@@ -14,6 +14,9 @@
 
 @property (nonatomic, assign) IBOutlet UIScrollView *svMain;
 
+@property (nonatomic, assign) IBOutlet UIView *viewError;
+@property (nonatomic, assign) IBOutlet UILabel *lblError;
+
 @property (nonatomic, assign) IBOutlet UIView *viewFacebook;
 @property (nonatomic, assign) IBOutlet UIButton *btnSignIn;
 
@@ -50,6 +53,49 @@
 {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeKeyboardFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) willShowKeyboard:(NSNotification*)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    
+    [self collapseScrollView:keyboardFrameBeginRect.size.height];
+}
+
+- (void) willChangeKeyboardFrame:(NSNotification *)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    
+    [self collapseScrollView:keyboardFrameBeginRect.size.height];
+}
+
+- (void) willHideKeyboard:(NSNotification *)notification
+{
+    [self expandScrollView];
+}
+
+- (void) collapseScrollView:(float)keyboardHeight
+{
+    self.svMain.frame = CGRectMake(self.svMain.frame.origin.x, self.svMain.frame.origin.y, self.svMain.frame.size.width, self.view.frame.size.height - self.svMain.frame.origin.y - keyboardHeight);
+}
+
+- (void) expandScrollView
+{
+    self.svMain.frame = CGRectMake(self.svMain.frame.origin.x, self.svMain.frame.origin.y, self.svMain.frame.size.width, self.view.frame.size.height - self.svMain.frame.origin.y);
 }
 
 - (void)hideKeyboard
@@ -119,5 +165,20 @@
     [self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
 }
 
+#pragma mark UITextFieldDelegate
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField
+{
+    if(textField == self.txtEmail)
+    {
+        [self.txtPassword becomeFirstResponder];
+    }
+    else
+    {
+        [self.txtPassword resignFirstResponder];
+    }
+    
+    return YES;
+}
 
 @end
