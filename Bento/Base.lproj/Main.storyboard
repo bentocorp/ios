@@ -1,13 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14B25" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="bfp-2n-wGh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="bfp-2n-wGh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Bold.ttf">
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
@@ -483,7 +481,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISH TITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="BPl-wb-MAe">
                                                 <rect key="frame" x="0.0" y="0.0" width="260" height="66"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="18"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -626,12 +624,11 @@
                                     <action selector="onCart:" destination="diU-FL-EY2" eventType="touchUpInside" id="gh9-bI-9cx"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9hp-xO-ItZ">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9hp-xO-ItZ">
                                 <rect key="frame" x="30" y="370" width="260" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                <state key="normal" title="ADD ANOTHER BENTO">
+                                <state key="normal" image="string_addanotherbento.png">
                                     <color key="titleColor" red="0.53333333333333333" green="0.68627450980392157" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1111,7 +1108,7 @@
                             </button>
                             <view contentMode="scaleToFill" id="tB6-sZ-kP1">
                                 <rect key="frame" x="0.0" y="120" width="320" height="240"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="p0I-0u-oUV">
                                         <rect key="frame" x="0.0" y="103" width="320" height="45"/>
@@ -1324,19 +1321,6 @@
                                 <rect key="frame" x="0.0" y="108" width="320" height="284"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VCZ-aB-4bV">
-                                <rect key="frame" x="0.0" y="435" width="320" height="45"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                <state key="normal" title="CONTINUE">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onBottomButton:" destination="cjF-1z-ADL" eventType="touchUpInside" id="bFT-ss-Hn5"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="epU-fh-v9M">
                                 <rect key="frame" x="0.0" y="108" width="320" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -1346,6 +1330,18 @@
                                     <outlet property="delegate" destination="cjF-1z-ADL" id="cmc-ze-8GN"/>
                                 </connections>
                             </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VCZ-aB-4bV">
+                                <rect key="frame" x="0.0" y="435" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                <state key="normal" image="string_continue.png">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onBottomButton:" destination="cjF-1z-ADL" eventType="touchUpInside" id="bFT-ss-Hn5"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1685,7 +1681,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fE8-hD-jqj">
-                                                            <rect key="frame" x="585" y="11" width="40" height="21"/>
+                                                            <rect key="frame" x="904" y="11" width="40" height="21"/>
                                                             <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                                             <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                             <color key="textColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2483,6 +2479,8 @@
         <image name="register_icon_phone.png" width="26" height="42"/>
         <image name="register_icon_username.png" width="42" height="42"/>
         <image name="register_image_or.png" width="245" height="20"/>
+        <image name="string_addanotherbento.png" width="143" height="9"/>
+        <image name="string_continue.png" width="73" height="11"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -2490,8 +2488,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Pio-jZ-Z4r"/>
-        <segue reference="qAv-RA-Ckb"/>
         <segue reference="7Su-b9-xyl"/>
+        <segue reference="wQ7-4U-rn4"/>
+        <segue reference="HSl-vf-uty"/>
     </inferredMetricsTieBreakers>
 </document>

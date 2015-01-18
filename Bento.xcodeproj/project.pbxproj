@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		47AA1C441A6BE52800064857 /* string_confirmaddress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C421A6BE52800064857 /* string_confirmaddress@2x.png */; };
+		47AA1C451A6BE52800064857 /* string_continue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C431A6BE52800064857 /* string_continue@2x.png */; };
+		47AA1C471A6BE52F00064857 /* string_addanotherbento@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C461A6BE52F00064857 /* string_addanotherbento@2x.png */; };
 		7279E5D91A68397D00591CB2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7279E5D81A68397D00591CB2 /* FacebookSDK.framework */; };
 		7279E5E11A6B5F3B00591CB2 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7279E5E01A6B5F3A00591CB2 /* DataManager.m */; };
 		90220A381A6424BC00ECECEF /* CAGradientLayer+SJSGradients.m in Sources */ = {isa = PBXBuildFile; fileRef = 90220A371A6424BC00ECECEF /* CAGradientLayer+SJSGradients.m */; };
@@ -96,6 +99,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		47AA1C421A6BE52800064857 /* string_confirmaddress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string_confirmaddress@2x.png"; sourceTree = "<group>"; };
+		47AA1C431A6BE52800064857 /* string_continue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string_continue@2x.png"; sourceTree = "<group>"; };
+		47AA1C461A6BE52F00064857 /* string_addanotherbento@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string_addanotherbento@2x.png"; sourceTree = "<group>"; };
 		7279E5D81A68397D00591CB2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		7279E5DF1A6B5F3A00591CB2 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		7279E5E01A6B5F3A00591CB2 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
@@ -432,6 +438,8 @@
 		90BED0A91A5BD180003DC872 /* DeliveryLocation */ = {
 			isa = PBXGroup;
 			children = (
+				47AA1C421A6BE52800064857 /* string_confirmaddress@2x.png */,
+				47AA1C431A6BE52800064857 /* string_continue@2x.png */,
 				90D8F7CE1A5E2B3B00D034CF /* deliverylocation_icon_navigation@2x.png */,
 				90D8F7CF1A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png */,
 			);
@@ -441,6 +449,7 @@
 		90BED0AA1A5BD180003DC872 /* MakeBento */ = {
 			isa = PBXGroup;
 			children = (
+				47AA1C461A6BE52F00064857 /* string_addanotherbento@2x.png */,
 				90D8F7A51A5D7F7100D034CF /* mybento_image_bottom.png */,
 				90BED0EF1A5C391D003DC872 /* image_gradient.png */,
 				90BED0DC1A5C04DE003DC872 /* mybento_nav_cart_act@2x.png */,
@@ -630,10 +639,12 @@
 				90D8F7A61A5D7F7100D034CF /* mybento_image_bottom.png in Resources */,
 				90BED0DF1A5C04DE003DC872 /* mybento_nav_cart_act@2x.png in Resources */,
 				90359C251A5EC49700AAD5D2 /* orderconfirm_image_minute@2x.png in Resources */,
+				47AA1C441A6BE52800064857 /* string_confirmaddress@2x.png in Resources */,
 				90359C241A5EC49700AAD5D2 /* orderconfirm_image_credit.png in Resources */,
 				90D8F7C61A5E126C00D034CF /* register_icon_phone_err.png in Resources */,
 				90BED0C31A5BE72F003DC872 /* OpenSans-ExtraBold.ttf in Resources */,
 				90BED0B21A5BE22E003DC872 /* logo.png in Resources */,
+				47AA1C451A6BE52800064857 /* string_continue@2x.png in Resources */,
 				90359C221A5EC49700AAD5D2 /* orderconfirm_image_applepay.png in Resources */,
 				90D8F7BF1A5D9B0800D034CF /* nav_btn_close@2x.png in Resources */,
 				90D8F7C51A5E126C00D034CF /* register_icon_password_err.png in Resources */,
@@ -647,6 +658,7 @@
 				90D8F7B31A5D84B800D034CF /* register_icon_phone.png in Resources */,
 				90BED0DB1A5C0320003DC872 /* nav_background.png in Resources */,
 				90D8F7D41A5E2C4C00D034CF /* image_checked@2x.png in Resources */,
+				47AA1C471A6BE52F00064857 /* string_addanotherbento@2x.png in Resources */,
 				90BED0C91A5BE72F003DC872 /* OpenSans-Semibold.ttf in Resources */,
 				90BED0E01A5C04DE003DC872 /* mybento_nav_cart_inact@2x.png in Resources */,
 				90BED0C41A5BE72F003DC872 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
