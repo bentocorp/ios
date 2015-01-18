@@ -10,7 +10,7 @@
 
 #import "FaqViewController.h"
 
-#import <FacebookSDK/FacebookSDK.h>
+#import "DataManager.h"
 
 typedef enum : NSUInteger {
     ERROR_NONE,
@@ -86,23 +86,36 @@ typedef enum : NSUInteger {
 
 - (IBAction)onBack:(id)sender
 {
+    [self closeKeyboard];
+    
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)onRegisterWithFacebook:(id)sender
 {
+    [self closeKeyboard];
+    
     [self gotoPhoneNumberScreen];
 }
 
 - (IBAction)onRegister:(id)sender
 {
+    [self closeKeyboard];
+    
     if(self.txtYourname.text.length == 0)
     {
         [self showErrorWithString:@"Please enter a valid user name." code:ERROR_USERNAME];
         return;
     }
     
-    if(self.txtEmail.text.length == 0)
+    NSString *strEmail = self.txtEmail.text;
+    if(strEmail.length == 0)
+    {
+        [self showErrorWithString:@"Please enter a email address." code:ERROR_EMAIL];
+        return;
+    }
+    
+    if (![DataManager isValidMailAddress:strEmail])
     {
         [self showErrorWithString:@"Please enter a valid email address." code:ERROR_EMAIL];
         return;
@@ -127,16 +140,22 @@ typedef enum : NSUInteger {
 
 - (IBAction)onSignin:(id)sender
 {
+    [self closeKeyboard];
+    
     [self performSegueWithIdentifier:@"SignIn" sender:nil];
 }
 
 - (IBAction)onPrivacyPolicy:(id)sender
 {
+    [self closeKeyboard];
+    
     [self performSegueWithIdentifier:@"Terms" sender:[NSNumber numberWithInt:CONTENT_PRIVACY]];
 }
 
 - (IBAction)onTermsAndConditions:(id)sender
 {
+    [self closeKeyboard];
+    
     [self performSegueWithIdentifier:@"Terms" sender:[NSNumber numberWithInt:CONTENT_TERMS]];
 }
 

@@ -9,6 +9,7 @@
 #import "SignInViewController.h"
 
 #import "MyAlertView.h"
+#include "DataManager.h"
 
 @interface SignInViewController ()
 
@@ -70,13 +71,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (BOOL)isValidMailAddress:(NSString*)strMailAddr
-{
-    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
-    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
-    return [emailTest evaluateWithObject:strMailAddr];
-}
-
 - (BOOL)processSignin
 {
     return YES;
@@ -93,7 +87,7 @@
         return;
     }
     
-    if (![self isValidMailAddress:strEmail])
+    if (![DataManager isValidMailAddress:strEmail])
     {
         [self showErrorMessage:@"Please input a vaild e-mail address."];
         return;

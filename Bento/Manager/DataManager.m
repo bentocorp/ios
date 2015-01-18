@@ -52,4 +52,18 @@ static DataManager *_shareDataManager;
     return [UIColor colorWithRed:125.f/255.f green:170.f/255.f blue:82.f/255.f alpha:0.8f];
 }
 
++ (BOOL)isValidMailAddress:(NSString *)strMailAddr
+{
+    NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";
+    NSPredicate *emailTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", emailRegex];
+    return [emailTest evaluateWithObject:strMailAddr];
+}
+
++ (BOOL)isValidPhoneNumber:(NSString *)strPhoneNumber
+{
+    NSString *phoneRegex = @"^(\\([0-9]{3})\\) [0-9]{3}-[0-9]{4}$";
+    NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+    return [phoneTest evaluateWithObject:strPhoneNumber];
+}
+
 @end

@@ -17,4 +17,8 @@
 + (UIColor *)getGradientColor1;
 + (UIColor *)getGradientColor2;
 
++ (BOOL)isValidMailAddress:(NSString *)strMailAddr;
+
++ (BOOL)isValidPhoneNumber:(NSString *)strPhoneNumber;
+
 @end
