@@ -71,6 +71,7 @@
 {
     [super viewWillAppear:animated];
     
+    [self updateUI];
 }
 
 - (IBAction)onBack:(id)sender
@@ -202,12 +203,14 @@
 {
     if(self.txtAddress.text.length > 0)
     {
-        [self.btnBottomButton setTitle:@"CONFIRM ADDRESS" forState:UIControlStateNormal];
+        //[self.btnBottomButton setTitle:@"CONFIRM ADDRESS" forState:UIControlStateNormal];
+        [self.btnBottomButton setImage:[UIImage imageNamed:@"string_confirmaddress"] forState:UIControlStateNormal];
         self.btnBottomButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:176.0f / 255.0f blue:95.0f / 255.0f alpha:1.0f];
     }
     else
     {
-        [self.btnBottomButton setTitle:@"CONFIRM ADDRESS" forState:UIControlStateNormal];
+        //[self.btnBottomButton setTitle:@"CONTINUE" forState:UIControlStateNormal];
+        [self.btnBottomButton setImage:[UIImage imageNamed:@"string_continue"] forState:UIControlStateNormal];
         self.btnBottomButton.backgroundColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:145.0f / 255.0f alpha:1.0f];
     }
 }

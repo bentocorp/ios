@@ -5,7 +5,11 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
+<<<<<<< HEAD
 	<string>839A88AD-DB24-4A01-9AA1-286126505ECC</string>
+=======
+	<string>61A12EF7-EEED-4E4A-AEEB-3201FC683185</string>
+>>>>>>> 5251dd32c495e579cf17b23d402c9e9ad5214a3d
 	<key>IDESourceControlProjectName</key>
 	<string>Bento</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
