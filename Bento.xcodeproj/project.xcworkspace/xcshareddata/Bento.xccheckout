@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>839A88AD-DB24-4A01-9AA1-286126505ECC</string>
+	<key>IDESourceControlProjectName</key>
+	<string>Bento</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>58F321B027D03517BA0A9783C5C85D80A7A07508</key>
+		<string>https://github.com/demant/bento-ios.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>Bento.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>58F321B027D03517BA0A9783C5C85D80A7A07508</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/demant/bento-ios.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>58F321B027D03517BA0A9783C5C85D80A7A07508</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>58F321B027D03517BA0A9783C5C85D80A7A07508</string>
+			<key>IDESourceControlWCCName</key>
+			<string>bento-ios</string>
+		</dict>
+	</array>
+</dict>
+</plist>

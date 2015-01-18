@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1E0788627C732857C288841E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC0B59E0C21EA384AF9FA91 /* libPods.a */; };
+		722332E31A6BC7DE006C2446 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E21A6BC7DE006C2446 /* Foundation.framework */; };
+		722332E51A6BC7E6006C2446 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E41A6BC7E6006C2446 /* Security.framework */; };
+		722332E81A6BDEEF006C2446 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */; };
 		7279E5D91A68397D00591CB2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7279E5D81A68397D00591CB2 /* FacebookSDK.framework */; };
 		7279E5E11A6B5F3B00591CB2 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7279E5E01A6B5F3A00591CB2 /* DataManager.m */; };
 		90220A381A6424BC00ECECEF /* CAGradientLayer+SJSGradients.m in Sources */ = {isa = PBXBuildFile; fileRef = 90220A371A6424BC00ECECEF /* CAGradientLayer+SJSGradients.m */; };
@@ -16,7 +20,6 @@
 		90359C251A5EC49700AAD5D2 /* orderconfirm_image_minute@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90359C1F1A5EC49700AAD5D2 /* orderconfirm_image_minute@2x.png */; };
 		90359C261A5EC49700AAD5D2 /* orderconfirm_image_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90359C201A5EC49700AAD5D2 /* orderconfirm_image_plus@2x.png */; };
 		90359C271A5EC49700AAD5D2 /* orderconfirm_image_remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90359C211A5EC49700AAD5D2 /* orderconfirm_image_remove@2x.png */; };
-		90A553DB1A5FD5B2001F9DA7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */; };
 		90A553DF1A5FFEEB001F9DA7 /* BentoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A553DE1A5FFEEB001F9DA7 /* BentoTableViewCell.m */; };
 		90A553E21A60035D001F9DA7 /* PromoCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A553E11A60035D001F9DA7 /* PromoCodeView.m */; };
 		90A553E41A60038C001F9DA7 /* PromoCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A553E31A60038C001F9DA7 /* PromoCodeView.xib */; };
@@ -96,6 +99,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3561C29F3B08D2974FA2BADA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		3CC0B59E0C21EA384AF9FA91 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EC9DF39CFE2AE0B67A3FFE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		722332E21A6BC7DE006C2446 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		722332E41A6BC7E6006C2446 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		722333011A6BF172006C2446 /* Bento.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Bento.entitlements; sourceTree = "<group>"; };
 		7279E5D81A68397D00591CB2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		7279E5DF1A6B5F3A00591CB2 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		7279E5E01A6B5F3A00591CB2 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
@@ -205,8 +214,11 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				90A553DB1A5FD5B2001F9DA7 /* MapKit.framework in Frameworks */,
+				722332E81A6BDEEF006C2446 /* MapKit.framework in Frameworks */,
+				722332E51A6BC7E6006C2446 /* Security.framework in Frameworks */,
+				722332E31A6BC7DE006C2446 /* Foundation.framework in Frameworks */,
 				7279E5D91A68397D00591CB2 /* FacebookSDK.framework in Frameworks */,
+				1E0788627C732857C288841E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -220,6 +232,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6FD3F1724EE25B5F8E1A5D58 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3561C29F3B08D2974FA2BADA /* Pods.debug.xcconfig */,
+				6EC9DF39CFE2AE0B67A3FFE5 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		7279E5D71A68397D00591CB2 /* FacebookSDK */ = {
 			isa = PBXGroup;
 			children = (
@@ -246,21 +267,14 @@
 			path = GradientLayer;
 			sourceTree = "<group>";
 		};
-		90A553DC1A5FD5BC001F9DA7 /* Framework */ = {
-			isa = PBXGroup;
-			children = (
-				90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */,
-			);
-			name = Framework;
-			sourceTree = "<group>";
-		};
 		90BED0651A5BCC04003DC872 = {
 			isa = PBXGroup;
 			children = (
-				90A553DC1A5FD5BC001F9DA7 /* Framework */,
 				90BED0701A5BCC04003DC872 /* Bento */,
 				90BED08A1A5BCC04003DC872 /* BentoTests */,
 				90BED06F1A5BCC04003DC872 /* Products */,
+				6FD3F1724EE25B5F8E1A5D58 /* Pods */,
+				C994F09FDA3B8896E57F29B5 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -276,6 +290,7 @@
 		90BED0701A5BCC04003DC872 /* Bento */ = {
 			isa = PBXGroup;
 			children = (
+				722333011A6BF172006C2446 /* Bento.entitlements */,
 				7279E5DE1A6B5F3A00591CB2 /* Manager */,
 				90BED0E71A5C3333003DC872 /* Cell */,
 				90BED0971A5BCC7B003DC872 /* App */,
@@ -528,6 +543,17 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */,
+				722332E41A6BC7E6006C2446 /* Security.framework */,
+				722332E21A6BC7DE006C2446 /* Foundation.framework */,
+				3CC0B59E0C21EA384AF9FA91 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -535,9 +561,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 90BED0911A5BCC04003DC872 /* Build configuration list for PBXNativeTarget "Bento" */;
 			buildPhases = (
+				F7DC010A696B70EAF240E7C3 /* Check Pods Manifest.lock */,
 				90BED06A1A5BCC04003DC872 /* Sources */,
 				90BED06B1A5BCC04003DC872 /* Frameworks */,
 				90BED06C1A5BCC04003DC872 /* Resources */,
+				C07A5F3A95D40E43E3B7069A /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -578,6 +606,14 @@
 					90BED06D1A5BCC04003DC872 = {
 						CreatedOnToolsVersion = 6.1;
 						DevelopmentTeam = WFJ7C63625;
+						SystemCapabilities = {
+							com.apple.OMC = {
+								enabled = 0;
+							};
+							com.apple.Passbook = {
+								enabled = 0;
+							};
+						};
 					};
 					90BED0861A5BCC04003DC872 = {
 						CreatedOnToolsVersion = 6.1;
@@ -670,6 +706,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		C07A5F3A95D40E43E3B7069A /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F7DC010A696B70EAF240E7C3 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		90BED06A1A5BCC04003DC872 /* Sources */ = {
@@ -818,9 +887,12 @@
 		};
 		90BED0921A5BCC04003DC872 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3561C29F3B08D2974FA2BADA /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
+				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
@@ -828,15 +900,18 @@
 				INFOPLIST_FILE = Bento/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "ae49ac5b-665e-484e-ba72-9a408959d1ce";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
 		90BED0931A5BCC04003DC872 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6EC9DF39CFE2AE0B67A3FFE5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
+				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
@@ -844,7 +919,7 @@
 				INFOPLIST_FILE = Bento/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "80a26fb4-fd33-473a-9318-5feae59ca840";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
