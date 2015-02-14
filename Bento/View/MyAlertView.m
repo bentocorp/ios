@@ -23,7 +23,7 @@
 - (id) initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if(self) {
+    if (self) {
         
     }
     
@@ -35,7 +35,7 @@
     CGRect rect = [[UIScreen mainScreen] bounds];
     
     self = [self initWithFrame:rect];
-    if(self) {
+    if (self) {
         
     }
     
@@ -55,7 +55,7 @@
     self.viewBack = viewBack;
     viewBack = nil;
     
-    if(title != nil && title.length > 0)
+    if (title != nil && title.length > 0)
     {
         message = [NSString stringWithFormat:@"%@\n%@", title, message];
     }
@@ -81,11 +81,14 @@
     UIView *viewButtonBack = [[UIView alloc] initWithFrame:CGRectMake(0, view.frame.size.height - BUTTON_HEIGHT, view.frame.size.width, BUTTON_HEIGHT)];
     viewButtonBack.backgroundColor = [UIColor colorWithRed:138.0f / 255.0f green:187.0f / 255.0f blue:90.0f / 255.0f alpha:1.0f];
     
-    UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(viewButtonBack.frame.size.width / 2, 2, 1, viewButtonBack.frame.size.height - 4)];
-    line.backgroundColor = lineColor;
-    
-    [viewButtonBack addSubview:line];
-    line = nil;
+    if(cancelButtonTitle != nil && otherButtonTitle != nil)
+    {
+        UILabel *line = [[UILabel alloc] initWithFrame:CGRectMake(viewButtonBack.frame.size.width / 2, 2, 1, viewButtonBack.frame.size.height - 4)];
+        line.backgroundColor = lineColor;
+        
+        [viewButtonBack addSubview:line];
+        line = nil;
+    }
     
     [view addSubview:viewButtonBack];
     viewButtonBack = nil;
@@ -97,7 +100,7 @@
     
     float pos = szMessage.height  + GAP_CONTENT * 2;
     
-    if(cancelButtonTitle != nil && otherButtonTitle != nil)
+    if (cancelButtonTitle != nil && otherButtonTitle != nil)
     {
         UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
         [button1 addTarget:self action:@selector(clickButton1) forControlEvents:UIControlEventTouchUpInside];
@@ -119,7 +122,7 @@
         
         [view addSubview:button2];
     }
-    else if(cancelButtonTitle != nil)
+    else if (cancelButtonTitle != nil)
     {
         UIButton *button1 = [UIButton buttonWithType:UIButtonTypeCustom];
         [button1 addTarget:self action:@selector(clickButton1) forControlEvents:UIControlEventTouchUpInside];
@@ -131,7 +134,7 @@
         
         [view addSubview:button1];
     }
-    else if(otherButtonTitle != nil)
+    else if (otherButtonTitle != nil)
     {
         UIButton *button2 = [UIButton buttonWithType:UIButtonTypeCustom];
         [button2 addTarget:self action:@selector(clickButton2) forControlEvents:UIControlEventTouchUpInside];

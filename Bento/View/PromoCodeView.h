@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol PromoCodeViewDelegate <NSObject>
+
+- (void)setDiscound:(NSInteger)priceDiscount;
+
+@end
+
 @interface PromoCodeView : UIView
+
+@property (nonatomic, assign) id<PromoCodeViewDelegate> delegate;
 
 @end

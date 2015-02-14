@@ -10,4 +10,6 @@
 
 @interface PhoneNumberViewController : UIViewController
 
+@property (nonatomic, retain) NSDictionary *userInfo;
+
 @end

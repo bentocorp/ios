@@ -8,10 +8,20 @@
 
 #import "SignInViewController.h"
 
-#import "MyAlertView.h"
-#include "DataManager.h"
+#import "PhoneNumberViewController.h"
 
-@interface SignInViewController ()
+#import "MyAlertView.h"
+
+#import "JGProgressHUD.h"
+
+#import "AppStrings.h"
+#import "WebManager.h"
+#import "DataManager.h"
+#import "FacebookManager.h"
+
+@interface SignInViewController () <FBManagerDelegate>
+
+@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
 
 @property (nonatomic, assign) IBOutlet UIScrollView *svMain;
 
@@ -21,8 +31,8 @@
 @property (nonatomic, assign) IBOutlet UIView *viewFacebook;
 @property (nonatomic, assign) IBOutlet UIButton *btnSignIn;
 
-@property (nonatomic, assign) IBOutlet UITextField *txtEmail;
-@property (nonatomic, assign) IBOutlet UITextField *txtPassword;
+@property (nonatomic, assign) IBOutlet UIImageView *ivEmail;
+@property (nonatomic, assign) IBOutlet UIImageView *ivPassword;
 
 @end
 
@@ -31,8 +41,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    self.lblTitle.text = [[AppStrings sharedInstance] getString:SIGNIN_TITLE];
+    [self.btnSignIn setTitle:[[AppStrings sharedInstance] getString:SIGNIN_BUTTON_SIGNIN] forState:UIControlStateNormal];
     
     self.svMain.contentSize = CGSizeMake(self.svMain.frame.size.width, 504);
+    
+    [self showErrorMessage:nil code:ERROR_NONE];
+    
+    // Facebook
+    [[FacebookManager sharedInstance] setDelegate:self];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -40,15 +57,18 @@
     // Dispose of any resources that can be recreated.
 }
 
-/*
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    if ([segue.identifier isEqualToString:@"PhoneNumber"])
+    {
+        PhoneNumberViewController *vcPhoneNumber = segue.destinationViewController;
+        vcPhoneNumber.userInfo = sender;
+    }
 }
-*/
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -57,6 +77,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeKeyboardFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    // For test only
+#ifdef DEBUG
+    self.txtEmail.text = @"test2@bentonow.com";
+    self.txtPassword.text = @"12345678";
+#endif//DEBUG
+    
+    [self updateUI];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -105,9 +133,61 @@
     [self.txtPassword resignFirstResponder];
 }
 
-- (void)showErrorMessage:(NSString *)strMessage
+- (void)showErrorMessage:(NSString *)errorMsg code:(int)errorCode
 {
+    if (errorMsg == nil || errorMsg.length == 0)
+    {
+        self.viewError.hidden = YES;
+    }
+    else
+    {
+        self.viewError.hidden = NO;
+        self.lblError.text = errorMsg;
+    }
     
+    UIColor *errorColor = [UIColor colorWithRed:233.0f / 255.0f green:114.0f / 255.0f blue:2.0f / 255.0f alpha:1.0f];
+    UIColor *correctColor = [UIColor colorWithRed:109.0f / 255.0f green:117.0f / 255.0f blue:131.0f / 255.0f alpha:1.0f];
+    
+    switch (errorCode) {
+        case ERROR_NONE:
+        {
+            self.viewError.hidden = YES;
+            
+            self.txtEmail.textColor = correctColor;
+            self.txtPassword.textColor = correctColor;
+            
+            self.ivEmail.image = [UIImage imageNamed:@"register_icon_email"];
+            self.ivPassword.image = [UIImage imageNamed:@"register_icon_password"];
+        }
+            break;
+            
+        case ERROR_EMAIL:
+        {
+            self.viewError.hidden = NO;
+
+            self.txtEmail.textColor = errorColor;
+            self.txtPassword.textColor = correctColor;
+            
+            self.ivEmail.image = [UIImage imageNamed:@"register_icon_email_err"];
+            self.ivPassword.image = [UIImage imageNamed:@"register_icon_password"];
+        }
+            break;
+            
+        case ERROR_PASSWORD:
+        {
+            self.viewError.hidden = NO;
+            
+            self.txtEmail.textColor = correctColor;
+            self.txtPassword.textColor = errorColor;
+            
+            self.ivEmail.image = [UIImage imageNamed:@"register_icon_email"];
+            self.ivPassword.image = [UIImage imageNamed:@"register_icon_password_err"];
+        }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (IBAction)onBack:(id)sender
@@ -117,62 +197,242 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (BOOL)processSignin
+- (void) dissmodal
 {
-    return YES;
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)onSignIn:(id)sender
+- (void)processSignin
 {
     NSString *strEmail = self.txtEmail.text;
     NSString *strPassword = self.txtPassword.text;
     
+    NSDictionary* loginInfo = @{
+                                @"email" : strEmail,
+                                @"password" : strPassword,
+                                };
+    
+    NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
+    WebManager *webManager = [[WebManager alloc] init];
+    
+    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD.textLabel.text = @"Logging in...";
+    [loadingHUD showInView:self.view];
+    
+    [webManager AsyncProcess:@"/user/login" method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+        [loadingHUD dismiss];
+        
+        NSDictionary *response = networkOperation.responseJSON;
+        [[DataManager shareDataManager] setUserInfo:response];
+        
+        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+        [pref setObject:@"/user/login" forKey:@"apiName"];
+        [pref setObject:dicRequest forKey:@"loginRequest"];
+        [pref synchronize];
+        
+        [self showErrorMessage:nil code:ERROR_NONE];
+        [self gotoDeliveryLocationScreen];
+        
+    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
+        [loadingHUD dismiss];
+
+        NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
+        if (strMessage == nil)
+            strMessage = error.localizedDescription;
+        
+        if (error.code == 403)
+        {
+            [self showErrorMessage:strMessage code:ERROR_PASSWORD];
+        }
+        else if (error.code == 404)
+        {
+            [self showErrorMessage:strMessage code:ERROR_EMAIL];
+        }
+        else
+        {
+            [self showErrorMessage:strMessage code:ERROR_UNKNOWN];
+        }
+    
+    } isJSON:NO];
+}
+
+- (void)doSignin
+{
+    NSString *strEmail = self.txtEmail.text;
     if (strEmail.length == 0)
     {
-        [self showErrorMessage:@"Please input e-mail address."];
+        [self showErrorMessage:@"Please enter a email address." code:ERROR_EMAIL];
         return;
     }
     
     if (![DataManager isValidMailAddress:strEmail])
     {
-        [self showErrorMessage:@"Please input a vaild e-mail address."];
+        [self showErrorMessage:@"Please enter a valid email address." code:ERROR_EMAIL];
         return;
     }
     
-    if (strPassword.length == 0)
+    if (self.txtPassword.text.length == 0)
     {
-        [self showErrorMessage:@"Please input the password."];
+        [self showErrorMessage:@"Please enter the password." code:ERROR_PASSWORD];
         return;
     }
     
-    if ([self processSignin])
-        [self gotoDeliveryLocationScreen];
+    [self showErrorMessage:nil code:ERROR_NONE];
+    [self processSignin];
+}
+
+- (IBAction)onSignIn:(id)sender
+{
+    [self doSignin];
+}
+
+- (IBAction)onForgot:(id)sender
+{
+    NSURL *urlReset = [[AppStrings sharedInstance] getURL:SIGNIN_LINK_RESET];
+    if (urlReset != nil && [[UIApplication sharedApplication] canOpenURL:urlReset])
+        [[UIApplication sharedApplication] openURL:urlReset];
+}
+
+- (void)reqFacebookUserInfo
+{
+    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD.textLabel.text = @"Logging in...";
+    [loadingHUD showInView:self.view];
+    
+    [[FacebookManager sharedInstance] loadUserDetailsWithCompletionHandler:^(NSDictionary<FBGraphUser> *user, NSError *error)
+     {
+         if (error == nil)
+         {
+             NSLog(@"%@", user);
+             NSString *strMailAddr = [user valueForKey:@"email"];
+             NSString *strFBID = [user valueForKey:@"id"];
+             NSString *strAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
+             
+             NSDictionary* loginInfo = @{
+                                         @"email" : strMailAddr,
+                                         @"fb_id" : strFBID,
+                                         @"fb_token" : strAccessToken,
+                                         };
+             
+             NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
+             WebManager *webManager = [[WebManager alloc] init];
+             
+             [webManager AsyncProcess:@"/user/fblogin" method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+                 [loadingHUD dismiss];
+                 
+                 NSDictionary *response = networkOperation.responseJSON;
+                 [[DataManager shareDataManager] setUserInfo:response];
+                 
+                 NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+                 [pref setObject:@"/user/fblogin" forKey:@"apiName"];
+                 [pref setObject:dicRequest forKey:@"loginRequest"];
+                 [pref synchronize];
+                 
+                 [self showErrorMessage:nil code:ERROR_NONE];
+                 [self gotoDeliveryLocationScreen];
+                 
+             } failure:^(MKNetworkOperation *errorOp, NSError *error) {
+                 
+                 [loadingHUD dismiss];
+                 
+                 if (error.code == 403 || error.code == 404)
+                 {
+                     [self gotoPhoneNumberScreen:user];
+                     return;
+                 }
+                 else
+                 {
+                     NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
+                     if (strMessage == nil)
+                         strMessage = error.localizedDescription;
+                     
+                     MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+                     [alertView showInView:self.view];
+                     alertView = nil;
+                     return;
+                 }
+                 
+             } isJSON:NO];
+         }
+         else
+         {
+             [loadingHUD dismiss];
+             
+             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.debugDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+             [alertView showInView:self.view];
+             alertView = nil;
+             return;
+         }
+     }];
 }
 
 - (IBAction)onSignInWithFacebook:(id)sender
 {
-    [self gotoDeliveryLocationScreen];
+    FacebookManager *fbManager = [FacebookManager sharedInstance];
+    if ([fbManager isSessionOpen])
+    {
+        [self reqFacebookUserInfo];
+    }
+    else
+    {
+        [fbManager login];
+    }
+}
+
+- (void) gotoPhoneNumberScreen:(NSDictionary<FBGraphUser> *)userInfo
+{
+    [self performSegueWithIdentifier:@"PhoneNumber" sender:userInfo];
+}
+
+- (IBAction)onTextChanged:(id)sender
+{
+    [self updateUI];
+}
+
+- (void)updateUI
+{
+    NSString *strEmail = self.txtEmail.text;
+    NSString *strPassword = self.txtPassword.text;
+    
+    BOOL isValid = (strEmail.length > 0 &&
+                    [DataManager isValidMailAddress:strEmail] &&
+                    strPassword.length > 0);
+    
+    //    self.btnRegister.enabled = isValid;
+    if (isValid)
+        [self.btnSignIn setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+    else
+        [self.btnSignIn setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
 }
 
 - (void) gotoDeliveryLocationScreen
 {
-    [self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
+    [self dissmodal];
+    
+    //[self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
 }
 
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if(textField == self.txtEmail)
+    if (textField == self.txtEmail)
     {
         [self.txtPassword becomeFirstResponder];
     }
     else
     {
-        [self.txtPassword resignFirstResponder];
+        [self doSignin];
     }
     
     return YES;
+}
+
+#pragma mark FBManagerDelegate
+
+-(void)FBLogin:(BOOL)flag
+{
+    [self reqFacebookUserInfo];
 }
 
 @end

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Bento.h"
+
 @interface ChooseMainDishViewController : UIViewController
+
+@property (nonatomic, assign) Bento *currentBento;
 
 @end

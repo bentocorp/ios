@@ -8,13 +8,34 @@
 
 #import "MyBentoViewController.h"
 
+#import "AppDelegate.h"
+
+#import "ChooseMainDishViewController.h"
 #import "ChooseSideDishViewController.h"
+
+#import "CompleteOrderViewController.h"
+#import "DeliveryLocationViewController.h"
 
 #import "MyAlertView.h"
 
 #import "CAGradientLayer+SJSGradients.h"
 
+#import "UIImageView+WebCache.h"
+
+#import "BentoShop.h"
+#import "AppStrings.h"
+#import "DataManager.h"
+
+#import "SVPlacemark.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
+
+#define BORDER_COLOR [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f]
+
 @interface MyBentoViewController ()<MyAlertViewDelegate>
+
+@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
+
+@property (nonatomic, assign) IBOutlet UIButton *btnBack;
 
 @property (nonatomic, assign) IBOutlet UILabel *lblBadge;
 
@@ -43,6 +64,20 @@
 @property (nonatomic, assign) IBOutlet UILabel *lblSideDish3;
 @property (nonatomic, assign) IBOutlet UILabel *lblSideDish4;
 
+@property (nonatomic, assign) IBOutlet UIButton *btnMainDish;
+
+@property (nonatomic, assign) IBOutlet UIButton *btnSideDish1;
+@property (nonatomic, assign) IBOutlet UIButton *btnSideDish2;
+@property (nonatomic, assign) IBOutlet UIButton *btnSideDish3;
+@property (nonatomic, assign) IBOutlet UIButton *btnSideDish4;
+
+@property (weak, nonatomic) IBOutlet UIImageView *ivBannerMainDish;
+@property (weak, nonatomic) IBOutlet UIImageView *ivBannerSideDish1;
+@property (weak, nonatomic) IBOutlet UIImageView *ivBannerSideDish2;
+@property (weak, nonatomic) IBOutlet UIImageView *ivBannerSideDish3;
+@property (weak, nonatomic) IBOutlet UIImageView *ivBannerSideDish4;
+
+
 @property (nonatomic, assign) IBOutlet UIButton *btnAddAnotherBento;
 
 @property (nonatomic, assign) IBOutlet UIButton *btnState;
@@ -60,28 +95,33 @@
     
     self.viewDishs.layer.cornerRadius = 3;
     self.viewDishs.clipsToBounds = YES;
-    self.viewDishs.layer.borderColor = [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f].CGColor;
+    self.viewDishs.layer.borderColor = BORDER_COLOR.CGColor;
     self.viewDishs.layer.borderWidth = 1.0f;
     
     int everyDishHeight = self.viewDishs.frame.size.height / 3;
     
     self.viewMainEntree.frame = CGRectMake(-1, -1, self.viewDishs.frame.size.width + 2, everyDishHeight + 2);
+    self.ivBannerMainDish.frame = CGRectMake(self.viewMainEntree.frame.size.width - self.viewMainEntree.frame.size.height / 2, 0, self.viewMainEntree.frame.size.height / 2, self.viewMainEntree.frame.size.height / 2);
     
     self.viewSide1.frame = CGRectMake(-1, everyDishHeight, self.viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1);
     self.viewSide1.layer.borderWidth = 1.0f;
-    self.viewSide1.layer.borderColor = [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f].CGColor;
+    self.viewSide1.layer.borderColor = BORDER_COLOR.CGColor;
+    self.ivBannerSideDish1.frame = CGRectMake(self.viewSide1.frame.size.width - self.viewSide1.frame.size.height / 2, 0, self.viewSide1.frame.size.height / 2, self.viewSide1.frame.size.height / 2);
     
     self.viewSide2.frame = CGRectMake(self.viewDishs.frame.size.width / 2, everyDishHeight, self.viewDishs.frame.size.width / 2 + 1, everyDishHeight + 1);
     self.viewSide2.layer.borderWidth = 1.0f;
-    self.viewSide2.layer.borderColor = [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f].CGColor;
+    self.viewSide2.layer.borderColor = BORDER_COLOR.CGColor;
+    self.ivBannerSideDish2.frame = CGRectMake(self.viewSide2.frame.size.width - self.viewSide2.frame.size.height / 2, 0, self.viewSide2.frame.size.height / 2, self.viewSide2.frame.size.height / 2);
     
     self.viewSide3.frame = CGRectMake(-1, everyDishHeight * 2, self.viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2);
     self.viewSide3.layer.borderWidth = 1.0f;
-    self.viewSide3.layer.borderColor = [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f].CGColor;
+    self.viewSide3.layer.borderColor = BORDER_COLOR.CGColor;
+    self.ivBannerSideDish3.frame = CGRectMake(self.viewSide3.frame.size.width - self.viewSide3.frame.size.height / 2, 0, self.viewSide3.frame.size.height / 2, self.viewSide3.frame.size.height / 2);
     
     self.viewSide4.frame = CGRectMake(self.viewDishs.frame.size.width / 2, everyDishHeight * 2, self.viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2);
     self.viewSide4.layer.borderWidth = 1.0f;
-    self.viewSide4.layer.borderColor = [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f].CGColor;
+    self.viewSide4.layer.borderColor = BORDER_COLOR.CGColor;
+    self.ivBannerSideDish4.frame = CGRectMake(self.viewSide4.frame.size.width - self.viewSide4.frame.size.height / 2, 0, self.viewSide4.frame.size.height / 2, self.viewSide4.frame.size.height / 2);
     
     CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
     backgroundLayer.frame = self.ivMainDish.frame;
@@ -108,8 +148,64 @@
     backgroundLayer.opacity = 0.8f;
     [self.ivSideDish4.layer insertSublayer:backgroundLayer atIndex:0];
     
-    self.btnAddAnotherBento.layer.borderColor = [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f].CGColor;
+    self.btnAddAnotherBento.layer.borderColor = BORDER_COLOR.CGColor;
     self.btnAddAnotherBento.layer.borderWidth = 1.0f;
+    
+    [self.lblTitle setText:[[AppStrings sharedInstance] getString:BUILD_TITLE]];
+    
+    [self.btnMainDish setTitle:[[AppStrings sharedInstance] getString:BUILD_MAIN_BUTTON] forState:UIControlStateNormal];
+    [self.btnSideDish1 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE1_BUTTON] forState:UIControlStateNormal];
+    [self.btnSideDish2 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE2_BUTTON] forState:UIControlStateNormal];
+    [self.btnSideDish3 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
+    [self.btnSideDish4 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE4_BUTTON] forState:UIControlStateNormal];
+    
+    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
+    if (strTitle != nil)
+    {
+        [self.btnAddAnotherBento setTitle:strTitle forState:UIControlStateNormal];
+        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        float spacing = 1.0f;
+        [attributedTitle addAttribute:NSKernAttributeName
+                                value:@(spacing)
+                                range:NSMakeRange(0, [strTitle length])];
+        
+        self.btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
+        
+        strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
+        [self.btnState setTitle:strTitle forState:UIControlStateNormal];
+        attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        spacing = 1.0f;
+        [attributedTitle addAttribute:NSKernAttributeName
+                                value:@(spacing)
+                                range:NSMakeRange(0, [strTitle length])];
+        
+        self.btnState.titleLabel.attributedText = attributedTitle;
+        attributedTitle = nil;
+    }
+    
+    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
+    {
+        [[BentoShop sharedInstance] addNewBento];
+        self.currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    }
+
+    [self.btnBack setImage:[UIImage imageNamed:@"mybento_nav_help"] forState:UIControlStateNormal];
+    
+    self.lblBadge.hidden = NO;
+    self.btnCart.hidden = NO;
+    self.btnAddAnotherBento.hidden = NO;
+    self.btnState.hidden = NO;
+
+    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    CLLocationCoordinate2D location = [delegate getCurrentLocation];
+    BentoShop *globalShop = [BentoShop sharedInstance];
+    if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
+    {
+        UIViewController *vcLocation = [self.storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self.navigationController pushViewController:vcLocation animated:NO];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -124,10 +220,26 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if([segue.identifier isEqualToString:@"SideDish"])
+    if ([segue.identifier isEqualToString:@"MainDish"])
+    {
+        ChooseMainDishViewController *vc = segue.destinationViewController;
+
+        if (self.currentBento != nil)
+            vc.currentBento = self.currentBento;
+        else
+            vc.currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    }
+    else if ([segue.identifier isEqualToString:@"SideDish"])
     {
         ChooseSideDishViewController *vc = segue.destinationViewController;
-        vc.sideDishIndex = [sender integerValue];
+        
+        if (self.currentBento != nil)
+            vc.currentBento = self.currentBento;
+        else
+            vc.currentBento = [[BentoShop sharedInstance] getCurrentBento];
+        
+        NSNumber *number = (NSNumber *)sender;
+        vc.sideDishIndex = [number integerValue];
     }
 }
 
@@ -136,85 +248,187 @@
     [super viewWillAppear:animated];
     
     [self updateUI];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void) onUpdatedStatus:(NSNotification *)notification
+{
+    if ([[BentoShop sharedInstance] isClosed])
+        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+    else if ([[BentoShop sharedInstance] isSoldOut])
+        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+    else
+        [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (void) loadSelectedDishes
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSInteger mainDishIndex = 0;
+    NSInteger side1DishIndex = 0;
+    NSInteger side2DishIndex = 0;
+    NSInteger side3DishIndex = 0;
+    NSInteger side4DishIndex = 0;
     
-    NSInteger mainDishIndex = [[prefs objectForKey:@"MainDish"] integerValue];
+    Bento *currentBento = nil;
+    if (self.currentBento != nil)
+        currentBento = self.currentBento;
+    else
+        currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
-    if(mainDishIndex != -1)
+    if (currentBento != nil)
     {
-        self.ivMainDish.image = [UIImage imageNamed:@"sample"];
+        mainDishIndex = [currentBento getMainDish];
+        side1DishIndex = [currentBento getSideDish1];
+        side2DishIndex = [currentBento getSideDish2];
+        side3DishIndex = [currentBento getSideDish3];
+        side4DishIndex = [currentBento getSideDish4];
+    }
+    
+    if (mainDishIndex > 0)
+    {
         self.ivMainDish.hidden = NO;
         self.lblMainDish.hidden = NO;
+        
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
+        if (dishInfo != nil)
+        {
+            self.lblMainDish.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            [self.ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex])
+                self.ivBannerMainDish.hidden = NO;
+            else
+                self.ivBannerMainDish.hidden = YES;
+        }
     }
     else
     {
         self.ivMainDish.image = nil;
         self.ivMainDish.hidden = YES;
         self.lblMainDish.hidden = YES;
+        self.ivBannerMainDish.hidden = YES;
     }
     
-    NSInteger sideDishIndex = [[prefs objectForKey:@"SideDish1"] integerValue];
-    
-    if(sideDishIndex != -1)
+    if (side1DishIndex > 0)
     {
-        self.ivSideDish1.image = [UIImage imageNamed:@"sample"];
         self.ivSideDish1.hidden = NO;
         self.lblSideDish1.hidden = NO;
+
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
+        if (dishInfo != nil)
+        {
+            self.lblSideDish1.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            [self.ivSideDish1 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex])
+                self.ivBannerSideDish1.hidden = NO;
+            else
+                self.ivBannerSideDish1.hidden = YES;
+        }
     }
     else
     {
         self.ivSideDish1.image = nil;
         self.ivSideDish1.hidden = YES;
         self.lblSideDish1.hidden = YES;
+        self.ivBannerSideDish1.hidden = YES;
     }
     
-    sideDishIndex = [[prefs objectForKey:@"SideDish2"] integerValue];
-    
-    if(sideDishIndex != -1)
+    if (side2DishIndex > 0)
     {
-        self.ivSideDish2.image = [UIImage imageNamed:@"sample"];
         self.ivSideDish2.hidden = NO;
         self.lblSideDish2.hidden = NO;
+
+        
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
+        if (dishInfo != nil)
+        {
+            self.lblSideDish2.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            [self.ivSideDish2 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex])
+                self.ivBannerSideDish2.hidden = NO;
+            else
+                self.ivBannerSideDish2.hidden = YES;
+        }
     }
     else
     {
         self.ivSideDish2.image = nil;
         self.ivSideDish2.hidden = YES;
         self.lblSideDish2.hidden = YES;
+        self.ivBannerSideDish2.hidden = YES;
     }
     
-    sideDishIndex = [[prefs objectForKey:@"SideDish3"] integerValue];
-    
-    if(sideDishIndex != -1)
+    if (side3DishIndex > 0)
     {
-        self.ivSideDish3.image = [UIImage imageNamed:@"sample"];
         self.ivSideDish3.hidden = NO;
         self.lblSideDish3.hidden = NO;
+
+        
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
+        if (dishInfo != nil)
+        {
+            self.lblSideDish3.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            [self.ivSideDish3 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex])
+                self.ivBannerSideDish3.hidden = NO;
+            else
+                self.ivBannerSideDish3.hidden = YES;
+        }
     }
     else
     {
         self.ivSideDish3.image = nil;
         self.ivSideDish3.hidden = YES;
         self.lblSideDish3.hidden = YES;
+        self.ivBannerSideDish3.hidden = YES;
     }
     
-    sideDishIndex = [[prefs objectForKey:@"SideDish4"] integerValue];
-    
-    if(sideDishIndex != -1)
+    if (side4DishIndex > 0)
     {
-        self.ivSideDish4.image = [UIImage imageNamed:@"sample"];
         self.ivSideDish4.hidden = NO;
         self.lblSideDish4.hidden = NO;
+
+        
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
+        if (dishInfo != nil)
+        {
+            self.lblSideDish4.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            [self.ivSideDish4 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+        }
+        
+        if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex])
+            self.ivBannerSideDish4.hidden = NO;
+        else
+            self.ivBannerSideDish4.hidden = YES;
     }
     else
     {
         self.ivSideDish4.image = nil;
         self.ivSideDish4.hidden = YES;
         self.lblSideDish4.hidden = YES;
+        self.ivBannerSideDish4.hidden = YES;
     }
 }
 
@@ -225,19 +439,24 @@
 
 - (IBAction)onCart:(id)sender
 {
-    if([self isCompletedToMakeMyBento])
-    {
-        [self gotoOrderScreen];
-    }
+    Bento *currentBento = nil;
+    if (self.currentBento != nil)
+        currentBento = self.currentBento;
     else
-    {
+        currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    
+    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted])
         [self showConfirmMsg];
-    }
+    else
+        [self gotoOrderScreen];
 }
 
 - (void) showConfirmMsg
 {
-    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"You didn't finish your Bento. \nWant us to finish it for you?" delegate:self cancelButtonTitle:@"No" otherButtonTitle:@"Yes"];
+    NSString *strText = [[AppStrings sharedInstance] getString:ALERT_BNF_TEXT];
+    NSString *strCancel = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CANCEL];
+    NSString *strConfirm = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CONFIRM];
+    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strText delegate:self cancelButtonTitle:strCancel otherButtonTitle:strConfirm];
     
     [alertView showInView:self.view];
     alertView = nil;
@@ -245,20 +464,25 @@
 
 - (void) gotoOrderScreen
 {
-    if(YES) [self gotoRegisterScreen];
+    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
+    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    if (currentUserInfo == nil)
+    {
+        if (placeInfo == nil)
+            [self openAccountViewController:[DeliveryLocationViewController class]];
+        else
+            [self openAccountViewController:[CompleteOrderViewController class]];
+    }
+    else
+    {
+        if (placeInfo == nil)
+            [self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
+        else
+            [self performSegueWithIdentifier:@"CompleteOrder" sender:nil];
+    }
 }
 
-- (void) gotoRegisterScreen
-{
-    [self performSegueWithIdentifier:@"Register" sender:nil];
-}
-
-- (void) gotoDeliveryLocationScreen
-{
-    [self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
-}
-
-- (IBAction)onAddMainEntree:(id)sender
+- (IBAction)onAddMainDish:(id)sender
 {
     [self performSegueWithIdentifier:@"MainDish" sender:nil];
 }
@@ -272,90 +496,167 @@
 
 - (IBAction)onAddAnotherBento:(id)sender
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    Bento *currentBento = nil;
+    if (self.currentBento != nil)
+        currentBento = self.currentBento;
+    else
+        currentBento = [[BentoShop sharedInstance] getCurrentBento];
+
+    if (currentBento != nil && ![currentBento isCompleted])
+        [currentBento completeBento];
     
-    [prefs setValue:[NSNumber numberWithInteger:-1] forKey:@"MainDish"];
-    
-    [prefs setValue:[NSNumber numberWithInteger:-1] forKey:@"SideDish1"];
-    [prefs setValue:[NSNumber numberWithInteger:-1] forKey:@"SideDish2"];
-    [prefs setValue:[NSNumber numberWithInteger:-1] forKey:@"SideDish3"];
-    [prefs setValue:[NSNumber numberWithInteger:-1] forKey:@"SideDish4"];
-    
-    [prefs synchronize];
+    [[BentoShop sharedInstance] addNewBento];
+    self.currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
     [self updateUI];
+}
+
+- (IBAction)onContinue:(id)sender
+{
+    Bento *currentBento = nil;
+    if (self.currentBento != nil)
+        currentBento = self.currentBento;
+    else
+        currentBento = [[BentoShop sharedInstance] getCurrentBento];
+
+    if (currentBento == nil || [currentBento isEmpty])
+    {
+        [self performSegueWithIdentifier:@"MainDish" sender:nil];
+    }
+    else if (![currentBento isCompleted])
+    {
+        if ([currentBento getMainDish] == 0)
+            [self performSegueWithIdentifier:@"MainDish" sender:nil];
+        else if ([currentBento getSideDish1] == 0)
+            [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:self.btnSideDish1.tag]];
+        else if ([currentBento getSideDish2] == 0)
+            [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:self.btnSideDish2.tag]];
+        else if ([currentBento getSideDish3] == 0)
+            [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:self.btnSideDish3.tag]];
+        else if ([currentBento getSideDish4] == 0)
+            [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:self.btnSideDish4.tag]];
+    }
+    else // Completed Bento
+    {
+        [[BentoShop sharedInstance] saveBentoArray];
+        [self gotoOrderScreen];
+    }
 }
 
 - (void) updateUI
 {
     [self loadSelectedDishes];
     
-    self.btnCart.selected = [self isCompletedToMakeMyBento];
-    
-    if([self isCompletedToMakeMyBento])
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0)
     {
-        [self.btnState setBackgroundImage:[UIImage imageNamed:@"mybento_image_bottom"] forState:UIControlStateNormal];
-        [self.btnState setBackgroundColor:[UIColor clearColor]];
-        
-        [self.btnState setTitle:@"FINALIZE ORDER" forState:UIControlStateNormal];
+        self.btnCart.enabled = YES;
+        self.btnCart.selected = YES;
     }
     else
     {
-        [self.btnState setBackgroundImage:[UIImage alloc] forState:UIControlStateNormal];
+        self.btnCart.enabled = NO;
+        self.btnCart.selected = NO;
+    }
+    
+    if ([self isCompletedToMakeMyBento])
+    {
+        [self.btnState setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+        
+        NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
+        if (strTitle != nil)
+        {
+            [self.btnState setTitle:strTitle forState:UIControlStateNormal];
+            NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+            float spacing = 1.0f;
+            [attributedTitle addAttribute:NSKernAttributeName
+                                    value:@(spacing)
+                                    range:NSMakeRange(0, [strTitle length])];
+            
+            self.btnState.titleLabel.attributedText = attributedTitle;
+            attributedTitle = nil;
+        }
+    }
+    else
+    {
         [self.btnState setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
         
-        [self.btnState setTitle:@"CONTINUE" forState:UIControlStateNormal];
+        NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
+        if (strTitle != nil)
+        {
+            [self.btnState setTitle:strTitle forState:UIControlStateNormal];
+            NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+            float spacing = 1.0f;
+            [attributedTitle addAttribute:NSKernAttributeName
+                                    value:@(spacing)
+                                    range:NSMakeRange(0, [strTitle length])];
+            
+            self.btnState.titleLabel.attributedText = attributedTitle;
+            attributedTitle = nil;
+        }
+    }
+    
+//    if (self.currentBento == nil)
+    {
+        NSInteger bentoCount = [[BentoShop sharedInstance] getCompletedBentoCount];
+        if (bentoCount > 0)
+        {
+            self.lblBadge.text = [NSString stringWithFormat:@"%ld", (long)bentoCount];
+            self.lblBadge.hidden = NO;
+        }
+        else
+        {
+            self.lblBadge.text = @"";
+            self.lblBadge.hidden = YES;
+        }
+    }
+    
+    Bento *currentBento = nil;
+    if (self.currentBento != nil)
+        currentBento = self.currentBento;
+    else
+        currentBento = [[BentoShop sharedInstance] getCurrentBento];
+
+    if (currentBento == nil || ![currentBento isCompleted])
+    {
+        self.btnAddAnotherBento.enabled = NO;
+        [self.btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
+    }
+    else
+    {
+        self.btnAddAnotherBento.enabled = YES;
+        [self.btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:243.0f / 255.0f green:245.0f / 255.0f blue:245.0f / 255.0f alpha:1.0f]];
     }
 }
 
 - (BOOL) isCompletedToMakeMyBento
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
-    NSInteger mainDishIndex = [[prefs objectForKey:@"MainDish"] integerValue];
-    
-    if(mainDishIndex == -1)
-    {
+    Bento *currentBento = nil;
+    if (self.currentBento != nil)
+        currentBento = self.currentBento;
+    else
+        currentBento = [[BentoShop sharedInstance] getCurrentBento];
+
+    if (currentBento == nil)
         return NO;
-    }
     
-    NSInteger sideDishIndex = [[prefs objectForKey:@"SideDish1"] integerValue];
-    
-    if(sideDishIndex == -1)
-    {
-        return NO;
-    }
-    
-    sideDishIndex = [[prefs objectForKey:@"SideDish2"] integerValue];
-    
-    if(sideDishIndex == -1)
-    {
-        return NO;
-    }
-    
-    sideDishIndex = [[prefs objectForKey:@"SideDish3"] integerValue];
-    
-    if(sideDishIndex == -1)
-    {
-        return NO;
-    }
-    
-    sideDishIndex = [[prefs objectForKey:@"SideDish4"] integerValue];
-    
-    if(sideDishIndex == -1)
-    {
-        return NO;
-    }
-    
-    return YES;
+    return [currentBento isCompleted];
 }
 
 #pragma mark MyAlertViewDelegate
 
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if(buttonIndex == 1)
+    if (buttonIndex == 1)
     {
+        Bento *currentBento = nil;
+        if (self.currentBento != nil)
+            currentBento = self.currentBento;
+        else
+            currentBento = [[BentoShop sharedInstance] getCurrentBento];
+
+        if (currentBento != nil && ![currentBento isCompleted])
+            [currentBento completeBento];
+        
         [self gotoOrderScreen];
     }
 }

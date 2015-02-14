@@ -3,3 +3,4 @@
 #endif
 
 #import "Pods-BentoTests-environment.h"
+#define STRIPE_ENABLE_APPLEPAY YES

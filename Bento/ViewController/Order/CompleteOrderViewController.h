@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
-@interface CompleteOrderViewController : UIViewController
+#import "DataManager.h"
+
+#import "BaseViewController.h"
+
+@interface CompleteOrderViewController : BaseViewController
 
 @end

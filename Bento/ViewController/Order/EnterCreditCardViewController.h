@@ -8,6 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+#import "STPCard.h"
+
+@protocol EnterCreditCardViewControllerDelegate
+
+- (void) setCardInfo:(STPCard *)cardInfo;
+
+@end
+
 @interface EnterCreditCardViewController : UIViewController
+
+@property (nonatomic, assign) id<EnterCreditCardViewControllerDelegate> delegate;
 
 @end

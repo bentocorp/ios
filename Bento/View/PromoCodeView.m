@@ -8,6 +8,14 @@
 
 #import "PromoCodeView.h"
 
+#import "MyAlertView.h"
+
+#import "JGProgressHUD.h"
+
+#import "AppStrings.h"
+#import "WebManager.h"
+#import "DataManager.h"
+
 @interface PromoCodeView()
 
 @property (nonatomic, assign) IBOutlet UIView *viewPromoCode;
@@ -15,6 +23,8 @@
 @property (nonatomic, assign) IBOutlet UITextField *txtPromoCode;
 
 @property (nonatomic, assign) IBOutlet UIButton *btnUsePromoCode;
+
+@property (nonatomic, assign) IBOutlet UIButton *btnCancel;
 
 @end
 
@@ -27,6 +37,10 @@
     
     self.btnUsePromoCode.layer.cornerRadius = 3;
     self.btnUsePromoCode.clipsToBounds = YES;
+    
+    self.txtPromoCode.placeholder = [[AppStrings sharedInstance] getString:PROMOCODE_PLACEHOLDER];
+    [self.btnUsePromoCode setTitle:[[AppStrings sharedInstance] getString:PROMOCODE_BUTTON_USE] forState:UIControlStateNormal];
+    [self.btnCancel setTitle:[[AppStrings sharedInstance] getString:PROMOCODE_BUTTON_CANCEL] forState:UIControlStateNormal];
 }
 
 /*
@@ -37,12 +51,83 @@
 }
 */
 
+- (void)process
+{
+    [self.txtPromoCode resignFirstResponder];
+    
+    if (self.txtPromoCode.text.length == 0)
+        return;
+    
+    NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
+    if (strAPIToken == nil || strAPIToken.length == 0)
+        return;
+    
+    WebManager *webManager = [[WebManager alloc] init];
+    
+    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD.textLabel.text = @"Processing...";
+    [loadingHUD showInView:self];
+    
+    NSString *strRequest = [NSString stringWithFormat:@"/coupon/apply/%@?api_token=%@", self.txtPromoCode.text, strAPIToken];
+    [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
+        [loadingHUD dismiss];
+        
+        NSDictionary *response = networkOperation.responseJSON;
+        if (response != nil && [response objectForKey:@"amountOff"] != nil)
+        {
+            NSInteger discount = [[response objectForKey:@"amountOff"] integerValue];
+            if (self.delegate != nil)
+                [self.delegate setDiscound:discount];
+        }
+        
+        [UIView animateWithDuration:0.3f animations:^{
+            
+            self.alpha = 0.0f;
+            
+        } completion:^(BOOL finished) {
+            
+            [self removeFromSuperview];
+            
+        }];
+        
+    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
+        [loadingHUD dismiss];
+        
+        NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
+        if (strMessage == nil)
+            strMessage = error.localizedDescription;
+        
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        [alertView showInView:self];
+        alertView = nil;
+        return;
+        
+//        if (error.code == 400)
+//        {
+//            NSString *strTitle = [[AppStrings sharedInstance] getString:ALERT_IPC_TITLE];
+//            NSString *strText = [[AppStrings sharedInstance] getString:ALERT_IPC_TEXT];
+//            NSString *strConfirm = [[AppStrings sharedInstance] getString:ALERT_IPC_BUTTON_OK];
+//            
+//            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:strTitle message:strText delegate:nil cancelButtonTitle:strConfirm otherButtonTitle:nil];
+//            
+//            [alertView showInView:self];
+//            alertView = nil;
+//            return;
+//        }
+//        else
+//        {
+//            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+//            [alertView showInView:self];
+//            alertView = nil;
+//            return;
+//        }
+        
+    } isJSON:NO];
+}
+
 - (IBAction)onUsePromoCode:(id)sender
 {
-    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"Invalid Promo Code" message:@"The promo code you entered is invalid. Please try again." delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-    [alertView show];
-    alertView = nil;
+    [self process];
 }
 
 - (IBAction)onCancel:(id)sender
@@ -62,7 +147,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self.txtPromoCode resignFirstResponder];
+    [self process];
     
     return YES;
 }

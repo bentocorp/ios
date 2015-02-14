@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6250" systemVersion="13F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="bfp-2n-wGh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6254" systemVersion="14C109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="bfp-2n-wGh">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6244"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Bold.ttf">
@@ -51,8 +50,16 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+        </mutableArray>
+        <mutableArray key="OpenSans-Light.ttf">
+            <string>OpenSans-Light</string>
         </mutableArray>
         <mutableArray key="OpenSans-Regular.ttf">
+            <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
@@ -110,20 +117,19 @@
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
-            <string>OpenSans-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
         <!--Sold Out View Controller-->
         <scene sceneID="GXX-qv-CIo">
             <objects>
-                <viewController id="eCr-57-e09" customClass="SoldOutViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SoldOutViewController" id="eCr-57-e09" customClass="SoldOutViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Red-BZ-u3h">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="first_background.png" id="rYp-Bh-ycX">
-                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
                             <view contentMode="scaleToFill" id="K7J-A1-RNo">
@@ -152,19 +158,19 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="WF3-1X-OAS">
-                                <rect key="frame" x="0.0" y="136" width="320" height="207"/>
+                                <rect key="frame" x="0.0" y="180" width="320" height="207"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We’re closed now!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q40-KE-h1E">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="34"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We’ll be back tomorrow at 9am. Here’s a promo code for 10% off your next order." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gfc-m1-4dc">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We’ll be back tomorrow at 9am. Here’s a promo code for 10% off your next order." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gfc-m1-4dc">
                                         <rect key="frame" x="25" y="26" width="270" height="82"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -206,7 +212,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gIC-MI-qhK">
-                                <rect key="frame" x="0.0" y="440" width="130" height="40"/>
+                                <rect key="frame" x="0.0" y="528" width="130" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                 <state key="normal" title="Privacy Policy">
@@ -219,7 +225,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dyi-MF-TAk">
-                                <rect key="frame" x="160" y="440" width="160" height="40"/>
+                                <rect key="frame" x="160" y="528" width="160" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                 <state key="normal" title="Terms &amp; Conditions">
@@ -236,7 +242,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="jij-xh-7tu"/>
                     <connections>
+                        <outlet property="btnPolicy" destination="gIC-MI-qhK" id="Hcu-Nd-Chn"/>
+                        <outlet property="btnSend" destination="T1p-OR-Sjv" id="h2W-NN-U5a"/>
+                        <outlet property="btnTerms" destination="dyi-MF-TAk" id="TU9-hr-PTF"/>
                         <outlet property="ivBackground" destination="rYp-Bh-ycX" id="rzF-jN-j93"/>
+                        <outlet property="ivTitle" destination="gyq-DU-jyO" id="dBY-a8-Zsh"/>
                         <outlet property="lblMessageContent" destination="gfc-m1-4dc" id="aY3-77-nUE"/>
                         <outlet property="lblMessageTitle" destination="Q40-KE-h1E" id="C5y-hG-6YG"/>
                         <outlet property="txtEmail" destination="g4w-Ug-cU5" id="k5X-Rx-Ufp"/>
@@ -246,7 +256,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFL-zd-gAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="867" y="-190"/>
+            <point key="canvasLocation" x="317" y="1040"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ARi-do-CBH">
+            <objects>
+                <navigationController storyboardIdentifier="SoldOut" navigationBarHidden="YES" id="ypz-Tf-mmw" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="J4S-0K-8uE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="eCr-57-e09" kind="relationship" relationship="rootViewController" id="qZS-EP-RhR"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="JVR-7P-KIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-129" y="1040"/>
         </scene>
         <!--First View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -285,8 +312,11 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <connections>
                         <outlet property="ivBackground" destination="8IQ-jD-y7k" id="bxY-MA-MBa"/>
-                        <segue destination="cih-YB-hrD" kind="push" identifier="MakeBento" id="n9b-DI-aZT"/>
-                        <segue destination="eCr-57-e09" kind="push" identifier="SoldOut" id="NlI-fI-L7G"/>
+                        <outlet property="ivLaunchLogo" destination="IlR-5c-RNW" id="47o-nV-WxA"/>
+                        <outlet property="lblLaunchSlogan" destination="ZuD-Ad-TM9" id="7uQ-5w-ceh"/>
+                        <segue destination="cih-YB-hrD" kind="push" identifier="Intro" id="n9b-DI-aZT"/>
+                        <segue destination="diU-FL-EY2" kind="push" identifier="MyBento" id="Ghr-0t-YHG"/>
+                        <segue destination="cjF-1z-ADL" kind="push" identifier="DeliveryLocation" id="Jq9-7a-GOP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -296,7 +326,7 @@
         <!--Intro View Controller-->
         <scene sceneID="UdI-NS-1Dg">
             <objects>
-                <viewController id="cih-YB-hrD" customClass="IntroViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="IntroViewController" id="cih-YB-hrD" customClass="IntroViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="UY9-Up-bcR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -340,22 +370,22 @@
                                         <color key="textColor" red="0.54117647059999996" green="0.6705882353" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a main dish.        " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="IVg-0A-jmy">
-                                        <rect key="frame" x="82" y="86" width="180" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a main dish.        " lineBreakMode="tailTruncation" minimumScaleFactor="0.5" id="IVg-0A-jmy">
+                                        <rect key="frame" x="82" y="84" width="180" height="32"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick your 4 side dishes.   " lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="cZZ-OZ-YoM">
-                                        <rect key="frame" x="83" y="141" width="180" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick your 4 side dishes.   " lineBreakMode="tailTruncation" minimumScaleFactor="0.5" id="cZZ-OZ-YoM">
+                                        <rect key="frame" x="83" y="138" width="180" height="32"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your address. Done." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="GsT-oE-bTu">
-                                        <rect key="frame" x="83" y="192" width="180" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your address. Done." lineBreakMode="tailTruncation" minimumScaleFactor="0.5" id="GsT-oE-bTu">
+                                        <rect key="frame" x="83" y="190" width="180" height="32"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
@@ -388,22 +418,25 @@
                     <connections>
                         <outlet property="btnGetStarted" destination="9V8-fy-NiP" id="hJe-Xd-3ju"/>
                         <outlet property="ivBackground" destination="et5-BV-R37" id="nRK-AU-eeD"/>
+                        <outlet property="ivLogo" destination="dzM-tT-Uvv" id="JJL-8T-ySi"/>
                         <outlet property="lblComment" destination="jUz-WA-vPg" id="ss0-Jl-9cr"/>
+                        <outlet property="lblItem0" destination="jUz-WA-vPg" id="T15-NJ-vB0"/>
+                        <outlet property="lblItem1" destination="IVg-0A-jmy" id="45M-58-Xo4"/>
+                        <outlet property="lblItem2" destination="cZZ-OZ-YoM" id="yha-EO-YQQ"/>
+                        <outlet property="lblItem3" destination="GsT-oE-bTu" id="57l-is-Om6"/>
                         <outlet property="lblNumber1" destination="NJw-qI-yTX" id="5pU-0j-xMA"/>
                         <outlet property="lblNumber2" destination="zve-5b-5vS" id="0aj-6h-8ri"/>
                         <outlet property="lblNumber3" destination="Igs-fu-eRb" id="McC-pQ-gga"/>
-                        <segue destination="diU-FL-EY2" kind="push" identifier="MyBento" id="7Su-b9-xyl"/>
-                        <segue destination="cjF-1z-ADL" kind="push" identifier="DeliveryLocation" id="Pio-jZ-Z4r"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fy6-LN-dRc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="889" y="462"/>
+            <point key="canvasLocation" x="897" y="-44"/>
         </scene>
         <!--My Bento View Controller-->
         <scene sceneID="RYP-cm-1PN">
             <objects>
-                <viewController id="diU-FL-EY2" customClass="MyBentoViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MyBentoViewController" id="diU-FL-EY2" customClass="MyBentoViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ClA-IU-eIm">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -472,7 +505,7 @@
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="onAddMainEntree:" destination="diU-FL-EY2" eventType="touchUpInside" id="tVY-u9-2Il"/>
+                                                    <action selector="onAddMainDish:" destination="diU-FL-EY2" eventType="touchUpInside" id="wft-yt-4Ym"/>
                                                 </connections>
                                             </button>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="San-at-zvT">
@@ -486,6 +519,10 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="RZZ-jU-O8M">
+                                                <rect key="frame" x="219" y="0.0" width="41" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -516,6 +553,10 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="YdG-bB-86p">
+                                                <rect key="frame" x="89" y="0.0" width="41" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -546,6 +587,10 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="frH-Fe-vBi">
+                                                <rect key="frame" x="89" y="0.0" width="41" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -576,6 +621,10 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="5XU-32-iHW">
+                                                <rect key="frame" x="89" y="0.0" width="41" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -606,6 +655,10 @@
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="Efm-j8-36b">
+                                                <rect key="frame" x="89" y="0.0" width="41" height="41"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -622,16 +675,20 @@
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
                                 <connections>
-                                    <action selector="onCart:" destination="diU-FL-EY2" eventType="touchUpInside" id="gh9-bI-9cx"/>
+                                    <action selector="onContinue:" destination="diU-FL-EY2" eventType="touchUpInside" id="map-Ww-I67"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9hp-xO-ItZ">
                                 <rect key="frame" x="30" y="370" width="260" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.96078431372549022" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="string_addanotherbento.png">
+                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
+                                <state key="normal" title="ADD ANOTHER BENTO">
                                     <color key="titleColor" red="0.53333333333333333" green="0.68627450980392157" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="disabled">
+                                    <color key="titleColor" red="0.67843137254901964" green="0.78431372549019607" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
                                 <connections>
                                     <action selector="onAddAnotherBento:" destination="diU-FL-EY2" eventType="touchUpInside" id="KB9-WY-Mrr"/>
@@ -643,8 +700,19 @@
                     <navigationItem key="navigationItem" id="QSI-kA-xGm"/>
                     <connections>
                         <outlet property="btnAddAnotherBento" destination="9hp-xO-ItZ" id="dy9-PC-imv"/>
+                        <outlet property="btnBack" destination="lW4-aV-d51" id="9Qy-F9-kW2"/>
                         <outlet property="btnCart" destination="1ZN-wJ-xL2" id="V0N-fr-fUM"/>
+                        <outlet property="btnMainDish" destination="KQy-bw-YSx" id="rC5-Ts-GEn"/>
+                        <outlet property="btnSideDish1" destination="cwM-DC-TXG" id="IYb-WN-9fx"/>
+                        <outlet property="btnSideDish2" destination="3Yz-gN-QBo" id="xjH-tr-af3"/>
+                        <outlet property="btnSideDish3" destination="a67-DD-r0D" id="R6R-GL-mI7"/>
+                        <outlet property="btnSideDish4" destination="VaD-cs-f6w" id="Qb7-7a-IIF"/>
                         <outlet property="btnState" destination="JtB-oX-RW9" id="MiM-le-yNG"/>
+                        <outlet property="ivBannerMainDish" destination="RZZ-jU-O8M" id="KTM-HO-pZX"/>
+                        <outlet property="ivBannerSideDish1" destination="YdG-bB-86p" id="R3g-Vj-aew"/>
+                        <outlet property="ivBannerSideDish2" destination="frH-Fe-vBi" id="f1K-nc-LPa"/>
+                        <outlet property="ivBannerSideDish3" destination="5XU-32-iHW" id="ks0-fH-OtZ"/>
+                        <outlet property="ivBannerSideDish4" destination="Efm-j8-36b" id="VqU-XP-M77"/>
                         <outlet property="ivMainDish" destination="San-at-zvT" id="ybT-U9-nLY"/>
                         <outlet property="ivSideDish1" destination="cro-qA-bIw" id="eEv-bf-vuJ"/>
                         <outlet property="ivSideDish2" destination="mdZ-cn-fVj" id="xwd-kP-ghG"/>
@@ -656,6 +724,7 @@
                         <outlet property="lblSideDish2" destination="VQS-pA-9AJ" id="q3D-xX-RfT"/>
                         <outlet property="lblSideDish3" destination="RmR-pc-tPb" id="DOh-zU-hg8"/>
                         <outlet property="lblSideDish4" destination="fIE-Lf-r4q" id="BeG-tg-8Mp"/>
+                        <outlet property="lblTitle" destination="Hgo-zt-rAE" id="VRP-1i-7oj"/>
                         <outlet property="viewDishs" destination="q9X-aU-dkj" id="pSE-sz-tOy"/>
                         <outlet property="viewMainEntree" destination="7AP-v0-tnQ" id="Fhq-NS-BGr"/>
                         <outlet property="viewSide1" destination="2eQ-aA-4Yo" id="A2S-Tg-wgU"/>
@@ -665,7 +734,8 @@
                         <segue destination="Y3s-WX-y7y" kind="push" identifier="MainDish" id="2yK-go-LWz"/>
                         <segue destination="tNR-bW-wkA" kind="push" identifier="SideDish" id="cWi-n0-G3A"/>
                         <segue destination="OTw-yi-Ooo" kind="push" identifier="Faq" id="wQ7-4U-rn4"/>
-                        <segue destination="W50-Cr-45u" kind="push" identifier="Register" id="5hT-Hp-Skr"/>
+                        <segue destination="cjF-1z-ADL" kind="push" identifier="DeliveryLocation" id="09w-J6-v5C"/>
+                        <segue destination="IGL-x5-TQo" kind="push" identifier="CompleteOrder" id="oNJ-Gc-fzE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6d-St-eXW" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -675,7 +745,7 @@
         <!--Choose Main Dish View Controller-->
         <scene sceneID="blW-Mz-28m">
             <objects>
-                <viewController id="Y3s-WX-y7y" customClass="ChooseMainDishViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChooseMainDishViewController" id="Y3s-WX-y7y" customClass="ChooseMainDishViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="IOw-Au-Jvl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -705,7 +775,7 @@
                                             <action selector="onBack:" destination="Y3s-WX-y7y" eventType="touchUpInside" id="Jg0-dU-PvI"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Ev-qO-lpC">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Ev-qO-lpC">
                                         <rect key="frame" x="270" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="mybento_nav_cart_inact.png">
@@ -716,7 +786,7 @@
                                             <action selector="onCart:" destination="Y3s-WX-y7y" eventType="touchUpInside" id="WJd-Lf-WnK"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VoK-da-hpy">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VoK-da-hpy">
                                         <rect key="frame" x="277" y="24" width="14" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.89019607840000003" green="0.2470588235" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -754,18 +824,36 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ys0-Ok-xvL"/>
                     <connections>
                         <outlet property="btnCart" destination="3Ev-qO-lpC" id="7Nx-7w-LhT"/>
                         <outlet property="cvMainDishes" destination="jEL-Ah-vpE" id="zQo-KC-lTm"/>
                         <outlet property="lblBadge" destination="VoK-da-hpy" id="5wb-f9-YPM"/>
+                        <outlet property="lblTitle" destination="Rfm-67-QKg" id="67X-rx-SuZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EMt-78-ygp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1898" y="462"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="d57-l3-npt">
+            <objects>
+                <navigationController storyboardIdentifier="Account" navigationBarHidden="YES" id="eFM-Ym-6lk" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fen-UY-31n">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="W50-Cr-45u" kind="relationship" relationship="rootViewController" id="2Qr-1i-dUY"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7Ws-92-auz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-711" y="1636"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="8U0-dj-nvw">
@@ -866,27 +954,18 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="textColor" red="0.42745098039215684" green="0.45882352941176469" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
                                                 <connections>
+                                                    <action selector="onTextChanged:" destination="W50-Cr-45u" eventType="editingChanged" id="ZdQ-oS-Fb2"/>
                                                     <outlet property="delegate" destination="W50-Cr-45u" id="w8J-Oi-Nam"/>
                                                 </connections>
                                             </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" minimumFontSize="17" id="XyA-3w-KKd">
-                                                <rect key="frame" x="70" y="53" width="230" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="W50-Cr-45u" id="dsr-Jz-A9e"/>
-                                                </connections>
-                                            </textField>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone number" minimumFontSize="17" id="kss-ag-dM8">
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone number" minimumFontSize="17" id="kss-ag-dM8" customClass="SHSPhoneTextField">
                                                 <rect key="frame" x="70" y="98" width="230" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
                                                 <connections>
                                                     <outlet property="delegate" destination="W50-Cr-45u" id="iuC-YU-vtN"/>
                                                 </connections>
@@ -898,7 +977,19 @@
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                 <connections>
+                                                    <action selector="onTextChanged:" destination="W50-Cr-45u" eventType="editingChanged" id="6Oo-al-9Xt"/>
                                                     <outlet property="delegate" destination="W50-Cr-45u" id="TGY-L9-GEZ"/>
+                                                </connections>
+                                            </textField>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" minimumFontSize="17" id="XyA-3w-KKd">
+                                                <rect key="frame" x="70" y="53" width="230" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
+                                                <connections>
+                                                    <action selector="onTextChanged:" destination="W50-Cr-45u" eventType="editingChanged" id="zft-d3-K9X"/>
+                                                    <outlet property="delegate" destination="W50-Cr-45u" id="dsr-Jz-A9e"/>
                                                 </connections>
                                             </textField>
                                         </subviews>
@@ -979,12 +1070,25 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid email address." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E2l-23-qlK">
-                                        <rect key="frame" x="47" y="11" width="256" height="21"/>
+                                        <rect key="frame" x="47" y="11" width="259" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Bx-89-ZkC">
+                                        <rect key="frame" x="253" y="7" width="60" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
+                                        <state key="normal" title="SIGN IN">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onSignInWithEmail:" destination="W50-Cr-45u" eventType="touchUpInside" id="Jbf-Hc-oHr"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.9137254901960784" green="0.44705882352941173" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -1024,11 +1128,13 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
                         <outlet property="btnRegister" destination="GaG-xX-Wfd" id="vb3-UI-WUT"/>
+                        <outlet property="btnSignUp" destination="0Bx-89-ZkC" id="Rn9-hF-L8n"/>
                         <outlet property="ivEmail" destination="uqH-ab-4iu" id="8p8-Ho-5Gd"/>
                         <outlet property="ivPassword" destination="Mxf-HM-j7P" id="eGM-jC-2Qx"/>
                         <outlet property="ivPhoneNumber" destination="bH6-Eq-hhm" id="4Nd-Qt-gVO"/>
                         <outlet property="ivYourname" destination="SrB-MV-sqR" id="dGj-vu-EPg"/>
                         <outlet property="lblError" destination="E2l-23-qlK" id="4J6-lU-3Th"/>
+                        <outlet property="lblTitle" destination="wHK-m1-5eO" id="rV3-9b-rx8"/>
                         <outlet property="svMain" destination="5YZ-FN-XgV" id="kSm-EA-F7k"/>
                         <outlet property="txtEmail" destination="XyA-3w-KKd" id="md0-hj-51j"/>
                         <outlet property="txtPassword" destination="cMx-iM-tth" id="QuP-li-Lfb"/>
@@ -1039,12 +1145,11 @@
                         <segue destination="2fX-aE-lC2" kind="push" identifier="SignIn" id="yv2-FZ-lXu"/>
                         <segue destination="OTw-yi-Ooo" kind="push" identifier="Terms" id="c0e-A3-bdS"/>
                         <segue destination="Uml-6W-39g" kind="push" identifier="PhoneNumber" id="sjk-uB-lm1"/>
-                        <segue destination="cjF-1z-ADL" kind="push" identifier="DeliveryLocation" id="SGT-yH-fjw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IwZ-gB-3gc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1820" y="1132"/>
+            <point key="canvasLocation" x="-207" y="1636"/>
         </scene>
         <!--Phone Number View Controller-->
         <scene sceneID="xTy-Lv-o3p">
@@ -1054,6 +1159,69 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" id="tB6-sZ-kP1">
+                                <rect key="frame" x="0.0" y="150" width="320" height="180"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="p0I-0u-oUV">
+                                        <rect key="frame" x="0.0" y="73" width="320" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" id="fOy-ri-luE">
+                                                <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" id="xgs-r7-JD0">
+                                                <rect key="frame" x="0.0" y="45" width="320" height="1"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <view contentMode="scaleToFill" id="to2-2o-V8Y">
+                                                <rect key="frame" x="50" y="0.0" width="1" height="46"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
+                                            </view>
+                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" id="ZWs-Us-ZYu" customClass="SHSPhoneTextField">
+                                                <rect key="frame" x="70" y="8" width="230" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="Uml-6W-39g" id="eCv-HL-njd"/>
+                                                </connections>
+                                            </textField>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_phone.png" id="nbX-wa-VWK">
+                                                <rect key="frame" x="18" y="12" width="13" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            </imageView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="b5I-6l-4Lz">
+                                        <rect key="frame" x="15" y="135" width="290" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                                        <state key="normal" title="DONE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onDone:" destination="Uml-6W-39g" eventType="touchUpInside" id="Dpb-Xz-SbW"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need your phone number to let you know when your delivery is ready." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="imE-ZK-euc">
+                                        <rect key="frame" x="31" y="0.0" width="258" height="59"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <color key="textColor" red="0.3411764705882353" green="0.37647058823529411" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                             <view contentMode="scaleToFill" id="PZA-0Y-sTk">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
@@ -1083,6 +1251,24 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <view contentMode="scaleToFill" id="lBv-mA-Qf0">
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_alert.png" id="Avv-nm-FxL">
+                                        <rect key="frame" x="15" y="14" width="16" height="16"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid email address." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zze-hN-6Ks">
+                                        <rect key="frame" x="47" y="11" width="256" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.91372549020000005" green="0.44705882349999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sr8-TN-d5c">
                                 <rect key="frame" x="160" y="440" width="160" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
@@ -1107,69 +1293,6 @@
                                     <action selector="onPrivacyPolicy:" destination="Uml-6W-39g" eventType="touchUpInside" id="qzZ-IP-bbD"/>
                                 </connections>
                             </button>
-                            <view contentMode="scaleToFill" id="tB6-sZ-kP1">
-                                <rect key="frame" x="0.0" y="120" width="320" height="240"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" id="p0I-0u-oUV">
-                                        <rect key="frame" x="0.0" y="103" width="320" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <subviews>
-                                            <view contentMode="scaleToFill" id="fOy-ri-luE">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" id="xgs-r7-JD0">
-                                                <rect key="frame" x="0.0" y="45" width="320" height="1"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
-                                            </view>
-                                            <view contentMode="scaleToFill" id="to2-2o-V8Y">
-                                                <rect key="frame" x="50" y="0.0" width="1" height="46"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
-                                            </view>
-                                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" id="ZWs-Us-ZYu">
-                                                <rect key="frame" x="70" y="8" width="230" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                                <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="Uml-6W-39g" id="4uI-jK-SnJ"/>
-                                                </connections>
-                                            </textField>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_phone.png" id="nbX-wa-VWK">
-                                                <rect key="frame" x="18" y="12" width="13" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="b5I-6l-4Lz">
-                                        <rect key="frame" x="15" y="165" width="290" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
-                                        <state key="normal" title="DONE">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onDone:" destination="Uml-6W-39g" eventType="touchUpInside" id="Dpb-Xz-SbW"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need your phone number to let you know when your delivery is ready." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="imE-ZK-euc">
-                                        <rect key="frame" x="31" y="30" width="258" height="59"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                        <color key="textColor" red="0.3411764705882353" green="0.37647058823529411" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -1177,19 +1300,26 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="btnDone" destination="b5I-6l-4Lz" id="13i-2J-mNw"/>
+                        <outlet property="btnPolicy" destination="I7B-WQ-R10" id="zTM-wl-jBj"/>
+                        <outlet property="btnTerms" destination="Sr8-TN-d5c" id="a4H-CP-L9d"/>
+                        <outlet property="ivPhoneNumber" destination="nbX-wa-VWK" id="cdx-TM-KYE"/>
+                        <outlet property="lblDescription" destination="imE-ZK-euc" id="r8A-eR-l1W"/>
+                        <outlet property="lblError" destination="zze-hN-6Ks" id="BFw-qC-pze"/>
+                        <outlet property="lblTitle" destination="5Bu-cl-ZKd" id="ani-XJ-ThE"/>
                         <outlet property="txtPhoneNumber" destination="ZWs-Us-ZYu" id="TdD-Sn-ffY"/>
-                        <segue destination="cjF-1z-ADL" kind="push" identifier="DeliveryLocation" id="HSl-vf-uty"/>
+                        <outlet property="viewError" destination="lBv-mA-Qf0" id="M22-oq-IiJ"/>
+                        <outlet property="viewPhoneNumber" destination="tB6-sZ-kP1" id="jQc-qG-bXt"/>
                         <segue destination="OTw-yi-Ooo" kind="push" identifier="Faq" id="jSv-1B-rhc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nvk-7O-cZq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2752" y="1786"/>
+            <point key="canvasLocation" x="258" y="2308"/>
         </scene>
         <!--Delivery Location View Controller-->
         <scene sceneID="Qcn-rT-Ef9">
             <objects>
-                <viewController id="cjF-1z-ADL" customClass="DeliveryLocationViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DeliveryLocationViewController" id="cjF-1z-ADL" customClass="DeliveryLocationViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="63n-gA-U9r">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1198,14 +1328,14 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your address" minimumFontSize="17" id="PrE-gh-x4k">
+                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your address" minimumFontSize="17" clearButtonMode="whileEditing" id="PrE-gh-x4k">
                                         <rect key="frame" x="50" y="7" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                         <connections>
                                             <action selector="onChangeAddress:" destination="cjF-1z-ADL" eventType="editingChanged" id="5SS-QR-vra"/>
-                                            <outlet property="delegate" destination="cjF-1z-ADL" id="EAy-KI-R7f"/>
+                                            <outlet property="delegate" destination="cjF-1z-ADL" id="ton-XS-hnY"/>
                                         </connections>
                                     </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cbK-pc-cfu">
@@ -1265,7 +1395,7 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="onMeetMyDriver:" destination="cjF-1z-ADL" eventType="touchUpInside" id="brJ-m8-dUU"/>
+                                            <action selector="onHelp:" destination="cjF-1z-ADL" eventType="touchUpInside" id="hjS-tY-w8R"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -1302,6 +1432,7 @@
                                         <state key="normal" image="mybento_nav_cart_act.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+                                        <state key="disabled" image="mybento_nav_cart_inact.png"/>
                                         <state key="selected" image="mybento_nav_cart_act.png"/>
                                         <connections>
                                             <action selector="onDelivery:" destination="cjF-1z-ADL" eventType="touchUpInside" id="lDl-UP-aWk"/>
@@ -1318,9 +1449,12 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="x1o-Jf-fPe">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="x1o-Jf-fPe">
                                 <rect key="frame" x="0.0" y="108" width="320" height="284"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="cjF-1z-ADL" id="szf-Ef-JYe"/>
+                                </connections>
                             </mapView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="epU-fh-v9M">
                                 <rect key="frame" x="0.0" y="108" width="320" height="108"/>
@@ -1335,7 +1469,8 @@
                                 <rect key="frame" x="0.0" y="435" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <state key="normal" image="string_continue.png">
+                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                <state key="normal" title="CONTINUE">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
@@ -1343,22 +1478,35 @@
                                     <action selector="onBottomButton:" destination="cjF-1z-ADL" eventType="touchUpInside" id="bFT-ss-Hn5"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please tap the checkbox to confirm curbside delivery." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jHS-3E-dw8">
+                                <rect key="frame" x="0.0" y="363" width="320" height="21"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Smn-XZ-o9M"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
+                        <outlet property="btnBack" destination="QKw-5b-gs7" id="42E-lQ-sA1"/>
                         <outlet property="btnBottomButton" destination="VCZ-aB-4bV" id="6Ge-cV-xKo"/>
                         <outlet property="btnDelivery" destination="71c-yE-Lcr" id="Tk5-9B-Vby"/>
                         <outlet property="btnMeetMyDrive" destination="0U3-tR-rVN" id="gaT-q9-dGF"/>
+                        <outlet property="lblAgree" destination="HsG-Vf-ZpK" id="NYm-JX-s5P"/>
                         <outlet property="lblBadge" destination="Anb-d9-Snh" id="GOb-ud-EB6"/>
+                        <outlet property="lblError" destination="jHS-3E-dw8" id="AGt-6e-uY0"/>
+                        <outlet property="lblTitle" destination="7gg-Lq-6Aa" id="lpf-D4-TpC"/>
                         <outlet property="mapView" destination="x1o-Jf-fPe" id="y4E-3c-0II"/>
                         <outlet property="tvLocations" destination="epU-fh-v9M" id="K6P-LN-sdH"/>
                         <outlet property="txtAddress" destination="PrE-gh-x4k" id="hzj-vP-Phz"/>
                         <outlet property="viewSearchLocation" destination="PgI-ir-4n1" id="Kf6-U4-a2l"/>
                         <segue destination="nhj-Yn-paf" kind="push" identifier="OutOfDelivery" id="Tsm-7o-Ram"/>
                         <segue destination="IGL-x5-TQo" kind="push" identifier="CompleteOrder" id="dRi-of-nZl"/>
+                        <segue destination="diU-FL-EY2" kind="push" identifier="AddAnotherBento" id="TLP-Su-R5t"/>
+                        <segue destination="OTw-yi-Ooo" kind="push" identifier="Faq" id="AiB-nW-Nk2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MUb-Fw-Ivc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1368,7 +1516,7 @@
         <!--Complete Order View Controller-->
         <scene sceneID="VNP-Ho-6cd">
             <objects>
-                <viewController id="IGL-x5-TQo" customClass="CompleteOrderViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CompleteOrderViewController" id="IGL-x5-TQo" customClass="CompleteOrderViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G3n-IH-OZF">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1426,22 +1574,14 @@
                                 </connections>
                             </button>
                             <view contentMode="scaleToFill" id="QE3-nQ-WT3">
-                                <rect key="frame" x="0.0" y="65" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your address" minimumFontSize="17" id="ff3-Yl-i2f">
-                                        <rect key="frame" x="15" y="7" width="229" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
-                                        <connections>
-                                            <outlet property="delegate" destination="IGL-x5-TQo" id="taC-Ix-E5m"/>
-                                        </connections>
-                                    </textField>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iiJ-Jj-yAJ">
-                                        <rect key="frame" x="235" y="0.0" width="70" height="44"/>
+                                        <rect key="frame" x="235" y="0.0" width="85" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="CHANGE">
                                             <color key="titleColor" red="0.58431372549019611" green="0.792156862745098" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1455,17 +1595,25 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.83921568627450982" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery Destination" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LX8-ou-bJ7">
+                                        <rect key="frame" x="15" y="11" width="229" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <color key="textColor" red="0.30588235294117649" green="0.34509803921568627" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="agK-tb-ytI">
-                                <rect key="frame" x="0.0" y="109" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cOo-Wx-ePj">
-                                        <rect key="frame" x="235" y="0.0" width="70" height="44"/>
+                                        <rect key="frame" x="235" y="0.0" width="85" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="CHANGE">
                                             <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1479,10 +1627,89 @@
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderconfirm_image_applepay.png" id="cls-zz-h40">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderconfirm_image_applepay.png" id="cls-zz-h40">
                                         <rect key="frame" x="15" y="11" width="46" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Method" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5KH-qE-afz">
+                                        <rect key="frame" x="69" y="11" width="158" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <color key="textColor" red="0.30196078431372547" green="0.34509803921568627" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="hVC-th-zts">
+                                <rect key="frame" x="0.0" y="153" width="320" height="106"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pbc-Hz-gCU">
+                                        <rect key="frame" x="0.0" y="0.0" width="140" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
+                                        <state key="normal" title="ADD ANOTHER BENTO">
+                                            <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onAddAnotherBento:" destination="IGL-x5-TQo" eventType="touchUpInside" id="yb7-Nh-rq0"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ryh-p2-U6Y">
+                                        <rect key="frame" x="235" y="0.0" width="85" height="44"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
+                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
+                                        <state key="normal" title="EDIT">
+                                            <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onEditBentos:" destination="IGL-x5-TQo" eventType="touchUpInside" id="enk-Qw-Tud"/>
+                                        </connections>
+                                    </button>
+                                    <view contentMode="scaleToFill" id="HwP-O1-VPc">
+                                        <rect key="frame" x="0.0" y="43" width="320" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lth-bX-9L2">
+                                        <rect key="frame" x="0.0" y="43" width="320" height="63"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <connections>
+                                            <outlet property="dataSource" destination="IGL-x5-TQo" id="Ka0-en-mcs"/>
+                                            <outlet property="delegate" destination="IGL-x5-TQo" id="KFY-MJ-zLM"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <view contentMode="scaleToFill" id="tfC-0t-xL2">
+                                <rect key="frame" x="0.0" y="259" width="320" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" id="9qR-Yl-vN9">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Promo Discount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T88-Z1-qyD">
+                                        <rect key="frame" x="15" y="11" width="163" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AEx-9y-g8p">
+                                        <rect key="frame" x="205" y="11" width="100" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                        <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -1550,32 +1777,6 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" id="tfC-0t-xL2">
-                                <rect key="frame" x="0.0" y="259" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" id="9qR-Yl-vN9">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                        <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Promo Discount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T88-Z1-qyD">
-                                        <rect key="frame" x="15" y="11" width="163" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                        <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AEx-9y-g8p">
-                                        <rect key="frame" x="205" y="11" width="100" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                        <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
                             <view contentMode="scaleToFill" id="76i-t7-otd">
                                 <rect key="frame" x="0.0" y="347" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -1605,7 +1806,7 @@
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="onMinuteTip:" destination="IGL-x5-TQo" eventType="touchUpInside" id="z7y-JM-9XX"/>
+                                            <action selector="onMinusTip:" destination="IGL-x5-TQo" eventType="touchUpInside" id="2V6-eu-0dV"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="o1K-1D-u7N">
@@ -1630,94 +1831,32 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
-                            <view contentMode="scaleToFill" id="hVC-th-zts">
-                                <rect key="frame" x="0.0" y="153" width="320" height="106"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pbc-Hz-gCU">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
-                                        <state key="normal" title="ADD ANOTHER BENTO">
-                                            <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onAddAnotherBento:" destination="IGL-x5-TQo" eventType="touchUpInside" id="yb7-Nh-rq0"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ryh-p2-U6Y">
-                                        <rect key="frame" x="235" y="0.0" width="70" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
-                                        <state key="normal" title="EDIT">
-                                            <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onEditBentos:" destination="IGL-x5-TQo" eventType="touchUpInside" id="enk-Qw-Tud"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" id="HwP-O1-VPc">
-                                        <rect key="frame" x="0.0" y="43" width="320" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lth-bX-9L2">
-                                        <rect key="frame" x="0.0" y="43" width="320" height="63"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        <prototypes>
-                                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" id="jUz-7p-dPL" customClass="BentoTableViewCell">
-                                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jUz-7p-dPL" id="gm2-DX-Nxa">
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bento" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="RTK-0R-Nnk">
-                                                            <rect key="frame" x="15" y="11" width="221" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                                            <color key="textColor" red="0.54117647059999996" green="0.73333333329999995" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$15" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fE8-hD-jqj">
-                                                            <rect key="frame" x="904" y="11" width="40" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                                            <color key="textColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                                <connections>
-                                                    <outlet property="lblBentoName" destination="RTK-0R-Nnk" id="WL6-pq-3oE"/>
-                                                    <outlet property="lblBentoPrice" destination="fE8-hD-jqj" id="iLz-5N-MR3"/>
-                                                </connections>
-                                            </tableViewCell>
-                                        </prototypes>
-                                        <connections>
-                                            <outlet property="dataSource" destination="IGL-x5-TQo" id="Ka0-en-mcs"/>
-                                            <outlet property="delegate" destination="IGL-x5-TQo" id="KFY-MJ-zLM"/>
-                                        </connections>
-                                    </tableView>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="QU5-XD-J3S"/>
                     <connections>
+                        <outlet property="btnAddAnother" destination="pbc-Hz-gCU" id="zok-SX-x8V"/>
+                        <outlet property="btnAddPromo" destination="fxD-Rl-wWD" id="vaf-Hc-Jxj"/>
+                        <outlet property="btnChangeAddr" destination="iiJ-Jj-yAJ" id="AeG-2z-uMz"/>
+                        <outlet property="btnChangeMethod" destination="cOo-Wx-ePj" id="chj-se-Wk3"/>
                         <outlet property="btnEdit" destination="Ryh-p2-U6Y" id="63C-hc-6ia"/>
                         <outlet property="btnGetItNow" destination="2Gh-RT-7qO" id="XyJ-pl-SdZ"/>
+                        <outlet property="ivCardType" destination="cls-zz-h40" id="irU-AI-WhK"/>
+                        <outlet property="lblAddress" destination="LX8-ou-bJ7" id="4fp-mv-xn0"/>
                         <outlet property="lblDeliveryTip" destination="kjF-xR-Bb6" id="uV0-EJ-F3a"/>
+                        <outlet property="lblPaymentMethod" destination="5KH-qE-afz" id="cqo-2K-2Cv"/>
                         <outlet property="lblPromoDiscount" destination="AEx-9y-g8p" id="DQ4-qB-Vih"/>
                         <outlet property="lblTax" destination="V4F-Un-VVC" id="sN4-rN-ZZB"/>
+                        <outlet property="lblTitle" destination="J8l-Tx-PpD" id="cEQ-oZ-HkR"/>
+                        <outlet property="lblTitlePromo" destination="T88-Z1-qyD" id="vTw-ev-g2v"/>
+                        <outlet property="lblTitleTax" destination="sMP-XO-0sa" id="fwW-Wx-34z"/>
+                        <outlet property="lblTitleTip" destination="7po-kz-3DU" id="iza-vx-JOz"/>
+                        <outlet property="lblTitleTotal" destination="R8F-6H-yJt" id="kiy-gj-n2K"/>
                         <outlet property="lblTotal" destination="G2i-DY-dBo" id="qUl-hw-fuk"/>
                         <outlet property="tvBentos" destination="Lth-bX-9L2" id="sEt-iJ-Lnf"/>
-                        <outlet property="txtAddress" destination="ff3-Yl-i2f" id="oAh-dt-EwD"/>
+                        <outlet property="viewList" destination="hVC-th-zts" id="HUh-JG-6eS"/>
+                        <outlet property="viewPromo" destination="tfC-0t-xL2" id="7kF-tZ-iG9"/>
                         <segue destination="XvI-57-7Bc" kind="modal" identifier="CreditCard" id="EpH-Ya-dQJ"/>
                         <segue destination="utt-Mq-JP9" kind="push" identifier="ConfirmOrder" id="XqP-BI-Zce"/>
                         <segue destination="OTw-yi-Ooo" kind="push" identifier="Faq" id="gyw-N9-RgR"/>
@@ -1731,29 +1870,51 @@
         <!--Enter Credit Card View Controller-->
         <scene sceneID="l9o-iz-hyu">
             <objects>
-                <viewController id="XvI-57-7Bc" customClass="EnterCreditCardViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EnterCreditCardViewController" id="XvI-57-7Bc" customClass="EnterCreditCardViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="49k-li-Y5Y">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="snp-dy-QJr">
-                                <rect key="frame" x="0.0" y="64" width="320" height="100"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A single Bento is only…" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pi3-yZ-jYd">
                                         <rect key="frame" x="66" y="28" width="188" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.47843137254901957" green="0.52156862745098043" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eds-o0-foK">
                                         <rect key="frame" x="139" y="56" width="42" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="21"/>
                                         <color key="textColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <view contentMode="scaleToFill" id="dg2-sb-bPo">
+                                        <rect key="frame" x="0.0" y="104" width="320" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IAt-I3-Gvk">
+                                                <rect key="frame" x="270" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
+                                                <state key="normal" image="creditcard_btn_clear.png">
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onClear:" destination="XvI-57-7Bc" eventType="touchUpInside" id="ER5-rd-gEP"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </view>
+                                    <view contentMode="scaleToFill" id="xd0-pM-PF2">
+                                        <rect key="frame" x="0.0" y="104" width="270" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                    </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.87450980392156863" green="0.89411764705882346" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
@@ -1803,8 +1964,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="jxA-Re-dca"/>
                     <connections>
+                        <outlet property="btnContinue" destination="JGv-H3-Wl4" id="SJP-9R-tvq"/>
                         <outlet property="lblMessage" destination="Pi3-yZ-jYd" id="WYb-4I-eoq"/>
                         <outlet property="lblPrice" destination="Eds-o0-foK" id="t7s-TF-ia8"/>
+                        <outlet property="lblTitle" destination="qID-zg-qkA" id="gHP-2l-iZb"/>
+                        <outlet property="viewInput" destination="xd0-pM-PF2" id="eKb-Az-syI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0y-jd-YVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1814,7 +1978,7 @@
         <!--Order Confirm View Controller-->
         <scene sceneID="g3z-gP-hSU">
             <objects>
-                <viewController id="utt-Mq-JP9" customClass="OrderConfirmViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderConfirmViewController" id="utt-Mq-JP9" customClass="OrderConfirmViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Y8f-wD-ttK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1884,7 +2048,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yrg-wJ-aDW">
                                 <rect key="frame" x="0.0" y="435" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.47843137254901957" green="0.52156862745098043" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <state key="normal" title="BUILD ANOTHER BENTO">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1899,6 +2063,12 @@
                     </view>
                     <navigationItem key="navigationItem" id="9Bv-av-lbz"/>
                     <connections>
+                        <outlet property="btnBuild" destination="yrg-wJ-aDW" id="w9Q-G8-r0R"/>
+                        <outlet property="btnQuestion" destination="aUl-qg-PQb" id="vgg-LO-Jis"/>
+                        <outlet property="ivCompleted" destination="sge-pH-T9f" id="VD8-34-c3I"/>
+                        <outlet property="ivTitle" destination="3ha-dd-TkX" id="8kw-yi-aim"/>
+                        <outlet property="lblCompletedText" destination="gqW-wd-92A" id="829-dX-sR8"/>
+                        <outlet property="lblCompletedTitle" destination="R4d-b6-xQx" id="dKe-vL-T16"/>
                         <segue destination="OTw-yi-Ooo" kind="push" identifier="Faq" id="wkH-cv-fop"/>
                         <segue destination="diU-FL-EY2" kind="push" identifier="AddAnotherBento" id="KR1-Yj-bB5"/>
                     </connections>
@@ -1910,7 +2080,7 @@
         <!--Out Of Delivery Address View Controller-->
         <scene sceneID="dzF-gT-KqI">
             <objects>
-                <viewController id="nhj-Yn-paf" customClass="OutOfDeliveryAddressViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OutOfDeliveryAddressViewController" id="nhj-Yn-paf" customClass="OutOfDeliveryAddressViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="RMa-LD-3Mp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1954,10 +2124,17 @@
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="PtN-1g-STY">
+                            <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="PtN-1g-STY">
                                 <rect key="frame" x="0.0" y="64" width="320" height="328"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <connections>
+                                    <outlet property="delegate" destination="nhj-Yn-paf" id="Prb-S8-Xcl"/>
+                                </connections>
                             </mapView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="polygon_service_area.png" id="EWV-oS-yOG">
+                                <rect key="frame" x="0.0" y="64" width="320" height="134"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0P7-hr-NeD">
                                 <rect key="frame" x="0.0" y="435" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -1993,29 +2170,29 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="DeG-u7-UDM">
-                                <rect key="frame" x="0.0" y="202" width="320" height="190"/>
+                                <rect key="frame" x="0.0" y="251" width="320" height="141"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bummer!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hJa-G6-7id">
-                                        <rect key="frame" x="74" y="40" width="173" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
-                                        <color key="textColor" red="0.90196078431372551" green="0.40000000000000002" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dvS-wU-jf6">
-                                        <rect key="frame" x="27" y="73" width="267" height="84"/>
+                                        <rect key="frame" x="8" y="49" width="304" height="84"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <string key="text">We don’t deliver there yet! Available locations are highlighted above. Enter your email and we’ll buy you a free Bento when we come to your area.</string>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.3411764705882353" green="0.37647058823529411" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bummer!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hJa-G6-7id">
+                                        <rect key="frame" x="74" y="20" width="173" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
+                                        <color key="textColor" red="0.90196078431372551" green="0.40000000000000002" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="KMN-9L-51E">
-                                <rect key="frame" x="0.0" y="158" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="207" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M10-yU-3wC">
@@ -2032,9 +2209,9 @@
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PPj-wh-C03">
                                         <rect key="frame" x="14" y="11" width="232" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                        <color key="textColor" red="0.63137254899999995" green="0.65490196079999996" blue="0.67843137249999996" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.30588235294117649" green="0.34509803921568627" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -2045,8 +2222,14 @@
                     </view>
                     <navigationItem key="navigationItem" id="w1w-wb-Xt0"/>
                     <connections>
+                        <outlet property="btnSend" destination="0P7-hr-NeD" id="JD1-NM-UaH"/>
+                        <outlet property="lblAddress" destination="PPj-wh-C03" id="68X-4g-O2x"/>
+                        <outlet property="lblMiddleText" destination="dvS-wU-jf6" id="CvV-Pm-94U"/>
+                        <outlet property="lblMiddleTitle" destination="hJa-G6-7id" id="E0F-VZ-8pR"/>
+                        <outlet property="lblTitle" destination="JME-Oj-OCQ" id="wSG-Zb-ytN"/>
                         <outlet property="mapView" destination="PtN-1g-STY" id="7Hh-ZY-GLK"/>
                         <outlet property="txtEmail" destination="3U9-GH-Je9" id="mbF-e8-fef"/>
+                        <outlet property="viewOver" destination="76O-gB-UNj" id="Wxj-8b-qcn"/>
                         <segue destination="OTw-yi-Ooo" kind="push" identifier="Faq" id="Lcl-81-dnV"/>
                     </connections>
                 </viewController>
@@ -2099,8 +2282,9 @@
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
-                                                <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="next"/>
+                                                <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
                                                 <connections>
+                                                    <action selector="onTextChanged:" destination="2fX-aE-lC2" eventType="editingChanged" id="B9R-dN-4Pf"/>
                                                     <outlet property="delegate" destination="2fX-aE-lC2" id="zWw-k5-YRq"/>
                                                 </connections>
                                             </textField>
@@ -2115,6 +2299,7 @@
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
                                                 <connections>
+                                                    <action selector="onTextChanged:" destination="2fX-aE-lC2" eventType="editingChanged" id="p7c-97-DVa"/>
                                                     <outlet property="delegate" destination="2fX-aE-lC2" id="IhY-uS-dns"/>
                                                 </connections>
                                             </textField>
@@ -2134,8 +2319,20 @@
                                             <action selector="onSignIn:" destination="2fX-aE-lC2" eventType="touchUpInside" id="HzX-KM-cB0"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C5J-49-6A0">
+                                        <rect key="frame" x="70" y="237" width="180" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="14"/>
+                                        <state key="normal" title="Forgot password?">
+                                            <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onForgot:" destination="2fX-aE-lC2" eventType="touchUpInside" id="K7d-tr-Nxr"/>
+                                        </connections>
+                                    </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_image_or.png" id="sE5-js-woy">
-                                        <rect key="frame" x="99" y="257" width="122" height="10"/>
+                                        <rect key="frame" x="99" y="280" width="122" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
                                     <view contentMode="scaleToFill" id="CyY-Bc-maQ">
@@ -2165,7 +2362,7 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="RjP-Wp-6V4">
-                                        <rect key="frame" x="15" y="292" width="290" height="44"/>
+                                        <rect key="frame" x="15" y="320" width="290" height="44"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" id="0Gv-gr-IwH">
@@ -2181,7 +2378,7 @@
                                                 <rect key="frame" x="50" y="0.0" width="240" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                                <state key="normal" title="REGISTER WITH FACEBOOK">
+                                                <state key="normal" title="SIGN IN WITH FACEBOOK">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                                 </state>
@@ -2247,23 +2444,26 @@
                     <navigationItem key="navigationItem" id="YGI-bd-QLa"/>
                     <connections>
                         <outlet property="btnSignIn" destination="ghu-rM-FL3" id="zIz-S1-meo"/>
+                        <outlet property="ivEmail" destination="7dU-5X-tqC" id="4Ll-uH-RzP"/>
+                        <outlet property="ivPassword" destination="W4o-q0-xdI" id="5iH-uT-dO6"/>
                         <outlet property="lblError" destination="abB-3C-2vh" id="U0B-YK-JRC"/>
+                        <outlet property="lblTitle" destination="OP1-If-5jg" id="kyg-E6-Onz"/>
                         <outlet property="svMain" destination="6jH-QV-cze" id="gcn-g5-jBx"/>
                         <outlet property="txtEmail" destination="I3D-oS-dls" id="qQt-ON-GZz"/>
                         <outlet property="txtPassword" destination="Odn-0J-lVe" id="WWl-Tc-6f9"/>
                         <outlet property="viewError" destination="gOi-qB-KDA" id="Wpt-wc-M3d"/>
                         <outlet property="viewFacebook" destination="RjP-Wp-6V4" id="D9s-Fy-1Wr"/>
-                        <segue destination="cjF-1z-ADL" kind="push" identifier="DeliveryLocation" id="0rb-BP-07L"/>
+                        <segue destination="Uml-6W-39g" kind="push" identifier="PhoneNumber" id="Xro-hm-UPB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWl-hV-82G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2329" y="1132"/>
+            <point key="canvasLocation" x="258" y="1636"/>
         </scene>
         <!--Choose Side Dish View Controller-->
         <scene sceneID="dUe-qW-yIy">
             <objects>
-                <viewController id="tNR-bW-wkA" customClass="ChooseSideDishViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ChooseSideDishViewController" id="tNR-bW-wkA" customClass="ChooseSideDishViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ew1-ko-7FU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -2293,7 +2493,7 @@
                                             <action selector="onBack:" destination="tNR-bW-wkA" eventType="touchUpInside" id="cqx-97-c7O"/>
                                         </connections>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="l8r-Y1-Tv6">
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="l8r-Y1-Tv6">
                                         <rect key="frame" x="270" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" image="mybento_nav_cart_inact.png">
@@ -2304,7 +2504,7 @@
                                             <action selector="onCart:" destination="tNR-bW-wkA" eventType="touchUpInside" id="09y-mR-lfd"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3sA-sL-EAj">
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3sA-sL-EAj">
                                         <rect key="frame" x="277" y="24" width="14" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
                                         <color key="backgroundColor" red="0.89019607840000003" green="0.2470588235" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -2342,13 +2542,14 @@
                                 </connections>
                             </collectionView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="OQJ-he-WeM"/>
                     <connections>
                         <outlet property="btnCart" destination="l8r-Y1-Tv6" id="h46-Jq-ydF"/>
                         <outlet property="cvSideDishes" destination="KIA-L3-xvh" id="hsH-x6-cJF"/>
                         <outlet property="lblBadge" destination="3sA-sL-EAj" id="gJV-Vp-Vpf"/>
+                        <outlet property="lblTitle" destination="K7d-zv-DtO" id="s44-I6-Xvk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbc-AW-6Bs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2360,7 +2561,7 @@
             <objects>
                 <viewController id="OTw-yi-Ooo" customClass="FaqViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WH0-Db-p6J">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="xjp-gW-neB">
@@ -2371,30 +2572,32 @@
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questions?                  or call 555-555-5555" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Dkn-OO-wFe">
+                                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questions?                  or call 555-555-5555" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="Dkn-OO-wFe">
                                                 <rect key="frame" x="0.0" y="11" width="320" height="21"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Vdh-xh-f9c">
-                                                <rect key="frame" x="103" y="7" width="57" height="30"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
-                                                <state key="normal" title="Email us">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" id="JWq-c6-1Of">
+                                                <rect key="frame" x="0.0" y="4" width="320" height="36"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <attributedString key="attributedText">
+                                                    <fragment content="Contact">
+                                                        <attributes>
+                                                            <color key="NSColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                            <font key="NSFont" size="17" name="HelveticaNeue"/>
+                                                            <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural"/>
+                                                        </attributes>
+                                                    </fragment>
+                                                </attributedString>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <dataDetectorType key="dataDetectorTypes" phoneNumber="YES" link="YES"/>
                                                 <connections>
-                                                    <action selector="onEmailUs:" destination="OTw-yi-Ooo" eventType="touchUpInside" id="b5N-ZW-QmE"/>
+                                                    <outlet property="delegate" destination="OTw-yi-Ooo" id="Ast-A7-5Rx"/>
                                                 </connections>
-                                            </button>
-                                            <view contentMode="scaleToFill" id="c6K-uA-n60">
-                                                <rect key="frame" x="103" y="29" width="57" height="1"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            </view>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
@@ -2426,11 +2629,31 @@
                                             <action selector="onBack:" destination="OTw-yi-Ooo" eventType="touchUpInside" id="REb-hw-ctJ"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Sp2-YN-sYl">
+                                        <rect key="frame" x="257" y="28" width="55" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                                        <state key="normal" title="Log Out">
+                                            <color key="titleColor" red="0.53333333333333333" green="0.68627450980392157" blue="0.37647058823529411" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onLogout:" destination="OTw-yi-Ooo" eventType="touchUpInside" id="BFT-Dx-JvR"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
+                            <webView contentMode="scaleToFill" id="4da-Sg-qqb">
+                                <rect key="frame" x="0.0" y="108" width="320" height="328"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="delegate" destination="OTw-yi-Ooo" id="ib8-ec-ojr"/>
+                                </connections>
+                            </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="43T-HP-Zdo">
-                                <rect key="frame" x="0.0" y="523" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="435" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
@@ -2442,13 +2665,22 @@
                                     <action selector="onFinishBuildingMyBento:" destination="OTw-yi-Ooo" eventType="touchUpInside" id="TgS-TO-fF4"/>
                                 </connections>
                             </button>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="wrC-4h-Tqp">
+                                <rect key="frame" x="151" y="262" width="20" height="20"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="NuL-7x-g9a"/>
                     <connections>
                         <outlet property="btnFinishing" destination="43T-HP-Zdo" id="oPE-wa-wzR"/>
+                        <outlet property="btnLogout" destination="Sp2-YN-sYl" id="svp-0y-lht"/>
+                        <outlet property="lblDescription" destination="Dkn-OO-wFe" id="dnQ-nb-IVW"/>
                         <outlet property="lblTitle" destination="5Ki-t8-lbl" id="RHl-8l-aqM"/>
+                        <outlet property="tvDescription" destination="JWq-c6-1Of" id="Tle-do-mbR"/>
+                        <outlet property="viewActivity" destination="wrC-4h-Tqp" id="ZJK-Bs-m8F"/>
+                        <outlet property="webView" destination="4da-Sg-qqb" id="cg7-GZ-hsl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="m0f-Yl-W6b" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2475,6 +2707,8 @@
         </scene>
     </scenes>
     <resources>
+        <image name="banner_sold_out.png" width="154" height="154"/>
+        <image name="creditcard_btn_clear.png" width="20" height="20"/>
         <image name="deliverylocation_icon_navigation.png" width="16" height="16"/>
         <image name="deliverylocation_icon_search.png" width="16" height="16"/>
         <image name="first_background.png" width="764" height="1145"/>
@@ -2493,6 +2727,7 @@
         <image name="orderconfirm_image_countpanel.png" width="188" height="56"/>
         <image name="orderconfirm_image_minute.png" width="6" height="1"/>
         <image name="orderconfirm_image_plus.png" width="7" height="7"/>
+        <image name="polygon_service_area.png" width="640" height="361"/>
         <image name="register_icon_alert.png" width="32" height="32"/>
         <image name="register_icon_email.png" width="42" height="32"/>
         <image name="register_icon_facebook.png" width="22" height="42"/>
@@ -2500,8 +2735,6 @@
         <image name="register_icon_phone.png" width="26" height="42"/>
         <image name="register_icon_username.png" width="42" height="42"/>
         <image name="register_image_or.png" width="245" height="20"/>
-        <image name="string_addanotherbento.png" width="143" height="9"/>
-        <image name="string_continue.png" width="73" height="11"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
@@ -2509,8 +2742,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="7Su-b9-xyl"/>
-        <segue reference="c0e-A3-bdS"/>
-        <segue reference="0rb-BP-07L"/>
+        <segue reference="Ghr-0t-YHG"/>
+        <segue reference="wQ7-4U-rn4"/>
+        <segue reference="oNJ-Gc-fzE"/>
+        <segue reference="09w-J6-v5C"/>
+        <segue reference="sjk-uB-lm1"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -8,19 +8,28 @@
 
 #import "ChooseMainDishViewController.h"
 
+#import "SoldOutViewController.h"
 #import "DishCollectionViewCell.h"
+
+#import "BentoShop.h"
+#import "AppStrings.h"
 
 @interface ChooseMainDishViewController ()<DishCollectionViewCellDelegate>
 {
+    NSInteger _originalDishIndex;
     NSInteger _selectedIndex;
     NSInteger _selectedItemState;
 }
+
+@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
 
 @property (nonatomic, assign) IBOutlet UICollectionView *cvMainDishes;
 
 @property (nonatomic, assign) IBOutlet UILabel *lblBadge;
 
 @property (nonatomic, assign) IBOutlet UIButton *btnCart;
+
+@property (nonatomic, retain) NSArray *aryDishes;
 
 @end
 
@@ -33,23 +42,32 @@
     self.lblBadge.layer.cornerRadius = self.lblBadge.frame.size.width / 2;
     self.lblBadge.clipsToBounds = YES;
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
-    NSInteger mainDishIndex = [[prefs objectForKey:@"MainDish"] integerValue];
-    
-    if(mainDishIndex == -1)
-    {
-        _selectedIndex = NSNotFound;
-        _selectedItemState = DISH_CELL_NORMAL;
-    }
-    else
-    {
-        _selectedIndex = mainDishIndex;
-        _selectedItemState = DISH_CELL_SELECTED;
-    }
-    
     UINib *cellNib = [UINib nibWithNibName:@"DishCollectionViewCell" bundle:nil];
     [self.cvMainDishes registerNib:cellNib forCellWithReuseIdentifier:@"cell"];
+    
+    [self.lblTitle setText:[[AppStrings sharedInstance] getString:MAINDISH_TITLE]];
+    
+    self.aryDishes = [[BentoShop sharedInstance] getMainDishes];
+    
+    _selectedIndex = NSNotFound;
+    _selectedItemState = DISH_CELL_NORMAL;
+    
+    _originalDishIndex = NSNotFound;
+    if (self.currentBento != nil)
+    {
+        NSInteger mainDishIndex = [self.currentBento getMainDish];
+        
+        for (NSInteger index = 0; index < self.aryDishes.count; index++)
+        {
+            NSDictionary *dishInfo = [self.aryDishes objectAtIndex:index];
+            if ([[dishInfo objectForKey:@"itemId"] integerValue] == mainDishIndex)
+            {
+                _originalDishIndex = index;
+                _selectedIndex = index;
+                _selectedItemState = DISH_CELL_SELECTED;
+            }
+        }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -74,6 +92,24 @@
     [self.cvMainDishes reloadData];
     
     [self updateUI];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)onUpdatedStatus:(NSNotification *)notification
+{
+    if ([[BentoShop sharedInstance] isClosed])
+        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+    else if ([[BentoShop sharedInstance] isSoldOut])
+        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+    else
+        [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (IBAction)onBack:(id)sender
@@ -88,73 +124,62 @@
 
 - (void) updateUI
 {
-    
     self.btnCart.selected = [self isCompletedToMakeMyBento];
+    
+    [self.cvMainDishes reloadData];
 }
 
 - (BOOL) isCompletedToMakeMyBento
 {
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
-    
-    NSInteger mainDishIndex = [[prefs objectForKey:@"MainDish"] integerValue];
-    
-    if(mainDishIndex == -1)
-    {
+    if (self.currentBento == nil)
         return NO;
-    }
     
-    NSInteger sideDishIndex = [[prefs objectForKey:@"SideDish1"] integerValue];
-    
-    if(sideDishIndex == -1)
-    {
-        return NO;
-    }
-    
-    sideDishIndex = [[prefs objectForKey:@"SideDish2"] integerValue];
-    
-    if(sideDishIndex == -1)
-    {
-        return NO;
-    }
-    
-    sideDishIndex = [[prefs objectForKey:@"SideDish3"] integerValue];
-    
-    if(sideDishIndex == -1)
-    {
-        return NO;
-    }
-    
-    sideDishIndex = [[prefs objectForKey:@"SideDish4"] integerValue];
-    
-    if(sideDishIndex == -1)
-    {
-        return NO;
-    }
-    
-    return YES;
+    return [self.currentBento isCompleted];
 }
 
-#pragma mark - UICollectionViewDatasource Methods
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (void) showSoldoutScreen:(NSNumber *)identifier
+{
+    UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
+    SoldOutViewController *vcSoldOut = (SoldOutViewController *)nav.topViewController;
+    vcSoldOut.type = [identifier integerValue];
     
-    return 10;
+    [self.navigationController presentViewController:nav animated:YES completion:nil];
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
+#pragma mark - UICollectionViewDataSource Methods
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    if (self.aryDishes == nil)
+        return 0;
     
+    return self.aryDishes.count;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
     DishCollectionViewCell *cell = (DishCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
     
-    if(_selectedIndex == indexPath.item)
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    DishCollectionViewCell *myCell = (DishCollectionViewCell *)cell;
+    
+    NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
+    NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+    [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:YES];
+    
+    if (_selectedIndex == indexPath.item)
     {
-        [cell setCellState:_selectedItemState index:indexPath.item];
+        [myCell setCellState:_selectedItemState index:indexPath.item];
     }
     else
     {
-        [cell setCellState:DISH_CELL_NORMAL index:indexPath.item];
+        [myCell setCellState:DISH_CELL_NORMAL index:indexPath.item];
     }
-    
-    return cell;
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -164,17 +189,22 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
-    if(_selectedIndex == indexPath.item)
+    if (_selectedIndex == indexPath.item)
     {
 
     }
     else
     {
         _selectedIndex = indexPath.item;
-        _selectedItemState = DISH_CELL_FOCUS;
+        if (_selectedIndex == _originalDishIndex)
+            _selectedItemState = DISH_CELL_SELECTED;
+        else
+            _selectedItemState = DISH_CELL_FOCUS;
     }
     
     [collectionView reloadData];
+    
+    [self updateUI];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
@@ -187,28 +217,37 @@
 {
     _selectedIndex = index;
     
-    NSUserDefaults *prefs = [NSUserDefaults standardUserDefaults];
+    NSDictionary *dishInfo = [self.aryDishes objectAtIndex:_selectedIndex];
+    if (dishInfo == nil)
+        return;
     
-    if(_selectedItemState == DISH_CELL_SELECTED)
+    NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
+    
+    if (_selectedItemState == DISH_CELL_SELECTED)
     {
+        _originalDishIndex = NSNotFound;
         _selectedItemState = DISH_CELL_FOCUS;
         
-        [prefs setValue:[NSNumber numberWithInteger:-1] forKey:@"MainDish"];
+        if (self.currentBento != nil)
+        {
+            [self.currentBento setMainDish:0];
+        }
     }
     else
     {
         _selectedItemState = DISH_CELL_SELECTED;
         
-        [prefs setValue:[NSNumber numberWithInteger:_selectedIndex] forKey:@"MainDish"];
+        [self.currentBento setMainDish:dishIndex];
+        
+        _originalDishIndex = index;
     }
-    
-    [prefs synchronize];
     
     [self.cvMainDishes reloadData];
     
     [self updateUI];
+
+    if (_selectedItemState == DISH_CELL_SELECTED)
+        [self.navigationController popViewControllerAnimated:YES];
 }
-
-
 
 @end

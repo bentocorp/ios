@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Pods-Bento-Mixpanel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Bento-PaymentKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-Bento-Stripe.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -14,12 +24,32 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-BentoTests-Mixpanel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-BentoTests-PaymentKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-BentoTests-Stripe.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>Pods-BentoTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-Mixpanel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Pods-PaymentKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -37,32 +67,62 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>10A4A0C451396ED9A338129D</key>
+		<key>07C9C7F296206D143D57BE55</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>139137D05E3938972A1967FD</key>
+		<key>1D8E0001846DDCD15728775F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1ABE1B6C9B6D58DE5A5E9B03</key>
+		<key>24B72D2731F98C566BCA27AD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1B2BFB35248C70E83E7694BE</key>
+		<key>37270865F6514D41CB2FF1F5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D542DE167D9C929039AE13E</key>
+		<key>90186EAC239C558CED40773E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C1ED016D5400A9E6EC2B8841</key>
+		<key>90DC0566D0185EF901596A28</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>91F5612A391CA333B8D6B685</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>96860DB1924DC0003375FBE5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9FE64E356993A2F078D95B51</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C717A85C1F1C08AD677F4D22</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D75785398EF92582C7942E2E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FD9808C165F77EE3C1C2A20D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

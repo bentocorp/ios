@@ -7,7 +7,12 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface MyBentoViewController : UIViewController
+#import "Bento.h"
+
+@interface MyBentoViewController : BaseViewController
+
+@property (nonatomic, assign) Bento *currentBento;
 
 @end

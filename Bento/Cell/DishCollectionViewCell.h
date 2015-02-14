@@ -24,6 +24,10 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) id<DishCollectionViewCellDelegate> delegate;
 
+@property (nonatomic, assign) IBOutlet UIButton *btnAction;
+
+- (void) setDishInfo:(NSDictionary *)dishInfo isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded;
+
 - (void) setSmallDishCell;
 - (void) setCellState:(NSInteger)state index:(NSInteger)index;
 

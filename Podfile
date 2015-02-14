@@ -10,3 +10,6 @@ target 'BentoTests' do
 end
 
 pod 'Stripe'
+pod 'Stripe/ApplePay'
+pod 'PaymentKit'
+pod 'Mixpanel'

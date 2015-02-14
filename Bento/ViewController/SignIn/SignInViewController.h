@@ -10,4 +10,7 @@
 
 @interface SignInViewController : UIViewController
 
+@property (nonatomic, assign) IBOutlet UITextField *txtEmail;
+@property (nonatomic, assign) IBOutlet UITextField *txtPassword;
+
 @end

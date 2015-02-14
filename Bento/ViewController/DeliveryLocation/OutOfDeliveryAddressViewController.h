@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "DataManager.h"
+
 @interface OutOfDeliveryAddressViewController : UIViewController
+
+@property (nonatomic, retain) NSString *strAddress;
 
 @end
