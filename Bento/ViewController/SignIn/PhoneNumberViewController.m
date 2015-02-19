@@ -82,7 +82,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([segue.identifier isEqualToString:@"Terms"])
+    if ([segue.identifier isEqualToString:@"Faq"])
     {
         FaqViewController *vc = segue.destinationViewController;
         vc.contentType = [sender intValue];
@@ -214,9 +214,18 @@
     NSString *strAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
     
     NSString *strAgeRange = @"";
-    NSDictionary *ageRangeDict = [self.userInfo objectForKey:@"age_range"];
+    NSDictionary *ageRangeDict = [[FacebookManager sharedInstance].userDetails objectForKey:@"age_range"];
     if (ageRangeDict != nil)
-        strAgeRange = [NSString stringWithFormat:@"%@-%@", [ageRangeDict objectForKey:@"min"], [ageRangeDict objectForKey:@"max"]];
+    {
+        if ([ageRangeDict objectForKey:@"min"] != nil && [ageRangeDict objectForKey:@"max"] != nil)
+            strAgeRange = [NSString stringWithFormat:@"%@-%@", [ageRangeDict objectForKey:@"min"], [ageRangeDict objectForKey:@"max"]];
+        else if ([ageRangeDict objectForKey:@"min"] != nil)
+            strAgeRange = [NSString stringWithFormat:@"%@+", [ageRangeDict objectForKey:@"min"]];
+        else if ([ageRangeDict objectForKey:@"max"] != nil)
+            strAgeRange = [NSString stringWithFormat:@"-%@", [ageRangeDict objectForKey:@"max"]];
+        else
+            strAgeRange = @"";
+    }
     
     NSDictionary* request = @{
                               @"firstname" : strFirstName,

@@ -9,6 +9,7 @@
 #import "AppDelegate.h"
 
 #import "MyAlertView.h"
+#import "JGProgressHUD.h"
 
 #import "Stripe.h"
 #import "BentoShop.h"
@@ -26,8 +27,8 @@
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
-NSString * const StripePublishableKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
-//NSString * const StripePublishableKey = @"pk_live_n7ojFbrTm0RDwUQaPizNBAUL";
+NSString * const StripePublishableTestKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
+NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 @interface AppDelegate () <MyCLControllerDelegate>
 {
@@ -94,7 +95,11 @@ NSString * const StripePublishableKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
     // Global Data Manager
     
     // Stripe
-    [Stripe setDefaultPublishableKey:StripePublishableKey];
+#ifdef DEBUG
+    [Stripe setDefaultPublishableKey:StripePublishableTestKey];
+#else
+    [Stripe setDefaultPublishableKey:StripePublishableLiveKey];
+#endif
 
     // Initialize location manager.
     locationController = [[MyCLController alloc] init];
@@ -154,6 +159,11 @@ NSString * const StripePublishableKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [globalShop getMenus];
+        [globalShop getStatus];
+        [globalShop getServiceArea];
+    });
     
     // Global Data Manager
     [globalShop refreshResume];

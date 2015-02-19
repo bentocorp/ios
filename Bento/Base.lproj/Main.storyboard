@@ -1478,13 +1478,20 @@
                                     <action selector="onBottomButton:" destination="cjF-1z-ADL" eventType="touchUpInside" id="bFT-ss-Hn5"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please tap the checkbox to confirm curbside delivery." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jHS-3E-dw8">
-                                <rect key="frame" x="0.0" y="363" width="320" height="21"/>
+                            <view contentMode="scaleToFill" id="fbZ-8V-3aR">
+                                <rect key="frame" x="0.0" y="348" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
-                                <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please tap the checkbox to agree curbside delivery." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="jHS-3E-dw8">
+                                        <rect key="frame" x="8" y="11" width="304" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="0.91372549020000005" green="0.44705882349999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -1502,6 +1509,7 @@
                         <outlet property="mapView" destination="x1o-Jf-fPe" id="y4E-3c-0II"/>
                         <outlet property="tvLocations" destination="epU-fh-v9M" id="K6P-LN-sdH"/>
                         <outlet property="txtAddress" destination="PrE-gh-x4k" id="hzj-vP-Phz"/>
+                        <outlet property="viewError" destination="fbZ-8V-3aR" id="90v-S6-2eD"/>
                         <outlet property="viewSearchLocation" destination="PgI-ir-4n1" id="Kf6-U4-a2l"/>
                         <segue destination="nhj-Yn-paf" kind="push" identifier="OutOfDelivery" id="Tsm-7o-Ram"/>
                         <segue destination="IGL-x5-TQo" kind="push" identifier="CompleteOrder" id="dRi-of-nZl"/>
@@ -2561,7 +2569,7 @@
             <objects>
                 <viewController id="OTw-yi-Ooo" customClass="FaqViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WH0-Db-p6J">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="xjp-gW-neB">
@@ -2645,7 +2653,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <webView contentMode="scaleToFill" id="4da-Sg-qqb">
-                                <rect key="frame" x="0.0" y="108" width="320" height="328"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="416"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -2653,7 +2661,7 @@
                                 </connections>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="43T-HP-Zdo">
-                                <rect key="frame" x="0.0" y="435" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="523" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
@@ -2666,7 +2674,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="wrC-4h-Tqp">
-                                <rect key="frame" x="151" y="262" width="20" height="20"/>
+                                <rect key="frame" x="151" y="312" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
@@ -2742,10 +2750,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Ghr-0t-YHG"/>
-        <segue reference="wQ7-4U-rn4"/>
-        <segue reference="oNJ-Gc-fzE"/>
-        <segue reference="09w-J6-v5C"/>
         <segue reference="sjk-uB-lm1"/>
+        <segue reference="c0e-A3-bdS"/>
+        <segue reference="Jq9-7a-GOP"/>
+        <segue reference="TLP-Su-R5t"/>
+        <segue reference="dRi-of-nZl"/>
     </inferredMetricsTieBreakers>
 </document>

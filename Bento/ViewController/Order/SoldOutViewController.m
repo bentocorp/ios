@@ -54,7 +54,7 @@
     gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     
-    NSURL *urlBack = [[AppStrings sharedInstance] getURL:APP_BACKGND];
+    NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
     [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
@@ -94,7 +94,7 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-    if ([segue.identifier isEqualToString:@"Terms"])
+    if ([segue.identifier isEqualToString:@"Faq"])
     {
         FaqViewController *vc = segue.destinationViewController;
         vc.contentType = [sender intValue];

@@ -13,6 +13,7 @@
 
 #import "BentoShop.h"
 #import "AppStrings.h"
+#import "DataManager.h"
 
 @interface ChooseMainDishViewController ()<DishCollectionViewCellDelegate>
 {
@@ -53,9 +54,9 @@
     _selectedItemState = DISH_CELL_NORMAL;
     
     _originalDishIndex = NSNotFound;
-    if (self.currentBento != nil)
+    if ([[BentoShop sharedInstance] getCurrentBento] != nil)
     {
-        NSInteger mainDishIndex = [self.currentBento getMainDish];
+        NSInteger mainDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getMainDish];
         
         for (NSInteger index = 0; index < self.aryDishes.count; index++)
         {
@@ -104,9 +105,9 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed])
+    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    else if ([[BentoShop sharedInstance] isSoldOut])
+    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     else
         [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
@@ -131,10 +132,10 @@
 
 - (BOOL) isCompletedToMakeMyBento
 {
-    if (self.currentBento == nil)
+    if ([[BentoShop sharedInstance] getCurrentBento] == nil)
         return NO;
     
-    return [self.currentBento isCompleted];
+    return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
 }
 
 - (void) showSoldoutScreen:(NSNumber *)identifier
@@ -228,16 +229,16 @@
         _originalDishIndex = NSNotFound;
         _selectedItemState = DISH_CELL_FOCUS;
         
-        if (self.currentBento != nil)
+        if ([[BentoShop sharedInstance] getCurrentBento] != nil)
         {
-            [self.currentBento setMainDish:0];
+            [[[BentoShop sharedInstance] getCurrentBento] setMainDish:0];
         }
     }
     else
     {
         _selectedItemState = DISH_CELL_SELECTED;
         
-        [self.currentBento setMainDish:dishIndex];
+        [[[BentoShop sharedInstance] getCurrentBento] setMainDish:dishIndex];
         
         _originalDishIndex = index;
     }

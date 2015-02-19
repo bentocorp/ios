@@ -19,6 +19,7 @@ NSString * const kFacebookNotificationPhotoUploaded         = @"kFacebookPhotoUp
 @interface FacebookManager ()
 
 @property (nonatomic, retain) NSDictionary<FBGraphUser> *user;
+@property (nonatomic, retain) NSDictionary<FBGraphUser> *userAge;
 @property (nonatomic, retain) NSMutableArray *albums;
 @property (nonatomic, retain) NSMutableDictionary *friends;
 
@@ -218,7 +219,7 @@ NSString * const kFacebookNotificationPhotoUploaded         = @"kFacebookPhotoUp
 
 - (NSDictionary<FBGraphUser> *)userDetails
 {
-    return [FBSession.activeSession isOpen] ? self.user : nil;
+    return [FBSession.activeSession isOpen] ? self.userAge : nil;
 }
 
 #pragma mark - permissions
@@ -360,11 +361,25 @@ NSString * const kFacebookNotificationPhotoUploaded         = @"kFacebookPhotoUp
             
             if ([self facebookErrorMessage:error])
             {
-                self.user = user;
+                // Get User Age
+                [FBRequestConnection startWithGraphPath:@"/me?fields=age_range"
+                                             parameters:nil
+                                             HTTPMethod:@"GET"
+                                      completionHandler:^(
+                                                          FBRequestConnection *connection,
+                                                          id result,
+                                                          NSError *error
+                                                          ) {
+                                          if ([self facebookErrorMessage:error])
+                                          {
+                                              self.user = user;
+                                              self.userAge = (NSDictionary<FBGraphUser> *)result;
+                                          }
+                                          dispatch_async(dispatch_get_main_queue(), ^{
+                                              if (completionHandler) completionHandler(user, error);
+                                          });
+                                      }];
             }
-            dispatch_async(dispatch_get_main_queue(), ^{
-                if (completionHandler) completionHandler(user, error);
-            });
         }];
     }
 }

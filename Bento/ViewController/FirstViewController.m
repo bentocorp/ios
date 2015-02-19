@@ -53,7 +53,7 @@
     
     NSString *strSlogan = [[NSUserDefaults standardUserDefaults] objectForKey:@"Slogan"];
     if (strSlogan == nil || strSlogan.length > 0)
-        strSlogan = @"Healthy Asian Food Delivered in Minutes.";
+        strSlogan = @"Delicious Asian Food Delivered in Minutes.";
     self.lblLaunchSlogan.text = strSlogan;
 }
 
@@ -87,7 +87,7 @@
     
     [[AppStrings sharedInstance] getAppStrings];
     
-    NSURL *urlBack = [[AppStrings sharedInstance] getURL:APP_BACKGND];
+    NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
     [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
@@ -192,6 +192,23 @@
 - (void) process
 {
     NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+/*
+#ifdef DEBUG
+    if ([pref objectForKey:@"apiName"] == nil)
+        [pref setObject:@"/user/login" forKey:@"apiName"];
+    
+    if ([pref objectForKey:@"loginRequest"] == nil)
+    {
+        NSDictionary* loginInfo = @{
+                                    @"email" : @"ridev@bentonow.com",
+                                    @"password" : @"12345678",
+                                    };
+        
+        NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
+        [pref setObject:dicRequest forKey:@"loginRequest"];
+    }
+#endif
+*/    
     if ([pref objectForKey:@"apiName"] != nil && [pref objectForKey:@"loginRequest"] != nil)
     {
         [self processAutoLogin];

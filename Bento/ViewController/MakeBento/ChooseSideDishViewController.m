@@ -13,6 +13,7 @@
 
 #import "BentoShop.h"
 #import "AppStrings.h"
+#import "DataManager.h"
 
 @interface ChooseSideDishViewController ()<DishCollectionViewCellDelegate>
 {
@@ -56,16 +57,16 @@
         [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_4_TITLE]];
     
     NSInteger sideDishIndex = 0;
-    if (self.currentBento != nil)
+    if ([[BentoShop sharedInstance] getCurrentBento] != nil)
     {
         if (self.sideDishIndex == 0)
-            sideDishIndex = [self.currentBento getSideDish1];
+            sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish1];
         else if (self.sideDishIndex == 1)
-            sideDishIndex = [self.currentBento getSideDish2];
+            sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish2];
         else if (self.sideDishIndex == 2)
-            sideDishIndex = [self.currentBento getSideDish3];
+            sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish3];
         else if (self.sideDishIndex == 3)
-            sideDishIndex = [self.currentBento getSideDish4];
+            sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish4];
     }
     
 //    self.aryDishes = [[BentoShop sharedInstance] getSideDishes];
@@ -73,7 +74,7 @@
     for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-        if ([self.currentBento canAddSideDish:dishID] || [[BentoShop sharedInstance] isDishSoldOut:dishID] || dishID == sideDishIndex)
+        if ([[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID] || [[BentoShop sharedInstance] isDishSoldOut:dishID] || dishID == sideDishIndex)
         {
 //            if (dishID != sideDishIndex)
                 [self.aryDishes addObject:dishInfo];
@@ -136,9 +137,9 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed])
+    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    else if ([[BentoShop sharedInstance] isSoldOut])
+    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     else
         [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
@@ -163,10 +164,10 @@
 
 - (BOOL) isCompletedToMakeMyBento
 {
-    if (self.currentBento == nil)
+    if ([[BentoShop sharedInstance] getCurrentBento] == nil)
         return NO;
     
-    return [self.currentBento isCompleted];
+    return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
 }
 
 - (void) showSoldoutScreen:(NSNumber *)identifier
@@ -193,6 +194,8 @@
     DishCollectionViewCell *cell = (DishCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
     
+    [cell setSmallDishCell];
+    
     return cell;
 }
 
@@ -202,7 +205,7 @@
     
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-    [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[self.currentBento canAddSideDish:dishID]];
+    [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID]];
     
     [myCell setSmallDishCell];
     
@@ -263,16 +266,16 @@
         _originalDishIndex = NSNotFound;
         _selectedItemState = DISH_CELL_FOCUS;
         
-        if (self.currentBento != nil)
+        if ([[BentoShop sharedInstance] getCurrentBento] != nil)
         {
             if (self.sideDishIndex == 0)
-                [self.currentBento setSideDish1:0];
+                [[[BentoShop sharedInstance] getCurrentBento] setSideDish1:0];
             else if (self.sideDishIndex == 1)
-                [self.currentBento setSideDish2:0];
+                [[[BentoShop sharedInstance] getCurrentBento] setSideDish2:0];
             else if (self.sideDishIndex == 2)
-                [self.currentBento setSideDish3:0];
+                [[[BentoShop sharedInstance] getCurrentBento] setSideDish3:0];
             else if (self.sideDishIndex == 3)
-                [self.currentBento setSideDish4:0];
+                [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:0];
         }
     }
     else
@@ -280,13 +283,13 @@
         _selectedItemState = DISH_CELL_SELECTED;
         
         if (self.sideDishIndex == 0)
-            [self.currentBento setSideDish1:dishIndex];
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish1:dishIndex];
         else if (self.sideDishIndex == 1)
-            [self.currentBento setSideDish2:dishIndex];
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish2:dishIndex];
         else if (self.sideDishIndex == 2)
-            [self.currentBento setSideDish3:dishIndex];
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish3:dishIndex];
         else if (self.sideDishIndex == 3)
-            [self.currentBento setSideDish4:dishIndex];
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:dishIndex];
         
         _originalDishIndex = index;
     }

@@ -184,10 +184,7 @@
     }
     
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
-    {
         [[BentoShop sharedInstance] addNewBento];
-        self.currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    }
 
     [self.btnBack setImage:[UIImage imageNamed:@"mybento_nav_help"] forState:UIControlStateNormal];
     
@@ -223,20 +220,10 @@
     if ([segue.identifier isEqualToString:@"MainDish"])
     {
         ChooseMainDishViewController *vc = segue.destinationViewController;
-
-        if (self.currentBento != nil)
-            vc.currentBento = self.currentBento;
-        else
-            vc.currentBento = [[BentoShop sharedInstance] getCurrentBento];
     }
     else if ([segue.identifier isEqualToString:@"SideDish"])
     {
         ChooseSideDishViewController *vc = segue.destinationViewController;
-        
-        if (self.currentBento != nil)
-            vc.currentBento = self.currentBento;
-        else
-            vc.currentBento = [[BentoShop sharedInstance] getCurrentBento];
         
         NSNumber *number = (NSNumber *)sender;
         vc.sideDishIndex = [number integerValue];
@@ -262,9 +249,9 @@
 
 - (void) onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed])
+    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    else if ([[BentoShop sharedInstance] isSoldOut])
+    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     else
         [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
@@ -278,12 +265,7 @@
     NSInteger side3DishIndex = 0;
     NSInteger side4DishIndex = 0;
     
-    Bento *currentBento = nil;
-    if (self.currentBento != nil)
-        currentBento = self.currentBento;
-    else
-        currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento != nil)
     {
         mainDishIndex = [currentBento getMainDish];
@@ -439,12 +421,7 @@
 
 - (IBAction)onCart:(id)sender
 {
-    Bento *currentBento = nil;
-    if (self.currentBento != nil)
-        currentBento = self.currentBento;
-    else
-        currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted])
         [self showConfirmMsg];
     else
@@ -496,28 +473,18 @@
 
 - (IBAction)onAddAnotherBento:(id)sender
 {
-    Bento *currentBento = nil;
-    if (self.currentBento != nil)
-        currentBento = self.currentBento;
-    else
-        currentBento = [[BentoShop sharedInstance] getCurrentBento];
-
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento != nil && ![currentBento isCompleted])
         [currentBento completeBento];
     
     [[BentoShop sharedInstance] addNewBento];
-    self.currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
     [self updateUI];
 }
 
 - (IBAction)onContinue:(id)sender
 {
-    Bento *currentBento = nil;
-    if (self.currentBento != nil)
-        currentBento = self.currentBento;
-    else
-        currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
 
     if (currentBento == nil || [currentBento isEmpty])
     {
@@ -545,6 +512,11 @@
 
 - (void) updateUI
 {
+    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
+        [[BentoShop sharedInstance] addNewBento];
+    else if ([[BentoShop sharedInstance] getCurrentBento] == nil)
+        [[BentoShop sharedInstance] setCurrentBento:[[BentoShop sharedInstance] getLastBento]];
+    
     [self loadSelectedDishes];
     
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0)
@@ -610,12 +582,7 @@
         }
     }
     
-    Bento *currentBento = nil;
-    if (self.currentBento != nil)
-        currentBento = self.currentBento;
-    else
-        currentBento = [[BentoShop sharedInstance] getCurrentBento];
-
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento == nil || ![currentBento isCompleted])
     {
         self.btnAddAnotherBento.enabled = NO;
@@ -630,12 +597,7 @@
 
 - (BOOL) isCompletedToMakeMyBento
 {
-    Bento *currentBento = nil;
-    if (self.currentBento != nil)
-        currentBento = self.currentBento;
-    else
-        currentBento = [[BentoShop sharedInstance] getCurrentBento];
-
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento == nil)
         return NO;
     
@@ -648,12 +610,7 @@
 {
     if (buttonIndex == 1)
     {
-        Bento *currentBento = nil;
-        if (self.currentBento != nil)
-            currentBento = self.currentBento;
-        else
-            currentBento = [[BentoShop sharedInstance] getCurrentBento];
-
+        Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted])
             [currentBento completeBento];
         

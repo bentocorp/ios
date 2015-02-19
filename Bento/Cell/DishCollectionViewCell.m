@@ -70,8 +70,8 @@
 {
     _isSideDishCell = YES;
     
-    self.lblTitle.font = [UIFont fontWithName:self.lblTitle.font.fontName size:14];
-    self.lblDescription.font = [UIFont fontWithName:self.lblDescription.font.fontName size:14];
+//    self.lblTitle.font = [UIFont fontWithName:self.lblTitle.font.fontName size:14];
+//    self.lblDescription.font = [UIFont fontWithName:self.lblDescription.font.fontName size:14];
     
     if (_isSoldOut)
         [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
@@ -132,8 +132,8 @@
     else if (self.state == DISH_CELL_FOCUS)
     {
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
-        self.lblDescription.center = CGPointMake(self.lblDescription.center.x, self.viewMain.frame.size.height / 2);
-        self.btnAction.center = CGPointMake(self.btnAction.center.x, self.viewMain.frame.size.height - 40);
+//        self.lblDescription.center = CGPointMake(self.lblDescription.center.x, self.viewMain.frame.size.height / 2);
+//        self.btnAction.center = CGPointMake(self.btnAction.center.x, self.viewMain.frame.size.height - 25);
         
         self.btnAction.backgroundColor = [UIColor clearColor];
         [self.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -169,8 +169,8 @@
     else if (self.state == DISH_CELL_SELECTED)
     {
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
-        self.lblDescription.center = CGPointMake(self.lblDescription.center.x, self.viewMain.frame.size.height / 2);
-        self.btnAction.center = CGPointMake(self.btnAction.center.x, self.viewMain.frame.size.height - 40);
+//        self.lblDescription.center = CGPointMake(self.lblDescription.center.x, self.viewMain.frame.size.height / 2);
+//        self.btnAction.center = CGPointMake(self.btnAction.center.x, self.viewMain.frame.size.height - 25);
         
         self.btnAction.backgroundColor = [UIColor whiteColor];
         [self.btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];

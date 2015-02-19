@@ -10,6 +10,7 @@
 
 #import "UIImageView+WebCache.h"
 
+#import "BentoShop.h"
 #import "AppStrings.h"
 #import "DataManager.h"
 
@@ -48,7 +49,7 @@
     gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     
-    NSURL *urlBack = [[AppStrings sharedInstance] getURL:APP_BACKGND];
+    NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
     [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     self.lblNumber1.layer.cornerRadius = self.lblNumber1.frame.size.width / 2;

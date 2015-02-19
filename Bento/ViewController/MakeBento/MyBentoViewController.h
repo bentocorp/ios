@@ -13,6 +13,6 @@
 
 @interface MyBentoViewController : BaseViewController
 
-@property (nonatomic, assign) Bento *currentBento;
+//@property (nonatomic, assign) Bento *currentBento;
 
 @end

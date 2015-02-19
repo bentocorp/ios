@@ -38,6 +38,8 @@
 - (void)getMenus;
 - (void)getServiceArea;
 
+- (NSURL *)getMenuImageURL;
+
 - (void)refreshStart;
 - (void)refreshPause;
 - (void)refreshResume;
@@ -58,6 +60,7 @@
 - (Bento *)getCurrentBento;
 - (void)setCurrentBento:(Bento *)bento;
 - (Bento *)getBento:(NSInteger)bentoIndex;
+- (Bento *)getLastBento;
 
 - (void)addNewBento;
 - (void)removeBento:(Bento *)bento;

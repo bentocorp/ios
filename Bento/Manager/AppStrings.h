@@ -9,12 +9,10 @@
 #import <Foundation/Foundation.h>
 
 // First Screen
-#define APP_BACKGND                             @"background-launch-image"
 #define APP_LOGO                                @"launch-logo"
 #define APP_SLOGAN                              @"launch-slogan"
 
 // Welcome Screen.
-#define ABOUT_BACKGND                           @"background-launch-image"
 #define ABOUT_LOGO                              @"about-logo"
 #define ABOUT_ITEM_0                            @"about-item-0"
 #define ABOUT_ITEM_1                            @"about-item-1"
@@ -99,6 +97,7 @@
 #define LOCATION_PLACEHOLDER_ADDRESS            @"delivery-enter-address"
 #define LOCATION_TEXT_AGREE                     @"delivery-agree"
 #define LOCATION_BUTTON_CONTINUE                @"delivery-button"
+#define LOCATION_AGREE_ERROR                    @"delivery-agree-error"
 
 // Input Address Screen
 #define ADDRESS_TITLE                           @"delivery-address-title"
@@ -161,7 +160,6 @@
 
 // Closed Screen
 #define CLOSED_IMAGE_LOGO                       @"title-logo"
-#define CLOSED_IMAGE_BACKGROUND                 @"background-launch-image"
 #define CLOSED_TEXT_TITLE                       @"closed-title"
 #define CLOSED_TEXT_CONTENT                     @"closed-text"
 #define CLOSED_PLACEHOLDER_EMAIL                @"closed-input-text"
@@ -175,7 +173,6 @@
 
 // Sold Out Screen
 #define SOLDOUT_IMAGE_LOGO                      @"title-logo"
-#define SOLDOUT_IMAGE_BACKGROUND                @"background-launch-image"
 #define SOLDOUT_TEXT_TITLE                      @"sold-out-title"
 #define SOLDOUT_TEXT_CONTENT                    @"sold-out-text"
 #define SOLDOUT_PLACEHOLDER_EMAIL               @"sold-out-input-text"

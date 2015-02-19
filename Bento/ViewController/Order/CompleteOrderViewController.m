@@ -8,6 +8,7 @@
 
 #import "CompleteOrderViewController.h"
 
+#import "FaqViewController.h"
 #import "MyBentoViewController.h"
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
@@ -206,10 +207,10 @@
         EnterCreditCardViewController *vcEnterCreditCard = segue.destinationViewController;
         vcEnterCreditCard.delegate = self;
     }
-    else if ([segue.identifier isEqualToString:@"AddAnotherBento"])
+    else if ([segue.identifier isEqualToString:@"Faq"])
     {
-        MyBentoViewController *vcBuildBento = segue.destinationViewController;
-        vcBuildBento.currentBento = (Bento *)sender;
+        FaqViewController *vc = segue.destinationViewController;
+        vc.contentType = CONTENT_FAQ;
     }
 }
 
@@ -405,9 +406,9 @@
 
 - (void) onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed])
+    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    else if ([[BentoShop sharedInstance] isSoldOut])
+    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     else
         [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
@@ -482,7 +483,6 @@
         if ([vc isKindOfClass:[MyBentoViewController class]])
         {
             [[BentoShop sharedInstance] addNewBento];
-            ((MyBentoViewController *)vc).currentBento = [[BentoShop sharedInstance] getCurrentBento];
             [self.navigationController popToViewController:vc animated:YES];
             
             return;
@@ -601,6 +601,8 @@
     else if (_isApplePayEnabled)
     {
         PKPaymentRequest *request = [Stripe paymentRequestWithMerchantIdentifier:APPLE_MERCHANT_ID];
+        request.countryCode = @"US";
+        request.currencyCode = @"USD";
 /*
         [request setRequiredShippingAddressFields:PKAddressFieldPostalAddress];
         [request setRequiredBillingAddressFields:PKAddressFieldPostalAddress];
@@ -611,7 +613,7 @@
         float deliveryTip = (float)_totalPrice * _deliveryTipPercent / 100.f;
         float tax = _totalPrice * _taxPercent / 100;
         float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
-        NSDecimalNumber *amount = (NSDecimalNumber *)[NSDecimalNumber numberWithInteger:totalPrice];
+        NSDecimalNumber *amount = (NSDecimalNumber *)[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%.2f", totalPrice]];
         request.paymentSummaryItems = @[
                                         [PKPaymentSummaryItem summaryItemWithLabel:label amount:amount]
                                         ];
@@ -783,7 +785,7 @@
         
         if ([vc isKindOfClass:[MyBentoViewController class]])
         {
-            ((MyBentoViewController *)vc).currentBento = curBento;
+            [[BentoShop sharedInstance] setCurrentBento:curBento];
             [self.navigationController popToViewController:vc animated:YES];
             
             return;
@@ -870,23 +872,33 @@
         NSMutableArray *dishArray = [[NSMutableArray alloc] init];
         
         NSInteger dishIndex = [bento getMainDish];
-        NSDictionary *dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"main" };
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:dishIndex];
+        NSString *strDishName = [dishInfo objectForKey:@"name"];
+        NSDictionary *dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"main", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish1];
-        dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side1" };
+        dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        strDishName = [dishInfo objectForKey:@"name"];
+        dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side1", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish2];
-        dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side2" };
+        dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        strDishName = [dishInfo objectForKey:@"name"];
+        dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side2", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish3];
-        dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side3" };
+        dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        strDishName = [dishInfo objectForKey:@"name"];
+        dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side3", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish4];
-        dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side4" };
+        dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        strDishName = [dishInfo objectForKey:@"name"];
+        dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side4", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         [bentoInfo setObject:dishArray forKey:@"items"];
@@ -903,8 +915,16 @@
     NSMutableDictionary *addressInfo = [[NSMutableDictionary alloc] init];
     NSLog(@"%@", self.placeInfo);
     
-    NSString *strStreet = [NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare];
+    NSString *strNumber = self.placeInfo.subThoroughfare;
+    if (strNumber == nil)
+        strNumber = @"";
+    [addressInfo setObject:strNumber forKey:@"number"];
+
+    NSString *strStreet = self.placeInfo.thoroughfare;
+    if (strStreet == nil)
+        strStreet = @"";
     [addressInfo setObject:strStreet forKey:@"street"];
+    
     [addressInfo setObject:self.placeInfo.locality forKey:@"city"];
     [addressInfo setObject:self.placeInfo.administrativeAreaCode forKey:@"state"];
     [addressInfo setObject:self.placeInfo.postalCode forKey:@"zip"];

@@ -45,6 +45,7 @@
 
 @property (nonatomic, assign) IBOutlet MKMapView *mapView;
 
+@property (weak, nonatomic) IBOutlet UIView *viewError;
 @property (weak, nonatomic) IBOutlet UILabel *lblError;
 
 @property (nonatomic, assign) IBOutlet UILabel *lblAgree;
@@ -70,6 +71,7 @@
     self.lblTitle.text = [[AppStrings sharedInstance] getString:LOCATION_TITLE];
     [self.txtAddress setPlaceholder:[[AppStrings sharedInstance] getString:LOCATION_PLACEHOLDER_ADDRESS]];
     self.lblAgree.text = [[AppStrings sharedInstance] getString:LOCATION_TEXT_AGREE];
+    self.lblError.text = [[AppStrings sharedInstance] getString:LOCATION_AGREE_ERROR];
     [self.btnBottomButton setTitle:[[AppStrings sharedInstance] getString:LOCATION_BUTTON_CONTINUE] forState:UIControlStateNormal];
     
     [[self.txtAddress valueForKey:@"textInputTraits"] setValue:[UIColor colorWithRed:138.0f / 255.0f green:187.0f / 255.0f blue:90.0f / 255.0f alpha:1.0f] forKey:@"insertionPointColor"];
@@ -109,9 +111,10 @@
     
     self.placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     
+    self.viewError.alpha = 0.0f;
+    
     if (self.placeInfo != nil)
     {
-        self.lblError.hidden = YES;
         self.btnMeetMyDrive.selected = YES;
         
         self.txtAddress.text = self.placeInfo.formattedAddress;
@@ -124,7 +127,6 @@
     }
     else
     {
-        self.lblError.hidden = NO;
         self.btnMeetMyDrive.selected = NO;
         
         self.txtAddress.text = @"";
@@ -203,9 +205,9 @@
 
 - (void) onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed])
+    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    else if ([[BentoShop sharedInstance] isSoldOut])
+    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     else
         [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
@@ -358,13 +360,11 @@
 {
     if (self.btnMeetMyDrive.selected)
     {
-        self.lblError.hidden = NO;
         self.btnMeetMyDrive.selected = NO;
         [self updateUI];
     }
     else
     {
-        self.lblError.hidden = YES;
         self.btnMeetMyDrive.selected = YES;
         [self updateUI];
     }
@@ -375,8 +375,34 @@
     [self updateUI];
 }
 
+- (void)hideErrorView
+{
+    [UIView animateWithDuration:0.3f animations:^{
+        
+        self.viewError.alpha = 0.0f;
+        
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
 - (IBAction)onBottomButton:(id)sender
 {
+    if (!self.btnMeetMyDrive.selected)
+    {
+        [UIView animateWithDuration:0.3f animations:^{
+            
+            self.viewError.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            
+            [self performSelector:@selector(hideErrorView) withObject:nil afterDelay:3.0f];
+            
+        }];
+        
+        return;
+    }
+    
     if (_nextToBuild)
     {
         [self stopSearch];
@@ -492,8 +518,6 @@
     
     if (self.placeInfo != nil && self.btnMeetMyDrive.selected && [[BentoShop sharedInstance] getCompletedBentoCount] > 0)
     {
-        self.btnBottomButton.enabled = YES;
-        
         NSString *strTitle = @"CONFIRM ADDRESS";
         [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
         
@@ -511,8 +535,6 @@
     {
         if (self.placeInfo != nil && self.btnMeetMyDrive.selected && _nextToBuild)
         {
-            self.btnBottomButton.enabled = YES;
-            
             NSString *strTitle = @"CONFIRM ADDRESS";
             [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
             
@@ -528,8 +550,6 @@
         }
         else
         {
-            self.btnBottomButton.enabled = NO;
-            
             NSString *strTitle = [[AppStrings sharedInstance] getString:LOCATION_BUTTON_CONTINUE];
             [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
             
@@ -708,7 +728,6 @@
         }
         else if (buttonIndex == 1)
         {
-            self.lblError.hidden = YES;
             self.btnMeetMyDrive.selected = YES;
             [self updateUI];
         }

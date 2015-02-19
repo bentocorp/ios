@@ -11,12 +11,11 @@
 
 @interface BentoShop ()
 
+@property (nonatomic, retain) NSString *strToday;
 @property (nonatomic, retain) NSDictionary *dicStatus;
 @property (nonatomic, retain) NSDictionary *menuToday;
 @property (nonatomic, retain) NSArray *menuStatus;
 @property (nonatomic, retain) MKPolygon *serviceArea;
-
-@property (nonatomic, retain) NSString *strDate;
 @property (nonatomic, retain) NSMutableArray *aryBentos;
 
 @end
@@ -50,8 +49,7 @@ static BentoShop *_shareInstance;
 {
     if ( (self = [super init]) )
     {
-        self.strDate = nil;
-        
+        self.strToday = nil;
         self.dicStatus = nil;
         self.menuToday = nil;
         self.menuStatus = nil;
@@ -106,12 +104,12 @@ static BentoShop *_shareInstance;
     self.menuStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
     if ([self isClosed])
-        [self.aryBentos removeAllObjects];
+        [self resetBentoArray];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
 }
 
-- (void)getMenus
+- (NSString *)getDateString
 {
     NSDate* currentDate = [NSDate date];
     
@@ -131,19 +129,29 @@ static BentoShop *_shareInstance;
     currentDate = nil;
     formatter = nil;
     
+    return strDate;
+}
+
+- (void)resetBentoArray
+{
+    [self.aryBentos removeAllObjects];
+}
+
+- (void)getMenus
+{
+    NSString *strDate = [self getDateString];
+    
     NSString *strRequest = [NSString stringWithFormat:@"https://api.bentonow.com/menu/%@", strDate];
     NSError *error = nil;
     self.menuToday = [self sendRequest:strRequest statusCode:nil error:&error];
     
-    if (self.menuToday == nil)
+    if (![strDate isEqualToString:self.strToday])
     {
-        strDate = @"20150127";
-        strRequest = [NSString stringWithFormat:@"https://api.bentonow.com/menu/%@", strDate];
-        error = nil;
-        self.menuToday = [self sendRequest:strRequest statusCode:nil error:&error];
+        [self resetBentoArray];
+        
+        self.strToday = strDate;
+        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_MENU object:nil];
     }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_MENU object:nil];
 }
 
 - (void)getServiceArea
@@ -189,6 +197,22 @@ static BentoShop *_shareInstance;
     free(locations);
     
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_AREA object:nil];
+}
+
+- (NSURL *)getMenuImageURL
+{
+    if (self.menuToday == nil)
+        return nil;
+    
+    NSDictionary *menuInfo = [self.menuToday objectForKey:@"Menu"];
+    if (menuInfo == nil)
+        return nil;
+    
+    NSString *strMenuBack = [menuInfo objectForKey:@"bgimg"];
+    if (strMenuBack == nil)
+        return nil;
+    
+    return [NSURL URLWithString:strMenuBack];
 }
 
 - (BOOL)isClosed
@@ -291,11 +315,6 @@ static BentoShop *_shareInstance;
         return;
     
     _isPaused = NO;
-    
-    [self getMenus];
-    [self getStatus];
-    [self getServiceArea];
-    
     _timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(updateProc) userInfo:nil repeats:YES];
 }
 
@@ -475,6 +494,14 @@ static BentoShop *_shareInstance;
         return nil;
     
     return [self.aryBentos objectAtIndex:bentoIndex];
+}
+
+- (Bento *)getLastBento
+{
+    if (self.aryBentos == nil || self.aryBentos.count == 0)
+        return nil;
+    
+    return [self.aryBentos lastObject];
 }
 
 - (void)addNewBento
