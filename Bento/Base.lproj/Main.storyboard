@@ -388,8 +388,8 @@
                                         <rect key="frame" x="35" y="18" width="250" height="92"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                     </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Takeout, delivered instantly." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="ZuD-Ad-TM9">
-                                        <rect key="frame" x="0.0" y="101" width="320" height="30"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Takeout, delivered instantly." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000007" id="ZuD-Ad-TM9">
+                                        <rect key="frame" x="40" y="101" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2856,9 +2856,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="oNJ-Gc-fzE"/>
         <segue reference="Ghr-0t-YHG"/>
-        <segue reference="09w-J6-v5C"/>
+        <segue reference="Jq9-7a-GOP"/>
+        <segue reference="oNJ-Gc-fzE"/>
         <segue reference="Xro-hm-UPB"/>
         <segue reference="jSv-1B-rhc"/>
     </inferredMetricsTieBreakers>

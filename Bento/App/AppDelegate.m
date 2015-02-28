@@ -14,6 +14,7 @@
 #import "Stripe.h"
 #import "BentoShop.h"
 #import "AppStrings.h"
+#import "DataManager.h"
 #import "Reachability.h"
 #import "FacebookManager.h"
 
@@ -95,7 +96,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Global Data Manager
     
     // Stripe
-#ifdef DEBUG
+#ifdef DEV_MODE
     [Stripe setDefaultPublishableKey:StripePublishableTestKey];
 #else
     [Stripe setDefaultPublishableKey:StripePublishableLiveKey];

@@ -9,7 +9,6 @@
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
-            <string>OpenSans-Semibold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -54,17 +53,6 @@ fghfgh</string>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k6K-6f-oEd">
-                                <rect key="frame" x="18" y="122" width="125" height="36"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
-                                <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <state key="normal" title="ADD TO BENTO">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -73,7 +61,6 @@ fghfgh</string>
             </view>
             <size key="customSize" width="160" height="166"/>
             <connections>
-                <outlet property="btnAction" destination="k6K-6f-oEd" id="35y-Hu-vfG"/>
                 <outlet property="ivImage" destination="aB4-LG-AVw" id="5km-zH-OfF"/>
                 <outlet property="ivMask" destination="4bU-zP-lGe" id="7dT-Sk-3Jx"/>
                 <outlet property="lblDescription" destination="vYH-Re-rw1" id="SYg-Eo-Xxh"/>

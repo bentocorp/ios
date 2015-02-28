@@ -444,10 +444,6 @@ static BentoShop *_shareInstance;
         }
     }
     
-#ifdef DEBUG
-    return NO;
-#endif
-    
     return YES;
 }
 

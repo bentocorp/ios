@@ -30,7 +30,7 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-    self.lblTitle.text = [NSString stringWithFormat:@"%@'s MENU", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     
     UINib *cellNib = [UINib nibWithNibName:@"PreviewCollectionViewCell" bundle:nil];
     [self.cvDishes registerNib:cellNib forCellWithReuseIdentifier:@"PreviewCollectionViewCell"];
