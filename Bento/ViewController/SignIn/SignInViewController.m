@@ -19,7 +19,7 @@
 #import "DataManager.h"
 #import "FacebookManager.h"
 
-@interface SignInViewController () <FBManagerDelegate>
+@interface SignInViewController () <FBManagerDelegate, MyAlertViewDelegate>
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
 
@@ -80,7 +80,7 @@
     
     // For test only
 #ifdef DEBUG
-    self.txtEmail.text = @"test2@bentonow.com";
+    self.txtEmail.text = @"ridev@bentonow.com";
     self.txtPassword.text = @"12345678";
 #endif//DEBUG
     
@@ -89,9 +89,9 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void) willShowKeyboard:(NSNotification*)notification
@@ -219,14 +219,15 @@
     loadingHUD.textLabel.text = @"Logging in...";
     [loadingHUD showInView:self.view];
     
-    [webManager AsyncProcess:@"/user/login" method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+    NSString *strRequest = [NSString stringWithFormat:@"%@/user/login", SERVER_URL];
+    [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         
         NSDictionary *response = networkOperation.responseJSON;
         [[DataManager shareDataManager] setUserInfo:response];
         
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-        [pref setObject:@"/user/login" forKey:@"apiName"];
+        [pref setObject:strRequest forKey:@"apiName"];
         [pref setObject:dicRequest forKey:@"loginRequest"];
         [pref synchronize];
         
@@ -305,6 +306,16 @@
          {
              NSLog(@"%@", user);
              NSString *strMailAddr = [user valueForKey:@"email"];
+             if (strMailAddr == nil || strMailAddr.length == 0)
+             {
+                 [loadingHUD dismiss];
+                 
+                 MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Error! We need your email to submit your order. We promise, no spam! Do you want to try again?" delegate:self cancelButtonTitle:@"No" otherButtonTitle:@"Yes"];
+                 [alertView showInView:self.view];
+                 alertView = nil;
+                 return;
+             }
+             
              NSString *strFBID = [user valueForKey:@"id"];
              NSString *strAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
              
@@ -317,14 +328,15 @@
              NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
              WebManager *webManager = [[WebManager alloc] init];
              
-             [webManager AsyncProcess:@"/user/fblogin" method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+             NSString *strRequest = [NSString stringWithFormat:@"%@/user/fblogin", SERVER_URL];
+             [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
                  [loadingHUD dismiss];
                  
                  NSDictionary *response = networkOperation.responseJSON;
                  [[DataManager shareDataManager] setUserInfo:response];
                  
                  NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-                 [pref setObject:@"/user/fblogin" forKey:@"apiName"];
+                 [pref setObject:strRequest forKey:@"apiName"];
                  [pref setObject:dicRequest forKey:@"loginRequest"];
                  [pref synchronize];
                  
@@ -366,17 +378,25 @@
      }];
 }
 
-- (IBAction)onSignInWithFacebook:(id)sender
+- (void)doSignInWithFacebook:(BOOL)isRetry
 {
+    [self hideKeyboard];
+    
     FacebookManager *fbManager = [FacebookManager sharedInstance];
-    if ([fbManager isSessionOpen])
-    {
-        [self reqFacebookUserInfo];
-    }
+    if (isRetry)
+        [fbManager login];
     else
     {
-        [fbManager login];
+        if ([fbManager isSessionOpen])
+            [self reqFacebookUserInfo];
+        else
+            [fbManager login];
     }
+}
+
+- (IBAction)onSignInWithFacebook:(id)sender
+{
+    [self doSignInWithFacebook:NO];
 }
 
 - (void) gotoPhoneNumberScreen:(NSDictionary<FBGraphUser> *)userInfo
@@ -433,6 +453,21 @@
 -(void)FBLogin:(BOOL)flag
 {
     [self reqFacebookUserInfo];
+}
+
+#pragma mark MyAlertViewDelegate
+
+- (void)doReauthorise
+{
+    [self doSignInWithFacebook:YES];
+}
+
+- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [self performSelector:@selector(doReauthorise) withObject:nil];
+    }
 }
 
 @end

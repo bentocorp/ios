@@ -29,8 +29,6 @@
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
 @property (nonatomic, assign) IBOutlet UILabel *lblDescription;
 
-
-
 @property (nonatomic, assign) IBOutlet UIImageView *ivMask;
 
 @property (nonatomic, assign) IBOutlet UIImageView *ivBanner;
@@ -52,7 +50,7 @@
     backgroundLayer.frame = self.ivImage.frame;
     [self.ivImage.layer insertSublayer:backgroundLayer atIndex:0];
     self.gradientLayer = backgroundLayer;
-    self.gradientLayer.opacity = 0.96f;
+    self.gradientLayer.opacity = 0.8f;
     
     self.ivMask.hidden = YES;
     [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
@@ -96,7 +94,7 @@
     self.lblDescription.text = strDescription;
     
     NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-    [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+    [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
 }
 
 - (void) setCellState:(NSInteger)state index:(NSInteger)index

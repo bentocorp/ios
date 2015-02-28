@@ -22,7 +22,7 @@
 #import "DataManager.h"
 #import "FacebookManager.h"
 
-@interface RegisterViewController () <FBManagerDelegate>
+@interface RegisterViewController () <FBManagerDelegate, MyAlertViewDelegate>
 {
     UITextField *_activeField;
 }
@@ -137,9 +137,9 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void) willShowKeyboard:(NSNotification*)notification
@@ -216,9 +216,19 @@
      {
          if (error == nil)
          {
+             NSString *strMailAddr = [user valueForKey:@"email"];
+             if (strMailAddr == nil || strMailAddr.length == 0)
+             {
+                 [loadingHUD dismiss];
+                 
+                 MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Error! We need your email to submit your order. We promise, no spam! Do you want to try again?" delegate:self cancelButtonTitle:@"No" otherButtonTitle:@"Yes"];
+                 [alertView showInView:self.view];
+                 alertView = nil;
+                 return;
+             }
+             
              NSString *strAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
              
-             NSString *strMailAddr = [user valueForKey:@"email"];
              NSString *strFBID = [user valueForKey:@"id"];
              
              NSDictionary* loginInfo = @{
@@ -230,14 +240,15 @@
              NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
              WebManager *webManager = [[WebManager alloc] init];
              
-             [webManager AsyncProcess:@"/user/fblogin" method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+             NSString *strRequest = [NSString stringWithFormat:@"%@/user/fblogin", SERVER_URL];
+             [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
                  [loadingHUD dismiss];
                  
                  NSDictionary *response = networkOperation.responseJSON;
                  [[DataManager shareDataManager] setUserInfo:response];
                  
                  NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-                 [pref setObject:@"/user/fblogin" forKey:@"apiName"];
+                 [pref setObject:strRequest forKey:@"apiName"];
                  [pref setObject:dicRequest forKey:@"loginRequest"];
                  [pref synchronize];
                  
@@ -279,19 +290,26 @@
      }];
 }
 
-- (IBAction)onRegisterWithFacebook:(id)sender
+- (void)doRegisterWithFacebook:(BOOL)isRetry
 {
     [self closeKeyboard];
     
     FacebookManager *fbManager = [FacebookManager sharedInstance];
-    if ([fbManager isSessionOpen])
-    {
-        [self reqFacebookUserInfo];
-    }
+    
+    if (isRetry)
+        [fbManager login];
     else
     {
-        [fbManager login];
+        if ([fbManager isSessionOpen])
+            [self reqFacebookUserInfo];
+        else
+            [fbManager login];
     }
+}
+
+- (IBAction)onRegisterWithFacebook:(id)sender
+{
+    [self doRegisterWithFacebook:NO];
 }
 
 - (void)processRegister
@@ -315,14 +333,16 @@
     loadingHUD.textLabel.text = @"Registering...";
     [loadingHUD showInView:self.view];
     
-    [webManager AsyncProcess:@"/user/signup" method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+    NSString *strRequest = [NSString stringWithFormat:@"%@/user/signup", SERVER_URL];
+    [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         
         NSDictionary *response = networkOperation.responseJSON;
         [[DataManager shareDataManager] setUserInfo:response];
         
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-        [pref setObject:@"/user/login" forKey:@"apiName"];
+        NSString *strRequest = [NSString stringWithFormat:@"%@/user/login", SERVER_URL];
+        [pref setObject:strRequest forKey:@"apiName"];
         
         NSDictionary *loginRequest = @{
                                        @"email" : strEmail,
@@ -651,6 +671,21 @@
 -(void)FBLogin:(BOOL)flag
 {
     [self reqFacebookUserInfo];
+}
+
+#pragma mark MyAlertViewDelegate
+
+- (void)doReauthorise
+{
+    [self doRegisterWithFacebook:YES];
+}
+
+- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
+        [self performSelector:@selector(doReauthorise) withObject:nil];
+    }
 }
 
 @end

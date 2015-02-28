@@ -11,6 +11,14 @@
 
 #import "Stripe.h"
 
+#define DEV_MODE
+
+#ifndef DEV_MODE
+#define SERVER_URL @"https://api.bentonow.com"
+#else
+#define SERVER_URL @"https://dev.api.bentonow.com"
+#endif
+
 #define GOOGLE_API_KEY @"AIzaSyCv7nwsR9ppbEWPwCKnZ9f6nf3UTli-ZLk"
 
 typedef enum : NSUInteger {
@@ -22,6 +30,21 @@ typedef enum : NSUInteger {
     ERROR_PASSWORD,
     ERROR_UNKNOWN,
 } ERROR_TYPE;
+
+typedef enum : NSUInteger {
+    Payment_None,
+    Payment_Server,
+    Payment_ApplePay,
+    Payment_CreditCard,
+} PaymentMethod;
+
+#ifdef DEV_MODE
+
+@interface NSURLRequest (IgnoreSSL)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host;
+@end
+
+#endif
 
 @interface DataManager : NSObject
 
@@ -42,10 +65,12 @@ typedef enum : NSUInteger {
 - (NSString *)getAPIToken;
 
 - (BOOL)isAdminUser;
-- (BOOL)hasCreditCard;
 
 - (STPCard *)getCreditCard;
 - (void)setCreditCard:(STPCard *)card;
+
+- (PaymentMethod)getPaymentMethod;
+- (void)setPaymentMethod:(PaymentMethod)newPaymentMethod;
 
 - (NSString *)getErrorMessage:(id)errorInfo;
 

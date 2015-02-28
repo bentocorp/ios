@@ -92,9 +92,9 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void) willShowKeyboard:(NSNotification*)notification
@@ -208,7 +208,7 @@
     loadingHUD.textLabel.text = @"Sending...";
     [loadingHUD showInView:self.view];
     
-    NSString *strRequest = @"/coupon/request";
+    NSString *strRequest = [NSString stringWithFormat:@"%@/coupon/request", SERVER_URL];
     if ([[DataManager shareDataManager] getUserInfo] != nil)
         strRequest = [NSString stringWithFormat:@"%@?api_token=%@", strRequest, [[DataManager shareDataManager] getAPIToken]];
     

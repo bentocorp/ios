@@ -133,6 +133,8 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)onUpdatedStatus:(NSNotification *)notification
@@ -228,7 +230,15 @@
     
     if (_selectedIndex == indexPath.item)
     {
-        
+        if (_selectedItemState == DISH_CELL_NORMAL)
+        {
+            if (_selectedIndex == _originalDishIndex)
+                _selectedItemState = DISH_CELL_SELECTED;
+            else
+                _selectedItemState = DISH_CELL_FOCUS;
+        }
+        else if (_selectedItemState == DISH_CELL_FOCUS || _selectedItemState == DISH_CELL_SELECTED)
+            _selectedItemState = DISH_CELL_NORMAL;
     }
     else
     {

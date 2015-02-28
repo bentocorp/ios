@@ -48,10 +48,6 @@
 @interface CompleteOrderViewController () <UIActionSheetDelegate, PKPaymentAuthorizationViewControllerDelegate, EnterCreditCardViewControllerDelegate, PromoCodeViewDelegate, MyAlertViewDelegate, BentoTableViewCellDelegate>
 {
     BOOL _isEditingBentos;
-    BOOL _isApplePayEnabled;
-    
-    // Payment
-    BOOL _hasCreditCard;
     
     // Promo Code
     NSInteger _promoDiscount;
@@ -139,10 +135,6 @@
     
     _isEditingBentos = NO;
     
-    _hasCreditCard = NO;
-    if ([[DataManager shareDataManager] hasCreditCard])
-        _hasCreditCard = YES;
-    
     _promoDiscount = 0;
     
     _deliveryTipPercent = 15;
@@ -177,18 +169,13 @@
     
     self.tvBentos.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    PKPaymentRequest *request = [Stripe paymentRequestWithMerchantIdentifier:@"merchant.com.bento"];
-    
-    // Check apple pay is available on the iPhone.
-    NSString *label = @"Checking if Apple Pay is available";
-    NSDecimalNumber *amount = [NSDecimalNumber decimalNumberWithString:@"0.01"];
-    request.paymentSummaryItems = @[
-                                    [PKPaymentSummaryItem summaryItemWithLabel:label amount:amount]
-                                    ];
-    
-    _isApplePayEnabled = [self applePayEnabled];
-    if (!_isApplePayEnabled && !_hasCreditCard && [[DataManager shareDataManager] getCreditCard] == nil)
-        [self gotoCreditScreen];
+    if ([[DataManager shareDataManager] getPaymentMethod] == Payment_None)
+    {
+        if (![self applePayEnabled])
+            [self gotoCreditScreen];
+        else
+            [[DataManager shareDataManager] setPaymentMethod:Payment_ApplePay];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -214,104 +201,102 @@
     }
 }
 
+- (void)updatePaymentInfo:(NSString *)strCardType cardNumber:(NSString *)strCardNumber
+{
+    NSString *strImageName = @"placeholder";
+    NSString *strPaymentMethod = @"";
+    
+    if ([strCardType isEqualToString:@"applepay"])
+    {
+        strImageName = @"orderconfirm_image_applepay";
+        strPaymentMethod = @"Apple Pay";
+    }
+    else if ([strCardType isEqualToString:@"amex"])
+    {
+        strImageName = @"amex";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"diners"])
+    {
+        strImageName = @"diners";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"discover"])
+    {
+        strImageName = @"discover";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"jcb"])
+    {
+        strImageName = @"jcb";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"mastercard"])
+    {
+        strImageName = @"mastercard";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"visa"])
+    {
+        strImageName = @"visa";
+        strPaymentMethod= strCardNumber;
+    }
+    
+    self.lblPaymentMethod.text = strPaymentMethod;
+    [self.ivCardType setImage:[UIImage imageNamed:strImageName]];
+}
+
 - (void)updateCardInfo
 {
-    if (_hasCreditCard && [[DataManager shareDataManager] getCreditCard] == nil)
+    PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
+    if (curPaymentMethod == Payment_ApplePay)
+    {
+        [self.ivCardType setImage:[UIImage imageNamed:@"orderconfirm_image_applepay"]];
+        self.lblPaymentMethod.text = @"Apple Pay";
+    }
+    else if (curPaymentMethod == Payment_Server)
     {
         NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
         NSDictionary *cardInfo = [userInfo objectForKey:@"card"];
         NSString *strCardType = [[cardInfo objectForKey:@"brand"] lowercaseString];
         NSString *strCardNumber = [cardInfo objectForKey:@"last4"];
-        
-        self.lblPaymentMethod.text = @"";
-        
-        if ([strCardType isEqualToString:@"applepay"])
-        {
-            [self.ivCardType setImage:[UIImage imageNamed:@"orderconfirm_image_applepay"]];
-            self.lblPaymentMethod.text = @"Apple Pay";
-        }
-        else if ([strCardType isEqualToString:@"amex"])
-        {
-            [self.ivCardType setImage:[UIImage imageNamed:@"amex"]];
-            self.lblPaymentMethod.text = strCardNumber;
-        }
-        else if ([strCardType isEqualToString:@"diners"])
-        {
-            [self.ivCardType setImage:[UIImage imageNamed:@"diners"]];
-            self.lblPaymentMethod.text = strCardNumber;
-        }
-        else if ([strCardType isEqualToString:@"discover"])
-        {
-            [self.ivCardType setImage:[UIImage imageNamed:@"discover"]];
-            self.lblPaymentMethod.text = strCardNumber;
-        }
-        else if ([strCardType isEqualToString:@"jcb"])
-        {
-            [self.ivCardType setImage:[UIImage imageNamed:@"jcb"]];
-            self.lblPaymentMethod.text = strCardNumber;
-        }
-        else if ([strCardType isEqualToString:@"mastercard"])
-        {
-            [self.ivCardType setImage:[UIImage imageNamed:@"mastercard"]];
-            self.lblPaymentMethod.text = strCardNumber;
-        }
-        else if ([strCardType isEqualToString:@"visa"])
-        {
-            [self.ivCardType setImage:[UIImage imageNamed:@"visa"]];
-            self.lblPaymentMethod.text = strCardNumber;
-        }
+     
+        [self updatePaymentInfo:strCardType cardNumber:strCardNumber];
     }
-    else if ([[DataManager shareDataManager] getCreditCard] != nil)
+    else if (curPaymentMethod == Payment_CreditCard)
     {
         STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
         PTKCardNumber *cardNumber = [PTKCardNumber cardNumberWithString:cardInfo.number];
         PTKCardType cardType = [cardNumber cardType];
-        NSString *cardTypeName = @"placeholder";
-        self.lblPaymentMethod.text = @"";
         
         switch (cardType) {
             case PTKCardTypeAmex:
-                cardTypeName = @"amex";
-                self.lblPaymentMethod.text = cardNumber.last4;
+                [self updatePaymentInfo:@"amex" cardNumber:cardNumber.last4];
                 break;
             case PTKCardTypeDinersClub:
-                cardTypeName = @"diners";
-                self.lblPaymentMethod.text = cardNumber.last4;
+                [self updatePaymentInfo:@"diners" cardNumber:cardNumber.last4];
                 break;
             case PTKCardTypeDiscover:
-                cardTypeName = @"discover";
-                self.lblPaymentMethod.text = cardNumber.last4;
+                [self updatePaymentInfo:@"discover" cardNumber:cardNumber.last4];
                 break;
             case PTKCardTypeJCB:
-                cardTypeName = @"jcb";
-                self.lblPaymentMethod.text = cardNumber.last4;
+                [self updatePaymentInfo:@"jcb" cardNumber:cardNumber.last4];
                 break;
             case PTKCardTypeMasterCard:
-                cardTypeName = @"mastercard";
-                self.lblPaymentMethod.text = cardNumber.last4;
+                [self updatePaymentInfo:@"mastercard" cardNumber:cardNumber.last4];
                 break;
             case PTKCardTypeVisa:
-                cardTypeName = @"visa";
-                self.lblPaymentMethod.text = cardNumber.last4;
+                [self updatePaymentInfo:@"visa" cardNumber:cardNumber.last4];
                 break;
             default:
+                [self updatePaymentInfo:@"" cardNumber:@""];
                 break;
         }
-        
-        [self.ivCardType setImage:[UIImage imageNamed:cardTypeName]];
     }
-    else
+    else if (curPaymentMethod == Payment_None)
     {
-        if (_isApplePayEnabled)
-        {
-            [self.ivCardType setImage:[UIImage imageNamed:@"orderconfirm_image_applepay"]];
-            self.lblPaymentMethod.text = @"Apple Pay";
-        }
-        else
-        {
-            [self.ivCardType setImage:[UIImage imageNamed:@"orderconfirm_image_credit"]];
-            self.lblPaymentMethod.text = @"";
-        }
+        [self.ivCardType setImage:[UIImage imageNamed:@"orderconfirm_image_credit"]];
+        self.lblPaymentMethod.text = @"";
     }
 }
 
@@ -340,8 +325,12 @@
     self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     
+    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
-    _totalPrice = self.aryBentos.count * unitPrice;
+    if (salePrice != 0 && salePrice < unitPrice)
+        _totalPrice = self.aryBentos.count * salePrice;
+    else
+        _totalPrice = self.aryBentos.count * unitPrice;
     
     float deliveryTip = (float)_totalPrice * _deliveryTipPercent / 100.f;
     
@@ -370,7 +359,7 @@
     [self.btnEdit setTitleColor:(_isEditingBentos ? doneColor : editColor) forState:UIControlStateNormal];
 
     BOOL isReady = NO;
-    if (self.placeInfo != nil && (_isApplePayEnabled || _hasCreditCard || [[DataManager shareDataManager] getCreditCard] != nil))
+    if (self.placeInfo != nil && [[DataManager shareDataManager] getPaymentMethod] != Payment_None)
     {
         isReady = YES;
     }
@@ -386,11 +375,6 @@
 {
     [super viewWillAppear:animated];
 
-    if ([[DataManager shareDataManager] hasCreditCard])
-        _hasCreditCard = YES;
-    else
-        _hasCreditCard = NO;
-    
     [self updateUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
@@ -399,9 +383,9 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void) onUpdatedStatus:(NSNotification *)notification
@@ -444,6 +428,7 @@
         if([vc isKindOfClass:[DeliveryLocationViewController class]])
         {
             found = YES;
+            ((DeliveryLocationViewController *)vc).isFromOrder = YES;
             [self.navigationController popToViewController:vc animated:YES];
             return;
         }
@@ -452,21 +437,22 @@
     if(!found)
     {
         UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+        ((DeliveryLocationViewController *)vc).isFromOrder = YES;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
 
 - (IBAction)onChangePayment:(id)sender
 {
-//    if (!_isApplePayEnabled)
-//    {
+    if (![self applePayEnabled])
+    {
         [self gotoCreditScreen];
-//    }
-//    else
-//    {
-//        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Payment Method" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Apple Pay", @"Credit ", nil];
-//        [actionSheet showInView:self.view];
-//    }
+    }
+    else
+    {
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Payment Method" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use Apple Pay", @"Use Credit Card", nil];
+        [actionSheet showInView:self.view];
+    }
 }
 
 - (IBAction)onAddAnotherBento:(id)sender
@@ -565,40 +551,47 @@
 */
 - (void)processPayment
 {
-    STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
-    if (!_hasCreditCard && cardInfo == nil && !_isApplePayEnabled)
+    PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
+    if (curPaymentMethod == Payment_None)
         return;
-    
-    if (cardInfo != nil) // STPCard
+
+    if (curPaymentMethod == Payment_CreditCard)
     {
-        JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        loadingHUD.textLabel.text = @"Processing...";
-        [loadingHUD showInView:self.view];
-        
-        [[STPAPIClient sharedClient] createTokenWithCard:cardInfo completion:^(STPToken *token, NSError *error) {
-            if (error)
-            {
-                [loadingHUD dismiss];
-                
-                MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-                [alertView showInView:self.view];
-                alertView = nil;
-                
-            }
-            else
-            {
-                [loadingHUD dismiss];
-                
-                [self createBackendChargeWithToken:token completion:nil];
-            }
-        }];
+        STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
+        if (cardInfo != nil) // STPCard
+        {
+            JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+            loadingHUD.textLabel.text = @"Processing...";
+            [loadingHUD showInView:self.view];
+            
+            [[STPAPIClient sharedClient] createTokenWithCard:cardInfo completion:^(STPToken *token, NSError *error) {
+                if (error)
+                {
+                    [loadingHUD dismiss];
+                    
+                    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+                    [alertView showInView:self.view];
+                    alertView = nil;
+                    
+                }
+                else
+                {
+                    [loadingHUD dismiss];
+                    
+                    // Save card information
+                    [self saveCardInfo:cardInfo isApplePay:NO];
+                    
+                    [self createBackendChargeWithToken:token completion:nil];
+                }
+            }];
+        }
     }
-    else if (_hasCreditCard)
+    else if (curPaymentMethod == Payment_Server)
     {
         [self createBackendChargeWithToken:nil completion:nil];
         return;
     }
-    else if (_isApplePayEnabled)
+    else if (curPaymentMethod == Payment_ApplePay)
     {
         PKPaymentRequest *request = [Stripe paymentRequestWithMerchantIdentifier:APPLE_MERCHANT_ID];
         request.countryCode = @"US";
@@ -726,6 +719,27 @@
     return strAdd;
 }
 
+- (void)saveCardInfo:(STPCard *)cardInfo isApplePay:(BOOL)isApplePay
+{
+    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
+    if (userInfo == nil)
+        return;
+
+    NSString *strEmail = [userInfo objectForKey:@"email"];
+    if (strEmail == nil || strEmail.length == 0)
+        return;
+    
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:strEmail forKey:@"user_email"];
+    [userDefaults setObject:[cardInfo type] forKey:@"card_brand"];
+    [userDefaults setObject:[cardInfo last4] forKey:@"card_last4"];
+    
+    if (isApplePay)
+        [userDefaults setObject:@"1" forKey:@"is_applepay"];
+    else
+        [userDefaults setObject:@"0" forKey:@"is_applepay"];
+}
+
 #pragma mark UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -751,7 +765,13 @@
     Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
     
     cell.lblBentoName.text = [NSString stringWithFormat:@"%@ Bento", [curBento getBentoName]];
-    cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)[[AppStrings sharedInstance] getInteger:ABOUT_PRICE]];
+    
+    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
+    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    if (salePrice != 0 && salePrice < unitPrice)
+        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)salePrice];
+    else
+        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
     
     cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
     
@@ -954,10 +974,17 @@
     
     // Stripe
     NSDictionary *stripeInfo = nil;
-    if (_hasCreditCard)
+    PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
+    
+    if (curPaymentMethod == Payment_Server)
+    {
         stripeInfo = @{ @"stripeToken" : @"NULL" };
+    }
     else
-        stripeInfo = @{ @"stripeToken" : stripeToken };
+    {
+        if (stripeToken != nil)
+            stripeInfo = @{ @"stripeToken" : stripeToken };
+    }
     
     [request setObject:stripeInfo forKey:@"Stripe"];
     // Stripe token
@@ -967,14 +994,17 @@
 
 - (void)createBackendChargeWithToken:(STPToken *)token completion:(void (^)(PKPaymentAuthorizationStatus))completion
 {
-    if (!_hasCreditCard && (token.tokenId == nil || token.tokenId.length == 0))
-        return;
+    if (token.tokenId == nil || token.tokenId.length == 0)
+    {
+        if ([[DataManager shareDataManager] getPaymentMethod] != Payment_Server)
+            return;
+    }
     
     NSDictionary *request = nil;
-    if (_hasCreditCard)
-        request = [self buildRequest:nil];
-    else
+    if (token.tokenId != nil)
         request = [self buildRequest:token.tokenId];
+    else if ([[DataManager shareDataManager] getPaymentMethod] == Payment_Server)
+        request = [self buildRequest:nil];
     
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
@@ -983,7 +1013,7 @@
     loadingHUD.textLabel.text = @"Purchasing...";
     [loadingHUD showInView:self.view];
     
-    NSString *strRequest = [NSString stringWithFormat:@"/order?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
+    NSString *strRequest = [NSString stringWithFormat:@"%@/order?api_token=%@", SERVER_URL, [[DataManager shareDataManager] getAPIToken]];
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         
@@ -1026,6 +1056,8 @@
             return;
         }
         
+        // Save card information
+        [self saveCardInfo:card isApplePay:YES];
         [self createBackendChargeWithToken:token completion:completion];
     }];
 }
@@ -1044,6 +1076,8 @@
             return;
         }
         
+        // Save card information
+        [self saveCardInfo:token.card isApplePay:YES];
         [self createBackendChargeWithToken:token completion:completion];
     }];
 }
@@ -1114,10 +1148,13 @@
 {
     if (buttonIndex == 0)
     {
+        [[DataManager shareDataManager] setCreditCard:nil];
+        [[DataManager shareDataManager] setPaymentMethod:Payment_ApplePay];
+        [self updateUI];
     }
     else if (buttonIndex == 1)
     {
-        [self gotoCreditScreen];
+        [self performSelector:@selector(gotoCreditScreen) withObject:nil afterDelay:0.3f];
     }
 }
 

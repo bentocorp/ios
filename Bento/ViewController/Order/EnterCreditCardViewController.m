@@ -45,7 +45,15 @@
     // Do any additional setup after loading the view.
     self.lblTitle.text = [[AppStrings sharedInstance] getString:CREDITCARD_TITLE];
     self.lblMessage.text = [[AppStrings sharedInstance] getString:CREDITCARD_TEXT];
-    self.lblPrice.text = [NSString stringWithFormat:@"$%ld", (long)[[AppStrings sharedInstance] getInteger:ABOUT_PRICE]];
+    
+    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
+    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    
+    if (salePrice != 0 && salePrice < unitPrice)
+        self.lblPrice.text = [NSString stringWithFormat:@"$%ld", (long)salePrice];
+    else
+        self.lblPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
+    
     [self.btnContinue setTitle:[[AppStrings sharedInstance] getString:CREDITCARD_BUTTON_CONTINUE] forState:UIControlStateNormal];
     
     // Credit Card View
@@ -96,9 +104,9 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void) willShowKeyboard:(NSNotification*)notification
@@ -128,7 +136,11 @@
 {
     [UIView animateWithDuration:0.3f animations:^{
         
-        self.btnContinue.center = CGPointMake(self.btnContinue.center.x, self.view.frame.size.height - (self.btnContinue.frame.size.height / 2 + 40 + height));
+        CGFloat yCenter = self.view.frame.size.height - (self.btnContinue.frame.size.height / 2 + 40 + height);
+        if (yCenter < 64 + self.viewInput.frame.origin.y + self.viewInput.frame.size.height + self.btnContinue.frame.size.height / 2)
+            yCenter = 64 + self.viewInput.frame.origin.y + self.viewInput.frame.size.height + self.btnContinue.frame.size.height / 2;
+        
+        self.btnContinue.center = CGPointMake(self.btnContinue.center.x, yCenter);
         
     } completion:^(BOOL finished) {
         

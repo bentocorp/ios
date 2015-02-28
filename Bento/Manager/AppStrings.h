@@ -147,7 +147,6 @@
 // Enter Credit Card Screen
 #define CREDITCARD_TITLE                        @"credit-card-title"
 #define CREDITCARD_TEXT                         @"credit-card-text"
-#define CREDITCARD_PRICE                        @"price"
 #define CREDITCARD_BUTTON_CONTINUE              @"credit-card-button"
 
 // Completed Order Screen
@@ -191,6 +190,14 @@
 #define OUTOFAREA_TEXT_CONTENT                  @"out-of-area-text"
 #define OUTOFAREA_PLACEHOLDER_EMAIL             @"out-of-area-input-text"
 #define OUTOFAREA_BUTTON_RECEIVE_COUPON         @"out-of-area-button"
+
+// Sale Price
+#define SALE_PRICE                              @"sale_price"
+
+// Sneak Preview
+#define SNEAK_PREVIEW_BUTTON                    @"closed-sneak-preview-button"
+#define SNEAK_PREVIEW_MAIN_DISH                 @"closed-main-add-button"
+#define SNEAK_PREVIEW_SIDE_DISH                 @"closed-sides-add-button"
 
 @interface AppStrings : NSObject
 

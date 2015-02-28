@@ -121,8 +121,18 @@
 
         MKCoordinateRegion mapRegion;
         mapRegion.center = self.placeInfo.location.coordinate;
-        mapRegion.span.latitudeDelta = 0.2;
-        mapRegion.span.longitudeDelta = 0.2;
+        
+        if (self.isFromOrder)
+        {
+            mapRegion.span.latitudeDelta = 0.005;
+            mapRegion.span.longitudeDelta = 0.005;
+        }
+        else
+        {
+            mapRegion.span.latitudeDelta = 0.2;
+            mapRegion.span.longitudeDelta = 0.2;
+        }
+        
         [self.mapView setRegion:mapRegion animated: YES];
     }
     else
@@ -198,9 +208,9 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void) onUpdatedStatus:(NSNotification *)notification
@@ -215,6 +225,12 @@
 
 - (IBAction)onBack:(id)sender
 {
+    if (self.isFromOrder)
+    {
+        [self doConfirmOrder];
+        return;
+    }
+    
     [self gotoAddAnotherBentoScreen];
 }
 
@@ -239,6 +255,21 @@
 
 - (void)doConfirmOrder
 {
+    if (!self.btnMeetMyDrive.selected)
+    {
+        [UIView animateWithDuration:0.3f animations:^{
+            
+            self.viewError.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            
+            [self performSelector:@selector(hideErrorView) withObject:nil afterDelay:3.0f];
+            
+        }];
+        
+        return;
+    }
+    
     [self stopSearch];
     
     if (self.placeInfo == nil)
@@ -292,35 +323,6 @@
             [self updateUI];
         }
     }];
-/*
-    NSString *strRequest = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?latlng=%.6f,%.6f&result_type=street_address&key=%@", coordinate.latitude, coordinate.longitude, GOOGLE_API_KEY];
-    
-    WebManager *webManager = [[WebManager alloc] init];
-    
-    [webManager AsyncRequest:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
-        
-        NSArray *aryResults = [(NSDictionary *)networkOperation.responseJSON objectForKey:@"results"];
-        for (NSDictionary *placeInfo in aryResults)
-        {
-            NSString *strAddress = [DataManager getAddressString:placeInfo];
-            if (strAddress != nil && strAddress.length > 0)
-            {
-                self.placeInfo = placeInfo;
-                break;
-            }
-        }
-        
-        self.txtAddress.text = [DataManager getAddressString:self.placeInfo];
-        [self updateUI];
-        
-    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-        
-        self.placeInfo = nil;
-        self.txtAddress.text = @"";
-        [self updateUI];
-        
-    } isJSON:NO];
-*/
 }
 
 - (IBAction)onNavigation:(id)sender
@@ -565,6 +567,18 @@
         }
     }
     
+    NSInteger bentoCount = [[BentoShop sharedInstance] getCompletedBentoCount];
+    if (bentoCount > 0)
+    {
+        self.lblBadge.text = [NSString stringWithFormat:@"%ld", (long)bentoCount];
+        self.lblBadge.hidden = NO;
+    }
+    else
+    {
+        self.lblBadge.text = @"";
+        self.lblBadge.hidden = YES;
+    }
+    
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0)
     {
         self.btnDelivery.enabled = YES;
@@ -642,35 +656,6 @@
             [self.tvLocations reloadData];
         }
     }];
-/*
-    MKCoordinateSpan span = self.mapView.region.span;
-    CLLocationCoordinate2D center = [self.mapView centerCoordinate];
-    NSString *strBounds = [NSString stringWithFormat:@"%.6f,%.6f|%.6f,%.6f",
-    center.latitude - (span.latitudeDelta / 2.0),
-    center.longitude - (span.longitudeDelta / 2.0),
-    center.latitude + (span.latitudeDelta / 2.0),
-    center.longitude + (span.longitudeDelta / 2.0)];
- 
-    NSString *strRequest = [NSString stringWithFormat:@"https://maps.googleapis.com/maps/api/geocode/json?address=%@&bounds=%@&key=%@", strSearch, strBounds, GOOGLE_API_KEY];
-    strRequest = [strRequest stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    WebManager *webManager = [[WebManager alloc] init];
-    
-    [webManager AsyncRequest:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
-        
-        NSDictionary *result = (NSDictionary *)networkOperation.responseJSON;
-        self.aryDisplay = [result objectForKey:@"results"];
-        NSLog(@"%@", self.aryDisplay);
-        [self.tvLocations reloadData];
-        
-        _isSearching = NO;
-    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-        
-        self.aryDisplay = nil;
-        [self.tvLocations reloadData];
-        
-        _isSearching = NO;
-    } isJSON:NO];
-*/
 }
 
 - (void)textFieldDidChange:(NSNotification *)notification

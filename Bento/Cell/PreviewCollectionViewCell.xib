@@ -15,26 +15,26 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="DishCollectionViewCell">
+        <collectionViewCell clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="PreviewCollectionViewCell" id="gTV-IL-0wX" customClass="PreviewCollectionViewCell">
             <rect key="frame" x="0.0" y="0.0" width="160" height="166"/>
             <autoresizingMask key="autoresizingMask"/>
             <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                 <rect key="frame" x="0.0" y="0.0" width="160" height="166"/>
                 <subviews>
-                    <view clipsSubviews="YES" contentMode="scaleToFill" id="6Le-q6-g34">
+                    <view clipsSubviews="YES" contentMode="scaleToFill" id="tnK-SY-AoO">
                         <rect key="frame" x="0.0" y="0.0" width="160" height="166"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="MyH-qN-lHU">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="aB4-LG-AVw">
                                 <rect key="frame" x="0.0" y="0.0" width="160" height="166"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="4U6-1M-L0Z">
+                            <imageView userInteractionEnabled="NO" alpha="0.5" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="4bU-zP-lGe">
                                 <rect key="frame" x="0.0" y="0.0" width="160" height="166"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MONGOLIAN BEEF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="uJO-5b-ZTx">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MONGOLIAN BEEF" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="EqW-Ch-NUq">
                                 <rect key="frame" x="10" y="24" width="140" height="25"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="18"/>
@@ -43,7 +43,7 @@
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="TcP-4r-oPv">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="vYH-Re-rw1">
                                 <rect key="frame" x="10" y="50" width="140" height="65"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <string key="text">Whole Grilled Japanese Eggplant with Green Onions
@@ -54,7 +54,7 @@ fghfgh</string>
                                 <color key="shadowColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <size key="shadowOffset" width="0.0" height="2"/>
                             </label>
-                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="BIN-UI-9ut">
+                            <button contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="k6K-6f-oEd">
                                 <rect key="frame" x="18" y="122" width="125" height="36"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -64,35 +64,25 @@ fghfgh</string>
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="onAction:" destination="gTV-IL-0wX" eventType="touchUpInside" id="fwJ-ab-DEX"/>
-                                </connections>
                             </button>
-                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="ENo-gl-ee0">
-                                <rect key="frame" x="237" y="0.0" width="83" height="83"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             </view>
+            <size key="customSize" width="160" height="166"/>
             <connections>
-                <outlet property="btnAction" destination="BIN-UI-9ut" id="nU8-F0-FiU"/>
-                <outlet property="ivBanner" destination="ENo-gl-ee0" id="2E1-Li-WnX"/>
-                <outlet property="ivImage" destination="MyH-qN-lHU" id="RDi-jx-sBd"/>
-                <outlet property="ivMask" destination="4U6-1M-L0Z" id="75q-IO-YN9"/>
-                <outlet property="lblDescription" destination="TcP-4r-oPv" id="Djg-0o-jda"/>
-                <outlet property="lblTitle" destination="uJO-5b-ZTx" id="0mC-Ef-yg6"/>
-                <outlet property="viewMain" destination="6Le-q6-g34" id="vSQ-dO-vJv"/>
+                <outlet property="btnAction" destination="k6K-6f-oEd" id="35y-Hu-vfG"/>
+                <outlet property="ivImage" destination="aB4-LG-AVw" id="5km-zH-OfF"/>
+                <outlet property="ivMask" destination="4bU-zP-lGe" id="7dT-Sk-3Jx"/>
+                <outlet property="lblDescription" destination="vYH-Re-rw1" id="SYg-Eo-Xxh"/>
+                <outlet property="lblTitle" destination="EqW-Ch-NUq" id="YZI-fe-3Jx"/>
+                <outlet property="viewMain" destination="tnK-SY-AoO" id="sSM-gV-k4i"/>
             </connections>
-            <point key="canvasLocation" x="382" y="370"/>
+            <point key="canvasLocation" x="282" y="371"/>
         </collectionViewCell>
     </objects>
-    <resources>
-        <image name="banner_sold_out.png" width="154" height="154"/>
-    </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

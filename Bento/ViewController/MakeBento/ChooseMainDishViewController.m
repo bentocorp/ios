@@ -101,6 +101,8 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)onUpdatedStatus:(NSNotification *)notification
@@ -185,14 +187,22 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.cvMainDishes.frame.size.width, self.cvMainDishes.frame.size.width / 2);
+    return CGSizeMake(self.cvMainDishes.frame.size.width, self.cvMainDishes.frame.size.height / 3);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
     
     if (_selectedIndex == indexPath.item)
     {
-
+        if (_selectedItemState == DISH_CELL_NORMAL)
+        {
+            if (_selectedIndex == _originalDishIndex)
+                _selectedItemState = DISH_CELL_SELECTED;
+            else
+                _selectedItemState = DISH_CELL_FOCUS;
+        }
+        else if (_selectedItemState == DISH_CELL_FOCUS || _selectedItemState == DISH_CELL_SELECTED)
+            _selectedItemState = DISH_CELL_NORMAL;
     }
     else
     {

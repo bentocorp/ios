@@ -102,9 +102,9 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void) willShowKeyboard:(NSNotification*)notification
@@ -140,7 +140,12 @@
 {
     [UIView animateWithDuration:0.3f animations:^{
         
-        self.viewPhoneNumber.center = CGPointMake(self.viewPhoneNumber.center.x, self.view.frame.size.height - keyboardHeight - self.viewPhoneNumber.frame.size.height / 2);
+        float newCenterY = self.view.frame.size.height - keyboardHeight - self.viewPhoneNumber.frame.size.height / 2;
+        
+        if(newCenterY < self.viewPhoneNumber.center.y)
+        {
+            self.viewPhoneNumber.center = CGPointMake(self.viewPhoneNumber.center.x, newCenterY);
+        }
         
     } completion:^(BOOL finished) {
         
@@ -246,14 +251,16 @@
     loadingHUD.textLabel.text = @"Registering...";
     [loadingHUD showInView:self.view];
     
-    [webManager AsyncProcess:@"/user/fbsignup" method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+    NSString *strRequest = [NSString stringWithFormat:@"%@/user/fbsignup", SERVER_URL];
+    [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         
         NSDictionary *response = networkOperation.responseJSON;
         [[DataManager shareDataManager] setUserInfo:response];
         
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-        [pref setObject:@"/user/fblogin" forKey:@"apiName"];
+        NSString *strRequest = [NSString stringWithFormat:@"%@/user/fblogin", SERVER_URL];
+        [pref setObject:strRequest forKey:@"apiName"];
         
         NSDictionary *fbloginRequest = @{
                                          @"email" : strMailAddr,

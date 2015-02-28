@@ -9,6 +9,7 @@
 #import "AppStrings.h"
 
 #import "WebManager.h"
+#import "DataManager.h"
 
 @implementation AppStrings
 
@@ -47,7 +48,7 @@ static AppStrings *_shareInstance;
 
 - (void)getAppStrings
 {
-    NSString *strRequest = @"https://api.bentonow.com/ioscopy";
+    NSString *strRequest = [NSString stringWithFormat:@"%@/ioscopy", SERVER_URL];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest]];
     NSURLResponse *response = nil;
     NSError *error = nil;

@@ -14,8 +14,6 @@
 
 #import "UIImageView+WebCache.h"
 
-#import "JGProgressHUD.h"
-
 #import "AppDelegate.h"
 
 #import "BentoShop.h"
@@ -25,12 +23,17 @@
 #import "Reachability.h"
 
 @interface FirstViewController ()
+{
+    BOOL _hasInit;
+}
 
 @property (nonatomic, assign) IBOutlet UIImageView *ivBackground;
 
 @property (nonatomic, assign) IBOutlet UIImageView *ivLaunchLogo;
 
 @property (nonatomic, assign) IBOutlet UILabel *lblLaunchSlogan;
+
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 
@@ -40,6 +43,8 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view, typically from a nib.
+    _hasInit = NO;
+    
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.ivBackground.bounds;
 
@@ -48,7 +53,7 @@
     gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     
-    [self.ivBackground setImage:[UIImage imageNamed:@"first_background"]];
+//    [self.ivBackground setImage:[UIImage imageNamed:@"first_background"]];
     [self.ivLaunchLogo setImage:[UIImage imageNamed:@"logo"]];
     
     NSString *strSlogan = [[NSUserDefaults standardUserDefaults] objectForKey:@"Slogan"];
@@ -80,15 +85,15 @@
 
 - (void)initProcedure
 {
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    loadingHUD.textLabel.text = @"Loading...";
-    [loadingHUD showInView:self.view];
+    self.activityIndicator.hidden = NO;
+    [self.activityIndicator startAnimating];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1f]];
     
     [[AppStrings sharedInstance] getAppStrings];
     
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
-    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
+    [self.ivBackground sd_setImageWithURL:urlBack];
+//    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivLaunchLogo sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo"]];
@@ -103,7 +108,7 @@
     
     [[BentoShop sharedInstance] refreshStart];
     
-    [loadingHUD dismiss];
+    [self.activityIndicator stopAnimating];
 
     // Check the app is already launched
     if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
@@ -123,7 +128,15 @@
 {
     [super viewWillAppear:animated];
     
-    [self performSelector:@selector(initProcedure) withObject:nil afterDelay:0.01f];
+    if (!_hasInit)
+    {
+        _hasInit = YES;
+        [self performSelector:@selector(initProcedure) withObject:nil afterDelay:0.01f];
+    }
+    else
+    {
+        [self processAfterLogin];
+    }
 }
 
 - (void)processAutoLogin
@@ -134,12 +147,11 @@
     
     WebManager *webManager = [[WebManager alloc] init];
     
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    loadingHUD.textLabel.text = @"Logging in...";
-    [loadingHUD showInView:self.view];
+    self.activityIndicator.hidden = NO;
+    [self.activityIndicator startAnimating];
     
     [webManager AsyncProcess:strAPIName method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
-        [loadingHUD dismiss];
+        [self.activityIndicator stopAnimating];
         
         NSDictionary *response = networkOperation.responseJSON;
         [[DataManager shareDataManager] setUserInfo:response];
@@ -147,7 +159,7 @@
         [self processAfterLogin];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-        [loadingHUD dismiss];
+        [self.activityIndicator stopAnimating];
         
         [pref setObject:nil forKey:@"apiName"];
         [pref setObject:nil forKey:@"loginRequest"];

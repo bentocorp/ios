@@ -332,7 +332,7 @@
     loadingHUD.textLabel.text = @"Logging out...";
     [loadingHUD showInView:self.view];
     
-    NSString *strRequest = [NSString stringWithFormat:@"/user/logout?api_token=%@", strAPIToken];
+    NSString *strRequest = [NSString stringWithFormat:@"%@/user/logout?api_token=%@", SERVER_URL, strAPIToken];
     [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         

@@ -68,7 +68,7 @@
     loadingHUD.textLabel.text = @"Processing...";
     [loadingHUD showInView:self];
     
-    NSString *strRequest = [NSString stringWithFormat:@"/coupon/apply/%@?api_token=%@", self.txtPromoCode.text, strAPIToken];
+    NSString *strRequest = [NSString stringWithFormat:@"%@/coupon/apply/%@?api_token=%@", SERVER_URL, self.txtPromoCode.text, strAPIToken];
     [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         

@@ -9,6 +9,7 @@
 #import "SoldOutViewController.h"
 
 #import "FaqViewController.h"
+#import "SneakPreviewViewController.h"
 
 #import "MyAlertView.h"
 
@@ -35,6 +36,7 @@
 @property (nonatomic, assign) IBOutlet UITextField *txtEmail;
 
 @property (nonatomic, assign) IBOutlet UIButton *btnSend;
+@property (weak, nonatomic) IBOutlet UIButton *btnPreview;
 
 @property (nonatomic, assign) IBOutlet UIButton *btnPolicy;
 @property (nonatomic, assign) IBOutlet UIButton *btnTerms;
@@ -55,7 +57,8 @@
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
-    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
+    [self.ivBackground sd_setImageWithURL:urlBack];
+//    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
@@ -80,6 +83,20 @@
         [self.btnPolicy setTitle:[[AppStrings sharedInstance] getString:SOLDOUT_LINK_POLICY] forState:UIControlStateNormal];
         [self.btnTerms setTitle:[[AppStrings sharedInstance] getString:SOLDOUT_LINK_TERMS] forState:UIControlStateNormal];
     }
+
+    self.btnPreview.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.btnPreview.titleLabel.textAlignment = NSTextAlignmentCenter;
+    NSString *strTitle;
+    if (self.type == 0) // Closed
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    else
+        strTitle = @"View Today's Menu";
+    
+    [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
+    
+    self.btnPreview.layer.cornerRadius = 8;
+    self.btnPreview.layer.borderWidth = 1;
+    self.btnPreview.layer.borderColor = [[UIColor whiteColor] CGColor];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -99,20 +116,30 @@
         FaqViewController *vc = segue.destinationViewController;
         vc.contentType = [sender intValue];
     }
+    else if ([segue.identifier isEqualToString:@"preview"])
+    {
+        SneakPreviewViewController *vcPreview = segue.destinationViewController;
+        vcPreview.type = self.type;
+    }
 }
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    [self onUpdatedStatus];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeKeyboardFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void) onUpdatedStatus
@@ -132,6 +159,41 @@
             [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
         }
             //[self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+- (void) willShowKeyboard:(NSNotification*)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    
+    [self moveToShowablePosition:keyboardFrameBeginRect.size.height];
+}
+
+- (void) willChangeKeyboardFrame:(NSNotification *)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    
+    [self moveToShowablePosition:keyboardFrameBeginRect.size.height];
+}
+
+- (void) willHideKeyboard:(NSNotification *)notification
+{
+    [UIView animateWithDuration:0.3f animations:^{
+        self.viewMain.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
+    }];
+}
+
+- (void) moveToShowablePosition:(float)keyboardHeight
+{
+    if(self.viewMain.center.y > (self.view.frame.size.height - keyboardHeight))
+    {
+        [UIView animateWithDuration:0.3f animations:^{
+            self.viewMain.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height - keyboardHeight - 15);
+        }];
     }
 }
 
@@ -223,7 +285,7 @@
     [loadingHUD showInView:self.view];
     
     
-    NSString *strRequest = @"/coupon/request";
+    NSString *strRequest = [NSString stringWithFormat:@"%@/coupon/request", SERVER_URL];
     if ([[DataManager shareDataManager] getUserInfo] != nil)
         strRequest = [NSString stringWithFormat:@"%@?api_token=%@", strRequest, [[DataManager shareDataManager] getAPIToken]];
     
@@ -250,6 +312,11 @@
 - (IBAction)onSendBentoCoupon:(id)sender
 {
     [self doSubmit];
+}
+
+- (IBAction)onGotoMenu:(id)sender
+{
+    [self performSegueWithIdentifier:@"preview" sender:nil];
 }
 
 #pragma mark UITextFieldDelegate

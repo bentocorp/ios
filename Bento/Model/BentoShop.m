@@ -7,6 +7,10 @@
 //
 
 #import "BentoShop.h"
+
+#import "DataManager.h"
+
+#import "SDWebImagePrefetcher.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
 @interface BentoShop ()
@@ -14,9 +18,13 @@
 @property (nonatomic, retain) NSString *strToday;
 @property (nonatomic, retain) NSDictionary *dicStatus;
 @property (nonatomic, retain) NSDictionary *menuToday;
+@property (nonatomic, retain) NSDictionary *menuNext;
 @property (nonatomic, retain) NSArray *menuStatus;
 @property (nonatomic, retain) MKPolygon *serviceArea;
 @property (nonatomic, retain) NSMutableArray *aryBentos;
+
+@property (nonatomic, assign) BOOL prevClosed;
+@property (nonatomic, assign) BOOL prevSoldOut;
 
 @end
 
@@ -49,9 +57,13 @@ static BentoShop *_shareInstance;
 {
     if ( (self = [super init]) )
     {
+        self.prevClosed = NO;
+        self.prevSoldOut = NO;
+        
         self.strToday = nil;
         self.dicStatus = nil;
         self.menuToday = nil;
+        self.menuNext = nil;
         self.menuStatus = nil;
         self.serviceArea = nil;
         
@@ -96,23 +108,36 @@ static BentoShop *_shareInstance;
 
 - (void)getStatus
 {
-    NSString *strRequest = @"https://api.bentonow.com/status/overall";
+    NSString *strRequest = [NSString stringWithFormat:@"%@/status/overall", SERVER_URL];
+    
     NSError *error = nil;
     self.dicStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
-    strRequest = @"https://api.bentonow.com/status/menu";
+    strRequest = [NSString stringWithFormat:@"%@/status/menu", SERVER_URL];
+    
     self.menuStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
-    if ([self isClosed])
-        [self resetBentoArray];
+    BOOL isClosed = [self isClosed];
+    BOOL isSoldOut = [self isSoldOut];
     
-    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    if ([self isClosed])
+        [self getNextMenus];
+    
+    if (self.prevClosed != isClosed || self.prevSoldOut != isSoldOut)
+        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    
+    self.prevClosed = isClosed;
+    self.prevSoldOut = isSoldOut;
+    
+    if ([self isClosed] && ![[DataManager shareDataManager] isAdminUser])
+        [self resetBentoArray];
 }
 
 - (NSString *)getDateString
 {
     NSDate* currentDate = [NSDate date];
     
+#ifdef DEBUG
     NSTimeZone* currentTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT-08:00"];
     NSTimeZone* nowTimeZone = [NSTimeZone systemTimeZone];
     
@@ -121,6 +146,7 @@ static BentoShop *_shareInstance;
     
     NSTimeInterval interval = currentGMTOffset - nowGMTOffset;
     currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
+#endif
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd"];
@@ -137,13 +163,46 @@ static BentoShop *_shareInstance;
     [self.aryBentos removeAllObjects];
 }
 
+- (void)prefetchImages:(NSDictionary *)menuInfo
+{
+    if (menuInfo == nil)
+        return;
+    
+    NSMutableArray *urls = [[NSMutableArray alloc] init];
+    NSDictionary *menuDetailInfo = [menuInfo objectForKey:@"Menu"];
+    if (menuDetailInfo != nil)
+    {
+        NSString *strMenuBack = [menuInfo objectForKey:@"bgimg"];
+        if (strMenuBack != nil && [strMenuBack isKindOfClass:[NSString class]] && strMenuBack.length > 0)
+            [urls addObject:[NSURL URLWithString:strMenuBack]];
+    }
+    
+    NSArray *aryDishes = [menuInfo objectForKey:@"MenuItems"];
+    if (aryDishes != nil && [aryDishes isKindOfClass:[NSArray class]] && aryDishes.count > 0)
+    {
+        for (NSDictionary *dishInfo in aryDishes)
+        {
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            
+            if (strImageURL != nil && [strImageURL isKindOfClass:[NSString class]] && strImageURL.length > 0)
+                [urls addObject:[NSURL URLWithString:strImageURL]];
+        }
+    }
+
+    if (urls.count > 0)
+        [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:urls];
+}
+
 - (void)getMenus
 {
     NSString *strDate = [self getDateString];
     
-    NSString *strRequest = [NSString stringWithFormat:@"https://api.bentonow.com/menu/%@", strDate];
+    NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
+    
     NSError *error = nil;
     self.menuToday = [self sendRequest:strRequest statusCode:nil error:&error];
+    
+    [self prefetchImages:self.menuToday];
     
     if (![strDate isEqualToString:self.strToday])
     {
@@ -154,9 +213,60 @@ static BentoShop *_shareInstance;
     }
 }
 
+- (void)getNextMenus
+{
+    NSDate* currentDate = [NSDate date];
+    
+#ifdef DEBUG
+    NSTimeZone* currentTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT-08:00"];
+    NSTimeZone* nowTimeZone = [NSTimeZone systemTimeZone];
+    
+    NSInteger currentGMTOffset = [currentTimeZone secondsFromGMTForDate:currentDate];
+    NSInteger nowGMTOffset = [nowTimeZone secondsFromGMTForDate:currentDate];
+    
+    NSTimeInterval interval = currentGMTOffset - nowGMTOffset;
+    currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
+#endif
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:currentDate];
+    NSInteger hour = [components hour];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyyMMdd"];
+    NSString *strDate = [formatter stringFromDate:currentDate];
+    
+    if (hour < 21)
+    {
+        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
+        
+        NSError *error = nil;
+        NSInteger statusCode = 0;
+        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error];
+        
+        if (statusCode == 404)
+        {
+            strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
+            self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error];
+        }
+    }
+    else
+    {
+        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
+        
+        NSError *error = nil;
+        NSInteger statusCode = 0;
+        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error];
+    }
+
+    [self prefetchImages:self.menuNext];
+    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+}
+
 - (void)getServiceArea
 {
-    NSString *strRequest = @"https://api.bentonow.com/servicearea";
+    NSString *strRequest = [NSString stringWithFormat:@"%@/servicearea", SERVER_URL];
+    
     NSError *error = nil;
     NSDictionary *kmlValues = [self sendRequest:strRequest statusCode:nil error:&error];
     if (kmlValues == nil || error != nil)
@@ -201,10 +311,13 @@ static BentoShop *_shareInstance;
 
 - (NSURL *)getMenuImageURL
 {
-    if (self.menuToday == nil)
+    if (self.menuToday == nil && self.menuNext == nil)
         return nil;
     
     NSDictionary *menuInfo = [self.menuToday objectForKey:@"Menu"];
+    if (menuInfo == nil)
+        menuInfo = [self.menuNext objectForKey:@"Menu"];
+    
     if (menuInfo == nil)
         return nil;
     
@@ -213,6 +326,65 @@ static BentoShop *_shareInstance;
         return nil;
     
     return [NSURL URLWithString:strMenuBack];
+}
+
+- (NSString *)getMenuDateString
+{
+    if (self.menuToday == nil)
+        return nil;
+    
+    NSDictionary *menuInfo = [self.menuToday objectForKey:@"Menu"];
+    if (menuInfo == nil)
+        return nil;
+    
+    return [menuInfo objectForKey:@"day_text"];
+}
+
+- (NSString *)getMenuWeekdayString
+{
+    if (self.menuToday == nil)
+        return nil;
+    
+    NSDictionary *menuInfo = [self.menuToday objectForKey:@"Menu"];
+    if (menuInfo == nil)
+        return nil;
+    
+    NSString *strDate = [menuInfo objectForKey:@"for_date"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *menuDate = [formatter dateFromString:strDate];
+    [formatter setDateFormat:@"EEEE"];
+    return [formatter stringFromDate:menuDate];
+}
+
+- (NSString *)getNextMenuDateString
+{
+    if (self.menuNext == nil)
+        return nil;
+    
+    NSDictionary *menuInfo = [self.menuNext objectForKey:@"Menu"];
+    if (menuInfo == nil)
+        return nil;
+    
+    return [menuInfo objectForKey:@"day_text"];
+}
+
+- (NSString *)getNextMenuWeekdayString
+{
+    if (self.menuNext == nil)
+        return nil;
+    
+    NSDictionary *menuInfo = [self.menuNext objectForKey:@"Menu"];
+    if (menuInfo == nil)
+        return nil;
+    
+    NSString *strDate = [menuInfo objectForKey:@"for_date"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *menuDate = [formatter dateFromString:strDate];
+    [formatter setDateFormat:@"EEEE"];
+    NSString *strReturn = [formatter stringFromDate:menuDate];
+    return strReturn;
 }
 
 - (BOOL)isClosed
@@ -271,6 +443,10 @@ static BentoShop *_shareInstance;
             return YES;
         }
     }
+    
+#ifdef DEBUG
+    return NO;
+#endif
     
     return YES;
 }
@@ -353,6 +529,46 @@ static BentoShop *_shareInstance;
         return nil;
     
     NSArray *menuItems = [self.menuToday objectForKey:@"MenuItems"];
+    if (menuItems == nil)
+        return nil;
+    
+    NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
+    for (NSDictionary *dishInfo in menuItems)
+    {
+        NSString *strType = [dishInfo objectForKey:@"type"];
+        if ([strType isEqualToString:@"side"])
+            [arrayDishes addObject:dishInfo];
+    }
+    
+    return (NSArray *)arrayDishes;
+}
+
+- (NSArray *)getNextMainDishes
+{
+    if (self.menuNext == nil)
+        return nil;
+    
+    NSArray *menuItems = [self.menuNext objectForKey:@"MenuItems"];
+    if (menuItems == nil)
+        return nil;
+    
+    NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
+    for (NSDictionary *dishInfo in menuItems)
+    {
+        NSString *strType = [dishInfo objectForKey:@"type"];
+        if ([strType isEqualToString:@"main"])
+            [arrayDishes addObject:dishInfo];
+    }
+    
+    return (NSArray *)arrayDishes;
+}
+
+- (NSArray *)getNextSideDishes
+{
+    if (self.menuNext == nil)
+        return nil;
+    
+    NSArray *menuItems = [self.menuNext objectForKey:@"MenuItems"];
     if (menuItems == nil)
         return nil;
     
@@ -527,13 +743,15 @@ static BentoShop *_shareInstance;
 
 - (void)loadBentoArray
 {
-    NSArray *savedArray  = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"beto_array"];
+    NSArray *savedArray  = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"bento_array"];
     self.aryBentos = [NSMutableArray arrayWithArray:savedArray];
+    self.strToday = [[NSUserDefaults standardUserDefaults] objectForKey:@"bento_date"];
 }
 
 - (void)saveBentoArray
 {
-    [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.aryBentos forKey:@"beto_array"];
+    [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.aryBentos forKey:@"bento_array"];
+    [[NSUserDefaults standardUserDefaults] setObject:self.strToday forKey:@"bento_date"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 

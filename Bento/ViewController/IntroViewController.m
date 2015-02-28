@@ -50,7 +50,8 @@
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
-    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
+    [self.ivBackground sd_setImageWithURL:urlBack];
+//    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     self.lblNumber1.layer.cornerRadius = self.lblNumber1.frame.size.width / 2;
     self.lblNumber1.clipsToBounds = YES;
@@ -66,8 +67,15 @@
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivLogo sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo"]];
     
-    NSInteger price = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
-    NSString *strPrice = [NSString stringWithFormat:@"$%ld!", (long)price];
+    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
+    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    
+    NSString *strPrice = @"";
+    if (salePrice != 0 && salePrice < unitPrice)
+        strPrice = [NSString stringWithFormat:@"$%ld!", (long)salePrice];
+    else
+        strPrice = [NSString stringWithFormat:@"$%ld!", (long)unitPrice];
+    
     NSString *strItem0 = [[AppStrings sharedInstance] getString:ABOUT_ITEM_0];
     strItem0 = [strItem0 stringByReplacingOccurrencesOfString:@"$X!" withString:strPrice];
     [self.lblItem0 setText:strItem0];

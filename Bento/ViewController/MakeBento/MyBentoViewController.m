@@ -41,6 +41,8 @@
 
 @property (nonatomic, assign) IBOutlet UIButton *btnCart;
 
+@property (weak, nonatomic) IBOutlet UILabel *lblBanner;
+
 @property (nonatomic, assign) IBOutlet UIView *viewDishs;
 
 @property (nonatomic, assign) IBOutlet UIView *viewMainEntree;
@@ -92,6 +94,10 @@
     
     self.lblBadge.layer.cornerRadius = self.lblBadge.frame.size.width / 2;
     self.lblBadge.clipsToBounds = YES;
+    
+    self.lblBanner.hidden = YES;
+    self.lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, 64 + self.view.frame.size.width / 6);
+    self.lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
     
     self.viewDishs.layer.cornerRadius = 3;
     self.viewDishs.clipsToBounds = YES;
@@ -242,9 +248,9 @@
 
 - (void) viewWillDisappear:(BOOL)animated
 {
-    [super viewWillDisappear:animated];
-    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+
+    [super viewWillDisappear:animated];
 }
 
 - (void) onUpdatedStatus:(NSNotification *)notification
@@ -512,6 +518,16 @@
 
 - (void) updateUI
 {
+    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
+    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    
+    self.lblBanner.hidden = YES;
+    if (salePrice != 0 && salePrice < unitPrice)
+    {
+        self.lblBanner.hidden = NO;
+        self.lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
+    }
+    
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
         [[BentoShop sharedInstance] addNewBento];
     else if ([[BentoShop sharedInstance] getCurrentBento] == nil)

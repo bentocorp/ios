@@ -76,7 +76,7 @@ NSString * const kFacebookNotificationPhotoUploaded         = @"kFacebookPhotoUp
 
 - (void)applicationWillResignActive:(NSNotification *)notification
 {
-    [[FBSession activeSession] close];
+//    [[FBSession activeSession] close];
 }
 
 #pragma mark - authorization with Facebook Application or by Safari
@@ -88,7 +88,7 @@ NSString * const kFacebookNotificationPhotoUploaded         = @"kFacebookPhotoUp
         if ([FBSession.activeSession isOpen])
         {
             //[[NSNotificationCenter defaultCenter] postNotificationName:kFacebookNotificationSessionOpened object:nil userInfo:nil];
-            [_delegate FBLogin:YES];
+            //[_delegate FBLogin:YES];
         }
         else
         {
@@ -157,54 +157,71 @@ NSString * const kFacebookNotificationPhotoUploaded         = @"kFacebookPhotoUp
 
 - (void)login
 {
+    if ([FBSession.activeSession isOpen])
+    {
+        if ([[[FBSession activeSession] permissions] indexOfObject:@"email"] == NSNotFound)
+        {
+            [FBSession.activeSession requestNewReadPermissions:@[@"email"]
+                                             completionHandler:^(FBSession *session, NSError *error) {
+                                                 if (error != nil)
+                                                     [self facebookErrorMessage:error];
+                                                 else
+                                                     [_delegate FBLogin:YES];
+                                             }];
+        }
+        else
+        {
+            [_delegate FBLogin:YES];
+        }
+        
+        return;
+    }
+    
     @synchronized (self)
     {
-        if ([FBSession.activeSession isOpen] == NO)
-        {
-            //[NetworkActivity start];
-            [FBSession openActiveSessionWithReadPermissions:@[@"email", /*@"user_about_me", @"user_hometown", @"user_photos", @"user_birthday",*/ @"friends_photos", @"friends_birthday", @"friends_location", @"friends_hometown", @"user_friends"]
-                                               allowLoginUI:YES
-                                          completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
-                                              //[NetworkActivity stop];
-                                              
-                                              switch (state)
-                                              {
-                                                  case FBSessionStateCreated:
-                                                      //NSLog(@"FBSessionStateCreated");
-                                                      break;
-                                                      
-                                                  case FBSessionStateCreatedTokenLoaded:
-                                                      //NSLog(@"FBSessionStateCreatedTokenLoaded");
-                                                      break;
-                                                      
-                                                  case FBSessionStateCreatedOpening:
-                                                      //NSLog(@"FBSessionStateCreatedOpening");
-                                                      break;
-                                                      
-                                                  case FBSessionStateOpen:
-                                                      //NSLog(@"FBSessionStateOpen");
-//                                                      [[NSNotificationCenter defaultCenter] postNotificationName:kFacebookNotificationSessionOpened object:nil userInfo:nil];
-                                                      [_delegate FBLogin:YES];
-                                                      break;
-                                                      
-                                                  case FBSessionStateOpenTokenExtended:
-                                                      //NSLog(@"FBSessionStateOpenTokenExtended");
-                                                      break;
-                                                      
-                                                  case FBSessionStateClosedLoginFailed:
-                                                      //NSLog(@"FBSessionStateClosedLoginFailed");
-                                                      [self clearTokenAndCookies];
-                                                      break;
-                                                      
-                                                  case FBSessionStateClosed:
-                                                      //NSLog(@"FBSessionStateClosed");
-                                                      [self clearTokenAndCookies];
-                                                      break;
-                                              }
-                                              
-                                              [self facebookErrorMessage:error];
-                                          }];
-        }
+        //[NetworkActivity start];
+        [FBSession openActiveSessionWithReadPermissions:@[@"email"]
+                                           allowLoginUI:YES
+                                      completionHandler:^(FBSession *session, FBSessionState state, NSError *error) {
+                                          //[NetworkActivity stop];
+                                          
+                                          switch (state)
+                                          {
+                                              case FBSessionStateCreated:
+                                                  //NSLog(@"FBSessionStateCreated");
+                                                  break;
+                                                  
+                                              case FBSessionStateCreatedTokenLoaded:
+                                                  //NSLog(@"FBSessionStateCreatedTokenLoaded");
+                                                  break;
+                                                  
+                                              case FBSessionStateCreatedOpening:
+                                                  //NSLog(@"FBSessionStateCreatedOpening");
+                                                  break;
+                                                  
+                                              case FBSessionStateOpen:
+                                                  //NSLog(@"FBSessionStateOpen");
+                                                  //                                                      [[NSNotificationCenter defaultCenter] postNotificationName:kFacebookNotificationSessionOpened object:nil userInfo:nil];
+                                                  [_delegate FBLogin:YES];
+                                                  break;
+                                                  
+                                              case FBSessionStateOpenTokenExtended:
+                                                  //NSLog(@"FBSessionStateOpenTokenExtended");
+                                                  break;
+                                                  
+                                              case FBSessionStateClosedLoginFailed:
+                                                  //NSLog(@"FBSessionStateClosedLoginFailed");
+                                                  [self clearTokenAndCookies];
+                                                  break;
+                                                  
+                                              case FBSessionStateClosed:
+                                                  //NSLog(@"FBSessionStateClosed");
+                                                  [self clearTokenAndCookies];
+                                                  break;
+                                          }
+                                          
+                                          [self facebookErrorMessage:error];
+                                      }];
     }
 }
 

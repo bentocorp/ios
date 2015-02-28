@@ -8,11 +8,23 @@
 
 #import "DataManager.h"
 
+#ifdef DEV_MODE
+
+@implementation NSURLRequest (IgnoreSSL)
++ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host
+{
+    return YES;
+}
+@end
+
+#endif
+
 @interface DataManager ()
 
 @property (nonatomic, retain) NSDictionary *currentUserInfo;
 
 @property (nonatomic, retain) STPCard *creditCardInfo;
+@property (nonatomic, assign) PaymentMethod curPaymentMethod;
 
 @end
 
@@ -99,6 +111,38 @@ static DataManager *_shareDataManager;
 - (void)setUserInfo:(NSDictionary *)userInfo
 {
     self.currentUserInfo = userInfo;
+    
+    self.paymentMethod = Payment_None;
+    
+    if (self.currentUserInfo != nil)
+    {
+        NSDictionary *cardInfo = [self.currentUserInfo objectForKey:@"card"];
+        if ([cardInfo isKindOfClass:[NSDictionary class]] && cardInfo != nil)
+        {
+            NSString *strCardType = [cardInfo objectForKey:@"brand"];
+            NSString *strCardNumber = [cardInfo objectForKey:@"last4"];
+            NSString *strUserMail = [self.currentUserInfo objectForKey:@"email"];
+            
+            // Load Card Info
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            NSString *strSavedUserMail = [userDefaults objectForKey:@"user_email"];
+            NSString *strSavedCardBrand = [userDefaults objectForKey:@"card_brand"];
+            NSString *strSavedCardLast4 = [userDefaults objectForKey:@"card_last4"];
+            if ([strSavedUserMail isEqualToString:strUserMail] &&
+                [strSavedCardBrand isEqualToString:strCardType] &&
+                [strSavedCardLast4 isEqualToString:strCardNumber])
+            {
+                if ([[userDefaults objectForKey:@"is_applepay"] boolValue])
+                    self.paymentMethod = Payment_ApplePay;
+                else
+                    self.paymentMethod = Payment_Server;
+            }
+            else
+            {
+                self.paymentMethod = Payment_Server;
+            }
+        }
+    }
 }
 
 - (NSString *)getAPIToken
@@ -117,21 +161,6 @@ static DataManager *_shareDataManager;
     return [[self.currentUserInfo objectForKey:@"is_admin"] boolValue];
 }
 
-- (BOOL)hasCreditCard
-{
-    if (self.currentUserInfo == nil)
-        return NO;
-    
-    id object = [self.currentUserInfo objectForKey:@"card"];
-    if (object == nil)
-        return NO;
-    
-    if (object == [NSNull null])
-        return NO;
-    
-    return YES;
-}
-
 - (STPCard *)getCreditCard
 {
     return self.creditCardInfo;
@@ -140,6 +169,17 @@ static DataManager *_shareDataManager;
 - (void)setCreditCard:(STPCard *)creditCardInfo
 {
     self.creditCardInfo = creditCardInfo;
+    self.paymentMethod = Payment_CreditCard;
+}
+
+- (PaymentMethod)getPaymentMethod
+{
+    return self.curPaymentMethod;
+}
+
+- (void)setPaymentMethod:(PaymentMethod)newPaymentMethod
+{
+    self.curPaymentMethod = newPaymentMethod;
 }
 
 - (NSString *)getErrorMessage:(id)errorInfo
