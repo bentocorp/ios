@@ -1,1 +1,1 @@
-../../../Stripe/Stripe/Stripe.h
+../../../Stripe/Stripe/PublicHeaders/Stripe.h

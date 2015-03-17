@@ -101,6 +101,7 @@
     NSString *strSlogan = [[AppStrings sharedInstance] getString:APP_SLOGAN];
     self.lblLaunchSlogan.text = strSlogan;
     [[NSUserDefaults standardUserDefaults] setObject:strSlogan forKey:@"Slogan"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     [[BentoShop sharedInstance] getMenus];
     [[BentoShop sharedInstance] getStatus];
@@ -163,6 +164,7 @@
         
         [pref setObject:nil forKey:@"apiName"];
         [pref setObject:nil forKey:@"loginRequest"];
+        [pref synchronize];
         
         NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
         if (strMessage == nil)

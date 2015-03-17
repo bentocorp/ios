@@ -1,1 +1,1 @@
-../../../Stripe/Stripe/STPAPIClient.h
+../../../Stripe/Stripe/PublicHeaders/STPAPIClient.h

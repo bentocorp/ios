@@ -74,7 +74,8 @@
     for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-        if ([[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID] || [[BentoShop sharedInstance] isDishSoldOut:dishID] || dishID == sideDishIndex)
+//        if ([[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID] || [[BentoShop sharedInstance] isDishSoldOut:dishID] || [[BentoShop sharedInstance] canAddDish:dishID] || dishID == sideDishIndex)
+        if ([[BentoShop sharedInstance] canAddDish:dishID] && ([[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID] || dishID == sideDishIndex))
         {
 //            if (dishID != sideDishIndex)
                 [self.aryDishes addObject:dishInfo];
@@ -207,7 +208,10 @@
     
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-    [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID]];
+    
+    BOOL canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID];
+    canBeAdded = canBeAdded && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
+    [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:canBeAdded];
     
     [myCell setSmallDishCell];
     

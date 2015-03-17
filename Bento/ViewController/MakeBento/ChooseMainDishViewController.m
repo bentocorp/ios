@@ -30,7 +30,7 @@
 
 @property (nonatomic, assign) IBOutlet UIButton *btnCart;
 
-@property (nonatomic, retain) NSArray *aryDishes;
+@property (nonatomic, retain) NSMutableArray *aryDishes;
 
 @end
 
@@ -48,7 +48,16 @@
     
     [self.lblTitle setText:[[AppStrings sharedInstance] getString:MAINDISH_TITLE]];
     
-    self.aryDishes = [[BentoShop sharedInstance] getMainDishes];
+    self.aryDishes = [[NSMutableArray alloc] init];
+    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes])
+    {
+        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+//        if ([[BentoShop sharedInstance] isDishSoldOut:dishID] || [[BentoShop sharedInstance] canAddDish:dishID])
+        if ([[BentoShop sharedInstance] canAddDish:dishID])
+        {
+            [self.aryDishes addObject:dishInfo];
+        }
+    }
     
     _selectedIndex = NSNotFound;
     _selectedItemState = DISH_CELL_NORMAL;
@@ -173,7 +182,7 @@
     
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-    [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:YES];
+    [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID]];
     
     if (_selectedIndex == indexPath.item)
     {

@@ -1,1 +1,1 @@
-../../../Stripe/Stripe/STPToken.h
+../../../Stripe/Stripe/PublicHeaders/STPToken.h

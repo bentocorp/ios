@@ -133,6 +133,9 @@
             if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
                 continue;
             
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+                continue;
+            
             self.indexMainDish = dishIndex;
             break;
         }
@@ -145,6 +148,9 @@
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
             if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+                continue;
+            
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])
@@ -164,6 +170,9 @@
             if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
                 continue;
             
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+                continue;
+            
             if (![self canAddSideDish:dishIndex])
                 continue;
             
@@ -181,6 +190,9 @@
             if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
                 continue;
             
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+                continue;
+            
             if (![self canAddSideDish:dishIndex])
                 continue;
             
@@ -196,6 +208,9 @@
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
             if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+                continue;
+            
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])

@@ -232,6 +232,9 @@
             strAgeRange = @"";
     }
     
+    if (strGender == nil)
+        strGender = @"";
+    
     NSDictionary* request = @{
                               @"firstname" : strFirstName,
                               @"lastname" : strLastName,

@@ -133,6 +133,15 @@ static BentoShop *_shareInstance;
         [self resetBentoArray];
 }
 
+- (void)setStatus:(NSArray *)menuStatus
+{
+    if (menuStatus == nil)
+        return;
+    
+    self.menuStatus = [menuStatus copy];
+    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+}
+
 - (NSString *)getDateString
 {
     NSDate* currentDate = [NSDate date];
@@ -422,6 +431,50 @@ static BentoShop *_shareInstance;
     return NO;
 }
 
+- (BOOL)canAddDish:(NSInteger)dishID
+{
+    NSInteger quantity = 0;
+    for (NSDictionary *menuItem in self.menuStatus)
+    {
+        NSInteger itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+        if (itemID == dishID)
+        {
+            quantity = [[menuItem objectForKey:@"qty"] integerValue];
+            break;
+        }
+    }
+    
+    if (quantity == 0)
+        return NO;
+    
+    NSInteger currentAmount = 0;
+    for (Bento *bento in self.aryBentos)
+    {
+        if (![bento isCompleted])
+            continue;
+        
+        if ([bento getMainDish] == dishID)
+            currentAmount ++;
+        
+        if ([bento getSideDish1] == dishID)
+            currentAmount ++;
+        
+        if ([bento getSideDish2] == dishID)
+            currentAmount ++;
+        
+        if ([bento getSideDish3] == dishID)
+            currentAmount ++;
+        
+        if ([bento getSideDish4] == dishID)
+            currentAmount ++;
+    }
+    
+    if (currentAmount < quantity)
+        return YES;
+    
+    return NO;
+}
+
 - (BOOL)isDishSoldOut:(NSInteger)menuID
 {
     if (self.menuToday == nil || self.menuStatus == nil)
@@ -444,7 +497,7 @@ static BentoShop *_shareInstance;
         }
     }
     
-    return YES;
+    return NO;
 }
 
 - (void)updateProc

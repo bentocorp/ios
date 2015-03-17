@@ -6,12 +6,29 @@
 	<dict>
 		<key>Bento.xcscheme</key>
 		<dict>
+			<key>isShown</key>
+			<true/>
 			<key>orderHint</key>
 			<integer>0</integer>
+		</dict>
+		<key>BentoDev.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>14</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>7216B6411AA64B3F0006FFE9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7216B7061AA64C7C0006FFE9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>90BED06D1A5BCC04003DC872</key>
 		<dict>
 			<key>primary</key>

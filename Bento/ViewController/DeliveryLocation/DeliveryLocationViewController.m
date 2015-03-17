@@ -418,6 +418,8 @@
         else
         {
             [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             [self gotoAddAnotherBentoScreen];
         }
     }
@@ -436,6 +438,7 @@
 - (void) gotoCompleteOrderScreen
 {
     [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     if ([[DataManager shareDataManager] getUserInfo] == nil)
         [self openAccountViewController:[CompleteOrderViewController class]];
@@ -553,15 +556,19 @@
         else
         {
             NSString *strTitle = [[AppStrings sharedInstance] getString:LOCATION_BUTTON_CONTINUE];
-            [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
             
-            NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-            float spacing = 1.0f;
-            [attributedTitle addAttribute:NSKernAttributeName
-                                    value:@(spacing)
-                                    range:NSMakeRange(0, [strTitle length])];
-            
-            self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+            if (strTitle != nil)
+            {
+                [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
+                
+                NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+                float spacing = 1.0f;
+                [attributedTitle addAttribute:NSKernAttributeName
+                                        value:@(spacing)
+                                        range:NSMakeRange(0, [strTitle length])];
+                
+                self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+            }
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:145.0f / 255.0f alpha:1.0f];
         }

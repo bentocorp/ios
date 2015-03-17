@@ -11,8 +11,6 @@
 
 #import "Stripe.h"
 
-#define DEV_MODE
-
 #ifndef DEV_MODE
 #define SERVER_URL @"https://api.bentonow.com"
 #else

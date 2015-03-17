@@ -1,1 +1,1 @@
-../../../Stripe/Stripe/StripeError.h
+../../../Stripe/Stripe/PublicHeaders/StripeError.h

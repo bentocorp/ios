@@ -1,1 +1,1 @@
-../../../Stripe/Stripe/STPCard.h
+../../../Stripe/Stripe/PublicHeaders/STPCard.h

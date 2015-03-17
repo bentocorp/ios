@@ -33,9 +33,11 @@
 - (BOOL)isClosed;
 - (BOOL)isSoldOut;
 
+- (BOOL)canAddDish:(NSInteger)dishID;
 - (BOOL)isDishSoldOut:(NSInteger)menuID;
 
 - (void)getStatus;
+- (void)setStatus:(NSArray *)menuStatus;
 - (void)getMenus;
 - (void)getServiceArea;
 

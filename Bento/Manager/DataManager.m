@@ -119,18 +119,19 @@ static DataManager *_shareDataManager;
         NSDictionary *cardInfo = [self.currentUserInfo objectForKey:@"card"];
         if ([cardInfo isKindOfClass:[NSDictionary class]] && cardInfo != nil)
         {
-            NSString *strCardType = [cardInfo objectForKey:@"brand"];
+//            NSString *strCardType = [cardInfo objectForKey:@"brand"];
             NSString *strCardNumber = [cardInfo objectForKey:@"last4"];
             NSString *strUserMail = [self.currentUserInfo objectForKey:@"email"];
             
             // Load Card Info
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSString *strSavedUserMail = [userDefaults objectForKey:@"user_email"];
-            NSString *strSavedCardBrand = [userDefaults objectForKey:@"card_brand"];
-            NSString *strSavedCardLast4 = [userDefaults objectForKey:@"card_last4"];
-            if ([strSavedUserMail isEqualToString:strUserMail] &&
-                [strSavedCardBrand isEqualToString:strCardType] &&
-                [strSavedCardLast4 isEqualToString:strCardNumber])
+//            NSString *strSavedCardBrand = [userDefaults objectForKey:@"card_brand"];
+//            NSString *strSavedCardLast4 = [userDefaults objectForKey:@"card_last4"];
+//            if ([strSavedUserMail caseInsensitiveCompare:strUserMail] == NSOrderedSame &&
+//                [strSavedCardBrand caseInsensitiveCompare:strCardType] == NSOrderedSame &&
+//                [strSavedCardLast4 caseInsensitiveCompare:strCardNumber] == NSOrderedSame)
+            if ([strSavedUserMail isEqualToString:strUserMail])
             {
                 if ([[userDefaults objectForKey:@"is_applepay"] boolValue])
                     self.paymentMethod = Payment_ApplePay;
@@ -139,7 +140,10 @@ static DataManager *_shareDataManager;
             }
             else
             {
-                self.paymentMethod = Payment_Server;
+                if ([strCardNumber isEqualToString:@"0000"])
+                    self.paymentMethod = Payment_ApplePay;
+                else
+                    self.paymentMethod = Payment_Server;
             }
         }
     }
@@ -169,7 +173,11 @@ static DataManager *_shareDataManager;
 - (void)setCreditCard:(STPCard *)creditCardInfo
 {
     self.creditCardInfo = creditCardInfo;
-    self.paymentMethod = Payment_CreditCard;
+    
+    if (creditCardInfo == nil)
+        self.paymentMethod = Payment_None;
+    else
+        self.paymentMethod = Payment_CreditCard;
 }
 
 - (PaymentMethod)getPaymentMethod

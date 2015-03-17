@@ -43,7 +43,8 @@
 #import "STPTestPaymentAuthorizationViewController.h"
 #endif
 
-#define APPLE_MERCHANT_ID @"merchant.com.bento"
+//#define APPLE_MERCHANT_ID @"merchant.com.bento"
+#define APPLE_MERCHANT_ID @"merchant.com.somethingnew.bento"
 
 @interface CompleteOrderViewController () <UIActionSheetDelegate, PKPaymentAuthorizationViewControllerDelegate, EnterCreditCardViewControllerDelegate, PromoCodeViewDelegate, MyAlertViewDelegate, BentoTableViewCellDelegate>
 {
@@ -338,6 +339,8 @@
     self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
     
     float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
+    if (totalPrice < 0)
+        totalPrice = 0;
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", totalPrice];
 }
 
@@ -606,12 +609,15 @@
         float deliveryTip = (float)_totalPrice * _deliveryTipPercent / 100.f;
         float tax = _totalPrice * _taxPercent / 100;
         float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
+        if (totalPrice < 0)
+            totalPrice = 0;
+        
         NSDecimalNumber *amount = (NSDecimalNumber *)[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%.2f", totalPrice]];
         request.paymentSummaryItems = @[
                                         [PKPaymentSummaryItem summaryItemWithLabel:label amount:amount]
                                         ];
         
-        if ([Stripe canSubmitPaymentRequest:request])
+        if ([self applePayEnabled])
         {
             UIViewController *paymentController;
 #ifdef DEBUG
@@ -731,13 +737,15 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:strEmail forKey:@"user_email"];
-    [userDefaults setObject:[cardInfo type] forKey:@"card_brand"];
-    [userDefaults setObject:[cardInfo last4] forKey:@"card_last4"];
+//    [userDefaults setObject:[cardInfo type] forKey:@"card_brand"];
+//    [userDefaults setObject:[cardInfo last4] forKey:@"card_last4"];
     
     if (isApplePay)
         [userDefaults setObject:@"1" forKey:@"is_applepay"];
     else
         [userDefaults setObject:@"0" forKey:@"is_applepay"];
+    
+    [userDefaults synchronize];
 }
 
 #pragma mark UITableViewDelegate
@@ -964,6 +972,8 @@
     // - Tip
     float deliveryTip = (float)_totalPrice * _deliveryTipPercent / 100.f;
     float totalPrice = _totalPrice + tax + deliveryTip - _promoDiscount;
+    if (totalPrice < 0)
+        totalPrice = 0;
     
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(deliveryTip * 100)] forKey:@"tip_cents"];
     
@@ -1030,6 +1040,14 @@
         
         if (completion)
             completion(PKPaymentAuthorizationStatusFailure);
+        
+        // Add by Han 2015/03/11 for check Quantity.
+        if (error.code == 410) // The inventory is not available.
+        {
+            id menuStatus = [errorOp.responseJSON objectForKey:@"MenuStatus"];
+            if ([menuStatus isKindOfClass:[NSArray class]])
+                [[BentoShop sharedInstance] setStatus:menuStatus];
+        }
         
         NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
         if (strMessage == nil)

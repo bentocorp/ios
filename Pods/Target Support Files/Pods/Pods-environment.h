@@ -27,18 +27,18 @@
 // Stripe
 #define COCOAPODS_POD_AVAILABLE_Stripe
 #define COCOAPODS_VERSION_MAJOR_Stripe 3
-#define COCOAPODS_VERSION_MINOR_Stripe 0
+#define COCOAPODS_VERSION_MINOR_Stripe 1
 #define COCOAPODS_VERSION_PATCH_Stripe 0
 
 // Stripe/ApplePay
 #define COCOAPODS_POD_AVAILABLE_Stripe_ApplePay
 #define COCOAPODS_VERSION_MAJOR_Stripe_ApplePay 3
-#define COCOAPODS_VERSION_MINOR_Stripe_ApplePay 0
+#define COCOAPODS_VERSION_MINOR_Stripe_ApplePay 1
 #define COCOAPODS_VERSION_PATCH_Stripe_ApplePay 0
 
 // Stripe/Core
 #define COCOAPODS_POD_AVAILABLE_Stripe_Core
 #define COCOAPODS_VERSION_MAJOR_Stripe_Core 3
-#define COCOAPODS_VERSION_MINOR_Stripe_Core 0
+#define COCOAPODS_VERSION_MINOR_Stripe_Core 1
 #define COCOAPODS_VERSION_PATCH_Stripe_Core 0
 

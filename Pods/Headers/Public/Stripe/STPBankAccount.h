@@ -1,1 +1,1 @@
-../../../Stripe/Stripe/STPBankAccount.h
+../../../Stripe/Stripe/PublicHeaders/STPBankAccount.h

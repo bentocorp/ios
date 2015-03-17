@@ -55,7 +55,12 @@
 {
     [self.txtPromoCode resignFirstResponder];
     
-    if (self.txtPromoCode.text.length == 0)
+    NSString *strPromoCode = self.txtPromoCode.text;
+    
+    // Remove all whitespaces
+    strPromoCode = [strPromoCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+    
+    if (strPromoCode.length == 0)
         return;
     
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
@@ -68,7 +73,7 @@
     loadingHUD.textLabel.text = @"Processing...";
     [loadingHUD showInView:self];
     
-    NSString *strRequest = [NSString stringWithFormat:@"%@/coupon/apply/%@?api_token=%@", SERVER_URL, self.txtPromoCode.text, strAPIToken];
+    NSString *strRequest = [NSString stringWithFormat:@"%@/coupon/apply/%@?api_token=%@", SERVER_URL, strPromoCode, strAPIToken];
     [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         
