@@ -226,8 +226,8 @@
 
 - (BOOL)canAddSideDish:(NSInteger)sideDishID
 {
-    if ([[BentoShop sharedInstance] isDishSoldOut:sideDishID])
-        return NO;
+//    if ([[BentoShop sharedInstance] isDishSoldOut:sideDishID])
+//        return NO;
     
     NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:sideDishID];
     if (dishInfo == nil)

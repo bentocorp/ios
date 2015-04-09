@@ -191,7 +191,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Note this handler block should be the exact same as the handler passed to any open calls.
     
     // Facebook
+#ifndef DEV_MODE
     if ([[url scheme] isEqualToString:@"fb791688527544905"])
+#else
+    if ([[url scheme] isEqualToString:@"fb823525551027869"])
+#endif
     {
         BOOL handled = [[FacebookManager sharedInstance] handleOpenURL:url sourceApplication:sourceApplication];
         NSLog(@"<%@ (%p) %@ handled:%@>\r url: %@\r sourceApplication: %@", NSStringFromClass([self class]), self, NSStringFromSelector(_cmd), handled ? @"YES" : @"NO", url.absoluteString, sourceApplication);

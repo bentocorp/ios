@@ -15,4 +15,8 @@
 
 @interface CompleteOrderViewController : BaseViewController
 
+// Promo Code
+//@property(strong, nonatomic) NSString *strPromoCode;
+//@property(assign, nonatomic) NSInteger promoDiscount;
+
 @end

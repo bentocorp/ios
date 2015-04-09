@@ -175,6 +175,12 @@
         self.btnBack.hidden = YES;
     else
         self.btnBack.hidden = NO;
+    
+//    if (!self.isFromOrder)
+//    {
+//        self.priceDiscount = 0;
+//        self.strPromoCode = nil;
+//    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -193,6 +199,23 @@
         OutOfDeliveryAddressViewController *vcOutOfZone = segue.destinationViewController;
         vcOutOfZone.strAddress = (NSString *)sender;
     }
+/*
+    else if ([segue.identifier isEqualToString:@"CompleteOrder"])
+    {
+        CompleteOrderViewController *vcCompleteOrder = (CompleteOrderViewController *)segue.destinationViewController;
+        
+        if (self.isFromOrder)
+        {
+            vcCompleteOrder.strPromoCode = self.strPromoCode;
+            vcCompleteOrder.promoDiscount = self.priceDiscount;
+        }
+        else
+        {
+            vcCompleteOrder.strPromoCode = nil;
+            vcCompleteOrder.promoDiscount = 0;
+        }
+    }
+*/
 }
 
 - (void) viewWillAppear:(BOOL)animated

@@ -43,6 +43,9 @@
 #import "STPTestPaymentAuthorizationViewController.h"
 #endif
 
+#define KEY_PROMO_CODE @"promo_code"
+#define KEY_PROMO_DISCOUNT @"promo_discount"
+
 //#define APPLE_MERCHANT_ID @"merchant.com.bento"
 #define APPLE_MERCHANT_ID @"merchant.com.somethingnew.bento"
 
@@ -50,8 +53,6 @@
 {
     BOOL _isEditingBentos;
     
-    // Promo Code
-    NSInteger _promoDiscount;
     float _taxPercent;
     NSInteger _deliveryTipPercent;
     float _totalPrice;
@@ -59,6 +60,9 @@
     NSIndexPath *_currentIndexPath;
     
     NSInteger _clickedMinuteButtonIndex;
+    
+    NSString *_strPromoCode;
+    NSInteger _promoDiscount;
 }
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
@@ -136,7 +140,11 @@
     
     _isEditingBentos = NO;
     
-    _promoDiscount = 0;
+//    self.strPromoCode = nil;
+//    self.promoDiscount = 0;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    _strPromoCode = [userDefaults objectForKey:KEY_PROMO_CODE];
+    _promoDiscount = [userDefaults integerForKey:KEY_PROMO_DISCOUNT];
     
     _deliveryTipPercent = 15;
     _taxPercent = [[[AppStrings sharedInstance] getString:COMPLETE_TAX_PERCENT] floatValue];
@@ -303,7 +311,8 @@
 
 - (void)updatePromoView
 {
-    if (_promoDiscount == 0)
+//    if (self.promoDiscount == 0 && self.strPromoCode == nil)
+    if (_promoDiscount == 0 && (_strPromoCode == nil || _strPromoCode.length == 0))
     {
         self.viewPromo.hidden = YES;
         self.viewList.frame = CGRectMake(self.viewList.frame.origin.x,
@@ -321,11 +330,8 @@
     }
 }
 
-- (void)updatePriceLabels
+- (float)getTotalPrice
 {
-    self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
-    self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
-    
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     if (salePrice != 0 && salePrice < unitPrice)
@@ -333,15 +339,26 @@
     else
         _totalPrice = self.aryBentos.count * unitPrice;
     
-    float deliveryTip = (float)_totalPrice * _deliveryTipPercent / 100.f;
+    float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
     
-    float tax = _totalPrice * _taxPercent / 100;
+    float tax = (int)(_totalPrice * _taxPercent) / 100.f;
     self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
     
     float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
-    if (totalPrice < 0)
-        totalPrice = 0;
-    self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", totalPrice];
+    if (totalPrice < 0.0f)
+        totalPrice = 0.0f;
+    else if (totalPrice > 0 && totalPrice < 1.0f)
+        totalPrice = 1.0f;
+    
+    return totalPrice;
+}
+
+- (void)updatePriceLabels
+{
+//    self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)self.promoDiscount];
+    self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
+    self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
+    self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
 }
 
 - (void)updateUI
@@ -432,15 +449,19 @@
         {
             found = YES;
             ((DeliveryLocationViewController *)vc).isFromOrder = YES;
+//            ((DeliveryLocationViewController *)vc).priceDiscount = self.promoDiscount;
+//            ((DeliveryLocationViewController *)vc).strPromoCode = self.strPromoCode;
             [self.navigationController popToViewController:vc animated:YES];
             return;
         }
     }
     
-    if(!found)
+    if (!found)
     {
         UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         ((DeliveryLocationViewController *)vc).isFromOrder = YES;
+//        ((DeliveryLocationViewController *)vc).priceDiscount = self.promoDiscount;
+//        ((DeliveryLocationViewController *)vc).strPromoCode = self.strPromoCode;
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
@@ -596,6 +617,16 @@
     }
     else if (curPaymentMethod == Payment_ApplePay)
     {
+#ifndef DEBUG
+        if (![PKPaymentAuthorizationViewController canMakePayments])
+        {
+            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+            [alertView showInView:self.view];
+            alertView = nil;
+            return;
+        }
+#endif
+        
         PKPaymentRequest *request = [Stripe paymentRequestWithMerchantIdentifier:APPLE_MERCHANT_ID];
         request.countryCode = @"US";
         request.currencyCode = @"USD";
@@ -606,12 +637,23 @@
         request.paymentSummaryItems = [self summaryItemsForShippingMethod:request.shippingMethods.firstObject];
 */
         NSString *label = @"Purchase of Bento";
-        float deliveryTip = (float)_totalPrice * _deliveryTipPercent / 100.f;
-        float tax = _totalPrice * _taxPercent / 100;
-        float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
-        if (totalPrice < 0)
-            totalPrice = 0;
         
+/*
+        float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
+        float tax = (int)(_totalPrice * _taxPercent) / 100.f;
+//        float totalPrice = _totalPrice + deliveryTip + tax - self.promoDiscount;
+        float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
+        if (totalPrice < 0.0f)
+            totalPrice = 0.0f;
+        else if (totalPrice > 0 && totalPrice < 1.0f)
+            totalPrice = 1.0f;
+
+#ifdef DEBUG
+        // For test
+        totalPrice = 0.0f;
+#endif
+*/
+        float totalPrice = [self getTotalPrice];
         NSDecimalNumber *amount = (NSDecimalNumber *)[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%.2f", totalPrice]];
         request.paymentSummaryItems = @[
                                         [PKPaymentSummaryItem summaryItemWithLabel:label amount:amount]
@@ -627,7 +669,15 @@
             paymentController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:request];
             ((PKPaymentAuthorizationViewController *)paymentController).delegate = self;
 #endif
-            [self presentViewController:paymentController animated:YES completion:nil];
+            if (paymentController != nil)
+                [self presentViewController:paymentController animated:YES completion:nil];
+            else
+            {
+                MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+                [alertView showInView:self.view];
+                alertView = nil;
+                return;
+            }
         }
     }
 }
@@ -643,6 +693,13 @@
         
         [self openAccountViewController:[CompleteOrderViewController class]];
         
+        return;
+    }
+    
+    float totalPrice = [self getTotalPrice];
+    if (totalPrice == 0.0f)
+    {
+        [self createBackendChargeWithToken:nil completion:nil];
         return;
     }
     
@@ -966,15 +1023,20 @@
     [detailInfo setObject:coordInfo forKey:@"coords"];
     
     // - Tax
-    float tax = _totalPrice * _taxPercent / 100;
+    float tax = (int)(_totalPrice * _taxPercent) / 100.f;
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(tax * 100)] forKey:@"tax_cents"];
     
     // - Tip
-    float deliveryTip = (float)_totalPrice * _deliveryTipPercent / 100.f;
+    float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
+//    float totalPrice = _totalPrice + tax + deliveryTip - self.promoDiscount;
+/*
     float totalPrice = _totalPrice + tax + deliveryTip - _promoDiscount;
-    if (totalPrice < 0)
-        totalPrice = 0;
-    
+    if (totalPrice < 0.0f)
+        totalPrice = 0.0f;
+    else if (totalPrice > 0 && totalPrice < 1.0f)
+        totalPrice = 1.0f;
+*/
+    float totalPrice = [self getTotalPrice];
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(deliveryTip * 100)] forKey:@"tip_cents"];
     
     // - Total
@@ -986,7 +1048,7 @@
     NSDictionary *stripeInfo = nil;
     PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
     
-    if (curPaymentMethod == Payment_Server)
+    if ([self getTotalPrice] == 0 || curPaymentMethod == Payment_Server)
     {
         stripeInfo = @{ @"stripeToken" : @"NULL" };
     }
@@ -999,6 +1061,15 @@
     [request setObject:stripeInfo forKey:@"Stripe"];
     // Stripe token
     
+    // PromoCode
+    NSString *strPromoCode = @"";
+//    if (self.strPromoCode != nil && self.strPromoCode.length > 0)
+//        strPromoCode = self.strPromoCode;
+    if (_strPromoCode != nil && _strPromoCode.length > 0)
+        strPromoCode = _strPromoCode;
+    
+    [request setObject:strPromoCode forKey:@"CouponCode"];
+    
     return request;
 }
 
@@ -1006,14 +1077,14 @@
 {
     if (token.tokenId == nil || token.tokenId.length == 0)
     {
-        if ([[DataManager shareDataManager] getPaymentMethod] != Payment_Server)
+        if ([self getTotalPrice] > 0 && [[DataManager shareDataManager] getPaymentMethod] != Payment_Server)
             return;
     }
     
     NSDictionary *request = nil;
     if (token.tokenId != nil)
         request = [self buildRequest:token.tokenId];
-    else if ([[DataManager shareDataManager] getPaymentMethod] == Payment_Server)
+    else if ([self getTotalPrice] == 0.0f || [[DataManager shareDataManager] getPaymentMethod] == Payment_Server)
         request = [self buildRequest:nil];
     
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
@@ -1032,6 +1103,10 @@
         
         for (Bento *bento in self.aryBentos)
             [[BentoShop sharedInstance] removeBento:bento];
+        
+        NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+        [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
+        [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
         
         [self gotoConfirmOrderScreen];
         
@@ -1135,8 +1210,15 @@
 
 #pragma mark PromoCodeViewDelegate
 
-- (void)setDiscound:(NSInteger)priceDiscount
+- (void)setDiscound:(NSInteger)priceDiscount strCouponCode:(NSString *)strCouponCode
 {
+//    self.strPromoCode = strCouponCode;
+//    self.promoDiscount = priceDiscount;
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    [userDefaults setObject:strCouponCode forKey:KEY_PROMO_CODE];
+    [userDefaults setInteger:priceDiscount forKey:KEY_PROMO_DISCOUNT];
+    
+    _strPromoCode = strCouponCode;
     _promoDiscount = priceDiscount;
     
     [self updateUI];

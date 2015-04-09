@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "55285785FD9542486802ABAA"
+               BlueprintIdentifier = "77D3D0BDBD5CAE79D9BEA909"
                BuildableName = "libPods-BentoTests-Stripe.a"
                BlueprintName = "Pods-BentoTests-Stripe"
                ReferencedContainer = "container:Pods.xcodeproj">

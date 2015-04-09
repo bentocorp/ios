@@ -1,7 +1,7 @@
 PODS:
-  - Mixpanel (2.7.2):
-    - Mixpanel/MPCategoryHelpers (= 2.7.2)
-  - Mixpanel/MPCategoryHelpers (2.7.2)
+  - Mixpanel (2.7.3):
+    - Mixpanel/MPCategoryHelpers (= 2.7.3)
+  - Mixpanel/MPCategoryHelpers (2.7.3)
   - PaymentKit (1.1.1)
   - Stripe (3.1.0):
     - Stripe/Core (= 3.1.0)
@@ -16,8 +16,8 @@ DEPENDENCIES:
   - Stripe/ApplePay
 
 SPEC CHECKSUMS:
-  Mixpanel: def38b9e600f101686b8d647e05660a72c089c65
-  PaymentKit: f77b4d5cee45947949429c3d587e8eb160a3c9e2
-  Stripe: aaa174b50fac40a16958cbc892457a241d0b4b08
+  Mixpanel: 1d387d76800e07e953958c62c97fea27f13632dd
+  PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
+  Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
 
 COCOAPODS: 0.36.0.beta.1

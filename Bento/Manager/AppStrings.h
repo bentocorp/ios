@@ -161,6 +161,7 @@
 #define CLOSED_IMAGE_LOGO                       @"title-logo"
 #define CLOSED_TEXT_TITLE                       @"closed-title"
 #define CLOSED_TEXT_CONTENT                     @"closed-text"
+#define CLOSED_TEXT_LATENIGHT                   @"closed-text-latenight"
 #define CLOSED_PLACEHOLDER_EMAIL                @"closed-input-text"
 #define CLOSED_BUTTON_RECEIVE_COUPON            @"closed-button"
 #define CLOSED_LINK_POLICY                      @"closed-privacy-policy-link"

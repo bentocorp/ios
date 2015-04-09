@@ -1848,7 +1848,6 @@
 			baseConfigurationReference = 3561C29F3B08D2974FA2BADA /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
@@ -1865,10 +1864,10 @@
 					DEV_MODE,
 				);
 				INFOPLIST_FILE = "Bento Dev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "5a277134-768f-465a-948b-dfb2ff6e1869";
+				PROVISIONING_PROFILE = "10451e06-b6e9-489b-93bd-e556fc09612b";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1878,7 +1877,6 @@
 			baseConfigurationReference = 6EC9DF39CFE2AE0B67A3FFE5 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
@@ -1894,10 +1892,10 @@
 					DEV_MODE,
 				);
 				INFOPLIST_FILE = "Bento Dev-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "08e4aab1-c27a-4f29-aaae-f23008436605";
+				PROVISIONING_PROFILE = "e26c5181-1118-46ce-9778-abe21516cb87";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -2002,7 +2000,7 @@
 					"DEBUG=1",
 				);
 				INFOPLIST_FILE = Bento/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2f894934-27e0-4203-975b-b4b64601823b";
@@ -2026,7 +2024,7 @@
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
 				INFOPLIST_FILE = Bento/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "688dc68d-7ca4-4a3b-a5d8-9a140d72fbd1";

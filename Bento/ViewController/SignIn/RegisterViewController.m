@@ -78,6 +78,7 @@
     }];
     
     [self.txtPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
+    self.txtPhoneNumber.formatter.prefix = @"+1 ";
     
     // Facebook
     [[FacebookManager sharedInstance] setDelegate:self];

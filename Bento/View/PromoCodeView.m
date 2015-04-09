@@ -58,7 +58,9 @@
     NSString *strPromoCode = self.txtPromoCode.text;
     
     // Remove all whitespaces
-    strPromoCode = [strPromoCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+//    strPromoCode = [strPromoCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    NSArray* words = [strPromoCode componentsSeparatedByCharactersInSet :[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+    strPromoCode = [words componentsJoinedByString:@""];
     
     if (strPromoCode.length == 0)
         return;
@@ -67,6 +69,7 @@
     if (strAPIToken == nil || strAPIToken.length == 0)
         return;
     
+#ifndef DEBUG
     WebManager *webManager = [[WebManager alloc] init];
     
     JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
@@ -78,11 +81,12 @@
         [loadingHUD dismiss];
         
         NSDictionary *response = networkOperation.responseJSON;
-        if (response != nil && [response objectForKey:@"amountOff"] != nil)
+        id amountOff = [response objectForKey:@"amountOff"];
+        if (response != nil && amountOff != nil && [amountOff isKindOfClass:[NSString class]])
         {
             NSInteger discount = [[response objectForKey:@"amountOff"] integerValue];
             if (self.delegate != nil)
-                [self.delegate setDiscound:discount];
+                [self.delegate setDiscound:discount strCouponCode:strPromoCode];
         }
         
         [UIView animateWithDuration:0.3f animations:^{
@@ -128,6 +132,21 @@
 //        }
         
     } isJSON:NO];
+#else
+    NSInteger discount = 99;
+    if (self.delegate != nil)
+        [self.delegate setDiscound:discount strCouponCode:@"ridev"];
+
+    [UIView animateWithDuration:0.3f animations:^{
+        
+        self.alpha = 0.0f;
+        
+    } completion:^(BOOL finished) {
+        
+        [self removeFromSuperview];
+        
+    }];
+#endif
 }
 
 - (IBAction)onUsePromoCode:(id)sender

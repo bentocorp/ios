@@ -445,13 +445,13 @@ static BentoShop *_shareInstance;
     }
     
     if (quantity == 0)
-        return NO;
+        return YES;
     
     NSInteger currentAmount = 0;
     for (Bento *bento in self.aryBentos)
     {
-        if (![bento isCompleted])
-            continue;
+//        if (![bento isCompleted])
+//            continue;
         
         if ([bento getMainDish] == dishID)
             currentAmount ++;

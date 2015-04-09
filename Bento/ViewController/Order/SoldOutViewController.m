@@ -45,6 +45,31 @@
 
 @implementation SoldOutViewController
 
+- (NSString *)getClosedText
+{
+    NSDate* currentDate = [NSDate date];
+    
+#ifdef DEBUG
+    NSTimeZone* currentTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT-08:00"];
+    NSTimeZone* nowTimeZone = [NSTimeZone systemTimeZone];
+    
+    NSInteger currentGMTOffset = [currentTimeZone secondsFromGMTForDate:currentDate];
+    NSInteger nowGMTOffset = [nowTimeZone secondsFromGMTForDate:currentDate];
+    
+    NSTimeInterval interval = currentGMTOffset - nowGMTOffset;
+    currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
+#endif
+    
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:currentDate];
+    NSInteger hour = [components hour];
+    
+    if (hour >= 19 && hour <= 23)
+        return [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT];
+
+    return [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
@@ -66,7 +91,7 @@
     if (self.type == 0) // Closed
     {
         self.lblMessageTitle.text = [[AppStrings sharedInstance] getString:CLOSED_TEXT_TITLE];
-        self.lblMessageContent.text = [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT];
+        self.lblMessageContent.text = [self getClosedText];
         
         self.txtEmail.placeholder = [[AppStrings sharedInstance] getString:CLOSED_PLACEHOLDER_EMAIL];
         [self.btnSend setTitle:[[AppStrings sharedInstance] getString:CLOSED_BUTTON_RECEIVE_COUPON] forState:UIControlStateNormal];
