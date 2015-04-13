@@ -112,7 +112,6 @@
 		7216B75F1AA64C7C0006FFE9 /* BentoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A553DE1A5FFEEB001F9DA7 /* BentoTableViewCell.m */; };
 		7216B7611AA64C7C0006FFE9 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7209E0811A76BD3500D18D7A /* CoreLocation.framework */; };
 		7216B7621AA64C7C0006FFE9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333821A6E55B6006C2446 /* CoreData.framework */; };
-		7216B7631AA64C7C0006FFE9 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 725BA0331A84EDBF005C18D3 /* Crashlytics.framework */; };
 		7216B7641AA64C7C0006FFE9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333801A6E5570006C2446 /* ImageIO.framework */; };
 		7216B7651AA64C7C0006FFE9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337E1A6E5535006C2446 /* GLKit.framework */; };
 		7216B7661AA64C7C0006FFE9 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337C1A6E5504006C2446 /* libc++.dylib */; };
@@ -251,7 +250,6 @@
 		722333FD1A72C133006C2446 /* STPTestShippingMethodStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F51A72C133006C2446 /* STPTestShippingMethodStore.m */; };
 		722333FF1A7425CA006C2446 /* creditcard_btn_clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 722333FE1A7425CA006C2446 /* creditcard_btn_clear.png */; };
 		723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 723BD40C1A8DD831000AD4F1 /* FXBlurView.m */; };
-		725BA0351A84EDBF005C18D3 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 725BA0331A84EDBF005C18D3 /* Crashlytics.framework */; };
 		725BA0361A84EDBF005C18D3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 725BA0341A84EDBF005C18D3 /* Fabric.framework */; };
 		726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */ = {isa = PBXBuildFile; fileRef = 726A92051A8CBA4900E04EFE /* polygon_service_area.png */; };
 		726CE35B1A82693900296182 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 726CE35A1A82693900296182 /* BaseViewController.m */; };
@@ -336,6 +334,42 @@
 		90D8F7E51A5E39A500D034CF /* logo_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E41A5E39A500D034CF /* logo_title.png */; };
 		90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */; };
 		90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */; };
+		FCDF22161ADC3ADF006B2750 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22041ADC3ADF006B2750 /* Icon-60.png */; };
+		FCDF22171ADC3ADF006B2750 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22041ADC3ADF006B2750 /* Icon-60.png */; };
+		FCDF22181ADC3ADF006B2750 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */; };
+		FCDF22191ADC3ADF006B2750 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */; };
+		FCDF221A1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22061ADC3ADF006B2750 /* Icon-60@3x.png */; };
+		FCDF221B1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22061ADC3ADF006B2750 /* Icon-60@3x.png */; };
+		FCDF221C1ADC3ADF006B2750 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22071ADC3ADF006B2750 /* Icon-72.png */; };
+		FCDF221D1ADC3ADF006B2750 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22071ADC3ADF006B2750 /* Icon-72.png */; };
+		FCDF221E1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22081ADC3ADF006B2750 /* Icon-72@2x.png */; };
+		FCDF221F1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22081ADC3ADF006B2750 /* Icon-72@2x.png */; };
+		FCDF22201ADC3ADF006B2750 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22091ADC3ADF006B2750 /* Icon-76.png */; };
+		FCDF22211ADC3ADF006B2750 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22091ADC3ADF006B2750 /* Icon-76.png */; };
+		FCDF22221ADC3ADF006B2750 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220A1ADC3ADF006B2750 /* Icon-76@2x.png */; };
+		FCDF22231ADC3ADF006B2750 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220A1ADC3ADF006B2750 /* Icon-76@2x.png */; };
+		FCDF22241ADC3ADF006B2750 /* Icon-Small-40.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220B1ADC3ADF006B2750 /* Icon-Small-40.png */; };
+		FCDF22251ADC3ADF006B2750 /* Icon-Small-40.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220B1ADC3ADF006B2750 /* Icon-Small-40.png */; };
+		FCDF22261ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220C1ADC3ADF006B2750 /* Icon-Small-40@2x.png */; };
+		FCDF22271ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220C1ADC3ADF006B2750 /* Icon-Small-40@2x.png */; };
+		FCDF22281ADC3ADF006B2750 /* Icon-Small-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220D1ADC3ADF006B2750 /* Icon-Small-40@3x.png */; };
+		FCDF22291ADC3ADF006B2750 /* Icon-Small-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220D1ADC3ADF006B2750 /* Icon-Small-40@3x.png */; };
+		FCDF222A1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220E1ADC3ADF006B2750 /* Icon-Small-50.png */; };
+		FCDF222B1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220E1ADC3ADF006B2750 /* Icon-Small-50.png */; };
+		FCDF222C1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220F1ADC3ADF006B2750 /* Icon-Small-50@2x.png */; };
+		FCDF222D1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220F1ADC3ADF006B2750 /* Icon-Small-50@2x.png */; };
+		FCDF222E1ADC3ADF006B2750 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22101ADC3ADF006B2750 /* Icon-Small.png */; };
+		FCDF222F1ADC3ADF006B2750 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22101ADC3ADF006B2750 /* Icon-Small.png */; };
+		FCDF22301ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22111ADC3ADF006B2750 /* Icon-Small@2x.png */; };
+		FCDF22311ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22111ADC3ADF006B2750 /* Icon-Small@2x.png */; };
+		FCDF22321ADC3ADF006B2750 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22121ADC3ADF006B2750 /* Icon-Small@3x.png */; };
+		FCDF22331ADC3ADF006B2750 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22121ADC3ADF006B2750 /* Icon-Small@3x.png */; };
+		FCDF22341ADC3ADF006B2750 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22131ADC3ADF006B2750 /* Icon.png */; };
+		FCDF22351ADC3ADF006B2750 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22131ADC3ADF006B2750 /* Icon.png */; };
+		FCDF22361ADC3ADF006B2750 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22141ADC3ADF006B2750 /* Icon@2x.png */; };
+		FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22141ADC3ADF006B2750 /* Icon@2x.png */; };
+		FCDF22381ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
+		FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -495,7 +529,6 @@
 		722333FE1A7425CA006C2446 /* creditcard_btn_clear.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = creditcard_btn_clear.png; sourceTree = "<group>"; };
 		723BD40B1A8DD831000AD4F1 /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
 		723BD40C1A8DD831000AD4F1 /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
-		725BA0331A84EDBF005C18D3 /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		725BA0341A84EDBF005C18D3 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		726A92051A8CBA4900E04EFE /* polygon_service_area.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = polygon_service_area.png; sourceTree = "<group>"; };
 		726CE3591A82693900296182 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
@@ -534,13 +567,13 @@
 		90BED0721A5BCC04003DC872 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BED0731A5BCC04003DC872 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		90BED07C1A5BCC04003DC872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		90BED07E1A5BCC04003DC872 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		90BED07E1A5BCC04003DC872 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		90BED0811A5BCC04003DC872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		90BED0871A5BCC04003DC872 /* BentoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BentoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		90BED08C1A5BCC04003DC872 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		90BED08D1A5BCC04003DC872 /* BentoTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BentoTests.m; sourceTree = "<group>"; };
-		90BED0981A5BCC7B003DC872 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		90BED0991A5BCC7B003DC872 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		90BED0981A5BCC7B003DC872 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../App/AppDelegate.h; sourceTree = "<group>"; };
+		90BED0991A5BCC7B003DC872 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../App/AppDelegate.m; sourceTree = "<group>"; };
 		90BED0A31A5BD05C003DC872 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		90BED0A41A5BD05C003DC872 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		90BED0AE1A5BE22E003DC872 /* first_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_background.png; sourceTree = "<group>"; };
@@ -613,6 +646,24 @@
 		90D8F7E61A5E3F7500D034CF /* EnterCreditCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterCreditCardViewController.h; sourceTree = "<group>"; };
 		90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterCreditCardViewController.m; sourceTree = "<group>"; };
 		90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderconfirm_image_car.png; sourceTree = "<group>"; };
+		FCDF22041ADC3ADF006B2750 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
+		FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
+		FCDF22061ADC3ADF006B2750 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
+		FCDF22071ADC3ADF006B2750 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
+		FCDF22081ADC3ADF006B2750 /* Icon-72@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72@2x.png"; sourceTree = "<group>"; };
+		FCDF22091ADC3ADF006B2750 /* Icon-76.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76.png"; sourceTree = "<group>"; };
+		FCDF220A1ADC3ADF006B2750 /* Icon-76@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-76@2x.png"; sourceTree = "<group>"; };
+		FCDF220B1ADC3ADF006B2750 /* Icon-Small-40.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-40.png"; sourceTree = "<group>"; };
+		FCDF220C1ADC3ADF006B2750 /* Icon-Small-40@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-40@2x.png"; sourceTree = "<group>"; };
+		FCDF220D1ADC3ADF006B2750 /* Icon-Small-40@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-40@3x.png"; sourceTree = "<group>"; };
+		FCDF220E1ADC3ADF006B2750 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50.png"; sourceTree = "<group>"; };
+		FCDF220F1ADC3ADF006B2750 /* Icon-Small-50@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small-50@2x.png"; sourceTree = "<group>"; };
+		FCDF22101ADC3ADF006B2750 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small.png"; sourceTree = "<group>"; };
+		FCDF22111ADC3ADF006B2750 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@2x.png"; sourceTree = "<group>"; };
+		FCDF22121ADC3ADF006B2750 /* Icon-Small@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-Small@3x.png"; sourceTree = "<group>"; };
+		FCDF22131ADC3ADF006B2750 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
+		FCDF22141ADC3ADF006B2750 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
+		FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -622,7 +673,6 @@
 			files = (
 				7216B7611AA64C7C0006FFE9 /* CoreLocation.framework in Frameworks */,
 				7216B7621AA64C7C0006FFE9 /* CoreData.framework in Frameworks */,
-				7216B7631AA64C7C0006FFE9 /* Crashlytics.framework in Frameworks */,
 				7216B7641AA64C7C0006FFE9 /* ImageIO.framework in Frameworks */,
 				7216B7651AA64C7C0006FFE9 /* GLKit.framework in Frameworks */,
 				7216B7661AA64C7C0006FFE9 /* libc++.dylib in Frameworks */,
@@ -643,7 +693,6 @@
 			files = (
 				7209E0821A76BD3500D18D7A /* CoreLocation.framework in Frameworks */,
 				722333831A6E55B6006C2446 /* CoreData.framework in Frameworks */,
-				725BA0351A84EDBF005C18D3 /* Crashlytics.framework in Frameworks */,
 				722333811A6E5570006C2446 /* ImageIO.framework in Frameworks */,
 				7223337F1A6E5535006C2446 /* GLKit.framework in Frameworks */,
 				7223337D1A6E5504006C2446 /* libc++.dylib in Frameworks */,
@@ -765,6 +814,7 @@
 				722333671A6D57CB006C2446 /* Bento.m */,
 				722333691A6D5847006C2446 /* BentoShop.h */,
 				7223336A1A6D5847006C2446 /* BentoShop.m */,
+				7279E5DE1A6B5F3A00591CB2 /* Manager */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -922,7 +972,8 @@
 				7279E5DF1A6B5F3A00591CB2 /* DataManager.h */,
 				7279E5E01A6B5F3A00591CB2 /* DataManager.m */,
 			);
-			path = Manager;
+			name = Manager;
+			path = ../Manager;
 			sourceTree = "<group>";
 		};
 		7286EB431A7D8BE800D03DCE /* RMMapper */ = {
@@ -974,19 +1025,14 @@
 		90BED0701A5BCC04003DC872 /* Bento */ = {
 			isa = PBXGroup;
 			children = (
-				722333651A6D57AD006C2446 /* Model */,
 				722333011A6BF172006C2446 /* Bento.entitlements */,
-				7279E5DE1A6B5F3A00591CB2 /* Manager */,
 				722333051A6C12FC006C2446 /* Modules */,
-				90BED0E71A5C3333003DC872 /* Cell */,
-				90BED0971A5BCC7B003DC872 /* App */,
-				90BED09A1A5BCC7B003DC872 /* Resource */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
+				722333651A6D57AD006C2446 /* Model */,
+				90BED0E71A5C3333003DC872 /* Cell */,
 				90BED09C1A5BCC7B003DC872 /* View */,
 				90BED09D1A5BCC7B003DC872 /* ViewController */,
-				90BED07B1A5BCC04003DC872 /* Main.storyboard */,
-				90BED07E1A5BCC04003DC872 /* Images.xcassets */,
-				90BED0801A5BCC04003DC872 /* LaunchScreen.xib */,
+				90BED09A1A5BCC7B003DC872 /* Resource */,
 				90BED0711A5BCC04003DC872 /* Supporting Files */,
 			);
 			path = Bento;
@@ -1018,18 +1064,10 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		90BED0971A5BCC7B003DC872 /* App */ = {
-			isa = PBXGroup;
-			children = (
-				90BED0981A5BCC7B003DC872 /* AppDelegate.h */,
-				90BED0991A5BCC7B003DC872 /* AppDelegate.m */,
-			);
-			path = App;
-			sourceTree = "<group>";
-		};
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FCDF22031ADC3ADF006B2750 /* Squared Icons */,
 				7209E0831A77715000D18D7A /* Launch */,
 				90BED0B41A5BE72F003DC872 /* Font */,
 				90BED0A91A5BD180003DC872 /* DeliveryLocation */,
@@ -1054,6 +1092,9 @@
 		90BED09C1A5BCC7B003DC872 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				90BED07B1A5BCC04003DC872 /* Main.storyboard */,
+				90BED07E1A5BCC04003DC872 /* Images.xcassets */,
+				90BED0801A5BCC04003DC872 /* LaunchScreen.xib */,
 				90D8F7A21A5D6B6E00D034CF /* MyAlertView.h */,
 				90D8F7A31A5D6B6E00D034CF /* MyAlertView.m */,
 				90A553E01A60035D001F9DA7 /* PromoCodeView.h */,
@@ -1066,6 +1107,8 @@
 		90BED09D1A5BCC7B003DC872 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
+				90BED0981A5BCC7B003DC872 /* AppDelegate.h */,
+				90BED0991A5BCC7B003DC872 /* AppDelegate.m */,
 				7223336C1A6D66E8006C2446 /* IntroViewController.h */,
 				7223336D1A6D66E8006C2446 /* IntroViewController.m */,
 				90BED0A31A5BD05C003DC872 /* FirstViewController.h */,
@@ -1250,7 +1293,6 @@
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				725BA0331A84EDBF005C18D3 /* Crashlytics.framework */,
 				725BA0341A84EDBF005C18D3 /* Fabric.framework */,
 				7209E0811A76BD3500D18D7A /* CoreLocation.framework */,
 				722333821A6E55B6006C2446 /* CoreData.framework */,
@@ -1264,6 +1306,32 @@
 				3CC0B59E0C21EA384AF9FA91 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCDF22031ADC3ADF006B2750 /* Squared Icons */ = {
+			isa = PBXGroup;
+			children = (
+				FCDF22041ADC3ADF006B2750 /* Icon-60.png */,
+				FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */,
+				FCDF22061ADC3ADF006B2750 /* Icon-60@3x.png */,
+				FCDF22071ADC3ADF006B2750 /* Icon-72.png */,
+				FCDF22081ADC3ADF006B2750 /* Icon-72@2x.png */,
+				FCDF22091ADC3ADF006B2750 /* Icon-76.png */,
+				FCDF220A1ADC3ADF006B2750 /* Icon-76@2x.png */,
+				FCDF220B1ADC3ADF006B2750 /* Icon-Small-40.png */,
+				FCDF220C1ADC3ADF006B2750 /* Icon-Small-40@2x.png */,
+				FCDF220D1ADC3ADF006B2750 /* Icon-Small-40@3x.png */,
+				FCDF220E1ADC3ADF006B2750 /* Icon-Small-50.png */,
+				FCDF220F1ADC3ADF006B2750 /* Icon-Small-50@2x.png */,
+				FCDF22101ADC3ADF006B2750 /* Icon-Small.png */,
+				FCDF22111ADC3ADF006B2750 /* Icon-Small@2x.png */,
+				FCDF22121ADC3ADF006B2750 /* Icon-Small@3x.png */,
+				FCDF22131ADC3ADF006B2750 /* Icon.png */,
+				FCDF22141ADC3ADF006B2750 /* Icon@2x.png */,
+				FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */,
+			);
+			name = "Squared Icons";
+			path = ../Squared;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1392,6 +1460,7 @@
 				7216B7771AA64C7C0006FFE9 /* BentoTableViewCell.xib in Resources */,
 				7216B7781AA64C7C0006FFE9 /* Main.storyboard in Resources */,
 				7216B7791AA64C7C0006FFE9 /* OpenSans-Italic.ttf in Resources */,
+				FCDF22251ADC3ADF006B2750 /* Icon-Small-40.png in Resources */,
 				7216B77A1AA64C7C0006FFE9 /* deliverylocation_icon_navigation@2x.png in Resources */,
 				7216B77B1AA64C7C0006FFE9 /* OpenSans-Bold.ttf in Resources */,
 				7216B77C1AA64C7C0006FFE9 /* PreviewCollectionViewCell.xib in Resources */,
@@ -1400,14 +1469,19 @@
 				7216B77F1AA64C7C0006FFE9 /* register_icon_alert.png in Resources */,
 				7216B7801AA64C7C0006FFE9 /* creditcard_btn_clear.png in Resources */,
 				7216B7811AA64C7C0006FFE9 /* soldout_background.png in Resources */,
+				FCDF22231ADC3ADF006B2750 /* Icon-76@2x.png in Resources */,
 				7216B7821AA64C7C0006FFE9 /* image_unchecked@2x.png in Resources */,
+				FCDF22351ADC3ADF006B2750 /* Icon.png in Resources */,
 				7216B7831AA64C7C0006FFE9 /* JGProgressHUD Resources.bundle in Resources */,
 				7216B7841AA64C7C0006FFE9 /* polygon_service_area.png in Resources */,
+				FCDF222B1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
 				7216B7851AA64C7C0006FFE9 /* nav_btn_back@2x.png in Resources */,
+				FCDF221F1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
 				7216B7861AA64C7C0006FFE9 /* register_icon_facebook.png in Resources */,
 				7216B7871AA64C7C0006FFE9 /* register_icon_username.png in Resources */,
 				7216B7881AA64C7C0006FFE9 /* logo_title.png in Resources */,
 				7216B7891AA64C7C0006FFE9 /* mybento_image_bottom.png in Resources */,
+				FCDF22171ADC3ADF006B2750 /* Icon-60.png in Resources */,
 				7216B78A1AA64C7C0006FFE9 /* mybento_nav_cart_act@2x.png in Resources */,
 				7216B78B1AA64C7C0006FFE9 /* orderconfirm_image_minute@2x.png in Resources */,
 				7216B78C1AA64C7C0006FFE9 /* string_confirmaddress@2x.png in Resources */,
@@ -1422,21 +1496,30 @@
 				7216B7951AA64C7C0006FFE9 /* register_icon_password_err.png in Resources */,
 				7216B7961AA64C7C0006FFE9 /* DishCollectionViewCell.xib in Resources */,
 				7216B7971AA64C7C0006FFE9 /* orderconfirm_image_countpanel.png in Resources */,
+				FCDF22191ADC3ADF006B2750 /* Icon-60@2x.png in Resources */,
 				7216B7981AA64C7C0006FFE9 /* LaunchScreen.xib in Resources */,
 				7216B7991AA64C7C0006FFE9 /* OpenSans-Light.ttf in Resources */,
+				FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */,
+				FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */,
+				FCDF222F1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				7216B79A1AA64C7C0006FFE9 /* banner_sold_out.png in Resources */,
 				7216B79B1AA64C7C0006FFE9 /* register_icon_username_err.png in Resources */,
+				FCDF22271ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				7216B79C1AA64C7C0006FFE9 /* first_background.png in Resources */,
 				7216B79D1AA64C7C0006FFE9 /* orderconfirm_image_car.png in Resources */,
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
+				FCDF22211ADC3ADF006B2750 /* Icon-76.png in Resources */,
 				7216B79F1AA64C7C0006FFE9 /* nav_background.png in Resources */,
 				7216B7A01AA64C7C0006FFE9 /* image_checked@2x.png in Resources */,
 				7216B7A11AA64C7C0006FFE9 /* string_addanotherbento@2x.png in Resources */,
 				7216B7A21AA64C7C0006FFE9 /* OpenSans-Semibold.ttf in Resources */,
 				7216B7A31AA64C7C0006FFE9 /* mybento_nav_cart_inact@2x.png in Resources */,
+				FCDF221B1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */,
 				7216B7A41AA64C7C0006FFE9 /* completeorder_cell_btn_minute@2x.png in Resources */,
 				7216B7A51AA64C7C0006FFE9 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				7216B7A61AA64C7C0006FFE9 /* OpenSans-Regular.ttf in Resources */,
+				FCDF22291ADC3ADF006B2750 /* Icon-Small-40@3x.png in Resources */,
+				FCDF22331ADC3ADF006B2750 /* Icon-Small@3x.png in Resources */,
 				7216B7A71AA64C7C0006FFE9 /* OpenSans-BoldItalic.ttf in Resources */,
 				7216B7A81AA64C7C0006FFE9 /* OpenSans-LightItalic.ttf in Resources */,
 				7216B7A91AA64C7C0006FFE9 /* orderconfirm_image_plus@2x.png in Resources */,
@@ -1444,7 +1527,10 @@
 				7216B7AB1AA64C7C0006FFE9 /* Images.xcassets in Resources */,
 				7216B7AC1AA64C7C0006FFE9 /* register_icon_email.png in Resources */,
 				7216B7AD1AA64C7C0006FFE9 /* mybento_nav_help@2x.png in Resources */,
+				FCDF222D1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				7216B7AE1AA64C7C0006FFE9 /* register_icon_password.png in Resources */,
+				FCDF221D1ADC3ADF006B2750 /* Icon-72.png in Resources */,
+				FCDF22311ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1462,6 +1548,7 @@
 				47C5B0151A8B8038008FA7DA /* BentoTableViewCell.xib in Resources */,
 				90BED07D1A5BCC04003DC872 /* Main.storyboard in Resources */,
 				90BED0C51A5BE72F003DC872 /* OpenSans-Italic.ttf in Resources */,
+				FCDF22241ADC3ADF006B2750 /* Icon-Small-40.png in Resources */,
 				90D8F7D01A5E2B3B00D034CF /* deliverylocation_icon_navigation@2x.png in Resources */,
 				90BED0C11A5BE72F003DC872 /* OpenSans-Bold.ttf in Resources */,
 				728B9E811A9C65C900A2ED73 /* PreviewCollectionViewCell.xib in Resources */,
@@ -1470,14 +1557,19 @@
 				90D8F7B71A5D856200D034CF /* register_icon_alert.png in Resources */,
 				722333FF1A7425CA006C2446 /* creditcard_btn_clear.png in Resources */,
 				90D8F7E31A5E37E300D034CF /* soldout_background.png in Resources */,
+				FCDF22221ADC3ADF006B2750 /* Icon-76@2x.png in Resources */,
 				90D8F7D51A5E2C4C00D034CF /* image_unchecked@2x.png in Resources */,
+				FCDF22341ADC3ADF006B2750 /* Icon.png in Resources */,
 				7223335A1A6D4058006C2446 /* JGProgressHUD Resources.bundle in Resources */,
 				726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */,
+				FCDF222A1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
 				90BED0E31A5C1E70003DC872 /* nav_btn_back@2x.png in Resources */,
+				FCDF221E1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
 				90D8F7B11A5D84B800D034CF /* register_icon_facebook.png in Resources */,
 				90D8F7B41A5D84B800D034CF /* register_icon_username.png in Resources */,
 				90D8F7E51A5E39A500D034CF /* logo_title.png in Resources */,
 				90D8F7A61A5D7F7100D034CF /* mybento_image_bottom.png in Resources */,
+				FCDF22161ADC3ADF006B2750 /* Icon-60.png in Resources */,
 				90BED0DF1A5C04DE003DC872 /* mybento_nav_cart_act@2x.png in Resources */,
 				90359C251A5EC49700AAD5D2 /* orderconfirm_image_minute@2x.png in Resources */,
 				47AA1C441A6BE52800064857 /* string_confirmaddress@2x.png in Resources */,
@@ -1492,21 +1584,30 @@
 				90D8F7C51A5E126C00D034CF /* register_icon_password_err.png in Resources */,
 				90BED0EC1A5C3346003DC872 /* DishCollectionViewCell.xib in Resources */,
 				90359C231A5EC49700AAD5D2 /* orderconfirm_image_countpanel.png in Resources */,
+				FCDF22181ADC3ADF006B2750 /* Icon-60@2x.png in Resources */,
 				90BED0821A5BCC04003DC872 /* LaunchScreen.xib in Resources */,
 				90BED0C61A5BE72F003DC872 /* OpenSans-Light.ttf in Resources */,
+				FCDF22381ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */,
+				FCDF22361ADC3ADF006B2750 /* Icon@2x.png in Resources */,
+				FCDF222E1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				722333E11A6FF9C5006C2446 /* banner_sold_out.png in Resources */,
 				90D8F7C71A5E126C00D034CF /* register_icon_username_err.png in Resources */,
+				FCDF22261ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				90BED0B11A5BE22E003DC872 /* first_background.png in Resources */,
 				90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */,
 				90D8F7B31A5D84B800D034CF /* register_icon_phone.png in Resources */,
+				FCDF22201ADC3ADF006B2750 /* Icon-76.png in Resources */,
 				90BED0DB1A5C0320003DC872 /* nav_background.png in Resources */,
 				90D8F7D41A5E2C4C00D034CF /* image_checked@2x.png in Resources */,
 				47AA1C471A6BE52F00064857 /* string_addanotherbento@2x.png in Resources */,
 				90BED0C91A5BE72F003DC872 /* OpenSans-Semibold.ttf in Resources */,
 				90BED0E01A5C04DE003DC872 /* mybento_nav_cart_inact@2x.png in Resources */,
+				FCDF221A1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */,
 				47C5B0181A8B82BD008FA7DA /* completeorder_cell_btn_minute@2x.png in Resources */,
 				90BED0C41A5BE72F003DC872 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				90BED0C81A5BE72F003DC872 /* OpenSans-Regular.ttf in Resources */,
+				FCDF22281ADC3ADF006B2750 /* Icon-Small-40@3x.png in Resources */,
+				FCDF22321ADC3ADF006B2750 /* Icon-Small@3x.png in Resources */,
 				90BED0C21A5BE72F003DC872 /* OpenSans-BoldItalic.ttf in Resources */,
 				90BED0C71A5BE72F003DC872 /* OpenSans-LightItalic.ttf in Resources */,
 				90359C261A5EC49700AAD5D2 /* orderconfirm_image_plus@2x.png in Resources */,
@@ -1514,7 +1615,10 @@
 				90BED07F1A5BCC04003DC872 /* Images.xcassets in Resources */,
 				90D8F7B01A5D84B800D034CF /* register_icon_email.png in Resources */,
 				90BED0E11A5C04DE003DC872 /* mybento_nav_help@2x.png in Resources */,
+				FCDF222C1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				90D8F7B21A5D84B800D034CF /* register_icon_password.png in Resources */,
+				FCDF221C1ADC3ADF006B2750 /* Icon-72.png in Resources */,
+				FCDF22301ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1830,6 +1934,7 @@
 				90BED07C1A5BCC04003DC872 /* Base */,
 			);
 			name = Main.storyboard;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		90BED0801A5BCC04003DC872 /* LaunchScreen.xib */ = {
@@ -1838,6 +1943,7 @@
 				90BED0811A5BCC04003DC872 /* Base */,
 			);
 			name = LaunchScreen.xib;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1849,8 +1955,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
@@ -1867,7 +1973,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "10451e06-b6e9-489b-93bd-e556fc09612b";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -1878,8 +1984,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
@@ -1895,7 +2001,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "e26c5181-1118-46ce-9778-abe21516cb87";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

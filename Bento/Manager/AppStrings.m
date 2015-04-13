@@ -101,8 +101,7 @@ static AppStrings *_shareInstance;
         NSString *type = [info objectForKey:@"type"];
         if ([key isEqualToString:strKey] && [type isEqualToString:@"text"])
         {
-            NSString *value = [info objectForKey:@"value"];
-            return [NSString stringWithFormat:@"%@", value];
+            return [info objectForKey:@"value"]; // return string value
         }
     }
     
