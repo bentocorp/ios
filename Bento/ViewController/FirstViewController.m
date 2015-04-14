@@ -41,22 +41,27 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // Do any additional setup after loading the view, typically from a nib.
+
     _hasInit = NO;
     
+    // Gradient background
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.ivBackground.bounds;
 
+    // get colors for gradient
     UIColor *color1 = [DataManager getGradientColor1];
     UIColor *color2 = [DataManager getGradientColor2];
-    gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
+    
+    // set gradient (light to darker green)
+    gradient.colors = @[(id)[color1 CGColor], (id)[color2 CGColor]];
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     
+    // set background and logo image
 //    [self.ivBackground setImage:[UIImage imageNamed:@"first_background"]];
     [self.ivLaunchLogo setImage:[UIImage imageNamed:@"logo"]];
     
-    NSString *strSlogan = [[NSUserDefaults standardUserDefaults] objectForKey:@"Slogan"];
+    // set slogan string
+    NSString *strSlogan = [[NSUserDefaults standardUserDefaults] objectForKey:@"Slogan"]; // first-time running is null
     if (strSlogan == nil || strSlogan.length > 0)
         strSlogan = @"Delicious Asian Food Delivered in Minutes.";
     self.lblLaunchSlogan.text = strSlogan;
@@ -64,7 +69,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
@@ -85,12 +89,15 @@
 
 - (void)initProcedure
 {
+    // Preloader animation
     self.activityIndicator.hidden = NO;
     [self.activityIndicator startAnimating];
-    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1f]];
+    [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1f]]; // what is this?
     
+    // Get app strings from server
     [[AppStrings sharedInstance] getAppStrings];
     
+    //
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
     [self.ivBackground sd_setImageWithURL:urlBack];
 //    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
@@ -203,7 +210,7 @@
     [self gotoMyBentoScreen];
 }
 
-- (void) process
+- (void)process
 {
     NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
 /*
@@ -233,24 +240,24 @@
     }
 }
 
-- (void) gotoIntroScreen
+- (void)gotoIntroScreen
 {
     [self performSegueWithIdentifier:@"Intro" sender:nil];
 }
 
-- (void) gotoClosedScreen
+- (void)gotoClosedScreen
 {
 //    [self performSegueWithIdentifier:@"SoldOut" sender:[NSNumber numberWithInt:0]];
     [self showSoldoutScreen:[NSNumber numberWithInt:0]];
 }
 
-- (void) gotoSoldOutScreen
+- (void)gotoSoldOutScreen
 {
 //    [self performSegueWithIdentifier:@"SoldOut" sender:[NSNumber numberWithInt:1]];
     [self showSoldoutScreen:[NSNumber numberWithInt:1]];
 }
 
-- (void) gotoMyBentoScreen
+- (void)gotoMyBentoScreen
 {
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
@@ -264,7 +271,7 @@
     [self.navigationController pushViewController:vcBuildBento animated:needsAnimation];
 }
 
-- (void) showSoldoutScreen:(NSNumber *)identifier
+- (void)showSoldoutScreen:(NSNumber *)identifier
 {
     UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
     SoldOutViewController *vcSoldOut = (SoldOutViewController *)nav.topViewController;

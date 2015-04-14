@@ -370,6 +370,8 @@
 		FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22141ADC3ADF006B2750 /* Icon@2x.png */; };
 		FCDF22381ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
 		FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
+		FCDF23881ADC886C006B2750 /* hamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF23871ADC886C006B2750 /* hamburger@2x.png */; };
+		FCDF238C1ADC88E4006B2750 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDF238B1ADC88E4006B2750 /* SWRevealViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -664,6 +666,9 @@
 		FCDF22131ADC3ADF006B2750 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		FCDF22141ADC3ADF006B2750 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		FCDF23871ADC886C006B2750 /* hamburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hamburger@2x.png"; sourceTree = "<group>"; };
+		FCDF238A1ADC88E4006B2750 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
+		FCDF238B1ADC88E4006B2750 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -766,6 +771,7 @@
 		722333051A6C12FC006C2446 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
+				FCDF23891ADC88E4006B2750 /* SWRevealViewController */,
 				723BD40A1A8DD831000AD4F1 /* FXBlurView */,
 				7286EB431A7D8BE800D03DCE /* RMMapper */,
 				7209E0871A780A1200D18D7A /* SHSPhoneComponent */,
@@ -1029,9 +1035,9 @@
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
 				722333651A6D57AD006C2446 /* Model */,
-				90BED0E71A5C3333003DC872 /* Cell */,
 				90BED09C1A5BCC7B003DC872 /* View */,
 				90BED09D1A5BCC7B003DC872 /* ViewController */,
+				FCDF238D1ADCBA1B006B2750 /* Menu Panel */,
 				90BED09A1A5BCC7B003DC872 /* Resource */,
 				90BED0711A5BCC04003DC872 /* Supporting Files */,
 			);
@@ -1100,6 +1106,7 @@
 				90A553E01A60035D001F9DA7 /* PromoCodeView.h */,
 				90A553E11A60035D001F9DA7 /* PromoCodeView.m */,
 				90A553E31A60038C001F9DA7 /* PromoCodeView.xib */,
+				90BED0E71A5C3333003DC872 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1109,10 +1116,10 @@
 			children = (
 				90BED0981A5BCC7B003DC872 /* AppDelegate.h */,
 				90BED0991A5BCC7B003DC872 /* AppDelegate.m */,
-				7223336C1A6D66E8006C2446 /* IntroViewController.h */,
-				7223336D1A6D66E8006C2446 /* IntroViewController.m */,
 				90BED0A31A5BD05C003DC872 /* FirstViewController.h */,
 				90BED0A41A5BD05C003DC872 /* FirstViewController.m */,
+				7223336C1A6D66E8006C2446 /* IntroViewController.h */,
+				7223336D1A6D66E8006C2446 /* IntroViewController.m */,
 				726CE3591A82693900296182 /* BaseViewController.h */,
 				726CE35A1A82693900296182 /* BaseViewController.m */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
@@ -1226,6 +1233,7 @@
 		90BED0AC1A5BD180003DC872 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				FCDF23871ADC886C006B2750 /* hamburger@2x.png */,
 				90D8F7E41A5E39A500D034CF /* logo_title.png */,
 				90D8F7D21A5E2C4C00D034CF /* image_checked@2x.png */,
 				90D8F7D31A5E2C4C00D034CF /* image_unchecked@2x.png */,
@@ -1287,7 +1295,8 @@
 				728B9E7E1A9C65C900A2ED73 /* PreviewCollectionViewCell.m */,
 				728B9E7F1A9C65C900A2ED73 /* PreviewCollectionViewCell.xib */,
 			);
-			path = Cell;
+			name = Cell;
+			path = ../Cell;
 			sourceTree = "<group>";
 		};
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
@@ -1332,6 +1341,24 @@
 			);
 			name = "Squared Icons";
 			path = ../Squared;
+			sourceTree = "<group>";
+		};
+		FCDF23891ADC88E4006B2750 /* SWRevealViewController */ = {
+			isa = PBXGroup;
+			children = (
+				FCDF238A1ADC88E4006B2750 /* SWRevealViewController.h */,
+				FCDF238B1ADC88E4006B2750 /* SWRevealViewController.m */,
+			);
+			name = SWRevealViewController;
+			path = ../SWRevealViewController;
+			sourceTree = "<group>";
+		};
+		FCDF238D1ADCBA1B006B2750 /* Menu Panel */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Menu Panel";
+			path = ViewController/SignIn;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1604,6 +1631,7 @@
 				90BED0E01A5C04DE003DC872 /* mybento_nav_cart_inact@2x.png in Resources */,
 				FCDF221A1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */,
 				47C5B0181A8B82BD008FA7DA /* completeorder_cell_btn_minute@2x.png in Resources */,
+				FCDF23881ADC886C006B2750 /* hamburger@2x.png in Resources */,
 				90BED0C41A5BE72F003DC872 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				90BED0C81A5BE72F003DC872 /* OpenSans-Regular.ttf in Resources */,
 				FCDF22281ADC3ADF006B2750 /* Icon-Small-40@3x.png in Resources */,
@@ -1838,6 +1866,7 @@
 				90A553E21A60035D001F9DA7 /* PromoCodeView.m in Sources */,
 				722333A81A6EADBD006C2446 /* NSData+ImageContentType.m in Sources */,
 				722333601A6D4058006C2446 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
+				FCDF238C1ADC88E4006B2750 /* SWRevealViewController.m in Sources */,
 				90D8F7BD1A5D990800D034CF /* PhoneNumberViewController.m in Sources */,
 				90D8F7BA1A5D963300D034CF /* SignInViewController.m in Sources */,
 				722333FB1A72C133006C2446 /* STPTestPaymentSummaryViewController.m in Sources */,
