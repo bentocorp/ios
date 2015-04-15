@@ -59,24 +59,30 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    // set label text
     self.lblTitle.text = [[AppStrings sharedInstance] getString:SIGNUP_TITLE];
     [self.btnRegister setTitle:[[AppStrings sharedInstance] getString:SIGNUP_BUTTON_SIGNUP] forState:UIControlStateNormal];
     [self.btnPolicy setTitle:[[AppStrings sharedInstance] getString:SIGNUP_LINK_POLICY] forState:UIControlStateNormal];
     [self.btnTerms setTitle:[[AppStrings sharedInstance] getString:SIGNUP_LINK_TERMS] forState:UIControlStateNormal];
     
+    // round corners of facebook label
     self.viewRegisterWithFacebook.layer.cornerRadius = 3;
     self.viewRegisterWithFacebook.clipsToBounds = YES;
     
+    // round corners of sign up button
     self.btnRegister.layer.cornerRadius = 3;
     self.btnRegister.clipsToBounds = YES;
     
+    // set content view size of scroll view
     self.svMain.contentSize = CGSizeMake(self.svMain.frame.size.width, 504);
     
+    // block will be called when phone number text changed
     [self.txtPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
         [self updateUI];
     }];
     
+    //
     [self.txtPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
     self.txtPhoneNumber.formatter.prefix = @"+1 ";
     

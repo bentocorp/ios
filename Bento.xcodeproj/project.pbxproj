@@ -450,7 +450,7 @@
 		722333691A6D5847006C2446 /* BentoShop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BentoShop.h; sourceTree = "<group>"; };
 		7223336A1A6D5847006C2446 /* BentoShop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BentoShop.m; sourceTree = "<group>"; };
 		7223336C1A6D66E8006C2446 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
-		7223336D1A6D66E8006C2446 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
+		7223336D1A6D66E8006C2446 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = Bento/ViewController/IntroViewController.m; sourceTree = SOURCE_ROOT; };
 		722333761A6E0DFD006C2446 /* AppStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStrings.h; sourceTree = "<group>"; };
 		722333771A6E0DFD006C2446 /* AppStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStrings.m; sourceTree = "<group>"; };
 		7223337A1A6E5387006C2446 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
@@ -1106,6 +1106,7 @@
 			isa = PBXGroup;
 			children = (
 				90BED07B1A5BCC04003DC872 /* Main.storyboard */,
+				7223336D1A6D66E8006C2446 /* IntroViewController.m */,
 				90BED07E1A5BCC04003DC872 /* Images.xcassets */,
 				90BED0801A5BCC04003DC872 /* LaunchScreen.xib */,
 				90D8F7A21A5D6B6E00D034CF /* MyAlertView.h */,
@@ -1126,9 +1127,9 @@
 				90BED0A31A5BD05C003DC872 /* FirstViewController.h */,
 				90BED0A41A5BD05C003DC872 /* FirstViewController.m */,
 				7223336C1A6D66E8006C2446 /* IntroViewController.h */,
-				7223336D1A6D66E8006C2446 /* IntroViewController.m */,
 				726CE3591A82693900296182 /* BaseViewController.h */,
 				726CE35A1A82693900296182 /* BaseViewController.m */,
+				FCD0470C1ADF0C4E00030F01 /* Menu */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
 				90BED0A51A5BD05C003DC872 /* MakeBento */,
 				90BED0A61A5BD05C003DC872 /* Order */,
@@ -1322,6 +1323,13 @@
 				3CC0B59E0C21EA384AF9FA91 /* libPods.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		FCD0470C1ADF0C4E00030F01 /* Menu */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Menu;
 			sourceTree = "<group>";
 		};
 		FCDF22031ADC3ADF006B2750 /* Squared Icons */ = {

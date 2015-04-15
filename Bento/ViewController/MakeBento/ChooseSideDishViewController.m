@@ -47,9 +47,6 @@
     UINib *cellNib = [UINib nibWithNibName:@"DishCollectionViewCell" bundle:nil];
     [self.cvSideDishes registerNib:cellNib forCellWithReuseIdentifier:@"cell"];
     
-    // prevent cell scrolling
-    self.cvSideDishes.alwaysBounceVertical = NO;
-    
     if (self.sideDishIndex == 0)
         [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_1_TITLE]];
     else if (self.sideDishIndex == 1)
