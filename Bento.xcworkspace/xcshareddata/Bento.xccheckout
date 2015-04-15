@@ -12,6 +12,8 @@
 	<dict>
 		<key>58F321B027D03517BA0A9783C5C85D80A7A07508</key>
 		<string>https://github.com/demant/bento-ios.git</string>
+		<key>7CA2D5F2C3A5B118A466001E5A33BCEE65605D33</key>
+		<string>https://github.com/JosephLauSF/bento_test_version.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Bento.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>58F321B027D03517BA0A9783C5C85D80A7A07508</key>
 		<string>..</string>
+		<key>7CA2D5F2C3A5B118A466001E5A33BCEE65605D33</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/demant/bento-ios.git</string>
@@ -28,6 +32,14 @@
 	<string>58F321B027D03517BA0A9783C5C85D80A7A07508</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>7CA2D5F2C3A5B118A466001E5A33BCEE65605D33</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>

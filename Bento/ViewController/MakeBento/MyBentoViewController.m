@@ -89,11 +89,12 @@
 
 @implementation MyBentoViewController
 
+// view did load
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Menu Slider
     SWRevealViewController *revealViewController = self.revealViewController;
-    
     if (revealViewController) {
     
         [self.btnBack addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
@@ -199,8 +200,6 @@
     
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
         [[BentoShop sharedInstance] addNewBento];
-
-    [self.btnBack setImage:[UIImage imageNamed:@"hamburger.png"] forState:UIControlStateNormal];
     
     self.lblBadge.hidden = NO;
     self.btnCart.hidden = NO;
@@ -428,11 +427,6 @@
     }
 }
 
-//- (IBAction)onFaq:(id)sender
-//{
-//    [self performSegueWithIdentifier:@"Faq" sender:nil];
-//}
-
 - (IBAction)onCart:(id)sender
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
@@ -453,7 +447,7 @@
     alertView = nil;
 }
 
-- (void) gotoOrderScreen
+- (void)gotoOrderScreen
 {
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
