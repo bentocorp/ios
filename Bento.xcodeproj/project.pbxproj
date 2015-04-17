@@ -334,10 +334,6 @@
 		90D8F7E51A5E39A500D034CF /* logo_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E41A5E39A500D034CF /* logo_title.png */; };
 		90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */; };
 		90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */; };
-		FC87BAB51ADCE975004EF15A /* SWRevealViewController.m in Resources */ = {isa = PBXBuildFile; fileRef = FCDF238B1ADC88E4006B2750 /* SWRevealViewController.m */; };
-		FC87BAB61ADCEA4D004EF15A /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDF238B1ADC88E4006B2750 /* SWRevealViewController.m */; };
-		FC988E291ADDA47A00E04236 /* hamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC988E281ADDA47A00E04236 /* hamburger@2x.png */; };
-		FC988E2A1ADDA47A00E04236 /* hamburger@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FC988E281ADDA47A00E04236 /* hamburger@2x.png */; };
 		FCDF22161ADC3ADF006B2750 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22041ADC3ADF006B2750 /* Icon-60.png */; };
 		FCDF22171ADC3ADF006B2750 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22041ADC3ADF006B2750 /* Icon-60.png */; };
 		FCDF22181ADC3ADF006B2750 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */; };
@@ -374,9 +370,6 @@
 		FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22141ADC3ADF006B2750 /* Icon@2x.png */; };
 		FCDF22381ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
 		FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
-		FCDF238C1ADC88E4006B2750 /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCDF238B1ADC88E4006B2750 /* SWRevealViewController.m */; };
-		FCE175A51ADDDD4300D7D057 /* Screen Shot 2015-04-14 at 4.40.48 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE175A41ADDDD4300D7D057 /* Screen Shot 2015-04-14 at 4.40.48 PM.png */; };
-		FCE175A61ADDDD4300D7D057 /* Screen Shot 2015-04-14 at 4.40.48 PM.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE175A41ADDDD4300D7D057 /* Screen Shot 2015-04-14 at 4.40.48 PM.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -450,7 +443,7 @@
 		722333691A6D5847006C2446 /* BentoShop.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BentoShop.h; sourceTree = "<group>"; };
 		7223336A1A6D5847006C2446 /* BentoShop.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BentoShop.m; sourceTree = "<group>"; };
 		7223336C1A6D66E8006C2446 /* IntroViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IntroViewController.h; sourceTree = "<group>"; };
-		7223336D1A6D66E8006C2446 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = IntroViewController.m; path = Bento/ViewController/IntroViewController.m; sourceTree = SOURCE_ROOT; };
+		7223336D1A6D66E8006C2446 /* IntroViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IntroViewController.m; sourceTree = "<group>"; };
 		722333761A6E0DFD006C2446 /* AppStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStrings.h; sourceTree = "<group>"; };
 		722333771A6E0DFD006C2446 /* AppStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStrings.m; sourceTree = "<group>"; };
 		7223337A1A6E5387006C2446 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
@@ -653,7 +646,6 @@
 		90D8F7E61A5E3F7500D034CF /* EnterCreditCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterCreditCardViewController.h; sourceTree = "<group>"; };
 		90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterCreditCardViewController.m; sourceTree = "<group>"; };
 		90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderconfirm_image_car.png; sourceTree = "<group>"; };
-		FC988E281ADDA47A00E04236 /* hamburger@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "hamburger@2x.png"; sourceTree = "<group>"; };
 		FCDF22041ADC3ADF006B2750 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		FCDF22061ADC3ADF006B2750 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
@@ -672,9 +664,6 @@
 		FCDF22131ADC3ADF006B2750 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		FCDF22141ADC3ADF006B2750 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
-		FCDF238A1ADC88E4006B2750 /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
-		FCDF238B1ADC88E4006B2750 /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
-		FCE175A41ADDDD4300D7D057 /* Screen Shot 2015-04-14 at 4.40.48 PM.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Screen Shot 2015-04-14 at 4.40.48 PM.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -777,7 +766,6 @@
 		722333051A6C12FC006C2446 /* Modules */ = {
 			isa = PBXGroup;
 			children = (
-				FCDF23891ADC88E4006B2750 /* SWRevealViewController */,
 				723BD40A1A8DD831000AD4F1 /* FXBlurView */,
 				7286EB431A7D8BE800D03DCE /* RMMapper */,
 				7209E0871A780A1200D18D7A /* SHSPhoneComponent */,
@@ -1015,7 +1003,6 @@
 		90BED0651A5BCC04003DC872 = {
 			isa = PBXGroup;
 			children = (
-				FCE175A41ADDDD4300D7D057 /* Screen Shot 2015-04-14 at 4.40.48 PM.png */,
 				90BED0701A5BCC04003DC872 /* Bento */,
 				90BED08A1A5BCC04003DC872 /* BentoTests */,
 				90BED06F1A5BCC04003DC872 /* Products */,
@@ -1042,9 +1029,9 @@
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
 				722333651A6D57AD006C2446 /* Model */,
+				90BED0E71A5C3333003DC872 /* Cell */,
 				90BED09C1A5BCC7B003DC872 /* View */,
 				90BED09D1A5BCC7B003DC872 /* ViewController */,
-				FCDF238D1ADCBA1B006B2750 /* Menu Panel */,
 				90BED09A1A5BCC7B003DC872 /* Resource */,
 				90BED0711A5BCC04003DC872 /* Supporting Files */,
 			);
@@ -1106,7 +1093,6 @@
 			isa = PBXGroup;
 			children = (
 				90BED07B1A5BCC04003DC872 /* Main.storyboard */,
-				7223336D1A6D66E8006C2446 /* IntroViewController.m */,
 				90BED07E1A5BCC04003DC872 /* Images.xcassets */,
 				90BED0801A5BCC04003DC872 /* LaunchScreen.xib */,
 				90D8F7A21A5D6B6E00D034CF /* MyAlertView.h */,
@@ -1114,7 +1100,6 @@
 				90A553E01A60035D001F9DA7 /* PromoCodeView.h */,
 				90A553E11A60035D001F9DA7 /* PromoCodeView.m */,
 				90A553E31A60038C001F9DA7 /* PromoCodeView.xib */,
-				90BED0E71A5C3333003DC872 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1124,12 +1109,12 @@
 			children = (
 				90BED0981A5BCC7B003DC872 /* AppDelegate.h */,
 				90BED0991A5BCC7B003DC872 /* AppDelegate.m */,
+				7223336C1A6D66E8006C2446 /* IntroViewController.h */,
+				7223336D1A6D66E8006C2446 /* IntroViewController.m */,
 				90BED0A31A5BD05C003DC872 /* FirstViewController.h */,
 				90BED0A41A5BD05C003DC872 /* FirstViewController.m */,
-				7223336C1A6D66E8006C2446 /* IntroViewController.h */,
 				726CE3591A82693900296182 /* BaseViewController.h */,
 				726CE35A1A82693900296182 /* BaseViewController.m */,
-				FCD0470C1ADF0C4E00030F01 /* Menu */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
 				90BED0A51A5BD05C003DC872 /* MakeBento */,
 				90BED0A61A5BD05C003DC872 /* Order */,
@@ -1242,7 +1227,6 @@
 			isa = PBXGroup;
 			children = (
 				90D8F7E41A5E39A500D034CF /* logo_title.png */,
-				FC988E281ADDA47A00E04236 /* hamburger@2x.png */,
 				90D8F7D21A5E2C4C00D034CF /* image_checked@2x.png */,
 				90D8F7D31A5E2C4C00D034CF /* image_unchecked@2x.png */,
 				90D8F7BE1A5D9B0800D034CF /* nav_btn_close@2x.png */,
@@ -1303,8 +1287,7 @@
 				728B9E7E1A9C65C900A2ED73 /* PreviewCollectionViewCell.m */,
 				728B9E7F1A9C65C900A2ED73 /* PreviewCollectionViewCell.xib */,
 			);
-			name = Cell;
-			path = ../Cell;
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
@@ -1323,13 +1306,6 @@
 				3CC0B59E0C21EA384AF9FA91 /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FCD0470C1ADF0C4E00030F01 /* Menu */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Menu;
 			sourceTree = "<group>";
 		};
 		FCDF22031ADC3ADF006B2750 /* Squared Icons */ = {
@@ -1358,24 +1334,6 @@
 			path = ../Squared;
 			sourceTree = "<group>";
 		};
-		FCDF23891ADC88E4006B2750 /* SWRevealViewController */ = {
-			isa = PBXGroup;
-			children = (
-				FCDF238A1ADC88E4006B2750 /* SWRevealViewController.h */,
-				FCDF238B1ADC88E4006B2750 /* SWRevealViewController.m */,
-			);
-			name = SWRevealViewController;
-			path = ../SWRevealViewController;
-			sourceTree = "<group>";
-		};
-		FCDF238D1ADCBA1B006B2750 /* Menu Panel */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Menu Panel";
-			path = ViewController/SignIn;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1388,7 +1346,7 @@
 				7216B7601AA64C7C0006FFE9 /* Frameworks */,
 				7216B76F1AA64C7C0006FFE9 /* Resources */,
 				7216B7AF1AA64C7C0006FFE9 /* Copy Pods Resources */,
-				7216B7B01AA64C7C0006FFE9 /* Run Script */,
+				7216B7B01AA64C7C0006FFE9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -1492,7 +1450,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC87BAB51ADCE975004EF15A /* SWRevealViewController.m in Resources */,
 				7216B7701AA64C7C0006FFE9 /* deliverylocation_icon_search@2x.png in Resources */,
 				7216B7711AA64C7C0006FFE9 /* register_icon_email_err.png in Resources */,
 				7216B7721AA64C7C0006FFE9 /* completeorder_cell_btn_remove@2x.png in Resources */,
@@ -1550,7 +1507,6 @@
 				FCDF22271ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				7216B79C1AA64C7C0006FFE9 /* first_background.png in Resources */,
 				7216B79D1AA64C7C0006FFE9 /* orderconfirm_image_car.png in Resources */,
-				FCE175A61ADDDD4300D7D057 /* Screen Shot 2015-04-14 at 4.40.48 PM.png in Resources */,
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
 				FCDF22211ADC3ADF006B2750 /* Icon-76.png in Resources */,
 				7216B79F1AA64C7C0006FFE9 /* nav_background.png in Resources */,
@@ -1566,7 +1522,6 @@
 				FCDF22331ADC3ADF006B2750 /* Icon-Small@3x.png in Resources */,
 				7216B7A71AA64C7C0006FFE9 /* OpenSans-BoldItalic.ttf in Resources */,
 				7216B7A81AA64C7C0006FFE9 /* OpenSans-LightItalic.ttf in Resources */,
-				FC988E2A1ADDA47A00E04236 /* hamburger@2x.png in Resources */,
 				7216B7A91AA64C7C0006FFE9 /* orderconfirm_image_plus@2x.png in Resources */,
 				7216B7AA1AA64C7C0006FFE9 /* register_image_or.png in Resources */,
 				7216B7AB1AA64C7C0006FFE9 /* Images.xcassets in Resources */,
@@ -1627,7 +1582,6 @@
 				90359C221A5EC49700AAD5D2 /* orderconfirm_image_applepay.png in Resources */,
 				90D8F7BF1A5D9B0800D034CF /* nav_btn_close@2x.png in Resources */,
 				90D8F7C51A5E126C00D034CF /* register_icon_password_err.png in Resources */,
-				FC988E291ADDA47A00E04236 /* hamburger@2x.png in Resources */,
 				90BED0EC1A5C3346003DC872 /* DishCollectionViewCell.xib in Resources */,
 				90359C231A5EC49700AAD5D2 /* orderconfirm_image_countpanel.png in Resources */,
 				FCDF22181ADC3ADF006B2750 /* Icon-60@2x.png in Resources */,
@@ -1660,7 +1614,6 @@
 				90D8F7B51A5D84B800D034CF /* register_image_or.png in Resources */,
 				90BED07F1A5BCC04003DC872 /* Images.xcassets in Resources */,
 				90D8F7B01A5D84B800D034CF /* register_icon_email.png in Resources */,
-				FCE175A51ADDDD4300D7D057 /* Screen Shot 2015-04-14 at 4.40.48 PM.png in Resources */,
 				90BED0E11A5C04DE003DC872 /* mybento_nav_help@2x.png in Resources */,
 				FCDF222C1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				90D8F7B21A5D84B800D034CF /* register_icon_password.png in Resources */,
@@ -1709,14 +1662,13 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7216B7B01AA64C7C0006FFE9 /* Run Script */ = {
+		7216B7B01AA64C7C0006FFE9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1773,7 +1725,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC87BAB61ADCEA4D004EF15A /* SWRevealViewController.m in Sources */,
 				7216B7091AA64C7C0006FFE9 /* WebManager.m in Sources */,
 				7216B70A1AA64C7C0006FFE9 /* RegisterViewController.m in Sources */,
 				7216B70B1AA64C7C0006FFE9 /* STPTestDataTableViewController.m in Sources */,
@@ -1887,7 +1838,6 @@
 				90A553E21A60035D001F9DA7 /* PromoCodeView.m in Sources */,
 				722333A81A6EADBD006C2446 /* NSData+ImageContentType.m in Sources */,
 				722333601A6D4058006C2446 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
-				FCDF238C1ADC88E4006B2750 /* SWRevealViewController.m in Sources */,
 				90D8F7BD1A5D990800D034CF /* PhoneNumberViewController.m in Sources */,
 				90D8F7BA1A5D963300D034CF /* SignInViewController.m in Sources */,
 				722333FB1A72C133006C2446 /* STPTestPaymentSummaryViewController.m in Sources */,
@@ -2158,34 +2108,6 @@
 				INFOPLIST_FILE = Bento/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-l\"MPCategoryHelpers\"",
-					"-l\"Pods-Mixpanel\"",
-					"-l\"Pods-PaymentKit\"",
-					"-l\"Pods-Stripe\"",
-					"-l\"icucore\"",
-					"-framework",
-					"\"Accelerate\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreTelephony\"",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-framework",
-					"\"UIKit\"",
-					"-weak_framework",
-					"\"AddressBook\"",
-					"-weak_framework",
-					"\"PassKit\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "2f894934-27e0-4203-975b-b4b64601823b";
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2210,34 +2132,6 @@
 				INFOPLIST_FILE = Bento/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_LDFLAGS = (
-					"-ObjC",
-					"-l\"MPCategoryHelpers\"",
-					"-l\"Pods-Mixpanel\"",
-					"-l\"Pods-PaymentKit\"",
-					"-l\"Pods-Stripe\"",
-					"-l\"icucore\"",
-					"-framework",
-					"\"Accelerate\"",
-					"-framework",
-					"\"CoreGraphics\"",
-					"-framework",
-					"\"CoreTelephony\"",
-					"-framework",
-					"\"Foundation\"",
-					"-framework",
-					"\"QuartzCore\"",
-					"-framework",
-					"\"Security\"",
-					"-framework",
-					"\"SystemConfiguration\"",
-					"-framework",
-					"\"UIKit\"",
-					"-weak_framework",
-					"\"AddressBook\"",
-					"-weak_framework",
-					"\"PassKit\"",
-				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "688dc68d-7ca4-4a3b-a5d8-9a140d72fbd1";
 				TARGETED_DEVICE_FAMILY = 1;

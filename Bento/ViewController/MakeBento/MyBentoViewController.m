@@ -29,8 +29,6 @@
 #import "SVPlacemark.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
-#import "SWRevealViewController.h"
-
 #define BORDER_COLOR [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f]
 
 @interface MyBentoViewController ()<MyAlertViewDelegate>
@@ -81,6 +79,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *ivBannerSideDish3;
 @property (weak, nonatomic) IBOutlet UIImageView *ivBannerSideDish4;
 
+
 @property (nonatomic, assign) IBOutlet UIButton *btnAddAnotherBento;
 
 @property (nonatomic, assign) IBOutlet UIButton *btnState;
@@ -89,18 +88,10 @@
 
 @implementation MyBentoViewController
 
-// view did load
 - (void)viewDidLoad {
     [super viewDidLoad];
+    // Do any additional setup after loading the view.
     
-    // Menu Slider
-    SWRevealViewController *revealViewController = self.revealViewController;
-    if (revealViewController) {
-    
-        [self.btnBack addTarget:self.revealViewController action:@selector(revealToggle:) forControlEvents:UIControlEventTouchUpInside];
-        [self.view addGestureRecognizer: self.revealViewController.panGestureRecognizer];
-    }
-
     self.lblBadge.layer.cornerRadius = self.lblBadge.frame.size.width / 2;
     self.lblBadge.clipsToBounds = YES;
     
@@ -200,6 +191,8 @@
     
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
         [[BentoShop sharedInstance] addNewBento];
+
+    [self.btnBack setImage:[UIImage imageNamed:@"mybento_nav_help"] forState:UIControlStateNormal];
     
     self.lblBadge.hidden = NO;
     self.btnCart.hidden = NO;
@@ -427,6 +420,11 @@
     }
 }
 
+- (IBAction)onFaq:(id)sender
+{
+    [self performSegueWithIdentifier:@"Faq" sender:nil];
+}
+
 - (IBAction)onCart:(id)sender
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
@@ -447,7 +445,7 @@
     alertView = nil;
 }
 
-- (void)gotoOrderScreen
+- (void) gotoOrderScreen
 {
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
