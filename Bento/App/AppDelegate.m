@@ -177,7 +177,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     if (![globalShop checkLocation:location])
         [self showLocationAlert];
 */
-    
+  
+    // facebook event tracking
     [FBSettings setDefaultAppID: @"791688527544905"];
     [FBAppEvents activateApp];
 }
