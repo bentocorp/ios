@@ -200,8 +200,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Facebook
 #ifndef DEV_MODE
     if ([[url scheme] isEqualToString:@"fb791688527544905"])
+        NSLog(@"This is production build");
 #else
     if ([[url scheme] isEqualToString:@"fb823525551027869"])
+        NSLog(@"This is dev build");
 #endif
     {
         BOOL handled = [[FacebookManager sharedInstance] handleOpenURL:url sourceApplication:sourceApplication];
