@@ -77,6 +77,9 @@
     [loadingHUD showInView:self];
     
     NSString *strRequest = [NSString stringWithFormat:@"%@/coupon/apply/%@?api_token=%@", SERVER_URL, strPromoCode, strAPIToken];
+    
+    NSLog(@"api token %@", strRequest);
+    
     [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         
@@ -87,6 +90,8 @@
             NSInteger discount = [[response objectForKey:@"amountOff"] integerValue];
             if (self.delegate != nil)
                 [self.delegate setDiscound:discount strCouponCode:strPromoCode];
+            
+             NSLog(@"json response %@", response);
         }
         
         [UIView animateWithDuration:0.3f animations:^{

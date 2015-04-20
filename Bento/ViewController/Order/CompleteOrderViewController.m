@@ -1095,7 +1095,12 @@
     [loadingHUD showInView:self.view];
     
     NSString *strRequest = [NSString stringWithFormat:@"%@/order?api_token=%@", SERVER_URL, [[DataManager shareDataManager] getAPIToken]];
+    
+    NSLog(@"order URL - %@", strRequest);
+    
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+        NSLog(@"order JSON - %@", dicRequest);
+        
         [loadingHUD dismiss];
         
         if (completion)
