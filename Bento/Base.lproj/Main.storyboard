@@ -2676,7 +2676,7 @@
             <objects>
                 <viewController id="OTw-yi-Ooo" customClass="FaqViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WH0-Db-p6J">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="xjp-gW-neB">
@@ -2760,7 +2760,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <webView contentMode="scaleToFill" id="4da-Sg-qqb">
-                                <rect key="frame" x="0.0" y="108" width="320" height="416"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="328"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -2768,7 +2768,7 @@
                                 </connections>
                             </webView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="43T-HP-Zdo">
-                                <rect key="frame" x="0.0" y="523" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="435" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
@@ -2781,7 +2781,7 @@
                                 </connections>
                             </button>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="wrC-4h-Tqp">
-                                <rect key="frame" x="151" y="312" width="20" height="20"/>
+                                <rect key="frame" x="151" y="262" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
@@ -2856,10 +2856,10 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Xro-hm-UPB"/>
-        <segue reference="oNJ-Gc-fzE"/>
-        <segue reference="KR1-Yj-bB5"/>
-        <segue reference="wQ7-4U-rn4"/>
         <segue reference="09w-J6-v5C"/>
+        <segue reference="KR1-Yj-bB5"/>
+        <segue reference="oNJ-Gc-fzE"/>
+        <segue reference="AiB-nW-Nk2"/>
+        <segue reference="Xro-hm-UPB"/>
     </inferredMetricsTieBreakers>
 </document>
