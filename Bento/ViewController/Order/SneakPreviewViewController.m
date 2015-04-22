@@ -29,8 +29,19 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
-    self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    // Get current hour
+    NSDate *currentDate = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
+    NSInteger hour = [components hour];
+    NSLog(@"current hour - %ld", hour);
+    
+    // if sold out or closed and before 9pm
+    if ([[BentoShop sharedInstance] isSoldOut] || ([[BentoShop sharedInstance] isClosed] && hour < 21)) {
+        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+    } else if ([[BentoShop sharedInstance] isClosed]) {
+        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    }
     
     UINib *cellNib = [UINib nibWithNibName:@"PreviewCollectionViewCell" bundle:nil];
     [self.cvDishes registerNib:cellNib forCellWithReuseIdentifier:@"PreviewCollectionViewCell"];
@@ -116,7 +127,15 @@
 {
     if (section == 0) // Main Dishes
     {
-        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+//        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+        
+        NSArray *aryMainDishes;
+        if ([[BentoShop sharedInstance] isSoldOut]) {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
+        } else if ([[BentoShop sharedInstance] isClosed]) {
+            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+        }
+        
         if (aryMainDishes == nil)
             return 0;
         
@@ -124,7 +143,15 @@
     }
     else if (section == 1)
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+//        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+        
+        NSArray *arySideDishes;
+        if ([[BentoShop sharedInstance] isSoldOut]) {
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+        } else if ([[BentoShop sharedInstance] isClosed]) {
+            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+        }
+
         if (arySideDishes == nil)
             return 0;
         
@@ -156,13 +183,31 @@
     
     if (indexPath.section == 0) // Main Dish
     {
-        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+//        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+        NSArray *aryMainDishes;
+        if ([[BentoShop sharedInstance] isSoldOut]) {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
+            NSLog(@"Get today's menu");
+        } else if ([[BentoShop sharedInstance] isClosed]) {
+            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+        }
+        
+        NSLog(@"Get today's menu - %@", [[BentoShop sharedInstance] getMainDishes]);
+        NSLog(@"Get tomorrow's menu - %@", [[BentoShop sharedInstance] getNextMainDishes]);
+        
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
     }
     else if (indexPath.section == 1) // Side Dish
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+//        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+        NSArray *arySideDishes;
+        if ([[BentoShop sharedInstance] isSoldOut]) {
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+        } else if ([[BentoShop sharedInstance] isClosed]) {
+            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+        }
+        
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
     }

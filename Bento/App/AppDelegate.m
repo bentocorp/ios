@@ -178,9 +178,18 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         [self showLocationAlert];
 */
   
-    // facebook event tracking
-    [FBSettings setDefaultAppID: @"791688527544905"];
-    [FBAppEvents activateApp];
+    // Facebook event tracking
+#ifndef DEV_MODE
+    static NSString *facebookKey = @"791688527544905"; // prod key
+#else
+    static NSString *facebookKey = @"823525551027869"; // dev key
+#endif
+    {
+        [FBSettings setDefaultAppID: facebookKey];
+        [FBAppEvents activateApp];
+        
+        NSLog(@"facebook key - %@", facebookKey);
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
@@ -200,10 +209,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Facebook
 #ifndef DEV_MODE
     if ([[url scheme] isEqualToString:@"fb791688527544905"])
-        NSLog(@"This is production build");
 #else
     if ([[url scheme] isEqualToString:@"fb823525551027869"])
-        NSLog(@"This is dev build");
 #endif
     {
         BOOL handled = [[FacebookManager sharedInstance] handleOpenURL:url sourceApplication:sourceApplication];

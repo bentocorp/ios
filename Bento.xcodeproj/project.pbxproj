@@ -2102,7 +2102,8 @@
 					"DEBUG=1",
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
-					STRIPE_ENABLE_APPLEPAY,
+					"$(inherited)",
+					"COCOAPODS=1",
 					"DEBUG=1",
 				);
 				INFOPLIST_FILE = Bento/Info.plist;
