@@ -241,7 +241,7 @@ static BentoShop *_shareInstance;
     NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     NSInteger hour = [components hour];
     
-    NSLog(@"CURRENT HOUR - %ld", hour);
+    NSLog(@"CURRENT HOUR - %ld", (long)hour);
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd"];
