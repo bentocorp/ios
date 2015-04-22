@@ -6,16 +6,16 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "451170299.396767"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "451344462.713107"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "688"
-            endingLineNumber = "688"
-            landmarkName = "-onGetItNow:"
+            startingLineNumber = "225"
+            endingLineNumber = "225"
+            landmarkName = "-getNextMenus"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,13 +25,13 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "451170301.477478"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "451355123.951272"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "687"
-            endingLineNumber = "687"
-            landmarkName = "-onGetItNow:"
+            startingLineNumber = "250"
+            endingLineNumber = "250"
+            landmarkName = "-getNextMenus"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

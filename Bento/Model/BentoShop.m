@@ -159,8 +159,8 @@ static BentoShop *_shareInstance;
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd"];
-    NSString *strDate = [formatter stringFromDate:currentDate];
     
+    NSString *strDate = [formatter stringFromDate:currentDate];
     currentDate = nil;
     formatter = nil;
     
@@ -238,14 +238,16 @@ static BentoShop *_shareInstance;
 #endif
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:currentDate];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     NSInteger hour = [components hour];
+    
+    NSLog(@"CURRENT HOUR - %ld", hour);
     
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd"];
     NSString *strDate = [formatter stringFromDate:currentDate];
     
-    if (hour < 21)
+    if (hour < 21) // before 9pm
     {
         NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
         
