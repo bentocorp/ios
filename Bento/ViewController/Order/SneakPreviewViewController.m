@@ -33,13 +33,22 @@
     NSDate *currentDate = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
+    
     NSInteger hour = [components hour];
     NSLog(@"current hour - %ld", hour);
     
-    // if sold out or closed and before 9pm
-    if ([[BentoShop sharedInstance] isSoldOut] || ([[BentoShop sharedInstance] isClosed] && hour < 21)) {
+    // Sunday = 1, Saturday = 7
+    int weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
+    NSLog(@"today is - %ld", (long)weekday);
+    
+    // if sold out || (closed && before 9pm && is not sunday && is not saturday)
+    if ([[BentoShop sharedInstance] isSoldOut] ||
+        (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+        
         self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+        
     } else if ([[BentoShop sharedInstance] isClosed]) {
+        
         self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     }
     
