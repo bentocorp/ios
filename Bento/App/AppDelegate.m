@@ -16,7 +16,6 @@
 #import "AppStrings.h"
 #import "DataManager.h"
 #import "Reachability.h"
-#import "FacebookManager.h"
 
 // Crashlytics
 #import <Fabric/Fabric.h>
@@ -27,6 +26,10 @@
 #define MIXPANEL_TOKEN @"e0b4fc9fdf720bb40b6cbefddb9678f3"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
+// Facebook
+#import "FacebookManager.h"
+#import <FacebookSDK/FacebookSDK.h>
 
 NSString * const StripePublishableTestKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
 NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
@@ -174,6 +177,19 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     if (![globalShop checkLocation:location])
         [self showLocationAlert];
 */
+  
+    // Facebook event tracking
+#ifndef DEV_MODE
+    static NSString *facebookKey = @"791688527544905"; // prod key
+#else
+    static NSString *facebookKey = @"823525551027869"; // dev key
+#endif
+    {
+        [FBSettings setDefaultAppID: facebookKey];
+        [FBAppEvents activateApp];
+        
+        NSLog(@"facebook key - %@", facebookKey);
+    }
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
