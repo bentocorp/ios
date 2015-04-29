@@ -173,12 +173,14 @@ static DataManager *_shareDataManager;
 
 - (void)setCreditCard:(STPCard *)creditCardInfo
 {
+    
     self.creditCardInfo = creditCardInfo;
     
-    if (creditCardInfo == nil)
+    if (creditCardInfo == nil) {
         self.paymentMethod = Payment_None;
-    else
+    } else {
         self.paymentMethod = Payment_CreditCard;
+    }
 }
 
 - (PaymentMethod)getPaymentMethod

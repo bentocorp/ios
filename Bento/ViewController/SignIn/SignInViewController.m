@@ -19,6 +19,8 @@
 #import "DataManager.h"
 #import "FacebookManager.h"
 
+#import "SignedOutSettingsViewController.h"
+
 @interface SignInViewController () <FBManagerDelegate, MyAlertViewDelegate>
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
@@ -33,6 +35,9 @@
 
 @property (nonatomic, assign) IBOutlet UIImageView *ivEmail;
 @property (nonatomic, assign) IBOutlet UIImageView *ivPassword;
+
+- (IBAction)onSignUpButton:(id)sender;
+
 
 @end
 
@@ -193,8 +198,17 @@
 - (IBAction)onBack:(id)sender
 {
     [self hideKeyboard];
+
+    if (NO) {
+        //skip
+    } else {
+        
+        // this will be checked first. back to settings page
+        [self.navigationController popViewControllerAnimated:YES];
+    }
     
-    [self.navigationController popViewControllerAnimated:YES];
+    // back to My Bento
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) dissmodal
@@ -225,6 +239,8 @@
         
         NSDictionary *response = networkOperation.responseJSON;
         [[DataManager shareDataManager] setUserInfo:response];
+        
+        NSLog(@"email log in response - %@", response);
         
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
         [pref setObject:strRequest forKey:@"apiName"];
@@ -304,7 +320,8 @@
      {
          if (error == nil)
          {
-             NSLog(@"%@", user);
+             NSLog(@"facebook log in response - %@", user);
+             
              NSString *strMailAddr = [user valueForKey:@"email"];
              if (strMailAddr == nil || strMailAddr.length == 0)
              {
@@ -326,6 +343,9 @@
                                          };
              
              NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
+             
+             NSLog(@"Facebook login dictRequest - %@", dicRequest);
+             
              WebManager *webManager = [[WebManager alloc] init];
              
              NSString *strRequest = [NSString stringWithFormat:@"%@/user/fblogin", SERVER_URL];
@@ -334,6 +354,8 @@
                  
                  NSDictionary *response = networkOperation.responseJSON;
                  [[DataManager shareDataManager] setUserInfo:response];
+                 
+                 NSLog(@"/user/fblogin response - %@", response);
                  
                  NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
                  [pref setObject:strRequest forKey:@"apiName"];
@@ -468,6 +490,14 @@
     {
         [self performSelector:@selector(doReauthorise) withObject:nil];
     }
+}
+
+
+- (IBAction)onSignUpButton:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"RegisterID"];
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 @end

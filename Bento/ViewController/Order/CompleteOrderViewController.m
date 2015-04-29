@@ -8,7 +8,6 @@
 
 #import "CompleteOrderViewController.h"
 
-#import "FaqViewController.h"
 #import "MyBentoViewController.h"
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
@@ -152,30 +151,6 @@
     
     _currentIndexPath = nil;
     
-    self.lblAddress.text = @"";
-
-    self.placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-    if (self.placeInfo != nil)
-    {
-        if (self.placeInfo.subThoroughfare && self.placeInfo.thoroughfare)
-            self.lblAddress.text = [NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare];
-        else if (self.placeInfo.subThoroughfare)
-            self.lblAddress.text = self.placeInfo.subThoroughfare;
-        else if (self.placeInfo.thoroughfare)
-            self.lblAddress.text = self.placeInfo.thoroughfare;
-        else
-            self.lblAddress.text = @"";
-
-        [self.lblAddress setTextColor:[UIColor colorWithRed:78.f/255.f green:88.f/255.f blue:99.f/255.f alpha:1.0f]];
-        [self.btnChangeAddr setTitle:@"CHANGE" forState:UIControlStateNormal];
-    }
-    else
-    {
-        self.lblAddress.text = @"Delivery Destination";
-        [self.lblAddress setTextColor:[UIColor lightGrayColor]];
-        [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
-    }
-    
     self.tvBentos.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     if ([[DataManager shareDataManager] getPaymentMethod] == Payment_None)
@@ -202,11 +177,6 @@
     {
         EnterCreditCardViewController *vcEnterCreditCard = segue.destinationViewController;
         vcEnterCreditCard.delegate = self;
-    }
-    else if ([segue.identifier isEqualToString:@"Faq"])
-    {
-        FaqViewController *vc = segue.destinationViewController;
-        vc.contentType = CONTENT_FAQ;
     }
 }
 
@@ -257,6 +227,8 @@
 
 - (void)updateCardInfo
 {
+    NSLog(@"updated user info - %@", [[DataManager shareDataManager] getUserInfo]);
+    
     PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
     if (curPaymentMethod == Payment_ApplePay)
     {
@@ -278,29 +250,64 @@
         PTKCardNumber *cardNumber = [PTKCardNumber cardNumberWithString:cardInfo.number];
         PTKCardType cardType = [cardNumber cardType];
         
+        NSMutableDictionary *currentUserInfo = [[[DataManager shareDataManager] getUserInfo] mutableCopy];
+        
         switch (cardType) {
             case PTKCardTypeAmex:
                 [self updatePaymentInfo:@"amex" cardNumber:cardNumber.last4];
+                currentUserInfo[@"card"] = @{
+                                             @"brand": @"amex",
+                                             @"last4": cardNumber.last4
+                                             };
+                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeDinersClub:
                 [self updatePaymentInfo:@"diners" cardNumber:cardNumber.last4];
+                currentUserInfo[@"card"] = @{
+                                             @"brand": @"diners",
+                                             @"last4": cardNumber.last4
+                                             };
+                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeDiscover:
                 [self updatePaymentInfo:@"discover" cardNumber:cardNumber.last4];
+                currentUserInfo[@"card"] = @{
+                                             @"brand": @"discover",
+                                             @"last4": cardNumber.last4
+                                             };
+                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeJCB:
                 [self updatePaymentInfo:@"jcb" cardNumber:cardNumber.last4];
+                currentUserInfo[@"card"] = @{
+                                             @"brand": @"jcb",
+                                             @"last4": cardNumber.last4
+                                             };
+                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeMasterCard:
                 [self updatePaymentInfo:@"mastercard" cardNumber:cardNumber.last4];
+                currentUserInfo[@"card"] = @{
+                                             @"brand": @"mastercard",
+                                             @"last4": cardNumber.last4
+                                             };
+                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeVisa:
                 [self updatePaymentInfo:@"visa" cardNumber:cardNumber.last4];
+                currentUserInfo[@"card"] = @{
+                                             @"brand": @"visa",
+                                             @"last4": cardNumber.last4
+                                             };
+                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             default:
                 [self updatePaymentInfo:@"" cardNumber:@""];
                 break;
         }
+        
+        NSLog(@"card number - %@", cardInfo.last4);
+        
     }
     else if (curPaymentMethod == Payment_None)
     {
@@ -399,6 +406,31 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    
+    // ADDRESS
+    self.lblAddress.text = @"";
+    
+    self.placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    if (self.placeInfo != nil)
+    {
+        if (self.placeInfo.subThoroughfare && self.placeInfo.thoroughfare)
+            self.lblAddress.text = [NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare];
+        else if (self.placeInfo.subThoroughfare)
+            self.lblAddress.text = self.placeInfo.subThoroughfare;
+        else if (self.placeInfo.thoroughfare)
+            self.lblAddress.text = self.placeInfo.thoroughfare;
+        else
+            self.lblAddress.text = @"";
+        
+        [self.lblAddress setTextColor:[UIColor colorWithRed:78.f/255.f green:88.f/255.f blue:99.f/255.f alpha:1.0f]];
+        [self.btnChangeAddr setTitle:@"CHANGE" forState:UIControlStateNormal];
+    }
+    else
+    {
+        self.lblAddress.text = @"Delivery Destination";
+        [self.lblAddress setTextColor:[UIColor lightGrayColor]];
+        [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -431,11 +463,6 @@
 - (IBAction)onBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)onHelp:(id)sender
-{
-    [self performSegueWithIdentifier:@"Faq" sender:nil];
 }
 
 - (IBAction)onChangeAddress:(id)sender

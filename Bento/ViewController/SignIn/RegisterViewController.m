@@ -120,6 +120,8 @@
         {
             vcSignIn.txtEmail.text = @"";
         }
+        
+        vcSignIn.whichVC = @"From Register VC";
     }
 }
 
@@ -197,14 +199,8 @@
 
 - (IBAction)onBack:(id)sender
 {
-    [self dissmodal];
-}
-
-- (void) dissmodal
-{
     [self closeKeyboard];
-    
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)reqFacebookUserInfo
@@ -254,7 +250,10 @@
                  [pref synchronize];
                  
                  [self showErrorWithString:nil code:ERROR_NONE];
-                 [self gotoDeliveryLocationScreen];
+
+                 [self signInWithRegisteredData:dicRequest];
+                 
+                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
                  
              } failure:^(MKNetworkOperation *errorOp, NSError *error) {
                  
@@ -338,8 +337,8 @@
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         
-        NSDictionary *response = networkOperation.responseJSON;
-        [[DataManager shareDataManager] setUserInfo:response];
+//        NSDictionary *response = networkOperation.responseJSON;
+//        [[DataManager shareDataManager] setUserInfo:response];
         
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
         NSString *strRequest = [NSString stringWithFormat:@"%@/user/login", SERVER_URL];
@@ -349,12 +348,14 @@
                                        @"email" : strEmail,
                                        @"password" : strPassword,
                                        };
+        
         NSDictionary *saveRequest = @{@"data" : [loginRequest jsonEncodedKeyValueString]};
         [pref setObject:saveRequest forKey:@"loginRequest"];
         [pref synchronize];
         
         [self showErrorWithString:nil code:ERROR_NONE];
-        [self gotoDeliveryLocationScreen];
+        
+        [self signInWithRegisteredData:dicRequest];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -370,6 +371,30 @@
             [self showErrorWithString:strMessage code:ERROR_NO_EMAIL];
         else
             [self showErrorWithString:strMessage code:ERROR_EMAIL];
+        
+    } isJSON:NO];
+}
+
+-(void)signInWithRegisteredData:(NSDictionary *)registeredData
+{
+    WebManager *webManager = [[WebManager alloc] init];
+    
+    NSString *strRequest = [NSString stringWithFormat:@"%@/user/login", SERVER_URL];
+    [webManager AsyncProcess:strRequest method:POST parameters:registeredData success:^(MKNetworkOperation *networkOperation) {
+        
+        NSDictionary *response = networkOperation.responseJSON;
+        [[DataManager shareDataManager] setUserInfo:response];
+        NSLog(@"new user data - %@", [[DataManager shareDataManager] getUserInfo]);
+        
+        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+        [pref setObject:strRequest forKey:@"apiName"];
+        [pref setObject:registeredData forKey:@"loginRequest"];
+        [pref synchronize];
+        
+        // dismiss vc
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         
     } isJSON:NO];
 }
@@ -424,13 +449,6 @@
     [self doRegister];
 }
 
-- (IBAction)onSignin:(id)sender
-{
-    [self closeKeyboard];
-    
-    [self performSegueWithIdentifier:@"SignIn" sender:nil];
-}
-
 - (IBAction)onSignInWithEmail:(id)sender
 {
     [self performSegueWithIdentifier:@"SignIn" sender:self.txtEmail.text];
@@ -440,14 +458,20 @@
 {
     [self closeKeyboard];
     
-    [self performSegueWithIdentifier:@"Terms" sender:[NSNumber numberWithInt:CONTENT_PRIVACY]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
+    destVC.contentType = CONTENT_PRIVACY;
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 - (IBAction)onTermsAndConditions:(id)sender
 {
     [self closeKeyboard];
     
-    [self performSegueWithIdentifier:@"Terms" sender:[NSNumber numberWithInt:CONTENT_TERMS]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
+    destVC.contentType = CONTENT_TERMS;
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 - (void) showErrorWithString:(NSString *)errorMsg code:(int)errorCode
@@ -588,12 +612,6 @@
 - (void) gotoPhoneNumberScreen:(NSDictionary<FBGraphUser> *)userInfo
 {
     [self performSegueWithIdentifier:@"PhoneNumber" sender:userInfo];
-}
-
-- (void) gotoDeliveryLocationScreen
-{
-    [self dissmodal];
-    //[self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
 }
 
 - (void) closeKeyboard

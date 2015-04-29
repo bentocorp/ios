@@ -31,6 +31,10 @@
 #import "FacebookManager.h"
 #import <FacebookSDK/FacebookSDK.h>
 
+// Force Update
+#import "Harpy.h"
+#import "AppStrings.h"
+
 NSString * const StripePublishableTestKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
 NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
@@ -69,8 +73,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // Override point for customization after application launch.
-    
     // Crashlytics
     [Fabric with:@[CrashlyticsKit]];
     
@@ -121,6 +123,36 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     [locationController.locationManager startUpdatingLocation];
     
+/*---------------------------FORCE UPDATE----------------------------*/
+    
+#ifndef DEV_MODE
+    {
+        NSLog(@"This is production version...run update check!");
+        
+        // Present Window before calling Harpy
+        [self.window makeKeyAndVisible];
+        
+        // Set the App ID for your app
+        [[Harpy sharedInstance] setAppID:@"963634117"];
+        
+        // Set the UIViewController that will present an instance of UIAlertController
+        [[Harpy sharedInstance] setPresentingViewController:_window.rootViewController];
+        
+        // (Optional) The tintColor for the alertController
+        [[Harpy sharedInstance] setAlertControllerTintColor:[UIColor blueColor]];
+        
+        // (Optional) Set the App Name for your app
+        [[Harpy sharedInstance] setAppName:@"Bento"];
+        
+        /* (Optional) Set the Alert Type for your app
+         By default, Harpy is configured to use HarpyAlertTypeOption */
+        [[Harpy sharedInstance] setAlertType:HarpyAlertTypeForce];
+        
+        // Perform check for new version of your app
+        [[Harpy sharedInstance] checkVersion];
+    }
+#endif
+    
     return YES;
 }
 
@@ -148,6 +180,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Global Data Manager
     [globalShop refreshPause];
+    
+    // Perform check for new version of your app
+    [[Harpy sharedInstance] checkVersion];
 }
 
 - (void)showLocationAlert

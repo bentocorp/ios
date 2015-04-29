@@ -16,6 +16,9 @@
 #import "CompleteOrderViewController.h"
 #import "DeliveryLocationViewController.h"
 
+#import "SignedInSettingsViewController.h"
+#import "SignedOutSettingsViewController.h"
+
 #import "MyAlertView.h"
 
 #import "CAGradientLayer+SJSGradients.h"
@@ -29,13 +32,15 @@
 #import "SVPlacemark.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
+#import <QuartzCore/QuartzCore.h>
+
 #define BORDER_COLOR [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f]
 
-@interface MyBentoViewController ()<MyAlertViewDelegate>
+@interface MyBentoViewController () <MyAlertViewDelegate>
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnBack;
+@property (nonatomic, assign) IBOutlet UIButton *settingsButton;
 
 @property (nonatomic, assign) IBOutlet UILabel *lblBadge;
 
@@ -81,7 +86,6 @@
 
 
 @property (nonatomic, assign) IBOutlet UIButton *btnAddAnotherBento;
-
 @property (nonatomic, assign) IBOutlet UIButton *btnState;
 
 @end
@@ -90,7 +94,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    NSLog(@"closed text 1 - %@", [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT]);
+    NSLog(@"closed text 2 - %@", [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT]);
     
     self.lblBadge.layer.cornerRadius = self.lblBadge.frame.size.width / 2;
     self.lblBadge.clipsToBounds = YES;
@@ -191,8 +197,6 @@
     
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
         [[BentoShop sharedInstance] addNewBento];
-
-    [self.btnBack setImage:[UIImage imageNamed:@"mybento_nav_help"] forState:UIControlStateNormal];
     
     self.lblBadge.hidden = NO;
     self.btnCart.hidden = NO;
@@ -213,7 +217,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
@@ -420,9 +423,30 @@
     }
 }
 
-- (IBAction)onFaq:(id)sender
+- (IBAction)onSettings:(id)sender
 {
-    [self performSegueWithIdentifier:@"Faq" sender:nil];
+    // get current user info
+    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
+    
+    SignedInSettingsViewController *signedInSettingsViewController = [[SignedInSettingsViewController alloc] init];
+    SignedOutSettingsViewController *signedOutSettingsViewController = [[SignedOutSettingsViewController alloc] init];
+    UINavigationController *navC;
+    
+    // signed in or not?
+    if (currentUserInfo == nil) {
+        
+        // navigate to signed out settings vc
+        navC = [[UINavigationController alloc] initWithRootViewController:signedOutSettingsViewController];
+        navC.navigationBar.hidden = YES;
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+        
+    } else {
+        
+        // navigate to signed in settings vc
+        navC = [[UINavigationController alloc] initWithRootViewController:signedInSettingsViewController];
+        navC.navigationBar.hidden = YES;
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+    }
 }
 
 - (IBAction)onCart:(id)sender

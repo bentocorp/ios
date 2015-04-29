@@ -42,7 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
     self.lblTitle.text = [[AppStrings sharedInstance] getString:CREDITCARD_TITLE];
     self.lblMessage.text = [[AppStrings sharedInstance] getString:CREDITCARD_TEXT];
     
@@ -68,7 +67,6 @@
         if([subview isKindOfClass:[UIImageView class]] && subview != self.paymentView.placeholderView)
         {
             subview.hidden = YES;
-            //[subview removeFromSuperview];
         }
     }
     
@@ -77,18 +75,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void) viewWillAppear:(BOOL)animated
 {

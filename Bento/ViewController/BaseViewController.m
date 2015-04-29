@@ -10,6 +10,7 @@
 
 #import "DataManager.h"
 #import "SoldOutViewController.h"
+#import "SignInViewController.h"
 
 @interface BaseViewController ()
 
@@ -59,6 +60,9 @@
     self.complete = nil;
     
     UINavigationController *navACcount = [self.storyboard instantiateViewControllerWithIdentifier:@"Account"];
+    
+    SignInViewController *signInViewController = [[SignInViewController alloc] init];
+    signInViewController.whichVC = @"From MyBento";
     
     [self.navigationController presentViewController:navACcount animated:YES completion:nil];
 }
