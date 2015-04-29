@@ -100,16 +100,16 @@
             break;
         case 1:
             settingsTableViewCell.settingsLabel.text = @"FAQ";
-            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"faq"];
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-help"];
             break;
         case 2:
             settingsTableViewCell.settingsLabel.text = @"Email Support";
-            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"email-support"];
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-email"];
 
             break;
         case 3:
             settingsTableViewCell.settingsLabel.text = @"Phone Support";
-            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"phone-support"];
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-phone"];
 
             break;
     }

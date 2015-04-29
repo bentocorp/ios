@@ -176,25 +176,25 @@
         // set button images, events and labels
         switch (i) {
             case 0:
-                [socialIconButton setImage:[UIImage imageNamed:@"facebook"] forState:UIControlStateNormal];
+                [socialIconButton setImage:[UIImage imageNamed:@"icon-circle-facebook"] forState:UIControlStateNormal];
                 [socialIconButton addTarget:self action:@selector(postToFacebook) forControlEvents:UIControlEventTouchUpInside];
 
                 socialLabel.text = @"SHARE";
                 break;
             case 1:
-                [socialIconButton setImage:[UIImage imageNamed:@"twitter"] forState:UIControlStateNormal];
+                [socialIconButton setImage:[UIImage imageNamed:@"icon-circle-twitter"] forState:UIControlStateNormal];
                 [socialIconButton addTarget:self action:@selector(postToTwitter) forControlEvents:UIControlEventTouchUpInside];
                 
                 socialLabel.text = @"TWEET";
                 break;
             case 2:
-                [socialIconButton setImage:[UIImage imageNamed:@"speech"] forState:UIControlStateNormal];
+                [socialIconButton setImage:[UIImage imageNamed:@"icon-circle-messages"] forState:UIControlStateNormal];
                 [socialIconButton addTarget:self action:@selector(showSMS) forControlEvents:UIControlEventTouchUpInside];
                 
                 socialLabel.text = @"TEXT";
                 break;
             case 3:
-                [socialIconButton setImage:[UIImage imageNamed:@"mail"] forState:UIControlStateNormal];
+                [socialIconButton setImage:[UIImage imageNamed:@"icon-circle-mail"] forState:UIControlStateNormal];
                 [socialIconButton addTarget:self action:@selector(openEmailFromSharing) forControlEvents:UIControlEventTouchUpInside];
                 
                 socialLabel.text = @"EMAIL";
@@ -237,19 +237,19 @@
     switch (indexPath.row) {
         case 0:
             settingsTableViewCell.settingsLabel.text = @"Credit Card";
-            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"credit-card"];
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
             break;
         case 1:
             settingsTableViewCell.settingsLabel.text = @"FAQ";
-            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"faq"];
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-help"];
             break;
         case 2:
             settingsTableViewCell.settingsLabel.text = @"Email Support";
-            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"email-support"];
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-email"];
             break;
         case 3:
             settingsTableViewCell.settingsLabel.text = @"Phone Support";
-            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"phone-support"];
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-phone"];
             break;
     }
     
