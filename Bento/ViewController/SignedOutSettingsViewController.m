@@ -96,7 +96,7 @@
     switch (indexPath.row) {
         case 0:
             settingsTableViewCell.settingsLabel.text = @"Sign in";
-            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"user-profile"];
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-user"];
             break;
         case 1:
             settingsTableViewCell.settingsLabel.text = @"FAQ";
