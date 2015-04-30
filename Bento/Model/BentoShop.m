@@ -80,7 +80,7 @@ static BentoShop *_shareInstance;
             self.aryBentos = [[NSMutableArray alloc] init];
     }
     
-    // set original status to empty string when app launches the first time
+    // set original status to empty string when app launches the first time!!
     originalStatus = @"";
     
     return self;
