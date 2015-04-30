@@ -9,6 +9,7 @@
 #import "BentoShop.h"
 
 #import "DataManager.h"
+#import "AppStrings.h"
 
 #import "SDWebImagePrefetcher.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
@@ -113,18 +114,28 @@ static BentoShop *_shareInstance;
     NSError *error = nil;
     self.dicStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
+    NSLog(@"dicStatus - %@", self.dicStatus);
+    
     strRequest = [NSString stringWithFormat:@"%@/status/menu", SERVER_URL];
     
     self.menuStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
+    NSLog(@"menuStatus - %@", self.menuStatus);
+    
     BOOL isClosed = [self isClosed];
     BOOL isSoldOut = [self isSoldOut];
+    
+    NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
     
     if ([self isClosed])
         [self getNextMenus];
     
-    if (self.prevClosed != isClosed || self.prevSoldOut != isSoldOut)
+    if (self.prevClosed != isClosed || self.prevSoldOut != isSoldOut) {
         [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+        
+        // call /ioscopy to reload all strings if closed or sold out
+        [[AppStrings sharedInstance] getAppStrings];
+    }
     
     self.prevClosed = isClosed;
     self.prevSoldOut = isSoldOut;
@@ -163,6 +174,8 @@ static BentoShop *_shareInstance;
     NSString *strDate = [formatter stringFromDate:currentDate];
     currentDate = nil;
     formatter = nil;
+    
+    NSLog(@"getDateString - %@", strDate);
     
     return strDate;
 }

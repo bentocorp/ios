@@ -474,46 +474,6 @@
 		FCAA47A31AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */; };
 		FCB906131AEC7FBF003041F7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
 		FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
-		FCBAFEAB1AF159EC00DD465B /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA11AF159EC00DD465B /* facebook.png */; };
-		FCBAFEAC1AF159EC00DD465B /* facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA11AF159EC00DD465B /* facebook.png */; };
-		FCBAFEAD1AF159EC00DD465B /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA21AF159EC00DD465B /* facebook@2x.png */; };
-		FCBAFEAE1AF159EC00DD465B /* facebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA21AF159EC00DD465B /* facebook@2x.png */; };
-		FCBAFEB31AF159EC00DD465B /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA51AF159EC00DD465B /* profile.png */; };
-		FCBAFEB41AF159EC00DD465B /* profile.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA51AF159EC00DD465B /* profile.png */; };
-		FCBAFEB51AF159EC00DD465B /* profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA61AF159EC00DD465B /* profile@2x.png */; };
-		FCBAFEB61AF159EC00DD465B /* profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA61AF159EC00DD465B /* profile@2x.png */; };
-		FCBAFEB71AF159EC00DD465B /* speech.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA71AF159EC00DD465B /* speech.png */; };
-		FCBAFEB81AF159EC00DD465B /* speech.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA71AF159EC00DD465B /* speech.png */; };
-		FCBAFEB91AF159EC00DD465B /* speech@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA81AF159EC00DD465B /* speech@2x.png */; };
-		FCBAFEBA1AF159EC00DD465B /* speech@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA81AF159EC00DD465B /* speech@2x.png */; };
-		FCBAFEBB1AF159EC00DD465B /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA91AF159EC00DD465B /* twitter.png */; };
-		FCBAFEBC1AF159EC00DD465B /* twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEA91AF159EC00DD465B /* twitter.png */; };
-		FCBAFEBD1AF159EC00DD465B /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEAA1AF159EC00DD465B /* twitter@2x.png */; };
-		FCBAFEBE1AF159EC00DD465B /* twitter@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEAA1AF159EC00DD465B /* twitter@2x.png */; };
-		FCBAFEC11AF15B5E00DD465B /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEBF1AF15B5E00DD465B /* mail.png */; };
-		FCBAFEC21AF15B5E00DD465B /* mail.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEBF1AF15B5E00DD465B /* mail.png */; };
-		FCBAFEC31AF15B5E00DD465B /* mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEC01AF15B5E00DD465B /* mail@2x.png */; };
-		FCBAFEC41AF15B5E00DD465B /* mail@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEC01AF15B5E00DD465B /* mail@2x.png */; };
-		FCBAFEED1AF15F7900DD465B /* credit-card.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE31AF15F7900DD465B /* credit-card.png */; };
-		FCBAFEEE1AF15F7900DD465B /* credit-card.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE31AF15F7900DD465B /* credit-card.png */; };
-		FCBAFEEF1AF15F7900DD465B /* credit-card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE41AF15F7900DD465B /* credit-card@2x.png */; };
-		FCBAFEF01AF15F7900DD465B /* credit-card@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE41AF15F7900DD465B /* credit-card@2x.png */; };
-		FCBAFEF11AF15F7900DD465B /* email-support.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE51AF15F7900DD465B /* email-support.png */; };
-		FCBAFEF21AF15F7900DD465B /* email-support.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE51AF15F7900DD465B /* email-support.png */; };
-		FCBAFEF31AF15F7900DD465B /* email-support@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE61AF15F7900DD465B /* email-support@2x.png */; };
-		FCBAFEF41AF15F7900DD465B /* email-support@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE61AF15F7900DD465B /* email-support@2x.png */; };
-		FCBAFEF51AF15F7900DD465B /* faq.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE71AF15F7900DD465B /* faq.png */; };
-		FCBAFEF61AF15F7900DD465B /* faq.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE71AF15F7900DD465B /* faq.png */; };
-		FCBAFEF71AF15F7900DD465B /* faq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE81AF15F7900DD465B /* faq@2x.png */; };
-		FCBAFEF81AF15F7900DD465B /* faq@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFEE81AF15F7900DD465B /* faq@2x.png */; };
-		FCBAFF031AF15FE500DD465B /* phone-support.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFF011AF15FE500DD465B /* phone-support.png */; };
-		FCBAFF041AF15FE500DD465B /* phone-support.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFF011AF15FE500DD465B /* phone-support.png */; };
-		FCBAFF051AF15FE500DD465B /* phone-support@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFF021AF15FE500DD465B /* phone-support@2x.png */; };
-		FCBAFF061AF15FE500DD465B /* phone-support@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFF021AF15FE500DD465B /* phone-support@2x.png */; };
-		FCBAFF091AF160DE00DD465B /* user-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFF071AF160DE00DD465B /* user-profile.png */; };
-		FCBAFF0A1AF160DE00DD465B /* user-profile.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFF071AF160DE00DD465B /* user-profile.png */; };
-		FCBAFF0B1AF160DE00DD465B /* user-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFF081AF160DE00DD465B /* user-profile@2x.png */; };
-		FCBAFF0C1AF160DE00DD465B /* user-profile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCBAFF081AF160DE00DD465B /* user-profile@2x.png */; };
 		FCDF22161ADC3ADF006B2750 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22041ADC3ADF006B2750 /* Icon-60.png */; };
 		FCDF22171ADC3ADF006B2750 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22041ADC3ADF006B2750 /* Icon-60.png */; };
 		FCDF22181ADC3ADF006B2750 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */; };
@@ -902,26 +862,6 @@
 		FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedOutSettingsViewController.m; sourceTree = "<group>"; };
 		FCB906111AEC7FB9003041F7 /* FaqViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaqViewController.h; sourceTree = "<group>"; };
 		FCB906121AEC7FBF003041F7 /* FaqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaqViewController.m; sourceTree = "<group>"; };
-		FCBAFEA11AF159EC00DD465B /* facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = facebook.png; sourceTree = "<group>"; };
-		FCBAFEA21AF159EC00DD465B /* facebook@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "facebook@2x.png"; sourceTree = "<group>"; };
-		FCBAFEA51AF159EC00DD465B /* profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profile.png; sourceTree = "<group>"; };
-		FCBAFEA61AF159EC00DD465B /* profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profile@2x.png"; sourceTree = "<group>"; };
-		FCBAFEA71AF159EC00DD465B /* speech.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = speech.png; sourceTree = "<group>"; };
-		FCBAFEA81AF159EC00DD465B /* speech@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "speech@2x.png"; sourceTree = "<group>"; };
-		FCBAFEA91AF159EC00DD465B /* twitter.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = twitter.png; sourceTree = "<group>"; };
-		FCBAFEAA1AF159EC00DD465B /* twitter@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "twitter@2x.png"; sourceTree = "<group>"; };
-		FCBAFEBF1AF15B5E00DD465B /* mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mail.png; sourceTree = "<group>"; };
-		FCBAFEC01AF15B5E00DD465B /* mail@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mail@2x.png"; sourceTree = "<group>"; };
-		FCBAFEE31AF15F7900DD465B /* credit-card.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "credit-card.png"; sourceTree = "<group>"; };
-		FCBAFEE41AF15F7900DD465B /* credit-card@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "credit-card@2x.png"; sourceTree = "<group>"; };
-		FCBAFEE51AF15F7900DD465B /* email-support.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email-support.png"; sourceTree = "<group>"; };
-		FCBAFEE61AF15F7900DD465B /* email-support@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "email-support@2x.png"; sourceTree = "<group>"; };
-		FCBAFEE71AF15F7900DD465B /* faq.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = faq.png; sourceTree = "<group>"; };
-		FCBAFEE81AF15F7900DD465B /* faq@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "faq@2x.png"; sourceTree = "<group>"; };
-		FCBAFF011AF15FE500DD465B /* phone-support.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone-support.png"; sourceTree = "<group>"; };
-		FCBAFF021AF15FE500DD465B /* phone-support@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "phone-support@2x.png"; sourceTree = "<group>"; };
-		FCBAFF071AF160DE00DD465B /* user-profile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-profile.png"; sourceTree = "<group>"; };
-		FCBAFF081AF160DE00DD465B /* user-profile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "user-profile@2x.png"; sourceTree = "<group>"; };
 		FCDF22041ADC3ADF006B2750 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		FCDF22061ADC3ADF006B2750 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
@@ -1345,26 +1285,6 @@
 			children = (
 				FC82867B1AEEF3D2009D073D /* Settings Icons */,
 				FC8DB72D1AF18674003045A3 /* Images */,
-				FCBAFEA11AF159EC00DD465B /* facebook.png */,
-				FCBAFEA21AF159EC00DD465B /* facebook@2x.png */,
-				FCBAFEA51AF159EC00DD465B /* profile.png */,
-				FCBAFEA61AF159EC00DD465B /* profile@2x.png */,
-				FCBAFEA71AF159EC00DD465B /* speech.png */,
-				FCBAFEA81AF159EC00DD465B /* speech@2x.png */,
-				FCBAFEA91AF159EC00DD465B /* twitter.png */,
-				FCBAFEAA1AF159EC00DD465B /* twitter@2x.png */,
-				FCBAFEBF1AF15B5E00DD465B /* mail.png */,
-				FCBAFEC01AF15B5E00DD465B /* mail@2x.png */,
-				FCBAFEE31AF15F7900DD465B /* credit-card.png */,
-				FCBAFEE41AF15F7900DD465B /* credit-card@2x.png */,
-				FCBAFEE51AF15F7900DD465B /* email-support.png */,
-				FCBAFEE61AF15F7900DD465B /* email-support@2x.png */,
-				FCBAFF071AF160DE00DD465B /* user-profile.png */,
-				FCBAFF081AF160DE00DD465B /* user-profile@2x.png */,
-				FCBAFEE71AF15F7900DD465B /* faq.png */,
-				FCBAFEE81AF15F7900DD465B /* faq@2x.png */,
-				FCBAFF011AF15FE500DD465B /* phone-support.png */,
-				FCBAFF021AF15FE500DD465B /* phone-support@2x.png */,
 				FCDF22031ADC3ADF006B2750 /* Squared Icons */,
 				7209E0831A77715000D18D7A /* Launch */,
 				90BED0B41A5BE72F003DC872 /* Font */,
@@ -1948,7 +1868,6 @@
 				7216B7701AA64C7C0006FFE9 /* deliverylocation_icon_search@2x.png in Resources */,
 				7216B7711AA64C7C0006FFE9 /* register_icon_email_err.png in Resources */,
 				7216B7721AA64C7C0006FFE9 /* completeorder_cell_btn_remove@2x.png in Resources */,
-				FCBAFF0C1AF160DE00DD465B /* user-profile@2x.png in Resources */,
 				7216B7731AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.xib in Resources */,
 				FC82864C1AEEED1B009D073D /* ss-social-regular.svg in Resources */,
 				FC82861C1AEEED1B009D073D /* ss-air.woff in Resources */,
@@ -1961,10 +1880,8 @@
 				7216B7751AA64C7C0006FFE9 /* sample.png in Resources */,
 				7216B7761AA64C7C0006FFE9 /* orderconfirm_image_remove@2x.png in Resources */,
 				7216B7771AA64C7C0006FFE9 /* BentoTableViewCell.xib in Resources */,
-				FCBAFEF81AF15F7900DD465B /* faq@2x.png in Resources */,
 				FC8DB73F1AF18674003045A3 /* icon-circle-twitter.png in Resources */,
 				7216B7781AA64C7C0006FFE9 /* Main.storyboard in Resources */,
-				FCBAFEEE1AF15F7900DD465B /* credit-card.png in Resources */,
 				FC82861E1AEEED1B009D073D /* documentation.html in Resources */,
 				FC8DB7431AF18674003045A3 /* icon-square-creditcard.png in Resources */,
 				7216B7791AA64C7C0006FFE9 /* OpenSans-Italic.ttf in Resources */,
@@ -1982,11 +1899,8 @@
 				7216B7801AA64C7C0006FFE9 /* creditcard_btn_clear.png in Resources */,
 				FC82866C1AEEED1B009D073D /* readme.txt in Resources */,
 				FC82866A1AEEED1B009D073D /* license.txt in Resources */,
-				FCBAFEF21AF15F7900DD465B /* email-support.png in Resources */,
 				FC8286501AEEED1B009D073D /* ss-social-regular.woff in Resources */,
-				FCBAFEB41AF159EC00DD465B /* profile.png in Resources */,
 				FC82860E1AEEED1B009D073D /* readme.txt in Resources */,
-				FCBAFEF61AF15F7900DD465B /* faq.png in Resources */,
 				FC8286361AEEED1B009D073D /* ss-social-regular.eot in Resources */,
 				7216B7811AA64C7C0006FFE9 /* soldout_background.png in Resources */,
 				FC8286321AEEED1B009D073D /* ss-social-circle.ttf in Resources */,
@@ -1997,14 +1911,11 @@
 				FC8DB7411AF18674003045A3 /* icon-navigateright.png in Resources */,
 				7216B7831AA64C7C0006FFE9 /* JGProgressHUD Resources.bundle in Resources */,
 				FC8286561AEEED1B009D073D /* license.txt in Resources */,
-				FCBAFEBC1AF159EC00DD465B /* twitter.png in Resources */,
 				FC8286661AEEED1B009D073D /* ss-social.js in Resources */,
 				FC8286521AEEED1B009D073D /* ss-social.js in Resources */,
-				FCBAFF041AF15FE500DD465B /* phone-support.png in Resources */,
 				FC8286101AEEED1B009D073D /* ss-air.otf in Resources */,
 				FC8286141AEEED1B009D073D /* ss-air.eot in Resources */,
 				7216B7841AA64C7C0006FFE9 /* polygon_service_area.png in Resources */,
-				FCBAFEB61AF159EC00DD465B /* profile@2x.png in Resources */,
 				FCDF222B1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
 				FC82861A1AEEED1B009D073D /* ss-air.ttf in Resources */,
 				7216B7851AA64C7C0006FFE9 /* nav_btn_back@2x.png in Resources */,
@@ -2014,7 +1925,6 @@
 				7216B7881AA64C7C0006FFE9 /* logo_title.png in Resources */,
 				FC8286681AEEED1B009D073D /* documentation.html in Resources */,
 				FC8286581AEEED1B009D073D /* readme.txt in Resources */,
-				FCBAFEF41AF15F7900DD465B /* email-support@2x.png in Resources */,
 				7216B7891AA64C7C0006FFE9 /* mybento_image_bottom.png in Resources */,
 				FCDF22171ADC3ADF006B2750 /* Icon-60.png in Resources */,
 				FC8286481AEEED1B009D073D /* ss-social-regular.css in Resources */,
@@ -2022,7 +1932,6 @@
 				7216B78A1AA64C7C0006FFE9 /* mybento_nav_cart_act@2x.png in Resources */,
 				7216B78B1AA64C7C0006FFE9 /* orderconfirm_image_minute@2x.png in Resources */,
 				FC8286781AEEED1B009D073D /* ss-standard.ttf in Resources */,
-				FCBAFEF01AF15F7900DD465B /* credit-card@2x.png in Resources */,
 				FC8286621AEEED1B009D073D /* ss-social-regular.ttf in Resources */,
 				7216B78C1AA64C7C0006FFE9 /* string_confirmaddress@2x.png in Resources */,
 				FC8DB73B1AF18674003045A3 /* icon-circle-mail.png in Resources */,
@@ -2032,7 +1941,6 @@
 				7216B78D1AA64C7C0006FFE9 /* orderconfirm_image_credit.png in Resources */,
 				7216B78E1AA64C7C0006FFE9 /* register_icon_phone_err.png in Resources */,
 				7216B78F1AA64C7C0006FFE9 /* OpenSans-ExtraBold.ttf in Resources */,
-				FCBAFEB81AF159EC00DD465B /* speech.png in Resources */,
 				FC8DB7471AF18674003045A3 /* icon-square-help.png in Resources */,
 				7216B7901AA64C7C0006FFE9 /* LaunchScreen.png in Resources */,
 				FC82865C1AEEED1B009D073D /* ss-social-regular.css in Resources */,
@@ -2059,15 +1967,10 @@
 				FCDF222F1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				7216B79A1AA64C7C0006FFE9 /* banner_sold_out.png in Resources */,
 				7216B79B1AA64C7C0006FFE9 /* register_icon_username_err.png in Resources */,
-				FCBAFEAE1AF159EC00DD465B /* facebook@2x.png in Resources */,
-				FCBAFEC41AF15B5E00DD465B /* mail@2x.png in Resources */,
 				FC82862E1AEEED1B009D073D /* ss-social-circle.eot in Resources */,
 				FCDF22271ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				FC8DB74B1AF18674003045A3 /* icon-user.png in Resources */,
-				FCBAFF0A1AF160DE00DD465B /* user-profile.png in Resources */,
-				FCBAFEC21AF15B5E00DD465B /* mail.png in Resources */,
 				7216B79C1AA64C7C0006FFE9 /* first_background.png in Resources */,
-				FCBAFF061AF15FE500DD465B /* phone-support@2x.png in Resources */,
 				7216B79D1AA64C7C0006FFE9 /* orderconfirm_image_car.png in Resources */,
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
 				FCDF22211ADC3ADF006B2750 /* Icon-76.png in Resources */,
@@ -2090,12 +1993,10 @@
 				FC8286221AEEED1B009D073D /* documentation.html in Resources */,
 				7216B7A61AA64C7C0006FFE9 /* OpenSans-Regular.ttf in Resources */,
 				FCDF22291ADC3ADF006B2750 /* Icon-Small-40@3x.png in Resources */,
-				FCBAFEAC1AF159EC00DD465B /* facebook.png in Resources */,
 				FCDF22331ADC3ADF006B2750 /* Icon-Small@3x.png in Resources */,
 				FC8286601AEEED1B009D073D /* ss-social-regular.svg in Resources */,
 				7216B7A71AA64C7C0006FFE9 /* OpenSans-BoldItalic.ttf in Resources */,
 				FC8286121AEEED1B009D073D /* ss-air.css in Resources */,
-				FCBAFEBA1AF159EC00DD465B /* speech@2x.png in Resources */,
 				7216B7A81AA64C7C0006FFE9 /* OpenSans-LightItalic.ttf in Resources */,
 				7216B7A91AA64C7C0006FFE9 /* orderconfirm_image_plus@2x.png in Resources */,
 				7216B7AA1AA64C7C0006FFE9 /* register_image_or.png in Resources */,
@@ -2106,7 +2007,6 @@
 				FCDF222D1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				FC8286341AEEED1B009D073D /* ss-social-circle.woff in Resources */,
 				7216B7AE1AA64C7C0006FFE9 /* register_icon_password.png in Resources */,
-				FCBAFEBE1AF159EC00DD465B /* twitter@2x.png in Resources */,
 				FC82860C1AEEED1B009D073D /* license.txt in Resources */,
 				FCDF221D1ADC3ADF006B2750 /* Icon-72.png in Resources */,
 				FCDF22311ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */,
@@ -2122,7 +2022,6 @@
 				90D8F7D11A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png in Resources */,
 				90D8F7C41A5E126C00D034CF /* register_icon_email_err.png in Resources */,
 				47C5B0191A8B82BD008FA7DA /* completeorder_cell_btn_remove@2x.png in Resources */,
-				FCBAFF0B1AF160DE00DD465B /* user-profile@2x.png in Resources */,
 				722333FC1A72C133006C2446 /* STPTestPaymentSummaryViewController.xib in Resources */,
 				FC82864B1AEEED1B009D073D /* ss-social-regular.svg in Resources */,
 				FC82861B1AEEED1B009D073D /* ss-air.woff in Resources */,
@@ -2135,10 +2034,8 @@
 				90BED0EE1A5C38DA003DC872 /* sample.png in Resources */,
 				90359C271A5EC49700AAD5D2 /* orderconfirm_image_remove@2x.png in Resources */,
 				47C5B0151A8B8038008FA7DA /* BentoTableViewCell.xib in Resources */,
-				FCBAFEF71AF15F7900DD465B /* faq@2x.png in Resources */,
 				FC8DB73E1AF18674003045A3 /* icon-circle-twitter.png in Resources */,
 				90BED07D1A5BCC04003DC872 /* Main.storyboard in Resources */,
-				FCBAFEED1AF15F7900DD465B /* credit-card.png in Resources */,
 				FC82861D1AEEED1B009D073D /* documentation.html in Resources */,
 				FC8DB7421AF18674003045A3 /* icon-square-creditcard.png in Resources */,
 				90BED0C51A5BE72F003DC872 /* OpenSans-Italic.ttf in Resources */,
@@ -2156,11 +2053,8 @@
 				722333FF1A7425CA006C2446 /* creditcard_btn_clear.png in Resources */,
 				FC82866B1AEEED1B009D073D /* readme.txt in Resources */,
 				FC8286691AEEED1B009D073D /* license.txt in Resources */,
-				FCBAFEF11AF15F7900DD465B /* email-support.png in Resources */,
 				FC82864F1AEEED1B009D073D /* ss-social-regular.woff in Resources */,
-				FCBAFEB31AF159EC00DD465B /* profile.png in Resources */,
 				FC82860D1AEEED1B009D073D /* readme.txt in Resources */,
-				FCBAFEF51AF15F7900DD465B /* faq.png in Resources */,
 				FC8286351AEEED1B009D073D /* ss-social-regular.eot in Resources */,
 				90D8F7E31A5E37E300D034CF /* soldout_background.png in Resources */,
 				FC8286311AEEED1B009D073D /* ss-social-circle.ttf in Resources */,
@@ -2171,14 +2065,11 @@
 				FC8DB7401AF18674003045A3 /* icon-navigateright.png in Resources */,
 				7223335A1A6D4058006C2446 /* JGProgressHUD Resources.bundle in Resources */,
 				FC8286551AEEED1B009D073D /* license.txt in Resources */,
-				FCBAFEBB1AF159EC00DD465B /* twitter.png in Resources */,
 				FC8286651AEEED1B009D073D /* ss-social.js in Resources */,
 				FC8286511AEEED1B009D073D /* ss-social.js in Resources */,
-				FCBAFF031AF15FE500DD465B /* phone-support.png in Resources */,
 				FC82860F1AEEED1B009D073D /* ss-air.otf in Resources */,
 				FC8286131AEEED1B009D073D /* ss-air.eot in Resources */,
 				726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */,
-				FCBAFEB51AF159EC00DD465B /* profile@2x.png in Resources */,
 				FCDF222A1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
 				FC8286191AEEED1B009D073D /* ss-air.ttf in Resources */,
 				90BED0E31A5C1E70003DC872 /* nav_btn_back@2x.png in Resources */,
@@ -2188,7 +2079,6 @@
 				90D8F7E51A5E39A500D034CF /* logo_title.png in Resources */,
 				FC8286671AEEED1B009D073D /* documentation.html in Resources */,
 				FC8286571AEEED1B009D073D /* readme.txt in Resources */,
-				FCBAFEF31AF15F7900DD465B /* email-support@2x.png in Resources */,
 				90D8F7A61A5D7F7100D034CF /* mybento_image_bottom.png in Resources */,
 				FCDF22161ADC3ADF006B2750 /* Icon-60.png in Resources */,
 				FC8286471AEEED1B009D073D /* ss-social-regular.css in Resources */,
@@ -2196,7 +2086,6 @@
 				90BED0DF1A5C04DE003DC872 /* mybento_nav_cart_act@2x.png in Resources */,
 				90359C251A5EC49700AAD5D2 /* orderconfirm_image_minute@2x.png in Resources */,
 				FC8286771AEEED1B009D073D /* ss-standard.ttf in Resources */,
-				FCBAFEEF1AF15F7900DD465B /* credit-card@2x.png in Resources */,
 				FC8286611AEEED1B009D073D /* ss-social-regular.ttf in Resources */,
 				47AA1C441A6BE52800064857 /* string_confirmaddress@2x.png in Resources */,
 				FC8DB73A1AF18674003045A3 /* icon-circle-mail.png in Resources */,
@@ -2206,7 +2095,6 @@
 				90359C241A5EC49700AAD5D2 /* orderconfirm_image_credit.png in Resources */,
 				90D8F7C61A5E126C00D034CF /* register_icon_phone_err.png in Resources */,
 				90BED0C31A5BE72F003DC872 /* OpenSans-ExtraBold.ttf in Resources */,
-				FCBAFEB71AF159EC00DD465B /* speech.png in Resources */,
 				FC8DB7461AF18674003045A3 /* icon-square-help.png in Resources */,
 				7209E0851A77715000D18D7A /* LaunchScreen.png in Resources */,
 				FC82865B1AEEED1B009D073D /* ss-social-regular.css in Resources */,
@@ -2233,15 +2121,10 @@
 				FCDF222E1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				722333E11A6FF9C5006C2446 /* banner_sold_out.png in Resources */,
 				90D8F7C71A5E126C00D034CF /* register_icon_username_err.png in Resources */,
-				FCBAFEAD1AF159EC00DD465B /* facebook@2x.png in Resources */,
-				FCBAFEC31AF15B5E00DD465B /* mail@2x.png in Resources */,
 				FC82862D1AEEED1B009D073D /* ss-social-circle.eot in Resources */,
 				FCDF22261ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				FC8DB74A1AF18674003045A3 /* icon-user.png in Resources */,
-				FCBAFF091AF160DE00DD465B /* user-profile.png in Resources */,
-				FCBAFEC11AF15B5E00DD465B /* mail.png in Resources */,
 				90BED0B11A5BE22E003DC872 /* first_background.png in Resources */,
-				FCBAFF051AF15FE500DD465B /* phone-support@2x.png in Resources */,
 				90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */,
 				90D8F7B31A5D84B800D034CF /* register_icon_phone.png in Resources */,
 				FCDF22201ADC3ADF006B2750 /* Icon-76.png in Resources */,
@@ -2264,12 +2147,10 @@
 				FC8286211AEEED1B009D073D /* documentation.html in Resources */,
 				90BED0C81A5BE72F003DC872 /* OpenSans-Regular.ttf in Resources */,
 				FCDF22281ADC3ADF006B2750 /* Icon-Small-40@3x.png in Resources */,
-				FCBAFEAB1AF159EC00DD465B /* facebook.png in Resources */,
 				FCDF22321ADC3ADF006B2750 /* Icon-Small@3x.png in Resources */,
 				FC82865F1AEEED1B009D073D /* ss-social-regular.svg in Resources */,
 				90BED0C21A5BE72F003DC872 /* OpenSans-BoldItalic.ttf in Resources */,
 				FC8286111AEEED1B009D073D /* ss-air.css in Resources */,
-				FCBAFEB91AF159EC00DD465B /* speech@2x.png in Resources */,
 				90BED0C71A5BE72F003DC872 /* OpenSans-LightItalic.ttf in Resources */,
 				90359C261A5EC49700AAD5D2 /* orderconfirm_image_plus@2x.png in Resources */,
 				90D8F7B51A5D84B800D034CF /* register_image_or.png in Resources */,
@@ -2280,7 +2161,6 @@
 				FCDF222C1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				FC8286331AEEED1B009D073D /* ss-social-circle.woff in Resources */,
 				90D8F7B21A5D84B800D034CF /* register_icon_password.png in Resources */,
-				FCBAFEBD1AF159EC00DD465B /* twitter@2x.png in Resources */,
 				FC82860B1AEEED1B009D073D /* license.txt in Resources */,
 				FCDF221C1ADC3ADF006B2750 /* Icon-72.png in Resources */,
 				FCDF22301ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */,
