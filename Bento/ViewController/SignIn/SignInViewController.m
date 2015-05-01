@@ -216,7 +216,8 @@
 
 - (void) dissmodal
 {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
+    [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
 }
 
 - (void)processSignin
@@ -252,6 +253,9 @@
         
         [self showErrorMessage:nil code:ERROR_NONE];
         [self gotoDeliveryLocationScreen];
+        
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
+        [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         [loadingHUD dismiss];

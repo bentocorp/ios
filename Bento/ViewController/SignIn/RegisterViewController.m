@@ -91,7 +91,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
@@ -123,8 +122,6 @@
         {
             vcSignIn.txtEmail.text = @"";
         }
-        
-        vcSignIn.whichVC = @"From Register VC";
     }
 }
 
@@ -139,6 +136,12 @@
     [self showErrorWithString:nil code:ERROR_NONE];
     
     [self updateUI];
+    
+    /*----------------*/
+    // this should run when signed in from checkout
+    if ([[DataManager shareDataManager] getUserInfo] != nil) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -256,7 +259,8 @@
 
                  [self signInWithRegisteredData:dicRequest];
                  
-                 [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+                 [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
+                 [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
                  
              } failure:^(MKNetworkOperation *errorOp, NSError *error) {
                  
@@ -359,6 +363,10 @@
         [self showErrorWithString:nil code:ERROR_NONE];
         
         [self signInWithRegisteredData:dicRequest];
+        
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
+        [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
+        
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         
