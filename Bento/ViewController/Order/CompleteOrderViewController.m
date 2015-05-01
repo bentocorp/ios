@@ -223,6 +223,15 @@
     
     self.lblPaymentMethod.text = strPaymentMethod;
     [self.ivCardType setImage:[UIImage imageNamed:strImageName]];
+    
+    NSMutableDictionary *currentUserInfo = [[[DataManager shareDataManager] getUserInfo] mutableCopy];
+    currentUserInfo[@"card"] = @{
+                                 @"brand": strImageName,
+                                 @"last4": strCardNumber
+                                 };
+    [[DataManager shareDataManager] setUserInfo:currentUserInfo];
+    
+    NSLog(@"Update Payment Info, %@", currentUserInfo[@"card"]);
 }
 
 - (void)updateCardInfo
@@ -250,56 +259,24 @@
         PTKCardNumber *cardNumber = [PTKCardNumber cardNumberWithString:cardInfo.number];
         PTKCardType cardType = [cardNumber cardType];
         
-        NSMutableDictionary *currentUserInfo = [[[DataManager shareDataManager] getUserInfo] mutableCopy];
-        
         switch (cardType) {
             case PTKCardTypeAmex:
                 [self updatePaymentInfo:@"amex" cardNumber:cardNumber.last4];
-                currentUserInfo[@"card"] = @{
-                                             @"brand": @"amex",
-                                             @"last4": cardNumber.last4
-                                             };
-                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeDinersClub:
                 [self updatePaymentInfo:@"diners" cardNumber:cardNumber.last4];
-                currentUserInfo[@"card"] = @{
-                                             @"brand": @"diners",
-                                             @"last4": cardNumber.last4
-                                             };
-                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeDiscover:
                 [self updatePaymentInfo:@"discover" cardNumber:cardNumber.last4];
-                currentUserInfo[@"card"] = @{
-                                             @"brand": @"discover",
-                                             @"last4": cardNumber.last4
-                                             };
-                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeJCB:
                 [self updatePaymentInfo:@"jcb" cardNumber:cardNumber.last4];
-                currentUserInfo[@"card"] = @{
-                                             @"brand": @"jcb",
-                                             @"last4": cardNumber.last4
-                                             };
-                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeMasterCard:
                 [self updatePaymentInfo:@"mastercard" cardNumber:cardNumber.last4];
-                currentUserInfo[@"card"] = @{
-                                             @"brand": @"mastercard",
-                                             @"last4": cardNumber.last4
-                                             };
-                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             case PTKCardTypeVisa:
                 [self updatePaymentInfo:@"visa" cardNumber:cardNumber.last4];
-                currentUserInfo[@"card"] = @{
-                                             @"brand": @"visa",
-                                             @"last4": cardNumber.last4
-                                             };
-                [[DataManager shareDataManager] setUserInfo:currentUserInfo];
                 break;
             default:
                 [self updatePaymentInfo:@"" cardNumber:@""];
@@ -391,6 +368,8 @@
         isReady = YES;
     }
     
+    NSLog(@"payment - %lu, placeinfo - %@", (unsigned long)[[DataManager shareDataManager] getPaymentMethod], self.placeInfo);
+    
     self.btnGetItNow.enabled = isReady;
     if (isReady)
         [self.btnGetItNow setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
@@ -401,8 +380,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-
-    [self updateUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
@@ -431,6 +408,8 @@
         [self.lblAddress setTextColor:[UIColor lightGrayColor]];
         [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
     }
+    
+    [self updateUI];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
