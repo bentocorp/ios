@@ -130,10 +130,15 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *destVC;
     
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
     switch (indexPath.row) {
         case 0:
             
             // go to sign in
+            [defaults setObject:@"" forKey:@"cameFromWhichVC"];
+            [defaults synchronize];
+            
             destVC = [storyboard instantiateViewControllerWithIdentifier:@"SignInID"];
             [self.navigationController pushViewController:destVC animated:YES];
             

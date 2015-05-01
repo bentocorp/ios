@@ -55,17 +55,16 @@
 - (void) openAccountViewController:(id) nextViewControllerClass
 {
     self.isOpenningAccountView = YES;
-    
     self.nextViewController = nextViewControllerClass;
     self.complete = nil;
     
-    UINavigationController *navACcount = [self.storyboard instantiateViewControllerWithIdentifier:@"Account"];
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"" forKey:@"cameFromWhichVC"];
+    [defaults synchronize];
     
-    // probably not using this, check if can delete
-    SignInViewController *signInViewController = [[SignInViewController alloc] init];
-    signInViewController.whichVC = @"From MyBento";
-    
-    [self.navigationController presentViewController:navACcount animated:YES completion:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"RegisterID"];
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 - (void) openAccountViewControllerWithComplete:(void (^)())completion
 {

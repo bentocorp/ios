@@ -97,6 +97,7 @@
         creditCardDigitsLabel.text = currentUserInfo[@"card"][@"last4"];
     }
     
+    // COME BACK HERE HOMIE!
 //    NSDictionary *curUserInfo = [[DataManager shareDataManager] getUserInfo];
 //    if (curUserInfo == nil)
 //        return;

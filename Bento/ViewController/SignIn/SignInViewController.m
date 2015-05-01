@@ -9,6 +9,7 @@
 #import "SignInViewController.h"
 
 #import "PhoneNumberViewController.h"
+#import "RegisterViewController.h"
 
 #import "MyAlertView.h"
 
@@ -36,8 +37,10 @@
 @property (nonatomic, assign) IBOutlet UIImageView *ivEmail;
 @property (nonatomic, assign) IBOutlet UIImageView *ivPassword;
 
-- (IBAction)onSignUpButton:(id)sender;
 
+@property (weak, nonatomic) IBOutlet UILabel *signUpLabel;
+@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
+- (IBAction)onSignUpButton:(id)sender;
 
 @end
 
@@ -445,6 +448,16 @@
         [self.btnSignIn setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
     else
         [self.btnSignIn setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+    
+    /*------------------------------------------------------------*/
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([[defaults objectForKey:@"cameFromWhichVC"] isEqualToString:@"cameFromRegister"]) {
+        // hide
+        self.signUpButton.hidden = YES;
+        self.signUpLabel.hidden = YES;
+    }
 }
 
 - (void) gotoDeliveryLocationScreen
@@ -495,6 +508,10 @@
 
 - (IBAction)onSignUpButton:(id)sender
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"cameFromSignIn" forKey:@"cameFromWhichVC"];
+    [defaults synchronize];
+    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"RegisterID"];
     [self.navigationController pushViewController:destVC animated:YES];

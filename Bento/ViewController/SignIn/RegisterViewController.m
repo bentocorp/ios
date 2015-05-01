@@ -53,6 +53,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnSignUp;
 
+@property (weak, nonatomic) IBOutlet UILabel *signInLabel;
+@property (weak, nonatomic) IBOutlet UIButton *signInButton;
+
 @end
 
 @implementation RegisterViewController
@@ -648,6 +651,16 @@
         [self.btnRegister setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
     else
         [self.btnRegister setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+    
+    /*------------------------------------------------------------*/
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([[defaults objectForKey:@"cameFromWhichVC"] isEqualToString:@"cameFromSignIn"]) {
+        // hide
+        self.signInButton.hidden = YES;
+        self.signInLabel.hidden = YES;
+    }
 }
 
 #pragma mark UITextFieldDelegate
@@ -705,6 +718,19 @@
     {
         [self performSelector:@selector(doReauthorise) withObject:nil];
     }
+}
+
+- (IBAction)onSignIn:(id)sender
+{
+    [self closeKeyboard];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"cameFromRegister" forKey:@"cameFromWhichVC"];
+    [defaults synchronize];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"SignInID"];
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 @end

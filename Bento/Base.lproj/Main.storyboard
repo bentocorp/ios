@@ -53,6 +53,7 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Light.ttf">
             <string>OpenSans-Light</string>
@@ -87,6 +88,7 @@
             <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
@@ -1108,9 +1110,30 @@
                                             <action selector="onRegister:" destination="W50-Cr-45u" eventType="touchUpInside" id="Hab-L9-Xbs"/>
                                         </connections>
                                     </button>
-                                    <view contentMode="scaleToFill" id="c8H-yd-1ou">
-                                        <rect key="frame" x="0.0" y="410" width="320" height="30"/>
+                                    <view contentMode="scaleToFill" id="NQF-aC-fRs">
+                                        <rect key="frame" x="0.0" y="414" width="320" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nx4-5n-dKx">
+                                                <rect key="frame" x="36" y="4" width="176" height="21"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
+                                                <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xU4-oM-8sq">
+                                                <rect key="frame" x="216" y="0.0" width="68" height="30"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                                                <state key="normal" title="Sign in.">
+                                                    <color key="titleColor" red="0.54117647059999996" green="0.73333333329999995" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="onSignIn:" destination="W50-Cr-45u" eventType="touchUpInside" id="nCG-iQ-i3G"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
@@ -1182,14 +1205,18 @@
                     <navigationItem key="navigationItem" id="vxr-FP-eD2"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
+                        <outlet property="btnPolicy" destination="pAs-iW-6ri" id="tT9-ee-eVR"/>
                         <outlet property="btnRegister" destination="GaG-xX-Wfd" id="vb3-UI-WUT"/>
                         <outlet property="btnSignUp" destination="0Bx-89-ZkC" id="Rn9-hF-L8n"/>
+                        <outlet property="btnTerms" destination="uyR-XF-uAc" id="7LE-eo-znc"/>
                         <outlet property="ivEmail" destination="uqH-ab-4iu" id="8p8-Ho-5Gd"/>
                         <outlet property="ivPassword" destination="Mxf-HM-j7P" id="eGM-jC-2Qx"/>
                         <outlet property="ivPhoneNumber" destination="bH6-Eq-hhm" id="4Nd-Qt-gVO"/>
                         <outlet property="ivYourname" destination="SrB-MV-sqR" id="dGj-vu-EPg"/>
                         <outlet property="lblError" destination="E2l-23-qlK" id="4J6-lU-3Th"/>
                         <outlet property="lblTitle" destination="wHK-m1-5eO" id="rV3-9b-rx8"/>
+                        <outlet property="signInButton" destination="xU4-oM-8sq" id="geg-OG-n0Z"/>
+                        <outlet property="signInLabel" destination="nx4-5n-dKx" id="8Gh-ER-5sH"/>
                         <outlet property="svMain" destination="5YZ-FN-XgV" id="kSm-EA-F7k"/>
                         <outlet property="txtEmail" destination="XyA-3w-KKd" id="md0-hj-51j"/>
                         <outlet property="txtPassword" destination="cMx-iM-tth" id="QuP-li-Lfb"/>
@@ -2359,7 +2386,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2uv-Er-zXO">
-                                                <rect key="frame" x="216" y="0.0" width="68" height="30"/>
+                                                <rect key="frame" x="220" y="0.0" width="68" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <state key="normal" title="Sign up.">
@@ -2460,6 +2487,8 @@
                         <outlet property="ivPassword" destination="W4o-q0-xdI" id="5iH-uT-dO6"/>
                         <outlet property="lblError" destination="abB-3C-2vh" id="U0B-YK-JRC"/>
                         <outlet property="lblTitle" destination="OP1-If-5jg" id="kyg-E6-Onz"/>
+                        <outlet property="signUpButton" destination="2uv-Er-zXO" id="Qur-Pg-Oqo"/>
+                        <outlet property="signUpLabel" destination="pCF-xw-dY1" id="WSX-CJ-RLI"/>
                         <outlet property="svMain" destination="6jH-QV-cze" id="gcn-g5-jBx"/>
                         <outlet property="txtEmail" destination="I3D-oS-dls" id="qQt-ON-GZz"/>
                         <outlet property="txtPassword" destination="Odn-0J-lVe" id="WWl-Tc-6f9"/>
@@ -2745,9 +2774,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="Xro-hm-UPB"/>
         <segue reference="ejO-bj-5g6"/>
         <segue reference="oNJ-Gc-fzE"/>
         <segue reference="09w-J6-v5C"/>
-        <segue reference="sjk-uB-lm1"/>
     </inferredMetricsTieBreakers>
 </document>
