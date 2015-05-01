@@ -332,6 +332,8 @@
 		90D8F7E51A5E39A500D034CF /* logo_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E41A5E39A500D034CF /* logo_title.png */; };
 		90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */; };
 		90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */; };
+		FC0984231AF2ACD20014B138 /* CustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0984221AF2ACD20014B138 /* CustomSegue.m */; };
+		FC0984241AF2ACD20014B138 /* CustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0984221AF2ACD20014B138 /* CustomSegue.m */; };
 		FC8286091AEEED1B009D073D /* documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = FC8285C61AEEED1B009D073D /* documentation.html */; };
 		FC82860A1AEEED1B009D073D /* documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = FC8285C61AEEED1B009D073D /* documentation.html */; };
 		FC82860B1AEEED1B009D073D /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC8285C71AEEED1B009D073D /* license.txt */; };
@@ -784,6 +786,8 @@
 		90D8F7E61A5E3F7500D034CF /* EnterCreditCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterCreditCardViewController.h; sourceTree = "<group>"; };
 		90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterCreditCardViewController.m; sourceTree = "<group>"; };
 		90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderconfirm_image_car.png; sourceTree = "<group>"; };
+		FC0984211AF2ACD20014B138 /* CustomSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegue.h; sourceTree = "<group>"; };
+		FC0984221AF2ACD20014B138 /* CustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegue.m; sourceTree = "<group>"; };
 		FC8285C61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
 		FC8285C71AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		FC8285C81AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
@@ -1241,6 +1245,8 @@
 		90BED0701A5BCC04003DC872 /* Bento */ = {
 			isa = PBXGroup;
 			children = (
+				FC0984211AF2ACD20014B138 /* CustomSegue.h */,
+				FC0984221AF2ACD20014B138 /* CustomSegue.m */,
 				722333011A6BF172006C2446 /* Bento.entitlements */,
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
@@ -2318,6 +2324,7 @@
 				7216B7331AA64C7C0006FFE9 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				7216B7341AA64C7C0006FFE9 /* SDWebImagePrefetcher.m in Sources */,
 				7216B7351AA64C7C0006FFE9 /* MyAlertView.m in Sources */,
+				FC0984241AF2ACD20014B138 /* CustomSegue.m in Sources */,
 				7216B7361AA64C7C0006FFE9 /* STPTestShippingMethodStore.m in Sources */,
 				7216B7371AA64C7C0006FFE9 /* NSDictionary+RequestEncoding.m in Sources */,
 				7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */,
@@ -2416,6 +2423,7 @@
 				722333D41A6F46DF006C2446 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				722333AF1A6EADBD006C2446 /* SDWebImagePrefetcher.m in Sources */,
 				90D8F7A41A5D6B6E00D034CF /* MyAlertView.m in Sources */,
+				FC0984231AF2ACD20014B138 /* CustomSegue.m in Sources */,
 				722333FD1A72C133006C2446 /* STPTestShippingMethodStore.m in Sources */,
 				722333D11A6F46DF006C2446 /* NSDictionary+RequestEncoding.m in Sources */,
 				7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */,
@@ -2576,7 +2584,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -2617,7 +2626,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2663,7 +2673,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "893057b9-7a0f-4bae-a584-594a7d086f2f";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2687,7 +2697,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "893057b9-7a0f-4bae-a584-594a7d086f2f";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
