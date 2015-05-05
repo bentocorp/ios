@@ -22,6 +22,8 @@
 #import "DataManager.h"
 #import "Reachability.h"
 
+#import "ServingDinnerViewController.h"
+
 @interface FirstViewController ()
 {
     BOOL _hasInit;
@@ -257,8 +259,11 @@
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
         needsAnimation = NO;
     
-    UIViewController *vcBuildBento = [self.storyboard instantiateViewControllerWithIdentifier:@"MyBentoViewController"];
-    [self.navigationController pushViewController:vcBuildBento animated:needsAnimation];
+    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+    [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
+    
+//    UIViewController *vcBuildBento = [self.storyboard instantiateViewControllerWithIdentifier:@"MyBentoViewController"];
+//    [self.navigationController pushViewController:vcBuildBento animated:needsAnimation];
 }
 
 - (void) showSoldoutScreen:(NSNumber *)identifier

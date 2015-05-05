@@ -15,7 +15,7 @@
 #import "AppStrings.h"
 #import "DataManager.h"
 
-@interface ChooseMainDishViewController ()<DishCollectionViewCellDelegate>
+@interface ChooseMainDishViewController () <DishCollectionViewCellDelegate>
 {
     NSInteger _originalDishIndex;
     NSInteger _selectedIndex;

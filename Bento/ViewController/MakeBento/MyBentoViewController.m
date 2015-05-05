@@ -51,28 +51,24 @@
 @property (nonatomic, assign) IBOutlet UIView *viewDishs;
 
 @property (nonatomic, assign) IBOutlet UIView *viewMainEntree;
-
 @property (nonatomic, assign) IBOutlet UIView *viewSide1;
 @property (nonatomic, assign) IBOutlet UIView *viewSide2;
 @property (nonatomic, assign) IBOutlet UIView *viewSide3;
 @property (nonatomic, assign) IBOutlet UIView *viewSide4;
 
 @property (nonatomic, assign) IBOutlet UIImageView *ivMainDish;
-
 @property (nonatomic, assign) IBOutlet UIImageView *ivSideDish1;
 @property (nonatomic, assign) IBOutlet UIImageView *ivSideDish2;
 @property (nonatomic, assign) IBOutlet UIImageView *ivSideDish3;
 @property (nonatomic, assign) IBOutlet UIImageView *ivSideDish4;
 
 @property (nonatomic, assign) IBOutlet UILabel *lblMainDish;
-
 @property (nonatomic, assign) IBOutlet UILabel *lblSideDish1;
 @property (nonatomic, assign) IBOutlet UILabel *lblSideDish2;
 @property (nonatomic, assign) IBOutlet UILabel *lblSideDish3;
 @property (nonatomic, assign) IBOutlet UILabel *lblSideDish4;
 
 @property (nonatomic, assign) IBOutlet UIButton *btnMainDish;
-
 @property (nonatomic, assign) IBOutlet UIButton *btnSideDish1;
 @property (nonatomic, assign) IBOutlet UIButton *btnSideDish2;
 @property (nonatomic, assign) IBOutlet UIButton *btnSideDish3;
@@ -83,7 +79,6 @@
 @property (weak, nonatomic) IBOutlet UIImageView *ivBannerSideDish2;
 @property (weak, nonatomic) IBOutlet UIImageView *ivBannerSideDish3;
 @property (weak, nonatomic) IBOutlet UIImageView *ivBannerSideDish4;
-
 
 @property (nonatomic, assign) IBOutlet UIButton *btnAddAnotherBento;
 @property (nonatomic, assign) IBOutlet UIButton *btnState;
@@ -228,7 +223,7 @@
     
     if ([segue.identifier isEqualToString:@"MainDish"])
     {
-        ChooseMainDishViewController *vc = segue.destinationViewController;
+//        ChooseMainDishViewController *vc = segue.destinationViewController;
     }
     else if ([segue.identifier isEqualToString:@"SideDish"])
     {
@@ -491,14 +486,20 @@
 
 - (IBAction)onAddMainDish:(id)sender
 {
-    [self performSegueWithIdentifier:@"MainDish" sender:nil];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 - (IBAction)onAddSideDish:(id)sender
 {
-    NSInteger tag = ((UIButton *)sender).tag;
+//    NSInteger tag = ((UIButton *)sender).tag;
+//    
+//    [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:tag]];
     
-    [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:tag]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 - (IBAction)onAddAnotherBento:(id)sender

@@ -33,7 +33,6 @@
     
     /*-----------------------------------------------------------*/
     
-    
     // navigation bar color
     UIView *navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
     navigationBarView.backgroundColor = [UIColor whiteColor];
@@ -52,7 +51,6 @@
     [closeButton setImage:[UIImage imageNamed:@"nav_btn_close"] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(onCloseButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
-    
     
     /*-----------------------------------------------------------*/
     
