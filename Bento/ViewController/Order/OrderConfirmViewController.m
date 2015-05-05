@@ -8,7 +8,7 @@
 
 #import "OrderConfirmViewController.h"
 
-#import "MyBentoViewController.h"
+#import "ServingDinnerViewController.h"
 
 #import "UIImageView+WebCache.h"
 
@@ -72,7 +72,7 @@
     
     for (UIViewController *vc in viewControllers) {
         
-        if ([vc isKindOfClass:[MyBentoViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]])
         {
             [[BentoShop sharedInstance] addNewBento];
             [self.navigationController popToViewController:vc animated:YES];
@@ -81,7 +81,8 @@
         }
     }
     
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:nil];
+    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
 }
 
 @end

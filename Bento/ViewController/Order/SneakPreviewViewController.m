@@ -17,6 +17,8 @@
 @interface SneakPreviewViewController ()
 {
     NSIndexPath *_selectedPath;
+    NSInteger hour;
+    int weekday;
 }
 
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
@@ -34,11 +36,11 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
     
-    NSInteger hour = [components hour];
+    hour = [components hour];
     NSLog(@"current hour - %ld", hour);
     
     // Sunday = 1, Saturday = 7
-    int weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
+    weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
     
     // if sold out || (closed && before 9pm && is not sunday && is not saturday)
@@ -139,7 +141,7 @@
 //        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
         
         NSArray *aryMainDishes;
-        if ([[BentoShop sharedInstance] isSoldOut]) {
+        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
         } else if ([[BentoShop sharedInstance] isClosed]) {
             aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
@@ -155,7 +157,7 @@
 //        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
         
         NSArray *arySideDishes;
-        if ([[BentoShop sharedInstance] isSoldOut]) {
+        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
             arySideDishes = [[BentoShop sharedInstance] getSideDishes];
         } else if ([[BentoShop sharedInstance] isClosed]) {
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
@@ -194,7 +196,7 @@
     {
 //        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
         NSArray *aryMainDishes;
-        if ([[BentoShop sharedInstance] isSoldOut]) {
+        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
             NSLog(@"Get today's menu");
         } else if ([[BentoShop sharedInstance] isClosed]) {
@@ -211,7 +213,7 @@
     {
 //        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
         NSArray *arySideDishes;
-        if ([[BentoShop sharedInstance] isSoldOut]) {
+        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
             arySideDishes = [[BentoShop sharedInstance] getSideDishes];
         } else if ([[BentoShop sharedInstance] isClosed]) {
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];

@@ -8,7 +8,7 @@
 
 #import "CompleteOrderViewController.h"
 
-#import "MyBentoViewController.h"
+#import "ServingDinnerViewController.h"
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
 
@@ -496,7 +496,7 @@
     
     for (UIViewController *vc in viewControllers) {
      
-        if ([vc isKindOfClass:[MyBentoViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]])
         {
             [[BentoShop sharedInstance] addNewBento];
             [self.navigationController popToViewController:vc animated:YES];
@@ -505,7 +505,8 @@
         }
     }
 
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:nil];
+    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
 }
 
 - (void)showStartOverAlert
@@ -874,7 +875,7 @@
     
     for (UIViewController *vc in viewControllers) {
         
-        if ([vc isKindOfClass:[MyBentoViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]])
         {
             [[BentoShop sharedInstance] setCurrentBento:curBento];
             [self.navigationController popToViewController:vc animated:YES];
@@ -883,7 +884,8 @@
         }
     }
     
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:curBento];
+    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
 }
 
 - (void) onClickedMinuteButton:(UIView *)view

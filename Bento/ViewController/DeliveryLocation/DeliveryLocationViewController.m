@@ -10,7 +10,7 @@
 
 #import "AppDelegate.h"
 
-#import "MyBentoViewController.h"
+#import "ServingDinnerViewController.h"
 #import "CompleteOrderViewController.h"
 #import "OutOfDeliveryAddressViewController.h"
 #import "FaqViewController.h"
@@ -240,7 +240,7 @@
     
     for (UIViewController *vc in viewControllers) {
         
-        if ([vc isKindOfClass:[MyBentoViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]])
         {
             [self.navigationController popToViewController:vc animated:YES];
             
@@ -248,7 +248,8 @@
         }
     }
     
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:nil];
+    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
 }
 
 - (void)doConfirmOrder

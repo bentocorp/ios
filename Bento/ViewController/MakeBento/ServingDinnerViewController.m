@@ -88,10 +88,22 @@
     
     UIButton *btnAddAnotherBento;
     UIButton *btnState;
+    
+    UIStoryboard *storyboard;
+    ChooseMainDishViewController *chooseMainDishViewController;
+    ChooseSideDishViewController *chooseSideDishViewController;
+    DeliveryLocationViewController *deliveryLocationViewController;
+    CompleteOrderViewController *completeOrderViewController;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+    deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+    completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -213,7 +225,7 @@
     
 /*---Button Dishes---*/
     
-    btnMainDish = [[UIButton alloc] initWithFrame:viewMainEntree.frame];
+    btnMainDish = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
     btnMainDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
     [btnMainDish setTitle:[[AppStrings sharedInstance] getString:BUILD_MAIN_BUTTON] forState:UIControlStateNormal];
     [btnMainDish setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
@@ -221,132 +233,147 @@
     [btnMainDish addTarget:self action:@selector(onAddMainDish) forControlEvents:UIControlEventTouchUpInside];
     [viewMainEntree addSubview:btnMainDish];
 
-    btnSideDish1 = [[UIButton alloc] initWithFrame:viewSide1.frame];
-    btnSideDish1.backgroundColor = [UIColor redColor];
+    btnSideDish1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
     [btnSideDish1 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE1_BUTTON] forState:UIControlStateNormal];
     [btnSideDish1 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
     btnSideDish1.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    btnSideDish1.tag = 0;
     [btnSideDish1 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
     [viewSide1 addSubview:btnSideDish1];
-//
-//    btnSideDish2 = [[UIButton alloc] initWithFrame:viewSide2.frame];
-//    [btnSideDish2 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE2_BUTTON] forState:UIControlStateNormal];
-//    [btnSideDish2 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
-//    btnSideDish2.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-//    [btnSideDish2 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
-//    [viewSide2 addSubview:btnSideDish2];
-//    
-//    btnSideDish3 = [[UIButton alloc] initWithFrame:viewSide3.frame];
-//    [btnSideDish3 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
-//    [btnSideDish3 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
-//    btnSideDish3.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-//    [btnSideDish3 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
-//    [viewSide3 addSubview:btnSideDish3];
-//    
-//    btnSideDish4 = [[UIButton alloc] initWithFrame:viewSide4.frame];
-//    [btnSideDish4 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE4_BUTTON] forState:UIControlStateNormal];
-//    [btnSideDish4 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
-//    btnSideDish4.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-//    [btnSideDish4 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
-//    [viewSide4 addSubview:btnSideDish4];
+
+    btnSideDish2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 1)];
+    [btnSideDish2 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE2_BUTTON] forState:UIControlStateNormal];
+    [btnSideDish2 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
+    btnSideDish2.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    btnSideDish2.tag = 1;
+    [btnSideDish2 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
+    [viewSide2 addSubview:btnSideDish2];
+
+    btnSideDish3 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
+    [btnSideDish3 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
+    [btnSideDish3 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
+    btnSideDish3.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    btnSideDish3.tag = 2;
+    [btnSideDish3 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
+    [viewSide3 addSubview:btnSideDish3];
+    
+    btnSideDish4 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
+    [btnSideDish4 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE4_BUTTON] forState:UIControlStateNormal];
+    [btnSideDish4 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
+    btnSideDish4.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    btnSideDish4.tag = 3;
+    [btnSideDish4 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
+    [viewSide4 addSubview:btnSideDish4];
     
 /*---Image Dishes*---*/
     
-//    ivMainDish = [[UIImageView alloc] initWithFrame:viewMainEntree.frame];
-//    ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
-//    [viewMainEntree addSubview:ivMainDish];
-//    
-//    ivSideDish1 = [[UIImageView alloc] initWithFrame:viewSide1.frame];
-//    ivSideDish1.contentMode = UIViewContentModeScaleAspectFill;
-//    [viewSide1 addSubview:ivSideDish1];
-//    
-//    ivSideDish2 = [[UIImageView alloc] initWithFrame:viewSide2.frame];
-//    ivSideDish2.contentMode = UIViewContentModeScaleAspectFill;
-//    [viewSide2 addSubview:ivSideDish2];
-//    
-//    ivSideDish3 = [[UIImageView alloc] initWithFrame:viewSide3.frame];
-//    ivSideDish3.contentMode = UIViewContentModeScaleAspectFill;
-//    [viewSide3 addSubview:ivSideDish3];
-//    
-//    ivSideDish4 = [[UIImageView alloc] initWithFrame:viewSide4.frame];
-//    ivSideDish4.contentMode = UIViewContentModeScaleAspectFill;
-//    [viewSide4 addSubview:ivSideDish4];
+    ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
+    [ivMainDish setClipsToBounds:YES];
+    ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
+    [viewMainEntree addSubview:ivMainDish];
+    
+    ivSideDish1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
+    ivSideDish1.contentMode = UIViewContentModeScaleAspectFill;
+    [ivSideDish1 setClipsToBounds:YES];
+    [viewSide1 addSubview:ivSideDish1];
+
+    ivSideDish2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 1)];
+    [ivSideDish2 setClipsToBounds:YES];
+    ivSideDish2.contentMode = UIViewContentModeScaleAspectFill;
+    [viewSide2 addSubview:ivSideDish2];
+
+    ivSideDish3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
+    [ivSideDish3 setClipsToBounds:YES];
+    ivSideDish3.contentMode = UIViewContentModeScaleAspectFill;
+    [viewSide3 addSubview:ivSideDish3];
+    
+    ivSideDish4 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
+    [ivSideDish4 setClipsToBounds:YES];
+    ivSideDish4.contentMode = UIViewContentModeScaleAspectFill;
+    [viewSide4 addSubview:ivSideDish4];
     
 /*---Gradient Layer---*/
     
-//    CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
-//    backgroundLayer.frame = ivMainDish.frame;
-//    backgroundLayer.opacity = 0.8f;
-//    [ivMainDish.layer insertSublayer:backgroundLayer atIndex:0];
-//    
-//    backgroundLayer = [CAGradientLayer blackGradientLayer];
-//    backgroundLayer.frame = ivSideDish1.frame;
-//    backgroundLayer.opacity = 0.8f;
-//    [ivSideDish1.layer insertSublayer:backgroundLayer atIndex:0];
-//    
-//    backgroundLayer = [CAGradientLayer blackGradientLayer];
-//    backgroundLayer.frame = ivSideDish2.frame;
-//    backgroundLayer.opacity = 0.8f;
-//    [ivSideDish2.layer insertSublayer:backgroundLayer atIndex:0];
-//    
-//    backgroundLayer = [CAGradientLayer blackGradientLayer];
-//    backgroundLayer.frame = ivSideDish3.frame;
-//    backgroundLayer.opacity = 0.8f;
-//    [ivSideDish3.layer insertSublayer:backgroundLayer atIndex:0];
-//    
-//    backgroundLayer = [CAGradientLayer blackGradientLayer];
-//    backgroundLayer.frame = ivSideDish4.frame;
-//    backgroundLayer.opacity = 0.8f;
-//    [ivSideDish4.layer insertSublayer:backgroundLayer atIndex:0];
+    CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
+    backgroundLayer.frame = ivMainDish.frame;
+    backgroundLayer.opacity = 0.8f;
+    [ivMainDish.layer insertSublayer:backgroundLayer atIndex:0];
+
+    backgroundLayer = [CAGradientLayer blackGradientLayer];
+    backgroundLayer.frame = ivSideDish1.frame;
+    backgroundLayer.opacity = 0.8f;
+    [ivSideDish1.layer insertSublayer:backgroundLayer atIndex:0];
+
+    backgroundLayer = [CAGradientLayer blackGradientLayer];
+    backgroundLayer.frame = ivSideDish2.frame;
+    backgroundLayer.opacity = 0.8f;
+    [ivSideDish2.layer insertSublayer:backgroundLayer atIndex:0];
+
+    backgroundLayer = [CAGradientLayer blackGradientLayer];
+    backgroundLayer.frame = ivSideDish3.frame;
+    backgroundLayer.opacity = 0.8f;
+    [ivSideDish3.layer insertSublayer:backgroundLayer atIndex:0];
+
+    backgroundLayer = [CAGradientLayer blackGradientLayer];
+    backgroundLayer.frame = ivSideDish4.frame;
+    backgroundLayer.opacity = 0.8f;
+    [ivSideDish4.layer insertSublayer:backgroundLayer atIndex:0];
     
 /*---Label Dishes---*/
     
-//    lblMainDish = [[UILabel alloc] initWithFrame:viewMainEntree.frame];
-//    lblMainDish.textColor = [UIColor whiteColor];
-//    lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:18.0f];
-//    lblMainDish.textAlignment = NSTextAlignmentCenter;
-//    [viewMainEntree addSubview:lblMainDish];
-//    
-//    lblSideDish1 = [[UILabel alloc] initWithFrame:viewSide1.frame];
-//    lblSideDish1.textColor = [UIColor whiteColor];
-//    lblSideDish1.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-//    lblSideDish1.textAlignment = NSTextAlignmentCenter;
-//    [viewSide1 addSubview:lblSideDish1];
-//    
-//    lblSideDish2 = [[UILabel alloc] initWithFrame:viewSide2.frame];
-//    lblSideDish2.textColor = [UIColor whiteColor];
-//    lblSideDish2.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-//    lblSideDish2.textAlignment = NSTextAlignmentCenter;
-//    [viewSide2 addSubview:lblSideDish2];
-//    
-//    lblSideDish3 = [[UILabel alloc] initWithFrame:viewSide3.frame];
-//    lblSideDish3.textColor = [UIColor whiteColor];
-//    lblSideDish3.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-//    lblSideDish3.textAlignment = NSTextAlignmentCenter;
-//    [viewSide3 addSubview:lblSideDish3];
-//    
-//    lblSideDish4 = [[UILabel alloc] initWithFrame:viewSide4.frame];
-//    lblSideDish4.textColor = [UIColor whiteColor];
-//    lblSideDish4.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-//    lblSideDish4.textAlignment = NSTextAlignmentCenter;
-//    [viewSide4 addSubview:lblSideDish4];
+    lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
+    lblMainDish.textColor = [UIColor whiteColor];
+    lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:18.0f];
+    lblMainDish.textAlignment = NSTextAlignmentCenter;
+    [viewMainEntree addSubview:lblMainDish];
+    
+    lblSideDish1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
+    lblSideDish1.textColor = [UIColor whiteColor];
+    lblSideDish1.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
+    lblSideDish1.textAlignment = NSTextAlignmentCenter;
+    [viewSide1 addSubview:lblSideDish1];
+
+    lblSideDish2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 1)];
+    lblSideDish2.textColor = [UIColor whiteColor];
+    lblSideDish2.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
+    lblSideDish2.textAlignment = NSTextAlignmentCenter;
+    [viewSide2 addSubview:lblSideDish2];
+
+    lblSideDish3 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
+    lblSideDish3.textColor = [UIColor whiteColor];
+    lblSideDish3.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
+    lblSideDish3.textAlignment = NSTextAlignmentCenter;
+    [viewSide3 addSubview:lblSideDish3];
+    
+    lblSideDish4 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
+    lblSideDish4.textColor = [UIColor whiteColor];
+    lblSideDish4.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
+    lblSideDish4.textAlignment = NSTextAlignmentCenter;
+    [viewSide4 addSubview:lblSideDish4];
     
 /*---Image Banner---*/
+    
+    UIImage *soldOutBannerImage = [UIImage imageNamed:@"banner_sold_out"];
 
-//    ivBannerMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(viewMainEntree.frame.size.width - viewMainEntree.frame.size.height / 2, 0, viewMainEntree.frame.size.height / 2, viewMainEntree.frame.size.height / 2)];
-//    [viewMainEntree addSubview:ivBannerMainDish];
-//    
-//    ivBannerSideDish1 = [[UIImageView alloc] initWithFrame:CGRectMake(viewSide1.frame.size.width - viewSide1.frame.size.height / 2, 0, viewSide1.frame.size.height / 2, viewSide1.frame.size.height / 2)];
-//    [viewSide1 addSubview:ivBannerSideDish1];
-//    
-//    ivBannerSideDish2 = [[UIImageView alloc] initWithFrame: CGRectMake(viewSide2.frame.size.width - viewSide2.frame.size.height / 2, 0, viewSide2.frame.size.height / 2, viewSide2.frame.size.height / 2)];
-//    [viewSide2 addSubview:ivBannerSideDish2];
-//    
-//    ivBannerSideDish3 = [[UIImageView alloc] initWithFrame:CGRectMake(viewSide3.frame.size.width - viewSide3.frame.size.height / 2, 0, viewSide3.frame.size.height / 2, viewSide3.frame.size.height / 2)];
-//    [viewSide3 addSubview:ivBannerSideDish3];
-//    
-//    ivBannerSideDish4 = [[UIImageView alloc] initWithFrame:CGRectMake(viewSide4.frame.size.width - viewSide4.frame.size.height / 2, 0, viewSide4.frame.size.height / 2, viewSide4.frame.size.height / 2)];
-//    [viewSide4 addSubview:ivBannerSideDish4];
+    ivBannerMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(viewMainEntree.frame.size.width - viewMainEntree.frame.size.height / 2, 0, viewMainEntree.frame.size.height / 2, viewMainEntree.frame.size.height / 2)];
+    ivBannerMainDish.image = soldOutBannerImage;
+    [viewMainEntree addSubview:ivBannerMainDish];
+
+    ivBannerSideDish1 = [[UIImageView alloc] initWithFrame:CGRectMake(viewSide1.frame.size.width - viewSide1.frame.size.height / 2, 0, viewSide1.frame.size.height / 2, viewSide1.frame.size.height / 2)];
+    ivBannerSideDish1.image = soldOutBannerImage;
+    [viewSide1 addSubview:ivBannerSideDish1];
+    
+    ivBannerSideDish2 = [[UIImageView alloc] initWithFrame: CGRectMake(viewSide2.frame.size.width - viewSide2.frame.size.height / 2, 0, viewSide2.frame.size.height / 2, viewSide2.frame.size.height / 2)];
+    ivBannerSideDish2.image = soldOutBannerImage;
+    [viewSide2 addSubview:ivBannerSideDish2];
+    
+    ivBannerSideDish3 = [[UIImageView alloc] initWithFrame:CGRectMake(viewSide3.frame.size.width - viewSide3.frame.size.height / 2, 0, viewSide3.frame.size.height / 2, viewSide3.frame.size.height / 2)];
+    ivBannerSideDish3.image = soldOutBannerImage;
+    [viewSide3 addSubview:ivBannerSideDish3];
+    
+    ivBannerSideDish4 = [[UIImageView alloc] initWithFrame:CGRectMake(viewSide4.frame.size.width - viewSide4.frame.size.height / 2, 0, viewSide4.frame.size.height / 2, viewSide4.frame.size.height / 2)];
+    ivBannerSideDish4.image = soldOutBannerImage;
+    [viewSide4 addSubview:ivBannerSideDish4];
     
 /*---Add Another Bento Button---*/
     
@@ -355,6 +382,7 @@
     btnAddAnotherBento.layer.borderWidth = 1.0f;
     [btnAddAnotherBento setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
     btnAddAnotherBento.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    [btnAddAnotherBento addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnAddAnotherBento];
     
 /*---Button State---*/
@@ -406,31 +434,13 @@
     BentoShop *globalShop = [BentoShop sharedInstance];
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
     {
-        UIViewController *vcLocation = [self.storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self.navigationController pushViewController:vcLocation animated:NO];
+        [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
     }
 }
 
-#pragma mark - Navigation
-
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"MainDish"])
-    {
-//        ChooseMainDishViewController *vc = segue.destinationViewController;
-    }
-    else if ([segue.identifier isEqualToString:@"SideDish"])
-    {
-        ChooseSideDishViewController *vc = segue.destinationViewController;
-        
-        NSNumber *number = (NSNumber *)sender;
-        vc.sideDishIndex = [number integerValue];
-    }
-}
-
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
@@ -440,14 +450,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super viewWillDisappear:animated];
 }
 
-- (void) onUpdatedStatus:(NSNotification *)notification
+- (void)onUpdatedStatus:(NSNotification *)notification
 {
     if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
@@ -466,8 +476,8 @@
     NSInteger side4DishIndex = 0;
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil)
-    {
+    if (currentBento != nil) {
+        
         mainDishIndex = [currentBento getMainDish];
         side1DishIndex = [currentBento getSideDish1];
         side2DishIndex = [currentBento getSideDish2];
@@ -475,8 +485,8 @@
         side4DishIndex = [currentBento getSideDish4];
     }
     
-    if (mainDishIndex > 0)
-    {
+    if (mainDishIndex > 0) {
+        
         ivMainDish.hidden = NO;
         lblMainDish.hidden = NO;
         
@@ -493,9 +503,7 @@
             else
                 ivBannerMainDish.hidden = YES;
         }
-    }
-    else
-    {
+    } else {
         ivMainDish.image = nil;
         ivMainDish.hidden = YES;
         lblMainDish.hidden = YES;
@@ -674,32 +682,27 @@
     else
     {
         if (placeInfo == nil)
-            [self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
+            [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
         else
-            [self performSegueWithIdentifier:@"CompleteOrder" sender:nil];
+            [self.navigationController pushViewController:completeOrderViewController animated:YES];
     }
 }
 
 - (void)onAddMainDish
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    [self.navigationController pushViewController:destVC animated:YES];
+    [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
 }
 
 - (void)onAddSideDish:(id)sender
 {
+    UIButton *selectedButton = (UIButton *)sender;
     
-    NSLog(@"on add side dish");
-//    NSInteger tag = ((UIButton *)sender).tag;
-//    [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:tag]];
+    chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-    [self.navigationController pushViewController:destVC animated:YES];
+    [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
 }
 
-- (void)onAddAnotherBento:(id)sender
+- (void)onAddAnotherBento
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento != nil && ![currentBento isCompleted])
@@ -714,25 +717,25 @@
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
-    if (currentBento == nil || [currentBento isEmpty])
-    {
-        [self performSegueWithIdentifier:@"MainDish" sender:nil];
-    }
-    else if (![currentBento isCompleted])
-    {
+    if (currentBento == nil || [currentBento isEmpty]) {
+        
+        [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
+        
+    } else if (![currentBento isCompleted]) {
+        
         if ([currentBento getMainDish] == 0)
-            [self performSegueWithIdentifier:@"MainDish" sender:nil];
+            [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
         else if ([currentBento getSideDish1] == 0)
-            [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:btnSideDish1.tag]];
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
         else if ([currentBento getSideDish2] == 0)
-            [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:btnSideDish2.tag]];
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
         else if ([currentBento getSideDish3] == 0)
-            [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:btnSideDish3.tag]];
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
         else if ([currentBento getSideDish4] == 0)
-            [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:btnSideDish4.tag]];
-    }
-    else // Completed Bento
-    {
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        
+    } else { /* Completed Bento */
+        
         [[BentoShop sharedInstance] saveBentoArray];
         [self gotoOrderScreen];
     }
@@ -761,6 +764,7 @@
     {
         btnCart.enabled = YES;
         btnCart.selected = YES;
+        [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
     }
     else
     {

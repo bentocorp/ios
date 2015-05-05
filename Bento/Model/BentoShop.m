@@ -115,17 +115,17 @@ static BentoShop *_shareInstance;
 
 - (void)getStatus
 {
-    NSString *strRequest = [NSString stringWithFormat:@"%@/status/overall", SERVER_URL];
+    NSString *strRequest = [NSString stringWithFormat:@"%@/status/all", SERVER_URL];
     
     NSError *error = nil;
     self.dicStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
     
     if (originalStatus.length == 0) {
-        originalStatus = self.dicStatus[@"value"];
+        originalStatus = self.dicStatus[@"overall"][@"value"];
     }
     
-    NSString *newStatus = self.dicStatus[@"value"];
+    NSString *newStatus = self.dicStatus[@"overall"][@"value"];
     
     if (![originalStatus isEqualToString:newStatus]) {
         
@@ -141,8 +141,6 @@ static BentoShop *_shareInstance;
     strRequest = [NSString stringWithFormat:@"%@/status/menu", SERVER_URL];
     
     self.menuStatus = [self sendRequest:strRequest statusCode:nil error:&error];
-    
-//    NSLog(@"menuStatus - %@", self.menuStatus);
     
     BOOL isClosed = [self isClosed];
     BOOL isSoldOut = [self isSoldOut];
@@ -210,15 +208,15 @@ static BentoShop *_shareInstance;
         return;
     
     NSMutableArray *urls = [[NSMutableArray alloc] init];
-    NSDictionary *menuDetailInfo = [menuInfo objectForKey:@"Menu"];
+    NSDictionary *menuDetailInfo = menuInfo[@"dinner"][@"Menu"];
     if (menuDetailInfo != nil)
     {
-        NSString *strMenuBack = [menuInfo objectForKey:@"bgimg"];
+        NSString *strMenuBack = menuInfo[@"bgimg"];
         if (strMenuBack != nil && [strMenuBack isKindOfClass:[NSString class]] && strMenuBack.length > 0)
             [urls addObject:[NSURL URLWithString:strMenuBack]];
     }
     
-    NSArray *aryDishes = [menuInfo objectForKey:@"MenuItems"];
+    NSArray *aryDishes = menuInfo[@"dinner"][@"MenuItems"];
     if (aryDishes != nil && [aryDishes isKindOfClass:[NSArray class]] && aryDishes.count > 0)
     {
         for (NSDictionary *dishInfo in aryDishes)
@@ -306,6 +304,9 @@ static BentoShop *_shareInstance;
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
 }
 
+// TODO: CHECK IF LUNCH VS DINNER SERVICE AREA//
+// TODO: CHECK IF LUNCH VS DINNER SERVICE AREA//
+// TODO: CHECK IF LUNCH VS DINNER SERVICE AREA//
 - (void)getServiceArea
 {
     NSString *strRequest = [NSString stringWithFormat:@"%@/servicearea", SERVER_URL];
@@ -315,7 +316,7 @@ static BentoShop *_shareInstance;
     if (kmlValues == nil || error != nil)
         return;
     
-    NSString *strPoints = [kmlValues objectForKey:@"value"];
+    NSString *strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
     NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
     
     // Parse String and Separate Latitude and Longitude.
@@ -352,14 +353,16 @@ static BentoShop *_shareInstance;
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_AREA object:nil];
 }
 
+
+// TODO CHECK if lunch or dinner
 - (NSURL *)getMenuImageURL
 {
     if (self.menuToday == nil && self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self.menuToday objectForKey:@"Menu"];
+    NSDictionary *menuInfo = self.menuToday[@"dinner"][@"Menu"];
     if (menuInfo == nil)
-        menuInfo = [self.menuNext objectForKey:@"Menu"];
+        menuInfo = self.menuNext[@"dinner"][@"Menu"];
     
     if (menuInfo == nil)
         return nil;
@@ -376,7 +379,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self.menuToday objectForKey:@"Menu"];
+    NSDictionary *menuInfo = self.menuToday[@"dinner"][@"Menu"];
     if (menuInfo == nil)
         return nil;
     
@@ -388,7 +391,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self.menuToday objectForKey:@"Menu"];
+    NSDictionary *menuInfo = self.menuToday[@"dinner"][@"Menu"];
     if (menuInfo == nil)
         return nil;
     
@@ -405,7 +408,7 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self.menuNext objectForKey:@"Menu"];
+    NSDictionary *menuInfo = self.menuNext[@"dinner"][@"Menu"];
     if (menuInfo == nil)
         return nil;
     
@@ -417,11 +420,11 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self.menuNext objectForKey:@"Menu"];
+    NSDictionary *menuInfo = self.menuNext[@"dinner"][@"Menu"];
     if (menuInfo == nil)
         return nil;
     
-    NSString *strDate = [menuInfo objectForKey:@"for_date"];
+    NSString *strDate = menuInfo[@"for_date"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
     NSDate *menuDate = [formatter dateFromString:strDate];
@@ -435,7 +438,7 @@ static BentoShop *_shareInstance;
     if (self.dicStatus == nil)
         return YES;
     
-    NSString *strOverallStatus = [self.dicStatus objectForKey:@"value"];
+    NSString *strOverallStatus = self.dicStatus[@"overall"][@"value"];
     if ([strOverallStatus isEqualToString:@"closed"])
         return YES;
 
@@ -458,7 +461,7 @@ static BentoShop *_shareInstance;
     if (self.dicStatus == nil)
         return YES;
     
-    NSString *strOverallStatus = [self.dicStatus objectForKey:@"value"];
+    NSString *strOverallStatus = self.dicStatus[@"overall"][@"value"];
     if ([strOverallStatus isEqualToString:@"sold out"])
         return YES;
     
@@ -591,7 +594,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSArray *menuItems = [self.menuToday objectForKey:@"MenuItems"];
+    NSArray *menuItems = self.menuToday[@"dinner"][@"MenuItems"];
     if (menuItems == nil)
         return nil;
     
@@ -611,7 +614,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSArray *menuItems = [self.menuToday objectForKey:@"MenuItems"];
+    NSArray *menuItems = self.menuToday[@"dinner"][@"MenuItems"];
     if (menuItems == nil)
         return nil;
     
@@ -631,7 +634,7 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSArray *menuItems = [self.menuNext objectForKey:@"MenuItems"];
+    NSArray *menuItems = self.menuNext[@"dinner"][@"MenuItems"];
     if (menuItems == nil)
         return nil;
     
@@ -651,7 +654,7 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSArray *menuItems = [self.menuNext objectForKey:@"MenuItems"];
+    NSArray *menuItems = self.menuNext[@"dinner"][@"MenuItems"];
     if (menuItems == nil)
         return nil;
     
@@ -671,7 +674,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSArray *menuItems = [self.menuToday objectForKey:@"MenuItems"];
+    NSArray *menuItems = self.menuToday[@"dinner"][@"MenuItems"];
     if (menuItems == nil)
         return nil;
     
@@ -691,7 +694,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSArray *menuItems = [self.menuToday objectForKey:@"MenuItems"];
+    NSArray *menuItems = self.menuToday[@"dinner"][@"MenuItems"];
     if (menuItems == nil)
         return nil;
     
