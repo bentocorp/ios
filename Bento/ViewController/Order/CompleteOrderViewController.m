@@ -113,20 +113,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     _clickedMinuteButtonIndex = NSNotFound;
     
     UINib *cellNib = [UINib nibWithNibName:@"BentoTableViewCell" bundle:nil];
     [self.tvBentos registerNib:cellNib forCellReuseIdentifier:@"BentoCell"];
-    
-    self.aryBentos = [[NSMutableArray alloc] init];
-    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
-    {
-        Bento *bento = [[BentoShop sharedInstance] getBento:index];
-        if ([bento isCompleted])
-            [self.aryBentos addObject:bento];
-    }
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:COMPLETE_TITLE];
     [self.btnAddAnother setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
@@ -139,8 +130,6 @@
     
     _isEditingBentos = NO;
     
-//    self.strPromoCode = nil;
-//    self.promoDiscount = 0;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     _strPromoCode = [userDefaults objectForKey:KEY_PROMO_CODE];
     _promoDiscount = [userDefaults integerForKey:KEY_PROMO_DISCOUNT];
@@ -164,15 +153,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     if ([segue.identifier isEqualToString:@"CreditCard"])
     {
         EnterCreditCardViewController *vcEnterCreditCard = segue.destinationViewController;
@@ -224,13 +210,13 @@
     self.lblPaymentMethod.text = strPaymentMethod;
     [self.ivCardType setImage:[UIImage imageNamed:strImageName]];
     
-    //
+    
     NSMutableDictionary *currentUserInfo = [[[DataManager shareDataManager] getUserInfo] mutableCopy];
     currentUserInfo[@"card"] = @{
                                  @"brand": strImageName,
                                  @"last4": strCardNumber
                                  };
-    [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];
+    [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];// This should fix the payment issue, added paymentMethod
     
     NSLog(@"Update Payment Info, %@", currentUserInfo[@"card"]);
 }
@@ -381,8 +367,19 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+
+    // set array every time view appears (edit: moved from viewDidLoad)
+    self.aryBentos = [[NSMutableArray alloc] init];
+    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
+    {
+        Bento *bento = [[BentoShop sharedInstance] getBento:index];
+        if ([bento isCompleted])
+            [self.aryBentos addObject:bento];
+    }
     
     [self.tvBentos reloadData];
+    
+    NSLog(@"aryBentos in completeorder - %ld", self.aryBentos.count);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
@@ -418,6 +415,8 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self.aryBentos removeAllObjects];
     
     [super viewWillDisappear:animated];
 }

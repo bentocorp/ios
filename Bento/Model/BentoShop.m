@@ -775,7 +775,9 @@ static BentoShop *_shareInstance;
     if (_currentIndex == NSNotFound)
         _currentIndex = self.aryBentos.count - 1;
     
-    return [self.aryBentos objectAtIndex:_currentIndex];
+    NSLog(@"aryBentos in Bentoshop - %ld", self.aryBentos.count);
+    
+    return self.aryBentos[_currentIndex];
 }
 
 - (void)setCurrentBento:(Bento *)bento

@@ -203,7 +203,7 @@
     [self gotoMyBentoScreen];
 }
 
-- (void) process
+- (void)process
 {
     NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
 /*
