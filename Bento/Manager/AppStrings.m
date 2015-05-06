@@ -123,6 +123,8 @@ static AppStrings *_shareInstance;
         if ([key isEqualToString:strKey] && [type isEqualToString:@"number"])
         {
             NSInteger value = [[info objectForKey:@"value"] integerValue];
+            
+            NSLog(@"getInteger, value - %ld", value);
             return value;
         }
     }
