@@ -109,6 +109,11 @@ static DataManager *_shareDataManager;
     return self.currentUserInfo;
 }
 
+- (void)setUserInfo:(NSDictionary *)userInfo paymentMethod:(PaymentMethod)paymentMethod {
+    self.currentUserInfo = userInfo;
+    [self setPaymentMethod:paymentMethod];
+}
+
 - (void)setUserInfo:(NSDictionary *)userInfo
 {
     self.currentUserInfo = userInfo;

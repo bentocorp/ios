@@ -1,4 +1,4 @@
-//
+	//
 //  CompleteOrderViewController.m
 //  Bento
 //
@@ -176,7 +176,7 @@
     }
 }
 
-- (void)updatePaymentInfo:(NSString *)strCardType cardNumber:(NSString *)strCardNumber
+- (void)updatePaymentInfo:(NSString *)strCardType cardNumber:(NSString *)strCardNumber paymentMethod:(PaymentMethod)paymentMethod
 {
     NSString *strImageName = @"placeholder";
     NSString *strPaymentMethod = @"";
@@ -220,12 +220,13 @@
     self.lblPaymentMethod.text = strPaymentMethod;
     [self.ivCardType setImage:[UIImage imageNamed:strImageName]];
     
+    //
     NSMutableDictionary *currentUserInfo = [[[DataManager shareDataManager] getUserInfo] mutableCopy];
     currentUserInfo[@"card"] = @{
                                  @"brand": strImageName,
                                  @"last4": strCardNumber
                                  };
-    [[DataManager shareDataManager] setUserInfo:currentUserInfo];
+    [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];
     
     NSLog(@"Update Payment Info, %@", currentUserInfo[@"card"]);
 }
@@ -247,7 +248,7 @@
         NSString *strCardType = [[cardInfo objectForKey:@"brand"] lowercaseString];
         NSString *strCardNumber = [cardInfo objectForKey:@"last4"];
      
-        [self updatePaymentInfo:strCardType cardNumber:strCardNumber];
+        [self updatePaymentInfo:strCardType cardNumber:strCardNumber paymentMethod:curPaymentMethod];
     }
     else if (curPaymentMethod == Payment_CreditCard)
     {
@@ -257,25 +258,25 @@
         
         switch (cardType) {
             case PTKCardTypeAmex:
-                [self updatePaymentInfo:@"amex" cardNumber:cardNumber.last4];
+                [self updatePaymentInfo:@"amex" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
                 break;
             case PTKCardTypeDinersClub:
-                [self updatePaymentInfo:@"diners" cardNumber:cardNumber.last4];
+                [self updatePaymentInfo:@"diners" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
                 break;
             case PTKCardTypeDiscover:
-                [self updatePaymentInfo:@"discover" cardNumber:cardNumber.last4];
+                [self updatePaymentInfo:@"discover" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
                 break;
             case PTKCardTypeJCB:
-                [self updatePaymentInfo:@"jcb" cardNumber:cardNumber.last4];
+                [self updatePaymentInfo:@"jcb" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
                 break;
             case PTKCardTypeMasterCard:
-                [self updatePaymentInfo:@"mastercard" cardNumber:cardNumber.last4];
+                [self updatePaymentInfo:@"mastercard" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
                 break;
             case PTKCardTypeVisa:
-                [self updatePaymentInfo:@"visa" cardNumber:cardNumber.last4];
+                [self updatePaymentInfo:@"visa" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
                 break;
             default:
-                [self updatePaymentInfo:@"" cardNumber:@""];
+                [self updatePaymentInfo:@"" cardNumber:@"" paymentMethod:curPaymentMethod];
                 break;
         }
         

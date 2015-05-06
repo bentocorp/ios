@@ -59,6 +59,7 @@ typedef enum : NSUInteger {
 
 - (NSDictionary *)getUserInfo;
 - (void)setUserInfo:(NSDictionary *)userInfo;
+- (void)setUserInfo:(NSDictionary *)userInfo paymentMethod:(PaymentMethod)paymentMethod;
 
 - (NSString *)getAPIToken;
 
