@@ -493,13 +493,9 @@
 
 - (IBAction)onAddSideDish:(id)sender
 {
-//    NSInteger tag = ((UIButton *)sender).tag;
-//    
-//    [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:tag]];
+    NSInteger tag = ((UIButton *)sender).tag;
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-    [self.navigationController pushViewController:destVC animated:YES];
+    [self performSegueWithIdentifier:@"SideDish" sender:[NSNumber numberWithInteger:tag]];
 }
 
 - (IBAction)onAddAnotherBento:(id)sender

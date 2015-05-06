@@ -12,6 +12,4 @@
 
 @interface ChooseMainDishViewController : UIViewController
 
-//@property (nonatomic, assign) Bento *currentBento;
-
 @end

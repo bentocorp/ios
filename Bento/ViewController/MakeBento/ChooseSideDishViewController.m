@@ -16,35 +16,30 @@
 #import "DataManager.h"
 
 @interface ChooseSideDishViewController ()<DishCollectionViewCellDelegate>
+
+@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
+@property (nonatomic, assign) IBOutlet UICollectionView *cvSideDishes;
+@property (nonatomic, retain) NSMutableArray *aryDishes;
+
+@end
+
+@implementation ChooseSideDishViewController
 {
     NSInteger _originalDishIndex;
     NSInteger _selectedIndex;
     NSInteger _selectedItemState;
 }
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
-
-@property (nonatomic, assign) IBOutlet UICollectionView *cvSideDishes;
-
-@property (nonatomic, assign) IBOutlet UILabel *lblBadge;
-
-@property (nonatomic, assign) IBOutlet UIButton *btnCart;
-
-@property (nonatomic, retain) NSMutableArray *aryDishes;
-
-@end
-
-@implementation ChooseSideDishViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.lblBadge.layer.cornerRadius = self.lblBadge.frame.size.width / 2;
-    self.lblBadge.clipsToBounds = YES;
-
+    NSLog(@"viewdidload");
+    
+    // Set Nib to Collection View
     UINib *cellNib = [UINib nibWithNibName:@"DishCollectionViewCell" bundle:nil];
     [self.cvSideDishes registerNib:cellNib forCellWithReuseIdentifier:@"cell"];
     
+    // Set Dish Title Label
     if (self.sideDishIndex == 0)
         [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_1_TITLE]];
     else if (self.sideDishIndex == 1)
@@ -54,6 +49,60 @@
     else if (self.sideDishIndex == 3)
         [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_4_TITLE]];
     
+//    // Get Side Dish
+//    NSInteger sideDishIndex = 0;
+//    if ([[BentoShop sharedInstance] getCurrentBento] != nil)
+//    {
+//        if (self.sideDishIndex == 0)
+//            sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish1];
+//        else if (self.sideDishIndex == 1)
+//            sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish2];
+//        else if (self.sideDishIndex == 2)
+//            sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish3];
+//        else if (self.sideDishIndex == 3)
+//            sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish4];
+//    }
+//    
+//    self.aryDishes = [[NSMutableArray alloc] init];
+//    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes])
+//    {
+//        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+//        
+//        if ([[BentoShop sharedInstance] canAddDish:dishID] && ([[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID] || dishID == sideDishIndex))
+//        {
+//            [self.aryDishes addObject:dishInfo];
+//            NSLog(@"self.aryDishes - %@", self.aryDishes);
+//        }
+//    }
+//
+//    _originalDishIndex = NSNotFound;
+//    _selectedIndex = NSNotFound;
+//    _selectedItemState = DISH_CELL_NORMAL;
+//
+//    if (sideDishIndex != 0)
+//    {
+//        for (NSInteger index = 0; index < self.aryDishes.count; index++)
+//        {
+//            NSDictionary *dishInfo = [self.aryDishes objectAtIndex:index];
+//            if ([[dishInfo objectForKey:@"itemId"] integerValue] == sideDishIndex)
+//            {
+//                _originalDishIndex = index;
+//                _selectedIndex = index;
+//                _selectedItemState = DISH_CELL_SELECTED;
+//            }
+//        }
+//    }
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // Get Side Dish
     NSInteger sideDishIndex = 0;
     if ([[BentoShop sharedInstance] getCurrentBento] != nil)
     {
@@ -67,28 +116,24 @@
             sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish4];
     }
     
-//    self.aryDishes = [[BentoShop sharedInstance] getSideDishes];
     self.aryDishes = [[NSMutableArray alloc] init];
     for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-//        if ([[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID] || [[BentoShop sharedInstance] isDishSoldOut:dishID] || [[BentoShop sharedInstance] canAddDish:dishID] || dishID == sideDishIndex)
+        
         if ([[BentoShop sharedInstance] canAddDish:dishID] && ([[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID] || dishID == sideDishIndex))
         {
-//            if (dishID != sideDishIndex)
-                [self.aryDishes addObject:dishInfo];
+            [self.aryDishes addObject:dishInfo];
+            NSLog(@"self.aryDishes - %@", self.aryDishes);
         }
     }
-
+    
     _originalDishIndex = NSNotFound;
     _selectedIndex = NSNotFound;
     _selectedItemState = DISH_CELL_NORMAL;
-
+    
     if (sideDishIndex != 0)
     {
-//        _selectedIndex = sideDishIndex;
-//        _selectedItemState = DISH_CELL_SELECTED;
-        
         for (NSInteger index = 0; index < self.aryDishes.count; index++)
         {
             NSDictionary *dishInfo = [self.aryDishes objectAtIndex:index];
@@ -100,17 +145,9 @@
             }
         }
     }
-}
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
-    [self.cvSideDishes reloadData];
+//    [self.cvSideDishes reloadData]; // wtf this fool reload twice for? shiiieeet
     
     [self updateUI];
     
@@ -118,11 +155,11 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
     [super viewWillDisappear:animated];
+    
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)onUpdatedStatus:(NSNotification *)notification
@@ -140,19 +177,17 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)onCart:(id)sender
+- (void)updateUI
 {
-    
-}
+    NSLog(@"side dish index - %ld", self.sideDishIndex);
+    NSLog(@"original dish index - %ld", _originalDishIndex);
+    NSLog(@"selected index - %ld", _selectedIndex);
+    NSLog(@"selected item state - %ld", _selectedItemState);
 
-- (void) updateUI
-{
-    self.btnCart.selected = [self isCompletedToMakeMyBento];
-    
     [self.cvSideDishes reloadData];
 }
 
-- (BOOL) isCompletedToMakeMyBento
+- (BOOL)isCompletedToMakeMyBento
 {
     if ([[BentoShop sharedInstance] getCurrentBento] == nil)
         return NO;
@@ -180,7 +215,6 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
     DishCollectionViewCell *cell = (DishCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
     
@@ -217,7 +251,9 @@
     return CGSizeMake(self.cvSideDishes.frame.size.width / 2, self.cvSideDishes.frame.size.width / 2);
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Cell selected!, indexPath.item - %ld", indexPath.item);
     
     if (_selectedIndex == indexPath.item)
     {
@@ -252,13 +288,16 @@
 
 #pragma mark DishCollectionViewCellDelegate
 
-- (void) onActionDishCell:(NSInteger)index
+- (void)onActionDishCell:(NSInteger)index
 {
-    _selectedIndex = index;
-    
+    NSLog(@"onActionDishCell activated!");
+     
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:_selectedIndex];
     if (dishInfo == nil)
+    {
+        NSLog(@"No dishInfo!");
         return;
+    }
     
     NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
     
@@ -269,6 +308,7 @@
         
         if ([[BentoShop sharedInstance] getCurrentBento] != nil)
         {
+            // removes item from Side Dish
             if (self.sideDishIndex == 0)
                 [[[BentoShop sharedInstance] getCurrentBento] setSideDish1:0];
             else if (self.sideDishIndex == 1)

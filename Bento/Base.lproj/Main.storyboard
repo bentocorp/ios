@@ -115,8 +115,6 @@
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
-            <string>OpenSans-Semibold</string>
-            <string>OpenSans-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -862,25 +860,6 @@
                                             <action selector="onBack:" destination="Y3s-WX-y7y" eventType="touchUpInside" id="Jg0-dU-PvI"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Ev-qO-lpC">
-                                        <rect key="frame" x="270" y="20" width="50" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="mybento_nav_cart_inact.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="mybento_nav_cart_act.png"/>
-                                        <connections>
-                                            <action selector="onCart:" destination="Y3s-WX-y7y" eventType="touchUpInside" id="WJd-Lf-WnK"/>
-                                        </connections>
-                                    </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VoK-da-hpy">
-                                        <rect key="frame" x="277" y="24" width="14" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.89019607840000003" green="0.2470588235" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -915,9 +894,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ys0-Ok-xvL"/>
                     <connections>
-                        <outlet property="btnCart" destination="3Ev-qO-lpC" id="7Nx-7w-LhT"/>
                         <outlet property="cvMainDishes" destination="jEL-Ah-vpE" id="zQo-KC-lTm"/>
-                        <outlet property="lblBadge" destination="VoK-da-hpy" id="5wb-f9-YPM"/>
                         <outlet property="lblTitle" destination="Rfm-67-QKg" id="67X-rx-SuZ"/>
                     </connections>
                 </viewController>
@@ -2523,25 +2500,6 @@
                                             <action selector="onBack:" destination="tNR-bW-wkA" eventType="touchUpInside" id="cqx-97-c7O"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="l8r-Y1-Tv6">
-                                        <rect key="frame" x="270" y="20" width="50" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="mybento_nav_cart_inact.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="mybento_nav_cart_act.png"/>
-                                        <connections>
-                                            <action selector="onCart:" destination="tNR-bW-wkA" eventType="touchUpInside" id="09y-mR-lfd"/>
-                                        </connections>
-                                    </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3sA-sL-EAj">
-                                        <rect key="frame" x="277" y="24" width="14" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.89019607840000003" green="0.2470588235" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -2576,9 +2534,7 @@
                     </view>
                     <navigationItem key="navigationItem" id="OQJ-he-WeM"/>
                     <connections>
-                        <outlet property="btnCart" destination="l8r-Y1-Tv6" id="h46-Jq-ydF"/>
                         <outlet property="cvSideDishes" destination="KIA-L3-xvh" id="hsH-x6-cJF"/>
-                        <outlet property="lblBadge" destination="3sA-sL-EAj" id="gJV-Vp-Vpf"/>
                         <outlet property="lblTitle" destination="K7d-zv-DtO" id="s44-I6-Xvk"/>
                     </connections>
                 </viewController>

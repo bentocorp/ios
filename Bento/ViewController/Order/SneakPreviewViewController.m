@@ -15,11 +15,6 @@
 #import "BentoShop.h"
 
 @interface SneakPreviewViewController ()
-{
-    NSIndexPath *_selectedPath;
-    NSInteger hour;
-    int weekday;
-}
 
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UICollectionView *cvDishes;
@@ -27,6 +22,11 @@
 @end
 
 @implementation SneakPreviewViewController
+{
+    NSIndexPath *_selectedPath;
+    NSInteger hour;
+    int weekday;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,7 +63,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation

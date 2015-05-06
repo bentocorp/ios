@@ -26,6 +26,8 @@
 #import "SignedInSettingsViewController.h"
 #import "SignedOutSettingsViewController.h"
 
+#import "PreviewCollectionViewCell.h"
+
 #import "MyAlertView.h"
 
 #import "CAGradientLayer+SJSGradients.h"
@@ -50,7 +52,7 @@
     UIScrollView *scrollView;
     
     UILabel *lblBanner;
-    UILabel *lblTitle;
+    UILabel *dinnerTitleLabel;
     UILabel *lblBadge;
     UIButton *btnCart;
     
@@ -107,7 +109,7 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
     
-//    [lblTitle setText:[[AppStrings sharedInstance] getString:BUILD_TITLE]];
+//    [dinnerTitleLabel setText:[[AppStrings sharedInstance] getString:BUILD_TITLE]];
     
 /*---Scroll View---*/
     
@@ -723,16 +725,30 @@
         
     } else if (![currentBento isCompleted]) {
         
-        if ([currentBento getMainDish] == 0)
+        if ([currentBento getMainDish] == 0) {
+            
             [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
-        else if ([currentBento getSideDish1] == 0)
+            
+        } else if ([currentBento getSideDish1] == 0) {
+            
+            chooseSideDishViewController.sideDishIndex = 0;
             [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-        else if ([currentBento getSideDish2] == 0)
+            
+        } else if ([currentBento getSideDish2] == 0) {
+            
+            chooseSideDishViewController.sideDishIndex = 1;
             [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-        else if ([currentBento getSideDish3] == 0)
+            
+        } else if ([currentBento getSideDish3] == 0) {
+            
+            chooseSideDishViewController.sideDishIndex = 2;
             [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-        else if ([currentBento getSideDish4] == 0)
+            
+        } else if ([currentBento getSideDish4] == 0) {
+            
+            chooseSideDishViewController.sideDishIndex = 3;
             [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        }
         
     } else { /* Completed Bento */
         

@@ -761,7 +761,7 @@ static BentoShop *_shareInstance;
     for (Bento *bento in self.aryBentos)
     {
         if ([bento isCompleted])
-            completedCount ++;
+            completedCount++;
     }
     
     return completedCount;

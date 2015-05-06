@@ -338,6 +338,10 @@
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC0984231AF2ACD20014B138 /* CustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0984221AF2ACD20014B138 /* CustomSegue.m */; };
 		FC0984241AF2ACD20014B138 /* CustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0984221AF2ACD20014B138 /* CustomSegue.m */; };
+		FC3C4E791AF96A41005D7197 /* ServingLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */; };
+		FC3C4E7A1AF96A41005D7197 /* ServingLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */; };
+		FC3C4E7D1AF96B42005D7197 /* ServingLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */; };
+		FC3C4E7E1AF96B42005D7197 /* ServingLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */; };
 		FC8286091AEEED1B009D073D /* documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = FC8285C61AEEED1B009D073D /* documentation.html */; };
 		FC82860A1AEEED1B009D073D /* documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = FC8285C61AEEED1B009D073D /* documentation.html */; };
 		FC82860B1AEEED1B009D073D /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC8285C71AEEED1B009D073D /* license.txt */; };
@@ -796,6 +800,10 @@
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
 		FC0984211AF2ACD20014B138 /* CustomSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegue.h; sourceTree = "<group>"; };
 		FC0984221AF2ACD20014B138 /* CustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegue.m; sourceTree = "<group>"; };
+		FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchViewController.h; sourceTree = "<group>"; };
+		FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchViewController.m; sourceTree = "<group>"; };
+		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchCell.h; sourceTree = "<group>"; };
+		FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchCell.m; sourceTree = "<group>"; };
 		FC8285C61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
 		FC8285C71AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		FC8285C81AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
@@ -866,8 +874,8 @@
 		FCA1C8C11AF1973E004715F1 /* icon-square-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-user.png"; sourceTree = "<group>"; };
 		FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardInfoViewController.h; sourceTree = "<group>"; };
 		FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardInfoViewController.m; sourceTree = "<group>"; };
-		FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewCell.h; path = ../ViewController/SettingsTableViewCell.h; sourceTree = "<group>"; };
-		FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewCell.m; path = ../ViewController/SettingsTableViewCell.m; sourceTree = "<group>"; };
+		FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewCell.h; sourceTree = "<group>"; };
+		FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
 		FCAA47981AE9E03B00CA1743 /* SignedInSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignedInSettingsViewController.h; sourceTree = "<group>"; };
 		FCAA47991AE9E03B00CA1743 /* SignedInSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedInSettingsViewController.m; sourceTree = "<group>"; };
 		FCAA479A1AE9E03B00CA1743 /* SignedOutSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignedOutSettingsViewController.h; sourceTree = "<group>"; };
@@ -1353,6 +1361,7 @@
 				90BED0A51A5BD05C003DC872 /* MakeBento */,
 				90BED0A61A5BD05C003DC872 /* Order */,
 				90BED0A71A5BD05C003DC872 /* SignIn */,
+				FC3C4E761AF969F2005D7197 /* Unused VC */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1371,10 +1380,8 @@
 		90BED0A51A5BD05C003DC872 /* MakeBento */ = {
 			isa = PBXGroup;
 			children = (
-				FC08AB221AF713DD00CFB44D /* ServingDinnerViewController.h */,
-				FC08AB231AF713DD00CFB44D /* ServingDinnerViewController.m */,
-				90BED0D11A5BF2D9003DC872 /* MyBentoViewController.h */,
-				90BED0D21A5BF2D9003DC872 /* MyBentoViewController.m */,
+				FC3C4E801AF97FD7005D7197 /* Serving Dinner */,
+				FC3C4E7F1AF97FCD005D7197 /* Serving Lunch */,
 				90BED0D41A5BF2F4003DC872 /* ChooseMainDishViewController.h */,
 				90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */,
 				90BED0D71A5BF301003DC872 /* ChooseSideDishViewController.h */,
@@ -1522,8 +1529,6 @@
 				728B9E7D1A9C65C900A2ED73 /* PreviewCollectionViewCell.h */,
 				728B9E7E1A9C65C900A2ED73 /* PreviewCollectionViewCell.m */,
 				728B9E7F1A9C65C900A2ED73 /* PreviewCollectionViewCell.xib */,
-				FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */,
-				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1553,6 +1558,36 @@
 				FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */,
 			);
 			path = BWTitlePagerView;
+			sourceTree = "<group>";
+		};
+		FC3C4E761AF969F2005D7197 /* Unused VC */ = {
+			isa = PBXGroup;
+			children = (
+				90BED0D11A5BF2D9003DC872 /* MyBentoViewController.h */,
+				90BED0D21A5BF2D9003DC872 /* MyBentoViewController.m */,
+			);
+			name = "Unused VC";
+			path = MakeBento;
+			sourceTree = "<group>";
+		};
+		FC3C4E7F1AF97FCD005D7197 /* Serving Lunch */ = {
+			isa = PBXGroup;
+			children = (
+				FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */,
+				FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */,
+				FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */,
+				FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */,
+			);
+			name = "Serving Lunch";
+			sourceTree = "<group>";
+		};
+		FC3C4E801AF97FD7005D7197 /* Serving Dinner */ = {
+			isa = PBXGroup;
+			children = (
+				FC08AB221AF713DD00CFB44D /* ServingDinnerViewController.h */,
+				FC08AB231AF713DD00CFB44D /* ServingDinnerViewController.m */,
+			);
+			name = "Serving Dinner";
 			sourceTree = "<group>";
 		};
 		FC8285C41AEEED1B009D073D /* Icons */ = {
@@ -1763,6 +1798,8 @@
 		FCFD79F01AE8880D002AD322 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */,
+				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
 				FCAA479A1AE9E03B00CA1743 /* SignedOutSettingsViewController.h */,
 				FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */,
 				FCAA47981AE9E03B00CA1743 /* SignedInSettingsViewController.h */,
@@ -2333,6 +2370,7 @@
 				7216B7281AA64C7C0006FFE9 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				7216B7291AA64C7C0006FFE9 /* SDWebImageCompat.m in Sources */,
 				7216B72A1AA64C7C0006FFE9 /* UIImage+MultiFormat.m in Sources */,
+				FC3C4E7E1AF96B42005D7197 /* ServingLunchCell.m in Sources */,
 				7216B72B1AA64C7C0006FFE9 /* EnterCreditCardViewController.m in Sources */,
 				7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */,
 				7216B72D1AA64C7C0006FFE9 /* UIImage+WebP.m in Sources */,
@@ -2350,6 +2388,7 @@
 				7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */,
 				7216B7391AA64C7C0006FFE9 /* Reachability.m in Sources */,
 				7216B73A1AA64C7C0006FFE9 /* MKAnnotationView+WebCache.m in Sources */,
+				FC3C4E7A1AF96A41005D7197 /* ServingLunchViewController.m in Sources */,
 				7216B73B1AA64C7C0006FFE9 /* FirstViewController.m in Sources */,
 				7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */,
 				7216B73E1AA64C7C0006FFE9 /* SDWebImageDecoder.m in Sources */,
@@ -2434,6 +2473,7 @@
 				722333D31A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				722333AA1A6EADBD006C2446 /* SDWebImageCompat.m in Sources */,
 				722333B21A6EADBD006C2446 /* UIImage+MultiFormat.m in Sources */,
+				FC3C4E7D1AF96B42005D7197 /* ServingLunchCell.m in Sources */,
 				90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */,
 				722333611A6D4058006C2446 /* JGProgressHUDIndicatorView.m in Sources */,
 				722333B31A6EADBD006C2446 /* UIImage+WebP.m in Sources */,
@@ -2451,6 +2491,7 @@
 				7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */,
 				722333DB1A6F4701006C2446 /* Reachability.m in Sources */,
 				722333A71A6EADBD006C2446 /* MKAnnotationView+WebCache.m in Sources */,
+				FC3C4E791AF96A41005D7197 /* ServingLunchViewController.m in Sources */,
 				90BED0A81A5BD05C003DC872 /* FirstViewController.m in Sources */,
 				7223336B1A6D5847006C2446 /* BentoShop.m in Sources */,
 				722333AB1A6EADBD006C2446 /* SDWebImageDecoder.m in Sources */,

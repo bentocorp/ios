@@ -23,6 +23,7 @@
 #import "Reachability.h"
 
 #import "ServingDinnerViewController.h"
+#import "ServingLunchViewController.h"
 
 @interface FirstViewController ()
 {
@@ -258,6 +259,9 @@
     BOOL needsAnimation = YES;
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
         needsAnimation = NO;
+    
+//    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+//    [self.navigationController pushViewController:servingLunchViewController animated:YES];
     
     ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
     [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
