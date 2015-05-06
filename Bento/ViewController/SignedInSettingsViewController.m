@@ -440,7 +440,7 @@
         [self presentViewController:tweetSheet animated:YES completion:nil];
     } else { // not logged into twitter
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
-                                                               message:@"You need to be logged into the Twitter app in order to post to Twitter. Please log into the Twitter app and try again."
+                                                               message:@"Please log into Twitter via the Twitter app or iPhone settings and try again."
                                                               delegate:nil
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil];
@@ -456,6 +456,13 @@
         [faceSheet setInitialText:sharePrecomposedMessageNew];
                 
         [self presentViewController:faceSheet animated:YES completion:Nil];
+    } else { // not logged into facebook
+        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
+                                                               message:@"Please log into Facebook via the Facebook app or iPhone settings and try again."
+                                                              delegate:nil
+                                                     cancelButtonTitle:@"OK"
+                                                     otherButtonTitles:nil];
+        [warningAlert show];
     }
 }
 
