@@ -41,7 +41,7 @@
     _isSideDishCell = NO;
     
     self.ivMask.hidden = YES;
-    //    [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SNEAK_PREVIEW_MAIN_DISH] forState:UIControlStateNormal];
+//    [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SNEAK_PREVIEW_MAIN_DISH] forState:UIControlStateNormal];
 }
 
 - (void)layoutSubviews
@@ -68,17 +68,17 @@
     [self.ivImage.layer insertSublayer:self.gradientLayer atIndex:0];
     
     
-    //    self.btnAction.layer.cornerRadius = 3;
-    //    self.btnAction.clipsToBounds = YES;
-    //    self.btnAction.layer.borderColor = [UIColor whiteColor].CGColor;
-    //    self.btnAction.layer.borderWidth = 1.0f;
+//    self.btnAction.layer.cornerRadius = 3;
+//    self.btnAction.clipsToBounds = YES;
+//    self.btnAction.layer.borderColor = [UIColor whiteColor].CGColor;
+//    self.btnAction.layer.borderWidth = 1.0f;
 }
 
 - (void) setSmallDishCell
 {
     _isSideDishCell = YES;
     
-    //    [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SNEAK_PREVIEW_SIDE_DISH] forState:UIControlStateNormal];
+//    [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SNEAK_PREVIEW_SIDE_DISH] forState:UIControlStateNormal];
 }
 
 - (void) setDishInfo:(NSDictionary *)dishInfo
@@ -103,7 +103,7 @@
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, self.viewMain.frame.size.height / 2);
         
         self.lblDescription.hidden = YES;
-        //        self.btnAction.hidden = YES;
+//        self.btnAction.hidden = YES;
         
         self.ivMask.hidden = YES;
     }
@@ -111,18 +111,18 @@
     {
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
         
-        //        self.btnAction.backgroundColor = [UIColor clearColor];
-        //        [self.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+//        self.btnAction.backgroundColor = [UIColor clearColor];
+//        [self.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         self.lblDescription.hidden = NO;
         
-        //        self.btnAction.hidden = NO;
+//        self.btnAction.hidden = NO;
         
-        //        if (_isSideDishCell)
-        //            [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SNEAK_PREVIEW_SIDE_DISH] forState:UIControlStateNormal];
-        //        else
-        //            [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SNEAK_PREVIEW_MAIN_DISH] forState:UIControlStateNormal];
-        
+//        if (_isSideDishCell)
+//            [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SNEAK_PREVIEW_SIDE_DISH] forState:UIControlStateNormal];
+//        else
+//            [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SNEAK_PREVIEW_MAIN_DISH] forState:UIControlStateNormal];
+
         self.ivMask.hidden = NO;
     }
 }

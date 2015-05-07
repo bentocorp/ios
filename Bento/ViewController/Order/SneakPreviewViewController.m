@@ -55,7 +55,7 @@
     UINib *cellNib = [UINib nibWithNibName:@"PreviewCollectionViewCell" bundle:nil];
     [self.cvDishes registerNib:cellNib forCellWithReuseIdentifier:@"PreviewCollectionViewCell"];
     [self.cvDishes registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
-    
+
     _selectedPath = nil;
 }
 
@@ -136,7 +136,7 @@
 {
     if (section == 0) // Main Dishes
     {
-        //        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+//        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
         
         NSArray *aryMainDishes;
         if ([[BentoShop sharedInstance] isSoldOut]) {
@@ -152,7 +152,7 @@
     }
     else if (section == 1)
     {
-        //        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+//        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
         
         NSArray *arySideDishes;
         if ([[BentoShop sharedInstance] isSoldOut]) {
@@ -160,7 +160,7 @@
         } else if ([[BentoShop sharedInstance] isClosed]) {
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
         }
-        
+
         if (arySideDishes == nil)
             return 0;
         
@@ -186,13 +186,13 @@
 {
     PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
     
-    //    myCell.layer.cornerRadius = 4;
-    //    myCell.layer.borderWidth = 1;
-    //    myCell.layer.borderColor = [[UIColor blackColor] CGColor];
+//    myCell.layer.cornerRadius = 4;
+//    myCell.layer.borderWidth = 1;
+//    myCell.layer.borderColor = [[UIColor blackColor] CGColor];
     
     if (indexPath.section == 0) // Main Dish
     {
-        //        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+//        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
         NSArray *aryMainDishes;
         if ([[BentoShop sharedInstance] isSoldOut]) {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
@@ -209,7 +209,7 @@
     }
     else if (indexPath.section == 1) // Side Dish
     {
-        //        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+//        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
         NSArray *arySideDishes;
         if ([[BentoShop sharedInstance] isSoldOut]) {
             arySideDishes = [[BentoShop sharedInstance] getSideDishes];
@@ -220,7 +220,7 @@
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
     }
-    
+
     if (_selectedPath != nil && _selectedPath == indexPath)
     {
         [myCell setCellState:YES];
@@ -281,7 +281,7 @@
         
         if (reusableview == nil)
             reusableview = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, self.cvDishes.frame.size.width, 44)];
-        
+
         UILabel *label = (UILabel *)[reusableview viewWithTag:1];
         if (label == nil)
         {
