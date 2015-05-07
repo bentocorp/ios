@@ -239,7 +239,7 @@ static BentoShop *_shareInstance;
     NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
     
     NSError *error = nil;
-    self.menuToday = [self sendRequest:strRequest statusCode:nil error:&error];
+    self.menuToday = [self sendRequest:strRequest statusCode:nil error:&error][@"menus"];
     
     [self prefetchImages:self.menuToday];
     
@@ -283,12 +283,12 @@ static BentoShop *_shareInstance;
         
         NSError *error = nil;
         NSInteger statusCode = 0;
-        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error];
+        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
         
         if (statusCode == 404)
         {
             strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
-            self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error];
+            self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
         }
     }
     else
@@ -297,7 +297,7 @@ static BentoShop *_shareInstance;
         
         NSError *error = nil;
         NSInteger statusCode = 0;
-        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error];
+        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
     }
 
     [self prefetchImages:self.menuNext];

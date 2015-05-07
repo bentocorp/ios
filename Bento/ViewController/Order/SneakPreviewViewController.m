@@ -15,6 +15,9 @@
 #import "BentoShop.h"
 
 @interface SneakPreviewViewController ()
+{
+    NSIndexPath *_selectedPath;
+}
 
 @property (weak, nonatomic) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UICollectionView *cvDishes;
@@ -22,11 +25,6 @@
 @end
 
 @implementation SneakPreviewViewController
-{
-    NSIndexPath *_selectedPath;
-    NSInteger hour;
-    int weekday;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -36,11 +34,11 @@
     NSCalendar *calendar = [NSCalendar currentCalendar];
     NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
     
-    hour = [components hour];
-    NSLog(@"current hour - %d", hour);
+    NSInteger hour = [components hour];
+    NSLog(@"current hour - %ld", hour);
     
     // Sunday = 1, Saturday = 7
-    weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
+    int weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
     
     // if sold out || (closed && before 9pm && is not sunday && is not saturday)
@@ -57,17 +55,21 @@
     UINib *cellNib = [UINib nibWithNibName:@"PreviewCollectionViewCell" bundle:nil];
     [self.cvDishes registerNib:cellNib forCellWithReuseIdentifier:@"PreviewCollectionViewCell"];
     [self.cvDishes registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
-
+    
     _selectedPath = nil;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
 
+// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    // Get the new view controller using [segue destinationViewController].
+    // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"Faq"])
     {
         FaqViewController *vc = segue.destinationViewController;
@@ -134,10 +136,10 @@
 {
     if (section == 0) // Main Dishes
     {
-//        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+        //        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
         
         NSArray *aryMainDishes;
-        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+        if ([[BentoShop sharedInstance] isSoldOut]) {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
         } else if ([[BentoShop sharedInstance] isClosed]) {
             aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
@@ -150,15 +152,15 @@
     }
     else if (section == 1)
     {
-//        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+        //        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
         
         NSArray *arySideDishes;
-        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+        if ([[BentoShop sharedInstance] isSoldOut]) {
             arySideDishes = [[BentoShop sharedInstance] getSideDishes];
         } else if ([[BentoShop sharedInstance] isClosed]) {
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
         }
-
+        
         if (arySideDishes == nil)
             return 0;
         
@@ -184,11 +186,15 @@
 {
     PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
     
+    //    myCell.layer.cornerRadius = 4;
+    //    myCell.layer.borderWidth = 1;
+    //    myCell.layer.borderColor = [[UIColor blackColor] CGColor];
+    
     if (indexPath.section == 0) // Main Dish
     {
-//        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+        //        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
         NSArray *aryMainDishes;
-        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+        if ([[BentoShop sharedInstance] isSoldOut]) {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
             NSLog(@"Get today's menu");
         } else if ([[BentoShop sharedInstance] isClosed]) {
@@ -203,9 +209,9 @@
     }
     else if (indexPath.section == 1) // Side Dish
     {
-//        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+        //        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
         NSArray *arySideDishes;
-        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+        if ([[BentoShop sharedInstance] isSoldOut]) {
             arySideDishes = [[BentoShop sharedInstance] getSideDishes];
         } else if ([[BentoShop sharedInstance] isClosed]) {
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
@@ -214,7 +220,7 @@
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
     }
-
+    
     if (_selectedPath != nil && _selectedPath == indexPath)
     {
         [myCell setCellState:YES];
@@ -275,7 +281,7 @@
         
         if (reusableview == nil)
             reusableview = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, self.cvDishes.frame.size.width, 44)];
-
+        
         UILabel *label = (UILabel *)[reusableview viewWithTag:1];
         if (label == nil)
         {
