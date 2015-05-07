@@ -37,7 +37,7 @@
     NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
     
     hour = [components hour];
-    NSLog(@"current hour - %ld", hour);
+    NSLog(@"current hour - %d", hour);
     
     // Sunday = 1, Saturday = 7
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
@@ -67,10 +67,7 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
     if ([segue.identifier isEqualToString:@"Faq"])
     {
         FaqViewController *vc = segue.destinationViewController;
@@ -186,10 +183,6 @@
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
-    
-//    myCell.layer.cornerRadius = 4;
-//    myCell.layer.borderWidth = 1;
-//    myCell.layer.borderColor = [[UIColor blackColor] CGColor];
     
     if (indexPath.section == 0) // Main Dish
     {
