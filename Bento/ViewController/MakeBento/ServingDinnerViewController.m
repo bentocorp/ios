@@ -26,6 +26,8 @@
 #import "SignedInSettingsViewController.h"
 #import "SignedOutSettingsViewController.h"
 
+#import "ServingLunchCell.h"
+
 #import "PreviewCollectionViewCell.h"
 
 #import "MyAlertView.h"
@@ -43,13 +45,14 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface ServingDinnerViewController () <MyAlertViewDelegate>
+@interface ServingDinnerViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
 
 @end
 
 @implementation ServingDinnerViewController
 {
     UIScrollView *scrollView;
+    UITableView *myTableView;
     
     UILabel *lblBanner;
     UILabel *dinnerTitleLabel;
@@ -96,6 +99,14 @@
     ChooseSideDishViewController *chooseSideDishViewController;
     DeliveryLocationViewController *deliveryLocationViewController;
     CompleteOrderViewController *completeOrderViewController;
+    
+    // Upcoming Lunch
+    UILabel *lblTitle;
+    UICollectionView *cvDishes;
+    
+    NSIndexPath *_selectedPath;
+    NSInteger hour;
+    int weekday;
 }
 
 - (void)viewDidLoad {
@@ -440,6 +451,51 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
     }
+    
+/*-------------------------------------Upcoming Lunch---------------------------------------*/
+    
+    /*---Collection View---*/
+    
+    UICollectionViewFlowLayout *collectionViewFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+    
+    cvDishes = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65) collectionViewLayout:collectionViewFlowLayout];
+    cvDishes.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
+    cvDishes.allowsSelection = NO;
+    cvDishes.dataSource = self;
+    cvDishes.delegate = self;
+    
+    UINib *cellNib = [UINib nibWithNibName:@"PreviewCollectionViewCell" bundle:nil];
+    [cvDishes registerNib:cellNib forCellWithReuseIdentifier:@"PreviewCollectionViewCell"];
+    [cvDishes registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
+    
+    [scrollView addSubview:cvDishes];
+    
+    
+    
+    // Get current hour
+    NSDate *currentDate = [NSDate date];
+    NSCalendar *calendar = [NSCalendar currentCalendar];
+    NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
+    
+    hour = [components hour];
+    NSLog(@"current hour - %ld", hour);
+    
+    // Sunday = 1, Saturday = 7
+    weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
+    NSLog(@"today is - %ld", (long)weekday);
+    
+    //    // if sold out || (closed && before 9pm && is not sunday && is not saturday)
+    //    if ([[BentoShop sharedInstance] isSoldOut] ||
+    //        (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+    //
+    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+    //
+    //    } else if ([[BentoShop sharedInstance] isClosed]) {
+    //
+    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    //    }
+    
+    _selectedPath = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -876,8 +932,193 @@
     }
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+/*------------------------------------------Upcoming Lunch---------------------------------------------*/
+
+- (void)onUpdatedMenu:(NSNotification *)notification
+{
+    [cvDishes reloadData];
+}
+
+- (void)doBack
+{
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)onBack:(id)sender
+{
+    [self doBack];
+}
+
+#pragma mark - UICollectionViewDataSource
+
+- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
+{
+    return 2;
+}
+
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    if (section == 0) // Main Dishes
+    {
+        NSArray *aryMainDishes;
+//        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
+//        } else if ([[BentoShop sharedInstance] isClosed]) {
+//            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+//        }
+        
+        if (aryMainDishes == nil)
+            return 0;
+        
+        return aryMainDishes.count;
+    }
+    else if (section == 1)
+    {
+        NSArray *arySideDishes;
+//        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+//        } else if ([[BentoShop sharedInstance] isClosed]) {
+//            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+//        }
+        
+        if (arySideDishes == nil)
+            return 0;
+        
+        return arySideDishes.count;
+    }
+    
+    return 0;
+}
+
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PreviewCollectionViewCell *cell = (PreviewCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PreviewCollectionViewCell" forIndexPath:indexPath];
+    
+    [cell initView];
+    
+    if (indexPath.section == 1)
+        [cell setSmallDishCell];
+    
+    return cell;
+}
+
+- (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
+    
+    if (indexPath.section == 0) // Main Dish
+    {
+        NSArray *aryMainDishes;
+//        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
+//            NSLog(@"Get today's menu");
+//        } else if ([[BentoShop sharedInstance] isClosed]) {
+//            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
+//        }
+        
+        NSLog(@"Get today's menu - %@", [[BentoShop sharedInstance] getMainDishes]);
+        NSLog(@"Get tomorrow's menu - %@", [[BentoShop sharedInstance] getNextMainDishes]);
+        
+        NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
+        [myCell setDishInfo:dishInfo];
+    }
+    else if (indexPath.section == 1) // Side Dish
+    {
+        NSArray *arySideDishes;
+//        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+//        } else if ([[BentoShop sharedInstance] isClosed]) {
+//            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
+//        }
+        
+        NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
+        [myCell setDishInfo:dishInfo];
+    }
+    
+    if (_selectedPath != nil && _selectedPath == indexPath)
+    {
+        [myCell setCellState:YES];
+    }
+    else
+    {
+        [myCell setCellState:NO];
+    }
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (indexPath.section == 0) // Main Dish
+    {
+        return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width * 3 / 5);
+    }
+    else if (indexPath.section == 1) // Side Dish
+    {
+        return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
+    }
+    
+    return CGSizeMake(0, 0);
+}
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (_selectedPath == indexPath)
+    {
+        _selectedPath = nil;
+    }
+    else
+    {
+        _selectedPath = indexPath;
+    }
+    
+    [collectionView reloadData];
+}
+
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+    return UIEdgeInsetsMake(0, 0, 0, 0);
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    if (section == 0 || section == 1)
+    {
+        return CGSizeMake(cvDishes.frame.size.width, 44);
+    }
+    
+    return CGSizeMake(0, 0);
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader])
+    {
+        UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+        
+        if (reusableview == nil)
+            reusableview = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, cvDishes.frame.size.width, 44)];
+        
+        UILabel *label = (UILabel *)[reusableview viewWithTag:1];
+        if (label == nil)
+        {
+            label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, reusableview.frame.size.width, reusableview.frame.size.height)];
+            label.tag = 1;
+            [reusableview addSubview:label];
+        }
+        
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont fontWithName:@"OpenSans-Semibold" size:16.0f];
+        
+        if (indexPath.section == 0)
+            label.text = @"Main Dishes";
+        else if (indexPath.section == 1)
+            label.text = @"Side Dishes";
+        
+        reusableview.backgroundColor = [UIColor darkGrayColor];
+        
+        return reusableview;
+    }
+    
+    return nil;
 }
 
 @end

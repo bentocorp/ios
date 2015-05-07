@@ -32,7 +32,7 @@
         
         /*---Dish View---*/
         
-        viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 20, SCREEN_WIDTH-60, SCREEN_HEIGHT/3 + 20)];
+        viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 20, SCREEN_WIDTH-60, SCREEN_HEIGHT/3 + 4)];
         viewDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
         viewDish.layer.cornerRadius = 3;
         viewDish.clipsToBounds = YES;
