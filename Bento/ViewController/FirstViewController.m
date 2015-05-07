@@ -260,11 +260,13 @@
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
         needsAnimation = NO;
     
-//    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
-//    [self.navigationController pushViewController:servingLunchViewController animated:YES];
+/*--------------Determine here whether to show Lunch or Dinner mode--------------*/
     
-    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-    [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
+    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+    [self.navigationController pushViewController:servingLunchViewController animated:YES];
+    
+//    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+//    [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
     
 //    UIViewController *vcBuildBento = [self.storyboard instantiateViewControllerWithIdentifier:@"MyBentoViewController"];
 //    [self.navigationController pushViewController:vcBuildBento animated:needsAnimation];

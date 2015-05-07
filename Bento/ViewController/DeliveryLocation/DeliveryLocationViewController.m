@@ -11,6 +11,8 @@
 #import "AppDelegate.h"
 
 #import "ServingDinnerViewController.h"
+#import "ServingLunchViewController.h"
+
 #import "CompleteOrderViewController.h"
 #import "OutOfDeliveryAddressViewController.h"
 #import "FaqViewController.h"
@@ -240,7 +242,10 @@
     
     for (UIViewController *vc in viewControllers) {
         
-        if ([vc isKindOfClass:[ServingDinnerViewController class]])
+/*-----check if dinner or lunch mode-----*/
+        
+//        if ([vc isKindOfClass:[ServingDinnerViewController class]])
+        if ([vc isKindOfClass:[ServingLunchViewController class]])
         {
             [self.navigationController popToViewController:vc animated:YES];
             
@@ -248,8 +253,11 @@
         }
     }
     
-    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
+    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+    [self.navigationController pushViewController:servingLunchViewController animated:YES];
+    
+//    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+//    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
 }
 
 - (void)doConfirmOrder
