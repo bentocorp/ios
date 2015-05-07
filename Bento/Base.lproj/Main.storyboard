@@ -759,7 +759,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6d-St-eXW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2315" y="-510"/>
+            <point key="canvasLocation" x="1187" y="-982"/>
         </scene>
         <!--Choose Main Dish View Controller-->
         <scene sceneID="blW-Mz-28m">
@@ -2679,7 +2679,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Uev-9I-8EH" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="186" y="1104"/>
+            <point key="canvasLocation" x="746" y="-968"/>
         </scene>
     </scenes>
     <resources>

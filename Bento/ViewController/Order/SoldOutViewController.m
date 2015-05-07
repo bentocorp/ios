@@ -9,7 +9,8 @@
 #import "SoldOutViewController.h"
 
 #import "FaqViewController.h"
-#import "SneakPreviewViewController.h"
+//#import "SneakPreviewViewController.h"
+#import "PreviewViewController.h"
 
 #import "MyAlertView.h"
 
@@ -360,8 +361,11 @@
 
 - (IBAction)onGotoMenu:(id)sender
 {
-    SneakPreviewViewController *sneakPreviewViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SneakPreviewViewController"];
-    [self.navigationController pushViewController:sneakPreviewViewController animated:YES];
+    PreviewViewController *previewViewController = [[PreviewViewController alloc] init];
+    [self.navigationController pushViewController:previewViewController animated:YES];
+    
+//    SneakPreviewViewController *sneakPreviewViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SneakPreviewViewController"];
+//    [self.navigationController pushViewController:sneakPreviewViewController animated:YES];
 }
 
 #pragma mark UITextFieldDelegate

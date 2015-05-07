@@ -52,7 +52,6 @@
 @implementation ServingDinnerViewController
 {
     UIScrollView *scrollView;
-    UITableView *myTableView;
     
     UILabel *lblBanner;
     UILabel *dinnerTitleLabel;

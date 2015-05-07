@@ -22,6 +22,7 @@
 #import "CompleteOrderViewController.h"
 
 #import "PreviewCollectionViewCell.h"
+#import "ServingLunchBentoViewController.h"
 
 #import "MyAlertView.h"
 
@@ -348,6 +349,9 @@
 - (void)onDish:(id)sender
 {
     UIButton *selectedButton = (UIButton *)sender;
+    
+    ServingLunchBentoViewController *servingLunchBentoViewController = [[ServingLunchBentoViewController alloc] init];
+    [self.navigationController pushViewController:servingLunchBentoViewController animated:YES];
     
     NSLog(@"Dish Selected Tag - %ld", selectedButton.tag);
 }
