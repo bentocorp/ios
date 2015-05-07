@@ -456,7 +456,10 @@
     
     /*---Collection View---*/
     
+    // this sets the layout of the cells
     UICollectionViewFlowLayout *collectionViewFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [collectionViewFlowLayout setMinimumLineSpacing:0];
+    [collectionViewFlowLayout setMinimumInteritemSpacing:0];
     [cvDishes setCollectionViewLayout:collectionViewFlowLayout];
     
     cvDishes = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65) collectionViewLayout:collectionViewFlowLayout];
@@ -505,6 +508,9 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    
+/*---------------Tomorrow Lunch------------*/
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -938,16 +944,6 @@
     [cvDishes reloadData];
 }
 
-- (void)doBack
-{
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)onBack:(id)sender
-{
-    [self doBack];
-}
-
 #pragma mark - UICollectionViewDataSource
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
@@ -957,14 +953,9 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (section == 0) // Main Dishes
+    if (section == 0)
     {
-        NSArray *aryMainDishes;
-//        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
-//        } else if ([[BentoShop sharedInstance] isClosed]) {
-//            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
-//        }
+        NSArray *aryMainDishes = aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
         
         if (aryMainDishes == nil)
             return 0;
@@ -973,12 +964,7 @@
     }
     else if (section == 1)
     {
-        NSArray *arySideDishes;
-//        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes];
-//        } else if ([[BentoShop sharedInstance] isClosed]) {
-//            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
-//        }
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes];
         
         if (arySideDishes == nil)
             return 0;
@@ -1007,28 +993,14 @@
     
     if (indexPath.section == 0) // Main Dish
     {
-        NSArray *aryMainDishes;
-//        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
-//            NSLog(@"Get today's menu");
-//        } else if ([[BentoShop sharedInstance] isClosed]) {
-//            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes];
-//        }
-        
-        NSLog(@"Get today's menu - %@", [[BentoShop sharedInstance] getMainDishes]);
-        NSLog(@"Get tomorrow's menu - %@", [[BentoShop sharedInstance] getNextMainDishes]);
+        NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
         
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
     }
     else if (indexPath.section == 1) // Side Dish
     {
-        NSArray *arySideDishes;
-//        if ([[BentoShop sharedInstance] isSoldOut] || (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes];
-//        } else if ([[BentoShop sharedInstance] isClosed]) {
-//            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes];
-//        }
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes];
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];

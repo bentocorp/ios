@@ -360,7 +360,8 @@
 
 - (IBAction)onGotoMenu:(id)sender
 {
-    [self performSegueWithIdentifier:@"preview" sender:nil];
+    SneakPreviewViewController *sneakPreviewViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"SneakPreviewViewController"];
+    [self.navigationController pushViewController:sneakPreviewViewController animated:YES];
 }
 
 #pragma mark UITextFieldDelegate
