@@ -307,6 +307,4 @@
     return nil;
 }
 
-#pragma mark UICollectionViewDelegate
-
 @end
