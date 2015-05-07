@@ -45,7 +45,7 @@
 
 #import <QuartzCore/QuartzCore.h>
 
-@interface ServingDinnerViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource>
+@interface ServingDinnerViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
 
@@ -457,10 +457,12 @@
     /*---Collection View---*/
     
     UICollectionViewFlowLayout *collectionViewFlowLayout = [[UICollectionViewFlowLayout alloc] init];
+    [collectionViewFlowLayout setItemSize:CGSizeMake(50, 50)];
+    [collectionViewFlowLayout setScrollDirection:UICollectionViewScrollDirectionVertical];
+    [cvDishes setCollectionViewLayout:collectionViewFlowLayout];
     
     cvDishes = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65) collectionViewLayout:collectionViewFlowLayout];
     cvDishes.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
-    cvDishes.allowsSelection = NO;
     cvDishes.dataSource = self;
     cvDishes.delegate = self;
     
@@ -470,8 +472,7 @@
     
     [scrollView addSubview:cvDishes];
     
-    
-    
+
     // Get current hour
     NSDate *currentDate = [NSDate date];
     NSCalendar *calendar = [NSCalendar currentCalendar];
@@ -484,16 +485,18 @@
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
     
-    //    // if sold out || (closed && before 9pm && is not sunday && is not saturday)
-    //    if ([[BentoShop sharedInstance] isSoldOut] ||
-    //        (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
-    //
-    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
-    //
-    //    } else if ([[BentoShop sharedInstance] isClosed]) {
-    //
-    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    //    }
+    
+    // set menu title
+//    // if sold out || (closed && before 9pm && is not sunday && is not saturday)
+//    if ([[BentoShop sharedInstance] isSoldOut] ||
+//        (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+//
+//        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+//
+//    } else if ([[BentoShop sharedInstance] isClosed]) {
+//
+//        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+//    }
     
     _selectedPath = nil;
 }
@@ -932,7 +935,7 @@
     }
 }
 
-/*------------------------------------------Upcoming Lunch---------------------------------------------*/
+/*------------------------------------------Tomorrow Lunch---------------------------------------------*/
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
