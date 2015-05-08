@@ -244,8 +244,8 @@
         
 /*-----check if dinner or lunch mode-----*/
         
-//        if ([vc isKindOfClass:[ServingDinnerViewController class]])
-        if ([vc isKindOfClass:[ServingLunchViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]])
+//        if ([vc isKindOfClass:[ServingLunchViewController class]])
         {
             [self.navigationController popToViewController:vc animated:YES];
             
@@ -253,11 +253,11 @@
         }
     }
     
-    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
-    [self.navigationController pushViewController:servingLunchViewController animated:YES];
+//    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+//    [self.navigationController pushViewController:servingLunchViewController animated:YES];
     
-//    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-//    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
+    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
 }
 
 - (void)doConfirmOrder

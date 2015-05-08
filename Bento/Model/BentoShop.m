@@ -316,6 +316,38 @@ static BentoShop *_shareInstance;
     if (kmlValues == nil || error != nil)
         return;
     
+/*---Check---*/
+//    
+//    NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
+//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest2]];
+//    NSURLResponse *response = nil;
+//    NSError *error2 = nil;
+//    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
+//    if (data == nil) {
+//        return;
+//    }
+//    
+//    NSInteger statusCode = 0;
+//    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+//        statusCode = [(NSHTTPURLResponse *)response statusCode];
+//    }
+//    
+//    if (error != nil || statusCode != 200) {
+//        return;
+//    }
+//    
+//    NSError *parseError = nil;
+//    NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+//    if (initDic == nil) {
+//        return;
+//    }
+//    
+//    NSDictionary *initDictionary = [initDic copy];
+//    
+//    NSLog(@"initDictionary 2 - %@", initDictionary[@"meals"]);
+    
+/*---*/
+    
     NSString *strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
     NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
     

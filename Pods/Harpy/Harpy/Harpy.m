@@ -125,7 +125,16 @@ NSString * const HarpyLanguageTurkish               = @"tr";
         NSLog(@"current ios version - %f", iosCurrentVersion);
         
         if (iosCurrentVersion < iosMinVersion) {
-            [self performVersionCheck];
+            
+            #ifndef DEV_MODE
+                {
+                    [self performVersionCheck];
+                }
+            #endif
+                {
+                    UIAlertView *aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", iosCurrentVersion, iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+                    [aV show];
+                }
         }
     }
 }
@@ -470,12 +479,15 @@ NSString * const HarpyLanguageTurkish               = @"tr";
 }
 
 #pragma mark - UIAlertViewDelegate
+
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch ([self alertType]) {
             
         case HarpyAlertTypeForce: { // Launch App Store.app
+    
             [self launchAppStore];
+
         } break;
             
         case HarpyAlertTypeOption: {

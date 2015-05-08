@@ -262,11 +262,11 @@
     
 /*--------------Determine here whether to show Lunch or Dinner mode--------------*/
     
-    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
-    [self.navigationController pushViewController:servingLunchViewController animated:YES];
+//    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+//    [self.navigationController pushViewController:servingLunchViewController animated:YES];
     
-//    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-//    [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
+    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+    [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
     
 //    UIViewController *vcBuildBento = [self.storyboard instantiateViewControllerWithIdentifier:@"MyBentoViewController"];
 //    [self.navigationController pushViewController:vcBuildBento animated:needsAnimation];
