@@ -262,14 +262,21 @@
     
 /*--------------Determine here whether to show Lunch or Dinner mode--------------*/
     
-//    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
-//    [self.navigationController pushViewController:servingLunchViewController animated:YES];
+    NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
+    float currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
     
-    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-    [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
-    
-//    UIViewController *vcBuildBento = [self.storyboard instantiateViewControllerWithIdentifier:@"MyBentoViewController"];
-//    [self.navigationController pushViewController:vcBuildBento animated:needsAnimation];
+    // 12:00am - 4:59pm
+    if (currentTime >= 0 && currentTime < 16) {
+        
+        ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+        [self.navigationController pushViewController:servingLunchViewController animated:YES];
+        
+    // 5:00pm - 11:59pm
+    } else {
+        
+        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+        [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
+    }
 }
 
 - (void) showSoldoutScreen:(NSNumber *)identifier

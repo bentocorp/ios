@@ -32,6 +32,9 @@
 @implementation BentoShop
 {
     NSString *originalStatus;
+    
+    float lunchTime;
+    float dinnerTime;
 }
 
 static BentoShop *_shareInstance;
@@ -207,19 +210,37 @@ static BentoShop *_shareInstance;
     if (menuInfo == nil)
         return;
     
+    // instantiate empty array to hold urls
     NSMutableArray *urls = [[NSMutableArray alloc] init];
-    NSDictionary *menuDetailInfo = menuInfo[@"dinner"][@"Menu"];
-    if (menuDetailInfo != nil)
+    
+    if (menuInfo != nil)
     {
-        NSString *strMenuBack = menuInfo[@"bgimg"];
-        if (strMenuBack != nil && [strMenuBack isKindOfClass:[NSString class]] && strMenuBack.length > 0)
-            [urls addObject:[NSURL URLWithString:strMenuBack]];
+        for (NSDictionary *menuDetailedInfo in menuInfo)
+        {
+            NSString *strMenuBack = menuInfo[menuDetailedInfo][@"Menu"][@"bgimg"]; // ie. menuInfo[@"lunch"][@"Menu"][@"bgimg"]
+            
+            if (strMenuBack != nil && [strMenuBack isKindOfClass:[NSString class]] && strMenuBack.length > 0)
+                [urls addObject:[NSURL URLWithString:strMenuBack]];
+
+        }
     }
     
-    NSArray *aryDishes = menuInfo[@"dinner"][@"MenuItems"];
-    if (aryDishes != nil && [aryDishes isKindOfClass:[NSArray class]] && aryDishes.count > 0)
+    NSMutableArray *aryDishesLunch = menuInfo[@"lunch"][@"MenuItems"];
+    if (aryDishesLunch != nil && [aryDishesLunch isKindOfClass:[NSArray class]] && aryDishesLunch.count > 0)
     {
-        for (NSDictionary *dishInfo in aryDishes)
+        for (NSDictionary *dishInfo in aryDishesLunch)
+        {
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            
+            if (strImageURL != nil && [strImageURL isKindOfClass:[NSString class]] && strImageURL.length > 0)
+                [urls addObject:[NSURL URLWithString:strImageURL]];
+        }
+    }
+    
+    NSMutableArray *aryDishesDinner = menuInfo[@"dinner"][@"MenuItems"];
+    if (aryDishesDinner != nil && [aryDishesDinner isKindOfClass:[NSArray class]] && aryDishesDinner.count > 0)
+    {
+        for (NSDictionary *dishInfo in aryDishesDinner)
         {
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
             
@@ -305,8 +326,6 @@ static BentoShop *_shareInstance;
 }
 
 // TODO: CHECK IF LUNCH VS DINNER SERVICE AREA//
-// TODO: CHECK IF LUNCH VS DINNER SERVICE AREA//
-// TODO: CHECK IF LUNCH VS DINNER SERVICE AREA//
 - (void)getServiceArea
 {
     NSString *strRequest = [NSString stringWithFormat:@"%@/servicearea", SERVER_URL];
@@ -316,39 +335,85 @@ static BentoShop *_shareInstance;
     if (kmlValues == nil || error != nil)
         return;
     
-/*---Check---*/
-//    
-//    NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
-//    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest2]];
-//    NSURLResponse *response = nil;
-//    NSError *error2 = nil;
-//    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
-//    if (data == nil) {
-//        return;
-//    }
-//    
-//    NSInteger statusCode = 0;
-//    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-//        statusCode = [(NSHTTPURLResponse *)response statusCode];
-//    }
-//    
-//    if (error != nil || statusCode != 200) {
-//        return;
-//    }
-//    
-//    NSError *parseError = nil;
-//    NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-//    if (initDic == nil) {
-//        return;
-//    }
-//    
-//    NSDictionary *initDictionary = [initDic copy];
-//    
-//    NSLog(@"initDictionary 2 - %@", initDictionary[@"meals"]);
+/*----------------------GET LUNCH AND DINNER AND CURRENT TIMES-----------------------*/
     
-/*---*/
+    // API call
+    NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest2]];
+    NSURLResponse *response = nil;
+    NSError *error2 = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
     
-    NSString *strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+    if (data == nil) {
+        return;
+    }
+    
+    NSInteger statusCode = 0;
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        statusCode = [(NSHTTPURLResponse *)response statusCode];
+    }
+    
+    if (error2 != nil || statusCode != 200) {
+        return;
+    }
+    
+    // parse json
+    NSError *parseError = nil;
+    NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+    if (initDic == nil) {
+        return;
+    }
+    
+    // set /init results to dictionary
+    NSDictionary *initDictionary = [initDic copy];
+    
+    // Get time strings from /init call
+    NSString *lunchTimeString = initDictionary[@"meals"][@"2"][@"startTime"];
+    NSString *dinnerTimeString = initDictionary[@"meals"][@"3"][@"startTime"];
+    
+    // set date format
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"k:mm:ss"];
+
+    // format dates from strings
+    NSDate *dateLunch = [formatter dateFromString:lunchTimeString];
+    NSDate *dateDinner = [formatter dateFromString:dinnerTimeString];
+    
+    // convert to date components
+    NSDateComponents * componentsLunch = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:dateLunch];
+    NSDateComponents * componentsDinner = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:dateDinner];
+    
+    // convert to floats
+    lunchTime = (float)[componentsLunch hour] + ((float)[componentsLunch minute] / 60);
+    dinnerTime = (float)[componentsDinner hour] + ((float)[componentsDinner minute] / 60);
+    
+    
+    NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
+    float currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
+    
+    NSLog(@"lunch time: %f", lunchTime);
+    NSLog(@"dinner time: %f", dinnerTime);
+    NSLog(@"current time - %f", currentTime);
+
+/*----------------------------------------------------------------------------------------*/
+    
+    // set service area, Note: check logic again
+    
+    NSString *strPoints;
+    
+    // 12:00am - 4:59pm
+    if (currentTime >= 0 && currentTime < 16) {
+        
+        strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+        NSLog(@"lunch service area - %@", strPoints);
+        
+    // 5:00pm - 11:59pm
+    } else {
+        
+        strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+        NSLog(@"dinner service area - %@", strPoints);
+    }
+    
     NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
     
     // Parse String and Separate Latitude and Longitude.
