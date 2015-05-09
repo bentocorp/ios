@@ -240,12 +240,12 @@
     
     NSArray *viewControllers = self.navigationController.viewControllers;
     
-    for (UIViewController *vc in viewControllers) {
-        
 /*-----check if dinner or lunch mode-----*/
-        
-        if ([vc isKindOfClass:[ServingDinnerViewController class]])
-//        if ([vc isKindOfClass:[ServingLunchViewController class]])
+    
+    for (UIViewController *vc in viewControllers)
+    {
+        // serving dinner vc || serving lunch vc
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
         {
             [self.navigationController popToViewController:vc animated:YES];
             
@@ -253,11 +253,23 @@
         }
     }
     
-//    ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
-//    [self.navigationController pushViewController:servingLunchViewController animated:YES];
+    NSDictionary *dicTimes = [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbers];
+    float currentTime = [dicTimes[@"current"] floatValue];
+    float dinnerOpenTime = [dicTimes[@"dinner"] floatValue];
     
-    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerOpenTime)
+    {
+        ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+        [self.navigationController pushViewController:servingLunchViewController animated:YES];
+        
+    // dinner opening - 11:59pm
+    }
+    else if (currentTime >= dinnerOpenTime && currentTime < 24)
+    {
+        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+        [self.navigationController pushViewController:servingDinnerViewController animated:YES];
+    }
 }
 
 - (void)doConfirmOrder

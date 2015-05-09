@@ -121,7 +121,7 @@
     NSString *strTitle;
     if (self.type == 0) // Closed
         strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    else
+    else // Sold out
         strTitle = @"View Today's Menu";
     
     [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];

@@ -734,6 +734,7 @@
 {
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    
     if (currentUserInfo == nil)
     {
         if (placeInfo == nil)

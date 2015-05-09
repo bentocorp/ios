@@ -41,7 +41,7 @@
 - (void)getMenus;
 - (void)getServiceArea;
 
-- (NSDictionary *)getLunchAndDinnerAndBufferTimesInNumbers;
+- (NSDictionary *)getCurrentLunchDinnerBufferTimesInNumbers;
 
 - (NSURL *)getMenuImageURL;
 - (NSString *)getMenuDateString;

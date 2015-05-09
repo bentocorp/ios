@@ -52,12 +52,37 @@
     
     /*---BW Title Pager View---*/
     
+    // set menu title
+//    // if sold out || (closed && before 9pm && is not sunday && is not saturday)
+//    if ([[BentoShop sharedInstance] isSoldOut] ||
+//        (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
+//
+//        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+//
+//    } else if ([[BentoShop sharedInstance] isClosed]) {
+//
+//        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+//    }
+    
+    NSString *titleLeft;
+    NSString *titleRight;
+    
+    if ([[BentoShop sharedInstance] isClosed])
+    {
+        
+    }
+    
+    if ([[BentoShop sharedInstance] isSoldOut])
+    {
+        
+    }
+    
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[@"Today's Lunch", @"Tonight's Dinner"]]; // make dynamic
+    [pagingTitleView addObjects:@[titleLeft, titleRight]]; // make dynamic
     [navigationBarView addSubview:pagingTitleView];
     
     /*---Line Separator---*/
@@ -110,18 +135,6 @@
     // Sunday = 1, Saturday = 7
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
-    
-    // set menu title
-    //    // if sold out || (closed && before 9pm && is not sunday && is not saturday)
-    //    if ([[BentoShop sharedInstance] isSoldOut] ||
-    //        (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
-    //
-    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
-    //
-    //    } else if ([[BentoShop sharedInstance] isClosed]) {
-    //
-    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    //    }
     
     _selectedPath = nil;
 

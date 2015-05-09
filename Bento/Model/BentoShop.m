@@ -326,7 +326,7 @@ static BentoShop *_shareInstance;
 }
 
  /*----------------------GET LUNCH AND DINNER AND BUFFER TIMES-----------------------*/
-- (NSDictionary *)getLunchAndDinnerAndBufferTimesInNumbers
+- (NSDictionary *)getCurrentLunchDinnerBufferTimesInNumbers
 {
     // API call
     NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
@@ -374,30 +374,29 @@ static BentoShop *_shareInstance;
     NSDateComponents * componentsLunch = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:dateLunch];
     NSDateComponents * componentsDinner = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:dateDinner];
     
-    // convert to floats
+    // Lunch and Dinner
     float lunchTime = (float)[componentsLunch hour] + ((float)[componentsLunch minute] / 60);
     float dinnerTime = (float)[componentsDinner hour] + ((float)[componentsDinner minute] / 60);
     
-    //Buffer Time
+    // Buffer Time
     NSString *bufferString = initDictionary[@"settings"][@"buffer_minutes"];
     float bufferTime = [bufferString floatValue];
     
-    NSLog(@"Buffer Minutes - %f", bufferTime);
-    NSLog(@"lunch time: %f", lunchTime);
-    NSLog(@"dinner time: %f", dinnerTime);
+    // Current Time
+    NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
+    float currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
     
     return @{
              @"lunch": [NSNumber numberWithFloat:lunchTime],
              @"dinner": [NSNumber numberWithFloat:dinnerTime],
-             @"buffer": [NSNumber numberWithFloat:bufferTime]
+             @"buffer": [NSNumber numberWithFloat:bufferTime],
+             @"current": [NSNumber numberWithFloat:currentTime]
              };
 }
 
 
 - (void)getServiceArea
 {
-    NSLog(@"get mother - %@", [self getLunchAndDinnerAndBufferTimesInNumbers]);
-    
     NSString *strRequest = [NSString stringWithFormat:@"%@/servicearea", SERVER_URL];
     
     NSError *error = nil;
@@ -405,26 +404,24 @@ static BentoShop *_shareInstance;
     if (kmlValues == nil || error != nil)
         return;
     
-    // Current Time
-    NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
-    float currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
-    NSLog(@"current time - %f", currentTime);
-    
     // Service Area
-    
     NSString *strPoints;
     
-    // 12:00am - 4:29pm
-    if (currentTime >= 0 && currentTime < 16.5) {
+    NSDictionary *dicTimes = [self getCurrentLunchDinnerBufferTimesInNumbers];
+    float currentTime = [dicTimes[@"current"] floatValue];
+    float dinnerOpenTime = [dicTimes[@"dinner"] floatValue];
+    
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerOpenTime) {
         
         strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-        NSLog(@"lunch service area - %@", strPoints);
+        NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
         
-    // 4:30pm - 11:59pm
-    } else if (currentTime >= 16.5 && currentTime < 24) {
+    // dinner opening - 11:59pm
+    } else if (currentTime >= dinnerOpenTime && currentTime < 24) {
         
         strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-        NSLog(@"dinner service area - %@", strPoints);
+        NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
     }
     
     NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
