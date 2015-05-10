@@ -31,7 +31,14 @@
 
 @implementation BentoShop
 {
+    NSUserDefaults *defaults;
+    
     NSString *originalStatus;
+    
+    float lunchTime;
+    float dinnerTime;
+    float currentTime;
+    float bufferTime;
 }
 
 static BentoShop *_shareInstance;
@@ -61,6 +68,8 @@ static BentoShop *_shareInstance;
 {
     if ( (self = [super init]) )
     {
+        defaults = [NSUserDefaults standardUserDefaults];
+        
         self.prevClosed = NO;
         self.prevSoldOut = NO;
         
@@ -262,6 +271,13 @@ static BentoShop *_shareInstance;
     NSError *error = nil;
     self.menuToday = [self sendRequest:strRequest statusCode:nil error:&error][@"menus"];
     
+    // set menuInfo and menuItems to persistent storage
+    [defaults setObject:self.menuToday[@"lunner"][@"Menu"] forKey:@"lunchMenuInfo"];
+    [defaults setObject:self.menuToday[@"dinner"][@"Menu"] forKey:@"dinnerMenuInfo"];
+    [defaults setObject:self.menuToday[@"lunch"][@"MenuItems"] forKey:@"lunchMenuItems"];
+    [defaults setObject:self.menuToday[@"dinner"][@"MenuItems"] forKey:@"dinnerMenuItems"];
+    [defaults synchronize];
+    
     [self prefetchImages:self.menuToday];
     
     if (![strDate isEqualToString:self.strToday])
@@ -327,7 +343,7 @@ static BentoShop *_shareInstance;
 }
 
  /*----------------------GET LUNCH AND DINNER AND BUFFER TIME----------------------*/
-- (NSDictionary *)getCurrentLunchDinnerBufferTimesInNumbers
+- (void)getCurrentLunchDinnerBufferTimesInNumbers
 {
     // API call
     NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
@@ -337,7 +353,7 @@ static BentoShop *_shareInstance;
     NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
     
     if (data == nil) {
-        return nil;
+        return;
     }
     
     NSInteger statusCode = 0;
@@ -346,14 +362,14 @@ static BentoShop *_shareInstance;
     }
     
     if (error2 != nil || statusCode != 200) {
-        return nil;
+        return;
     }
     
     // parse json
     NSError *parseError = nil;
     NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
     if (initDic == nil) {
-        return nil;
+        return;
     }
     
     // set /init results to dictionary
@@ -376,43 +392,37 @@ static BentoShop *_shareInstance;
     NSDateComponents * componentsDinner = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:dateDinner];
     
     // Lunch and Dinner
-    float lunchTime = (float)[componentsLunch hour] + ((float)[componentsLunch minute] / 60);
-    float dinnerTime = (float)[componentsDinner hour] + ((float)[componentsDinner minute] / 60);
+    lunchTime = (float)[componentsLunch hour] + ((float)[componentsLunch minute] / 60);
+    dinnerTime = (float)[componentsDinner hour] + ((float)[componentsDinner minute] / 60);
     
     // Buffer Time
     NSString *bufferString = initDictionary[@"settings"][@"buffer_minutes"];
-    float bufferTime = [bufferString floatValue];
+    bufferTime = [bufferString floatValue];
     
     // Current Time
     NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
-    float currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
+    currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
     
-    return @{
-             @"lunch": [NSNumber numberWithFloat:lunchTime],
-             @"dinner": [NSNumber numberWithFloat:dinnerTime],
-             @"buffer": [NSNumber numberWithFloat:bufferTime],
-             @"current": [NSNumber numberWithFloat:currentTime]
-             };
+    [defaults setObject:[NSNumber numberWithFloat:lunchTime] forKey:@"lunchTimeNumber"];
+    [defaults setObject:[NSNumber numberWithFloat:dinnerTime] forKey:@"dinnerTimeNumber"];
+    [defaults setObject:[NSNumber numberWithFloat:currentTime] forKey:@"currentTimeNumber"];
+    [defaults setObject:[NSNumber numberWithFloat:bufferTime] forKey:@"bufferTimeNumber"];
 }
 
-- (NSDictionary *)setMenuInfo
+- (NSDictionary *)getMenuInfo
 {
-    NSDictionary *dicTimes = [self getCurrentLunchDinnerBufferTimesInNumbers];
-    float currentTime = [dicTimes[@"current"] floatValue];
-    float dinnerOpenTime = [dicTimes[@"dinner"] floatValue];
-    
     NSDictionary *menuInfo;
     
     // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerOpenTime)
+    if (currentTime >= 0 && currentTime < dinnerTime)
     {
-        menuInfo = self.menuToday[@"lunner"][@"Menu"];
+        menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
         
-        // dinner opening - 11:59pm
+    // dinner opening - 11:59pm
     }
-    else if (currentTime >= dinnerOpenTime && currentTime < 24)
+    else if (currentTime >= dinnerTime && currentTime < 24)
     {
-        menuInfo = self.menuToday[@"dinner"][@"Menu"];
+        menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
     }
     
     if (menuInfo == nil)
@@ -421,24 +431,20 @@ static BentoShop *_shareInstance;
     return menuInfo;
 }
 
-- (NSDictionary *)setMenuItems
+- (NSDictionary *)getMenuItems
 {
-    NSDictionary *dicTimes = [self getCurrentLunchDinnerBufferTimesInNumbers];
-    float currentTime = [dicTimes[@"current"] floatValue];
-    float dinnerOpenTime = [dicTimes[@"dinner"] floatValue];
-    
     NSDictionary *menuItems;
     
     // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerOpenTime)
+    if (currentTime >= 0 && currentTime < dinnerTime)
     {
-        menuItems = self.menuToday[@"lunch"][@"MenuItems"];
+        menuItems = [defaults objectForKey:@"lunchMenuItems"];
         
         // dinner opening - 11:59pm
     }
-    else if (currentTime >= dinnerOpenTime && currentTime < 24)
+    else if (currentTime >= dinnerTime && currentTime < 24)
     {
-        menuItems = self.menuToday[@"dinner"][@"MenuItems"];
+        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
     }
     
     if (menuItems == nil)
@@ -460,18 +466,16 @@ static BentoShop *_shareInstance;
     // Service Area
     NSString *strPoints;
     
-    NSDictionary *dicTimes = [self getCurrentLunchDinnerBufferTimesInNumbers];
-    float currentTime = [dicTimes[@"current"] floatValue];
-    float dinnerOpenTime = [dicTimes[@"dinner"] floatValue];
+    [self getCurrentLunchDinnerBufferTimesInNumbers];
     
     // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerOpenTime) {
+    if (currentTime >= 0 && currentTime < dinnerTime) {
         
         strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
         NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
         
     // dinner opening - 11:59pm
-    } else if (currentTime >= dinnerOpenTime && currentTime < 24) {
+    } else if (currentTime >= dinnerTime && currentTime < 24) {
         
         strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
         NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
@@ -520,7 +524,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil && self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self setMenuInfo];
+    NSDictionary *menuInfo = [self getMenuInfo];
     
     NSString *strMenuBack = [menuInfo objectForKey:@"bgimg"];
     if (strMenuBack == nil)
@@ -534,7 +538,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self setMenuInfo];
+    NSDictionary *menuInfo = [self getMenuInfo];
     
     return [menuInfo objectForKey:@"day_text"];
 }
@@ -544,7 +548,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self setMenuInfo];
+    NSDictionary *menuInfo = [self getMenuInfo];
     
     NSString *strDate = [menuInfo objectForKey:@"for_date"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -559,7 +563,7 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self setMenuInfo];
+    NSDictionary *menuInfo = [self getMenuInfo];
     
     return [menuInfo objectForKey:@"day_text"];
 }
@@ -569,7 +573,7 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self setMenuInfo];
+    NSDictionary *menuInfo = [self getMenuInfo];
     
     NSString *strDate = menuInfo[@"for_date"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -727,7 +731,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuItems = [self setMenuItems];
+    NSDictionary *menuItems = [self getMenuItems];
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
     for (NSDictionary *dishInfo in menuItems)
@@ -745,7 +749,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuItems = [self setMenuItems];
+    NSDictionary *menuItems = [self getMenuItems];
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
     for (NSDictionary *dishInfo in menuItems)
@@ -763,7 +767,7 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuItems = [self setMenuItems];
+    NSDictionary *menuItems = [self getMenuItems];
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
     for (NSDictionary *dishInfo in menuItems)
@@ -781,7 +785,7 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuItems = [self setMenuItems];
+    NSDictionary *menuItems = [self getMenuItems];
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
     for (NSDictionary *dishInfo in menuItems)
@@ -799,7 +803,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuItems = [self setMenuItems];
+    NSDictionary *menuItems = [self getMenuItems];
     
     for (NSDictionary *dishInfo in menuItems)
     {
@@ -817,7 +821,7 @@ static BentoShop *_shareInstance;
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuItems = [self setMenuItems];
+    NSDictionary *menuItems = [self getMenuItems];
     
     for (NSDictionary *dishInfo in menuItems)
     {
