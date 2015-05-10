@@ -280,7 +280,7 @@
     
     servingLunchCell.ivMainDish.image = [UIImage imageNamed:@""]; //  set main dish image
     
-    servingLunchCell.lblMainDish.text = @"Test Label"; // set main dish name [ getMainLabel:indexpath.row]
+    servingLunchCell.lblMainDish.text = @"Pork in Black Bean Sauce"; // set main dish name [ getMainLabel:indexpath.row]
     
     servingLunchCell.btnMainDish.tag = indexPath.row; // set button tag
     [servingLunchCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside]; // button action
@@ -399,6 +399,8 @@
 
 - (void)updateUI
 {
+    [cvDishes reloadData];
+    
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     

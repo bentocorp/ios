@@ -240,8 +240,6 @@
     
     NSArray *viewControllers = self.navigationController.viewControllers;
     
-/*-----check if dinner or lunch mode-----*/
-    
     for (UIViewController *vc in viewControllers)
     {
         // serving dinner vc || serving lunch vc
@@ -253,6 +251,7 @@
         }
     }
     
+/*-----check if dinner or lunch mode-----*/
     NSDictionary *dicTimes = [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbers];
     float currentTime = [dicTimes[@"current"] floatValue];
     float dinnerOpenTime = [dicTimes[@"dinner"] floatValue];
