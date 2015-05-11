@@ -274,8 +274,12 @@ static BentoShop *_shareInstance;
     // set menuInfo and menuItems to persistent storage
     [defaults setObject:self.menuToday[@"lunner"][@"Menu"] forKey:@"lunchMenuInfo"];
     [defaults setObject:self.menuToday[@"dinner"][@"Menu"] forKey:@"dinnerMenuInfo"];
-    [defaults setObject:self.menuToday[@"lunch"][@"MenuItems"] forKey:@"lunchMenuItems"];
-    [defaults setObject:self.menuToday[@"dinner"][@"MenuItems"] forKey:@"dinnerMenuItems"];
+    
+    NSData *dataLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuToday[@"lunch"][@"MenuItems"]];
+    NSData *dataDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuToday[@"dinner"][@"MenuItems"]];
+    [defaults setObject:dataLunch forKey:@"lunchMenuItems"];
+    [defaults setObject:dataDinner forKey:@"dinnerMenuItems"];
+    
     [defaults synchronize];
     
     [self prefetchImages:self.menuToday];
@@ -341,10 +345,6 @@ static BentoShop *_shareInstance;
     NSData *dataNextDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuNext[@"dinner"][@"MenuItems"]];
     [defaults setObject:dataNextLunch forKey:@"nextLunchMenuItems"];
     [defaults setObject:dataNextDinner forKey:@"nextDinnerMenuItems"];
-
-                    // BELOW IS NOT TO BE USED HERE. THIS IS A EXAMPLE OF HOW TO RETRIEVE THE ARRAY SET FROM ABOVE ^
-                    //    NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
-                    //    NSArray *savedArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     
     [defaults synchronize];
     
@@ -417,6 +417,8 @@ static BentoShop *_shareInstance;
     [defaults setObject:[NSNumber numberWithFloat:dinnerTime] forKey:@"dinnerTimeNumber"];
     [defaults setObject:[NSNumber numberWithFloat:currentTime] forKey:@"currentTimeNumber"];
     [defaults setObject:[NSNumber numberWithFloat:bufferTime] forKey:@"bufferTimeNumber"];
+    
+    NSLog(@"times - %f, %f, %f, %f", currentTime, lunchTime, dinnerTime, bufferTime);
 }
 
 - (NSDictionary *)getMenuInfo
@@ -427,6 +429,7 @@ static BentoShop *_shareInstance;
     if (currentTime >= 0 && currentTime < dinnerTime)
     {
         menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
+        
         
     // dinner opening - 11:59pm
     }
@@ -448,13 +451,21 @@ static BentoShop *_shareInstance;
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)
     {
-        menuItems = [defaults objectForKey:@"lunchMenuItems"];
+//        menuItems = [defaults objectForKey:@"lunchMenuItems"];
         
-        // dinner opening - 11:59pm
+        NSData *data = [defaults objectForKey:@"lunchMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+    
+    // dinner opening - 11:59pm
     }
     else if (currentTime >= dinnerTime && currentTime < 24)
     {
-        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
+//        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
+        
+        NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
     }
     
     if (menuItems == nil)
@@ -475,8 +486,6 @@ static BentoShop *_shareInstance;
     
     // Service Area
     NSString *strPoints;
-    
-    [self getCurrentLunchDinnerBufferTimesInNumbers];
     
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime) {
@@ -591,6 +600,8 @@ static BentoShop *_shareInstance;
     NSDate *menuDate = [formatter dateFromString:strDate];
     [formatter setDateFormat:@"EEEE"];
     NSString *strReturn = [formatter stringFromDate:menuDate];
+    
+    NSLog(@"getNextMenuDateString - %@", strReturn);
     return strReturn;
 }
 
@@ -692,6 +703,7 @@ static BentoShop *_shareInstance;
     _isCallingApi = YES;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [self getCurrentLunchDinnerBufferTimesInNumbers];
         [self getMenus];
         [self getStatus];
         [self getServiceArea];
@@ -745,11 +757,17 @@ static BentoShop *_shareInstance;
     
     if ([whatNeedsMain isEqualToString:@"todayLunch"])
     {
-        menuItems = [defaults objectForKey:@"lunchMenuItems"];
+//        menuItems = [defaults objectForKey:@"lunchMenuItems"];
+        
+        NSData *data = [defaults objectForKey:@"lunchMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     else if ([whatNeedsMain isEqualToString:@"tonightDinnerPreview"] || [whatNeedsMain isEqualToString:@"todayDinner"])
     {
-        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
+//        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
+        
+        NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
@@ -772,11 +790,17 @@ static BentoShop *_shareInstance;
     
     if ([whatNeedsSides isEqualToString:@"todayLunch"])
     {
-        menuItems = [defaults objectForKey:@"lunchMenuItems"];
+//        menuItems = [defaults objectForKey:@"lunchMenuItems"];
+        
+        NSData *data = [defaults objectForKey:@"lunchMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     else if ([whatNeedsSides isEqualToString:@"tonightDinnerPreview"] || [whatNeedsSides isEqualToString:@"todayDinner"])
     {
-        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
+//        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
+        
+        NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
@@ -799,13 +823,11 @@ static BentoShop *_shareInstance;
     
     if ([whatNeedsMain isEqualToString:@"nextLunchPreview"])
     {
-//        menuItems = [defaults objectForKey:@"nextLunchMenuItems"];
         NSData *data = [defaults objectForKey:@"nextLunchMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     else if ([whatNeedsMain isEqualToString:@"nextDinnerPreview"])
     {
-//        menuItems = [defaults objectForKey:@"nextDinnerMenuItems"];
         NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
@@ -830,13 +852,11 @@ static BentoShop *_shareInstance;
     
     if ([whatNeedsSides isEqualToString:@"nextLunchPreview"])
     {
-//        menuItems = [defaults objectForKey:@"nextLunchMenuItems"];
         NSData *data = [defaults objectForKey:@"nextLunchMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     else if ([whatNeedsSides isEqualToString:@"nextDinnerPreview"])
     {
-//        menuItems = [defaults objectForKey:@"nextDinnerMenuItems"];
         NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
