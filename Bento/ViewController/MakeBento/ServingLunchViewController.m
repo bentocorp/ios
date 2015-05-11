@@ -83,7 +83,7 @@
     [self.view addSubview:scrollView];
     
 /*---My Table View---*/
-    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65)];
+    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65 - 45)];
     myTableView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     myTableView.allowsSelection = NO;
@@ -104,7 +104,7 @@
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[@"Serving Lunch", @"Tonight's Dinner Preview"]];
+    [pagingTitleView addObjects:@[@"Today's Lunch", @"Tonight's Dinner"]];
     [navigationBarView addSubview:pagingTitleView];
     
 /*---Line Separator---*/
@@ -241,18 +241,6 @@
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
     
-    // set menu title
-    //    // if sold out || (closed && before 9pm && is not sunday && is not saturday)
-    //    if ([[BentoShop sharedInstance] isSoldOut] ||
-    //        (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
-    //
-    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
-    //
-    //    } else if ([[BentoShop sharedInstance] isClosed]) {
-    //
-    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    //    }
-    
     _selectedPath = nil;
 }
 
@@ -262,7 +250,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return tableView.frame.size.height/2 + 40;
+    return tableView.frame.size.height/2 + 70;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -278,14 +266,19 @@
         servingLunchCell = [[ServingLunchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    servingLunchCell.ivMainDish.image = [UIImage imageNamed:@""]; //  set main dish image
-    
-    servingLunchCell.lblMainDish.text = @"Pork in Black Bean Sauce"; // set main dish name [ getMainLabel:indexpath.row]
+    NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+    NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
+    [servingLunchCell setDishInfo:dishInfo];
     
     servingLunchCell.btnMainDish.tag = indexPath.row; // set button tag
-    [servingLunchCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside]; // button action
+    [servingLunchCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
     servingLunchCell.ivBannerMainDish.hidden = YES; // when to show/hide?
+    
+    // Hide last separator
+    if (indexPath.row == aryMainDishes.count - 1) {
+        servingLunchCell.longLineSepartor1.hidden = YES;
+    }
     
     return servingLunchCell;
 }
@@ -351,9 +344,13 @@
     UIButton *selectedButton = (UIButton *)sender;
     
     ServingLunchBentoViewController *servingLunchBentoViewController = [[ServingLunchBentoViewController alloc] init];
-    [self.navigationController pushViewController:servingLunchBentoViewController animated:YES];
+    servingLunchBentoViewController.fromWhichVC = selectedButton.tag;
     
-    NSLog(@"Dish Selected Tag - %ld", selectedButton.tag);
+    NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+    NSDictionary *dishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
+    servingLunchBentoViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];;
+    
+    [self.navigationController pushViewController:servingLunchBentoViewController animated:YES];
 }
 
 - (void)onCart

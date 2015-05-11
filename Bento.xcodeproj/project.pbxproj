@@ -1535,6 +1535,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		AA4B292B1B016E0400C4CFB0 /* Details */ = {
+			isa = PBXGroup;
+			children = (
+				FC99D4ED1AFBFD2A00BEE40B /* ServingLunchBentoViewController.h */,
+				FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */,
+			);
+			name = Details;
+			sourceTree = "<group>";
+		};
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -1579,8 +1588,7 @@
 			children = (
 				FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */,
 				FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */,
-				FC99D4ED1AFBFD2A00BEE40B /* ServingLunchBentoViewController.h */,
-				FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */,
+				AA4B292B1B016E0400C4CFB0 /* Details */,
 			);
 			name = "Serving Lunch";
 			sourceTree = "<group>";

@@ -42,12 +42,14 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     titleLabel.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
-    titleLabel.text = @"Japanese Eggplant Bento"; //make dynamic
+    
+    
+    titleLabel.text = @"Japanese Eggplant Bento";
     [self.view addSubview:titleLabel];
     
     // back button
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 50, 45)];
-    [closeButton setImage:[UIImage imageNamed:@"nav_btn_close"] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(onCloseButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
     
@@ -124,21 +126,11 @@
 {
     if (section == 0)
     {
-        NSArray *aryMainDishes = aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
-        
-        if (aryMainDishes == nil)
-            return 0;
-        
-        return aryMainDishes.count;
+        return 1; // 1 main dish
     }
-    else if (section == 1)
+    else
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
-        
-        if (arySideDishes == nil)
-            return 0;
-        
-        return arySideDishes.count;
+        return 4; // 4 side dishes
     }
     
     return 0;
@@ -162,14 +154,14 @@
     
     if (indexPath.section == 0) // Main Dish
     {
-        NSArray *aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+        NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
         
-        NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
+        NSDictionary *dishInfo = [aryMainDishes objectAtIndex:self.fromWhichVC];
         [myCell setDishInfo:dishInfo];
     }
     else if (indexPath.section == 1) // Side Dish
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
@@ -217,49 +209,49 @@
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
-// header
-//- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
-//{
-//    if (section == 0 || section == 1)
-//    {
-//        return CGSizeMake(cvDishes.frame.size.width, 44);
-//    }
-//    
-//    return CGSizeMake(0, 0);
-//}
-//
-//- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
-//{
-//    if ([kind isEqualToString:UICollectionElementKindSectionHeader])
-//    {
-//        UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
-//        
-//        if (reusableview == nil)
-//            reusableview = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, cvDishes.frame.size.width, 44)];
-//        
-//        UILabel *label = (UILabel *)[reusableview viewWithTag:1];
-//        if (label == nil)
-//        {
-//            label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, reusableview.frame.size.width, reusableview.frame.size.height)];
-//            label.tag = 1;
-//            [reusableview addSubview:label];
-//        }
-//        
-//        label.textColor = [UIColor whiteColor];
-//        label.textAlignment = NSTextAlignmentCenter;
-//        label.font = [UIFont fontWithName:@"OpenSans-Semibold" size:16.0f];
-//        
-//        if (indexPath.section == 0)
-//            label.text = @"Main Dish";
-//        else if (indexPath.section == 1)
-//            label.text = @"Side Dishes";
-//        
-//        reusableview.backgroundColor = [UIColor darkGrayColor];
-//        
-//        return reusableview;
-//    }
-//    
-//    return nil;
-//}
+// HEADER 
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
+{
+    if (section == 0 || section == 1)
+    {
+        return CGSizeMake(cvDishes.frame.size.width, 44);
+    }
+    
+    return CGSizeMake(0, 0);
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
+{
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader])
+    {
+        UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+        
+        if (reusableview == nil)
+            reusableview = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, cvDishes.frame.size.width, 44)];
+        
+        UILabel *label = (UILabel *)[reusableview viewWithTag:1];
+        if (label == nil)
+        {
+            label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, reusableview.frame.size.width, reusableview.frame.size.height)];
+            label.tag = 1;
+            [reusableview addSubview:label];
+        }
+        
+        label.textColor = [UIColor whiteColor];
+        label.textAlignment = NSTextAlignmentCenter;
+        label.font = [UIFont fontWithName:@"OpenSans-Semibold" size:16.0f];
+        
+        if (indexPath.section == 0)
+            label.text = @"Main Dish";
+        else if (indexPath.section == 1)
+            label.text = @"Side Dishes";
+        
+        reusableview.backgroundColor = [UIColor darkGrayColor];
+        
+        return reusableview;
+    }
+    
+    return nil;
+}
 
 @end

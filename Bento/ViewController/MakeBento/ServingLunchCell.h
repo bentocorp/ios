@@ -18,4 +18,10 @@
 
 @property (nonatomic) UIImageView *ivBannerMainDish;
 
+@property (nonatomic) UIButton *addButton;
+
+@property (nonatomic) UIView *longLineSepartor1;
+
+- (void)setDishInfo:(NSDictionary *)dishInfo;
+
 @end

@@ -10,4 +10,7 @@
 
 @interface ServingLunchBentoViewController : UIViewController
 
+@property (nonatomic) NSInteger fromWhichVC;
+@property (nonatomic) NSString *titleText;
+
 @end

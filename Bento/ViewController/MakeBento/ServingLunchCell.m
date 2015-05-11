@@ -12,6 +12,7 @@
 
 #import "ServingLunchCell.h"
 #import "CAGradientLayer+SJSGradients.h"
+#import "UIImageView+WebCache.h"
 
 @implementation ServingLunchCell
 {
@@ -32,7 +33,7 @@
         
         /*---Dish View---*/
         
-        viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 20, SCREEN_WIDTH-60, SCREEN_HEIGHT/3 + 4)];
+        viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 20, SCREEN_WIDTH-60, SCREEN_HEIGHT/2.75)];
         viewDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
         viewDish.layer.cornerRadius = 3;
         viewDish.clipsToBounds = YES;
@@ -42,7 +43,7 @@
 
         /*---Dish Image---*/
         
-        self.ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDish.frame.size.width, viewDish.frame.size.height - 65)];
+        self.ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDish.frame.size.width, viewDish.frame.size.height - 45)];
         self.ivMainDish.clipsToBounds = YES;
         self.ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
         [viewDish addSubview:self.ivMainDish];
@@ -56,9 +57,9 @@
         
         /*---Dish Label---*/
         
-        self.lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(0, viewDish.frame.size.height - 65, viewDish.frame.size.width + 2, 65)];
+        self.lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(0, viewDish.frame.size.height - 45, viewDish.frame.size.width + 2, 45)];
         self.lblMainDish.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
-        self.lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:18.0f];
+        self.lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
         self.lblMainDish.textAlignment = NSTextAlignmentCenter;
         [viewDish addSubview:self.lblMainDish];
         
@@ -76,22 +77,35 @@
         [viewDish addSubview:self.ivBannerMainDish];
         
         /*---Add Button---*/
-        UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), SCREEN_HEIGHT/3 + 30, SCREEN_WIDTH-60, 44)];
-        addButton.layer.cornerRadius = 3;
-        addButton.layer.masksToBounds = YES;
-        addButton.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
-        addButton.titleLabel.text = @"Add To Cart";
-        addButton.titleLabel.textColor = [UIColor whiteColor];
-        [self addSubview:addButton];
+        self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), SCREEN_HEIGHT/3 + 50, SCREEN_WIDTH-60, 44)];
+        self.addButton.layer.cornerRadius = 3;
+        self.addButton.layer.masksToBounds = YES;
+        self.addButton.backgroundColor = [UIColor colorWithRed:135.0/255.0 green:176.0/255.0 blue:95.0/255.0 alpha:1.0];
+        [self.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
+        self.addButton.titleLabel.textColor = [UIColor whiteColor];
+        [self addSubview:self.addButton];
         
         /*---Line Separator---*/
         
-        UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT/3 + 100, 100, 1)];
-        longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
-        [self addSubview:longLineSepartor1];
+        self.longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 75, SCREEN_HEIGHT/2 + 15, 150, 1)];
+        self.longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
+        [self addSubview:self.longLineSepartor1];
     }
     
     return self;
+}
+
+
+- (void)setDishInfo:(NSDictionary *)dishInfo
+{
+    if (dishInfo == nil)
+        return;
+    
+    NSString *strName = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];
+    self.lblMainDish.text = [strName uppercaseString];
+    
+    NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+    [self.ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
