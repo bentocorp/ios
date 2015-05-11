@@ -74,6 +74,21 @@
         self.ivBannerMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(viewDish.frame.size.width - viewDish.frame.size.height / 2, 0, viewDish.frame.size.height / 2, viewDish.frame.size.height / 2)];
         self.ivBannerMainDish.image = soldOutBannerImage;
         [viewDish addSubview:self.ivBannerMainDish];
+        
+        /*---Add Button---*/
+        UIButton *addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), SCREEN_HEIGHT/3 + 30, SCREEN_WIDTH-60, 44)];
+        addButton.layer.cornerRadius = 3;
+        addButton.layer.masksToBounds = YES;
+        addButton.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
+        addButton.titleLabel.text = @"Add To Cart";
+        addButton.titleLabel.textColor = [UIColor whiteColor];
+        [self addSubview:addButton];
+        
+        /*---Line Separator---*/
+        
+        UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 50, SCREEN_HEIGHT/3 + 100, 100, 1)];
+        longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
+        [self addSubview:longLineSepartor1];
     }
     
     return self;

@@ -69,11 +69,18 @@
     NSString *titleLeft;
     NSString *titleRight;
     
-    // CLOSED: 00:00 - 12.30
+    // CLOSED: 00:00 - 12:29
     if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
     {
         titleLeft = @"Today's Lunch";
         titleRight = @"Tonight's Dinner";
+    }
+    
+    // CLOSED: 12:30 - 17:29
+    if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
+    {
+        titleLeft = @"Tonight's Dinner";
+        titleRight = @"Next Lunch";
     }
     
     // CLOSED: 17.30 - 23:59
@@ -93,7 +100,7 @@
     // SOLD-OUT: 16:30 - 23:59
     if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
     {
-        titleLeft = @"Today's Dinner";
+        titleLeft = @"Tonight's Dinner";
         titleRight = @"Next Lunch";
     }
     
@@ -214,11 +221,18 @@
     // Which Side
     if (collectionView == cvDishesLeft) // left side
     {
-        // CLOSED: 00:00 - 12.30
+        // CLOSED: 00:00 - 12.29
         if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
         {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+        }
+        
+        // CLOSED: 12:30 - 17:29
+        if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
+        {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
         }
         
         // CLOSED: 17.30 - 23:59
@@ -263,11 +277,18 @@
     }
     else // right side
     {
-        // CLOSED: 00:00 - 12.30
+        // CLOSED: 00:00 - 12:29
         if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
         {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+        }
+        
+        // CLOSED: 12:30 - 17:29
+        if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
+        {
+            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         }
         
         // CLOSED: 17.30 - 23:59
@@ -287,8 +308,8 @@
         // SOLD-OUT: 16:30 - 23:59
         if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
         {
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"nextLunchPreview"];
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"nextLunchPreview"];
+            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         }
         
         /*---------------*/
@@ -345,11 +366,18 @@
     
     if (collectionView == cvDishesLeft) // left side
     {
-        // CLOSED: 00:00 - 12.30
+        // CLOSED: 00:00 - 12.29
         if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
         {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+        }
+        
+        // CLOSED: 12:30 - 17:29
+        if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
+        {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
         }
         
         // CLOSED: 17.30 - 23:59
@@ -384,8 +412,6 @@
         }
         else if (indexPath.section == 1) // Side Dish
         {
-            
-            
             NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
             [myCell setDishInfo:dishInfo];
         }
@@ -401,11 +427,18 @@
     }
     else // right side
     {
-        // CLOSED: 00:00 - 12.30
+        // CLOSED: 00:00 - 12:29
         if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
         {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+        }
+        
+        // CLOSED: 12:30 - 17:29
+        if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
+        {
+            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         }
         
         // CLOSED: 17.30 - 23:59
@@ -425,8 +458,8 @@
         // SOLD-OUT: 16:30 - 23:59
         if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
         {
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"nextLunchPreview"];
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"nextLunchPreview"];
+            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         }
         
         /*---------------*/

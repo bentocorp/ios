@@ -68,6 +68,8 @@ static BentoShop *_shareInstance;
 {
     if ( (self = [super init]) )
     {
+        [self getCurrentLunchDinnerBufferTimesInNumbers];
+        
         defaults = [NSUserDefaults standardUserDefaults];
         
         self.prevClosed = NO;
@@ -272,7 +274,7 @@ static BentoShop *_shareInstance;
     self.menuToday = [self sendRequest:strRequest statusCode:nil error:&error][@"menus"];
     
     // set menuInfo and menuItems to persistent storage
-    [defaults setObject:self.menuToday[@"lunner"][@"Menu"] forKey:@"lunchMenuInfo"];
+    [defaults setObject:self.menuToday[@"lunch"][@"Menu"] forKey:@"lunchMenuInfo"];
     [defaults setObject:self.menuToday[@"dinner"][@"Menu"] forKey:@"dinnerMenuInfo"];
     
     NSData *dataLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuToday[@"lunch"][@"MenuItems"]];
@@ -407,7 +409,7 @@ static BentoShop *_shareInstance;
     
     // Buffer Time
     NSString *bufferString = initDictionary[@"settings"][@"buffer_minutes"];
-    bufferTime = [bufferString floatValue];
+    bufferTime = [bufferString floatValue] / 60;
     
     // Current Time
     NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
