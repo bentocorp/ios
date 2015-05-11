@@ -79,7 +79,7 @@
     [super viewWillAppear:animated];
     
     self.aryDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes])
+    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:@"todayDinner"])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         //        if ([[BentoShop sharedInstance] isDishSoldOut:dishID] || [[BentoShop sharedInstance] canAddDish:dishID])

@@ -53,11 +53,11 @@
 - (void)refreshResume;
 - (void)refreshStop;
 
-- (NSArray *)getMainDishes;
-- (NSArray *)getSideDishes;
+- (NSArray *)getMainDishes:(NSString *)whatNeedsMain;
+- (NSArray *)getSideDishes:(NSString *)whatNeedsSides;
 
-- (NSArray *)getNextMainDishes;
-- (NSArray *)getNextSideDishes;
+- (NSArray *)getNextMainDishes:(NSString *)whatNeedsMain;
+- (NSArray *)getNextSideDishes:(NSString *)whatNeedsSides;
 
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID;
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID;

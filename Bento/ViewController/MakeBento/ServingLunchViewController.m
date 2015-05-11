@@ -554,7 +554,7 @@
     {
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted])
-            [currentBento completeBento];
+            [currentBento completeBento:@"todayLunch"];
         
         [self gotoOrderScreen];
     }
@@ -590,7 +590,8 @@
 {
     if (section == 0)
     {
-        NSArray *aryMainDishes = aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
+        // get dinner main preview
+        NSArray *aryMainDishes = aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"tonightDinnerPreview"];
         
         if (aryMainDishes == nil)
             return 0;
@@ -599,7 +600,8 @@
     }
     else if (section == 1)
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+        // get dinner side preview
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"tonightDinnerPreview"];
         
         if (arySideDishes == nil)
             return 0;
@@ -628,14 +630,14 @@
     
     if (indexPath.section == 0) // Main Dish
     {
-        NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
+        NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"tonightDinnerPreview"];
         
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
     }
     else if (indexPath.section == 1) // Side Dish
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"tonightDinnerPreview"];
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];

@@ -117,7 +117,7 @@
     }
     
     self.aryDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes])
+    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes:@"todayDinner"])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         

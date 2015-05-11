@@ -27,7 +27,7 @@
 
 - (BOOL)isEmpty;
 - (BOOL)isCompleted;
-- (void)completeBento;
+- (void)completeBento:(NSString *)whatNeedsThis;
 
 - (BOOL)canAddSideDish:(NSInteger)sideDishID;
 

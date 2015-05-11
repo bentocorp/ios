@@ -156,7 +156,7 @@ static BentoShop *_shareInstance;
     
     NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
     
-    if ([self isClosed])
+//    if ([self isClosed])
         [self getNextMenus];
     
     if (self.prevClosed != isClosed || self.prevSoldOut != isSoldOut) {
@@ -304,40 +304,48 @@ static BentoShop *_shareInstance;
     currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
 #endif
     
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
-    NSInteger hour = [components hour];
-    
-    NSLog(@"CURRENT HOUR - %ld", (long)hour);
-    
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd"];
     NSString *strDate = [formatter stringFromDate:currentDate];
     
-    if (hour < 21) // before 9pm, get menu
-    {
-        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
-        
-        NSError *error = nil;
-        NSInteger statusCode = 0;
-        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
-        
-        // if today menu not exist, get next menu
-        if (statusCode == 404)
-        {
-            strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
-            self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
-        }
-    }
-    else // 9pm and after
-    {
+//    if (hour < 21) // before 9pm, get menu
+//    {
+//        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
+//        
+//        NSError *error = nil;
+//        NSInteger statusCode = 0;
+//        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
+//        
+//        // if today menu not exist, get next menu
+//        if (statusCode == 404)
+//        {
+//            strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
+//            self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
+//        }
+//    }
+//    else // 9pm and after
+//    {
         NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
         
         NSError *error = nil;
         NSInteger statusCode = 0;
         self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
-    }
+//    }
 
+    // set menuInfo and menuItems to persistent storage
+    [defaults setObject:self.menuNext[@"lunner"][@"Menu"] forKey:@"nextLunchMenuInfo"];
+    [defaults setObject:self.menuNext[@"dinner"][@"Menu"] forKey:@"nextDinnerMenuInfo"];
+    [defaults setObject:self.menuNext[@"lunch"][@"MenuItems"] forKey:@"nextLunchMenuItems"];
+    /* archive array before setting into defaults - weird case */
+    NSData *data = [NSKeyedArchiver archivedDataWithRootObject:self.menuNext[@"dinner"][@"MenuItems"]];
+    [defaults setObject:data forKey:@"nextDinnerMenuItems"];
+    
+    // BELOW IS NOT TO BE USED HERE. THIS IS A EXAMPLE OF HOW TO RETRIEVE THE ARRAY SET FROM ABOVE ^
+        //    NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
+        //    NSArray *savedArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    
+    [defaults synchronize];
+    
     [self prefetchImages:self.menuNext];
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
 }
@@ -726,12 +734,21 @@ static BentoShop *_shareInstance;
     _timer = nil;
 }
 
-- (NSArray *)getMainDishes
+- (NSArray *)getMainDishes:(NSString *)whatNeedsMain
 {
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuItems = [self getMenuItems];
+    NSDictionary *menuItems;
+    
+    if ([whatNeedsMain isEqualToString:@"todayLunch"])
+    {
+        menuItems = [defaults objectForKey:@"lunchMenuItems"];
+    }
+    else if ([whatNeedsMain isEqualToString:@"tonightDinnerPreview"] || [whatNeedsMain isEqualToString:@"todayDinner"])
+    {
+        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
+    }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
     for (NSDictionary *dishInfo in menuItems)
@@ -744,12 +761,21 @@ static BentoShop *_shareInstance;
     return (NSArray *)arrayDishes;
 }
 
-- (NSArray *)getSideDishes
+- (NSArray *)getSideDishes:(NSString *)whatNeedsSides
 {
     if (self.menuToday == nil)
         return nil;
     
-    NSDictionary *menuItems = [self getMenuItems];
+    NSDictionary *menuItems;
+    
+    if ([whatNeedsSides isEqualToString:@"todayLunch"])
+    {
+        menuItems = [defaults objectForKey:@"lunchMenuItems"];
+    }
+    else if ([whatNeedsSides isEqualToString:@"tonightDinnerPreview"] || [whatNeedsSides isEqualToString:@"todayDinner"])
+    {
+        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
+    }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
     for (NSDictionary *dishInfo in menuItems)
@@ -762,12 +788,24 @@ static BentoShop *_shareInstance;
     return (NSArray *)arrayDishes;
 }
 
-- (NSArray *)getNextMainDishes
+- (NSArray *)getNextMainDishes:(NSString *)whatNeedsMain
 {
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuItems = [self getMenuItems];
+    NSDictionary *menuItems;
+    
+    if ([whatNeedsMain isEqualToString:@"nextLunchPreview"])
+    {
+        menuItems = [defaults objectForKey:@"nextLunchMenuItems"];
+        NSLog(@"nextLunchMenuItems - %@", [defaults objectForKey:@"nextLunchMenuItems"]);
+    }
+    else if ([whatNeedsMain isEqualToString:@"nextDinnerPreview"])
+    {
+//        menuItems = [defaults objectForKey:@"nextDinnerMenuItems"];
+        NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
     for (NSDictionary *dishInfo in menuItems)
@@ -780,12 +818,23 @@ static BentoShop *_shareInstance;
     return (NSArray *)arrayDishes;
 }
 
-- (NSArray *)getNextSideDishes
+- (NSArray *)getNextSideDishes:(NSString *)whatNeedsSides
 {
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuItems = [self getMenuItems];
+    NSDictionary *menuItems;
+    
+    if ([whatNeedsSides isEqualToString:@"nextLunchPreview"])
+    {
+        menuItems = [defaults objectForKey:@"nextLunchMenuItems"];
+    }
+    else if ([whatNeedsSides isEqualToString:@"nextDinnerPreview"])
+    {
+//        menuItems = [defaults objectForKey:@"nextDinnerMenuItems"];
+        NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
     for (NSDictionary *dishInfo in menuItems)
