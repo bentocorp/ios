@@ -24,7 +24,8 @@
     BWTitlePagerView *pagingTitleView;
     
     UILabel *lblTitle;
-    UICollectionView *cvDishes;
+    UICollectionView *cvDishesLeft;
+    UICollectionView *cvDishesRight;
     
     NSIndexPath *_selectedPath;
     
@@ -119,44 +120,40 @@
     
     /*---Collection View---*/
     
-    // this sets the layout of the cells
+// Left Side
     UICollectionViewFlowLayout *collectionViewFlowLayout = [[UICollectionViewFlowLayout alloc] init];
     [collectionViewFlowLayout setMinimumLineSpacing:0];
     [collectionViewFlowLayout setMinimumInteritemSpacing:0];
+    cvDishesLeft = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65) collectionViewLayout:collectionViewFlowLayout];
+    cvDishesLeft.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
+    cvDishesLeft.dataSource = self;
+    cvDishesLeft.delegate = self;
+    [cvDishesLeft setCollectionViewLayout:collectionViewFlowLayout];
+    UINib *cellNib = [UINib nibWithNibName:@"PreviewCollectionViewCell" bundle:nil];
+    [cvDishesLeft registerNib:cellNib forCellWithReuseIdentifier:@"PreviewCollectionViewCell"];
+    [cvDishesLeft registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
+    [scrollView addSubview:cvDishesLeft];
     
+// Right Side
     UICollectionViewFlowLayout *collectionViewFlowLayout2 = [[UICollectionViewFlowLayout alloc] init];
     [collectionViewFlowLayout2 setMinimumLineSpacing:0];
     [collectionViewFlowLayout2 setMinimumInteritemSpacing:0];
+    cvDishesRight = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65) collectionViewLayout:collectionViewFlowLayout2];
+    cvDishesRight.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
+    cvDishesRight.dataSource = self;
+    cvDishesRight.delegate = self;
+    [cvDishesRight setCollectionViewLayout:collectionViewFlowLayout2];
+    UINib *cellNib2 = [UINib nibWithNibName:@"PreviewCollectionViewCell" bundle:nil];
+    [cvDishesRight registerNib:cellNib2 forCellWithReuseIdentifier:@"PreviewCollectionViewCell"];
+    [cvDishesRight registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
+    [scrollView addSubview:cvDishesRight];
     
-    // fix this later
-    for (int i = 0; i < 2; i++) {
-        
-        if (i == 0) {
-            [cvDishes setCollectionViewLayout:collectionViewFlowLayout];
-            cvDishes = [[UICollectionView alloc] initWithFrame:CGRectMake(i * SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65) collectionViewLayout:collectionViewFlowLayout];
-        } else {
-            [cvDishes setCollectionViewLayout:collectionViewFlowLayout2];
-            cvDishes = [[UICollectionView alloc] initWithFrame:CGRectMake(i * SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65) collectionViewLayout:collectionViewFlowLayout2];
-        }
-        
-        cvDishes.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
-        cvDishes.dataSource = self;
-        cvDishes.delegate = self;
-        cvDishes.tag = i;
-        
-        UINib *cellNib = [UINib nibWithNibName:@"PreviewCollectionViewCell" bundle:nil];
-        [cvDishes registerNib:cellNib forCellWithReuseIdentifier:@"PreviewCollectionViewCell"];
-        [cvDishes registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
-        
-        [scrollView addSubview:cvDishes];
-    }
     
     // Sunday = 1, Saturday = 7
     weekday = (int)[[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:[NSDate date]] weekday];
     NSLog(@"today is - %ld", (long)weekday);
     
     _selectedPath = nil;
-
 }
 
 - (void)didReceiveMemoryWarning {
@@ -185,7 +182,8 @@
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
-    [cvDishes reloadData];
+    [cvDishesLeft reloadData];
+    [cvDishesRight reloadData];
 }
 
 - (void)onUpdatedStatus:(NSNotification *)notification
@@ -214,7 +212,7 @@
     NSArray *arySideDishes;
     
     // Which Side
-    if (collectionView.tag == 0) // left side
+    if (collectionView == cvDishesLeft) // left side
     {
         // CLOSED: 00:00 - 12.30
         if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
@@ -316,14 +314,28 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PreviewCollectionViewCell *cell = (PreviewCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PreviewCollectionViewCell" forIndexPath:indexPath];
-    
-    [cell initView];
-    
-    if (indexPath.section == 1)
-        [cell setSmallDishCell];
-    
-    return cell;
+    if (collectionView == cvDishesLeft) // left side
+    {
+        PreviewCollectionViewCell *cell = (PreviewCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PreviewCollectionViewCell" forIndexPath:indexPath];
+        
+        [cell initView];
+        
+        if (indexPath.section == 1)
+            [cell setSmallDishCell];
+        
+        return cell;
+    }
+    else // right side
+    {
+        PreviewCollectionViewCell *cell = (PreviewCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PreviewCollectionViewCell" forIndexPath:indexPath];
+        
+        [cell initView];
+        
+        if (indexPath.section == 1)
+            [cell setSmallDishCell];
+        
+        return cell;
+    }
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
@@ -331,7 +343,7 @@
     NSArray *aryMainDishes;
     NSArray *arySideDishes;
     
-    if (collectionView.tag == 0) // left side
+    if (collectionView == cvDishesLeft) // left side
     {
         // CLOSED: 00:00 - 12.30
         if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
@@ -447,78 +459,167 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) // Main Dish
+    if (collectionView == cvDishesLeft) // left side
     {
-        return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width * 3 / 5);
+        if (indexPath.section == 0) // Main Dish
+        {
+            return CGSizeMake(cvDishesLeft.frame.size.width, cvDishesLeft.frame.size.width * 3 / 5);
+        }
+        else if (indexPath.section == 1) // Side Dish
+        {
+            return CGSizeMake(cvDishesLeft.frame.size.width / 2, cvDishesLeft.frame.size.width / 2);
+        }
+        
+        return CGSizeMake(0, 0);
     }
-    else if (indexPath.section == 1) // Side Dish
+    else // right side
     {
-        return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
+        if (indexPath.section == 0) // Main Dish
+        {
+            return CGSizeMake(cvDishesRight.frame.size.width, cvDishesRight.frame.size.width * 3 / 5);
+        }
+        else if (indexPath.section == 1) // Side Dish
+        {
+            return CGSizeMake(cvDishesRight.frame.size.width / 2, cvDishesRight.frame.size.width / 2);
+        }
+        
+        return CGSizeMake(0, 0);
     }
-    
-    return CGSizeMake(0, 0);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (_selectedPath == indexPath)
+    if (collectionView == cvDishesLeft) // left side
     {
-        _selectedPath = nil;
+        if (_selectedPath == indexPath)
+        {
+            _selectedPath = nil;
+        }
+        else
+        {
+            _selectedPath = indexPath;
+        }
+        
+        [collectionView reloadData];
     }
-    else
+    else // right side
     {
-        _selectedPath = indexPath;
+        if (_selectedPath == indexPath)
+        {
+            _selectedPath = nil;
+        }
+        else
+        {
+            _selectedPath = indexPath;
+        }
+        
+        [collectionView reloadData];
     }
-    
-    [collectionView reloadData];
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
-    return UIEdgeInsetsMake(0, 0, 0, 0);
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
+    if (collectionView == cvDishesLeft) // left side
+    {
+        return UIEdgeInsetsMake(0, 0, 0, 0);
+    }
+    else // right side
+    {
+        return UIEdgeInsetsMake(0, 0, 0, 0);
+    }
+    
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (section == 0 || section == 1)
+    if (collectionView == cvDishesLeft) // left side
     {
-        return CGSizeMake(cvDishes.frame.size.width, 44);
-    }
+        if (section == 0 || section == 1)
+        {
+            return CGSizeMake(cvDishesLeft.frame.size.width, 44);
+        }
     
-    return CGSizeMake(0, 0);
+        return CGSizeMake(0, 0);
+    }
+    else // right side
+    {
+        if (section == 0 || section == 1)
+        {
+            return CGSizeMake(cvDishesRight.frame.size.width, 44);
+        }
+    
+        return CGSizeMake(0, 0);
+    }
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader])
+    if (collectionView == cvDishesLeft) // left side
     {
-        UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
-        
-        if (reusableview == nil)
-            reusableview = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, cvDishes.frame.size.width, 44)];
-        
-        UILabel *label = (UILabel *)[reusableview viewWithTag:1];
-        if (label == nil)
+        if ([kind isEqualToString:UICollectionElementKindSectionHeader])
         {
-            label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, reusableview.frame.size.width, reusableview.frame.size.height)];
-            label.tag = 1;
-            [reusableview addSubview:label];
+            UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+            
+            if (reusableview == nil)
+                reusableview = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, cvDishesLeft.frame.size.width, 44)];
+            
+            UILabel *label = (UILabel *)[reusableview viewWithTag:1];
+            if (label == nil)
+            {
+                label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, reusableview.frame.size.width, reusableview.frame.size.height)];
+                label.tag = 1;
+                [reusableview addSubview:label];
+            }
+            
+            label.textColor = [UIColor whiteColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.font = [UIFont fontWithName:@"OpenSans-Semibold" size:16.0f];
+            
+            if (indexPath.section == 0)
+                label.text = @"Main Dishes";
+            else if (indexPath.section == 1)
+                label.text = @"Side Dishes";
+            
+            reusableview.backgroundColor = [UIColor darkGrayColor];
+            
+            return reusableview;
         }
         
-        label.textColor = [UIColor whiteColor];
-        label.textAlignment = NSTextAlignmentCenter;
-        label.font = [UIFont fontWithName:@"OpenSans-Semibold" size:16.0f];
-        
-        if (indexPath.section == 0)
-            label.text = @"Main Dishes";
-        else if (indexPath.section == 1)
-            label.text = @"Side Dishes";
-        
-        reusableview.backgroundColor = [UIColor darkGrayColor];
-        
-        return reusableview;
+        return nil;
     }
-    
-    return nil;
+    else // right side
+    {
+        if ([kind isEqualToString:UICollectionElementKindSectionHeader])
+        {
+            UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+            
+            if (reusableview == nil)
+                reusableview = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, cvDishesRight.frame.size.width, 44)];
+            
+            UILabel *label = (UILabel *)[reusableview viewWithTag:1];
+            if (label == nil)
+            {
+                label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, reusableview.frame.size.width, reusableview.frame.size.height)];
+                label.tag = 1;
+                [reusableview addSubview:label];
+            }
+            
+            label.textColor = [UIColor whiteColor];
+            label.textAlignment = NSTextAlignmentCenter;
+            label.font = [UIFont fontWithName:@"OpenSans-Semibold" size:16.0f];
+            
+            if (indexPath.section == 0)
+                label.text = @"Main Dishes";
+            else if (indexPath.section == 1)
+                label.text = @"Side Dishes";
+            
+            reusableview.backgroundColor = [UIColor darkGrayColor];
+            
+            return reusableview;
+        }
+        
+        return nil;
+    }
 }
 
 @end
