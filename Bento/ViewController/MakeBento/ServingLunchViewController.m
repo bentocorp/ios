@@ -56,8 +56,6 @@
     UIButton *btnState;
     
     UIStoryboard *storyboard;
-    DeliveryLocationViewController *deliveryLocationViewController;
-    CompleteOrderViewController *completeOrderViewController;
     
     // Tonight's Dinner
     UILabel *lblTitle;
@@ -72,8 +70,6 @@
     [super viewDidLoad];
     
     storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-    completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
     
 /*---Scroll View---*/
     
@@ -202,6 +198,7 @@
     {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
     }
     
@@ -503,6 +500,9 @@
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     
+    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+    
     if (currentUserInfo == nil)
     {
         if (placeInfo == nil)
@@ -515,6 +515,7 @@
         if (placeInfo == nil)
             [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
         else
+            
             [self.navigationController pushViewController:completeOrderViewController animated:YES];
     }
 }

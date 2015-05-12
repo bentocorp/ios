@@ -1250,7 +1250,7 @@
         else if (buttonIndex == 1)
         {
             [self removeBento];
-            [self gotoAddAnotherBentoScreen];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
