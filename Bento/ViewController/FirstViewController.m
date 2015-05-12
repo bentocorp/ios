@@ -269,19 +269,19 @@
     // delete this
     ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
     [self.navigationController pushViewController:servingLunchViewController animated:needsAnimation];
-    
-    // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime) {
-        
-        ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
-        [self.navigationController pushViewController:servingLunchViewController animated:needsAnimation];
-        
-    // dinner opening - 11:59pm
-    } else if (currentTime >= dinnerTime && currentTime < 24) {
-        
-        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-        [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
-    }
+//    
+//    // 12:00am - dinner opening (ie. 16.5)
+//    if (currentTime >= 0 && currentTime < dinnerTime) {
+//        
+//        ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+//        [self.navigationController pushViewController:servingLunchViewController animated:needsAnimation];
+//        
+//    // dinner opening - 11:59pm
+//    } else if (currentTime >= dinnerTime && currentTime < 24) {
+//        
+//        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+//        [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
+//    }
 }
 
 - (void) showSoldoutScreen:(NSNumber *)identifier

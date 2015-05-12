@@ -1039,6 +1039,8 @@ static BentoShop *_shareInstance;
     [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.aryBentos forKey:@"bento_array"];
     [[NSUserDefaults standardUserDefaults] setObject:self.strToday forKey:@"bento_date"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"save bento array - %@", self.aryBentos);
 }
 
 @end

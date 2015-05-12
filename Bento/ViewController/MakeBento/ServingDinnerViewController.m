@@ -143,7 +143,7 @@
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[@"Now Serving Dinner", @"Upcoming Lunch"]];
+    [pagingTitleView addObjects:@[@"Now Serving Dinner", @"Next Lunch Menu"]];
     [navigationBarView addSubview:pagingTitleView];
     
 /*---Line Separator---*/
@@ -483,18 +483,6 @@
     // Sunday = 1, Saturday = 7
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
-    
-    // set menu title
-//    // if sold out || (closed && before 9pm && is not sunday && is not saturday)
-//    if ([[BentoShop sharedInstance] isSoldOut] ||
-//        (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
-//
-//        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
-//
-//    } else if ([[BentoShop sharedInstance] isClosed]) {
-//
-//        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-//    }
     
     _selectedPath = nil;
 }
@@ -850,7 +838,7 @@
     }
     
     /*---Finalize Button---*/
-    if (![self isCompletedToMakeMyBento])
+    if ([self isCompletedToMakeMyBento])
     {
         [btnState setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
         
@@ -872,7 +860,7 @@
     {
         [btnState setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
         
-        NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
+        NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
         if (strTitle != nil)
         {
             [btnState setTitle:strTitle forState:UIControlStateNormal];

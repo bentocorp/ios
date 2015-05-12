@@ -9,6 +9,8 @@
 #import "CompleteOrderViewController.h"
 
 #import "ServingDinnerViewController.h"
+#import "ServingLunchViewController.h"
+
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
 
@@ -492,12 +494,12 @@
     [self gotoAddAnotherBentoScreen];
 }
 
-- (void) gotoAddAnotherBentoScreen
+- (void)gotoAddAnotherBentoScreen
 {
     NSArray *viewControllers = self.navigationController.viewControllers;
     
     for (UIViewController *vc in viewControllers) {
-     
+        
         if ([vc isKindOfClass:[ServingDinnerViewController class]])
         {
             [[BentoShop sharedInstance] addNewBento];
@@ -871,23 +873,36 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
-
-    NSArray *viewControllers = self.navigationController.viewControllers;
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    float currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
+    float dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
     
-    for (UIViewController *vc in viewControllers) {
-        
-        if ([vc isKindOfClass:[ServingDinnerViewController class]])
-        {
-            [[BentoShop sharedInstance] setCurrentBento:curBento];
-            [self.navigationController popToViewController:vc animated:YES];
-            
-            return;
-        }
+    // lunch mode
+    if (currentTime >= 0 && currentTime < dinnerTime)
+    {
+        [self.navigationController popViewControllerAnimated:YES];
     }
-    
-    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
+    // dinner mode
+    else if (currentTime >= dinnerTime && currentTime < 24)
+    {
+        Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
+        
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        
+        for (UIViewController *vc in viewControllers) {
+            
+            if ([vc isKindOfClass:[ServingDinnerViewController class]])
+            {
+                [[BentoShop sharedInstance] setCurrentBento:curBento];
+                [self.navigationController popToViewController:vc animated:YES];
+                
+                return;
+            }
+        }
+        
+        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+        [self.navigationController pushViewController:servingDinnerViewController animated:YES];
+    }
 }
 
 - (void) onClickedMinuteButton:(UIView *)view
