@@ -58,6 +58,7 @@
         /*---Dish Label---*/
         
         self.lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(0, viewDish.frame.size.height - 45, viewDish.frame.size.width + 2, 45)];
+        self.lblMainDish.adjustsFontSizeToFitWidth = YES; // dynamically changes font size
         self.lblMainDish.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
         self.lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
         self.lblMainDish.textAlignment = NSTextAlignmentCenter;

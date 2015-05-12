@@ -348,7 +348,7 @@
     
     NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
-    servingLunchBentoViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];;
+    servingLunchBentoViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];
     
     [self.navigationController pushViewController:servingLunchBentoViewController animated:YES];
 }

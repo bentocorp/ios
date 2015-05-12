@@ -39,12 +39,11 @@
     
     // title label
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 110, 20, 220, 45)];
+    titleLabel.adjustsFontSizeToFitWidth = YES;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     titleLabel.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
-    
-    
-    titleLabel.text = @"Japanese Eggplant Bento";
+    titleLabel.text = self.titleText;
     [self.view addSubview:titleLabel];
     
     // back button
