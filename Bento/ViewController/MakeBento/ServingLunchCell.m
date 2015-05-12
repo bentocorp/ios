@@ -33,7 +33,7 @@
         
         /*---Dish View---*/
         
-        viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 20, SCREEN_WIDTH-60, SCREEN_HEIGHT/2.75)];
+        viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 30, SCREEN_WIDTH-60, SCREEN_HEIGHT/2.75)];
         viewDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
         viewDish.layer.cornerRadius = 3;
         viewDish.clipsToBounds = YES;
@@ -83,14 +83,9 @@
         self.addButton.layer.masksToBounds = YES;
         self.addButton.backgroundColor = [UIColor colorWithRed:135.0/255.0 green:176.0/255.0 blue:95.0/255.0 alpha:1.0];
         [self.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
+        self.addButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
         self.addButton.titleLabel.textColor = [UIColor whiteColor];
         [self addSubview:self.addButton];
-        
-        /*---Line Separator---*/
-        
-        self.longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 75, SCREEN_HEIGHT/2 + 15, 150, 1)];
-        self.longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
-        [self addSubview:self.longLineSepartor1];
     }
     
     return self;

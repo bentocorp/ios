@@ -85,7 +85,8 @@
 /*---My Table View---*/
     myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65 - 45)];
     myTableView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
-    myTableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+    myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
+    myTableView.separatorInset = UIEdgeInsetsMake(0, SCREEN_WIDTH / 2.5, 0, SCREEN_WIDTH/ 2.5);
     myTableView.allowsSelection = NO;
     myTableView.dataSource = self;
     myTableView.delegate = self;
@@ -178,7 +179,7 @@
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
         
-        strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
+        strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
         [btnState setTitle:strTitle forState:UIControlStateNormal];
         attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         spacing = 1.0f;
@@ -235,7 +236,6 @@
     NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
     
     hour = [components hour];
-    NSLog(@"current hour - %ld", hour);
     
     // Sunday = 1, Saturday = 7
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
@@ -250,7 +250,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return tableView.frame.size.height/2 + 70;
+    return SCREEN_HEIGHT/2 + 20;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -274,13 +274,14 @@
     [servingLunchCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
     servingLunchCell.ivBannerMainDish.hidden = YES; // when to show/hide?
-    
-    // Hide last separator
-    if (indexPath.row == aryMainDishes.count - 1) {
-        servingLunchCell.longLineSepartor1.hidden = YES;
-    }
+    [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
     
     return servingLunchCell;
+}
+
+- (void)onAddBento:(id)sender
+{
+    
 }
 
 - (void)onSettings
