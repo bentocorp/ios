@@ -332,15 +332,43 @@
         lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
     }
     
-    // 
-    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
+    // Get rid of empty bentos and update persistent data
+    NSArray *savedArray  = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"bento_array"];
+    NSMutableArray *aryBentos = [NSMutableArray arrayWithArray:savedArray];
+    
+    // loop through bento array
+    for (int i = 0; i < aryBentos.count; i++)
+    {
+        // if bento in current index is empty
+        Bento *bento = aryBentos[i];
+        if (bento.indexMainDish == 0 &&
+            bento.indexSideDish1 == 0 &&
+            bento.indexSideDish2 == 0 &&
+            bento.indexSideDish3 == 0 &&
+            bento.indexSideDish4 == 0)
+        {
+            // remove bento from bentos array
+            [aryBentos removeObjectAtIndex:i];
+            
+            // get today's date string
+            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+            [formatter setDateFormat:@"yyyyMMdd"];
+            NSString *strDate = [formatter stringFromDate:[NSDate date]];
+            
+            // update bentos array and strToday to persistent data
+            [[NSUserDefaults standardUserDefaults] rm_setCustomObject:aryBentos forKey:@"bento_array"];
+            [[NSUserDefaults standardUserDefaults] setObject:strDate forKey:@"bento_date"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+    }
+    
+    // if current bento is completed, added new empty bento
+    if ([[[BentoShop sharedInstance] getLastBento] isCompleted])
     {
         [[BentoShop sharedInstance] addNewBento];
     }
-    else if ([[BentoShop sharedInstance] getCurrentBento] == nil)
-    {
-        [[BentoShop sharedInstance] setCurrentBento:[[BentoShop sharedInstance] getLastBento]];
-    }
+    
+    NSLog(@"Bento Array - %@", savedArray);
     
     // Cart and Finalize button state
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0)

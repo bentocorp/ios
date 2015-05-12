@@ -330,7 +330,6 @@
                         <outlet property="ivLaunchLogo" destination="IlR-5c-RNW" id="47o-nV-WxA"/>
                         <outlet property="lblLaunchSlogan" destination="ZuD-Ad-TM9" id="7uQ-5w-ceh"/>
                         <segue destination="cih-YB-hrD" kind="push" identifier="Intro" id="n9b-DI-aZT"/>
-                        <segue destination="cjF-1z-ADL" kind="push" identifier="DeliveryLocation" id="Jq9-7a-GOP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>

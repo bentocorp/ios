@@ -260,14 +260,14 @@
     if (currentTime >= 0 && currentTime < dinnerTime)
     {
         ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
-        [self.navigationController pushViewController:servingLunchViewController animated:YES];
+        [self.navigationController popToViewController:servingLunchViewController animated:YES];
         
     // dinner opening - 11:59pm
     }
     else if (currentTime >= dinnerTime && currentTime < 24)
     {
         ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-        [self.navigationController pushViewController:servingDinnerViewController animated:YES];
+        [self.navigationController popToViewController:servingDinnerViewController animated:YES];
     }
 }
 

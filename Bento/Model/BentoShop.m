@@ -14,6 +14,8 @@
 #import "SDWebImagePrefetcher.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
+#import "FirstViewController.h"
+
 @interface BentoShop ()
 
 @property (nonatomic, retain) NSString *strToday;
@@ -415,12 +417,14 @@ static BentoShop *_shareInstance;
     NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
     
-    [defaults setObject:[NSNumber numberWithFloat:lunchTime] forKey:@"lunchTimeNumber"];
-    [defaults setObject:[NSNumber numberWithFloat:dinnerTime] forKey:@"dinnerTimeNumber"];
-    [defaults setObject:[NSNumber numberWithFloat:currentTime] forKey:@"currentTimeNumber"];
-    [defaults setObject:[NSNumber numberWithFloat:bufferTime] forKey:@"bufferTimeNumber"];
+/*--TIMES IS NOT SAVING PROPERLY TO NSUSERDEFAULTS WHEN APP FIRST LOADS. RECREATED THIS METHOD IN FIRSTVIEWCONTROLLER--*/
     
-    NSLog(@"times - %f, %f, %f, %f", currentTime, lunchTime, dinnerTime, bufferTime);
+            //    [defaults setObject:[NSNumber numberWithFloat:currentTime] forKey:@"currentTimeNumber"];
+            //    [defaults setObject:[NSNumber numberWithFloat:lunchTime] forKey:@"lunchTimeNumber"];
+            //    [defaults setObject:[NSNumber numberWithFloat:dinnerTime] forKey:@"dinnerTimeNumber"];
+            //    [defaults setObject:[NSNumber numberWithFloat:bufferTime] forKey:@"bufferTimeNumber"];
+            //    
+            //    NSLog(@"times - %@, %@, %@, %@", [defaults objectForKey:@"currentTimeNumber"], [defaults objectForKey:@"lunchTimeNumber"], [defaults objectForKey:@"dinnerTimeNumber"], [defaults objectForKey:@"bufferTimeNumber"]);
 }
 
 - (NSDictionary *)getMenuInfo
@@ -785,15 +789,11 @@ static BentoShop *_shareInstance;
     
     if ([whatNeedsSides isEqualToString:@"todayLunch"])
     {
-//        menuItems = [defaults objectForKey:@"lunchMenuItems"];
-        
         NSData *data = [defaults objectForKey:@"lunchMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     else if ([whatNeedsSides isEqualToString:@"tonightDinnerPreview"] || [whatNeedsSides isEqualToString:@"todayDinner"])
     {
-//        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
-        
         NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
@@ -1034,6 +1034,7 @@ static BentoShop *_shareInstance;
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSLog(@"save bento array - %@", self.aryBentos);
+    NSLog(@"string today - %@", self.strToday);
 }
 
 @end

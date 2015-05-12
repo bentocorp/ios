@@ -41,6 +41,12 @@
 @end
 
 @implementation FirstViewController
+{
+    float currentTime;
+    float lunchTime;
+    float dinnerTime;
+    float bufferTime;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -250,7 +256,77 @@
     [self showSoldoutScreen:[NSNumber numberWithInt:1]];
 }
 
-- (void) gotoMyBentoScreen
+/*----------------------GET LUNCH AND DINNER AND BUFFER TIME----------------------*/
+- (void)getCurrentLunchDinnerBufferTimesInNumbers
+{
+    // API call
+    NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
+    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest2]];
+    NSURLResponse *response = nil;
+    NSError *error2 = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
+    
+    if (data == nil) {
+        return;
+    }
+    
+    NSInteger statusCode = 0;
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+        statusCode = [(NSHTTPURLResponse *)response statusCode];
+    }
+    
+    if (error2 != nil || statusCode != 200) {
+        return;
+    }
+    
+    // parse json
+    NSError *parseError = nil;
+    NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+    if (initDic == nil) {
+        return;
+    }
+    
+    // set /init results to dictionary
+    NSDictionary *initDictionary = [initDic copy];
+    
+    // Get time strings from /init call
+    NSString *lunchTimeString = initDictionary[@"meals"][@"2"][@"startTime"];
+    NSString *dinnerTimeString = initDictionary[@"meals"][@"3"][@"startTime"];
+    
+    // set date format
+    NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"k:mm:ss"];
+    
+    // format dates from strings
+    NSDate *dateLunch = [formatter dateFromString:lunchTimeString];
+    NSDate *dateDinner = [formatter dateFromString:dinnerTimeString];
+    
+    // convert to date components
+    NSDateComponents * componentsLunch = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:dateLunch];
+    NSDateComponents * componentsDinner = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:dateDinner];
+    
+    // Lunch and Dinner
+    lunchTime = (float)[componentsLunch hour] + ((float)[componentsLunch minute] / 60);
+    dinnerTime = (float)[componentsDinner hour] + ((float)[componentsDinner minute] / 60);
+    
+    // Buffer Time
+    NSString *bufferString = initDictionary[@"settings"][@"buffer_minutes"];
+    bufferTime = [bufferString floatValue] / 60;
+    
+    // Current Time
+    NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
+    currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:[NSNumber numberWithFloat:currentTime] forKey:@"currentTimeNumber"];
+    [defaults setObject:[NSNumber numberWithFloat:lunchTime] forKey:@"lunchTimeNumber"];
+    [defaults setObject:[NSNumber numberWithFloat:dinnerTime] forKey:@"dinnerTimeNumber"];
+    [defaults setObject:[NSNumber numberWithFloat:bufferTime] forKey:@"bufferTimeNumber"];
+    
+    NSLog(@"times - %@, %@, %@, %@", [defaults objectForKey:@"currentTimeNumber"], [defaults objectForKey:@"lunchTimeNumber"], [defaults objectForKey:@"dinnerTimeNumber"], [defaults objectForKey:@"bufferTimeNumber"]);
+}
+
+- (void)gotoMyBentoScreen
 {
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
@@ -262,9 +338,11 @@
     
 /*--------------Determine whether to show Lunch or Dinner mode--------------*/
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    float currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
-    float dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
+//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+//    float currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
+//    float dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
+    
+    [self getCurrentLunchDinnerBufferTimesInNumbers];
     
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime) {

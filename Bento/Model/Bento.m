@@ -11,13 +11,6 @@
 
 @interface Bento()
 
-@property (nonatomic, assign) NSInteger indexMainDish;
-
-@property (nonatomic, assign) NSInteger indexSideDish1;
-@property (nonatomic, assign) NSInteger indexSideDish2;
-@property (nonatomic, assign) NSInteger indexSideDish3;
-@property (nonatomic, assign) NSInteger indexSideDish4;
-
 @end
 
 @implementation Bento

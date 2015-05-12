@@ -942,23 +942,6 @@
     [self updateUI];
 }
 
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (editingStyle == UITableViewCellEditingStyleDelete)
-//    {
-//        _currentIndexPath = indexPath;
-//        
-//        if (self.aryBentos.count > 1)
-//        {
-//            [self removeBento];
-//        }
-//        else
-//        {
-//            [self showStartOverAlert];
-//        }
-//    }
-//}
-
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return [[AppStrings sharedInstance] getString:COMPLETE_TEXT_REMOVE];

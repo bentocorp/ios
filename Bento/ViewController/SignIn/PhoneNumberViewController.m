@@ -329,8 +329,6 @@
 
 - (void) gotoDeliveryLocationScreen
 {
-    //[self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
-    
     [self dissmodal];
 }
 
