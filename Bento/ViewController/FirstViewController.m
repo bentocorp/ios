@@ -323,7 +323,7 @@
     [defaults setObject:[NSNumber numberWithFloat:dinnerTime] forKey:@"dinnerTimeNumber"];
     [defaults setObject:[NSNumber numberWithFloat:bufferTime] forKey:@"bufferTimeNumber"];
     
-    NSLog(@"times - %@, %@, %@, %@", [defaults objectForKey:@"currentTimeNumber"], [defaults objectForKey:@"lunchTimeNumber"], [defaults objectForKey:@"dinnerTimeNumber"], [defaults objectForKey:@"bufferTimeNumber"]);
+    NSLog(@"times from FirstVC - %@, %@, %@, %@", [defaults objectForKey:@"currentTimeNumber"], [defaults objectForKey:@"lunchTimeNumber"], [defaults objectForKey:@"dinnerTimeNumber"], [defaults objectForKey:@"bufferTimeNumber"]);
 }
 
 - (void)gotoMyBentoScreen

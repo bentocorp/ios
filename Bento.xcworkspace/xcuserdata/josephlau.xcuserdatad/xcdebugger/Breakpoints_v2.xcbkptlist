@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/Model/BentoShop.m"
-            timestampString = "453158877.127532"
+            timestampString = "453159921.676943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1013"
-            endingLineNumber = "1013"
+            startingLineNumber = "1011"
+            endingLineNumber = "1011"
             landmarkName = "-removeBento:"
             landmarkType = "5">
          </BreakpointContent>
@@ -84,11 +84,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/FirstViewController.m"
-            timestampString = "453159014.491442"
+            timestampString = "453159921.676943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "349"
-            endingLineNumber = "349"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
             landmarkName = "-gotoMyBentoScreen"
             landmarkType = "5">
          </BreakpointContent>
@@ -100,13 +100,45 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/FirstViewController.m"
-            timestampString = "453159014.491442"
+            timestampString = "453159921.676943"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "355"
-            endingLineNumber = "355"
+            startingLineNumber = "354"
+            endingLineNumber = "354"
             landmarkName = "-gotoMyBentoScreen"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[FirstViewController gotoMyBentoScreen]"
+                  moduleName = "Bento Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josephlau/Desktop/_github/ios/Bento/ViewController/FirstViewController.m"
+                  timestampString = "453159588.127987"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "359"
+                  endingLineNumber = "359"
+                  offsetFromSymbolStart = "628">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[FirstViewController gotoMyBentoScreen]"
+                  moduleName = "Bento Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/josephlau/Desktop/_github/ios/Bento/ViewController/FirstViewController.m"
+                  timestampString = "453159588.128307"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "359"
+                  endingLineNumber = "359"
+                  offsetFromSymbolStart = "641">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

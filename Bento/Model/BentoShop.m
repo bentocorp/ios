@@ -417,14 +417,14 @@ static BentoShop *_shareInstance;
     NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
     
-/*--TIMES IS NOT SAVING PROPERLY TO NSUSERDEFAULTS WHEN APP FIRST LOADS. RECREATED THIS METHOD IN FIRSTVIEWCONTROLLER--*/
+/*--TIMES IS NOT SAVING PROPERLY TO NSUSERDEFAULTS WHEN APP FIRST LOADS. RECREATED THIS METHOD IN FIRSTVIEWCONTROLLER TO COMPENSATE AND FOR BACKUP--*/
     
-            //    [defaults setObject:[NSNumber numberWithFloat:currentTime] forKey:@"currentTimeNumber"];
-            //    [defaults setObject:[NSNumber numberWithFloat:lunchTime] forKey:@"lunchTimeNumber"];
-            //    [defaults setObject:[NSNumber numberWithFloat:dinnerTime] forKey:@"dinnerTimeNumber"];
-            //    [defaults setObject:[NSNumber numberWithFloat:bufferTime] forKey:@"bufferTimeNumber"];
-            //    
-            //    NSLog(@"times - %@, %@, %@, %@", [defaults objectForKey:@"currentTimeNumber"], [defaults objectForKey:@"lunchTimeNumber"], [defaults objectForKey:@"dinnerTimeNumber"], [defaults objectForKey:@"bufferTimeNumber"]);
+    [defaults setObject:[NSNumber numberWithFloat:currentTime] forKey:@"currentTimeNumber"];
+    [defaults setObject:[NSNumber numberWithFloat:lunchTime] forKey:@"lunchTimeNumber"];
+    [defaults setObject:[NSNumber numberWithFloat:dinnerTime] forKey:@"dinnerTimeNumber"];
+    [defaults setObject:[NSNumber numberWithFloat:bufferTime] forKey:@"bufferTimeNumber"];
+    
+    NSLog(@"times from BentoShop - %@, %@, %@, %@", [defaults objectForKey:@"currentTimeNumber"], [defaults objectForKey:@"lunchTimeNumber"], [defaults objectForKey:@"dinnerTimeNumber"], [defaults objectForKey:@"bufferTimeNumber"]);
 }
 
 - (NSDictionary *)getMenuInfo
