@@ -432,7 +432,6 @@ static BentoShop *_shareInstance;
     {
         menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
         
-        
     // dinner opening - 11:59pm
     }
     else if (currentTime >= dinnerTime && currentTime < 24)
@@ -453,21 +452,15 @@ static BentoShop *_shareInstance;
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)
     {
-//        menuItems = [defaults objectForKey:@"lunchMenuItems"];
-        
         NSData *data = [defaults objectForKey:@"lunchMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
 
-    
     // dinner opening - 11:59pm
     }
     else if (currentTime >= dinnerTime && currentTime < 24)
     {
-//        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
-        
         NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-
     }
     
     if (menuItems == nil)

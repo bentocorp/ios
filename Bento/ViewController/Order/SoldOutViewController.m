@@ -115,9 +115,12 @@
     self.btnPreview.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.btnPreview.titleLabel.textAlignment = NSTextAlignmentCenter;
     NSString *strTitle;
-    if (self.type == 0) // Closed
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]]; // NEEDS FIX!!!
-    else // Sold out
+    
+    // Closed
+    if (self.type == 0)
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    // Sold out
+    else
         strTitle = @"View Today's Menu";
     
     [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
