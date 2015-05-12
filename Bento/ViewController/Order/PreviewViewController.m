@@ -90,8 +90,8 @@
         titleRight = @"Next Dinner";
     }
     
-    // SOLD-OUT: 11:30 - 16:30
-    if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= lunchTime && currentTime < dinnerTime)
+    // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
+    if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
     {
         titleLeft = @"Today's Lunch";
         titleRight = @"Tonight's Dinner";
@@ -242,8 +242,8 @@
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         }
         
-        // SOLD-OUT: 11:30 - 16:30
-        if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= lunchTime && currentTime < dinnerTime)
+        // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
+        if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
         {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
@@ -298,8 +298,8 @@
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
         }
         
-        // SOLD-OUT: 11:30 - 16:30
-        if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= lunchTime && currentTime < dinnerTime)
+        // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
+        if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
         {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
@@ -387,8 +387,8 @@
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         }
         
-        // SOLD-OUT: 11:30 - 16:30
-        if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= lunchTime && currentTime < dinnerTime)
+        // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
+        if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
         {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
@@ -448,8 +448,8 @@
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
         }
         
-        // SOLD-OUT: 11:30 - 16:30
-        if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= lunchTime && currentTime < dinnerTime)
+        // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
+        if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
         {
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];

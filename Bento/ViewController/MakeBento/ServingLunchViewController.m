@@ -299,7 +299,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 2;
+    return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -525,6 +525,7 @@
         btnCart.selected = YES;
         [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
         
+        [btnState setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
         btnState.enabled = YES;
     }
     else
@@ -532,6 +533,7 @@
         btnCart.enabled = NO;
         btnCart.selected = NO;
         
+        [btnState setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
         btnState.enabled = NO;
     }
     
