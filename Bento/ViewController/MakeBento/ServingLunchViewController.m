@@ -304,7 +304,20 @@
     servingLunchCell.btnMainDish.tag = indexPath.row; // set button tag
     [servingLunchCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
-    servingLunchCell.ivBannerMainDish.hidden = YES; // when to show/hide?
+    // Check Sold out item, set add to cart button state
+    NSInteger mainDishId = [[dishInfo objectForKey:@"itemId"] integerValue];
+    if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId])
+    {
+        servingLunchCell.ivBannerMainDish.hidden = NO;
+        servingLunchCell.addButton.enabled = NO;
+        [servingLunchCell.addButton setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+    }
+    else
+    {
+        servingLunchCell.ivBannerMainDish.hidden = YES;
+        servingLunchCell.addButton.enabled = YES;
+        [servingLunchCell.addButton setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+    }
     
     servingLunchCell.addButton.tag = indexPath.row;
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
@@ -399,7 +412,6 @@
         lblBadge.hidden = YES;
     }
 }
-
 
 
 - (void)onSettings
@@ -578,6 +590,7 @@
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
     [cvDishes reloadData];
+    [myTableView reloadData];
 }
 
 #pragma mark - UICollectionViewDataSource

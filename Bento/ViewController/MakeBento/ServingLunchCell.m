@@ -81,7 +81,6 @@
         self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), SCREEN_HEIGHT/3 + 50, SCREEN_WIDTH-60, 44)];
         self.addButton.layer.cornerRadius = 3;
         self.addButton.layer.masksToBounds = YES;
-        self.addButton.backgroundColor = [UIColor colorWithRed:135.0/255.0 green:176.0/255.0 blue:95.0/255.0 alpha:1.0];
         [self.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
         self.addButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
         self.addButton.titleLabel.textColor = [UIColor whiteColor];
