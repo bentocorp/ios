@@ -58,6 +58,7 @@
         if ([object isKindOfClass:[NSString class]]) {
             UILabel *textLabel = [[UILabel alloc] init];
             textLabel.text = object;
+            textLabel.adjustsFontSizeToFitWidth = YES;
             textLabel.textColor = self.currentTintColor;
             textLabel.textAlignment = NSTextAlignmentCenter;
             textLabel.font = self.font;
