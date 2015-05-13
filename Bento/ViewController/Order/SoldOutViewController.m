@@ -124,8 +124,6 @@
     self.btnPreview.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.btnPreview.titleLabel.textAlignment = NSTextAlignmentCenter;
     
-    
-    
     self.btnPreview.layer.cornerRadius = 8;
     self.btnPreview.layer.borderWidth = 1;
     self.btnPreview.layer.borderColor = [[UIColor whiteColor] CGColor];
