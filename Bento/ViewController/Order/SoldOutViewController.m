@@ -123,44 +123,35 @@
 
     self.btnPreview.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.btnPreview.titleLabel.textAlignment = NSTextAlignmentCenter;
-    NSString *strTitle;
+    
     
     /*-----------------Show Previews Button Text-----------------*/
+
     
-    NSDateFormatter* day = [[NSDateFormatter alloc] init];
-    [day setDateFormat: @"EEEE"];
-    NSString *todayDate = [day stringFromDate:[NSDate date]];
     
-    // CLOSED: 00:00 - 12:29
-    if (self.type == 0 && [[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
-    {
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", todayDate];
+//    IF (closed && time is 12:00am to 8:59pm)
+//    Try to get today's menu with /menu/{date}
+//    If today's menu returns a 404 (because of a weekend, for example), try to get the next menu with /menu/next/{date}
+//    
+//    IF (closed && time is 9pm to 11:59pm)
+//    Look directly for the next menu with /menu/next/{date}
+    
+    NSString *strTitle;
+    
+    // closed, get today, if none today, get next  00:00 - 17:29
+    if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime)) {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil] ];
     }
-    
-    // CLOSED: 12:30 - 17:29
-    if (self.type == 0 && [[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
-    {
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", todayDate];
-    }
-    
-    // CLOSED: 17.30 - 23:59
-    if (self.type == 0 && [[BentoShop sharedInstance] isClosed] && currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
+    // closed, go straight to NEXT
+    else if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
     {
         strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     }
-
-    // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
-    if (self.type == 1 && [[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
+    else // soldout
     {
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", todayDate];
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
     }
-
-    // SOLD-OUT: 16:30 - 23:59
-    if (self.type == 1 && [[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
-    {
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", todayDate];
-    }
-                    
+    
     /*----------------------------------*/
 
     

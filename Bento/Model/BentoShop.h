@@ -44,6 +44,7 @@
 - (NSURL *)getMenuImageURL;
 - (NSString *)getMenuDateString;
 - (NSString *)getMenuWeekdayString;
+- (NSString *)getNextMenuDateIfTodayMenuReturnsNil;
 
 - (NSString *)getNextMenuDateString;
 - (NSString *)getNextMenuWeekdayString;

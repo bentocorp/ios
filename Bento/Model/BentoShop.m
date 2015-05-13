@@ -299,6 +299,18 @@ static BentoShop *_shareInstance;
     }
 }
 
+- (NSString *)getNextMenuDateIfTodayMenuReturnsNil
+{
+    if ([self getMenuDateString] != nil)
+    {
+        return [self getMenuWeekdayString];
+    }
+    else
+    {
+        return [self getNextMenuWeekdayString];
+    }
+}
+
 - (void)getNextMenus
 {
     NSDate* currentDate = [NSDate date];
