@@ -825,14 +825,19 @@
 
 - (void)updateUI
 {
+    [cvDishes reloadData];
+    
+    [[AppStrings sharedInstance] getAppStrings];
+    
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     
-    lblBanner.hidden = YES;
     if (salePrice != 0 && salePrice < unitPrice)
     {
         lblBanner.hidden = NO;
         lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
+    } else {
+        lblBanner.hidden = YES;
     }
     
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
@@ -947,7 +952,7 @@
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
-    [cvDishes reloadData];
+    [self updateUI];
 }
 
 #pragma mark - UICollectionViewDataSource
