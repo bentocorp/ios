@@ -78,7 +78,7 @@
         [viewDish addSubview:self.ivBannerMainDish];
         
         /*---Add Button---*/
-        self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), SCREEN_HEIGHT/3 + 50, SCREEN_WIDTH-60, 44)];
+        self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), SCREEN_HEIGHT/3 + 55, SCREEN_WIDTH-60, 44)];
         self.addButton.layer.cornerRadius = 3;
         self.addButton.layer.masksToBounds = YES;
         [self.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
