@@ -39,7 +39,7 @@
         self.pageControl = [[UIPageControl alloc] init];
         
         self.tintColor = [UIColor lightGrayColor];
-//        self.currentTintColor = [UIColor redColor];
+//        self.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
 //        self.font = [UIFont systemFontOfSize:17];
         
         _isObservingScrollView = NO;
@@ -127,7 +127,10 @@
     
     CGFloat scrollViewWidth = self.scrollView.frame.size.width;
     
+    
+    
     [self.views enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
+        
         CGFloat diff = (self.scrollView.contentOffset.x - scrollViewWidth*idx) + scrollViewWidth/2;
         
         if (diff > scrollViewWidth/2) {
@@ -139,8 +142,13 @@
         }
         
         CGFloat alpha = scrollViewWidth / 100 * diff / 100 + 0.15f;
+        NSLog(@"float - %f", self.observedScrollView.contentOffset.x);
         
-        view.alpha = alpha;
+        if (self.observedScrollView.contentOffset.x == 0) {
+            view.alpha = 1;
+        } else {
+            view.alpha = alpha;
+        }
     }];
 }
 
