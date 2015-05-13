@@ -157,7 +157,7 @@
     lblBanner.textColor = [UIColor whiteColor];
     lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
     lblBanner.hidden = YES;
-    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, 64 + self.view.frame.size.width / 6);
+    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6 + 10, self.view.frame.size.width / 8 + 10);
     lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
     lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     [scrollView addSubview:lblBanner];
@@ -342,14 +342,17 @@
     [cvDishes reloadData];
     [myTableView reloadData];
     
+    [[AppStrings sharedInstance] getAppStrings];
+    
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     
-    lblBanner.hidden = YES;
     if (salePrice != 0 && salePrice < unitPrice)
     {
         lblBanner.hidden = NO;
         lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
+    } else {
+        lblBanner.hidden = YES;
     }
     
     // Get rid of empty bentos and update persistent data
@@ -607,8 +610,7 @@
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
-    [cvDishes reloadData];
-    [myTableView reloadData];
+    [self updateUI];
 }
 
 #pragma mark - UICollectionViewDataSource

@@ -186,18 +186,6 @@
     lblBadge.clipsToBounds = YES;
     [navigationBarView addSubview:lblBadge];
     
-/*---Banner---*/
-    
-    lblBanner = [[UILabel alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 28)];
-    lblBanner.textAlignment = NSTextAlignmentCenter;
-    lblBanner.textColor = [UIColor whiteColor];
-    lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
-    lblBanner.hidden = YES;
-    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, 64 + self.view.frame.size.width / 6);
-    lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
-    lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    [scrollView addSubview:lblBanner];
-    
 /*---Full Dishes View---*/
     
     viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 20, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
@@ -410,6 +398,18 @@
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
     [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnState];
+    
+/*---Banner---*/
+    
+    lblBanner = [[UILabel alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 28)];
+    lblBanner.textAlignment = NSTextAlignmentCenter;
+    lblBanner.textColor = [UIColor whiteColor];
+    lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
+    lblBanner.hidden = YES;
+    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
+    lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
+    lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
+    [scrollView addSubview:lblBanner];
     
 /*------*/
     
