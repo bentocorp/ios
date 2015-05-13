@@ -102,7 +102,7 @@
     
 /*---BW Title Pager View---*/
     
-    NSString *nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    NSString *nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
@@ -549,8 +549,9 @@
 {
     if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
     {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-//        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
     }
     else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
     {
