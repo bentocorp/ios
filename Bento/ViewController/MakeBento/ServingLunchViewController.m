@@ -64,10 +64,14 @@
     NSIndexPath *_selectedPath;
     NSInteger hour;
     int weekday;
+    
+    BWTitlePagerView *pagingTitleView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSLog(@"Loaded Lunch Homepage");
     
     storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
@@ -98,7 +102,7 @@
     
 /*---BW Title Pager View---*/
     
-    BWTitlePagerView *pagingTitleView = [[BWTitlePagerView alloc] init];
+    pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
@@ -257,7 +261,6 @@
             [self.aryDishes addObject:dishInfo];
         }
     }
-    NSLog(@"aryDishes - - %@", self.aryDishes);
     
     [self updateUI];
     
@@ -273,6 +276,11 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super viewWillDisappear:animated];
+}
+
+- (void)dealloc
+{
+    [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
 }
 
 
@@ -535,11 +543,19 @@
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
     if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
-        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+    }
     else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
-        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+    {
+        [self.navigationController popToRootViewControllerAnimated:YES];
+//        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+    }
     else
+    {
         [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    }
 }
 
 - (void)showConfirmMsg

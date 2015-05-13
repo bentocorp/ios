@@ -338,15 +338,12 @@
     
 /*--------------Determine whether to show Lunch or Dinner mode--------------*/
     
-//    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-//    float currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
-//    float dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
-    
     [self getCurrentLunchDinnerBufferTimesInNumbers];
     
     // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime) {
-        
+//    if (currentTime >= 0 && currentTime < dinnerTime) {
+    if (currentTime >= 0 && currentTime < 17.37) {
+    
         ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
         [self.navigationController pushViewController:servingLunchViewController animated:needsAnimation];
         
