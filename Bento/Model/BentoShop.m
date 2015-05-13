@@ -301,10 +301,12 @@ static BentoShop *_shareInstance;
 
 - (NSString *)getNextMenuDateIfTodayMenuReturnsNil
 {
+    // there is a menu today! return today string!
     if ([self getMenuDateString] != nil)
     {
         return [self getMenuWeekdayString];
     }
+    // bummer... no menu today.. return next date string
     else
     {
         return [self getNextMenuWeekdayString];

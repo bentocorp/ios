@@ -142,7 +142,6 @@
         }
         
         CGFloat alpha = scrollViewWidth / 100 * diff / 100 + 0.15f;
-        NSLog(@"float - %f", self.observedScrollView.contentOffset.x);
         
         if (self.observedScrollView.contentOffset.x == 0) {
             view.alpha = 1;
