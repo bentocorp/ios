@@ -120,7 +120,6 @@
     vcSoldOut.type = [identifier integerValue];
     
 //    [self.navigationController presentViewController:nav animated:YES completion:nil];
-//    [self.navigationController popToViewController:vcSoldOut animated:YES];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -51,6 +51,7 @@
     float dinnerTime;
     float bufferTime;
     
+    NSString *strTitle;
 }
 
 - (NSString *)getClosedText
@@ -119,35 +120,11 @@
         [self.btnPolicy setTitle:[[AppStrings sharedInstance] getString:SOLDOUT_LINK_POLICY] forState:UIControlStateNormal];
         [self.btnTerms setTitle:[[AppStrings sharedInstance] getString:SOLDOUT_LINK_TERMS] forState:UIControlStateNormal];
     }
-
+    
     self.btnPreview.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.btnPreview.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     
-    /*-----------------Show Previews Button Text-----------------*/
-
-    
-    
-    NSString *strTitle;
-    
-    // closed, get today, if none today, get next  00:00 - 17:29
-    if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime)) {
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil] ];
-    }
-    // closed, go straight to NEXT
-    else if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
-    {
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    }
-    else // soldout
-    {
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
-    }
-    
-    /*----------------------------------*/
-
-    
-    [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
     
     self.btnPreview.layer.cornerRadius = 8;
     self.btnPreview.layer.borderWidth = 1;
@@ -158,9 +135,11 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self setPreviewButtonText];
     
     [self onUpdatedStatus];
     
@@ -175,6 +154,39 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [super viewWillDisappear:animated];
+}
+
+- (void)setPreviewButtonText
+{
+    // set type
+    if ([[BentoShop sharedInstance] isClosed])
+    {
+        self.type = 0;
+    }
+    else if ([[BentoShop sharedInstance] isSoldOut])
+    {
+        self.type = 1;
+    }
+    
+    // Closed && 17:30 - 23:59 (get next)
+    if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    }
+    
+    // Closed &&  00:00 - 17:29 (get today, if none today, get next)
+    else if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil]];
+    }
+    
+    // Sold out
+    else
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+    }
+    
+    [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
 }
 
 - (void)onUpdatedStatus

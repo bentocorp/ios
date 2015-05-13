@@ -94,10 +94,6 @@
     UIButton *btnState;
     
     UIStoryboard *storyboard;
-    ChooseMainDishViewController *chooseMainDishViewController;
-    ChooseSideDishViewController *chooseSideDishViewController;
-    DeliveryLocationViewController *deliveryLocationViewController;
-    CompleteOrderViewController *completeOrderViewController;
     
     // Upcoming Lunch
     UILabel *lblTitle;
@@ -114,10 +110,6 @@
     [super viewDidLoad];
     
     storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-    deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-    completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -450,6 +442,8 @@
     BentoShop *globalShop = [BentoShop sharedInstance];
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
     {
+        DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+   
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
@@ -737,6 +731,9 @@
 
 - (void)gotoOrderScreen
 {
+    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+    
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     
@@ -758,6 +755,7 @@
 
 - (void)onAddMainDish
 {
+    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
     [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
 }
 
@@ -765,6 +763,7 @@
 {
     UIButton *selectedButton = (UIButton *)sender;
     
+    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
     [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
@@ -783,6 +782,9 @@
 
 - (void)onContinue
 {
+    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+    
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
     if (currentBento == nil || [currentBento isEmpty]) {
