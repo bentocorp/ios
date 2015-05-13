@@ -341,8 +341,7 @@
     [self getCurrentLunchDinnerBufferTimesInNumbers];
     
     // 12:00am - dinner opening (ie. 16.5)
-//    if (currentTime >= 0 && currentTime < dinnerTime) {
-    if (currentTime >= 0 && currentTime < 17.37) {
+    if (currentTime >= 0 && currentTime < dinnerTime) {
     
         ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
         [self.navigationController pushViewController:servingLunchViewController animated:needsAnimation];

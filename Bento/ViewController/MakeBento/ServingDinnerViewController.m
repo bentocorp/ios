@@ -523,8 +523,8 @@
     }
     else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
     {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-//        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+//        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     }
     else
     {

@@ -37,6 +37,8 @@
     
     NSString *originalStatus;
     
+    NSString *currentMode;
+    
     float lunchTime;
     float dinnerTime;
     float currentTime;
@@ -316,7 +318,7 @@ static BentoShop *_shareInstance;
     [formatter setDateFormat:@"yyyyMMdd"];
     NSString *strDate = [formatter stringFromDate:currentDate];
     
-//    if (hour < 21) // before 9pm, get menu
+//    if (currentTime < 21) // before 9pm, get menu
 //    {
 //        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
 //        
@@ -338,10 +340,11 @@ static BentoShop *_shareInstance;
         NSError *error = nil;
         NSInteger statusCode = 0;
         self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
+    
 //    }
 
     // set menuInfo and menuItems to persistent storage
-    [defaults setObject:self.menuNext[@"lunner"][@"Menu"] forKey:@"nextLunchMenuInfo"];
+    [defaults setObject:self.menuNext[@"lunch"][@"Menu"] forKey:@"nextLunchMenuInfo"];
     [defaults setObject:self.menuNext[@"dinner"][@"Menu"] forKey:@"nextDinnerMenuInfo"];
     
     /* archive array before setting into defaults - because there may be null values for unset inventory count */
@@ -427,6 +430,43 @@ static BentoShop *_shareInstance;
     NSLog(@"times from BentoShop - %@, %@, %@, %@", [defaults objectForKey:@"currentTimeNumber"], [defaults objectForKey:@"lunchTimeNumber"], [defaults objectForKey:@"dinnerTimeNumber"], [defaults objectForKey:@"bufferTimeNumber"]);
 }
 
+- (void)setLunchOrDinnerMode
+{
+    // Set Lunch Mode
+    if (currentTime >= 0 && currentTime < dinnerTime)
+    {
+        [defaults setObject:@"Lunch" forKey:@"LunchOrDinner"];
+        currentMode = @"Lunch";
+    }
+    else if (currentTime >= dinnerTime && currentTime < 24)
+    {
+        [defaults setObject:@"Dinner" forKey:@"LunchOrDinner"];
+        currentMode = @"Dinner";
+    }
+    
+    [defaults synchronize];
+    
+    NSLog(@"Current Mode - %@, Saved Mode - %@", currentMode, [defaults objectForKey:@"LunchOrDinner"]);
+}
+
+- (void)checkIfBentoArrayNeedsToBeReset
+{
+    NSString *strDate = [self getDateString];
+    
+    NSString *savedMode = [defaults objectForKey:@"LunchOrDinner"];
+    
+    // today's date doesn't match saved date && current mode doesn't match saved mode
+    if (![strDate isEqualToString:self.strToday] && ![currentMode isEqualToString:savedMode])
+    {
+        [self resetBentoArray];
+        
+        NSLog(@"Today's Date - %@, Saved Date - %@", strDate, self.strToday);
+        
+        self.strToday = strDate;
+        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_MENU object:nil];
+    }
+}
+
 - (NSDictionary *)getMenuInfo
 {
     NSDictionary *menuInfo;
@@ -487,8 +527,7 @@ static BentoShop *_shareInstance;
     NSString *strPoints;
     
     // 12:00am - dinner opening (ie. 16.5)
-//    if (currentTime >= 0 && currentTime < dinnerTime) {
-    if (currentTime >= 0 && currentTime < 17.37) {
+    if (currentTime >= 0 && currentTime < dinnerTime) {
         strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
         NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
         
@@ -591,7 +630,7 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuInfo = [self getMenuInfo];
+    NSDictionary *menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"]; // doesn't matter lunch or dinner, just get next date
     
     NSString *strDate = menuInfo[@"for_date"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -703,9 +742,12 @@ static BentoShop *_shareInstance;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self getCurrentLunchDinnerBufferTimesInNumbers];
+        [self setLunchOrDinnerMode];
+        [self checkIfBentoArrayNeedsToBeReset];
         [self getMenus];
         [self getStatus];
         [self getServiceArea];
+        
     });
     
     _isCallingApi = NO;

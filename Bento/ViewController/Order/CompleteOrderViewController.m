@@ -914,7 +914,7 @@
     [self.tvBentos reloadData];
 }
 
-- (void) onClickedRemoveButton:(UIView *)view
+- (void)onClickedRemoveButton:(UIView *)view
 {
     _clickedMinuteButtonIndex = NSNotFound;
     

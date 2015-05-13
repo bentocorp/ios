@@ -45,6 +45,13 @@
 @end
 
 @implementation SoldOutViewController
+{
+    float currentTime;
+    float lunchTime;
+    float dinnerTime;
+    float bufferTime;
+    
+}
 
 - (NSString *)getClosedText
 {
@@ -62,15 +69,17 @@
 #endif
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    float currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
-    float dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
-    float bufferTime = [[defaults objectForKey:@"bufferTimeNumber"] floatValue];
+    currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
+    dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
+    lunchTime = [[defaults objectForKey:@"lunchTimeNumber"] floatValue];
+    bufferTime = [[defaults objectForKey:@"bufferTimeNumber"] floatValue];
     
-    // 17:30 - 23:59, Closed for the night
+    // 17:30 - 23:59, Closed for the night, talk about next menu
     if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24) {
         return [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT];
     }
 
+    // talk about today
     return [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT];
 }
 
@@ -116,12 +125,44 @@
     self.btnPreview.titleLabel.textAlignment = NSTextAlignmentCenter;
     NSString *strTitle;
     
-    // Closed
-    if (self.type == 0)
+    /*-----------------Show Previews Button Text-----------------*/
+    
+    NSDateFormatter* day = [[NSDateFormatter alloc] init];
+    [day setDateFormat: @"EEEE"];
+    NSString *todayDate = [day stringFromDate:[NSDate date]];
+    
+    // CLOSED: 00:00 - 12:29
+    if (self.type == 0 && [[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", todayDate];
+    }
+    
+    // CLOSED: 12:30 - 17:29
+    if (self.type == 0 && [[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", todayDate];
+    }
+    
+    // CLOSED: 17.30 - 23:59
+    if (self.type == 0 && [[BentoShop sharedInstance] isClosed] && currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
+    {
         strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    // Sold out
-    else
-        strTitle = @"View Today's Menu";
+    }
+
+    // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
+    if (self.type == 1 && [[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", todayDate];
+    }
+
+    // SOLD-OUT: 16:30 - 23:59
+    if (self.type == 1 && [[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", todayDate];
+    }
+                    
+    /*----------------------------------*/
+
     
     [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
     
