@@ -75,6 +75,11 @@ NSString * const HarpyLanguageTurkish               = @"tr";
     return self;
 }
 
+- (NSString *)getAPI:(NSString *)apiString
+{
+    return self.apiString = apiString;
+}
+
 #pragma mark - Public
 - (void)checkVersion
 {
@@ -84,15 +89,8 @@ NSString * const HarpyLanguageTurkish               = @"tr";
     
     } else {
         
-#ifndef DEV_MODE
-#define SERVER_URL @"https://api.bentonow.com"
-#else
-#define SERVER_URL @"https://dev.api.bentonow.com"
-#endif
-        
-        NSLog(@"Server URL - %@", SERVER_URL);
-        
-        NSString *strRequest = [NSString stringWithFormat:@"%@/init", SERVER_URL];
+        NSLog(@"Using API string - %@", self.apiString);
+        NSString *strRequest = [NSString stringWithFormat:@"%@/init", self.apiString];
         NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest]];
         NSURLResponse *response = nil;
         NSError *error = nil;
@@ -137,6 +135,7 @@ NSString * const HarpyLanguageTurkish               = @"tr";
             }
         }
     }
+    
 }
 
 - (void)checkVersionDaily
