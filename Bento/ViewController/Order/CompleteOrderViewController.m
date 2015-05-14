@@ -500,7 +500,7 @@
     
     for (UIViewController *vc in viewControllers) {
         
-        // if vc is either dinner or lunch
+        // dinner or lunch vc
         if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
         {
             // if dinner, add new bento
