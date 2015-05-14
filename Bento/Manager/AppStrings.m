@@ -70,7 +70,7 @@ static AppStrings *_shareInstance;
     
     self.appStrings = [aryRet copy];
     
-//    NSLog(@"appStrings - %@", aryRet);
+    NSLog(@"appStrings - %@", aryRet);
 }
 
 - (NSURL *)getURL:(NSString *)strKey

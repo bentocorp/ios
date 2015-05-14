@@ -71,8 +71,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSLog(@"Loaded Lunch Homepage");
-    
     storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
 /*---Scroll View---*/
@@ -285,7 +283,6 @@
     [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
 }
 
-
 #pragma mark Tableview Datasource
 /*---------------------------------------------------------------------------------------------*/
 
@@ -341,8 +338,6 @@
 {
     [cvDishes reloadData];
     [myTableView reloadData];
-    
-    [[AppStrings sharedInstance] getAppStrings];
     
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
@@ -507,6 +502,7 @@
         [currentBento completeBento:@"todayLunch"];
     
     [[BentoShop sharedInstance] addNewBento];
+    
     
     [self updateUI];
 }

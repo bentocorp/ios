@@ -829,8 +829,6 @@
 {
     [cvDishes reloadData];
     
-    [[AppStrings sharedInstance] getAppStrings];
-    
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     

@@ -195,6 +195,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Perform check for new version of your app
     [[Harpy sharedInstance] checkVersion];
+    
+    // reload app strings
+    [[AppStrings sharedInstance] getAppStrings];
 }
 
 - (void)showLocationAlert
