@@ -69,9 +69,8 @@
 
 - (void)gotoAddAnotherBentoScreen
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    float currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
-    float dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
+    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
     
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)

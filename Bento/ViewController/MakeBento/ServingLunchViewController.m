@@ -102,14 +102,14 @@
     
 /*---BW Title Pager View---*/
     
-    NSString *nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+//    NSString *nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[@"Now Serving Lunch", nextMenuTitle]];
+    [pagingTitleView addObjects:@[@"Now Serving Lunch", @"Tonight's Dinner Menu"]];
     [navigationBarView addSubview:pagingTitleView];
     
 /*---Line Separator---*/
@@ -549,13 +549,10 @@
 {
     if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
     {
-        
-//        [self.navigationController popToRootViewControllerAnimated:YES];
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
     }
     else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
     {
-//        [self.navigationController popToRootViewControllerAnimated:YES];
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     }
     else

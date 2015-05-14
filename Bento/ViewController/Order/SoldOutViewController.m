@@ -68,11 +68,10 @@
     currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
 #endif
     
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
-    dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
-    lunchTime = [[defaults objectForKey:@"lunchTimeNumber"] floatValue];
-    bufferTime = [[defaults objectForKey:@"bufferTimeNumber"] floatValue];
+    currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
+    dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
+    bufferTime = [[[BentoShop sharedInstance] getBufferTime] floatValue];
     
     // 17:30 - 23:59, Closed for the night, talk about next menu
     if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24) {
@@ -128,13 +127,6 @@
     /*-----------------Show Previews Button Text-----------------*/
 
     
-    
-//    IF (closed && time is 12:00am to 8:59pm)
-//    Try to get today's menu with /menu/{date}
-//    If today's menu returns a 404 (because of a weekend, for example), try to get the next menu with /menu/next/{date}
-//    
-//    IF (closed && time is 9pm to 11:59pm)
-//    Look directly for the next menu with /menu/next/{date}
     
     NSString *strTitle;
     

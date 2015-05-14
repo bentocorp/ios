@@ -49,6 +49,11 @@
 - (NSString *)getNextMenuDateString;
 - (NSString *)getNextMenuWeekdayString;
 
+- (NSNumber *)getCurrentTime;
+- (NSNumber *)getLunchTime;
+- (NSNumber *)getDinnerTime;
+- (NSNumber *)getBufferTime;
+
 - (void)refreshStart;
 - (void)refreshPause;
 - (void)refreshResume;

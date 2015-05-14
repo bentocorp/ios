@@ -43,11 +43,10 @@
     [super viewDidLoad];
     
     /*---Times---*/
-    defaults = [NSUserDefaults standardUserDefaults];
-    currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
-    lunchTime = [[defaults objectForKey:@"lunchTimeNumber"] floatValue];
-    dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
-    bufferTime = [[defaults objectForKey:@"bufferTimeNumber"] floatValue];
+    currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
+    dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
+    bufferTime = [[[BentoShop sharedInstance] getBufferTime] floatValue];
     
     /*---Scroll View---*/
     
@@ -93,14 +92,14 @@
     // CLOSED: 00:00 - 12:29
     else if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
     {
-        titleLeft = @"Today's Lunch";
-        titleRight = @"Tonight's Dinner";
+        titleLeft = @"Today's Lunch Menu";
+        titleRight = @"Tonight's Dinner Menu";
     }
     
     // CLOSED: 12:30 - 17:29
     else if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
     {
-        titleLeft = @"Tonight's Dinner";
+        titleLeft = @"Tonight's Dinner Menu";
         titleRight = nextMenuTitleLunch;
     }
     
@@ -114,14 +113,14 @@
     // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
     else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
     {
-        titleLeft = @"Today's Lunch";
-        titleRight = @"Tonight's Dinner";
+        titleLeft = @"Today's Lunch Menu";
+        titleRight = @"Tonight's Dinner Menu";
     }
     
     // SOLD-OUT: 16:30 - 23:59
     else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
     {
-        titleLeft = @"Tonight's Dinner";
+        titleLeft = @"Tonight's Dinner Menu";
         titleRight = nextMenuTitleLunch;
     }
     

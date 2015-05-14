@@ -873,9 +873,8 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    float currentTime = [[defaults objectForKey:@"currentTimeNumber"] floatValue];
-    float dinnerTime = [[defaults objectForKey:@"dinnerTimeNumber"] floatValue];
+    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
     
     // lunch mode
     if (currentTime >= 0 && currentTime < dinnerTime)
