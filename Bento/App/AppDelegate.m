@@ -131,7 +131,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
         // Set the App ID for your app
         [[Harpy sharedInstance] setAppID:@"963634117"];
-        [[Harpy sharedInstance] getAPI:@"https://api.bentonow.com"];
+        [[Harpy sharedInstance] getAPI:@"https://api2.bentonow.com"];
     }
 #else
     {

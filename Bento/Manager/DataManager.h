@@ -12,9 +12,11 @@
 #import "Stripe.h"
 
 #ifndef DEV_MODE
-#define SERVER_URL @"https://api.bentonow.com"
+#define SERVER_URL @"https://api2.bentonow.com"
+    NSString *jump;
 #else
 #define SERVER_URL @"https://api2.dev.bentonow.com"
+    NSString *jump;
 #endif
 
 #define GOOGLE_API_KEY @"AIzaSyCv7nwsR9ppbEWPwCKnZ9f6nf3UTli-ZLk"
