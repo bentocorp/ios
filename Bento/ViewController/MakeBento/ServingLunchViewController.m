@@ -55,8 +55,6 @@
     
     UIButton *btnState;
     
-    UIStoryboard *storyboard;
-    
     // Tonight's Dinner
     UILabel *lblTitle;
     UICollectionView *cvDishes;
@@ -70,8 +68,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
 /*---Scroll View---*/
     
@@ -202,6 +198,8 @@
     {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
         [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
     }
@@ -521,6 +519,7 @@
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     

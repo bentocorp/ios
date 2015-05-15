@@ -93,8 +93,6 @@
     UIButton *btnAddAnotherBento;
     UIButton *btnState;
     
-    UIStoryboard *storyboard;
-    
     // Upcoming Lunch
     UILabel *lblTitle;
     UICollectionView *cvDishes;
@@ -108,8 +106,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -442,6 +438,7 @@
     BentoShop *globalShop = [BentoShop sharedInstance];
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
     {
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
    
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
@@ -727,6 +724,7 @@
 
 - (void)gotoOrderScreen
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
     
@@ -751,6 +749,7 @@
 
 - (void)onAddMainDish
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
     [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
 }
@@ -759,6 +758,7 @@
 {
     UIButton *selectedButton = (UIButton *)sender;
     
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
@@ -778,6 +778,7 @@
 
 - (void)onContinue
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     

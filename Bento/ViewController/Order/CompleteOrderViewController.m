@@ -877,34 +877,23 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
+    Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
+    NSLog(@"Current Bento - %@", curBento);
+    NSArray *viewControllers = self.navigationController.viewControllers;
     
-    // lunch mode
-    if (currentTime >= 0 && currentTime < dinnerTime)
-    {
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    // dinner mode
-    else if (currentTime >= dinnerTime && currentTime < 24)
-    {
-        Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
+    for (UIViewController *vc in viewControllers) {
         
-        NSArray *viewControllers = self.navigationController.viewControllers;
-        
-        for (UIViewController *vc in viewControllers) {
-            
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
+        {
             if ([vc isKindOfClass:[ServingDinnerViewController class]])
             {
                 [[BentoShop sharedInstance] setCurrentBento:curBento];
-                [self.navigationController popToViewController:vc animated:YES];
-                
-                return;
             }
+            
+            [self.navigationController popToViewController:vc animated:YES];
+            
+            return;
         }
-        
-        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-        [self.navigationController pushViewController:servingDinnerViewController animated:YES];
     }
 }
 
