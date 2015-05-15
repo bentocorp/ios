@@ -493,8 +493,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    
-/*---------------Tomorrow Lunch------------*/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
 }
 
@@ -514,12 +512,10 @@
 {
     if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
     {
-        [self.navigationController popToRootViewControllerAnimated:YES];
-//        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
     }
     else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
     {
-//        [self.navigationController popToRootViewControllerAnimated:YES];
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     }
     else
