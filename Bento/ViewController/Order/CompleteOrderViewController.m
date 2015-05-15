@@ -500,17 +500,21 @@
     
     for (UIViewController *vc in viewControllers) {
         
-        if ([vc isKindOfClass:[ServingDinnerViewController class]])
+        // if vc is either dinner or lunch
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
         {
-            [[BentoShop sharedInstance] addNewBento];
+            // if dinner, add new bento
+            if ([vc isKindOfClass:[ServingDinnerViewController class]])
+            {
+                [[BentoShop sharedInstance] addNewBento];
+            }
+           
+            // go back
             [self.navigationController popToViewController:vc animated:YES];
             
             return;
         }
     }
-
-    ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
-    [self.navigationController pushViewController:servingDinnerViewController animated:YES];
 }
 
 - (void)showStartOverAlert
