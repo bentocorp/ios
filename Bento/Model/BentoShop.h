@@ -44,20 +44,26 @@
 - (NSURL *)getMenuImageURL;
 - (NSString *)getMenuDateString;
 - (NSString *)getMenuWeekdayString;
+- (NSString *)getNextMenuDateIfTodayMenuReturnsNil;
 
 - (NSString *)getNextMenuDateString;
 - (NSString *)getNextMenuWeekdayString;
+
+- (NSNumber *)getCurrentTime;
+- (NSNumber *)getLunchTime;
+- (NSNumber *)getDinnerTime;
+- (NSNumber *)getBufferTime;
 
 - (void)refreshStart;
 - (void)refreshPause;
 - (void)refreshResume;
 - (void)refreshStop;
 
-- (NSArray *)getMainDishes;
-- (NSArray *)getSideDishes;
+- (NSArray *)getMainDishes:(NSString *)whatNeedsMain;
+- (NSArray *)getSideDishes:(NSString *)whatNeedsSides;
 
-- (NSArray *)getNextMainDishes;
-- (NSArray *)getNextSideDishes;
+- (NSArray *)getNextMainDishes:(NSString *)whatNeedsMain;
+- (NSArray *)getNextSideDishes:(NSString *)whatNeedsSides;
 
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID;
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID;

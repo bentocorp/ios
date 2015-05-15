@@ -66,6 +66,9 @@ typedef NS_ENUM(NSUInteger, HarpyAlertType)
  */
 @property (strong, nonatomic) NSString *appID;
 
+//custom added by joseph
+@property (strong, nonatomic) NSString *apiString;
+
 /**
  @b OPTIONAL: The preferred name for the app. This name will be displayed in the @c UIAlertView in place of the bundle name.
  */
@@ -143,5 +146,7 @@ typedef NS_ENUM(NSUInteger, HarpyAlertType)
  Do not use this method if you are using @c checkVersion or @c checkVersionDaily.
  */
 - (void)checkVersionWeekly;
+
+- (NSString *)getAPI:(NSString *)apiString;
 
 @end

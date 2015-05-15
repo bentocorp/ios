@@ -8,7 +8,8 @@
 
 #import "OrderConfirmViewController.h"
 
-#import "MyBentoViewController.h"
+#import "ServingDinnerViewController.h"
+#import "ServingLunchViewController.h"
 
 #import "UIImageView+WebCache.h"
 
@@ -66,22 +67,56 @@
     [self gotoAddAnotherBentoScreen];
 }
 
-- (void) gotoAddAnotherBentoScreen
+- (void)gotoAddAnotherBentoScreen
 {
-    NSArray *viewControllers = self.navigationController.viewControllers;
+    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
     
-    for (UIViewController *vc in viewControllers) {
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerTime)
+    {
+        // wtf is this checking?
+        NSArray *viewControllers = self.navigationController.viewControllers;
         
-        if ([vc isKindOfClass:[MyBentoViewController class]])
-        {
-            [[BentoShop sharedInstance] addNewBento];
-            [self.navigationController popToViewController:vc animated:YES];
+        for (UIViewController *vc in viewControllers) {
             
-            return;
+            if ([vc isKindOfClass:[ServingLunchViewController class]])
+            {
+                [[BentoShop sharedInstance] addNewBento];
+                [self.navigationController popToViewController:vc animated:YES];
+                
+                return;
+            }
         }
+        
+        ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+        [self.navigationController pushViewController:servingLunchViewController animated:YES];
+        
+    // dinner opening - 11:59pm
     }
+    else if (currentTime >= dinnerTime && currentTime < 24)
+    {
+        // wtf is this checking?
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        
+        for (UIViewController *vc in viewControllers) {
+            
+            if ([vc isKindOfClass:[ServingDinnerViewController class]])
+            {
+                [[BentoShop sharedInstance] addNewBento];
+                [self.navigationController popToViewController:vc animated:YES];
+                
+                return;
+            }
+        }
+        
+        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+        [self.navigationController pushViewController:servingDinnerViewController animated:YES];
+    }
+
+
     
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:nil];
+    
 }
 
 @end

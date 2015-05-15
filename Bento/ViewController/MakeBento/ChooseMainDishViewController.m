@@ -15,44 +15,43 @@
 #import "AppStrings.h"
 #import "DataManager.h"
 
-@interface ChooseMainDishViewController ()<DishCollectionViewCellDelegate>
+@interface ChooseMainDishViewController () <DishCollectionViewCellDelegate>
+
+@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
+@property (nonatomic, assign) IBOutlet UICollectionView *cvMainDishes;
+@property (nonatomic, retain) NSMutableArray *aryDishes;
+
+@end
+
+@implementation ChooseMainDishViewController
 {
     NSInteger _originalDishIndex;
     NSInteger _selectedIndex;
     NSInteger _selectedItemState;
 }
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
-
-@property (nonatomic, assign) IBOutlet UICollectionView *cvMainDishes;
-
-@property (nonatomic, assign) IBOutlet UILabel *lblBadge;
-
-@property (nonatomic, assign) IBOutlet UIButton *btnCart;
-
-@property (nonatomic, retain) NSMutableArray *aryDishes;
-
-@end
-
-@implementation ChooseMainDishViewController
-
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    self.lblBadge.layer.cornerRadius = self.lblBadge.frame.size.width / 2;
-    self.lblBadge.clipsToBounds = YES;
     
     UINib *cellNib = [UINib nibWithNibName:@"DishCollectionViewCell" bundle:nil];
     [self.cvMainDishes registerNib:cellNib forCellWithReuseIdentifier:@"cell"];
     
     [self.lblTitle setText:[[AppStrings sharedInstance] getString:MAINDISH_TITLE]];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
     
     self.aryDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes])
+    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:@"todayDinner"])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-//        if ([[BentoShop sharedInstance] isDishSoldOut:dishID] || [[BentoShop sharedInstance] canAddDish:dishID])
+        //        if ([[BentoShop sharedInstance] isDishSoldOut:dishID] || [[BentoShop sharedInstance] canAddDish:dishID])
         if ([[BentoShop sharedInstance] canAddDish:dishID])
         {
             [self.aryDishes addObject:dishInfo];
@@ -78,17 +77,8 @@
             }
         }
     }
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
-    [self.cvMainDishes reloadData];
+//    [self.cvMainDishes reloadData];
     
     [self updateUI];
     
@@ -118,15 +108,8 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (IBAction)onCart:(id)sender
-{
-    
-}
-
 - (void) updateUI
 {
-    self.btnCart.selected = [self isCompletedToMakeMyBento];
-    
     [self.cvMainDishes reloadData];
 }
 
@@ -222,16 +205,18 @@
 
 #pragma mark DishCollectionViewCellDelegate
 
-- (void) onActionDishCell:(NSInteger)index
+- (void)onActionDishCell:(NSInteger)index
 {
     _selectedIndex = index;
     
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:_selectedIndex];
+    
     if (dishInfo == nil)
         return;
     
     NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
     
+    // delete from bento
     if (_selectedItemState == DISH_CELL_SELECTED)
     {
         _originalDishIndex = NSNotFound;
@@ -242,6 +227,7 @@
             [[[BentoShop sharedInstance] getCurrentBento] setMainDish:0];
         }
     }
+    // add to bento
     else
     {
         _selectedItemState = DISH_CELL_SELECTED;

@@ -467,8 +467,6 @@
 - (void) gotoDeliveryLocationScreen
 {
     [self dissmodal];
-    
-    //[self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
 }
 
 #pragma mark UITextFieldDelegate

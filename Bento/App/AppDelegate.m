@@ -128,12 +128,23 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #ifndef DEV_MODE
     {
         NSLog(@"This is production version...run update check!");
-        
-        // Present Window before calling Harpy
-        [self.window makeKeyAndVisible];
-        
+    
         // Set the App ID for your app
         [[Harpy sharedInstance] setAppID:@"963634117"];
+        [[Harpy sharedInstance] getAPI:@"https://api2.bentonow.com"];
+    }
+#else
+    {
+        NSLog(@"This is dev version...run update check anyway!");
+        
+        // Set the App ID for your app
+        [[Harpy sharedInstance] setAppID:@"973246172"];
+        [[Harpy sharedInstance] getAPI:@"https://api2.dev.bentonow.com"];
+    }
+#endif
+    {
+        // Present Window before calling Harpy
+        [self.window makeKeyAndVisible];
         
         // Set the UIViewController that will present an instance of UIAlertController
         [[Harpy sharedInstance] setPresentingViewController:_window.rootViewController];
@@ -151,7 +162,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         // Perform check for new version of your app
         [[Harpy sharedInstance] checkVersion];
     }
-#endif
+
+/*---------------------------------------------------------------------*/
     
     return YES;
 }
@@ -183,6 +195,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Perform check for new version of your app
     [[Harpy sharedInstance] checkVersion];
+    
+    // reload app strings
+    [[AppStrings sharedInstance] getAppStrings];
 }
 
 - (void)showLocationAlert

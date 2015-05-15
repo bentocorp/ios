@@ -59,7 +59,7 @@
     self.complete = nil;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [defaults setObject:@"" forKey:@"cameFromWhichVC"];
+    [defaults setObject:@"" forKey:@"cameFromWhichVC"]; // wtf?
     [defaults synchronize];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
@@ -114,11 +114,13 @@
 
 - (void) showSoldoutScreen:(NSNumber *)identifier
 {
-    UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
     SoldOutViewController *vcSoldOut = (SoldOutViewController *)nav.topViewController;
     vcSoldOut.type = [identifier integerValue];
     
-    [self.navigationController presentViewController:nav animated:YES completion:nil];
+//    [self.navigationController presentViewController:nav animated:YES completion:nil];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

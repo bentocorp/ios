@@ -11,13 +11,6 @@
 
 @interface Bento()
 
-@property (nonatomic, assign) NSInteger indexMainDish;
-
-@property (nonatomic, assign) NSInteger indexSideDish1;
-@property (nonatomic, assign) NSInteger indexSideDish2;
-@property (nonatomic, assign) NSInteger indexSideDish3;
-@property (nonatomic, assign) NSInteger indexSideDish4;
-
 @end
 
 @implementation Bento
@@ -122,11 +115,12 @@
             self.indexSideDish4 != 0);
 }
 
-- (void)completeBento
+- (void)completeBento:(NSString *)whatNeedsThis
 {
     if (self.indexMainDish == 0)
     {
-        NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes];
+        NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:whatNeedsThis];
+        
         for (NSDictionary *dishInfo in aryMainDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
@@ -143,7 +137,7 @@
 
     if (self.indexSideDish1 == 0)
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:whatNeedsThis];
         for (NSDictionary *dishInfo in arySideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
@@ -163,7 +157,7 @@
     
     if (self.indexSideDish2 == 0)
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:whatNeedsThis];
         for (NSDictionary *dishInfo in arySideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
@@ -183,7 +177,7 @@
     
     if (self.indexSideDish3 == 0)
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:whatNeedsThis];
         for (NSDictionary *dishInfo in arySideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
@@ -203,7 +197,7 @@
     
     if (self.indexSideDish4 == 0)
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes];
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:whatNeedsThis];
         for (NSDictionary *dishInfo in arySideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];

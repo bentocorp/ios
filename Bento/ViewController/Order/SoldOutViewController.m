@@ -9,7 +9,8 @@
 #import "SoldOutViewController.h"
 
 #import "FaqViewController.h"
-#import "SneakPreviewViewController.h"
+
+#import "PreviewViewController.h"
 
 #import "MyAlertView.h"
 
@@ -44,6 +45,14 @@
 @end
 
 @implementation SoldOutViewController
+{
+    float currentTime;
+    float lunchTime;
+    float dinnerTime;
+    float bufferTime;
+    
+    NSString *strTitle;
+}
 
 - (NSString *)getClosedText
 {
@@ -60,19 +69,17 @@
     currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
 #endif
     
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
-    NSInteger hour = [components hour];
-    NSLog(@"current hour - %ld", hour);
+    currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
+    dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
+    bufferTime = [[[BentoShop sharedInstance] getBufferTime] floatValue];
     
-    NSLog(@"closed text 1 - %@", [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT]);
-    NSLog(@"closed text 2 - %@", [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT]);
-    
-    // if (now >= 7:00pm && now <= 11:59pm && today has a menu)
-    if (hour >= 19 && hour <= 23) {
+    // 17:30 - 23:59, Closed for the night, talk about next menu
+    if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24) {
         return [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT];
     }
 
+    // talk about today
     return [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT];
 }
 
@@ -88,8 +95,7 @@
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
-    [self.ivBackground sd_setImageWithURL:urlBack];
-//    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
+    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
@@ -114,16 +120,9 @@
         [self.btnPolicy setTitle:[[AppStrings sharedInstance] getString:SOLDOUT_LINK_POLICY] forState:UIControlStateNormal];
         [self.btnTerms setTitle:[[AppStrings sharedInstance] getString:SOLDOUT_LINK_TERMS] forState:UIControlStateNormal];
     }
-
+    
     self.btnPreview.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
     self.btnPreview.titleLabel.textAlignment = NSTextAlignmentCenter;
-    NSString *strTitle;
-    if (self.type == 0) // Closed
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    else
-        strTitle = @"View Today's Menu";
-    
-    [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
     
     self.btnPreview.layer.cornerRadius = 8;
     self.btnPreview.layer.borderWidth = 1;
@@ -132,28 +131,13 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - Navigation
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    if ([segue.identifier isEqualToString:@"Faq"])
-//    {
-////        FaqViewController *vc = segue.destinationViewController;
-////        vc.contentType = [sender intValue];
-//    }
-//    else if ([segue.identifier isEqualToString:@"preview"])
-//    {
-//        SneakPreviewViewController *vcPreview = segue.destinationViewController;
-//        vcPreview.type = self.type;
-//    }
-//}
-
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [self setPreviewButtonText];
     
     [self onUpdatedStatus];
     
@@ -163,14 +147,47 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeKeyboardFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [super viewWillDisappear:animated];
 }
 
-- (void) onUpdatedStatus
+- (void)setPreviewButtonText
+{
+    // set type
+    if ([[BentoShop sharedInstance] isClosed])
+    {
+        self.type = 0;
+    }
+    else if ([[BentoShop sharedInstance] isSoldOut])
+    {
+        self.type = 1;
+    }
+    
+    // Closed && 17:30 - 23:59 (get next)
+    if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    }
+    
+    // Closed &&  00:00 - 17:29 (get today, if none today, get next)
+    else if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil]];
+    }
+    
+    // Sold out
+    else
+    {
+        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+    }
+    
+    [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
+}
+
+- (void)onUpdatedStatus
 {
     if (self.type == 0) // Closed
     {
@@ -190,7 +207,7 @@
     }
 }
 
-- (void) willShowKeyboard:(NSNotification*)notification
+- (void)willShowKeyboard:(NSNotification*)notification
 {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
@@ -199,7 +216,7 @@
     [self moveToShowablePosition:keyboardFrameBeginRect.size.height];
 }
 
-- (void) willChangeKeyboardFrame:(NSNotification *)notification
+- (void)willChangeKeyboardFrame:(NSNotification *)notification
 {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
@@ -208,7 +225,7 @@
     [self moveToShowablePosition:keyboardFrameBeginRect.size.height];
 }
 
-- (void) willHideKeyboard:(NSNotification *)notification
+- (void)willHideKeyboard:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.3f animations:^{
         self.viewMain.center = CGPointMake(self.view.frame.size.width / 2, self.view.frame.size.height / 2);
@@ -225,15 +242,13 @@
     }
 }
 
-- (void) onBack
+- (void)onBack
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (IBAction)onPrivacyPolicy:(id)sender
 {
-//    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_PRIVACY]];
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
     destVC.contentType = CONTENT_PRIVACY;
@@ -242,8 +257,6 @@
 
 - (IBAction)onTermsAndConditions:(id)sender
 {
-//    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_TERMS]];
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
     destVC.contentType = CONTENT_TERMS;
@@ -252,14 +265,11 @@
 
 - (IBAction)onHelp:(id)sender
 {
-//    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_FAQ]];
-    
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
     destVC.contentType = CONTENT_FAQ;
     [self.navigationController pushViewController:destVC animated:YES];
 }
-
 
 - (void) showConfirmMessage
 {
@@ -360,7 +370,8 @@
 
 - (IBAction)onGotoMenu:(id)sender
 {
-    [self performSegueWithIdentifier:@"preview" sender:nil];
+    PreviewViewController *previewViewController = [[PreviewViewController alloc] init];
+    [self.navigationController pushViewController:previewViewController animated:YES];
 }
 
 #pragma mark UITextFieldDelegate

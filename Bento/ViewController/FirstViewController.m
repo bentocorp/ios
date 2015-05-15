@@ -22,6 +22,9 @@
 #import "DataManager.h"
 #import "Reachability.h"
 
+#import "ServingDinnerViewController.h"
+#import "ServingLunchViewController.h"
+
 @interface FirstViewController ()
 {
     BOOL _hasInit;
@@ -200,7 +203,7 @@
     [self gotoMyBentoScreen];
 }
 
-- (void) process
+- (void)process
 {
     NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
 /*
@@ -247,7 +250,7 @@
     [self showSoldoutScreen:[NSNumber numberWithInt:1]];
 }
 
-- (void) gotoMyBentoScreen
+- (void)gotoMyBentoScreen
 {
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
@@ -257,8 +260,24 @@
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
         needsAnimation = NO;
     
-    UIViewController *vcBuildBento = [self.storyboard instantiateViewControllerWithIdentifier:@"MyBentoViewController"];
-    [self.navigationController pushViewController:vcBuildBento animated:needsAnimation];
+/*--------------Determine whether to show Lunch or Dinner mode--------------*/
+    
+    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    float lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
+    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+    
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerTime) {
+    
+        ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+        [self.navigationController pushViewController:servingLunchViewController animated:needsAnimation];
+        
+    // dinner opening - 11:59pm
+    } else if (currentTime >= dinnerTime && currentTime < 24) {
+        
+        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+        [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
+    }
 }
 
 - (void) showSoldoutScreen:(NSNumber *)identifier

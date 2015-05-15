@@ -40,8 +40,8 @@
 
 @implementation DishCollectionViewCell
 
-- (void)awakeFromNib {
-    // Initialization code
+- (void)awakeFromNib
+{
     _isSoldOut = NO;
     _canBeAdded = NO;
     _isSideDishCell = NO;
@@ -64,12 +64,10 @@
     [self.delegate onActionDishCell:self.index];
 }
 
-- (void) setSmallDishCell
+// sets the title label of button
+- (void)setSmallDishCell
 {
     _isSideDishCell = YES;
-    
-//    self.lblTitle.font = [UIFont fontWithName:self.lblTitle.font.fontName size:14];
-//    self.lblDescription.font = [UIFont fontWithName:self.lblDescription.font.fontName size:14];
     
     if (_isSoldOut)
         [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
@@ -79,7 +77,7 @@
         [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
 }
 
-- (void) setDishInfo:(NSDictionary *)dishInfo isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded
+- (void)setDishInfo:(NSDictionary *)dishInfo isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded
 {
     if (dishInfo == nil)
         return;
@@ -97,7 +95,8 @@
     [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
 }
 
-- (void) setCellState:(NSInteger)state index:(NSInteger)index
+
+- (void)setCellState:(NSInteger)state index:(NSInteger)index
 {
     self.viewMain.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     
@@ -130,8 +129,6 @@
     else if (self.state == DISH_CELL_FOCUS)
     {
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
-//        self.lblDescription.center = CGPointMake(self.lblDescription.center.x, self.viewMain.frame.size.height / 2);
-//        self.btnAction.center = CGPointMake(self.btnAction.center.x, self.viewMain.frame.size.height - 25);
         
         self.btnAction.backgroundColor = [UIColor clearColor];
         [self.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -167,8 +164,6 @@
     else if (self.state == DISH_CELL_SELECTED)
     {
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
-//        self.lblDescription.center = CGPointMake(self.lblDescription.center.x, self.viewMain.frame.size.height / 2);
-//        self.btnAction.center = CGPointMake(self.btnAction.center.x, self.viewMain.frame.size.height - 25);
         
         self.btnAction.backgroundColor = [UIColor whiteColor];
         [self.btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
