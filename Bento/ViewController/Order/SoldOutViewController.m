@@ -61,11 +61,17 @@
 #endif
     
     NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:currentDate];
+    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     NSInteger hour = [components hour];
+    NSLog(@"current hour - %ld", hour);
     
-    if (hour >= 19 && hour <= 23)
+    NSLog(@"closed text 1 - %@", [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT]);
+    NSLog(@"closed text 2 - %@", [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT]);
+    
+    // if (now >= 7:00pm && now <= 11:59pm && today has a menu)
+    if (hour >= 19 && hour <= 23) {
         return [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT];
+    }
 
     return [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT];
 }
@@ -131,22 +137,19 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
-    if ([segue.identifier isEqualToString:@"Faq"])
-    {
-        FaqViewController *vc = segue.destinationViewController;
-        vc.contentType = [sender intValue];
-    }
-    else if ([segue.identifier isEqualToString:@"preview"])
-    {
-        SneakPreviewViewController *vcPreview = segue.destinationViewController;
-        vcPreview.type = self.type;
-    }
-}
+//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+//    
+//    if ([segue.identifier isEqualToString:@"Faq"])
+//    {
+////        FaqViewController *vc = segue.destinationViewController;
+////        vc.contentType = [sender intValue];
+//    }
+//    else if ([segue.identifier isEqualToString:@"preview"])
+//    {
+//        SneakPreviewViewController *vcPreview = segue.destinationViewController;
+//        vcPreview.type = self.type;
+//    }
+//}
 
 - (void) viewWillAppear:(BOOL)animated
 {
@@ -229,18 +232,34 @@
 
 - (IBAction)onPrivacyPolicy:(id)sender
 {
-    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_PRIVACY]];
+//    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_PRIVACY]];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
+    destVC.contentType = CONTENT_PRIVACY;
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 - (IBAction)onTermsAndConditions:(id)sender
 {
-    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_TERMS]];
+//    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_TERMS]];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
+    destVC.contentType = CONTENT_TERMS;
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 - (IBAction)onHelp:(id)sender
 {
-    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_FAQ]];
+//    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_FAQ]];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
+    destVC.contentType = CONTENT_FAQ;
+    [self.navigationController pushViewController:destVC animated:YES];
 }
+
 
 - (void) showConfirmMessage
 {

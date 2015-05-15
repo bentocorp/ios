@@ -18,5 +18,6 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, assign) int contentType;
 @property (nonatomic, retain) NSString *strBottom;
+@property (nonatomic) int *whatContentToDisplay;
 
 @end

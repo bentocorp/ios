@@ -42,7 +42,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view, typically from a nib.
     _hasInit = NO;
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -64,17 +63,12 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
     if ([segue.identifier isEqualToString:@"SoldOut"])
     {
         SoldOutViewController *vc = segue.destinationViewController;
@@ -106,7 +100,6 @@
     [[BentoShop sharedInstance] getMenus];
     [[BentoShop sharedInstance] getStatus];
     [[BentoShop sharedInstance] getServiceArea];
-    
     [[BentoShop sharedInstance] refreshStart];
     
     [self.activityIndicator stopAnimating];
@@ -146,6 +139,8 @@
     NSString *strAPIName = [pref objectForKey:@"apiName"];
     NSDictionary *dicRequest = [pref objectForKey:@"loginRequest"];
     
+    NSLog(@"auto login dicRequest - %@", dicRequest);
+    
     WebManager *webManager = [[WebManager alloc] init];
     
     self.activityIndicator.hidden = NO;
@@ -157,6 +152,8 @@
         NSDictionary *response = networkOperation.responseJSON;
         [[DataManager shareDataManager] setUserInfo:response];
         
+        NSLog(@"auto login response - %@", response);
+
         [self processAfterLogin];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {

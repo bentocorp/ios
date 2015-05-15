@@ -9,6 +9,7 @@
 #import "BentoShop.h"
 
 #import "DataManager.h"
+#import "AppStrings.h"
 
 #import "SDWebImagePrefetcher.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
@@ -29,6 +30,9 @@
 @end
 
 @implementation BentoShop
+{
+    NSString *originalStatus;
+}
 
 static BentoShop *_shareInstance;
 
@@ -76,6 +80,9 @@ static BentoShop *_shareInstance;
             self.aryBentos = [[NSMutableArray alloc] init];
     }
     
+    // set original status to empty string when app launches the first time!!
+    originalStatus = @"";
+    
     return self;
 }
 
@@ -113,18 +120,41 @@ static BentoShop *_shareInstance;
     NSError *error = nil;
     self.dicStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
+    
+    if (originalStatus.length == 0) {
+        originalStatus = self.dicStatus[@"value"];
+    }
+    
+    NSString *newStatus = self.dicStatus[@"value"];
+    
+    if (![originalStatus isEqualToString:newStatus]) {
+        
+        [[AppStrings sharedInstance] getAppStrings];
+        
+        originalStatus = @"";
+        
+        NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
+    }
+    
+    NSLog(@"originalStatus - %@, newStatus - %@", originalStatus, newStatus);
+    
     strRequest = [NSString stringWithFormat:@"%@/status/menu", SERVER_URL];
     
     self.menuStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
+//    NSLog(@"menuStatus - %@", self.menuStatus);
+    
     BOOL isClosed = [self isClosed];
     BOOL isSoldOut = [self isSoldOut];
+    
+    NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
     
     if ([self isClosed])
         [self getNextMenus];
     
-    if (self.prevClosed != isClosed || self.prevSoldOut != isSoldOut)
+    if (self.prevClosed != isClosed || self.prevSoldOut != isSoldOut) {
         [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    }
     
     self.prevClosed = isClosed;
     self.prevSoldOut = isSoldOut;
@@ -163,6 +193,8 @@ static BentoShop *_shareInstance;
     NSString *strDate = [formatter stringFromDate:currentDate];
     currentDate = nil;
     formatter = nil;
+    
+    NSLog(@"getDateString - %@", strDate);
     
     return strDate;
 }

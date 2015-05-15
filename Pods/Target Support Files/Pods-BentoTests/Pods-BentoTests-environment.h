@@ -6,6 +6,12 @@
 // project.
 
 
+// Harpy
+#define COCOAPODS_POD_AVAILABLE_Harpy
+#define COCOAPODS_VERSION_MAJOR_Harpy 3
+#define COCOAPODS_VERSION_MINOR_Harpy 3
+#define COCOAPODS_VERSION_PATCH_Harpy 4
+
 // Mixpanel
 #define COCOAPODS_POD_AVAILABLE_Mixpanel
 #define COCOAPODS_VERSION_MAJOR_Mixpanel 2

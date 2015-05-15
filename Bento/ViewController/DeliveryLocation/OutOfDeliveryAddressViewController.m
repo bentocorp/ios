@@ -45,8 +45,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    self.lblTitle.text = [[AppStrings sharedInstance] getString:OUTOFAREA_TITLE];
+
+    self.lblTitle.text = @"Delivery Zone"; // hardcoded instead of [[AppStrings sharedInstance] getString:OUTOFAREA_TITLE]
     self.lblMiddleTitle.text = [[AppStrings sharedInstance] getString:OUTOFAREA_MIDDLE_TITLE];
     self.lblMiddleText.text = [[AppStrings sharedInstance] getString:OUTOFAREA_TEXT_CONTENT];
     self.txtEmail.placeholder = [[AppStrings sharedInstance] getString:OUTOFAREA_PLACEHOLDER_EMAIL];
@@ -65,20 +65,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    if ([segue.identifier isEqualToString:@"Faq"])
-    {
-        FaqViewController *vc = segue.destinationViewController;
-        vc.contentType = CONTENT_FAQ;
-    }
 }
 
 - (void) viewWillAppear:(BOOL)animated
@@ -147,11 +133,6 @@
 - (IBAction)onBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)onHelp:(id)sender
-{
-    [self performSegueWithIdentifier:@"Faq" sender:nil];
 }
 
 - (IBAction)onChangeAddress:(id)sender

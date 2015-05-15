@@ -109,6 +109,11 @@ static DataManager *_shareDataManager;
     return self.currentUserInfo;
 }
 
+- (void)setUserInfo:(NSDictionary *)userInfo paymentMethod:(PaymentMethod)paymentMethod {
+    self.currentUserInfo = userInfo;
+    [self setPaymentMethod:paymentMethod];
+}
+
 - (void)setUserInfo:(NSDictionary *)userInfo
 {
     self.currentUserInfo = userInfo;
@@ -127,12 +132,8 @@ static DataManager *_shareDataManager;
             // Load Card Info
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSString *strSavedUserMail = [userDefaults objectForKey:@"user_email"];
-//            NSString *strSavedCardBrand = [userDefaults objectForKey:@"card_brand"];
-//            NSString *strSavedCardLast4 = [userDefaults objectForKey:@"card_last4"];
-//            if ([strSavedUserMail caseInsensitiveCompare:strUserMail] == NSOrderedSame &&
-//                [strSavedCardBrand caseInsensitiveCompare:strCardType] == NSOrderedSame &&
-//                [strSavedCardLast4 caseInsensitiveCompare:strCardNumber] == NSOrderedSame)
-            if ([strSavedUserMail isEqualToString:strUserMail])
+            
+            if ([strSavedUserMail isEqualToString:strUserMail]) // Same user as last login
             {
                 if ([[userDefaults objectForKey:@"is_applepay"] boolValue])
                     self.paymentMethod = Payment_ApplePay;
@@ -173,22 +174,27 @@ static DataManager *_shareDataManager;
 
 - (void)setCreditCard:(STPCard *)creditCardInfo
 {
+    
     self.creditCardInfo = creditCardInfo;
     
-    if (creditCardInfo == nil)
+    if (creditCardInfo == nil) {
         self.paymentMethod = Payment_None;
-    else
+    } else {
         self.paymentMethod = Payment_CreditCard;
+    }
 }
 
 - (PaymentMethod)getPaymentMethod
 {
+    NSLog(@"getPaymentMethod, current payment method - %ld", self.curPaymentMethod);
     return self.curPaymentMethod;
 }
 
 - (void)setPaymentMethod:(PaymentMethod)newPaymentMethod
 {
     self.curPaymentMethod = newPaymentMethod;
+    
+    NSLog(@"newPaymentMethod - %ld", newPaymentMethod);
 }
 
 - (NSString *)getErrorMessage:(id)errorInfo

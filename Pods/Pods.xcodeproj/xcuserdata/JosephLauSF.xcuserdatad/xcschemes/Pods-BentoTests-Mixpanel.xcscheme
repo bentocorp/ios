@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C9F6F4E0E9CAF0DBC3F1780F"
+               BlueprintIdentifier = "2D9D64960262F821B4078D08"
                BuildableName = "libPods-BentoTests-Mixpanel.a"
                BlueprintName = "Pods-BentoTests-Mixpanel"
                ReferencedContainer = "container:Pods.xcodeproj">

@@ -51,6 +51,7 @@ install_resource()
   esac
 }
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_resource "Harpy/Harpy/Harpy.bundle"
   install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft.png"
   install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft@2x.png"
   install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowRight.imageset/MPArrowRight.png"
@@ -90,6 +91,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "PaymentKit/PaymentKit/Resources/textfield@2x.png"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_resource "Harpy/Harpy/Harpy.bundle"
   install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft.png"
   install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft@2x.png"
   install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowRight.imageset/MPArrowRight.png"

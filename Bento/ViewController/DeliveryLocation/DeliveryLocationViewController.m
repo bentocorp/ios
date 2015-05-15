@@ -13,6 +13,7 @@
 #import "MyBentoViewController.h"
 #import "CompleteOrderViewController.h"
 #import "OutOfDeliveryAddressViewController.h"
+#import "FaqViewController.h"
 
 #import "FXBlurView.h"
 #import "MyAlertView.h"
@@ -34,9 +35,6 @@
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
 @property (weak, nonatomic) IBOutlet UIButton *btnBack;
-
-@property (nonatomic, assign) IBOutlet UILabel *lblBadge;
-@property (nonatomic, assign) IBOutlet UIButton *btnDelivery;
 
 @property (nonatomic, assign) IBOutlet UIView *viewSearchLocation;
 
@@ -75,23 +73,6 @@
     [self.btnBottomButton setTitle:[[AppStrings sharedInstance] getString:LOCATION_BUTTON_CONTINUE] forState:UIControlStateNormal];
     
     [[self.txtAddress valueForKey:@"textInputTraits"] setValue:[UIColor colorWithRed:138.0f / 255.0f green:187.0f / 255.0f blue:90.0f / 255.0f alpha:1.0f] forKey:@"insertionPointColor"];
-    
-    self.lblBadge.layer.cornerRadius = self.lblBadge.frame.size.width / 2;
-    self.lblBadge.clipsToBounds = YES;
-    
-    NSInteger bentoCount = [[BentoShop sharedInstance] getCompletedBentoCount];
-    if (bentoCount > 0)
-    {
-        self.lblBadge.text = [NSString stringWithFormat:@"%ld", (long)bentoCount];
-        self.lblBadge.hidden = NO;
-    }
-    else
-    {
-        self.lblBadge.text = @"";
-        self.lblBadge.hidden = YES;
-    }
-    
-    self.btnDelivery.enabled = NO;
     
     _showedLocationTableView = NO;
     
@@ -248,13 +229,7 @@
 
 - (IBAction)onBack:(id)sender
 {
-    if (self.isFromOrder)
-    {
-        [self doConfirmOrder];
-        return;
-    }
-    
-    [self gotoAddAnotherBentoScreen];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void) gotoAddAnotherBentoScreen
@@ -295,24 +270,22 @@
     
     [self stopSearch];
     
-    if (self.placeInfo == nil)
-        [self gotoCompleteOrderScreen];
-    else
-    {
+    if (self.placeInfo == nil) {
+        
+        [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self.navigationController popViewControllerAnimated:YES];
+        
+    } else {
         CLLocationCoordinate2D location = self.placeInfo.location.coordinate;
-        if (![[BentoShop sharedInstance] checkLocation:location])
+        if (![[BentoShop sharedInstance] checkLocation:location]) {
             [self gotoNoneDeliveryAreaScreen];
-        else
-            [self gotoCompleteOrderScreen];
+        } else {
+            [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self.navigationController popViewControllerAnimated:YES];
+        }
     }
-}
-
-- (IBAction)onDelivery:(id)sender
-{
-//    if (self.mapAnnotation == nil && !self.btnMeetMyDrive.selected)
-//        return;
-
-    [self doConfirmOrder];
 }
 
 - (void)addAnnotation:(CLLocationCoordinate2D)coordinate
@@ -380,6 +353,15 @@
     [alertView showInView:self.view];
     alertView = nil;
 }
+
+- (IBAction)onFAQ:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
+    destVC.contentType = CONTENT_FAQ;
+    [self.navigationController pushViewController:destVC animated:YES];
+}
+
 
 - (IBAction)onMeetMyDriver:(id)sender
 {
@@ -456,17 +438,6 @@
 {
     [self stopSearch];
     [self performSegueWithIdentifier:@"OutOfDelivery" sender:self.placeInfo.formattedAddress];
-}
-
-- (void) gotoCompleteOrderScreen
-{
-    [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    if ([[DataManager shareDataManager] getUserInfo] == nil)
-        [self openAccountViewController:[CompleteOrderViewController class]];
-    else
-        [self performSegueWithIdentifier:@"CompleteOrder" sender:nil];
 }
 
 - (void) startSearch
@@ -595,27 +566,6 @@
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:145.0f / 255.0f alpha:1.0f];
         }
-    }
-    
-    NSInteger bentoCount = [[BentoShop sharedInstance] getCompletedBentoCount];
-    if (bentoCount > 0)
-    {
-        self.lblBadge.text = [NSString stringWithFormat:@"%ld", (long)bentoCount];
-        self.lblBadge.hidden = NO;
-    }
-    else
-    {
-        self.lblBadge.text = @"";
-        self.lblBadge.hidden = YES;
-    }
-    
-    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0)
-    {
-        self.btnDelivery.enabled = YES;
-    }
-    else
-    {
-        self.btnDelivery.enabled = NO;
     }
 }
 

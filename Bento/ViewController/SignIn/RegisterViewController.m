@@ -53,6 +53,9 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnSignUp;
 
+@property (weak, nonatomic) IBOutlet UILabel *signInLabel;
+@property (weak, nonatomic) IBOutlet UIButton *signInButton;
+
 @end
 
 @implementation RegisterViewController
@@ -88,7 +91,6 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
@@ -134,6 +136,12 @@
     [self showErrorWithString:nil code:ERROR_NONE];
     
     [self updateUI];
+    
+    /*----------------*/
+    // this should run when signed in from checkout
+    if ([[DataManager shareDataManager] getUserInfo] != nil) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -197,14 +205,8 @@
 
 - (IBAction)onBack:(id)sender
 {
-    [self dissmodal];
-}
-
-- (void) dissmodal
-{
     [self closeKeyboard];
-    
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)reqFacebookUserInfo
@@ -254,7 +256,11 @@
                  [pref synchronize];
                  
                  [self showErrorWithString:nil code:ERROR_NONE];
-                 [self gotoDeliveryLocationScreen];
+
+                 [self signInWithRegisteredData:dicRequest];
+                 
+                 [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
+                 [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
                  
              } failure:^(MKNetworkOperation *errorOp, NSError *error) {
                  
@@ -338,8 +344,8 @@
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         
-        NSDictionary *response = networkOperation.responseJSON;
-        [[DataManager shareDataManager] setUserInfo:response];
+//        NSDictionary *response = networkOperation.responseJSON;
+//        [[DataManager shareDataManager] setUserInfo:response];
         
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
         NSString *strRequest = [NSString stringWithFormat:@"%@/user/login", SERVER_URL];
@@ -349,12 +355,18 @@
                                        @"email" : strEmail,
                                        @"password" : strPassword,
                                        };
+        
         NSDictionary *saveRequest = @{@"data" : [loginRequest jsonEncodedKeyValueString]};
         [pref setObject:saveRequest forKey:@"loginRequest"];
         [pref synchronize];
         
         [self showErrorWithString:nil code:ERROR_NONE];
-        [self gotoDeliveryLocationScreen];
+        
+        [self signInWithRegisteredData:dicRequest];
+        
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
+        [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
+        
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -370,6 +382,30 @@
             [self showErrorWithString:strMessage code:ERROR_NO_EMAIL];
         else
             [self showErrorWithString:strMessage code:ERROR_EMAIL];
+        
+    } isJSON:NO];
+}
+
+-(void)signInWithRegisteredData:(NSDictionary *)registeredData
+{
+    WebManager *webManager = [[WebManager alloc] init];
+    
+    NSString *strRequest = [NSString stringWithFormat:@"%@/user/login", SERVER_URL];
+    [webManager AsyncProcess:strRequest method:POST parameters:registeredData success:^(MKNetworkOperation *networkOperation) {
+        
+        NSDictionary *response = networkOperation.responseJSON;
+        [[DataManager shareDataManager] setUserInfo:response];
+        NSLog(@"new user data - %@", [[DataManager shareDataManager] getUserInfo]);
+        
+        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+        [pref setObject:strRequest forKey:@"apiName"];
+        [pref setObject:registeredData forKey:@"loginRequest"];
+        [pref synchronize];
+        
+        // dismiss vc
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         
     } isJSON:NO];
 }
@@ -424,13 +460,6 @@
     [self doRegister];
 }
 
-- (IBAction)onSignin:(id)sender
-{
-    [self closeKeyboard];
-    
-    [self performSegueWithIdentifier:@"SignIn" sender:nil];
-}
-
 - (IBAction)onSignInWithEmail:(id)sender
 {
     [self performSegueWithIdentifier:@"SignIn" sender:self.txtEmail.text];
@@ -440,14 +469,20 @@
 {
     [self closeKeyboard];
     
-    [self performSegueWithIdentifier:@"Terms" sender:[NSNumber numberWithInt:CONTENT_PRIVACY]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
+    destVC.contentType = CONTENT_PRIVACY;
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 - (IBAction)onTermsAndConditions:(id)sender
 {
     [self closeKeyboard];
     
-    [self performSegueWithIdentifier:@"Terms" sender:[NSNumber numberWithInt:CONTENT_TERMS]];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
+    destVC.contentType = CONTENT_TERMS;
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 - (void) showErrorWithString:(NSString *)errorMsg code:(int)errorCode
@@ -590,12 +625,6 @@
     [self performSegueWithIdentifier:@"PhoneNumber" sender:userInfo];
 }
 
-- (void) gotoDeliveryLocationScreen
-{
-    [self dissmodal];
-    //[self performSegueWithIdentifier:@"DeliveryLocation" sender:nil];
-}
-
 - (void) closeKeyboard
 {
     [self.txtYourname resignFirstResponder];
@@ -630,6 +659,16 @@
         [self.btnRegister setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
     else
         [self.btnRegister setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+    
+    /*------------------------------------------------------------*/
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    
+    if ([[defaults objectForKey:@"cameFromWhichVC"] isEqualToString:@"cameFromSignIn"]) {
+        // hide
+        self.signInButton.hidden = YES;
+        self.signInLabel.hidden = YES;
+    }
 }
 
 #pragma mark UITextFieldDelegate
@@ -687,6 +726,19 @@
     {
         [self performSelector:@selector(doReauthorise) withObject:nil];
     }
+}
+
+- (IBAction)onSignIn:(id)sender
+{
+    [self closeKeyboard];
+    
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+    [defaults setObject:@"cameFromRegister" forKey:@"cameFromWhichVC"];
+    [defaults synchronize];
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"SignInID"];
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 @end

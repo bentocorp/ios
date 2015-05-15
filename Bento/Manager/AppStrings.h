@@ -200,6 +200,13 @@
 #define SNEAK_PREVIEW_MAIN_DISH                 @"closed-main-add-button"
 #define SNEAK_PREVIEW_SIDE_DISH                 @"closed-sides-add-button"
 
+// Promo Sharing Messages
+#define SHARE_PRECOMPOSED_MESSAGE               @"share-precomposed-message"
+#define SHARE_PROMO_MESSAGE                     @"share-promo-message"
+
+// Force Update
+#define IOS_MIN_VERSION                         @"ios_min_version"
+
 @interface AppStrings : NSObject
 
 @property (nonatomic, retain) NSArray *appStrings;

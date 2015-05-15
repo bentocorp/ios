@@ -24,15 +24,11 @@
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnLogout;
-
 @property (nonatomic, assign) IBOutlet UILabel *lblDescription;
 @property (nonatomic, assign) IBOutlet UITextView *tvDescription;
 
 @property (nonatomic, assign) IBOutlet UIWebView *webView;
 @property (nonatomic, assign) IBOutlet UIActivityIndicatorView *viewActivity;
-
-@property (nonatomic, assign) IBOutlet UIButton *btnFinishing;
 
 @end
 
@@ -41,7 +37,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Do any additional setup after loading the view.
     UITapGestureRecognizer *tapGesture = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(onTapDescription:)];
     [self.tvDescription addGestureRecognizer:tapGesture];
     tapGesture = nil;
@@ -51,30 +46,13 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
     [self initContent];
-    
-    NSDictionary *curUserInfo = [[DataManager shareDataManager] getUserInfo];
-    if (curUserInfo != nil)
-        self.btnLogout.hidden = NO;
-    else
-        self.btnLogout.hidden = YES;
 }
 
 - (void) initContent
@@ -87,7 +65,6 @@
             self.lblTitle.text = [[AppStrings sharedInstance] getString:POLICY_TITLE];
             self.lblDescription.text = [[AppStrings sharedInstance] getString:POLICY_CONTACT_US];
             self.tvDescription.text = [[AppStrings sharedInstance] getString:POLICY_CONTACT_US];
-            [self.btnFinishing setTitle:[[AppStrings sharedInstance] getString:POLICY_BUTTON_FINISH] forState:UIControlStateNormal];
             urlNavigate = [[AppStrings sharedInstance] getURL:POLICY_LINK_BODY];
         }
             break;
@@ -97,7 +74,6 @@
             self.lblTitle.text = [[AppStrings sharedInstance] getString:TERMS_TITLE];
             self.lblDescription.text = [[AppStrings sharedInstance] getString:TERMS_CONTACT_US];
             self.tvDescription.text = [[AppStrings sharedInstance] getString:TERMS_CONTACT_US];
-            [self.btnFinishing setTitle:[[AppStrings sharedInstance] getString:TERMS_BUTTON_FINISH] forState:UIControlStateNormal];
             urlNavigate = [[AppStrings sharedInstance] getURL:TERMS_LINK_BODY];
         }
             break;
@@ -107,7 +83,6 @@
             self.lblTitle.text = [[AppStrings sharedInstance] getString:FAQ_TITLE];
             self.lblDescription.text = [[AppStrings sharedInstance] getString:FAQ_CONTACT_US];
             self.tvDescription.text = [[AppStrings sharedInstance] getString:FAQ_CONTACT_US];
-            [self.btnFinishing setTitle:[[AppStrings sharedInstance] getString:FAQ_BUTTON_FINISH] forState:UIControlStateNormal];
             urlNavigate = [[AppStrings sharedInstance] getURL:FAQ_LINK_BODY];
         }
             break;
@@ -144,37 +119,6 @@
 - (IBAction)onBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (IBAction)onLogout:(id)sender
-{
-    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Confirmation" message:@"Are you sure you want to log out?" delegate:self cancelButtonTitle:@"No" otherButtonTitle:@"Yes"];
-    alertView.tag = 1;
-    [alertView showInView:self.view];
-    alertView = nil;
-}
-
-- (IBAction)onFinishBuildingMyBento:(id)sender
-{
-//    [self gotoAddAnotherBentoScreen];
-    [self.navigationController popViewControllerAnimated:YES];
-}
-
-- (void) gotoAddAnotherBentoScreen
-{
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    
-    for (UIViewController *vc in viewControllers) {
-        
-        if ([vc isKindOfClass:[MyBentoViewController class]])
-        {
-            [self.navigationController popToViewController:vc animated:YES];
-            
-            return;
-        }
-    }
-    
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:nil];
 }
 
 - (void)onSendMail
@@ -316,58 +260,9 @@
 
 #pragma mark MyAlertViewDelegate
 
-- (void)processLogout
-{
-    NSDictionary *curUserInfo = [[DataManager shareDataManager] getUserInfo];
-    if (curUserInfo == nil)
-        return;
-    
-    NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
-    if (strAPIToken == nil || strAPIToken.length == 0)
-        return;
-
-    WebManager *webManager = [[WebManager alloc] init];
-    
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    loadingHUD.textLabel.text = @"Logging out...";
-    [loadingHUD showInView:self.view];
-    
-    NSString *strRequest = [NSString stringWithFormat:@"%@/user/logout?api_token=%@", SERVER_URL, strAPIToken];
-    [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
-        [loadingHUD dismiss];
-        
-        [[DataManager shareDataManager] setUserInfo:nil];
-        [[DataManager shareDataManager] setCreditCard:nil];
-        
-        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-        [pref setObject:nil forKey:@"apiName"];
-        [pref setObject:nil forKey:@"loginRequest"];
-        [pref synchronize];
-        
-        self.btnLogout.hidden = YES;
-        
-    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-        [loadingHUD dismiss];
-        
-        NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-        if (strMessage == nil)
-            strMessage = error.localizedDescription;
-        
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-        [alertView showInView:self.view];
-        alertView = nil;
-        
-    } isJSON:NO];
-}
-
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 1)
-    {
-        if (buttonIndex == 1)
-            [self processLogout];
-    }
+    
 }
-
 
 @end
