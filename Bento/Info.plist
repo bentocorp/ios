@@ -15,11 +15,7 @@
 	<key>CFBundlePackageType</key>
 	<string>APPL</string>
 	<key>CFBundleShortVersionString</key>
-<<<<<<< HEAD
-	<string>1.60</string>
-=======
 	<string>1.70</string>
->>>>>>> lunch
 	<key>CFBundleURLTypes</key>
 	<array>
 		<dict>
@@ -32,11 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-<<<<<<< HEAD
-	<string>2</string>
-=======
 	<string>4</string>
->>>>>>> lunch
 	<key>Fabric</key>
 	<dict>
 		<key>APIKey</key>

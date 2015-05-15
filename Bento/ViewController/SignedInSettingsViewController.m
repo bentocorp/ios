@@ -441,11 +441,7 @@
         [self presentViewController:tweetSheet animated:YES completion:nil];
     } else { // not logged into twitter
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
-<<<<<<< HEAD
-                                                               message:@"Please log into Twitter via the Twitter app or iPhone settings and try again."
-=======
                                                                message:@"Please log into Twitter via the Twitter app or in your iPhone Settings and try again."
->>>>>>> lunch
                                                               delegate:nil
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil];
@@ -462,15 +458,9 @@
         [faceSheet setInitialText:sharePrecomposedMessageNew];
                 
         [self presentViewController:faceSheet animated:YES completion:Nil];
-<<<<<<< HEAD
-    } else { // not logged into facebook
-        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
-                                                               message:@"Please log into Facebook via the Facebook app or iPhone settings and try again."
-=======
     } else {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
                                                                message:@"Please log into Facebook via the Facebook app or in your iPhone Settings and try again."
->>>>>>> lunch
                                                               delegate:nil
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil];

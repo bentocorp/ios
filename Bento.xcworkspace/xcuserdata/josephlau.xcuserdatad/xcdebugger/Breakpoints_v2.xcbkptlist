@@ -25,7 +25,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "956"
             endingLineNumber = "956"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-buildRequest:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -41,7 +41,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1121"
             endingLineNumber = "1121"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-createBackendChargeWithToken:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -137,7 +137,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "502"
             endingLineNumber = "502"
-            landmarkName = "-prepareForSegue:sender:"
+            landmarkName = "-gotoAddAnotherBentoScreen"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

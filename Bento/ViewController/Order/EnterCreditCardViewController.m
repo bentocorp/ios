@@ -180,8 +180,6 @@
         stpCard.cvc = card.cvc;
         _creditCard = stpCard;
         
-        NSLog(@"stpCard - %@", stpCard);
-        
         self.btnContinue.enabled = YES;
         [self.btnContinue setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
     }
