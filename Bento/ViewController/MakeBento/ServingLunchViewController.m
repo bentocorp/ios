@@ -79,6 +79,7 @@
     [self.view addSubview:scrollView];
     
 /*---My Table View---*/
+    
     myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65 - 45)];
     myTableView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -95,8 +96,6 @@
     [self.view addSubview:navigationBarView];
     
 /*---BW Title Pager View---*/
-    
-//    NSString *nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
@@ -535,7 +534,6 @@
         if (placeInfo == nil)
             [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
         else
-            
             [self.navigationController pushViewController:completeOrderViewController animated:YES];
     }
 }
