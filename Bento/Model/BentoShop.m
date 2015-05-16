@@ -1036,8 +1036,10 @@ static BentoShop *_shareInstance;
 {
     if (self.aryBentos.count == 0)
         return nil;
-    
+
     _currentIndex = self.aryBentos.count - 1;
+    
+    NSLog(@"Current Bento - %@ at index %ld", self.aryBentos[_currentIndex], _currentIndex);
     
     return self.aryBentos[_currentIndex];
 }
@@ -1048,6 +1050,15 @@ static BentoShop *_shareInstance;
         return;
     
     NSInteger bentoIndex = [self.aryBentos indexOfObject:bento];
+    
+    /*added this to fix issue with editing bentos*/
+    [self.aryBentos addObject:bento];
+    [self.aryBentos removeObjectAtIndex:bentoIndex];
+    [self saveBentoArray];
+    /**/
+    
+    NSLog(@"Set Current Bento with index - %ld", bentoIndex);
+    
     if (bentoIndex == NSNotFound)
         return;
     
@@ -1103,9 +1114,6 @@ static BentoShop *_shareInstance;
     [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.aryBentos forKey:@"bento_array"];
     [[NSUserDefaults standardUserDefaults] setObject:self.strToday forKey:@"bento_date"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSLog(@"save bento array - %@", self.aryBentos);
-    NSLog(@"string today - %@", self.strToday);
 }
 
 @end

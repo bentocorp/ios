@@ -425,6 +425,7 @@
         attributedTitle = nil;
     }
     
+    // an empty empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
         [[BentoShop sharedInstance] addNewBento];
     
@@ -433,6 +434,7 @@
     btnAddAnotherBento.hidden = NO;
     btnState.hidden = NO;
     
+    // If no location set
     AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
     BentoShop *globalShop = [BentoShop sharedInstance];
@@ -523,6 +525,14 @@
 
 - (void)loadSelectedDishes
 {
+    NSMutableArray *aryBentos = [[NSMutableArray alloc] init];
+    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
+    {
+        Bento *bento = [[BentoShop sharedInstance] getBento:index];
+        if ([bento isCompleted])
+            [aryBentos addObject:bento];
+    }
+    
     NSInteger mainDishIndex = 0;
     NSInteger side1DishIndex = 0;
     NSInteger side2DishIndex = 0;
@@ -530,8 +540,10 @@
     NSInteger side4DishIndex = 0;
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil) {
-        
+    
+    // Current Bento is not empty
+    if (currentBento != nil)
+    {
         mainDishIndex = [currentBento getMainDish];
         side1DishIndex = [currentBento getSideDish1];
         side2DishIndex = [currentBento getSideDish2];
@@ -539,8 +551,9 @@
         side4DishIndex = [currentBento getSideDish4];
     }
     
-    if (mainDishIndex > 0) {
-        
+/*-Main-*/
+    if (mainDishIndex > 0)
+    {
         ivMainDish.hidden = NO;
         lblMainDish.hidden = NO;
         
@@ -557,13 +570,16 @@
             else
                 ivBannerMainDish.hidden = YES;
         }
-    } else {
+    }
+    else
+    {
         ivMainDish.image = nil;
         ivMainDish.hidden = YES;
         lblMainDish.hidden = YES;
         ivBannerMainDish.hidden = YES;
     }
     
+/*-Side 1-*/
     if (side1DishIndex > 0)
     {
         ivSideDish1.hidden = NO;
@@ -591,11 +607,11 @@
         ivBannerSideDish1.hidden = YES;
     }
     
+/*-Side 2-*/
     if (side2DishIndex > 0)
     {
         ivSideDish2.hidden = NO;
         lblSideDish2.hidden = NO;
-        
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
         if (dishInfo != nil)
@@ -618,12 +634,12 @@
         lblSideDish2.hidden = YES;
         ivBannerSideDish2.hidden = YES;
     }
-    
+
+/*-Side 3-*/
     if (side3DishIndex > 0)
     {
         ivSideDish3.hidden = NO;
         lblSideDish3.hidden = NO;
-        
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
         if (dishInfo != nil)
@@ -647,6 +663,7 @@
         ivBannerSideDish3.hidden = YES;
     }
     
+/*-Side 4-*/
     if (side4DishIndex > 0)
     {
         ivSideDish4.hidden = NO;
@@ -771,6 +788,7 @@
     if (currentBento != nil && ![currentBento isCompleted])
         [currentBento completeBento:@"todayDinner"];
     
+     
     [[BentoShop sharedInstance] addNewBento];
     
     [self updateUI];
@@ -833,7 +851,9 @@
     {
         lblBanner.hidden = NO;
         lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
-    } else {
+    }
+    else
+    {
         lblBanner.hidden = YES;
     }
     

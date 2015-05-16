@@ -378,10 +378,9 @@
         if ([bento isCompleted])
             [self.aryBentos addObject:bento];
     }
+    NSLog(@"aryBentos checkout - %@", self.aryBentos);
     
     [self.tvBentos reloadData];
-    
-    NSLog(@"aryBentos in completeorder - %ld", self.aryBentos.count);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
@@ -878,11 +877,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
-    NSLog(@"Current Bento - %@", curBento);
+    NSLog(@"didselect aryBentos - %@", self.aryBentos);
+    
     NSArray *viewControllers = self.navigationController.viewControllers;
     
-    for (UIViewController *vc in viewControllers) {
-        
+    for (UIViewController *vc in viewControllers)
+    {    
         if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
         {
             if ([vc isKindOfClass:[ServingDinnerViewController class]])
