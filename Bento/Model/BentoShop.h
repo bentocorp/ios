@@ -84,5 +84,6 @@
 
 - (void)loadBentoArray;
 - (void)saveBentoArray;
+- (void)resetBentoArray;
 
 @end

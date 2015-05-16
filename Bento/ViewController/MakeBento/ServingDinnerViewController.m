@@ -532,7 +532,7 @@
         if ([bento isCompleted])
             [aryBentos addObject:bento];
     }
-    
+    NSLog(@"Total Bentos: %ld", [[BentoShop sharedInstance] getTotalBentoCount]);
     NSInteger mainDishIndex = 0;
     NSInteger side1DishIndex = 0;
     NSInteger side2DishIndex = 0;

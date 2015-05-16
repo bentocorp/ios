@@ -1106,9 +1106,11 @@
         if (completion)
             completion(PKPaymentAuthorizationStatusSuccess);
         
-        for (Bento *bento in self.aryBentos)
-            [[BentoShop sharedInstance] removeBento:bento];
+//        for (Bento *bento in self.aryBentos)
+//            [[BentoShop sharedInstance] removeBento:bento];
         
+        [[BentoShop sharedInstance] resetBentoArray];
+            
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
         [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];

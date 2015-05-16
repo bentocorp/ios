@@ -7,6 +7,7 @@
 //
 
 #import "BentoShop.h"
+#import "Bento.h"
 
 #import "DataManager.h"
 #import "AppStrings.h"
@@ -212,10 +213,6 @@ static BentoShop *_shareInstance;
     return strDate;
 }
 
-- (void)resetBentoArray
-{
-    [self.aryBentos removeAllObjects];
-}
 
 - (void)prefetchImages:(NSDictionary *)menuInfo
 {
@@ -1083,6 +1080,14 @@ static BentoShop *_shareInstance;
 
 - (void)addNewBento
 {
+    // remove all empty bentos before adding new bento
+    for (NSInteger index = 0; index < self.aryBentos.count; index++)
+    {
+        Bento *bento = [[BentoShop sharedInstance] getBento:index];
+        if (![bento isCompleted])
+            [self removeBento:bento];
+    }
+
     Bento *newBento = [[Bento alloc] init];
     [self.aryBentos addObject:newBento];
     _currentIndex = self.aryBentos.count - 1;
@@ -1114,6 +1119,11 @@ static BentoShop *_shareInstance;
     [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.aryBentos forKey:@"bento_array"];
     [[NSUserDefaults standardUserDefaults] setObject:self.strToday forKey:@"bento_date"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)resetBentoArray
+{
+    [self.aryBentos removeAllObjects];
 }
 
 @end
