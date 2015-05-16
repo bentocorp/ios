@@ -78,7 +78,7 @@
     }
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
@@ -201,20 +201,11 @@
 - (IBAction)onBack:(id)sender
 {
     [self hideKeyboard];
-
-    if (NO) {
-        //skip
-    } else {
-        
-        // this will be checked first. back to settings page
-        [self.navigationController popViewControllerAnimated:YES];
-    }
-    
-    // back to My Bento
-    [self dismissViewControllerAnimated:YES completion:nil];
+    [self.navigationController popViewControllerAnimated:YES]; // this will be checked first. back to settings page
+    [self dismissViewControllerAnimated:YES completion:nil]; // back to My Bento
 }
 
-- (void) dissmodal
+- (void)dissmodal
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
     [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this

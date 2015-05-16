@@ -22,6 +22,8 @@
 #import "DataManager.h"
 #import "FacebookManager.h"
 
+#import "CompleteOrderViewController.h"
+
 @interface RegisterViewController () <FBManagerDelegate, MyAlertViewDelegate>
 {
     UITextField *_activeField;
@@ -138,9 +140,15 @@
     [self updateUI];
     
     /*----------------*/
+    
     // this should run when signed in from checkout
-    if ([[DataManager shareDataManager] getUserInfo] != nil) {
-        [self.navigationController popViewControllerAnimated:YES];
+    if ([[DataManager shareDataManager] getUserInfo] != nil)
+    {
+        [self.navigationController popViewControllerAnimated:NO];
+        
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+        [self.navigationController pushViewController:completeOrderViewController animated:YES];
     }
 }
 
@@ -260,6 +268,7 @@
                  [self signInWithRegisteredData:dicRequest];
                  
                  [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
+                
                  [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
                  
              } failure:^(MKNetworkOperation *errorOp, NSError *error) {
