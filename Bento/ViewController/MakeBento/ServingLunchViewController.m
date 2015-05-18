@@ -64,6 +64,8 @@
     int weekday;
     
     BWTitlePagerView *pagingTitleView;
+    
+    ServingLunchCell *servingLunchCell;
 }
 
 - (void)viewDidLoad {
@@ -76,6 +78,7 @@
     scrollView.pagingEnabled = YES;
     scrollView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     scrollView.bounces = NO;
+    scrollView.delaysContentTouches = NO;
     [self.view addSubview:scrollView];
     
 /*---My Table View---*/
@@ -87,6 +90,7 @@
     myTableView.allowsSelection = NO;
     myTableView.dataSource = self;
     myTableView.delegate = self;
+    myTableView.delaysContentTouches = NO;
     [scrollView addSubview:myTableView];
     
 /*---Navigation View---*/
@@ -295,7 +299,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ServingLunchCell *servingLunchCell = (ServingLunchCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    servingLunchCell = (ServingLunchCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     if (servingLunchCell == nil) {
         servingLunchCell = [[ServingLunchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
@@ -324,7 +328,8 @@
     }
     
     servingLunchCell.addButton.tag = indexPath.row;
-    [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
+    [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoDown) forControlEvents:UIControlEventTouchDown];
+    [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventEditingDidEnd];
     
     return servingLunchCell;
 }
@@ -459,8 +464,15 @@
     [self.navigationController pushViewController:servingLunchBentoViewController animated:YES];
 }
 
+- (void)onAddBentoDown
+{
+    [servingLunchCell.addButton setBackgroundColor:[UIColor grayColor]];
+}
+
 - (void)onAddBento:(id)sender
 {
+    [servingLunchCell.addButton setBackgroundColor:[UIColor redColor]];
+    
     /*---Add items to empty bento---*/
     UIButton *selectedButton = (UIButton *)sender;
     
