@@ -39,6 +39,8 @@
 
 @property (nonatomic, assign) IBOutlet UIButton *btnSend;
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation OutOfDeliveryAddressViewController
@@ -61,6 +63,10 @@
     [self.mapView setRegion:MKCoordinateRegionForMapRect(newRect)];
     
     [self.lblAddress setText:self.strAddress];
+    
+    NSURL *url = [NSURL URLWithString:@"https://a.tiles.mapbox.com/v4/vincent-bentonow-com.m4b3e43g/page.html?access_token=pk.eyJ1IjoidmluY2VudC1iZW50b25vdy1jb20iLCJhIjoiV0p2al9qNCJ9.cKufaBUS30xSk7wXxmGuDg#13/37.7802/-122.4169"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:request];
 }
 
 - (void)didReceiveMemoryWarning {
