@@ -85,7 +85,7 @@
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
     
-    viewActivity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(self.webView.frame.size.width/2-10, self.webView.frame.size.width/2-10, 20, 20)];
+    viewActivity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(self.webView.frame.size.width/2-10, self.webView.frame.size.width/2-40, 20, 20)];
     viewActivity.color = [UIColor grayColor];
     [self.webView addSubview:viewActivity];
     
