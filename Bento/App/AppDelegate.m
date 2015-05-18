@@ -73,6 +73,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion] );
+    
     // Crashlytics
     [Fabric with:@[CrashlyticsKit]];
     
