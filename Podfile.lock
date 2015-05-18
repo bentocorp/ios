@@ -1,4 +1,5 @@
 PODS:
+  - Canvas (0.1.2)
   - Harpy (3.3.4)
   - Mixpanel (2.7.3):
     - Mixpanel/MPCategoryHelpers (= 2.7.3)
@@ -11,6 +12,7 @@ PODS:
   - Stripe/Core (3.1.0)
 
 DEPENDENCIES:
+  - Canvas
   - Harpy
   - Mixpanel
   - PaymentKit
@@ -18,6 +20,7 @@ DEPENDENCIES:
   - Stripe/ApplePay
 
 SPEC CHECKSUMS:
+  Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
   Harpy: fab78de705e5db8d1c2c123ffdddada1a3413841
   Mixpanel: 1d387d76800e07e953958c62c97fea27f13632dd
   PaymentKit: 323c25233af5060880daa0c31366d4b688c34487

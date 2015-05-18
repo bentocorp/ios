@@ -36,6 +36,8 @@
 
 #import "AppDelegate.h"
 
+#import "Canvas.h"
+
 
 @interface ServingLunchViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -66,11 +68,12 @@
     BWTitlePagerView *pagingTitleView;
     
     ServingLunchCell *servingLunchCell;
+    
+    CSAnimationView *animationView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 /*---Scroll View---*/
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -138,14 +141,20 @@
     
 /*---Count Badge---*/
     
-    lblBadge = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 42.5, 25, 14, 14)];
+    animationView = [[CSAnimationView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 42.5, 25, 14, 14)];
+    animationView.duration = 0.5;
+    animationView.delay = 0;
+    animationView.type = CSAnimationTypeZoomOut;
+    [navigationBarView addSubview:animationView];
+    
+    lblBadge = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 16, 16)];
     lblBadge.textAlignment = NSTextAlignmentCenter;
     lblBadge.font = [UIFont fontWithName:@"OpenSans-Semibold" size:10];
     lblBadge.backgroundColor = [UIColor colorWithRed:0.890f green:0.247f blue:0.373f alpha:1.0f];
     lblBadge.textColor = [UIColor whiteColor];
     lblBadge.layer.cornerRadius = lblBadge.frame.size.width / 2;
     lblBadge.clipsToBounds = YES;
-    [navigationBarView addSubview:lblBadge];
+    [animationView addSubview:lblBadge];
     
 /*---Banner---*/
     
@@ -464,10 +473,12 @@
 
 - (void)onAddBento:(id)sender
 {
-    [UIView animateWithDuration:0.25f animations:^{
-        lblBadge.transform = CGAffineTransformMakeScale(6,6);
-        lblBadge.transform = CGAffineTransformIdentity;
-    } completion:nil];
+    [animationView startCanvasAnimation];
+    
+//    [UIView animateWithDuration:0.25f animations:^{
+//        lblBadge.transform = CGAffineTransformMakeScale(6,6);
+//        lblBadge.transform = CGAffineTransformIdentity;
+//    } completion:nil];
     
     /*---Add items to empty bento---*/
     UIButton *selectedButton = (UIButton *)sender;
