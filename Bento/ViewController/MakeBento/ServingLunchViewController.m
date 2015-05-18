@@ -328,9 +328,8 @@
     }
     
     servingLunchCell.addButton.tag = indexPath.row;
-    [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoDown) forControlEvents:UIControlEventTouchDown];
-    [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventEditingDidEnd];
-    
+    [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
+
     return servingLunchCell;
 }
 
@@ -423,7 +422,6 @@
     }
 }
 
-
 - (void)onSettings
 {
     // get current user info
@@ -464,14 +462,12 @@
     [self.navigationController pushViewController:servingLunchBentoViewController animated:YES];
 }
 
-- (void)onAddBentoDown
-{
-    [servingLunchCell.addButton setBackgroundColor:[UIColor grayColor]];
-}
-
 - (void)onAddBento:(id)sender
 {
-    [servingLunchCell.addButton setBackgroundColor:[UIColor redColor]];
+    [UIView animateWithDuration:0.25f animations:^{
+        lblBadge.transform = CGAffineTransformMakeScale(6,6);
+        lblBadge.transform = CGAffineTransformIdentity;
+    } completion:nil];
     
     /*---Add items to empty bento---*/
     UIButton *selectedButton = (UIButton *)sender;
@@ -511,7 +507,6 @@
         [currentBento completeBento:@"todayLunch"];
     
     [[BentoShop sharedInstance] addNewBento];
-    
     
     [self updateUI];
 }
