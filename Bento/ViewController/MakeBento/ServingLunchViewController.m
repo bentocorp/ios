@@ -336,7 +336,9 @@
         [servingLunchCell.addButton setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
     }
     
+    // add bento button
     servingLunchCell.addButton.tag = indexPath.row;
+    [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoHighlight:) forControlEvents:UIControlEventTouchDown];
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
 
     return servingLunchCell;
@@ -471,14 +473,16 @@
     [self.navigationController pushViewController:servingLunchBentoViewController animated:YES];
 }
 
+- (void)onAddBentoHighlight:(id)sender
+{
+    UIButton *selectedButton = (UIButton *)sender;
+    selectedButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:0.7f];
+}
+
 - (void)onAddBento:(id)sender
 {
+    // animate badge
     [animationView startCanvasAnimation];
-    
-//    [UIView animateWithDuration:0.25f animations:^{
-//        lblBadge.transform = CGAffineTransformMakeScale(6,6);
-//        lblBadge.transform = CGAffineTransformIdentity;
-//    } completion:nil];
     
     /*---Add items to empty bento---*/
     UIButton *selectedButton = (UIButton *)sender;

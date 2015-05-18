@@ -801,8 +801,8 @@
 		FC0984221AF2ACD20014B138 /* CustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegue.m; sourceTree = "<group>"; };
 		FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchViewController.h; sourceTree = "<group>"; };
 		FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchViewController.m; sourceTree = "<group>"; };
-		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServingLunchCell.h; path = ../ViewController/MakeBento/ServingLunchCell.h; sourceTree = "<group>"; };
-		FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServingLunchCell.m; path = ../ViewController/MakeBento/ServingLunchCell.m; sourceTree = "<group>"; };
+		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchCell.h; sourceTree = "<group>"; };
+		FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchCell.m; sourceTree = "<group>"; };
 		FC8285C61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
 		FC8285C71AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		FC8285C81AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
@@ -1524,8 +1524,6 @@
 				FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */,
 				FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */,
 				FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */,
-				FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */,
-				FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1557,6 +1555,15 @@
 			path = BWTitlePagerView;
 			sourceTree = "<group>";
 		};
+		FC08CC1E1B0AA361008D0A84 /* Lunch Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */,
+				FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */,
+			);
+			name = "Lunch Cell";
+			sourceTree = "<group>";
+		};
 		FC3C4E761AF969F2005D7197 /* Unused VC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1572,6 +1579,7 @@
 		FC3C4E7F1AF97FCD005D7197 /* Serving Lunch */ = {
 			isa = PBXGroup;
 			children = (
+				FC08CC1E1B0AA361008D0A84 /* Lunch Cell */,
 				FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */,
 				FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */,
 				FC99D4ED1AFBFD2A00BEE40B /* ServingLunchBentoViewController.h */,
