@@ -103,7 +103,8 @@
         {
             NSString *classIdentifier = NSStringFromClass(self.nextViewController);
             
-            UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:classIdentifier];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:classIdentifier];
             
             [self.navigationController pushViewController:vc animated:YES];
         }

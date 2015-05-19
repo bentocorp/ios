@@ -145,7 +145,8 @@
         if ((NSNull *)controller == [NSNull null]) {
             MPSurveyQuestion *question = _survey.questions[index];
             NSString *storyboardIdentifier = [NSString stringWithFormat:@"%@ViewController", NSStringFromClass([question class])];
-            controller = [self.storyboard instantiateViewControllerWithIdentifier:storyboardIdentifier];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            controller = [storyboard instantiateViewControllerWithIdentifier:storyboardIdentifier];
             if (controller) {
                 controller.delegate = self;
                 controller.question = question;

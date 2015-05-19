@@ -440,7 +440,8 @@
     BentoShop *globalShop = [BentoShop sharedInstance];
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
     {
-        DeliveryLocationViewController *deliveryLocationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
    
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -740,8 +741,9 @@
 
 - (void)gotoOrderScreen
 {
-    DeliveryLocationViewController *deliveryLocationViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-    CompleteOrderViewController *completeOrderViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
     
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
@@ -764,7 +766,8 @@
 
 - (void)onAddMainDish
 {
-    ChooseMainDishViewController *chooseMainDishViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
     [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
 }
 
@@ -772,7 +775,8 @@
 {
     UIButton *selectedButton = (UIButton *)sender;
     
-    ChooseSideDishViewController *chooseSideDishViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
     [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
@@ -792,8 +796,9 @@
 
 - (void)onContinue
 {
-    ChooseMainDishViewController *chooseMainDishViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    ChooseSideDishViewController *chooseSideDishViewController = [self.storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     

@@ -123,7 +123,8 @@
 
 - (void) showSoldoutScreen:(NSNumber *)identifier
 {
-    UINavigationController *nav = [self.storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
     SoldOutViewController *vcSoldOut = (SoldOutViewController *)nav.topViewController;
     vcSoldOut.type = [identifier integerValue];
     

@@ -467,7 +467,8 @@
     
     if (!found)
     {
-        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         ((DeliveryLocationViewController *)vc).isFromOrder = YES;
 //        ((DeliveryLocationViewController *)vc).priceDiscount = self.promoDiscount;
 //        ((DeliveryLocationViewController *)vc).strPromoCode = self.strPromoCode;
