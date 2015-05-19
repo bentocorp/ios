@@ -357,7 +357,6 @@
         [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", unitPrice] forState:UIControlStateNormal];
     }
 
-
     return servingLunchCell;
 }
 

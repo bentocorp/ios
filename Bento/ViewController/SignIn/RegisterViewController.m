@@ -145,10 +145,6 @@
     if ([[DataManager shareDataManager] getUserInfo] != nil)
     {
         [self.navigationController popViewControllerAnimated:NO];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
-        [self.navigationController pushViewController:completeOrderViewController animated:YES];
     }
 }
 
