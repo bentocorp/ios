@@ -37,8 +37,6 @@
 #import "AppDelegate.h"
 
 #import "Canvas.h"
-#import "myCustomScrollView.h"
-#import "MyCustomTableView.h"
 
 
 @interface ServingLunchViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -49,8 +47,8 @@
 
 @implementation ServingLunchViewController
 {
-    myCustomScrollView *scrollView;
-    MyCustomTableView *myTableView;
+    UIScrollView *scrollView;
+    UITableView *myTableView;
     
     UILabel *lblBadge;
     UILabel *lblBanner;
@@ -78,26 +76,26 @@
     [super viewDidLoad];
 /*---Scroll View---*/
     
-    scrollView = [[myCustomScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];
+    scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH*2, SCREEN_HEIGHT-65);
     scrollView.pagingEnabled = YES;
     scrollView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     scrollView.bounces = NO;
-    scrollView.delaysContentTouches = NO;
-    scrollView.canCancelContentTouches = YES;
+//    scrollView.delaysContentTouches = NO;
+//    scrollView.canCancelContentTouches = YES;
     [self.view addSubview:scrollView];
     
 /*---My Table View---*/
     
-    myTableView = [[MyCustomTableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65 - 45)];
+    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65 - 45)];
     myTableView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     myTableView.separatorInset = UIEdgeInsetsMake(0, SCREEN_WIDTH / 2.5, 0, SCREEN_WIDTH/ 2.5);
     myTableView.allowsSelection = NO;
     myTableView.dataSource = self;
     myTableView.delegate = self;
-    myTableView.delaysContentTouches = NO;
-    myTableView.canCancelContentTouches = YES;
+//    myTableView.delaysContentTouches = NO;
+//    myTableView.canCancelContentTouches = YES;
     [scrollView addSubview:myTableView];
     
 /*---Navigation View---*/

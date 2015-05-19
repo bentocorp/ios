@@ -82,7 +82,9 @@
         self.addButton.layer.cornerRadius = 3;
         self.addButton.layer.masksToBounds = YES;
         self.addButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-        [self.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
+        
+ // MAKE PRICE DYNAMIC //
+        [self.addButton setTitle:@"ADD BENTO TO CART - $12" forState:UIControlStateNormal];
         [self.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.addButton];
     }
