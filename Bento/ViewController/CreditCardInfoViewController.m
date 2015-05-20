@@ -83,12 +83,11 @@
     [whiteBackgroundView addSubview:creditCardDigitsLabel];
     
     // change credit card button
-//    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 12, 100, 30)];
-//    [changeButton setTitle:@"CHANGE" forState:UIControlStateNormal];
-//    [changeButton setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-//    changeButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:10];
-//    changeButton.
-//    [whiteBackgroundView addSubview:changeButton];
+    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 12, 100, 30)];
+    [changeButton setTitle:@"CHANGE" forState:UIControlStateNormal];
+    [changeButton setTitleColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
+    changeButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:10];
+    [whiteBackgroundView addSubview:changeButton];
 }
 
 -(void)viewWillAppear:(BOOL)animated

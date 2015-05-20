@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "026CB4035AC38EDB83D2CA55"
+               BlueprintIdentifier = "2CA88E0FF1411A3A784553DA"
                BuildableName = "libPods-BentoTests-Harpy.a"
                BlueprintName = "Pods-BentoTests-Harpy"
                ReferencedContainer = "container:Pods.xcodeproj">

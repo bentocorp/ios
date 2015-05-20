@@ -323,7 +323,6 @@
     float totalPrice = _totalPrice + deliveryTip + tax;
     
     
-    
     if (totalPrice < 0.0f)
         totalPrice = 0.0f;
     else if (totalPrice > 0 && totalPrice < 1.0f)
