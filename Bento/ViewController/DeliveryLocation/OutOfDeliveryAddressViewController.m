@@ -67,6 +67,8 @@
     
     [self.lblAddress setText:self.strAddress];
     
+    NSLog(@"hehe - %@", self.strAddress);
+    
 // set map view
     float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
     float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
@@ -197,16 +199,18 @@
     if (strToken != nil && strToken.length > 0)
     {
         postInfo = @{
-                     @"email" : strEmail,
-                     @"reason" : strReason,
-                     @"api_token" : strToken,
+                     @"email"       : strEmail,
+                     @"reason"      : strReason,
+                     @"api_token"   : strToken,
+                     @"address"     : self.strAddress
                      };
     }
     else
     {
         postInfo = @{
-                     @"email" : strEmail,
-                     @"reason" : strReason,
+                     @"email"   : strEmail,
+                     @"reason"  : strReason,
+                     @"address" : self.strAddress
                      };
     }
     
