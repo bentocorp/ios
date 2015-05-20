@@ -297,9 +297,9 @@
                                  @"brand": strImageName,
                                  @"last4": strCardNumber
                                  };
-    [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];// This should fix the payment issue, added paymentMethod
+    [[DataManager shareDataManager] setUserInfo:currentUserInfo2 paymentMethod:paymentMethod];// This should fix the payment issue, added paymentMethod
     
-    NSLog(@"Update Payment Info, %@", currentUserInfo[@"card"]);
+    NSLog(@"Update Payment Info, %@", currentUserInfo2[@"card"]);
     
     [self viewDidLoad];
 }
