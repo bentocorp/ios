@@ -401,18 +401,20 @@
     
 /*------*/
     
-    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
+//    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
+    NSString *strTitle = @"BUILD YOUR BENTO - $12";
     if (strTitle != nil)
     {
+        // Add Another Bento Button
         [btnAddAnotherBento setTitle:strTitle forState:UIControlStateNormal];
         NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         float spacing = 1.0f;
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
-        
         btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
         
+        // Continue Button
         strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
         [btnState setTitle:strTitle forState:UIControlStateNormal];
         attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
@@ -420,7 +422,6 @@
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
-        
         btnState.titleLabel.attributedText = attributedTitle;
         attributedTitle = nil;
     }
@@ -930,15 +931,34 @@
     }
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    
+    
+        
+
+    NSString *strTitle;
     if (currentBento == nil || ![currentBento isCompleted])
     {
+        strTitle = @"BUILD YOUR BENTO - $12";
         btnAddAnotherBento.enabled = NO;
         [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
     }
     else
     {
+        strTitle = [NSString stringWithFormat:@"%@ - $12", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON] ];
         btnAddAnotherBento.enabled = YES;
         [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:243.0f / 255.0f green:245.0f / 255.0f blue:245.0f / 255.0f alpha:1.0f]];
+    }
+    
+    if (strTitle != nil)
+    {
+        // Add Another Bento Button
+        [btnAddAnotherBento setTitle:strTitle forState:UIControlStateNormal];
+        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        float spacing = 1.0f;
+        [attributedTitle addAttribute:NSKernAttributeName
+                                value:@(spacing)
+                                range:NSMakeRange(0, [strTitle length])];
+        btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
     }
 }
 
