@@ -12,6 +12,8 @@
 	<dict>
 		<key>58F321B027D03517BA0A9783C5C85D80A7A07508</key>
 		<string>https://github.com/demant/bento-ios.git</string>
+		<key>F76BA38EFFC55E46E8D0815660EDB772ADABA782</key>
+		<string>https://github.com/JosephLauSF/AppCoda_NoStoryboard_CustomTableWithPropertyList.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
 	<string>Bento.xcworkspace</string>
@@ -19,6 +21,8 @@
 	<dict>
 		<key>58F321B027D03517BA0A9783C5C85D80A7A07508</key>
 		<string>..</string>
+		<key>F76BA38EFFC55E46E8D0815660EDB772ADABA782</key>
+		<string>../..</string>
 	</dict>
 	<key>IDESourceControlProjectURL</key>
 	<string>https://github.com/demant/bento-ios.git</string>
@@ -28,6 +32,14 @@
 	<string>58F321B027D03517BA0A9783C5C85D80A7A07508</string>
 	<key>IDESourceControlProjectWCConfigurations</key>
 	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>F76BA38EFFC55E46E8D0815660EDB772ADABA782</string>
+			<key>IDESourceControlWCCName</key>
+			<string></string>
+		</dict>
 		<dict>
 			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
 			<string>public.vcs.git</string>
