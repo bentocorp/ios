@@ -209,7 +209,7 @@
                                             <action selector="onSendBentoCoupon:" destination="eCr-57-e09" eventType="touchUpInside" id="T1R-Gl-2Mt"/>
                                         </connections>
                                     </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Monday-Friday" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9U-8i-K0n">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opened Mon-Fri" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9U-8i-K0n">
                                         <rect key="frame" x="60" y="229" width="200" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="17"/>
@@ -1953,7 +1953,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0y-jd-YVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1941" y="2470"/>
+            <point key="canvasLocation" x="1811" y="2470"/>
         </scene>
         <!--Order Confirm View Controller-->
         <scene sceneID="g3z-gP-hSU">
@@ -2043,7 +2043,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZa-6b-62c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1420" y="3155"/>
+            <point key="canvasLocation" x="1420" y="3049"/>
         </scene>
         <!--Out Of Delivery Address View Controller-->
         <scene sceneID="dzF-gT-KqI">

@@ -773,7 +773,6 @@ static BentoShop *_shareInstance;
         [self getMenus];
         [self getStatus];
         [self getServiceArea];
-        
     });
     
     _isCallingApi = NO;

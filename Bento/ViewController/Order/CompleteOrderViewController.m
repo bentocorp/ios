@@ -307,6 +307,7 @@
 {
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    
     if (salePrice != 0 && salePrice < unitPrice)
         _totalPrice = self.aryBentos.count * salePrice;
     else
@@ -318,10 +319,13 @@
     self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
     
     float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
+    
     if (totalPrice < 0.0f)
         totalPrice = 0.0f;
     else if (totalPrice > 0 && totalPrice < 1.0f)
         totalPrice = 1.0f;
+    
+    NSLog(@"totalPrice - %f, taxPercent - %f, tax - %f", _totalPrice, _taxPercent, tax);
     
     return totalPrice;
 }
