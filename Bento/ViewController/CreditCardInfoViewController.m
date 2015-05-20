@@ -300,6 +300,8 @@
     [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];// This should fix the payment issue, added paymentMethod
     
     NSLog(@"Update Payment Info, %@", currentUserInfo[@"card"]);
+    
+    [self viewDidLoad];
 }
 
 -(void)onBackButton
