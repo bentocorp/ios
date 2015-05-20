@@ -313,24 +313,22 @@
     else
         _totalPrice = self.aryBentos.count * unitPrice;
     
-//    float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
-    float deliveryTip = (int)((_totalPrice - _promoDiscount) * _deliveryTipPercent) / 100.f;
+    float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
     
 //    float tax = (int)(_totalPrice * _taxPercent) / 100.f;
     float tax = (int)((_totalPrice - _promoDiscount) * _taxPercent) / 100.f;
     
-//    float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
-    float totalPrice = _totalPrice + deliveryTip + tax;
+    float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
     
     
     if (totalPrice < 0.0f)
         totalPrice = 0.0f;
-    else if (totalPrice > 0 && totalPrice < 1.0f)
-        totalPrice = 1.0f;
+//    else if (totalPrice > 0 && totalPrice < 1.0f)
+//        totalPrice = 1.0f;
     
     self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
     
-    NSLog(@"totalPrice - %f, taxPercent - %f, tax - %f, promoDiscount - %ld", _totalPrice, _taxPercent, tax, _promoDiscount);
+    NSLog(@"totalPrice - %f, taxPercent - %f, tax - %f, promoDiscount - %ld, deliveryTip - %f", _totalPrice, _taxPercent, tax, _promoDiscount, deliveryTip);
     
     return totalPrice;
 }

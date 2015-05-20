@@ -53,7 +53,8 @@
     else
         self.lblPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
     
-    [self.btnContinue setTitle:[[AppStrings sharedInstance] getString:CREDITCARD_BUTTON_CONTINUE] forState:UIControlStateNormal];
+    // make this dynamic, Save or Continue To Summary- [[AppStrings sharedInstance] getString:CREDITCARD_BUTTON_CONTINUE]
+    [self.btnContinue setTitle:@"SAVE CREDIT CARD" forState:UIControlStateNormal];
     
     // Credit Card View
     PTKView *view = [[PTKView alloc] initWithFrame:self.viewInput.frame];
