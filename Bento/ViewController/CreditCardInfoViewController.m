@@ -94,18 +94,23 @@
     [self.view addSubview:whiteBackgroundView];
 
     // credit card image
-    creditCardImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 11.5, 30, 22)];
+    creditCardImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, whiteBackgroundView.frame.size.height/2 - (29.2/2), 40, 29.2)];
+    [creditCardImage setClipsToBounds:YES];
+    creditCardImage.contentMode = UIViewContentModeScaleAspectFill;
     [whiteBackgroundView addSubview:creditCardImage];
     
     // credit card digits
-    creditCardDigitsLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 12, 150, 21)];
+    creditCardDigitsLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 12, 150, 21)];
     creditCardDigitsLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     creditCardDigitsLabel.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [whiteBackgroundView addSubview:creditCardDigitsLabel];
     
     // change credit card button
-    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 100, whiteBackgroundView.frame.size.height/2 - 15, 100, 30)];
-    [changeButton setTitle:@"CHANGE" forState:UIControlStateNormal];
+    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, whiteBackgroundView.frame.size.height/2 - 15, 80, 30)];
+    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]])
+        [changeButton setTitle:@"ADD" forState:UIControlStateNormal];
+    else
+        [changeButton setTitle:@"CHANGE" forState:UIControlStateNormal];
     [changeButton setTitleColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
     changeButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:10];
     [changeButton addTarget:self action:@selector(onChange) forControlEvents:UIControlEventTouchUpInside];
@@ -114,13 +119,13 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]]) {
-        
+    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]])
+    {
         // no card info
         creditCardImage.image = [UIImage imageNamed:@"placeholder"];
-        
-    } else {
-        
+    }
+    else
+    {
         // has card info
         creditCardImage.image = [UIImage imageNamed:[currentUserInfo[@"card"][@"brand"] lowercaseString]];
         creditCardDigitsLabel.text = currentUserInfo[@"card"][@"last4"];
