@@ -128,6 +128,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #ifndef DEV_MODE
     {
         NSLog(@"This is production version...run update check!");
+<<<<<<< HEAD
         
         // Present Window before calling Harpy
         [self.window makeKeyAndVisible];
@@ -135,6 +136,26 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         // Set the App ID for your app
         [[Harpy sharedInstance] setAppID:@"963634117"];
         
+=======
+    
+        // Set the App ID for your app
+        [[Harpy sharedInstance] setAppID:@"963634117"];
+        [[Harpy sharedInstance] getAPI:@"https://api2.bentonow.com"];
+    }
+#else
+    {
+        NSLog(@"This is dev version...run update check anyway!");
+        
+        // Set the App ID for your app
+        [[Harpy sharedInstance] setAppID:@"973246172"];
+        [[Harpy sharedInstance] getAPI:@"https://api2.dev.bentonow.com"];
+    }
+#endif
+    {
+        // Present Window before calling Harpy
+        [self.window makeKeyAndVisible];
+        
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         // Set the UIViewController that will present an instance of UIAlertController
         [[Harpy sharedInstance] setPresentingViewController:_window.rootViewController];
         
@@ -151,7 +172,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         // Perform check for new version of your app
         [[Harpy sharedInstance] checkVersion];
     }
+<<<<<<< HEAD
 #endif
+=======
+
+/*---------------------------------------------------------------------*/
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     
     return YES;
 }
@@ -183,6 +209,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Perform check for new version of your app
     [[Harpy sharedInstance] checkVersion];
+<<<<<<< HEAD
+=======
+    
+    // reload app strings
+    [[AppStrings sharedInstance] getAppStrings];
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
 }
 
 - (void)showLocationAlert

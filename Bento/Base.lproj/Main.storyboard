@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<<<<<<< HEAD
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14E11f" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="bfp-2n-wGh">
+=======
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7702" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="bfp-2n-wGh">
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
@@ -115,8 +119,11 @@
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
+<<<<<<< HEAD
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
+=======
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         </mutableArray>
     </customFonts>
     <scenes>
@@ -264,12 +271,16 @@
                         <outlet property="lblMessageTitle" destination="Q40-KE-h1E" id="C5y-hG-6YG"/>
                         <outlet property="txtEmail" destination="g4w-Ug-cU5" id="k5X-Rx-Ufp"/>
                         <outlet property="viewMain" destination="WF3-1X-OAS" id="wH4-Gd-uNs"/>
+<<<<<<< HEAD
                         <segue destination="q4z-hJ-wGu" kind="push" identifier="preview" id="XR6-MM-z2k"/>
+=======
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iFL-zd-gAb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-223" y="1104"/>
+<<<<<<< HEAD
         </scene>
         <!--Sneak Preview View Controller-->
         <scene sceneID="QLZ-hn-l2t">
@@ -335,6 +346,8 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AMY-FS-Ig5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="186" y="1104"/>
+=======
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ARi-do-CBH">
@@ -351,7 +364,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JVR-7P-KIm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="-727" y="1104"/>
+=======
+            <point key="canvasLocation" x="-637" y="1104"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         </scene>
         <!--First View Controller-->
         <scene sceneID="ufC-wZ-h7g">
@@ -398,8 +415,6 @@
                         <outlet property="ivLaunchLogo" destination="IlR-5c-RNW" id="47o-nV-WxA"/>
                         <outlet property="lblLaunchSlogan" destination="ZuD-Ad-TM9" id="7uQ-5w-ceh"/>
                         <segue destination="cih-YB-hrD" kind="push" identifier="Intro" id="n9b-DI-aZT"/>
-                        <segue destination="diU-FL-EY2" kind="push" identifier="MyBento" id="Ghr-0t-YHG"/>
-                        <segue destination="cjF-1z-ADL" kind="push" identifier="DeliveryLocation" id="Jq9-7a-GOP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
@@ -514,7 +529,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fy6-LN-dRc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="1228" y="-138"/>
+=======
+            <point key="canvasLocation" x="1234" y="462"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         </scene>
         <!--My Bento View Controller-->
         <scene sceneID="RYP-cm-1PN">
@@ -747,12 +766,18 @@
                                         <rect key="frame" x="12" y="30" width="25" height="25"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     </imageView>
+<<<<<<< HEAD
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="lW4-aV-d51">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
+=======
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lW4-aV-d51">
+                                        <rect key="frame" x="0.0" y="20" width="50" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                         <connections>
                                             <action selector="onSettings:" destination="diU-FL-EY2" eventType="touchUpInside" id="obp-JS-SS4"/>
                                         </connections>
@@ -827,15 +852,22 @@
                         <outlet property="viewSide2" destination="CgN-k4-DKq" id="wt9-95-fXm"/>
                         <outlet property="viewSide3" destination="JdU-Tb-QQ0" id="x9Y-LQ-khH"/>
                         <outlet property="viewSide4" destination="9kY-eq-xP5" id="re3-Ef-YKM"/>
+<<<<<<< HEAD
                         <segue destination="Y3s-WX-y7y" kind="push" identifier="MainDish" id="2yK-go-LWz"/>
                         <segue destination="tNR-bW-wkA" kind="push" identifier="SideDish" id="cWi-n0-G3A"/>
                         <segue destination="cjF-1z-ADL" kind="push" identifier="DeliveryLocation" id="09w-J6-v5C"/>
                         <segue destination="IGL-x5-TQo" kind="push" identifier="CompleteOrder" id="oNJ-Gc-fzE"/>
+=======
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V6d-St-eXW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="1275" y="462"/>
+=======
+            <point key="canvasLocation" x="1187" y="-982"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         </scene>
         <!--Choose Main Dish View Controller-->
         <scene sceneID="blW-Mz-28m">
@@ -870,25 +902,6 @@
                                             <action selector="onBack:" destination="Y3s-WX-y7y" eventType="touchUpInside" id="Jg0-dU-PvI"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="3Ev-qO-lpC">
-                                        <rect key="frame" x="270" y="20" width="50" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="mybento_nav_cart_inact.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="mybento_nav_cart_act.png"/>
-                                        <connections>
-                                            <action selector="onCart:" destination="Y3s-WX-y7y" eventType="touchUpInside" id="WJd-Lf-WnK"/>
-                                        </connections>
-                                    </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="VoK-da-hpy">
-                                        <rect key="frame" x="277" y="24" width="14" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.89019607840000003" green="0.2470588235" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -923,15 +936,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="Ys0-Ok-xvL"/>
                     <connections>
-                        <outlet property="btnCart" destination="3Ev-qO-lpC" id="7Nx-7w-LhT"/>
                         <outlet property="cvMainDishes" destination="jEL-Ah-vpE" id="zQo-KC-lTm"/>
-                        <outlet property="lblBadge" destination="VoK-da-hpy" id="5wb-f9-YPM"/>
                         <outlet property="lblTitle" destination="Rfm-67-QKg" id="67X-rx-SuZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EMt-78-ygp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="1788" y="184"/>
+=======
+            <point key="canvasLocation" x="2028" y="388"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         </scene>
         <!--Register View Controller-->
         <scene sceneID="8U0-dj-nvw">
@@ -1580,7 +1595,10 @@
                         <outlet property="viewSearchLocation" destination="PgI-ir-4n1" id="Kf6-U4-a2l"/>
                         <segue destination="nhj-Yn-paf" kind="push" identifier="OutOfDelivery" id="Tsm-7o-Ram"/>
                         <segue destination="IGL-x5-TQo" kind="push" identifier="CompleteOrder" id="dRi-of-nZl"/>
+<<<<<<< HEAD
                         <segue destination="diU-FL-EY2" kind="push" identifier="AddAnotherBento" id="TLP-Su-R5t"/>
+=======
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MUb-Fw-Ivc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1692,7 +1710,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="hVC-th-zts">
+<<<<<<< HEAD
                                 <rect key="frame" x="-1" y="152" width="320" height="194"/>
+=======
+                                <rect key="frame" x="-1" y="152" width="320" height="106"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pbc-Hz-gCU">
@@ -1726,7 +1748,11 @@
                                         <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lth-bX-9L2">
+<<<<<<< HEAD
                                         <rect key="frame" x="0.0" y="42" width="320" height="152"/>
+=======
+                                        <rect key="frame" x="0.0" y="42" width="320" height="64"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
@@ -1738,7 +1764,11 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="tfC-0t-xL2">
+<<<<<<< HEAD
                                 <rect key="frame" x="-1" y="346" width="320" height="44"/>
+=======
+                                <rect key="frame" x="-1" y="258" width="320" height="44"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="9qR-Yl-vN9">
@@ -1764,7 +1794,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="qlf-uw-Z71">
+<<<<<<< HEAD
                                 <rect key="frame" x="-1" y="478" width="320" height="44"/>
+=======
+                                <rect key="frame" x="-1" y="390" width="320" height="44"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fxD-Rl-wWD">
@@ -1802,7 +1836,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="hQ1-sj-gfQ">
+<<<<<<< HEAD
                                 <rect key="frame" x="-1" y="390" width="320" height="44"/>
+=======
+                                <rect key="frame" x="-1" y="302" width="320" height="44"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" id="6tI-HZ-ciW">
@@ -1828,7 +1866,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="76i-t7-otd">
+<<<<<<< HEAD
                                 <rect key="frame" x="-1" y="434" width="320" height="44"/>
+=======
+                                <rect key="frame" x="-1" y="346" width="320" height="44"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderconfirm_image_countpanel.png" id="51A-TH-pQ4">
@@ -1882,7 +1924,11 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2Gh-RT-7qO">
+<<<<<<< HEAD
                                 <rect key="frame" x="-1" y="522" width="320" height="46"/>
+=======
+                                <rect key="frame" x="-1" y="434" width="321" height="46"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
@@ -1922,7 +1968,10 @@
                         <outlet property="viewPromo" destination="tfC-0t-xL2" id="7kF-tZ-iG9"/>
                         <segue destination="XvI-57-7Bc" kind="modal" identifier="CreditCard" id="EpH-Ya-dQJ"/>
                         <segue destination="utt-Mq-JP9" kind="push" identifier="ConfirmOrder" id="XqP-BI-Zce"/>
+<<<<<<< HEAD
                         <segue destination="diU-FL-EY2" kind="push" identifier="AddAnotherBento" id="ejO-bj-5g6"/>
+=======
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4n-7T-zdy" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2121,7 +2170,10 @@
                         <outlet property="ivTitle" destination="3ha-dd-TkX" id="8kw-yi-aim"/>
                         <outlet property="lblCompletedText" destination="gqW-wd-92A" id="829-dX-sR8"/>
                         <outlet property="lblCompletedTitle" destination="R4d-b6-xQx" id="dKe-vL-T16"/>
+<<<<<<< HEAD
                         <segue destination="diU-FL-EY2" kind="push" identifier="AddAnotherBento" id="KR1-Yj-bB5"/>
+=======
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZa-6b-62c" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2175,20 +2227,6 @@
                                 <rect key="frame" x="0.0" y="64" width="320" height="134"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0P7-hr-NeD">
-                                <rect key="frame" x="0.0" y="435" width="320" height="45"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                <size key="titleShadowOffset" width="1" height="1"/>
-                                <state key="normal" title="SEND FREE BENTO COUPON">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onSendFreeCoupon:" destination="nhj-Yn-paf" eventType="touchUpInside" id="R8u-u1-pcx"/>
-                                </connections>
-                            </button>
                             <view contentMode="scaleToFill" id="76O-gB-UNj">
                                 <rect key="frame" x="0.0" y="392" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
@@ -2257,6 +2295,20 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0P7-hr-NeD">
+                                <rect key="frame" x="0.0" y="435" width="320" height="45"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                <size key="titleShadowOffset" width="1" height="1"/>
+                                <state key="normal" title="SEND FREE BENTO COUPON">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onSendFreeCoupon:" destination="nhj-Yn-paf" eventType="touchUpInside" id="R8u-u1-pcx"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
@@ -2534,25 +2586,6 @@
                                             <action selector="onBack:" destination="tNR-bW-wkA" eventType="touchUpInside" id="cqx-97-c7O"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="l8r-Y1-Tv6">
-                                        <rect key="frame" x="270" y="20" width="50" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="mybento_nav_cart_inact.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="mybento_nav_cart_act.png"/>
-                                        <connections>
-                                            <action selector="onCart:" destination="tNR-bW-wkA" eventType="touchUpInside" id="09y-mR-lfd"/>
-                                        </connections>
-                                    </button>
-                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="3sA-sL-EAj">
-                                        <rect key="frame" x="277" y="24" width="14" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.89019607840000003" green="0.2470588235" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
@@ -2587,15 +2620,17 @@
                     </view>
                     <navigationItem key="navigationItem" id="OQJ-he-WeM"/>
                     <connections>
-                        <outlet property="btnCart" destination="l8r-Y1-Tv6" id="h46-Jq-ydF"/>
                         <outlet property="cvSideDishes" destination="KIA-L3-xvh" id="hsH-x6-cJF"/>
-                        <outlet property="lblBadge" destination="3sA-sL-EAj" id="gJV-Vp-Vpf"/>
                         <outlet property="lblTitle" destination="K7d-zv-DtO" id="s44-I6-Xvk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbc-AW-6Bs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="1788" y="806"/>
+=======
+            <point key="canvasLocation" x="2028" y="1010"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hpL-ZN-c77">
@@ -2631,7 +2666,11 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ucs-hA-xgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
+<<<<<<< HEAD
             <point key="canvasLocation" x="-727" y="1822"/>
+=======
+            <point key="canvasLocation" x="-637" y="1822"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         </scene>
         <!--Faq View Controller-->
         <scene sceneID="f2w-P5-EhP">
@@ -2734,8 +2773,78 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Gt-CP-9kz" userLabel="First Responder" sceneMemberID="firstResponder"/>
+<<<<<<< HEAD
             </objects>
             <point key="canvasLocation" x="679" y="1822"/>
+=======
+            </objects>
+            <point key="canvasLocation" x="679" y="1822"/>
+        </scene>
+        <!--Sneak Preview View Controller-->
+        <scene sceneID="Pv5-xi-fdb">
+            <objects>
+                <viewController storyboardIdentifier="SneakPreviewViewController" id="yMB-Wh-SQX" customClass="SneakPreviewViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="lPD-Ja-duM">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" id="T2o-aw-Dae">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="yAy-vf-97d">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="187-hY-aeY">
+                                        <rect key="frame" x="0.0" y="20" width="50" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <state key="normal" image="nav_btn_back.png">
+                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="onBack:" destination="yMB-Wh-SQX" eventType="touchUpInside" id="EWK-Ii-U68"/>
+                                        </connections>
+                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="02Z-HF-rui">
+                                        <rect key="frame" x="50" y="20" width="220" height="45"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
+                                        <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="OMv-ut-2RE">
+                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Txz-Rd-6NR">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="yMB-Wh-SQX" id="Jku-tS-8tI"/>
+                                    <outlet property="delegate" destination="yMB-Wh-SQX" id="xgs-GQ-gGR"/>
+                                </connections>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="43S-dm-cwV"/>
+                    <connections>
+                        <outlet property="cvDishes" destination="OMv-ut-2RE" id="ia8-wK-gBE"/>
+                        <outlet property="lblTitle" destination="02Z-HF-rui" id="lqi-LO-MsU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Uev-9I-8EH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="746" y="-968"/>
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         </scene>
     </scenes>
     <resources>

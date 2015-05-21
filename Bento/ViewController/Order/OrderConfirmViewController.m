@@ -8,7 +8,12 @@
 
 #import "OrderConfirmViewController.h"
 
+<<<<<<< HEAD
 #import "MyBentoViewController.h"
+=======
+#import "ServingDinnerViewController.h"
+#import "ServingLunchViewController.h"
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
 
 #import "UIImageView+WebCache.h"
 
@@ -66,13 +71,13 @@
     [self gotoAddAnotherBentoScreen];
 }
 
-- (void) gotoAddAnotherBentoScreen
+- (void)gotoAddAnotherBentoScreen
 {
     NSArray *viewControllers = self.navigationController.viewControllers;
     
     for (UIViewController *vc in viewControllers) {
         
-        if ([vc isKindOfClass:[MyBentoViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
         {
             [[BentoShop sharedInstance] addNewBento];
             [self.navigationController popToViewController:vc animated:YES];
@@ -80,8 +85,6 @@
             return;
         }
     }
-    
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:nil];
 }
 
 @end

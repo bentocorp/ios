@@ -150,8 +150,6 @@
 
 - (void)doSubmit
 {
-    [self.txtEmail resignFirstResponder];
-    
     NSString *strEmail = self.txtEmail.text;
     if (![DataManager isValidMailAddress:strEmail])
     {
@@ -222,8 +220,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self doSubmit];
-    
+    [self.txtEmail resignFirstResponder];
     return YES;
 }
 

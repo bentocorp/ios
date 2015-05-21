@@ -10,7 +10,9 @@
 
 #import "AppDelegate.h"
 
-#import "MyBentoViewController.h"
+#import "ServingDinnerViewController.h"
+#import "ServingLunchViewController.h"
+
 #import "CompleteOrderViewController.h"
 #import "OutOfDeliveryAddressViewController.h"
 #import "FaqViewController.h"
@@ -238,9 +240,10 @@
     
     NSArray *viewControllers = self.navigationController.viewControllers;
     
-    for (UIViewController *vc in viewControllers) {
-        
-        if ([vc isKindOfClass:[MyBentoViewController class]])
+    for (UIViewController *vc in viewControllers)
+    {
+        // serving dinner vc || serving lunch vc
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
         {
             [self.navigationController popToViewController:vc animated:YES];
             
@@ -248,7 +251,24 @@
         }
     }
     
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:nil];
+/*-----check if dinner or lunch mode-----*/
+    
+    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
+    
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerTime)
+    {
+        ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+        [self.navigationController popToViewController:servingLunchViewController animated:YES];
+        
+    // dinner opening - 11:59pm
+    }
+    else if (currentTime >= dinnerTime && currentTime < 24)
+    {
+        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+        [self.navigationController popToViewController:servingDinnerViewController animated:YES];
+    }
 }
 
 - (void)doConfirmOrder

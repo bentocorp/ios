@@ -8,7 +8,13 @@
 
 #import "CompleteOrderViewController.h"
 
+<<<<<<< HEAD
 #import "MyBentoViewController.h"
+=======
+#import "ServingDinnerViewController.h"
+#import "ServingLunchViewController.h"
+
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
 
@@ -113,20 +119,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     _clickedMinuteButtonIndex = NSNotFound;
     
     UINib *cellNib = [UINib nibWithNibName:@"BentoTableViewCell" bundle:nil];
     [self.tvBentos registerNib:cellNib forCellReuseIdentifier:@"BentoCell"];
-    
-    self.aryBentos = [[NSMutableArray alloc] init];
-    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
-    {
-        Bento *bento = [[BentoShop sharedInstance] getBento:index];
-        if ([bento isCompleted])
-            [self.aryBentos addObject:bento];
-    }
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:COMPLETE_TITLE];
     [self.btnAddAnother setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
@@ -139,8 +136,6 @@
     
     _isEditingBentos = NO;
     
-//    self.strPromoCode = nil;
-//    self.promoDiscount = 0;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     _strPromoCode = [userDefaults objectForKey:KEY_PROMO_CODE];
     _promoDiscount = [userDefaults integerForKey:KEY_PROMO_DISCOUNT];
@@ -168,7 +163,12 @@
 
 #pragma mark - Navigation
 
+<<<<<<< HEAD
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+=======
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     if ([segue.identifier isEqualToString:@"CreditCard"])
     {
         EnterCreditCardViewController *vcEnterCreditCard = segue.destinationViewController;
@@ -220,13 +220,21 @@
     self.lblPaymentMethod.text = strPaymentMethod;
     [self.ivCardType setImage:[UIImage imageNamed:strImageName]];
     
+<<<<<<< HEAD
     //
+=======
+    
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     NSMutableDictionary *currentUserInfo = [[[DataManager shareDataManager] getUserInfo] mutableCopy];
     currentUserInfo[@"card"] = @{
                                  @"brand": strImageName,
                                  @"last4": strCardNumber
                                  };
+<<<<<<< HEAD
     [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];
+=======
+    [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];// This should fix the payment issue, added paymentMethod
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     
     NSLog(@"Update Payment Info, %@", currentUserInfo[@"card"]);
 }
@@ -377,6 +385,22 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+<<<<<<< HEAD
+=======
+
+    // set array every time view appears (edit: moved from viewDidLoad)
+    self.aryBentos = [[NSMutableArray alloc] init];
+    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
+    {
+        Bento *bento = [[BentoShop sharedInstance] getBento:index];
+        if ([bento isCompleted])
+            [self.aryBentos addObject:bento];
+    }
+    
+    [self.tvBentos reloadData];
+    
+    NSLog(@"aryBentos in completeorder - %ld", self.aryBentos.count);
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
@@ -412,6 +436,8 @@
 - (void) viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self.aryBentos removeAllObjects];
     
     [super viewWillDisappear:animated];
 }
@@ -487,22 +513,27 @@
     [self gotoAddAnotherBentoScreen];
 }
 
-- (void) gotoAddAnotherBentoScreen
+- (void)gotoAddAnotherBentoScreen
 {
     NSArray *viewControllers = self.navigationController.viewControllers;
     
     for (UIViewController *vc in viewControllers) {
-     
-        if ([vc isKindOfClass:[MyBentoViewController class]])
+        
+        // dinner or lunch vc
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
         {
-            [[BentoShop sharedInstance] addNewBento];
+            // if dinner, add new bento
+            if ([vc isKindOfClass:[ServingDinnerViewController class]])
+            {
+                [[BentoShop sharedInstance] addNewBento];
+            }
+           
+            // go back
             [self.navigationController popToViewController:vc animated:YES];
             
             return;
         }
     }
-
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:nil];
 }
 
 - (void)showStartOverAlert
@@ -869,21 +900,23 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
-
+    NSLog(@"Current Bento - %@", curBento);
     NSArray *viewControllers = self.navigationController.viewControllers;
     
     for (UIViewController *vc in viewControllers) {
         
-        if ([vc isKindOfClass:[MyBentoViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
         {
-            [[BentoShop sharedInstance] setCurrentBento:curBento];
+            if ([vc isKindOfClass:[ServingDinnerViewController class]])
+            {
+                [[BentoShop sharedInstance] setCurrentBento:curBento];
+            }
+            
             [self.navigationController popToViewController:vc animated:YES];
             
             return;
         }
     }
-    
-    [self performSegueWithIdentifier:@"AddAnotherBento" sender:curBento];
 }
 
 - (void) onClickedMinuteButton:(UIView *)view
@@ -895,7 +928,7 @@
     [self.tvBentos reloadData];
 }
 
-- (void) onClickedRemoveButton:(UIView *)view
+- (void)onClickedRemoveButton:(UIView *)view
 {
     _clickedMinuteButtonIndex = NSNotFound;
     
@@ -922,23 +955,6 @@
     _currentIndexPath = nil;
     [self updateUI];
 }
-
-//- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-//{
-//    if (editingStyle == UITableViewCellEditingStyleDelete)
-//    {
-//        _currentIndexPath = indexPath;
-//        
-//        if (self.aryBentos.count > 1)
-//        {
-//            [self removeBento];
-//        }
-//        else
-//        {
-//            [self showStartOverAlert];
-//        }
-//    }
-//}
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -1252,7 +1268,7 @@
         else if (buttonIndex == 1)
         {
             [self removeBento];
-            [self gotoAddAnotherBentoScreen];
+            [self.navigationController popViewControllerAnimated:YES];
         }
     }
 }

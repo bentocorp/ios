@@ -19,6 +19,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
             timestampString = "452637478.25255"
             startingColumnNumber = "9223372036854775807"
@@ -170,6 +171,15 @@
             startingLineNumber = "747"
             endingLineNumber = "747"
             landmarkName = "-gotoOrderScreen"
+=======
+            filePath = "Bento/ViewController/MakeBento/ServingDinnerViewController.m"
+            timestampString = "453342233.977139"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "440"
+            endingLineNumber = "440"
+            landmarkName = "-viewDidLoad"
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -180,11 +190,19 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/Model/BentoShop.m"
+<<<<<<< HEAD
             timestampString = "452638670.728995"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "782"
             endingLineNumber = "782"
+=======
+            timestampString = "453345064.21602"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1045"
+            endingLineNumber = "1045"
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
             landmarkName = "-setCurrentBento:"
             landmarkType = "5">
          </BreakpointContent>
@@ -195,6 +213,7 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
+<<<<<<< HEAD
             filePath = "Bento/Model/BentoShop.m"
             timestampString = "452638670.728995"
             startingColumnNumber = "9223372036854775807"
@@ -392,6 +411,15 @@
             startingLineNumber = "243"
             endingLineNumber = "243"
             landmarkName = "-collectionView:didSelectItemAtIndexPath:"
+=======
+            filePath = "Bento/ViewController/MakeBento/ServingDinnerViewController.m"
+            timestampString = "453345074.358914"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "533"
+            endingLineNumber = "533"
+            landmarkName = "-loadSelectedDishes"
+>>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

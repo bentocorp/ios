@@ -12,8 +12,6 @@
 
 @interface ChooseSideDishViewController : UIViewController
 
-//@property (nonatomic, assign) Bento *currentBento;
-
 @property (nonatomic, assign) NSInteger sideDishIndex;
 
 @end
