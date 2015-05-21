@@ -72,18 +72,6 @@
     currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
 #endif
     
-<<<<<<< HEAD
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
-    NSInteger hour = [components hour];
-    NSLog(@"current hour - %ld", hour);
-    
-    NSLog(@"closed text 1 - %@", [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT]);
-    NSLog(@"closed text 2 - %@", [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT]);
-    
-    // if (now >= 7:00pm && now <= 11:59pm && today has a menu)
-    if (hour >= 19 && hour <= 23) {
-=======
     currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
     lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
     dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
@@ -91,7 +79,6 @@
     
     // 17:30 - 23:59, Closed for the night, talk about next menu
     if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24) {
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         return [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT];
     }
 
@@ -151,28 +138,7 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-<<<<<<< HEAD
-    // Dispose of any resources that can be recreated.
 }
-
-#pragma mark - Navigation
-
-//- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-//    
-//    if ([segue.identifier isEqualToString:@"Faq"])
-//    {
-////        FaqViewController *vc = segue.destinationViewController;
-////        vc.contentType = [sender intValue];
-//    }
-//    else if ([segue.identifier isEqualToString:@"preview"])
-//    {
-//        SneakPreviewViewController *vcPreview = segue.destinationViewController;
-//        vcPreview.type = self.type;
-//    }
-//}
-=======
-}
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -290,11 +256,6 @@
 
 - (IBAction)onPrivacyPolicy:(id)sender
 {
-<<<<<<< HEAD
-//    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_PRIVACY]];
-    
-=======
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
     destVC.contentType = CONTENT_PRIVACY;
@@ -303,11 +264,6 @@
 
 - (IBAction)onTermsAndConditions:(id)sender
 {
-<<<<<<< HEAD
-//    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_TERMS]];
-    
-=======
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
     destVC.contentType = CONTENT_TERMS;
@@ -316,17 +272,11 @@
 
 - (IBAction)onHelp:(id)sender
 {
-<<<<<<< HEAD
-//    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_FAQ]];
-    
-=======
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     FaqViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
     destVC.contentType = CONTENT_FAQ;
     [self.navigationController pushViewController:destVC animated:YES];
 }
-
 
 - (void) showConfirmMessage
 {

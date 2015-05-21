@@ -8,13 +8,9 @@
 
 #import "CompleteOrderViewController.h"
 
-<<<<<<< HEAD
-#import "MyBentoViewController.h"
-=======
 #import "ServingDinnerViewController.h"
 #import "ServingLunchViewController.h"
 
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
 
@@ -163,12 +159,8 @@
 
 #pragma mark - Navigation
 
-<<<<<<< HEAD
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-=======
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     if ([segue.identifier isEqualToString:@"CreditCard"])
     {
         EnterCreditCardViewController *vcEnterCreditCard = segue.destinationViewController;
@@ -220,21 +212,13 @@
     self.lblPaymentMethod.text = strPaymentMethod;
     [self.ivCardType setImage:[UIImage imageNamed:strImageName]];
     
-<<<<<<< HEAD
-    //
-=======
     
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     NSMutableDictionary *currentUserInfo = [[[DataManager shareDataManager] getUserInfo] mutableCopy];
     currentUserInfo[@"card"] = @{
                                  @"brand": strImageName,
                                  @"last4": strCardNumber
                                  };
-<<<<<<< HEAD
-    [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];
-=======
     [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];// This should fix the payment issue, added paymentMethod
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     
     NSLog(@"Update Payment Info, %@", currentUserInfo[@"card"]);
 }
@@ -392,8 +376,6 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-<<<<<<< HEAD
-=======
 
     // set array every time view appears (edit: moved from viewDidLoad)
     self.aryBentos = [[NSMutableArray alloc] init];
@@ -407,12 +389,6 @@
     
     [self.tvBentos reloadData];
     
-<<<<<<< HEAD
-    NSLog(@"aryBentos in completeorder - %ld", self.aryBentos.count);
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
-    
-=======
->>>>>>> dev
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     
@@ -621,8 +597,6 @@
 */
 - (void)processPayment
 {
-    NSLog(@"credit card info - %@", [[DataManager shareDataManager] getCreditCard]);
-    
     PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
     if (curPaymentMethod == Payment_None)
         return;
@@ -630,15 +604,11 @@
     if (curPaymentMethod == Payment_CreditCard)
     {
         STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
-        
-        
         if (cardInfo != nil) // STPCard
         {
             JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             loadingHUD.textLabel.text = @"Processing...";
             [loadingHUD showInView:self.view];
-            
-            
             
             [[STPAPIClient sharedClient] createTokenWithCard:cardInfo completion:^(STPToken *token, NSError *error) {
                 if (error)
@@ -739,6 +709,10 @@
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
     if (strAPIToken == nil || strAPIToken.length == 0)
     {
+//        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Please log in first." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+//        [alertView showInView:self.view];
+//        alertView = nil;
+        
         [self openAccountViewController:[CompleteOrderViewController class]];
         
         return;
@@ -750,7 +724,7 @@
         [self createBackendChargeWithToken:nil completion:nil];
         return;
     }
-
+    
     [self processPayment];
 //    [self gotoConfirmOrderScreen];
 }
@@ -907,7 +881,6 @@
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
-
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -1110,8 +1083,6 @@
 
 - (void)createBackendChargeWithToken:(STPToken *)token completion:(void (^)(PKPaymentAuthorizationStatus))completion
 {
-    NSLog(@"the token - %@", token.tokenId);
-    
     if (token.tokenId == nil || token.tokenId.length == 0)
     {
         if ([self getTotalPrice] > 0 && [[DataManager shareDataManager] getPaymentMethod] != Payment_Server)
@@ -1248,8 +1219,6 @@
 - (void)setCardInfo:(STPCard *)cardInfo
 {
     [[DataManager shareDataManager] setCreditCard:cardInfo];
-    
-    NSLog(@"cardInfo - %@", cardInfo);
 
     [self updateUI];
 }

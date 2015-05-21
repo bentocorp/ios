@@ -430,10 +430,7 @@
     }
 }
 
-<<<<<<< HEAD
-=======
 // TODO: ADD SETTINGS BUTTON
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
 - (void)postToTwitter
 {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
@@ -444,11 +441,7 @@
         [self presentViewController:tweetSheet animated:YES completion:nil];
     } else { // not logged into twitter
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
-<<<<<<< HEAD
-                                                               message:@"Please log into Twitter via the Twitter app or iPhone settings and try again."
-=======
                                                                message:@"Please log into Twitter via the Twitter app or in your iPhone Settings and try again."
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                                               delegate:nil
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil];
@@ -456,10 +449,7 @@
     }
 }
 
-<<<<<<< HEAD
-=======
 // TODO: ADD SETTI_gitNGS BUTTON
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
 - (void)postToFacebook
 {
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
@@ -468,15 +458,9 @@
         [faceSheet setInitialText:sharePrecomposedMessageNew];
                 
         [self presentViewController:faceSheet animated:YES completion:Nil];
-<<<<<<< HEAD
-    } else { // not logged into facebook
-        UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
-                                                               message:@"Please log into Facebook via the Facebook app or iPhone settings and try again."
-=======
     } else {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
                                                                message:@"Please log into Facebook via the Facebook app or in your iPhone Settings and try again."
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
                                                               delegate:nil
                                                      cancelButtonTitle:@"OK"
                                                      otherButtonTitles:nil];

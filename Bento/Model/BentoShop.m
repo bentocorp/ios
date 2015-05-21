@@ -34,9 +34,6 @@
 
 @implementation BentoShop
 {
-<<<<<<< HEAD
-    NSString *originalStatus;
-=======
     NSUserDefaults *defaults;
     
     NSString *originalStatus;
@@ -47,7 +44,6 @@
     float dinnerTime;
     float currentTime;
     float bufferTime;
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
 }
 
 static BentoShop *_shareInstance;
@@ -142,17 +138,10 @@ static BentoShop *_shareInstance;
     
     
     if (originalStatus.length == 0) {
-<<<<<<< HEAD
-        originalStatus = self.dicStatus[@"value"];
-    }
-    
-    NSString *newStatus = self.dicStatus[@"value"];
-=======
         originalStatus = self.dicStatus[@"overall"][@"value"];
     }
     
     NSString *newStatus = self.dicStatus[@"overall"][@"value"];
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     
     if (![originalStatus isEqualToString:newStatus]) {
         
@@ -169,18 +158,12 @@ static BentoShop *_shareInstance;
     
     self.menuStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
-//    NSLog(@"menuStatus - %@", self.menuStatus);
-    
     BOOL isClosed = [self isClosed];
     BOOL isSoldOut = [self isSoldOut];
     
     NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
     
-<<<<<<< HEAD
-    if ([self isClosed])
-=======
 //    if ([self isClosed])
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         [self getNextMenus];
     
     if (self.prevClosed != isClosed || self.prevSoldOut != isSoldOut) {
@@ -342,24 +325,10 @@ static BentoShop *_shareInstance;
     currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
 #endif
     
-<<<<<<< HEAD
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
-    NSInteger hour = [components hour];
-    
-    NSLog(@"CURRENT HOUR - %ld", (long)hour);
-    
-=======
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyyMMdd"];
     NSString *strDate = [formatter stringFromDate:currentDate];
     
-<<<<<<< HEAD
-    if (hour < 21) // before 9pm
-    {
-        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
-=======
 //    if (currentTime < 21) // before 9pm, get menu
 //    {
 //        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
@@ -378,7 +347,6 @@ static BentoShop *_shareInstance;
 //    else // 9pm and after
 //    {
         NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
         
         NSError *error = nil;
         NSInteger statusCode = 0;

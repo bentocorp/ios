@@ -59,11 +59,7 @@
     self.complete = nil;
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-<<<<<<< HEAD
-    [defaults setObject:@"" forKey:@"cameFromWhichVC"];
-=======
     [defaults setObject:@"" forKey:@"cameFromWhichVC"]; // wtf?
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     [defaults synchronize];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

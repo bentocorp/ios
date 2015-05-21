@@ -125,24 +125,5 @@
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
-<<<<<<< HEAD
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "453322235.684819"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "502"
-            endingLineNumber = "502"
-            landmarkName = "-gotoAddAnotherBentoScreen"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-=======
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
    </Breakpoints>
 </Bucket>

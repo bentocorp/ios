@@ -77,18 +77,6 @@
             }
         }
     }
-<<<<<<< HEAD
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-=======
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     
 //    [self.cvMainDishes reloadData];
     

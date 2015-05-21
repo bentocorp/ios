@@ -132,8 +132,12 @@ static DataManager *_shareDataManager;
             // Load Card Info
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSString *strSavedUserMail = [userDefaults objectForKey:@"user_email"];
-            
-            if ([strSavedUserMail isEqualToString:strUserMail]) // Same user as last login
+//            NSString *strSavedCardBrand = [userDefaults objectForKey:@"card_brand"];
+//            NSString *strSavedCardLast4 = [userDefaults objectForKey:@"card_last4"];
+//            if ([strSavedUserMail caseInsensitiveCompare:strUserMail] == NSOrderedSame &&
+//                [strSavedCardBrand caseInsensitiveCompare:strCardType] == NSOrderedSame &&
+//                [strSavedCardLast4 caseInsensitiveCompare:strCardNumber] == NSOrderedSame)
+            if ([strSavedUserMail isEqualToString:strUserMail])
             {
                 if ([[userDefaults objectForKey:@"is_applepay"] boolValue])
                     self.paymentMethod = Payment_ApplePay;
@@ -186,15 +190,12 @@ static DataManager *_shareDataManager;
 
 - (PaymentMethod)getPaymentMethod
 {
-    NSLog(@"getPaymentMethod, current payment method - %ld", self.curPaymentMethod);
     return self.curPaymentMethod;
 }
 
 - (void)setPaymentMethod:(PaymentMethod)newPaymentMethod
 {
     self.curPaymentMethod = newPaymentMethod;
-    
-    NSLog(@"newPaymentMethod - %ld", newPaymentMethod);
 }
 
 - (NSString *)getErrorMessage:(id)errorInfo

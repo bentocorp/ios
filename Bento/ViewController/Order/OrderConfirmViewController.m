@@ -8,12 +8,8 @@
 
 #import "OrderConfirmViewController.h"
 
-<<<<<<< HEAD
-#import "MyBentoViewController.h"
-=======
 #import "ServingDinnerViewController.h"
 #import "ServingLunchViewController.h"
->>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
 
 #import "UIImageView+WebCache.h"
 

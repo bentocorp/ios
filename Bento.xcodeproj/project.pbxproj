@@ -1361,13 +1361,6 @@
 				FC99D4F61AFC325100BEE40B /* At Launch */,
 				FC99D4F51AFC323700BEE40B /* Closed/Sold-out */,
 				FCFD79F01AE8880D002AD322 /* Settings */,
-				7223336C1A6D66E8006C2446 /* IntroViewController.h */,
-				7223336D1A6D66E8006C2446 /* IntroViewController.m */,
-				90BED0A31A5BD05C003DC872 /* FirstViewController.h */,
-				90BED0A41A5BD05C003DC872 /* FirstViewController.m */,
-				726CE3591A82693900296182 /* BaseViewController.h */,
-				726CE35A1A82693900296182 /* BaseViewController.m */,
-				FCFD79F01AE8880D002AD322 /* Settings */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
 				90BED0A51A5BD05C003DC872 /* Homepage */,
 				90BED0A61A5BD05C003DC872 /* Order */,
@@ -1531,13 +1524,6 @@
 				FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */,
 				FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */,
 				FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */,
-<<<<<<< HEAD
-				FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */,
-				FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */,
-				FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */,
-				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
-=======
->>>>>>> dev
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -2003,7 +1989,6 @@
 				FCDF22251ADC3ADF006B2750 /* Icon-Small-40.png in Resources */,
 				7216B77A1AA64C7C0006FFE9 /* deliverylocation_icon_navigation@2x.png in Resources */,
 				7216B77B1AA64C7C0006FFE9 /* OpenSans-Bold.ttf in Resources */,
-				7216B77C1AA64C7C0006FFE9 /* PreviewCollectionViewCell.xib in Resources */,
 				FC8DB73D1AF18674003045A3 /* icon-circle-messages.png in Resources */,
 				FC8DB7451AF18674003045A3 /* icon-square-email.png in Resources */,
 				7216B77D1AA64C7C0006FFE9 /* PromoCodeView.xib in Resources */,
@@ -2158,7 +2143,6 @@
 				FCDF22241ADC3ADF006B2750 /* Icon-Small-40.png in Resources */,
 				90D8F7D01A5E2B3B00D034CF /* deliverylocation_icon_navigation@2x.png in Resources */,
 				90BED0C11A5BE72F003DC872 /* OpenSans-Bold.ttf in Resources */,
-				728B9E811A9C65C900A2ED73 /* PreviewCollectionViewCell.xib in Resources */,
 				FC8DB73C1AF18674003045A3 /* icon-circle-messages.png in Resources */,
 				FC8DB7441AF18674003045A3 /* icon-square-email.png in Resources */,
 				90A553E41A60038C001F9DA7 /* PromoCodeView.xib in Resources */,
@@ -2395,7 +2379,6 @@
 				7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */,
-				7216B7111AA64C7C0006FFE9 /* PreviewCollectionViewCell.m in Sources */,
 				FCD51ECC1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */,
 				FCAA47A11AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				7216B7121AA64C7C0006FFE9 /* ChooseSideDishViewController.m in Sources */,
@@ -2454,7 +2437,6 @@
 				7216B7431AA64C7C0006FFE9 /* UIImageView+HighlightedWebCache.m in Sources */,
 				7216B7441AA64C7C0006FFE9 /* SVPlacemark.m in Sources */,
 				7216B7451AA64C7C0006FFE9 /* MyCLController.m in Sources */,
-				7216B7461AA64C7C0006FFE9 /* SneakPreviewViewController.m in Sources */,
 				FCAA479F1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				7216B7471AA64C7C0006FFE9 /* MKNetworkOperation.m in Sources */,
 				7216B7481AA64C7C0006FFE9 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
@@ -2502,7 +2484,6 @@
 				7286EB4E1A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */,
-				728B9E801A9C65C900A2ED73 /* PreviewCollectionViewCell.m in Sources */,
 				FCD51ECB1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */,
 				FCAA47A01AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				90BED0D91A5BF301003DC872 /* ChooseSideDishViewController.m in Sources */,
@@ -2561,7 +2542,6 @@
 				722333B41A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m in Sources */,
 				7209E0801A76BD1800D18D7A /* SVPlacemark.m in Sources */,
 				722333DF1A6FD7B8006C2446 /* MyCLController.m in Sources */,
-				728B9E7C1A9C1FD500A2ED73 /* SneakPreviewViewController.m in Sources */,
 				FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				722333D61A6F46DF006C2446 /* MKNetworkOperation.m in Sources */,
 				722333CE1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
@@ -2798,7 +2778,6 @@
 				INFOPLIST_FILE = Bento/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
