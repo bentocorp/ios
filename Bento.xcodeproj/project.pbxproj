@@ -330,8 +330,6 @@
 		FC08AB251AF713DD00CFB44D /* ServingDinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* ServingDinnerViewController.m */; };
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
-		FC0984231AF2ACD20014B138 /* CustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0984221AF2ACD20014B138 /* CustomSegue.m */; };
-		FC0984241AF2ACD20014B138 /* CustomSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = FC0984221AF2ACD20014B138 /* CustomSegue.m */; };
 		FC3C4E791AF96A41005D7197 /* ServingLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */; };
 		FC3C4E7A1AF96A41005D7197 /* ServingLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */; };
 		FC3C4E7D1AF96B42005D7197 /* ServingLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */; };
@@ -797,8 +795,6 @@
 		FC08AB231AF713DD00CFB44D /* ServingDinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingDinnerViewController.m; sourceTree = "<group>"; };
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
-		FC0984211AF2ACD20014B138 /* CustomSegue.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomSegue.h; sourceTree = "<group>"; };
-		FC0984221AF2ACD20014B138 /* CustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegue.m; sourceTree = "<group>"; };
 		FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchViewController.h; sourceTree = "<group>"; };
 		FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchViewController.m; sourceTree = "<group>"; };
 		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchCell.h; sourceTree = "<group>"; };
@@ -870,6 +866,10 @@
 		FC8DB7351AF18674003045A3 /* icon-square-help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-help.png"; sourceTree = "<group>"; };
 		FC8DB7361AF18674003045A3 /* icon-square-phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-phone.png"; sourceTree = "<group>"; };
 		FC8DB7371AF18674003045A3 /* icon-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-user.png"; sourceTree = "<group>"; };
+		FC90965E1B0E70FA00E592CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC90965F1B0E70FA00E592CF /* BentoDev_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BentoDev_Tests.m; sourceTree = "<group>"; };
+		FC90966D1B0E710500E592CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC90966E1B0E710500E592CF /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
 		FC99D4ED1AFBFD2A00BEE40B /* ServingLunchBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchBentoViewController.h; sourceTree = "<group>"; };
 		FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchBentoViewController.m; sourceTree = "<group>"; };
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
@@ -1250,6 +1250,8 @@
 			children = (
 				90BED0701A5BCC04003DC872 /* Bento */,
 				90BED08A1A5BCC04003DC872 /* BentoTests */,
+				FC90965C1B0E70FA00E592CF /* BentoDev Tests */,
+				FC90966B1B0E710500E592CF /* Bento Tests */,
 				90BED06F1A5BCC04003DC872 /* Products */,
 				6FD3F1724EE25B5F8E1A5D58 /* Pods */,
 				C994F09FDA3B8896E57F29B5 /* Frameworks */,
@@ -1270,8 +1272,6 @@
 		90BED0701A5BCC04003DC872 /* Bento */ = {
 			isa = PBXGroup;
 			children = (
-				FC0984211AF2ACD20014B138 /* CustomSegue.h */,
-				FC0984221AF2ACD20014B138 /* CustomSegue.m */,
 				722333011A6BF172006C2446 /* Bento.entitlements */,
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
@@ -1778,6 +1778,40 @@
 				FC8DB7371AF18674003045A3 /* icon-user.png */,
 			);
 			path = Images;
+			sourceTree = "<group>";
+		};
+		FC90965C1B0E70FA00E592CF /* BentoDev Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FC90965F1B0E70FA00E592CF /* BentoDev_Tests.m */,
+				FC90965D1B0E70FA00E592CF /* Supporting Files */,
+			);
+			path = "BentoDev Tests";
+			sourceTree = "<group>";
+		};
+		FC90965D1B0E70FA00E592CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC90965E1B0E70FA00E592CF /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		FC90966B1B0E710500E592CF /* Bento Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FC90966E1B0E710500E592CF /* Bento_Tests.m */,
+				FC90966C1B0E710500E592CF /* Supporting Files */,
+			);
+			path = "Bento Tests";
+			sourceTree = "<group>";
+		};
+		FC90966C1B0E710500E592CF /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC90966D1B0E710500E592CF /* Info.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		FC99D4F51AFC323700BEE40B /* Closed/Sold-out */ = {
@@ -2420,7 +2454,6 @@
 				7216B7331AA64C7C0006FFE9 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				7216B7341AA64C7C0006FFE9 /* SDWebImagePrefetcher.m in Sources */,
 				7216B7351AA64C7C0006FFE9 /* MyAlertView.m in Sources */,
-				FC0984241AF2ACD20014B138 /* CustomSegue.m in Sources */,
 				7216B7361AA64C7C0006FFE9 /* STPTestShippingMethodStore.m in Sources */,
 				7216B7371AA64C7C0006FFE9 /* NSDictionary+RequestEncoding.m in Sources */,
 				7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */,
@@ -2525,7 +2558,6 @@
 				722333D41A6F46DF006C2446 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				722333AF1A6EADBD006C2446 /* SDWebImagePrefetcher.m in Sources */,
 				90D8F7A41A5D6B6E00D034CF /* MyAlertView.m in Sources */,
-				FC0984231AF2ACD20014B138 /* CustomSegue.m in Sources */,
 				722333FD1A72C133006C2446 /* STPTestShippingMethodStore.m in Sources */,
 				722333D11A6F46DF006C2446 /* NSDictionary+RequestEncoding.m in Sources */,
 				7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */,

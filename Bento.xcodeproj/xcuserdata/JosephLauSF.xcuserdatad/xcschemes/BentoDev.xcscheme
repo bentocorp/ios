@@ -20,6 +20,20 @@
                ReferencedContainer = "container:Bento.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC90965A1B0E70FA00E592CF"
+               BuildableName = "BentoDev Tests.xctest"
+               BlueprintName = "BentoDev Tests"
+               ReferencedContainer = "container:Bento.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -28,6 +42,16 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC90965A1B0E70FA00E592CF"
+               BuildableName = "BentoDev Tests.xctest"
+               BlueprintName = "BentoDev Tests"
+               ReferencedContainer = "container:Bento.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference

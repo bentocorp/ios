@@ -1,19 +1,19 @@
 //
-//  BentoTests.m
-//  BentoTests
+//  BentoDev_Tests.m
+//  BentoDev Tests
 //
-//  Created by hanjinghe on 1/6/15.
+//  Created by Joseph Lau on 5/21/15.
 //  Copyright (c) 2015 bentonow. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 
-@interface BentoTests : XCTestCase
+@interface BentoDev_Tests : XCTestCase
 
 @end
 
-@implementation BentoTests
+@implementation BentoDev_Tests
 
 - (void)setUp {
     [super setUp];
@@ -22,31 +22,8 @@
 
 - (void)tearDown {
     // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
     [super tearDown];
-}
-
-- (void)testTrue
-{
-    XCTAssertTrue(true, @"Expression was not true");
-}
-
-- (void)testFalse
-{
-    int val1 = 1;
-    int val2 = 2;
-    XCTAssertFalse(val1 == val2, @"%d == %d", val1, val2);
-}
-
-- (void)testStringForNil
-{
-    NSString *somestring;
-    XCTAssertNil(somestring, @"someString was not nil");
-}
-
-- (void)testStringForNotNil
-{
-    NSString *someString = @"workshop";
-    XCTAssertNotNil(someString, @"someString == '%@'", someString);
 }
 
 - (void)testExample {
