@@ -10,6 +10,8 @@
 
 @interface ServingLunchCell : UITableViewCell
 
+@property (nonatomic) UIView *viewDish;
+
 @property (nonatomic) UIImageView *ivMainDish;
 
 @property (nonatomic) UILabel *lblMainDish;

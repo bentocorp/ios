@@ -21,7 +21,7 @@
 
 #import <MapKit/MapKit.h>
 
-@interface OutOfDeliveryAddressViewController ()
+@interface OutOfDeliveryAddressViewController () <UIWebViewDelegate>
 
 @property (nonatomic, assign) IBOutlet MKMapView *mapView;
 
@@ -39,9 +39,14 @@
 
 @property (nonatomic, assign) IBOutlet UIButton *btnSend;
 
+@property (weak, nonatomic) IBOutlet UIWebView *webView;
+
 @end
 
 @implementation OutOfDeliveryAddressViewController
+{
+    UIActivityIndicatorView *viewActivity;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -61,6 +66,33 @@
     [self.mapView setRegion:MKCoordinateRegionForMapRect(newRect)];
     
     [self.lblAddress setText:self.strAddress];
+    
+    NSLog(@"hehe - %@", self.strAddress);
+    
+// set map view
+    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
+    NSURL *url;
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerTime)
+    {
+        url = [NSURL URLWithString:@"https://a.tiles.mapbox.com/v4/vincent-bentonow-com.m6g45dbo/page.html?access_token=pk.eyJ1IjoidmluY2VudC1iZW50b25vdy1jb20iLCJhIjoiV0p2al9qNCJ9.cKufaBUS30xSk7wXxmGuDg#15/37.7692/-122.4111"];
+    }
+    // dinner opening - 11:59pm
+    else if (currentTime >= dinnerTime && currentTime < 24)
+    {
+        url = [NSURL URLWithString:@"https://a.tiles.mapbox.com/v4/vincent-bentonow-com.m4b3e43g/page.html?access_token=pk.eyJ1IjoidmluY2VudC1iZW50b25vdy1jb20iLCJhIjoiV0p2al9qNCJ9.cKufaBUS30xSk7wXxmGuDg#13/37.7802/-122.4169"];
+    }
+    
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    [self.webView loadRequest:request];
+    
+    viewActivity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(self.webView.frame.size.width/2-10, self.webView.frame.size.width/2-40, 20, 20)];
+    viewActivity.color = [UIColor grayColor];
+    [self.webView addSubview:viewActivity];
+    
+    viewActivity.hidden = NO;
+    [viewActivity startAnimating];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -167,16 +199,18 @@
     if (strToken != nil && strToken.length > 0)
     {
         postInfo = @{
-                     @"email" : strEmail,
-                     @"reason" : strReason,
-                     @"api_token" : strToken,
+                     @"email"       : strEmail,
+                     @"reason"      : strReason,
+                     @"api_token"   : strToken,
+                     @"address"     : self.strAddress
                      };
     }
     else
     {
         postInfo = @{
-                     @"email" : strEmail,
-                     @"reason" : strReason,
+                     @"email"   : strEmail,
+                     @"reason"  : strReason,
+                     @"address" : self.strAddress
                      };
     }
     
@@ -234,6 +268,28 @@
     polygonView.strokeColor = [UIColor redColor];
     polygonView.fillColor = [UIColor greenColor];
     return polygonView;
+}
+
+#pragma mark UIWebViewDelegate
+
+- (void)hideActivityView
+{
+    [viewActivity stopAnimating];
+    viewActivity.hidden = YES;
+}
+
+- (void)webViewDidFinishLoad:(UIWebView *)webView
+{
+    [self hideActivityView];
+}
+
+- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+{
+    [self hideActivityView];
+    
+    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+    [alertView showInView:self.view];
+    alertView = nil;
 }
 
 @end

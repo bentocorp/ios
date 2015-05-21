@@ -330,6 +330,7 @@
             SVPlacemark *placeMark = [placemarks firstObject];
             self.placeInfo = placeMark;
             self.txtAddress.text = placeMark.formattedAddress;
+            NSLog(@"Address: %@", self.txtAddress.text);
             [self updateUI];
         }
         else

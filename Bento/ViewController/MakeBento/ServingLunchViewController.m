@@ -36,6 +36,8 @@
 
 #import "AppDelegate.h"
 
+#import "Canvas.h"
+
 
 @interface ServingLunchViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -64,11 +66,14 @@
     int weekday;
     
     BWTitlePagerView *pagingTitleView;
+    
+    ServingLunchCell *servingLunchCell;
+    
+    CSAnimationView *animationView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
 /*---Scroll View---*/
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -76,9 +81,12 @@
     scrollView.pagingEnabled = YES;
     scrollView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     scrollView.bounces = NO;
+//    scrollView.delaysContentTouches = NO;
+//    scrollView.canCancelContentTouches = YES;
     [self.view addSubview:scrollView];
     
 /*---My Table View---*/
+    
     myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65 - 45)];
     myTableView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
@@ -86,6 +94,8 @@
     myTableView.allowsSelection = NO;
     myTableView.dataSource = self;
     myTableView.delegate = self;
+//    myTableView.delaysContentTouches = NO;
+//    myTableView.canCancelContentTouches = YES;
     [scrollView addSubview:myTableView];
     
 /*---Navigation View---*/
@@ -95,8 +105,6 @@
     [self.view addSubview:navigationBarView];
     
 /*---BW Title Pager View---*/
-    
-//    NSString *nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
@@ -135,14 +143,20 @@
     
 /*---Count Badge---*/
     
-    lblBadge = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 42.5, 25, 14, 14)];
+    animationView = [[CSAnimationView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 43.5, 23, 14, 14)];
+    animationView.duration = 0.5;
+    animationView.delay = 0;
+    animationView.type = CSAnimationTypeZoomOut;
+    [navigationBarView addSubview:animationView];
+    
+    lblBadge = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 17, 17)];
     lblBadge.textAlignment = NSTextAlignmentCenter;
     lblBadge.font = [UIFont fontWithName:@"OpenSans-Semibold" size:10];
     lblBadge.backgroundColor = [UIColor colorWithRed:0.890f green:0.247f blue:0.373f alpha:1.0f];
     lblBadge.textColor = [UIColor whiteColor];
     lblBadge.layer.cornerRadius = lblBadge.frame.size.width / 2;
     lblBadge.clipsToBounds = YES;
-    [navigationBarView addSubview:lblBadge];
+    [animationView addSubview:lblBadge];
     
 /*---Banner---*/
     
@@ -296,7 +310,7 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    ServingLunchCell *servingLunchCell = (ServingLunchCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    servingLunchCell = (ServingLunchCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     if (servingLunchCell == nil) {
         servingLunchCell = [[ServingLunchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
@@ -324,9 +338,25 @@
         [servingLunchCell.addButton setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
     }
     
+    // add bento button
     servingLunchCell.addButton.tag = indexPath.row;
+    [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoHighlight:) forControlEvents:UIControlEventTouchDown];
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
     
+    // Prices
+    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
+    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    if (salePrice != 0 && salePrice < unitPrice)
+    {
+        // Normal Price
+        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", salePrice] forState:UIControlStateNormal];
+    }
+    else
+    {
+        // On Sale
+        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", unitPrice] forState:UIControlStateNormal];
+    }
+
     return servingLunchCell;
 }
 
@@ -419,7 +449,6 @@
     }
 }
 
-
 - (void)onSettings
 {
     // get current user info
@@ -460,8 +489,17 @@
     [self.navigationController pushViewController:servingLunchBentoViewController animated:YES];
 }
 
+- (void)onAddBentoHighlight:(id)sender
+{
+    UIButton *selectedButton = (UIButton *)sender;
+    selectedButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:0.7f];
+}
+
 - (void)onAddBento:(id)sender
 {
+    // animate badge
+    [animationView startCanvasAnimation];
+    
     /*---Add items to empty bento---*/
     UIButton *selectedButton = (UIButton *)sender;
     
@@ -501,7 +539,6 @@
     
     [[BentoShop sharedInstance] addNewBento];
     
-    
     [self updateUI];
 }
 
@@ -535,7 +572,6 @@
         if (placeInfo == nil)
             [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
         else
-            
             [self.navigationController pushViewController:completeOrderViewController animated:YES];
     }
 }

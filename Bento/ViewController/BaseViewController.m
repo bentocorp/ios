@@ -52,7 +52,7 @@
     }
 }
 
-- (void) openAccountViewController:(id) nextViewControllerClass
+- (void)openAccountViewController:(id) nextViewControllerClass
 {
     self.isOpenningAccountView = YES;
     self.nextViewController = nextViewControllerClass;
@@ -77,7 +77,8 @@
     self.complete = completion;
     self.nextViewController = nil;
     
-    UINavigationController *navACcount = [self.storyboard instantiateViewControllerWithIdentifier:@"Account"];
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UINavigationController *navACcount = [storyboard instantiateViewControllerWithIdentifier:@"Account"];
     
     [self.navigationController presentViewController:navACcount animated:YES completion:nil];
 }
@@ -106,7 +107,8 @@
         {
             NSString *classIdentifier = NSStringFromClass(self.nextViewController);
             
-            UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:classIdentifier];
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:classIdentifier];
             
             [self.navigationController pushViewController:vc animated:YES];
         }

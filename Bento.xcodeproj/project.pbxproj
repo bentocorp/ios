@@ -801,8 +801,8 @@
 		FC0984221AF2ACD20014B138 /* CustomSegue.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomSegue.m; sourceTree = "<group>"; };
 		FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchViewController.h; sourceTree = "<group>"; };
 		FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchViewController.m; sourceTree = "<group>"; };
-		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ServingLunchCell.h; path = ../ViewController/MakeBento/ServingLunchCell.h; sourceTree = "<group>"; };
-		FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ServingLunchCell.m; path = ../ViewController/MakeBento/ServingLunchCell.m; sourceTree = "<group>"; };
+		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchCell.h; sourceTree = "<group>"; };
+		FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchCell.m; sourceTree = "<group>"; };
 		FC8285C61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
 		FC8285C71AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		FC8285C81AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
@@ -883,8 +883,8 @@
 		FCAA47991AE9E03B00CA1743 /* SignedInSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedInSettingsViewController.m; sourceTree = "<group>"; };
 		FCAA479A1AE9E03B00CA1743 /* SignedOutSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignedOutSettingsViewController.h; sourceTree = "<group>"; };
 		FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedOutSettingsViewController.m; sourceTree = "<group>"; };
-		FCB906111AEC7FB9003041F7 /* FaqViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FaqViewController.h; sourceTree = "<group>"; };
-		FCB906121AEC7FBF003041F7 /* FaqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FaqViewController.m; sourceTree = "<group>"; };
+		FCB906111AEC7FB9003041F7 /* FaqViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaqViewController.h; path = MakeBento/FaqViewController.h; sourceTree = "<group>"; };
+		FCB906121AEC7FBF003041F7 /* FaqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FaqViewController.m; path = MakeBento/FaqViewController.m; sourceTree = "<group>"; };
 		FCD51EC91AFB4B69009D75BB /* SneakPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakPreviewViewController.h; path = ../Order/SneakPreviewViewController.h; sourceTree = "<group>"; };
 		FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakPreviewViewController.m; path = ../Order/SneakPreviewViewController.m; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1276,8 +1276,8 @@
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
 				722333651A6D57AD006C2446 /* Model */,
-				90BED0E71A5C3333003DC872 /* Cell */,
 				90BED09C1A5BCC7B003DC872 /* View */,
+				90BED0E71A5C3333003DC872 /* Cell */,
 				90BED09D1A5BCC7B003DC872 /* ViewController */,
 				90BED09A1A5BCC7B003DC872 /* Resource */,
 				90BED0711A5BCC04003DC872 /* Supporting Files */,
@@ -1369,7 +1369,7 @@
 				726CE35A1A82693900296182 /* BaseViewController.m */,
 				FCFD79F01AE8880D002AD322 /* Settings */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
-				90BED0A51A5BD05C003DC872 /* MakeBento */,
+				90BED0A51A5BD05C003DC872 /* Homepage */,
 				90BED0A61A5BD05C003DC872 /* Order */,
 				90BED0A71A5BD05C003DC872 /* SignIn */,
 				FC3C4E761AF969F2005D7197 /* Unused VC */,
@@ -1388,18 +1388,13 @@
 			path = DeliveryLocation;
 			sourceTree = "<group>";
 		};
-		90BED0A51A5BD05C003DC872 /* MakeBento */ = {
+		90BED0A51A5BD05C003DC872 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
 				FC3C4E801AF97FD7005D7197 /* Serving Dinner */,
 				FC3C4E7F1AF97FCD005D7197 /* Serving Lunch */,
-				90BED0D41A5BF2F4003DC872 /* ChooseMainDishViewController.h */,
-				90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */,
-				90BED0D71A5BF301003DC872 /* ChooseSideDishViewController.h */,
-				90BED0D81A5BF301003DC872 /* ChooseSideDishViewController.m */,
-				FCB906111AEC7FB9003041F7 /* FaqViewController.h */,
-				FCB906121AEC7FBF003041F7 /* FaqViewController.m */,
 			);
+			name = Homepage;
 			path = MakeBento;
 			sourceTree = "<group>";
 		};
@@ -1536,21 +1531,15 @@
 				FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */,
 				FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */,
 				FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */,
+<<<<<<< HEAD
 				FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */,
 				FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */,
 				FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */,
 				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
+=======
+>>>>>>> dev
 			);
 			path = Cell;
-			sourceTree = "<group>";
-		};
-		AA4B292B1B016E0400C4CFB0 /* Details */ = {
-			isa = PBXGroup;
-			children = (
-				FC99D4ED1AFBFD2A00BEE40B /* ServingLunchBentoViewController.h */,
-				FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */,
-			);
-			name = Details;
 			sourceTree = "<group>";
 		};
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
@@ -1580,6 +1569,15 @@
 			path = BWTitlePagerView;
 			sourceTree = "<group>";
 		};
+		FC08CC1E1B0AA361008D0A84 /* Lunch Cell */ = {
+			isa = PBXGroup;
+			children = (
+				FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */,
+				FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */,
+			);
+			name = "Lunch Cell";
+			sourceTree = "<group>";
+		};
 		FC3C4E761AF969F2005D7197 /* Unused VC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1595,9 +1593,11 @@
 		FC3C4E7F1AF97FCD005D7197 /* Serving Lunch */ = {
 			isa = PBXGroup;
 			children = (
+				FC08CC1E1B0AA361008D0A84 /* Lunch Cell */,
 				FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */,
 				FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */,
-				AA4B292B1B016E0400C4CFB0 /* Details */,
+				FC99D4ED1AFBFD2A00BEE40B /* ServingLunchBentoViewController.h */,
+				FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */,
 			);
 			name = "Serving Lunch";
 			sourceTree = "<group>";
@@ -1607,6 +1607,10 @@
 			children = (
 				FC08AB221AF713DD00CFB44D /* ServingDinnerViewController.h */,
 				FC08AB231AF713DD00CFB44D /* ServingDinnerViewController.m */,
+				90BED0D41A5BF2F4003DC872 /* ChooseMainDishViewController.h */,
+				90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */,
+				90BED0D71A5BF301003DC872 /* ChooseSideDishViewController.h */,
+				90BED0D81A5BF301003DC872 /* ChooseSideDishViewController.m */,
 			);
 			name = "Serving Dinner";
 			sourceTree = "<group>";
@@ -1851,6 +1855,8 @@
 				FCAA47991AE9E03B00CA1743 /* SignedInSettingsViewController.m */,
 				FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */,
 				FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */,
+				FCB906111AEC7FB9003041F7 /* FaqViewController.h */,
+				FCB906121AEC7FBF003041F7 /* FaqViewController.m */,
 			);
 			name = Settings;
 			sourceTree = "<group>";

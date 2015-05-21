@@ -14,8 +14,29 @@
 #import "WebManager.h"
 #import "JGProgressHUD.h"
 #import "MyAlertView.h"
+#import "EnterCreditCardViewController.h"
 
-@interface CreditCardInfoViewController ()
+// Stripe
+#import "Stripe.h"
+#import "STPToken.h"
+#import "Stripe+ApplePay.h"
+#import <PassKit/PassKit.h>
+
+#import "PTKCardType.h"
+#import "PTKCardNumber.h"
+#import "PKPayment+STPTestKeys.h"
+
+#ifdef DEBUG
+#import "STPTestPaymentAuthorizationViewController.h"
+#endif
+
+#define KEY_PROMO_CODE @"promo_code"
+#define KEY_PROMO_DISCOUNT @"promo_discount"
+
+//#define APPLE_MERCHANT_ID @"merchant.com.bento"
+#define APPLE_MERCHANT_ID @"merchant.com.somethingnew.bento"
+
+@interface CreditCardInfoViewController () <EnterCreditCardViewControllerDelegate>
 
 @end
 
@@ -73,25 +94,38 @@
     [self.view addSubview:whiteBackgroundView];
 
     // credit card image
-    creditCardImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, 11.5, 30, 22)];
+    creditCardImage = [[UIImageView alloc] initWithFrame:CGRectMake(20, whiteBackgroundView.frame.size.height/2 - (29.2/2), 40, 29.2)];
+    [creditCardImage setClipsToBounds:YES];
+    creditCardImage.contentMode = UIViewContentModeScaleAspectFill;
     [whiteBackgroundView addSubview:creditCardImage];
     
     // credit card digits
-    creditCardDigitsLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 12, 150, 21)];
+    creditCardDigitsLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 12, 150, 21)];
     creditCardDigitsLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     creditCardDigitsLabel.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [whiteBackgroundView addSubview:creditCardDigitsLabel];
+    
+    // change credit card button
+    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, whiteBackgroundView.frame.size.height/2 - 15, 80, 30)];
+    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]])
+        [changeButton setTitle:@"ADD" forState:UIControlStateNormal];
+    else
+        [changeButton setTitle:@"CHANGE" forState:UIControlStateNormal];
+    [changeButton setTitleColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
+    changeButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:10];
+    [changeButton addTarget:self action:@selector(onChange) forControlEvents:UIControlEventTouchUpInside];
+    [whiteBackgroundView addSubview:changeButton];
 }
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]]) {
-        
+    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]])
+    {
         // no card info
         creditCardImage.image = [UIImage imageNamed:@"placeholder"];
-        
-    } else {
-        
+    }
+    else
+    {
         // has card info
         creditCardImage.image = [UIImage imageNamed:[currentUserInfo[@"card"][@"brand"] lowercaseString]];
         creditCardDigitsLabel.text = currentUserInfo[@"card"][@"last4"];
@@ -139,6 +173,140 @@
 //        alertView = nil;
 //        
 //    } isJSON:NO];
+}
+
+- (void)onChange
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    EnterCreditCardViewController *enterCreditCardViewController = [storyboard instantiateViewControllerWithIdentifier:@"EnterCreditCardViewController"];
+    enterCreditCardViewController.delegate = self;
+    [self.navigationController presentViewController:enterCreditCardViewController animated:YES completion:nil];
+}
+
+#pragma mark EnterCreditCardViewControllerDelegate
+
+- (void)setCardInfo:(STPCard *)cardInfo
+{
+    [[DataManager shareDataManager] setCreditCard:cardInfo];
+    
+    [self updateCardInfo];
+}
+
+- (void)updateCardInfo
+{
+    NSLog(@"updated user info - %@", [[DataManager shareDataManager] getUserInfo]);
+    
+    PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
+    if (curPaymentMethod == Payment_ApplePay)
+    {
+        [creditCardImage setImage:[UIImage imageNamed:@"orderconfirm_image_applepay"]];
+        creditCardDigitsLabel.text = @"Apple Pay";
+    }
+    else if (curPaymentMethod == Payment_Server)
+    {
+        NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
+        NSDictionary *cardInfo = [userInfo objectForKey:@"card"];
+        NSString *strCardType = [[cardInfo objectForKey:@"brand"] lowercaseString];
+        NSString *strCardNumber = [cardInfo objectForKey:@"last4"];
+        
+        [self updatePaymentInfo:strCardType cardNumber:strCardNumber paymentMethod:curPaymentMethod];
+    }
+    else if (curPaymentMethod == Payment_CreditCard)
+    {
+        STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
+        PTKCardNumber *cardNumber = [PTKCardNumber cardNumberWithString:cardInfo.number];
+        PTKCardType cardType = [cardNumber cardType];
+        
+        switch (cardType) {
+            case PTKCardTypeAmex:
+                [self updatePaymentInfo:@"amex" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+                break;
+            case PTKCardTypeDinersClub:
+                [self updatePaymentInfo:@"diners" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+                break;
+            case PTKCardTypeDiscover:
+                [self updatePaymentInfo:@"discover" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+                break;
+            case PTKCardTypeJCB:
+                [self updatePaymentInfo:@"jcb" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+                break;
+            case PTKCardTypeMasterCard:
+                [self updatePaymentInfo:@"mastercard" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+                break;
+            case PTKCardTypeVisa:
+                [self updatePaymentInfo:@"visa" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+                break;
+            default:
+                [self updatePaymentInfo:@"" cardNumber:@"" paymentMethod:curPaymentMethod];
+                break;
+        }
+        
+        NSLog(@"card number - %@", cardInfo.last4);
+        
+    }
+    else if (curPaymentMethod == Payment_None)
+    {
+        [creditCardImage setImage:[UIImage imageNamed:@"orderconfirm_image_credit"]];
+        creditCardDigitsLabel.text = @"";
+    }
+}
+
+
+- (void)updatePaymentInfo:(NSString *)strCardType cardNumber:(NSString *)strCardNumber paymentMethod:(PaymentMethod)paymentMethod
+{
+    NSString *strImageName = @"placeholder";
+    NSString *strPaymentMethod = @"";
+    
+    if ([strCardType isEqualToString:@"applepay"])
+    {
+        strImageName = @"orderconfirm_image_applepay";
+        strPaymentMethod = @"Apple Pay";
+    }
+    else if ([strCardType isEqualToString:@"amex"])
+    {
+        strImageName = @"amex";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"diners"])
+    {
+        strImageName = @"diners";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"discover"])
+    {
+        strImageName = @"discover";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"jcb"])
+    {
+        strImageName = @"jcb";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"mastercard"])
+    {
+        strImageName = @"mastercard";
+        strPaymentMethod = strCardNumber;
+    }
+    else if ([strCardType isEqualToString:@"visa"])
+    {
+        strImageName = @"visa";
+        strPaymentMethod= strCardNumber;
+    }
+    
+    creditCardDigitsLabel.text = strPaymentMethod;
+    [creditCardImage setImage:[UIImage imageNamed:strImageName]];
+    
+    
+    NSMutableDictionary *currentUserInfo2 = [[[DataManager shareDataManager] getUserInfo] mutableCopy];
+    currentUserInfo2[@"card"] = @{
+                                 @"brand": strImageName,
+                                 @"last4": strCardNumber
+                                 };
+    [[DataManager shareDataManager] setUserInfo:currentUserInfo2 paymentMethod:paymentMethod];// This should fix the payment issue, added paymentMethod
+    
+    NSLog(@"Update Payment Info, %@", currentUserInfo2[@"card"]);
+    
+    [self viewDidLoad];
 }
 
 -(void)onBackButton

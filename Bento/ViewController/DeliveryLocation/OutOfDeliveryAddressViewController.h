@@ -14,4 +14,5 @@
 
 @property (nonatomic, retain) NSString *strAddress;
 
+
 @end

@@ -42,6 +42,9 @@
 @property (nonatomic, assign) IBOutlet UIButton *btnPolicy;
 @property (nonatomic, assign) IBOutlet UIButton *btnTerms;
 
+@property (weak, nonatomic) IBOutlet UILabel *lunchAndDinnerHoursLabel;
+@property (weak, nonatomic) IBOutlet UILabel *openingHoursLabel;
+
 @end
 
 @implementation SoldOutViewController
@@ -99,6 +102,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    self.openingHoursLabel.adjustsFontSizeToFitWidth = YES;
+    self.lunchAndDinnerHoursLabel.adjustsFontSizeToFitWidth = YES;
+    
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.ivBackground.bounds;
     

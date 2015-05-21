@@ -15,9 +15,6 @@
 #import "UIImageView+WebCache.h"
 
 @implementation ServingLunchCell
-{
-    UIView *viewDish;
-}
 
 - (void)awakeFromNib {
     // Initialization code
@@ -33,20 +30,20 @@
         
         /*---Dish View---*/
         
-        viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 30, SCREEN_WIDTH-60, SCREEN_HEIGHT/2.75)];
-        viewDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
-        viewDish.layer.cornerRadius = 3;
-        viewDish.clipsToBounds = YES;
-        viewDish.layer.borderColor = BORDER_COLOR.CGColor;
-        viewDish.layer.borderWidth = 1.0f;
-        [self addSubview:viewDish];
+        self.viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 30, SCREEN_WIDTH-60, SCREEN_HEIGHT/2.75)];
+//        self.viewDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
+        self.viewDish.layer.cornerRadius = 3;
+        self.viewDish.clipsToBounds = YES;
+        self.viewDish.layer.borderColor = BORDER_COLOR.CGColor;
+        self.viewDish.layer.borderWidth = 1.0f;
+        [self addSubview:self.viewDish];
 
         /*---Dish Image---*/
         
-        self.ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDish.frame.size.width, viewDish.frame.size.height - 45)];
+        self.ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.viewDish.frame.size.width, self.viewDish.frame.size.height - 45)];
         self.ivMainDish.clipsToBounds = YES;
         self.ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
-        [viewDish addSubview:self.ivMainDish];
+        [self.viewDish addSubview:self.ivMainDish];
         
         /*---Gradient Layer---*/
         
@@ -57,33 +54,32 @@
         
         /*---Dish Label---*/
         
-        self.lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(0, viewDish.frame.size.height - 45, viewDish.frame.size.width + 2, 45)];
+        self.lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(10, self.viewDish.frame.size.height - 45, self.viewDish.frame.size.width - 20, 45)];
         self.lblMainDish.adjustsFontSizeToFitWidth = YES; // dynamically changes font size
         self.lblMainDish.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
         self.lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
         self.lblMainDish.textAlignment = NSTextAlignmentCenter;
-        [viewDish addSubview:self.lblMainDish];
+        [self.viewDish addSubview:self.lblMainDish];
         
         /*---Dish Button---*/
         
-        self.btnMainDish = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDish.frame.size.width, viewDish.frame.size.height)];
-        [viewDish addSubview:self.btnMainDish];
+        self.btnMainDish = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.viewDish.frame.size.width, self.viewDish.frame.size.height)];
+        [self.viewDish addSubview:self.btnMainDish];
         
         /*---Sold Out Banner---*/
         
         UIImage *soldOutBannerImage = [UIImage imageNamed:@"banner_sold_out"];
         
-        self.ivBannerMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(viewDish.frame.size.width - viewDish.frame.size.height / 2, 0, viewDish.frame.size.height / 2, viewDish.frame.size.height / 2)];
+        self.ivBannerMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(self.viewDish.frame.size.width - self.viewDish.frame.size.height / 2, 0, self.self.viewDish.frame.size.height / 2, self.viewDish.frame.size.height / 2)];
         self.ivBannerMainDish.image = soldOutBannerImage;
-        [viewDish addSubview:self.ivBannerMainDish];
+        [self.viewDish addSubview:self.ivBannerMainDish];
         
         /*---Add Button---*/
         self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), SCREEN_HEIGHT/3 + 55, SCREEN_WIDTH-60, 44)];
         self.addButton.layer.cornerRadius = 3;
         self.addButton.layer.masksToBounds = YES;
-        [self.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
         self.addButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-        self.addButton.titleLabel.textColor = [UIColor whiteColor];
+        [self.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.addButton];
     }
     

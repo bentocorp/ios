@@ -73,6 +73,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion] );
+    
     // Crashlytics
     [Fabric with:@[CrashlyticsKit]];
     
@@ -88,17 +90,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // App Strings
     globalStrings = [AppStrings sharedInstance];
-//    [globalStrings getAppStrings];
     
     // Bento Shop
     globalShop = [BentoShop sharedInstance];
-//    [globalShop getMenus];
-//    [globalShop getStatus];
-//    [globalShop getServiceArea];
-//    
-//    [globalShop refreshStart];
-    
-    // Global Data Manager
     
     // Stripe
 #ifdef DEV_MODE

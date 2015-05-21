@@ -323,6 +323,7 @@
 {
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    
     if (salePrice != 0 && salePrice < unitPrice)
         _totalPrice = self.aryBentos.count * salePrice;
     else
@@ -330,14 +331,20 @@
     
     float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
     
-    float tax = (int)(_totalPrice * _taxPercent) / 100.f;
-    self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
+//    float tax = (int)(_totalPrice * _taxPercent) / 100.f;
+    float tax = (int)((_totalPrice - _promoDiscount) * _taxPercent) / 100.f;
     
     float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
+    
+    
     if (totalPrice < 0.0f)
         totalPrice = 0.0f;
-    else if (totalPrice > 0 && totalPrice < 1.0f)
-        totalPrice = 1.0f;
+//    else if (totalPrice > 0 && totalPrice < 1.0f)
+//        totalPrice = 1.0f;
+    
+    self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
+    
+    NSLog(@"totalPrice - %f, taxPercent - %f, tax - %f, promoDiscount - %ld, deliveryTip - %f", _totalPrice, _taxPercent, tax, _promoDiscount, deliveryTip);
     
     return totalPrice;
 }
@@ -396,12 +403,16 @@
         if ([bento isCompleted])
             [self.aryBentos addObject:bento];
     }
+    NSLog(@"aryBentos checkout - %@", self.aryBentos);
     
     [self.tvBentos reloadData];
     
+<<<<<<< HEAD
     NSLog(@"aryBentos in completeorder - %ld", self.aryBentos.count);
 >>>>>>> 47776439e452e2fc205c2d7569fc58f955c67495
     
+=======
+>>>>>>> dev
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     
@@ -487,7 +498,8 @@
     
     if (!found)
     {
-        UIViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         ((DeliveryLocationViewController *)vc).isFromOrder = YES;
 //        ((DeliveryLocationViewController *)vc).priceDiscount = self.promoDiscount;
 //        ((DeliveryLocationViewController *)vc).strPromoCode = self.strPromoCode;
@@ -900,11 +912,12 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
     Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
-    NSLog(@"Current Bento - %@", curBento);
+    NSLog(@"didselect aryBentos - %@", self.aryBentos);
+    
     NSArray *viewControllers = self.navigationController.viewControllers;
     
-    for (UIViewController *vc in viewControllers) {
-        
+    for (UIViewController *vc in viewControllers)
+    {    
         if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
         {
             if ([vc isKindOfClass:[ServingDinnerViewController class]])
@@ -1130,9 +1143,11 @@
         if (completion)
             completion(PKPaymentAuthorizationStatusSuccess);
         
-        for (Bento *bento in self.aryBentos)
-            [[BentoShop sharedInstance] removeBento:bento];
+//        for (Bento *bento in self.aryBentos)
+//            [[BentoShop sharedInstance] removeBento:bento];
         
+        [[BentoShop sharedInstance] resetBentoArray];
+            
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
         [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
