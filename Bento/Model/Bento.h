@@ -12,25 +12,24 @@
 @interface Bento : NSObject
 
 @property (nonatomic, assign) NSInteger indexMainDish;
-
 @property (nonatomic, assign) NSInteger indexSideDish1;
 @property (nonatomic, assign) NSInteger indexSideDish2;
 @property (nonatomic, assign) NSInteger indexSideDish3;
 @property (nonatomic, assign) NSInteger indexSideDish4;
 
-- (NSString *)getBentoName;
-
 - (NSInteger)getMainDish;
-- (void)setMainDish:(NSInteger)indexMainDish;
-
 - (NSInteger)getSideDish1;
 - (NSInteger)getSideDish2;
 - (NSInteger)getSideDish3;
 - (NSInteger)getSideDish4;
+
+- (void)setMainDish:(NSInteger)indexMainDish;
 - (void)setSideDish1:(NSInteger)indexSideDish;
 - (void)setSideDish2:(NSInteger)indexSideDish;
 - (void)setSideDish3:(NSInteger)indexSideDish;
 - (void)setSideDish4:(NSInteger)indexSideDish;
+
+- (NSString *)getBentoName;
 
 - (BOOL)isEmpty;
 - (BOOL)isCompleted;
