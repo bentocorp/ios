@@ -465,6 +465,7 @@
 		FC8DB74A1AF18674003045A3 /* icon-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7371AF18674003045A3 /* icon-user.png */; };
 		FC8DB74B1AF18674003045A3 /* icon-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7371AF18674003045A3 /* icon-user.png */; };
 		FC90967E1B0E833200E592CF /* BentoDev_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC90967D1B0E833200E592CF /* BentoDev_Tests.m */; };
+		FC9096961B0ED01D00E592CF /* BentoTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9096951B0ED01D00E592CF /* BentoTests.m */; };
 		FC99D4EF1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */; };
 		FC99D4F01AFBFD2A00BEE40B /* ServingLunchBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */; };
 		FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
@@ -877,6 +878,7 @@
 		FC9096791B0E833200E592CF /* BentoDev Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BentoDev Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC90967C1B0E833200E592CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC90967D1B0E833200E592CF /* BentoDev_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BentoDev_Tests.m; sourceTree = "<group>"; };
+		FC9096951B0ED01D00E592CF /* BentoTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BentoTests.m; sourceTree = "<group>"; };
 		FC99D4ED1AFBFD2A00BEE40B /* ServingLunchBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchBentoViewController.h; sourceTree = "<group>"; };
 		FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchBentoViewController.m; sourceTree = "<group>"; };
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
@@ -1071,6 +1073,7 @@
 			children = (
 				722333661A6D57CB006C2446 /* Bento.h */,
 				722333671A6D57CB006C2446 /* Bento.m */,
+				FC9096951B0ED01D00E592CF /* BentoTests.m */,
 				722333691A6D5847006C2446 /* BentoShop.h */,
 				7223336A1A6D5847006C2446 /* BentoShop.m */,
 				7279E5DE1A6B5F3A00591CB2 /* Manager */,
@@ -2640,6 +2643,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC9096961B0ED01D00E592CF /* BentoTests.m in Sources */,
 				90BED08E1A5BCC04003DC872 /* BentoTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
