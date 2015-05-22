@@ -151,11 +151,69 @@
         else
             [[DataManager shareDataManager] setPaymentMethod:Payment_ApplePay];
     }
+    
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+- (void) viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
+    // set array every time view appears (edit: moved from viewDidLoad)
+    self.aryBentos = [[NSMutableArray alloc] init];
+    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
+    {
+        Bento *bento = [[BentoShop sharedInstance] getBento:index];
+        if ([bento isCompleted])
+            [self.aryBentos addObject:bento];
+    }
+    NSLog(@"aryBentos checkout - %@", self.aryBentos);
+    
+    [self.tvBentos reloadData];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    
+    // ADDRESS
+    self.lblAddress.text = @"";
+    
+    self.placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    if (self.placeInfo != nil)
+    {
+        if (self.placeInfo.subThoroughfare && self.placeInfo.thoroughfare)
+            self.lblAddress.text = [NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare];
+        else if (self.placeInfo.subThoroughfare)
+            self.lblAddress.text = self.placeInfo.subThoroughfare;
+        else if (self.placeInfo.thoroughfare)
+            self.lblAddress.text = self.placeInfo.thoroughfare;
+        else
+            self.lblAddress.text = @"";
+        
+        [self.lblAddress setTextColor:[UIColor colorWithRed:78.f/255.f green:88.f/255.f blue:99.f/255.f alpha:1.0f]];
+        [self.btnChangeAddr setTitle:@"CHANGE" forState:UIControlStateNormal];
+    }
+    else
+    {
+        self.lblAddress.text = @"Delivery Destination";
+        [self.lblAddress setTextColor:[UIColor lightGrayColor]];
+        [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
+    }
+    
+    [self updateUI];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self.aryBentos removeAllObjects];
+    
+    [super viewWillDisappear:animated];
+}
+
 
 #pragma mark - Navigation
 
@@ -313,16 +371,30 @@
     else
         _totalPrice = self.aryBentos.count * unitPrice;
     
+    // Delivery Tip
     float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
     
-//    float tax = (int)(_totalPrice * _taxPercent) / 100.f;
-    float tax = (int)((_totalPrice - _promoDiscount) * _taxPercent) / 100.f;
+    // Tax
+    float tax;
     
-    float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
+    if (_promoDiscount <= _totalPrice)
+        // if promo discount is <= total price, then subtract from total and calculate tax
+        tax = (int)((_totalPrice - _promoDiscount) * _taxPercent) / 100.f;
+    else
+        // if promo discount is greater than total
+        tax = 0;
+    
+    // Total Price
+    float totalPrice;
+    if (_promoDiscount <= _totalPrice)
+        totalPrice = _totalPrice + tax - _promoDiscount + deliveryTip;
+    else
+        totalPrice = deliveryTip;
     
     
     if (totalPrice < 0.0f)
         totalPrice = 0.0f;
+    
 //    else if (totalPrice > 0 && totalPrice < 1.0f)
 //        totalPrice = 1.0f;
     
@@ -371,62 +443,6 @@
         [self.btnGetItNow setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
     else
         [self.btnGetItNow setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
-
-    // set array every time view appears (edit: moved from viewDidLoad)
-    self.aryBentos = [[NSMutableArray alloc] init];
-    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
-    {
-        Bento *bento = [[BentoShop sharedInstance] getBento:index];
-        if ([bento isCompleted])
-            [self.aryBentos addObject:bento];
-    }
-    NSLog(@"aryBentos checkout - %@", self.aryBentos);
-    
-    [self.tvBentos reloadData];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    
-    // ADDRESS
-    self.lblAddress.text = @"";
-    
-    self.placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-    if (self.placeInfo != nil)
-    {
-        if (self.placeInfo.subThoroughfare && self.placeInfo.thoroughfare)
-            self.lblAddress.text = [NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare];
-        else if (self.placeInfo.subThoroughfare)
-            self.lblAddress.text = self.placeInfo.subThoroughfare;
-        else if (self.placeInfo.thoroughfare)
-            self.lblAddress.text = self.placeInfo.thoroughfare;
-        else
-            self.lblAddress.text = @"";
-        
-        [self.lblAddress setTextColor:[UIColor colorWithRed:78.f/255.f green:88.f/255.f blue:99.f/255.f alpha:1.0f]];
-        [self.btnChangeAddr setTitle:@"CHANGE" forState:UIControlStateNormal];
-    }
-    else
-    {
-        self.lblAddress.text = @"Delivery Destination";
-        [self.lblAddress setTextColor:[UIColor lightGrayColor]];
-        [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
-    }
-    
-    [self updateUI];
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [self.aryBentos removeAllObjects];
-    
-    [super viewWillDisappear:animated];
 }
 
 - (void) onUpdatedStatus:(NSNotification *)notification
