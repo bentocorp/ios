@@ -744,7 +744,12 @@ static BentoShop *_shareInstance;
 
     for (NSDictionary *menuItem in self.menuStatus)
     {
-        NSInteger itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+        NSInteger itemID;
+        if ([menuItem objectForKey:@"itemId"] != [NSNull null])
+            itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+        else
+            return NO;
+        
         if (itemID == menuID)
         {
             NSInteger quantity = [[menuItem objectForKey:@"qty"] integerValue];
