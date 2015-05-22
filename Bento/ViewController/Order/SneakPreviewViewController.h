@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 bentonow. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-
-@interface SneakPreviewViewController : UIViewController
-
-@property (nonatomic, assign) NSInteger type;
-
-@end
+//#import <UIKit/UIKit.h>
+//
+//@interface SneakPreviewViewController : UIViewController
+//
+//@property (nonatomic, assign) NSInteger type;
+//
+//@end

@@ -1990,7 +1990,7 @@
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
-                                            <action selector="onHelp:" destination="utt-Mq-JP9" eventType="touchUpInside" id="UM2-mN-fm9"/>
+                                            <action selector="onHelp:" destination="utt-Mq-JP9" eventType="touchUpInside" id="ykk-VZ-iJG"/>
                                         </connections>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderconfirm_image_car.png" id="sge-pH-T9f">

@@ -30,6 +30,8 @@
 
 @property (nonatomic, assign) IBOutlet UIButton *btnBuild;
 
+- (IBAction)onHelp:(id)sender;
+
 @end
 
 @implementation OrderConfirmViewController
@@ -81,6 +83,13 @@
             return;
         }
     }
+}
+
+- (IBAction)onHelp:(id)sender
+{
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
+    [self.navigationController pushViewController:destVC animated:YES];
 }
 
 @end

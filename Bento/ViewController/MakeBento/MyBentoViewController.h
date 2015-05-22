@@ -6,10 +6,10 @@
 //  Copyright (c) 2015 bentonow. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
-#import "BaseViewController.h"
-#import "Bento.h"
-
-@interface MyBentoViewController : BaseViewController
-
-@end
+//#import <UIKit/UIKit.h>
+//#import "BaseViewController.h"
+//#import "Bento.h"
+//
+//@interface MyBentoViewController : BaseViewController
+//
+//@end
