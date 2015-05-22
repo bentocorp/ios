@@ -745,19 +745,21 @@ static BentoShop *_shareInstance;
     for (NSDictionary *menuItem in self.menuStatus)
     {
         NSInteger itemID;
-        if ([menuItem objectForKey:@"itemId"] != [NSNull null])
+        
+//        if ([menuItem objectForKey:@"itemId"] != [NSNull null]) // this should prevent nil being sent into NSNull
             itemID = [[menuItem objectForKey:@"itemId"] integerValue];
-        else
-            return NO;
         
         if (itemID == menuID)
         {
-            NSInteger quantity = [[menuItem objectForKey:@"qty"] integerValue];
+            NSInteger quantity;
+            
+//            if ([menuItem objectForKey:@"qty"] != [NSNull null]) // this should prevent nil being sent into NSNull
+                quantity = [[menuItem objectForKey:@"qty"] integerValue];
             
             if (quantity > 0)
                 return NO;
-            
-            return YES;
+            else
+                return YES;
         }
     }
     
