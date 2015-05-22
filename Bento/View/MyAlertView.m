@@ -158,7 +158,7 @@
     return self;
 }
 
-- (void) clickButton1
+- (void)clickButton1
 {
     [UIView animateWithDuration:0.3f animations:^{
         

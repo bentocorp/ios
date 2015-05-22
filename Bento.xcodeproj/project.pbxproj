@@ -874,10 +874,6 @@
 		FC8DB7351AF18674003045A3 /* icon-square-help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-help.png"; sourceTree = "<group>"; };
 		FC8DB7361AF18674003045A3 /* icon-square-phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-phone.png"; sourceTree = "<group>"; };
 		FC8DB7371AF18674003045A3 /* icon-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-user.png"; sourceTree = "<group>"; };
-		FC90965E1B0E70FA00E592CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC90965F1B0E70FA00E592CF /* BentoDev_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BentoDev_Tests.m; sourceTree = "<group>"; };
-		FC90966D1B0E710500E592CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC90966E1B0E710500E592CF /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
 		FC9096791B0E833200E592CF /* BentoDev Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "BentoDev Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC90967C1B0E833200E592CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC90967D1B0E833200E592CF /* BentoDev_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BentoDev_Tests.m; sourceTree = "<group>"; };
@@ -888,8 +884,8 @@
 		FCA1C8C11AF1973E004715F1 /* icon-square-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-user.png"; sourceTree = "<group>"; };
 		FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardInfoViewController.h; sourceTree = "<group>"; };
 		FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardInfoViewController.m; sourceTree = "<group>"; };
-		FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsTableViewCell.h; sourceTree = "<group>"; };
-		FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsTableViewCell.m; sourceTree = "<group>"; };
+		FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewCell.h; path = ../ViewController/SettingsTableViewCell.h; sourceTree = "<group>"; };
+		FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SettingsTableViewCell.m; path = ../ViewController/SettingsTableViewCell.m; sourceTree = "<group>"; };
 		FCAA47981AE9E03B00CA1743 /* SignedInSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignedInSettingsViewController.h; sourceTree = "<group>"; };
 		FCAA47991AE9E03B00CA1743 /* SignedInSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedInSettingsViewController.m; sourceTree = "<group>"; };
 		FCAA479A1AE9E03B00CA1743 /* SignedOutSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignedOutSettingsViewController.h; sourceTree = "<group>"; };
@@ -1268,8 +1264,6 @@
 			children = (
 				90BED0701A5BCC04003DC872 /* Bento */,
 				90BED08A1A5BCC04003DC872 /* BentoTests */,
-				FC90965C1B0E70FA00E592CF /* BentoDev Tests */,
-				FC90966B1B0E710500E592CF /* Bento Tests */,
 				FC90967A1B0E833200E592CF /* BentoDev Tests */,
 				90BED06F1A5BCC04003DC872 /* Products */,
 				6FD3F1724EE25B5F8E1A5D58 /* Pods */,
@@ -1544,6 +1538,8 @@
 				FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */,
 				FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */,
 				FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */,
+				FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */,
+				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
 				FC08CC1E1B0AA361008D0A84 /* Lunch Cell */,
 			);
 			path = Cell;
@@ -1801,40 +1797,6 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		FC90965C1B0E70FA00E592CF /* BentoDev Tests */ = {
-			isa = PBXGroup;
-			children = (
-				FC90965F1B0E70FA00E592CF /* BentoDev_Tests.m */,
-				FC90965D1B0E70FA00E592CF /* Supporting Files */,
-			);
-			path = "BentoDev Tests";
-			sourceTree = "<group>";
-		};
-		FC90965D1B0E70FA00E592CF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FC90965E1B0E70FA00E592CF /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		FC90966B1B0E710500E592CF /* Bento Tests */ = {
-			isa = PBXGroup;
-			children = (
-				FC90966E1B0E710500E592CF /* Bento_Tests.m */,
-				FC90966C1B0E710500E592CF /* Supporting Files */,
-			);
-			path = "Bento Tests";
-			sourceTree = "<group>";
-		};
-		FC90966C1B0E710500E592CF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FC90966D1B0E710500E592CF /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		FC90967A1B0E833200E592CF /* BentoDev Tests */ = {
 			isa = PBXGroup;
 			children = (
@@ -1905,8 +1867,6 @@
 		FCFD79F01AE8880D002AD322 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */,
-				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
 				FCAA479A1AE9E03B00CA1743 /* SignedOutSettingsViewController.h */,
 				FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */,
 				FCAA47981AE9E03B00CA1743 /* SignedInSettingsViewController.h */,
@@ -3042,6 +3002,7 @@
 				FC9096831B0E833300E592CF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
