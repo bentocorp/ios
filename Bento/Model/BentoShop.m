@@ -695,20 +695,30 @@ static BentoShop *_shareInstance;
 
 - (BOOL)canAddDish:(NSInteger)dishID
 {
+    // get the quantity of dishID in menu status
     NSInteger quantity = 0;
     for (NSDictionary *menuItem in self.menuStatus)
     {
-        NSInteger itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+        NSInteger itemID;
+        
+        // get itemID
+        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]])
+            itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+        
+        // if selected dish id matches item id
         if (itemID == dishID)
         {
-            quantity = [[menuItem objectForKey:@"qty"] integerValue];
-            break;
+            // get the quantity of it
+            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]])
+                quantity = [[menuItem objectForKey:@"qty"] integerValue];
+                break;
         }
     }
     
     if (quantity == 0)
         return YES;
     
+    // check if how many of the dish exists in cart
     NSInteger currentAmount = 0;
     for (Bento *bento in self.aryBentos)
     {
@@ -728,9 +738,11 @@ static BentoShop *_shareInstance;
             currentAmount ++;
     }
     
+    // if the amount in cart is less than quantity, then ok to add
     if (currentAmount < quantity)
         return YES;
     
+    // can't add
     return NO;
 }
 
@@ -746,14 +758,14 @@ static BentoShop *_shareInstance;
     {
         NSInteger itemID;
         
-//        if ([menuItem objectForKey:@"itemId"] != [NSNull null]) // this should prevent nil being sent into NSNull
+        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]]) // this should prevent nil being sent into NSNull
             itemID = [[menuItem objectForKey:@"itemId"] integerValue];
         
         if (itemID == menuID)
         {
             NSInteger quantity;
             
-//            if ([menuItem objectForKey:@"qty"] != [NSNull null]) // this should prevent nil being sent into NSNull
+            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]]) // this should prevent nil being sent into NSNull
                 quantity = [[menuItem objectForKey:@"qty"] integerValue];
             
             if (quantity > 0)

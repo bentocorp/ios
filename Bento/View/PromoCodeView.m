@@ -138,7 +138,7 @@
         
     } isJSON:NO];
 #else
-    NSInteger discount = 12; // change discount account here
+    NSInteger discount = 99; // promo discount - hardcoded for testing
     if (self.delegate != nil)
         [self.delegate setDiscound:discount strCouponCode:@"ridev"];
 

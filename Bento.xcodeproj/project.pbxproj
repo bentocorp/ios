@@ -333,6 +333,8 @@
 		FC3C4E7A1AF96A41005D7197 /* ServingLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */; };
 		FC3C4E7D1AF96B42005D7197 /* ServingLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */; };
 		FC3C4E7E1AF96B42005D7197 /* ServingLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */; };
+		FC599F5A1B0FEDB600989E1B /* Bento_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC599F591B0FEDB600989E1B /* Bento_Tests.m */; };
+		FC7B609F1B0FF11300A00467 /* BentoModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B609E1B0FF11300A00467 /* BentoModelTests.m */; };
 		FC8286091AEEED1B009D073D /* documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = FC8285C61AEEED1B009D073D /* documentation.html */; };
 		FC82860A1AEEED1B009D073D /* documentation.html in Resources */ = {isa = PBXBuildFile; fileRef = FC8285C61AEEED1B009D073D /* documentation.html */; };
 		FC82860B1AEEED1B009D073D /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = FC8285C71AEEED1B009D073D /* license.txt */; };
@@ -463,7 +465,6 @@
 		FC8DB7491AF18674003045A3 /* icon-square-phone.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7361AF18674003045A3 /* icon-square-phone.png */; };
 		FC8DB74A1AF18674003045A3 /* icon-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7371AF18674003045A3 /* icon-user.png */; };
 		FC8DB74B1AF18674003045A3 /* icon-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7371AF18674003045A3 /* icon-user.png */; };
-		FC9096A91B0ED9C900E592CF /* Bento_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC9096A81B0ED9C900E592CF /* Bento_Tests.m */; };
 		FC99D4EF1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */; };
 		FC99D4F01AFBFD2A00BEE40B /* ServingLunchBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */; };
 		FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
@@ -525,7 +526,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FC9096AA1B0ED9C900E592CF /* PBXContainerItemProxy */ = {
+		FC599F5B1B0FEDB600989E1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 90BED0661A5BCC04003DC872 /* Project object */;
 			proxyType = 1;
@@ -796,6 +797,10 @@
 		FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchViewController.m; sourceTree = "<group>"; };
 		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchCell.h; sourceTree = "<group>"; };
 		FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchCell.m; sourceTree = "<group>"; };
+		FC599F551B0FEDB600989E1B /* Bento Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bento Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC599F581B0FEDB600989E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		FC599F591B0FEDB600989E1B /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
+		FC7B609E1B0FF11300A00467 /* BentoModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BentoModelTests.m; path = "../../Bento Tests/BentoModelTests.m"; sourceTree = "<group>"; };
 		FC8285C61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
 		FC8285C71AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		FC8285C81AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
@@ -863,9 +868,6 @@
 		FC8DB7351AF18674003045A3 /* icon-square-help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-help.png"; sourceTree = "<group>"; };
 		FC8DB7361AF18674003045A3 /* icon-square-phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-phone.png"; sourceTree = "<group>"; };
 		FC8DB7371AF18674003045A3 /* icon-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-user.png"; sourceTree = "<group>"; };
-		FC9096A41B0ED9C900E592CF /* Bento Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bento Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC9096A71B0ED9C900E592CF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC9096A81B0ED9C900E592CF /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
 		FC99D4ED1AFBFD2A00BEE40B /* ServingLunchBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchBentoViewController.h; sourceTree = "<group>"; };
 		FC99D4EE1AFBFD2A00BEE40B /* ServingLunchBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchBentoViewController.m; sourceTree = "<group>"; };
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
@@ -947,7 +949,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC9096A11B0ED9C900E592CF /* Frameworks */ = {
+		FC599F521B0FEDB600989E1B /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1053,6 +1055,7 @@
 			children = (
 				722333661A6D57CB006C2446 /* Bento.h */,
 				722333671A6D57CB006C2446 /* Bento.m */,
+				FC7B609E1B0FF11300A00467 /* BentoModelTests.m */,
 				722333691A6D5847006C2446 /* BentoShop.h */,
 				7223336A1A6D5847006C2446 /* BentoShop.m */,
 				7279E5DE1A6B5F3A00591CB2 /* Manager */,
@@ -1245,7 +1248,7 @@
 			isa = PBXGroup;
 			children = (
 				90BED0701A5BCC04003DC872 /* Bento */,
-				FC9096A51B0ED9C900E592CF /* Bento Tests */,
+				FC599F561B0FEDB600989E1B /* Bento Tests */,
 				90BED06F1A5BCC04003DC872 /* Products */,
 				6FD3F1724EE25B5F8E1A5D58 /* Pods */,
 				C994F09FDA3B8896E57F29B5 /* Frameworks */,
@@ -1258,7 +1261,7 @@
 			children = (
 				90BED06E1A5BCC04003DC872 /* Bento.app */,
 				7216B7B41AA64C7C0006FFE9 /* Bento Dev.app */,
-				FC9096A41B0ED9C900E592CF /* Bento Tests.xctest */,
+				FC599F551B0FEDB600989E1B /* Bento Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1581,6 +1584,23 @@
 			name = "Serving Dinner";
 			sourceTree = "<group>";
 		};
+		FC599F561B0FEDB600989E1B /* Bento Tests */ = {
+			isa = PBXGroup;
+			children = (
+				FC599F591B0FEDB600989E1B /* Bento_Tests.m */,
+				FC599F571B0FEDB600989E1B /* Supporting Files */,
+			);
+			path = "Bento Tests";
+			sourceTree = "<group>";
+		};
+		FC599F571B0FEDB600989E1B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				FC599F581B0FEDB600989E1B /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
 		FC8285C41AEEED1B009D073D /* Icons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1760,23 +1780,6 @@
 			path = Images;
 			sourceTree = "<group>";
 		};
-		FC9096A51B0ED9C900E592CF /* Bento Tests */ = {
-			isa = PBXGroup;
-			children = (
-				FC9096A81B0ED9C900E592CF /* Bento_Tests.m */,
-				FC9096A61B0ED9C900E592CF /* Supporting Files */,
-			);
-			path = "Bento Tests";
-			sourceTree = "<group>";
-		};
-		FC9096A61B0ED9C900E592CF /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FC9096A71B0ED9C900E592CF /* Info.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
 		FC99D4F51AFC323700BEE40B /* Closed/Sold-out */ = {
 			isa = PBXGroup;
 			children = (
@@ -1885,22 +1888,22 @@
 			productReference = 90BED06E1A5BCC04003DC872 /* Bento.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FC9096A31B0ED9C900E592CF /* Bento Tests */ = {
+		FC599F541B0FEDB600989E1B /* Bento Tests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FC9096AC1B0ED9C900E592CF /* Build configuration list for PBXNativeTarget "Bento Tests" */;
+			buildConfigurationList = FC599F5D1B0FEDB600989E1B /* Build configuration list for PBXNativeTarget "Bento Tests" */;
 			buildPhases = (
-				FC9096A01B0ED9C900E592CF /* Sources */,
-				FC9096A11B0ED9C900E592CF /* Frameworks */,
-				FC9096A21B0ED9C900E592CF /* Resources */,
+				FC599F511B0FEDB600989E1B /* Sources */,
+				FC599F521B0FEDB600989E1B /* Frameworks */,
+				FC599F531B0FEDB600989E1B /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				FC9096AB1B0ED9C900E592CF /* PBXTargetDependency */,
+				FC599F5C1B0FEDB600989E1B /* PBXTargetDependency */,
 			);
 			name = "Bento Tests";
 			productName = "Bento Tests";
-			productReference = FC9096A41B0ED9C900E592CF /* Bento Tests.xctest */;
+			productReference = FC599F551B0FEDB600989E1B /* Bento Tests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1927,9 +1930,8 @@
 							};
 						};
 					};
-					FC9096A31B0ED9C900E592CF = {
+					FC599F541B0FEDB600989E1B = {
 						CreatedOnToolsVersion = 6.3.1;
-						DevelopmentTeam = WFJ7C63625;
 						TestTargetID = 90BED06D1A5BCC04003DC872;
 					};
 				};
@@ -1949,7 +1951,7 @@
 			targets = (
 				90BED06D1A5BCC04003DC872 /* Bento */,
 				7216B7061AA64C7C0006FFE9 /* BentoDev */,
-				FC9096A31B0ED9C900E592CF /* Bento Tests */,
+				FC599F541B0FEDB600989E1B /* Bento Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -2263,7 +2265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC9096A21B0ED9C900E592CF /* Resources */ = {
+		FC599F531B0FEDB600989E1B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -2570,21 +2572,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC9096A01B0ED9C900E592CF /* Sources */ = {
+		FC599F511B0FEDB600989E1B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC9096A91B0ED9C900E592CF /* Bento_Tests.m in Sources */,
+				FC7B609F1B0FF11300A00467 /* BentoModelTests.m in Sources */,
+				FC599F5A1B0FEDB600989E1B /* Bento_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FC9096AB1B0ED9C900E592CF /* PBXTargetDependency */ = {
+		FC599F5C1B0FEDB600989E1B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 90BED06D1A5BCC04003DC872 /* Bento */;
-			targetProxy = FC9096AA1B0ED9C900E592CF /* PBXContainerItemProxy */;
+			targetProxy = FC599F5B1B0FEDB600989E1B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2802,12 +2805,10 @@
 			};
 			name = Release;
 		};
-		FC9096AD1B0ED9C900E592CF /* Debug */ = {
+		FC599F5E1B0FEDB600989E1B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(SDKROOT)/Developer/Library/Frameworks",
@@ -2822,17 +2823,14 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bento.app/Bento";
 			};
 			name = Debug;
 		};
-		FC9096AE1B0ED9C900E592CF /* Release */ = {
+		FC599F5F1B0FEDB600989E1B /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				FRAMEWORK_SEARCH_PATHS = (
@@ -2844,7 +2842,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bento.app/Bento";
 			};
 			name = Release;
@@ -2879,13 +2876,14 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FC9096AC1B0ED9C900E592CF /* Build configuration list for PBXNativeTarget "Bento Tests" */ = {
+		FC599F5D1B0FEDB600989E1B /* Build configuration list for PBXNativeTarget "Bento Tests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				FC9096AD1B0ED9C900E592CF /* Debug */,
-				FC9096AE1B0ED9C900E592CF /* Release */,
+				FC599F5E1B0FEDB600989E1B /* Debug */,
+				FC599F5F1B0FEDB600989E1B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

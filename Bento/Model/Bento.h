@@ -17,24 +17,30 @@
 @property (nonatomic, assign) NSInteger indexSideDish3;
 @property (nonatomic, assign) NSInteger indexSideDish4;
 
+// Testing
 - (NSInteger)getMainDish;
 - (NSInteger)getSideDish1;
 - (NSInteger)getSideDish2;
 - (NSInteger)getSideDish3;
 - (NSInteger)getSideDish4;
 
+// Testing
 - (void)setMainDish:(NSInteger)indexMainDish;
 - (void)setSideDish1:(NSInteger)indexSideDish;
 - (void)setSideDish2:(NSInteger)indexSideDish;
 - (void)setSideDish3:(NSInteger)indexSideDish;
 - (void)setSideDish4:(NSInteger)indexSideDish;
 
+// Not Testing
 - (NSString *)getBentoName;
 
+// Testing
 - (BOOL)isEmpty;
 - (BOOL)isCompleted;
 - (void)completeBento:(NSString *)whatNeedsThis;
 
+// Not Testing
+- (BOOL)canAddDish:(NSInteger)dishID;
 - (BOOL)canAddSideDish:(NSInteger)sideDishID;
 
 @end
