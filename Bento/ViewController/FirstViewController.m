@@ -100,10 +100,15 @@
     [[NSUserDefaults standardUserDefaults] setObject:strSlogan forKey:@"Slogan"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [[BentoShop sharedInstance] getMenus];
-    [[BentoShop sharedInstance] getStatus];
-    [[BentoShop sharedInstance] getServiceArea];
-    [[BentoShop sharedInstance] refreshStart];
+    // check version first
+    BentoShop *globalShop = [BentoShop sharedInstance];
+    if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
+    {
+        [[BentoShop sharedInstance] getMenus];
+        [[BentoShop sharedInstance] getStatus];
+        [[BentoShop sharedInstance] getServiceArea];
+        [[BentoShop sharedInstance] refreshStart];
+    }
     
     [self.activityIndicator stopAnimating];
 

@@ -792,11 +792,16 @@ static BentoShop *_shareInstance;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-        [self setLunchOrDinnerMode];
-        [self checkIfBentoArrayNeedsToBeReset];
-        [self getMenus];
-        [self getStatus];
-        [self getServiceArea];
+        
+        // check version first
+        if (self.iosCurrentVersion >= self.iosMinVersion)
+        {
+            [self setLunchOrDinnerMode];
+            [self checkIfBentoArrayNeedsToBeReset];
+            [self getMenus];
+            [self getStatus];
+            [self getServiceArea];
+        }
     });
     
     _isCallingApi = NO;

@@ -46,6 +46,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
     MyCLController *locationController;
     CLLocationCoordinate2D  coordinate;
+    
+    UIAlertView *aV;
 }
 
 @end
@@ -119,65 +121,38 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
 /*---------------------------FORCE UPDATE----------------------------*/
     
-    NSString *devOrProd;
     
-#ifndef DEV_MODE
+#ifdef DEV_MODE
     {
-        // Set the App ID for your app
-        [[Harpy sharedInstance] setAppID:@"963634117"];
-        
-        devOrProd = @"Prod";
-        
-         NSLog(@"This is production version...run update check!");
-    }
-#else
-    {
-        // Set the App ID for your app
-        [[Harpy sharedInstance] setAppID:@"973246172"];
-        
-        devOrProd = @"Dev";
+        aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", globalShop.iosCurrentVersion, globalShop.iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
         
         NSLog(@"This is dev version...run update check anyway!");
     }
+#else
+    {
+        aV = [[UIAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update", nil];
+        aV.tag = 007;
+        NSLog(@"This is production version...run update check!");
+    }
 #endif
     {
-        // Present Window before calling Harpy
-        [self.window makeKeyAndVisible];
-        
-        // Set the UIViewController that will present an instance of UIAlertController
-        [[Harpy sharedInstance] setPresentingViewController:_window.rootViewController];
-        
-        // (Optional) The tintColor for the alertController
-        [[Harpy sharedInstance] setAlertControllerTintColor:[UIColor blueColor]];
-        
-        // (Optional) Set the App Name for your app
-        [[Harpy sharedInstance] setAppName:@"Bento"];
-        
-        /* (Optional) Set the Alert Type for your app
-         By default, Harpy is configured to use HarpyAlertTypeOption */
-        [[Harpy sharedInstance] setAlertType:HarpyAlertTypeForce];
-        
         NSLog(@"ios minimum version - %f", globalShop.iosMinVersion);
         NSLog(@"current ios version - %f", globalShop.iosCurrentVersion);
         
         // Perform check for new version of your app
         if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
-        {
-            if ([devOrProd isEqualToString:@"Prod"])
-            {
-                [[Harpy sharedInstance] checkVersion];
-            }
-            else if ([devOrProd isEqualToString:@"Dev"])
-            {
-                UIAlertView *aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", globalShop.iosCurrentVersion, globalShop.iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-                [aV show];
-            }
-        }
+            [aV show];
     }
 
 /*---------------------------------------------------------------------*/
     
     return YES;
+}
+
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 007)
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -206,7 +181,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [globalShop refreshPause];
     
     // Perform check for new version of your app
-    [[Harpy sharedInstance] checkVersion];
+    if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
+        [aV show];
     
     // reload app strings
     [[AppStrings sharedInstance] getAppStrings];
@@ -225,11 +201,16 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [globalShop getMenus];
-        [globalShop getStatus];
-        [globalShop getServiceArea];
-    });
+    
+    // if version is current/greater than ios min
+    if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [globalShop getMenus];
+            [globalShop getStatus];
+            [globalShop getServiceArea];
+        });
+    }
     
     // Global Data Manager
     [globalShop refreshResume];
