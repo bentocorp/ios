@@ -106,15 +106,15 @@
     [whiteBackgroundView addSubview:creditCardDigitsLabel];
     
     // change credit card button
-    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, whiteBackgroundView.frame.size.height/2 - 15, 80, 30)];
-    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]])
-        [changeButton setTitle:@"ADD" forState:UIControlStateNormal];
-    else
-        [changeButton setTitle:@"CHANGE" forState:UIControlStateNormal];
-    [changeButton setTitleColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
-    changeButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:10];
-    [changeButton addTarget:self action:@selector(onChange) forControlEvents:UIControlEventTouchUpInside];
-    [whiteBackgroundView addSubview:changeButton];
+//    UIButton *changeButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, whiteBackgroundView.frame.size.height/2 - 15, 80, 30)];
+//    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]])
+//        [changeButton setTitle:@"ADD" forState:UIControlStateNormal];
+//    else
+//        [changeButton setTitle:@"CHANGE" forState:UIControlStateNormal];
+//    [changeButton setTitleColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
+//    changeButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:10];
+//    [changeButton addTarget:self action:@selector(onChange) forControlEvents:UIControlEventTouchUpInside];
+//    [whiteBackgroundView addSubview:changeButton];
 }
 
 -(void)viewWillAppear:(BOOL)animated
