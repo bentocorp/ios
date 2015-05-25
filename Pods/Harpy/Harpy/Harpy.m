@@ -75,7 +75,7 @@ NSString * const HarpyLanguageTurkish               = @"tr";
     return self;
 }
 
-- (NSString *)getAPI:(NSString *)apiString
+- (NSString *)setAPI:(NSString *)apiString
 {
     return self.apiString = apiString;
 }
@@ -126,12 +126,16 @@ NSString * const HarpyLanguageTurkish               = @"tr";
             
             #ifndef DEV_MODE
             {
-                [self performVersionCheck];
+                
             }
-            #endif
+            #else
             {
                 UIAlertView *aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", iosCurrentVersion, iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
                 [aV show];
+            }
+            #endif
+            {
+                [self performVersionCheck];
             }
         }
     }

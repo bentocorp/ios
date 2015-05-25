@@ -122,54 +122,54 @@
                            ];
     ////////////////////////////////////////////////
     
-    NSInteger quantity = 0;
-    for (NSDictionary *menuItem in menuStatus)
-    {
-        NSInteger itemID;
-        
-        // get itemID
-        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]])
-            itemID = [[menuItem objectForKey:@"itemId"] integerValue];
-        
-        // if selected dish id matches item id
-        if (itemID == dishID)
-        {
-            // get the quantity of it
-            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]])
-                quantity = [[menuItem objectForKey:@"qty"] integerValue];
-            break;
-        }
-    }
-    
-    if (quantity == 0)
-        canAddDish = YES;
-    
-    // check if how many of the dish exists in cart
-    NSInteger currentAmount = 0;
-    for (Bento *bento in self.aryBentos)
-    {
-        if ([bento getMainDish] == dishID)
-            currentAmount ++;
-        
-        if ([bento getSideDish1] == dishID)
-            currentAmount ++;
-        
-        if ([bento getSideDish2] == dishID)
-            currentAmount ++;
-        
-        if ([bento getSideDish3] == dishID)
-            currentAmount ++;
-        
-        if ([bento getSideDish4] == dishID)
-            currentAmount ++;
-    }
-    
-    // if the amount in cart is less than quantity, then ok to add
-    if (currentAmount < quantity)
-        canAddDish = YES;
-    
-    // can't add
-    canAddDish = NO;
+//    NSInteger quantity = 0;
+//    for (NSDictionary *menuItem in menuStatus)
+//    {
+//        NSInteger itemID;
+//        
+//        // get itemID
+//        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]])
+//            itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+//        
+//        // if selected dish id matches item id
+//        if (itemID == dishID)
+//        {
+//            // get the quantity of it
+//            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]])
+//                quantity = [[menuItem objectForKey:@"qty"] integerValue];
+//            break;
+//        }
+//    }
+//    
+//    if (quantity == 0)
+//        canAddDish = YES;
+//    
+//    // check if how many of the dish exists in cart
+//    NSInteger currentAmount = 0;
+//    for (Bento *bento in self.aryBentos)
+//    {
+//        if ([bento getMainDish] == dishID)
+//            currentAmount ++;
+//        
+//        if ([bento getSideDish1] == dishID)
+//            currentAmount ++;
+//        
+//        if ([bento getSideDish2] == dishID)
+//            currentAmount ++;
+//        
+//        if ([bento getSideDish3] == dishID)
+//            currentAmount ++;
+//        
+//        if ([bento getSideDish4] == dishID)
+//            currentAmount ++;
+//    }
+//    
+//    // if the amount in cart is less than quantity, then ok to add
+//    if (currentAmount < quantity)
+//        canAddDish = YES;
+//    
+//    // can't add
+//    canAddDish = NO;
 }
 
 - (void)testCanAddDishNO

@@ -147,6 +147,6 @@ typedef NS_ENUM(NSUInteger, HarpyAlertType)
  */
 - (void)checkVersionWeekly;
 
-- (NSString *)getAPI:(NSString *)apiString;
+- (NSString *)setAPI:(NSString *)apiString;
 
 @end
