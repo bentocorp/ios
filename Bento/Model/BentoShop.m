@@ -73,7 +73,7 @@ static BentoShop *_shareInstance;
 {
     if ( (self = [super init]) )
     {
-        [self getCurrentLunchDinnerBufferTimesInNumbers];
+        [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         
         defaults = [NSUserDefaults standardUserDefaults];
         
@@ -371,7 +371,7 @@ static BentoShop *_shareInstance;
 }
 
  /*----------------------GET LUNCH AND DINNER AND BUFFER TIME----------------------*/
-- (void)getCurrentLunchDinnerBufferTimesInNumbers
+- (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers
 {
     // API call
     NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
@@ -430,6 +430,11 @@ static BentoShop *_shareInstance;
     // Current Time
     NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
+    
+    /*-------------------------------------for forced update------------------------------------------------*/
+    self.iosMinVersion = (CGFloat)[initDictionary[@"ios_min_version"] floatValue];
+    self.iosCurrentVersion = (CGFloat)[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
+    /*-------------------------------------------------------------------------------------*/
 }
 
 - (NSNumber *)getCurrentTime
@@ -786,7 +791,7 @@ static BentoShop *_shareInstance;
     _isCallingApi = YES;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self getCurrentLunchDinnerBufferTimesInNumbers];
+        [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         [self setLunchOrDinnerMode];
         [self checkIfBentoArrayNeedsToBeReset];
         [self getMenus];

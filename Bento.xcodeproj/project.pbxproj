@@ -798,7 +798,7 @@
 		FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchViewController.m; sourceTree = "<group>"; };
 		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchCell.h; sourceTree = "<group>"; };
 		FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchCell.m; sourceTree = "<group>"; };
-		FC599F551B0FEDB600989E1B /* Bento Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Bento Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC599F551B0FEDB600989E1B /* BentoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BentoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC599F581B0FEDB600989E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC599F591B0FEDB600989E1B /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
 		FC7B609E1B0FF11300A00467 /* BentoModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BentoModelTests.m; path = "../../Bento Tests/BentoModelTests.m"; sourceTree = "<group>"; };
@@ -1264,7 +1264,7 @@
 			children = (
 				90BED06E1A5BCC04003DC872 /* Bento.app */,
 				7216B7B41AA64C7C0006FFE9 /* Bento Dev.app */,
-				FC599F551B0FEDB600989E1B /* Bento Tests.xctest */,
+				FC599F551B0FEDB600989E1B /* BentoTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1891,9 +1891,9 @@
 			productReference = 90BED06E1A5BCC04003DC872 /* Bento.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FC599F541B0FEDB600989E1B /* Bento Tests */ = {
+		FC599F541B0FEDB600989E1B /* BentoTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = FC599F5D1B0FEDB600989E1B /* Build configuration list for PBXNativeTarget "Bento Tests" */;
+			buildConfigurationList = FC599F5D1B0FEDB600989E1B /* Build configuration list for PBXNativeTarget "BentoTests" */;
 			buildPhases = (
 				FC599F511B0FEDB600989E1B /* Sources */,
 				FC599F521B0FEDB600989E1B /* Frameworks */,
@@ -1904,9 +1904,9 @@
 			dependencies = (
 				FC599F5C1B0FEDB600989E1B /* PBXTargetDependency */,
 			);
-			name = "Bento Tests";
+			name = BentoTests;
 			productName = "Bento Tests";
-			productReference = FC599F551B0FEDB600989E1B /* Bento Tests.xctest */;
+			productReference = FC599F551B0FEDB600989E1B /* BentoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -1954,7 +1954,7 @@
 			targets = (
 				90BED06D1A5BCC04003DC872 /* Bento */,
 				7216B7061AA64C7C0006FFE9 /* BentoDev */,
-				FC599F541B0FEDB600989E1B /* Bento Tests */,
+				FC599F541B0FEDB600989E1B /* BentoTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2880,7 +2880,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		FC599F5D1B0FEDB600989E1B /* Build configuration list for PBXNativeTarget "Bento Tests" */ = {
+		FC599F5D1B0FEDB600989E1B /* Build configuration list for PBXNativeTarget "BentoTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				FC599F5E1B0FEDB600989E1B /* Debug */,

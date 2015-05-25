@@ -75,11 +75,6 @@ NSString * const HarpyLanguageTurkish               = @"tr";
     return self;
 }
 
-- (NSString *)setAPI:(NSString *)apiString
-{
-    return self.apiString = apiString;
-}
-
 #pragma mark - Public
 - (void)checkVersion
 {
@@ -88,58 +83,8 @@ NSString * const HarpyLanguageTurkish               = @"tr";
         NSLog(@"[Harpy]: Please make sure that you have set _appID and _presentationViewController before calling checkVersion, checkVersionDaily, or checkVersionWeekly");
     
     } else {
-        
-        NSLog(@"Using API string - %@", self.apiString);
-        NSString *strRequest = [NSString stringWithFormat:@"%@/init", self.apiString];
-        NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest]];
-        NSURLResponse *response = nil;
-        NSError *error = nil;
-        NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-        if (data == nil) {
-            return;
-        }
-        
-        NSInteger statusCode = 0;
-        if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-            statusCode = [(NSHTTPURLResponse *)response statusCode];
-        }
-        
-        if (error != nil || statusCode != 200) {
-            return;
-        }
-        
-        NSError *parseError = nil;
-        NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-        if (initDic == nil) {
-            return;
-        }
-        
-        NSDictionary *initDictionary = [initDic copy];
-        
-        CGFloat iosMinVersion = (CGFloat)[initDictionary[@"ios_min_version"] floatValue];
-        CGFloat iosCurrentVersion = (CGFloat)[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
-        
-        NSLog(@"ios minimum version - %f", iosMinVersion);
-        NSLog(@"current ios version - %f", iosCurrentVersion);
-        
-        if (iosCurrentVersion < iosMinVersion) {
-            
-            #ifndef DEV_MODE
-            {
-                
-            }
-            #else
-            {
-                UIAlertView *aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", iosCurrentVersion, iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-                [aV show];
-            }
-            #endif
-            {
-                [self performVersionCheck];
-            }
-        }
+        [self performVersionCheck];
     }
-    
 }
 
 - (void)checkVersionDaily
@@ -234,6 +179,8 @@ NSString * const HarpyLanguageTurkish               = @"tr";
                                                         if ([versionsInAppStore count]) {
                                                             _currentAppStoreVersion = [versionsInAppStore objectAtIndex:0];
                                                             [self checkIfAppStoreVersionIsNewestVersion:_currentAppStoreVersion];
+                                                            
+                                                            NSLog(@"current store version - %@", _currentAppStoreVersion);
                                                         }
                                                     });
                                                 }
@@ -482,15 +429,12 @@ NSString * const HarpyLanguageTurkish               = @"tr";
 }
 
 #pragma mark - UIAlertViewDelegate
-
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     switch ([self alertType]) {
             
         case HarpyAlertTypeForce: { // Launch App Store.app
-    
             [self launchAppStore];
-
         } break;
             
         case HarpyAlertTypeOption: {

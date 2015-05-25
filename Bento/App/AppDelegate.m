@@ -119,21 +119,25 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
 /*---------------------------FORCE UPDATE----------------------------*/
     
+    NSString *devOrProd;
+    
 #ifndef DEV_MODE
     {
-        NSLog(@"This is production version...run update check!");
-    
         // Set the App ID for your app
         [[Harpy sharedInstance] setAppID:@"963634117"];
-        [[Harpy sharedInstance] setAPI:@"https://api2.bentonow.com"];
+        
+        devOrProd = @"Prod";
+        
+         NSLog(@"This is production version...run update check!");
     }
 #else
     {
-        NSLog(@"This is dev version...run update check anyway!");
-        
         // Set the App ID for your app
         [[Harpy sharedInstance] setAppID:@"973246172"];
-        [[Harpy sharedInstance] setAPI:@"https://api2.dev.bentonow.com"];
+        
+        devOrProd = @"Dev";
+        
+        NSLog(@"This is dev version...run update check anyway!");
     }
 #endif
     {
@@ -153,8 +157,22 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
          By default, Harpy is configured to use HarpyAlertTypeOption */
         [[Harpy sharedInstance] setAlertType:HarpyAlertTypeForce];
         
+        NSLog(@"ios minimum version - %f", globalShop.iosMinVersion);
+        NSLog(@"current ios version - %f", globalShop.iosCurrentVersion);
+        
         // Perform check for new version of your app
-        [[Harpy sharedInstance] checkVersion];
+        if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
+        {
+            if ([devOrProd isEqualToString:@"Prod"])
+            {
+                [[Harpy sharedInstance] checkVersion];
+            }
+            else if ([devOrProd isEqualToString:@"Dev"])
+            {
+                UIAlertView *aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", globalShop.iosCurrentVersion, globalShop.iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+                [aV show];
+            }
+        }
     }
 
 /*---------------------------------------------------------------------*/
