@@ -107,6 +107,8 @@
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
     
+    self.lblMessageContent.adjustsFontSizeToFitWidth = YES;
+    
     if (self.type == 0) // Closed
     {
         self.lblMessageTitle.text = [[AppStrings sharedInstance] getString:CLOSED_TEXT_TITLE];
