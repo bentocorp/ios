@@ -16,7 +16,7 @@
 #import "AppStrings.h"
 #import "DataManager.h"
 
-#import "Reachability.h"
+//#import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
 // Crashlytics
@@ -43,7 +43,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     AppStrings *globalStrings;
     BentoShop *globalShop;
-    Reachability *reach;
+//    Reachability *reach;
 
     MyCLController *locationController;
     CLLocationCoordinate2D  coordinate;
@@ -57,12 +57,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 @implementation AppDelegate
 
-- (BOOL)connected
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return !(networkStatus == NotReachable);
-}
+//- (BOOL)connected
+//{
+//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+//    return !(networkStatus == NotReachable);
+//}
 
 //- (void)networkChanged:(NSNotification *)notification
 //{
@@ -122,16 +122,16 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    if (![self connected])
-    {
-        // not connected
-        alertConnection = [[UIAlertView alloc] initWithTitle:@"Internet Connection Not Found" message:@"Please check your network settings!" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
-        [alertConnection show];
-    } else
-    {
-        // connected, do some internet stuff
-        
-    }
+//    if (![self connected])
+//    {
+//        // not connected
+//        alertConnection = [[UIAlertView alloc] initWithTitle:@"Internet Connection Not Found" message:@"Please check your network settings!" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+//        [alertConnection show];
+//    } else
+//    {
+//        // connected, do some internet stuff
+//        
+//    }
     
     
     
@@ -243,16 +243,16 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
-    if (![self connected])
-    {
+//    if (![self connected])
+//    {
         // not connected
 //        alertConnection = [[UIAlertView alloc] initWithTitle:@"Internet Connection Not Found" message:@"Please check your network settings!" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
 //        [alertConnection show];
-    } else
-    {
-        // connected, do some internet stuff
-        [alertConnection dismissWithClickedButtonIndex:0 animated:YES];
-    }
+//    } else
+//    {
+//        // connected, do some internet stuff
+//        [alertConnection dismissWithClickedButtonIndex:0 animated:YES];
+//    }
     
     // Global Data Manager
     [globalShop refreshPause];
