@@ -480,8 +480,8 @@
 		FCAA47A31AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */; };
 		FCB906131AEC7FBF003041F7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
 		FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
-		FCBF06F11B150DFE00EEC177 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F01B150DFE00EEC177 /* Reachability.m */; };
-		FCBF06F21B150DFE00EEC177 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F01B150DFE00EEC177 /* Reachability.m */; };
+		FCBF06F51B1510D000EEC177 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F41B1510D000EEC177 /* Reachability.m */; };
+		FCBF06F61B1510D000EEC177 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F41B1510D000EEC177 /* Reachability.m */; };
 		FCD51ECB1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */; };
 		FCD51ECC1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */; };
 		FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
@@ -885,8 +885,8 @@
 		FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedOutSettingsViewController.m; sourceTree = "<group>"; };
 		FCB906111AEC7FB9003041F7 /* FaqViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaqViewController.h; path = MakeBento/FaqViewController.h; sourceTree = "<group>"; };
 		FCB906121AEC7FBF003041F7 /* FaqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FaqViewController.m; path = MakeBento/FaqViewController.m; sourceTree = "<group>"; };
-		FCBF06EF1B150DFE00EEC177 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Bento/Modules/Reachability.h; sourceTree = SOURCE_ROOT; };
-		FCBF06F01B150DFE00EEC177 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Bento/Modules/Reachability.m; sourceTree = SOURCE_ROOT; };
+		FCBF06F31B1510D000EEC177 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../../../../../../Downloads/Reachability-master 4/Reachability.h"; sourceTree = "<group>"; };
+		FCBF06F41B1510D000EEC177 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../../../../../../Downloads/Reachability-master 4/Reachability.m"; sourceTree = "<group>"; };
 		FCD51EC91AFB4B69009D75BB /* SneakPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakPreviewViewController.h; path = ../Order/SneakPreviewViewController.h; sourceTree = "<group>"; };
 		FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakPreviewViewController.m; path = ../Order/SneakPreviewViewController.m; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1159,8 +1159,8 @@
 		722333D81A6F4701006C2446 /* Reachability */ = {
 			isa = PBXGroup;
 			children = (
-				FCBF06EF1B150DFE00EEC177 /* Reachability.h */,
-				FCBF06F01B150DFE00EEC177 /* Reachability.m */,
+				FCBF06F31B1510D000EEC177 /* Reachability.h */,
+				FCBF06F41B1510D000EEC177 /* Reachability.m */,
 			);
 			path = Reachability;
 			sourceTree = "<group>";
@@ -2437,7 +2437,7 @@
 				7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */,
 				7216B73E1AA64C7C0006FFE9 /* SDWebImageDecoder.m in Sources */,
 				7216B73F1AA64C7C0006FFE9 /* SVGeocoder.m in Sources */,
-				FCBF06F21B150DFE00EEC177 /* Reachability.m in Sources */,
+				FCBF06F61B1510D000EEC177 /* Reachability.m in Sources */,
 				7216B7401AA64C7C0006FFE9 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
 				7216B7411AA64C7C0006FFE9 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				7216B7421AA64C7C0006FFE9 /* main.m in Sources */,
@@ -2541,7 +2541,7 @@
 				7223336B1A6D5847006C2446 /* BentoShop.m in Sources */,
 				722333AB1A6EADBD006C2446 /* SDWebImageDecoder.m in Sources */,
 				7209E07F1A76BD1800D18D7A /* SVGeocoder.m in Sources */,
-				FCBF06F11B150DFE00EEC177 /* Reachability.m in Sources */,
+				FCBF06F51B1510D000EEC177 /* Reachability.m in Sources */,
 				7209E0951A780A1200D18D7A /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
 				722333FA1A72C133006C2446 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				90BED0741A5BCC04003DC872 /* main.m in Sources */,

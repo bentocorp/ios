@@ -257,9 +257,17 @@
     [super didReceiveMemoryWarning];
 }
 
+//-(void)goToRootVC:(NSNotification*)note
+//{
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+//}
+
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+////////////////////////////////////////////NO INTERNET CONNECTION////////////////////////////////////////////////////
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(goToRootVC:) name:@"goToRootVC" object:nil];
+////////////////////////////////////////////////////////////////////////////////////////////////
     
     // set aryDishes array
     self.aryDishes = [[NSMutableArray alloc] init];

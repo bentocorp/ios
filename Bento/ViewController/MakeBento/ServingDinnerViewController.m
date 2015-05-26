@@ -417,7 +417,8 @@
         // Continue Button
         strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
         [btnState setTitle:strTitle forState:UIControlStateNormal];
-        attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        if (strTitle != nil)
+            attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         spacing = 1.0f;
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
