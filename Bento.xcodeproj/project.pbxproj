@@ -470,6 +470,9 @@
 		FC99D4F41AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
 		FCA1C8C21AF1973E004715F1 /* icon-square-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA1C8C11AF1973E004715F1 /* icon-square-user.png */; };
 		FCA1C8C31AF1973E004715F1 /* icon-square-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA1C8C11AF1973E004715F1 /* icon-square-user.png */; };
+		FCA43B661B14F2DE00EF1C86 /* TMReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA43B651B14F2DE00EF1C86 /* TMReachability.m */; };
+		FCA43B671B14F2DE00EF1C86 /* TMReachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCA43B651B14F2DE00EF1C86 /* TMReachability.m */; };
+		FCA43B681B14FA8A00EF1C86 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE3B9451B141A9A00301353 /* Reachability.m */; };
 		FCAA479C1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */; };
 		FCAA479D1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */; };
 		FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */; };
@@ -524,7 +527,6 @@
 		FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
 		FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
-		FCE3B9461B141A9A00301353 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE3B9451B141A9A00301353 /* Reachability.m */; };
 		FCE3B9471B141A9A00301353 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE3B9451B141A9A00301353 /* Reachability.m */; };
 /* End PBXBuildFile section */
 
@@ -875,6 +877,8 @@
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
 		FC99D4F21AFC161300BEE40B /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviewViewController.m; path = Order/PreviewViewController.m; sourceTree = "<group>"; };
 		FCA1C8C11AF1973E004715F1 /* icon-square-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-user.png"; sourceTree = "<group>"; };
+		FCA43B641B14F2DE00EF1C86 /* TMReachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TMReachability.h; sourceTree = "<group>"; };
+		FCA43B651B14F2DE00EF1C86 /* TMReachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TMReachability.m; sourceTree = "<group>"; };
 		FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardInfoViewController.h; sourceTree = "<group>"; };
 		FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardInfoViewController.m; sourceTree = "<group>"; };
 		FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewCell.h; path = ../ViewController/SettingsTableViewCell.h; sourceTree = "<group>"; };
@@ -1023,6 +1027,8 @@
 				722333E51A72C133006C2446 /* ApplePayStubs */,
 				722333DC1A6FD7B8006C2446 /* LocationManager */,
 				722333B71A6F46DF006C2446 /* WebManager */,
+				FCA43B641B14F2DE00EF1C86 /* TMReachability.h */,
+				FCA43B651B14F2DE00EF1C86 /* TMReachability.m */,
 				722333851A6EADBD006C2446 /* SDWebImage */,
 				722333441A6D4058006C2446 /* JGProgressHUD */,
 			);
@@ -2445,6 +2451,7 @@
 				7216B7451AA64C7C0006FFE9 /* MyCLController.m in Sources */,
 				FCAA479F1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				7216B7471AA64C7C0006FFE9 /* MKNetworkOperation.m in Sources */,
+				FCA43B671B14F2DE00EF1C86 /* TMReachability.m in Sources */,
 				7216B7481AA64C7C0006FFE9 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				7216B7491AA64C7C0006FFE9 /* BaseViewController.m in Sources */,
 				7216B74A1AA64C7C0006FFE9 /* CompleteOrderViewController.m in Sources */,
@@ -2482,6 +2489,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCA43B681B14FA8A00EF1C86 /* Reachability.m in Sources */,
 				722333D71A6F46DF006C2446 /* WebManager.m in Sources */,
 				FCAA479C1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */,
 				90D8F7A91A5D81C300D034CF /* RegisterViewController.m in Sources */,
@@ -2549,6 +2557,7 @@
 				722333DF1A6FD7B8006C2446 /* MyCLController.m in Sources */,
 				FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				722333D61A6F46DF006C2446 /* MKNetworkOperation.m in Sources */,
+				FCA43B661B14F2DE00EF1C86 /* TMReachability.m in Sources */,
 				722333CE1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				726CE35B1A82693900296182 /* BaseViewController.m in Sources */,
 				90D8F7D81A5E2FE900D034CF /* CompleteOrderViewController.m in Sources */,
@@ -2575,7 +2584,6 @@
 				7286EB4D1A7D8BE800D03DCE /* NSObject+RMCopyable.m in Sources */,
 				722333781A6E0DFD006C2446 /* AppStrings.m in Sources */,
 				90D8F7DE1A5E30AD00D034CF /* SoldOutViewController.m in Sources */,
-				FCE3B9461B141A9A00301353 /* Reachability.m in Sources */,
 				90D8F7DB1A5E304D00D034CF /* OrderConfirmViewController.m in Sources */,
 				90A553DF1A5FFEEB001F9DA7 /* BentoTableViewCell.m in Sources */,
 				FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */,

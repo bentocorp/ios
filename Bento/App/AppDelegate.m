@@ -17,6 +17,8 @@
 #import "DataManager.h"
 
 //#import "Reachability.h"
+
+#import "TMReachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
 // Crashlytics
@@ -50,7 +52,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     UIAlertView *aV;
     
-    UIAlertView *alertConnection;
+//    UIAlertView *alertConnection;
+    
+    TMReachability *googleReach;
 }
 
 @end
@@ -133,7 +137,43 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 //        
 //    }
     
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(reachabilityChanged:)
+                                                 name:kReachabilityChangedNotification
+                                               object:nil];
+
+    googleReach = [TMReachability reachabilityWithHostname:@"www.google.com"];
     
+    googleReach.reachableBlock = ^(TMReachability * reachability)
+    {
+        NSString * temp = [NSString stringWithFormat:@"GOOGLE Block Says Reachable(%@)", reachability.currentReachabilityString];
+        NSLog(@"%@", temp);
+        
+        // to update UI components from a block callback
+        // you need to dipatch this to the main thread
+        // this uses NSOperationQueue mainQueue
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            
+        }];
+    };
+    
+    googleReach.unreachableBlock = ^(TMReachability * reachability)
+    {
+        NSString * temp = [NSString stringWithFormat:@"GOOGLE Block Says Unreachable(%@)", reachability.currentReachabilityString];
+        NSLog(@"%@", temp);
+        
+        // to update UI components from a block callback
+        // you need to dipatch this to the main thread
+        // this one uses dispatch_async they do the same thing (as above)
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+        });
+    };
+    
+    [googleReach startNotifier];
+    
+    /////////////////////////////////////////////////////////////////////////////////////
+    /////////////////////////////////////////////////////////////////////////////////////
     
     NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion] );
     
@@ -220,6 +260,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=General"]];
     }
 }
+
+#pragma mark MyAlertViewDelegate
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -369,5 +411,35 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     {
     }
 }
+
+
+#pragma mark TMReachability Notification Method
+-(void)reachabilityChanged:(NSNotification*)note
+{
+    TMReachability * reach = [note object];
+    
+    UIAlertView *netWorkAlertView = [[UIAlertView alloc] initWithTitle:@"No Network Connection" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Settings", nil];
+    netWorkAlertView.tag = 911;
+    
+    if(reach == googleReach)
+    {
+        if([reach isReachable])
+        {
+            NSString * temp = [NSString stringWithFormat:@"GOOGLE Notification Says Reachable(%@)", reach.currentReachabilityString];
+            NSLog(@"%@", temp);
+            
+            [netWorkAlertView dismissWithClickedButtonIndex:0 animated:YES];
+        }
+        else
+        {
+            NSString * temp = [NSString stringWithFormat:@"GOOGLE Notification Says Unreachable(%@)", reach.currentReachabilityString];
+            NSLog(@"%@", temp);
+            
+            [netWorkAlertView show];
+        }
+    }
+}
+
+
 
 @end
