@@ -61,15 +61,22 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     UINavigationController *vcNav = (UINavigationController *)self.window.rootViewController;
     UIViewController *vcCurrent = vcNav.visibleViewController;
     
+    UIAlertView *alertView;
+    
     if (networkStatus == NotReachable)
     {
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"There is no internet connection." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-        [alertView showInView:vcCurrent.view];
+        alertView = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please check your network settings" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        alertView.tag = 911;
+        [alertView show];
+        
+//        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please check your network settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+//        [alertView showInView:vcCurrent.view];
+        
         alertView = nil;
         return;
     }
     
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kReachabilityChangedNotification object:networkReachability];
+    [[NSNotificationCenter defaultCenter] postNotificationName:kReachabilityChangedNotification object:networkReachability];
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -152,6 +159,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     if (alertView.tag == 007)
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
+    
+    if (alertView.tag == 911)
+    {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=General"]];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
