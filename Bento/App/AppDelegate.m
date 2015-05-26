@@ -16,8 +16,6 @@
 #import "AppStrings.h"
 #import "DataManager.h"
 
-//#import "Reachability.h"
-
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
@@ -346,22 +344,16 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #pragma mark TMReachability Notification Method
 -(void)reachabilityChanged:(NSNotification*)note
 {
-    UIAlertView *netWorkAlertView = [[UIAlertView alloc] initWithTitle:@"No Network Connection" message:@"You have no wifi or cellular connection available. Please connect to a WIFI or cellular network." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-    netWorkAlertView.tag = 911;
-    
     Reachability * reach = [note object];
     
     if(reach == googleReach)
     {
         if([reach isReachable])
         {
-//            [netWorkAlertView removeFromSuperview];
-//            [netWorkAlertView dismissWithClickedButtonIndex:0 animated:YES]; // remove alert message
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"networkConnected" object:nil];
             
             if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
             {
-                
-                
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     [globalShop getMenus];
                     [globalShop getStatus];
@@ -370,12 +362,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             }
         }
         else
-        {
+        {   
             if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
                 [globalShop getStatus];
             
-//            [netWorkAlertView show]; // show alert message
-//            netWorkAlertView = nil;
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"networkError" object:nil];
+            
         }
     }
 }

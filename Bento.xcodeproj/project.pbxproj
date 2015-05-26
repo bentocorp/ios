@@ -482,6 +482,8 @@
 		FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
 		FCBF06F51B1510D000EEC177 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F41B1510D000EEC177 /* Reachability.m */; };
 		FCBF06F61B1510D000EEC177 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F41B1510D000EEC177 /* Reachability.m */; };
+		FCBF06FA1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */; };
+		FCBF06FB1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */; };
 		FCD51ECB1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */; };
 		FCD51ECC1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */; };
 		FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
@@ -887,6 +889,8 @@
 		FCB906121AEC7FBF003041F7 /* FaqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FaqViewController.m; path = MakeBento/FaqViewController.m; sourceTree = "<group>"; };
 		FCBF06F31B1510D000EEC177 /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = "../../../../../../Downloads/Reachability-master 4/Reachability.h"; sourceTree = "<group>"; };
 		FCBF06F41B1510D000EEC177 /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = "../../../../../../Downloads/Reachability-master 4/Reachability.m"; sourceTree = "<group>"; };
+		FCBF06F81B1522C800EEC177 /* NetworkErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkErrorViewController.h; sourceTree = "<group>"; };
+		FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkErrorViewController.m; sourceTree = "<group>"; };
 		FCD51EC91AFB4B69009D75BB /* SneakPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakPreviewViewController.h; path = ../Order/SneakPreviewViewController.h; sourceTree = "<group>"; };
 		FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakPreviewViewController.m; path = ../Order/SneakPreviewViewController.m; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
@@ -1792,6 +1796,8 @@
 		FC99D4F51AFC323700BEE40B /* Closed/Sold-out */ = {
 			isa = PBXGroup;
 			children = (
+				FCBF06F81B1522C800EEC177 /* NetworkErrorViewController.h */,
+				FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */,
 				90D8F7DC1A5E30AD00D034CF /* SoldOutViewController.h */,
 				90D8F7DD1A5E30AD00D034CF /* SoldOutViewController.m */,
 				FC99D4F11AFC161300BEE40B /* PreviewViewController.h */,
@@ -2388,6 +2394,7 @@
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */,
 				FCD51ECC1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */,
+				FCBF06FB1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
 				FCAA47A11AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				7216B7121AA64C7C0006FFE9 /* ChooseSideDishViewController.m in Sources */,
 				FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */,
@@ -2492,6 +2499,7 @@
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */,
 				FCD51ECB1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */,
+				FCBF06FA1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
 				FCAA47A01AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				90BED0D91A5BF301003DC872 /* ChooseSideDishViewController.m in Sources */,
 				FCB906131AEC7FBF003041F7 /* FaqViewController.m in Sources */,
