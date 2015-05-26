@@ -32,7 +32,6 @@
 #import <FacebookSDK/FacebookSDK.h>
 
 // Force Update
-#import "Harpy.h"
 #import "AppStrings.h"
 
 NSString * const StripePublishableTestKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
