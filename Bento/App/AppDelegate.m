@@ -18,7 +18,7 @@
 
 //#import "Reachability.h"
 
-#import "TMReachability.h"
+#import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
 // Crashlytics
@@ -45,135 +45,81 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     AppStrings *globalStrings;
     BentoShop *globalShop;
-//    Reachability *reach;
 
     MyCLController *locationController;
     CLLocationCoordinate2D  coordinate;
     
     UIAlertView *aV;
     
-//    UIAlertView *alertConnection;
-    
-    TMReachability *googleReach;
+    Reachability *googleReach;
 }
 
 @end
 
 @implementation AppDelegate
 
-//- (BOOL)connected
-//{
-//    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-//    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-//    return !(networkStatus == NotReachable);
-//}
-
-//- (void)networkChanged:(NSNotification *)notification
-//{
-//    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-//    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-//    
-//    UINavigationController *vcNav = (UINavigationController *)self.window.rootViewController;
-//    UIViewController *vcCurrent = vcNav.visibleViewController;
-//    
-//    if (networkStatus == NotReachable)
-//    {
-//        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please check your network settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-//        [alertView showInView:vcCurrent.view];
-//        
-//        alertView = nil;
-//        return;
-//    }
-//    
-//    [[NSNotificationCenter defaultCenter] postNotificationName:kReachabilityChangedNotification object:networkReachability];
-//}
-
-//-(void)reachabilityBlock
-//{
-//    // allocate a reachability object
-//    reach = [Reachability reachabilityWithHostname:@"www.google.com"];
-//    
-//    // tell the reachability that we DONT want to be reachable on 3G/EDGE/CDMA
-//    reach.reachableOnWWAN = YES;
-//    
-//    reach.reachableBlock = ^(Reachability * reachability)
-//    {
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSLog(@"REACHABLE! block");
-//        });
-//    };
-//    
-//    reach.unreachableBlock = ^(Reachability * reachability)
-//    {
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            NSLog(@"UNREACHABLE! block");
-//            
-//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"No Network found!"
-//                                                            message: @"You have no wifi or cellular connection available. Please connect to a WIFI or cellular network."
-//                                                           delegate: nil
-//                                                  cancelButtonTitle: nil
-//                                                  otherButtonTitles: @"Settings", nil];
-//            alert.tag = 911;
-//            
-//            [alert show];
-//        });
-//        
-//    };
-//    
-//    [reach startNotifier];
-//}
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-//    if (![self connected])
+    
+//    [[NSNotificationCenter defaultCenter] addObserver:self
+//                                             selector:@selector(reachabilityChanged:)
+//                                                 name:kReachabilityChangedNotification
+//                                               object:nil];
+    
+//    __block UIAlertView *netWorkAlertView = [[UIAlertView alloc] initWithTitle:@"No Network Connection" message:@"You have no wifi or cellular connection available. Please connect to a WIFI or cellular network." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//    netWorkAlertView.tag = 911;
+//
+//    googleReach = [Reachability reachabilityWithHostname:@"www.google.com"];
+//    
+//    googleReach.reachableBlock = ^(Reachability * reachability)
 //    {
-//        // not connected
-//        alertConnection = [[UIAlertView alloc] initWithTitle:@"Internet Connection Not Found" message:@"Please check your network settings!" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
-//        [alertConnection show];
-//    } else
-//    {
-//        // connected, do some internet stuff
+//        NSString * temp = [NSString stringWithFormat:@"GOOGLE Block Says Reachable(%@)", reachability.currentReachabilityString];
+//        NSLog(@"%@", temp);
 //        
-//    }
+//        // to update UI components from a block callback
+//        // you need to dipatch this to the main thread
+//        // this uses NSOperationQueue mainQueue
+//        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+//            
+//            [netWorkAlertView dismissWithClickedButtonIndex:0 animated:YES]; // remove alert message
+//        }];
+//    };
+//    
+//    googleReach.unreachableBlock = ^(Reachability * reachability)
+//    {
+//        NSString * temp = [NSString stringWithFormat:@"GOOGLE Block Says Unreachable(%@)", reachability.currentReachabilityString];
+//        NSLog(@"%@", temp);
+//        
+//        // to update UI components from a block callback
+//        // you need to dipatch this to the main thread
+//        // this one uses dispatch_async they do the same thing (as above)
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            
+//            [netWorkAlertView show]; // show alert message
+//        });
+//    };
+//    
+//    [googleReach startNotifier];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self
-                                             selector:@selector(reachabilityChanged:)
-                                                 name:kReachabilityChangedNotification
-                                               object:nil];
+    googleReach = [Reachability reachabilityWithHostname:@"www.google.com"];
+    if ([googleReach isReachable])
+    {
+        
+    }
+    else // Unreachable
+    {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Network Connection"
+                                                        message:@"You have no wifi or cellular connection available. Please connect to a WIFI or cellular network."
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"Settings", nil];
+        [alert show];
+        alert = nil;
+    }
 
-    googleReach = [TMReachability reachabilityWithHostname:@"www.google.com"];
     
-    googleReach.reachableBlock = ^(TMReachability * reachability)
-    {
-        NSString * temp = [NSString stringWithFormat:@"GOOGLE Block Says Reachable(%@)", reachability.currentReachabilityString];
-        NSLog(@"%@", temp);
-        
-        // to update UI components from a block callback
-        // you need to dipatch this to the main thread
-        // this uses NSOperationQueue mainQueue
-        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
-            
-        }];
-    };
-    
-    googleReach.unreachableBlock = ^(TMReachability * reachability)
-    {
-        NSString * temp = [NSString stringWithFormat:@"GOOGLE Block Says Unreachable(%@)", reachability.currentReachabilityString];
-        NSLog(@"%@", temp);
-        
-        // to update UI components from a block callback
-        // you need to dipatch this to the main thread
-        // this one uses dispatch_async they do the same thing (as above)
-        dispatch_async(dispatch_get_main_queue(), ^{
-            
-        });
-    };
-    
-    [googleReach startNotifier];
-    
-    /////////////////////////////////////////////////////////////////////////////////////
-    /////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////
     
     NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion] );
     
@@ -184,12 +130,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"App Launched" properties:nil];
-    
-    // Reachability
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChanged:) name:kReachabilityChangedNotification object:nil];
-//    reach = [Reachability reachabilityForInternetConnection];
-//    [reach startNotifier];
-//    [self reachabilityBlock];
     
     // App Strings
     globalStrings = [AppStrings sharedInstance];
@@ -220,7 +160,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     [locationController.locationManager startUpdatingLocation];
     
-/*---------------------------FORCE UPDATE----------------------------*/
+/*---------------------------FORCED UPDATE----------------------------*/
     
     
 #ifdef DEV_MODE
@@ -257,7 +197,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     if (alertView.tag == 911)
     {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=General"]];
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=General"]];
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
     }
 }
 
@@ -284,17 +225,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    
-//    if (![self connected])
-//    {
-        // not connected
-//        alertConnection = [[UIAlertView alloc] initWithTitle:@"Internet Connection Not Found" message:@"Please check your network settings!" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
-//        [alertConnection show];
-//    } else
-//    {
-//        // connected, do some internet stuff
-//        [alertConnection dismissWithClickedButtonIndex:0 animated:YES];
-//    }
     
     // Global Data Manager
     [globalShop refreshPause];
@@ -358,7 +288,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
     // Reachability.
-//    [reach stopNotifier];
+    [googleReach stopNotifier];
     
     // Global Data Manager.
     [globalShop refreshStop];
@@ -416,26 +346,17 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #pragma mark TMReachability Notification Method
 -(void)reachabilityChanged:(NSNotification*)note
 {
-    TMReachability * reach = [note object];
-    
-    UIAlertView *netWorkAlertView = [[UIAlertView alloc] initWithTitle:@"No Network Connection" message:@"" delegate:self cancelButtonTitle:nil otherButtonTitles:@"Settings", nil];
-    netWorkAlertView.tag = 911;
+    Reachability * reach = [note object];
     
     if(reach == googleReach)
     {
         if([reach isReachable])
         {
-            NSString * temp = [NSString stringWithFormat:@"GOOGLE Notification Says Reachable(%@)", reach.currentReachabilityString];
-            NSLog(@"%@", temp);
             
-            [netWorkAlertView dismissWithClickedButtonIndex:0 animated:YES];
         }
         else
         {
-            NSString * temp = [NSString stringWithFormat:@"GOOGLE Notification Says Unreachable(%@)", reach.currentReachabilityString];
-            NSLog(@"%@", temp);
             
-            [netWorkAlertView show];
         }
     }
 }
