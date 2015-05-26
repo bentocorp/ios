@@ -15,7 +15,9 @@
 #import "BentoShop.h"
 #import "AppStrings.h"
 #import "DataManager.h"
+
 #import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
 
 // Crashlytics
 #import <Fabric/Fabric.h>
@@ -41,46 +43,98 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     AppStrings *globalStrings;
     BentoShop *globalShop;
-    Reachability *reachability;
+    Reachability *reach;
 
     MyCLController *locationController;
     CLLocationCoordinate2D  coordinate;
     
     UIAlertView *aV;
+    
+    UIAlertView *alertConnection;
 }
 
 @end
 
 @implementation AppDelegate
 
-- (void)networkChanged:(NSNotification *)notification
+- (BOOL)connected
 {
-    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
-    
-    UINavigationController *vcNav = (UINavigationController *)self.window.rootViewController;
-    UIViewController *vcCurrent = vcNav.visibleViewController;
-    
-    UIAlertView *alertView;
-    
-    if (networkStatus == NotReachable)
-    {
-        alertView = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please check your network settings" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        alertView.tag = 911;
-        [alertView show];
-        
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return !(networkStatus == NotReachable);
+}
+
+//- (void)networkChanged:(NSNotification *)notification
+//{
+//    Reachability *networkReachability = [Reachability reachabilityForInternetConnection];
+//    NetworkStatus networkStatus = [networkReachability currentReachabilityStatus];
+//    
+//    UINavigationController *vcNav = (UINavigationController *)self.window.rootViewController;
+//    UIViewController *vcCurrent = vcNav.visibleViewController;
+//    
+//    if (networkStatus == NotReachable)
+//    {
 //        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please check your network settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
 //        [alertView showInView:vcCurrent.view];
-        
-        alertView = nil;
-        return;
-    }
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:kReachabilityChangedNotification object:networkReachability];
-}
+//        
+//        alertView = nil;
+//        return;
+//    }
+//    
+//    [[NSNotificationCenter defaultCenter] postNotificationName:kReachabilityChangedNotification object:networkReachability];
+//}
+
+//-(void)reachabilityBlock
+//{
+//    // allocate a reachability object
+//    reach = [Reachability reachabilityWithHostname:@"www.google.com"];
+//    
+//    // tell the reachability that we DONT want to be reachable on 3G/EDGE/CDMA
+//    reach.reachableOnWWAN = YES;
+//    
+//    reach.reachableBlock = ^(Reachability * reachability)
+//    {
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"REACHABLE! block");
+//        });
+//    };
+//    
+//    reach.unreachableBlock = ^(Reachability * reachability)
+//    {
+//        
+//        dispatch_async(dispatch_get_main_queue(), ^{
+//            NSLog(@"UNREACHABLE! block");
+//            
+//            UIAlertView *alert = [[UIAlertView alloc] initWithTitle: @"No Network found!"
+//                                                            message: @"You have no wifi or cellular connection available. Please connect to a WIFI or cellular network."
+//                                                           delegate: nil
+//                                                  cancelButtonTitle: nil
+//                                                  otherButtonTitles: @"Settings", nil];
+//            alert.tag = 911;
+//            
+//            [alert show];
+//        });
+//        
+//    };
+//    
+//    [reach startNotifier];
+//}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    if (![self connected])
+    {
+        // not connected
+        alertConnection = [[UIAlertView alloc] initWithTitle:@"Internet Connection Not Found" message:@"Please check your network settings!" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+        [alertConnection show];
+    } else
+    {
+        // connected, do some internet stuff
+        
+    }
+    
+    
+    
     NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion] );
     
     // Crashlytics
@@ -92,9 +146,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [mixpanel track:@"App Launched" properties:nil];
     
     // Reachability
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChanged:) name:kReachabilityChangedNotification object:nil];
-    reachability = [Reachability reachabilityForInternetConnection];
-    [reachability startNotifier];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(networkChanged:) name:kReachabilityChangedNotification object:nil];
+//    reach = [Reachability reachabilityForInternetConnection];
+//    [reach startNotifier];
+//    [self reachabilityBlock];
     
     // App Strings
     globalStrings = [AppStrings sharedInstance];
@@ -188,6 +243,17 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
+    if (![self connected])
+    {
+        // not connected
+//        alertConnection = [[UIAlertView alloc] initWithTitle:@"Internet Connection Not Found" message:@"Please check your network settings!" delegate:nil cancelButtonTitle:nil otherButtonTitles:nil];
+//        [alertConnection show];
+    } else
+    {
+        // connected, do some internet stuff
+        [alertConnection dismissWithClickedButtonIndex:0 animated:YES];
+    }
+    
     // Global Data Manager
     [globalShop refreshPause];
     
@@ -250,7 +316,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
     // Reachability.
-    [reachability stopNotifier];
+//    [reach stopNotifier];
     
     // Global Data Manager.
     [globalShop refreshStop];
