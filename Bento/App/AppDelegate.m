@@ -355,6 +355,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
             {
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                    [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
                     [globalShop getMenus];
                     [globalShop getStatus];
                     [globalShop getServiceArea];
