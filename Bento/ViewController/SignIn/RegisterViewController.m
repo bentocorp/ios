@@ -134,7 +134,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeKeyboardFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popBack) name:@"networkError" object:nil];
+    
     [self showErrorWithString:nil code:ERROR_NONE];
     
     [self updateUI];
@@ -150,6 +151,14 @@
 //        CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
 //        [self.navigationController pushViewController:completeOrderViewController animated:YES];
     }
+}
+
+- (void)popBack
+{
+    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
