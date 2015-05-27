@@ -104,23 +104,40 @@
     [[NSUserDefaults standardUserDefaults] setObject:strSlogan forKey:@"Slogan"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    // check version first
+    // check version first (this comment useless)
     
     
     [self.activityIndicator stopAnimating];
 
-    // Check the app is already launched
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+    
+    if (isThereConnection)
     {
-        // This is the first launch ever
-        [self performSelector:@selector(gotoIntroScreen) withObject:nil afterDelay:1.0f];
-        return;
+        // Check the app is already launched
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+        {
+            // This is the first launch ever
+            [self performSelector:@selector(gotoIntroScreen) withObject:nil afterDelay:1.0f];
+            return;
+        }
+        else
+        {
+            [self performSelector:@selector(process) withObject:nil afterDelay:1.0f];
+            return;
+        }
     }
-    else
-    {
-        [self performSelector:@selector(process) withObject:nil afterDelay:1.0f];
-        return;
-    }
+    
+//    // Check the app is already launched
+//    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+//    {
+//        // This is the first launch ever
+//        [self performSelector:@selector(gotoIntroScreen) withObject:nil afterDelay:1.0f];
+//        return;
+//    }
+//    else
+//    {
+//        [self performSelector:@selector(process) withObject:nil afterDelay:1.0f];
+//        return;
+//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -227,31 +244,39 @@
 
 - (void)process
 {
-    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-/*
-#ifdef DEBUG
-    if ([pref objectForKey:@"apiName"] == nil)
-        [pref setObject:@"/user/login" forKey:@"apiName"];
-    
-    if ([pref objectForKey:@"loginRequest"] == nil)
+    if ([isThereConnection isEqualToString:@"NO"])
     {
-        NSDictionary* loginInfo = @{
-                                    @"email" : @"ridev@bentonow.com",
-                                    @"password" : @"12345678",
-                                    };
-        
-        NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
-        [pref setObject:dicRequest forKey:@"loginRequest"];
-    }
-#endif
-*/    
-    if ([pref objectForKey:@"apiName"] != nil && [pref objectForKey:@"loginRequest"] != nil)
-    {
-        [self processAutoLogin];
+        [self showNetworkErrorScreen];
     }
     else
     {
-        [self processAfterLogin];
+        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+        /*
+        #ifdef DEBUG
+            if ([pref objectForKey:@"apiName"] == nil)
+                [pref setObject:@"/user/login" forKey:@"apiName"];
+            
+            if ([pref objectForKey:@"loginRequest"] == nil)
+            {
+                NSDictionary* loginInfo = @{
+                                            @"email" : @"ridev@bentonow.com",
+                                            @"password" : @"12345678",
+                                            };
+                
+                NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
+                [pref setObject:dicRequest forKey:@"loginRequest"];
+            }
+        #endif
+        */
+        
+        if ([pref objectForKey:@"apiName"] != nil && [pref objectForKey:@"loginRequest"] != nil)
+        {
+            [self processAutoLogin];
+        }
+        else
+        {
+            [self processAfterLogin];
+        }
     }
 }
 

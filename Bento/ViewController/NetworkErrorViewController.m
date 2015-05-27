@@ -22,7 +22,7 @@
 @implementation NetworkErrorViewController
 {
     UIImageView *ivBackground;
-    UIAlertView *alert;
+//    UIAlertView *alert;
     BentoShop *globalShop;
     BOOL isConnected;
 }
@@ -49,13 +49,13 @@
     [ivBackground.layer insertSublayer:gradient atIndex:0];
     
     
-     alert = [[UIAlertView alloc] initWithTitle:@"No Network Connection"
-                                                        message:@"Please connect to a WIFI or cellular network."
-                                                       delegate:self
-                                              cancelButtonTitle:nil
-                                              otherButtonTitles:@"Try again", nil];
-    
-    [alert show];
+//     alert = [[UIAlertView alloc] initWithTitle:@"No Network Connection"
+//                                                        message:@"Please connect to a WIFI or cellular network."
+//                                                       delegate:self
+//                                              cancelButtonTitle:nil
+//                                              otherButtonTitles:@"Try again", nil];
+//    
+//    [alert show];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -73,19 +73,20 @@
 - (void)yesConnection
 {
     isConnected = YES;
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (isConnected)
-    {
-        [self dismissViewControllerAnimated:YES completion:nil];
-    }
-    else
-    {
-        [self viewDidLoad];
-    }
-}
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (isConnected)
+//    {
+//        [self dismissViewControllerAnimated:YES completion:nil];
+//    }
+//    else
+//    {
+//        [self viewDidLoad];
+//    }
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
