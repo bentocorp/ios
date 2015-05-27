@@ -38,6 +38,8 @@
 
 #import "Canvas.h"
 
+#import "JGProgressHUD.h"
+
 
 @interface ServingLunchViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -70,6 +72,8 @@
     ServingLunchCell *servingLunchCell;
     
     CSAnimationView *animationView;
+    
+    JGProgressHUD *loadingHUD;
 }
 
 - (void)viewDidLoad {
@@ -280,9 +284,10 @@
     
     [self updateUI];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popBack) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
     /*---------------Tomorrow Lunch------------*/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
@@ -290,7 +295,22 @@
 
 - (void)popBack
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    [loadingHUD removeFromSuperview];
+    loadingHUD = nil;
+    [self viewWillAppear:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
