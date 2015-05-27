@@ -6,11 +6,15 @@
 //  Copyright (c) 2015 bentonow. All rights reserved.
 //
 
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #import "NetworkErrorViewController.h"
 #import "DataManager.h"
 #import "BentoShop.h"
 #import "UIImageView+WebCache.h"
 #import "AppStrings.h"
+#import "AppDelegate.h"
 
 @interface NetworkErrorViewController ()
 
@@ -19,11 +23,15 @@
 @implementation NetworkErrorViewController
 {
     UIImageView *ivBackground;
-    UIImageView *ivTitle;
+    UIAlertView *alert;
+    BentoShop *globalShop;
+    BOOL isConnected;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    globalShop = [BentoShop sharedInstance];
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = ivBackground.bounds;
@@ -38,8 +46,19 @@
     [ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     [self.view addSubview:ivBackground];
     
-    NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
-    [ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
+//    ivTitle = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 150, SCREEN_HEIGHT/2 - 60, 300, 60)];
+//    NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
+//    ivTitle.tintColor = [UIColor whiteColor];
+//    [ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
+//    [self.view addSubview:ivTitle];
+    
+     alert = [[UIAlertView alloc] initWithTitle:@"No Network Connection"
+                                                        message:@"Please connect to a WIFI or cellular network."
+                                                       delegate:self
+                                              cancelButtonTitle:nil
+                                              otherButtonTitles:@"Try again", nil];
+    
+    [alert show];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -49,17 +68,29 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-//    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:@"networkError" object:nil];
+    
+    isConnected = NO;
 }
 
 - (void)yesConnection
 {
-    [NSTimer scheduledTimerWithTimeInterval:3.0f target:self selector:@selector(timerDidEnd) userInfo:nil repeats:NO];
+    isConnected = YES;
+    
 }
 
-- (void)timerDidEnd
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (isConnected)
+    {
+        [[AppStrings sharedInstance] getAppStrings];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    }
+    else
+    {
+        [self viewDidLoad];
+    }
 }
 
 - (void)didReceiveMemoryWarning {

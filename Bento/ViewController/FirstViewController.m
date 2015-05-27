@@ -108,10 +108,12 @@
     BentoShop *globalShop = [BentoShop sharedInstance];
     if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
     {
+        [[AppStrings sharedInstance] getAppStrings];
         [[BentoShop sharedInstance] getMenus];
         [[BentoShop sharedInstance] getStatus];
         [[BentoShop sharedInstance] getServiceArea];
         [[BentoShop sharedInstance] refreshStart];
+
     }
     
     [self.activityIndicator stopAnimating];

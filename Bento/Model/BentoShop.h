@@ -90,4 +90,8 @@
 - (void)saveBentoArray;
 - (void)resetBentoArray;
 
+- (void)checkIfBentoArrayNeedsToBeReset;
+- (void)setLunchOrDinnerMode;
+
+
 @end
