@@ -153,7 +153,7 @@
 
 - (void)dealloc {
     if (_isObservingScrollView) {
-        [self.observedScrollView removeObserver:self forKeyPath:@"contentOffset"];
+//        [self.observedScrollView removeObserver:self forKeyPath:@"contentOffset"];
     }
 }
 

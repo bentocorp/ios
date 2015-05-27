@@ -76,7 +76,7 @@
             
             if (aryParams.count > 0)dicParams = [aryParams objectAtIndex:0];
             
-            NSString *postString = [NSString stringWithFormat:@"\[%@\]", [dicParams jsonEncodedKeyValueString]];
+            NSString *postString = [NSString stringWithFormat:@"\[%@]", [dicParams jsonEncodedKeyValueString]];
             
             return postString;
             

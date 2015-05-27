@@ -7,17 +7,39 @@
 //
 
 #import "NetworkErrorViewController.h"
+#import "DataManager.h"
+#import "BentoShop.h"
+#import "UIImageView+WebCache.h"
+#import "AppStrings.h"
 
 @interface NetworkErrorViewController ()
 
 @end
 
 @implementation NetworkErrorViewController
+{
+    UIImageView *ivBackground;
+    UIImageView *ivTitle;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor redColor];
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = ivBackground.bounds;
+    
+    UIColor *color1 = [DataManager getGradientColor1];
+    UIColor *color2 = [DataManager getGradientColor2];
+    gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
+    [ivBackground.layer insertSublayer:gradient atIndex:0];
+    
+    ivBackground = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
+    [ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
+    [self.view addSubview:ivBackground];
+    
+    NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
+    [ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
 }
 
 - (void)viewWillAppear:(BOOL)animated
