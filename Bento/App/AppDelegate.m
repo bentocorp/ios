@@ -65,14 +65,18 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     if (networkStatus == NotReachable)
     {
-        alertView = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please check your network settings" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        alertView.tag = 911;
-        [alertView show];
+//        alertView = [[UIAlertView alloc] initWithTitle:nil message:@"Waiting for internet connectivity..." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+//        alertView.tag = 911;
+//        [alertView show];
         
 //        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please check your network settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
 //        [alertView showInView:vcCurrent.view];
         
-        alertView = nil;
+//        alertView = nil;
+        
+        JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:vcCurrent.view];
         return;
     }
     
