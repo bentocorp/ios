@@ -173,6 +173,21 @@
 //        alertView = nil;
 //        
 //    } isJSON:NO];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popBack) name:@"networkError" object:nil];
+}
+
+- (void)popBack
+{
+    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)onChange

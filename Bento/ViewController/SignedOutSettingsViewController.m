@@ -11,7 +11,6 @@
 
 #import "SignedOutSettingsViewController.h"
 #import "SettingsTableViewCell.h"
-#import "MyBentoViewController.h"
 #import "SignInViewController.h"
 #import "FaqViewController.h"
 #import <MessageUI/MessageUI.h>
@@ -71,6 +70,24 @@
     UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 245, SCREEN_WIDTH, 2)];
     longLineSepartor2.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [self.view addSubview:longLineSepartor2];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popBack) name:@"networkError" object:nil];
+}
+
+- (void)popBack
+{
+    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath

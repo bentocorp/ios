@@ -13,7 +13,6 @@
 #import "DataManager.h"
 #import "BentoShop.h"
 #import "UIImageView+WebCache.h"
-#import "AppStrings.h"
 #import "AppDelegate.h"
 
 @interface NetworkErrorViewController ()
@@ -74,7 +73,6 @@
 - (void)yesConnection
 {
     isConnected = YES;
-    
 }
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
