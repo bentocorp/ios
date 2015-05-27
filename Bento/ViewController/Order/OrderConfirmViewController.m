@@ -62,6 +62,20 @@
 - (void) viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popBack) name:@"networkError" object:nil];
+}
+
+- (void)popBack
+{
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (IBAction)onAnothorBento:(id)sender
