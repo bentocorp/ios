@@ -32,6 +32,11 @@
 
 - (void)yesConnection
 {
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(timerDidEnd) userInfo:nil repeats:NO];
+}
+
+- (void)timerDidEnd
+{
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 

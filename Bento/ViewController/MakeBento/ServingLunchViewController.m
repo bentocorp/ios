@@ -177,19 +177,22 @@
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
     [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
     
-    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
-    if (strTitle != nil)
+    NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
+    if (strTitle == nil)
     {
-        [btnState setTitle:strTitle forState:UIControlStateNormal];
-        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-        float spacing = 1.0f;
-        [attributedTitle addAttribute:NSKernAttributeName
-                                value:@(spacing)
-                                range:NSMakeRange(0, [strTitle length])];
-        
-        btnState.titleLabel.attributedText = attributedTitle;
-        attributedTitle = nil;
+        strTitle = [@"FINALIZE ORDER!" mutableCopy];
     }
+    
+    [btnState setTitle:strTitle forState:UIControlStateNormal];
+    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+    float spacing = 1.0f;
+    [attributedTitle addAttribute:NSKernAttributeName
+                            value:@(spacing)
+                            range:NSMakeRange(0, [strTitle length])];
+    
+    btnState.titleLabel.attributedText = attributedTitle;
+    attributedTitle = nil;
+
     
     [scrollView addSubview:btnState];
     
