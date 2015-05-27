@@ -24,6 +24,9 @@
 @end
 
 @implementation SignedOutSettingsViewController
+{
+    MyAlertView *callAlertView;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -79,6 +82,8 @@
 
 - (void)popBack
 {
+    // TODO: dismiss alert view if no internet connection
+    
     [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -137,7 +142,7 @@
     // Remove table cell highlight
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    MyAlertView *callAlertView = [[MyAlertView alloc] initWithTitle:nil message:@"(415) 300-1332" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Call"];
+    callAlertView = [[MyAlertView alloc] initWithTitle:nil message:@"(415) 300-1332" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Call"];
     
     MFMailComposeViewController *mailComposeViewController;
     NSArray *toRecipentsArray;
