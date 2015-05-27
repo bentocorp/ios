@@ -93,8 +93,8 @@
     [[AppStrings sharedInstance] getAppStrings];
     
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
-    [self.ivBackground sd_setImageWithURL:urlBack];
-//    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
+//    [self.ivBackground sd_setImageWithURL:urlBack];
+    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivLaunchLogo sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo"]];
@@ -105,16 +105,7 @@
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     // check version first
-    BentoShop *globalShop = [BentoShop sharedInstance];
-    if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
-    {
-        [[AppStrings sharedInstance] getAppStrings];
-        [[BentoShop sharedInstance] getMenus];
-        [[BentoShop sharedInstance] getStatus];
-        [[BentoShop sharedInstance] getServiceArea];
-        [[BentoShop sharedInstance] refreshStart];
-
-    }
+    
     
     [self.activityIndicator stopAnimating];
 
@@ -135,6 +126,16 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    BentoShop *globalShop = [BentoShop sharedInstance];
+    if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
+    {
+        [[AppStrings sharedInstance] getAppStrings];
+        [[BentoShop sharedInstance] getMenus];
+        [[BentoShop sharedInstance] getStatus];
+        [[BentoShop sharedInstance] getServiceArea];
+        [[BentoShop sharedInstance] refreshStart];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];

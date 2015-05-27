@@ -33,24 +33,22 @@
     
     globalShop = [BentoShop sharedInstance];
     
-    CAGradientLayer *gradient = [CAGradientLayer layer];
-    gradient.frame = ivBackground.bounds;
-    
     UIColor *color1 = [DataManager getGradientColor1];
     UIColor *color2 = [DataManager getGradientColor2];
-    gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
-    [ivBackground.layer insertSublayer:gradient atIndex:0];
     
     ivBackground = [[UIImageView alloc] initWithFrame:self.view.bounds];
+    
+    CAGradientLayer *gradient = [CAGradientLayer layer];
+    gradient.frame = ivBackground.bounds;
+    gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
+    
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
     [ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
+    ivBackground.clipsToBounds = YES;
+    ivBackground.contentMode = UIViewContentModeScaleAspectFill;
     [self.view addSubview:ivBackground];
+    [ivBackground.layer insertSublayer:gradient atIndex:0];
     
-//    ivTitle = [[UIImageView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 150, SCREEN_HEIGHT/2 - 60, 300, 60)];
-//    NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
-//    ivTitle.tintColor = [UIColor whiteColor];
-//    [ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
-//    [self.view addSubview:ivTitle];
     
      alert = [[UIAlertView alloc] initWithTitle:@"No Network Connection"
                                                         message:@"Please connect to a WIFI or cellular network."
@@ -83,8 +81,6 @@
 {
     if (isConnected)
     {
-        [[AppStrings sharedInstance] getAppStrings];
-        
         [self dismissViewControllerAnimated:YES completion:nil];
     }
     else
