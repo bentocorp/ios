@@ -111,6 +111,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /////////////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
+    
     NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"]) // if still set to dinner
@@ -121,7 +123,7 @@
     
     NSLog(@"SET CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
     
-    ///////////////////////////////////////////////////////////////////////////////////////////
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -513,6 +515,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
 }
 
 - (void)noConnection
@@ -539,6 +543,19 @@
     [loadingHUD dismiss];
     loadingHUD = nil;
     [self viewWillAppear:YES];
+}
+
+- (void)checkCurrentMode
+{
+    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+    
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerTime) // if it's dinner time, refresh app state
+    {
+        [[BentoShop sharedInstance] resetBentoArray];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void)viewWillDisappear:(BOOL)animated

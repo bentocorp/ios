@@ -80,6 +80,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /////////////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
+    
     NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
@@ -90,7 +92,7 @@
     
     NSLog(@"SET CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
     
-    
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
 /*---Scroll View---*/
     
@@ -336,7 +338,7 @@
     float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
         
     // dinner opening - 11:59pm
-    if (currentTime >= dinnerTime && currentTime < 24)
+    if (currentTime >= dinnerTime && currentTime < 24) // if it's lunch time, refresh app state
     {
         [[BentoShop sharedInstance] resetBentoArray];
         [self.navigationController popToRootViewControllerAnimated:YES];
