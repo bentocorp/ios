@@ -10,6 +10,7 @@
 #import "BWTitlePagerView.h"
 #import "BentoShop.h"
 #import "PreviewCollectionViewCell.h"
+#import "JGProgressHUD.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -37,6 +38,9 @@
     float lunchTime;
     float dinnerTime;
     float bufferTime;
+    
+    JGProgressHUD *loadingHUD;
+    BOOL isThereConnection;
 }
 
 - (void)viewDidLoad {
@@ -193,6 +197,35 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+}
+
+- (void)noConnection
+{
+    isThereConnection = NO;
+    
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+}
+
+- (void)callUpdate
+{
+    isThereConnection = YES;
+    
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+    [self viewWillAppear:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -209,16 +242,22 @@
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
-    [cvDishesLeft reloadData];
-    [cvDishesRight reloadData];
+    if (isThereConnection)
+    {
+        [cvDishesLeft reloadData];
+        [cvDishesRight reloadData];
+    }
 }
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if (self.type == 0 && ![[BentoShop sharedInstance] isClosed]) // Closed
-        [self performSelectorOnMainThread:@selector(onCloseButton) withObject:nil waitUntilDone:NO];
-    else if (self.type == 1 && ![[BentoShop sharedInstance] isSoldOut]) // Sold Out
-        [self performSelectorOnMainThread:@selector(onCloseButton) withObject:nil waitUntilDone:NO];
+    if (isThereConnection)
+    {
+        if (self.type == 0 && ![[BentoShop sharedInstance] isClosed]) // Closed
+            [self performSelectorOnMainThread:@selector(onCloseButton) withObject:nil waitUntilDone:NO];
+        else if (self.type == 1 && ![[BentoShop sharedInstance] isSoldOut]) // Sold Out
+            [self performSelectorOnMainThread:@selector(onCloseButton) withObject:nil waitUntilDone:NO];
+    }
 }
 
 - (void)onCloseButton

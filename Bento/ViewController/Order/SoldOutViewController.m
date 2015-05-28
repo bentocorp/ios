@@ -55,6 +55,9 @@
     float bufferTime;
     
     NSString *strTitle;
+    
+    JGProgressHUD *loadingHUD;
+    BOOL isThereConnection;
 }
 
 - (NSString *)getClosedText
@@ -153,7 +156,37 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeKeyboardFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
 }
+
+- (void)noConnection
+{
+    isThereConnection = NO;
+    
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+}
+
+- (void)callUpdate
+{
+    isThereConnection = YES;
+    
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+    [self viewWillAppear:YES];
+}
+
 
 - (void)viewWillDisappear:(BOOL)animated
 {
@@ -197,21 +230,24 @@
 
 - (void)onUpdatedStatus
 {
-    if (self.type == 0) // Closed
+    if (isThereConnection)
     {
-        if (![[BentoShop sharedInstance] isClosed])
+        if (self.type == 0) // Closed
         {
-            [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
+            if (![[BentoShop sharedInstance] isClosed])
+            {
+                [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
+            }
+                //[self.navigationController popViewControllerAnimated:YES];
         }
-            //[self.navigationController popViewControllerAnimated:YES];
-    }
-    else if (self.type == 1) // Sold Out
-    {
-        if (![[BentoShop sharedInstance] isSoldOut])
+        else if (self.type == 1) // Sold Out
         {
-            [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
+            if (![[BentoShop sharedInstance] isSoldOut])
+            {
+                [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
+            }
+                //[self.navigationController popViewControllerAnimated:YES];
         }
-            //[self.navigationController popViewControllerAnimated:YES];
     }
 }
 

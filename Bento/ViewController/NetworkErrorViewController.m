@@ -14,6 +14,7 @@
 #import "BentoShop.h"
 #import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
+#import "JGProgressHUD.h"
 
 @interface NetworkErrorViewController ()
 
@@ -48,14 +49,9 @@
     [self.view addSubview:ivBackground];
     [ivBackground.layer insertSublayer:gradient atIndex:0];
     
-    
-//     alert = [[UIAlertView alloc] initWithTitle:@"No Network Connection"
-//                                                        message:@"Please connect to a WIFI or cellular network."
-//                                                       delegate:self
-//                                              cancelButtonTitle:nil
-//                                              otherButtonTitles:@"Try again", nil];
-//    
-//    [alert show];
+    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+    [loadingHUD showInView:self.view];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -75,18 +71,6 @@
     isConnected = YES;
     [self dismissViewControllerAnimated:YES completion:nil];
 }
-
-//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-//{
-//    if (isConnected)
-//    {
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//    }
-//    else
-//    {
-//        [self viewDidLoad];
-//    }
-//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
