@@ -13,6 +13,7 @@
 #import "BentoShop.h"
 #import "AppStrings.h"
 #import "DataManager.h"
+#import "JGProgressHUD.h"
 
 @interface IntroViewController()
 
@@ -36,6 +37,9 @@
 @end
 
 @implementation IntroViewController
+{
+    JGProgressHUD *loadingHUD;
+}
 
 
 - (void)viewDidLoad {
@@ -98,6 +102,28 @@
     
     // get button title text and set it to button
     [self.btnGetStarted setTitle:[[AppStrings sharedInstance] getString:ABOUT_BUTTON_TITLE] forState:UIControlStateNormal];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+}
+
+- (void)noConnection
+{
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
 }
 
 - (IBAction)onGetStarted:(id)sender
