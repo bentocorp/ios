@@ -46,6 +46,8 @@
     
     UIImageView *creditCardImage;
     UILabel *creditCardDigitsLabel;
+    
+    JGProgressHUD *loadingHUD;
 }
 
 - (void)viewDidLoad
@@ -173,6 +175,32 @@
 //        alertView = nil;
 //        
 //    } isJSON:NO];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+}
+
+- (void)noConnection
+{
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)onChange

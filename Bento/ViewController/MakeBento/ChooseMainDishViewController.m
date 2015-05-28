@@ -15,6 +15,8 @@
 #import "AppStrings.h"
 #import "DataManager.h"
 
+#import "JGProgressHUD.h"
+
 @interface ChooseMainDishViewController () <DishCollectionViewCellDelegate>
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
@@ -28,6 +30,9 @@
     NSInteger _originalDishIndex;
     NSInteger _selectedIndex;
     NSInteger _selectedItemState;
+    
+    JGProgressHUD *loadingHUD;
+    BOOL isThereConnection;
 }
 
 - (void)viewDidLoad {
@@ -84,6 +89,35 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+}
+
+- (void)noConnection
+{
+    isThereConnection = NO;
+    
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+}
+
+- (void)callUpdate
+{
+    isThereConnection = YES;
+    
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+    [self viewWillAppear:YES];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -95,12 +129,15 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
-        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
-        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-    else
-        [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    if (isThereConnection)
+    {
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+        else
+            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    }
 }
 
 - (IBAction)onBack:(id)sender

@@ -11,7 +11,6 @@
 
 #import "SignedOutSettingsViewController.h"
 #import "SettingsTableViewCell.h"
-#import "MyBentoViewController.h"
 #import "SignInViewController.h"
 #import "FaqViewController.h"
 #import <MessageUI/MessageUI.h>
@@ -19,12 +18,17 @@
 #import "SignedInSettingsViewController.h"
 #import "RegisterViewController.h"
 #import "MyAlertView.h"
+#import "JGProgressHUD.h"
 
 @interface SignedOutSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
 @end
 
 @implementation SignedOutSettingsViewController
+{
+    MyAlertView *callAlertView;
+    JGProgressHUD *loadingHUD;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -71,6 +75,35 @@
     UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 245, SCREEN_WIDTH, 2)];
     longLineSepartor2.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [self.view addSubview:longLineSepartor2];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+}
+
+- (void)noConnection
+{
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -120,7 +153,7 @@
     // Remove table cell highlight
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    MyAlertView *callAlertView = [[MyAlertView alloc] initWithTitle:nil message:@"(415) 300-1332" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Call"];
+    callAlertView = [[MyAlertView alloc] initWithTitle:nil message:@"(415) 300-1332" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Call"];
     
     MFMailComposeViewController *mailComposeViewController;
     NSArray *toRecipentsArray;

@@ -52,6 +52,7 @@
 - (NSString *)getNextMenuDateString;
 - (NSString *)getNextMenuWeekdayString;
 
+- (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers;
 - (NSNumber *)getCurrentTime;
 - (NSNumber *)getLunchTime;
 - (NSNumber *)getDinnerTime;
@@ -88,5 +89,9 @@
 - (void)loadBentoArray;
 - (void)saveBentoArray;
 - (void)resetBentoArray;
+
+- (void)checkIfBentoArrayNeedsToBeReset;
+- (void)setLunchOrDinnerMode;
+
 
 @end

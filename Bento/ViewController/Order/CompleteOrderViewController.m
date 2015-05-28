@@ -64,6 +64,8 @@
     
     NSString *_strPromoCode;
     NSInteger _promoDiscount;
+    
+    JGProgressHUD *loadingHUD;
 }
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
@@ -176,6 +178,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
     // ADDRESS
     self.lblAddress.text = @"";
@@ -203,6 +207,22 @@
     }
     
     [self updateUI];
+}
+
+- (void)noConnection
+{
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
 }
 
 - (void) viewWillDisappear:(BOOL)animated

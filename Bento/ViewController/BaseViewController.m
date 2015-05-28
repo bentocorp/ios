@@ -20,25 +20,13 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
     
     self.isOpenningAccountView = NO;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
-
-/*
-#pragma mark - Navigation
-
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-}
-*/
 
 - (void) viewDidAppear:(BOOL)animated
 {
@@ -66,6 +54,7 @@
     UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"RegisterID"];
     [self.navigationController pushViewController:destVC animated:YES];
 }
+
 - (void) openAccountViewControllerWithComplete:(void (^)())completion
 {
     self.isOpenningAccountView = YES;
@@ -114,14 +103,13 @@
     self.complete = nil;
 }
 
-- (void) showSoldoutScreen:(NSNumber *)identifier
+- (void)showSoldoutScreen:(NSNumber *)identifier
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
     SoldOutViewController *vcSoldOut = (SoldOutViewController *)nav.topViewController;
     vcSoldOut.type = [identifier integerValue];
     
-//    [self.navigationController presentViewController:nav animated:YES completion:nil];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

@@ -29,10 +29,14 @@
 #import <MapKit/MapKit.h>
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
+#import "JGProgressHUD.h"
+
 @interface DeliveryLocationViewController () <MKMapViewDelegate, MyAlertViewDelegate>
 {
     BOOL _nextToBuild;
     BOOL _showedLocationTableView;
+    
+    JGProgressHUD *loadingHUD;
 }
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
@@ -208,8 +212,26 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.txtAddress];
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [self updateUI];
+    
+}
+
+- (void)noConnection
+{
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated

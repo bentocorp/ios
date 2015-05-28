@@ -44,6 +44,7 @@
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
 #import <QuartzCore/QuartzCore.h>
+#import "JGProgressHUD.h"
 
 @interface ServingDinnerViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -102,6 +103,9 @@
     int weekday;
     
     BWTitlePagerView *pagingTitleView;
+    
+    JGProgressHUD *loadingHUD;
+    BOOL isThereConnection;
 }
 
 - (void)viewDidLoad {
@@ -417,7 +421,8 @@
         // Continue Button
         strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
         [btnState setTitle:strTitle forState:UIControlStateNormal];
-        attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        if (strTitle != nil)
+            attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         spacing = 1.0f;
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
@@ -494,6 +499,34 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+}
+
+- (void)noConnection
+{
+    isThereConnection = NO;
+    
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+}
+
+- (void)callUpdate
+{
+    isThereConnection = YES;
+    
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+    [self viewWillAppear:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -510,17 +543,20 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+    if (isThereConnection)
     {
-        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    }
-    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
-    {
-        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-    }
-    else
-    {
-        [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+        {
+            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        }
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+        {
+            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+        }
+        else
+        {
+            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        }
     }
 }
 
@@ -936,19 +972,22 @@
     {
         [btnState setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
         
-        NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
-        if (strTitle != nil)
+        
+        NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
+        if (strTitle == nil)
         {
-            [btnState setTitle:strTitle forState:UIControlStateNormal];
-            NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-            float spacing = 1.0f;
-            [attributedTitle addAttribute:NSKernAttributeName
-                                    value:@(spacing)
-                                    range:NSMakeRange(0, [strTitle length])];
-            
-            btnState.titleLabel.attributedText = attributedTitle;
-            attributedTitle = nil;
+            strTitle = [@"FINALIZE ORDER!" mutableCopy];
         }
+            
+        [btnState setTitle:strTitle forState:UIControlStateNormal];
+        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        float spacing = 1.0f;
+        [attributedTitle addAttribute:NSKernAttributeName
+                                value:@(spacing)
+                                range:NSMakeRange(0, [strTitle length])];
+        
+        btnState.titleLabel.attributedText = attributedTitle;
+        attributedTitle = nil;
     }
     else
     {
@@ -1012,6 +1051,7 @@
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
+    if (isThereConnection)
     [self updateUI];
 }
 

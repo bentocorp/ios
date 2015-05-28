@@ -8,6 +8,7 @@
 
 #import "FirstViewController.h"
 
+#import "NetworkErrorViewController.h"
 #import "SoldOutViewController.h"
 
 #import "MyAlertView.h"
@@ -41,6 +42,9 @@
 @end
 
 @implementation FirstViewController
+{
+    NSString *isThereConnection;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -89,8 +93,8 @@
     [[AppStrings sharedInstance] getAppStrings];
     
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
-    [self.ivBackground sd_setImageWithURL:urlBack];
-//    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
+//    [self.ivBackground sd_setImageWithURL:urlBack];
+    [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivLaunchLogo sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo"]];
@@ -100,35 +104,58 @@
     [[NSUserDefaults standardUserDefaults] setObject:strSlogan forKey:@"Slogan"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    // check version first
+    // check version first (this comment useless)
+    
+    
+    [self.activityIndicator stopAnimating];
+
+    
+    if (isThereConnection)
+    {
+        // Check the app is already launched
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+        {
+            // This is the first launch ever
+            [self performSelector:@selector(gotoIntroScreen) withObject:nil afterDelay:1.0f];
+            return;
+        }
+        else
+        {
+            [self performSelector:@selector(process) withObject:nil afterDelay:1.0f];
+            return;
+        }
+    }
+    
+//    // Check the app is already launched
+//    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+//    {
+//        // This is the first launch ever
+//        [self performSelector:@selector(gotoIntroScreen) withObject:nil afterDelay:1.0f];
+//        return;
+//    }
+//    else
+//    {
+//        [self performSelector:@selector(process) withObject:nil afterDelay:1.0f];
+//        return;
+//    }
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     BentoShop *globalShop = [BentoShop sharedInstance];
     if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
     {
+        [[AppStrings sharedInstance] getAppStrings];
         [[BentoShop sharedInstance] getMenus];
         [[BentoShop sharedInstance] getStatus];
         [[BentoShop sharedInstance] getServiceArea];
         [[BentoShop sharedInstance] refreshStart];
     }
     
-    [self.activityIndicator stopAnimating];
-
-    // Check the app is already launched
-    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
-    {
-        // This is the first launch ever
-        [self performSelector:@selector(gotoIntroScreen) withObject:nil afterDelay:1.0f];
-        return;
-    }
-    else
-    {
-        [self performSelector:@selector(process) withObject:nil afterDelay:1.0f];
-        return;
-    }
-}
-
-- (void) viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
     if (!_hasInit)
     {
@@ -184,57 +211,72 @@
 
 - (void)processAfterLogin
 {
-    BentoShop *globalShop = [BentoShop sharedInstance];
-    if ([globalShop isClosed])
+    if ([isThereConnection isEqualToString:@"NO"])
     {
-        // Check if the user is an admin or not.
-        if ([[DataManager shareDataManager] getUserInfo] == nil || ![[DataManager shareDataManager] isAdminUser])
-        {
-            [self gotoClosedScreen];
-            return;
-        }
+        [self showNetworkErrorScreen];
     }
-    
-    if ([globalShop isSoldOut])
+    else 
     {
-        // Check if the user is an admin or not.
-        if ([[DataManager shareDataManager] getUserInfo] == nil || ![[DataManager shareDataManager] isAdminUser])
+        BentoShop *globalShop = [BentoShop sharedInstance];
+        if ([globalShop isClosed])
         {
-            [self gotoSoldOutScreen];
-            return;
+            // Check if the user is an admin or not.
+            if ([[DataManager shareDataManager] getUserInfo] == nil || ![[DataManager shareDataManager] isAdminUser])
+            {
+                [self gotoClosedScreen];
+                return;
+            }
         }
+        
+        if ([globalShop isSoldOut])
+        {
+            // Check if the user is an admin or not.
+            if ([[DataManager shareDataManager] getUserInfo] == nil || ![[DataManager shareDataManager] isAdminUser])
+            {
+                [self gotoSoldOutScreen];
+                return;
+            }
+        }
+        
+        [self gotoMyBentoScreen];
     }
-
-    [self gotoMyBentoScreen];
 }
 
 - (void)process
 {
-    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-/*
-#ifdef DEBUG
-    if ([pref objectForKey:@"apiName"] == nil)
-        [pref setObject:@"/user/login" forKey:@"apiName"];
-    
-    if ([pref objectForKey:@"loginRequest"] == nil)
+    if ([isThereConnection isEqualToString:@"NO"])
     {
-        NSDictionary* loginInfo = @{
-                                    @"email" : @"ridev@bentonow.com",
-                                    @"password" : @"12345678",
-                                    };
-        
-        NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
-        [pref setObject:dicRequest forKey:@"loginRequest"];
-    }
-#endif
-*/    
-    if ([pref objectForKey:@"apiName"] != nil && [pref objectForKey:@"loginRequest"] != nil)
-    {
-        [self processAutoLogin];
+        [self showNetworkErrorScreen];
     }
     else
     {
-        [self processAfterLogin];
+        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+        /*
+        #ifdef DEBUG
+            if ([pref objectForKey:@"apiName"] == nil)
+                [pref setObject:@"/user/login" forKey:@"apiName"];
+            
+            if ([pref objectForKey:@"loginRequest"] == nil)
+            {
+                NSDictionary* loginInfo = @{
+                                            @"email" : @"ridev@bentonow.com",
+                                            @"password" : @"12345678",
+                                            };
+                
+                NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
+                [pref setObject:dicRequest forKey:@"loginRequest"];
+            }
+        #endif
+        */
+        
+        if ([pref objectForKey:@"apiName"] != nil && [pref objectForKey:@"loginRequest"] != nil)
+        {
+            [self processAutoLogin];
+        }
+        else
+        {
+            [self processAfterLogin];
+        }
     }
 }
 
@@ -268,7 +310,7 @@
 /*--------------Determine whether to show Lunch or Dinner mode--------------*/
     
     float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-    float lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
+//    float lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
     float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
     
     // 12:00am - dinner opening (ie. 16.5)
@@ -285,7 +327,7 @@
     }
 }
 
-- (void) showSoldoutScreen:(NSNumber *)identifier
+- (void)showSoldoutScreen:(NSNumber *)identifier
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
@@ -293,6 +335,22 @@
     vcSoldOut.type = [identifier integerValue];
     
     [self.navigationController presentViewController:nav animated:YES completion:nil];
+}
+
+- (void)noConnection
+{
+    isThereConnection = @"NO";
+}
+
+- (void)yesConnection
+{
+    isThereConnection = @"YES";
+}
+
+- (void)showNetworkErrorScreen
+{
+    NetworkErrorViewController *networkErrorViewController = [[NetworkErrorViewController alloc] init];
+    [self.navigationController presentViewController:networkErrorViewController animated:YES completion:nil];
 }
 
 @end

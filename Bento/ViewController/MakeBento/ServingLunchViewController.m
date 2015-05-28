@@ -38,6 +38,8 @@
 
 #import "Canvas.h"
 
+#import "JGProgressHUD.h"
+
 
 @interface ServingLunchViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -70,10 +72,14 @@
     ServingLunchCell *servingLunchCell;
     
     CSAnimationView *animationView;
+    
+    JGProgressHUD *loadingHUD;
+    BOOL isThereConnection;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
 /*---Scroll View---*/
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -81,8 +87,6 @@
     scrollView.pagingEnabled = YES;
     scrollView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     scrollView.bounces = NO;
-//    scrollView.delaysContentTouches = NO;
-//    scrollView.canCancelContentTouches = YES;
     [self.view addSubview:scrollView];
     
 /*---My Table View---*/
@@ -94,8 +98,6 @@
     myTableView.allowsSelection = NO;
     myTableView.dataSource = self;
     myTableView.delegate = self;
-//    myTableView.delaysContentTouches = NO;
-//    myTableView.canCancelContentTouches = YES;
     [scrollView addSubview:myTableView];
     
 /*---Navigation View---*/
@@ -177,19 +179,22 @@
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
     [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
     
-    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
-    if (strTitle != nil)
+    NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
+    if (strTitle == nil)
     {
-        [btnState setTitle:strTitle forState:UIControlStateNormal];
-        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-        float spacing = 1.0f;
-        [attributedTitle addAttribute:NSKernAttributeName
-                                value:@(spacing)
-                                range:NSMakeRange(0, [strTitle length])];
-        
-        btnState.titleLabel.attributedText = attributedTitle;
-        attributedTitle = nil;
+        strTitle = [@"FINALIZE ORDER" mutableCopy];
     }
+    
+    [btnState setTitle:strTitle forState:UIControlStateNormal];
+    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+    float spacing = 1.0f;
+    [attributedTitle addAttribute:NSKernAttributeName
+                            value:@(spacing)
+                            range:NSMakeRange(0, [strTitle length])];
+    
+    btnState.titleLabel.attributedText = attributedTitle;
+    attributedTitle = nil;
+
     
     [scrollView addSubview:btnState];
     
@@ -260,7 +265,7 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
+
     // set aryDishes array
     self.aryDishes = [[NSMutableArray alloc] init];
     
@@ -275,12 +280,40 @@
     }
     
     [self updateUI];
-    
+//    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
     /*---------------Tomorrow Lunch------------*/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+}
+
+- (void)noConnection
+{
+    isThereConnection = NO;
+    
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+}
+
+- (void)callUpdate
+{
+    isThereConnection = YES;
+    
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+    [self viewWillAppear:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -578,17 +611,20 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+    if (isThereConnection)
     {
-        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    }
-    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
-    {
-        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-    }
-    else
-    {
-        [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+        {
+            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        }
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+        {
+            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+        }
+        else
+        {
+            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        }
     }
 }
 
@@ -639,7 +675,10 @@
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
-    [self updateUI];
+    if (isThereConnection)
+    {
+        [self updateUI];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource

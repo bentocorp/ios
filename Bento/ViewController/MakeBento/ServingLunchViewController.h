@@ -11,4 +11,6 @@
 
 @interface ServingLunchViewController : BaseViewController
 
+@property (nonatomic) BOOL networkError;
+
 @end
