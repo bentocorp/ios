@@ -63,21 +63,21 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-
+    
     googleReach = [Reachability reachabilityWithHostname:@"www.google.com"];
     
     googleReach.reachableBlock = ^(Reachability * reachability)
     {
-        alertView = [[UIAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please check your network settings" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        alertView.tag = 911;
-        [alertView show];
+        NSString * temp = [NSString stringWithFormat:@"GOOGLE Block Says Reachable(%@)", reachability.currentReachabilityString];
+        NSLog(@"%@", temp);
         
-//        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"No Internet Connection" message:@"Please check your network settings." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-//        [alertView showInView:vcCurrent.view];
-        
-        alertView = nil;
-        return;
-    }
+        // to update UI components from a block callback
+        // you need to dipatch this to the main thread
+        // this uses NSOperationQueue mainQueue
+        [[NSOperationQueue mainQueue] addOperationWithBlock:^{
+            
+        }];
+    };
     
     googleReach.unreachableBlock = ^(Reachability * reachability)
     {
