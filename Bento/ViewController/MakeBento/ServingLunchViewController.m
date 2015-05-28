@@ -75,14 +75,10 @@
     
     JGProgressHUD *loadingHUD;
     BOOL isThereConnection;
-    NSTimer *_timer;
-    NSTimer *_timer2;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-//    isThereConnection = YES;
     
 /*---Scroll View---*/
     
@@ -284,7 +280,7 @@
     }
     
     [self updateUI];
-    
+//    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
@@ -308,28 +304,16 @@
 
 - (void)yesConnection
 {
-    isThereConnection = YES;
-    
-    [loadingHUD dismiss];
-    loadingHUD = nil;
-    
-    // try to update UI repeatedly
-    _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(callUpdate) userInfo:nil repeats:YES];
-    
-    // try for three seconds
-    _timer2 = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(stopTimer) userInfo:nil repeats:NO];
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
 }
 
 - (void)callUpdate
 {
-//    [self updateUI];
+    isThereConnection = YES;
     
+    [loadingHUD dismiss];
+    loadingHUD = nil;
     [self viewWillAppear:YES];
-}
-
-- (void)stopTimer
-{
-    [_timer invalidate];
 }
 
 - (void)viewWillDisappear:(BOOL)animated

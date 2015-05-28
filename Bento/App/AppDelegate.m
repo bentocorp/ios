@@ -365,10 +365,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         }
         else
         {
-            [globalShop refreshPause];
-            
-            if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
-//                [globalShop getStatus];
+            [globalShop refreshStop]; // stop trying to call API
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"networkError" object:nil];
             
