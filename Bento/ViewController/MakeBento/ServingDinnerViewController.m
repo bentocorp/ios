@@ -111,6 +111,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"]) // if still set to dinner
+            [[BentoShop sharedInstance] resetBentoArray];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"currentMode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"SET CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
+    
+    ///////////////////////////////////////////////////////////////////////////////////////////
+    
     self.view.backgroundColor = [UIColor whiteColor];
     
 //    [dinnerTitleLabel setText:[[AppStrings sharedInstance] getString:BUILD_TITLE]];
@@ -488,11 +500,6 @@
     NSLog(@"today is - %ld", (long)weekday);
     
     _selectedPath = nil;
-    
-    
-    // reset aryBentos if lunch items exist
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
-        [[BentoShop sharedInstance] resetBentoArray];
 }
 
 - (void)viewWillAppear:(BOOL)animated

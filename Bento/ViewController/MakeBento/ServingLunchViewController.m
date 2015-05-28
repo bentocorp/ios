@@ -80,6 +80,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+        [[BentoShop sharedInstance] resetBentoArray];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"currentMode"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"SET CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
+    
+    
+    
 /*---Scroll View---*/
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];

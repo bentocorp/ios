@@ -318,9 +318,6 @@
     {
         ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
         [self.navigationController pushViewController:servingLunchViewController animated:needsAnimation];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"currentMode"]; // this will be used for reseting aryBentos if needed
-        [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
     // dinner opening - 11:59pm
