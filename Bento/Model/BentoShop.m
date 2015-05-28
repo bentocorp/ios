@@ -173,7 +173,7 @@ static BentoShop *_shareInstance;
     self.prevClosed = isClosed;
     self.prevSoldOut = isSoldOut;
     
-    if ([self isClosed] && ![[DataManager shareDataManager] isAdminUser])
+    if ([self isClosed] && ![[DataManager shareDataManager] isAdminUser]) // reset bento if closed
         [self resetBentoArray];
 }
 

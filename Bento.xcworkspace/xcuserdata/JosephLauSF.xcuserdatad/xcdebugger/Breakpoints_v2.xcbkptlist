@@ -212,12 +212,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/MakeBento/ServingLunchViewController.m"
-            timestampString = "454536086.370103"
+            timestampString = "454536165.278814"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "322"
-            endingLineNumber = "322"
-            landmarkName = "-checkCurrentMode"
+            startingLineNumber = "289"
+            endingLineNumber = "289"
+            landmarkName = "-viewWillAppear:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -228,12 +228,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/MakeBento/ServingLunchViewController.m"
-            timestampString = "454536165.278814"
+            timestampString = "454540485.065886"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "289"
-            endingLineNumber = "289"
-            landmarkName = "-viewWillAppear:"
+            startingLineNumber = "332"
+            endingLineNumber = "332"
+            landmarkName = "-checkCurrentMode"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

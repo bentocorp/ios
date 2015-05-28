@@ -330,6 +330,7 @@
     // dinner opening - 11:59pm
     } else if (currentTime >= dinnerTime && currentTime < 24) {
         
+        [[BentoShop sharedInstance] resetBentoArray];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }

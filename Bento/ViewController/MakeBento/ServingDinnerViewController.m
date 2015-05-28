@@ -569,6 +569,7 @@
         if ([bento isCompleted])
             [aryBentos addObject:bento];
     }
+    
     NSLog(@"Total Bentos: %ld", [[BentoShop sharedInstance] getTotalBentoCount]);
     NSInteger mainDishIndex = 0;
     NSInteger side1DishIndex = 0;
@@ -577,7 +578,7 @@
     NSInteger side4DishIndex = 0;
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    
+
     // Current Bento is not empty
     if (currentBento != nil)
     {
@@ -587,7 +588,7 @@
         side3DishIndex = [currentBento getSideDish3];
         side4DishIndex = [currentBento getSideDish4];
     }
-    
+
 /*-Main-*/
     if (mainDishIndex > 0)
     {
@@ -915,7 +916,6 @@
                                     range:NSMakeRange(0, [strTitle length])];
             btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
         }
-
     }
     else
     {
@@ -948,12 +948,13 @@
 
     }
     
-    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
-        [[BentoShop sharedInstance] addNewBento];
+    // Bentos
+    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) // no bento
+        [[BentoShop sharedInstance] addNewBento]; // add an empty one
     else if ([[BentoShop sharedInstance] getCurrentBento] == nil)
-        [[BentoShop sharedInstance] setCurrentBento:[[BentoShop sharedInstance] getLastBento]];
+        [[BentoShop sharedInstance] setCurrentBento:[[BentoShop sharedInstance] getLastBento]]; // set current with current one in array
     
-    [self loadSelectedDishes];
+    [self loadSelectedDishes]; // load bento
     
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0)
     {
