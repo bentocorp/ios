@@ -16,6 +16,8 @@
 #import "AppStrings.h"
 #import "BentoShop.h"
 
+#import "JGProgressHUD.h"
+
 @interface OrderConfirmViewController ()
 
 @property (nonatomic, assign) IBOutlet UIImageView *ivTitle;
@@ -35,6 +37,9 @@
 @end
 
 @implementation OrderConfirmViewController
+{
+    JGProgressHUD *loadingHUD;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -63,12 +68,24 @@
 {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popBack) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
 }
 
-- (void)popBack
+- (void)noConnection
 {
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
 }
 
 - (void) viewWillDisappear:(BOOL)animated

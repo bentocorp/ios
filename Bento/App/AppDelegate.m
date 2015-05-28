@@ -358,16 +358,17 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                 
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-//                    [globalShop getStatus];
                     [globalShop getMenus];
                     [globalShop getServiceArea];
                 });
             }
         }
         else
-        {   
+        {
+            [globalShop refreshPause];
+            
             if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
-                [globalShop getStatus];
+//                [globalShop getStatus];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"networkError" object:nil];
             

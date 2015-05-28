@@ -18,9 +18,12 @@
 
 #import <PassKit/PassKit.h>
 
+#import "JGProgressHUD.h"
+
 @interface EnterCreditCardViewController () <PTKViewDelegate>
 {
     STPCard *_creditCard;
+    JGProgressHUD *loadingHUD;
 }
 
 @property (nonatomic, assign) IBOutlet UILabel *lblTitle;
@@ -85,16 +88,27 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willHideKeyboard:) name:UIKeyboardWillHideNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeKeyboardFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popBack) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
     self.btnContinue.enabled = NO;
     [self.btnContinue setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
 }
 
-- (void)popBack
+- (void)noConnection
 {
-    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
 }
 
 - (void) viewWillDisappear:(BOOL)animated

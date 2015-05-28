@@ -74,10 +74,16 @@
     CSAnimationView *animationView;
     
     JGProgressHUD *loadingHUD;
+    BOOL isThereConnection;
+    NSTimer *_timer;
+    NSTimer *_timer2;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+//    isThereConnection = YES;
+    
 /*---Scroll View---*/
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -264,7 +270,6 @@
 {
     [super viewWillAppear:animated];
 
-    
     // set aryDishes array
     self.aryDishes = [[NSMutableArray alloc] init];
     
@@ -280,18 +285,18 @@
     
     [self updateUI];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popBack) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
     /*---------------Tomorrow Lunch------------*/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
 }
 
-- (void)popBack
+- (void)noConnection
 {
-//    [self.navigationController popToRootViewControllerAnimated:YES];
+    isThereConnection = NO;
     
     if (loadingHUD == nil)
     {
@@ -303,16 +308,28 @@
 
 - (void)yesConnection
 {
-    // give time to load data again before trying to update UI
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(dismissSpinner) userInfo:nil repeats:NO];
+    isThereConnection = YES;
+    
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+    
+    // try to update UI repeatedly
+    _timer = [NSTimer scheduledTimerWithTimeInterval:0.01 target:self selector:@selector(callUpdate) userInfo:nil repeats:YES];
+    
+    // try for three seconds
+    _timer2 = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(stopTimer) userInfo:nil repeats:NO];
 }
 
-- (void)dismissSpinner
+- (void)callUpdate
 {
-    [loadingHUD dismiss];
-    [loadingHUD removeFromSuperview];
-    loadingHUD = nil;
-    [self updateUI];
+//    [self updateUI];
+    
+    [self viewWillAppear:YES];
+}
+
+- (void)stopTimer
+{
+    [_timer invalidate];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -610,17 +627,20 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+    if (isThereConnection)
     {
-        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    }
-    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
-    {
-        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-    }
-    else
-    {
-        [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+        {
+            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        }
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+        {
+            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+        }
+        else
+        {
+            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        }
     }
 }
 
@@ -671,7 +691,10 @@
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
-    [self updateUI];
+    if (isThereConnection)
+    {
+        [self updateUI];
+    }
 }
 
 #pragma mark - UICollectionViewDataSource

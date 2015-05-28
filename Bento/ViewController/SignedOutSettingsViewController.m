@@ -18,6 +18,7 @@
 #import "SignedInSettingsViewController.h"
 #import "RegisterViewController.h"
 #import "MyAlertView.h"
+#import "JGProgressHUD.h"
 
 @interface SignedOutSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -26,6 +27,7 @@
 @implementation SignedOutSettingsViewController
 {
     MyAlertView *callAlertView;
+    JGProgressHUD *loadingHUD;
 }
 
 - (void)viewDidLoad {
@@ -77,15 +79,24 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(popBack) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
 }
 
-- (void)popBack
+- (void)noConnection
 {
-    // TODO: dismiss alert view if no internet connection
-    
-    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
-    [self dismissViewControllerAnimated:YES completion:nil];
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
 }
 
 - (void)viewWillDisappear:(BOOL)animated
