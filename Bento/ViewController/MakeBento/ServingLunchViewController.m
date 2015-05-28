@@ -85,8 +85,6 @@
     scrollView.pagingEnabled = YES;
     scrollView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     scrollView.bounces = NO;
-//    scrollView.delaysContentTouches = NO;
-//    scrollView.canCancelContentTouches = YES;
     [self.view addSubview:scrollView];
     
 /*---My Table View---*/
@@ -98,8 +96,6 @@
     myTableView.allowsSelection = NO;
     myTableView.dataSource = self;
     myTableView.delegate = self;
-//    myTableView.delaysContentTouches = NO;
-//    myTableView.canCancelContentTouches = YES;
     [scrollView addSubview:myTableView];
     
 /*---Navigation View---*/
@@ -184,7 +180,7 @@
     NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
     if (strTitle == nil)
     {
-        strTitle = [@"FINALIZE ORDER!" mutableCopy];
+        strTitle = [@"FINALIZE ORDER" mutableCopy];
     }
     
     [btnState setTitle:strTitle forState:UIControlStateNormal];
@@ -307,10 +303,16 @@
 
 - (void)yesConnection
 {
+    // give time to load data again before trying to update UI
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(dismissSpinner) userInfo:nil repeats:NO];
+}
+
+- (void)dismissSpinner
+{
     [loadingHUD dismiss];
     [loadingHUD removeFromSuperview];
     loadingHUD = nil;
-    [self viewWillAppear:YES];
+    [self updateUI];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
