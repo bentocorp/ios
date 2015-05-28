@@ -63,7 +63,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-    
+
     googleReach = [Reachability reachabilityWithHostname:@"www.google.com"];
     
     googleReach.reachableBlock = ^(Reachability * reachability)
