@@ -488,6 +488,11 @@
     NSLog(@"today is - %ld", (long)weekday);
     
     _selectedPath = nil;
+    
+    
+    // reset aryBentos if lunch items exist
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+        [[BentoShop sharedInstance] resetBentoArray];
 }
 
 - (void)viewWillAppear:(BOOL)animated

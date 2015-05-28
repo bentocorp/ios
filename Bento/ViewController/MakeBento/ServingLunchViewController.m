@@ -322,14 +322,10 @@
 {
     float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
     float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
-    
-    // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime) {
-        
         
     // dinner opening - 11:59pm
-    } else if (currentTime >= dinnerTime && currentTime < 24) {
-        
+    if (currentTime >= dinnerTime && currentTime < 24)
+    {
         [[BentoShop sharedInstance] resetBentoArray];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
