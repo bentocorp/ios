@@ -243,8 +243,6 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    self.cameFromCompleteOrderVC = NO;
 
     [super viewWillDisappear:animated];
 }
@@ -276,16 +274,8 @@
     {
         originalDateString = [[BentoShop sharedInstance] getMenuDateString];
         
-        if (self.cameFromCompleteOrderVC)
-        {
-            // pop back twice
-            NSArray *array = [self.navigationController viewControllers];
-            [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
-        }
-        else // came from homepage
-        {
-            [self.navigationController popViewControllerAnimated:YES];
-        }
+        NSArray *array = [self.navigationController viewControllers];
+        [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
     }
 }
 

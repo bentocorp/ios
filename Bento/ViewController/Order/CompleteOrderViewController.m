@@ -525,8 +525,6 @@
         DeliveryLocationViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         ((DeliveryLocationViewController *)vc).isFromOrder = YES;
         
-        vc.cameFromCompleteOrderVC = YES;
-        
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
