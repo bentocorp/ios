@@ -187,14 +187,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     if (alertView.tag == 007)
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
-    
-    if (alertView.tag == 911)
-    {
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"prefs:root=General"]];
-        
-//        NSLog(@"GO TO SETTINGS!!!");
-//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    }
 }
 
 #pragma mark MyAlertViewDelegate
@@ -388,7 +380,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             [globalShop refreshStop]; // stop trying to call API
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"networkError" object:nil];
-            
         }
     }
 }
