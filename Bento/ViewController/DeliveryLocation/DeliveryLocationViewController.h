@@ -16,4 +16,6 @@
 //@property (nonatomic, assign) NSInteger priceDiscount;
 //@property (nonatomic, strong) NSString *strPromoCode;
 
+@property (nonatomic) BOOL cameFromCompleteOrderVC;
+
 @end

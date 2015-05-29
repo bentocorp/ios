@@ -66,6 +66,10 @@
 @end
 
 @implementation DeliveryLocationViewController
+{
+    NSString *originalDateString;
+    NSString *newDateString;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -214,6 +218,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(textFieldDidChange:) name:UITextFieldTextDidChangeNotification object:self.txtAddress];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
+    
     [self updateUI];
     
 }
@@ -237,8 +243,40 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    self.cameFromCompleteOrderVC = NO;
 
     [super viewWillDisappear:animated];
+}
+
+- (void)preloadCheckCurrentMode
+{
+    // so date string can refresh first
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
+}
+
+- (void)checkCurrentMode
+{
+    newDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"NEW DATE: %@", newDateString);
+    
+    if (![originalDateString isEqualToString:newDateString])
+    {
+        originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+        
+        if (self.cameFromCompleteOrderVC)
+        {
+            NSArray *array = [self.navigationController viewControllers];
+            
+            [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
+        }
+        else // came from homepage
+        {
+            [self.navigationController popViewControllerAnimated:YES];
+        }
+    }
 }
 
 - (void) onUpdatedStatus:(NSNotification *)notification

@@ -514,8 +514,6 @@
         {
             found = YES;
             ((DeliveryLocationViewController *)vc).isFromOrder = YES;
-//            ((DeliveryLocationViewController *)vc).priceDiscount = self.promoDiscount;
-//            ((DeliveryLocationViewController *)vc).strPromoCode = self.strPromoCode;
             [self.navigationController popToViewController:vc animated:YES];
             return;
         }
@@ -524,10 +522,11 @@
     if (!found)
     {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        UIViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+        DeliveryLocationViewController *vc = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         ((DeliveryLocationViewController *)vc).isFromOrder = YES;
-//        ((DeliveryLocationViewController *)vc).priceDiscount = self.promoDiscount;
-//        ((DeliveryLocationViewController *)vc).strPromoCode = self.strPromoCode;
+        
+        vc.cameFromCompleteOrderVC = YES;
+        
         [self.navigationController pushViewController:vc animated:YES];
     }
 }
