@@ -553,8 +553,7 @@
 
 - (void)refreshView
 {
-    [loadingHUD dismiss];
-    loadingHUD = nil;
+    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [self viewWillAppear:YES];
 }
 
@@ -581,10 +580,9 @@
     
     else if (![originalDateString isEqualToString:newDateString])
     {
-        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
         
-        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        [loadingHUD showInView:self.view];
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         
         originalDateString = [[BentoShop sharedInstance] getMenuDateString];
     }

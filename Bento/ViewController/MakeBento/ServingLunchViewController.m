@@ -83,9 +83,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
-    NSLog(@"ORIGINAL DATE: %@", originalDateString);
-    
     /////////////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
     
     NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
@@ -285,6 +282,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"ORIGINAL DATE: %@", originalDateString);
 
     // set aryDishes array
     self.aryDishes = [[NSMutableArray alloc] init];
@@ -300,7 +300,7 @@
     }
     
     [self updateUI];
-//    
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
@@ -340,8 +340,7 @@
 
 - (void)refreshView
 {
-    [loadingHUD dismiss];
-    loadingHUD = nil;
+    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
     [self viewWillAppear:YES];
 }
 
@@ -365,10 +364,9 @@
     
     else if (![originalDateString isEqualToString:newDateString])
     {
-        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
         
-        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        [loadingHUD showInView:self.view];
+        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         
         originalDateString = [[BentoShop sharedInstance] getMenuDateString];
     }
