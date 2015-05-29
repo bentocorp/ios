@@ -14,5 +14,6 @@
 
 @property (nonatomic, retain) NSString *strAddress;
 
+@property (nonatomic) BOOL cameFromCompleteOrderVC;
 
 @end

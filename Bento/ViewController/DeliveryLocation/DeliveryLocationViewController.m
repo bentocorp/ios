@@ -260,7 +260,19 @@
     newDateString = [[BentoShop sharedInstance] getMenuDateString];
     NSLog(@"NEW DATE: %@", newDateString);
     
-    if (![originalDateString isEqualToString:newDateString])
+    
+    // if mode changed
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]
+          isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
+    {
+        // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
+    // if date changed
+    else if (![originalDateString isEqualToString:newDateString])
     {
         originalDateString = [[BentoShop sharedInstance] getMenuDateString];
         
