@@ -33,6 +33,9 @@
     
     JGProgressHUD *loadingHUD;
     BOOL isThereConnection;
+    
+    NSString *originalDateString;
+    NSString *newDateString;
 }
 
 - (void)viewDidLoad {
@@ -92,6 +95,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
 }
 
 - (void)noConnection
@@ -118,6 +123,37 @@
     [loadingHUD dismiss];
     loadingHUD = nil;
     [self viewWillAppear:YES];
+}
+
+- (void)preloadCheckCurrentMode
+{
+    // so date string can refresh first
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
+}
+
+- (void)checkCurrentMode
+{
+    newDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"NEW DATE: %@", newDateString);
+    
+    // if mode changed
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]
+          isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
+    {
+        // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
+    // if date changed
+    else if (![originalDateString isEqualToString:newDateString])
+    {
+        originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+        
+        NSArray *array = [self.navigationController viewControllers];
+        [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
+    }
 }
 
 - (void) viewWillDisappear:(BOOL)animated

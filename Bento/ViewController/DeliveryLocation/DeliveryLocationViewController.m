@@ -258,7 +258,6 @@
     newDateString = [[BentoShop sharedInstance] getMenuDateString];
     NSLog(@"NEW DATE: %@", newDateString);
     
-    
     // if mode changed
     if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]
           isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
