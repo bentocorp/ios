@@ -254,11 +254,23 @@
     newDateString = [[BentoShop sharedInstance] getMenuDateString];
     NSLog(@"NEW DATE: %@", newDateString);
     
-    if (![originalDateString isEqualToString:newDateString])
+    // if mode changed
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]
+          isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
+    {
+        // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
+    // if date changed
+    else if (![originalDateString isEqualToString:newDateString])
     {
         originalDateString = [[BentoShop sharedInstance] getMenuDateString];
         
-        [self.navigationController popViewControllerAnimated:YES];
+        NSArray *array = [self.navigationController viewControllers];
+        [self.navigationController popToViewController:[array objectAtIndex:1] animated:YES];
     }
 }
 
@@ -652,7 +664,7 @@
         STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
         if (cardInfo != nil) // STPCard
         {
-            JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+            loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             loadingHUD.textLabel.text = @"Processing...";
             [loadingHUD showInView:self.view];
             
@@ -1144,7 +1156,7 @@
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
     
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     loadingHUD.textLabel.text = @"Purchasing...";
     [loadingHUD showInView:self.view];
     
