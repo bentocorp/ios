@@ -212,6 +212,8 @@
 {
     NSString *sharePrecomposedMessageOriginal = [[AppStrings sharedInstance] getString:SHARE_PRECOMPOSED_MESSAGE];
     
+    NSLog(@"sharePrecomposedMessageOriginal - %@", sharePrecomposedMessageOriginal);
+    
     sharePrecomposedMessageNew = [sharePrecomposedMessageOriginal stringByReplacingOccurrencesOfString:@"%@" withString:currentUserInfo[@"coupon_code"]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];

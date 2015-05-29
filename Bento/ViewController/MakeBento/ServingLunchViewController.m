@@ -75,10 +75,16 @@
     
     JGProgressHUD *loadingHUD;
     BOOL isThereConnection;
+    
+    NSString *originalDateString;
+    NSString *newDateString;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"ORIGINAL DATE: %@", originalDateString);
     
     /////////////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
     
@@ -300,7 +306,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
     
     /*---------------Tomorrow Lunch------------*/
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
@@ -332,6 +338,19 @@
     [self viewWillAppear:YES];
 }
 
+- (void)refreshView
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+    [self viewWillAppear:YES];
+}
+
+- (void)preloadCheckCurrentMode
+{
+    // so date string can refresh first
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
+}
+
 - (void)checkCurrentMode
 {
     float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
@@ -342,6 +361,16 @@
     {
         [[BentoShop sharedInstance] resetBentoArray];
         [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
+    else if (![originalDateString isEqualToString:newDateString])
+    {
+        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
+        
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        [loadingHUD showInView:self.view];
+        
+        originalDateString = [[BentoShop sharedInstance] getMenuDateString];
     }
 }
 

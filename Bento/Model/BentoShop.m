@@ -44,6 +44,7 @@
     float dinnerTime;
     float currentTime;
     float bufferTime;
+    NSString *todayDate;
 }
 
 static BentoShop *_shareInstance;
