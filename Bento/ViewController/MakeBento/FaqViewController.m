@@ -8,8 +8,6 @@
 
 #import "FaqViewController.h"
 
-#import "MyBentoViewController.h"
-
 #import "MyAlertView.h"
 
 #import "JGProgressHUD.h"
