@@ -93,27 +93,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     };
     
     [googleReach startNotifier];
-    
-//    googleReach = [Reachability reachabilityWithHostname:@"www.google.com"];
-//    if ([googleReach isReachable])
-//    {
-//        
-//    }
-//    else // Unreachable
-//    {
-//        
-//        NSLog(@"No internet man!!!");
-//        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"No Network Connection"
-//                                                        message:@"You have no wifi or cellular connection available. Please connect to a WIFI or cellular network."
-//                                                       delegate:self
-//                                              cancelButtonTitle:nil
-//                                              otherButtonTitles:@"Settings", nil];
-//        [alert show];
-//        alert = nil;
-//    }
 
-    
-/////////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////////
     
     NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion] );
@@ -182,6 +162,24 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 /*---------------------------------------------------------------------*/
     
+    // SET ORIGINAL MODE
+    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+    
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerTime)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"OriginalLunchOrDinnerMode"];
+    }
+    // dinner opening - 11:59pm
+    else if (currentTime >= dinnerTime && currentTime < 24)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"OriginalLunchOrDinnerMode"];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"ORIGNAL LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]);
+    
     return YES;
 }
 
@@ -222,6 +220,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
+    
     [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"enteredForeground" object:nil];
     
@@ -234,6 +233,25 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // reload app strings
     [[AppStrings sharedInstance] getAppStrings];
+    
+/*---------*/
+    // set currentMode
+    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+    
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerTime)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
+    }
+    // dinner opening - 11:59pm
+    else if (currentTime >= dinnerTime && currentTime < 24)
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
 }
 
 - (void)showLocationAlert

@@ -83,7 +83,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    /////////////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
+    ////////*might not need this*///////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
     
     NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
     
