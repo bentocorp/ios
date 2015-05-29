@@ -352,19 +352,17 @@
 
 - (void)checkCurrentMode
 {
-    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
-    
     newDateString = [[BentoShop sharedInstance] getMenuDateString];
     NSLog(@"NEW DATE: %@", newDateString);
     
-    // dinner opening - 11:59pm
-    if (currentTime >= dinnerTime && currentTime < 24) // if it's lunch time, refresh app state
+    // if Dinner mode, refresh state
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] isEqualToString:@"DinnerMode"])
     {
         [[BentoShop sharedInstance] resetBentoArray];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     
+    // if date changed
     else if (![originalDateString isEqualToString:newDateString])
     {
         [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
