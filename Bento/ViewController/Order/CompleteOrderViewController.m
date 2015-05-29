@@ -103,6 +103,10 @@
 @end
 
 @implementation CompleteOrderViewController
+{
+    NSString *originalDateString;
+    NSString *newDateString;
+}
 
 - (BOOL)applePayEnabled
 {
@@ -164,6 +168,9 @@
 {
     [super viewWillAppear:animated];
     
+    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"ORIGINAL DATE: %@", originalDateString);
+    
     // set array every time view appears (edit: moved from viewDidLoad)
     self.aryBentos = [[NSMutableArray alloc] init];
     for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
@@ -180,6 +187,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
     
     // ADDRESS
     self.lblAddress.text = @"";
@@ -232,6 +241,25 @@
     [self.aryBentos removeAllObjects];
     
     [super viewWillDisappear:animated];
+}
+
+- (void)preloadCheckCurrentMode
+{
+    // so date string can refresh first
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
+}
+
+- (void)checkCurrentMode
+{
+    newDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"NEW DATE: %@", newDateString);
+    
+    if (![originalDateString isEqualToString:newDateString])
+    {
+        originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+        
+        [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 

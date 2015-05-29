@@ -354,7 +354,10 @@
 {
     float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
     float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
-        
+    
+    newDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"NEW DATE: %@", newDateString);
+    
     // dinner opening - 11:59pm
     if (currentTime >= dinnerTime && currentTime < 24) // if it's lunch time, refresh app state
     {
