@@ -34,7 +34,6 @@
 		7216B7121AA64C7C0006FFE9 /* ChooseSideDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D81A5BF301003DC872 /* ChooseSideDishViewController.m */; };
 		7216B7131AA64C7C0006FFE9 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BE1A6F46DF006C2446 /* NSDate+RFC1123.m */; };
 		7216B7141AA64C7C0006FFE9 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339C1A6EADBD006C2446 /* UIImage+GIF.m */; };
-		7216B7151AA64C7C0006FFE9 /* MyBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D21A5BF2D9003DC872 /* MyBentoViewController.m */; };
 		7216B7161AA64C7C0006FFE9 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333931A6EADBD006C2446 /* SDWebImageDownloaderOperation.m */; };
 		7216B7171AA64C7C0006FFE9 /* JGProgressHUDAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333491A6D4058006C2446 /* JGProgressHUDAnimation.m */; };
 		7216B7181AA64C7C0006FFE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0991A5BCC7B003DC872 /* AppDelegate.m */; };
@@ -281,7 +280,6 @@
 		90BED0C81A5BE72F003DC872 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0BD1A5BE72F003DC872 /* OpenSans-Regular.ttf */; };
 		90BED0C91A5BE72F003DC872 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0BE1A5BE72F003DC872 /* OpenSans-Semibold.ttf */; };
 		90BED0CA1A5BE72F003DC872 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0BF1A5BE72F003DC872 /* OpenSans-SemiboldItalic.ttf */; };
-		90BED0D31A5BF2D9003DC872 /* MyBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D21A5BF2D9003DC872 /* MyBentoViewController.m */; };
 		90BED0D61A5BF2F4003DC872 /* ChooseMainDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */; };
 		90BED0D91A5BF301003DC872 /* ChooseSideDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D81A5BF301003DC872 /* ChooseSideDishViewController.m */; };
 		90BED0DB1A5C0320003DC872 /* nav_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0DA1A5C0320003DC872 /* nav_background.png */; };
@@ -484,8 +482,6 @@
 		FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
 		FCBF06FA1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */; };
 		FCBF06FB1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */; };
-		FCD51ECB1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */; };
-		FCD51ECC1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */; };
 		FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED11AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
@@ -736,8 +732,6 @@
 		90BED0BD1A5BE72F003DC872 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
 		90BED0BE1A5BE72F003DC872 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
 		90BED0BF1A5BE72F003DC872 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
-		90BED0D11A5BF2D9003DC872 /* MyBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyBentoViewController.h; sourceTree = "<group>"; };
-		90BED0D21A5BF2D9003DC872 /* MyBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyBentoViewController.m; sourceTree = "<group>"; };
 		90BED0D41A5BF2F4003DC872 /* ChooseMainDishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseMainDishViewController.h; sourceTree = "<group>"; };
 		90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ChooseMainDishViewController.m; sourceTree = "<group>"; };
 		90BED0D71A5BF301003DC872 /* ChooseSideDishViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ChooseSideDishViewController.h; sourceTree = "<group>"; };
@@ -891,8 +885,6 @@
 		FCB906121AEC7FBF003041F7 /* FaqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FaqViewController.m; path = MakeBento/FaqViewController.m; sourceTree = "<group>"; };
 		FCBF06F81B1522C800EEC177 /* NetworkErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkErrorViewController.h; sourceTree = "<group>"; };
 		FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkErrorViewController.m; sourceTree = "<group>"; };
-		FCD51EC91AFB4B69009D75BB /* SneakPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SneakPreviewViewController.h; path = ../Order/SneakPreviewViewController.h; sourceTree = "<group>"; };
-		FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SneakPreviewViewController.m; path = ../Order/SneakPreviewViewController.m; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
 		FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCollectionViewCell.m; sourceTree = "<group>"; };
 		FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1357,7 +1349,6 @@
 				90BED0A51A5BD05C003DC872 /* Homepage */,
 				90BED0A61A5BD05C003DC872 /* Order */,
 				90BED0A71A5BD05C003DC872 /* SignIn */,
-				FC3C4E761AF969F2005D7197 /* Unused VC */,
 			);
 			path = ViewController;
 			sourceTree = "<group>";
@@ -1559,18 +1550,6 @@
 			);
 			name = "Lunch Cell";
 			path = ../ViewController/MakeBento;
-			sourceTree = "<group>";
-		};
-		FC3C4E761AF969F2005D7197 /* Unused VC */ = {
-			isa = PBXGroup;
-			children = (
-				FCD51EC91AFB4B69009D75BB /* SneakPreviewViewController.h */,
-				FCD51ECA1AFB4B69009D75BB /* SneakPreviewViewController.m */,
-				90BED0D11A5BF2D9003DC872 /* MyBentoViewController.h */,
-				90BED0D21A5BF2D9003DC872 /* MyBentoViewController.m */,
-			);
-			name = "Unused VC";
-			path = MakeBento;
 			sourceTree = "<group>";
 		};
 		FC3C4E7F1AF97FCD005D7197 /* Serving Lunch */ = {
@@ -2393,14 +2372,12 @@
 				7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */,
-				FCD51ECC1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */,
 				FCBF06FB1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
 				FCAA47A11AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				7216B7121AA64C7C0006FFE9 /* ChooseSideDishViewController.m in Sources */,
 				FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */,
 				7216B7131AA64C7C0006FFE9 /* NSDate+RFC1123.m in Sources */,
 				7216B7141AA64C7C0006FFE9 /* UIImage+GIF.m in Sources */,
-				7216B7151AA64C7C0006FFE9 /* MyBentoViewController.m in Sources */,
 				7216B7161AA64C7C0006FFE9 /* SDWebImageDownloaderOperation.m in Sources */,
 				7216B7171AA64C7C0006FFE9 /* JGProgressHUDAnimation.m in Sources */,
 				7216B7181AA64C7C0006FFE9 /* AppDelegate.m in Sources */,
@@ -2498,14 +2475,12 @@
 				7286EB4E1A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */,
-				FCD51ECB1AFB4B69009D75BB /* SneakPreviewViewController.m in Sources */,
 				FCBF06FA1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
 				FCAA47A01AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				90BED0D91A5BF301003DC872 /* ChooseSideDishViewController.m in Sources */,
 				FCB906131AEC7FBF003041F7 /* FaqViewController.m in Sources */,
 				722333D01A6F46DF006C2446 /* NSDate+RFC1123.m in Sources */,
 				722333B11A6EADBD006C2446 /* UIImage+GIF.m in Sources */,
-				90BED0D31A5BF2D9003DC872 /* MyBentoViewController.m in Sources */,
 				722333AD1A6EADBD006C2446 /* SDWebImageDownloaderOperation.m in Sources */,
 				7223335C1A6D4058006C2446 /* JGProgressHUDAnimation.m in Sources */,
 				90BED0A01A5BCC7B003DC872 /* AppDelegate.m in Sources */,
