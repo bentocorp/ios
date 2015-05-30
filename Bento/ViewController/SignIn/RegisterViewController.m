@@ -511,11 +511,6 @@
     [self doRegister];
 }
 
-- (IBAction)onSignInWithEmail:(id)sender
-{
-    [self performSegueWithIdentifier:@"SignIn" sender:self.txtEmail.text];
-}
-
 - (IBAction)onPrivacyPolicy:(id)sender
 {
     [self closeKeyboard];

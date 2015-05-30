@@ -1062,7 +1062,7 @@
     // Order details
     NSMutableDictionary *detailInfo = [[NSMutableDictionary alloc] init];
     
-    // - Address
+    // Address
     NSMutableDictionary *addressInfo = [[NSMutableDictionary alloc] init];
     NSLog(@"%@", self.placeInfo);
     

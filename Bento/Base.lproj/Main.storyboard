@@ -54,7 +54,6 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Light.ttf">
             <string>OpenSans-Light</string>
@@ -1075,19 +1074,6 @@
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0Bx-89-ZkC">
-                                        <rect key="frame" x="253" y="7" width="60" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                        <state key="normal" title="SIGN IN">
-                                            <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onSignInWithEmail:" destination="W50-Cr-45u" eventType="touchUpInside" id="Jbf-Hc-oHr"/>
-                                        </connections>
-                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.9137254901960784" green="0.44705882352941173" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
@@ -1128,7 +1114,6 @@
                     <connections>
                         <outlet property="btnPolicy" destination="pAs-iW-6ri" id="tT9-ee-eVR"/>
                         <outlet property="btnRegister" destination="GaG-xX-Wfd" id="vb3-UI-WUT"/>
-                        <outlet property="btnSignUp" destination="0Bx-89-ZkC" id="Rn9-hF-L8n"/>
                         <outlet property="btnTerms" destination="uyR-XF-uAc" id="7LE-eo-znc"/>
                         <outlet property="ivEmail" destination="uqH-ab-4iu" id="8p8-Ho-5Gd"/>
                         <outlet property="ivPassword" destination="Mxf-HM-j7P" id="eGM-jC-2Qx"/>

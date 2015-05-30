@@ -10,7 +10,6 @@
 #import <CoreLocation/CoreLocation.h>
 
 #import "DataManager.h"
-
 #import "BaseViewController.h"
 
 @interface CompleteOrderViewController : BaseViewController
