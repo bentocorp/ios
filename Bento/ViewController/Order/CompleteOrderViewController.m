@@ -710,34 +710,12 @@
         PKPaymentRequest *request = [Stripe paymentRequestWithMerchantIdentifier:APPLE_MERCHANT_ID];
         request.countryCode = @"US";
         request.currencyCode = @"USD";
-/*
-        [request setRequiredShippingAddressFields:PKAddressFieldPostalAddress];
-        [request setRequiredBillingAddressFields:PKAddressFieldPostalAddress];
-        request.shippingMethods = [self shippingMethods];
-        request.paymentSummaryItems = [self summaryItemsForShippingMethod:request.shippingMethods.firstObject];
-*/
+
         NSString *label = @"Purchase of Bento";
         
-/*
-        float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
-        float tax = (int)(_totalPrice * _taxPercent) / 100.f;
-//        float totalPrice = _totalPrice + deliveryTip + tax - self.promoDiscount;
-        float totalPrice = _totalPrice + deliveryTip + tax - _promoDiscount;
-        if (totalPrice < 0.0f)
-            totalPrice = 0.0f;
-        else if (totalPrice > 0 && totalPrice < 1.0f)
-            totalPrice = 1.0f;
-
-#ifdef DEBUG
-        // For test
-        totalPrice = 0.0f;
-#endif
-*/
         float totalPrice = [self getTotalPrice];
         NSDecimalNumber *amount = (NSDecimalNumber *)[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%.2f", totalPrice]];
-        request.paymentSummaryItems = @[
-                                        [PKPaymentSummaryItem summaryItemWithLabel:label amount:amount]
-                                        ];
+        request.paymentSummaryItems = @[ [PKPaymentSummaryItem summaryItemWithLabel:label amount:amount] ];
         
         if ([self applePayEnabled])
         {
@@ -784,7 +762,6 @@
     }
     
     [self processPayment];
-//    [self gotoConfirmOrderScreen];
 }
 
 - (IBAction)onMinusTip:(id)sender

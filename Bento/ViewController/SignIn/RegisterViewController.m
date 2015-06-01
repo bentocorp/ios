@@ -257,7 +257,7 @@
 
 - (void)reqFacebookUserInfo
 {
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     loadingHUD.textLabel.text = @"Logging in...";
     [loadingHUD showInView:self.view];
     
@@ -383,7 +383,7 @@
     NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
     
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     loadingHUD.textLabel.text = @"Registering...";
     [loadingHUD showInView:self.view];
     

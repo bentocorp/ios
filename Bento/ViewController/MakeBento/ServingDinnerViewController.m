@@ -520,7 +520,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
 }
 
@@ -626,7 +625,7 @@
             [aryBentos addObject:bento];
     }
     
-    NSLog(@"Total Bentos: %ld", [[BentoShop sharedInstance] getTotalBentoCount]);
+    NSLog(@"TOTAL BENTOS: %ld", [[BentoShop sharedInstance] getTotalBentoCount]);
     NSInteger mainDishIndex = 0;
     NSInteger side1DishIndex = 0;
     NSInteger side2DishIndex = 0;
@@ -644,7 +643,7 @@
         side3DishIndex = [currentBento getSideDish3];
         side4DishIndex = [currentBento getSideDish4];
     }
-
+    
 /*-Main-*/
     if (mainDishIndex > 0)
     {

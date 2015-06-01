@@ -78,6 +78,8 @@
     
     NSString *originalDateString;
     NSString *newDateString;
+    
+    NSMutableArray *savedArray;
 }
 
 - (void)viewDidLoad {
@@ -303,13 +305,12 @@
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
-    
-    /*---------------Tomorrow Lunch------------*/
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
 }
 
 - (void)noConnection
@@ -335,6 +336,7 @@
     
     [loadingHUD dismiss];
     loadingHUD = nil;
+    
     [self viewWillAppear:YES];
 }
 
@@ -454,9 +456,6 @@
 
 - (void)updateUI
 {
-    [cvDishes reloadData];
-    [myTableView reloadData];
-    
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     
@@ -468,15 +467,15 @@
         lblBanner.hidden = YES;
     }
     
-    // Get rid of empty bentos and update persistent data
-    NSArray *savedArray  = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"bento_array"];
-    NSMutableArray *aryBentos = [NSMutableArray arrayWithArray:savedArray];
+    // Get rid of any empty bentos and update persistent data
+    savedArray  = [[[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"bento_array"] mutableCopy];
+    NSLog(@"SAVED ARRAY: %@", savedArray);
     
     // loop through bento array
-    for (int i = 0; i < aryBentos.count; i++)
+    for (int i = 0; i < savedArray.count; i++)
     {
         // if bento in current index is empty
-        Bento *bento = aryBentos[i];
+        Bento *bento = savedArray[i];
         if (bento.indexMainDish == 0 &&
             bento.indexSideDish1 == 0 &&
             bento.indexSideDish2 == 0 &&
@@ -484,7 +483,7 @@
             bento.indexSideDish4 == 0)
         {
             // remove bento from bentos array
-            [aryBentos removeObjectAtIndex:i];
+            [savedArray removeObjectAtIndex:i];
             
             // get today's date string
             NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -492,19 +491,17 @@
             NSString *strDate = [formatter stringFromDate:[NSDate date]];
             
             // update bentos array and strToday to persistent data
-            [[NSUserDefaults standardUserDefaults] rm_setCustomObject:aryBentos forKey:@"bento_array"];
+            [[NSUserDefaults standardUserDefaults] rm_setCustomObject:savedArray forKey:@"bento_array"];
             [[NSUserDefaults standardUserDefaults] setObject:strDate forKey:@"bento_date"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
     }
     
-    // if current bento is completed, added new empty bento
+    // if current bento is completed, add new empty bento
     if ([[[BentoShop sharedInstance] getLastBento] isCompleted])
     {
         [[BentoShop sharedInstance] addNewBento];
     }
-    
-    NSLog(@"Bento Array - %@", savedArray);
     
     // Cart and Finalize button state
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0)
@@ -537,6 +534,9 @@
         lblBadge.text = @"";
         lblBadge.hidden = YES;
     }
+    
+    [cvDishes reloadData];
+    [myTableView reloadData];
 }
 
 - (void)onSettings

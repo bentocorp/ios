@@ -70,7 +70,7 @@ static BentoShop *_shareInstance;
     }
 }
 
-- (id) init
+- (id)init
 {
     if ( (self = [super init]) )
     {
@@ -174,8 +174,8 @@ static BentoShop *_shareInstance;
     self.prevClosed = isClosed;
     self.prevSoldOut = isSoldOut;
     
-    if ([self isClosed] && ![[DataManager shareDataManager] isAdminUser]) // reset bento if closed and not adminUser
-        [self resetBentoArray];
+//    if ([self isClosed] && ![[DataManager shareDataManager] isAdminUser]) // reset bento if closed and not adminUser
+//        [self resetBentoArray];
 }
 
 - (void)setStatus:(NSArray *)menuStatus

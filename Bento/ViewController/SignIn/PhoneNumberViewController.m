@@ -254,7 +254,7 @@
     NSString *strFirstName = [self.userInfo valueForKey:@"first_name"];
     NSString *strLastName = [self.userInfo valueForKey:@"last_name"];
     NSString *strFBID = [self.userInfo valueForKey:@"id"];
-    NSString *strUserName = [self.userInfo valueForKey:@"name"];
+//    NSString *strUserName = [self.userInfo valueForKey:@"name"];
     NSString *strGender = [self.userInfo valueForKey:@"gender"];
     NSString *strPhotoURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", strFBID];
     NSString *strPhoneNumber = self.txtPhoneNumber.text;
@@ -292,7 +292,7 @@
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
     
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     loadingHUD.textLabel.text = @"Registering...";
     [loadingHUD showInView:self.view];
     

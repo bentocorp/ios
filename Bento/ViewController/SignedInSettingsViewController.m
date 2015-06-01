@@ -431,7 +431,7 @@
     
     WebManager *webManager = [[WebManager alloc] init];
     
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     loadingHUD.textLabel.text = @"Logging out...";
     [loadingHUD showInView:self.view];
     
@@ -561,7 +561,7 @@
 
 - (void)copyCode
 {
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     loadingHUD.textLabel.text = @"Copying";
     [loadingHUD showInView:self.view];
     

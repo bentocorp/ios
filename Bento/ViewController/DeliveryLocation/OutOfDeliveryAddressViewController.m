@@ -274,7 +274,7 @@
     NSDictionary *dicRequest = @{@"data" : [postInfo jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
     
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     loadingHUD.textLabel.text = @"Sending...";
     [loadingHUD showInView:self.view];
     
