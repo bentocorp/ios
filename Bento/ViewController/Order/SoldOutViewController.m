@@ -92,6 +92,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    isThereConnection = YES;
+    
     self.openingHoursLabel.adjustsFontSizeToFitWidth = YES;
     self.lunchAndDinnerHoursLabel.adjustsFontSizeToFitWidth = YES;
     
