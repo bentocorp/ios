@@ -675,8 +675,7 @@
                     
                     MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
                     [alertView showInView:self.view];
-                    alertView = nil;
-                    
+                    alertView = nil; 
                 }
                 else
                 {
@@ -728,7 +727,7 @@
             ((PKPaymentAuthorizationViewController *)paymentController).delegate = self;
 #endif
             if (paymentController != nil)
-                [self presentViewController:paymentController animated:YES completion:nil];
+                [self presentViewController:paymentController animated:YES completion:nil]; // shows the gray pop up
             else
             {
                 MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
@@ -745,10 +744,6 @@
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
     if (strAPIToken == nil || strAPIToken.length == 0)
     {
-//        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Please log in first." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-//        [alertView showInView:self.view];
-//        alertView = nil;
-        
         [self openAccountViewController:[CompleteOrderViewController class]];
         
         return;

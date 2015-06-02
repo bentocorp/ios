@@ -17,12 +17,29 @@
 @implementation BentoModelTests
 {
     Bento *bento;
+    NSArray *aryBentos;
 }
 
 - (void)setUp {
     [super setUp];
     
     bento = [[Bento alloc] init];
+    
+    Bento *bento1 = [Bento new];
+    bento1.indexMainDish = 30;
+    bento1.indexSideDish1 = 38;
+    bento1.indexSideDish2 = 41;
+    bento1.indexSideDish3 = 43;
+    bento1.indexSideDish4 = 49;
+    
+    Bento *bento2 = [Bento new];
+    bento2.indexMainDish = 30;
+    bento2.indexSideDish1 = 38;
+    bento2.indexSideDish2 = 38;
+    bento2.indexSideDish3 = 43;
+    bento2.indexSideDish4 = 54;
+    
+    aryBentos = @[bento1, bento2];
 }
 
 - (void)tearDown {
@@ -89,14 +106,16 @@
     XCTAssert([bento isCompleted] == NO, @"Bento is complete!");
 }
 
+
 - (void)testCanAddDishYES
 {
-    BOOL canAddDish;
+    // set argument to see if it can be added
+    NSInteger dishID = 43;
     
     // Mock
     NSArray *menuStatus = @[
                                 @{
-                                    @"itemId": @"2",
+                                    @"itemId": @"30",
                                     @"qty": @"99"
                                 },
                                 @{
@@ -120,33 +139,116 @@
                                     @"qty": @"99"
                                 }
                            ];
-    ////////////////////////////////////////////////
     
-//    NSInteger quantity = 0;
+    /*----------------------------------------------*/
+    
+    NSInteger quantity = 0; // how many qty left?
+    for (NSDictionary *menuItem in menuStatus)
+    {
+        NSInteger itemID; // resets everytime
+
+        // if returned value from itemId is not null...
+        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]])
+            itemID = [[menuItem objectForKey:@"itemId"] integerValue]; // ...get itemId and convert to integer value, 43
+
+        // if selected dish id matches item id
+        if (itemID == dishID)
+        {
+            // if returned value from gty is not null...
+            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]])
+                quantity = [[menuItem objectForKey:@"qty"] integerValue]; // ...get qty and convert to integer value, 99
+            
+            break; // stop searching for qty once found match itemID and dishItem
+        }
+    }
+
+    if (quantity == 0) // wtf?
+        canAddDish = YES;
+
+    // check to see how many of the dishID(from argument) already exists in cart
+    NSInteger currentAmount = 0;
+    for (Bento *bento in aryBentos)
+    {
+        if ([bento getMainDish] == dishID)
+            currentAmount ++;
+        
+        if ([bento getSideDish1] == dishID)
+            currentAmount ++;
+        
+        if ([bento getSideDish2] == dishID)
+            currentAmount ++;
+        
+        if ([bento getSideDish3] == dishID)
+            currentAmount ++;
+        
+        if ([bento getSideDish4] == dishID)
+            currentAmount ++;
+    }
+    
+    XCTAssert(currentAmount < quantity == YES, @"Can't add dish");
+}
+
+//- (void)testCanAddDishNO
+//{
+//    // set argument to see if it can be added
+//    NSInteger dishID = 30;
+//    
+//    // Mock
+//    NSArray *menuStatus = @[
+//                            @{
+//                                @"itemId": @"30",
+//                                @"qty": @"0"
+//                                },
+//                            @{
+//                                @"itemId": @"38",
+//                                @"qty": @"99"
+//                                },
+//                            @{
+//                                @"itemId": @"41",
+//                                @"qty": @"99"
+//                                },
+//                            @{
+//                                @"itemId": @"43",
+//                                @"qty": @"99"
+//                                },
+//                            @{
+//                                @"itemId": @"49",
+//                                @"qty": @"99"
+//                                },
+//                            @{
+//                                @"itemId": @"54",
+//                                @"qty": @"99"
+//                                }
+//                            ];
+//    
+//    /*----------------------------------------------*/
+//    
+//    NSInteger quantity = 0; // how many qty left?
 //    for (NSDictionary *menuItem in menuStatus)
 //    {
-//        NSInteger itemID;
+//        NSInteger itemID; // resets everytime
 //        
-//        // get itemID
+//        // if returned value from itemId is not null...
 //        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]])
-//            itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+//            itemID = [[menuItem objectForKey:@"itemId"] integerValue]; // ...get itemId and convert to integer value, 43
 //        
 //        // if selected dish id matches item id
 //        if (itemID == dishID)
 //        {
-//            // get the quantity of it
+//            // if returned value from gty is not null...
 //            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]])
-//                quantity = [[menuItem objectForKey:@"qty"] integerValue];
-//            break;
+//                quantity = [[menuItem objectForKey:@"qty"] integerValue]; // ...get qty and convert to integer value, 99
+//            
+//            break; // stop searching for qty once found match itemID and dishItem
 //        }
 //    }
 //    
-//    if (quantity == 0)
+//    if (quantity == 0) // wtf?
 //        canAddDish = YES;
 //    
-//    // check if how many of the dish exists in cart
+//    // check to see how many of the dishID(from argument) already exists in cart
 //    NSInteger currentAmount = 0;
-//    for (Bento *bento in self.aryBentos)
+//    for (Bento *bento in aryBentos)
 //    {
 //        if ([bento getMainDish] == dishID)
 //            currentAmount ++;
@@ -164,18 +266,8 @@
 //            currentAmount ++;
 //    }
 //    
-//    // if the amount in cart is less than quantity, then ok to add
-//    if (currentAmount < quantity)
-//        canAddDish = YES;
-//    
-//    // can't add
-//    canAddDish = NO;
-}
-
-- (void)testCanAddDishNO
-{
-    
-}
+//    XCTAssert(currentAmount < quantity == YES, @"Can't add dish");
+//}
 
 - (void)testCanAddSideDishYES
 {

@@ -340,30 +340,35 @@
     lblMainDish.textColor = [UIColor whiteColor];
     lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:18.0f];
     lblMainDish.textAlignment = NSTextAlignmentCenter;
+    lblMainDish.adjustsFontSizeToFitWidth = YES;
     [viewMainEntree addSubview:lblMainDish];
     
     lblSideDish1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
     lblSideDish1.textColor = [UIColor whiteColor];
     lblSideDish1.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
     lblSideDish1.textAlignment = NSTextAlignmentCenter;
+    lblSideDish1.adjustsFontSizeToFitWidth = YES;
     [viewSide1 addSubview:lblSideDish1];
 
     lblSideDish2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 1)];
     lblSideDish2.textColor = [UIColor whiteColor];
     lblSideDish2.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
     lblSideDish2.textAlignment = NSTextAlignmentCenter;
+    lblSideDish2.adjustsFontSizeToFitWidth = YES;
     [viewSide2 addSubview:lblSideDish2];
 
     lblSideDish3 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
     lblSideDish3.textColor = [UIColor whiteColor];
     lblSideDish3.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
     lblSideDish3.textAlignment = NSTextAlignmentCenter;
+    lblSideDish3.adjustsFontSizeToFitWidth = YES;
     [viewSide3 addSubview:lblSideDish3];
     
     lblSideDish4 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
     lblSideDish4.textColor = [UIColor whiteColor];
     lblSideDish4.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
     lblSideDish4.textAlignment = NSTextAlignmentCenter;
+    lblSideDish4.adjustsFontSizeToFitWidth = YES;
     [viewSide4 addSubview:lblSideDish4];
     
 /*---Image Banner---*/
