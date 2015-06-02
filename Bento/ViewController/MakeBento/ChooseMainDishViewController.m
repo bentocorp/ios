@@ -41,6 +41,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // initialize to YES
+    isThereConnection = YES;
+    
     UINib *cellNib = [UINib nibWithNibName:@"DishCollectionViewCell" bundle:nil];
     [self.cvMainDishes registerNib:cellNib forCellWithReuseIdentifier:@"cell"];
     

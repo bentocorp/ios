@@ -41,6 +41,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // initialize to YES
+    isThereConnection = YES;
+    
     NSLog(@"viewdidload");
     
     // Set Nib to Collection View

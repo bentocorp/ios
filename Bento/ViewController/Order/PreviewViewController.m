@@ -46,6 +46,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // initialize to YES
+    isThereConnection = YES;
+    
     /*---Times---*/
     currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
     lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];

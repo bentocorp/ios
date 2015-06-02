@@ -122,6 +122,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // initialize to YES
+    isThereConnection = YES;
+    
     _clickedMinuteButtonIndex = NSNotFound;
     
     UINib *cellNib = [UINib nibWithNibName:@"BentoTableViewCell" bundle:nil];

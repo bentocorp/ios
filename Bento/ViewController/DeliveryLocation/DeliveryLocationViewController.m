@@ -74,6 +74,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    // initialize to YES
+    isThereConnection = YES;
+    
     [SVGeocoder setGoogleMapsAPIKey:GOOGLE_API_KEY];
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:LOCATION_TITLE];
