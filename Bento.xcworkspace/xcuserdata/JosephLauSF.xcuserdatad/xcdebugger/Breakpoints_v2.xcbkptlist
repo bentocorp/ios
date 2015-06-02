@@ -164,11 +164,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignedOutSettingsViewController.m"
-            timestampString = "454966541.922502"
+            timestampString = "454968666.508156"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "112"
-            endingLineNumber = "112"
+            startingLineNumber = "111"
+            endingLineNumber = "111"
             landmarkName = "-checkCurrentMode"
             landmarkType = "5">
          </BreakpointContent>
