@@ -85,6 +85,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // initialize yes
+    isThereConnection = YES;
+    
     ////////*might not need this*///////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
     
     NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);

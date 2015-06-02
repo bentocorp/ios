@@ -113,6 +113,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // initialize to yes
+    isThereConnection = YES;
+    
     originalDateString = [[BentoShop sharedInstance] getMenuDateString];
     NSLog(@"ORIGINAL DATE: %@", originalDateString);
     
