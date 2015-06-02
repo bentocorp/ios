@@ -164,8 +164,7 @@ static BentoShop *_shareInstance;
     
     NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
     
-//    if ([self isClosed])
-        [self getNextMenus];
+    [self getNextMenus];
     
 //    if (self.prevClosed != isClosed || self.prevSoldOut != isSoldOut) {
         [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];

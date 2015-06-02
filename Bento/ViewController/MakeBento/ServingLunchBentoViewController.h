@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface ServingLunchBentoViewController : UIViewController
+@interface ServingLunchBentoViewController : BaseViewController
 
 @property (nonatomic) NSInteger fromWhichVC;
 @property (nonatomic) NSString *titleText;

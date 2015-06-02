@@ -11,7 +11,7 @@
 
 #import "ServingLunchBentoViewController.h"
 #import "PreviewCollectionViewCell.h"
-
+#import "DataManager.h"
 #import "BentoShop.h"
 
 @interface ServingLunchBentoViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate>
@@ -96,6 +96,26 @@
     //    }
     
     _selectedPath = nil;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+}
+
+- (void) viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+}
+
+- (void)onUpdatedStatus:(NSNotification *)notification
+{
+    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
 }
 
 - (void)didReceiveMemoryWarning {
