@@ -294,7 +294,33 @@
 
 - (void)testCanAddSideDishYES
 {
+    NSInteger sideDishID = 23;
     
+    NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:sideDishID];
+    if (dishInfo == nil)
+        return NO;
+    
+    id object = [dishInfo objectForKey:@"max_per_order"];
+    if (object == [NSNull null])
+        return YES;
+    
+    NSInteger maxPerOrder = [object integerValue];
+    if (self.indexSideDish1 == sideDishID)
+        maxPerOrder --;
+    
+    if (self.indexSideDish2 == sideDishID)
+        maxPerOrder --;
+    
+    if (self.indexSideDish3 == sideDishID)
+        maxPerOrder --;
+    
+    if (self.indexSideDish4 == sideDishID)
+        maxPerOrder --;
+    
+    if (maxPerOrder <= 0)
+        return NO;
+    
+    return YES;
 }
 
 - (void)testCanAddSideDishNO

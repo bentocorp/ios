@@ -39,7 +39,7 @@
 - (BOOL)isCompleted;
 - (void)completeBento:(NSString *)whatNeedsThis;
 
-// Not Testing in progress
+// Testing
 - (BOOL)canAddSideDish:(NSInteger)sideDishID;
 - (BOOL)canAddDish:(NSInteger)dishID;
 
