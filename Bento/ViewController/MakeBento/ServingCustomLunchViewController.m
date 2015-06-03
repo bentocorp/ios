@@ -10,7 +10,7 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define BORDER_COLOR [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f]
 
-#import "CustomServingLunchViewController.h"
+#import "ServingCustomLunchViewController.h"
 
 #import "BWTitlePagerView.h"
 
@@ -46,11 +46,11 @@
 #import "JGProgressHUD.h"
 
 
-@interface CustomServingLunchViewController ()
+@interface ServingCustomLunchViewController ()
 
 @end
 
-@implementation CustomServingLunchViewController
+@implementation ServingCustomLunchViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

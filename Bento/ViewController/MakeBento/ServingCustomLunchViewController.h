@@ -8,6 +8,6 @@
 
 #import "BaseViewController.h"
 
-@interface CustomServingLunchViewController : BaseViewController
+@interface ServingCustomLunchViewController : BaseViewController
 
 @end
