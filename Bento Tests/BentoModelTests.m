@@ -330,7 +330,7 @@
     if (object == [NSNull null])
         canAddSideDish = YES;
     
-    Bento *bentoObject = aryBentos[1];
+    Bento *bentoObject = aryBentos[1]; // mock
     
     NSInteger maxPerOrder = [object integerValue];
     if (bentoObject.indexSideDish1 == sideDishID)
@@ -351,6 +351,34 @@
         canAddSideDish = YES;
     
     XCTAssert(canAddSideDish == NO, @"Can add side dish");
+}
+
+- (void)testGetBentoName
+{
+    NSString *getBentoName; // return value, argument
+    
+     Bento *bentoObject = aryBentos[1]; // mock
+    
+    /*----------------------------------------------*/
+    
+    if (bentoObject.indexMainDish == 0)
+        getBentoName = @"";
+    
+//    NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:bentoObject.indexMainDish];
+    
+    NSDictionary *dishInfo = @{
+                               @"itemId": @"30",
+                               @"name": @"Test Item Name",
+                               @"description": @"Test description",
+                               @"type": @"main",
+                               @"image1": @"https://s3-us-west-1.amazonaws.com/bentonow-assets/menu/041515/hawaiianpoke.jpg",
+                               @"max_per_order": @"99"
+                               };
+    
+    if (dishInfo == nil)
+        getBentoName = @"";
+    
+    XCTAssert([[dishInfo objectForKey:@"name"] isEqualToString:@"Test Item Name"], @"Bento name does not exist");
 }
 
 @end
