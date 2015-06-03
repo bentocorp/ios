@@ -52,4 +52,16 @@
     XCTAssert(isClosed == NO, @"It's open!");
 }
 
+- (void)testIsSoldOut
+{
+    if (self.dicStatus == nil)
+        return YES;
+    
+    NSString *strOverallStatus = self.dicStatus[@"overall"][@"value"];
+    if ([strOverallStatus isEqualToString:@"sold out"])
+        return YES;
+    
+    return NO;
+}
+
 @end

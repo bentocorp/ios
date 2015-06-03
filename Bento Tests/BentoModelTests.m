@@ -264,6 +264,8 @@
     
     /*----------------------------------------------*/
     
+//    NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:sideDishID];
+    
     // mock
     NSDictionary *dishInfo = @{
                                 @"itemId": @"54",
@@ -312,6 +314,8 @@
     NSInteger sideDishID = 54;
     
     /*----------------------------------------------*/
+    
+//    NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:sideDishID];
     
     // mock
     NSDictionary *dishInfo = @{
