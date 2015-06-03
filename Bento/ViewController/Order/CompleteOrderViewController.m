@@ -9,7 +9,7 @@
 #import "CompleteOrderViewController.h"
 
 #import "ServingDinnerViewController.h"
-#import "ServingLunchViewController.h"
+#import "ServingFixedLunchViewController.h"
 
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
@@ -566,7 +566,7 @@
     for (UIViewController *vc in viewControllers) {
         
         // dinner or lunch vc
-        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingFixedLunchViewController class]])
         {
             // if dinner, add new bento
             if ([vc isKindOfClass:[ServingDinnerViewController class]])
@@ -921,7 +921,7 @@
     
     for (UIViewController *vc in viewControllers)
     {    
-        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingFixedLunchViewController class]])
         {
             if ([vc isKindOfClass:[ServingDinnerViewController class]])
             {

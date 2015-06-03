@@ -11,7 +11,7 @@
 #import "AppDelegate.h"
 
 #import "ServingDinnerViewController.h"
-#import "ServingLunchViewController.h"
+#import "ServingFixedLunchViewController.h"
 
 #import "CompleteOrderViewController.h"
 #import "OutOfDeliveryAddressViewController.h"
@@ -306,7 +306,7 @@
     for (UIViewController *vc in viewControllers)
     {
         // serving dinner vc || serving lunch vc
-        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingLunchViewController class]])
+        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingFixedLunchViewController class]])
         {
             [self.navigationController popToViewController:vc animated:YES];
             
@@ -322,7 +322,7 @@
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)
     {
-        ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+        ServingFixedLunchViewController *servingLunchViewController = [[ServingFixedLunchViewController alloc] init];
         [self.navigationController popToViewController:servingLunchViewController animated:YES];
         
     // dinner opening - 11:59pm

@@ -24,7 +24,7 @@
 #import "Reachability.h"
 
 #import "ServingDinnerViewController.h"
-#import "ServingLunchViewController.h"
+#import "ServingFixedLunchViewController.h"
 
 @interface FirstViewController ()
 {
@@ -316,7 +316,7 @@
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)
     {
-        ServingLunchViewController *servingLunchViewController = [[ServingLunchViewController alloc] init];
+        ServingFixedLunchViewController *servingLunchViewController = [[ServingFixedLunchViewController alloc] init];
         [self.navigationController pushViewController:servingLunchViewController animated:needsAnimation];
     }
     

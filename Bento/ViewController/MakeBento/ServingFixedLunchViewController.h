@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface ServingLunchViewController : BaseViewController
+@interface ServingFixedLunchViewController : BaseViewController
 
 @property (nonatomic) BOOL networkError;
 

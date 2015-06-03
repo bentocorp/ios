@@ -325,8 +325,10 @@
 		FC08AB251AF713DD00CFB44D /* ServingDinnerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* ServingDinnerViewController.m */; };
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
-		FC3C4E791AF96A41005D7197 /* ServingLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */; };
-		FC3C4E7A1AF96A41005D7197 /* ServingLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */; };
+		FC14783F1B1FBC37005048B0 /* CustomServingLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC14783E1B1FBC37005048B0 /* CustomServingLunchViewController.m */; };
+		FC1478401B1FBC37005048B0 /* CustomServingLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC14783E1B1FBC37005048B0 /* CustomServingLunchViewController.m */; };
+		FC3C4E791AF96A41005D7197 /* ServingFixedLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* ServingFixedLunchViewController.m */; };
+		FC3C4E7A1AF96A41005D7197 /* ServingFixedLunchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* ServingFixedLunchViewController.m */; };
 		FC3C4E7D1AF96B42005D7197 /* ServingLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */; };
 		FC3C4E7E1AF96B42005D7197 /* ServingLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */; };
 		FC599F5A1B0FEDB600989E1B /* Bento_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC599F591B0FEDB600989E1B /* Bento_Tests.m */; };
@@ -790,8 +792,10 @@
 		FC08AB231AF713DD00CFB44D /* ServingDinnerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingDinnerViewController.m; sourceTree = "<group>"; };
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
-		FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchViewController.h; sourceTree = "<group>"; };
-		FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchViewController.m; sourceTree = "<group>"; };
+		FC14783D1B1FBC37005048B0 /* CustomServingLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomServingLunchViewController.h; sourceTree = "<group>"; };
+		FC14783E1B1FBC37005048B0 /* CustomServingLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomServingLunchViewController.m; sourceTree = "<group>"; };
+		FC3C4E771AF96A41005D7197 /* ServingFixedLunchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingFixedLunchViewController.h; sourceTree = "<group>"; };
+		FC3C4E781AF96A41005D7197 /* ServingFixedLunchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingFixedLunchViewController.m; sourceTree = "<group>"; };
 		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchCell.h; sourceTree = "<group>"; };
 		FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchCell.m; sourceTree = "<group>"; };
 		FC599F551B0FEDB600989E1B /* BentoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BentoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1564,8 +1568,8 @@
 		FC14783B1B1FB99F005048B0 /* Fixed Lunch Mode */ = {
 			isa = PBXGroup;
 			children = (
-				FC3C4E771AF96A41005D7197 /* ServingLunchViewController.h */,
-				FC3C4E781AF96A41005D7197 /* ServingLunchViewController.m */,
+				FC3C4E771AF96A41005D7197 /* ServingFixedLunchViewController.h */,
+				FC3C4E781AF96A41005D7197 /* ServingFixedLunchViewController.m */,
 			);
 			name = "Fixed Lunch Mode";
 			sourceTree = "<group>";
@@ -1573,6 +1577,8 @@
 		FC14783C1B1FB9F1005048B0 /* Custom Lunch Mode */ = {
 			isa = PBXGroup;
 			children = (
+				FC14783D1B1FBC37005048B0 /* CustomServingLunchViewController.h */,
+				FC14783E1B1FBC37005048B0 /* CustomServingLunchViewController.m */,
 			);
 			name = "Custom Lunch Mode";
 			sourceTree = "<group>";
@@ -2440,7 +2446,7 @@
 				7216B7371AA64C7C0006FFE9 /* NSDictionary+RequestEncoding.m in Sources */,
 				7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */,
 				7216B73A1AA64C7C0006FFE9 /* MKAnnotationView+WebCache.m in Sources */,
-				FC3C4E7A1AF96A41005D7197 /* ServingLunchViewController.m in Sources */,
+				FC3C4E7A1AF96A41005D7197 /* ServingFixedLunchViewController.m in Sources */,
 				7216B73B1AA64C7C0006FFE9 /* FirstViewController.m in Sources */,
 				7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */,
 				7216B73E1AA64C7C0006FFE9 /* SDWebImageDecoder.m in Sources */,
@@ -2476,6 +2482,7 @@
 				7216B7581AA64C7C0006FFE9 /* OutOfDeliveryAddressViewController.m in Sources */,
 				7216B7591AA64C7C0006FFE9 /* IntroViewController.m in Sources */,
 				7216B75A1AA64C7C0006FFE9 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
+				FC1478401B1FBC37005048B0 /* CustomServingLunchViewController.m in Sources */,
 				7216B75B1AA64C7C0006FFE9 /* NSObject+RMCopyable.m in Sources */,
 				7216B75C1AA64C7C0006FFE9 /* AppStrings.m in Sources */,
 				7216B75D1AA64C7C0006FFE9 /* SoldOutViewController.m in Sources */,
@@ -2543,7 +2550,7 @@
 				722333D11A6F46DF006C2446 /* NSDictionary+RequestEncoding.m in Sources */,
 				7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */,
 				722333A71A6EADBD006C2446 /* MKAnnotationView+WebCache.m in Sources */,
-				FC3C4E791AF96A41005D7197 /* ServingLunchViewController.m in Sources */,
+				FC3C4E791AF96A41005D7197 /* ServingFixedLunchViewController.m in Sources */,
 				90BED0A81A5BD05C003DC872 /* FirstViewController.m in Sources */,
 				7223336B1A6D5847006C2446 /* BentoShop.m in Sources */,
 				722333AB1A6EADBD006C2446 /* SDWebImageDecoder.m in Sources */,
@@ -2579,6 +2586,7 @@
 				90D8F7CD1A5E252800D034CF /* OutOfDeliveryAddressViewController.m in Sources */,
 				7223336E1A6D66E8006C2446 /* IntroViewController.m in Sources */,
 				7223335F1A6D4058006C2446 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
+				FC14783F1B1FBC37005048B0 /* CustomServingLunchViewController.m in Sources */,
 				7286EB4D1A7D8BE800D03DCE /* NSObject+RMCopyable.m in Sources */,
 				722333781A6E0DFD006C2446 /* AppStrings.m in Sources */,
 				90D8F7DE1A5E30AD00D034CF /* SoldOutViewController.m in Sources */,

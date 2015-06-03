@@ -10,7 +10,7 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define BORDER_COLOR [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f]
 
-#import "ServingLunchViewController.h"
+#import "ServingFixedLunchViewController.h"
 #import "ServingLunchCell.h"
 
 #import "BWTitlePagerView.h"
@@ -41,13 +41,13 @@
 #import "JGProgressHUD.h"
 
 
-@interface ServingLunchViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface ServingFixedLunchViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic, retain) NSMutableArray *aryDishes;
 
 @end
 
-@implementation ServingLunchViewController
+@implementation ServingFixedLunchViewController
 {
     UIScrollView *scrollView;
     UITableView *myTableView;
