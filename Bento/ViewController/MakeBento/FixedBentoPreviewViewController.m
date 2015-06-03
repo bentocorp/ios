@@ -9,17 +9,17 @@
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-#import "ServingLunchBentoViewController.h"
+#import "FixedBentoPreviewViewController.h"
 #import "PreviewCollectionViewCell.h"
 #import "DataManager.h"
 #import "BentoShop.h"
 #import "JGProgressHUD.h"
 
-@interface ServingLunchBentoViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate>
+@interface FixedBentoPreviewViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate>
 
 @end
 
-@implementation ServingLunchBentoViewController
+@implementation FixedBentoPreviewViewController
 {
     UILabel *lblTitle;
     UICollectionView *cvDishes;

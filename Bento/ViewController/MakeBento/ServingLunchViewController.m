@@ -22,7 +22,7 @@
 #import "CompleteOrderViewController.h"
 
 #import "PreviewCollectionViewCell.h"
-#import "ServingLunchBentoViewController.h"
+#import "FixedBentoPreviewViewController.h"
 
 #import "MyAlertView.h"
 
@@ -572,7 +572,7 @@
 {
     UIButton *selectedButton = (UIButton *)sender;
     
-    ServingLunchBentoViewController *servingLunchBentoViewController = [[ServingLunchBentoViewController alloc] init];
+    FixedBentoPreviewViewController *servingLunchBentoViewController = [[FixedBentoPreviewViewController alloc] init];
     servingLunchBentoViewController.fromWhichVC = selectedButton.tag;
     
     NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
