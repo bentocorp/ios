@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <XCTest/XCTest.h>
 #import "Bento.h"
+#import "BentoShop.h"
 
 @interface BentoModelTests : XCTestCase
 
@@ -17,12 +18,58 @@
 @implementation BentoModelTests
 {
     Bento *bento;
+    NSArray *menuStatus;
+    NSArray *aryBentos;
 }
 
 - (void)setUp {
     [super setUp];
     
     bento = [[Bento alloc] init];
+    
+    // Mock
+    menuStatus = @[
+                    @{
+                        @"itemId": @"30",
+                        @"qty": @"0" // testing, result NO
+                        },
+                    @{
+                        @"itemId": @"38",
+                        @"qty": @"99"
+                        },
+                    @{
+                        @"itemId": @"41",
+                        @"qty": @"99"
+                        },
+                    @{
+                        @"itemId": @"43",
+                        @"qty": @"99" // testing, result YES
+                        },
+                    @{
+                        @"itemId": @"49",
+                        @"qty": @"99"
+                        },
+                    @{
+                        @"itemId": @"54",
+                        @"qty": @"99"
+                        }
+                    ];
+    
+    Bento *bento1 = [Bento new];
+    bento1.indexMainDish = 30;
+    bento1.indexSideDish1 = 38;
+    bento1.indexSideDish2 = 41;
+    bento1.indexSideDish3 = 43;
+    bento1.indexSideDish4 = 49;
+    
+    Bento *bento2 = [Bento new];
+    bento2.indexMainDish = 30;
+    bento2.indexSideDish1 = 38;
+    bento2.indexSideDish2 = 38;
+    bento2.indexSideDish3 = 43;
+    bento2.indexSideDish4 = 54;
+    
+    aryBentos = @[bento1, bento2];
 }
 
 - (void)tearDown {
@@ -92,58 +139,15 @@
 
 - (void)testCanAddDishYES
 {
-    // set argument to see if it can be added
-    NSInteger dishID = 43;
-    
-    // Mock
-    NSArray *menuStatus = @[
-                                @{
-                                    @"itemId": @"30",
-                                    @"qty": @"99"
-                                },
-                                @{
-                                    @"itemId": @"38",
-                                    @"qty": @"99"
-                                },
-                                @{
-                                    @"itemId": @"41",
-                                    @"qty": @"99"
-                                },
-                                @{
-                                    @"itemId": @"43",
-                                    @"qty": @"99" // right here
-                                },
-                                @{
-                                    @"itemId": @"49",
-                                    @"qty": @"99"
-                                },
-                                @{
-                                    @"itemId": @"54",
-                                    @"qty": @"99"
-                                }
-                           ];
-    
-    Bento *bento1 = [Bento new];
-    bento1.indexMainDish = 30;
-    bento1.indexSideDish1 = 38;
-    bento1.indexSideDish2 = 41;
-    bento1.indexSideDish3 = 43;
-    bento1.indexSideDish4 = 49;
-    
-    Bento *bento2 = [Bento new];
-    bento2.indexMainDish = 30;
-    bento2.indexSideDish1 = 38;
-    bento2.indexSideDish2 = 38;
-    bento2.indexSideDish3 = 43;
-    bento2.indexSideDish4 = 54;
-    
-    NSArray *aryBentos = @[bento1, bento2];
-    
     BOOL canAddDish;
+    
+    // set argument as 43, can we add 43?
+    NSInteger dishID = 43;
     
     /*----------------------------------------------*/
     
     NSInteger quantity = 0; // how many qty left?
+    
     for (NSDictionary *menuItem in menuStatus)
     {
         NSInteger itemID; // resets everytime
@@ -162,29 +166,28 @@
             break; // stop searching for qty once found match itemID and dishItem
         }
     }
-    
-    NSLog(@"QUANTITY: %ld", quantity);
 
     if (quantity == 0) // wtf?
         canAddDish = YES;
 
     // check to see how many of the dishID(from argument) already exists in cart
     NSInteger currentAmount = 0;
-    for (Bento *bento in aryBentos)
+    
+    for (Bento *bentoObject in aryBentos)
     {
-        if ([bento getMainDish] == dishID)
+        if ([bentoObject getMainDish] == dishID)
             currentAmount ++;
         
-        if ([bento getSideDish1] == dishID)
+        if ([bentoObject getSideDish1] == dishID)
             currentAmount ++;
         
-        if ([bento getSideDish2] == dishID)
+        if ([bentoObject getSideDish2] == dishID)
             currentAmount ++;
         
-        if ([bento getSideDish3] == dishID)
+        if ([bentoObject getSideDish3] == dishID)
             currentAmount ++;
         
-        if ([bento getSideDish4] == dishID)
+        if ([bentoObject getSideDish4] == dishID)
             currentAmount ++;
     }
     
@@ -193,58 +196,15 @@
 
 - (void)testCanAddDishNO
 {
+    BOOL canAddDish;
+    
     // set argument to see if it can be added
     NSInteger dishID = 30;
-    
-    // Mock
-    NSArray *menuStatus = @[
-                            @{
-                                @"itemId": @"30",
-                                @"qty": @"0" // checking this
-                                },
-                            @{
-                                @"itemId": @"38",
-                                @"qty": @"99"
-                                },
-                            @{
-                                @"itemId": @"41",
-                                @"qty": @"99"
-                                },
-                            @{
-                                @"itemId": @"43",
-                                @"qty": @"99"
-                                },
-                            @{
-                                @"itemId": @"49",
-                                @"qty": @"99"
-                                },
-                            @{
-                                @"itemId": @"54",
-                                @"qty": @"99"
-                                }
-                            ];
-    
-    Bento *bento1 = [Bento new];
-    bento1.indexMainDish = 30;
-    bento1.indexSideDish1 = 38;
-    bento1.indexSideDish2 = 41;
-    bento1.indexSideDish3 = 43;
-    bento1.indexSideDish4 = 49;
-    
-    Bento *bento2 = [Bento new];
-    bento2.indexMainDish = 30;
-    bento2.indexSideDish1 = 38;
-    bento2.indexSideDish2 = 38;
-    bento2.indexSideDish3 = 43;
-    bento2.indexSideDish4 = 54;
-    
-    NSArray *aryBentos = @[bento1, bento2];
-    
-    BOOL canAddDish;
     
     /*----------------------------------------------*/
     
     NSInteger quantity = 0; // how many qty left?
+    
     for (NSDictionary *menuItem in menuStatus)
     {
         NSInteger itemID; // resets everytime
@@ -264,69 +224,68 @@
         }
     }
     
-    NSLog(@"QUANTITY: %ld", quantity);
-    
     if (quantity == 0) // wtf?
         canAddDish = YES;
     
     // check to see how many of the dishID(from argument) already exists in cart
     NSInteger currentAmount = 0;
-    for (Bento *bento in aryBentos)
+    
+    for (Bento *bentoObject in aryBentos)
     {
-        if ([bento getMainDish] == dishID)
+        if ([bentoObject getMainDish] == dishID)
             currentAmount ++;
         
-        if ([bento getSideDish1] == dishID)
+        if ([bentoObject getSideDish1] == dishID)
             currentAmount ++;
         
-        if ([bento getSideDish2] == dishID)
+        if ([bentoObject getSideDish2] == dishID)
             currentAmount ++;
         
-        if ([bento getSideDish3] == dishID)
+        if ([bentoObject getSideDish3] == dishID)
             currentAmount ++;
         
-        if ([bento getSideDish4] == dishID)
+        if ([bentoObject getSideDish4] == dishID)
             currentAmount ++;
     }
     
     XCTAssert(currentAmount < quantity == NO, @"Can add dish");
 }
 
-- (void)testCanAddSideDishYES
-{
-    //
-    NSInteger sideDishID = 23;
-    
-    NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:sideDishID];
-    if (dishInfo == nil)
-        return NO;
-    
-    id object = [dishInfo objectForKey:@"max_per_order"];
-    if (object == [NSNull null])
-        return YES;
-    
-    NSInteger maxPerOrder = [object integerValue];
-    if (self.indexSideDish1 == sideDishID)
-        maxPerOrder --;
-    
-    if (self.indexSideDish2 == sideDishID)
-        maxPerOrder --;
-    
-    if (self.indexSideDish3 == sideDishID)
-        maxPerOrder --;
-    
-    if (self.indexSideDish4 == sideDishID)
-        maxPerOrder --;
-    
-    if (maxPerOrder <= 0)
-        return NO;
-    
-    return YES;
-}
-
-- (void)testCanAddSideDishNO
-{
-    
-}
+//- (void)testCanAddSideDishYES
+//{
+//    // argument
+//    NSInteger sideDishID = 23;
+//    
+//    NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:sideDishID];
+//    if (dishInfo == nil)
+//        return NO;
+//    
+//    id object = [dishInfo objectForKey:@"max_per_order"];
+//    if (object == [NSNull null])
+//        return YES;
+//    
+//    NSInteger maxPerOrder = [object integerValue];
+//    if (self.indexSideDish1 == sideDishID)
+//        maxPerOrder --;
+//    
+//    if (self.indexSideDish2 == sideDishID)
+//        maxPerOrder --;
+//    
+//    if (self.indexSideDish3 == sideDishID)
+//        maxPerOrder --;
+//    
+//    if (self.indexSideDish4 == sideDishID)
+//        maxPerOrder --;
+//    
+//    if (maxPerOrder <= 0)
+//        return NO;
+//    
+//    return YES;
+//}
+//
+//- (void)testCanAddSideDishNO
+//{
+//    
+//}
 
 @end
