@@ -13,6 +13,7 @@
 #import "PreviewCollectionViewCell.h"
 #import "DataManager.h"
 #import "BentoShop.h"
+#import "JGProgressHUD.h"
 
 @interface ServingLunchBentoViewController () <UICollectionViewDelegateFlowLayout, UICollectionViewDataSource, UICollectionViewDelegate>
 
@@ -25,10 +26,15 @@
     NSIndexPath *_selectedPath;
     NSInteger hour;
     int weekday;
+    JGProgressHUD *loadingHUD;
+    
+    BOOL isThereConnection;
 }
     
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    isThereConnection = YES;
     
     self.view.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     
@@ -101,6 +107,11 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
 }
 
 - (void) viewWillDisappear:(BOOL)animated
@@ -112,10 +123,53 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
-        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
-        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+    if (isThereConnection)
+    {
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+    }
+}
+
+- (void)noConnection
+{
+    isThereConnection = NO;
+    
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection
+{
+    isThereConnection = YES;
+    
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+}
+
+- (void)preloadCheckCurrentMode
+{
+    // so date string can refresh first
+    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
+}
+
+- (void)checkCurrentMode
+{
+    // if mode changed
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]
+          isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
+    {
+        // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
 }
 
 - (void)didReceiveMemoryWarning {
