@@ -51,6 +51,65 @@
 @end
 
 @implementation ServingCustomLunchViewController
+{
+    UIScrollView *scrollView;
+    
+    UILabel *lblBanner;
+    UILabel *dinnerTitleLabel;
+    UILabel *lblBadge;
+    UIButton *btnCart;
+    
+    UIView *viewDishs;
+    
+    UIView *viewMainEntree;
+    UIView *viewSide1;
+    UIView *viewSide2;
+    UIView *viewSide3;
+    UIView *viewSide4;
+    
+    UIImageView *ivMainDish;
+    UIImageView *ivSideDish1;
+    UIImageView *ivSideDish2;
+    UIImageView *ivSideDish3;
+    UIImageView *ivSideDish4;
+    
+    UILabel *lblMainDish;
+    UILabel *lblSideDish1;
+    UILabel *lblSideDish2;
+    UILabel *lblSideDish3;
+    UILabel *lblSideDish4;
+    
+    UIButton *btnMainDish;
+    UIButton *btnSideDish1;
+    UIButton *btnSideDish2;
+    UIButton *btnSideDish3;
+    UIButton *btnSideDish4;
+    
+    UIImageView *ivBannerMainDish;
+    UIImageView *ivBannerSideDish1;
+    UIImageView *ivBannerSideDish2;
+    UIImageView *ivBannerSideDish3;
+    UIImageView *ivBannerSideDish4;
+    
+    UIButton *btnAddAnotherBento;
+    UIButton *btnState;
+    
+    // Upcoming Lunch
+    UILabel *lblTitle;
+    UICollectionView *cvDishes;
+    
+    NSIndexPath *_selectedPath;
+    NSInteger hour;
+    int weekday;
+    
+    BWTitlePagerView *pagingTitleView;
+    
+    JGProgressHUD *loadingHUD;
+    BOOL isThereConnection;
+    
+    NSString *originalDateString;
+    NSString *newDateString;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
