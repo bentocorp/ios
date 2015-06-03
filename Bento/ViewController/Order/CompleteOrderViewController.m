@@ -8,8 +8,8 @@
 
 #import "CompleteOrderViewController.h"
 
-#import "ServingDinnerViewController.h"
-#import "ServingFixedLunchViewController.h"
+#import "CustomBentoViewController.h"
+#import "FixedBentoViewController.h"
 
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
@@ -566,10 +566,10 @@
     for (UIViewController *vc in viewControllers) {
         
         // dinner or lunch vc
-        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingFixedLunchViewController class]])
+        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]])
         {
             // if dinner, add new bento
-            if ([vc isKindOfClass:[ServingDinnerViewController class]])
+            if ([vc isKindOfClass:[CustomBentoViewController class]])
             {
                 [[BentoShop sharedInstance] addNewBento];
             }
@@ -921,9 +921,9 @@
     
     for (UIViewController *vc in viewControllers)
     {    
-        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingFixedLunchViewController class]])
+        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]])
         {
-            if ([vc isKindOfClass:[ServingDinnerViewController class]])
+            if ([vc isKindOfClass:[CustomBentoViewController class]])
             {
                 [[BentoShop sharedInstance] setCurrentBento:curBento];
             }

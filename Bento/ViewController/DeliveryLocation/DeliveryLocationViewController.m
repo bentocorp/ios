@@ -10,8 +10,8 @@
 
 #import "AppDelegate.h"
 
-#import "ServingDinnerViewController.h"
-#import "ServingFixedLunchViewController.h"
+#import "CustomBentoViewController.h"
+#import "FixedBentoViewController.h"
 
 #import "CompleteOrderViewController.h"
 #import "OutOfDeliveryAddressViewController.h"
@@ -306,7 +306,7 @@
     for (UIViewController *vc in viewControllers)
     {
         // serving dinner vc || serving lunch vc
-        if ([vc isKindOfClass:[ServingDinnerViewController class]] || [vc isKindOfClass:[ServingFixedLunchViewController class]])
+        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]])
         {
             [self.navigationController popToViewController:vc animated:YES];
             
@@ -322,14 +322,14 @@
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)
     {
-        ServingFixedLunchViewController *servingLunchViewController = [[ServingFixedLunchViewController alloc] init];
+        FixedBentoViewController *servingLunchViewController = [[FixedBentoViewController alloc] init];
         [self.navigationController popToViewController:servingLunchViewController animated:YES];
         
     // dinner opening - 11:59pm
     }
     else if (currentTime >= dinnerTime && currentTime < 24)
     {
-        ServingDinnerViewController *servingDinnerViewController = [[ServingDinnerViewController alloc] init];
+        CustomBentoViewController *servingDinnerViewController = [[CustomBentoViewController alloc] init];
         [self.navigationController popToViewController:servingDinnerViewController animated:YES];
     }
 }

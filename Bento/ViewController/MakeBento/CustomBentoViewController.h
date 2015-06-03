@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface ServingDinnerViewController : BaseViewController
+@interface CustomBentoViewController : BaseViewController
 
 @end

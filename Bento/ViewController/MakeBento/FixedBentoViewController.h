@@ -9,7 +9,7 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
-@interface ServingFixedLunchViewController : BaseViewController
+@interface FixedBentoViewController : BaseViewController
 
 @property (nonatomic) BOOL networkError;
 

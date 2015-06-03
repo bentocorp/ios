@@ -10,7 +10,7 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define BORDER_COLOR [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f]
 
-#import "ServingDinnerViewController.h"
+#import "CustomBentoViewController.h"
 
 #import "BWTitlePagerView.h"
 
@@ -45,11 +45,11 @@
 #import <QuartzCore/QuartzCore.h>
 #import "JGProgressHUD.h"
 
-@interface ServingDinnerViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface CustomBentoViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
 
-@implementation ServingDinnerViewController
+@implementation CustomBentoViewController
 {
     UIScrollView *scrollView;
     
