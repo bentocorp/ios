@@ -41,6 +41,5 @@
 
 // Testing
 - (BOOL)canAddSideDish:(NSInteger)sideDishID;
-- (BOOL)canAddDish:(NSInteger)dishID;
 
 @end
