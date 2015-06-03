@@ -404,13 +404,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento Tests/BentoModelTests.m"
-            timestampString = "455054940.286411"
+            timestampString = "455056508.765908"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "260"
-            endingLineNumber = "260"
-            landmarkName = "-testCanAddSideDishYES"
+            startingLineNumber = "255"
+            endingLineNumber = "255"
+            landmarkName = "-testCanAddDishNO"
             landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[BentoModelTests testCanAddDishNO]"
+                  moduleName = "BentoTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/JosephLauSF/_github/Bento/Bento%20Tests/BentoModelTests.m"
+                  timestampString = "455056516.981356"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "255"
+                  endingLineNumber = "255"
+                  offsetFromSymbolStart = "1804">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[BentoModelTests testCanAddDishNO]"
+                  moduleName = "BentoTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/JosephLauSF/_github/Bento/Bento%20Tests/BentoModelTests.m"
+                  timestampString = "455056516.981746"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "255"
+                  endingLineNumber = "255"
+                  offsetFromSymbolStart = "2238">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[BentoModelTests testCanAddDishNO]"
+                  moduleName = "BentoTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/JosephLauSF/_github/Bento/Bento%20Tests/BentoModelTests.m"
+                  timestampString = "455056516.982089"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "255"
+                  endingLineNumber = "255"
+                  offsetFromSymbolStart = "2285">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "-[BentoModelTests testCanAddDishNO]"
+                  moduleName = "BentoTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/JosephLauSF/_github/Bento/Bento%20Tests/BentoModelTests.m"
+                  timestampString = "455056516.982737"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "255"
+                  endingLineNumber = "255"
+                  offsetFromSymbolStart = "2422">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
