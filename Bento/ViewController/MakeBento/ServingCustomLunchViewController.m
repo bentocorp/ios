@@ -155,14 +155,14 @@
     
     /*---BW Title Pager View---*/
     
-    NSString *nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    NSString *nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[@"Now Serving Dinner", nextMenuTitle]];
+    [pagingTitleView addObjects:@[@"Now Serving Lunch", nextMenuTitle]];
     [navigationBarView addSubview:pagingTitleView];
     
     /*---Line Separator---*/
