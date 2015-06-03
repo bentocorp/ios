@@ -55,6 +55,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"ORIGINAL DATE: %@", originalDateString);
 
     self.lblTitle.text = @"Delivery Zone"; // hardcoded instead of [[AppStrings sharedInstance] getString:OUTOFAREA_TITLE]
     self.lblMiddleTitle.text = [[AppStrings sharedInstance] getString:OUTOFAREA_MIDDLE_TITLE];

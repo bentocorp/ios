@@ -75,6 +75,9 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
+    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"ORIGINAL DATE: %@", originalDateString);
+    
     [SVGeocoder setGoogleMapsAPIKey:GOOGLE_API_KEY];
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:LOCATION_TITLE];
