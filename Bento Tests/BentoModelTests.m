@@ -191,7 +191,9 @@
             currentAmount ++;
     }
     
-    XCTAssert(currentAmount < quantity == YES, @"Can't add dish");
+    canAddDish = currentAmount < quantity;
+    
+    XCTAssert(canAddDish, @"Can't add dish");
 }
 
 - (void)testCanAddDishNO
@@ -248,44 +250,63 @@
             currentAmount ++;
     }
     
-    XCTAssert(currentAmount < quantity == NO, @"Can add dish");
+    canAddDish = currentAmount < quantity == NO;
+    
+    XCTAssert(canAddDish, @"Can add dish");
 }
 
-//- (void)testCanAddSideDishYES
-//{
-//    // argument
-//    NSInteger sideDishID = 23;
-//    
-//    NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:sideDishID];
-//    if (dishInfo == nil)
-//        return NO;
-//    
-//    id object = [dishInfo objectForKey:@"max_per_order"];
-//    if (object == [NSNull null])
-//        return YES;
-//    
-//    NSInteger maxPerOrder = [object integerValue];
-//    if (self.indexSideDish1 == sideDishID)
-//        maxPerOrder --;
-//    
-//    if (self.indexSideDish2 == sideDishID)
-//        maxPerOrder --;
-//    
-//    if (self.indexSideDish3 == sideDishID)
-//        maxPerOrder --;
-//    
-//    if (self.indexSideDish4 == sideDishID)
-//        maxPerOrder --;
-//    
-//    if (maxPerOrder <= 0)
-//        return NO;
-//    
-//    return YES;
-//}
-//
-//- (void)testCanAddSideDishNO
-//{
-//    
-//}
+- (void)testCanAddSideDishYES
+{
+    BOOL canAddSideDish;
+    
+    // argument
+    NSInteger sideDishID = 54;
+    
+    /*----------------------------------------------*/
+    
+    // mock
+    NSDictionary *dishInfo = @{
+                                @"itemId": @"54",
+                                @"name": @"Test Item Name",
+                                @"description": @"Test description",
+                                @"type": @"main",
+                                @"image1": @"https://s3-us-west-1.amazonaws.com/bentonow-assets/menu/041515/hawaiianpoke.jpg",
+                                @"max_per_order": @"0" // testing
+                             };
+    
+    if (dishInfo == nil)
+        canAddSideDish = NO;
+    
+    id object = [dishInfo objectForKey:@"max_per_order"];
+    if (object == [NSNull null])
+        canAddSideDish = YES;
+    
+    Bento *bentoObject = aryBentos[1];
+    
+    NSInteger maxPerOrder = [object integerValue];
+    if (bentoObject.indexSideDish1 == sideDishID)
+        maxPerOrder --;
+    
+    if (bentoObject.indexSideDish2 == sideDishID)
+        maxPerOrder --;
+    
+    if (bentoObject.indexSideDish3 == sideDishID)
+        maxPerOrder --;
+    
+    if (bentoObject.indexSideDish4 == sideDishID)
+        maxPerOrder --;
+    
+    if (maxPerOrder <= 0)
+        canAddSideDish = NO;
+    
+    canAddSideDish = YES;
+    
+    XCTAssert(canAddSideDish, @"Can't add side dish");
+}
+
+- (void)testCanAddSideDishNO
+{
+    
+}
 
 @end
