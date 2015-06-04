@@ -805,7 +805,7 @@
     if (section == 0)
     {
         // get dinner main preview
-        NSArray *aryMainDishes = aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"tonightDinnerPreview"];
+        NSArray *aryMainDishes = aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
         
         if (aryMainDishes == nil)
             return 0;
@@ -815,7 +815,7 @@
     else if (section == 1)
     {
         // get dinner side preview
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"tonightDinnerPreview"];
+        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
         
         if (arySideDishes == nil)
             return 0;
@@ -844,14 +844,24 @@
     
     if (indexPath.section == 0) // Main Dish
     {
-        NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"tonightDinnerPreview"];
+        NSArray *aryMainDishes;
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
         
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
     }
     else if (indexPath.section == 1) // Side Dish
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"tonightDinnerPreview"];
+        NSArray *arySideDishes;
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];

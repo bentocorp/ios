@@ -843,7 +843,7 @@ static BentoShop *_shareInstance;
         NSData *data = [defaults objectForKey:@"lunchMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
-    else if ([whatNeedsMain isEqualToString:@"tonightDinnerPreview"] || [whatNeedsMain isEqualToString:@"todayDinner"])
+    else if ([whatNeedsMain isEqualToString:@"todayDinner"])
     {   
         NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -872,7 +872,7 @@ static BentoShop *_shareInstance;
         NSData *data = [defaults objectForKey:@"lunchMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
-    else if ([whatNeedsSides isEqualToString:@"tonightDinnerPreview"] || [whatNeedsSides isEqualToString:@"todayDinner"])
+    else if ([whatNeedsSides isEqualToString:@"todayDinner"])
     {
         NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
