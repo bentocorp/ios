@@ -905,7 +905,6 @@
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
             [currentBento completeBento:@"todayDinner"];
     }
-    
      
     [[BentoShop sharedInstance] addNewBento];
     
@@ -1122,7 +1121,12 @@
     {
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted])
-            [currentBento completeBento:@"todayDinner"];
+        {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+                [currentBento completeBento:@"todayLunch"];
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+                [currentBento completeBento:@"todayDinner"];
+        }
         
         [self gotoOrderScreen];
     }
