@@ -310,21 +310,22 @@
 /*--------------Determine whether to show Lunch or Dinner mode--------------*/
     
     float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-//    float lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
     float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+    
+    NSString *menuType = [[BentoShop sharedInstance] getMenuType];
     
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)
     {
-        FixedBentoViewController *servingLunchViewController = [[FixedBentoViewController alloc] init];
-        [self.navigationController pushViewController:servingLunchViewController animated:needsAnimation];
+        FixedBentoViewController *fixedBentoViewController = [[FixedBentoViewController alloc] init];
+        [self.navigationController pushViewController:fixedBentoViewController animated:needsAnimation];
     }
     
     // dinner opening - 11:59pm
     else if (currentTime >= dinnerTime && currentTime < 24)
     {
-        CustomBentoViewController *servingDinnerViewController = [[CustomBentoViewController alloc] init];
-        [self.navigationController pushViewController:servingDinnerViewController animated:needsAnimation];
+        CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
+        [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
     }
 }
 

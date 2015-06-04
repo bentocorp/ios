@@ -329,30 +329,11 @@ static BentoShop *_shareInstance;
     [formatter setDateFormat:@"yyyyMMdd"];
     NSString *strDate = [formatter stringFromDate:currentDate];
     
-//    if (currentTime < 21) // before 9pm, get menu
-//    {
-//        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
-//        
-//        NSError *error = nil;
-//        NSInteger statusCode = 0;
-//        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
-//        
-//        // if today menu not exist, get next menu
-//        if (statusCode == 404)
-//        {
-//            strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
-//            self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
-//        }
-//    }
-//    else // 9pm and after
-//    {
-        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
-        
-        NSError *error = nil;
-        NSInteger statusCode = 0;
-        self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
+    NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
     
-//    }
+    NSError *error = nil;
+    NSInteger statusCode = 0;
+    self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
 
     // set menuInfo and menuItems to persistent storage
     [defaults setObject:self.menuNext[@"lunch"][@"Menu"] forKey:@"nextLunchMenuInfo"];
@@ -672,6 +653,12 @@ static BentoShop *_shareInstance;
     
     NSLog(@"getNextMenuDateString - %@", strReturn);
     return strReturn;
+}
+
+- (NSString *)getMenuType
+{
+    NSLog(@"MEAL TYPE: %@", [self getMenuInfo][@"menu_type"]);
+    return [self getMenuInfo][@"menu_type"];
 }
 
 - (BOOL)isClosed
