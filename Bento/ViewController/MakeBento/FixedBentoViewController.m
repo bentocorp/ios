@@ -783,14 +783,12 @@
     }
 }
 
-/*------------------------------------------Tomorrow Lunch---------------------------------------------*/
+/*------------------------------------------Next Menu Preview---------------------------------------------*/
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
     if (isThereConnection)
-    {
         [self updateUI];
-    }
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -808,9 +806,9 @@
         NSArray *aryMainDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
             
         if (aryMainDishes == nil)
             return 0;
@@ -823,9 +821,9 @@
         NSArray *arySideDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
         
         if (arySideDishes == nil)
             return 0;
@@ -857,9 +855,9 @@
         NSArray *aryMainDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
         
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
@@ -869,9 +867,9 @@
         NSArray *arySideDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
