@@ -149,7 +149,7 @@
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[@"Now Serving Lunch", @"Tonight's Dinner Menu"]];
+    [pagingTitleView addObjects:@[currentMenuTitle, nextMenuTitle]];
     [navigationBarView addSubview:pagingTitleView];
     
 /*---Line Separator---*/
@@ -414,7 +414,12 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+        return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+        return [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] count];
+    
+    return 0;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -425,7 +430,13 @@
         servingLunchCell = [[ServingLunchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+    NSArray *aryMainDishes;
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+    
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
     [servingLunchCell setDishInfo:dishInfo];
     
@@ -589,7 +600,13 @@
     FixedBentoPreviewViewController *servingLunchBentoViewController = [[FixedBentoPreviewViewController alloc] init];
     servingLunchBentoViewController.fromWhichVC = selectedButton.tag;
     
-    NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+    NSArray *aryMainDishes;
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+    
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
     servingLunchBentoViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];
     
@@ -610,8 +627,19 @@
     /*---Add items to empty bento---*/
     UIButton *selectedButton = (UIButton *)sender;
     
-    NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-    NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+    NSArray *aryMainDishes;
+    NSArray *arySideDishes;
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+    {
+        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+        arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+    }
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+    {
+        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+        arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+    }
     
     // Add main to Bento
     NSDictionary *mainDishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
@@ -642,7 +670,12 @@
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento != nil && ![currentBento isCompleted])
-        [currentBento completeBento:@"todayLunch"];
+    {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+            [currentBento completeBento:@"todayLunch"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+            [currentBento completeBento:@"todayDinner"];
+    }
     
     [[BentoShop sharedInstance] addNewBento];
     
@@ -739,7 +772,12 @@
     {
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted])
-            [currentBento completeBento:@"todayLunch"];
+        {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+                [currentBento completeBento:@"todayLunch"];
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+                [currentBento completeBento:@"todayDinner"];
+        }
         
         [self gotoOrderScreen];
     }
