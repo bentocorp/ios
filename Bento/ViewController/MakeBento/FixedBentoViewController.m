@@ -90,15 +90,15 @@
     
     ////////*might not need this*///////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
     
-    NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
-        [[BentoShop sharedInstance] resetBentoArray];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"currentMode"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSLog(@"SET CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
+//    NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
+//    
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+//        [[BentoShop sharedInstance] resetBentoArray];
+//    
+//    [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"currentMode"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+//    
+//    NSLog(@"SET CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
@@ -133,12 +133,12 @@
     NSString *currentMenuTitle;
     NSString *nextMenuTitle;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
     {
         currentMenuTitle = @"Now Serving Lunch";
         nextMenuTitle = @"Tonight's Dinner Menu";
     }
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
     {
         currentMenuTitle = @"Now Serving Dinner";
         nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
@@ -414,9 +414,9 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
         return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
         return [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] count];
     
     return 0;
@@ -432,9 +432,9 @@
     
     NSArray *aryMainDishes;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
         aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
         aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
     
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
@@ -602,9 +602,9 @@
     
     NSArray *aryMainDishes;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
         aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
         aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
     
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
@@ -630,12 +630,12 @@
     NSArray *aryMainDishes;
     NSArray *arySideDishes;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
     {
         aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
         arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
     }
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
     {
         aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
         arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
@@ -671,9 +671,9 @@
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento != nil && ![currentBento isCompleted])
     {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
             [currentBento completeBento:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             [currentBento completeBento:@"todayDinner"];
     }
     
@@ -773,9 +773,9 @@
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted])
         {
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
                 [currentBento completeBento:@"todayLunch"];
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
                 [currentBento completeBento:@"todayDinner"];
         }
         
@@ -805,9 +805,9 @@
         // get dinner main preview
         NSArray *aryMainDishes;
         
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
             
         if (aryMainDishes == nil)
@@ -820,9 +820,9 @@
         // get dinner side preview
         NSArray *arySideDishes;
         
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
         
         if (arySideDishes == nil)
@@ -854,9 +854,9 @@
     {
         NSArray *aryMainDishes;
         
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
         
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
@@ -866,9 +866,9 @@
     {
         NSArray *arySideDishes;
         
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
