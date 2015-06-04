@@ -15,6 +15,7 @@
 #import "AppStrings.h"
 #import "WebManager.h"
 #import "DataManager.h"
+#import "BentoShop.h"
 
 #import <MessageUI/MessageUI.h>
 
@@ -90,6 +91,8 @@
     {
         // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
         [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        
+        [[BentoShop sharedInstance] resetBentoArray];
         
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];

@@ -21,6 +21,8 @@
 #import <Social/Social.h>
 #import "AppStrings.h"
 
+#import "BentoShop.h"
+
 @interface SignedInSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 
 @end
@@ -251,6 +253,8 @@
     {
         // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
         [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        
+        [[BentoShop sharedInstance] resetBentoArray];
         
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];

@@ -19,6 +19,7 @@
 #import "WebManager.h"
 #import "DataManager.h"
 #import "FacebookManager.h"
+#import "BentoShop.h"
 
 #import "SignedOutSettingsViewController.h"
 
@@ -132,6 +133,8 @@
     {
         // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
         [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        
+        [[BentoShop sharedInstance] resetBentoArray];
         
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
