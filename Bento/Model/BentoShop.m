@@ -840,15 +840,11 @@ static BentoShop *_shareInstance;
     
     if ([whatNeedsMain isEqualToString:@"todayLunch"])
     {
-//        menuItems = [defaults objectForKey:@"lunchMenuItems"];
-        
         NSData *data = [defaults objectForKey:@"lunchMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     else if ([whatNeedsMain isEqualToString:@"tonightDinnerPreview"] || [whatNeedsMain isEqualToString:@"todayDinner"])
-    {
-//        menuItems = [defaults objectForKey:@"dinnerMenuItems"];
-        
+    {   
         NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
