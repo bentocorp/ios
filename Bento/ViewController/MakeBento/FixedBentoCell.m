@@ -10,11 +10,11 @@
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 #define BORDER_COLOR [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f]
 
-#import "ServingLunchCell.h"
+#import "FixedBentoCell.h"
 #import "CAGradientLayer+SJSGradients.h"
 #import "UIImageView+WebCache.h"
 
-@implementation ServingLunchCell
+@implementation FixedBentoCell
 
 - (void)awakeFromNib {
     // Initialization code

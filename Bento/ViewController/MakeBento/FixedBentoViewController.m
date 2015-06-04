@@ -11,7 +11,7 @@
 #define BORDER_COLOR [UIColor colorWithRed:223.0f / 255.0f green:226.0f / 255.0f blue:226.0f / 255.0f alpha:1.0f]
 
 #import "FixedBentoViewController.h"
-#import "ServingLunchCell.h"
+#import "FixedBentoCell.h"
 
 #import "BWTitlePagerView.h"
 
@@ -69,7 +69,7 @@
     
     BWTitlePagerView *pagingTitleView;
     
-    ServingLunchCell *servingLunchCell;
+    FixedBentoCell *servingLunchCell;
     
     CSAnimationView *animationView;
     
@@ -424,10 +424,10 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    servingLunchCell = (ServingLunchCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    servingLunchCell = (FixedBentoCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     if (servingLunchCell == nil) {
-        servingLunchCell = [[ServingLunchCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        servingLunchCell = [[FixedBentoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
     NSArray *aryMainDishes;
@@ -597,8 +597,8 @@
 {
     UIButton *selectedButton = (UIButton *)sender;
     
-    FixedBentoPreviewViewController *servingLunchBentoViewController = [[FixedBentoPreviewViewController alloc] init];
-    servingLunchBentoViewController.fromWhichVC = selectedButton.tag;
+    FixedBentoPreviewViewController *fixedBentoPreviewViewController = [[FixedBentoPreviewViewController alloc] init];
+    fixedBentoPreviewViewController.fromWhichVC = selectedButton.tag;
     
     NSArray *aryMainDishes;
     
@@ -608,9 +608,9 @@
         aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
     
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
-    servingLunchBentoViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];
+    fixedBentoPreviewViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];
     
-    [self.navigationController pushViewController:servingLunchBentoViewController animated:YES];
+    [self.navigationController pushViewController:fixedBentoPreviewViewController animated:YES];
 }
 
 - (void)onAddBentoHighlight:(id)sender

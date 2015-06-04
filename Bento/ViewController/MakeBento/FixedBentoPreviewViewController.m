@@ -181,7 +181,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-/*------------------------------------------Tomorrow Lunch---------------------------------------------*/
+///////////
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
@@ -227,14 +227,24 @@
     
     if (indexPath.section == 0) // Main Dish
     {
-        NSArray *aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+        NSArray *aryMainDishes;
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
         
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:self.fromWhichVC];
         [myCell setDishInfo:dishInfo];
     }
     else if (indexPath.section == 1) // Side Dish
     {
-        NSArray *arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+        NSArray *arySideDishes;
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];

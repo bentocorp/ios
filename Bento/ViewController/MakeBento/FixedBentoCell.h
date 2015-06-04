@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ServingLunchCell : UITableViewCell
+@interface FixedBentoCell : UITableViewCell
 
 @property (nonatomic) UIView *viewDish;
 

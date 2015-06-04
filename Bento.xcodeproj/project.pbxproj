@@ -327,8 +327,8 @@
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
-		FC3C4E7D1AF96B42005D7197 /* ServingLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */; };
-		FC3C4E7E1AF96B42005D7197 /* ServingLunchCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */; };
+		FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
+		FC3C4E7E1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
 		FC599F5A1B0FEDB600989E1B /* Bento_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC599F591B0FEDB600989E1B /* Bento_Tests.m */; };
 		FC72297B1B16905700C9A9AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
 		FC72297C1B16905700C9A9AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
@@ -792,8 +792,8 @@
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
 		FC3C4E771AF96A41005D7197 /* FixedBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoViewController.h; sourceTree = "<group>"; };
 		FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoViewController.m; sourceTree = "<group>"; };
-		FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServingLunchCell.h; sourceTree = "<group>"; };
-		FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServingLunchCell.m; sourceTree = "<group>"; };
+		FC3C4E7B1AF96B42005D7197 /* FixedBentoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoCell.h; sourceTree = "<group>"; };
+		FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoCell.m; sourceTree = "<group>"; };
 		FC599F551B0FEDB600989E1B /* BentoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BentoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC599F581B0FEDB600989E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC599F591B0FEDB600989E1B /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
@@ -1509,7 +1509,7 @@
 				FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */,
 				FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */,
 				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
-				FC08CC1E1B0AA361008D0A84 /* Lunch Cell */,
+				FC08CC1E1B0AA361008D0A84 /* Fixed Menu Cell */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1542,13 +1542,13 @@
 			path = BWTitlePagerView;
 			sourceTree = "<group>";
 		};
-		FC08CC1E1B0AA361008D0A84 /* Lunch Cell */ = {
+		FC08CC1E1B0AA361008D0A84 /* Fixed Menu Cell */ = {
 			isa = PBXGroup;
 			children = (
-				FC3C4E7B1AF96B42005D7197 /* ServingLunchCell.h */,
-				FC3C4E7C1AF96B42005D7197 /* ServingLunchCell.m */,
+				FC3C4E7B1AF96B42005D7197 /* FixedBentoCell.h */,
+				FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */,
 			);
-			name = "Lunch Cell";
+			name = "Fixed Menu Cell";
 			path = ../ViewController/MakeBento;
 			sourceTree = "<group>";
 		};
@@ -2400,7 +2400,7 @@
 				7216B7281AA64C7C0006FFE9 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				7216B7291AA64C7C0006FFE9 /* SDWebImageCompat.m in Sources */,
 				7216B72A1AA64C7C0006FFE9 /* UIImage+MultiFormat.m in Sources */,
-				FC3C4E7E1AF96B42005D7197 /* ServingLunchCell.m in Sources */,
+				FC3C4E7E1AF96B42005D7197 /* FixedBentoCell.m in Sources */,
 				7216B72B1AA64C7C0006FFE9 /* EnterCreditCardViewController.m in Sources */,
 				7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */,
 				7216B72D1AA64C7C0006FFE9 /* UIImage+WebP.m in Sources */,
@@ -2503,7 +2503,7 @@
 				722333D31A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				722333AA1A6EADBD006C2446 /* SDWebImageCompat.m in Sources */,
 				722333B21A6EADBD006C2446 /* UIImage+MultiFormat.m in Sources */,
-				FC3C4E7D1AF96B42005D7197 /* ServingLunchCell.m in Sources */,
+				FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */,
 				90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */,
 				722333611A6D4058006C2446 /* JGProgressHUDIndicatorView.m in Sources */,
 				722333B31A6EADBD006C2446 /* UIImage+WebP.m in Sources */,

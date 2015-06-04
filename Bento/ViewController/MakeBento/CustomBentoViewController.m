@@ -25,7 +25,7 @@
 #import "SignedInSettingsViewController.h"
 #import "SignedOutSettingsViewController.h"
 
-#import "ServingLunchCell.h"
+#import "FixedBentoCell.h"
 
 #import "PreviewCollectionViewCell.h"
 
