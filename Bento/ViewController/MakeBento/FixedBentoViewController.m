@@ -130,6 +130,20 @@
     
 /*---BW Title Pager View---*/
     
+    NSString *currentMenuTitle;
+    NSString *nextMenuTitle;
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"])
+    {
+        currentMenuTitle = @"Now Serving Lunch";
+        nextMenuTitle = @"Tonight's Dinner Menu";
+    }
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
+    {
+        currentMenuTitle = @"Now Serving Dinner";
+        nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    }
+    
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
