@@ -59,7 +59,15 @@
     [super viewWillAppear:animated];
     
     self.aryDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:@"todayDinner"])
+    
+    NSString *lunchOrDinnerString;
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+        lunchOrDinnerString = @"todayLunch";
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+        lunchOrDinnerString = @"todayDinner";
+        
+    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:lunchOrDinnerString])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         //        if ([[BentoShop sharedInstance] isDishSoldOut:dishID] || [[BentoShop sharedInstance] canAddDish:dishID])
