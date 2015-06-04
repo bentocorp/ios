@@ -371,13 +371,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/FirstViewController.m"
-            timestampString = "455140525.977476"
+            filePath = "Bento/ViewController/DeliveryLocation/OutOfDeliveryAddressViewController.m"
+            timestampString = "455145614.936622"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "331"
-            endingLineNumber = "331"
-            landmarkName = "-gotoMyBentoScreen"
+            startingLineNumber = "146"
+            endingLineNumber = "146"
+            landmarkName = "-checkCurrentMode"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -388,28 +388,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/Model/BentoShop.m"
-            timestampString = "455140553.910742"
+            timestampString = "455145898.745364"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "659"
-            endingLineNumber = "659"
-            landmarkName = "-getMenuType"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bento/Model/BentoShop.m"
-            timestampString = "455140572.5457"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "483"
-            endingLineNumber = "483"
-            landmarkName = "-getMenuInfo"
+            startingLineNumber = "446"
+            endingLineNumber = "446"
+            landmarkName = "-setLunchOrDinnerMode"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

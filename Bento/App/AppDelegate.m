@@ -180,6 +180,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSLog(@"ORIGNAL LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]);
     
+    
+    //////
+    
+    [[BentoShop sharedInstance] setLunchOrDinnerMode];
+    
     return YES;
 }
 
