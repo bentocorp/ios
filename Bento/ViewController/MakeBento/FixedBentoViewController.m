@@ -372,12 +372,20 @@
 - (void)checkCurrentMode
 {
     newDateString = [[BentoShop sharedInstance] getMenuDateString];
-    NSLog(@"NEW DATE: %@", newDateString);
     
-    // if Dinner mode, refresh state
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] isEqualToString:@"DinnerMode"])
+    NSString *originalLunchOrDinnerMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"];
+    NSString *newLunchOrDinnerMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"];
+    
+    // if mode do not match, refresh state
+    if (![newLunchOrDinnerMode isEqualToString:originalLunchOrDinnerMode])
     {
+        // update original mode with new mode
+        [[NSUserDefaults standardUserDefaults] setObject:newLunchOrDinnerMode forKey:@"OriginalLunchOrDinnerMode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         [[BentoShop sharedInstance] resetBentoArray];
+        
+        // reset app
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     
@@ -730,9 +738,14 @@
         }
         else
         {
-            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateUIOnMainThread) userInfo:nil repeats:NO];
         }
     }
+}
+
+- (void)updateUIOnMainThread
+{
+    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (void)showConfirmMsg
