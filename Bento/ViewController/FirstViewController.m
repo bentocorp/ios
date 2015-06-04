@@ -307,22 +307,34 @@
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
         needsAnimation = NO;
     
-/*--------------Determine whether to show Lunch or Dinner mode--------------*/
+/*--------------Determine whether to show Fixed or Custom--------------*/
     
-    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+//    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+//    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+//    
+//    // 12:00am - dinner opening (ie. 16.5)
+//    if (currentTime >= 0 && currentTime < dinnerTime)
+//    {
+//        FixedBentoViewController *fixedBentoViewController = [[FixedBentoViewController alloc] init];
+//        [self.navigationController pushViewController:fixedBentoViewController animated:needsAnimation];
+//    }
+//    
+//    // dinner opening - 11:59pm
+//    else if (currentTime >= dinnerTime && currentTime < 24)
+//    {
+//        CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
+//        [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
+//    }
     
+    // this is dynamic to times of day
     NSString *menuType = [[BentoShop sharedInstance] getMenuType];
     
-    // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime)
+    if ([menuType isEqualToString:@"fixed"])
     {
         FixedBentoViewController *fixedBentoViewController = [[FixedBentoViewController alloc] init];
         [self.navigationController pushViewController:fixedBentoViewController animated:needsAnimation];
     }
-    
-    // dinner opening - 11:59pm
-    else if (currentTime >= dinnerTime && currentTime < 24)
+    else if ([menuType isEqualToString:@"custom"])
     {
         CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
         [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];

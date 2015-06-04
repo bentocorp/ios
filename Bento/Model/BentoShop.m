@@ -658,7 +658,8 @@ static BentoShop *_shareInstance;
 - (NSString *)getMenuType
 {
     NSLog(@"MEAL TYPE: %@", [self getMenuInfo][@"menu_type"]);
-    return [self getMenuInfo][@"menu_type"];
+    
+    return [self getMenuInfo][@"menu_type"]; // fixed/custom
 }
 
 - (BOOL)isClosed
