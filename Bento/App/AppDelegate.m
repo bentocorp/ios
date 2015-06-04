@@ -219,6 +219,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
     [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+    [globalShop setLunchOrDinnerMode];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"enteredForeground" object:nil];
     
     // Global Data Manager
@@ -269,6 +270,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
     {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [globalShop setLunchOrDinnerMode];
             [globalShop getMenus];
             [globalShop getStatus];
             [globalShop getServiceArea];
