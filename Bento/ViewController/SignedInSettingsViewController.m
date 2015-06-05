@@ -275,7 +275,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return 4;
+    return 3;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -289,19 +289,19 @@
 //    settingsTableViewCell.iconImageView.backgroundColor = [UIColor colorWithRed:0.694f green:0.702f blue:0.729f alpha:1.0f];
     
     switch (indexPath.row) {
+//        case 0:
+//            settingsTableViewCell.settingsLabel.text = @"Credit Card";
+//            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
+//            break;
         case 0:
-            settingsTableViewCell.settingsLabel.text = @"Credit Card";
-            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
-            break;
-        case 1:
             settingsTableViewCell.settingsLabel.text = @"FAQ";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-help"];
             break;
-        case 2:
+        case 1:
             settingsTableViewCell.settingsLabel.text = @"Email Support";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-email"];
             break;
-        case 3:
+        case 2:
             settingsTableViewCell.settingsLabel.text = @"Phone Support";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-phone"];
             break;
@@ -320,20 +320,20 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *destVC;
     
-    CreditCardInfoViewController *creditCardInfoViewController = [[CreditCardInfoViewController alloc] init];
+//    CreditCardInfoViewController *creditCardInfoViewController = [[CreditCardInfoViewController alloc] init];
     
     NSArray *toEmailRecipentsArray;
     MFMailComposeViewController *mailComposeViewController;
     
     switch (indexPath.row) {
+//        case 0:
+//            
+//            // go to credit card
+//            [self.navigationController pushViewController:creditCardInfoViewController animated:YES];
+//            
+//            break;
+//            
         case 0:
-            
-            // go to credit card
-            [self.navigationController pushViewController:creditCardInfoViewController animated:YES];
-            
-            break;
-            
-        case 1:
         {
             // go to faq
             destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
@@ -341,7 +341,7 @@
             
             break;
         }
-        case 2:
+        case 1:
             
             // email
             if ([MFMailComposeViewController canSendMail]) {
@@ -356,7 +356,7 @@
             
             break;
         
-        case 3:
+        case 2:
             
             // show call alert
             callAlertView.tag = 2;
