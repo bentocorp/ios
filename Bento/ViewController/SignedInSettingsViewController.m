@@ -122,7 +122,8 @@
 /*-----------------------------------------------------------*/
     
     // table view
-    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 160, SCREEN_WIDTH, 180)];
+//    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 160, SCREEN_WIDTH, 180)];
+    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 160, SCREEN_WIDTH, 135)];
     settingsTableView.alwaysBounceVertical = NO;
     [settingsTableView setSeparatorInset:UIEdgeInsetsMake(0, 60, 0, 0)];
     settingsTableView.delegate = self;
@@ -130,7 +131,8 @@
     [scrollView addSubview:settingsTableView];
     
     // line separator at bottom of table view
-    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 339, SCREEN_WIDTH, 2)];
+//    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 339, SCREEN_WIDTH, 2)];
+    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 294, SCREEN_WIDTH, 2)];
     longLineSepartor2.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [scrollView addSubview:longLineSepartor2];
     
