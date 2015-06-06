@@ -84,12 +84,12 @@
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)
     {
-        url = [NSURL URLWithString:@"https://a.tiles.mapbox.com/v4/vincent-bentonow-com.m6g45dbo/page.html?access_token=pk.eyJ1IjoidmluY2VudC1iZW50b25vdy1jb20iLCJhIjoiV0p2al9qNCJ9.cKufaBUS30xSk7wXxmGuDg#15/37.7692/-122.4111"];
+        url = [NSURL URLWithString:@"https://a.tiles.mapbox.com/v4/vincent-bentonow-com.m6g45dbo/page.html?access_token=pk.eyJ1IjoidmluY2VudC1iZW50b25vdy1jb20iLCJhIjoiV0p2al9qNCJ9.cKufaBUS30xSk7wXxmGuDg#11/37.7903/-122.4100"];
     }
     // dinner opening - 11:59pm
     else if (currentTime >= dinnerTime && currentTime < 24)
     {
-        url = [NSURL URLWithString:@"https://a.tiles.mapbox.com/v4/vincent-bentonow-com.m4b3e43g/page.html?access_token=pk.eyJ1IjoidmluY2VudC1iZW50b25vdy1jb20iLCJhIjoiV0p2al9qNCJ9.cKufaBUS30xSk7wXxmGuDg#13/37.7802/-122.4169"];
+        url = [NSURL URLWithString:@"https://a.tiles.mapbox.com/v4/vincent-bentonow-com.m26hh48o/page.html?access_token=pk.eyJ1IjoidmluY2VudC1iZW50b25vdy1jb20iLCJhIjoiV0p2al9qNCJ9.cKufaBUS30xSk7wXxmGuDg#11/37.7892/-122.4176"];
     }
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
