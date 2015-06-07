@@ -50,6 +50,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSLog(@"ORIGINAL DATE: %@", originalDateString);
+    
     self.lblTitle.text = [[AppStrings sharedInstance] getString:CREDITCARD_TITLE];
     self.lblMessage.text = [[AppStrings sharedInstance] getString:CREDITCARD_TEXT];
     
@@ -134,7 +137,8 @@
           isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
     {
         // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
-        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]
+                                                  forKey:@"OriginalLunchOrDinnerMode"];
         
         [[BentoShop sharedInstance] resetBentoArray];
         
