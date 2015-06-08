@@ -23,7 +23,10 @@
 {
     UILabel *lblTitle;
     UICollectionView *cvDishes;
-    NSInteger _selectedPath;
+    
+    NSInteger _selectedPathMain;
+    NSInteger _selectedPathSide;
+    
     NSInteger hour;
     int weekday;
     JGProgressHUD *loadingHUD;
@@ -88,7 +91,8 @@
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
     
-    _selectedPath = -1;
+    _selectedPathMain = -1;
+    _selectedPathSide = -1;
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -220,6 +224,12 @@
         
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:self.fromWhichVC];
         [myCell setDishInfo:dishInfo];
+        
+        if (_selectedPathMain == indexPath.row)
+            [myCell setCellState:YES];
+        else
+            [myCell setCellState:NO];
+        
     }
     else if (indexPath.section == 1) // Side Dish
     {
@@ -232,12 +242,12 @@
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
+        
+        if (_selectedPathSide == indexPath.row)
+            [myCell setCellState:YES];
+        else
+            [myCell setCellState:NO];
     }
-    
-    if (_selectedPath == indexPath.row)
-        [myCell setCellState:YES];
-    else
-        [myCell setCellState:NO];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -252,10 +262,20 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (_selectedPath == indexPath.row)
-        _selectedPath = -1;
+    if (indexPath.section == 0)
+    {
+        if (_selectedPathMain == indexPath.row)
+            _selectedPathMain = -1;
+        else
+            _selectedPathMain = indexPath.row;
+    }
     else
-        _selectedPath = indexPath.row;
+    {
+        if (_selectedPathSide == indexPath.row)
+            _selectedPathSide = -1;
+        else
+            _selectedPathSide = indexPath.row;
+    }
     
     [collectionView reloadData];
 }
