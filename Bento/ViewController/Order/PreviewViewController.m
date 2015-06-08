@@ -28,7 +28,7 @@
     UICollectionView *cvDishesLeft;
     UICollectionView *cvDishesRight;
     
-    NSIndexPath *_selectedPath;
+    NSInteger _selectedPath;
     
     NSInteger hour;
     int weekday;
@@ -74,17 +74,6 @@
     
     NSString *titleLeft;
     NSString *titleRight;
-    
-    //    IF (closed && time is 12:00am to 8:59pm)
-    //    Try to get today's menu with /menu/{date}
-    //    If today's menu returns a 404 (because of a weekend, for example), try to get the next menu with /menu/next/{date}
-    //
-    //    // CLOSED:
-    //    if ([[BentoShop sharedInstance] isClosed] && )
-    //    {
-    //        titleLeft = @"Next Lunch";
-    //        titleRight = @"Next Dinner";
-    //    }
     
     NSString *nextMenuTitleLunch = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     NSString *nextMenuTitleDinner = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
@@ -187,7 +176,7 @@
     weekday = (int)[[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:[NSDate date]] weekday];
     NSLog(@"today is - %ld", (long)weekday);
     
-    _selectedPath = nil;
+    _selectedPath = -1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -200,7 +189,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
 }
@@ -498,14 +486,10 @@
             [myCell setDishInfo:dishInfo];
         }
         
-        if (_selectedPath != nil && _selectedPath == indexPath)
-        {
+        if (_selectedPath == indexPath.row)
             [myCell setCellState:YES];
-        }
         else
-        {
             [myCell setCellState:NO];
-        }
     }
     else // right side
     {
@@ -567,14 +551,10 @@
             [myCell setDishInfo:dishInfo];
         }
         
-        if (_selectedPath != nil && _selectedPath == indexPath)
-        {
+        if (_selectedPath == indexPath.row)
             [myCell setCellState:YES];
-        }
         else
-        {
             [myCell setCellState:NO];
-        }
 
     }
 }
@@ -584,26 +564,18 @@
     if (collectionView == cvDishesLeft) // left side
     {
         if (indexPath.section == 0) // Main Dish
-        {
             return CGSizeMake(cvDishesLeft.frame.size.width, cvDishesLeft.frame.size.width * 3 / 5);
-        }
         else if (indexPath.section == 1) // Side Dish
-        {
             return CGSizeMake(cvDishesLeft.frame.size.width / 2, cvDishesLeft.frame.size.width / 2);
-        }
         
         return CGSizeMake(0, 0);
     }
     else // right side
     {
         if (indexPath.section == 0) // Main Dish
-        {
             return CGSizeMake(cvDishesRight.frame.size.width, cvDishesRight.frame.size.width * 3 / 5);
-        }
         else if (indexPath.section == 1) // Side Dish
-        {
             return CGSizeMake(cvDishesRight.frame.size.width / 2, cvDishesRight.frame.size.width / 2);
-        }
         
         return CGSizeMake(0, 0);
     }
@@ -613,27 +585,19 @@
 {
     if (collectionView == cvDishesLeft) // left side
     {
-        if (_selectedPath == indexPath)
-        {
-            _selectedPath = nil;
-        }
+        if (_selectedPath == indexPath.row)
+            _selectedPath = -1;
         else
-        {
-            _selectedPath = indexPath;
-        }
+            _selectedPath = indexPath.row;
         
         [collectionView reloadData];
     }
     else // right side
     {
-        if (_selectedPath == indexPath)
-        {
-            _selectedPath = nil;
-        }
+        if (_selectedPath == indexPath.row)
+            _selectedPath = -1;
         else
-        {
-            _selectedPath = indexPath;
-        }
+            _selectedPath = indexPath.row;
         
         [collectionView reloadData];
     }
@@ -642,14 +606,9 @@
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
 {
     if (collectionView == cvDishesLeft) // left side
-    {
         return UIEdgeInsetsMake(0, 0, 0, 0);
-    }
     else // right side
-    {
         return UIEdgeInsetsMake(0, 0, 0, 0);
-    }
-    
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
@@ -657,18 +616,14 @@
     if (collectionView == cvDishesLeft) // left side
     {
         if (section == 0 || section == 1)
-        {
             return CGSizeMake(cvDishesLeft.frame.size.width, 44);
-        }
     
         return CGSizeMake(0, 0);
     }
     else // right side
     {
         if (section == 0 || section == 1)
-        {
             return CGSizeMake(cvDishesRight.frame.size.width, 44);
-        }
     
         return CGSizeMake(0, 0);
     }

@@ -1281,12 +1281,12 @@
 				722333011A6BF172006C2446 /* Bento.entitlements */,
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
+				FCF2787B1B26370700130F7A /* Crashlytics.framework */,
 				722333651A6D57AD006C2446 /* Model */,
 				90BED09C1A5BCC7B003DC872 /* View */,
 				90BED0E71A5C3333003DC872 /* Cell */,
 				90BED09D1A5BCC7B003DC872 /* ViewController */,
 				90BED09A1A5BCC7B003DC872 /* Resource */,
-				FCF2787B1B26370700130F7A /* Crashlytics.framework */,
 				90BED0711A5BCC04003DC872 /* Supporting Files */,
 			);
 			path = Bento;
