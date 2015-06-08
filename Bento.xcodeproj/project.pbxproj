@@ -524,6 +524,7 @@
 		FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
 		FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
+		FCF2787C1B26370700130F7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -907,6 +908,7 @@
 		FCDF22141ADC3ADF006B2750 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FCF2787B1B26370700130F7A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -936,6 +938,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */,
+				FCF2787C1B26370700130F7A /* Crashlytics.framework in Frameworks */,
 				7209E0821A76BD3500D18D7A /* CoreLocation.framework in Frameworks */,
 				722333831A6E55B6006C2446 /* CoreData.framework in Frameworks */,
 				722333811A6E5570006C2446 /* ImageIO.framework in Frameworks */,
@@ -1281,6 +1284,7 @@
 				90BED0E71A5C3333003DC872 /* Cell */,
 				90BED09D1A5BCC7B003DC872 /* ViewController */,
 				90BED09A1A5BCC7B003DC872 /* Resource */,
+				FCF2787B1B26370700130F7A /* Crashlytics.framework */,
 				90BED0711A5BCC04003DC872 /* Supporting Files */,
 			);
 			path = Bento;
@@ -2755,6 +2759,7 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Bento",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -2788,6 +2793,7 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Bento",
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
 				INFOPLIST_FILE = Bento/Info.plist;
