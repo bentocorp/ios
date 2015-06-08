@@ -267,14 +267,22 @@
         if (_selectedPathMain == indexPath.row)
             _selectedPathMain = -1;
         else
+        {
             _selectedPathMain = indexPath.row;
+            _selectedPathSide = -1;
+        }
     }
     else
     {
         if (_selectedPathSide == indexPath.row)
+        {
             _selectedPathSide = -1;
+        }
         else
+        {
             _selectedPathSide = indexPath.row;
+            _selectedPathMain = -1;
+        }
     }
     
     [collectionView reloadData];
