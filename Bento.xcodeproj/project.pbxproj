@@ -525,6 +525,7 @@
 		FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCF2787C1B26370700130F7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
+		FCF2787D1B264C0100130F7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -917,6 +918,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */,
+				FCF2787D1B264C0100130F7A /* Crashlytics.framework in Frameworks */,
 				7216B7611AA64C7C0006FFE9 /* CoreLocation.framework in Frameworks */,
 				7216B7621AA64C7C0006FFE9 /* CoreData.framework in Frameworks */,
 				7216B7641AA64C7C0006FFE9 /* ImageIO.framework in Frameworks */,
@@ -2624,6 +2626,7 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Bento",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -2653,6 +2656,7 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Bento",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
