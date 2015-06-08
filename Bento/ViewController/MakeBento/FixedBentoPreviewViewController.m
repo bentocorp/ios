@@ -23,7 +23,7 @@
 {
     UILabel *lblTitle;
     UICollectionView *cvDishes;
-    NSIndexPath *_selectedPath;
+    NSInteger _selectedPath;
     NSInteger hour;
     int weekday;
     JGProgressHUD *loadingHUD;
@@ -83,32 +83,18 @@
     NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
     
     hour = [components hour];
-    NSLog(@"current hour - %ld", hour);
     
     // Sunday = 1, Saturday = 7
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
     
-    // set menu title
-    //    // if sold out || (closed && before 9pm && is not sunday && is not saturday)
-    //    if ([[BentoShop sharedInstance] isSoldOut] ||
-    //        (([[BentoShop sharedInstance] isClosed] && hour < 21) && weekday != 1 && weekday != 7)) {
-    //
-    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
-    //
-    //    } else if ([[BentoShop sharedInstance] isClosed]) {
-    //
-    //        self.lblTitle.text = [NSString stringWithFormat:@"%@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    //    }
-    
-    _selectedPath = nil;
+    _selectedPath = -1;
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
@@ -200,13 +186,9 @@
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (section == 0)
-    {
         return 1; // 1 main dish
-    }
     else
-    {
         return 4; // 4 side dishes
-    }
     
     return 0;
 }
@@ -252,45 +234,34 @@
         [myCell setDishInfo:dishInfo];
     }
     
-    if (_selectedPath != nil && _selectedPath == indexPath)
-    {
+    if (_selectedPath == indexPath.row)
         [myCell setCellState:YES];
-    }
     else
-    {
         [myCell setCellState:NO];
-    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) // Main Dish
-    {
         return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width * 3 / 5);
-    }
     else if (indexPath.section == 1) // Side Dish
-    {
         return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
-    }
     
     return CGSizeMake(0, 0);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (_selectedPath == indexPath)
-    {
-        _selectedPath = nil;
-    }
+    if (_selectedPath == indexPath.row)
+        _selectedPath = -1;
     else
-    {
-        _selectedPath = indexPath;
-    }
+        _selectedPath = indexPath.row;
     
     [collectionView reloadData];
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
@@ -298,9 +269,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if (section == 0 || section == 1)
-    {
         return CGSizeMake(cvDishes.frame.size.width, 44);
-    }
     
     return CGSizeMake(0, 0);
 }
