@@ -259,7 +259,7 @@
         [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
     }
     
-    /*-------------------------------------Tonight's Dinner---------------------------------------*/
+    /*-------------------------------------Next Menu---------------------------------------*/
     
     /*---Collection View---*/
     

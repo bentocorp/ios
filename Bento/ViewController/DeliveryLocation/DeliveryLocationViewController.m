@@ -185,32 +185,13 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
     if ([segue.identifier isEqualToString:@"OutOfDelivery"])
     {
         OutOfDeliveryAddressViewController *vcOutOfZone = segue.destinationViewController;
         vcOutOfZone.strAddress = (NSString *)sender;
     }
-/*
-    else if ([segue.identifier isEqualToString:@"CompleteOrder"])
-    {
-        CompleteOrderViewController *vcCompleteOrder = (CompleteOrderViewController *)segue.destinationViewController;
-        
-        if (self.isFromOrder)
-        {
-            vcCompleteOrder.strPromoCode = self.strPromoCode;
-            vcCompleteOrder.promoDiscount = self.priceDiscount;
-        }
-        else
-        {
-            vcCompleteOrder.strPromoCode = nil;
-            vcCompleteOrder.promoDiscount = 0;
-        }
-    }
-*/
 }
 
 - (void) viewWillAppear:(BOOL)animated
