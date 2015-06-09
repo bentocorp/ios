@@ -28,8 +28,11 @@
     UICollectionView *cvDishesLeft;
     UICollectionView *cvDishesRight;
     
-    NSInteger _selectedPathMain;
-    NSInteger _selectedPathSide;
+    NSInteger _selectedPathMainLeft;
+    NSInteger _selectedPathSideLeft;
+    
+    NSInteger _selectedPathMainRight;
+    NSInteger _selectedPathSideRight;
     
     NSInteger hour;
     int weekday;
@@ -177,8 +180,13 @@
     weekday = (int)[[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:[NSDate date]] weekday];
     NSLog(@"today is - %ld", (long)weekday);
     
-    _selectedPathMain = -1;
-    _selectedPathSide = -1;
+    
+    // For selection
+    _selectedPathMainLeft = -1;
+    _selectedPathSideLeft = -1;
+    
+    _selectedPathMainRight = -1;
+    _selectedPathSideRight = -1;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -482,7 +490,7 @@
             NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
             [myCell setDishInfo:dishInfo];
             
-            if (_selectedPathMain == indexPath.row)
+            if (_selectedPathMainLeft == indexPath.row)
                 [myCell setCellState:YES];
             else
                 [myCell setCellState:NO];
@@ -492,7 +500,7 @@
             NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
             [myCell setDishInfo:dishInfo];
             
-            if (_selectedPathSide == indexPath.row)
+            if (_selectedPathSideLeft == indexPath.row)
                 [myCell setCellState:YES];
             else
                 [myCell setCellState:NO];
@@ -552,7 +560,7 @@
             NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
             [myCell setDishInfo:dishInfo];
             
-            if (_selectedPathMain == indexPath.row)
+            if (_selectedPathMainRight == indexPath.row)
                 [myCell setCellState:YES];
             else
                 [myCell setCellState:NO];
@@ -562,7 +570,7 @@
             NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
             [myCell setDishInfo:dishInfo];
             
-            if (_selectedPathSide == indexPath.row)
+            if (_selectedPathSideRight == indexPath.row)
                 [myCell setCellState:YES];
             else
                 [myCell setCellState:NO];
@@ -598,56 +606,71 @@
     {
         if (indexPath.section == 0)
         {
-            if (_selectedPathMain == indexPath.row)
-                _selectedPathMain = -1;
+            if (_selectedPathMainLeft == indexPath.row)
+                _selectedPathMainLeft = -1;
             else
             {
-                _selectedPathMain = indexPath.row;
-                _selectedPathSide = -1;
+                _selectedPathMainLeft = indexPath.row;
+                _selectedPathSideLeft = -1;
+                
+                // deselect everything on the right side
+                _selectedPathMainRight = -1;
+                _selectedPathSideRight = -1;
             }
         }
         else
         {
-            if (_selectedPathSide == indexPath.row)
+            if (_selectedPathSideLeft == indexPath.row)
             {
-                _selectedPathSide = -1;
+                _selectedPathSideLeft = -1;
             }
             else
             {
-                _selectedPathSide = indexPath.row;
-                _selectedPathMain = -1;
+                _selectedPathSideLeft = indexPath.row;
+                _selectedPathMainLeft = -1;
+                
+                // deselect everything on the right side
+                _selectedPathMainRight = -1;
+                _selectedPathSideRight = -1;
             }
         }
-        
-        [collectionView reloadData];
     }
     else // right side
     {
         if (indexPath.section == 0)
         {
-            if (_selectedPathMain == indexPath.row)
-                _selectedPathMain = -1;
+            if (_selectedPathMainRight == indexPath.row)
+                _selectedPathMainRight = -1;
             else
             {
-                _selectedPathMain = indexPath.row;
-                _selectedPathSide = -1;
+                _selectedPathMainRight = indexPath.row;
+                _selectedPathSideRight = -1;
+                
+                // deselect everything on the left side
+                _selectedPathMainLeft = -1;
+                _selectedPathSideLeft = -1;
             }
         }
         else
         {
-            if (_selectedPathSide == indexPath.row)
+            if (_selectedPathSideRight == indexPath.row)
             {
-                _selectedPathSide = -1;
+                _selectedPathSideRight = -1;
             }
             else
             {
-                _selectedPathSide = indexPath.row;
-                _selectedPathMain = -1;
+                _selectedPathSideRight = indexPath.row;
+                _selectedPathMainRight = -1;
+                
+                // deselect everything on the left side
+                _selectedPathMainLeft = -1;
+                _selectedPathSideLeft = -1;
             }
         }
-        
-        [collectionView reloadData];
     }
+    
+    [cvDishesLeft reloadData];
+    [cvDishesRight reloadData];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
