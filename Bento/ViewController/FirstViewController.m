@@ -166,6 +166,10 @@
     {
         [self processAfterLogin];
     }
+    
+    // reset if closed
+    if ([globalShop isClosed])
+        [globalShop resetBentoArray];
 }
 
 - (void)processAutoLogin
