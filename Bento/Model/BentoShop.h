@@ -52,6 +52,9 @@
 - (NSString *)getNextMenuDateString;
 - (NSString *)getNextMenuWeekdayString;
 
+- (BOOL)isThereLunchNextMenu;
+- (BOOL)isThereDinnerNextMenu;
+
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers;
 - (NSNumber *)getCurrentTime;
 - (NSNumber *)getLunchTime;
