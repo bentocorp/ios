@@ -554,12 +554,6 @@
     [self viewWillAppear:YES];
 }
 
-//- (void)refreshView
-//{
-//    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-//    [self viewWillAppear:YES];
-//}
-
 - (void)preloadCheckCurrentMode
 {
     [[BentoShop sharedInstance] refreshStop];
@@ -575,7 +569,7 @@
     NSString *originalLunchOrDinnerMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"];
     NSString *newLunchOrDinnerMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"];
     
-    // if mode do not match, refresh state
+    // if mode changed
     if (![newLunchOrDinnerMode isEqualToString:originalLunchOrDinnerMode])
     {
         // update original mode with new mode
@@ -584,25 +578,15 @@
         
         [[BentoShop sharedInstance] resetBentoArray];
         
-        // reset app
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES]; // reset app
     }
     
-    // if different date from before
+    // if date changed
     else if (![originalDateString isEqualToString:newDateString])
     {
-        
-        
-        // only refresh viewWillAppear
-//        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
-        
-//        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        
         originalDateString = [[BentoShop sharedInstance] getMenuDateString];
         
-        
-        // reset app
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [self.navigationController popToRootViewControllerAnimated:YES]; // reset app
     }
 }
 
