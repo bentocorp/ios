@@ -485,15 +485,11 @@ static BentoShop *_shareInstance;
     
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)
-    {
         menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
         
     // dinner opening - 11:59pm
-    }
     else if (currentTime >= dinnerTime && currentTime < 24)
-    {
         menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
-    }
     
     if (menuInfo == nil)
         return nil;
@@ -679,9 +675,16 @@ static BentoShop *_shareInstance;
 
 - (NSString *)getMenuType
 {
-    NSLog(@"MEAL TYPE: %@", [self getMenuInfo][@"menu_type"]);
+    if ([self getMenuInfo][@"menu_type"] != nil)
+    {
+        NSLog(@"MEAL TYPE: %@", [self getMenuInfo][@"menu_type"]);
+        return [self getMenuInfo][@"menu_type"]; // fixed/custom
+    }
     
-    return [self getMenuInfo][@"menu_type"]; // fixed/custom
+    // this hardcoded value doesn't matter, i could've set it to either fixed/custom.
+    // it's just a placeholder to prevent app from hanging in FirstViewController
+    // in case there is no current menu set for current time and store opens
+    return @"custom";
 }
 
 - (BOOL)isClosed
