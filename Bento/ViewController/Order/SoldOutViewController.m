@@ -112,6 +112,7 @@
     [self.ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
     
     self.lblMessageContent.adjustsFontSizeToFitWidth = YES;
+    self.lblMessageTitle.adjustsFontSizeToFitWidth = YES;
     
     if (self.type == 0) // Closed
     {
