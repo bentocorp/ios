@@ -51,6 +51,8 @@
 
 @implementation CustomBentoViewController
 {
+    UIView *navigationBarView;
+    
     UIScrollView *scrollView;
     
     UILabel *lblBanner;
@@ -118,24 +120,8 @@
     
     originalDateString = [[BentoShop sharedInstance] getMenuDateString];
     NSLog(@"ORIGINAL DATE: %@", originalDateString);
-
-    ////////*might not need this*///////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
-    
-//    NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
-//    
-//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"LunchMode"]) // if still set to dinner
-//            [[BentoShop sharedInstance] resetBentoArray];
-//    
-//    [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"currentMode"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    
-//    NSLog(@"SET CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     self.view.backgroundColor = [UIColor whiteColor];
-    
-//    [dinnerTitleLabel setText:[[AppStrings sharedInstance] getString:BUILD_TITLE]];
     
 /*---Scroll View---*/
     
@@ -148,7 +134,7 @@
     
 /*---Navigation View---*/
     
-    UIView *navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
+    navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
     navigationBarView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationBarView];
     
@@ -568,14 +554,16 @@
     [self viewWillAppear:YES];
 }
 
-- (void)refreshView
-{
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    [self viewWillAppear:YES];
-}
+//- (void)refreshView
+//{
+//    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
+//    [self viewWillAppear:YES];
+//}
 
 - (void)preloadCheckCurrentMode
 {
+    [[BentoShop sharedInstance] refreshStop];
+    
     // so date string can refresh first
     [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
 }
@@ -603,11 +591,18 @@
     // if different date from before
     else if (![originalDateString isEqualToString:newDateString])
     {
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
         
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
+        
+        // only refresh viewWillAppear
+//        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
+        
+//        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
         
         originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+        
+        
+        // reset app
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 

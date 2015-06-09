@@ -909,7 +909,7 @@
 		FCDF22141ADC3ADF006B2750 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		FCF2787B1B26370700130F7A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		FCF2787B1B26370700130F7A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1281,7 +1281,6 @@
 				722333011A6BF172006C2446 /* Bento.entitlements */,
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
-				FCF2787B1B26370700130F7A /* Crashlytics.framework */,
 				722333651A6D57AD006C2446 /* Model */,
 				90BED09C1A5BCC7B003DC872 /* View */,
 				90BED0E71A5C3333003DC872 /* Cell */,
@@ -1321,6 +1320,7 @@
 		90BED09B1A5BCC7B003DC872 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				FCF2787B1B26370700130F7A /* Crashlytics.framework */,
 				722333791A6E5387006C2446 /* GoogleMapsSDK */,
 				7279E5D71A68397D00591CB2 /* FacebookSDK */,
 				90220A351A6424BB00ECECEF /* GradientLayer */,
