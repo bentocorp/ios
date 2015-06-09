@@ -1140,7 +1140,12 @@
         NSArray *aryMainDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        {
+            if ([[BentoShop sharedInstance] getMainDishes:@"todayDinner"] != nil)
+                aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            else
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
             
@@ -1154,7 +1159,12 @@
         NSArray *arySideDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        {
+            if ([[BentoShop sharedInstance] getMainDishes:@"todayDinner"] != nil)
+                arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+            else
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         
@@ -1188,7 +1198,12 @@
         NSArray *aryMainDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        {
+            if ([[BentoShop sharedInstance] getMainDishes:@"todayDinner"] != nil)
+                aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            else
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
             
@@ -1200,7 +1215,12 @@
         NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        {
+            if ([[BentoShop sharedInstance] getMainDishes:@"todayDinner"] != nil)
+                arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+            else
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         
