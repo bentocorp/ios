@@ -642,7 +642,13 @@ static BentoShop *_shareInstance;
     if (self.menuNext == nil)
         return nil;
     
-    NSDictionary *menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"]; // doesn't matter lunch or dinner, just get next date
+    NSDictionary *menuInfo;
+    
+    // doesn't matter lunch or dinner, just used to get next date
+    if ([defaults objectForKey:@"nextLunchMenuInfo"] != nil) // if no lunch, get dinner info
+        menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"];
+    else
+        menuInfo = [defaults objectForKey:@"nextDinnerMenuInfo"];
     
     NSString *strDate = menuInfo[@"for_date"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];

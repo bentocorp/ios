@@ -160,7 +160,7 @@
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
     {
         currentMenuTitle = @"Now Serving Lunch";
-        nextMenuTitle = @"Tonight's Dinner Menu";
+        nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     }
     else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
     {
