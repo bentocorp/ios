@@ -132,39 +132,6 @@
     [pagingTitleView addObjects:@[titleLeft, titleRight]];
     [navigationBarView addSubview:pagingTitleView];
     
-//    NSString *currentMenuTitle;
-//    NSString *nextMenuTitle;
-//    
-//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-//        currentMenuTitle = @"Today's Lunch Menu";
-//    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-//        currentMenuTitle = @"Tonight's Dinner Menu";
-//    
-//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-//    {
-//        if ([[BentoShop sharedInstance] isThereDinnerMenu])
-//            nextMenuTitle = @"Tonight's Dinner Menu";
-//        else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-//            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-//        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-//            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-//    }
-//    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-//    {
-//        if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-//            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-//        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-//            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-//    }
-//    
-//    pagingTitleView = [[BWTitlePagerView alloc] init];
-//    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
-//    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-//    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
-//    [pagingTitleView observeScrollView:scrollView];
-//    [pagingTitleView addObjects:@[currentMenuTitle, nextMenuTitle]];
-//    [navigationBarView addSubview:pagingTitleView];
-    
     /*---Line Separator---*/
     
     UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 1)];
