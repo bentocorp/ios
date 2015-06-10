@@ -350,6 +350,10 @@
             [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             [self.navigationController popViewControllerAnimated:YES];
+            
+            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+            CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+            [self.navigationController pushViewController:completeOrderViewController animated:YES];
         }
     }
 }
