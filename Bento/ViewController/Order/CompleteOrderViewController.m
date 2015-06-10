@@ -428,24 +428,35 @@
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     
+    // Meal (_totalPrice)
     if (salePrice != 0 && salePrice < unitPrice)
         _totalPrice = self.aryBentos.count * salePrice;
     else
         _totalPrice = self.aryBentos.count * unitPrice;
     
+    // Meal * % = Tip
     float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
     
+    // (Meal - Promo) * 0.875(tax) = Tax
     float tax;
     if (_promoDiscount <= _totalPrice)
         tax = (int)((_totalPrice - _promoDiscount) * _taxPercent) / 100.f;
     else
-        tax = 0;
+        tax = 0; // if Promo is greater than Meal
 
+    // Meal + Tax + Tip
+    float subTotal = _totalPrice + tax + deliveryTip; // tip is subtracted from promo code, once used up, it starts charging user's card
+    
+    // Grand Total
     float totalPrice;
-    if (_promoDiscount <= _totalPrice)
-        totalPrice = _totalPrice + tax - _promoDiscount + deliveryTip;
+    if (subTotal - _promoDiscount >= 0) // ie. subtotal(13.80) - promo(5)
+        totalPrice = subTotal - _promoDiscount;
     else
-        totalPrice = deliveryTip;
+        totalPrice = 0; // if Promo hasn't been used up yet ie. subtotal(13.80) - promo(85),
+    
+    NSLog(@"PROMO CREDIT LEFT: %f", _promoDiscount - subTotal);
+    NSLog(@"SUB TOTAL: %f", subTotal);
+    NSLog(@"GRAND TOTAL: %f", totalPrice);
     
     self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
     
