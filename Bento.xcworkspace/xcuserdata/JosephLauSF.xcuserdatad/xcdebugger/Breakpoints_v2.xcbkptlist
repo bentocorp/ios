@@ -361,7 +361,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1137"
             endingLineNumber = "1137"
-            landmarkName = "-collectionView:numberOfItemsInSection:"
+            landmarkName = "-onUpdatedMenu:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

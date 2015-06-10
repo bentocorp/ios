@@ -148,10 +148,22 @@
     else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
         currentMenuTitle = @"Now Serving Dinner";
     
-    if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-        nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-        nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+    {
+        if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            nextMenuTitle = @"Tonight's Dinner Menu";
+        else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    }
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+    {
+        if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    }
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
