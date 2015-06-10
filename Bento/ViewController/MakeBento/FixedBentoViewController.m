@@ -88,20 +88,6 @@
     // initialize yes
     isThereConnection = YES;
     
-    ////////*might not need this*///////////////////////////////CHECK AND SET CURRENT MODE//////////////////////////////////////////////////////
-    
-//    NSLog(@"CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
-//    
-//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"] isEqualToString:@"DinnerMode"])
-//        [[BentoShop sharedInstance] resetBentoArray];
-//    
-//    [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"currentMode"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-//    
-//    NSLog(@"SET CURRENT MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"currentMode"]);
-    
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    
 /*---Scroll View---*/
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];
@@ -134,23 +120,26 @@
     NSString *nextMenuTitle;
     
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-    {
         currentMenuTitle = @"Now Serving Lunch";
-        nextMenuTitle = @"Tonight's Dinner Menu";
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+        currentMenuTitle = @"Now Serving Dinner";
+    
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+    {
+        if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            nextMenuTitle = @"Tonight's Dinner Menu";
+        else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     }
     else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
     {
-        currentMenuTitle = @"Now Serving Dinner";
-        nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     }
-    
-    pagingTitleView = [[BWTitlePagerView alloc] init];
-    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
-    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
-    [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[currentMenuTitle, nextMenuTitle]];
-    [navigationBarView addSubview:pagingTitleView];
     
 /*---Line Separator---*/
     
