@@ -141,6 +141,14 @@
             nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     }
     
+    pagingTitleView = [[BWTitlePagerView alloc] init];
+    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
+    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
+    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+    [pagingTitleView observeScrollView:scrollView];
+    [pagingTitleView addObjects:@[currentMenuTitle, nextMenuTitle]];
+    [navigationBarView addSubview:pagingTitleView];
+    
 /*---Line Separator---*/
     
     UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 1)];
@@ -807,9 +815,21 @@
         NSArray *aryMainDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        {
+            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+        {
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        }
         
         if (aryMainDishes == nil)
             return 0;
@@ -821,9 +841,21 @@
         NSArray *arySideDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        {
+            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+        {
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        }
         
         if (arySideDishes == nil)
             return 0;
@@ -855,9 +887,21 @@
         NSArray *aryMainDishes;
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        {
+            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+        {
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                aryMainDishes = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+        }
         
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
@@ -867,9 +911,21 @@
         NSArray *arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        {
+            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+        {
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+        }
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
