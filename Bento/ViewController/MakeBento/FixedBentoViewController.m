@@ -354,12 +354,6 @@
     [self viewWillAppear:YES];
 }
 
-- (void)refreshView
-{
-    [[UIApplication sharedApplication] endIgnoringInteractionEvents];
-    [self viewWillAppear:YES];
-}
-
 - (void)preloadCheckCurrentMode
 {
     // so date string can refresh first
@@ -389,11 +383,10 @@
     // if date changed
     else if (![originalDateString isEqualToString:newDateString])
     {
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
-        
-        [[UIApplication sharedApplication] beginIgnoringInteractionEvents];
-        
         originalDateString = [[BentoShop sharedInstance] getMenuDateString];
+        
+        // reset app
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 
