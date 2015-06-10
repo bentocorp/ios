@@ -1160,8 +1160,9 @@
 //        for (Bento *bento in self.aryBentos)
 //            [[BentoShop sharedInstance] removeBento:bento];
         
-        [[BentoShop sharedInstance] resetBentoArray];
-            
+        [[BentoShop sharedInstance] resetBentoArray]; // remove from temp
+        [[BentoShop sharedInstance] saveBentoArray]; // save empty to persistent storage
+        
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
         [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
