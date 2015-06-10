@@ -76,85 +76,52 @@
     
     /*---BW Title Pager View---*/
     
-//    NSString *titleLeft;
-//    NSString *titleRight;
-//    
-//    NSString *nextMenuTitleLunch = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-//    NSString *nextMenuTitleDinner = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-//    
-//    // CLOSED: no menu today
-//    if ([[BentoShop sharedInstance] isClosed] && [[BentoShop sharedInstance] getMenuDateString] == nil)
-//    {
-//        titleLeft = nextMenuTitleLunch;
-//        titleRight = nextMenuTitleDinner;
-//    }
-//    
-//    // CLOSED: 00:00 - 12:29
-//    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
-//    {
-//        titleLeft = @"Today's Lunch Menu";
-//        titleRight = @"Tonight's Dinner Menu";
-//    }
-//    
-//    // CLOSED: 12:30 - 17:29
-//    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
-//    {
-//        titleLeft = @"Tonight's Dinner Menu";
-//        titleRight = nextMenuTitleLunch;
-//    }
-//    
-//    // CLOSED: 17.30 - 23:59
-//    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
-//    {
-//        titleLeft = nextMenuTitleLunch;
-//        titleRight = nextMenuTitleDinner;
-//    }
-//
-//    // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
-//    else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
-//    {
-//        titleLeft = @"Today's Lunch Menu";
-//        titleRight = @"Tonight's Dinner Menu";
-//    }
-//    
-//    // SOLD-OUT: 16:30 - 23:59
-//    else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
-//    {
-//        titleLeft = @"Tonight's Dinner Menu";
-//        titleRight = nextMenuTitleLunch;
-//    }
-//    
-//    pagingTitleView = [[BWTitlePagerView alloc] init];
-//    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
-//    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-//    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
-//    [pagingTitleView observeScrollView:scrollView];
-//    [pagingTitleView addObjects:@[titleLeft, titleRight]];
-//    [navigationBarView addSubview:pagingTitleView];
+    NSString *titleLeft;
+    NSString *titleRight;
     
-    NSString *currentMenuTitle;
-    NSString *nextMenuTitle;
+    NSString *nextMenuTitleLunch = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    NSString *nextMenuTitleDinner = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        currentMenuTitle = @"Today's Lunch Menu";
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        currentMenuTitle = @"Tonight's Dinner Menu";
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+    // CLOSED: no menu today
+    if ([[BentoShop sharedInstance] isClosed] && [[BentoShop sharedInstance] getMenuDateString] == nil)
     {
-        if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            nextMenuTitle = @"Tonight's Dinner Menu";
-        else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        titleLeft = nextMenuTitleLunch;
+        titleRight = nextMenuTitleDinner;
     }
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+    
+    // CLOSED: 00:00 - 12:29
+    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
     {
-        if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        titleLeft = @"Today's Lunch Menu";
+        titleRight = @"Tonight's Dinner Menu";
+    }
+    
+    // CLOSED: 12:30 - 17:29
+    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
+    {
+        titleLeft = @"Tonight's Dinner Menu";
+        titleRight = nextMenuTitleLunch;
+    }
+    
+    // CLOSED: 17.30 - 23:59
+    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
+    {
+        titleLeft = nextMenuTitleLunch;
+        titleRight = nextMenuTitleDinner;
+    }
+
+    // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
+    else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
+    {
+        titleLeft = @"Today's Lunch Menu";
+        titleRight = @"Tonight's Dinner Menu";
+    }
+    
+    // SOLD-OUT: 16:30 - 23:59
+    else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
+    {
+        titleLeft = @"Tonight's Dinner Menu";
+        titleRight = nextMenuTitleLunch;
     }
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
@@ -162,8 +129,41 @@
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[currentMenuTitle, nextMenuTitle]];
+    [pagingTitleView addObjects:@[titleLeft, titleRight]];
     [navigationBarView addSubview:pagingTitleView];
+    
+//    NSString *currentMenuTitle;
+//    NSString *nextMenuTitle;
+//    
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+//        currentMenuTitle = @"Today's Lunch Menu";
+//    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+//        currentMenuTitle = @"Tonight's Dinner Menu";
+//    
+//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+//    {
+//        if ([[BentoShop sharedInstance] isThereDinnerMenu])
+//            nextMenuTitle = @"Tonight's Dinner Menu";
+//        else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+//            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+//        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+//            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+//    }
+//    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+//    {
+//        if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+//            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+//        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+//            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+//    }
+//    
+//    pagingTitleView = [[BWTitlePagerView alloc] init];
+//    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
+//    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
+//    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+//    [pagingTitleView observeScrollView:scrollView];
+//    [pagingTitleView addObjects:@[currentMenuTitle, nextMenuTitle]];
+//    [navigationBarView addSubview:pagingTitleView];
     
     /*---Line Separator---*/
     
