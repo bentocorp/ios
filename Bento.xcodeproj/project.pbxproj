@@ -718,8 +718,8 @@
 		90BED07C1A5BCC04003DC872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		90BED07E1A5BCC04003DC872 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Images.xcassets; path = ../Images.xcassets; sourceTree = "<group>"; };
 		90BED0811A5BCC04003DC872 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		90BED0981A5BCC7B003DC872 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = ../App/AppDelegate.h; sourceTree = "<group>"; };
-		90BED0991A5BCC7B003DC872 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = ../App/AppDelegate.m; sourceTree = "<group>"; };
+		90BED0981A5BCC7B003DC872 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = App/AppDelegate.h; sourceTree = "<group>"; };
+		90BED0991A5BCC7B003DC872 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = App/AppDelegate.m; sourceTree = "<group>"; };
 		90BED0A31A5BD05C003DC872 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
 		90BED0A41A5BD05C003DC872 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
 		90BED0AE1A5BE22E003DC872 /* first_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_background.png; sourceTree = "<group>"; };
@@ -1279,12 +1279,13 @@
 			isa = PBXGroup;
 			children = (
 				722333011A6BF172006C2446 /* Bento.entitlements */,
+				90BED0981A5BCC7B003DC872 /* AppDelegate.h */,
+				90BED0991A5BCC7B003DC872 /* AppDelegate.m */,
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
 				722333651A6D57AD006C2446 /* Model */,
 				90BED09C1A5BCC7B003DC872 /* View */,
-				90BED0E71A5C3333003DC872 /* Cell */,
-				90BED09D1A5BCC7B003DC872 /* ViewController */,
+				90BED09D1A5BCC7B003DC872 /* Controller */,
 				90BED09A1A5BCC7B003DC872 /* Resource */,
 				90BED0711A5BCC04003DC872 /* Supporting Files */,
 			);
@@ -1339,15 +1340,14 @@
 				90A553E01A60035D001F9DA7 /* PromoCodeView.h */,
 				90A553E11A60035D001F9DA7 /* PromoCodeView.m */,
 				90A553E31A60038C001F9DA7 /* PromoCodeView.xib */,
+				90BED0E71A5C3333003DC872 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		90BED09D1A5BCC7B003DC872 /* ViewController */ = {
+		90BED09D1A5BCC7B003DC872 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
-				90BED0981A5BCC7B003DC872 /* AppDelegate.h */,
-				90BED0991A5BCC7B003DC872 /* AppDelegate.m */,
 				FC99D4F61AFC325100BEE40B /* At Launch */,
 				FC99D4F51AFC323700BEE40B /* Closed/Sold-out */,
 				FCFD79F01AE8880D002AD322 /* Settings */,
@@ -1356,6 +1356,7 @@
 				90BED0A61A5BD05C003DC872 /* Order */,
 				90BED0A71A5BD05C003DC872 /* SignIn */,
 			);
+			name = Controller;
 			path = ViewController;
 			sourceTree = "<group>";
 		};
@@ -1517,7 +1518,8 @@
 				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
 				FC08CC1E1B0AA361008D0A84 /* Fixed Menu Cell */,
 			);
-			path = Cell;
+			name = Cell;
+			path = ../Cell;
 			sourceTree = "<group>";
 		};
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
