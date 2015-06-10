@@ -193,40 +193,30 @@
 
 - (void)viewWillDisappear:(BOOL)animated
 {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
     [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setPreviewButtonText
 {
     // set type
     if ([[BentoShop sharedInstance] isClosed])
-    {
         self.type = 0;
-    }
     else if ([[BentoShop sharedInstance] isSoldOut])
-    {
         self.type = 1;
-    }
     
     // Closed && 17:30 - 23:59 (get next)
     if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
-    {
         strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    }
     
     // Closed &&  00:00 - 17:29 (get today, if none today, get next)
     else if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
-    {
         strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil]];
-    }
     
     // Sold out
     else
-    {
         strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
-    }
     
     [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
 }
@@ -238,18 +228,12 @@
         if (self.type == 0) // Closed
         {
             if (![[BentoShop sharedInstance] isClosed])
-            {
                 [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
-            }
-                //[self.navigationController popViewControllerAnimated:YES];
         }
         else if (self.type == 1) // Sold Out
         {
             if (![[BentoShop sharedInstance] isSoldOut])
-            {
                 [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
-            }
-                //[self.navigationController popViewControllerAnimated:YES];
         }
     }
 }
@@ -318,7 +302,7 @@
     [self.navigationController pushViewController:destVC animated:YES];
 }
 
-- (void) showConfirmMessage
+- (void)showConfirmMessage
 {
     NSString *strMessage = @"";
     NSString *strConfirmButton = @"";
@@ -335,8 +319,8 @@
     }
     
     MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:nil cancelButtonTitle:strConfirmButton otherButtonTitle:nil];
-    
     [alertView showInView:self.view];
+    
     alertView = nil;
 }
 

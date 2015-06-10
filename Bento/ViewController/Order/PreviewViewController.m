@@ -314,6 +314,8 @@
     // Which Side
     if (collectionView == cvDishesLeft) // left side
     {
+        /*GE*/
+        
         // CLOSED: no menu today
         if ([[BentoShop sharedInstance] isClosed] && [[BentoShop sharedInstance] getMenuDateString] == nil)
         {
