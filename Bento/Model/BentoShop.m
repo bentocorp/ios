@@ -23,6 +23,7 @@
 @property (nonatomic, retain) NSDictionary *dicStatus;
 @property (nonatomic, retain) NSDictionary *menuToday;
 @property (nonatomic, retain) NSDictionary *menuNext;
+@property (nonatomic, retain) NSDictionary *menuNextNext;
 @property (nonatomic, retain) NSArray *menuStatus;
 @property (nonatomic, retain) MKPolygon *serviceArea;
 @property (nonatomic, retain) NSMutableArray *aryBentos;
@@ -349,6 +350,47 @@ static BentoShop *_shareInstance;
     
     [self prefetchImages:self.menuNext];
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+}
+
+- (void)getNextNextMenus
+{   
+    NSDictionary *menuInfo;
+    
+    // doesn't matter lunch or dinner, just used to get next date
+    if ([defaults objectForKey:@"nextLunchMenuInfo"] != nil) // if no lunch, get dinner info
+        menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"];
+    else
+        menuInfo = [defaults objectForKey:@"nextDinnerMenuInfo"];
+    
+    NSString *strDate = menuInfo[@"for_date"];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate *menuDate = [formatter dateFromString:strDate];
+    NSString *nextDateString = [formatter stringFromDate:menuDate];
+    ///////////////////////////////////////////////////////////////
+    
+    NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, [nextDateString stringByReplacingOccurrencesOfString:@"-" withString: @""]];
+    
+    NSError *error = nil;
+    NSInteger statusCode = 0;
+    self.menuNextNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
+    
+    // set menuInfo and menuItems to persistent storage
+    [defaults setObject:self.menuNextNext[@"lunch"][@"Menu"] forKey:@"nextLunchMenuInfo"];
+    [defaults setObject:self.menuNextNext[@"dinner"][@"Menu"] forKey:@"nextDinnerMenuInfo"];
+    
+    /* archive array before setting into defaults - because there may be null values for unset inventory count */
+    NSData *dataNextNextLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"lunch"][@"MenuItems"]];
+    NSData *dataNextNextDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"dinner"][@"MenuItems"]];
+    [defaults setObject:dataNextNextLunch forKey:@"nextNextLunchMenuItems"];
+    [defaults setObject:dataNextNextDinner forKey:@"nextNextDinnerMenuItems"];
+    
+    [defaults synchronize];
+    
+    [self prefetchImages:self.menuNextNext];
+//    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
 }
 
  /*----------------------GET LUNCH AND DINNER AND BUFFER TIME----------------------*/
@@ -828,8 +870,12 @@ static BentoShop *_shareInstance;
             [self setLunchOrDinnerMode];
             [self checkIfBentoArrayNeedsToBeReset];
             [self getMenus];
+            [self getNextNextMenus];
             [self getStatus];
             [self getServiceArea];
+            
+//            if ([[BentoShop sharedInstance] isClosed])
+//                [self getNextNextMenus];
         }
     });
     
