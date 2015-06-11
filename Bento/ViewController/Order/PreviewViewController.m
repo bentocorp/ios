@@ -82,6 +82,20 @@
     NSString *nextMenuTitleLunch = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     NSString *nextMenuTitleDinner = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     
+    // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
+    if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
+    {
+        titleLeft = @"Today's Lunch Menu";
+        titleRight = @"Tonight's Dinner Menu";
+    }
+    
+    // SOLD-OUT: 16:30 - 23:59
+    else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
+    {
+        titleLeft = @"Tonight's Dinner Menu";
+        titleRight = nextMenuTitleLunch;
+    }
+    
     // CLOSED: no menu today
     if ([[BentoShop sharedInstance] isClosed] && [[BentoShop sharedInstance] getMenuDateString] == nil)
     {
@@ -108,20 +122,6 @@
     {
         titleLeft = nextMenuTitleLunch;
         titleRight = nextMenuTitleDinner;
-    }
-
-    // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
-    else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
-    {
-        titleLeft = @"Today's Lunch Menu";
-        titleRight = @"Tonight's Dinner Menu";
-    }
-    
-    // SOLD-OUT: 16:30 - 23:59
-    else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
-    {
-        titleLeft = @"Tonight's Dinner Menu";
-        titleRight = nextMenuTitleLunch;
     }
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
