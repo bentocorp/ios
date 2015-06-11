@@ -79,86 +79,61 @@
     NSString *titleLeft;
     NSString *titleRight;
     
-//    NSString *nextMenuTitleLunch = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-//    NSString *nextMenuTitleDinner = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    
-//    NSString *nextMenuTitle;
-    
     // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
     if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
     {
         // LEFT SIDE
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            titleLeft = @"Now Serving Lunch";
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            titleLeft = @"Now Serving Dinner";
+        titleLeft = @"Now Serving Lunch";
         
         // RIGHT SIDE
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        {
-            if ([[BentoShop sharedInstance] isThereDinnerMenu])
-                titleRight = @"Tonight's Dinner Menu";
-            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-        }
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        {
-            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-        }
+        if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            titleRight = @"Tonight's Dinner Menu";
+        else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     }
 
     // SOLD-OUT: 16:30 - 23:59
     else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
     {
+        // LEFT SIDE
+        titleLeft = @"Now Serving Dinner";
         
+        // RIGHT SIDE
+        if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     }
     
-//    // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
-//    if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
+//    // CLOSED: no menu today
+//    if ([[BentoShop sharedInstance] isClosed] && [[BentoShop sharedInstance] getMenuDateString] == nil)
+//    {
+//        titleLeft = nextMenuTitleLunch;
+//        titleRight = nextMenuTitleDinner;
+//    }
+//    
+//    // CLOSED: 00:00 - 12:29
+//    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
 //    {
 //        titleLeft = @"Today's Lunch Menu";
 //        titleRight = @"Tonight's Dinner Menu";
 //    }
 //    
-//    // SOLD-OUT: 16:30 - 23:59
-//    else if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= dinnerTime && currentTime < 24)
+//    // CLOSED: 12:30 - 17:29
+//    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
 //    {
 //        titleLeft = @"Tonight's Dinner Menu";
 //        titleRight = nextMenuTitleLunch;
 //    }
-    
-    // CLOSED: no menu today
-    if ([[BentoShop sharedInstance] isClosed] && [[BentoShop sharedInstance] getMenuDateString] == nil)
-    {
-        titleLeft = nextMenuTitleLunch;
-        titleRight = nextMenuTitleDinner;
-    }
-    
-    // CLOSED: 00:00 - 12:29
-    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
-    {
-        titleLeft = @"Today's Lunch Menu";
-        titleRight = @"Tonight's Dinner Menu";
-    }
-    
-    // CLOSED: 12:30 - 17:29
-    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
-    {
-        titleLeft = @"Tonight's Dinner Menu";
-        titleRight = nextMenuTitleLunch;
-    }
-    
-    // CLOSED: 17.30 - 23:59
-    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
-    {
-        titleLeft = nextMenuTitleLunch;
-        titleRight = nextMenuTitleDinner;
-    }
+//    
+//    // CLOSED: 17.30 - 23:59
+//    else if ([[BentoShop sharedInstance] isClosed] && currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
+//    {
+//        titleLeft = nextMenuTitleLunch;
+//        titleRight = nextMenuTitleDinner;
+//    }
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
