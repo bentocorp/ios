@@ -57,6 +57,8 @@
 - (BOOL)isThereDinnerMenu;
 - (BOOL)isThereLunchNextMenu;
 - (BOOL)isThereDinnerNextMenu;
+- (BOOL)isThereLunchNextNextMenu;
+- (BOOL)isThereDinnerNextNextMenu;
 
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers;
 - (NSNumber *)getCurrentTime;

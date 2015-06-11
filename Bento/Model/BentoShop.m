@@ -754,6 +754,22 @@ static BentoShop *_shareInstance;
         return NO;
 }
 
+- (BOOL)isThereLunchNextNextMenu
+{
+    if ([defaults objectForKey:@"nextNextLunchMenuInfo"] != nil)
+        return YES;
+    else
+        return NO;
+}
+
+- (BOOL)isThereDinnerNextNextMenu
+{
+    if ([defaults objectForKey:@"nextNextDinnerMenuInfo"] != nil)
+        return YES;
+    else
+        return NO;
+}
+
 - (NSString *)getMenuType
 {
     if ([self getMenuInfo][@"menu_type"] != nil)

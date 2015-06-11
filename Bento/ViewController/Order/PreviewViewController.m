@@ -121,9 +121,9 @@
         
         // RIGHT SIDE (next menu or next-next menu)
         if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-            titleLeft = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNexgMenuWeekdayString]];
+            titleLeft = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
         else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-            titleLeft = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            titleLeft = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
     }
     
     // CLOSED: 00:00 - 12:29
