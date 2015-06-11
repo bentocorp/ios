@@ -79,8 +79,13 @@
     NSString *titleLeft;
     NSString *titleRight;
     
-    NSString *nextMenuTitleLunch = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    NSString *nextMenuTitleDinner = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+//    NSString *nextMenuTitleLunch = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+//    NSString *nextMenuTitleDinner = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    
+    NSString *nextMenuTitle;
+    
+    if ([[BentoShop sharedInstance] isThereLunchMenu])
+        // show today lunch
     
     // SOLD-OUT: 11:30 - 16:30 (but use instead: 00:00 - 16:30)
     if ([[BentoShop sharedInstance] isSoldOut] && currentTime >= 0 && currentTime < dinnerTime)
