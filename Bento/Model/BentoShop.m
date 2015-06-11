@@ -699,6 +699,29 @@ static BentoShop *_shareInstance;
     return strReturn;
 }
 
+- (NSString *)getNextNextMenuWeekdayString
+{
+    if (self.menuNextNext == nil)
+        return nil;
+    
+    NSDictionary *menuInfo;
+    
+    // doesn't matter lunch or dinner, just used to get next date
+    if ([defaults objectForKey:@"nextNextLunchMenuInfo"] != nil) // if no lunch, get dinner info
+        menuInfo = [defaults objectForKey:@"nextNextLunchMenuInfo"];
+    else
+        menuInfo = [defaults objectForKey:@"nextNextDinnerMenuInfo"];
+    
+    NSString *strDate = menuInfo[@"for_date"];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    NSDate *menuDate = [formatter dateFromString:strDate];
+    [formatter setDateFormat:@"EEEE"];
+    NSString *strReturn = [formatter stringFromDate:menuDate];
+    
+    return strReturn;
+}
+
 - (BOOL)isThereLunchMenu
 {
     if ([defaults objectForKey:@"lunchMenuInfo"] != nil)

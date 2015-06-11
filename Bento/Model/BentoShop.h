@@ -51,6 +51,7 @@
 
 - (NSString *)getNextMenuDateString;
 - (NSString *)getNextMenuWeekdayString;
+- (NSString *)getNextNextMenuWeekdayString;
 
 - (BOOL)isThereLunchMenu;
 - (BOOL)isThereDinnerMenu;
