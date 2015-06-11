@@ -1034,6 +1034,64 @@ static BentoShop *_shareInstance;
     return (NSArray *)arrayDishes;
 }
 
+- (NSArray *)getNextNextMainDishes:(NSString *)whatNeedsMain
+{
+    if (self.menuNext == nil)
+        return nil;
+    
+    NSDictionary *menuItems;
+    
+    if ([whatNeedsMain isEqualToString:@"nextNextLunchPreview"])
+    {
+        NSData *data = [defaults objectForKey:@"nextNextLunchMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    else if ([whatNeedsMain isEqualToString:@"nextNextDinnerPreview"])
+    {
+        NSData *data = [defaults objectForKey:@"nextNextDinnerMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    
+    NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
+    for (NSDictionary *dishInfo in menuItems)
+    {
+        NSString *strType = [dishInfo objectForKey:@"type"];
+        if ([strType isEqualToString:@"main"])
+            [arrayDishes addObject:dishInfo];
+    }
+    
+    return (NSArray *)arrayDishes;
+}
+
+- (NSArray *)getNextNextSideDishes:(NSString *)whatNeedsSides
+{
+    if (self.menuNext == nil)
+        return nil;
+    
+    NSDictionary *menuItems;
+    
+    if ([whatNeedsSides isEqualToString:@"nextNextLunchPreview"])
+    {
+        NSData *data = [defaults objectForKey:@"nextNextLunchMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    else if ([whatNeedsSides isEqualToString:@"nextNextDinnerPreview"])
+    {
+        NSData *data = [defaults objectForKey:@"nextNextDinnerMenuItems"];
+        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    }
+    
+    NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
+    for (NSDictionary *dishInfo in menuItems)
+    {
+        NSString *strType = [dishInfo objectForKey:@"type"];
+        if ([strType isEqualToString:@"side"])
+            [arrayDishes addObject:dishInfo];
+    }
+    
+    return (NSArray *)arrayDishes;
+}
+
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID
 {
     if (self.menuToday == nil)

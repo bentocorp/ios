@@ -76,6 +76,9 @@
 - (NSArray *)getNextMainDishes:(NSString *)whatNeedsMain;
 - (NSArray *)getNextSideDishes:(NSString *)whatNeedsSides;
 
+- (NSArray *)getNextNextMainDishes:(NSString *)whatNeedsMain;
+- (NSArray *)getNextNextSideDishes:(NSString *)whatNeedsSides;
+
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID;
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID;
 
