@@ -170,7 +170,7 @@
         }
         
         // 12:30 - 17:29
-        if (currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
+        else if (currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
         {
             // LEFT SIDE
             if ([[BentoShop sharedInstance] isThereDinnerMenu])
@@ -213,7 +213,7 @@
         }
             
         // 17.30 - 23:59
-        if (currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
+        else if (currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
         {
             // LEFT SIDE
             if ([[BentoShop sharedInstance] isThereLunchNextMenu])
