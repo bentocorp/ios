@@ -209,7 +209,6 @@
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
             }
-
         }
             
         // 17.30 - 23:59

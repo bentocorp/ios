@@ -166,6 +166,7 @@ static BentoShop *_shareInstance;
     NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
     
     [self getNextMenus];
+    [self getNextNextMenus];
     
 //    if (self.prevClosed != isClosed || self.prevSoldOut != isSoldOut) {
         [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
@@ -353,44 +354,47 @@ static BentoShop *_shareInstance;
 }
 
 - (void)getNextNextMenus
-{   
-    NSDictionary *menuInfo;
-    
-    // doesn't matter lunch or dinner, just used to get next date
-    if ([defaults objectForKey:@"nextLunchMenuInfo"] != nil) // if no lunch, get dinner info
-        menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"];
-    else
-        menuInfo = [defaults objectForKey:@"nextDinnerMenuInfo"];
-    
-    NSString *strDate = menuInfo[@"for_date"];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    
-    NSDate *menuDate = [formatter dateFromString:strDate];
-    NSString *nextDateString = [formatter stringFromDate:menuDate];
-    ///////////////////////////////////////////////////////////////
-    
-    NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, [nextDateString stringByReplacingOccurrencesOfString:@"-" withString: @""]];
-    
-    NSError *error = nil;
-    NSInteger statusCode = 0;
-    self.menuNextNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
-    
-    // set menuInfo and menuItems to persistent storage
-    [defaults setObject:self.menuNextNext[@"lunch"][@"Menu"] forKey:@"nextNextLunchMenuInfo"];
-    [defaults setObject:self.menuNextNext[@"dinner"][@"Menu"] forKey:@"nextNextDinnerMenuInfo"];
-    
-    /* archive array before setting into defaults - because there may be null values for unset inventory count */
-    NSData *dataNextNextLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"lunch"][@"MenuItems"]];
-    NSData *dataNextNextDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"dinner"][@"MenuItems"]];
-    [defaults setObject:dataNextNextLunch forKey:@"nextNextLunchMenuItems"];
-    [defaults setObject:dataNextNextDinner forKey:@"nextNextDinnerMenuItems"];
-    
-    [defaults synchronize];
-    
-    [self prefetchImages:self.menuNextNext];
-//    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+{
+    if ([self isClosed])
+    {
+        NSDictionary *menuInfo;
+        
+        // doesn't matter lunch or dinner, just used to get next date
+        if ([defaults objectForKey:@"nextLunchMenuInfo"] != nil) // if no lunch, get dinner info
+            menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"];
+        else
+            menuInfo = [defaults objectForKey:@"nextDinnerMenuInfo"];
+        
+        NSString *strDate = menuInfo[@"for_date"];
+        
+        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+        [formatter setDateFormat:@"yyyy-MM-dd"];
+        
+        NSDate *menuDate = [formatter dateFromString:strDate];
+        NSString *nextDateString = [formatter stringFromDate:menuDate];
+        ///////////////////////////////////////////////////////////////
+        
+        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, [nextDateString stringByReplacingOccurrencesOfString:@"-" withString: @""]];
+        
+        NSError *error = nil;
+        NSInteger statusCode = 0;
+        self.menuNextNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
+        
+        // set menuInfo and menuItems to persistent storage
+        [defaults setObject:self.menuNextNext[@"lunch"][@"Menu"] forKey:@"nextNextLunchMenuInfo"];
+        [defaults setObject:self.menuNextNext[@"dinner"][@"Menu"] forKey:@"nextNextDinnerMenuInfo"];
+        
+        /* archive array before setting into defaults - because there may be null values for unset inventory count */
+        NSData *dataNextNextLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"lunch"][@"MenuItems"]];
+        NSData *dataNextNextDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"dinner"][@"MenuItems"]];
+        [defaults setObject:dataNextNextLunch forKey:@"nextNextLunchMenuItems"];
+        [defaults setObject:dataNextNextDinner forKey:@"nextNextDinnerMenuItems"];
+        
+        [defaults synchronize];
+        
+        [self prefetchImages:self.menuNextNext];
+//      [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+    }
 }
 
  /*----------------------GET LUNCH AND DINNER AND BUFFER TIME----------------------*/
