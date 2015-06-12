@@ -393,7 +393,6 @@ static BentoShop *_shareInstance;
         [defaults synchronize];
         
         [self prefetchImages:self.menuNextNext];
-//      [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
     }
 }
 

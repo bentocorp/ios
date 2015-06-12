@@ -573,6 +573,8 @@
 {
     if (isThereConnection)
     {
+        [self viewDidLoad];
+        
         [cvDishesLeft reloadData];
         [cvDishesRight reloadData];
     }
