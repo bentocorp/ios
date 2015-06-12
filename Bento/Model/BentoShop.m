@@ -378,8 +378,8 @@ static BentoShop *_shareInstance;
     self.menuNextNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
     
     // set menuInfo and menuItems to persistent storage
-    [defaults setObject:self.menuNextNext[@"lunch"][@"Menu"] forKey:@"nextLunchMenuInfo"];
-    [defaults setObject:self.menuNextNext[@"dinner"][@"Menu"] forKey:@"nextDinnerMenuInfo"];
+    [defaults setObject:self.menuNextNext[@"lunch"][@"Menu"] forKey:@"nextNextLunchMenuInfo"];
+    [defaults setObject:self.menuNextNext[@"dinner"][@"Menu"] forKey:@"nextNextDinnerMenuInfo"];
     
     /* archive array before setting into defaults - because there may be null values for unset inventory count */
     NSData *dataNextNextLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"lunch"][@"MenuItems"]];
