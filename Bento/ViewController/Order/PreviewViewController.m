@@ -229,54 +229,136 @@
             {
                 titleLeft = @"Today's Lunch Menu";
                 
+                aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                {
                     titleRight = @"Tonight's Dinner Menu";
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+
+                }
                 else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextDinnerPreview"];
+                }
             }
             else if ([[BentoShop sharedInstance] isThereDinnerMenu])
             {
                 titleLeft = @"Tonight's Dinner Menu";
                 
+                aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+                
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
-                
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextDinnerPreview"];
+                }
             }
             else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
             {
                 titleLeft = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                 
+                aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextDinnerPreview"];
+                }
             }
             else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
             {
                 titleLeft = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                 
+                aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextDinnerPreview"];
+                }
             }
         }
         
@@ -288,37 +370,91 @@
             {
                 titleLeft = @"Tonight's Dinner Menu";
                 
+                aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+                
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextDinnerPreview"];
+                }
             }
             else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
             {
                 titleLeft = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                 
+                aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextDinnerPreview"];
+                }
             }
             else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
             {
                 titleLeft = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                 
+                aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextDinnerPreview"];
+                }
             }
         }
         
@@ -330,23 +466,54 @@
             {
                 titleLeft = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                 
+                aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextDinnerPreview"];
+                }
             }
             else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
             {
                 titleLeft = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                 
+                aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextLunchPreview"];
+                }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextNextMenu])
+                {
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextNextMenuWeekdayString]];
+                    
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextNextMainDishes:@"nextNextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextNextSideDishes:@"nextNextDinnerPreview"];
+                }
             }
         }
     }
