@@ -22,6 +22,7 @@
 @implementation PreviewViewController
 {
     UIScrollView *scrollView;
+    UIView *navigationBarView;
     BWTitlePagerView *pagingTitleView;
     
     NSString *titleLeft;
@@ -78,21 +79,21 @@
     
     /*---Navigation View---*/
     
-    UIView *navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
+    navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
     navigationBarView.backgroundColor = [UIColor whiteColor];
     [self.view addSubview:navigationBarView];
     
-    /*---BW Title Pager View---*/
-    
-    [self setTitlesMainAndSideDishes];
-    
-    pagingTitleView = [[BWTitlePagerView alloc] init];
-    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
-    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
-    [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[titleLeft, titleRight]];
-    [navigationBarView addSubview:pagingTitleView];
+//    /*---BW Title Pager View---*/
+//    
+//    [self setTitlesMainAndSideDishes];
+//    
+//    pagingTitleView = [[BWTitlePagerView alloc] init];
+//    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
+//    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
+//    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+//    [pagingTitleView observeScrollView:scrollView];
+//    [pagingTitleView addObjects:@[titleLeft, titleRight]];
+//    [navigationBarView addSubview:pagingTitleView];
     
     /*---Line Separator---*/
     
@@ -188,7 +189,7 @@
             titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
             
             aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-            arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+            arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
         }
     }
     
@@ -214,7 +215,7 @@
             titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
             
             aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-            arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+            arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
         }
     }
     
@@ -253,7 +254,7 @@
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
                 {
@@ -290,7 +291,7 @@
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
                 {
@@ -320,7 +321,7 @@
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
                 {
@@ -342,7 +343,7 @@
                 titleLeft = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                 
                 aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                arySideDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
@@ -386,7 +387,7 @@
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
                 {
@@ -416,7 +417,7 @@
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
                 {
@@ -438,7 +439,7 @@
                 titleLeft = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                 
                 aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                arySideDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
@@ -475,7 +476,7 @@
                     titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                    arySideDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 }
                 else if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
                 {
@@ -497,7 +498,7 @@
                 titleLeft = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
                 
                 aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                arySideDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 
                 // RIGHT SIDE
                 if ([[BentoShop sharedInstance] isThereLunchNextNextMenu])
@@ -519,12 +520,31 @@
     }
 }
 
+- (void)setMenuTitles
+{
+    /*---BW Title Pager View---*/
+    
+    [pagingTitleView removeFromSuperview];
+    
+    [self setTitlesMainAndSideDishes];
+    
+    pagingTitleView = [[BWTitlePagerView alloc] init];
+    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
+    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
+    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+    [pagingTitleView observeScrollView:scrollView];
+    [pagingTitleView addObjects:@[titleLeft, titleRight]];
+    [navigationBarView addSubview:pagingTitleView];
+}
+
 #pragma mark - Notifications
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
+    [self setMenuTitles];
+
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
@@ -573,7 +593,7 @@
 {
     if (isThereConnection)
     {
-        [self viewDidLoad];
+//        [self setMenuTitles];
         
         [cvDishesLeft reloadData];
         [cvDishesRight reloadData];
