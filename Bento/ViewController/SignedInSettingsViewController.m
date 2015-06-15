@@ -218,7 +218,9 @@
     
     NSLog(@"sharePrecomposedMessageOriginal - %@", sharePrecomposedMessageOriginal);
     
-    sharePrecomposedMessageNew = [sharePrecomposedMessageOriginal stringByReplacingOccurrencesOfString:@"%@" withString:currentUserInfo[@"coupon_code"]];
+    //fix this fucking issue
+    if (currentUserInfo[@"coupon_code"] != [NSNull null])
+        sharePrecomposedMessageNew = [sharePrecomposedMessageOriginal stringByReplacingOccurrencesOfString:@"%@" withString:currentUserInfo[@"coupon_code"]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
