@@ -525,6 +525,7 @@
     /*---BW Title Pager View---*/
     
     [pagingTitleView removeFromSuperview];
+    pagingTitleView = nil;
     
     [self setTitlesMainAndSideDishes];
     
@@ -543,12 +544,29 @@
 {
     [super viewWillAppear:animated];
     
+    currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
+    dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
+    bufferTime = [[[BentoShop sharedInstance] getBufferTime] floatValue];
+    
     [self setMenuTitles];
 
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onEnteredForeground) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+}
+
+- (void)onEnteredForeground
+{
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
+}
+
+- (void)refreshView
+{
+    [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
+    [self viewWillAppear:YES];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
