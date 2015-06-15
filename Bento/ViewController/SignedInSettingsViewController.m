@@ -33,6 +33,8 @@
     UIScrollView *scrollView;
     NSString *sharePrecomposedMessageNew;
     JGProgressHUD *loadingHUD;
+    
+    NSString *couponCodeString;
 }
 
 - (void)viewDidLoad {
@@ -41,6 +43,13 @@
     // get current user info
     currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     NSLog(@"current user info - %@", currentUserInfo);
+    
+    // Set promo code
+    if (currentUserInfo[@"coupon_code"] != [NSNull null] || currentUserInfo[@"coupon_code"] != nil)
+        couponCodeString = currentUserInfo[@"coupon_code"];
+    else
+        couponCodeString = @"--";
+    
     
     self.view.backgroundColor = [UIColor colorWithRed:0.914f green:0.925f blue:0.925f alpha:1.0f];
     
@@ -155,7 +164,8 @@
     UIButton *promoCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 42.5, SCREEN_WIDTH - 20, 21)];
     [promoCodeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [promoCodeButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:17]];
-    [promoCodeButton setTitle:currentUserInfo[@"coupon_code"] forState:UIControlStateNormal];
+    
+    [promoCodeButton setTitle:couponCodeString forState:UIControlStateNormal];
     [promoCodeButton addTarget:self action:@selector(copyCode) forControlEvents:UIControlEventTouchUpInside];
     [promoGrayBackgroundView addSubview:promoCodeButton];
     
@@ -214,13 +224,18 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    // Set promo code
+    if (currentUserInfo[@"coupon_code"] != [NSNull null] || currentUserInfo[@"coupon_code"] != nil)
+        couponCodeString = currentUserInfo[@"coupon_code"];
+    else
+        couponCodeString = @"--";
+    
+    
     NSString *sharePrecomposedMessageOriginal = [[AppStrings sharedInstance] getString:SHARE_PRECOMPOSED_MESSAGE];
     
     NSLog(@"sharePrecomposedMessageOriginal - %@", sharePrecomposedMessageOriginal);
     
-    //fix this fucking issue
-    if (currentUserInfo[@"coupon_code"] != [NSNull null])
-        sharePrecomposedMessageNew = [sharePrecomposedMessageOriginal stringByReplacingOccurrencesOfString:@"%@" withString:currentUserInfo[@"coupon_code"]];
+    sharePrecomposedMessageNew = [sharePrecomposedMessageOriginal stringByReplacingOccurrencesOfString:@"%@" withString:couponCodeString];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
@@ -561,7 +576,8 @@
     
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.messageComposeDelegate = self;
-    [messageController setBody:[NSString stringWithFormat:@"Use my Bento promo code, %@, and get $5 off your first delicious Bento meal. Install the app here: http://apple.co/1FPEbWY", currentUserInfo[@"coupon_code"]]];
+    
+    [messageController setBody:[NSString stringWithFormat:@"Use my Bento promo code, %@, and get $5 off your first delicious Bento meal. Install the app here: http://apple.co/1FPEbWY", couponCodeString]];
     
     // Present message view controller on screen
     [self presentViewController:messageController animated:YES completion:nil];
@@ -574,7 +590,7 @@
     [loadingHUD showInView:self.view];
     
     UIPasteboard *pasteboard = [UIPasteboard generalPasteboard];
-    pasteboard.string = currentUserInfo[@"coupon_code"];
+    pasteboard.string = couponCodeString;
     
     [loadingHUD dismiss];
 }
