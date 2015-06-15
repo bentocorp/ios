@@ -560,13 +560,16 @@
 
 - (void)onEnteredForeground
 {
-    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
+    if (isThereConnection)
+        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
 }
 
 - (void)refreshView
 {
     [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
     [self viewWillAppear:YES];
+    [cvDishesLeft reloadData];
+    [cvDishesRight reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -611,10 +614,7 @@
 {
     if (isThereConnection)
     {
-//        [self setMenuTitles];
-        
-        [cvDishesLeft reloadData];
-        [cvDishesRight reloadData];
+        [self refreshView];
     }
 }
 
