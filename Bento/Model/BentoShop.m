@@ -528,12 +528,16 @@ static BentoShop *_shareInstance;
 {
     NSDictionary *menuInfo;
     
-    // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime)
+    // 12:00am - dinner opening (ie. 16.5) && lunch menu exists
+    if (currentTime >= 0 && currentTime < dinnerTime && [defaults objectForKey:@"lunchMenuInfo"] != nil)
         menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
+    
+    // if no lunch menu, SHOW DINNER
+    else
+        menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
         
-    // dinner opening - 11:59pm
-    else if (currentTime >= dinnerTime && currentTime < 24)
+    // dinner opening - 11:59pm && dinner menu exists
+    if (currentTime >= dinnerTime && currentTime < 24 && [defaults objectForKey:@"dinnerMenuInfo"] != nil)
         menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
     
     if (menuInfo == nil)

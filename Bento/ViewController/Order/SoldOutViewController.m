@@ -54,8 +54,6 @@
     float dinnerTime;
     float bufferTime;
     
-    NSString *strTitle;
-    
     JGProgressHUD *loadingHUD;
     BOOL isThereConnection;
 }
@@ -205,6 +203,8 @@
         self.type = 0;
     else if ([[BentoShop sharedInstance] isSoldOut])
         self.type = 1;
+    
+     NSString *strTitle;
     
     // Closed && 17:30 - 23:59 (get next)
     if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
