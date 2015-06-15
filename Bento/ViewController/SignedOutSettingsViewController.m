@@ -187,12 +187,6 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    UIAlertView *cantSendMailAlert = [[UIAlertView alloc] initWithTitle:nil
-                                                                message:@"An error occured when trying to present Email composition page"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"OK"
-                                                      otherButtonTitles:nil];
-    
     switch (indexPath.row) {
         case 0:
             
@@ -225,8 +219,6 @@
             // Present mail view controller on screen
             if ([MFMailComposeViewController canSendMail])
                 [self presentViewController:mailComposeViewController animated:YES completion:NULL];
-            else
-                [cantSendMailAlert show];
             
             break;
             
