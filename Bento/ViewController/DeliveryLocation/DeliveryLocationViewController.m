@@ -312,8 +312,8 @@
     }
     else if (currentTime >= dinnerTime && currentTime < 24)
     {
-        CustomBentoViewController *servingDinnerViewController = [[CustomBentoViewController alloc] init];
-        [self.navigationController popToViewController:servingDinnerViewController animated:YES];
+        CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
+        [self.navigationController popToViewController:customBentoViewController animated:YES];
     }
 }
 

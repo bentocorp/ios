@@ -112,6 +112,22 @@
     self.lblMessageContent.adjustsFontSizeToFitWidth = YES;
     self.lblMessageTitle.adjustsFontSizeToFitWidth = YES;
     
+    self.btnPreview.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.btnPreview.titleLabel.textAlignment = NSTextAlignmentCenter;
+    
+    self.btnPreview.layer.cornerRadius = 8;
+    self.btnPreview.layer.borderWidth = 1;
+    self.btnPreview.layer.borderColor = [[UIColor whiteColor] CGColor];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+    [super viewWillAppear:animated];
+    
     if (self.type == 0) // Closed
     {
         self.lblMessageTitle.text = [[AppStrings sharedInstance] getString:CLOSED_TEXT_TITLE];
@@ -132,22 +148,6 @@
         [self.btnPolicy setTitle:[[AppStrings sharedInstance] getString:SOLDOUT_LINK_POLICY] forState:UIControlStateNormal];
         [self.btnTerms setTitle:[[AppStrings sharedInstance] getString:SOLDOUT_LINK_TERMS] forState:UIControlStateNormal];
     }
-    
-    self.btnPreview.titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-    self.btnPreview.titleLabel.textAlignment = NSTextAlignmentCenter;
-    
-    self.btnPreview.layer.cornerRadius = 8;
-    self.btnPreview.layer.borderWidth = 1;
-    self.btnPreview.layer.borderColor = [[UIColor whiteColor] CGColor];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-}
-
-- (void)viewWillAppear:(BOOL)animated
-{
-    [super viewWillAppear:animated];
     
     [self setPreviewButtonText];
     
