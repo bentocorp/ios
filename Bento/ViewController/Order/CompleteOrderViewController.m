@@ -750,8 +750,6 @@
 
 - (IBAction)onGetItNow:(id)sender
 {
-    
-    
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
     if (strAPIToken == nil || strAPIToken.length == 0)
     {

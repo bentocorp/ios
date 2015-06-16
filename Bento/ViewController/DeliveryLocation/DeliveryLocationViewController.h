@@ -13,7 +13,4 @@
 
 @property (nonatomic, assign) BOOL isFromOrder;
 
-//@property (nonatomic, assign) NSInteger priceDiscount;
-//@property (nonatomic, strong) NSString *strPromoCode;
-
 @end
