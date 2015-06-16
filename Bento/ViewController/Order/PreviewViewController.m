@@ -506,6 +506,12 @@
             }
         }
     }
+    
+    if (titleLeft == nil)
+        titleLeft = @"Next Upcoming Menu";
+    
+    if (titleRight == nil)
+        titleRight = @"Upcoming Menu";
 }
 
 - (void)setMenuTitles
