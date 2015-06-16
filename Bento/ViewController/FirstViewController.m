@@ -185,7 +185,8 @@
     self.activityIndicator.hidden = NO;
     [self.activityIndicator startAnimating];
     
-    [webManager AsyncProcess:strAPIName method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+    [webManager AsyncProcess:strAPIName method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation)
+    {
         [self.activityIndicator stopAnimating];
         
         NSDictionary *response = networkOperation.responseJSON;

@@ -670,8 +670,7 @@
     if (curPaymentMethod == Payment_CreditCard)
     {
         STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
-        NSLog(@"CREDIT CARD INFO: %@", cardInfo);
-        
+
         if (cardInfo != nil) // STPCard
         {
             loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
@@ -751,6 +750,8 @@
 
 - (IBAction)onGetItNow:(id)sender
 {
+    
+    
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
     if (strAPIToken == nil || strAPIToken.length == 0)
     {
@@ -1107,12 +1108,10 @@
     }
     
     [request setObject:stripeInfo forKey:@"Stripe"];
-    // Stripe token
     
     // PromoCode
     NSString *strPromoCode = @"";
-//    if (self.strPromoCode != nil && self.strPromoCode.length > 0)
-//        strPromoCode = self.strPromoCode;
+
     if (_strPromoCode != nil && _strPromoCode.length > 0)
         strPromoCode = _strPromoCode;
     
