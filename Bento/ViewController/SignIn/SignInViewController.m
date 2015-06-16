@@ -96,8 +96,10 @@
     
     // For test only
 #ifdef DEBUG
-    self.txtEmail.text = @"ridev@bentonow.com";
-    self.txtPassword.text = @"12345678";
+//    self.txtEmail.text = @"ridev@bentonow.com";
+//    self.txtPassword.text = @"12345678";
+    self.txtEmail.text = @"joseph@bentonow.com";
+    self.txtPassword.text = @"123456";
 #endif//DEBUG
     
     [self updateUI];
@@ -294,7 +296,7 @@
         [self gotoDeliveryLocationScreen];
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
-        [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
+        [self.navigationController popViewControllerAnimated:YES]; // if not this will run
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         [loadingHUD dismiss];

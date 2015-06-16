@@ -670,6 +670,8 @@
     if (curPaymentMethod == Payment_CreditCard)
     {
         STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
+        NSLog(@"CREDIT CARD INFO: %@", cardInfo);
+        
         if (cardInfo != nil) // STPCard
         {
             loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
