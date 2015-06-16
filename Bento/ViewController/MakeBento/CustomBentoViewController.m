@@ -165,6 +165,12 @@
             nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
     }
     
+    // just in case
+    if (currentMenuTitle == nil)
+        currentMenuTitle = @"Current Menu";
+    if (nextMenuTitle == nil)
+        nextMenuTitle = @"Upcoming Menu";
+    
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
@@ -383,6 +389,7 @@
     lblSideDish4.adjustsFontSizeToFitWidth = YES;
     [viewSide4 addSubview:lblSideDish4];
     
+
 /*---Image Banner---*/
     
     UIImage *soldOutBannerImage = [UIImage imageNamed:@"banner_sold_out"];
