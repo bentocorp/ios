@@ -358,7 +358,7 @@
                 CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
                 [self.navigationController pushViewController:completeOrderViewController animated:YES];
                 
-                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isFromHomepge"];
+                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isFromHomepage"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
         }
