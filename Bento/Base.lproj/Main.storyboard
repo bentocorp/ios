@@ -1831,7 +1831,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4n-7T-zdy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1952" y="2470"/>
+            <point key="canvasLocation" x="1420" y="2452"/>
         </scene>
         <!--Enter Credit Card View Controller-->
         <scene sceneID="l9o-iz-hyu">
@@ -1939,7 +1939,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0y-jd-YVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2343" y="2470"/>
+            <point key="canvasLocation" x="1832" y="2452"/>
         </scene>
         <!--Order Confirm View Controller-->
         <scene sceneID="g3z-gP-hSU">
@@ -2029,7 +2029,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZa-6b-62c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1420" y="3049"/>
+            <point key="canvasLocation" x="1420" y="3077"/>
         </scene>
         <!--Out Of Delivery Address View Controller-->
         <scene sceneID="dzF-gT-KqI">
@@ -2182,7 +2182,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NWx-IA-0Yo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1918" y="1801"/>
+            <point key="canvasLocation" x="1832" y="1801"/>
         </scene>
         <!--Sign In View Controller-->
         <scene sceneID="LZW-Kn-45T">

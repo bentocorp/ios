@@ -518,11 +518,6 @@
     [self performSegueWithIdentifier:@"CreditCard" sender:nil];
 }
 
-- (void) gotoConfirmOrderScreen
-{
-    [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
-}
-
 - (IBAction)onBack:(id)sender
 {
     [self.navigationController popViewControllerAnimated:YES];
@@ -1156,9 +1151,7 @@
         
         if (completion)
             completion(PKPaymentAuthorizationStatusSuccess);
-        
-//        for (Bento *bento in self.aryBentos)
-//            [[BentoShop sharedInstance] removeBento:bento];
+
         
         [[BentoShop sharedInstance] resetBentoArray]; // remove from temp
         [[BentoShop sharedInstance] saveBentoArray]; // save empty to persistent storage
@@ -1167,7 +1160,7 @@
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
         [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
         
-        [self gotoConfirmOrderScreen];
+        [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         [loadingHUD dismiss];
