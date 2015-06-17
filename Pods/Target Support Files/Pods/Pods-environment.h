@@ -48,3 +48,15 @@
 #define COCOAPODS_VERSION_MINOR_Stripe_Core 1
 #define COCOAPODS_VERSION_PATCH_Stripe_Core 0
 
+// mopub-ios-sdk
+#define COCOAPODS_POD_AVAILABLE_mopub_ios_sdk
+#define COCOAPODS_VERSION_MAJOR_mopub_ios_sdk 3
+#define COCOAPODS_VERSION_MINOR_mopub_ios_sdk 8
+#define COCOAPODS_VERSION_PATCH_mopub_ios_sdk 0
+
+// mopub-ios-sdk/MoPubSDK
+#define COCOAPODS_POD_AVAILABLE_mopub_ios_sdk_MoPubSDK
+#define COCOAPODS_VERSION_MAJOR_mopub_ios_sdk_MoPubSDK 3
+#define COCOAPODS_VERSION_MINOR_mopub_ios_sdk_MoPubSDK 8
+#define COCOAPODS_VERSION_PATCH_mopub_ios_sdk_MoPubSDK 0
+

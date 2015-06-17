@@ -88,6 +88,11 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "PaymentKit/PaymentKit/Resources/gradient@2x.png"
   install_resource "PaymentKit/PaymentKit/Resources/textfield.png"
   install_resource "PaymentKit/PaymentKit/Resources/textfield@2x.png"
+  install_resource "mopub-ios-sdk/MoPubSDK/Internal/Common/MPAdBrowserController.xib"
+  install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX.png"
+  install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@2x.png"
+  install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@3x.png"
+  install_resource "mopub-ios-sdk/MoPubSDK/Resources/MRAID.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft.png"
@@ -127,6 +132,11 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "PaymentKit/PaymentKit/Resources/gradient@2x.png"
   install_resource "PaymentKit/PaymentKit/Resources/textfield.png"
   install_resource "PaymentKit/PaymentKit/Resources/textfield@2x.png"
+  install_resource "mopub-ios-sdk/MoPubSDK/Internal/Common/MPAdBrowserController.xib"
+  install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX.png"
+  install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@2x.png"
+  install_resource "mopub-ios-sdk/MoPubSDK/Resources/MPCloseButtonX@3x.png"
+  install_resource "mopub-ios-sdk/MoPubSDK/Resources/MRAID.bundle"
 fi
 
 rsync -avr --copy-links --no-relative --exclude '*/.svn/*' --files-from="$RESOURCES_TO_COPY" / "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"
