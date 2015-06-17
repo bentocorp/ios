@@ -320,7 +320,7 @@
                  [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
                  
 //                 [mixpanel track:@"Completed Registration" properties:nil];
-                 NSLog(@"Completed Registration");
+                 NSLog(@"COMPLETED REGISTRATION");
                  
              } failure:^(MKNetworkOperation *errorOp, NSError *error) {
                  
@@ -428,9 +428,8 @@
         
         [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
             
-//        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//        CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
-//        [self.navigationController pushViewController:completeOrderViewController animated:YES];
+//        [mixpanel track:@"Began Registration" properties:nil];
+        NSLog(@"COMPLETED REGISTRATION");
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         
