@@ -21,6 +21,7 @@
 #import "WebManager.h"
 #import "DataManager.h"
 #import "FacebookManager.h"
+#import "Mixpanel.h"
 
 #import "BentoShop.h"
 
@@ -727,6 +728,9 @@
 {
     _activeField = textField;
     [self showSignUpButton];
+    
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Began Registration" properties:nil];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
