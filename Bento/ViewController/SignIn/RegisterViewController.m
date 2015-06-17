@@ -66,11 +66,16 @@
 @implementation RegisterViewController
 {
     JGProgressHUD *loadingHUD;
+    
+    Mixpanel *mixpanel;
+    BOOL beganRegistration;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+
+    mixpanel = [Mixpanel sharedInstance];
+    
     self.lblTitle.text = [[AppStrings sharedInstance] getString:SIGNUP_TITLE];
     [self.btnRegister setTitle:[[AppStrings sharedInstance] getString:SIGNUP_BUTTON_SIGNUP] forState:UIControlStateNormal];
     [self.btnPolicy setTitle:[[AppStrings sharedInstance] getString:SIGNUP_LINK_POLICY] forState:UIControlStateNormal];
@@ -313,6 +318,9 @@
                  [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
                 
                  [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
+                 
+//                 [mixpanel track:@"Completed Registration" properties:nil];
+                 NSLog(@"Completed Registration");
                  
              } failure:^(MKNetworkOperation *errorOp, NSError *error) {
                  
@@ -729,8 +737,16 @@
     _activeField = textField;
     [self showSignUpButton];
     
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Began Registration" properties:nil];
+    // Track Began Registration
+    // only call once per page view
+    if (beganRegistration == NO)
+    {
+//        [mixpanel track:@"Began Registration" properties:nil];
+        
+        beganRegistration = YES;
+        
+        NSLog(@"BEGAN REGISTRATION");
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField

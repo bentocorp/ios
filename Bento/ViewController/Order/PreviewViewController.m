@@ -569,7 +569,6 @@
         //do nothing, obviously it wasn't attached because an exception was thrown
     }
     
-    
     [self viewWillAppear:YES];
     [cvDishesLeft reloadData];
     [cvDishesRight reloadData];
