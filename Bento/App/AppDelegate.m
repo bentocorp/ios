@@ -104,7 +104,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [Fabric with:@[CrashlyticsKit]];
     
     // Twitter Conversion Tracking, MoPub
-    [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"<ITUNES_APPLICATION_ID>"];
+    [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"963634117"];
     
     // MixPanel
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
