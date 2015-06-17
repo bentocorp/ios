@@ -19,10 +19,11 @@
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
-// Crashlytics
+// Crashlytics, and Twitter conversion tracking
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
+#import "MoPub.h"
 
 // Mixpanel
 #import "Mixpanel.h"
@@ -101,6 +102,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Crashlytics
     [Fabric with:@[CrashlyticsKit]];
+    
+    // Twitter Conversion Tracking, MoPub
+    [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"<ITUNES_APPLICATION_ID>"];
     
     // MixPanel
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
