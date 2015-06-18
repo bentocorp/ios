@@ -163,29 +163,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
-            timestampString = "456188411.130821"
+            filePath = "Bento/ViewController/SignIn/PhoneNumberViewController.m"
+            timestampString = "456348144.934178"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "706"
-            endingLineNumber = "706"
-            landmarkName = "-gotoOrderScreen"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/SignIn/RegisterViewController.m"
-            timestampString = "456272608.906736"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "735"
-            endingLineNumber = "735"
-            landmarkName = "-textFieldDidBeginEditing:"
+            startingLineNumber = "327"
+            endingLineNumber = "327"
+            landmarkName = "-processRegister"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

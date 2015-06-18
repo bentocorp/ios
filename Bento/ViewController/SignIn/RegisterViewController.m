@@ -319,7 +319,7 @@
                 
                  [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
                  
-//                 [mixpanel track:@"Completed Registration" properties:nil];
+                 [mixpanel track:@"Completed Registration" properties:nil];
                  NSLog(@"COMPLETED REGISTRATION");
                  
              } failure:^(MKNetworkOperation *errorOp, NSError *error) {
@@ -428,7 +428,7 @@
         
         [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
             
-//        [mixpanel track:@"Began Registration" properties:nil];
+        [mixpanel track:@"Completed Registration" properties:nil];
         NSLog(@"COMPLETED REGISTRATION");
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
@@ -740,7 +740,7 @@
     // only call once per page view
     if (beganRegistration == NO)
     {
-//        [mixpanel track:@"Began Registration" properties:nil];
+        [mixpanel track:@"Began Registration" properties:nil];
         
         beganRegistration = YES;
         
