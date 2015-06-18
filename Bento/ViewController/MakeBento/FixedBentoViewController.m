@@ -40,6 +40,8 @@
 
 #import "JGProgressHUD.h"
 
+#import "Mixpanel.h"
+
 
 @interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -625,6 +627,11 @@
 
 - (void)onAddBento:(id)sender
 {
+    // Track began add a bento
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Began Registration" properties:nil];
+    NSLog(@"BEGAN BUILDING A BENTO");
+    
     // animate badge
     [animationView startCanvasAnimation];
     
