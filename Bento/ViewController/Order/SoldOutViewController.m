@@ -12,6 +12,9 @@
 
 #import "PreviewViewController.h"
 
+#import "SignedInSettingsViewController.h"
+#import "SignedOutSettingsViewController.h"
+
 #import "MyAlertView.h"
 
 #import "UIImageView+WebCache.h"
@@ -91,6 +94,11 @@
     [super viewDidLoad];
     
     isThereConnection = YES;
+    
+    UIButton *settingsButton = [[UIButton alloc] initWithFrame:CGRectMake(12, 30, 25, 25)];
+    [settingsButton addTarget:self action:@selector(onSettings) forControlEvents:UIControlEventTouchUpInside];
+    [settingsButton setImage:[UIImage imageNamed:@"icon-user"] forState:UIControlStateNormal];
+    [self.view addSubview:settingsButton];
     
     self.openingHoursLabel.adjustsFontSizeToFitWidth = YES;
     self.lunchAndDinnerHoursLabel.adjustsFontSizeToFitWidth = YES;
@@ -403,6 +411,32 @@
 {
     PreviewViewController *previewViewController = [[PreviewViewController alloc] init];
     [self.navigationController pushViewController:previewViewController animated:YES];
+}
+
+- (void)onSettings
+{
+    // get current user info
+    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
+    
+    SignedInSettingsViewController *signedInSettingsViewController = [[SignedInSettingsViewController alloc] init];
+    SignedOutSettingsViewController *signedOutSettingsViewController = [[SignedOutSettingsViewController alloc] init];
+    UINavigationController *navC;
+    
+    // signed in or not?
+    if (currentUserInfo == nil) {
+        
+        // navigate to signed out settings vc
+        navC = [[UINavigationController alloc] initWithRootViewController:signedOutSettingsViewController];
+        navC.navigationBar.hidden = YES;
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+        
+    } else {
+        
+        // navigate to signed in settings vc
+        navC = [[UINavigationController alloc] initWithRootViewController:signedInSettingsViewController];
+        navC.navigationBar.hidden = YES;
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+    }
 }
 
 #pragma mark UITextFieldDelegate
