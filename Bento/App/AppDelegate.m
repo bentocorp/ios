@@ -19,9 +19,11 @@
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
-// Crashlytics
+// Crashlytics, and Twitter conversion tracking
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
+
+#import "MoPub.h"
 
 // Mixpanel
 #import "Mixpanel.h"
@@ -100,6 +102,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Crashlytics
     [Fabric with:@[CrashlyticsKit]];
+    
+    // Twitter Conversion Tracking, MoPub
+    [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"963634117"];
     
     // MixPanel
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
@@ -218,9 +223,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
+    [globalShop getStatus];
     [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
     [globalShop setLunchOrDinnerMode];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     
     // Global Data Manager
     [globalShop refreshPause];
