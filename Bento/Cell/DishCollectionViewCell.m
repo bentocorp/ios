@@ -14,11 +14,17 @@
 
 #import "AppStrings.h"
 
+#import "BentoShop.h"
+
+#import "Mixpanel.h"
+
 @interface DishCollectionViewCell()
 {
     BOOL _isSoldOut;
     BOOL _canBeAdded;
     BOOL _isSideDishCell;
+    
+    BOOL trackingCurrentBento;
 }
 
 @property (nonatomic, assign) IBOutlet UIView *viewMain;
@@ -60,6 +66,24 @@
 {
     if (_isSoldOut || (!_canBeAdded && self.state == DISH_CELL_FOCUS))
         return;
+    
+    // if current bento is not empty
+    if ([[[BentoShop sharedInstance] getCurrentBento] isEmpty])
+    {
+        // if not tracked yet
+        if (trackingCurrentBento == NO)
+        {
+//            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//            [mixpanel track:@"" properties:nil];
+            
+            trackingCurrentBento = YES;
+            
+            NSLog(@"BEGAN BUILDING A BENTO");
+        }
+    }
+    else
+        // since current bento is already filled, it's been tracked already
+        trackingCurrentBento = YES;
     
     [self.delegate onActionDishCell:self.index];
 }
