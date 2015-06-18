@@ -515,6 +515,7 @@
 - (void) gotoNoneDeliveryAreaScreen
 {
     [self stopSearch];
+    
     [self performSegueWithIdentifier:@"OutOfDelivery" sender:self.placeInfo.formattedAddress];
 }
 

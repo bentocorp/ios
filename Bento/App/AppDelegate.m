@@ -47,7 +47,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     BentoShop *globalShop;
 
     MyCLController *locationController;
-    CLLocationCoordinate2D  coordinate;
+    CLLocationCoordinate2D coordinate;
     
     UIAlertView *aV;
     
@@ -257,6 +257,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
+    
+    /*---------*/
+    if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]])
+    {
+        NSLog(@"OUT OF SERVICE AREA");
+    }
 }
 
 - (void)showLocationAlert
