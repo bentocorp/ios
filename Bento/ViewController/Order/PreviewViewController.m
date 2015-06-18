@@ -11,6 +11,7 @@
 #import "BentoShop.h"
 #import "PreviewCollectionViewCell.h"
 #import "JGProgressHUD.h"
+#import "Mixpanel.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -58,6 +59,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Track Previewed Today's Menu
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Previewed Today's Menu" properties:nil];
+    NSLog(@"PREVIEWED TODAY'S MENU");
     
     // initialize to YES
     isThereConnection = YES;
