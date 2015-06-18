@@ -73,8 +73,8 @@
         // if not tracked yet
         if (trackingCurrentBento == NO)
         {
-//            Mixpanel *mixpanel = [Mixpanel sharedInstance];
-//            [mixpanel track:@"" properties:nil];
+            Mixpanel *mixpanel = [Mixpanel sharedInstance];
+            [mixpanel track:@"Began Building A Bento" properties:nil];
             
             trackingCurrentBento = YES;
             
