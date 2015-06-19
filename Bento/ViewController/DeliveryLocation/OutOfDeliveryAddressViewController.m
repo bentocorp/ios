@@ -21,6 +21,8 @@
 
 #import <MapKit/MapKit.h>
 
+#import "Mixpanel.h"
+
 @interface OutOfDeliveryAddressViewController () <UIWebViewDelegate>
 
 @property (nonatomic, assign) IBOutlet MKMapView *mapView;
@@ -75,7 +77,12 @@
     
     [self.lblAddress setText:self.strAddress];
     
-    NSLog(@"hehe - %@", self.strAddress);
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel track:@"Selected Address Outside of Service Area" properties:@{
+                                     @"Address": self.strAddress
+                                     }];
+    
+    NSLog(@"SELECTED ADDRESS: %@", self.strAddress);
     
 // set map view
     float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
