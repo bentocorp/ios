@@ -79,8 +79,8 @@
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Selected Address Outside of Service Area" properties:@{
-                                     @"Address": self.strAddress
-                                     }];
+                                                                             @"Address": self.strAddress
+                                                                            }];
     
     NSLog(@"SELECTED ADDRESS: %@", self.strAddress);
     

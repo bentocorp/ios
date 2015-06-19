@@ -665,31 +665,35 @@
 */
 - (void)processPayment
 {
+    // Mixpanel track for Placed An Order
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
     PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
     
-//    NSString *paymentMethod;
-//    
-//    // TRACK
-//    if (curPaymentMethod == Payment_None)
-//        paymentMethod = @"Payment_None";
-//    else if (curPaymentMethod == Payment_CreditCard)
-//        paymentMethod = @"Payment_CreditCard";
-//    else if (curPaymentMethod == Payment_Server)
-//        paymentMethod = @"Payment_Server";
-//    else if (curPaymentMethod == Payment_ApplePay)
-//        paymentMethod = @"Payment_ApplePay";
-//
-//     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-//     
-//     [mixpanel track:@"Placed An Order" properties:@{
-//                                                        @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
-//                                                        @"Payment Method": paymentMethod,
-//                                                        @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]]
-//                                                    }];
+    NSString *paymentMethod;
+    if (curPaymentMethod == Payment_None)
+        paymentMethod = @"Payment_None";
+    else if (curPaymentMethod == Payment_CreditCard)
+        paymentMethod = @"Payment_CreditCard";
+    else if (curPaymentMethod == Payment_Server)
+        paymentMethod = @"Payment_Server";
+    else if (curPaymentMethod == Payment_ApplePay)
+        paymentMethod = @"Payment_ApplePay";
+    
+    __block NSString *successOrFailure;
     
     
     if (curPaymentMethod == Payment_None)
+    {
+        successOrFailure = @"Failure";
+        [mixpanel track:@"Placed An Order" properties:@{
+                                                        @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                        @"Payment Method": paymentMethod,
+                                                        @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                        @"Success/Failure": successOrFailure
+                                                        }];
         return;
+    }
 
     if (curPaymentMethod == Payment_CreditCard)
     {
@@ -708,7 +712,15 @@
                     
                     MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
                     [alertView showInView:self.view];
-                    alertView = nil; 
+                    alertView = nil;
+                    
+                    successOrFailure = @"Failure";
+                    [mixpanel track:@"Placed An Order" properties:@{
+                                                                    @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                                    @"Payment Method": paymentMethod,
+                                                                    @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                                    @"Success/Failure": successOrFailure
+                                                                    }];
                 }
                 else
                 {
@@ -718,6 +730,14 @@
                     [self saveCardInfo:cardInfo isApplePay:NO];
                     
                     [self createBackendChargeWithToken:token completion:nil];
+                    
+                    successOrFailure = @"Success";
+                    [mixpanel track:@"Placed An Order" properties:@{
+                                                                    @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                                    @"Payment Method": paymentMethod,
+                                                                    @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                                    @"Success/Failure": successOrFailure
+                                                                    }];
                 }
             }];
         }
@@ -725,6 +745,14 @@
     else if (curPaymentMethod == Payment_Server)
     {
         [self createBackendChargeWithToken:nil completion:nil];
+        
+        successOrFailure = @"Success";
+        [mixpanel track:@"Placed An Order" properties:@{
+                                                        @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                        @"Payment Method": paymentMethod,
+                                                        @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                        @"Success/Failure": successOrFailure
+                                                        }];
         return;
     }
     else if (curPaymentMethod == Payment_ApplePay)
@@ -735,6 +763,14 @@
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
             [alertView showInView:self.view];
             alertView = nil;
+            
+            successOrFailure = @"Failure";
+            [mixpanel track:@"Placed An Order" properties:@{
+                                                            @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                            @"Payment Method": paymentMethod,
+                                                            @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                            @"Success/Failure": successOrFailure
+                                                            }];
             return;
         }
 #endif
@@ -760,13 +796,31 @@
             ((PKPaymentAuthorizationViewController *)paymentController).delegate = self;
 #endif
             if (paymentController != nil)
-                [self presentViewController:paymentController animated:YES completion:nil]; // shows the gray pop up
+                // shows the gray pop up
+                [self presentViewController:paymentController animated:YES completion:^{
+                    successOrFailure = @"Success";
+                    [mixpanel track:@"Placed An Order" properties:@{
+                                                                    @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                                    @"Payment Method": paymentMethod,
+                                                                    @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                                    @"Success/Failure": successOrFailure
+                                                                    }];
+                }];
             else
             {
                 MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
                 [alertView showInView:self.view];
                 alertView = nil;
+                
+                successOrFailure = @"Failure";
+                [mixpanel track:@"Placed An Order" properties:@{
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                                @"Payment Method": paymentMethod,
+                                                                @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                                @"Success/Failure": successOrFailure
+                                                                }];
                 return;
+                
             }
         }
     }
