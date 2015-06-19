@@ -30,6 +30,8 @@
 #import "SVPlacemark.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
+#import "Mixpanel.h"
+
 // Stripe
 #import "Stripe.h"
 #import "STPToken.h"
@@ -663,30 +665,29 @@
 */
 - (void)processPayment
 {
-    /*
-     
-     if (curPaymentMethod == Payment_None)
+    PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
+    
+    NSString *paymentMethod;
+    
+    // TRACK
+    if (curPaymentMethod == Payment_None)
         paymentMethod = @"Payment_None";
-     
-     if (curPaymentMethod == Payment_CreditCard)
+    else if (curPaymentMethod == Payment_CreditCard)
         paymentMethod = @"Payment_CreditCard";
-     else if (curPaymentMethod == Payment_Server)
+    else if (curPaymentMethod == Payment_Server)
         paymentMethod = @"Payment_Server";
-     else if (curPaymentMethod == Payment_ApplePay)
+    else if (curPaymentMethod == Payment_ApplePay)
         paymentMethod = @"Payment_ApplePay";
-     
-     
+
      Mixpanel *mixpanel = [Mixpanel sharedInstance];
      
      [mixpanel track:@"Placed An Order" properties:@{
-                                                        @"Bento Quantity": [NSString stringWithFormat:"%ld", self.aryBentos.count],
+                                                        @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
                                                         @"Payment Method": paymentMethod,
-                                                        @"Total Price": [self getTotalPrice]
-                                                     }];
-     
-    */
+                                                        @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]]
+                                                    }];
     
-    PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
+    
     if (curPaymentMethod == Payment_None)
         return;
 
