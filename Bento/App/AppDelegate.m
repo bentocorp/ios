@@ -240,6 +240,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [[AppStrings sharedInstance] getAppStrings];
     
 /*---------*/
+    
     // set currentMode
     float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
     float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
@@ -258,10 +259,15 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [[NSUserDefaults standardUserDefaults] synchronize];
     NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
     
-    /*---------*/
+/*---------*/
+    
     if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]])
     {
         NSLog(@"OUT OF SERVICE AREA");
+    }
+    else
+    {
+        NSLog(@"WITHIN SERVICE AREA");
     }
 }
 
