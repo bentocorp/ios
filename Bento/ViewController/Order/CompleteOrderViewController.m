@@ -682,7 +682,6 @@
     
     __block NSString *successOrFailure;
     
-    
     if (curPaymentMethod == Payment_None)
     {
         successOrFailure = @"Failure";
@@ -1074,6 +1073,8 @@
     NSMutableArray *aryBentos = [[NSMutableArray alloc] init];
     for (NSInteger index = 0; index < self.aryBentos.count; index++)
     {
+        NSMutableDictionary *currentBentoDishes = [@{} mutableCopy]; // for mixpanel
+        
         Bento *bento = [self.aryBentos objectAtIndex:index];
         
         NSMutableDictionary *bentoInfo = [[NSMutableDictionary alloc] init];
@@ -1084,36 +1085,47 @@
         NSInteger dishIndex = [bento getMainDish];
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:dishIndex];
         NSString *strDishName = [dishInfo objectForKey:@"name"];
+        [currentBentoDishes setObject:strDishName forKey:@"main"]; // for mixpanel
         NSDictionary *dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"main", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish1];
         dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
         strDishName = [dishInfo objectForKey:@"name"];
+        [currentBentoDishes setObject:strDishName forKey:@"side1"]; // for mixpanel
         dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side1", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish2];
         dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
         strDishName = [dishInfo objectForKey:@"name"];
+        [currentBentoDishes setObject:strDishName forKey:@"side2"];
         dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side2", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish3];
         dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
         strDishName = [dishInfo objectForKey:@"name"];
+        [currentBentoDishes setObject:strDishName forKey:@"side3"];
         dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side3", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish4];
         dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
         strDishName = [dishInfo objectForKey:@"name"];
+        [currentBentoDishes setObject:strDishName forKey:@"side4"];
         dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side4", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         [bentoInfo setObject:dishArray forKey:@"items"];
         
         [aryBentos addObject:bentoInfo];
+        
+        NSLog(@"BENTOS: %@", currentBentoDishes);
+        
+        // Mixpanel
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"Bento Requested" properties:currentBentoDishes];
     }
     
     [request setObject:aryBentos forKey:@"OrderItems"];
