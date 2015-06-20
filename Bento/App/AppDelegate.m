@@ -106,8 +106,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Twitter Conversion Tracking, MoPub
     [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"963634117"];
     
-    // MixPanel
-    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    
+    // MixPanel, for production build only
+#ifndef DEV_MODE
+        [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+#endif
+    
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"App Launched" properties:nil];
     
@@ -122,6 +126,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     {
         NSLog(@"WITHIN SERVICE AREA");
     }
+    
     
     // App Strings
     globalStrings = [AppStrings sharedInstance];
