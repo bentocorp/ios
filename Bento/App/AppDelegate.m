@@ -107,10 +107,13 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"963634117"];
     
     
-    // MixPanel, for production build only
+    
 #ifndef DEV_MODE
-        [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
+    {
+        [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];  // Use MixPanel for production build only
+    }
 #endif
+    {}
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"App Launched" properties:nil];
