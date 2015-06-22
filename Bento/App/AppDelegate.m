@@ -106,8 +106,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Twitter Conversion Tracking, MoPub
     [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"963634117"];
     
-    
-    
 #ifndef DEV_MODE
     {
         [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];  // Use MixPanel for production build only

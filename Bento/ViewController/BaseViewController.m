@@ -110,6 +110,9 @@
     SoldOutViewController *vcSoldOut = (SoldOutViewController *)nav.topViewController;
     vcSoldOut.type = [identifier integerValue];
     
+//    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+//    [self dismissViewControllerAnimated:YES completion:nil];
+    
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
