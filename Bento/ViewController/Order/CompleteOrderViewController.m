@@ -108,6 +108,10 @@
 {
     NSString *originalDateString;
     NSString *newDateString;
+    
+    Mixpanel *mixpanel;
+    NSString *trackPaymentMethod;
+    __block NSString *successOrFailure;
 }
 
 - (BOOL)applePayEnabled
@@ -123,6 +127,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Mixpanel track for Placed An Order
+    mixpanel = [Mixpanel sharedInstance];
     
     _clickedMinuteButtonIndex = NSNotFound;
     
@@ -340,7 +347,7 @@
                                  @"brand": strImageName,
                                  @"last4": strCardNumber
                                  };
-    [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod];// This should fix the payment issue, added paymentMethod
+    [[DataManager shareDataManager] setUserInfo:currentUserInfo paymentMethod:paymentMethod]; // This should fix the payment issue, added paymentMethod
     
     NSLog(@"Update Payment Info, %@", currentUserInfo[@"card"]);
 }
@@ -665,29 +672,23 @@
 */
 - (void)processPayment
 {
-    // Mixpanel track for Placed An Order
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    
     PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
     
-    NSString *paymentMethod;
     if (curPaymentMethod == Payment_None)
-        paymentMethod = @"Payment_None";
+        trackPaymentMethod = @"Payment_None";
     else if (curPaymentMethod == Payment_CreditCard)
-        paymentMethod = @"Payment_CreditCard";
+        trackPaymentMethod = @"Payment_CreditCard";
     else if (curPaymentMethod == Payment_Server)
-        paymentMethod = @"Payment_Server";
+        trackPaymentMethod = @"Payment_Server";
     else if (curPaymentMethod == Payment_ApplePay)
-        paymentMethod = @"Payment_ApplePay";
-    
-    __block NSString *successOrFailure;
+        trackPaymentMethod = @"Payment_ApplePay";
     
     if (curPaymentMethod == Payment_None)
     {
         successOrFailure = @"Failure";
         [mixpanel track:@"Placed An Order" properties:@{
                                                         @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
-                                                        @"Payment Method": paymentMethod,
+                                                        @"Payment Method": trackPaymentMethod,
                                                         @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                         @"Success/Failure": successOrFailure
                                                         }];
@@ -716,7 +717,7 @@
                     successOrFailure = @"Failure";
                     [mixpanel track:@"Placed An Order" properties:@{
                                                                     @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
-                                                                    @"Payment Method": paymentMethod,
+                                                                    @"Payment Method": trackPaymentMethod,
                                                                     @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                     @"Success/Failure": successOrFailure
                                                                     }];
@@ -733,7 +734,7 @@
                     successOrFailure = @"Success";
                     [mixpanel track:@"Placed An Order" properties:@{
                                                                     @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
-                                                                    @"Payment Method": paymentMethod,
+                                                                    @"Payment Method": trackPaymentMethod,
                                                                     @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                     @"Success/Failure": successOrFailure
                                                                     }];
@@ -748,7 +749,7 @@
         successOrFailure = @"Success";
         [mixpanel track:@"Placed An Order" properties:@{
                                                         @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
-                                                        @"Payment Method": paymentMethod,
+                                                        @"Payment Method": trackPaymentMethod,
                                                         @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                         @"Success/Failure": successOrFailure
                                                         }];
@@ -766,7 +767,7 @@
             successOrFailure = @"Failure";
             [mixpanel track:@"Placed An Order" properties:@{
                                                             @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
-                                                            @"Payment Method": paymentMethod,
+                                                            @"Payment Method": trackPaymentMethod,
                                                             @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                             @"Success/Failure": successOrFailure
                                                             }];
@@ -795,8 +796,12 @@
             ((PKPaymentAuthorizationViewController *)paymentController).delegate = self;
 #endif
             if (paymentController != nil)
+            {
                 // shows the gray pop up
                 [self presentViewController:paymentController animated:YES completion:nil];
+            
+                // track in createbackendtoken
+            }
             else
             {
                 MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
@@ -806,7 +811,7 @@
                 successOrFailure = @"Failure";
                 [mixpanel track:@"Placed An Order" properties:@{
                                                                 @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
-                                                                @"Payment Method": paymentMethod,
+                                                                @"Payment Method": trackPaymentMethod,
                                                                 @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                 @"Success/Failure": successOrFailure
                                                                 }];
@@ -1269,7 +1274,7 @@
 }
 
 - (void)handlePaymentAuthorizationWithCard:(STPCard *)card
-                                   completion:(void (^)(PKPaymentAuthorizationStatus))completion
+                                completion:(void (^)(PKPaymentAuthorizationStatus))completion
 {
     [[STPAPIClient sharedClient] createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
         if (error)
@@ -1299,7 +1304,34 @@
             alertView = nil;
             
             completion(PKPaymentAuthorizationStatusFailure);
+            
+            // tracking apple pay
+            if ([trackPaymentMethod isEqualToString:@"Payment_ApplePay"])
+            {
+                successOrFailure = @"Failure";
+                [mixpanel track:@"Placed An Order" properties:@{
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                                @"Payment Method": trackPaymentMethod,
+                                                                @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                                @"Success/Failure": successOrFailure
+                                                                }];
+            }
+            
             return;
+        }
+        else
+        {
+            // tracking apple pay
+            if ([trackPaymentMethod isEqualToString:@"Payment_ApplePay"])
+            {
+                successOrFailure = @"Success";
+                [mixpanel track:@"Placed An Order" properties:@{
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                                @"Payment Method": trackPaymentMethod,
+                                                                @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                                @"Success/Failure": successOrFailure
+                                                                }];
+            }
         }
         
         // Save card information

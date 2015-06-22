@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "90BED0861A5BCC04003DC872"
+               BlueprintIdentifier = "FC599F541B0FEDB600989E1B"
                BuildableName = "BentoTests.xctest"
                BlueprintName = "BentoTests"
                ReferencedContainer = "container:Bento.xcodeproj">
@@ -60,7 +60,7 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "90BED0861A5BCC04003DC872"
+               BlueprintIdentifier = "FC599F541B0FEDB600989E1B"
                BuildableName = "BentoTests.xctest"
                BlueprintName = "BentoTests"
                ReferencedContainer = "container:Bento.xcodeproj">
