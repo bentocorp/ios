@@ -1121,7 +1121,6 @@
         NSLog(@"BENTOS: %@", currentBentoDishes);
         
         // Mixpanel
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"Bento Requested" properties:currentBentoDishes];
     }
     
@@ -1284,7 +1283,34 @@
             alertView = nil;
             
             completion(PKPaymentAuthorizationStatusFailure);
+            
+            // tracking apple pay
+            if ([trackPaymentMethod isEqualToString:@"Payment_ApplePay"])
+            {
+                successOrFailure = @"Failure";
+                [mixpanel track:@"Placed An Order" properties:@{
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                                @"Payment Method": trackPaymentMethod,
+                                                                @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                                @"Success/Failure": successOrFailure
+                                                                }];
+            }
+            
             return;
+        }
+        else
+        {
+            // tracking apple pay
+            if ([trackPaymentMethod isEqualToString:@"Payment_ApplePay"])
+            {
+                successOrFailure = @"Success";
+                [mixpanel track:@"Placed An Order" properties:@{
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
+                                                                @"Payment Method": trackPaymentMethod,
+                                                                @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
+                                                                @"Success/Failure": successOrFailure
+                                                                }];
+            }
         }
         
         // Save card information
