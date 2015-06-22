@@ -513,6 +513,7 @@
         }
     }
     
+    // to prevent crash
     if (titleLeft == nil)
         titleLeft = @"Next Upcoming Menu";
     
@@ -575,7 +576,7 @@
         //do nothing, obviously it wasn't attached because an exception was thrown
     }
     
-    [self viewWillAppear:YES];
+//    [self viewWillAppear:YES];
     [cvDishesLeft reloadData];
     [cvDishesRight reloadData];
 }
