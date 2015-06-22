@@ -796,15 +796,7 @@
 #endif
             if (paymentController != nil)
                 // shows the gray pop up
-                [self presentViewController:paymentController animated:YES completion:^{
-                    successOrFailure = @"Success";
-                    [mixpanel track:@"Placed An Order" properties:@{
-                                                                    @"Bento Quantity": [NSString stringWithFormat:@"%ld", self.aryBentos.count],
-                                                                    @"Payment Method": paymentMethod,
-                                                                    @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
-                                                                    @"Success/Failure": successOrFailure
-                                                                    }];
-                }];
+                [self presentViewController:paymentController animated:YES completion:nil];
             else
             {
                 MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
