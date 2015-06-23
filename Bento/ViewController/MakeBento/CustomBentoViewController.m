@@ -876,7 +876,12 @@
     if (currentUserInfo == nil)
     {
         if (placeInfo == nil)
+        {
+            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromHomepage"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
             [self openAccountViewController:[DeliveryLocationViewController class]];
+        }
         else
             [self openAccountViewController:[CompleteOrderViewController class]];
     }

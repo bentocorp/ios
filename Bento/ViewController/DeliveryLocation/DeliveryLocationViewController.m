@@ -291,7 +291,15 @@
         // serving dinner vc || serving lunch vc
         if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]])
         {
-            [self.navigationController popToViewController:vc animated:YES];
+            if (self.isFromOrder)
+            {
+                [self.navigationController popToViewController:vc animated:YES];
+                
+                CompleteOrderViewController *completeOrderViewController = [[CompleteOrderViewController alloc] init];
+                [self.navigationController pushViewController:completeOrderViewController animated:YES];
+            }
+            else
+                [self.navigationController popToViewController:vc animated:YES];
             
             return;
         }
