@@ -128,7 +128,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         NSLog(@"WITHIN SERVICE AREA");
     }
     
-    
     // App Strings
     globalStrings = [AppStrings sharedInstance];
     
@@ -158,30 +157,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     [locationController.locationManager startUpdatingLocation];
     
-/*---------------------------FORCED UPDATE----------------------------*/
-    
-    
-#ifdef DEV_MODE
-    {
-        aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", globalShop.iosCurrentVersion, globalShop.iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-        
-        NSLog(@"This is dev version...run update check anyway!");
-    }
-#else
-    {
-        aV = [[UIAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update", nil];
-        aV.tag = 007;
-        NSLog(@"This is production version...run update check!");
-    }
-#endif
-    {
-        NSLog(@"ios minimum version - %f", globalShop.iosMinVersion);
-        NSLog(@"current ios version - %f", globalShop.iosCurrentVersion);
-        
-        // Perform check for new version of your app
-        if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
-            [aV show];
-    }
 
 /*---------------------------------------------------------------------*/
     
@@ -194,6 +169,32 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            /*---------------------------FORCED UPDATE----------------------------*/
+#ifdef DEV_MODE
+            {
+                aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", globalShop.iosCurrentVersion, globalShop.iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+                
+                NSLog(@"This is dev version...run update check anyway!");
+            }
+#else
+            {
+                aV = [[UIAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update", nil];
+                aV.tag = 007;
+                NSLog(@"This is production version...run update check!");
+            }
+#endif
+            {
+                NSLog(@"ios minimum version - %f", globalShop.iosMinVersion);
+                NSLog(@"current ios version - %f", globalShop.iosCurrentVersion);
+                
+                // Perform check for new version of your app
+                if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
+                    [aV show];
+            }
+            
+            /*-----------------------*/
+        
             currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
             dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
             
@@ -211,7 +212,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             [[NSUserDefaults standardUserDefaults] synchronize];
             NSLog(@"ORIGNAL LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]);
             
-            //////
+            /*-----------------------*/
             
             [[BentoShop sharedInstance] setLunchOrDinnerMode];
         });
@@ -420,12 +421,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             
             if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
             {
-                [globalShop getStatus];
-                
                 dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                     [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-                    [globalShop getMenus];
+                    [globalShop getStatus];
                     [globalShop getServiceArea];
+                    [globalShop getMenus];
                 });
             }
         }

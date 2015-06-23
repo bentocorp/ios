@@ -143,10 +143,11 @@
             [[BentoShop sharedInstance] getMenus];
             [[BentoShop sharedInstance] getStatus];
             [[BentoShop sharedInstance] getServiceArea];
-            [[BentoShop sharedInstance] refreshStart];
         }
     
         dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [[BentoShop sharedInstance] refreshStart];
             
             if (!_hasInit)
             {

@@ -906,20 +906,17 @@ static BentoShop *_shareInstance;
     _isCallingApi = YES;
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         
         // check version first
         if (self.iosCurrentVersion >= self.iosMinVersion)
         {
+            [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [self setLunchOrDinnerMode];
             [self checkIfBentoArrayNeedsToBeReset];
             [self getMenus];
             [self getNextNextMenus];
             [self getStatus];
             [self getServiceArea];
-            
-//            if ([[BentoShop sharedInstance] isClosed])
-//                [self getNextNextMenus];
         }
     });
     
@@ -1237,8 +1234,6 @@ static BentoShop *_shareInstance;
 
     _currentIndex = self.aryBentos.count - 1;
     
-    NSLog(@"Current Bento - %@ at index %ld", self.aryBentos[_currentIndex], _currentIndex);
-    
     return self.aryBentos[_currentIndex];
 }
 
@@ -1254,8 +1249,6 @@ static BentoShop *_shareInstance;
     [self.aryBentos removeObjectAtIndex:bentoIndex];
     [self saveBentoArray];
     /**/
-    
-    NSLog(@"Set Current Bento with index - %ld", bentoIndex);
     
     if (bentoIndex == NSNotFound)
         return;
