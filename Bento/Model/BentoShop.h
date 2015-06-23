@@ -15,7 +15,7 @@
 
 @interface BentoShop : NSObject
 {
-    BOOL _isPaused;
+//    BOOL _isPaused;
     BOOL _isCallingApi;
     
     NSTimer *_timer;
@@ -27,6 +27,7 @@
 #define USER_NOTIFICATION_UPDATED_AREA      @"user_notification_updated_area"
 #define USER_NOTIFICATION_UPDATED_NEXTMENU  @"user_notification_updated_nextmenu"
 
+@property (nonatomic) BOOL _isPaused;
 @property (nonatomic) CGFloat iosMinVersion;
 @property (nonatomic) CGFloat iosCurrentVersion;
 

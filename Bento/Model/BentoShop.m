@@ -89,7 +89,7 @@ static BentoShop *_shareInstance;
         self.menuStatus = nil;
         self.serviceArea = nil;
         
-        _isPaused = NO;
+        self._isPaused = NO;
         _isCallingApi = NO;
         _currentIndex = NSNotFound;
         
@@ -900,7 +900,7 @@ static BentoShop *_shareInstance;
 
 - (void)updateProc
 {
-    if (_isPaused || _isCallingApi)
+    if (self._isPaused || _isCallingApi)
         return;
     
     _isCallingApi = YES;
@@ -929,25 +929,31 @@ static BentoShop *_shareInstance;
         return;
     
     _timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(updateProc) userInfo:nil repeats:YES];
+    
+    NSLog(@"Refresh Start");
 }
 
 - (void)refreshPause
 {
-    if (_isPaused)
+    if (self._isPaused)
         return;
     
-    _isPaused = YES;
+    self._isPaused = YES;
     [_timer invalidate];
     _timer = nil;
+    
+    NSLog(@"Refresh Paused");
 }
 
 - (void)refreshResume
 {
-    if (!_isPaused)
+    if (!self._isPaused)
         return;
     
-    _isPaused = NO;
+    self._isPaused = NO;
     _timer = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(updateProc) userInfo:nil repeats:YES];
+    
+    NSLog(@"Refresh Resumed");
 }
 
 - (void)refreshStop
@@ -957,6 +963,8 @@ static BentoShop *_shareInstance;
     
     [_timer invalidate];
     _timer = nil;
+    
+    NSLog(@"Refresh Stopped");
 }
 
 - (NSArray *)getMainDishes:(NSString *)whatNeedsMain

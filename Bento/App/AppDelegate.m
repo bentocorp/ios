@@ -314,19 +314,23 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    // if version is current/greater than ios min
-    if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
+    if ([self connected])
     {
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-            [globalShop setLunchOrDinnerMode];
-            [globalShop getMenus];
-            [globalShop getStatus];
-            [globalShop getServiceArea];
-        });
+        // connected, do some internet stuff
+        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
+        {
+            dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [globalShop setLunchOrDinnerMode];
+                [globalShop getMenus];
+                [globalShop getStatus];
+                [globalShop getServiceArea];
+            });
+            
+            // Global Data Manager
+            [globalShop refreshResume];
+        }
     }
     
-    // Global Data Manager
-    [globalShop refreshResume];
 /*
     // Check User Location and Confirm
     CLLocationCoordinate2D location = [self getCurrentLocation];
@@ -421,16 +425,21 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             
             if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
             {
-                dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                    [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-                    [globalShop getStatus];
-                    [globalShop getServiceArea];
-                    [globalShop getMenus];
-                    
-                    dispatch_async(dispatch_get_main_queue(), ^{
-                        [globalShop refreshResume];
+                if (globalShop._isPaused)
+                {
+                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                        
+                        [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+                        [globalShop getStatus];
+                        [globalShop getServiceArea];
+                        [globalShop getMenus];
+                        
+                        dispatch_async(dispatch_get_main_queue(), ^{
+
+                                [globalShop refreshResume];
+                        });
                     });
-                });
+                }
             }
         }
         else
@@ -442,6 +451,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     }
 }
 
-
+// used when view became active
+- (BOOL)connected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
 
 @end

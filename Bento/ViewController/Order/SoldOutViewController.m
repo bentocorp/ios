@@ -214,8 +214,6 @@
     
      NSString *strTitle;
     
-    
-    
     // Closed && 17:30 - 23:59 (get next)
     if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
     {
