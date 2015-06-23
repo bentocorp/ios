@@ -46,6 +46,8 @@
     float currentTime;
     float bufferTime;
     NSString *todayDate;
+    
+    BOOL isThereConnection;
 }
 
 static BentoShop *_shareInstance;
@@ -75,6 +77,10 @@ static BentoShop *_shareInstance;
 {
     if ( (self = [super init]) )
     {
+        isThereConnection = YES;
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+        
         [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         
         defaults = [NSUserDefaults standardUserDefaults];
@@ -102,6 +108,21 @@ static BentoShop *_shareInstance;
     originalStatus = @"";
     
     return self;
+}
+
+- (void)noConnection
+{
+    isThereConnection = NO;
+}
+
+- (void)yesConnection
+{
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(changeConnection) userInfo:nil repeats:NO];
+}
+
+- (void)changeConnection
+{
+    isThereConnection = YES;
 }
 
 - (id)sendRequest:(NSString *)strRequest statusCode:(NSInteger *)statusCode error:(NSError **)error
@@ -913,13 +934,15 @@ static BentoShop *_shareInstance;
         // check version first
         if (self.iosCurrentVersion >= self.iosMinVersion)
         {
-            [self setLunchOrDinnerMode];
-            [self checkIfBentoArrayNeedsToBeReset];
-            [self getMenus];
-            [self getNextNextMenus];
-            [self getStatus];
-            [self getServiceArea];
-            
+            if (isThereConnection)
+            {
+                [self setLunchOrDinnerMode];
+                [self checkIfBentoArrayNeedsToBeReset];
+                [self getMenus];
+                [self getNextNextMenus];
+                [self getStatus];
+                [self getServiceArea];
+            }
 //            if ([[BentoShop sharedInstance] isClosed])
 //                [self getNextNextMenus];
         }
