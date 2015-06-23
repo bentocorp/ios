@@ -426,6 +426,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                     [globalShop getStatus];
                     [globalShop getServiceArea];
                     [globalShop getMenus];
+                    
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [globalShop refreshResume];
+                    });
                 });
             }
         }
