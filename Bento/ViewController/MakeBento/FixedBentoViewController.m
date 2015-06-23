@@ -42,6 +42,9 @@
 
 #import "Mixpanel.h"
 
+#import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
+
 
 @interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -569,8 +572,18 @@
         lblBadge.hidden = YES;
     }
     
-    [cvDishes reloadData];
-    [myTableView reloadData];
+    if ([self connected])
+    {
+        [cvDishes reloadData];
+        [myTableView reloadData];
+    }
+}
+
+- (BOOL)connected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
 }
 
 - (void)onSettings

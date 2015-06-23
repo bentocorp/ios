@@ -52,6 +52,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     UIAlertView *aV;
     
     Reachability *googleReach;
+    
+    BOOL ranFirstTime;
+    NSTimer *connectionTimer;
 }
 
 @end
@@ -421,34 +424,53 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     {
         if([reach isReachable])
         {
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"networkConnected" object:nil];
+            if (ranFirstTime == NO)
+            {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"networkConnected" object:nil];
+                
+                ranFirstTime = YES;
+            }
             
             if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
             {
                 if (globalShop._isPaused)
                 {
-                    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                        
-                        [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-                        [globalShop getStatus];
-                        [globalShop getServiceArea];
-                        [globalShop getMenus];
-                        
-                        dispatch_async(dispatch_get_main_queue(), ^{
-
-                                [globalShop refreshResume];
-                        });
-                    });
+                    NSLog(@"TRYING TO POST NETWORK CONNECTED");
+                    // 3 seconds buffer before posting NETWORK CONNECTED, just in case connection suddenly gets lost (ie. if user keeps toggling on and off connection)
+                    connectionTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(yesConnection) userInfo:nil repeats:NO];
                 }
             }
         }
         else
         {
+            NSLog(@"PREVENT POST NETWORK CONNECTED");
+            [connectionTimer invalidate]; // prevent posting "networkConnected"
+            
             [globalShop refreshPause]; // stop trying to call API
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"networkError" object:nil];
         }
     }
+}
+
+- (void)yesConnection
+{
+    NSLog(@"POST NETWORK CONNECTED");
+    
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+        [globalShop getStatus];
+        [globalShop getServiceArea];
+        [globalShop getMenus];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [globalShop refreshResume];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"networkConnected" object:nil];
+        });
+    });
 }
 
 // used when view became active

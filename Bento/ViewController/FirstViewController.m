@@ -139,6 +139,7 @@
     
         if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
         {
+            [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [[AppStrings sharedInstance] getAppStrings];
             [[BentoShop sharedInstance] getMenus];
             [[BentoShop sharedInstance] getStatus];
