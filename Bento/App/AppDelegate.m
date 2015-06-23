@@ -250,54 +250,53 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
-    [globalShop getStatus];
-    [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-    [globalShop setLunchOrDinnerMode];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     
-    // Global Data Manager
-    [globalShop refreshPause];
-    
-    // Perform check for new version of your app
-    if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
-        [aV show];
-    
-    // reload app strings
-    [[AppStrings sharedInstance] getAppStrings];
-    
-/*---------*/
-    
-    // set currentMode
-    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
-    
-    // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime)
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
-    }
-    // dinner opening - 11:59pm
-    else if (currentTime >= dinnerTime && currentTime < 24)
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
-    
-/*---------*/
-    
-    if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]])
-    {
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel track:@"Opened App Outside of Service Area" properties:nil];
-        NSLog(@"OUT OF SERVICE AREA");
-    }
-    else
-    {
-        NSLog(@"WITHIN SERVICE AREA");
-    }
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [globalShop getStatus];
+        [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+        [globalShop setLunchOrDinnerMode];
+        [[AppStrings sharedInstance] getAppStrings];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            // Global Data Manager
+            [globalShop refreshPause];
+            
+            // Perform check for new version of your app
+            if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
+                [aV show];
+            
+            /*---------*/
+            
+            // set currentMode
+            float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+            float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+            
+            // 12:00am - dinner opening (ie. 16.5)
+            if (currentTime >= 0 && currentTime < dinnerTime)
+                [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
+            // dinner opening - 11:59pm
+            else if (currentTime >= dinnerTime && currentTime < 24)
+                [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
+            
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
+            
+            /*---------*/
+            
+            if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]])
+            {
+                Mixpanel *mixpanel = [Mixpanel sharedInstance];
+                [mixpanel track:@"Opened App Outside of Service Area" properties:nil];
+                NSLog(@"OUT OF SERVICE AREA");
+            }
+            else
+                NSLog(@"WITHIN SERVICE AREA");
+        });
+    });
 }
 
 - (void)showLocationAlert
