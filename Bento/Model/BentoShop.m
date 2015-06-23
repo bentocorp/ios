@@ -75,8 +75,8 @@ static BentoShop *_shareInstance;
 {
     if ( (self = [super init]) )
     {
-        [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         
+    
         defaults = [NSUserDefaults standardUserDefaults];
         
         self.prevClosed = NO;

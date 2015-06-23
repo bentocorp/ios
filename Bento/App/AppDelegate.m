@@ -186,27 +186,36 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 /*---------------------------------------------------------------------*/
     
     // SET ORIGINAL MODE
-    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+    __block float currentTime;
+    __block float dinnerTime;
     
-    // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime)
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"OriginalLunchOrDinnerMode"];
-    }
-    // dinner opening - 11:59pm
-    else if (currentTime >= dinnerTime && currentTime < 24)
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"OriginalLunchOrDinnerMode"];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    NSLog(@"ORIGNAL LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]);
-    
-    
-    //////
-    
-    [[BentoShop sharedInstance] setLunchOrDinnerMode];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+            dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+            
+            // 12:00am - dinner opening (ie. 16.5)
+            if (currentTime >= 0 && currentTime < dinnerTime)
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"OriginalLunchOrDinnerMode"];
+            }
+            // dinner opening - 11:59pm
+            else if (currentTime >= dinnerTime && currentTime < 24)
+            {
+                [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"OriginalLunchOrDinnerMode"];
+            }
+            
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            NSLog(@"ORIGNAL LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]);
+            
+            //////
+            
+            [[BentoShop sharedInstance] setLunchOrDinnerMode];
+        });
+    });
     
     return YES;
 }
