@@ -93,7 +93,6 @@
     [[AppStrings sharedInstance] getAppStrings];
     
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
-//    [self.ivBackground sd_setImageWithURL:urlBack];
     [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
@@ -103,13 +102,10 @@
     self.lblLaunchSlogan.text = strSlogan;
     [[NSUserDefaults standardUserDefaults] setObject:strSlogan forKey:@"Slogan"];
     [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    // check version first (this comment useless)
-    
-    
-    [self.activityIndicator stopAnimating];
 
     
+//    [self.activityIndicator stopAnimating];
+
     if (isThereConnection)
     {
         // Check the app is already launched
@@ -125,51 +121,50 @@
             return;
         }
     }
-    
-//    // Check the app is already launched
-//    if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
-//    {
-//        // This is the first launch ever
-//        [self performSelector:@selector(gotoIntroScreen) withObject:nil afterDelay:1.0f];
-//        return;
-//    }
-//    else
-//    {
-//        [self performSelector:@selector(process) withObject:nil afterDelay:1.0f];
-//        return;
-//    }
 }
 
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    BentoShop *globalShop = [BentoShop sharedInstance];
-    if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
-    {
-        [[AppStrings sharedInstance] getAppStrings];
-        [[BentoShop sharedInstance] getMenus];
-        [[BentoShop sharedInstance] getStatus];
-        [[BentoShop sharedInstance] getServiceArea];
-        [[BentoShop sharedInstance] refreshStart];
-    }
+    self.activityIndicator.hidden = NO;
+    [self.activityIndicator startAnimating];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
-    if (!_hasInit)
-    {
-        _hasInit = YES;
-        [self performSelector:@selector(initProcedure) withObject:nil afterDelay:0.01f];
-    }
-    else
-    {
-        [self processAfterLogin];
-    }
+    __block BentoShop *globalShop = [BentoShop sharedInstance];
     
-    // reset if closed
-    if ([globalShop isClosed])
-        [globalShop resetBentoArray];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
+        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
+        {
+            [[AppStrings sharedInstance] getAppStrings];
+            [[BentoShop sharedInstance] getMenus];
+            [[BentoShop sharedInstance] getStatus];
+            [[BentoShop sharedInstance] getServiceArea];
+            [[BentoShop sharedInstance] refreshStart];
+        }
+    
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            if (!_hasInit)
+            {
+                _hasInit = YES;
+                [self performSelector:@selector(initProcedure) withObject:nil afterDelay:0.01f];
+            }
+            else
+            {
+                [self processAfterLogin];
+            }
+            
+            // reset if closed
+            if ([globalShop isClosed])
+                [globalShop resetBentoArray];
+            
+            [self.activityIndicator stopAnimating];
+        });
+    });
 }
 
 - (void)processAutoLogin
@@ -182,8 +177,8 @@
     
     WebManager *webManager = [[WebManager alloc] init];
     
-    self.activityIndicator.hidden = NO;
-    [self.activityIndicator startAnimating];
+//    self.activityIndicator.hidden = NO;
+//    [self.activityIndicator startAnimating];
     
     [webManager AsyncProcess:strAPIName method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation)
     {
