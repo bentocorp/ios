@@ -214,17 +214,34 @@
     
      NSString *strTitle;
     
+    
+    
     // Closed && 17:30 - 23:59 (get next)
     if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    {
+        if ([[BentoShop sharedInstance] getNextMenuWeekdayString] != nil)
+            strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        else
+            strTitle = @"See Upcoming Menu";
+    }
     
     // Closed &&  00:00 - 17:29 (get today, if none today, get next)
     else if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil]];
+    {
+        if ([[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil] != nil)
+            strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil]];
+        else
+            strTitle = @"See Upcoming Menu";
+    }
     
     // Sold out
     else
-        strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+    {
+        if ([[BentoShop sharedInstance] getMenuWeekdayString] != nil)
+            strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+        else
+            strTitle = @"See Upcoming Menu";
+    }
     
     [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
 }
