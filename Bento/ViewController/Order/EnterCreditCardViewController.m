@@ -51,7 +51,6 @@
     [super viewDidLoad];
     
     originalDateString = [[BentoShop sharedInstance] getMenuDateString];
-    NSLog(@"ORIGINAL DATE: %@", originalDateString);
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:CREDITCARD_TITLE];
     self.lblMessage.text = [[AppStrings sharedInstance] getString:CREDITCARD_TEXT];

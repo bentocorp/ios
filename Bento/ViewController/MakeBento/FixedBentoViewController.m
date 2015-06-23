@@ -311,7 +311,6 @@
     [super viewWillAppear:animated];
     
     originalDateString = [[BentoShop sharedInstance] getMenuDateString];
-    NSLog(@"ORIGINAL DATE: %@", originalDateString);
 
     // set aryDishes array
     self.aryDishes = [[NSMutableArray alloc] init];
@@ -338,31 +337,48 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
 }
 
+- (BOOL)connected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
+}
+
 - (void)noConnection
 {
-    isThereConnection = NO;
-    
-    if (loadingHUD == nil)
+    // if no internet connection and timer has been paused
+    if (![self connected] && [BentoShop sharedInstance]._isPaused)
     {
-        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
-        [loadingHUD showInView:self.view];
+        isThereConnection = NO;
+        
+        if (loadingHUD == nil)
+        {
+            loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+            loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+            [loadingHUD showInView:self.view];
+        }
     }
 }
 
 - (void)yesConnection
 {
-    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
+    {
+        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+    }
 }
 
 - (void)callUpdate
 {
-    isThereConnection = YES;
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
+    {
+        isThereConnection = YES; 
     
-    [loadingHUD dismiss];
-    loadingHUD = nil;
+        [loadingHUD dismiss];
+        loadingHUD = nil;
     
-    [self viewWillAppear:YES];
+        [self viewWillAppear:YES];
+    }
 }
 
 - (void)preloadCheckCurrentMode
@@ -572,18 +588,11 @@
         lblBadge.hidden = YES;
     }
     
-    if ([self connected])
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
     {
         [cvDishes reloadData];
         [myTableView reloadData];
     }
-}
-
-- (BOOL)connected
-{
-    Reachability *reachability = [Reachability reachabilityForInternetConnection];
-    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
-    return networkStatus != NotReachable;
 }
 
 - (void)onSettings

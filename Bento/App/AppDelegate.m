@@ -63,7 +63,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
@@ -81,6 +80,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         // this uses NSOperationQueue mainQueue
         [[NSOperationQueue mainQueue] addOperationWithBlock:^{
             
+            NSLog(@"TRYING TO POST NETWORK CONNECTED");
+            
+            if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
+                connectionTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(yesConnection) userInfo:nil repeats:NO];
         }];
     };
     
@@ -422,6 +425,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     if(reach == googleReach)
     {
+        NSLog(@"REACHABLE");
+        
         if([reach isReachable])
         {
             if (ranFirstTime == NO)
@@ -431,18 +436,19 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                 ranFirstTime = YES;
             }
             
-            if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
-            {
-                if (globalShop._isPaused)
-                {
-                    NSLog(@"TRYING TO POST NETWORK CONNECTED");
+            /*---this is being called in googleReach up top instead---*/
+            
+//            if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
+//            {
+//                    NSLog(@"TRYING TO POST NETWORK CONNECTED");
                     // 3 seconds buffer before posting NETWORK CONNECTED, just in case connection suddenly gets lost (ie. if user keeps toggling on and off connection)
-                    connectionTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(yesConnection) userInfo:nil repeats:NO];
-                }
-            }
+//                    connectionTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(yesConnection) userInfo:nil repeats:NO];
+//            }
         }
         else
         {
+            NSLog(@"UNREACHABLE");
+            
             NSLog(@"PREVENT POST NETWORK CONNECTED");
             [connectionTimer invalidate]; // prevent posting "networkConnected"
             
@@ -468,7 +474,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             
             [globalShop refreshResume];
             
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"networkConnected" object:nil];
+            if ([self connected])
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"networkConnected" object:nil];
         });
     });
 }

@@ -76,7 +76,6 @@
     // Do any additional setup after loading the view.
     
     originalDateString = [[BentoShop sharedInstance] getMenuDateString];
-    NSLog(@"ORIGINAL DATE: %@", originalDateString);
     
     [SVGeocoder setGoogleMapsAPIKey:GOOGLE_API_KEY];
     

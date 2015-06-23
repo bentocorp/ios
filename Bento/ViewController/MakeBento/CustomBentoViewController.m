@@ -119,7 +119,6 @@
     isThereConnection = YES;
     
     originalDateString = [[BentoShop sharedInstance] getMenuDateString];
-    NSLog(@"ORIGINAL DATE: %@", originalDateString);
     
     self.view.backgroundColor = [UIColor whiteColor];
     

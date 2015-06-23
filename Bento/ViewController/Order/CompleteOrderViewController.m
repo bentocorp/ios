@@ -178,7 +178,6 @@
     [super viewWillAppear:animated];
     
     originalDateString = [[BentoShop sharedInstance] getMenuDateString];
-    NSLog(@"ORIGINAL DATE: %@", originalDateString);
     
     // set array every time view appears (edit: moved from viewDidLoad)
     self.aryBentos = [[NSMutableArray alloc] init];
