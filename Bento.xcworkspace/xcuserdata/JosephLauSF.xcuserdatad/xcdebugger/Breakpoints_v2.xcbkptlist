@@ -164,7 +164,7 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/Order/CompleteOrderViewController.m"
-                  timestampString = "456779325.282569"
+                  timestampString = "456780683.146497"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1325"
@@ -179,7 +179,7 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/Order/CompleteOrderViewController.m"
-                  timestampString = "456779325.282724"
+                  timestampString = "456780683.14671"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1325"
@@ -266,6 +266,22 @@
             startingLineNumber = "483"
             endingLineNumber = "483"
             landmarkName = "-onBottomButton:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "456780398.383849"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "902"
+            endingLineNumber = "902"
+            landmarkName = "-updateProc"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

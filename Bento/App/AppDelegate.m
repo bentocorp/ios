@@ -435,7 +435,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         }
         else
         {
-            [globalShop refreshStop]; // stop trying to call API
+            [globalShop refreshPause]; // stop trying to call API
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"networkError" object:nil];
         }
