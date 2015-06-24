@@ -547,18 +547,35 @@ static BentoShop *_shareInstance;
 - (NSDictionary *)getMenuInfo
 {
     NSDictionary *menuInfo;
+    BOOL all_day = YES;
     
-    // 12:00am - dinner opening (ie. 16.5) && lunch menu exists
-    if (currentTime >= 0 && currentTime < dinnerTime && [defaults objectForKey:@"lunchMenuInfo"] != nil)
-        menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
-    
-    // if no lunch menu, SHOW DINNER
-    else
-        menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
+    // if all_day menu is set
+    if (all_day)
+    {
+        // check if lunch exists
+        if ([defaults objectForKey:@"lunchMenuInfo"] != nil)
+            menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
         
-    // dinner opening - 11:59pm && dinner menu exists
-    if (currentTime >= dinnerTime && currentTime < 24 && [defaults objectForKey:@"dinnerMenuInfo"] != nil)
-        menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
+        // if no lunch, get dinner
+        else
+            menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
+    }
+    
+    // if not all_day, use business logic
+    else
+    {
+        // 12:00am - dinner opening (ie. 16.5) && lunch menu exists
+        if (currentTime >= 0 && currentTime < dinnerTime && [defaults objectForKey:@"lunchMenuInfo"] != nil)
+            menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
+        
+        // if no lunch menu, SHOW DINNER
+        else
+            menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
+            
+        // dinner opening - 11:59pm && dinner menu exists
+        if (currentTime >= dinnerTime && currentTime < 24 && [defaults objectForKey:@"dinnerMenuInfo"] != nil)
+            menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
+    }
     
     if (menuInfo == nil)
         return nil;
