@@ -54,6 +54,8 @@
 
 @implementation FixedBentoViewController
 {
+    NSTimer *connectionTimer;
+    
     UIScrollView *scrollView;
     UITableView *myTableView;
     
@@ -79,7 +81,7 @@
     CSAnimationView *animationView;
     
     JGProgressHUD *loadingHUD;
-    BOOL isThereConnection;
+//    BOOL isThereConnection;
     
     NSString *originalDateString;
     NSString *newDateString;
@@ -91,7 +93,7 @@
     [super viewDidLoad];
     
     // initialize yes
-    isThereConnection = YES;
+//    isThereConnection = YES;
     
 /*---Scroll View---*/
     
@@ -349,7 +351,7 @@
     // if no internet connection and timer has been paused
     if (![self connected] && [BentoShop sharedInstance]._isPaused)
     {
-        isThereConnection = NO;
+//        isThereConnection = NO;
         
         if (loadingHUD == nil)
         {
@@ -372,7 +374,7 @@
 {
     if ([self connected] && ![BentoShop sharedInstance]._isPaused)
     {
-        isThereConnection = YES; 
+//        isThereConnection = YES;
     
         [loadingHUD dismiss];
         loadingHUD = nil;
@@ -589,6 +591,12 @@
     }
     
     if ([self connected] && ![BentoShop sharedInstance]._isPaused)
+        connectionTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadDishes) userInfo:nil repeats:NO];
+}
+
+- (void)reloadDishes
+{
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
     {
         [cvDishes reloadData];
         [myTableView reloadData];
@@ -758,7 +766,8 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if (isThereConnection)
+    // is connected and timer is not paused
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
     {
         if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
         {
@@ -770,14 +779,15 @@
         }
         else
         {
-            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateUIOnMainThread) userInfo:nil repeats:NO];
+            [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateUIOnMainThread) userInfo:nil repeats:NO];
         }
     }
 }
 
 - (void)updateUIOnMainThread
 {
-    [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
+        [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
 }
 
 - (void)showConfirmMsg
@@ -832,7 +842,8 @@
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
-    if (isThereConnection)
+    // is connected and timer is not paused
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
         [self updateUI];
 }
 

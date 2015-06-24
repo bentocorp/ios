@@ -17,6 +17,9 @@
 
 #import "FirstViewController.h"
 
+#import "Reachability.h"
+#import <SystemConfiguration/SystemConfiguration.h>
+
 @interface BentoShop ()
 
 @property (nonatomic, retain) NSString *strToday;
@@ -905,22 +908,32 @@ static BentoShop *_shareInstance;
     
     _isCallingApi = YES;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-        
-        // check version first
-        if (self.iosCurrentVersion >= self.iosMinVersion)
-        {
-            [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-            [self setLunchOrDinnerMode];
-            [self checkIfBentoArrayNeedsToBeReset];
-            [self getMenus];
-            [self getNextNextMenus];
-            [self getStatus];
-            [self getServiceArea];
-        }
-    });
+    if ([self connected])
+    {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            
+            // check version first
+            if (self.iosCurrentVersion >= self.iosMinVersion)
+            {
+                [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+                [self setLunchOrDinnerMode];
+                [self checkIfBentoArrayNeedsToBeReset];
+                [self getMenus];
+                [self getNextNextMenus];
+                [self getStatus];
+                [self getServiceArea];
+            }
+        });
+    }
     
     _isCallingApi = NO;
+}
+
+- (BOOL)connected
+{
+    Reachability *reachability = [Reachability reachabilityForInternetConnection];
+    NetworkStatus networkStatus = [reachability currentReachabilityStatus];
+    return networkStatus != NotReachable;
 }
 
 - (void)refreshStart

@@ -260,6 +260,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [[NSNotificationCenter defaultCenter] postNotificationName:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     
+    
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
         [globalShop getStatus];
@@ -480,7 +481,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     });
 }
 
-// used when view became active
+
 - (BOOL)connected
 {
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
