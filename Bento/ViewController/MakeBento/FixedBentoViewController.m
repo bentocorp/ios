@@ -490,19 +490,22 @@
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoHighlight:) forControlEvents:UIControlEventTouchDown];
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
     
-    // Prices
-    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
-    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
-    if (salePrice != 0 && salePrice < unitPrice)
-    {
-        // Normal Price
-        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", salePrice] forState:UIControlStateNormal];
-    }
-    else
-    {
-        // On Sale
-        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", unitPrice] forState:UIControlStateNormal];
-    }
+//    // Prices
+//    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
+//    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+//    if (salePrice != 0 && salePrice < unitPrice)
+//    {
+//        // Normal Price
+//        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", salePrice] forState:UIControlStateNormal];
+//    }
+//    else
+//    {
+//        // On Sale
+//        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", unitPrice] forState:UIControlStateNormal];
+//    }
+    
+    [servingLunchCell.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
+    [servingLunchCell.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateHighlighted | UIControlStateDisabled];
 
     return servingLunchCell;
 }
@@ -999,25 +1002,17 @@
     }
     
     if (_selectedPath != nil && _selectedPath == indexPath)
-    {
         [myCell setCellState:YES];
-    }
     else
-    {
         [myCell setCellState:NO];
-    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (indexPath.section == 0) // Main Dish
-    {
         return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width * 3 / 5);
-    }
     else if (indexPath.section == 1) // Side Dish
-    {
         return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
-    }
     
     return CGSizeMake(0, 0);
 }
@@ -1025,13 +1020,9 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (_selectedPath == indexPath)
-    {
         _selectedPath = nil;
-    }
     else
-    {
         _selectedPath = indexPath;
-    }
     
     [collectionView reloadData];
 }
@@ -1044,9 +1035,7 @@
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
     if (section == 0 || section == 1)
-    {
         return CGSizeMake(cvDishes.frame.size.width, 44);
-    }
     
     return CGSizeMake(0, 0);
 }

@@ -164,7 +164,7 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/Order/CompleteOrderViewController.m"
-                  timestampString = "456801285.872927"
+                  timestampString = "456866085.659677"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1324"
@@ -179,7 +179,7 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/Order/CompleteOrderViewController.m"
-                  timestampString = "456801285.873068"
+                  timestampString = "456866085.65979"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "1324"
@@ -234,38 +234,6 @@
             startingLineNumber = "482"
             endingLineNumber = "482"
             landmarkName = "-onBottomButton:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
-            timestampString = "456797047.71599"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "598"
-            endingLineNumber = "598"
-            landmarkName = "-reloadDishes"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/MakeBento/CustomBentoViewController.m"
-            timestampString = "456800982.118752"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "874"
-            endingLineNumber = "874"
-            landmarkName = "-gotoOrderScreen"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -447,8 +447,12 @@
     
 /*------*/
     
-//    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
-    NSString *strTitle = @"BUILD YOUR BENTO - $12";
+    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
+    if (strTitle == nil)
+        strTitle = @"BUILD YOUR BENTO";
+    
+//    NSString *strTitle = @"BUILD YOUR BENTO - $12";
+    
     if (strTitle != nil)
     {
         // Add Another Bento Button
@@ -1005,6 +1009,7 @@
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     NSString *strTitle;
     
+    /*---On Sale---*/
     if (salePrice != 0 && salePrice < unitPrice)
     {
         lblBanner.hidden = NO;
@@ -1012,13 +1017,15 @@
         
         if (currentBento == nil || ![currentBento isCompleted])
         {
-            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], salePrice];
+//            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], salePrice]; // show price
+            strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
             btnAddAnotherBento.enabled = NO;
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
         }
         else
         {
-            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], salePrice];
+//            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], salePrice]; // show price
+            strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
             btnAddAnotherBento.enabled = YES;
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:243.0f / 255.0f green:245.0f / 255.0f blue:245.0f / 255.0f alpha:1.0f]];
         }
@@ -1035,19 +1042,22 @@
             btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
         }
     }
+    /*---Regular Price---*/
     else
     {
         lblBanner.hidden = YES;
         
         if (currentBento == nil || ![currentBento isCompleted])
         {
-            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], unitPrice];
+//            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], unitPrice]; // show price
+            strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
             btnAddAnotherBento.enabled = NO;
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
         }
         else
         {
-            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], unitPrice];
+//            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], unitPrice]; // show price
+            strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
             btnAddAnotherBento.enabled = YES;
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:243.0f / 255.0f green:245.0f / 255.0f blue:245.0f / 255.0f alpha:1.0f]];
         }
@@ -1063,8 +1073,8 @@
                                     range:NSMakeRange(0, [strTitle length])];
             btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
         }
-
     }
+    
     
     // Bentos
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) // no bento
