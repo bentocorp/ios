@@ -166,9 +166,9 @@
     
     // just in case
     if (currentMenuTitle == nil)
-        currentMenuTitle = @"Current Menu";
+        currentMenuTitle = @"No Available Menu";
     if (nextMenuTitle == nil)
-        nextMenuTitle = @"Upcoming Menu";
+        nextMenuTitle = @"No Available Menu";
     
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);

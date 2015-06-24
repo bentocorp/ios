@@ -515,10 +515,10 @@
     
     // to prevent crash
     if (titleLeft == nil)
-        titleLeft = @"Next Upcoming Menu";
+        titleLeft = @"No Available Menu";
     
     if (titleRight == nil)
-        titleRight = @"Upcoming Menu";
+        titleRight = @"No Available Menu";
 }
 
 - (void)setMenuTitles
