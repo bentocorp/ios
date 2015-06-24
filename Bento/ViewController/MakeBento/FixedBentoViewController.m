@@ -768,11 +768,20 @@
     else
     {
         if (placeInfo == nil)
-        {
             [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-        }
         else
-            [self.navigationController pushViewController:completeOrderViewController animated:YES];
+        {
+            // check if saved address is within CURRENT service area
+            CLLocationCoordinate2D location = placeInfo.location.coordinate;
+            
+            // not within service area
+            if (![[BentoShop sharedInstance] checkLocation:location])
+                [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+            
+            // within service area
+            else
+                [self.navigationController pushViewController:completeOrderViewController animated:YES];
+        }
     }
 }
 

@@ -881,7 +881,7 @@
             
             [self openAccountViewController:[DeliveryLocationViewController class]];
         }
-        else // if user already has saved address
+        else // if bento user already has saved address
         {
             // check if saved address is within CURRENT service area
             CLLocationCoordinate2D location = placeInfo.location.coordinate;
