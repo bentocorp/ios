@@ -49,6 +49,9 @@
     float currentTime;
     float bufferTime;
     NSString *todayDate;
+    
+    NSString *dinnerMapURLString;
+    NSString *lunchMapURLString;
 }
 
 static BentoShop *_shareInstance;
@@ -458,9 +461,15 @@ static BentoShop *_shareInstance;
     NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
     
-    /*-------------------------------------for forced update------------------------------------------------*/
+    /*-------------------------------------extra: for forced update------------------------------------------------*/
     self.iosMinVersion = (CGFloat)[initDictionary[@"ios_min_version"] floatValue];
     self.iosCurrentVersion = (CGFloat)[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
+    /*-------------------------------------------------------------------------------------*/
+    
+    /*--------------------------------------extra: for service area URL's-----------------------------------------------*/
+    lunchMapURLString = initDictionary[@"settings"][@"serviceArea_lunch_map"];
+    dinnerMapURLString = initDictionary[@"settings"][@"serviceArea_dinner_map"];
+    
     /*-------------------------------------------------------------------------------------*/
 }
 
@@ -486,6 +495,16 @@ static BentoShop *_shareInstance;
 {
     NSLog(@"Get Buffer Time - %@", [NSNumber numberWithFloat:bufferTime]);
     return [NSNumber numberWithFloat:bufferTime];
+}
+
+- (NSString *)getLunchMapURL
+{
+    return lunchMapURLString;
+}
+
+- (NSString*)getDinnerMapURL
+{
+    return dinnerMapURLString;
 }
 
 - (void)setLunchOrDinnerMode

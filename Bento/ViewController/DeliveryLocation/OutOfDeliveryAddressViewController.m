@@ -89,14 +89,10 @@
     NSURL *url;
     // 12:00am - dinner opening (ie. 16.5)
     if (currentTime >= 0 && currentTime < dinnerTime)
-    {
-        url = [NSURL URLWithString:@"https://a.tiles.mapbox.com/v4/vincent-bentonow-com.m6g45dbo/page.html?access_token=pk.eyJ1IjoidmluY2VudC1iZW50b25vdy1jb20iLCJhIjoiV0p2al9qNCJ9.cKufaBUS30xSk7wXxmGuDg#11/37.7903/-122.4100"];
-    }
+        url = [NSURL URLWithString:[[BentoShop sharedInstance] getLunchMapURL]];
     // dinner opening - 11:59pm
     else if (currentTime >= dinnerTime && currentTime < 24)
-    {
-        url = [NSURL URLWithString:@"https://a.tiles.mapbox.com/v4/vincent-bentonow-com.m26hh48o/page.html?access_token=pk.eyJ1IjoidmluY2VudC1iZW50b25vdy1jb20iLCJhIjoiV0p2al9qNCJ9.cKufaBUS30xSk7wXxmGuDg#11/37.7892/-122.4176"];
-    }
+        url = [NSURL URLWithString:[[BentoShop sharedInstance] getDinnerMapURL]];
     
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     [self.webView loadRequest:request];
