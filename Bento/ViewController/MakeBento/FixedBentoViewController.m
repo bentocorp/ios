@@ -750,8 +750,20 @@
 
             [self openAccountViewController:[DeliveryLocationViewController class]];
         }
-        else
-            [self openAccountViewController:[CompleteOrderViewController class]];
+
+        else // if user already has saved address
+        {
+            // check if saved address is within CURRENT service area
+            CLLocationCoordinate2D location = placeInfo.location.coordinate;
+            
+            // not within service area
+            if (![[BentoShop sharedInstance] checkLocation:location])
+                [self openAccountViewController:[DeliveryLocationViewController class]];
+            
+            // within service area
+            else
+                [self openAccountViewController:[CompleteOrderViewController class]];
+        }
     }
     else
     {
