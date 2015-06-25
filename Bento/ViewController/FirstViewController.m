@@ -311,7 +311,7 @@
     
 /*--------------Determine whether to show Fixed or Custom--------------*/
     
-    [globalShop setLunchOrDinnerMode]; // putting this here for when entering app without network connection, otherwise it wont be up to date
+    [globalShop setLunchOrDinnerModeByTimes]; // putting this here for when entering app without network connection, otherwise it wont be up to date
     
     // this is dynamic to times of day
     NSString *menuType = [[BentoShop sharedInstance] getMenuType];

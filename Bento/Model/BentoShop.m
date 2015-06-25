@@ -507,7 +507,7 @@ static BentoShop *_shareInstance;
     return dinnerMapURLString;
 }
 
-- (void)setLunchOrDinnerMode
+- (void)setLunchOrDinnerModeByTimes
 {
     // Set Lunch Mode
     if (currentTime >= 0 && currentTime < dinnerTime)
@@ -991,7 +991,7 @@ static BentoShop *_shareInstance;
             if (self.iosCurrentVersion >= self.iosMinVersion)
             {
                 [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-                [self setLunchOrDinnerMode];
+                [self setLunchOrDinnerModeByTimes];
                 [self checkIfBentoArrayNeedsToBeReset];
                 [self getMenus];
                 [self getNextNextMenus];

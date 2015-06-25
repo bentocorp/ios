@@ -107,7 +107,7 @@
 - (void)resetBentoArray;
 
 - (void)checkIfBentoArrayNeedsToBeReset;
-- (void)setLunchOrDinnerMode;
+- (void)setLunchOrDinnerModeByTimes;
 
 
 @end

@@ -244,12 +244,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/Model/BentoShop.m"
-            timestampString = "456879921.379353"
+            timestampString = "456951473.916137"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "550"
-            endingLineNumber = "550"
-            landmarkName = "-getMenuInfo"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
+            landmarkName = "-setLunchOrDinnerMode"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

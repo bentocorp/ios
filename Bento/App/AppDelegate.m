@@ -220,7 +220,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             
             /*-----------------------*/
             
-            [[BentoShop sharedInstance] setLunchOrDinnerMode];
+            [[BentoShop sharedInstance] setLunchOrDinnerModeByTimes];
         });
     });
     
@@ -265,7 +265,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         [globalShop getStatus];
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-        [globalShop setLunchOrDinnerMode];
+        [globalShop setLunchOrDinnerModeByTimes];
         [[AppStrings sharedInstance] getAppStrings];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
@@ -327,7 +327,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [globalShop setLunchOrDinnerMode];
+                [globalShop setLunchOrDinnerModeByTimes];
                 [globalShop getMenus];
                 [globalShop getStatus];
                 [globalShop getServiceArea];
