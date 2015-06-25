@@ -520,7 +520,7 @@
         [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
     }
     
-/*-------------------------------------Tomorrow Lunch---------------------------------------*/
+/*-------------------------------------RIGHT---------------------------------------*/
     
     /*---Collection View---*/
     

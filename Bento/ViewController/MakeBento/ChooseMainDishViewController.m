@@ -36,6 +36,8 @@
     
     NSString *originalDateString;
     NSString *newDateString;
+    
+    BOOL all_day;
 }
 
 - (void)viewDidLoad {
@@ -58,15 +60,27 @@
 {
     [super viewWillAppear:animated];
     
+    all_day = YES;
+    
     self.aryDishes = [[NSMutableArray alloc] init];
     
     NSString *lunchOrDinnerString;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        lunchOrDinnerString = @"todayLunch";
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        lunchOrDinnerString = @"todayDinner";
-        
+    if (all_day)
+    {
+        if ([[BentoShop sharedInstance] isThereLunchMenu])
+            lunchOrDinnerString = @"todayLunch";
+        else if ([[BentoShop sharedInstance] isThereLunchMenu])
+            lunchOrDinnerString = @"todayDinner";
+    }
+    else
+    {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            lunchOrDinnerString = @"todayLunch";
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            lunchOrDinnerString = @"todayDinner";
+    }
+    
     for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:lunchOrDinnerString])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
