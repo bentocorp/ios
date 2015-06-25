@@ -587,18 +587,37 @@ static BentoShop *_shareInstance;
 {
     NSDictionary *menuItems;
     
-    // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime)
+    BOOL all_day = YES;
+    if (all_day)
     {
-        NSData *data = [defaults objectForKey:@"lunchMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-
-    // dinner opening - 11:59pm
+        // lunch exists
+        if ([defaults objectForKey:@"lunchMenuItems"] != nil)
+        {
+            NSData *data = [defaults objectForKey:@"lunchMenuItems"];
+            menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        }
+        // no lunch, dinner exists
+        else if ([defaults objectForKey:@"dinnerMenuItems"] != nil)
+        {
+            NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
+            menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        }
     }
-    else if (currentTime >= dinnerTime && currentTime < 24)
+    else
     {
-        NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        // 12:00am - dinner opening (ie. 16.5)
+        if (currentTime >= 0 && currentTime < dinnerTime)
+        {
+            NSData *data = [defaults objectForKey:@"lunchMenuItems"];
+            menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+
+        // dinner opening - 11:59pm
+        }
+        else if (currentTime >= dinnerTime && currentTime < 24)
+        {
+            NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
+            menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        }
     }
     
     if (menuItems == nil)
@@ -620,16 +639,36 @@ static BentoShop *_shareInstance;
     // Service Area
     NSString *strPoints;
     
-    // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime) {
-        strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-        NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
-        
-    // dinner opening - 11:59pm
-    } else if (currentTime >= dinnerTime && currentTime < 24) {
-        
-        strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-        NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+    BOOL all_day = YES;
+    if (all_day)
+    {
+        // lunch exists
+        if ([defaults objectForKey:@"lunchMenuInfo"] != nil)
+        {
+            strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+            NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+        }
+        // if no lunch, dinner exists
+        else if ([defaults objectForKey:@"lunchMenuInfo"] != nil)
+        {
+            strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+            NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+        }
+    }
+    else
+    {
+        // 12:00am - dinner opening (ie. 16.5)
+        if (currentTime >= 0 && currentTime < dinnerTime)
+        {
+            strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+            NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+        }
+        // dinner opening - 11:59pm
+        else if (currentTime >= dinnerTime && currentTime < 24)
+        {
+            strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+            NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+        }
     }
     
     NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
