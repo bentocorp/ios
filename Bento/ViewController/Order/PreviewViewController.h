@@ -7,8 +7,9 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface PreviewViewController : UIViewController
+@interface PreviewViewController : BaseViewController
 
 @property (nonatomic, assign) NSInteger type;
 

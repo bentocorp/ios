@@ -299,6 +299,8 @@
 - (void)onBack
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)onPrivacyPolicy:(id)sender

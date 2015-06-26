@@ -12,6 +12,7 @@
 #import "PreviewCollectionViewCell.h"
 #import "JGProgressHUD.h"
 #import "Mixpanel.h"
+#import "DataManager.h"
 
 #define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
 #define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
@@ -695,13 +696,13 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if (isThereConnection)
-    {
-        if (self.type == 0 && ![[BentoShop sharedInstance] isClosed]) // Closed
-            [self performSelectorOnMainThread:@selector(onCloseButton) withObject:nil waitUntilDone:NO];
-        else if (self.type == 1 && ![[BentoShop sharedInstance] isSoldOut]) // Sold Out
-            [self performSelectorOnMainThread:@selector(onCloseButton) withObject:nil waitUntilDone:NO];
-    }
+//    if (isThereConnection)
+//    {
+//        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+//            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+//        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+//            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+//    }
 }
 
 #pragma mark - Navigation

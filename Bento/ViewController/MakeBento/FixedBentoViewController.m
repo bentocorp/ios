@@ -533,19 +533,21 @@
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoHighlight:) forControlEvents:UIControlEventTouchDown];
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
     
-    // Prices
-    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
-    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
-    if (salePrice != 0 && salePrice < unitPrice)
-    {
-        // Normal Price
-        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", salePrice] forState:UIControlStateNormal];
-    }
-    else
-    {
-        // On Sale
-        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", unitPrice] forState:UIControlStateNormal];
-    }
+    [servingLunchCell.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
+    
+//    // Prices
+//    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
+//    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+//    if (salePrice != 0 && salePrice < unitPrice)
+//    {
+//        // Normal Price
+//        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", salePrice] forState:UIControlStateNormal];
+//    }
+//    else
+//    {
+//        // On Sale
+//        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", unitPrice] forState:UIControlStateNormal];
+//    }
     
     return servingLunchCell;
 }
