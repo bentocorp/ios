@@ -684,10 +684,20 @@
     
     NSArray *aryMainDishes;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+    if ([[BentoShop sharedInstance] isAllDay])
+    {
+        if ([[BentoShop sharedInstance] isThereLunchMenu])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+    }
+    else
+    {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+    }
     
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
     fixedBentoPreviewViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];
