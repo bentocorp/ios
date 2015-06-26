@@ -273,7 +273,7 @@
         }
     }
 
-    // all day logic for closed
+    // ALL DAY LOGIC FOR CLOSED
     if ([[BentoShop sharedInstance] isAllDay] && [[BentoShop sharedInstance] isClosed])
     {
         // 00:00 - 17:29 (12am to 12:29pm, 12:30pm to 5:29pm)
@@ -400,8 +400,16 @@
             }
         }
         
+        
+        // 17:30pm - 23:59pm
+        else if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
+        {
+            
+        }
     }
-    else if ([[BentoShop sharedInstance] isClosed]) // regular business logic for closed
+    
+    // REGULAR BUSINESS LOGIC FOR CLOSED
+    else if ([[BentoShop sharedInstance] isClosed])
     {
         // 00:00 - 12.29
         if (currentTime >= 0 && currentTime < (lunchTime + bufferTime))
