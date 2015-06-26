@@ -36,6 +36,7 @@
 
 - (BOOL)isAllDay;
 - (BOOL)nextIsAllDay;
+- (BOOL)nextNextIsAllDay;
 
 - (BOOL)isClosed;
 - (BOOL)isSoldOut;

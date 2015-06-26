@@ -1058,6 +1058,11 @@ static BentoShop *_shareInstance;
     return YES;
 }
 
+- (BOOL)nextNextIsAllDay
+{
+    return YES;
+}
+
 - (NSArray *)getMainDishes:(NSString *)whatNeedsMain
 {
     if (self.menuToday == nil)
