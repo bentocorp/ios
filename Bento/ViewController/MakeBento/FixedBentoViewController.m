@@ -359,7 +359,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
 }
 
 - (BOOL)connected
@@ -406,39 +406,28 @@
     }
 }
 
-- (void)preloadCheckCurrentMode
-{
-    // so date string can refresh first
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-}
+//- (void)preloadCheckCurrentMode
+//{
+//    // so date string can refresh first
+//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
+//}
 
 - (void)checkCurrentMode
 {
-    newDateString = [[BentoShop sharedInstance] getMenuDateString];
+    NSString *originalMenuType = [[NSUserDefaults standardUserDefaults] objectForKey:@"originalMenuType"];
+    NSString *currentMenuType = [[BentoShop sharedInstance] getMenuType];
     
-    NSString *originalLunchOrDinnerMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"];
-    NSString *newLunchOrDinnerMode = [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"];
-    
-    // if mode do not match, refresh state
-    if (![newLunchOrDinnerMode isEqualToString:originalLunchOrDinnerMode])
+    // if menu type changed, reset the app
+    if (![originalMenuType isEqualToString:currentMenuType])
     {
-        // update original mode with new mode
-        [[NSUserDefaults standardUserDefaults] setObject:newLunchOrDinnerMode forKey:@"OriginalLunchOrDinnerMode"];
+        // reset originalMenuType with currentMenuType
+        [[NSUserDefaults standardUserDefaults] setObject:currentMenuType forKey:@"originalMenuType"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[BentoShop sharedInstance] resetBentoArray];
         
-        // reset app
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-    
-    // if date changed
-    else if (![originalDateString isEqualToString:newDateString])
-    {
-        originalDateString = [[BentoShop sharedInstance] getMenuDateString];
-        
-        // reset app
-        [self.navigationController popToRootViewControllerAnimated:YES];
+        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
     }
 }
 

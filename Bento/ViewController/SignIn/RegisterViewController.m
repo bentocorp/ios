@@ -147,7 +147,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeKeyboardFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(preloadCheckCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
     
     [self showErrorWithString:nil code:ERROR_NONE];
     
@@ -176,27 +176,28 @@
     loadingHUD = nil;
 }
 
-- (void)preloadCheckCurrentMode
-{
-    // so date string can refresh first
-    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-}
+//- (void)preloadCheckCurrentMode
+//{
+//    // so date string can refresh first
+//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
+//}
 
 - (void)checkCurrentMode
 {
-    // if mode changed
-    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]
-          isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
+    NSString *originalMenuType = [[NSUserDefaults standardUserDefaults] objectForKey:@"originalMenuType"];
+    NSString *currentMenuType = [[BentoShop sharedInstance] getMenuType];
+    
+    // if menu type changed, reset the app
+    if (![originalMenuType isEqualToString:currentMenuType])
     {
-        // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
-        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        // reset originalMenuType with currentMenuType
+        [[NSUserDefaults standardUserDefaults] setObject:currentMenuType forKey:@"originalMenuType"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[BentoShop sharedInstance] resetBentoArray];
         
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 
