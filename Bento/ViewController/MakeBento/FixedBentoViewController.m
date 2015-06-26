@@ -727,15 +727,32 @@
     NSArray *aryMainDishes;
     NSArray *arySideDishes;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+    // use all day logic
+    if ([[BentoShop sharedInstance] isAllDay])
     {
-        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+        if ([[BentoShop sharedInstance] isThereLunchMenu])
+        {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+        }
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+        {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+        }
     }
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+    else // use regular logic
     {
-        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-        arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+        {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+        }
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+        {
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+        }
     }
     
     // Add main to Bento
@@ -768,10 +785,20 @@
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento != nil && ![currentBento isCompleted])
     {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            [currentBento completeBento:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            [currentBento completeBento:@"todayDinner"];
+        if ([[BentoShop sharedInstance] isAllDay])
+        {
+            if ([[BentoShop sharedInstance] isThereLunchMenu])
+                [currentBento completeBento:@"todayLunch"];
+            else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                [currentBento completeBento:@"todayDinner"];
+        }
+        else
+        {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+                [currentBento completeBento:@"todayLunch"];
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+                [currentBento completeBento:@"todayDinner"];
+        }
     }
     
     [[BentoShop sharedInstance] addNewBento];
@@ -906,10 +933,20 @@
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted])
         {
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-                [currentBento completeBento:@"todayLunch"];
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-                [currentBento completeBento:@"todayDinner"];
+            if ([[BentoShop sharedInstance] isAllDay])
+            {
+                if ([[BentoShop sharedInstance] isThereLunchMenu])
+                    [currentBento completeBento:@"todayLunch"];
+                else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                    [currentBento completeBento:@"todayDinner"];
+            }
+            else
+            {
+                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+                    [currentBento completeBento:@"todayLunch"];
+                else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+                    [currentBento completeBento:@"todayDinner"];
+            }
         }
         
         [self gotoOrderScreen];
