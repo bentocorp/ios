@@ -163,8 +163,7 @@
         
         [[BentoShop sharedInstance] resetBentoArray];
         
-        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
-        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 
