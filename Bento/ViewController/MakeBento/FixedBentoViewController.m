@@ -126,26 +126,52 @@
     NSString *currentMenuTitle;
     NSString *nextMenuTitle;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        currentMenuTitle = @"Now Serving Lunch";
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        currentMenuTitle = @"Now Serving Dinner";
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+    if ([[BentoShop sharedInstance] isAllDay])
     {
-        if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            nextMenuTitle = @"Tonight's Dinner Menu";
-        else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        if([[BentoShop sharedInstance] isThereLunchMenu])
+            currentMenuTitle = @"Serving All-day Lunch";
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            currentMenuTitle = @"Serving All-day Dinner";
+        
+        // if next menu is all_day, show %@'s All-Day Menu
+        BOOL nextIsAllDay = NO;
+        
+        if (nextIsAllDay)
+        {
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu] || [[BentoShop sharedInstance] isThereDinnerNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        }
+        else
+        {
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        }
     }
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+    else
     {
-        if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-            nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-        else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-            nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            currentMenuTitle = @"Now Serving Lunch";
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            currentMenuTitle = @"Now Serving Dinner";
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+        {
+            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                nextMenuTitle = @"Tonight's Dinner Menu";
+            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        }
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+        {
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        }
     }
     
     // just in case
