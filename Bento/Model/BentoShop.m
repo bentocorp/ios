@@ -850,13 +850,18 @@ static BentoShop *_shareInstance;
 {
     if ([self getMenuInfo][@"menu_type"] != nil)
     {
+        // persist meal type, used for checking if the value ever changes and if it does reset the app like this:
+        // if (![BentoShop sharedInstance] getMenuType] isEqualToString:[[NSUserDefaults standardDefaults] objectForKey:@"originalMealType"]) ..... reset!
+        [[NSUserDefaults standardUserDefaults] setObject:[self getMenuInfo][@"menu_type"] forKey:@"originalMealType"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
         NSLog(@"MEAL TYPE: %@", [self getMenuInfo][@"menu_type"]);
-        return [self getMenuInfo][@"menu_type"]; // fixed/custom
+        
+        // return "fixed" or "custom"
+        return [self getMenuInfo][@"menu_type"];
     }
     
-    // this hardcoded value doesn't matter, i could've set it to either fixed/custom.
-    // it's just a placeholder to prevent app from hanging in FirstViewController
-    // in case there is no current menu set for current time and store opens
+    // this hardcoded value is only used for preventing the app from hanging in case there's no current menu set for current time and the store opens
     return @"custom";
 }
 
