@@ -467,10 +467,20 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        return [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] count];
+    if ([[BentoShop sharedInstance] isAllDay])
+    {
+        if ([[BentoShop sharedInstance] isThereLunchMenu])
+            return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            return [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] count];
+    }
+    else
+    {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            return [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] count];
+    }
     
     return 0;
 }
@@ -485,10 +495,20 @@
     
     NSArray *aryMainDishes;
     
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+    if ([[BentoShop sharedInstance] isAllDay])
+    {
+        if ([[BentoShop sharedInstance] isThereLunchMenu])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+    }
+    else
+    {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+    }
     
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
     [servingLunchCell setDishInfo:dishInfo];
