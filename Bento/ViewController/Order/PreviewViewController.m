@@ -177,7 +177,21 @@
         if ([[BentoShop sharedInstance] nextIsAllDay])
         {
             if ([[BentoShop sharedInstance] isThereLunchNextMenu] || [[BentoShop sharedInstance] isThereDinnerNextMenu])
-                titleRight = [NSString stringWithFormat:@"%@'s All-day Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];        }
+            {
+                titleRight = [NSString stringWithFormat:@"%@'s All-day Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                
+                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                {
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                }
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                {
+                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+                }
+            }
+        }
         else // next menu regular
         {
             if ([[BentoShop sharedInstance] isThereLunchNextMenu])
@@ -280,7 +294,6 @@
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
                     arySideDishesRight = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
-
                 }
                 else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
                 {
