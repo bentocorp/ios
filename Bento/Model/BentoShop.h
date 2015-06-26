@@ -34,6 +34,8 @@
 + (BentoShop *)sharedInstance;
 + (void)releaseInstance;
 
+- (BOOL)isAllDay;
+
 - (BOOL)isClosed;
 - (BOOL)isSoldOut;
 

@@ -547,17 +547,15 @@ static BentoShop *_shareInstance;
 - (NSDictionary *)getMenuInfo
 {
     NSDictionary *menuInfo;
-    BOOL all_day = YES;
     
-    // if all_day menu is set
-    if (all_day)
+    if ([self isAllDay])
     {
         // check if lunch exists
-        if ([defaults objectForKey:@"lunchMenuInfo"] != nil)
+        if ([self isThereLunchMenu])
             menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
         
         // if no lunch, get dinner
-        else
+        else if ([self isThereDinnerMenu])
             menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
     }
     
@@ -587,17 +585,16 @@ static BentoShop *_shareInstance;
 {
     NSDictionary *menuItems;
     
-    BOOL all_day = YES;
-    if (all_day)
+    if ([self isAllDay])
     {
         // lunch exists
-        if ([defaults objectForKey:@"lunchMenuItems"] != nil)
+        if ([self isThereLunchMenu])
         {
             NSData *data = [defaults objectForKey:@"lunchMenuItems"];
             menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
         }
         // no lunch, dinner exists
-        else if ([defaults objectForKey:@"dinnerMenuItems"] != nil)
+        else if ([self isThereDinnerMenu])
         {
             NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
             menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
@@ -639,17 +636,16 @@ static BentoShop *_shareInstance;
     // Service Area
     NSString *strPoints;
     
-    BOOL all_day = YES;
-    if (all_day)
+    if ([self isAllDay])
     {
         // lunch exists
-        if ([defaults objectForKey:@"lunchMenuInfo"] != nil)
+        if ([self isThereLunchMenu])
         {
             strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
             NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
         }
         // if no lunch, dinner exists
-        else if ([defaults objectForKey:@"lunchMenuInfo"] != nil)
+        else if ([self isThereDinnerMenu])
         {
             strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
             NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
@@ -1053,6 +1049,11 @@ static BentoShop *_shareInstance;
     _timer = nil;
     
     NSLog(@"Refresh Stopped");
+}
+
+- (BOOL)isAllDay
+{
+    return YES;
 }
 
 - (NSArray *)getMainDishes:(NSString *)whatNeedsMain

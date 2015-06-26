@@ -110,15 +110,10 @@
     
     NSString *originalDateString;
     NSString *newDateString;
-    
-    BOOL all_day;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    // all_day menu?
-     all_day = YES;
     
     // initialize to yes
     isThereConnection = YES;
@@ -147,12 +142,12 @@
     NSString *currentMenuTitle;
     NSString *nextMenuTitle;
     
-    if (all_day)
+    if ([[BentoShop sharedInstance] isAllDay])
     {
         if([[BentoShop sharedInstance] isThereLunchMenu])
-            currentMenuTitle = @"Now Serving Lunch All Day";
+            currentMenuTitle = @"Serving All-day Lunch";
         else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            currentMenuTitle = @"Now Serving Dinner All Day";
+            currentMenuTitle = @"Serving All-day Dinner";
         
         if ([[BentoShop sharedInstance] isThereLunchNextMenu])
             nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
