@@ -1053,6 +1053,11 @@ static BentoShop *_shareInstance;
 
 - (BOOL)isAllDay
 {
+    return NO;
+}
+
+- (BOOL)nextIsAllDay
+{
     return YES;
 }
 

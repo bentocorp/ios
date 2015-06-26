@@ -149,10 +149,7 @@
         else if ([[BentoShop sharedInstance] isThereDinnerMenu])
             currentMenuTitle = @"Serving All-day Dinner";
         
-        // if next menu is all_day, show %@'s All-Day Menu
-        BOOL nextIsAllDay = NO;
-        
-        if (nextIsAllDay)
+        if ([[BentoShop sharedInstance] nextIsAllDay])
         {
             if ([[BentoShop sharedInstance] isThereLunchNextMenu] || [[BentoShop sharedInstance] isThereDinnerNextMenu])
                 nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];

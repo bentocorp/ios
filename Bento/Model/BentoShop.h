@@ -35,6 +35,7 @@
 + (void)releaseInstance;
 
 - (BOOL)isAllDay;
+- (BOOL)nextIsAllDay;
 
 - (BOOL)isClosed;
 - (BOOL)isSoldOut;
