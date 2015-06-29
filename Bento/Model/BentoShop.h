@@ -113,5 +113,6 @@
 - (void)checkIfBentoArrayNeedsToBeReset;
 - (void)setLunchOrDinnerModeByTimes;
 
+- (BOOL)didModeOrDateChange;
 
 @end

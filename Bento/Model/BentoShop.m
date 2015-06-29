@@ -362,39 +362,55 @@ static BentoShop *_shareInstance;
         
         // doesn't matter lunch or dinner, just used to get next date
         if ([defaults objectForKey:@"nextLunchMenuInfo"] != nil) // if no lunch, get dinner info
+        {
             menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"];
-        else
+            
+            [self getNextNextMenuInfo:menuInfo];
+        }
+        else if ([defaults objectForKey:@"nextDinnerMenuInfo"] != nil) // if dinner also doesn't exist, don't try to get anything
+        {
             menuInfo = [defaults objectForKey:@"nextDinnerMenuInfo"];
-        
-        NSString *strDate = menuInfo[@"for_date"];
-        
-        NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-        [formatter setDateFormat:@"yyyy-MM-dd"];
-        
-        NSDate *menuDate = [formatter dateFromString:strDate];
-        NSString *nextDateString = [formatter stringFromDate:menuDate];
-        ///////////////////////////////////////////////////////////////
-        
-        NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, [nextDateString stringByReplacingOccurrencesOfString:@"-" withString: @""]];
-        
-        NSError *error = nil;
-        NSInteger statusCode = 0;
-        self.menuNextNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
-        
-        // set menuInfo and menuItems to persistent storage
-        [defaults setObject:self.menuNextNext[@"lunch"][@"Menu"] forKey:@"nextNextLunchMenuInfo"];
-        [defaults setObject:self.menuNextNext[@"dinner"][@"Menu"] forKey:@"nextNextDinnerMenuInfo"];
-        
-        /* archive array before setting into defaults - because there may be null values for unset inventory count */
-        NSData *dataNextNextLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"lunch"][@"MenuItems"]];
-        NSData *dataNextNextDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"dinner"][@"MenuItems"]];
-        [defaults setObject:dataNextNextLunch forKey:@"nextNextLunchMenuItems"];
-        [defaults setObject:dataNextNextDinner forKey:@"nextNextDinnerMenuItems"];
-        
-        [defaults synchronize];
-        
-        [self prefetchImages:self.menuNextNext];
+            
+            [self getNextNextMenuInfo:menuInfo];
+        }
+        else
+        {
+            [defaults setObject:nil forKey:@"nextNextLunchMenuInfo"];
+            [defaults setObject:nil forKey:@"nextNextDinnerMenuInfo"];
+        }
     }
+}
+
+- (void)getNextNextMenuInfo:(NSDictionary *)menuInfo
+{
+    NSString *strDate = menuInfo[@"for_date"];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSDate *menuDate = [formatter dateFromString:strDate];
+    NSString *nextDateString = [formatter stringFromDate:menuDate];
+    ///////////////////////////////////////////////////////////////
+    
+    NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, [nextDateString stringByReplacingOccurrencesOfString:@"-" withString: @""]];
+    
+    NSError *error = nil;
+    NSInteger statusCode = 0;
+    self.menuNextNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
+    
+    // set menuInfo and menuItems to persistent storage
+    [defaults setObject:self.menuNextNext[@"lunch"][@"Menu"] forKey:@"nextNextLunchMenuInfo"];
+    [defaults setObject:self.menuNextNext[@"dinner"][@"Menu"] forKey:@"nextNextDinnerMenuInfo"];
+    
+    /* archive array before setting into defaults - because there may be null values for unset inventory count */
+    NSData *dataNextNextLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"lunch"][@"MenuItems"]];
+    NSData *dataNextNextDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"dinner"][@"MenuItems"]];
+    [defaults setObject:dataNextNextLunch forKey:@"nextNextLunchMenuItems"];
+    [defaults setObject:dataNextNextDinner forKey:@"nextNextDinnerMenuItems"];
+    
+    [defaults synchronize];
+    
+    [self prefetchImages:self.menuNextNext];
 }
 
  /*----------------------GET LUNCH AND DINNER AND BUFFER TIME----------------------*/
@@ -1423,5 +1439,7 @@ static BentoShop *_shareInstance;
 {
     [self.aryBentos removeAllObjects];
 }
+
+
 
 @end
