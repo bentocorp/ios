@@ -26,7 +26,7 @@
 @property (nonatomic, retain) NSDictionary *dicStatus;
 @property (nonatomic, retain) NSDictionary *menuToday;
 @property (nonatomic, retain) NSDictionary *menuNext;
-@property (nonatomic, retain) NSDictionary *menuNextNext;
+//@property (nonatomic, retain) NSDictionary *menuNextNext;
 @property (nonatomic, retain) NSArray *menuStatus;
 @property (nonatomic, retain) MKPolygon *serviceArea;
 @property (nonatomic, retain) NSMutableArray *aryBentos;
@@ -172,7 +172,7 @@ static BentoShop *_shareInstance;
     NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
     
     [self getNextMenus];
-    [self getNextNextMenus];
+//    [self getNextNextMenus];
 
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     
@@ -354,64 +354,64 @@ static BentoShop *_shareInstance;
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
 }
 
-- (void)getNextNextMenus
-{
-    if ([self isClosed])
-    {
-        NSDictionary *menuInfo;
-        
-        // doesn't matter lunch or dinner, just used to get next date
-        if ([defaults objectForKey:@"nextLunchMenuInfo"] != nil) // if no lunch, get dinner info
-        {
-            menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"];
-            
-            [self getNextNextMenuInfo:menuInfo];
-        }
-        else if ([defaults objectForKey:@"nextDinnerMenuInfo"] != nil) // if dinner also doesn't exist, don't try to get anything
-        {
-            menuInfo = [defaults objectForKey:@"nextDinnerMenuInfo"];
-            
-            [self getNextNextMenuInfo:menuInfo];
-        }
-        else
-        {
-            [defaults setObject:nil forKey:@"nextNextLunchMenuInfo"];
-            [defaults setObject:nil forKey:@"nextNextDinnerMenuInfo"];
-        }
-    }
-}
+//- (void)getNextNextMenus
+//{
+//    if ([self isClosed])
+//    {
+//        NSDictionary *menuInfo;
+//        
+//        // doesn't matter lunch or dinner, just used to get next date
+//        if ([defaults objectForKey:@"nextLunchMenuInfo"] != nil) // if no lunch, get dinner info
+//        {
+//            menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"];
+//            
+//            [self getNextNextMenuInfo:menuInfo];
+//        }
+//        else if ([defaults objectForKey:@"nextDinnerMenuInfo"] != nil) // if dinner also doesn't exist, don't try to get anything
+//        {
+//            menuInfo = [defaults objectForKey:@"nextDinnerMenuInfo"];
+//            
+//            [self getNextNextMenuInfo:menuInfo];
+//        }
+//        else
+//        {
+//            [defaults setObject:nil forKey:@"nextNextLunchMenuInfo"];
+//            [defaults setObject:nil forKey:@"nextNextDinnerMenuInfo"];
+//        }
+//    }
+//}
 
-- (void)getNextNextMenuInfo:(NSDictionary *)menuInfo
-{
-    NSString *strDate = menuInfo[@"for_date"];
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    
-    NSDate *menuDate = [formatter dateFromString:strDate];
-    NSString *nextDateString = [formatter stringFromDate:menuDate];
-    ///////////////////////////////////////////////////////////////
-    
-    NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, [nextDateString stringByReplacingOccurrencesOfString:@"-" withString: @""]];
-    
-    NSError *error = nil;
-    NSInteger statusCode = 0;
-    self.menuNextNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
-    
-    // set menuInfo and menuItems to persistent storage
-    [defaults setObject:self.menuNextNext[@"lunch"][@"Menu"] forKey:@"nextNextLunchMenuInfo"];
-    [defaults setObject:self.menuNextNext[@"dinner"][@"Menu"] forKey:@"nextNextDinnerMenuInfo"];
-    
-    /* archive array before setting into defaults - because there may be null values for unset inventory count */
-    NSData *dataNextNextLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"lunch"][@"MenuItems"]];
-    NSData *dataNextNextDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"dinner"][@"MenuItems"]];
-    [defaults setObject:dataNextNextLunch forKey:@"nextNextLunchMenuItems"];
-    [defaults setObject:dataNextNextDinner forKey:@"nextNextDinnerMenuItems"];
-    
-    [defaults synchronize];
-    
-    [self prefetchImages:self.menuNextNext];
-}
+//- (void)getNextNextMenuInfo:(NSDictionary *)menuInfo
+//{
+//    NSString *strDate = menuInfo[@"for_date"];
+//    
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"yyyy-MM-dd"];
+//    
+//    NSDate *menuDate = [formatter dateFromString:strDate];
+//    NSString *nextDateString = [formatter stringFromDate:menuDate];
+//    ///////////////////////////////////////////////////////////////
+//    
+//    NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, [nextDateString stringByReplacingOccurrencesOfString:@"-" withString: @""]];
+//    
+//    NSError *error = nil;
+//    NSInteger statusCode = 0;
+//    self.menuNextNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
+//    
+//    // set menuInfo and menuItems to persistent storage
+//    [defaults setObject:self.menuNextNext[@"lunch"][@"Menu"] forKey:@"nextNextLunchMenuInfo"];
+//    [defaults setObject:self.menuNextNext[@"dinner"][@"Menu"] forKey:@"nextNextDinnerMenuInfo"];
+//    
+//    /* archive array before setting into defaults - because there may be null values for unset inventory count */
+//    NSData *dataNextNextLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"lunch"][@"MenuItems"]];
+//    NSData *dataNextNextDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuNextNext[@"dinner"][@"MenuItems"]];
+//    [defaults setObject:dataNextNextLunch forKey:@"nextNextLunchMenuItems"];
+//    [defaults setObject:dataNextNextDinner forKey:@"nextNextDinnerMenuItems"];
+//    
+//    [defaults synchronize];
+//    
+//    [self prefetchImages:self.menuNextNext];
+//}
 
  /*----------------------GET LUNCH AND DINNER AND BUFFER TIME----------------------*/
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers
@@ -791,28 +791,28 @@ static BentoShop *_shareInstance;
     return strReturn;
 }
 
-- (NSString *)getNextNextMenuWeekdayString
-{
-    if (self.menuNextNext == nil)
-        return nil;
-    
-    NSDictionary *menuInfo;
-    
-    // doesn't matter lunch or dinner, just used to get next date
-    if ([defaults objectForKey:@"nextNextLunchMenuInfo"] != nil) // if no lunch, get dinner info
-        menuInfo = [defaults objectForKey:@"nextNextLunchMenuInfo"];
-    else
-        menuInfo = [defaults objectForKey:@"nextNextDinnerMenuInfo"];
-    
-    NSString *strDate = menuInfo[@"for_date"];
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyy-MM-dd"];
-    NSDate *menuDate = [formatter dateFromString:strDate];
-    [formatter setDateFormat:@"EEEE"];
-    NSString *strReturn = [formatter stringFromDate:menuDate];
-    
-    return strReturn;
-}
+//- (NSString *)getNextNextMenuWeekdayString
+//{
+//    if (self.menuNextNext == nil)
+//        return nil;
+//    
+//    NSDictionary *menuInfo;
+//    
+//    // doesn't matter lunch or dinner, just used to get next date
+//    if ([defaults objectForKey:@"nextNextLunchMenuInfo"] != nil) // if no lunch, get dinner info
+//        menuInfo = [defaults objectForKey:@"nextNextLunchMenuInfo"];
+//    else
+//        menuInfo = [defaults objectForKey:@"nextNextDinnerMenuInfo"];
+//    
+//    NSString *strDate = menuInfo[@"for_date"];
+//    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+//    [formatter setDateFormat:@"yyyy-MM-dd"];
+//    NSDate *menuDate = [formatter dateFromString:strDate];
+//    [formatter setDateFormat:@"EEEE"];
+//    NSString *strReturn = [formatter stringFromDate:menuDate];
+//    
+//    return strReturn;
+//}
 
 - (BOOL)isThereLunchMenu
 {
@@ -846,21 +846,21 @@ static BentoShop *_shareInstance;
         return NO;
 }
 
-- (BOOL)isThereLunchNextNextMenu
-{
-    if ([defaults objectForKey:@"nextNextLunchMenuInfo"] != nil)
-        return YES;
-    else
-        return NO;
-}
-
-- (BOOL)isThereDinnerNextNextMenu
-{
-    if ([defaults objectForKey:@"nextNextDinnerMenuInfo"] != nil)
-        return YES;
-    else
-        return NO;
-}
+//- (BOOL)isThereLunchNextNextMenu
+//{
+//    if ([defaults objectForKey:@"nextNextLunchMenuInfo"] != nil)
+//        return YES;
+//    else
+//        return NO;
+//}
+//
+//- (BOOL)isThereDinnerNextNextMenu
+//{
+//    if ([defaults objectForKey:@"nextNextDinnerMenuInfo"] != nil)
+//        return YES;
+//    else
+//        return NO;
+//}
 
 - (NSString *)getMenuType
 {
@@ -1003,7 +1003,7 @@ static BentoShop *_shareInstance;
                 [self setLunchOrDinnerModeByTimes];
                 [self checkIfBentoArrayNeedsToBeReset];
                 [self getMenus];
-                [self getNextNextMenus];
+//                [self getNextNextMenus];
                 [self getStatus];
                 [self getServiceArea];
             }
@@ -1074,10 +1074,10 @@ static BentoShop *_shareInstance;
     return YES;
 }
 
-- (BOOL)nextNextIsAllDay
-{
-    return YES;
-}
+//- (BOOL)nextNextIsAllDay
+//{
+//    return YES;
+//}
 
 - (NSArray *)getMainDishes:(NSString *)whatNeedsMain
 {
@@ -1195,63 +1195,63 @@ static BentoShop *_shareInstance;
     return (NSArray *)arrayDishes;
 }
 
-- (NSArray *)getNextNextMainDishes:(NSString *)whatNeedsMain
-{
-    if (self.menuNext == nil)
-        return nil;
-    
-    NSDictionary *menuItems;
-    
-    if ([whatNeedsMain isEqualToString:@"nextNextLunchPreview"])
-    {
-        NSData *data = [defaults objectForKey:@"nextNextLunchMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    else if ([whatNeedsMain isEqualToString:@"nextNextDinnerPreview"])
-    {
-        NSData *data = [defaults objectForKey:@"nextNextDinnerMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    
-    NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary *dishInfo in menuItems)
-    {
-        NSString *strType = [dishInfo objectForKey:@"type"];
-        if ([strType isEqualToString:@"main"])
-            [arrayDishes addObject:dishInfo];
-    }
-    
-    return (NSArray *)arrayDishes;
-}
+//- (NSArray *)getNextNextMainDishes:(NSString *)whatNeedsMain
+//{
+//    if (self.menuNext == nil)
+//        return nil;
+//    
+//    NSDictionary *menuItems;
+//    
+//    if ([whatNeedsMain isEqualToString:@"nextNextLunchPreview"])
+//    {
+//        NSData *data = [defaults objectForKey:@"nextNextLunchMenuItems"];
+//        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//    }
+//    else if ([whatNeedsMain isEqualToString:@"nextNextDinnerPreview"])
+//    {
+//        NSData *data = [defaults objectForKey:@"nextNextDinnerMenuItems"];
+//        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//    }
+//    
+//    NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
+//    for (NSDictionary *dishInfo in menuItems)
+//    {
+//        NSString *strType = [dishInfo objectForKey:@"type"];
+//        if ([strType isEqualToString:@"main"])
+//            [arrayDishes addObject:dishInfo];
+//    }
+//    
+//    return (NSArray *)arrayDishes;
+//}
 
-- (NSArray *)getNextNextSideDishes:(NSString *)whatNeedsSides
-{
-    if (self.menuNext == nil)
-        return nil;
-    
-    NSDictionary *menuItems;
-    
-    if ([whatNeedsSides isEqualToString:@"nextNextLunchPreview"])
-    {
-        NSData *data = [defaults objectForKey:@"nextNextLunchMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    else if ([whatNeedsSides isEqualToString:@"nextNextDinnerPreview"])
-    {
-        NSData *data = [defaults objectForKey:@"nextNextDinnerMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    }
-    
-    NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary *dishInfo in menuItems)
-    {
-        NSString *strType = [dishInfo objectForKey:@"type"];
-        if ([strType isEqualToString:@"side"])
-            [arrayDishes addObject:dishInfo];
-    }
-    
-    return (NSArray *)arrayDishes;
-}
+//- (NSArray *)getNextNextSideDishes:(NSString *)whatNeedsSides
+//{
+//    if (self.menuNext == nil)
+//        return nil;
+//    
+//    NSDictionary *menuItems;
+//    
+//    if ([whatNeedsSides isEqualToString:@"nextNextLunchPreview"])
+//    {
+//        NSData *data = [defaults objectForKey:@"nextNextLunchMenuItems"];
+//        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//    }
+//    else if ([whatNeedsSides isEqualToString:@"nextNextDinnerPreview"])
+//    {
+//        NSData *data = [defaults objectForKey:@"nextNextDinnerMenuItems"];
+//        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//    }
+//    
+//    NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
+//    for (NSDictionary *dishInfo in menuItems)
+//    {
+//        NSString *strType = [dishInfo objectForKey:@"type"];
+//        if ([strType isEqualToString:@"side"])
+//            [arrayDishes addObject:dishInfo];
+//    }
+//    
+//    return (NSArray *)arrayDishes;
+//}
 
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID
 {

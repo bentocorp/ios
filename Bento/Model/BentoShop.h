@@ -36,7 +36,7 @@
 
 - (BOOL)isAllDay;
 - (BOOL)nextIsAllDay;
-- (BOOL)nextNextIsAllDay;
+//- (BOOL)nextNextIsAllDay;
 
 - (BOOL)isClosed;
 - (BOOL)isSoldOut;
@@ -54,16 +54,16 @@
 - (NSString *)getMenuWeekdayString;
 - (NSString *)getNextMenuDateIfTodayMenuReturnsNil;
 
-- (NSString *)getNextMenuDateString;
-- (NSString *)getNextMenuWeekdayString;
-- (NSString *)getNextNextMenuWeekdayString;
+//- (NSString *)getNextMenuDateString;
+//- (NSString *)getNextMenuWeekdayString;
+//- (NSString *)getNextNextMenuWeekdayString;
 
 - (BOOL)isThereLunchMenu;
 - (BOOL)isThereDinnerMenu;
 - (BOOL)isThereLunchNextMenu;
 - (BOOL)isThereDinnerNextMenu;
-- (BOOL)isThereLunchNextNextMenu;
-- (BOOL)isThereDinnerNextNextMenu;
+//- (BOOL)isThereLunchNextNextMenu;
+//- (BOOL)isThereDinnerNextNextMenu;
 
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers;
 - (NSNumber *)getCurrentTime;
@@ -86,8 +86,8 @@
 - (NSArray *)getNextMainDishes:(NSString *)whatNeedsMain;
 - (NSArray *)getNextSideDishes:(NSString *)whatNeedsSides;
 
-- (NSArray *)getNextNextMainDishes:(NSString *)whatNeedsMain;
-- (NSArray *)getNextNextSideDishes:(NSString *)whatNeedsSides;
+//- (NSArray *)getNextNextMainDishes:(NSString *)whatNeedsMain;
+//- (NSArray *)getNextNextSideDishes:(NSString *)whatNeedsSides;
 
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID;
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID;
