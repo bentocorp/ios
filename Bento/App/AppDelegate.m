@@ -197,6 +197,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             }
             
             /*-----------------------*/
+            // should i use this to reset?
+            NSLog(@"ORIGINAL DATE STRING ON LAUNCH: %@", [[BentoShop sharedInstance] getMenuDateString]);
+            [[NSUserDefaults standardUserDefaults] setObject:[[BentoShop sharedInstance] getMenuDateString] forKey:@"OriginalDateString"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
             
             // persist meal type, used for checking if the value ever changes fixed/custom and if it does reset the app:
             [[NSUserDefaults standardUserDefaults] setObject:[[BentoShop sharedInstance] getMenuType] forKey:@"originalMenuType"];
