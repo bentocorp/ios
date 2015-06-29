@@ -39,8 +39,6 @@
 @implementation OrderConfirmViewController
 {
     JGProgressHUD *loadingHUD;
-    NSString *originalDateString;
-    NSString *newDateString;
 }
 
 - (void)viewDidLoad {
@@ -99,17 +97,10 @@
 
 - (void)checkCurrentMode
 {
-    NSString *originalMenuType = [[NSUserDefaults standardUserDefaults] objectForKey:@"originalMenuType"];
-    NSString *currentMenuType = [[BentoShop sharedInstance] getMenuType];
-    
-    // if menu type changed, reset the app
-    if (![originalMenuType isEqualToString:currentMenuType])
+    if ([[BentoShop sharedInstance] didModeOrDateChange])
     {
-        // reset originalMenuType with currentMenuType
-        [[NSUserDefaults standardUserDefaults] setObject:currentMenuType forKey:@"originalMenuType"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[BentoShop sharedInstance] resetBentoArray];
+        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }

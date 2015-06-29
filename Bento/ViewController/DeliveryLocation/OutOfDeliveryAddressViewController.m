@@ -50,15 +50,10 @@
     UIActivityIndicatorView *viewActivity;
     
     JGProgressHUD *loadingHUD;
-    
-    NSString *originalDateString;
-    NSString *newDateString;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
 
     self.lblTitle.text = @"Delivery Zone"; // hardcoded instead of [[AppStrings sharedInstance] getString:OUTOFAREA_TITLE]
     self.lblMiddleTitle.text = [[AppStrings sharedInstance] getString:OUTOFAREA_MIDDLE_TITLE];
@@ -146,17 +141,10 @@
 
 - (void)checkCurrentMode
 {
-    NSString *originalMenuType = [[NSUserDefaults standardUserDefaults] objectForKey:@"originalMenuType"];
-    NSString *currentMenuType = [[BentoShop sharedInstance] getMenuType];
-    
-    // if menu type changed, reset the app
-    if (![originalMenuType isEqualToString:currentMenuType])
+    if ([[BentoShop sharedInstance] didModeOrDateChange])
     {
-        // reset originalMenuType with currentMenuType
-        [[NSUserDefaults standardUserDefaults] setObject:currentMenuType forKey:@"originalMenuType"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[BentoShop sharedInstance] resetBentoArray];
+        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }

@@ -83,9 +83,6 @@
     JGProgressHUD *loadingHUD;
 //    BOOL isThereConnection;
     
-    NSString *originalDateString;
-    NSString *newDateString;
-    
     NSMutableArray *savedArray;
 }
 
@@ -334,8 +331,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
 
     // set aryDishes array
     self.aryDishes = [[NSMutableArray alloc] init];
@@ -414,17 +409,10 @@
 
 - (void)checkCurrentMode
 {
-    NSString *originalMenuType = [[NSUserDefaults standardUserDefaults] objectForKey:@"originalMenuType"];
-    NSString *currentMenuType = [[BentoShop sharedInstance] getMenuType];
-    
-    // if menu type changed, reset the app
-    if (![originalMenuType isEqualToString:currentMenuType])
+    if ([[BentoShop sharedInstance] didModeOrDateChange])
     {
-        // reset originalMenuType with currentMenuType
-        [[NSUserDefaults standardUserDefaults] setObject:currentMenuType forKey:@"originalMenuType"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[BentoShop sharedInstance] resetBentoArray];
+        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }

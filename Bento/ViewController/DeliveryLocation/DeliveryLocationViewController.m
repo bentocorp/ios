@@ -66,16 +66,9 @@
 @end
 
 @implementation DeliveryLocationViewController
-{
-    NSString *originalDateString;
-    NSString *newDateString;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
-    
-    originalDateString = [[BentoShop sharedInstance] getMenuDateString];
     
     [SVGeocoder setGoogleMapsAPIKey:GOOGLE_API_KEY];
     
@@ -239,17 +232,10 @@
 
 - (void)checkCurrentMode
 {
-    NSString *originalMenuType = [[NSUserDefaults standardUserDefaults] objectForKey:@"originalMenuType"];
-    NSString *currentMenuType = [[BentoShop sharedInstance] getMenuType];
-    
-    // if menu type changed, reset the app
-    if (![originalMenuType isEqualToString:currentMenuType])
+    if ([[BentoShop sharedInstance] didModeOrDateChange])
     {
-        // reset originalMenuType with currentMenuType
-        [[NSUserDefaults standardUserDefaults] setObject:currentMenuType forKey:@"originalMenuType"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [[BentoShop sharedInstance] resetBentoArray];
+        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
