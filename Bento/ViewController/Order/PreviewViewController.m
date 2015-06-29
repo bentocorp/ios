@@ -27,9 +27,6 @@
     UIView *navigationBarView;
     BWTitlePagerView *pagingTitleView;
     
-    NSString *titleLeft;
-    NSString *titleRight;
-    
     NSArray *aryMainDishesLeft;
     NSArray *arySideDishesLeft;
     NSArray *aryMainDishesRight;
@@ -156,6 +153,8 @@
 - (void)setTitlesMainAndSideDishes
 {
     BOOL shouldShowOneMenu;
+    NSString *titleLeft;
+    NSString *titleRight;
     
     // all day logic for sold out
     if ([[BentoShop sharedInstance] isSoldOut] && [[BentoShop sharedInstance] isAllDay])
@@ -581,40 +580,14 @@
     if (titleRight == nil)
         titleRight = @"No Available Menu";
     
-    
-    /*       -Logic-
-     
-    todayLunch  | todayDinner
-                | nextLunch
-                | nextDinner
-                | n/a
-    
-    todayDinner | nextLunch
-                | nextDinner
-                | n/a
-    
-    nextLunch   | nextDinner
-                | n/a
-    
-    nextDinner  | n/a
-     
-    */
-    
-    [self setPageAndScrollView:shouldShowOneMenu];
+    [self setPageAndScrollView:shouldShowOneMenu left:titleLeft right:titleRight];
 }
 
-- (void)setMenuTitles
+- (void)setPageAndScrollView:(BOOL)shouldShowOneMenu left:(NSString *)titleLeft right:(NSString *)titleRight
 {
-    /*---BW Title Pager View---*/
-    
     [pagingTitleView removeFromSuperview];
     pagingTitleView = nil;
     
-    [self setTitlesMainAndSideDishes];
-}
-
-- (void)setPageAndScrollView:(BOOL)shouldShowOneMenu
-{
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
@@ -646,7 +619,7 @@
     dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
     bufferTime = [[[BentoShop sharedInstance] getBufferTime] floatValue];
     
-    [self setMenuTitles];
+    [self setTitlesMainAndSideDishes];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onEnteredForeground) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];

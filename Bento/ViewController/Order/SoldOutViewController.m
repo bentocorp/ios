@@ -59,6 +59,8 @@
     
     JGProgressHUD *loadingHUD;
     BOOL isThereConnection;
+    
+    BOOL areThereAnyMenus;
 }
 
 - (NSString *)getClosedText
@@ -168,6 +170,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setPreviewButtonText) name:@"enteredForeground" object:nil];
 }
 
 - (void)noConnection
@@ -206,6 +210,8 @@
 
 - (void)setPreviewButtonText
 {
+    areThereAnyMenus = YES;
+    
     // set type
     if ([[BentoShop sharedInstance] isClosed])
         self.type = 0;
@@ -214,22 +220,30 @@
     
      NSString *strTitle;
     
-    // Closed && 17:30 - 23:59 (get next)
-    if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
-    {
-        if ([[BentoShop sharedInstance] getNextMenuWeekdayString] != nil)
-            strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-        else
-            strTitle = @"See Upcoming Menu";
-    }
-    
     // Closed &&  00:00 - 17:29 (get today, if none today, get next)
-    else if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
+    if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
     {
         if ([[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil] != nil)
             strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil]];
         else
-            strTitle = @"See Upcoming Menu";
+        {
+            strTitle = @"No Available Menu";
+            
+            areThereAnyMenus = NO;
+        }
+    }
+    
+    // Closed && 17:30 - 23:59 (get nextMenu)
+    else if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
+    {
+        if ([[BentoShop sharedInstance] getNextMenuWeekdayString] != nil)
+            strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+        else
+        {
+            strTitle = @"No Available Menu";
+            
+            areThereAnyMenus = NO;
+        }
     }
     
     // Sold out
@@ -238,7 +252,11 @@
         if ([[BentoShop sharedInstance] getMenuWeekdayString] != nil)
             strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
         else
-            strTitle = @"See Upcoming Menu";
+        {
+            strTitle = @"No Available Menu";
+            
+            areThereAnyMenus = NO;
+        }
     }
     
     [self.btnPreview setTitle:[strTitle uppercaseString] forState:UIControlStateNormal];
@@ -426,8 +444,11 @@
 
 - (IBAction)onGotoMenu:(id)sender
 {
-    PreviewViewController *previewViewController = [[PreviewViewController alloc] init];
-    [self.navigationController pushViewController:previewViewController animated:YES];
+    if (areThereAnyMenus)
+    {
+        PreviewViewController *previewViewController = [[PreviewViewController alloc] init];
+        [self.navigationController pushViewController:previewViewController animated:YES];
+    }
 }
 
 - (void)onSettings
