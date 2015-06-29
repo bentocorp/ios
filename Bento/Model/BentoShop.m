@@ -1440,6 +1440,35 @@ static BentoShop *_shareInstance;
     [self.aryBentos removeAllObjects];
 }
 
-
+- (BOOL)didModeOrDateChange
+{
+    NSString *originalDateString = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalDateString"];
+    NSString *newDateString = [self getMenuDateString];
+    
+    // if mode changed
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
+    {
+        // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"] forKey:@"OriginalLunchOrDinnerMode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self resetBentoArray];
+        
+        return YES;
+    }
+    
+    // if date changed
+    else if (![originalDateString isEqualToString:newDateString])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:newDateString forKey:@"OriginalDateString"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self resetBentoArray];
+        
+        return YES;
+    }
+    
+    return NO;
+}
 
 @end
