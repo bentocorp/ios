@@ -602,6 +602,21 @@ static BentoShop *_shareInstance;
             strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
             NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
         }
+        
+        /* The below 2 cases are probably unecessary...I was hardcoding the value for isAllDay to YES when there was no menu, so the app hanged */
+        
+        // 12:00am - dinner opening (ie. 16.5)
+        else if (currentTime >= 0 && currentTime < dinnerTime)
+        {
+            strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+            NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+        }
+        // dinner opening - 11:59pm
+        else if (currentTime >= dinnerTime && currentTime < 24)
+        {
+            strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+            NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+        }
     }
     else
     {
@@ -617,6 +632,11 @@ static BentoShop *_shareInstance;
             strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
             NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
         }
+    }
+    
+    if (strPoints == nil)
+    {
+        NSLog(@"WARNING!!! SERVICE AREA strPoints == nil");
     }
     
     NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
@@ -965,12 +985,12 @@ static BentoShop *_shareInstance;
 
 - (BOOL)isAllDay
 {
-    return NO;
+    return YES;
 }
 
 - (BOOL)nextIsAllDay
 {
-    return NO;
+    return YES;
 }
 
 - (NSArray *)getMainDishes:(NSString *)whatNeedsMain

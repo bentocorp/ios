@@ -311,8 +311,12 @@
                     aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
                     arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 }
+                else
+                {
+                    shouldShowOneMenu = YES;
+                }
             }
-            else // regular menu logic
+            else // regular menu logic, is not all day
             {
                 if ([[BentoShop sharedInstance] isThereLunchNextMenu])
                 {
@@ -327,6 +331,10 @@
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
                     arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+                }
+                else
+                {
+                    shouldShowOneMenu = YES;
                 }
             }
 
@@ -347,6 +355,10 @@
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
                     arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 }
+                else
+                {
+                    shouldShowOneMenu = YES;
+                }
             }
             else if (![[BentoShop sharedInstance] nextIsAllDay]) // regular next menu logic
             {
@@ -364,12 +376,26 @@
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
                     arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
                 }
+                else
+                {
+                    shouldShowOneMenu = YES;
+                }
             }
         }
         
         // 17:30pm - 23:59pm
         else if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
         {
+            
+            
+            
+            
+            
+            
+            
+            
+            
+            
             
         }
     }
@@ -573,7 +599,7 @@
         }
     }
     
-    // to prevent crash
+    // to prevent crash just in case, but the button shoud be disabled in SoldOutViewController anyway if no menus
     if (titleLeft == nil)
         titleLeft = @"No Available Menu";
     
