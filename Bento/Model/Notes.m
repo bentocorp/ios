@@ -128,8 +128,8 @@ if (isAllDay == YES)
         
         try to get todayLunch...                            |       if (nextIsAllDay == YES)
         else try to get todayDinner...                      |           // "%@'s All-day Menu" + shouldShowOneMenu
-        else (nextIsAllDay == YES)                          |           try to get nextLunch...
-            // "%@'s All-day Menu" + shouldShowOneMenu      |           else try to get nextDinner...
+        else (nextIsAllDay == YES)                          |
+            // "%@'s All-day Menu" + shouldShowOneMenu      |           try to get nextDinner...
             try to get nextLunch...                         |       else (nextIsAllDay == NO)
             else try to get nextDinner...                   |           // "%@'s Lunch/Dinner Menu"
         else (nextIsAllDay == NO)                           |           try to get nextLunch...
@@ -139,8 +139,15 @@ if (isAllDay == YES)
  
     // 17:30 - 23:59
     else if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
- 
-        
+
+         if (nextIsAllDay == YES)                           |
+             // "%@'s All-day Menu" + shouldShowOneMenu     |
+             try to get nextLunch...                        |
+             else try to get nextDinner...                  |
+         else (nextIsAllDay == NO)                          |
+             // "%@'s Lunch/Dinner Menu"                    |
+             try to get nextLunch...                        |
+             else try to get nextDinner...                  |
  
  
 else if (isAllDay == NO)
