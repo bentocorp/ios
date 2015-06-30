@@ -147,6 +147,20 @@
 
 - (void)setTitlesMainAndSideDishes
 {
+    BOOL isSoldOut = [[BentoShop sharedInstance] isSoldOut];
+    BOOL isClosed = [[BentoShop sharedInstance] isClosed];
+    
+    BOOL isAllDay = [[BentoShop sharedInstance] isAllDay];
+    BOOL nextIsAllDay = [[BentoShop sharedInstance] nextIsAllDay];
+    
+    BOOL isThereLunchMenu = [[BentoShop sharedInstance] isThereLunchMenu];
+    BOOL isThereDinnerMenu = [[BentoShop sharedInstance] isThereDinnerMenu];
+    
+    BOOL isThereLunchNextMenu = [[BentoShop sharedInstance] isThereLunchNextMenu];
+    BOOL isThereDinnerNextMenu = [[BentoShop sharedInstance] isThereDinnerNextMenu];
+    
+    /*---*/
+    
     NSString *todayAllDayLunchMenuString = @"Today's All-day Lunch Menu";
     NSString *todayAllDayDinnerMenuString = @"Today's All-day Dinner Menu";
     
@@ -161,6 +175,8 @@
     
     NSString *titleLeft;
     NSString *titleRight;
+    
+    /*---*/
     
     NSArray *todayLunchMainDishesArray = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
     NSArray *todayLunchSideDishesArray = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
@@ -179,21 +195,22 @@
     NSArray *aryMainDishesRight;
     NSArray *arySideDishesRight;
     
+    /*---*/
     
     BOOL shouldShowOneMenu;
     
 /*-------------------------------------------------------------------------------------------------*/
     // SOLD OUT, IS ALL DAY
-    if ([[BentoShop sharedInstance] isSoldOut] && [[BentoShop sharedInstance] isAllDay])
+    if (isSoldOut && isAllDay)
     {
         // LEFT SIDE
-        if([[BentoShop sharedInstance] isThereLunchMenu])
+        if(isThereLunchMenu)
         {
             titleLeft = todayAllDayLunchMenuString;
             aryMainDishesLeft = todayLunchMainDishesArray;
             arySideDishesLeft = todayLunchSideDishesArray;
         }
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+        else if (isThereDinnerMenu)
         {
             titleLeft = todayAllDayDinnerMenuString;
             aryMainDishesLeft = todayDinnerMainDishesArray;
@@ -201,15 +218,15 @@
         }
         
         // RIGHT SIDE
-        if ([[BentoShop sharedInstance] nextIsAllDay]) // NEXT IS ALL DAY
+        if (nextIsAllDay) // NEXT IS ALL DAY
         {
-            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            if (isThereLunchNextMenu)
             {
                 titleRight = nextAllDayLunchMenuString;
                 aryMainDishesRight = nextLunchMainDishesArray;
                 arySideDishesRight = nextLunchSideDishesArray;
             }
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            else if (isThereDinnerNextMenu)
             {
                 titleRight = nextAllDayDinnerMenuString;
                 aryMainDishesRight = nextDinnerMainDishesArray;
@@ -218,13 +235,13 @@
         }
         else // NEXT IS NOT ALL DAY
         {
-            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            if (isThereLunchNextMenu)
             {
                 titleRight = nextLunchMenuString;
                 aryMainDishesRight = nextLunchMainDishesArray;
                 arySideDishesRight = nextLunchSideDishesArray;
             }
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            else if (isThereDinnerNextMenu)
             {
                 titleRight = nextLunchMenuString;
                 aryMainDishesRight = nextDinnerMainDishesArray;
@@ -233,7 +250,7 @@
         }
     }
     // IS NOT ALL DAY
-    else if ([[BentoShop sharedInstance] isSoldOut])
+    else if (isSoldOut)
     {
         // 00:00 - 16:30
         if (currentTime >= 0 && currentTime < dinnerTime)
@@ -244,19 +261,19 @@
             arySideDishesLeft = todayLunchSideDishesArray;
             
             // RIGHT SIDE
-            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            if (isThereDinnerMenu)
             {
                 titleRight = todayDinnerMenuString;
                 aryMainDishesRight = todayDinnerMainDishesArray;
                 arySideDishesRight = todayDinnerSideDishesArray;
             }
-            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            else if (isThereLunchNextMenu)
             {
                 titleRight = nextLunchMenuString;
                 aryMainDishesRight = nextLunchMainDishesArray;
                 arySideDishesRight = nextLunchSideDishesArray;
             }
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            else if (isThereDinnerNextMenu)
             {
                 titleRight = nextDinnerMenuString;
                 aryMainDishesRight = nextDinnerMainDishesArray;
@@ -272,13 +289,13 @@
             arySideDishesLeft = todayDinnerSideDishesArray;
             
             // RIGHT SIDE
-            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            if (isThereLunchNextMenu)
             {
                 titleRight = nextLunchMenuString;
                 aryMainDishesRight = nextLunchMainDishesArray;
                 arySideDishesRight = nextLunchSideDishesArray;
             }
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            else if (isThereDinnerNextMenu)
             {
                 titleRight = nextDinnerMenuString;
                 aryMainDishesRight = nextDinnerMainDishesArray;
@@ -287,36 +304,36 @@
         }
     }
     
-/*-------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------------------------------*/
     
     // CLOSED, IS ALL DAY
-    if ([[BentoShop sharedInstance] isAllDay] && [[BentoShop sharedInstance] isClosed])
+    if (isClosed && isAllDay)
     {
         // 00:00 - 17:29
         if (currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
         {
             // LEFT SIDE
-            if ([[BentoShop sharedInstance] isThereLunchMenu])
+            if (isThereLunchMenu)
             {
                 titleLeft = todayAllDayLunchMenuString;
                 aryMainDishesLeft = todayLunchMainDishesArray;
                 arySideDishesLeft = todayLunchSideDishesArray;
             }
-            else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            else if (isThereDinnerMenu)
             {
                 titleLeft = todayAllDayDinnerMenuString;
                 aryMainDishesLeft = todayDinnerMainDishesArray;
                 arySideDishesLeft = todayDinnerSideDishesArray;
             }
-            else if ([[BentoShop sharedInstance] nextIsAllDay]) // next is all-day, use all-day title
+            else if (nextIsAllDay) // next is all-day, use all-day title
             {
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                if (isThereLunchNextMenu)
                 {
                     titleLeft = nextAllDayLunchMenuString;
                     aryMainDishesLeft = nextLunchMainDishesArray;
                     arySideDishesLeft = nextLunchSideDishesArray;
                 }
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                else if (isThereDinnerNextMenu)
                 {
                     titleLeft = nextAllDayDinnerMenuString;
                     aryMainDishesLeft = nextDinnerMainDishesArray;
@@ -325,53 +342,26 @@
                 
                 shouldShowOneMenu = YES; // because next lunch/dinner is same all day
             }
-            else if (![[BentoShop sharedInstance] nextIsAllDay]) // next is not all day, use regular title
+            else if (!nextIsAllDay) // next is not all day, use regular title
             {
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                if (isThereLunchNextMenu)
                 {
                     titleLeft = nextLunchMenuString;
                     aryMainDishesRight = nextLunchMainDishesArray;
                     arySideDishesRight = nextLunchSideDishesArray;
+                    
+                    // RIGHT SIDE
+                    titleRight = nextDinnerMenuString;
+                    aryMainDishesRight = nextDinnerMainDishesArray;
+                    arySideDishesRight = nextDinnerSideDishesArray;
                 }
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                else if (isThereDinnerNextMenu)
                 {
                     titleLeft = nextDinnerMenuString;
                     aryMainDishesRight = nextDinnerMainDishesArray;
                     arySideDishesRight = nextDinnerSideDishesArray;
-                }
-            }
-
-            // RIGHT SIDE
-            if ([[BentoShop sharedInstance] nextIsAllDay]) // next is all-day, use all-day title
-            {
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                {
-                    titleRight = nextAllDayLunchMenuString;
-                    aryMainDishesRight = nextLunchMainDishesArray;
-                    arySideDishesRight = nextLunchSideDishesArray;
-                }
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                {
-                    titleRight = nextAllDayDinnerMenuString;
-                    aryMainDishesRight = nextDinnerMainDishesArray;
-                    arySideDishesRight = nextDinnerSideDishesArray;
-                }
-                
-                shouldShowOneMenu = YES;
-            }
-            else if (![[BentoShop sharedInstance] nextIsAllDay]) // next is not all day, use regular title
-            {
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                {
-                    titleRight = nextLunchMenuString;
-                    aryMainDishesRight = nextLunchMainDishesArray;
-                    arySideDishesRight = nextLunchSideDishesArray;
-                }
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                {
-                    titleRight = nextDinnerMenuString;
-                    aryMainDishesRight = nextDinnerMainDishesArray;
-                    arySideDishesRight = nextDinnerSideDishesArray;
+                    
+                    shouldShowOneMenu = YES;
                 }
             }
         }
@@ -380,15 +370,15 @@
         else if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
         {
             // LEFT SIDE
-            if ([[BentoShop sharedInstance] nextIsAllDay]) // next is all-day, use all-day title
+            if (nextIsAllDay) // next is all-day, use all-day title
             {
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                if (isThereLunchNextMenu)
                 {
                     titleLeft = nextAllDayLunchMenuString;
                     aryMainDishesLeft = nextLunchMainDishesArray;
                     arySideDishesLeft = nextLunchSideDishesArray;
                 }
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                else if (isThereDinnerNextMenu)
                 {
                     titleLeft = nextAllDayDinnerMenuString;
                     aryMainDishesLeft = nextDinnerMainDishesArray;
@@ -397,9 +387,9 @@
                 
                 shouldShowOneMenu = YES;
             }
-            else if (![[BentoShop sharedInstance] nextIsAllDay]) // next is not all day, use regular title
+            else if (!nextIsAllDay) // next is not all day, use regular title
             {
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                if (isThereLunchNextMenu)
                 {
                     titleLeft = nextLunchMenuString;
                     aryMainDishesLeft = nextLunchMainDishesArray;
@@ -410,7 +400,7 @@
                     aryMainDishesRight = nextDinnerMainDishesArray;
                     arySideDishesRight = nextDinnerSideDishesArray;
                 }
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                else if (isThereDinnerNextMenu)
                 {
                     titleLeft = nextDinnerMenuString;
                     aryMainDishesLeft = nextDinnerMainDishesArray;
@@ -423,28 +413,28 @@
     }
     
     // REGULAR LOGIC FOR CLOSED
-    else if ([[BentoShop sharedInstance] isClosed])
+    else if (isClosed)
     {
         // 00:00 - 12.29
         if (currentTime >= 0 && currentTime < (lunchTime + bufferTime))
         {
             // LEFT SIDE
-            if ([[BentoShop sharedInstance] isThereLunchMenu])
+            if (isThereLunchMenu)
             {
                 titleLeft = todayLunchMenuString;
                 aryMainDishesLeft = todayLunchMainDishesArray;
                 arySideDishesLeft = todayLunchSideDishesArray;
 
                 // RIGHT SIDE
-                if ([[BentoShop sharedInstance] nextIsAllDay]) // all day next menu logic
+                if (nextIsAllDay) // all day next menu logic
                 {
-                    if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    if (isThereLunchNextMenu)
                     {
                         titleRight = nextAllDayLunchMenuString;
                         aryMainDishesRight = nextLunchMainDishesArray;
                         arySideDishesRight = nextLunchSideDishesArray;
                     }
-                    else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    else if (isThereDinnerNextMenu)
                     {
                         titleRight = nextAllDayDinnerMenuString;
                         aryMainDishesRight = nextDinnerMainDishesArray;
@@ -453,19 +443,19 @@
                 }
                 else // regular day menu logic
                 {
-                    if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                    if (isThereDinnerMenu)
                     {
                         titleRight = todayDinnerMenuString;
                         aryMainDishesRight = todayDinnerMainDishesArray;
                         arySideDishesRight = todayDinnerSideDishesArray;
                     }
-                    else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    else if (isThereLunchNextMenu)
                     {
                         titleRight = nextLunchMenuString;
                         aryMainDishesRight = nextLunchMainDishesArray;
                         arySideDishesRight = nextLunchSideDishesArray;
                     }
-                    else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    else if (isThereDinnerNextMenu)
                     {
                         titleRight = nextDinnerMenuString;
                         aryMainDishesRight = nextDinnerMainDishesArray;
@@ -477,20 +467,20 @@
                     }
                 }
             }
-            else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            else if (isThereDinnerMenu)
             {
                 titleLeft = todayDinnerMenuString;
                 aryMainDishesLeft = todayDinnerMainDishesArray;
                 arySideDishesLeft = todayDinnerSideDishesArray;
                 
                 // RIGHT SIDE
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                if (isThereLunchNextMenu)
                 {
                     titleRight = nextLunchMenuString;
                     aryMainDishesRight = nextLunchMainDishesArray;
                     arySideDishesRight = nextLunchSideDishesArray;
                 }
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                else if (isThereDinnerNextMenu)
                 {
                     titleRight = nextDinnerMenuString;
                     aryMainDishesRight = nextDinnerMainDishesArray;
@@ -501,14 +491,14 @@
                     shouldShowOneMenu = YES;
                 }
             }
-            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            else if (isThereLunchNextMenu)
             {
                 titleLeft = nextLunchMenuString;
                 aryMainDishesLeft = nextLunchMainDishesArray;
                 arySideDishesLeft = nextLunchSideDishesArray;
                 
                 // RIGHT SIDE
-                if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                if (isThereDinnerNextMenu)
                 {
                     titleRight = nextDinnerMenuString;
                     aryMainDishesRight = nextDinnerMainDishesArray;
@@ -519,7 +509,7 @@
                     shouldShowOneMenu = YES;
                 }
             }
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            else if (isThereDinnerNextMenu)
             {
                 titleLeft = nextDinnerMenuString;
                 aryMainDishesLeft = nextDinnerMainDishesArray;
@@ -530,23 +520,23 @@
         }
         
         // 12:30 - 17:29
-        else if (currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime+bufferTime))
+        else if (currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime + bufferTime))
         {
             // LEFT SIDE
-            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            if (isThereDinnerMenu)
             {
                 titleLeft = todayDinnerMenuString;
                 aryMainDishesLeft = todayDinnerMainDishesArray;
                 arySideDishesLeft = todayDinnerSideDishesArray;
                 
                 // RIGHT SIDE
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                if (isThereLunchNextMenu)
                 {
                     titleRight = nextLunchMenuString;
                     aryMainDishesRight = nextLunchMainDishesArray;
                     arySideDishesRight = nextLunchSideDishesArray;
                 }
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                else if (isThereDinnerNextMenu)
                 {
                     titleRight = nextDinnerMenuString;
                     aryMainDishesRight = nextDinnerMainDishesArray;
@@ -557,14 +547,14 @@
                     shouldShowOneMenu = YES;
                 }
             }
-            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            else if (isThereLunchNextMenu)
             {
                 titleLeft = nextLunchMenuString;
                 aryMainDishesLeft = nextLunchMainDishesArray;
                 arySideDishesLeft = nextLunchSideDishesArray;
                 
                 // RIGHT SIDE
-                if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                if (isThereDinnerNextMenu)
                 {
                     titleRight = nextDinnerMenuString;
                     aryMainDishesRight = nextDinnerMainDishesArray;
@@ -575,7 +565,7 @@
                     shouldShowOneMenu = YES;
                 }
             }
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            else if (isThereDinnerNextMenu)
             {
                 titleLeft = nextDinnerMenuString;
                 aryMainDishesLeft = nextDinnerMainDishesArray;
@@ -590,14 +580,14 @@
         else if (currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
         {
             // LEFT SIDE
-            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+            if (isThereLunchNextMenu)
             {
                 titleLeft = nextLunchMenuString;
                 aryMainDishesLeft = nextLunchMainDishesArray;
                 arySideDishesLeft = nextLunchSideDishesArray;
                 
                 // RIGHT SIDE
-                if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                if (isThereDinnerNextMenu)
                 {
                     titleRight = nextDinnerMenuString;
                     aryMainDishesRight = nextDinnerMainDishesArray;
@@ -608,7 +598,7 @@
                     shouldShowOneMenu = YES;
                 }
             }
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+            else if (isThereDinnerNextMenu)
             {
                 titleLeft = nextDinnerMenuString;
                 aryMainDishesLeft = nextDinnerMainDishesArray;
@@ -620,13 +610,14 @@
         }
     }
     
-    // to prevent crash just in case, but the button shoud be disabled in SoldOutViewController anyway if no menus
+    // Just a safety measure If there's no available menu, this page shouldn't have been displayed
     if (titleLeft == nil)
         titleLeft = @"No Available Menu";
     
     if (titleRight == nil)
         titleRight = @"No Available Menu";
     
+    // set titles and scrollView's width size
     [self setPageAndScrollView:shouldShowOneMenu left:titleLeft right:titleRight];
 }
 
