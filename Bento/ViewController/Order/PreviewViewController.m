@@ -295,7 +295,7 @@
                 aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
                 arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
             }
-            else if ([[BentoShop sharedInstance] nextIsAllDay]) // check to see tomorrow is all-day, what if no next all day
+            else if ([[BentoShop sharedInstance] nextIsAllDay]) // check to see next is all-day, use all-day title
             {
                 if ([[BentoShop sharedInstance] isThereLunchNextMenu])
                 {
@@ -303,8 +303,6 @@
                     
                     aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
                     arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
-                    
-                    shouldShowOneMenu = YES;
                 }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
                 {
@@ -312,11 +310,11 @@
                     
                     aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
                     arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
-                    
-                    shouldShowOneMenu = YES;
                 }
+                
+                shouldShowOneMenu = YES; // because next lunch/dinner is same all day
             }
-            else // regular menu logic, is not all day
+            else if (![[BentoShop sharedInstance] nextIsAllDay]) // next is not all day, use regular title
             {
                 if ([[BentoShop sharedInstance] isThereLunchNextMenu])
                 {
@@ -331,10 +329,6 @@
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
                     arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
-                }
-                else
-                {
-                    shouldShowOneMenu = YES;
                 }
             }
 
@@ -475,7 +469,7 @@
         }
     }
     
-    // REGULAR BUSINESS LOGIC FOR CLOSED
+    // REGULAR LOGIC FOR CLOSED
     else if ([[BentoShop sharedInstance] isClosed])
     {
         // 00:00 - 12.29
@@ -490,30 +484,50 @@
                 arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
 
                 // RIGHT SIDE
-                if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                if ([[BentoShop sharedInstance] nextIsAllDay]) // all day next menu logic
                 {
-                    titleRight = @"Tonight's Dinner Menu";
-                    
-                    aryMainDishesRight = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-                    arySideDishesRight = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+                    if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    {
+                        titleRight = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                        
+                        aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+                        arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                    }
+                    else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    {
+                        titleRight = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                        
+                        aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                        arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+                    }
                 }
-                else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                else // regular day menu logic
                 {
-                    titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-                    
-                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
-                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
-                }
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                {
-                    titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-                    
-                    aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-                    arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
-                }
-                else
-                {
-                    shouldShowOneMenu = YES;
+                    if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                    {
+                        titleRight = @"Tonight's Dinner Menu";
+                        
+                        aryMainDishesRight = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+                        arySideDishesRight = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+                    }
+                    else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    {
+                        titleRight = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                        
+                        aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+                        arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                    }
+                    else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    {
+                        titleRight = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                        
+                        aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+                        arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+                    }
+                    else
+                    {
+                        shouldShowOneMenu = YES;
+                    }
                 }
             }
             else if ([[BentoShop sharedInstance] isThereDinnerMenu])
