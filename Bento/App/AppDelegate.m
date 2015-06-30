@@ -197,14 +197,35 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             }
             
             /*-----------------------*/
-            // should i use this to reset?
+            
+            // Date Change, reset
             NSLog(@"ORIGINAL DATE STRING ON LAUNCH: %@", [[BentoShop sharedInstance] getMenuDateString]);
             [[NSUserDefaults standardUserDefaults] setObject:[[BentoShop sharedInstance] getMenuDateString] forKey:@"OriginalDateString"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
-            // persist meal type, used for checking if the value ever changes fixed/custom and if it does reset the app:
-            [[NSUserDefaults standardUserDefaults] setObject:[[BentoShop sharedInstance] getMenuType] forKey:@"originalMenuType"];
+            /*-----------------------*/
+            
+            // Lunch/Dinner Times Changed, reset
+            float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+            float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+
+            // 12:00am - dinner opening
+            if (currentTime >= 0 && currentTime < dinnerTime)
+                [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"OriginalLunchOrDinnerMode"];
+            
+            // dinner opening - 11:59pm
+            else if (currentTime >= dinnerTime && currentTime < 24)
+                [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"OriginalLunchOrDinnerMode"];
+            
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSLog(@"ORIGNAL LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]);
+            
+            /*-----------------------*/
+            
+            // persist meal type, used for checking if the value ever changes fixed/custom and if it does reset the app:
+//            [[NSUserDefaults standardUserDefaults] setObject:[[BentoShop sharedInstance] getMenuType] forKey:@"originalMenuType"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
             
             /*-----------------------*/
             
@@ -246,12 +267,33 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
 //    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         [globalShop getStatus];
         [globalShop setLunchOrDinnerModeByTimes];
         [[AppStrings sharedInstance] getAppStrings];
         
 //        dispatch_sync(dispatch_get_main_queue(), ^{
+    
+            /*--------------------*/
+    
+            // lunch/dinner times changed, reset
+            // set currentMode
+            float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+            float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+            
+            // 12:00am - dinner opening (ie. 16.5)
+            if (currentTime >= 0 && currentTime < dinnerTime)
+                [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
+            // dinner opening - 11:59pm
+            else if (currentTime >= dinnerTime && currentTime < 24)
+                [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
+            
+            [[NSUserDefaults standardUserDefaults] synchronize];
+    
+            NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
+
+            /*--------------------*/
     
             // Notifications
             [[NSNotificationCenter defaultCenter] postNotificationName:@"enteredForeground" object:nil];
