@@ -303,6 +303,8 @@
                     
                     aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
                     arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                    
+                    shouldShowOneMenu = YES;
                 }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
                 {
@@ -310,9 +312,7 @@
                     
                     aryMainDishesLeft = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
                     arySideDishesLeft = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
-                }
-                else
-                {
+                    
                     shouldShowOneMenu = YES;
                 }
             }
@@ -347,6 +347,8 @@
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
                     arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+                    
+                    shouldShowOneMenu = YES;
                 }
                 else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
                 {
@@ -354,9 +356,7 @@
                     
                     aryMainDishesRight = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
                     arySideDishesRight = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
-                }
-                else
-                {
+                    
                     shouldShowOneMenu = YES;
                 }
             }
