@@ -19,12 +19,7 @@
  // checking service area?
  // map?
  
- 
-*/
 
-
-
-/*
  
                                       -Regular Menu Logic-
  
@@ -140,7 +135,7 @@ if (isAllDay == YES)
     // 17:30 - 23:59
     else if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
 
-         if (nextIsAllDay == YES)                           |
+         if (nextIsAllDay == YES)                           |       
              // "%@'s All-day Menu" + shouldShowOneMenu     |
              try to get nextLunch...                        |
              else try to get nextDinner...                  |
@@ -156,11 +151,32 @@ else if (isAllDay == NO)
     // 00:00 - 12.29 (12:00am - 12:29pm)
     if (now >= 0 && now < (lunchTime + bufferTime))
                      
-                     try to get todayLunch...         |        try to get todayDinner...
-                     else try to get todayDinner...   |        else try to get nextLunch...
-                     else try to get nextLunch...     |        else try to get nextDinner...
-                     else try to get nextDinner.      |        else don't show a right menu
-     
+                     try to get todayLunch...         |     try to get todayDinner...
+                                                            else try to get nextLunch...
+                                                                if (isNextAllDay == YES)
+                                                                    use "All-day" title
+                                                                else 
+                                                                    use regular title
+                                                            else try to get nextDinner...
+                                                                if (isNextAllDay == YES)
+                                                                    use "All-day" title
+                                                                else
+                                                                    use regular title
+ 
+
+                     else try to get todayDinner...   |     if (isNextAllDay == YES) - showOneMenu, all-day title
+                                                                try to get nextLunch...
+                                                                else try to get nextDinner...
+                                                            else (isNextAllDay == NO)
+                                                                try to get nextLunch...
+                                                                else try to get nextDinner...
+ 
+ 
+                     else try to get nextLunch...     |
+ 
+ 
+                     else try to get nextDinner.      |
+ 
     -----------------------------------------------------------------------------------------
     // 12:30 - 17:29 (12:30pm - 5:29pm)
     else if (now >= (lunchTime + bufferTime) && now < (dinnerTime+bufferTime))
@@ -178,102 +194,33 @@ else if (isAllDay == NO)
      
     -----------------------------------------------------------------------------------------
 
-*/
-
-
-
  
-//                                          -OPEN/SOLDOUT-
-
-// LEFT (tableView for fixed, collectionView for custom)
-if (isAllDay == YES)
-{
-    if (isThereLunch)
-    {
-        // display todayLunch
-    }
-    else (isThereDinner)
-    {
-        // display todayDinner
-    }
-}
-else if (isAllDay == NO)
-{
-    if (lunch time)
-    {
-        // display todayLunch
-    }
-    else if (dinner time)
-    {
-        // display todayDinner
-    }
-}
-
-// RIGHT (collection view)
-if (isAllDay == YES)
-{
-    // because it's all day right now, todayLunch and todayDinner are both on left side.
-    // so just grab next menu for right side.
-    if (isThereLunchNextMenu)
-    {
-        // display nextLunch
-    }
-    else if (isThereDinnerNextMenu)
-    {
-        // display nextDinner
-    }
-}
-else if (isAllDay == NO)
-{
-    if (lunch time)
-    {
-        if (isThereDinnerMenu)
-        {
-            // display todayDinner
-        }
-        else if (isThereLunchNextMenu)
-        {
-            // display nextLunch
-        }
-        else if (isThereDinnerNextMenu)
-        {
-            // display nextDinner
-        }
-    }
-    else if (dinner time)
-    {
-        if (isThereLunchNextMenu)
-        {
-            // display nextLunch
-        }
-        else if (isThereDinnerNextMenu)
-        {
-            // display nextDinner
-        }
-    }
-}
-
-
-//                                          -CLOSED-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ */
 
 
 
