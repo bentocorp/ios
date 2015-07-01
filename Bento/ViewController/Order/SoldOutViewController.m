@@ -211,6 +211,16 @@
 - (void)setPreviewButtonText
 {
     areThereAnyMenus = YES;
+
+    /*
+        - No Available Menu
+     
+        - See Today's Menu (if sold out or if closed @ 00:00-12:29)
+            if soldout: show today's menus
+            if closed: show today's menu, show
+     
+        - See "DATE" Menu (if closed @12:30-23:59)
+    */
     
     // set type
     if ([[BentoShop sharedInstance] isClosed])
@@ -220,7 +230,7 @@
     
      NSString *strTitle;
     
-    // Closed &&  00:00 - 17:29 (get today, if none today, get next)
+    // CLOSED &&  00:00 - 17:29 (get today, if none today, get next)
     if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
     {
         if ([[BentoShop sharedInstance] getNextMenuDateIfTodayMenuReturnsNil] != nil)
@@ -232,8 +242,7 @@
             areThereAnyMenus = NO;
         }
     }
-    
-    // Closed && 17:30 - 23:59 (get nextMenu)
+    // CLOSED && 17:30 - 23:59 (get nextMenu)
     else if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
     {
         if ([[BentoShop sharedInstance] getNextMenuWeekdayString] != nil)
@@ -245,12 +254,11 @@
             areThereAnyMenus = NO;
         }
     }
-    
-    // Sold out
+    // SOLDOUT
     else
     {
         if ([[BentoShop sharedInstance] getMenuWeekdayString] != nil)
-            strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getMenuWeekdayString]];
+            strTitle = @"See Today's Menu";
         else
         {
             strTitle = @"No Available Menu";

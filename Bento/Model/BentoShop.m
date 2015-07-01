@@ -990,7 +990,7 @@ static BentoShop *_shareInstance;
 
 - (BOOL)nextIsAllDay
 {
-    return YES;
+    return NO;
 }
 
 - (NSArray *)getMainDishes:(NSString *)whatNeedsMain

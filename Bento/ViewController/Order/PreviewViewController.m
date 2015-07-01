@@ -172,11 +172,15 @@
     NSString *todayLunchMenuString = @"Today's Lunch Menu";
     NSString *todayDinnerMenuString = @"Tonight's Dinner Menu";
     
-    NSString *nextAllDayLunchMenuString = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    NSString *nextAllDayDinnerMenuString = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    NSString *nextMenuWeekdayString;
+    if ([[BentoShop sharedInstance] getNextMenuWeekdayString] != nil)
+        nextMenuWeekdayString = [[BentoShop sharedInstance] getNextMenuWeekdayString];
     
-    NSString *nextLunchMenuString = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-    NSString *nextDinnerMenuString = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    NSString *nextAllDayLunchMenuString = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", nextMenuWeekdayString];
+    NSString *nextAllDayDinnerMenuString = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", nextMenuWeekdayString];
+    
+    NSString *nextLunchMenuString = [NSString stringWithFormat:@"%@'s Lunch Menu", nextMenuWeekdayString];
+    NSString *nextDinnerMenuString = [NSString stringWithFormat:@"%@'s Dinner Menu", nextMenuWeekdayString];
     
     NSString *titleLeft;
     NSString *titleRight;
