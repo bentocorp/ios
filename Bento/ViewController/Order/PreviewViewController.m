@@ -882,6 +882,7 @@
         
         if (collectionView == cvDishesLeft)
         {
+            NSLog(@"%ld", _selectedPathMainLeft);
             if (_selectedPathMainLeft == indexPath.row)
                 [myCell setCellState:YES];
             else
@@ -902,7 +903,7 @@
         
         if (collectionView == cvDishesLeft)
         {
-            if (_selectedPathMainLeft == indexPath.row)
+            if (_selectedPathSideLeft == indexPath.row)
                 [myCell setCellState:YES];
             else
                 [myCell setCellState:NO];
@@ -960,9 +961,7 @@
         else
         {
             if (_selectedPathSideLeft == indexPath.row)
-            {
                 _selectedPathSideLeft = -1;
-            }
             else
             {
                 _selectedPathSideLeft = indexPath.row;
@@ -993,9 +992,7 @@
         else
         {
             if (_selectedPathSideRight == indexPath.row)
-            {
                 _selectedPathSideRight = -1;
-            }
             else
             {
                 _selectedPathSideRight = indexPath.row;
@@ -1007,6 +1004,9 @@
             }
         }
     }
+    
+    NSLog(@"%ld", indexPath.row);
+    NSLog(@"selectedPathLeft: %ld", _selectedPathSideLeft);
     
     [cvDishesLeft reloadData];
     [cvDishesRight reloadData];
