@@ -218,18 +218,22 @@
     else if ([[BentoShop sharedInstance] isSoldOut])
         self.type = 1;
     
-    NSString *strTitle;
     NSString *noAvailableMenuString = @"No Available Menu";
+    NSString *todayMenuString = @"See Today's Menu";
+    NSString *tonightMenuString = @"See Tonight's Menu";
+    NSString *nextMenuString = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+    
+    NSString *strTitle;
     
     // CLOSED && 00:00 - 12:29
     if (self.type == 0 && currentTime >= 0 && currentTime < (lunchTime + bufferTime))
     {
         if ([[BentoShop sharedInstance] isThereLunchMenu])
-            strTitle = @"See Today's Menu";
+            strTitle = todayMenuString;
         else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            strTitle = @"See Tonight's Menu";
+            strTitle = tonightMenuString;
         else if ([[BentoShop sharedInstance] isThereLunchNextMenu] || [[BentoShop sharedInstance] isThereDinnerNextMenu])
-            strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            strTitle = nextMenuString;
         else
         {
             strTitle = noAvailableMenuString;
@@ -242,9 +246,9 @@
     else if (self.type == 0 && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime + bufferTime))
     {
         if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            strTitle = @"See Tonight's Menu";
+            strTitle = tonightMenuString;
         else if ([[BentoShop sharedInstance] isThereLunchNextMenu] || [[BentoShop sharedInstance] isThereDinnerNextMenu])
-            strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            strTitle = nextMenuString;
         else
         {
             strTitle = noAvailableMenuString;
@@ -257,7 +261,7 @@
     else if (self.type == 0 && currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
     {
         if ([[BentoShop sharedInstance] isThereLunchNextMenu] || [[BentoShop sharedInstance] isThereDinnerNextMenu])
-            strTitle = [NSString stringWithFormat:@"See %@'s Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            strTitle = nextMenuString;
         else
         {
             strTitle = noAvailableMenuString;
@@ -270,9 +274,11 @@
     else if (self.type == 1 && currentTime >= 0 && currentTime < lunchTime)
     {
         if ([[BentoShop sharedInstance] isThereLunchMenu])
-            strTitle = @"See Today's Menu";
+            strTitle = todayMenuString;
         else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            strTitle = @"See Tonight's Menu";
+            strTitle = tonightMenuString;
+        else if ([[BentoShop sharedInstance] isThereLunchNextMenu] || [[BentoShop sharedInstance] isThereDinnerNextMenu])
+            strTitle = nextMenuString;
         else
         {
             strTitle = noAvailableMenuString;
@@ -285,7 +291,9 @@
     else if (self.type == 1 && currentTime >= lunchTime && currentTime < 24)
     {
         if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            strTitle = @"See Tonight's Menu";
+            strTitle = tonightMenuString;
+        else if ([[BentoShop sharedInstance] isThereLunchNextMenu] || [[BentoShop sharedInstance] isThereDinnerNextMenu])
+            strTitle = nextMenuString;
         else
         {
             strTitle = noAvailableMenuString;
