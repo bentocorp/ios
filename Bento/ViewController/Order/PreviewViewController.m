@@ -618,14 +618,13 @@
         }
     }
     
-    // Just a safety measure If there's no available menu, this page shouldn't have been displayed
+    // Just a safety measure in case there's no available menu, if so this page shouldn't even have been displayed
     if (titleLeft == nil)
         titleLeft = @"No Available Menu";
     
     if (titleRight == nil)
         titleRight = @"No Available Menu";
     
-    // set titles and scrollView's width size
     [self setPageAndScrollView:shouldShowOneMenu left:titleLeft right:titleRight];
 }
 
@@ -700,13 +699,13 @@
 {
     if ([leftOrRight isEqualToString:@"Left"])
     {
-        aryMainDishesLeft = nextLunchMainDishesArray;
-        arySideDishesLeft = nextLunchSideDishesArray;
+        aryMainDishesLeft = nextDinnerMainDishesArray;
+        arySideDishesLeft = nextDinnerSideDishesArray;
     }
     else if ([leftOrRight isEqualToString:@"Right"])
     {
-        aryMainDishesRight = nextLunchMainDishesArray;
-        arySideDishesRight = nextLunchSideDishesArray;
+        aryMainDishesRight = nextDinnerMainDishesArray;
+        arySideDishesRight = nextDinnerSideDishesArray;
     }
 }
 
@@ -735,33 +734,8 @@
     
     [self setTitlesMainAndSideDishes];
 
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onEnteredForeground) name:@"enteredForeground" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-}
-
-- (void)onEnteredForeground
-{
-    if (isThereConnection)
-        [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(refreshView) userInfo:nil repeats:NO];
-}
-
-- (void)refreshView
-{
-    @try
-    {
-        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
-    }
-    @catch(id anException)
-    {
-        //do nothing, obviously it wasn't attached because an exception was thrown
-    }
-    
-//    [self viewWillAppear:YES];
-    [cvDishesLeft reloadData];
-    [cvDishesRight reloadData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -807,25 +781,6 @@
     [loadingHUD dismiss];
     loadingHUD = nil;
     [self viewWillAppear:YES];
-}
-
-- (void)onUpdatedMenu:(NSNotification *)notification
-{
-    if (isThereConnection)
-    {
-        [self refreshView];
-    }
-}
-
-- (void)onUpdatedStatus:(NSNotification *)notification
-{
-//    if (isThereConnection)
-//    {
-//        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
-//            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-//        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
-//            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-//    }
 }
 
 #pragma mark - Navigation
@@ -925,20 +880,40 @@
         NSDictionary *dishInfo = [aryMain objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
         
-        if (_selectedPathMainRight == indexPath.row)
-            [myCell setCellState:YES];
+        if (collectionView == cvDishesLeft)
+        {
+            if (_selectedPathMainLeft == indexPath.row)
+                [myCell setCellState:YES];
+            else
+                [myCell setCellState:NO];
+        }
         else
-            [myCell setCellState:NO];
+        {
+            if (_selectedPathMainRight == indexPath.row)
+                [myCell setCellState:YES];
+            else
+                [myCell setCellState:NO];
+        }
     }
     else if (indexPath.section == 1) // Side Dish
     {
         NSDictionary *dishInfo = [arySide objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
         
-        if (_selectedPathSideRight == indexPath.row)
-            [myCell setCellState:YES];
+        if (collectionView == cvDishesLeft)
+        {
+            if (_selectedPathMainLeft == indexPath.row)
+                [myCell setCellState:YES];
+            else
+                [myCell setCellState:NO];
+        }
         else
-            [myCell setCellState:NO];
+        {
+            if (_selectedPathSideRight == indexPath.row)
+                [myCell setCellState:YES];
+            else
+                [myCell setCellState:NO];
+        }
     }
 }
 
