@@ -184,7 +184,7 @@
     NSString *nextMenuWeekdayString;
     if ([[BentoShop sharedInstance] getNextMenuWeekdayString] != nil)
         nextMenuWeekdayString = [[BentoShop sharedInstance] getNextMenuWeekdayString];
-    
+
     NSString *nextAllDayLunchMenuString = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", nextMenuWeekdayString];
     NSString *nextAllDayDinnerMenuString = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", nextMenuWeekdayString];
     
@@ -196,8 +196,8 @@
     
     BOOL shouldShowOneMenu;
     
-/*-------------------------------------------------------------------------------------------------*/
-    // SOLD OUT, IS ALL DAY
+/*---------------------------------------*/
+/* SOLD OUT - IS ALL DAY */
     if (isSoldOut && isAllDay)
     {
         // LEFT SIDE
@@ -209,71 +209,62 @@
         else if (isThereDinnerMenu)
         {
             titleLeft = todayAllDayDinnerMenuString;
-            aryMainDishesLeft = todayDinnerMainDishesArray;
-            arySideDishesLeft = todayDinnerSideDishesArray;
+            [self setTodayDinnerArrays:@"Left"];
         }
         
         // RIGHT SIDE
-        if (nextIsAllDay == YES)
+        if (nextIsAllDay)
         {
             if (isThereLunchNextMenu)
             {
                 titleRight = nextAllDayLunchMenuString;
-                aryMainDishesRight = nextLunchMainDishesArray;
-                arySideDishesRight = nextLunchSideDishesArray;
+                [self setNextLunchArrays:@"Right"];
             }
             else if (isThereDinnerNextMenu)
             {
                 titleRight = nextAllDayDinnerMenuString;
-                aryMainDishesRight = nextDinnerMainDishesArray;
-                arySideDishesRight = nextDinnerSideDishesArray;
+                [self setNextDinnerArrays:@"Right"];
             }
         }
-        else // NEXT IS NOT ALL DAY
+        else if (nextIsAllDay == NO)
         {
             if (isThereLunchNextMenu)
             {
                 titleRight = nextLunchMenuString;
-                aryMainDishesRight = nextLunchMainDishesArray;
-                arySideDishesRight = nextLunchSideDishesArray;
+                [self setNextLunchArrays:@"Right"];
             }
             else if (isThereDinnerNextMenu)
             {
                 titleRight = nextLunchMenuString;
-                aryMainDishesRight = nextDinnerMainDishesArray;
-                arySideDishesRight = nextDinnerSideDishesArray;
+                [self setNextDinnerArrays:@"Right"];
             }
         }
     }
-    // IS NOT ALL DAY
+/* SOLD OUT - IS NOT ALL DAY */
     else if (isSoldOut)
     {
-        // 00:00 - 16:30
+        // 00:00 - 16:29
         if (currentTime >= 0 && currentTime < dinnerTime)
         {
             // LEFT SIDE
             titleLeft = todayLunchMenuString;
-            aryMainDishesLeft = todayLunchMainDishesArray;
-            arySideDishesLeft = todayLunchSideDishesArray;
+            [self setTodayLunchArrays:@"Left"];
             
             // RIGHT SIDE
             if (isThereDinnerMenu)
             {
                 titleRight = todayDinnerMenuString;
-                aryMainDishesRight = todayDinnerMainDishesArray;
-                arySideDishesRight = todayDinnerSideDishesArray;
+                [self setTodayDinnerArrays:@"Right"];
             }
             else if (isThereLunchNextMenu)
             {
                 titleRight = nextLunchMenuString;
-                aryMainDishesRight = nextLunchMainDishesArray;
-                arySideDishesRight = nextLunchSideDishesArray;
+                [self setNextLunchArrays:@"Right"];
             }
             else if (isThereDinnerNextMenu)
             {
                 titleRight = nextDinnerMenuString;
-                aryMainDishesRight = nextDinnerMainDishesArray;
-                arySideDishesRight = nextDinnerSideDishesArray;
+                [self setNextDinnerArrays:@"Right"];
             }
         }
         // 16:30 - 23:59
@@ -281,29 +272,26 @@
         {
             // LEFT SIDE
             titleLeft = todayDinnerMenuString;
-            aryMainDishesLeft = todayDinnerMainDishesArray;
-            arySideDishesLeft = todayDinnerSideDishesArray;
+            [self setTodayDinnerArrays:@"Left"];
             
             // RIGHT SIDE
             if (isThereLunchNextMenu)
             {
                 titleRight = nextLunchMenuString;
-                aryMainDishesRight = nextLunchMainDishesArray;
-                arySideDishesRight = nextLunchSideDishesArray;
+                [self setNextLunchArrays:@"Right"];
             }
             else if (isThereDinnerNextMenu)
             {
                 titleRight = nextDinnerMenuString;
-                aryMainDishesRight = nextDinnerMainDishesArray;
-                arySideDishesRight = nextDinnerSideDishesArray;
+                [self setNextDinnerArrays:@"Right"];
             }
         }
     }
     
     
-/*-----------------------------------------------------------------------*/
+/*-----------------------------------------------*/
     
-    // CLOSED, IS ALL DAY
+/* CLOSED - IS ALL DAY */
     if (isClosed && isAllDay)
     {
         // 00:00 - 17:29
@@ -313,28 +301,24 @@
             if (isThereLunchMenu)
             {
                 titleLeft = todayAllDayLunchMenuString;
-                aryMainDishesLeft = todayLunchMainDishesArray;
-                arySideDishesLeft = todayLunchSideDishesArray;
+                [self setTodayLunchArrays:@"Left"];
             }
             else if (isThereDinnerMenu)
             {
                 titleLeft = todayAllDayDinnerMenuString;
-                aryMainDishesLeft = todayDinnerMainDishesArray;
-                arySideDishesLeft = todayDinnerSideDishesArray;
+                [self setTodayDinnerArrays:@"Left"];
             }
             else if (nextIsAllDay) // use all-day title
             {
                 if (isThereLunchNextMenu)
                 {
                     titleLeft = nextAllDayLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                 }
                 else if (isThereDinnerNextMenu)
                 {
                     titleLeft = nextAllDayDinnerMenuString;
-                    aryMainDishesLeft = nextDinnerMainDishesArray;
-                    arySideDishesLeft = nextDinnerSideDishesArray;
+                    [self setNextDinnerArrays:@"Left"];
                 }
                 
                 shouldShowOneMenu = YES;
@@ -344,14 +328,12 @@
                 if (isThereLunchNextMenu)
                 {
                     titleLeft = nextLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                 }
                 else if (isThereDinnerNextMenu)
                 {
                     titleLeft = nextDinnerMenuString;
-                    aryMainDishesLeft = nextDinnerMainDishesArray;
-                    arySideDishesLeft = nextDinnerSideDishesArray;
+                    [self setNextDinnerArrays:@"Left"];
                     
                     shouldShowOneMenu = YES;
                 }
@@ -363,14 +345,12 @@
                 if (isThereLunchNextMenu)
                 {
                     titleRight = nextAllDayLunchMenuString;
-                    aryMainDishesRight = nextLunchMainDishesArray;
-                    arySideDishesRight = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Right"];
                 }
                 else if (isThereDinnerNextMenu)
                 {
                     titleRight = nextAllDayDinnerMenuString;
-                    aryMainDishesRight = nextDinnerMainDishesArray;
-                    arySideDishesRight = nextDinnerSideDishesArray;
+                    [self setNextDinnerArrays:@"Right"];
                 }
                 
                 shouldShowOneMenu = YES;
@@ -380,14 +360,12 @@
                 if (isThereLunchNextMenu)
                 {
                     titleRight = nextLunchMenuString;
-                    aryMainDishesRight = nextLunchMainDishesArray;
-                    arySideDishesRight = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Right"];
                 }
                 else if (isThereDinnerNextMenu)
                 {
                     titleRight = nextDinnerMenuString;
-                    aryMainDishesRight = nextDinnerMainDishesArray;
-                    arySideDishesRight = nextDinnerSideDishesArray;
+                    [self setNextDinnerArrays:@"Right"];
                     
                     shouldShowOneMenu = YES;
                 }
@@ -403,14 +381,12 @@
                 if (isThereLunchNextMenu)
                 {
                     titleLeft = nextAllDayLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                 }
                 else if (isThereDinnerNextMenu)
                 {
                     titleLeft = nextAllDayDinnerMenuString;
-                    aryMainDishesLeft = nextDinnerMainDishesArray;
-                    arySideDishesLeft = nextDinnerSideDishesArray;
+                    [self setNextDinnerArrays:@"Left"];
                 }
                 
                 shouldShowOneMenu = YES;
@@ -420,15 +396,13 @@
                 if (isThereLunchNextMenu)
                 {
                     titleLeft = nextLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                     
                     if (isThereDinnerNextMenu)
                     {
                         // RIGHT SIDE
                         titleLeft = nextDinnerMenuString;
-                        aryMainDishesLeft = nextDinnerMainDishesArray;
-                        arySideDishesLeft = nextDinnerSideDishesArray;
+                        [self setNextDinnerArrays:@"Left"];
                     }
                     else
                         shouldShowOneMenu = YES;
@@ -436,8 +410,7 @@
                 else if (isThereDinnerNextMenu)
                 {
                     titleLeft = nextDinnerMenuString;
-                    aryMainDishesLeft = nextDinnerMainDishesArray;
-                    arySideDishesLeft = nextDinnerSideDishesArray;
+                    [self setNextDinnerArrays:@"Left"];
                     
                     shouldShowOneMenu = YES;
                 }
@@ -445,7 +418,7 @@
         }
     }
     
-    // CLOSED, NOT ALL DAY
+/* CLOSED - NOT ALL DAY */
     else if (isClosed && isAllDay == NO)
     {
         // 00:00 - 12.29
@@ -455,15 +428,13 @@
             if (isThereLunchMenu)
             {
                 titleLeft = todayLunchMenuString;
-                aryMainDishesLeft = todayLunchMainDishesArray;
-                arySideDishesLeft = todayLunchSideDishesArray;
+                [self setTodayLunchArrays:@"Left"];
 
                 // RIGHT SIDE
                 if (isThereDinnerMenu)
                 {
                     titleRight = todayDinnerMenuString;
-                    aryMainDishesRight = todayDinnerMainDishesArray;
-                    arySideDishesRight = todayDinnerSideDishesArray;
+                    [self setTodayDinnerArrays:@"Right"];
                 }
                 else if (isThereLunchNextMenu)
                 {
@@ -471,9 +442,8 @@
                         titleRight = nextAllDayLunchMenuString;
                     else
                         titleRight = nextLunchMenuString;
-                        
-                    aryMainDishesRight = nextLunchMainDishesArray;
-                    arySideDishesRight = nextLunchSideDishesArray;
+                    
+                    [self setNextLunchArrays:@"Right"];
                 }
                 else if (isThereDinnerNextMenu)
                 {
@@ -482,8 +452,7 @@
                     else
                         titleRight = nextDinnerMenuString;
                     
-                    aryMainDishesRight = nextDinnerMainDishesArray;
-                    arySideDishesRight = nextDinnerSideDishesArray;
+                    [self setNextDinnerArrays:@"Right"];
                 }
                 else
                     shouldShowOneMenu = YES;
@@ -491,8 +460,7 @@
             else if (isThereDinnerMenu)
             {
                 titleLeft = todayDinnerMenuString;
-                aryMainDishesLeft = todayDinnerMainDishesArray;
-                arySideDishesLeft = todayDinnerSideDishesArray;
+                [self setTodayDinnerArrays:@"Left"];
                 
                 // RIGHT SIDE
                 if (isThereLunchNextMenu)
@@ -502,8 +470,7 @@
                     else
                         titleRight = nextLunchMenuString;
                     
-                    aryMainDishesRight = nextLunchMainDishesArray;
-                    arySideDishesRight = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Right"];
                 }
                 else if (isThereDinnerNextMenu)
                 {
@@ -512,8 +479,7 @@
                     else
                         titleRight = nextDinnerMenuString;
                     
-                    aryMainDishesRight = nextDinnerMainDishesArray;
-                    arySideDishesRight = nextDinnerSideDishesArray;
+                    [self setNextDinnerArrays:@"Right"];
                 }
                 else
                     shouldShowOneMenu = YES;
@@ -523,23 +489,20 @@
                 if (nextIsAllDay)
                 {
                     titleLeft = nextLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                     
                     shouldShowOneMenu = YES;
                 }
                 else if (nextIsAllDay == NO)
                 {
                     titleLeft = nextLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                     
                     // RIGHT SIDE
                     if (isThereDinnerNextMenu)
                     {
                         titleRight = nextDinnerMenuString;
-                        aryMainDishesRight = nextDinnerMainDishesArray;
-                        arySideDishesRight = nextDinnerSideDishesArray;
+                        [self setNextDinnerArrays:@"Right"];
                     }
                     else
                         shouldShowOneMenu = YES;
@@ -548,8 +511,7 @@
             else if (isThereDinnerNextMenu)
             {
                 titleLeft = nextDinnerMenuString;
-                aryMainDishesLeft = nextDinnerMainDishesArray;
-                arySideDishesLeft = nextDinnerSideDishesArray;
+                [self setNextDinnerArrays:@"Left"];
                 
                 shouldShowOneMenu = YES;
             }
@@ -562,8 +524,7 @@
             if (isThereDinnerMenu)
             {
                 titleLeft = todayDinnerMenuString;
-                aryMainDishesLeft = todayDinnerMainDishesArray;
-                arySideDishesLeft = todayDinnerSideDishesArray;
+                [self setTodayDinnerArrays:@"Left"];
                 
                 // RIGHT SIDE
                 if (isThereLunchNextMenu)
@@ -573,8 +534,7 @@
                     else
                         titleRight = nextLunchMenuString;
                     
-                    aryMainDishesRight = nextLunchMainDishesArray;
-                    arySideDishesRight = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Right"];
                 }
                 else if (isThereDinnerNextMenu)
                 {
@@ -583,8 +543,7 @@
                     else
                         titleRight = nextDinnerMenuString;
                     
-                    aryMainDishesRight = nextDinnerMainDishesArray;
-                    arySideDishesRight = nextDinnerSideDishesArray;
+                    [self setNextDinnerArrays:@"Right"];
                 }
                 else
                     shouldShowOneMenu = YES;
@@ -594,23 +553,20 @@
                 if (nextIsAllDay == YES)
                 {
                     titleLeft = nextLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                     
                     shouldShowOneMenu = YES;
                 }
                 else if (nextIsAllDay == NO)
                 {
                     titleLeft = nextLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                     
                     // RIGHT SIDE
                     if (isThereDinnerNextMenu)
                     {
                         titleRight = nextDinnerMenuString;
-                        aryMainDishesRight = nextDinnerMainDishesArray;
-                        arySideDishesRight = nextDinnerSideDishesArray;
+                        [self setNextDinnerArrays:@"Right"];
                     }
                     else
                         shouldShowOneMenu = YES;
@@ -619,8 +575,7 @@
             else if (isThereDinnerNextMenu)
             {
                 titleLeft = nextDinnerMenuString;
-                aryMainDishesLeft = nextDinnerMainDishesArray;
-                arySideDishesLeft = nextDinnerSideDishesArray;
+                [self setNextDinnerArrays:@"Left"];
                 
                 shouldShowOneMenu = YES;
             }
@@ -634,23 +589,20 @@
                 if (nextIsAllDay == YES)
                 {
                     titleLeft = nextLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                     
                     shouldShowOneMenu = YES;
                 }
                 else if (nextIsAllDay == NO)
                 {
                     titleLeft = nextLunchMenuString;
-                    aryMainDishesLeft = nextLunchMainDishesArray;
-                    arySideDishesLeft = nextLunchSideDishesArray;
+                    [self setNextLunchArrays:@"Left"];
                     
                     // RIGHT SIDE
                     if (isThereDinnerNextMenu)
                     {
                         titleRight = nextDinnerMenuString;
-                        aryMainDishesRight = nextDinnerMainDishesArray;
-                        arySideDishesRight = nextDinnerSideDishesArray;
+                        [self setNextDinnerArrays:@"Right"];
                     }
                     else
                         shouldShowOneMenu = YES;
@@ -659,8 +611,7 @@
             else if (isThereDinnerNextMenu)
             {
                 titleLeft = nextDinnerMenuString;
-                aryMainDishesLeft = nextDinnerMainDishesArray;
-                arySideDishesLeft = nextDinnerSideDishesArray;
+                [self setNextDinnerArrays:@"Left"];
                 
                 shouldShowOneMenu = YES;
             }
