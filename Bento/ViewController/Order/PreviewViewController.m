@@ -197,7 +197,9 @@
     BOOL shouldShowOneMenu;
     
 /*---------------------------------------*/
+    
 /* SOLD OUT - IS ALL DAY */
+    
     if (isSoldOut && isAllDay)
     {
         // LEFT SIDE
@@ -240,7 +242,9 @@
             }
         }
     }
+    
 /* SOLD OUT - IS NOT ALL DAY */
+    
     else if (isSoldOut)
     {
         // 00:00 - 16:29
@@ -288,10 +292,10 @@
         }
     }
     
-    
 /*-----------------------------------------------*/
     
 /* CLOSED - IS ALL DAY */
+    
     if (isClosed && isAllDay)
     {
         // 00:00 - 17:29
@@ -419,6 +423,7 @@
     }
     
 /* CLOSED - NOT ALL DAY */
+    
     else if (isClosed && isAllDay == NO)
     {
         // 00:00 - 12.29
@@ -882,7 +887,6 @@
         
         if (collectionView == cvDishesLeft)
         {
-            NSLog(@"%ld", _selectedPathMainLeft);
             if (_selectedPathMainLeft == indexPath.row)
                 [myCell setCellState:YES];
             else
