@@ -211,7 +211,20 @@ else if (isAllDay == NO)
  
  
  
+ CLOSED - ALL DAY MENU:
+ ---------------------------------------------------------------------------------------------------------------------------------------------------------
+                                    LEFT SIDE                               |                               RIGHT SIDE
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+IF 00:00-17:29 (12am-5:29pm)
  
+	try to get todayLunch…                                                  |       if (nextIsAllDay) (use all-day title and shouldShowOneMenu)
+	else try to get todayDinner…                                            |           else try to get nextLunch...
+	else (nextIsAllDay) (use all-day title and shouldShowOneMenu)           |           else try to get nextDinner...
+        else try to get nextLunch...                                        |       else (nextIsAllDay == NO)
+        else try to get nextDinner...                                       |           else try to get nextLunch...
+	else (nextIsAllDay == NO)                                               |           else try to get nextDinner. (shouldShowOneMenu)
+        else try to get nextLunch...                                        |
+        else try to get nextDinner. (shouldShowOneMenu)                     |
  
  
  
