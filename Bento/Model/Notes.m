@@ -21,7 +21,7 @@
  
 
  
-                                      -Regular Menu Logic-
+                                      -Old Menu Logic-
  
 --------------------------------------------------------------------------------------------
                 LEFT MENU                       |             RIGHT MENU
@@ -77,32 +77,30 @@ else if (now >= (dinnerTime+bufferTime) && now < 24)
  
 
                                        -New Menu Logic-
- 
- 
-BOOL isAllDay = YES/NO;
-BOOL nextIsAllDay = YES/NO;
 
 --------------------------------------------------------------------------------------------
                   LEFT MENU                       |             RIGHT MENU
 --------------------------------------------------------------------------------------------
                  
                  
-                                            OPEN/SOLDOUT
+OPEN/SOLDOUT
  
 --------------------------------------------------------------------------------------------
-if (isAllDay == YES)
-                                                                (separate logic)
+if (isAllDay)
+
                 try to get todayLunch...          |        try to get nextLunch...
                 else try to get todayDinner.      |        else try to get nextDinner.
  
+--------------------------------------------------------------------------------------------
 else if (isAllDay == NO)
  
     if (now >= 0 && now < 16.5)
-                     
+
                 get todayLunch.                   |        try to get todayDinner...
                                                   |        else try to get nextLunch...
                                                   |        else try to get nextDinner.
  
+    ----------------------------------------------------------------------------------------
     if (now >= 16.5 && now < 24)
                      
                 get todayDinner.                  |        try to get nextLunch...
@@ -111,121 +109,9 @@ else if (isAllDay == NO)
 --------------------------------------------------------------------------------------------
                  
                  
-                                                CLOSED
+CLOSED
  
-BOOL shouldShowOneMenu;
- 
----------------------------------------------------------------------------------------------
-if (isAllDay == YES)
- 
-    // 00:00 - 17:29
-    if (currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
-        
-        try to get todayLunch...                            |       if (nextIsAllDay == YES)
-        else try to get todayDinner...                      |           // "%@'s All-day Menu" + shouldShowOneMenu
-        else (nextIsAllDay == YES)                          |           try to get nextLunch...
-            // "%@'s All-day Menu" + shouldShowOneMenu      |           else try to get nextDinner...
-            try to get nextLunch...                         |       else (nextIsAllDay == NO)
-            else try to get nextDinner...                   |           // "%@'s Lunch/Dinner Menu"
-        else (nextIsAllDay == NO)                           |           try to get nextLunch...
-            // "%@'s Lunch/Dinner Menu"                     |           else try to get nextDinner...
-            try to get nextLunch...                         |
-            else try to get nextDinner...                   |
- 
-    // 17:30 - 23:59
-    else if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24)
-
-         if (nextIsAllDay == YES)                           |       
-             // "%@'s All-day Menu" + shouldShowOneMenu     |
-             try to get nextLunch...                        |
-             else try to get nextDinner...                  |
-         else (nextIsAllDay == NO)                          |
-             // "%@'s Lunch/Dinner Menu"                    |
-             try to get nextLunch...                        |
-             else try to get nextDinner...                  |
- 
- 
-else if (isAllDay == NO)
- 
-    -----------------------------------------------------------------------------------------
-    // 00:00 - 12.29 (12:00am - 12:29pm)
-    if (now >= 0 && now < (lunchTime + bufferTime))
-                     
-                     try to get todayLunch...         |     try to get todayDinner...
-                                                            else try to get nextLunch...
-                                                                if (isNextAllDay == YES)
-                                                                    use "All-day" title
-                                                                else 
-                                                                    use regular title
-                                                            else try to get nextDinner...
-                                                                if (isNextAllDay == YES)
-                                                                    use "All-day" title
-                                                                else
-                                                                    use regular title
- 
-
-                     else try to get todayDinner...   |     if (isNextAllDay == YES) - showOneMenu, all-day title
-                                                                try to get nextLunch...
-                                                                else try to get nextDinner...
-                                                            else (isNextAllDay == NO)
-                                                                try to get nextLunch...
-                                                                else try to get nextDinner...
- 
- 
-                     else try to get nextLunch...     |
- 
- 
-                     else try to get nextDinner.      |
- 
-    -----------------------------------------------------------------------------------------
-    // 12:30 - 17:29 (12:30pm - 5:29pm)
-    else if (now >= (lunchTime + bufferTime) && now < (dinnerTime+bufferTime))
-                     
-                     try to get todayDinner...        |        try to get nextLunch...
-                     else try to get nextLunch...     |        else try to get nextDinner...
-                     else try to get nextDinner.      |        else don't show a right menu
-     
-    -----------------------------------------------------------------------------------------
-    // 17.30 - 23:59 (5:30pm - 23:59pm)
-    else if (now >= (dinnerTime+bufferTime) && now < 24)
-                     
-                     try to get nextLunch...          |        try to get nextDinner...
-                     else try to get nextDinner.      |        else don't show a right menu
-     
-    -----------------------------------------------------------------------------------------
-
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- CLOSED - ALL DAY MENU:
- ---------------------------------------------------------------------------------------------------------------------------------------------------------
-                                    LEFT SIDE                               |                               RIGHT SIDE
----------------------------------------------------------------------------------------------------------------------------------------------------------
-IF 00:00-17:29 (12am-5:29pm)
- 
-	try to get todayLunch…                                                  |       if (nextIsAllDay) (use all-day title and shouldShowOneMenu)
-	else try to get todayDinner…                                            |           else try to get nextLunch...
-	else (nextIsAllDay) (use all-day title and shouldShowOneMenu)           |           else try to get nextDinner...
-        else try to get nextLunch...                                        |       else (nextIsAllDay == NO)
-        else try to get nextDinner...                                       |           else try to get nextLunch...
-	else (nextIsAllDay == NO)                                               |           else try to get nextDinner. (shouldShowOneMenu)
-        else try to get nextLunch...                                        |
-        else try to get nextDinner. (shouldShowOneMenu)                     |
- 
+--------------------------------------------------------------------------------------------
  
  
  
