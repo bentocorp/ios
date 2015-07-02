@@ -137,6 +137,8 @@
     NSString *currentMenuTitle;
     NSString *nextMenuTitle;
     
+    
+    /* All-DAY */
     if ([[BentoShop sharedInstance] isAllDay])
     {
         // Left Side
@@ -161,17 +163,18 @@
                 nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
         }
     }
-    else if ([[BentoShop sharedInstance] isAllDay] == NO)
-    {   
-        // Left Side
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-            currentMenuTitle = @"Now Serving Lunch";
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            currentMenuTitle = @"Now Serving Dinner";
-        
-        // Right Side
+    
+    /* IS NOT ALL-DAY */
+    else
+    {
+        // 00:00 - 16:29 Lunch
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
         {
+            // Left Side
+            if ([[BentoShop sharedInstance] isThereLunchMenu])
+                currentMenuTitle = @"Now Serving Lunch";
+            
+            // Right Side
             if ([[BentoShop sharedInstance] isThereDinnerMenu])
                 nextMenuTitle = @"Tonight's Dinner Menu";
             else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
@@ -179,8 +182,14 @@
             else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
                 nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
         }
+        // 16:30 - 23:59 Dinner
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
         {
+            // Left Side
+            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                currentMenuTitle = @"Now Serving Dinner";
+            
+            // Right Side
             if ([[BentoShop sharedInstance] isThereLunchNextMenu])
                 nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
             else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])

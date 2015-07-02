@@ -240,16 +240,18 @@
     }
     
 /* SOLD OUT - IS NOT ALL DAY */
-    
     else
     {
         // 00:00 - 16:29
         if (currentTime >= 0 && currentTime < dinnerTime)
         {
             // LEFT SIDE
-            titleLeft = todayLunchMenuString;
-            [self setTodayLunchArrays:@"Left"];
-            
+            if (isThereLunchMenu)
+            {
+                titleLeft = todayLunchMenuString;
+                [self setTodayLunchArrays:@"Left"];
+            }
+        
             // RIGHT SIDE
             if (isThereDinnerMenu)
             {
@@ -273,8 +275,11 @@
         else if (currentTime >= dinnerTime && currentTime < 24)
         {
             // LEFT SIDE
-            titleLeft = todayDinnerMenuString;
-            [self setTodayDinnerArrays:@"Left"];
+            if (isThereDinnerMenu)
+            {
+                titleLeft = todayDinnerMenuString;
+                [self setTodayDinnerArrays:@"Left"];
+            }
             
             // RIGHT SIDE
             if (isThereLunchNextMenu)
