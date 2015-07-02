@@ -220,7 +220,7 @@
         else if (isThereDinnerNextMenu)
             [self setNextDinnerArrays:@"Right"];
         else
-            shouldShowOneMenu = YES; // check if this works
+            shouldShowOneMenu = YES;
         
         // set right menu title
         if (nextIsAllDay)
@@ -266,6 +266,8 @@
                 titleRight = nextDinnerMenuString;
                 [self setNextDinnerArrays:@"Right"];
             }
+            else
+                shouldShowOneMenu = YES;
         }
         // 16:30 - 23:59
         else if (currentTime >= dinnerTime && currentTime < 24)
@@ -285,6 +287,8 @@
                 titleRight = nextDinnerMenuString;
                 [self setNextDinnerArrays:@"Right"];
             }
+            else
+                shouldShowOneMenu = YES;
         }
     }
     
