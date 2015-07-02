@@ -29,7 +29,6 @@
 @property (nonatomic, retain) NSArray *menuStatus;
 @property (nonatomic, retain) MKPolygon *serviceArea;
 @property (nonatomic, retain) NSMutableArray *aryBentos;
-
 @property (nonatomic, assign) BOOL prevClosed;
 @property (nonatomic, assign) BOOL prevSoldOut;
 
@@ -80,8 +79,6 @@ static BentoShop *_shareInstance;
 {
     if ( (self = [super init]) )
     {
-        
-    
         defaults = [NSUserDefaults standardUserDefaults];
         
         self.prevClosed = NO;
@@ -99,6 +96,7 @@ static BentoShop *_shareInstance;
         _currentIndex = NSNotFound;
         
         [self loadBentoArray];
+        
         if (self.aryBentos == nil)
             self.aryBentos = [[NSMutableArray alloc] init];
     }
@@ -209,11 +207,10 @@ static BentoShop *_shareInstance;
     currentDate = nil;
     formatter = nil;
     
-    NSLog(@"getDateString - %@", strDate);
-    
     return strDate;
 }
 
+#pragma mark Get Menus
 
 - (void)prefetchImages:(NSDictionary *)menuInfo
 {
@@ -297,20 +294,6 @@ static BentoShop *_shareInstance;
     }
 }
 
-- (NSString *)getNextMenuDateIfTodayMenuReturnsNil
-{
-    // there is a menu today! return today string!
-    if ([self getMenuDateString] != nil)
-    {
-        return [self getMenuWeekdayString];
-    }
-    // bummer... no menu today.. return next date string
-    else
-    {
-        return [self getNextMenuWeekdayString];
-    }
-}
-
 - (void)getNextMenus
 {
     NSDate* currentDate = [NSDate date];
@@ -352,7 +335,18 @@ static BentoShop *_shareInstance;
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
 }
 
- /*----------------------GET LUNCH AND DINNER AND BUFFER TIME----------------------*/
+- (NSString *)getNextMenuDateIfTodayMenuReturnsNil
+{
+    // there is a menu today! return today string!
+    if ([self getMenuDateString] != nil)
+        return [self getMenuWeekdayString];
+    // bummer... no menu today.. return next date string
+    else
+        return [self getNextMenuWeekdayString];
+}
+
+#pragma mark Times, Version Numbers, iOS Min Version
+
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers
 {
     // API call
@@ -1296,6 +1290,8 @@ static BentoShop *_shareInstance;
     [self.aryBentos removeAllObjects];
 }
 
+#pragma mark Response to State Change
+
 - (BOOL)didModeOrDateChange
 {
     NSString *originalDateString = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalDateString"];
@@ -1327,8 +1323,6 @@ static BentoShop *_shareInstance;
             return YES;
         }
     }
-    
-    
     
     return NO;
 }

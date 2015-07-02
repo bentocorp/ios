@@ -194,7 +194,7 @@
     NSString *titleLeft;
     NSString *titleRight;
     
-    BOOL shouldShowOneMenu;
+    BOOL shouldShowOneMenu = NO;
     
 /*---------------------------------------*/
     
