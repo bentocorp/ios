@@ -297,6 +297,9 @@
         alertView = nil;
         
     } isJSON:NO];
+    
+    // reset text field
+    self.txtEmail.text = @"";
 }
 
 - (IBAction)onSendFreeCoupon:(id)sender
