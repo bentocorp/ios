@@ -1005,11 +1005,19 @@
         }
     }
     
-    NSLog(@"%ld", indexPath.row);
-    NSLog(@"selectedPathLeft: %ld", _selectedPathSideLeft);
-    
     [cvDishesLeft reloadData];
     [cvDishesRight reloadData];
+    
+    
+    // previous error: An -observeValueForKeyPath:ofObject:change:context: message was received but not handled.
+    @try
+    {
+        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
+    }
+    @catch(id anException)
+    {
+        //do nothing, obviously it wasn't attached because an exception was thrown
+    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
