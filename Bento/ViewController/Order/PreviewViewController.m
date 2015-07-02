@@ -215,6 +215,14 @@
         }
         
         // RIGHT SIDE
+        if (isThereLunchNextMenu)
+            [self setNextLunchArrays:@"Right"];
+        else if (isThereDinnerNextMenu)
+            [self setNextDinnerArrays:@"Right"];
+        else
+            shouldShowOneMenu = YES; // check if this works
+        
+        // set right menu title
         if (nextIsAllDay)
         {
             if (isThereLunchNextMenu)
@@ -227,20 +235,13 @@
             if (isThereLunchNextMenu)
                 titleRight = nextLunchMenuString;
             else if (isThereDinnerNextMenu)
-                titleRight = nextLunchMenuString;
+                titleRight = nextDinnerMenuString;
         }
-        
-        if (isThereLunchNextMenu)
-            [self setNextLunchArrays:@"Right"];
-        else if (isThereDinnerNextMenu)
-            [self setNextDinnerArrays:@"Right"];
-        else
-            shouldShowOneMenu = YES; // check if this works
     }
     
 /* SOLD OUT - IS NOT ALL DAY */
     
-    else if (isSoldOut)
+    else
     {
         // 00:00 - 16:29
         if (currentTime >= 0 && currentTime < dinnerTime)
