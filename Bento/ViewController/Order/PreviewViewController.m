@@ -218,29 +218,24 @@
         if (nextIsAllDay)
         {
             if (isThereLunchNextMenu)
-            {
                 titleRight = nextAllDayLunchMenuString;
-                [self setNextLunchArrays:@"Right"];
-            }
             else if (isThereDinnerNextMenu)
-            {
                 titleRight = nextAllDayDinnerMenuString;
-                [self setNextDinnerArrays:@"Right"];
-            }
         }
         else if (nextIsAllDay == NO)
         {
             if (isThereLunchNextMenu)
-            {
                 titleRight = nextLunchMenuString;
-                [self setNextLunchArrays:@"Right"];
-            }
             else if (isThereDinnerNextMenu)
-            {
                 titleRight = nextLunchMenuString;
-                [self setNextDinnerArrays:@"Right"];
-            }
         }
+        
+        if (isThereLunchNextMenu)
+            [self setNextLunchArrays:@"Right"];
+        else if (isThereDinnerNextMenu)
+            [self setNextDinnerArrays:@"Right"];
+        else
+            shouldShowOneMenu = YES; // check if this works
     }
     
 /* SOLD OUT - IS NOT ALL DAY */

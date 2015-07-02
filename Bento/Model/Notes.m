@@ -76,42 +76,46 @@ else if (now >= (dinnerTime+bufferTime) && now < 24)
  
  
 
-                                       -New Menu Logic-
+                                            -New Menu Logic-
 
 --------------------------------------------------------------------------------------------
-                  LEFT MENU                       |             RIGHT MENU
+                  LEFT MENU                         |             RIGHT MENU
 --------------------------------------------------------------------------------------------
                  
                  
 OPEN/SOLDOUT
  
 --------------------------------------------------------------------------------------------
-if (isAllDay)
-
-                try to get todayLunch...          |        try to get nextLunch...
-                else try to get todayDinner.      |        else try to get nextDinner.
+if (isSoldOut && isAllDay)                          |
+                                                    |   if (nextIsAllDay)
+    try to get todayLunch...                        |       
+    else try to get todayDinner.                    |
+                                                    |   else (nextIsAllDay == NO)
+                                                    |       try to get nextLunch...
+                                                    |       else try to get nextDinner.
+                                                    |
  
---------------------------------------------------------------------------------------------
-else if (isAllDay == NO)
  
-    if (now >= 0 && now < 16.5)
-
-                get todayLunch.                   |        try to get todayDinner...
-                                                  |        else try to get nextLunch...
-                                                  |        else try to get nextDinner.
- 
-    ----------------------------------------------------------------------------------------
-    if (now >= 16.5 && now < 24)
-                     
-                get todayDinner.                  |        try to get nextLunch...
-                                                  |        else try to get nextDinner.
- 
+else if (isAllDay == NO)                            |
+                                                    |
+    if (now >= 0 && now < 16.5)                     |
+                                                    |
+        get todayLunch.                             |        try to get todayDinner...
+                                                    |        else try to get nextLunch...
+                                                    |        else try to get nextDinner.
+                                                    |
+    if (now >= 16.5 && now < 24)                    |
+                                                    |
+                get todayDinner.                    |        try to get nextLunch...
+                                                    |        else try to get nextDinner.
+                                                    |
 --------------------------------------------------------------------------------------------
                  
                  
 CLOSED
  
 --------------------------------------------------------------------------------------------
+ 
  
  
  
