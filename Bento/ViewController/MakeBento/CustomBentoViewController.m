@@ -645,14 +645,6 @@
     [self viewWillAppear:YES];
 }
 
-//- (void)preloadCheckCurrentMode
-//{
-//
-//    [[BentoShop sharedInstance] refreshStop]; 
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
-
 - (void)checkCurrentMode
 {
     if ([[BentoShop sharedInstance] didModeOrDateChange])

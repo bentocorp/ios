@@ -640,9 +640,6 @@
 
 - (void)setPageAndScrollView:(BOOL)shouldShowOneMenu left:(NSString *)titleLeft right:(NSString *)titleRight
 {
-    [pagingTitleView removeFromSuperview];
-    pagingTitleView = nil;
-    
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
@@ -1013,17 +1010,6 @@
     
     [cvDishesLeft reloadData];
     [cvDishesRight reloadData];
-    
-    
-    // previous error: An -observeValueForKeyPath:ofObject:change:context: message was received but not handled.
-    @try
-    {
-        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
-    }
-    @catch(id anException)
-    {
-        //do nothing, obviously it wasn't attached because an exception was thrown
-    }
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
@@ -1031,6 +1017,7 @@
     // left side
     if (collectionView == cvDishesLeft)
         return UIEdgeInsetsMake(0, 0, 0, 0);
+    
     // right side
     else
         return UIEdgeInsetsMake(0, 0, 0, 0);
