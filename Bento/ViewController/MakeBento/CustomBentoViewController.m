@@ -123,7 +123,6 @@
 /*---Scroll View---*/
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];
-    scrollView.contentSize = CGSizeMake(SCREEN_WIDTH*2, SCREEN_HEIGHT-65);
     scrollView.pagingEnabled = YES;
     scrollView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     scrollView.bounces = NO;
@@ -137,97 +136,7 @@
     
 /*---BW Title Pager View---*/
     
-    NSString *currentMenuTitle;
-    NSString *nextMenuTitle;
-    
-    BOOL shouldShowOneMenu = NO;
-    
-    /* IS All-DAY */
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        // Left Side
-        if([[BentoShop sharedInstance] isThereLunchMenu])
-            currentMenuTitle = @"Serving All-day Lunch";
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            currentMenuTitle = @"Serving All-day Dinner";
-        
-        // Right Side
-        
-        // No Next Available Menu
-        if ([[BentoShop sharedInstance] isThereLunchNextMenu] == NO || [[BentoShop sharedInstance] isThereDinnerNextMenu] == NO)
-            shouldShowOneMenu = YES;
-        
-        // Next Menu Available
-        else
-        {
-            if ([[BentoShop sharedInstance] nextIsAllDay])
-            {
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                    nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                    nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            }
-            else if ([[BentoShop sharedInstance] nextIsAllDay] == NO)
-            {
-                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                    nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                    nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            }
-        }
-    }
-    
-    /* IS NOT ALL-DAY */
-    else
-    {
-        // 00:00 - 16:29 Lunch
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        {
-            // Left Side
-            if ([[BentoShop sharedInstance] isThereLunchMenu])
-                currentMenuTitle = @"Now Serving Lunch";
-            
-            // Right Side
-            if ([[BentoShop sharedInstance] isThereDinnerMenu])
-                nextMenuTitle = @"Tonight's Dinner Menu";
-            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else
-                shouldShowOneMenu = YES;
-        }
-        
-        // 16:30 - 23:59 Dinner
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        {
-            // Left Side
-            if ([[BentoShop sharedInstance] isThereDinnerMenu])
-                currentMenuTitle = @"Now Serving Dinner";
-            
-            // Right Side
-            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else
-                shouldShowOneMenu = YES;
-        }
-    }
-    
-    // No Available Menu
-    if (currentMenuTitle == nil)
-        currentMenuTitle = @"No Available Menu";
-    if (nextMenuTitle == nil)
-        nextMenuTitle = @"No Available Menu";
-    
-    pagingTitleView = [[BWTitlePagerView alloc] init];
-    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
-    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
-    [pagingTitleView observeScrollView:scrollView];
-    [pagingTitleView addObjects:@[currentMenuTitle, nextMenuTitle]];
-    [navigationBarView addSubview:pagingTitleView];
+    [self setPageAndScrollView];
     
 /*---Line Separator---*/
     
@@ -585,6 +494,113 @@
     NSLog(@"today is - %ld", (long)weekday);
     
     _selectedPath = nil;
+}
+
+- (void)setPageAndScrollView
+{
+    NSString *currentMenuTitle;
+    NSString *nextMenuTitle;
+    
+    BOOL shouldShowOneMenu = NO;
+    
+    /* IS All-DAY */
+    if ([[BentoShop sharedInstance] isAllDay])
+    {
+        // Left Side
+        if([[BentoShop sharedInstance] isThereLunchMenu])
+            currentMenuTitle = @"Serving All-day Lunch";
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            currentMenuTitle = @"Serving All-day Dinner";
+        
+        // Right Side
+        
+        // No Next Available Menu
+        if ([[BentoShop sharedInstance] isThereLunchNextMenu] == NO || [[BentoShop sharedInstance] isThereDinnerNextMenu] == NO)
+            shouldShowOneMenu = YES;
+        
+        // Next Menu Available
+        else
+        {
+            if ([[BentoShop sharedInstance] nextIsAllDay])
+            {
+                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            }
+            else if ([[BentoShop sharedInstance] nextIsAllDay] == NO)
+            {
+                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            }
+        }
+    }
+    
+    /* IS NOT ALL-DAY */
+    else
+    {
+        // 00:00 - 16:29 Lunch
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+        {
+            // Left Side
+            if ([[BentoShop sharedInstance] isThereLunchMenu])
+                currentMenuTitle = @"Now Serving Lunch";
+            
+            // Right Side
+            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                nextMenuTitle = @"Tonight's Dinner Menu";
+            else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            else
+                shouldShowOneMenu = YES;
+        }
+        
+        // 16:30 - 23:59 Dinner
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+        {
+            // Left Side
+            if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                currentMenuTitle = @"Now Serving Dinner";
+            
+            // Right Side
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            else
+                shouldShowOneMenu = YES;
+        }
+    }
+    
+    // No Available Menu
+    if (currentMenuTitle == nil)
+        currentMenuTitle = @"No Available Menu";
+    if (nextMenuTitle == nil)
+        nextMenuTitle = @"No Available Menu";
+    
+    
+    pagingTitleView = [[BWTitlePagerView alloc] init];
+    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
+    pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
+    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+    [pagingTitleView observeScrollView:scrollView];
+    
+    if (shouldShowOneMenu)
+    {
+        scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-65);
+        [pagingTitleView addObjects:@[currentMenuTitle]];
+    }
+    else
+    {
+        scrollView.contentSize = CGSizeMake(SCREEN_WIDTH*2, SCREEN_HEIGHT-65);
+        [pagingTitleView addObjects:@[currentMenuTitle, nextMenuTitle]];
+    }
+    
+    [navigationBarView addSubview:pagingTitleView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
