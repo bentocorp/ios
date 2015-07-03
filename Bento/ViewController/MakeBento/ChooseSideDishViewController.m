@@ -84,6 +84,7 @@
     
     NSString *lunchOrDinnerString;
     
+    /* IS ALL-DAY */
     if ([[BentoShop sharedInstance] isAllDay])
     {
         if ([[BentoShop sharedInstance] isThereLunchMenu])
@@ -91,10 +92,15 @@
         else if ([[BentoShop sharedInstance] isThereDinnerMenu])
             lunchOrDinnerString = @"todayDinner";
     }
+    
+    /* IS NOT ALL-DAY */
     else
     {
+        // 00:00 - 16:29
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
             lunchOrDinnerString = @"todayLunch";
+        
+        // 16:30 - 23:59
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             lunchOrDinnerString = @"todayDinner";
     }
@@ -128,16 +134,12 @@
         }
     }
     
-//    [self.cvSideDishes reloadData];
-    
     [self updateUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
 }
 
@@ -166,12 +168,6 @@
     loadingHUD = nil;
     [self viewWillAppear:YES];
 }
-
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
 
 - (void)checkCurrentMode
 {
@@ -210,11 +206,6 @@
 
 - (void)updateUI
 {
-    NSLog(@"side dish index - %ld", self.sideDishIndex);
-    NSLog(@"original dish index - %ld", _originalDishIndex);
-    NSLog(@"selected index - %ld", _selectedIndex);
-    NSLog(@"selected item state - %ld", _selectedItemState);
-
     [self.cvSideDishes reloadData];
 }
 
@@ -226,7 +217,7 @@
     return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
 }
 
-- (void) showSoldoutScreen:(NSNumber *)identifier
+- (void)showSoldoutScreen:(NSNumber *)identifier
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
@@ -237,6 +228,7 @@
 }
 
 #pragma mark - UICollectionViewDatasource Methods
+
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     if (self.aryDishes == nil)
@@ -269,13 +261,9 @@
     [myCell setSmallDishCell];
     
     if (_selectedIndex == indexPath.item)
-    {
         [myCell setCellState:_selectedItemState index:indexPath.item];
-    }
     else
-    {
         [myCell setCellState:DISH_CELL_NORMAL index:indexPath.item];
-    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -310,8 +298,6 @@
     }
     
     [collectionView reloadData];
-    
-    [self updateUI];
 }
 
 - (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
@@ -322,14 +308,10 @@
 
 - (void)onActionDishCell:(NSInteger)index
 {
-    NSLog(@"onActionDishCell activated!");
-     
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:_selectedIndex];
+    
     if (dishInfo == nil)
-    {
-        NSLog(@"No dishInfo!");
         return;
-    }
     
     NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
     
@@ -366,8 +348,6 @@
         
         _originalDishIndex = index;
     }
-    
-    [self.cvSideDishes reloadData];
     
     [self updateUI];
 
