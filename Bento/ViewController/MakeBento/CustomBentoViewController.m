@@ -140,6 +140,7 @@
     NSString *currentMenuTitle;
     NSString *nextMenuTitle;
     
+    BOOL shouldShowOneMenu = NO;
     
     /* IS All-DAY */
     if ([[BentoShop sharedInstance] isAllDay])
@@ -151,19 +152,28 @@
             currentMenuTitle = @"Serving All-day Dinner";
         
         // Right Side
-        if ([[BentoShop sharedInstance] nextIsAllDay])
+        
+        // No Next Available Menu
+        if ([[BentoShop sharedInstance] isThereLunchNextMenu] == NO || [[BentoShop sharedInstance] isThereDinnerNextMenu] == NO)
+            shouldShowOneMenu = YES;
+        
+        // Next Menu Available
+        else
         {
-            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-        }
-        else if ([[BentoShop sharedInstance] nextIsAllDay] == NO)
-        {
-            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            if ([[BentoShop sharedInstance] nextIsAllDay])
+            {
+                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            }
+            else if ([[BentoShop sharedInstance] nextIsAllDay] == NO)
+            {
+                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            }
         }
     }
     
@@ -184,6 +194,8 @@
                 nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
             else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
                 nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            else
+                shouldShowOneMenu = YES;
         }
         
         // 16:30 - 23:59 Dinner
@@ -198,6 +210,8 @@
                 nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
             else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
                 nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            else
+                shouldShowOneMenu = YES;
         }
     }
     
