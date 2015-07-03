@@ -496,6 +496,8 @@
     _selectedPath = nil;
 }
 
+#pragma mark Set PageView and ScrollView
+
 - (void)setPageAndScrollView
 {
     NSString *currentMenuTitle;
@@ -686,17 +688,11 @@
     if (isThereConnection)
     {
         if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
-        {
             [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-        }
         else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
-        {
             [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-        }
         else
-        {
             [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-        }
     }
 }
 

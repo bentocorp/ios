@@ -8,14 +8,14 @@
 
 #import "ChooseMainDishViewController.h"
 
-#import "SoldOutViewController.h"
-#import "DishCollectionViewCell.h"
-
 #import "BentoShop.h"
 #import "AppStrings.h"
 #import "DataManager.h"
 
 #import "JGProgressHUD.h"
+
+#import "SoldOutViewController.h"
+#import "DishCollectionViewCell.h"
 
 @interface ChooseMainDishViewController () <DishCollectionViewCellDelegate>
 
@@ -51,7 +51,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
@@ -59,6 +59,7 @@
     
     NSString *lunchOrDinnerString;
     
+    /* IS ALL-DAY */
     if ([[BentoShop sharedInstance] isAllDay])
     {
         if ([[BentoShop sharedInstance] isThereLunchMenu])
@@ -66,10 +67,15 @@
         else if ([[BentoShop sharedInstance] isThereDinnerMenu])
             lunchOrDinnerString = @"todayDinner";
     }
+    
+    /* IS NOT ALL-DAY */
     else
     {
+        // 00:00 - 16:29
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
             lunchOrDinnerString = @"todayLunch";
+        
+        // 16:30 - 23:59
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
             lunchOrDinnerString = @"todayDinner";
     }
@@ -77,11 +83,9 @@
     for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:lunchOrDinnerString])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-        //        if ([[BentoShop sharedInstance] isDishSoldOut:dishID] || [[BentoShop sharedInstance] canAddDish:dishID])
+        
         if ([[BentoShop sharedInstance] canAddDish:dishID])
-        {
             [self.aryDishes addObject:dishInfo];
-        }
     }
     
     _selectedIndex = NSNotFound;
@@ -104,16 +108,12 @@
         }
     }
     
-//    [self.cvMainDishes reloadData];
-    
     [self updateUI];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
 }
 
@@ -143,12 +143,6 @@
     [self viewWillAppear:YES];
 }
 
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
-
 - (void)checkCurrentMode
 {
     if ([[BentoShop sharedInstance] didModeOrDateChange])
@@ -160,7 +154,7 @@
     }
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -185,12 +179,12 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void) updateUI
+- (void)updateUI
 {
     [self.cvMainDishes reloadData];
 }
 
-- (BOOL) isCompletedToMakeMyBento
+- (BOOL)isCompletedToMakeMyBento
 {
     if ([[BentoShop sharedInstance] getCurrentBento] == nil)
         return NO;
@@ -198,7 +192,7 @@
     return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
 }
 
-- (void) showSoldoutScreen:(NSNumber *)identifier
+- (void)showSoldoutScreen:(NSNumber *)identifier
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
@@ -235,13 +229,9 @@
     [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID]];
     
     if (_selectedIndex == indexPath.item)
-    {
         [myCell setCellState:_selectedItemState index:indexPath.item];
-    }
     else
-    {
         [myCell setCellState:DISH_CELL_NORMAL index:indexPath.item];
-    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -305,6 +295,7 @@
             [[[BentoShop sharedInstance] getCurrentBento] setMainDish:0];
         }
     }
+    
     // add to bento
     else
     {
@@ -314,8 +305,6 @@
         
         _originalDishIndex = index;
     }
-    
-    [self.cvMainDishes reloadData];
     
     [self updateUI];
 
