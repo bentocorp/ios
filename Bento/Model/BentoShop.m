@@ -1301,8 +1301,19 @@ static BentoShop *_shareInstance;
     NSString *originalDateString = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalDateString"];
     NSString *newDateString = [self getMenuDateString];
     
+    // if date changed
+    if (![originalDateString isEqualToString:newDateString])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:newDateString forKey:@"OriginalDateString"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self resetBentoArray];
+        
+        return YES;
+    }
+    
     // if mode changed
-    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
+    else if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
     {
         if ([[BentoShop sharedInstance] isAllDay] == NO)
         {
@@ -1317,16 +1328,7 @@ static BentoShop *_shareInstance;
         }
     }
     
-    // if date changed
-    else if (![originalDateString isEqualToString:newDateString])
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:newDateString forKey:@"OriginalDateString"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [self resetBentoArray];
-        
-        return YES;
-    }
+    
     
     return NO;
 }
