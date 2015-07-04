@@ -511,7 +511,7 @@ static BentoShop *_shareInstance;
             menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
     }
     
-    // if not all_day, use business logic
+    // if not all_day
     else
     {
         // 12:00am - dinner opening (ie. 16.5) && lunch menu exists

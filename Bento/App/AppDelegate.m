@@ -266,14 +266,15 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
     
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         [globalShop getStatus];
         [globalShop setLunchOrDinnerModeByTimes];
+        [globalShop getMenus];
         [[AppStrings sharedInstance] getAppStrings];
         
-//        dispatch_sync(dispatch_get_main_queue(), ^{
+        dispatch_sync(dispatch_get_main_queue(), ^{
     
             /*--------------------*/
     
@@ -316,8 +317,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             }
             else
                 NSLog(@"WITHIN SERVICE AREA");
-//        });
-//    });
+        });
+    });
 }
 
 - (void)showLocationAlert
