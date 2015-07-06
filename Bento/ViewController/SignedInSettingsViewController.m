@@ -224,18 +224,19 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-    // Set promo code
+    // Set promo code string
     if (currentUserInfo[@"coupon_code"] != [NSNull null] || currentUserInfo[@"coupon_code"] != nil)
         couponCodeString = currentUserInfo[@"coupon_code"];
     else
         couponCodeString = @"--";
     
+    NSString *sharePrecomposedMessageOriginal;
     
-    NSString *sharePrecomposedMessageOriginal = [[AppStrings sharedInstance] getString:SHARE_PRECOMPOSED_MESSAGE];
+    if ([[AppStrings sharedInstance] getString:SHARE_PRECOMPOSED_MESSAGE] != nil)
+        sharePrecomposedMessageOriginal = [[AppStrings sharedInstance] getString:SHARE_PRECOMPOSED_MESSAGE];
     
-    NSLog(@"sharePrecomposedMessageOriginal - %@", sharePrecomposedMessageOriginal);
-    
-    sharePrecomposedMessageNew = [sharePrecomposedMessageOriginal stringByReplacingOccurrencesOfString:@"%@" withString:couponCodeString];
+    if (couponCodeString != nil)
+        sharePrecomposedMessageNew = [sharePrecomposedMessageOriginal stringByReplacingOccurrencesOfString:@"%@" withString:couponCodeString];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
@@ -257,12 +258,6 @@
     [loadingHUD dismiss];
     loadingHUD = nil;
 }
-
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
 
 - (void)checkCurrentMode
 {
@@ -517,7 +512,7 @@
     }
 }
 
-// TODO: ADD SETTI_gitNGS BUTTON
+// TODO: ADD SETTINGS BUTTON
 - (void)postToFacebook
 {
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
