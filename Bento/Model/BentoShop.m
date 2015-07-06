@@ -1308,20 +1308,17 @@ static BentoShop *_shareInstance;
         return YES;
     }
     
-    // if mode changed
-    else if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]])
+    // if mode changed, and is not all-day
+    else if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]] && [[BentoShop sharedInstance] isAllDay] == NO)
     {
-        if ([[BentoShop sharedInstance] isAllDay] == NO)
-        {
-            // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
-            [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]
-                                                      forKey:@"OriginalLunchOrDinnerMode"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            [self resetBentoArray];
-            
-            return YES;
-        }
+        // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
+        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]
+                                                  forKey:@"OriginalLunchOrDinnerMode"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [self resetBentoArray];
+        
+        return YES;
     }
     
     return NO;
