@@ -459,12 +459,18 @@
 }
 
 - (void)dealloc
-{
-    [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
+{   
+    @try
+    {
+        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
+    }
+    @catch(id anException)
+    {
+        //do nothing, obviously it wasn't attached because an exception was thrown
+    }
 }
 
 #pragma mark Tableview Datasource
-/*---------------------------------------------------------------------------------------------*/
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
