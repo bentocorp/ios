@@ -679,22 +679,8 @@
     FixedBentoPreviewViewController *fixedBentoPreviewViewController = [[FixedBentoPreviewViewController alloc] init];
     fixedBentoPreviewViewController.fromWhichVC = selectedButton.tag;
     
-    NSArray *aryMainDishes;
-    
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-    }
-    else
-    {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-    }
+    // Main Dishes Array
+    [self setDishesBySection0MainOrSection1Side:0];
     
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
     fixedBentoPreviewViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];
@@ -721,36 +707,9 @@
     /*---Add items to empty bento---*/
     UIButton *selectedButton = (UIButton *)sender;
     
-    NSArray *aryMainDishes;
-    NSArray *arySideDishes;
-    
-    // use all day logic
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-        {
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-        }
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-        {
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
-        }
-    }
-    else // use regular logic
-    {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        {
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-        }
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        {
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-            arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
-        }
-    }
+    // set main and side arrays
+    [self setDishesBySection0MainOrSection1Side:0];
+    [self setDishesBySection0MainOrSection1Side:1];
     
     // Add main to Bento
     NSDictionary *mainDishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
