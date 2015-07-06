@@ -459,7 +459,7 @@
 }
 
 - (void)dealloc
-{   
+{
     @try
     {
         [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
@@ -479,19 +479,17 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if ([[BentoShop sharedInstance] isAllDay])
+    /* ONLY DISPLAY MAIN DISHES, no section 1 needed */
+    
+    [self setDishesBySection0MainOrSection1Side:section];
+    
+    // MAIN
+    if (section == 0)
     {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-            return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            return [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] count];
-    }
-    else
-    {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            return [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] count];
+        if (aryMainDishes == nil)
+            return 0;
+        
+        return aryMainDishes.count;
     }
     
     return 0;
@@ -1175,7 +1173,7 @@
     }
     
     // SIDE DISHES
-    else
+    else // section == 1
     {
         /* IS ALL-DAY */
         if ([[BentoShop sharedInstance] isAllDay])
