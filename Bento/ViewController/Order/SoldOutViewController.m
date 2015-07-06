@@ -464,18 +464,19 @@
     
     SignedInSettingsViewController *signedInSettingsViewController = [[SignedInSettingsViewController alloc] init];
     SignedOutSettingsViewController *signedOutSettingsViewController = [[SignedOutSettingsViewController alloc] init];
+    
     UINavigationController *navC;
     
     // signed in or not?
-    if (currentUserInfo == nil) {
-        
+    if (currentUserInfo == nil)
+    {
         // navigate to signed out settings vc
         navC = [[UINavigationController alloc] initWithRootViewController:signedOutSettingsViewController];
         navC.navigationBar.hidden = YES;
         [self.navigationController presentViewController:navC animated:YES completion:nil];
-        
-    } else {
-        
+    }
+    else
+    {
         // navigate to signed in settings vc
         navC = [[UINavigationController alloc] initWithRootViewController:signedInSettingsViewController];
         navC.navigationBar.hidden = YES;

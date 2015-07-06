@@ -109,16 +109,21 @@ static BentoShop *_shareInstance;
 
 - (id)sendRequest:(NSString *)strRequest statusCode:(NSInteger *)statusCode error:(NSError **)error
 {
+    // filter out empty stringRequest
     if (strRequest == nil || strRequest.length == 0)
         return nil;
     
+    // create URL request using stringRequest
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest]];
     NSURLResponse *response = nil;
     
+    // filter out nil error
     if (error != nil)
         *error = nil;
     
+    // get data from URL
     NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:error];
+    
     if (data == nil)
         return nil;
     
@@ -356,25 +361,21 @@ static BentoShop *_shareInstance;
     NSError *error2 = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
     
-    if (data == nil) {
+    if (data == nil)
         return;
-    }
     
     NSInteger statusCode = 0;
-    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
+    if ([response isKindOfClass:[NSHTTPURLResponse class]])
         statusCode = [(NSHTTPURLResponse *)response statusCode];
-    }
     
-    if (error2 != nil || statusCode != 200) {
+    if (error2 != nil || statusCode != 200)
         return;
-    }
     
     // parse json
     NSError *parseError = nil;
     NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-    if (initDic == nil) {
+    if (initDic == nil)
         return;
-    }
     
     // set /init results to dictionary
     NSDictionary *initDictionary = [initDic copy];
@@ -410,13 +411,10 @@ static BentoShop *_shareInstance;
     /*-------------------------------------extra: for forced update------------------------------------------------*/
     self.iosMinVersion = (CGFloat)[initDictionary[@"ios_min_version"] floatValue];
     self.iosCurrentVersion = (CGFloat)[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
-    /*-------------------------------------------------------------------------------------*/
     
-    /*--------------------------------------extra: for service area URL's-----------------------------------------------*/
+    /*--------------------------------------extra: for service area URL's-------------------------------------------*/
     lunchMapURLString = initDictionary[@"settings"][@"serviceArea_lunch_map"];
     dinnerMapURLString = initDictionary[@"settings"][@"serviceArea_dinner_map"];
-    
-    /*-------------------------------------------------------------------------------------*/
 }
 
 - (NSNumber *)getCurrentTime
@@ -629,9 +627,7 @@ static BentoShop *_shareInstance;
     }
     
     if (strPoints == nil)
-    {
         NSLog(@"WARNING!!! SERVICE AREA strPoints == nil");
-    }
     
     NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
     
@@ -668,7 +664,6 @@ static BentoShop *_shareInstance;
     
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_AREA object:nil];
 }
-
 
 // returns bg image
 - (NSURL *)getMenuImageURL
