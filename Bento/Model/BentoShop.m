@@ -1297,10 +1297,8 @@ static BentoShop *_shareInstance;
     NSString *originalDateString = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalDateString"];
     NSString *newDateString = [self getMenuDateString];
     
-    // if date changed, nil means that there was no menu for that day
-    if (![originalDateString isEqualToString:newDateString]
-        || (originalDateString != nil && newDateString == nil) // if original
-        || (originalDateString == nil && newDateString != nil))
+    // if date changed
+    if (![originalDateString isEqualToString:newDateString])
     {
         [[NSUserDefaults standardUserDefaults] setObject:newDateString forKey:@"OriginalDateString"];
         [[NSUserDefaults standardUserDefaults] synchronize];
