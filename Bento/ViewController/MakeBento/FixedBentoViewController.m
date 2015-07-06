@@ -499,26 +499,11 @@
 {
     servingLunchCell = (FixedBentoCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
-    if (servingLunchCell == nil) {
+    if (servingLunchCell == nil)
         servingLunchCell = [[FixedBentoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-    }
     
-    NSArray *aryMainDishes;
-    
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-    }
-    else
-    {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-    }
+    // Set Main Dishes Array
+    [self setDishesBySection0MainOrSection1Side:indexPath.section];
     
     NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
     [servingLunchCell setDishInfo:dishInfo];
@@ -541,14 +526,14 @@
         [servingLunchCell.addButton setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
     }
     
-    // add bento button
+    // Add Bento button
     servingLunchCell.addButton.tag = indexPath.row;
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoHighlight:) forControlEvents:UIControlEventTouchDown];
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
     
     [servingLunchCell.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
     
-//    // Prices
+//    // Price Tags
 //    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
 //    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
 //    if (salePrice != 0 && salePrice < unitPrice)
