@@ -1265,6 +1265,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onTermsAndConditions:" destination="Uml-6W-39g" eventType="touchUpInside" id="OoZ-rG-aWY"/>
+                                    <segue destination="wdM-kJ-Zs9" kind="push" identifier="faq" id="NxK-O6-xK7"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="I7B-WQ-R10">
@@ -1277,6 +1278,7 @@
                                 </state>
                                 <connections>
                                     <action selector="onPrivacyPolicy:" destination="Uml-6W-39g" eventType="touchUpInside" id="qzZ-IP-bbD"/>
+                                    <segue destination="wdM-kJ-Zs9" kind="push" identifier="faq" id="fyL-xl-6LA"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2525,7 +2527,7 @@
             <objects>
                 <viewController storyboardIdentifier="FAQID" id="wdM-kJ-Zs9" customClass="FaqViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Aj-1g-qZ5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="FvH-uq-K7e">
@@ -2597,7 +2599,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <webView contentMode="scaleToFill" id="mxe-Mc-DEi">
-                                <rect key="frame" x="0.0" y="108" width="320" height="465"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="377"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -2605,7 +2607,7 @@
                                 </connections>
                             </webView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="its-Uo-k0s">
-                                <rect key="frame" x="151" y="312" width="20" height="20"/>
+                                <rect key="frame" x="151" y="262" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
@@ -2622,7 +2624,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9Gt-CP-9kz" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="679" y="1822"/>
+            <point key="canvasLocation" x="632" y="2148"/>
         </scene>
         <!--Sneak Preview View Controller-->
         <scene sceneID="Pv5-xi-fdb">
@@ -2787,6 +2789,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="sjk-uB-lm1"/>
+        <segue reference="NxK-O6-xK7"/>
+        <segue reference="Xro-hm-UPB"/>
     </inferredMetricsTieBreakers>
 </document>
