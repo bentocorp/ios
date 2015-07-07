@@ -35,13 +35,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/MakeBento/CustomBentoViewController.m"
-            timestampString = "457925018.426497"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "457998804.873938"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "588"
-            endingLineNumber = "588"
-            landmarkName = "-setPageAndScrollView"
+            startingLineNumber = "672"
+            endingLineNumber = "672"
+            landmarkName = "-processPayment"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/View/MyAlertView.m"
+            timestampString = "457999168.417322"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "71"
+            endingLineNumber = "71"
+            landmarkName = "-initWithTitle:message:delegate:cancelButtonTitle:otherButtonTitle:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

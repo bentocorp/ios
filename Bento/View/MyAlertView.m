@@ -67,7 +67,14 @@
     label.frame = CGRectMake(0, 0, width - (GAP + GAP_CONTENT) * 2, height);
     label.textColor = [UIColor colorWithRed:87.0f / 255.0f green:96.0f / 255.0f blue:112.0f / 255.0f alpha:1.0f];
     
-    CGSize szMessage = [message sizeWithFont:label.font constrainedToSize:label.frame.size];
+    // DEPRECATED
+//    CGSize szMessage = [message sizeWithFont:label.font constrainedToSize:label.frame.size];
+    
+    CGRect textRect = [message boundingRectWithSize:label.frame.size
+                                         options:NSStringDrawingUsesLineFragmentOrigin
+                                      attributes:@{NSFontAttributeName:label.font}
+                                         context:nil];
+    CGSize szMessage = textRect.size;
     
     label.frame = CGRectMake(0, 0, width - (GAP + GAP_CONTENT) * 2, szMessage.height);
     label.text = message;

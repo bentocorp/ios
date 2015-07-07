@@ -272,9 +272,7 @@
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"Cell selected!, indexPath.item - %ld", indexPath.item);
-    
+{   
     if (_selectedIndex == indexPath.item)
     {
         if (_selectedItemState == DISH_CELL_NORMAL)
