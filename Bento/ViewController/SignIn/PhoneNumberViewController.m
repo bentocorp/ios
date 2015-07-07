@@ -238,6 +238,7 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
+/*
 - (IBAction)onPrivacyPolicy:(id)sender
 {
     [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_PRIVACY]];
@@ -247,6 +248,7 @@
 {
     [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_TERMS]];
 }
+*/
 
 - (void)processRegister
 {

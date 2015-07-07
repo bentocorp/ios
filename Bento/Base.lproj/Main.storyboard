@@ -52,8 +52,6 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Light.ttf">
             <string>OpenSans-Light</string>
@@ -1255,32 +1253,6 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.91372549020000005" green="0.44705882349999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Sr8-TN-d5c">
-                                <rect key="frame" x="160" y="440" width="160" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
-                                <state key="normal" title="Terms &amp; Conditions">
-                                    <color key="titleColor" red="0.54117647059999996" green="0.73333333329999995" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onTermsAndConditions:" destination="Uml-6W-39g" eventType="touchUpInside" id="OoZ-rG-aWY"/>
-                                    <segue destination="wdM-kJ-Zs9" kind="push" identifier="faq" id="NxK-O6-xK7"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="I7B-WQ-R10">
-                                <rect key="frame" x="0.0" y="440" width="130" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
-                                <state key="normal" title="Privacy Policy">
-                                    <color key="titleColor" red="0.54117647059999996" green="0.73333333329999995" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onPrivacyPolicy:" destination="Uml-6W-39g" eventType="touchUpInside" id="qzZ-IP-bbD"/>
-                                    <segue destination="wdM-kJ-Zs9" kind="push" identifier="faq" id="fyL-xl-6LA"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -1288,8 +1260,6 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <connections>
                         <outlet property="btnDone" destination="b5I-6l-4Lz" id="13i-2J-mNw"/>
-                        <outlet property="btnPolicy" destination="I7B-WQ-R10" id="zTM-wl-jBj"/>
-                        <outlet property="btnTerms" destination="Sr8-TN-d5c" id="a4H-CP-L9d"/>
                         <outlet property="ivPhoneNumber" destination="nbX-wa-VWK" id="cdx-TM-KYE"/>
                         <outlet property="lblDescription" destination="imE-ZK-euc" id="r8A-eR-l1W"/>
                         <outlet property="lblError" destination="zze-hN-6Ks" id="BFw-qC-pze"/>
@@ -2527,7 +2497,7 @@
             <objects>
                 <viewController storyboardIdentifier="FAQID" id="wdM-kJ-Zs9" customClass="FaqViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7Aj-1g-qZ5">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" id="FvH-uq-K7e">
@@ -2599,7 +2569,7 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <webView contentMode="scaleToFill" id="mxe-Mc-DEi">
-                                <rect key="frame" x="0.0" y="108" width="320" height="377"/>
+                                <rect key="frame" x="0.0" y="108" width="320" height="465"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
@@ -2607,7 +2577,7 @@
                                 </connections>
                             </webView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="its-Uo-k0s">
-                                <rect key="frame" x="151" y="262" width="20" height="20"/>
+                                <rect key="frame" x="151" y="312" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                             </activityIndicatorView>
                         </subviews>
@@ -2789,7 +2759,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="NxK-O6-xK7"/>
         <segue reference="Xro-hm-UPB"/>
     </inferredMetricsTieBreakers>
 </document>
