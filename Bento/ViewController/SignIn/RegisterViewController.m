@@ -321,7 +321,10 @@
                  
                  if (error.code == 403 || error.code == 404)
                  {
-                     [self gotoPhoneNumberScreen:user];
+                     dispatch_async(dispatch_get_main_queue(), ^{
+                         [self gotoPhoneNumberScreen:user];
+                     });
+                     
                      return;
                  }
                  else

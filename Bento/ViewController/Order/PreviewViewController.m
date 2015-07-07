@@ -70,7 +70,6 @@
     // Track Previewed Today's Menu
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Previewed Today's Menu" properties:nil];
-    NSLog(@"PREVIEWED TODAY'S MENU");
     
     // initialize to YES
     isThereConnection = YES;
@@ -139,11 +138,8 @@
     [cvDishesRight registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     [scrollView addSubview:cvDishesRight];
     
-    
     // Sunday = 1, Saturday = 7
     weekday = (int)[[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:[NSDate date]] weekday];
-    NSLog(@"today is - %ld", (long)weekday);
-    
     
     // For selection
     _selectedPathMainLeft = -1;
