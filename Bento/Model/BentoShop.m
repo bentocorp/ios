@@ -1292,6 +1292,8 @@ static BentoShop *_shareInstance;
     NSString *originalDateString = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalDateString"];
     NSString *newDateString = [self getMenuDateString];
     
+    NSLog(@"ENTERED FOREGROUND: orig - %@, new - %@", originalDateString, newDateString);
+    
     // if date changed
     if (![originalDateString isEqualToString:newDateString])
     {

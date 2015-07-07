@@ -327,6 +327,8 @@
 		FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
 		FC3C4E7E1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
+		FC4A37591B4C862B00020F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
+		FC4A375A1B4C863500020F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
 		FC599F5A1B0FEDB600989E1B /* Bento_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC599F591B0FEDB600989E1B /* Bento_Tests.m */; };
 		FC72297B1B16905700C9A9AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
 		FC72297C1B16905700C9A9AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
@@ -1854,6 +1856,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4A375A1B4C863500020F8C /* Main.storyboard in Resources */,
 				7216B7701AA64C7C0006FFE9 /* deliverylocation_icon_search@2x.png in Resources */,
 				7216B7711AA64C7C0006FFE9 /* register_icon_email_err.png in Resources */,
 				7216B7721AA64C7C0006FFE9 /* completeorder_cell_btn_remove@2x.png in Resources */,
@@ -1951,6 +1954,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC4A37591B4C862B00020F8C /* Main.storyboard in Resources */,
 				90D8F7D11A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png in Resources */,
 				90D8F7C41A5E126C00D034CF /* register_icon_email_err.png in Resources */,
 				47C5B0191A8B82BD008FA7DA /* completeorder_cell_btn_remove@2x.png in Resources */,

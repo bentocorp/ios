@@ -661,7 +661,10 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super viewWillDisappear:animated];
-    
+}
+
+- (void)dealloc
+{
     @try
     {
         [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];

@@ -23,9 +23,7 @@
 
 @implementation PreviewViewController
 {
-    UIScrollView *scrollView;
-    UIView *navigationBarView;
-    BWTitlePagerView *pagingTitleView;
+    NSUserDefaults *defaults;
     
     NSArray *aryMainDishesLeft;
     NSArray *arySideDishesLeft;
@@ -41,27 +39,50 @@
     NSArray *nextDinnerMainDishesArray;
     NSArray *nextDinnerSideDishesArray;
     
+    NSString *todayAllDayLunchMenuString;
+    NSString *todayAllDayDinnerMenuString;
+    NSString *todayLunchMenuString;
+    NSString *todayDinnerMenuString;
+    NSString *nextAllDayLunchMenuString;
+    NSString *nextAllDayDinnerMenuString;
+    NSString *nextLunchMenuString;
+    NSString *nextDinnerMenuString;
+    
+    UIScrollView *scrollView;
+    
+    UIView *navigationBarView;
+    
+    BWTitlePagerView *pagingTitleView;
+    
     UILabel *lblTitle;
+    
     UICollectionView *cvDishesLeft;
     UICollectionView *cvDishesRight;
     
     NSInteger _selectedPathMainLeft;
     NSInteger _selectedPathSideLeft;
-    
     NSInteger _selectedPathMainRight;
     NSInteger _selectedPathSideRight;
     
-    NSInteger hour;
-    int weekday;
-    
-    NSUserDefaults *defaults;
     float currentTime;
     float lunchTime;
     float dinnerTime;
     float bufferTime;
     
-    JGProgressHUD *loadingHUD;
     BOOL isThereConnection;
+    
+    BOOL isSoldOut;
+    BOOL isClosed;
+    
+    BOOL isAllDay;
+    BOOL nextIsAllDay;
+    
+    BOOL isThereLunchMenu;
+    BOOL isThereDinnerMenu;
+    BOOL isThereLunchNextMenu;
+    BOOL isThereDinnerNextMenu;
+    
+    JGProgressHUD *loadingHUD;
 }
 
 - (void)viewDidLoad {
@@ -83,7 +104,6 @@
     /*---Scroll View---*/
     
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, 45, SCREEN_WIDTH, SCREEN_HEIGHT)];
-//    scrollView.contentSize = CGSizeMake(SCREEN_WIDTH*2, SCREEN_HEIGHT-65);
     scrollView.pagingEnabled = YES;
     scrollView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     scrollView.bounces = NO;
@@ -138,63 +158,34 @@
     [cvDishesRight registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
     [scrollView addSubview:cvDishesRight];
     
-    // Sunday = 1, Saturday = 7
-    weekday = (int)[[[NSCalendar currentCalendar] components:NSCalendarUnitWeekday fromDate:[NSDate date]] weekday];
-    
     // For selection
     _selectedPathMainLeft = -1;
     _selectedPathSideLeft = -1;
     
     _selectedPathMainRight = -1;
     _selectedPathSideRight = -1;
+    
+    // titles and dishes
+    [self setTitlesMainAndSideDishes];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-#pragma mark - Business Logic
-
 - (void)setTitlesMainAndSideDishes
 {
-    BOOL isSoldOut = [[BentoShop sharedInstance] isSoldOut];
-    BOOL isClosed = [[BentoShop sharedInstance] isClosed];
-    
-    BOOL isAllDay = [[BentoShop sharedInstance] isAllDay];
-    BOOL nextIsAllDay = [[BentoShop sharedInstance] nextIsAllDay];
-    
-    BOOL isThereLunchMenu = [[BentoShop sharedInstance] isThereLunchMenu];
-    BOOL isThereDinnerMenu = [[BentoShop sharedInstance] isThereDinnerMenu];
-    
-    BOOL isThereLunchNextMenu = [[BentoShop sharedInstance] isThereLunchNextMenu];
-    BOOL isThereDinnerNextMenu = [[BentoShop sharedInstance] isThereDinnerNextMenu];
-    
-    /*---*/
-    
-    NSString *todayAllDayLunchMenuString = @"Today's All-day Lunch Menu";
-    NSString *todayAllDayDinnerMenuString = @"Today's All-day Dinner Menu";
-    
-    NSString *todayLunchMenuString = @"Today's Lunch Menu";
-    NSString *todayDinnerMenuString = @"Tonight's Dinner Menu";
-    
-    NSString *nextMenuWeekdayString;
-    if ([[BentoShop sharedInstance] getNextMenuWeekdayString] != nil)
-        nextMenuWeekdayString = [[BentoShop sharedInstance] getNextMenuWeekdayString];
-
-    NSString *nextAllDayLunchMenuString = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", nextMenuWeekdayString];
-    NSString *nextAllDayDinnerMenuString = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", nextMenuWeekdayString];
-    
-    NSString *nextLunchMenuString = [NSString stringWithFormat:@"%@'s Lunch Menu", nextMenuWeekdayString];
-    NSString *nextDinnerMenuString = [NSString stringWithFormat:@"%@'s Dinner Menu", nextMenuWeekdayString];
+    [self setTimes];
+    [self setArrays];
+    [self setBool];
+    [self setStrings];
     
     NSString *titleLeft;
     NSString *titleRight;
     
     BOOL shouldShowOneMenu = NO;
     
-/*---------------------------------------*/
-    
-/* SOLD OUT - IS ALL DAY */
+    /* SOLD OUT - IS ALL DAY */
     
     if (isSoldOut && isAllDay)
     {
@@ -235,7 +226,7 @@
         }
     }
     
-/* SOLD OUT - IS NOT ALL DAY */
+    /* SOLD OUT - IS NOT ALL DAY */
     else
     {
         // 00:00 - 16:29
@@ -247,7 +238,7 @@
                 titleLeft = todayLunchMenuString;
                 [self setTodayLunchArrays:@"Left"];
             }
-        
+            
             // RIGHT SIDE
             if (isThereDinnerMenu)
             {
@@ -293,9 +284,9 @@
         }
     }
     
-/*-----------------------------------------------*/
+    /*-----------------------------------------------*/
     
-/* CLOSED - IS ALL DAY */
+    /* CLOSED - IS ALL DAY */
     
     if (isClosed && isAllDay)
     {
@@ -423,7 +414,7 @@
         }
     }
     
-/* CLOSED - NOT ALL DAY */
+    /* CLOSED - NOT ALL DAY */
     
     else if (isClosed && isAllDay == NO)
     {
@@ -435,7 +426,7 @@
             {
                 titleLeft = todayLunchMenuString;
                 [self setTodayLunchArrays:@"Left"];
-
+                
                 // RIGHT SIDE
                 if (isThereDinnerMenu)
                 {
@@ -634,6 +625,64 @@
     [self setPageAndScrollView:shouldShowOneMenu left:titleLeft right:titleRight];
 }
 
+- (void)setTimes
+{
+    currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+    lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
+    dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
+    bufferTime = [[[BentoShop sharedInstance] getBufferTime] floatValue];
+}
+
+- (void)setArrays
+{
+    todayLunchMainDishesArray = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+    todayLunchSideDishesArray = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+    
+    todayDinnerMainDishesArray = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+    todayDinnerSideDishesArray = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+    
+    nextLunchMainDishesArray = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
+    nextLunchSideDishesArray = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+    
+    nextDinnerMainDishesArray = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
+    nextDinnerSideDishesArray = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+}
+
+- (void)setBool
+{
+    isSoldOut = [[BentoShop sharedInstance] isSoldOut];
+    isClosed = [[BentoShop sharedInstance] isClosed];
+    
+    isAllDay = [[BentoShop sharedInstance] isAllDay];
+    nextIsAllDay = [[BentoShop sharedInstance] nextIsAllDay];
+    
+    isThereLunchMenu = [[BentoShop sharedInstance] isThereLunchMenu];
+    isThereDinnerMenu = [[BentoShop sharedInstance] isThereDinnerMenu];
+    
+    isThereLunchNextMenu = [[BentoShop sharedInstance] isThereLunchNextMenu];
+    isThereDinnerNextMenu = [[BentoShop sharedInstance] isThereDinnerNextMenu];
+}
+
+- (void)setStrings
+{
+    todayAllDayLunchMenuString = @"Today's All-day Lunch Menu";
+    todayAllDayDinnerMenuString = @"Today's All-day Dinner Menu";
+    
+    todayLunchMenuString = @"Today's Lunch Menu";
+    todayDinnerMenuString = @"Tonight's Dinner Menu";
+    
+    NSString *nextMenuWeekdayString;
+    
+    if ([[BentoShop sharedInstance] getNextMenuWeekdayString] != nil)
+        nextMenuWeekdayString = [[BentoShop sharedInstance] getNextMenuWeekdayString];
+    
+    nextAllDayLunchMenuString = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", nextMenuWeekdayString];
+    nextAllDayDinnerMenuString = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", nextMenuWeekdayString];
+    
+    nextLunchMenuString = [NSString stringWithFormat:@"%@'s Lunch Menu", nextMenuWeekdayString];
+    nextDinnerMenuString = [NSString stringWithFormat:@"%@'s Dinner Menu", nextMenuWeekdayString];
+}
+
 - (void)setPageAndScrollView:(BOOL)shouldShowOneMenu left:(NSString *)titleLeft right:(NSString *)titleRight
 {
     pagingTitleView = [[BWTitlePagerView alloc] init];
@@ -717,25 +766,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-    lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
-    dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
-    bufferTime = [[[BentoShop sharedInstance] getBufferTime] floatValue];
-    
-    todayLunchMainDishesArray = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-    todayLunchSideDishesArray = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-    
-    todayDinnerMainDishesArray = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-    todayDinnerSideDishesArray = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
-    
-    nextLunchMainDishesArray = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
-    nextLunchSideDishesArray = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
-    
-    nextDinnerMainDishesArray = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
-    nextDinnerSideDishesArray = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
-    
-    [self setTitlesMainAndSideDishes];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
@@ -745,8 +775,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    [super viewWillDisappear:animated];
-    
     @try
     {
         [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
@@ -755,6 +783,8 @@
     {
         //do nothing, obviously it wasn't attached because an exception was thrown
     }
+    
+    [super viewWillDisappear:animated];
 }
 
 - (void)noConnection
