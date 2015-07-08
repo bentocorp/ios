@@ -351,8 +351,8 @@
                     titleRight = nextAllDayDinnerMenuString;
                     [self setNextDinnerArrays:@"Right"];
                 }
-                
-                shouldShowOneMenu = YES;
+                else
+                    shouldShowOneMenu = YES;
             }
             else if (nextIsAllDay == NO) // use regular title
             {
