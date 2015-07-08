@@ -1159,9 +1159,7 @@
     PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
     
     if ([self getTotalPrice] == 0 || curPaymentMethod == Payment_Server)
-    {
         stripeInfo = @{ @"stripeToken" : @"NULL" };
-    }
     else
     {
         if (stripeToken != nil)
@@ -1205,16 +1203,22 @@
     NSString *strRequest = [NSString stringWithFormat:@"%@/order?api_token=%@", SERVER_URL, [[DataManager shareDataManager] getAPIToken]];
     
     NSLog(@"order URL - %@", strRequest);
+    NSLog(@"order JSON - %@", dicRequest);
+    NSLog(@"ORDER ITEMS: %@", request[@"OrderItems"]);
     
+    if (!request[@"OrderItems"])
+    {
+        NSLog(@"WARNING!!! EMPTY ORDER!!!");
+        [mixpanel track:@"Empty Order" properties:request];
+    }
+
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
-        NSLog(@"order JSON - %@", dicRequest);
         
         [loadingHUD dismiss];
         
         if (completion)
             completion(PKPaymentAuthorizationStatusSuccess);
 
-        
         [[BentoShop sharedInstance] resetBentoArray]; // remove from temp
         [[BentoShop sharedInstance] saveBentoArray]; // save empty to persistent storage
         
@@ -1225,6 +1229,7 @@
         [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
+        
         [loadingHUD dismiss];
         
         if (completion)
@@ -1234,6 +1239,7 @@
         if (error.code == 410) // The inventory is not available.
         {
             id menuStatus = [errorOp.responseJSON objectForKey:@"MenuStatus"];
+            
             if ([menuStatus isKindOfClass:[NSArray class]])
                 [[BentoShop sharedInstance] setStatus:menuStatus];
         }
