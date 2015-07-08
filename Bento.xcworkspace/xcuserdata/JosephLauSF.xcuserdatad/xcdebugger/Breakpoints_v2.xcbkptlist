@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/Order/PreviewViewController.m"
-            timestampString = "458016807.641376"
+            timestampString = "458016905.314273"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "586"
-            endingLineNumber = "586"
+            startingLineNumber = "585"
+            endingLineNumber = "585"
             landmarkName = "-setTitlesMainAndSideDishes"
             landmarkType = "5">
          </BreakpointContent>
@@ -42,6 +42,22 @@
             startingLineNumber = "290"
             endingLineNumber = "290"
             landmarkName = "-setTitlesMainAndSideDishes"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "458016959.7942"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1285"
+            endingLineNumber = "1285"
+            landmarkName = "-resetBentoArray"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
