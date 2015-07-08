@@ -88,11 +88,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Track Previewed Today's Menu
+    /* Track Previewed Today's Menu */
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Previewed Today's Menu" properties:nil];
     
-    // initialize to YES
+    /*---Initialize to YES---*/
+    
     isThereConnection = YES;
     
     /*---Times---*/
@@ -184,6 +185,8 @@
     NSString *titleRight;
     
     BOOL shouldShowOneMenu = NO;
+    
+    /*----------------------------------*/
     
     /* SOLD OUT - IS ALL DAY */
     
@@ -686,7 +689,7 @@
 - (void)setPageAndScrollView:(BOOL)shouldShowOneMenu left:(NSString *)titleLeft right:(NSString *)titleRight
 {
     pagingTitleView = [[BWTitlePagerView alloc] init];
-    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
+    pagingTitleView.frame = CGRectMake(SCREEN_WIDTH / 2 - 100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [pagingTitleView observeScrollView:scrollView];
@@ -698,7 +701,7 @@
     }
     else
     {
-        scrollView.contentSize = CGSizeMake(SCREEN_WIDTH*2, SCREEN_HEIGHT-65);
+        scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT-65);
         [pagingTitleView addObjects:@[titleLeft, titleRight]];
     }
     

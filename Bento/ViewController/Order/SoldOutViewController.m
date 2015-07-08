@@ -83,12 +83,12 @@
     dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
     bufferTime = [[[BentoShop sharedInstance] getBufferTime] floatValue];
     
-    // 17:30 - 23:59, Closed for the night, talk about next menu
+    // 17:30 - 23:59, Closed for the night, see you tomorrow!
     if (currentTime >= (dinnerTime + bufferTime) && currentTime < 24) {
         return [[AppStrings sharedInstance] getString:CLOSED_TEXT_LATENIGHT];
     }
 
-    // talk about today
+    // Closed for now, see you when we open!
     return [[AppStrings sharedInstance] getString:CLOSED_TEXT_CONTENT];
 }
 

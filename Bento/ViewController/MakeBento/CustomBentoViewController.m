@@ -569,11 +569,22 @@
                 currentMenuTitle = @"Now Serving Dinner";
             
             // Right Side
-            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
-                nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
-            else
+            if ([[BentoShop sharedInstance] nextIsAllDay])
+            {
+                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s All-day Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            }
+            else if ([[BentoShop sharedInstance] nextIsAllDay] == NO)
+            {
+                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s Lunch Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    nextMenuTitle = [NSString stringWithFormat:@"%@'s Dinner Menu", [[BentoShop sharedInstance] getNextMenuWeekdayString]];
+            }
+            
+            if (nextMenuTitle == nil)
                 shouldShowOneMenu = YES;
         }
     }
