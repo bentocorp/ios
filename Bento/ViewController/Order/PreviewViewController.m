@@ -581,19 +581,32 @@
             }
         }
         
-        // 17.30 - 23:59
+        // 17:30 - 23:59, note: after 5:30 should show tomorrow's menu meaning next, no more today
         else if (currentTime >= (dinnerTime+bufferTime) && currentTime < 24)
         {
-            if (isThereLunchNextMenu)
+            /* NEXT IS ALL-DAY */
+            if (nextIsAllDay == YES)
             {
-                if (nextIsAllDay == YES)
+                // LEFT SIDE
+                if (isThereLunchNextMenu)
                 {
-                    titleLeft = nextLunchMenuString;
+                    titleLeft = nextAllDayLunchMenuString;
                     [self setNextLunchArrays:@"Left"];
-                    
-                    shouldShowOneMenu = YES;
                 }
-                else if (nextIsAllDay == NO)
+                else if (isThereDinnerNextMenu)
+                {
+                    titleLeft = nextAllDayDinnerMenuString;
+                    [self setNextDinnerArrays:@"Left"];
+                }
+                
+                shouldShowOneMenu = YES;
+            }
+            
+            /* NEXT IS NO ALL-DAY */
+            else
+            {
+                // LEFT SIDE
+                if (isThereLunchNextMenu)
                 {
                     titleLeft = nextLunchMenuString;
                     [self setNextLunchArrays:@"Left"];
@@ -607,13 +620,13 @@
                     else
                         shouldShowOneMenu = YES;
                 }
-            }
-            else if (isThereDinnerNextMenu)
-            {
-                titleLeft = nextDinnerMenuString;
-                [self setNextDinnerArrays:@"Left"];
-                
-                shouldShowOneMenu = YES;
+                else if (isThereDinnerNextMenu)
+                {
+                    titleLeft = nextDinnerMenuString;
+                    [self setNextDinnerArrays:@"Left"];
+                    
+                    shouldShowOneMenu = YES;
+                }
             }
         }
     }
