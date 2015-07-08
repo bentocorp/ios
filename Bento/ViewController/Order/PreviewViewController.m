@@ -271,18 +271,35 @@
                 [self setTodayDinnerArrays:@"Left"];
             }
             
-            // RIGHT SIDE
-            if (isThereLunchNextMenu)
+            // Right Side
+            if (nextIsAllDay == YES)
             {
-                titleRight = nextLunchMenuString;
-                [self setNextLunchArrays:@"Right"];
-            }
-            else if (isThereDinnerNextMenu)
-            {
-                titleRight = nextDinnerMenuString;
-                [self setNextDinnerArrays:@"Right"];
+                if (isThereLunchNextMenu)
+                {
+                    titleRight = nextAllDayLunchMenuString;
+                    [self setNextLunchArrays:@"Right"];
+                }
+                else if (isThereDinnerNextMenu)
+                {
+                    titleRight = nextAllDayDinnerMenuString;
+                    [self setNextDinnerArrays:@"Right"];
+                }
             }
             else
+            {
+                if (isThereLunchNextMenu)
+                {
+                    titleRight = nextLunchMenuString;
+                    [self setNextLunchArrays:@"Right"];
+                }
+                else if (isThereDinnerNextMenu)
+                {
+                    titleRight = nextDinnerMenuString;
+                    [self setNextDinnerArrays:@"Right"];
+                }
+            }
+            
+            if (titleRight == nil)
                 shouldShowOneMenu = YES;
         }
     }

@@ -1206,10 +1206,12 @@
     NSLog(@"order JSON - %@", dicRequest);
     NSLog(@"ORDER ITEMS: %@", request[@"OrderItems"]);
     
+    // Track empty orders
     if (!request[@"OrderItems"])
     {
-        NSLog(@"WARNING!!! EMPTY ORDER!!!");
         [mixpanel track:@"Empty Order" properties:request];
+        
+        NSLog(@"WARNING!!! EMPTY ORDER!!!");
     }
 
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
