@@ -731,8 +731,8 @@
     }
     else if ([leftOrRight isEqualToString:@"Right"])
     {
-        aryMainDishesLeft = todayDinnerMainDishesArray;
-        arySideDishesLeft = todayDinnerSideDishesArray;
+        aryMainDishesRight = todayDinnerMainDishesArray;
+        arySideDishesRight = todayDinnerSideDishesArray;
     }
 }
 
