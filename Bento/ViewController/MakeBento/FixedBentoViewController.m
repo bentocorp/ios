@@ -285,7 +285,7 @@
         // Right Side
         
         // No Next Available Menu
-        if ([[BentoShop sharedInstance] isThereLunchNextMenu] == NO || [[BentoShop sharedInstance] isThereDinnerNextMenu] == NO)
+        if ([[BentoShop sharedInstance] isThereLunchNextMenu] == NO && [[BentoShop sharedInstance] isThereDinnerNextMenu] == NO)
             shouldShowOneMenu = YES;
         
         // Next Menu Available
@@ -363,14 +363,13 @@
     if (nextMenuTitle == nil)
         nextMenuTitle = @"No Available Menu";
     
-    
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
     [pagingTitleView observeScrollView:scrollView];
     
-    if (shouldShowOneMenu)
+    if (shouldShowOneMenu) // shorten scrollview's width
     {
         scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, SCREEN_HEIGHT-65);
         [pagingTitleView addObjects:@[currentMenuTitle]];

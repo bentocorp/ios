@@ -517,7 +517,7 @@
         // Right Side
         
         // No Next Available Menu
-        if ([[BentoShop sharedInstance] isThereLunchNextMenu] == NO || [[BentoShop sharedInstance] isThereDinnerNextMenu] == NO)
+        if ([[BentoShop sharedInstance] isThereLunchNextMenu] == NO && [[BentoShop sharedInstance] isThereDinnerNextMenu] == NO)
             shouldShowOneMenu = YES;
         
         // Next Menu Available

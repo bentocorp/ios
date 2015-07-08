@@ -19,13 +19,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
-            timestampString = "458003809.695533"
+            filePath = "Bento/ViewController/MakeBento/CustomBentoViewController.m"
+            timestampString = "458012806.225009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "507"
-            endingLineNumber = "507"
-            landmarkName = "-tableView:cellForRowAtIndexPath:"
+            startingLineNumber = "502"
+            endingLineNumber = "502"
+            landmarkName = "-setPageAndScrollView"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
