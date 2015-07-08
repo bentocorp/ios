@@ -366,7 +366,8 @@
                     titleRight = nextDinnerMenuString;
                     [self setNextDinnerArrays:@"Right"];
                     
-                    shouldShowOneMenu = YES;
+                    if (isThereDinnerNextMenu == NO)
+                        shouldShowOneMenu = YES;
                 }
             }
         }
