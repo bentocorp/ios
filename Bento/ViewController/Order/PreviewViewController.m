@@ -823,14 +823,14 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    @try
-    {
+//    @try
+//    {
         [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
-    }
-    @catch(id anException)
-    {
+//    }
+//    @catch(id anException)
+//    {
         //do nothing, obviously it wasn't attached because an exception was thrown
-    }
+//    }
     
     [super viewWillDisappear:animated];
 }

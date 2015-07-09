@@ -479,14 +479,14 @@
 
 - (void)dealloc
 {
-    @try
-    {
+//    @try
+//    {
         [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
-    }
-    @catch(id anException)
-    {
-        //do nothing, obviously it wasn't attached because an exception was thrown
-    }
+//    }
+//    @catch(id anException)
+//    {
+//        //do nothing, obviously it wasn't attached because an exception was thrown
+//    }
 }
 
 #pragma mark Tableview Datasource
