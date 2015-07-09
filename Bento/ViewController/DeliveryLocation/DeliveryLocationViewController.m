@@ -39,29 +39,29 @@
     JGProgressHUD *loadingHUD;
 }
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
-@property (weak, nonatomic) IBOutlet UIButton *btnBack;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UIButton *btnBack;
 
-@property (nonatomic, assign) IBOutlet UIView *viewSearchLocation;
+@property (nonatomic, weak) IBOutlet UIView *viewSearchLocation;
 
-@property (nonatomic, assign) IBOutlet UITextField *txtAddress;
-@property (nonatomic, assign) IBOutlet UITableView *tvLocations;
+@property (nonatomic, weak) IBOutlet UITextField *txtAddress;
+@property (nonatomic, weak) IBOutlet UITableView *tvLocations;
 
-@property (nonatomic, assign) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet MKMapView *mapView;
 
-@property (weak, nonatomic) IBOutlet UIView *viewError;
-@property (weak, nonatomic) IBOutlet UILabel *lblError;
+@property (nonatomic, weak) IBOutlet UIView *viewError;
+@property (nonatomic, weak) IBOutlet UILabel *lblError;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblAgree;
-@property (nonatomic, assign) IBOutlet UIButton *btnMeetMyDrive;
+@property (nonatomic, weak) IBOutlet UILabel *lblAgree;
+@property (nonatomic, weak) IBOutlet UIButton *btnMeetMyDrive;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnBottomButton;
+@property (nonatomic, weak) IBOutlet UIButton *btnBottomButton;
 
-@property (nonatomic, retain) SVPlacemark *placeInfo;
+@property (nonatomic) SVPlacemark *placeInfo;
 
-@property (nonatomic, retain) MKPointAnnotation *mapAnnotation;
+@property (nonatomic) MKPointAnnotation *mapAnnotation;
 
-@property (nonatomic, retain) NSMutableArray *aryDisplay;
+@property (nonatomic) NSMutableArray *aryDisplay;
 
 @end
 

@@ -16,8 +16,8 @@ typedef enum : NSUInteger {
 
 @interface FaqViewController : UIViewController
 
-@property (nonatomic, assign) int contentType;
-@property (nonatomic, retain) NSString *strBottom;
+@property (nonatomic) int contentType;
+@property (nonatomic) NSString *strBottom;
 @property (nonatomic) int *whatContentToDisplay;
 
 @end

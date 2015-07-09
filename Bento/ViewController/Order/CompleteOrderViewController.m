@@ -70,37 +70,37 @@
     JGProgressHUD *loadingHUD;
 }
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
-@property (nonatomic, assign) IBOutlet UILabel *lblTitlePromo;
-@property (nonatomic, assign) IBOutlet UILabel *lblTitleTax;
-@property (nonatomic, assign) IBOutlet UILabel *lblTitleTip;
-@property (nonatomic, assign) IBOutlet UILabel *lblTitleTotal;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitlePromo;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitleTax;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitleTip;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitleTotal;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblAddress;
+@property (nonatomic, weak) IBOutlet UILabel *lblAddress;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivCardType;
-@property (nonatomic, assign) IBOutlet UILabel *lblPaymentMethod;
+@property (nonatomic, weak) IBOutlet UIImageView *ivCardType;
+@property (nonatomic, weak) IBOutlet UILabel *lblPaymentMethod;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblPromoDiscount;
-@property (nonatomic, assign) IBOutlet UILabel *lblTax;
-@property (nonatomic, assign) IBOutlet UILabel *lblDeliveryTip;
-@property (nonatomic, assign) IBOutlet UILabel *lblTotal;
+@property (nonatomic, weak) IBOutlet UILabel *lblPromoDiscount;
+@property (nonatomic, weak) IBOutlet UILabel *lblTax;
+@property (nonatomic, weak) IBOutlet UILabel *lblDeliveryTip;
+@property (nonatomic, weak) IBOutlet UILabel *lblTotal;
 
-@property (nonatomic, assign) IBOutlet UITableView *tvBentos;
+@property (nonatomic, weak) IBOutlet UITableView *tvBentos;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnChangeAddr;
-@property (nonatomic, assign) IBOutlet UIButton *btnChangeMethod;
+@property (nonatomic, weak) IBOutlet UIButton *btnChangeAddr;
+@property (nonatomic, weak) IBOutlet UIButton *btnChangeMethod;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnAddAnother;
-@property (nonatomic, assign) IBOutlet UIButton *btnEdit;
-@property (nonatomic, assign) IBOutlet UIButton *btnAddPromo;
-@property (nonatomic, assign) IBOutlet UIButton *btnGetItNow;
+@property (nonatomic, weak) IBOutlet UIButton *btnAddAnother;
+@property (nonatomic, weak) IBOutlet UIButton *btnEdit;
+@property (nonatomic, weak) IBOutlet UIButton *btnAddPromo;
+@property (nonatomic, weak) IBOutlet UIButton *btnGetItNow;
 
-@property (nonatomic, assign) IBOutlet UIView *viewList;
-@property (nonatomic, assign) IBOutlet UIView *viewPromo;
+@property (nonatomic, weak) IBOutlet UIView *viewList;
+@property (nonatomic, weak) IBOutlet UIView *viewPromo;
 
-@property (nonatomic, retain) NSMutableArray *aryBentos;
-@property (nonatomic, retain) SVPlacemark *placeInfo;
+@property (nonatomic) NSMutableArray *aryBentos;
+@property (nonatomic) SVPlacemark *placeInfo;
 
 @end
 

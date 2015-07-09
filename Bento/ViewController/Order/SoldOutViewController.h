@@ -10,6 +10,6 @@
 
 @interface SoldOutViewController : UIViewController
 
-@property (nonatomic, assign) NSInteger type;
+@property (nonatomic) NSInteger type;
 
 @end

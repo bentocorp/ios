@@ -28,17 +28,17 @@
     JGProgressHUD *loadingHUD;
 }
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblMessage;
+@property (nonatomic, weak) IBOutlet UILabel *lblMessage;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblPrice;
+@property (nonatomic, weak) IBOutlet UILabel *lblPrice;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnContinue;
+@property (nonatomic, weak) IBOutlet UIButton *btnContinue;
 
-@property (nonatomic, assign) IBOutlet UIView *viewInput;
+@property (nonatomic, weak) IBOutlet UIView *viewInput;
 
-@property (weak, nonatomic) PTKView *paymentView;
+@property (nonatomic) PTKView *paymentView;
 
 @end
 

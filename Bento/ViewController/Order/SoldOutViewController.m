@@ -28,25 +28,25 @@
 
 @interface SoldOutViewController ()
 
-@property (nonatomic, assign) IBOutlet UIView *viewMain;
+@property (nonatomic, weak) IBOutlet UIView *viewMain;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivBackground;
+@property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivTitle;
+@property (nonatomic, weak) IBOutlet UIImageView *ivTitle;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblMessageTitle;
-@property (nonatomic, assign) IBOutlet UILabel *lblMessageContent;
+@property (nonatomic, weak) IBOutlet UILabel *lblMessageTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblMessageContent;
 
-@property (nonatomic, assign) IBOutlet UITextField *txtEmail;
+@property (nonatomic, weak) IBOutlet UITextField *txtEmail;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnSend;
-@property (weak, nonatomic) IBOutlet UIButton *btnPreview;
+@property (nonatomic, weak) IBOutlet UIButton *btnSend;
+@property (nonatomic, weak) IBOutlet UIButton *btnPreview;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnPolicy;
-@property (nonatomic, assign) IBOutlet UIButton *btnTerms;
+@property (nonatomic, weak) IBOutlet UIButton *btnPolicy;
+@property (nonatomic, weak) IBOutlet UIButton *btnTerms;
 
-@property (weak, nonatomic) IBOutlet UILabel *lunchAndDinnerHoursLabel;
-@property (weak, nonatomic) IBOutlet UILabel *openingHoursLabel;
+@property (nonatomic, weak) IBOutlet UILabel *lunchAndDinnerHoursLabel;
+@property (nonatomic, weak) IBOutlet UILabel *openingHoursLabel;
 
 @end
 

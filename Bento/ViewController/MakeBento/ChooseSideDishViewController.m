@@ -19,9 +19,9 @@
 
 @interface ChooseSideDishViewController ()<DishCollectionViewCellDelegate>
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
-@property (nonatomic, assign) IBOutlet UICollectionView *cvSideDishes;
-@property (nonatomic, retain) NSMutableArray *aryDishes;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UICollectionView *cvSideDishes;
+@property (nonatomic) NSMutableArray *aryDishes;
 
 @end
 

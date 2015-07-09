@@ -11,11 +11,11 @@
 
 @interface Bento : NSObject
 
-@property (nonatomic, assign) NSInteger indexMainDish;
-@property (nonatomic, assign) NSInteger indexSideDish1;
-@property (nonatomic, assign) NSInteger indexSideDish2;
-@property (nonatomic, assign) NSInteger indexSideDish3;
-@property (nonatomic, assign) NSInteger indexSideDish4;
+@property (nonatomic) NSInteger indexMainDish;
+@property (nonatomic) NSInteger indexSideDish1;
+@property (nonatomic) NSInteger indexSideDish2;
+@property (nonatomic) NSInteger indexSideDish3;
+@property (nonatomic) NSInteger indexSideDish4;
 
 // Testing
 - (NSInteger)getMainDish;

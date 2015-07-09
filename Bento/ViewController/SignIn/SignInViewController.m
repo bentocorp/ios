@@ -25,22 +25,22 @@
 
 @interface SignInViewController () <FBManagerDelegate, MyAlertViewDelegate>
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
-@property (nonatomic, assign) IBOutlet UIScrollView *svMain;
+@property (nonatomic, weak) IBOutlet UIScrollView *svMain;
 
-@property (nonatomic, assign) IBOutlet UIView *viewError;
-@property (nonatomic, assign) IBOutlet UILabel *lblError;
+@property (nonatomic, weak) IBOutlet UIView *viewError;
+@property (nonatomic, weak) IBOutlet UILabel *lblError;
 
-@property (nonatomic, assign) IBOutlet UIView *viewFacebook;
-@property (nonatomic, assign) IBOutlet UIButton *btnSignIn;
+@property (nonatomic, weak) IBOutlet UIView *viewFacebook;
+@property (nonatomic, weak) IBOutlet UIButton *btnSignIn;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivEmail;
-@property (nonatomic, assign) IBOutlet UIImageView *ivPassword;
+@property (nonatomic, weak) IBOutlet UIImageView *ivEmail;
+@property (nonatomic, weak) IBOutlet UIImageView *ivPassword;
 
 
-@property (weak, nonatomic) IBOutlet UILabel *signUpLabel;
-@property (weak, nonatomic) IBOutlet UIButton *signUpButton;
+@property (nonatomic, weak) IBOutlet UILabel *signUpLabel;
+@property (nonatomic, weak) IBOutlet UIButton *signUpButton;
 - (IBAction)onSignUpButton:(id)sender;
 
 @end

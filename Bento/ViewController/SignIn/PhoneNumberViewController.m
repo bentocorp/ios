@@ -23,22 +23,14 @@
 
 @interface PhoneNumberViewController ()
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
-
-@property (nonatomic, assign) IBOutlet UIView *viewError;
-@property (nonatomic, assign) IBOutlet UILabel *lblError;
-
-@property (nonatomic, assign) IBOutlet UILabel *lblDescription;
-
-@property (nonatomic, assign) IBOutlet UIImageView *ivPhoneNumber;
-@property (nonatomic, assign) IBOutlet SHSPhoneTextField *txtPhoneNumber;
-
-@property (nonatomic, assign) IBOutlet UIButton *btnDone;
-
-@property (nonatomic, assign) IBOutlet UIButton *btnPolicy;
-@property (nonatomic, assign) IBOutlet UIButton *btnTerms;
-
-@property (weak, nonatomic) IBOutlet UIView *viewPhoneNumber;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UIView *viewError;
+@property (nonatomic, weak) IBOutlet UILabel *lblError;
+@property (nonatomic, weak) IBOutlet UILabel *lblDescription;
+@property (nonatomic, weak) IBOutlet UIImageView *ivPhoneNumber;
+@property (nonatomic, weak) IBOutlet SHSPhoneTextField *txtPhoneNumber;
+@property (nonatomic, weak) IBOutlet UIButton *btnDone;
+@property (nonatomic, weak) IBOutlet UIView *viewPhoneNumber;
 
 @end
 

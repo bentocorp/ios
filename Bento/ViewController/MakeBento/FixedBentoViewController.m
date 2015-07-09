@@ -48,7 +48,7 @@
 
 @interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
-@property (nonatomic, retain) NSMutableArray *aryDishes;
+@property (nonatomic) NSMutableArray *aryDishes;
 
 @end
 

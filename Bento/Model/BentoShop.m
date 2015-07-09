@@ -22,15 +22,15 @@
 
 @interface BentoShop ()
 
-@property (nonatomic, retain) NSString *strToday;
-@property (nonatomic, retain) NSDictionary *dicStatus;
-@property (nonatomic, retain) NSDictionary *menuToday;
-@property (nonatomic, retain) NSDictionary *menuNext;
-@property (nonatomic, retain) NSArray *menuStatus;
-@property (nonatomic, retain) MKPolygon *serviceArea;
-@property (nonatomic, retain) NSMutableArray *aryBentos;
-@property (nonatomic, assign) BOOL prevClosed;
-@property (nonatomic, assign) BOOL prevSoldOut;
+@property (nonatomic) NSString *strToday;
+@property (nonatomic) NSDictionary *dicStatus;
+@property (nonatomic) NSDictionary *menuToday;
+@property (nonatomic) NSDictionary *menuNext;
+@property (nonatomic) NSArray *menuStatus;
+@property (nonatomic) MKPolygon *serviceArea;
+@property (nonatomic) NSMutableArray *aryBentos;
+@property (nonatomic) BOOL prevClosed;
+@property (nonatomic) BOOL prevSoldOut;
 
 @end
 

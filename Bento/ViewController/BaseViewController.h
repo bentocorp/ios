@@ -10,11 +10,11 @@
 
 @interface BaseViewController : UIViewController
 
-@property (nonatomic, assign) BOOL isOpenningAccountView;
+@property (nonatomic) BOOL isOpenningAccountView;
 
-@property (nonatomic, assign) Class nextViewController;
+@property (nonatomic) Class nextViewController;
 
-@property (nonatomic, strong) void (^complete)();
+@property (nonatomic) void (^complete)();
 
 - (void) openAccountViewController:(id) nextViewControllerClass;
 - (void) openAccountViewControllerWithComplete:(void (^)())completion;

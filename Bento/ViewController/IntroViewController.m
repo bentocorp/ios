@@ -17,22 +17,22 @@
 
 @interface IntroViewController()
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivBackground;
+@property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblComment;
+@property (nonatomic, weak) IBOutlet UILabel *lblComment;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblNumber1;
-@property (nonatomic, assign) IBOutlet UILabel *lblNumber2;
-@property (nonatomic, assign) IBOutlet UILabel *lblNumber3;
+@property (nonatomic, weak) IBOutlet UILabel *lblNumber1;
+@property (nonatomic, weak) IBOutlet UILabel *lblNumber2;
+@property (nonatomic, weak) IBOutlet UILabel *lblNumber3;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivLogo;
+@property (nonatomic, weak) IBOutlet UIImageView *ivLogo;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblItem0;
-@property (nonatomic, assign) IBOutlet UILabel *lblItem1;
-@property (nonatomic, assign) IBOutlet UILabel *lblItem2;
-@property (nonatomic, assign) IBOutlet UILabel *lblItem3;
+@property (nonatomic, weak) IBOutlet UILabel *lblItem0;
+@property (nonatomic, weak) IBOutlet UILabel *lblItem1;
+@property (nonatomic, weak) IBOutlet UILabel *lblItem2;
+@property (nonatomic, weak) IBOutlet UILabel *lblItem3;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnGetStarted;
+@property (nonatomic, weak) IBOutlet UIButton *btnGetStarted;
 
 @end
 

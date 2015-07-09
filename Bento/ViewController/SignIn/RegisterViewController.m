@@ -32,34 +32,32 @@
     UITextField *_activeField;
 }
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
-@property (nonatomic, assign) IBOutlet UIScrollView *svMain;
+@property (nonatomic, weak) IBOutlet UIScrollView *svMain;
 
-@property (nonatomic, assign) IBOutlet UIView *viewError;
-@property (nonatomic, assign) IBOutlet UILabel *lblError;
+@property (nonatomic, weak) IBOutlet UIView *viewError;
+@property (nonatomic, weak) IBOutlet UILabel *lblError;
 
-@property (nonatomic, assign) IBOutlet UIView *viewRegisterWithFacebook;
+@property (nonatomic, weak) IBOutlet UIView *viewRegisterWithFacebook;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnRegister;
+@property (nonatomic, weak) IBOutlet UIButton *btnRegister;
 
-@property (nonatomic, assign) IBOutlet UITextField *txtYourname;
-@property (nonatomic, assign) IBOutlet UITextField *txtEmail;
-@property (nonatomic, assign) IBOutlet SHSPhoneTextField *txtPhoneNumber;
-@property (nonatomic, assign) IBOutlet UITextField *txtPassword;
+@property (nonatomic, weak) IBOutlet UITextField *txtYourname;
+@property (nonatomic, weak) IBOutlet UITextField *txtEmail;
+@property (nonatomic, weak) IBOutlet SHSPhoneTextField *txtPhoneNumber;
+@property (nonatomic, weak) IBOutlet UITextField *txtPassword;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivYourname;
-@property (nonatomic, assign) IBOutlet UIImageView *ivEmail;
-@property (nonatomic, assign) IBOutlet UIImageView *ivPhoneNumber;
-@property (nonatomic, assign) IBOutlet UIImageView *ivPassword;
+@property (nonatomic, weak) IBOutlet UIImageView *ivYourname;
+@property (nonatomic, weak) IBOutlet UIImageView *ivEmail;
+@property (nonatomic, weak) IBOutlet UIImageView *ivPhoneNumber;
+@property (nonatomic, weak) IBOutlet UIImageView *ivPassword;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnPolicy;
-@property (nonatomic, assign) IBOutlet UIButton *btnTerms;
+@property (nonatomic, weak) IBOutlet UIButton *btnPolicy;
+@property (nonatomic, weak) IBOutlet UIButton *btnTerms;
 
-@property (weak, nonatomic) IBOutlet UIButton *btnSignUp;
-
-@property (weak, nonatomic) IBOutlet UILabel *signInLabel;
-@property (weak, nonatomic) IBOutlet UIButton *signInButton;
+@property (nonatomic, weak) IBOutlet UILabel *signInLabel;
+@property (nonatomic, weak) IBOutlet UIButton *signInButton;
 
 @end
 

@@ -21,7 +21,7 @@
 
 }
 
-@property (nonatomic, assign) id<MyAlertViewDelegate> delegate;
+@property (nonatomic, weak) id<MyAlertViewDelegate> delegate;
 
 - (id)initWithTitle:(NSString *)title message:(NSString *)message delegate:(id )delegate cancelButtonTitle:(NSString *)cancelButtonTitle otherButtonTitle:(NSString *)otherButtonTitle;
 

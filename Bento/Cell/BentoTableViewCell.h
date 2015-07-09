@@ -17,7 +17,7 @@
 
 @interface BentoTableViewCell : UITableViewCell
 
-@property (nonatomic, assign) id <BentoTableViewCellDelegate> delegate;
+@property (nonatomic, weak) id <BentoTableViewCellDelegate> delegate;
 
 @property (weak, nonatomic) IBOutlet UIView *viewMain;
 

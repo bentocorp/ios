@@ -25,23 +25,23 @@
 
 @interface OutOfDeliveryAddressViewController () <UIWebViewDelegate>
 
-@property (nonatomic, assign) IBOutlet MKMapView *mapView;
+@property (nonatomic, weak) IBOutlet MKMapView *mapView;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblAddress;
+@property (nonatomic, weak) IBOutlet UILabel *lblAddress;
 
-@property (nonatomic, assign) IBOutlet UIView *viewOver;
+@property (nonatomic, weak) IBOutlet UIView *viewOver;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblMiddleTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblMiddleTitle;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblMiddleText;
+@property (nonatomic, weak) IBOutlet UILabel *lblMiddleText;
 
-@property (nonatomic, assign) IBOutlet UITextField *txtEmail;
+@property (nonatomic, weak) IBOutlet UITextField *txtEmail;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnSend;
+@property (nonatomic, weak) IBOutlet UIButton *btnSend;
 
-@property (weak, nonatomic) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
 
 @end
 

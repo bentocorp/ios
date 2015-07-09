@@ -11,6 +11,6 @@
 
 @interface DeliveryLocationViewController : BaseViewController
 
-@property (nonatomic, assign) BOOL isFromOrder;
+@property (nonatomic) BOOL isFromOrder;
 
 @end

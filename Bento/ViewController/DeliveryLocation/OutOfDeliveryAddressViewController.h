@@ -12,7 +12,7 @@
 
 @interface OutOfDeliveryAddressViewController : UIViewController
 
-@property (nonatomic, retain) NSString *strAddress;
+@property (nonatomic) NSString *strAddress;
 
 @property (nonatomic) BOOL cameFromCompleteOrderVC;
 

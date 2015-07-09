@@ -20,17 +20,17 @@
 
 @interface OrderConfirmViewController ()
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivTitle;
+@property (nonatomic, weak) IBOutlet UIImageView *ivTitle;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivCompleted;
+@property (nonatomic, weak) IBOutlet UIImageView *ivCompleted;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblCompletedTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblCompletedTitle;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblCompletedText;
+@property (nonatomic, weak) IBOutlet UILabel *lblCompletedText;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnQuestion;
+@property (nonatomic, weak) IBOutlet UIButton *btnQuestion;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnBuild;
+@property (nonatomic, weak) IBOutlet UIButton *btnBuild;
 
 - (IBAction)onHelp:(id)sender;
 

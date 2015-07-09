@@ -18,13 +18,13 @@
 
 @interface PromoCodeView()
 
-@property (nonatomic, assign) IBOutlet UIView *viewPromoCode;
+@property (nonatomic, weak) IBOutlet UIView *viewPromoCode;
 
-@property (nonatomic, assign) IBOutlet UITextField *txtPromoCode;
+@property (nonatomic, weak) IBOutlet UITextField *txtPromoCode;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnUsePromoCode;
+@property (nonatomic, weak) IBOutlet UIButton *btnUsePromoCode;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnCancel;
+@property (nonatomic, weak) IBOutlet UIButton *btnCancel;
 
 @end
 

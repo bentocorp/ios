@@ -14,7 +14,7 @@
 
 @interface MyAlertView()
 
-@property (nonatomic, assign) UIView *viewBack;
+@property (nonatomic) UIView *viewBack;
 
 @end
 

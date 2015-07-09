@@ -27,20 +27,20 @@
     BOOL trackingCurrentBento;
 }
 
-@property (nonatomic, assign) IBOutlet UIView *viewMain;
+@property (nonatomic, weak) IBOutlet UIView *viewMain;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivImage;
-@property (nonatomic, assign) IBOutlet CAGradientLayer *gradientLayer;
+@property (nonatomic, weak) IBOutlet UIImageView *ivImage;
+@property (nonatomic) CAGradientLayer *gradientLayer;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
-@property (nonatomic, assign) IBOutlet UILabel *lblDescription;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblDescription;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivMask;
+@property (nonatomic, weak) IBOutlet UIImageView *ivMask;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivBanner;
+@property (nonatomic, weak) IBOutlet UIImageView *ivBanner;
 
-@property (nonatomic, assign) NSInteger state;
-@property (nonatomic, assign) NSInteger index;
+@property (nonatomic) NSInteger state;
+@property (nonatomic) NSInteger index;
 
 @end
 

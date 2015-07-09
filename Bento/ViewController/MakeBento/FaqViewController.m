@@ -21,13 +21,13 @@
 
 @interface FaqViewController () <MFMailComposeViewControllerDelegate, MyAlertViewDelegate>
 
-@property (nonatomic, assign) IBOutlet UILabel *lblTitle;
+@property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblDescription;
-@property (nonatomic, assign) IBOutlet UITextView *tvDescription;
+@property (nonatomic, weak) IBOutlet UILabel *lblDescription;
+@property (nonatomic, weak) IBOutlet UITextView *tvDescription;
 
-@property (nonatomic, assign) IBOutlet UIWebView *webView;
-@property (nonatomic, assign) IBOutlet UIActivityIndicatorView *viewActivity;
+@property (nonatomic, weak) IBOutlet UIWebView *webView;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *viewActivity;
 
 @end
 
@@ -76,12 +76,6 @@
     [loadingHUD dismiss];
     loadingHUD = nil;
 }
-
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
 
 - (void)checkCurrentMode
 {

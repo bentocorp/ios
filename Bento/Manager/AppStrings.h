@@ -209,7 +209,7 @@
 
 @interface AppStrings : NSObject
 
-@property (nonatomic, retain) NSArray *appStrings;
+@property (nonatomic) NSArray *appStrings;
 
 + (AppStrings *)sharedInstance;
 + (void)releaseInstance;

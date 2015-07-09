@@ -18,6 +18,6 @@
 
 @interface EnterCreditCardViewController : UIViewController
 
-@property (nonatomic, assign) id <EnterCreditCardViewControllerDelegate> delegate;
+@property (nonatomic, weak) id <EnterCreditCardViewControllerDelegate> delegate;
 
 @end

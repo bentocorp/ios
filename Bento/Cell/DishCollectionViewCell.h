@@ -22,9 +22,9 @@ typedef enum : NSUInteger {
 
 @interface DishCollectionViewCell : UICollectionViewCell
 
-@property (nonatomic, assign) id <DishCollectionViewCellDelegate> delegate;
+@property (nonatomic, weak) id <DishCollectionViewCellDelegate> delegate;
 
-@property (nonatomic, assign) IBOutlet UIButton *btnAction;
+@property (nonatomic, weak) IBOutlet UIButton *btnAction;
 
 - (void) setDishInfo:(NSDictionary *)dishInfo isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded;
 

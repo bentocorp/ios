@@ -11,6 +11,6 @@
 
 @interface PreviewViewController : BaseViewController
 
-@property (nonatomic, assign) NSInteger type;
+@property (nonatomic) NSInteger type;
 
 @end

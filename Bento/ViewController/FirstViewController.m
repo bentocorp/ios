@@ -31,13 +31,13 @@
     BOOL _hasInit;
 }
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivBackground;
+@property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
 
-@property (nonatomic, assign) IBOutlet UIImageView *ivLaunchLogo;
+@property (nonatomic, weak) IBOutlet UIImageView *ivLaunchLogo;
 
-@property (nonatomic, assign) IBOutlet UILabel *lblLaunchSlogan;
+@property (nonatomic, weak) IBOutlet UILabel *lblLaunchSlogan;
 
-@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *activityIndicator;
+@property (nonatomic, weak) IBOutlet UIActivityIndicatorView *activityIndicator;
 
 @end
 

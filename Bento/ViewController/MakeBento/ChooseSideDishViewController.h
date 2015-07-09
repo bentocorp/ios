@@ -12,6 +12,6 @@
 
 @interface ChooseSideDishViewController : UIViewController
 
-@property (nonatomic, assign) NSInteger sideDishIndex;
+@property (nonatomic) NSInteger sideDishIndex;
 
 @end

@@ -21,10 +21,10 @@
 
 @interface DataManager ()
 
-@property (nonatomic, retain) NSDictionary *currentUserInfo;
+@property (nonatomic) NSDictionary *currentUserInfo;
 
-@property (nonatomic, retain) STPCard *creditCardInfo;
-@property (nonatomic, assign) PaymentMethod curPaymentMethod;
+@property (nonatomic) STPCard *creditCardInfo;
+@property (nonatomic) PaymentMethod curPaymentMethod;
 
 @end
 
