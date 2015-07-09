@@ -297,10 +297,9 @@
                     titleRight = nextDinnerMenuString;
                     [self setNextDinnerArrays:@"Right"];
                 }
+                else
+                    shouldShowOneMenu = YES;
             }
-            
-            if (titleRight == nil)
-                shouldShowOneMenu = YES;
         }
     }
     
