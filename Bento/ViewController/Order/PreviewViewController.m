@@ -248,18 +248,34 @@
                 titleRight = todayDinnerMenuString;
                 [self setTodayDinnerArrays:@"Right"];
             }
-            else if (isThereLunchNextMenu)
+            else if (nextIsAllDay)
             {
-                titleRight = nextLunchMenuString;
-                [self setNextLunchArrays:@"Right"];
-            }
-            else if (isThereDinnerNextMenu)
-            {
-                titleRight = nextDinnerMenuString;
-                [self setNextDinnerArrays:@"Right"];
+                if (isThereLunchNextMenu)
+                {
+                    titleRight = nextAllDayLunchMenuString;
+                    [self setNextLunchArrays:@"Right"];
+                }
+                else if (isThereDinnerNextMenu)
+                {
+                    titleRight = nextAllDayDinnerMenuString;
+                    [self setNextDinnerArrays:@"Right"];
+                }
             }
             else
-                shouldShowOneMenu = YES;
+            {
+                if (isThereLunchNextMenu)
+                {
+                    titleRight = nextLunchMenuString;
+                    [self setNextLunchArrays:@"Right"];
+                }
+                else if (isThereDinnerNextMenu)
+                {
+                    titleRight = nextDinnerMenuString;
+                    [self setNextDinnerArrays:@"Right"];
+                }
+                else
+                    shouldShowOneMenu = YES;
+            }
         }
         // 16:30 - 23:59
         else if (currentTime >= dinnerTime && currentTime < 24)
