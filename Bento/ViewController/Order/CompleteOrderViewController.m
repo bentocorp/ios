@@ -564,9 +564,7 @@
         {
             // if dinner, add new bento
             if ([vc isKindOfClass:[CustomBentoViewController class]])
-            {
                 [[BentoShop sharedInstance] addNewBento];
-            }
            
             // go back
             [self.navigationController popToViewController:vc animated:YES];
@@ -1206,12 +1204,25 @@
     NSLog(@"order JSON - %@", dicRequest);
     NSLog(@"ORDER ITEMS: %@", request[@"OrderItems"]);
     
-    // Track empty orders
+    // Track empty orders, show message, then reset app
     if (!request[@"OrderItems"])
     {
-        [mixpanel track:@"Empty Order" properties:request];
+        [mixpanel track:@"Empty Order" properties:@{
+                                                    @"request": request,
+                                                    @"bento count": request
+                                                    }];
         
-        NSLog(@"WARNING!!! EMPTY ORDER!!!");
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@""
+                                                            message:@"An error has occurred when processing your order. Please refresh the app and try again. Sorry for the inconvenience!"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"Refresh App"
+                                                   otherButtonTitle:nil];
+        
+        alertView.tag = 2;
+        [alertView showInView:self.view];
+        alertView = nil;
+        
+        return;
     }
 
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
@@ -1404,6 +1415,7 @@
 
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
+    // Deleting last bento response
     if (alertView.tag == 1)
     {
         if (buttonIndex == 0)
@@ -1415,6 +1427,13 @@
             [self removeBento];
             [self.navigationController popViewControllerAnimated:YES];
         }
+    }
+    
+    // Empty Order Response
+    else if (alertView.tag == 2)
+    {
+        [[BentoShop sharedInstance] resetBentoArray];
+        [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
 

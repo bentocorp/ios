@@ -177,8 +177,8 @@
     [scrollView addSubview:promoWhiteBackgroundView];
     
     // social sharing
-    for (int i = 0; i < 4; i++) {
-        
+    for (int i = 0; i < 4; i++)
+    {
         // create social icon buttons
         UIButton *socialIconButton = [[UIButton alloc] initWithFrame:CGRectMake(((SCREEN_WIDTH - (SCREEN_WIDTH - (SCREEN_WIDTH / 4 - 10))) / 2) + (SCREEN_WIDTH / 4 - 10) * i, 20, 40, 40)];
         
