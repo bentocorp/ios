@@ -549,8 +549,6 @@
         self.lblError.text = errorMsg;
     }
     
-    self.btnSignUp.hidden = YES;
-    
     UIColor *errorColor = [UIColor colorWithRed:233.0f / 255.0f green:114.0f / 255.0f blue:2.0f / 255.0f alpha:1.0f];
     UIColor *correctColor = [UIColor colorWithRed:109.0f / 255.0f green:117.0f / 255.0f blue:131.0f / 255.0f alpha:1.0f];
     
@@ -604,9 +602,7 @@
             break;
             
         case ERROR_NO_EMAIL:
-        {
-            self.btnSignUp.hidden = NO;
-            
+        {   
             self.viewError.hidden = NO;
             
             self.txtYourname.textColor = correctColor;

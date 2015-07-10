@@ -55,8 +55,6 @@
     self.lblDescription.text = [[AppStrings sharedInstance] getString:PHNUMBER_DESC];
     
     [self.btnDone setTitle:[[AppStrings sharedInstance] getString:PHNUMBER_BUTTON_DONE] forState:UIControlStateNormal];
-    [self.btnPolicy setTitle:[[AppStrings sharedInstance] getString:PHNUMBER_LINK_POLICY] forState:UIControlStateNormal];
-    [self.btnTerms setTitle:[[AppStrings sharedInstance] getString:PHNUMBER_LINK_TERMS] forState:UIControlStateNormal];
 
     [self showErrorMessage:nil code:ERROR_NONE];
     

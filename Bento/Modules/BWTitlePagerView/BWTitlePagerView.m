@@ -110,11 +110,8 @@
     [self.observedScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 }
 
-- (void)observeValueForKeyPath:(NSString *)keyPath
-                      ofObject:(id)object
-                        change:(NSDictionary *)change
-                       context:(void *)context {
-    
+- (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
+{
     CGFloat coef = self.observedScrollView.frame.size.width / self.scrollView.frame.size.width;
     
     if (coef > 0) {
@@ -126,8 +123,6 @@
     self.pageControl.currentPage = page;
     
     CGFloat scrollViewWidth = self.scrollView.frame.size.width;
-    
-    
     
     [self.views enumerateObjectsUsingBlock:^(UIView *view, NSUInteger idx, BOOL *stop) {
         

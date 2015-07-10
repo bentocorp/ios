@@ -14,7 +14,7 @@
 
 @property (nonatomic) Class nextViewController;
 
-@property (nonatomic) void (^complete)();
+@property (nonatomic, strong) void (^complete)();
 
 - (void) openAccountViewController:(id) nextViewControllerClass;
 - (void) openAccountViewControllerWithComplete:(void (^)())completion;

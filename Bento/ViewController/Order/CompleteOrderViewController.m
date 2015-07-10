@@ -664,7 +664,7 @@
     {
         successOrFailure = @"Failure";
         [mixpanel track:@"Placed An Order" properties:@{
-                                                        @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                        @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                         @"Payment Method": trackPaymentMethod,
                                                         @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                         @"Success/Failure": successOrFailure
@@ -693,7 +693,7 @@
                     
                     successOrFailure = @"Failure";
                     [mixpanel track:@"Placed An Order" properties:@{
-                                                                    @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                                    @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                                     @"Payment Method": trackPaymentMethod,
                                                                     @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                     @"Success/Failure": successOrFailure
@@ -710,7 +710,7 @@
                     
                     successOrFailure = @"Success";
                     [mixpanel track:@"Placed An Order" properties:@{
-                                                                    @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                                    @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                                     @"Payment Method": trackPaymentMethod,
                                                                     @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                     @"Success/Failure": successOrFailure
@@ -725,7 +725,7 @@
         
         successOrFailure = @"Success";
         [mixpanel track:@"Placed An Order" properties:@{
-                                                        @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                        @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                         @"Payment Method": trackPaymentMethod,
                                                         @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                         @"Success/Failure": successOrFailure
@@ -743,7 +743,7 @@
             
             successOrFailure = @"Failure";
             [mixpanel track:@"Placed An Order" properties:@{
-                                                            @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                            @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                             @"Payment Method": trackPaymentMethod,
                                                             @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                             @"Success/Failure": successOrFailure
@@ -787,7 +787,7 @@
                 
                 successOrFailure = @"Failure";
                 [mixpanel track:@"Placed An Order" properties:@{
-                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                                 @"Payment Method": trackPaymentMethod,
                                                                 @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                 @"Success/Failure": successOrFailure
@@ -1274,7 +1274,7 @@
             {
                 successOrFailure = @"Failure";
                 [mixpanel track:@"Placed An Order" properties:@{
-                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                                 @"Payment Method": trackPaymentMethod,
                                                                 @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                 @"Success/Failure": successOrFailure
@@ -1290,7 +1290,7 @@
             {
                 successOrFailure = @"Success";
                 [mixpanel track:@"Placed An Order" properties:@{
-                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                                 @"Payment Method": trackPaymentMethod,
                                                                 @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                 @"Success/Failure": successOrFailure
@@ -1321,7 +1321,7 @@
             {
                 successOrFailure = @"Failure";
                 [mixpanel track:@"Placed An Order" properties:@{
-                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                                 @"Payment Method": trackPaymentMethod,
                                                                 @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                 @"Success/Failure": successOrFailure
@@ -1337,7 +1337,7 @@
             {
                 successOrFailure = @"Success";
                 [mixpanel track:@"Placed An Order" properties:@{
-                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", self.aryBentos.count],
+                                                                @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
                                                                 @"Payment Method": trackPaymentMethod,
                                                                 @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                 @"Success/Failure": successOrFailure

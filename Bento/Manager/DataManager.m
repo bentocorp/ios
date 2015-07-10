@@ -22,7 +22,6 @@
 @interface DataManager ()
 
 @property (nonatomic) NSDictionary *currentUserInfo;
-
 @property (nonatomic) STPCard *creditCardInfo;
 @property (nonatomic) PaymentMethod curPaymentMethod;
 
@@ -37,9 +36,7 @@ static DataManager *_shareDataManager;
     @synchronized(self) {
         
         if (_shareDataManager == nil)
-        {
             _shareDataManager = [[DataManager alloc] init];
-        }
     }
     
     return _shareDataManager;
@@ -48,9 +45,7 @@ static DataManager *_shareDataManager;
 + (void)releaseDataManager
 {
     if (_shareDataManager != nil)
-    {
         _shareDataManager = nil;
-    }
 }
 
 - (id) init
@@ -125,18 +120,12 @@ static DataManager *_shareDataManager;
         NSDictionary *cardInfo = [self.currentUserInfo objectForKey:@"card"];
         if ([cardInfo isKindOfClass:[NSDictionary class]] && cardInfo != nil)
         {
-//            NSString *strCardType = [cardInfo objectForKey:@"brand"];
             NSString *strCardNumber = [cardInfo objectForKey:@"last4"];
             NSString *strUserMail = [self.currentUserInfo objectForKey:@"email"];
             
             // Load Card Info
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             NSString *strSavedUserMail = [userDefaults objectForKey:@"user_email"];
-//            NSString *strSavedCardBrand = [userDefaults objectForKey:@"card_brand"];
-//            NSString *strSavedCardLast4 = [userDefaults objectForKey:@"card_last4"];
-//            if ([strSavedUserMail caseInsensitiveCompare:strUserMail] == NSOrderedSame &&
-//                [strSavedCardBrand caseInsensitiveCompare:strCardType] == NSOrderedSame &&
-//                [strSavedCardLast4 caseInsensitiveCompare:strCardNumber] == NSOrderedSame)
             if ([strSavedUserMail isEqualToString:strUserMail])
             {
                 if ([[userDefaults objectForKey:@"is_applepay"] boolValue])

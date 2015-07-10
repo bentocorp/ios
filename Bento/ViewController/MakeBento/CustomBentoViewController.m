@@ -487,7 +487,7 @@
     NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
     
     hour = [components hour];
-    NSLog(@"current hour - %ld", hour);
+    NSLog(@"current hour - %ld", (long)hour);
     
     // Sunday = 1, Saturday = 7
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
@@ -631,12 +631,14 @@
     
     [self updateUI];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+
 }
 
 - (void)noConnection
@@ -718,7 +720,7 @@
             [aryBentos addObject:bento];
     }
     
-    NSLog(@"TOTAL BENTOS: %ld", [[BentoShop sharedInstance] getTotalBentoCount]);
+    NSLog(@"TOTAL BENTOS: %ld", (long)[[BentoShop sharedInstance] getTotalBentoCount]);
     NSInteger mainDishIndex = 0;
     NSInteger side1DishIndex = 0;
     NSInteger side2DishIndex = 0;
