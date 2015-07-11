@@ -190,7 +190,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
     
     // ADDRESS
@@ -245,12 +244,6 @@
     
     [super viewWillDisappear:animated];
 }
-
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
 
 - (void)checkCurrentMode
 {
@@ -538,12 +531,14 @@
 - (IBAction)onChangePayment:(id)sender
 {
     if (![self applePayEnabled])
-    {
         [self gotoCreditScreen];
-    }
     else
     {
-        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Payment Method" delegate:self cancelButtonTitle:@"Cancel" destructiveButtonTitle:nil otherButtonTitles:@"Use Apple Pay", @"Use Credit Card", nil];
+        UIActionSheet *actionSheet = [[UIActionSheet alloc] initWithTitle:@"Choose Payment Method"
+                                                                 delegate:self
+                                                        cancelButtonTitle:@"Cancel"
+                                                   destructiveButtonTitle:nil
+                                                        otherButtonTitles:@"Use Apple Pay", @"Use Credit Card", nil];
         [actionSheet showInView:self.view];
     }
 }
@@ -592,9 +587,7 @@
     _isEditingBentos = !_isEditingBentos;
     
     if(!_isEditingBentos)
-    {
         _clickedMinuteButtonIndex = NSNotFound;
-    }
 
     [self updateUI];
     
@@ -623,6 +616,7 @@
     }];
     
 }
+
 /*
 - (NSArray *)summaryItemsForShippingMethod:(PKShippingMethod *)shippingMethod
 {
@@ -645,6 +639,7 @@
     return @[normalItem, expressItem];
 }
 */
+
 - (void)processPayment
 {
     PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
@@ -982,9 +977,7 @@
         if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]])
         {
             if ([vc isKindOfClass:[CustomBentoViewController class]])
-            {
                 [[BentoShop sharedInstance] setCurrentBento:curBento];
-            }
             
             [self.navigationController popToViewController:vc animated:YES];
             
@@ -1011,13 +1004,9 @@
     _currentIndexPath = indexPath;
     
     if (self.aryBentos.count > 1)
-    {
         [self removeBento];
-    }
     else
-    {
         [self showStartOverAlert];
-    }
 }
 
 - (void)removeBento
@@ -1136,14 +1125,7 @@
     
     // - Tip
     float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
-//    float totalPrice = _totalPrice + tax + deliveryTip - self.promoDiscount;
-/*
-    float totalPrice = _totalPrice + tax + deliveryTip - _promoDiscount;
-    if (totalPrice < 0.0f)
-        totalPrice = 0.0f;
-    else if (totalPrice > 0 && totalPrice < 1.0f)
-        totalPrice = 1.0f;
-*/
+
     float totalPrice = [self getTotalPrice];
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(deliveryTip * 100)] forKey:@"tip_cents"];
     
@@ -1204,20 +1186,34 @@
     NSLog(@"order JSON - %@", dicRequest);
     NSLog(@"ORDER ITEMS: %@", request[@"OrderItems"]);
     
-    // Track empty orders, show message, then reset app
-    if (!request[@"OrderItems"])
+    /* Track empty orders, show message, then reset app */
+    if (request[@"OrderItems"])
     {
-        [mixpanel track:@"Empty Order" properties:@{
-                                                    @"request": request,
-                                                    @"bento count": request
-                                                    }];
+        // bento exists
+        if (self.aryBentos)
+        {
+            // get list of the bento names
+            NSMutableArray *bentoNamesArray = [@[] mutableCopy];
+            
+            for (Bento *bento in self.aryBentos)
+                [bentoNamesArray addObject:[bento getBentoName]];
+            
+            // track request and list of bento names
+            [mixpanel track:@"Empty Order" properties:@{@"List of Bento Names": bentoNamesArray}];
+        }
+        
+        // no bentos exists
+        else
+        {
+            // track request and bentos not found
+            [mixpanel track:@"Empty Order" properties:@{@"List of Bento Names": @"Not Found"}];
+        }
         
         MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@""
                                                             message:@"An error has occurred when processing your order. Please refresh the app and try again. Sorry for the inconvenience!"
                                                            delegate:self
                                                   cancelButtonTitle:@"Refresh App"
                                                    otherButtonTitle:nil];
-        
         alertView.tag = 2;
         [alertView showInView:self.view];
         alertView = nil;
