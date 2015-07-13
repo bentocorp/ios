@@ -489,7 +489,7 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    [self doSubmit];
+    [self.txtEmail resignFirstResponder];
     
     return YES;
 }
