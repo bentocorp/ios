@@ -81,6 +81,17 @@ static DataManager *_shareDataManager;
 //    NSString *phoneRegex = @"^(\\+1) (\\([0-9]{3})\\) [0-9]{3} - [0-9]{4}$";
     NSString *phoneRegex = @"(\\([0-9]{3})\\) [0-9]{3} - [0-9]{4}$";
     NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
+
+    NSMutableArray *characters = [[NSMutableArray alloc] initWithCapacity:[strPhoneNumber length]];
+    for (int i = 0; i < [strPhoneNumber length]; i++)
+    {
+        NSString *ichar = [NSString stringWithFormat:@"%c", [strPhoneNumber characterAtIndex:i]];
+        [characters addObject:ichar];
+    }
+    
+    if ([characters[1] isEqualToString:@"1"])
+        return NO;
+    
     BOOL isValid = [phoneTest evaluateWithObject:strPhoneNumber];
     return isValid;
 }
