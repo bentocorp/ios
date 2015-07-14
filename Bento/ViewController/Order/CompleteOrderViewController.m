@@ -53,22 +53,6 @@
 #define APPLE_MERCHANT_ID @"merchant.com.somethingnew.bento"
 
 @interface CompleteOrderViewController () <UIActionSheetDelegate, PKPaymentAuthorizationViewControllerDelegate, EnterCreditCardViewControllerDelegate, PromoCodeViewDelegate, MyAlertViewDelegate, BentoTableViewCellDelegate>
-{
-    BOOL _isEditingBentos;
-    
-    float _taxPercent;
-    NSInteger _deliveryTipPercent;
-    float _totalPrice;
-    
-    NSIndexPath *_currentIndexPath;
-    
-    NSInteger _clickedMinuteButtonIndex;
-    
-    NSString *_strPromoCode;
-    NSInteger _promoDiscount;
-    
-    JGProgressHUD *loadingHUD;
-}
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UILabel *lblTitlePromo;
@@ -106,6 +90,21 @@
 
 @implementation CompleteOrderViewController
 {
+    BOOL _isEditingBentos;
+    
+    float _taxPercent;
+    NSInteger _deliveryTipPercent;
+    float _totalPrice;
+    
+    NSIndexPath *_currentIndexPath;
+    
+    NSInteger _clickedMinuteButtonIndex;
+    
+    NSString *_strPromoCode;
+    NSInteger _promoDiscount;
+    
+    JGProgressHUD *loadingHUD;
+    
     Mixpanel *mixpanel;
     NSString *trackPaymentMethod;
     __block NSString *successOrFailure;

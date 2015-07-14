@@ -75,7 +75,6 @@
     UILabel *lblTitle;
     UICollectionView *cvDishes;
     
-    NSIndexPath *_selectedPath;
     NSInteger hour;
     int weekday;
     
@@ -88,10 +87,16 @@
     JGProgressHUD *loadingHUD;
     
     NSMutableArray *savedArray;
+    
+    NSInteger _selectedPathMainRight;
+    NSInteger _selectedPathSideRight;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _selectedPathMainRight = -1;
+    _selectedPathSideRight = -1;
     
 /*---Scroll View---*/
     
@@ -260,8 +265,6 @@
     // Sunday = 1, Saturday = 7
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
-    
-    _selectedPath = nil;
 }
 
 #pragma mark Set PageView and ScrollView
@@ -1057,6 +1060,11 @@
     {
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
+        
+        if (_selectedPathMainRight == indexPath.row)
+            [myCell setCellState:YES];
+        else
+            [myCell setCellState:NO];
     }
     
     // SIDES
@@ -1064,12 +1072,12 @@
     {
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
+        
+        if (_selectedPathSideRight == indexPath.row)
+            [myCell setCellState:YES];
+        else
+            [myCell setCellState:NO];
     }
-    
-    if (_selectedPath != nil && _selectedPath == indexPath)
-        [myCell setCellState:YES];
-    else
-        [myCell setCellState:NO];
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -1084,10 +1092,27 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (_selectedPath == indexPath)
-        _selectedPath = nil;
+    if (indexPath.section == 0)
+    {
+        if (_selectedPathMainRight == indexPath.row)
+            _selectedPathMainRight = -1;
+        else
+        {
+            _selectedPathMainRight = indexPath.row;
+            _selectedPathSideRight = -1;
+        }
+    }
     else
-        _selectedPath = indexPath;
+    {
+        if (_selectedPathSideRight == indexPath.row)
+            _selectedPathSideRight = -1;
+        else
+        {
+            _selectedPathSideRight = indexPath.row;
+            _selectedPathMainRight = -1;
+        }
+    }
+
     
     [collectionView reloadData];
 }
