@@ -310,6 +310,7 @@
     self.lblPaymentMethod.text = strPaymentMethod;
     [self.ivCardType setImage:[UIImage imageNamed:strImageName]];
     
+    /* should i add expirtion date to card into as well? */
     
     NSMutableDictionary *currentUserInfo = [[[DataManager shareDataManager] getUserInfo] mutableCopy];
     currentUserInfo[@"card"] = @{
@@ -443,7 +444,6 @@
 
 - (void)updatePriceLabels
 {
-//    self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)self.promoDiscount];
     self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
@@ -454,8 +454,6 @@
     [self updateCardInfo];
     [self updatePromoView];
     [self updatePriceLabels];
-    
-    //[self.tvBentos setEditing:_isEditingBentos animated:YES];
     
     NSString *strEdit = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_EDIT];
     NSString *strDone = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_DONE];
@@ -468,9 +466,7 @@
 
     BOOL isReady = NO;
     if (self.placeInfo != nil && [[DataManager shareDataManager] getPaymentMethod] != Payment_None)
-    {
         isReady = YES;
-    }
     
     NSLog(@"payment - %lu, placeinfo - %@", (unsigned long)[[DataManager shareDataManager] getPaymentMethod], self.placeInfo);
     
@@ -1263,13 +1259,17 @@
     } isJSON:NO];
 }
 
-- (void)handlePaymentAuthorizationWithCard:(STPCard *)card
-                                completion:(void (^)(PKPaymentAuthorizationStatus))completion
+/* Send card info to Stripe. Stripe returns a one-time token. */
+- (void)handlePaymentAuthorizationWithCard:(STPCard *)card completion:(void (^)(PKPaymentAuthorizationStatus))completion
 {
     [[STPAPIClient sharedClient] createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
         if (error)
         {
-            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error"
+                                                                message:error.localizedDescription
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                       otherButtonTitle:nil];
             [alertView showInView:self.view];
             alertView = nil;
             
@@ -1306,12 +1306,12 @@
         
         // Save card information
         [self saveCardInfo:card isApplePay:YES];
+        
         [self createBackendChargeWithToken:token completion:completion];
     }];
 }
 
-- (void)handlePaymentAuthorizationWithPayment:(PKPayment *)payment
-                                   completion:(void (^)(PKPaymentAuthorizationStatus))completion
+- (void)handlePaymentAuthorizationWithPayment:(PKPayment *)payment completion:(void (^)(PKPaymentAuthorizationStatus))completion
 {
     [[STPAPIClient sharedClient] createTokenWithPayment:payment completion:^(STPToken *token, NSError *error) {
         if (error)

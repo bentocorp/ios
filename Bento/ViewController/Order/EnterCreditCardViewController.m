@@ -223,6 +223,8 @@
         stpCard.cvc = card.cvc;
         _creditCard = stpCard;
         
+        NSLog(@"CARD INFO: Number: %@, Month: %ld, Year: %ld, CVC: %@", card.number, card.expMonth, card.expYear, card.cvc);
+        
         self.btnContinue.enabled = YES;
         [self.btnContinue setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
     }
@@ -231,10 +233,6 @@
         _creditCard = nil;
         self.btnContinue.enabled = NO;
         [self.btnContinue setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
-        
-//        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Invalid credit card" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-//        [alertView showInView:self.view];
-//        alertView = nil;
     }
 }
 

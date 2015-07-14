@@ -82,9 +82,6 @@ static DataManager *_shareDataManager;
     NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
     BOOL isValid = [phoneTest evaluateWithObject:strPhoneNumber];
     return isValid;
-//    NSMutableCharacterSet *characterSet = [NSMutableCharacterSet decimalDigitCharacterSet];
-//    [characterSet addCharactersInString:@"'-*+#,;. "];
-//    return ([strPhoneNumber rangeOfCharacterFromSet:[characterSet invertedSet]].location == NSNotFound);
 }
 
 + (NSString *)getAddressString:(NSDictionary *)googleResponse
@@ -104,7 +101,8 @@ static DataManager *_shareDataManager;
     return self.currentUserInfo;
 }
 
-- (void)setUserInfo:(NSDictionary *)userInfo paymentMethod:(PaymentMethod)paymentMethod {
+- (void)setUserInfo:(NSDictionary *)userInfo paymentMethod:(PaymentMethod)paymentMethod
+{
     self.currentUserInfo = userInfo;
     [self setPaymentMethod:paymentMethod];
 }
@@ -167,14 +165,12 @@ static DataManager *_shareDataManager;
 
 - (void)setCreditCard:(STPCard *)creditCardInfo
 {
-    
     self.creditCardInfo = creditCardInfo;
     
-    if (creditCardInfo == nil) {
+    if (creditCardInfo == nil)
         self.paymentMethod = Payment_None;
-    } else {
+    else
         self.paymentMethod = Payment_CreditCard;
-    }
 }
 
 - (PaymentMethod)getPaymentMethod

@@ -493,7 +493,6 @@
     }
 }
 
-// TODO: ADD SETTINGS BUTTON
 - (void)postToTwitter
 {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
@@ -512,14 +511,14 @@
     }
 }
 
-// TODO: ADD SETTINGS BUTTON
 - (void)postToFacebook
 {
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *faceSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
         [faceSheet setInitialText:sharePrecomposedMessageNew];
-                
+//        [FBSDKMessageDialog showWithContent:sharePrecomposedMessageNew delegate:nil];
+        
         [self presentViewController:faceSheet animated:YES completion:Nil];
     } else {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
