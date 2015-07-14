@@ -1112,7 +1112,6 @@
             _selectedPathMainRight = -1;
         }
     }
-
     
     [collectionView reloadData];
 }
