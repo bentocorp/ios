@@ -516,8 +516,8 @@
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *faceSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
+        // this is against FB's new policy now - does not work
         [faceSheet setInitialText:sharePrecomposedMessageNew];
-//        [FBSDKMessageDialog showWithContent:sharePrecomposedMessageNew delegate:nil];
         
         [self presentViewController:faceSheet animated:YES completion:Nil];
     } else {

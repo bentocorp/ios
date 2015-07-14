@@ -78,7 +78,8 @@ static DataManager *_shareDataManager;
 
 + (BOOL)isValidPhoneNumber:(NSString *)strPhoneNumber
 {
-    NSString *phoneRegex = @"^(\\+1) (\\([0-9]{3})\\) [0-9]{3} - [0-9]{4}$";
+//    NSString *phoneRegex = @"^(\\+1) (\\([0-9]{3})\\) [0-9]{3} - [0-9]{4}$";
+    NSString *phoneRegex = @"(\\([0-9]{3})\\) [0-9]{3} - [0-9]{4}$";
     NSPredicate *phoneTest = [NSPredicate predicateWithFormat:@"SELF MATCHES %@", phoneRegex];
     BOOL isValid = [phoneTest evaluateWithObject:strPhoneNumber];
     return isValid;

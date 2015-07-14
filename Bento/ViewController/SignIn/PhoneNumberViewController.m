@@ -63,7 +63,7 @@
     }];
     
     [self.txtPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
-    self.txtPhoneNumber.formatter.prefix = @"+1 ";
+//    self.txtPhoneNumber.formatter.prefix = @"+1 ";
 }
 
 - (void)didReceiveMemoryWarning {
