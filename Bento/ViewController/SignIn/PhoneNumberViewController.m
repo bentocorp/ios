@@ -349,10 +349,54 @@
     }
     else
     {
-        self.btnDone.enabled = NO;
+//        self.btnDone.enabled = NO;
         [self.btnDone setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
     }
 }
+
+- (void) showErrorWithString:(NSString *)errorMsg code:(int)errorCode
+{
+    if (errorMsg == nil || errorMsg.length == 0)
+    {
+        self.viewError.hidden = YES;
+    }
+    else
+    {
+        self.viewError.hidden = NO;
+        self.lblError.text = errorMsg;
+    }
+    
+    UIColor *errorColor = [UIColor colorWithRed:233.0f / 255.0f green:114.0f / 255.0f blue:2.0f / 255.0f alpha:1.0f];
+    UIColor *correctColor = [UIColor colorWithRed:109.0f / 255.0f green:117.0f / 255.0f blue:131.0f / 255.0f alpha:1.0f];
+    
+    switch (errorCode) {
+        case ERROR_NONE:
+        {
+            self.viewError.hidden = YES;
+            self.txtPhoneNumber.textColor = correctColor;
+            self.ivPhoneNumber.image = [UIImage imageNamed:@"register_icon_phone"];
+        }
+            break;
+            
+        case ERROR_PHONENUMBER:
+        {
+            self.viewError.hidden = NO;
+            self.txtPhoneNumber.textColor = errorColor;
+            self.ivPhoneNumber.image = [UIImage imageNamed:@"register_icon_phone_err"];
+        }
+            break;
+            
+        default:
+        case ERROR_UNKNOWN:
+        {
+            self.viewError.hidden = NO;
+            self.txtPhoneNumber.textColor = correctColor;
+            self.ivPhoneNumber.image = [UIImage imageNamed:@"register_icon_phone"];
+        }
+            break;
+    }
+}
+
 
 - (void) gotoDeliveryLocationScreen
 {
