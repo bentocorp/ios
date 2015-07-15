@@ -62,6 +62,12 @@
     
     // Facebook
     [[FacebookManager sharedInstance] setDelegate:self];
+    
+    // Tap
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -506,18 +512,14 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == self.txtEmail)
-    {
         [self.txtPassword becomeFirstResponder];
-    }
     else
-    {
         [self doSignin];
-    }
     
     return YES;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+-(void)dismissKeyboard
 {
     [self.txtEmail endEditing:YES];
     [self.txtPassword endEditing:YES];

@@ -94,6 +94,13 @@
     // Facebook
     [[FacebookManager sharedInstance] setDelegate:self];
     
+    // Tap
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
+                                   initWithTarget:self
+                                   action:@selector(dismissKeyboard)];
+    [self.view addGestureRecognizer:tap];
+    
+    //
     _activeField = nil;
 }
 
@@ -779,7 +786,7 @@
     return YES;
 }
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+-(void)dismissKeyboard
 {
     [self.txtEmail endEditing:YES];
     [self.txtYourname endEditing:YES];
