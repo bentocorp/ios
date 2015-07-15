@@ -507,9 +507,9 @@
         return;
     }
     
-    if (self.txtPassword.text.length == 0)
+    if (self.txtPassword.text.length < 6) // min character of 6
     {
-        [self showErrorWithString:@"Please enter a valid password." code:ERROR_PASSWORD];
+        [self showErrorWithString:@"Please enter a minimum of 6 characters." code:ERROR_PASSWORD];
         return;
     }
     
@@ -760,6 +760,12 @@
         [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
         return;
     }
+    
+    if (self.txtPassword.text.length != 0 && self.txtPassword.text.length < 6)
+    {
+        [self showErrorWithString:@"Password requires a minimum of 6 characters." code:ERROR_PASSWORD];
+        return;
+    }
 
     [self showErrorWithString:nil code:ERROR_NONE];
 }
@@ -776,7 +782,7 @@
     }
     else if (textField == self.txtPhoneNumber)
     {
-        [self.txtPassword  becomeFirstResponder];
+        [self.txtPassword becomeFirstResponder];
     }
     else
     {
