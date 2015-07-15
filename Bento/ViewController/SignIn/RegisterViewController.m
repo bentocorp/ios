@@ -748,7 +748,6 @@
         return;
     }
 
-
     if (strPhoneNumber.length != 0 && ![DataManager isValidPhoneNumber:strPhoneNumber])
     {
         [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
@@ -778,6 +777,14 @@
     }
     
     return YES;
+}
+
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.txtEmail endEditing:YES];
+    [self.txtYourname endEditing:YES];
+    [self.txtPhoneNumber endEditing:YES];
+    [self.txtPassword endEditing:YES];
 }
 
 #pragma mark FBManagerDelegate

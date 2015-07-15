@@ -477,9 +477,7 @@
     NSString *strEmail = self.txtEmail.text;
     NSString *strPassword = self.txtPassword.text;
     
-    BOOL isValid = (strEmail.length > 0 &&
-                    [DataManager isValidMailAddress:strEmail] &&
-                    strPassword.length > 0);
+    BOOL isValid = (strEmail.length > 0 && [DataManager isValidMailAddress:strEmail] && strPassword.length > 0);
     
     //    self.btnRegister.enabled = isValid;
     if (isValid)
@@ -491,8 +489,8 @@
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if ([[defaults objectForKey:@"cameFromWhichVC"] isEqualToString:@"cameFromRegister"]) {
-        // hide
+    if ([[defaults objectForKey:@"cameFromWhichVC"] isEqualToString:@"cameFromRegister"])
+    {
         self.signUpButton.hidden = YES;
         self.signUpLabel.hidden = YES;
     }
@@ -519,6 +517,12 @@
     return YES;
 }
 
+- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event
+{
+    [self.txtEmail endEditing:YES];
+    [self.txtPassword endEditing:YES];
+}
+
 #pragma mark FBManagerDelegate
 
 -(void)FBLogin:(BOOL)flag
@@ -540,7 +544,6 @@
         [self performSelector:@selector(doReauthorise) withObject:nil];
     }
 }
-
 
 - (IBAction)onSignUpButton:(id)sender
 {
