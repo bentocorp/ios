@@ -28,9 +28,6 @@
 #import "CompleteOrderViewController.h"
 
 @interface RegisterViewController () <FBManagerDelegate, MyAlertViewDelegate>
-{
-    UITextField *_activeField;
-}
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
@@ -63,10 +60,10 @@
 
 @implementation RegisterViewController
 {
-    JGProgressHUD *loadingHUD;
-    
-    Mixpanel *mixpanel;
+    UITextField *_activeField;
     BOOL beganRegistration;
+    JGProgressHUD *loadingHUD;
+    Mixpanel *mixpanel;
 }
 
 - (void)viewDidLoad {
@@ -741,6 +738,24 @@
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
     _activeField = nil;
+    
+    NSString *strEmail = self.txtEmail.text;
+    NSString *strPhoneNumber = self.txtPhoneNumber.text;
+    
+    if (strEmail.length != 0 && ![DataManager isValidMailAddress:strEmail])
+    {
+        [self showErrorWithString:@"Please enter a valid email address." code:ERROR_EMAIL];
+        return;
+    }
+
+
+    if (strPhoneNumber.length != 0 && ![DataManager isValidPhoneNumber:strPhoneNumber])
+    {
+        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
+        return;
+    }
+
+    [self showErrorWithString:nil code:ERROR_NONE];
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
