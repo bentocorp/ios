@@ -30,12 +30,6 @@
 #define COCOAPODS_VERSION_MINOR_PaymentKit 1
 #define COCOAPODS_VERSION_PATCH_PaymentKit 1
 
-// QKGeofenceManager
-#define COCOAPODS_POD_AVAILABLE_QKGeofenceManager
-#define COCOAPODS_VERSION_MAJOR_QKGeofenceManager 1
-#define COCOAPODS_VERSION_MINOR_QKGeofenceManager 2
-#define COCOAPODS_VERSION_PATCH_QKGeofenceManager 4
-
 // Stripe
 #define COCOAPODS_POD_AVAILABLE_Stripe
 #define COCOAPODS_VERSION_MAJOR_Stripe 3

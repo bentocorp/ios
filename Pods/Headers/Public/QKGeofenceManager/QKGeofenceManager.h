@@ -1,1 +1,0 @@
-../../../QKGeofenceManager/QKGeofenceManager/QKGeofenceManager.h

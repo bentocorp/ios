@@ -31,8 +31,6 @@
 
 #import "JGProgressHUD.h"
 
-
-
 @interface DeliveryLocationViewController () <MKMapViewDelegate, MyAlertViewDelegate>
 {
     BOOL _nextToBuild;
