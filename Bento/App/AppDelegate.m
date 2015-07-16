@@ -432,6 +432,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (void)locationUpdate:(CLLocation *)location
 {
     coordinate = [location coordinate];
+    
+    NSLog(@"USER COORDINATES: lat - %f, long - %f", coordinate.latitude, coordinate.longitude);
 }
 
 - (void)locationError:(NSError *)error
@@ -441,7 +443,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
     }
 }
-
 
 #pragma mark TMReachability Notification Method
 -(void)reachabilityChanged:(NSNotification*)note

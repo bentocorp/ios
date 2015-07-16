@@ -773,21 +773,13 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
     if (textField == self.txtYourname)
-    {
         [self.txtEmail becomeFirstResponder];
-    }
     else if (textField == self.txtEmail)
-    {
         [self.txtPhoneNumber becomeFirstResponder];
-    }
     else if (textField == self.txtPhoneNumber)
-    {
         [self.txtPassword becomeFirstResponder];
-    }
     else
-    {
         [self doRegister];
-    }
     
     return YES;
 }
@@ -817,9 +809,7 @@
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1)
-    {
         [self performSelector:@selector(doReauthorise) withObject:nil];
-    }
 }
 
 - (IBAction)onSignIn:(id)sender

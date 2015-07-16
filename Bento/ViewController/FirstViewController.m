@@ -27,9 +27,6 @@
 #import "FixedBentoViewController.h"
 
 @interface FirstViewController ()
-{
-    BOOL _hasInit;
-}
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
 
@@ -43,6 +40,7 @@
 
 @implementation FirstViewController
 {
+    BOOL _hasInit;
     NSString *isThereConnection;
 }
 

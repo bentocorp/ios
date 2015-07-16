@@ -1,6 +1,6 @@
 #include "Pods-Bento-Mixpanel.xcconfig"
 GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
-HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/Mixpanel" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Canvas" "${PODS_ROOT}/Headers/Public/Mixpanel" "${PODS_ROOT}/Headers/Public/PaymentKit" "${PODS_ROOT}/Headers/Public/Stripe" "${PODS_ROOT}/Headers/Public/mopub-ios-sdk"
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/Mixpanel" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/Canvas" "${PODS_ROOT}/Headers/Public/Mixpanel" "${PODS_ROOT}/Headers/Public/PaymentKit" "${PODS_ROOT}/Headers/Public/QKGeofenceManager" "${PODS_ROOT}/Headers/Public/Stripe" "${PODS_ROOT}/Headers/Public/mopub-ios-sdk"
 LIBRARY_SEARCH_PATHS = ${PODS_BENTO_MIXPANEL_LIBRARY_SEARCH_PATHS}
 OTHER_LDFLAGS = ${PODS_BENTO_MIXPANEL_OTHER_LDFLAGS} -ObjC
 PODS_ROOT = ${SRCROOT}
