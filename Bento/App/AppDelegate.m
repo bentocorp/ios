@@ -163,6 +163,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     [locationController.locationManager startUpdatingLocation];
     
+    // set geofence
+    [self initializeRegionMonitoring];
 
 /*---------------------------------------------------------------------*/
     
@@ -245,6 +247,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     return YES;
 }
+
+
 
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
@@ -413,37 +417,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     return YES;
 }
 
-- (CLLocationCoordinate2D )getCurrentLocation
-{
-#if (TARGET_IPHONE_SIMULATOR)
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:33.571895f longitude:-117.7379837036132f];
-    return location.coordinate;
-#endif
-    
-    return coordinate;
-}
-
-- (void) updateLocationManagerTimer
-{
-    
-}
-
-#pragma mark get current location
-- (void)locationUpdate:(CLLocation *)location
-{
-    coordinate = [location coordinate];
-    
-    NSLog(@"USER COORDINATES: lat - %f, long - %f", coordinate.latitude, coordinate.longitude);
-}
-
-- (void)locationError:(NSError *)error
-{
-    if (error.code == kCLErrorDenied)
-    {
-        
-    }
-}
-
 #pragma mark TMReachability Notification Method
 -(void)reachabilityChanged:(NSNotification*)note
 {
@@ -461,15 +434,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                 
                 ranFirstTime = YES;
             }
-            
-            /*---this is being called in googleReach up top instead---*/
-            
-//            if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
-//            {
-//                    NSLog(@"TRYING TO POST NETWORK CONNECTED");
-                    // 3 seconds buffer before posting NETWORK CONNECTED, just in case connection suddenly gets lost (ie. if user keeps toggling on and off connection)
-//                    connectionTimer = [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(yesConnection) userInfo:nil repeats:NO];
-//            }
         }
         else
         {
@@ -506,7 +470,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     });
 }
 
-
 - (BOOL)connected
 {
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
@@ -514,4 +477,103 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     return networkStatus != NotReachable;
 }
 
+#pragma mark - Geofence
+
+- (CLRegion*)getRegion
+{
+    NSString *title = @"Saved Address";
+    
+    CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
+    CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
+    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
+    
+    CLLocationDistance regionRadius = 200; // meters
+    
+    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate radius:regionRadius identifier:title];
+}
+
+- (void)initializeRegionMonitoring
+{
+    // Check to ensure location services are enabled
+    if(![CLLocationManager locationServicesEnabled]) {
+        // handle this
+        return;
+    }
+    
+    if (locationController.locationManager == nil) {
+        [NSException raise:@"Location Manager Not Initialized" format:@"You must initialize location manager first."];
+    }
+    
+    if(![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+        // handle this
+        return;
+    }
+    
+    // start monitoring region
+    [locationController.locationManager startMonitoringForRegion:[self getRegion]];
+    
+    [locationController.locationManager requestStateForRegion:[self getRegion]];
+}
+
+// delegate method for requestStateForRegion
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+{
+    // When regions are initialized, see if we are already within the geofence.
+    switch(state)
+    {
+        case CLRegionStateUnknown:
+            NSLog(@"Unknown region");
+            break;
+            
+        case CLRegionStateInside:
+            NSLog(@"Within region");
+            break;
+            
+        case CLRegionStateOutside:
+            NSLog(@"Outside region");
+            break;
+            
+        default:
+            break;
+    }
+}
+
+#pragma mark get current location
+
+- (CLLocationCoordinate2D )getCurrentLocation
+{
+#if (TARGET_IPHONE_SIMULATOR)
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:33.571895f longitude:-117.7379837036132f];
+    return location.coordinate;
+#endif
+    
+    return coordinate;
+}
+
+- (void)locationUpdate:(CLLocation *)location
+{
+    coordinate = [location coordinate];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.latitude] forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.longitude] forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)locationError:(NSError *)error
+{
+    if (error.code == kCLErrorDenied)
+    {
+        
+    }
+}
+
 @end
+
+
+
+
+
+
+
+
+
