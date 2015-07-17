@@ -41,12 +41,12 @@
 NSString * const StripePublishableTestKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
 NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
-@interface AppDelegate () <MyCLControllerDelegate>
+@interface AppDelegate () <CLLocationManagerDelegate>
 {
     AppStrings *globalStrings;
     BentoShop *globalShop;
 
-    MyCLController *locationController;
+    CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
     
     UIAlertView *aV;
@@ -148,20 +148,20 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #endif
 
     // Initialize location manager.
-    locationController = [[MyCLController alloc] init];
-    locationController.delegate = self;
-    locationController.locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationController.locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
     
 #ifdef __IPHONE_8_0
     if (IS_OS_8_OR_LATER)
     {
         // Use one or the other, not both. Depending on what you put in info.plist
-        [locationController.locationManager requestWhenInUseAuthorization];
+        [locationManager requestWhenInUseAuthorization];
     }
 #endif
     
-    [locationController.locationManager startUpdatingLocation];
+    [locationManager startUpdatingLocation];
     
     // set geofence
     [self initializeRegionMonitoring];
@@ -247,16 +247,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     return YES;
 }
-
-
-
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 007)
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
-}
-
-#pragma mark MyAlertViewDelegate
 
 - (void)applicationWillResignActive:(UIApplication *)application
 {
@@ -351,7 +341,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     if ([self connected])
     {
-        // connected, do some internet stuff
         if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
         {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -361,7 +350,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                 [globalShop getServiceArea];
             });
             
-            // Global Data Manager
             [globalShop refreshResume];
         }
     }
@@ -390,10 +378,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     
-    // Reachability.
     [googleReach stopNotifier];
     
-    // Global Data Manager.
     [globalShop refreshStop];
 }
 
@@ -415,6 +401,13 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     }
     
     return YES;
+}
+
+#pragma mark MyAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 007)
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
 }
 
 #pragma mark TMReachability Notification Method
@@ -479,46 +472,40 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 #pragma mark - Geofence
 
-- (CLRegion*)getRegion
+- (CLRegion *)getRegion
 {
-    NSString *title = @"Saved Address";
-    
     CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
     CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
     
-    CLLocationDistance regionRadius = 200; // meters
+    CLLocationDistance regionRadius = 1000;
     
-    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate radius:regionRadius identifier:title];
+    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate radius:regionRadius identifier:@"Saved Address"];
 }
 
 - (void)initializeRegionMonitoring
 {
-    // Check to ensure location services are enabled
     if(![CLLocationManager locationServicesEnabled]) {
         // handle this
         return;
     }
     
-    if (locationController.locationManager == nil) {
+    if (locationManager == nil)
         [NSException raise:@"Location Manager Not Initialized" format:@"You must initialize location manager first."];
-    }
     
     if(![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
         // handle this
         return;
     }
     
-    // start monitoring region
-    [locationController.locationManager startMonitoringForRegion:[self getRegion]];
+    [locationManager startMonitoringForRegion:[self getRegion]];
+    [locationManager requestStateForRegion:[self getRegion]];
     
-    [locationController.locationManager requestStateForRegion:[self getRegion]];
+    NSLog(@"getRegion: %@", [self getRegion]);
 }
 
-// delegate method for requestStateForRegion
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
-    // When regions are initialized, see if we are already within the geofence.
     switch(state)
     {
         case CLRegionStateUnknown:
@@ -568,12 +555,3 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 }
 
 @end
-
-
-
-
-
-
-
-
-

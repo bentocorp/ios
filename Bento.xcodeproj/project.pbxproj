@@ -79,7 +79,6 @@
 		7216B7421AA64C7C0006FFE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0731A5BCC04003DC872 /* main.m */; };
 		7216B7431AA64C7C0006FFE9 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A21A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m */; };
 		7216B7441AA64C7C0006FFE9 /* SVPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E07E1A76BD1800D18D7A /* SVPlacemark.m */; };
-		7216B7451AA64C7C0006FFE9 /* MyCLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333DE1A6FD7B8006C2446 /* MyCLController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7216B7471AA64C7C0006FFE9 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333CB1A6F46DF006C2446 /* MKNetworkOperation.m */; };
 		7216B7481AA64C7C0006FFE9 /* NSAlert+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BA1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m */; };
 		7216B7491AA64C7C0006FFE9 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 726CE35A1A82693900296182 /* BaseViewController.m */; };
@@ -229,7 +228,6 @@
 		722333D51A6F46DF006C2446 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C81A6F46DF006C2446 /* MKNetworkEngine.m */; };
 		722333D61A6F46DF006C2446 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333CB1A6F46DF006C2446 /* MKNetworkOperation.m */; };
 		722333D71A6F46DF006C2446 /* WebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333CD1A6F46DF006C2446 /* WebManager.m */; };
-		722333DF1A6FD7B8006C2446 /* MyCLController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333DE1A6FD7B8006C2446 /* MyCLController.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		722333E11A6FF9C5006C2446 /* banner_sold_out.png in Resources */ = {isa = PBXBuildFile; fileRef = 722333E01A6FF9C5006C2446 /* banner_sold_out.png */; };
 		722333F61A72C133006C2446 /* PKPayment+STPTestKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333E71A72C133006C2446 /* PKPayment+STPTestKeys.m */; };
 		722333F71A72C133006C2446 /* STPTestAddressStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333E91A72C133006C2446 /* STPTestAddressStore.m */; };
@@ -321,8 +319,6 @@
 		FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
-		FC27A3341B431D4A00CEBF0B /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = FC27A3331B431D4A00CEBF0B /* Notes.m */; };
-		FC27A3351B431D4A00CEBF0B /* Notes.m in Sources */ = {isa = PBXBuildFile; fileRef = FC27A3331B431D4A00CEBF0B /* Notes.m */; };
 		FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
@@ -551,8 +547,6 @@
 		722333CB1A6F46DF006C2446 /* MKNetworkOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MKNetworkOperation.m; sourceTree = "<group>"; };
 		722333CC1A6F46DF006C2446 /* WebManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WebManager.h; sourceTree = "<group>"; };
 		722333CD1A6F46DF006C2446 /* WebManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WebManager.m; sourceTree = "<group>"; };
-		722333DD1A6FD7B8006C2446 /* MyCLController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MyCLController.h; sourceTree = "<group>"; };
-		722333DE1A6FD7B8006C2446 /* MyCLController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MyCLController.m; sourceTree = "<group>"; };
 		722333E01A6FF9C5006C2446 /* banner_sold_out.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = banner_sold_out.png; sourceTree = "<group>"; };
 		722333E61A72C133006C2446 /* PKPayment+STPTestKeys.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "PKPayment+STPTestKeys.h"; sourceTree = "<group>"; };
 		722333E71A72C133006C2446 /* PKPayment+STPTestKeys.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "PKPayment+STPTestKeys.m"; sourceTree = "<group>"; };
@@ -682,7 +676,6 @@
 		FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBentoViewController.m; sourceTree = "<group>"; };
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
-		FC27A3331B431D4A00CEBF0B /* Notes.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Notes.m; path = Bento/Model/Notes.m; sourceTree = "<group>"; };
 		FC3C4E771AF96A41005D7197 /* FixedBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoViewController.h; sourceTree = "<group>"; };
 		FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoViewController.m; sourceTree = "<group>"; };
 		FC3C4E7B1AF96B42005D7197 /* FixedBentoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoCell.h; sourceTree = "<group>"; };
@@ -913,7 +906,6 @@
 				7209E0871A780A1200D18D7A /* SHSPhoneComponent */,
 				7209E07A1A76BD1800D18D7A /* SVGeocoder */,
 				722333E51A72C133006C2446 /* ApplePayStubs */,
-				722333DC1A6FD7B8006C2446 /* LocationManager */,
 				722333B71A6F46DF006C2446 /* WebManager */,
 				722333851A6EADBD006C2446 /* SDWebImage */,
 				722333441A6D4058006C2446 /* JGProgressHUD */,
@@ -1057,15 +1049,6 @@
 			path = Reachability;
 			sourceTree = "<group>";
 		};
-		722333DC1A6FD7B8006C2446 /* LocationManager */ = {
-			isa = PBXGroup;
-			children = (
-				722333DD1A6FD7B8006C2446 /* MyCLController.h */,
-				722333DE1A6FD7B8006C2446 /* MyCLController.m */,
-			);
-			path = LocationManager;
-			sourceTree = "<group>";
-		};
 		722333E51A72C133006C2446 /* ApplePayStubs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1147,7 +1130,6 @@
 		90BED0651A5BCC04003DC872 = {
 			isa = PBXGroup;
 			children = (
-				FC27A3331B431D4A00CEBF0B /* Notes.m */,
 				90BED0701A5BCC04003DC872 /* Bento */,
 				FC599F561B0FEDB600989E1B /* Bento Tests */,
 				90BED06F1A5BCC04003DC872 /* Products */,
@@ -2192,7 +2174,6 @@
 				7216B72B1AA64C7C0006FFE9 /* EnterCreditCardViewController.m in Sources */,
 				7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */,
 				7216B72D1AA64C7C0006FFE9 /* UIImage+WebP.m in Sources */,
-				FC27A3351B431D4A00CEBF0B /* Notes.m in Sources */,
 				7216B72E1AA64C7C0006FFE9 /* SDWebImageManager.m in Sources */,
 				7216B72F1AA64C7C0006FFE9 /* SDImageCache.m in Sources */,
 				7216B7301AA64C7C0006FFE9 /* SHSPhoneNumberFormatter.m in Sources */,
@@ -2215,7 +2196,6 @@
 				7216B7421AA64C7C0006FFE9 /* main.m in Sources */,
 				7216B7431AA64C7C0006FFE9 /* UIImageView+HighlightedWebCache.m in Sources */,
 				7216B7441AA64C7C0006FFE9 /* SVPlacemark.m in Sources */,
-				7216B7451AA64C7C0006FFE9 /* MyCLController.m in Sources */,
 				FCAA479F1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				7216B7471AA64C7C0006FFE9 /* MKNetworkOperation.m in Sources */,
 				7216B7481AA64C7C0006FFE9 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
@@ -2296,7 +2276,6 @@
 				90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */,
 				722333611A6D4058006C2446 /* JGProgressHUDIndicatorView.m in Sources */,
 				722333B31A6EADBD006C2446 /* UIImage+WebP.m in Sources */,
-				FC27A3341B431D4A00CEBF0B /* Notes.m in Sources */,
 				722333AE1A6EADBD006C2446 /* SDWebImageManager.m in Sources */,
 				722333A91A6EADBD006C2446 /* SDImageCache.m in Sources */,
 				7209E0961A780A1200D18D7A /* SHSPhoneNumberFormatter.m in Sources */,
@@ -2319,7 +2298,6 @@
 				90BED0741A5BCC04003DC872 /* main.m in Sources */,
 				722333B41A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m in Sources */,
 				7209E0801A76BD1800D18D7A /* SVPlacemark.m in Sources */,
-				722333DF1A6FD7B8006C2446 /* MyCLController.m in Sources */,
 				FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				722333D61A6F46DF006C2446 /* MKNetworkOperation.m in Sources */,
 				722333CE1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
