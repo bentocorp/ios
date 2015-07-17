@@ -480,7 +480,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     CLLocationDistance regionRadius = 1000;
     
-    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate radius:regionRadius identifier:@"Saved Address"];
+    NSLog(@"saved latitude: %f, saved longitude: %f", centerCoordinate.latitude, centerCoordinate.longitude);
+    
+    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate
+                                             radius:regionRadius
+                                         identifier:@"Saved Address"];
 }
 
 - (void)initializeRegionMonitoring
@@ -499,34 +503,36 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     }
     
     [locationManager startMonitoringForRegion:[self getRegion]];
-    [locationManager requestStateForRegion:[self getRegion]];
+    
+    [locationManager performSelector:@selector(requestStateForRegion:) withObject:[self getRegion] afterDelay:3];
     
     NSLog(@"getRegion: %@", [self getRegion]);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
-    switch(state)
-    {
-        case CLRegionStateUnknown:
-            NSLog(@"Unknown region");
-            break;
-            
-        case CLRegionStateInside:
-            NSLog(@"Within region");
-            break;
-            
-        case CLRegionStateOutside:
-            NSLog(@"Outside region");
-            break;
-            
-        default:
-            break;
-    }
+    if (state == CLRegionStateInside)
+        NSLog(@"Within region");
+    
+    else if (state == CLRegionStateOutside)
+        NSLog(@"Outside region");
 }
 
-#pragma mark get current location
+#pragma mark Current Location
 
+// setter
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = locations[0];
+
+    coordinate = location.coordinate;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.latitude] forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.longitude] forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+// getter
 - (CLLocationCoordinate2D )getCurrentLocation
 {
 #if (TARGET_IPHONE_SIMULATOR)
@@ -535,23 +541,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #endif
     
     return coordinate;
-}
-
-- (void)locationUpdate:(CLLocation *)location
-{
-    coordinate = [location coordinate];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.latitude] forKey:@"currentLatitude"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.longitude] forKey:@"currentLongitude"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-}
-
-- (void)locationError:(NSError *)error
-{
-    if (error.code == kCLErrorDenied)
-    {
-        
-    }
 }
 
 @end
