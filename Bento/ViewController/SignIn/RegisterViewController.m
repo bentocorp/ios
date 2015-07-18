@@ -68,6 +68,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    
 
     mixpanel = [Mixpanel sharedInstance];
     
@@ -85,6 +87,21 @@
     self.svMain.contentSize = CGSizeMake(self.svMain.frame.size.width, 504);
     
     [self.txtPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
+        
+        // set the last character in attributed text to have a bolder font
+        if ([textField.text length] > 0)
+        {
+            NSString *lastCharacter = [textField.text substringFromIndex:[textField.text length] - 1];
+            
+            unichar c = [lastCharacter characterAtIndex:0];
+            if (c >= '0' && c <= '9')
+            {
+//                textField.text = (NSString *)atrString;
+            }
+            
+            NSLog(@"Last Character: %@", lastCharacter);
+        }
+        
         [self updateUI];
     }];
     

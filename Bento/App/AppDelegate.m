@@ -164,7 +164,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [locationManager startUpdatingLocation];
     
     // set geofence
-    [self initializeRegionMonitoring];
+//    [self initializeRegionMonitoring];
 
 /*---------------------------------------------------------------------*/
     
@@ -470,53 +470,55 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     return networkStatus != NotReachable;
 }
 
-#pragma mark - Geofence
-
-- (CLRegion *)getRegion
-{
-    CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
-    CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
-    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
-    
-    CLLocationDistance regionRadius = 1000;
-    
-    NSLog(@"saved latitude: %f, saved longitude: %f", centerCoordinate.latitude, centerCoordinate.longitude);
-    
-    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate
-                                             radius:regionRadius
-                                         identifier:@"Saved Address"];
-}
-
-- (void)initializeRegionMonitoring
-{
-    if(![CLLocationManager locationServicesEnabled]) {
-        // handle this
-        return;
-    }
-    
-    if (locationManager == nil)
-        [NSException raise:@"Location Manager Not Initialized" format:@"You must initialize location manager first."];
-    
-    if(![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
-        // handle this
-        return;
-    }
-    
-    [locationManager startMonitoringForRegion:[self getRegion]];
-    
-    [locationManager performSelector:@selector(requestStateForRegion:) withObject:[self getRegion] afterDelay:3];
-    
-    NSLog(@"getRegion: %@", [self getRegion]);
-}
-
-- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
-{
-    if (state == CLRegionStateInside)
-        NSLog(@"Within region");
-    
-    else if (state == CLRegionStateOutside)
-        NSLog(@"Outside region");
-}
+//#pragma mark - Geofence
+//
+//- (CLRegion *)getRegion
+//{
+//    CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
+//    CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
+//    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
+//    
+//    CLLocationDistance regionRadius = 1000;
+//    
+//    NSLog(@"saved latitude: %f, saved longitude: %f", centerCoordinate.latitude, centerCoordinate.longitude);
+//    
+//    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate
+//                                             radius:regionRadius
+//                                         identifier:@"Saved Address"];
+//}
+//
+//- (void)initializeRegionMonitoring
+//{
+//    if(![CLLocationManager locationServicesEnabled]) {
+//        // handle this
+//        return;
+//    }
+//    
+//    if (locationManager == nil)
+//        [NSException raise:@"Location Manager Not Initialized" format:@"You must initialize location manager first."];
+//    
+//    if(![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+//        // handle this
+//        return;
+//    }
+//    
+//    [locationManager startMonitoringForRegion:[self getRegion]];
+//    
+//    [locationManager performSelector:@selector(requestStateForRegion:) withObject:[self getRegion] afterDelay:3];
+//    
+//    NSLog(@"getRegion: %@", [self getRegion]);
+//}
+//
+//- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+//{
+//    NSLog(@"Within region");
+//    
+//    if (state == CLRegionStateInside)
+//        NSLog(@"Within region");
+//    
+//    else if (state == CLRegionStateOutside)
+//        NSLog(@"Outside region");
+//}
 
 #pragma mark Current Location
 
@@ -524,7 +526,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = locations[0];
-
     coordinate = location.coordinate;
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.latitude] forKey:@"currentLatitude"];

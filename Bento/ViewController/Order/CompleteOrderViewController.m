@@ -32,6 +32,8 @@
 
 #import "Mixpanel.h"
 
+#import <CoreLocation/CoreLocation.h>
+
 // Stripe
 #import "Stripe.h"
 #import "STPToken.h"
@@ -52,7 +54,7 @@
 //#define APPLE_MERCHANT_ID @"merchant.com.bento"
 #define APPLE_MERCHANT_ID @"merchant.com.somethingnew.bento"
 
-@interface CompleteOrderViewController () <UIActionSheetDelegate, PKPaymentAuthorizationViewControllerDelegate, EnterCreditCardViewControllerDelegate, PromoCodeViewDelegate, MyAlertViewDelegate, BentoTableViewCellDelegate>
+@interface CompleteOrderViewController () <UIActionSheetDelegate, PKPaymentAuthorizationViewControllerDelegate, EnterCreditCardViewControllerDelegate, PromoCodeViewDelegate, MyAlertViewDelegate, BentoTableViewCellDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UILabel *lblTitlePromo;
@@ -108,6 +110,8 @@
     Mixpanel *mixpanel;
     NSString *trackPaymentMethod;
     __block NSString *successOrFailure;
+    
+    CLLocationManager *locationManager;
 }
 
 - (BOOL)applePayEnabled
@@ -123,6 +127,15 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    // Initialize location manager.
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    
+    // set geofence
+    [self initializeRegionMonitoring];
     
     // Mixpanel track for Placed An Order
     mixpanel = [Mixpanel sharedInstance];
@@ -165,6 +178,61 @@
     
 }
 
+#pragma mark - Geofence
+
+- (CLRegion *)getRegion
+{
+    CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
+    CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
+    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
+    
+    CLLocationDistance regionRadius = 1000;
+    
+    NSLog(@"saved latitude: %f, saved longitude: %f", centerCoordinate.latitude, centerCoordinate.longitude);
+    
+    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate
+                                             radius:regionRadius
+                                         identifier:@"Saved Address"];
+}
+
+- (void)initializeRegionMonitoring
+{
+    if(![CLLocationManager locationServicesEnabled]) {
+        // handle this
+        return;
+    }
+    
+    if (locationManager == nil)
+        [NSException raise:@"Location Manager Not Initialized" format:@"You must initialize location manager first."];
+    
+    if(![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+        // handle this
+        return;
+    }
+    
+    [locationManager startMonitoringForRegion:[self getRegion]];
+    
+    [locationManager performSelector:@selector(requestStateForRegion:) withObject:[self getRegion] afterDelay:3];
+    
+    NSLog(@"getRegion: %@", [self getRegion]);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
+{
+    NSLog(@"Within region");
+    
+    if (state == CLRegionStateInside)
+        NSLog(@"Within region");
+    
+    else if (state == CLRegionStateOutside)
+    {
+        NSLog(@"Outside region");
+        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
+        [alertView show];
+    }
+    
+}
+
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
@@ -181,9 +249,6 @@
 //    {
 //        MyAlertView *alertView = [MyAlertView alloc] initWithTitle:<#(NSString *)#> message:<#(NSString *)#> delegate:<#(id)#> cancelButtonTitle:<#(NSString *)#> otherButtonTitle:<#(NSString *)#>;
 //    }
-    
-    
-    
     
     
     // set array every time view appears (edit: moved from viewDidLoad)
