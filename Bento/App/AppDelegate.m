@@ -531,6 +531,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.latitude] forKey:@"currentLatitude"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.longitude] forKey:@"currentLongitude"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"lat: %f, long: %f", coordinate.latitude, coordinate.longitude);
+    
+    [manager stopUpdatingLocation];
 }
 
 // getter

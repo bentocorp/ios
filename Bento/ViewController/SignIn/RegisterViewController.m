@@ -69,8 +69,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    
-
     mixpanel = [Mixpanel sharedInstance];
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:SIGNUP_TITLE];

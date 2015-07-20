@@ -54,6 +54,8 @@
 //#define APPLE_MERCHANT_ID @"merchant.com.bento"
 #define APPLE_MERCHANT_ID @"merchant.com.somethingnew.bento"
 
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
 @interface CompleteOrderViewController () <UIActionSheetDelegate, PKPaymentAuthorizationViewControllerDelegate, EnterCreditCardViewControllerDelegate, PromoCodeViewDelegate, MyAlertViewDelegate, BentoTableViewCellDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
@@ -112,6 +114,7 @@
     __block NSString *successOrFailure;
     
     CLLocationManager *locationManager;
+    CLLocationCoordinate2D coordinate;
 }
 
 - (BOOL)applePayEnabled
@@ -178,6 +181,33 @@
     
 }
 
+
+// setter
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = locations[0];
+    coordinate = location.coordinate;
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.latitude] forKey:@"currentLatitude"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.longitude] forKey:@"currentLongitude"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"lat: %f, long: %f", coordinate.latitude, coordinate.longitude);
+    
+    [manager stopUpdatingLocation];
+}
+
+// getter
+- (CLLocationCoordinate2D )getCurrentLocation
+{
+#if (TARGET_IPHONE_SIMULATOR)
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:33.571895f longitude:-117.7379837036132f];
+    return location.coordinate;
+#endif
+    
+    return coordinate;
+}
+
 #pragma mark - Geofence
 
 - (CLRegion *)getRegion
@@ -205,32 +235,35 @@
     if (locationManager == nil)
         [NSException raise:@"Location Manager Not Initialized" format:@"You must initialize location manager first."];
     
-    if(![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
+    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]]) {
         // handle this
         return;
     }
     
-    [locationManager startMonitoringForRegion:[self getRegion]];
+    CLRegion *region = [self getRegion];
+    NSLog(@"getRegion: %@", region);
     
-    [locationManager performSelector:@selector(requestStateForRegion:) withObject:[self getRegion] afterDelay:3];
-    
-    NSLog(@"getRegion: %@", [self getRegion]);
+    [locationManager startMonitoringForRegion:region];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
+{
+    NSLog(@"started monitoring");
+    [manager requestStateForRegion:region];
+}
+
+- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error
+{
+    NSLog(@"failed monitoring error %@", error);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
 {
-    NSLog(@"Within region");
-    
     if (state == CLRegionStateInside)
         NSLog(@"Within region");
     
     else if (state == CLRegionStateOutside)
-    {
         NSLog(@"Outside region");
-        UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:@"" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
-        [alertView show];
-    }
-    
 }
 
 - (void)didReceiveMemoryWarning {
