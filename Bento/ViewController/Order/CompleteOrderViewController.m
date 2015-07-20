@@ -210,7 +210,7 @@
 
 #pragma mark - Geofence
 
-- (CLRegion *)getRegion
+- (CLCircularRegion *)getRegion
 {
     CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
     CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
@@ -235,12 +235,12 @@
     if (locationManager == nil)
         [NSException raise:@"Location Manager Not Initialized" format:@"You must initialize location manager first."];
     
-    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]]) {
+    if(![CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]]) {
         // handle this
         return;
     }
     
-    CLRegion *region = [self getRegion];
+    CLCircularRegion *region = [self getRegion];
     NSLog(@"getRegion: %@", region);
     
     [locationManager startMonitoringForRegion:region];

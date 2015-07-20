@@ -742,7 +742,7 @@
             aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
     }
     
-    NSDictionary *dishInfo = [aryMainDishes objectAtIndex:selectedButton.tag];
+    NSDictionary *dishInfo = [aryMainDishesLeft objectAtIndex:selectedButton.tag];
     fixedBentoPreviewViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];
     
     [self.navigationController pushViewController:fixedBentoPreviewViewController animated:YES];
@@ -1116,7 +1116,8 @@
     [collectionView reloadData];
 }
 
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section{
+- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout insetForSectionAtIndex:(NSInteger)section
+{
     return UIEdgeInsetsMake(0, 0, 0, 0);
 }
 
