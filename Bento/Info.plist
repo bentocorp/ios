@@ -51,8 +51,6 @@
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Bento would like to use your location</string>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Bento would like to use your location</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ss-social-regular.ttf</string>

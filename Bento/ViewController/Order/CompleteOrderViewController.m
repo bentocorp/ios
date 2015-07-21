@@ -135,7 +135,7 @@
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.distanceFilter = 100;
     
     // set geofence
     [self initializeRegionMonitoring];
@@ -181,20 +181,138 @@
     
 }
 
+#pragma mark - Geofence
 
-// setter
+- (CLRegion *)getRegion
+{
+    NSString *identifier = @"Saved Address";
+    
+    CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
+    CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
+    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
+    
+    CLLocationDistance regionRadius = 100;
+    
+    if (regionRadius > locationManager.maximumRegionMonitoringDistance)
+        regionRadius = locationManager.maximumRegionMonitoringDistance;
+    
+    NSString *version = [[UIDevice currentDevice] systemVersion];
+    CLRegion * region = nil;
+    
+    if ([version floatValue] >= 7.0f) // for iOS7+
+        region =  [[CLCircularRegion alloc] initWithCenter:centerCoordinate radius:regionRadius identifier:identifier];
+    else // iOS 7 below
+        region = [[CLRegion alloc] initCircularRegionWithCenter:centerCoordinate radius:regionRadius identifier:identifier];
+    
+    return region;
+}
+
+- (void)initializeRegionMonitoring
+{
+    if(![CLLocationManager locationServicesEnabled])
+    {
+        // You need to enable Location Services
+    }
+    
+    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]])
+    {
+        // Region monitoring is not available for this Class
+    }
+    
+    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted)
+    {
+        // You need to authorize Location Services for the APP
+    }
+    
+    CLRegion *region = [self getRegion];
+    NSLog(@"getRegion: %@", region);
+    
+    [locationManager startMonitoringForRegion:region];
+    
+    [locationManager startUpdatingLocation];
+}
+
+//- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
+//{
+//    NSLog(@"started monitoring");
+//}
+
+//- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error
+//{
+//    NSLog(@"failed monitoring error %@", error);
+//}
+
+//- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
+//{
+//    NSLog(@"Did Enter Region!!!!");
+//}
+
+- (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
+{
+    NSLog(@"Did Exit Region!!!");
+    
+    MyAlertView *outsideRegionAlert = [[MyAlertView alloc] initWithTitle:nil
+                                                                 message:[NSString stringWithFormat:@"It looks like you're not at this address:\n %@", self.lblAddress.text]
+                                                                delegate:self
+                                                       cancelButtonTitle:@"Keep"
+                                                        otherButtonTitle:@"Change"];
+    
+    [outsideRegionAlert showInView:self.view];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = locations[0];
     coordinate = location.coordinate;
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.latitude] forKey:@"currentLatitude"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.longitude] forKey:@"currentLongitude"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    NSLog(@"CURRENT LAT: %f, CURRENT LONG: %f", coordinate.latitude, coordinate.longitude);
     
-    NSLog(@"lat: %f, long: %f", coordinate.latitude, coordinate.longitude);
+    NSSet * monitoredRegions = locationManager.monitoredRegions;
     
-    [manager stopUpdatingLocation];
+    if (monitoredRegions)
+    {
+        [monitoredRegions enumerateObjectsUsingBlock:^(CLRegion *region, BOOL *stop)
+         {
+             NSString *identifer = region.identifier;
+             CLLocationCoordinate2D centerCoords = [(CLCircularRegion *)region center];
+             CLLocationCoordinate2D currentCoords = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+             CLLocationDistance radius = [(CLCircularRegion *)region radius];
+             
+             NSNumber * currentLocationDistance = [self calculateDistanceInMetersBetweenCoord:currentCoords coord:centerCoords];
+             
+             NSLog(@"SAVED LAT: %f, SAVED LONG: %f, DISTANCE: %@", centerCoords.latitude, centerCoords.longitude, currentLocationDistance);
+             
+             if ([currentLocationDistance floatValue] > radius)
+             {
+                 NSLog(@"Invoking didExitRegion manually for region: %@", identifer);
+                 
+                 //stop Monitoring Region temporarily
+                 [locationManager stopMonitoringForRegion:region];
+                 
+                 [self locationManager:locationManager didExitRegion:region];
+                 
+                 //start Monitoing Region again.
+                 [locationManager startMonitoringForRegion:region];
+             }
+         }];
+    
+        // Stop Location Updation, we dont need it now.
+        [locationManager stopUpdatingLocation];
+    }
+}
+
+- (NSNumber*)calculateDistanceInMetersBetweenCoord:(CLLocationCoordinate2D)coord1 coord:(CLLocationCoordinate2D)coord2
+{
+    NSInteger nRadius = 6371; // Earth's radius in Kilometers
+    double latDiff = (coord2.latitude - coord1.latitude) * (M_PI/180);
+    double lonDiff = (coord2.longitude - coord1.longitude) * (M_PI/180);
+    double lat1InRadians = coord1.latitude * (M_PI/180);
+    double lat2InRadians = coord2.latitude * (M_PI/180);
+    double nA = pow ( sin(latDiff/2), 2 ) + cos(lat1InRadians) * cos(lat2InRadians) * pow ( sin(lonDiff/2), 2 );
+    double nC = 2 * atan2( sqrt(nA), sqrt( 1 - nA ));
+    double nD = nRadius * nC;
+    // convert to meters
+    return @(nD*1000);
 }
 
 // getter
@@ -208,63 +326,8 @@
     return coordinate;
 }
 
-#pragma mark - Geofence
 
-- (CLCircularRegion *)getRegion
-{
-    CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
-    CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
-    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
-    
-    CLLocationDistance regionRadius = 1000;
-    
-    NSLog(@"saved latitude: %f, saved longitude: %f", centerCoordinate.latitude, centerCoordinate.longitude);
-    
-    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate
-                                             radius:regionRadius
-                                         identifier:@"Saved Address"];
-}
-
-- (void)initializeRegionMonitoring
-{
-    if(![CLLocationManager locationServicesEnabled]) {
-        // handle this
-        return;
-    }
-    
-    if (locationManager == nil)
-        [NSException raise:@"Location Manager Not Initialized" format:@"You must initialize location manager first."];
-    
-    if(![CLLocationManager isMonitoringAvailableForClass:[CLCircularRegion class]]) {
-        // handle this
-        return;
-    }
-    
-    CLCircularRegion *region = [self getRegion];
-    NSLog(@"getRegion: %@", region);
-    
-    [locationManager startMonitoringForRegion:region];
-}
-
-- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
-{
-    NSLog(@"started monitoring");
-    [manager requestStateForRegion:region];
-}
-
-- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error
-{
-    NSLog(@"failed monitoring error %@", error);
-}
-
-- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
-{
-    if (state == CLRegionStateInside)
-        NSLog(@"Within region");
-    
-    else if (state == CLRegionStateOutside)
-        NSLog(@"Outside region");
-}
+///////////
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];

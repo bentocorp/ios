@@ -147,6 +147,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [Stripe setDefaultPublishableKey:StripePublishableLiveKey];
 #endif
 
+    
+/*---------------------------LOCATION MANAGER--------------------------*/
+    
     // Initialize location manager.
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -155,17 +158,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
 #ifdef __IPHONE_8_0
     if (IS_OS_8_OR_LATER)
-    {
         // Use one or the other, not both. Depending on what you put in info.plist
         [locationManager requestWhenInUseAuthorization];
-    }
 #endif
     
     [locationManager startUpdatingLocation];
     
-    // set geofence
-//    [self initializeRegionMonitoring];
-
 /*---------------------------------------------------------------------*/
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -470,74 +468,18 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     return networkStatus != NotReachable;
 }
 
-//#pragma mark - Geofence
-//
-//- (CLRegion *)getRegion
-//{
-//    CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
-//    CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
-//    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
-//    
-//    CLLocationDistance regionRadius = 1000;
-//    
-//    NSLog(@"saved latitude: %f, saved longitude: %f", centerCoordinate.latitude, centerCoordinate.longitude);
-//    
-//    return [[CLCircularRegion alloc] initWithCenter:centerCoordinate
-//                                             radius:regionRadius
-//                                         identifier:@"Saved Address"];
-//}
-//
-//- (void)initializeRegionMonitoring
-//{
-//    if(![CLLocationManager locationServicesEnabled]) {
-//        // handle this
-//        return;
-//    }
-//    
-//    if (locationManager == nil)
-//        [NSException raise:@"Location Manager Not Initialized" format:@"You must initialize location manager first."];
-//    
-//    if(![CLLocationManager isMonitoringAvailableForClass:[CLBeaconRegion class]]) {
-//        // handle this
-//        return;
-//    }
-//    
-//    [locationManager startMonitoringForRegion:[self getRegion]];
-//    
-//    [locationManager performSelector:@selector(requestStateForRegion:) withObject:[self getRegion] afterDelay:3];
-//    
-//    NSLog(@"getRegion: %@", [self getRegion]);
-//}
-//
-//- (void)locationManager:(CLLocationManager *)manager didDetermineState:(CLRegionState)state forRegion:(CLRegion *)region
-//{
-//    NSLog(@"Within region");
-//    
-//    if (state == CLRegionStateInside)
-//        NSLog(@"Within region");
-//    
-//    else if (state == CLRegionStateOutside)
-//        NSLog(@"Outside region");
-//}
-
 #pragma mark Current Location
 
-// setter
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = locations[0];
     coordinate = location.coordinate;
-    
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.latitude] forKey:@"currentLatitude"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", coordinate.longitude] forKey:@"currentLongitude"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
     NSLog(@"lat: %f, long: %f", coordinate.latitude, coordinate.longitude);
     
     [manager stopUpdatingLocation];
 }
 
-// getter
 - (CLLocationCoordinate2D )getCurrentLocation
 {
 #if (TARGET_IPHONE_SIMULATOR)
