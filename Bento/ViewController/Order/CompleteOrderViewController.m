@@ -135,7 +135,7 @@
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = 100;
+    locationManager.distanceFilter = 50; // only update if moved 50 meters
     
     // Mixpanel track for Placed An Order
     mixpanel = [Mixpanel sharedInstance];
@@ -175,7 +175,6 @@
         else
             [[DataManager shareDataManager] setPaymentMethod:Payment_ApplePay];
     }
-    
 }
 
 #pragma mark - Geofence
@@ -234,13 +233,12 @@
     return region;
 }
 
-
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
     NSLog(@"Did Exit Region!!!");
     
-    MyAlertView *outsideRegionAlert = [[MyAlertView alloc] initWithTitle:nil
-                                                                 message:[NSString stringWithFormat:@"It looks like you're not at this address:\n %@", self.lblAddress.text]
+    MyAlertView *outsideRegionAlert = [[MyAlertView alloc] initWithTitle:@"It looks like you're not at this address:"
+                                                                 message:self.lblAddress.text
                                                                 delegate:self
                                                        cancelButtonTitle:@"Keep"
                                                         otherButtonTitle:@"Change"];
@@ -1212,35 +1210,45 @@
         NSInteger dishIndex = [bento getMainDish];
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:dishIndex];
         NSString *strDishName = [dishInfo objectForKey:@"name"];
-        [currentBentoDishes setObject:strDishName forKey:@"main"]; // for mixpanel
+        if (strDishName != nil) {
+            [currentBentoDishes setObject:strDishName forKey:@"main"]; // for mixpanel
+        }
         NSDictionary *dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"main", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish1];
         dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
         strDishName = [dishInfo objectForKey:@"name"];
-        [currentBentoDishes setObject:strDishName forKey:@"side1"]; // for mixpanel
+        if (strDishName != nil) {
+            [currentBentoDishes setObject:strDishName forKey:@"side1"]; // for mixpanel
+        }
         dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side1", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish2];
         dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
         strDishName = [dishInfo objectForKey:@"name"];
-        [currentBentoDishes setObject:strDishName forKey:@"side2"];
+        if (strDishName != nil) {
+            [currentBentoDishes setObject:strDishName forKey:@"side2"];
+        }
         dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side2", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish3];
         dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
         strDishName = [dishInfo objectForKey:@"name"];
-        [currentBentoDishes setObject:strDishName forKey:@"side3"];
+        if (strDishName != nil) {
+            [currentBentoDishes setObject:strDishName forKey:@"side3"];
+        }
         dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side3", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish4];
         dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
         strDishName = [dishInfo objectForKey:@"name"];
-        [currentBentoDishes setObject:strDishName forKey:@"side4"];
+        if (strDishName != nil) {
+            [currentBentoDishes setObject:strDishName forKey:@"side4"];
+        }
         dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side4", @"name" : strDishName };
         [dishArray addObject:dicDish];
         

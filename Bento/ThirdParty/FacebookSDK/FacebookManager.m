@@ -188,34 +188,34 @@ NSString * const kFacebookNotificationPhotoUploaded         = @"kFacebookPhotoUp
                                           switch (state)
                                           {
                                               case FBSessionStateCreated:
-                                                  //NSLog(@"FBSessionStateCreated");
+                                                  NSLog(@"FBSessionStateCreated");
                                                   break;
                                                   
                                               case FBSessionStateCreatedTokenLoaded:
-                                                  //NSLog(@"FBSessionStateCreatedTokenLoaded");
+                                                  NSLog(@"FBSessionStateCreatedTokenLoaded");
                                                   break;
                                                   
                                               case FBSessionStateCreatedOpening:
-                                                  //NSLog(@"FBSessionStateCreatedOpening");
+                                                  NSLog(@"FBSessionStateCreatedOpening");
                                                   break;
                                                   
                                               case FBSessionStateOpen:
-                                                  //NSLog(@"FBSessionStateOpen");
+                                                  NSLog(@"FBSessionStateOpen");
                                                   //                                                      [[NSNotificationCenter defaultCenter] postNotificationName:kFacebookNotificationSessionOpened object:nil userInfo:nil];
                                                   [_delegate FBLogin:YES];
                                                   break;
                                                   
                                               case FBSessionStateOpenTokenExtended:
-                                                  //NSLog(@"FBSessionStateOpenTokenExtended");
+                                                  NSLog(@"FBSessionStateOpenTokenExtended");
                                                   break;
                                                   
                                               case FBSessionStateClosedLoginFailed:
-                                                  //NSLog(@"FBSessionStateClosedLoginFailed");
+                                                  NSLog(@"FBSessionStateClosedLoginFailed");
                                                   [self clearTokenAndCookies];
                                                   break;
                                                   
                                               case FBSessionStateClosed:
-                                                  //NSLog(@"FBSessionStateClosed");
+                                                  NSLog(@"FBSessionStateClosed");
                                                   [self clearTokenAndCookies];
                                                   break;
                                           }
