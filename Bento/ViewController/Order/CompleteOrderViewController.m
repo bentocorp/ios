@@ -212,7 +212,13 @@
     CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
     CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
     
-    CLLocationDistance regionRadius = 100;
+    CLLocationDistance regionRadius;
+    NSString *geofenceOrderRadiusMeters = [[BentoShop sharedInstance] getGeofenceRadius];
+    
+    if (geofenceOrderRadiusMeters != nil)
+        regionRadius = [geofenceOrderRadiusMeters integerValue];
+    else
+        regionRadius = 100;
     
     if (regionRadius > locationManager.maximumRegionMonitoringDistance)
         regionRadius = locationManager.maximumRegionMonitoringDistance;

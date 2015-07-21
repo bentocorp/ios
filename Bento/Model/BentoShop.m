@@ -50,6 +50,8 @@
     
     NSString *dinnerMapURLString;
     NSString *lunchMapURLString;
+    
+    NSString *geofenceOrderRadiusMetersString;
 }
 
 static BentoShop *_shareInstance;
@@ -415,6 +417,19 @@ static BentoShop *_shareInstance;
     /*--------------------------------------extra: for service area URL's-------------------------------------------*/
     lunchMapURLString = initDictionary[@"settings"][@"serviceArea_lunch_map"];
     dinnerMapURLString = initDictionary[@"settings"][@"serviceArea_dinner_map"];
+    
+    /*--------------------------------------extra: set geofence-------------------------------------------*/
+    [self setGeofenceRadius:initDictionary];
+}
+
+- (void)setGeofenceRadius: (NSDictionary *)initDict
+{
+    geofenceOrderRadiusMetersString = initDict[@"settings"][@"geofence_order_radius_meters"];
+}
+
+- (NSString *)getGeofenceRadius
+{
+    return geofenceOrderRadiusMetersString;
 }
 
 - (NSNumber *)getCurrentTime

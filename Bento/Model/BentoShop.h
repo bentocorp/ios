@@ -67,7 +67,8 @@
 - (NSNumber *)getDinnerTime;
 - (NSNumber *)getBufferTime;
 - (NSString *)getLunchMapURL;
-- (NSString*)getDinnerMapURL;
+- (NSString *)getDinnerMapURL;
+- (NSString *)getGeofenceRadius;
 
 - (void)refreshStart;
 - (void)refreshPause;

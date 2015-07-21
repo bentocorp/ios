@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "459132907.230528"
+            timestampString = "459134250.829454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "471"
-            endingLineNumber = "471"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
             landmarkName = "-updatePaymentInfo:cardNumber:paymentMethod:"
             landmarkType = "5">
          </BreakpointContent>
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "459132907.230528"
+            timestampString = "459134250.829454"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1479"
-            endingLineNumber = "1479"
+            startingLineNumber = "1485"
+            endingLineNumber = "1485"
             landmarkName = "-handlePaymentAuthorizationWithPayment:completion:"
             landmarkType = "5">
          </BreakpointContent>
@@ -74,6 +74,22 @@
             startingLineNumber = "91"
             endingLineNumber = "91"
             landmarkName = "-viewDidLoad"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "459134236.931531"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "217"
+            endingLineNumber = "217"
+            landmarkName = "-getRegion"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
