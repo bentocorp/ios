@@ -238,6 +238,7 @@
                                                                 delegate:self
                                                        cancelButtonTitle:@"Keep"
                                                         otherButtonTitle:@"Change"];
+    outsideRegionAlert.tag = 911;
     
     [outsideRegionAlert showInView:self.view];
 }
@@ -264,6 +265,7 @@
              
              NSLog(@"SAVED LAT: %f, SAVED LONG: %f, DISTANCE: %@", centerCoords.latitude, centerCoords.longitude, currentLocationDistance);
              
+             // Outside radius
              if ([currentLocationDistance floatValue] > radius)
              {
                  NSLog(@"Invoking didExitRegion manually for region: %@", identifer);
@@ -276,6 +278,10 @@
                  //start Monitoing Region again.
                  [locationManager startMonitoringForRegion:region];
              }
+             
+             // Within radius
+             else
+                 [self commitOnGetItNow];
          }];
     
         // Stop Location Updation, we dont need it now.
@@ -1588,6 +1594,17 @@
     {
         [[BentoShop sharedInstance] resetBentoArray];
         [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+    
+    // User selected Keep when confirming address
+    else if (alertView.tag == 911)
+    {
+        if (buttonIndex == 0)
+            [self commitOnGetItNow];
+        else
+        {
+            [self onChangeAddress:nil];
+        }
     }
 }
 
