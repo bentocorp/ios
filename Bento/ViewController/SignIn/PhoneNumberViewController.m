@@ -59,11 +59,27 @@
     [self showErrorMessage:nil code:ERROR_NONE];
     
     [self.txtPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
+        
+        if ([textField.attributedText length] > 0)
+        {
+            NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:textField.text];
+            
+            [newString addAttribute:NSForegroundColorAttributeName
+                              value:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]
+                              range:NSMakeRange([textField.text length]-1, 1)];
+            
+            textField.attributedText = newString;
+        }
+        
         [self updateUI];
     }];
     
     [self.txtPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
-//    self.txtPhoneNumber.formatter.prefix = @"+1 ";
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    textField.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
 }
 
 - (void)didReceiveMemoryWarning {

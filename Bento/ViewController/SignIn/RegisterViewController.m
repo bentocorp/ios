@@ -87,21 +87,19 @@
     [self.txtPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
         
         // set the last character in attributed text to have a bolder font
-        if ([textField.text length] > 0)
+        if ([textField.attributedText length] > 0) // if textField length is not empty
         {
-            NSString *lastCharacter = [textField.text substringFromIndex:[textField.text length] - 1];
+            NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:textField.text];
+//            [newString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"OpenSans-Bold" size:20] range:NSMakeRange(0, [textField.text length])];
+            [newString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f] range:NSMakeRange([textField.text length]-1, 1)];
             
-            unichar c = [lastCharacter characterAtIndex:0];
-            if (c >= '0' && c <= '9')
-            {
-//                textField.text = (NSString *)atrString;
-            }
-            
-            NSLog(@"Last Character: %@", lastCharacter);
+            textField.attributedText = newString;
         }
         
         [self updateUI];
     }];
+    
+    self.txtPhoneNumber.tag = 101;
     
     [self.txtPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
 //    self.txtPhoneNumber.formatter.prefix = @"+1 ";
@@ -755,6 +753,13 @@
         
         NSLog(@"BEGAN REGISTRATION");
     }
+    
+    //
+    
+    if (textField.tag == 101)
+    {
+        textField.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
+    }
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
@@ -783,6 +788,13 @@
     }
 
     [self showErrorWithString:nil code:ERROR_NONE];
+    
+    //
+    
+    if (textField.tag == 101)
+    {
+        textField.font = [UIFont fontWithName:@"OpenSans" size:14];
+    }
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField

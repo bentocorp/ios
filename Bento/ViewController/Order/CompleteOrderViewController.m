@@ -326,16 +326,6 @@
 {
     [super viewWillAppear:animated];
     
-    // check if currentlocation is inside geofence of saved location
-    
-    // if not, show alert
-    
-//    if ()
-//    {
-//        MyAlertView *alertView = [MyAlertView alloc] initWithTitle:<#(NSString *)#> message:<#(NSString *)#> delegate:<#(id)#> cancelButtonTitle:<#(NSString *)#> otherButtonTitle:<#(NSString *)#>;
-//    }
-    
-    
     // set array every time view appears (edit: moved from viewDidLoad)
     self.aryBentos = [[NSMutableArray alloc] init];
     for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
