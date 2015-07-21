@@ -137,9 +137,6 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = 100;
     
-    // set geofence
-    [self initializeRegionMonitoring];
-    
     // Mixpanel track for Placed An Order
     mixpanel = [Mixpanel sharedInstance];
     
@@ -183,6 +180,30 @@
 
 #pragma mark - Geofence
 
+- (void)initializeRegionMonitoring
+{
+    if(![CLLocationManager locationServicesEnabled])
+    {
+        // You need to enable Location Services
+    }
+    
+    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]])
+    {
+        // Region monitoring is not available for this Class
+    }
+    
+    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted)
+    {
+        // You need to authorize Location Services for the APP
+    }
+    
+    CLRegion *region = [self getRegion];
+    NSLog(@"getRegion: %@", region);
+    
+    [locationManager startMonitoringForRegion:region];
+    [locationManager startUpdatingLocation];
+}
+
 - (CLRegion *)getRegion
 {
     NSString *identifier = @"Saved Address";
@@ -207,45 +228,6 @@
     return region;
 }
 
-- (void)initializeRegionMonitoring
-{
-    if(![CLLocationManager locationServicesEnabled])
-    {
-        // You need to enable Location Services
-    }
-    
-    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]])
-    {
-        // Region monitoring is not available for this Class
-    }
-    
-    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted)
-    {
-        // You need to authorize Location Services for the APP
-    }
-    
-    CLRegion *region = [self getRegion];
-    NSLog(@"getRegion: %@", region);
-    
-    [locationManager startMonitoringForRegion:region];
-    
-    [locationManager startUpdatingLocation];
-}
-
-//- (void)locationManager:(CLLocationManager *)manager didStartMonitoringForRegion:(CLRegion *)region
-//{
-//    NSLog(@"started monitoring");
-//}
-
-//- (void)locationManager:(CLLocationManager *)manager monitoringDidFailForRegion:(CLRegion *)region withError:(NSError *)error
-//{
-//    NSLog(@"failed monitoring error %@", error);
-//}
-
-//- (void)locationManager:(CLLocationManager *)manager didEnterRegion:(CLRegion *)region
-//{
-//    NSLog(@"Did Enter Region!!!!");
-//}
 
 - (void)locationManager:(CLLocationManager *)manager didExitRegion:(CLRegion *)region
 {
@@ -325,9 +307,6 @@
     
     return coordinate;
 }
-
-
-///////////
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -962,6 +941,12 @@
 }
 
 - (IBAction)onGetItNow:(id)sender
+{
+    // set geofence
+    [self initializeRegionMonitoring];
+}
+
+-(void)commitOnGetItNow
 {
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
     if (strAPIToken == nil || strAPIToken.length == 0)
