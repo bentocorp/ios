@@ -6,6 +6,18 @@
 // project.
 
 
+// Adjust
+#define COCOAPODS_POD_AVAILABLE_Adjust
+#define COCOAPODS_VERSION_MAJOR_Adjust 4
+#define COCOAPODS_VERSION_MINOR_Adjust 2
+#define COCOAPODS_VERSION_PATCH_Adjust 7
+
+// Adjust/Core
+#define COCOAPODS_POD_AVAILABLE_Adjust_Core
+#define COCOAPODS_VERSION_MAJOR_Adjust_Core 4
+#define COCOAPODS_VERSION_MINOR_Adjust_Core 2
+#define COCOAPODS_VERSION_PATCH_Adjust_Core 7
+
 // Canvas
 #define COCOAPODS_POD_AVAILABLE_Canvas
 #define COCOAPODS_VERSION_MAJOR_Canvas 0
