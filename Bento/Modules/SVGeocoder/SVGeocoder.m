@@ -220,7 +220,7 @@ static NSString *googleMapsAPIKey;
 }
 
 - (NSString*)createBoundsStringFromRegion:(CLRegion *)region {
-    MKCoordinateRegion coordinateRegion = MKCoordinateRegionMakeWithDistance(region.center, region.radius, region.radius);
+    MKCoordinateRegion coordinateRegion = MKCoordinateRegionMakeWithDistance([(CLCircularRegion *)region center], [(CLCircularRegion *)region radius], [(CLCircularRegion *)region radius]);
     
     NSString *bounds = [NSString stringWithFormat:@"%f,%f|%f,%f",
                          coordinateRegion.center.latitude-(coordinateRegion.span.latitudeDelta/2.0),
