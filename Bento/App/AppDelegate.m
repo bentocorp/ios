@@ -117,22 +117,21 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Twitter Conversion Tracking, MoPub
     [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"963634117"];
     
-    // Adjust Attribution Tracking
+    // Adjust Tracking (so far, onyl tracking organic installs)
     NSString *yourAppToken = ADJUST_TOKEN;
     
-    NSString *environment = ADJEnvironmentSandbox;
-//    NSString *environment = ADJEnvironmentProduction;
+//    NSString *environment = ADJEnvironmentSandbox;
+    NSString *environment = ADJEnvironmentProduction;
     
-    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:yourAppToken
-                                                environment:environment];
-    [Adjust appDidLaunch:adjustConfig];
-    
+    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:yourAppToken environment:environment];
     [adjustConfig setLogLevel:ADJLogLevelVerbose]; // enable all logging
 //    [adjustConfig setLogLevel:ADJLogLevelDebug];   // enable more logging
 //    [adjustConfig setLogLevel:ADJLogLevelInfo];    // the default
 //    [adjustConfig setLogLevel:ADJLogLevelWarn];    // disable info logging
 //    [adjustConfig setLogLevel:ADJLogLevelError];   // disable warnings as well
 //    [adjustConfig setLogLevel:ADJLogLevelAssert];  // disable errors as well
+    
+    [Adjust appDidLaunch:adjustConfig];
     
     // Mixpanel Tracking
 #ifndef DEV_MODE
