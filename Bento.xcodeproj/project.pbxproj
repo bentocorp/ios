@@ -330,6 +330,8 @@
 		FC72297C1B16905700C9A9AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
 		FC7B609F1B0FF11300A00467 /* BentoModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B609E1B0FF11300A00467 /* BentoModelTests.m */; };
 		FC7B60A11B10045D00A00467 /* BentoShopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B60A01B10045D00A00467 /* BentoShopTests.m */; };
+		FC89D5D31B6029B400D8D310 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC89D5D21B6029B400D8D310 /* iAd.framework */; };
+		FC89D5D51B6029B900D8D310 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC89D5D41B6029B900D8D310 /* AdSupport.framework */; };
 		FC8DB7381AF18674003045A3 /* icon-circle-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB72E1AF18674003045A3 /* icon-circle-facebook.png */; };
 		FC8DB7391AF18674003045A3 /* icon-circle-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB72E1AF18674003045A3 /* icon-circle-facebook.png */; };
 		FC8DB73A1AF18674003045A3 /* icon-circle-mail.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB72F1AF18674003045A3 /* icon-circle-mail.png */; };
@@ -744,6 +746,8 @@
 		FC8286061AEEED1B009D073D /* ss-standard.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ss-standard.svg"; sourceTree = "<group>"; };
 		FC8286071AEEED1B009D073D /* ss-standard.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-standard.ttf"; sourceTree = "<group>"; };
 		FC8286081AEEED1B009D073D /* ss-standard.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-standard.woff"; sourceTree = "<group>"; };
+		FC89D5D21B6029B400D8D310 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
+		FC89D5D41B6029B900D8D310 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
 		FC8DB72E1AF18674003045A3 /* icon-circle-facebook.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-circle-facebook.png"; sourceTree = "<group>"; };
 		FC8DB72F1AF18674003045A3 /* icon-circle-mail.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-circle-mail.png"; sourceTree = "<group>"; };
 		FC8DB7301AF18674003045A3 /* icon-circle-messages.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-circle-messages.png"; sourceTree = "<group>"; };
@@ -823,6 +827,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC89D5D51B6029B900D8D310 /* AdSupport.framework in Frameworks */,
+				FC89D5D31B6029B400D8D310 /* iAd.framework in Frameworks */,
 				FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */,
 				FCF2787C1B26370700130F7A /* Crashlytics.framework in Frameworks */,
 				7209E0821A76BD3500D18D7A /* CoreLocation.framework in Frameworks */,
@@ -1399,6 +1405,8 @@
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC89D5D41B6029B900D8D310 /* AdSupport.framework */,
+				FC89D5D21B6029B400D8D310 /* iAd.framework */,
 				FCE3B9411B14176300301353 /* SystemConfiguration.framework */,
 				725BA0341A84EDBF005C18D3 /* Fabric.framework */,
 				7209E0811A76BD3500D18D7A /* CoreLocation.framework */,

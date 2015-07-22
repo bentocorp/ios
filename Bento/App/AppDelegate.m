@@ -38,6 +38,11 @@
 // Force Update
 #import "AppStrings.h"
 
+// Adjust..attribution tracking
+#import "Adjust.h"
+#define ADJUST_TOKEN @"ltd8yvnhnkrw"
+
+
 NSString * const StripePublishableTestKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
 NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
@@ -102,9 +107,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     [googleReach startNotifier];
 
-/////////////////////////////////////////////////////////////////////////////////////
+/*--------------------------------------TRACKING--------------------------------------------*/
     
-    NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion] );
+    NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion]);
     
     // Crashlytics
     [Fabric with:@[CrashlyticsKit]];
@@ -112,6 +117,24 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Twitter Conversion Tracking, MoPub
     [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"963634117"];
     
+    // Adjust Attribution Tracking
+    NSString *yourAppToken = ADJUST_TOKEN;
+    
+    NSString *environment = ADJEnvironmentSandbox;
+//    NSString *environment = ADJEnvironmentProduction;
+    
+    ADJConfig *adjustConfig = [ADJConfig configWithAppToken:yourAppToken
+                                                environment:environment];
+    [Adjust appDidLaunch:adjustConfig];
+    
+    [adjustConfig setLogLevel:ADJLogLevelVerbose]; // enable all logging
+//    [adjustConfig setLogLevel:ADJLogLevelDebug];   // enable more logging
+//    [adjustConfig setLogLevel:ADJLogLevelInfo];    // the default
+//    [adjustConfig setLogLevel:ADJLogLevelWarn];    // disable info logging
+//    [adjustConfig setLogLevel:ADJLogLevelError];   // disable warnings as well
+//    [adjustConfig setLogLevel:ADJLogLevelAssert];  // disable errors as well
+    
+    // Mixpanel Tracking
 #ifndef DEV_MODE
     {
         [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];  // Use MixPanel for production build only
@@ -134,19 +157,19 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         NSLog(@"WITHIN SERVICE AREA");
     }
     
-    // App Strings
-    globalStrings = [AppStrings sharedInstance];
-    
-    // Bento Shop
-    globalShop = [BentoShop sharedInstance];
-    
     // Stripe
 #ifdef DEV_MODE
     [Stripe setDefaultPublishableKey:StripePublishableTestKey];
 #else
     [Stripe setDefaultPublishableKey:StripePublishableLiveKey];
 #endif
-
+    
+    // App Strings
+    globalStrings = [AppStrings sharedInstance];
+    
+    // Bento Shop
+    globalShop = [BentoShop sharedInstance];
+    
     
 /*---------------------------LOCATION MANAGER--------------------------*/
     
