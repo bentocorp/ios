@@ -337,6 +337,8 @@
                  if (error.code == 403 || error.code == 404)
                  {
                      dispatch_async(dispatch_get_main_queue(), ^{
+                         
+                         [[BentoShop sharedInstance] setSignInStatus:NO];
                          [self gotoPhoneNumberScreen:user];
                      });
                      
@@ -371,6 +373,8 @@
 - (void)doRegisterWithFacebook:(BOOL)isRetry
 {
     [self closeKeyboard];
+    
+    [[BentoShop sharedInstance] setSignInStatus:YES];
     
     FacebookManager *fbManager = [FacebookManager sharedInstance];
     
@@ -475,6 +479,8 @@
         [pref setObject:strRequest forKey:@"apiName"];
         [pref setObject:registeredData forKey:@"loginRequest"];
         [pref synchronize];
+        
+        [[BentoShop sharedInstance] setSignInStatus:YES];
         
         // dismiss vc
         [self dismissViewControllerAnimated:YES completion:nil];

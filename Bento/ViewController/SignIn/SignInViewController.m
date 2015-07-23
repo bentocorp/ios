@@ -291,6 +291,8 @@
         [pref setObject:dicRequest forKey:@"loginRequest"];
         [pref synchronize];
         
+        [[BentoShop sharedInstance] setSignInStatus:YES];
+        
         [self showErrorMessage:nil code:ERROR_NONE];
         [self gotoDeliveryLocationScreen];
         
@@ -418,6 +420,8 @@
                  
                  if (error.code == 403 || error.code == 404)
                  {
+                     
+                     [[BentoShop sharedInstance] setSignInStatus:NO];
                      [self gotoPhoneNumberScreen:user];
                      return;
                  }
@@ -450,6 +454,8 @@
 - (void)doSignInWithFacebook:(BOOL)isRetry
 {
     [self hideKeyboard];
+    
+    [[BentoShop sharedInstance] setSignInStatus:YES];
     
     FacebookManager *fbManager = [FacebookManager sharedInstance];
     if (isRetry)

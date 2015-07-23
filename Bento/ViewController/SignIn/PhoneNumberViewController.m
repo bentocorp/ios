@@ -318,6 +318,8 @@
         [pref setObject:saveRequest forKey:@"loginRequest"];
         [pref synchronize];
         
+        [[BentoShop sharedInstance] setSignInStatus:YES];
+        
         [self showErrorMessage:nil code:ERROR_NONE];
         [self gotoDeliveryLocationScreen];
         
