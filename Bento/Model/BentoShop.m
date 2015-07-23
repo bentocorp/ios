@@ -52,6 +52,8 @@
     NSString *lunchMapURLString;
     
     NSString *geofenceOrderRadiusMetersString;
+    
+    BOOL signedIn;
 }
 
 static BentoShop *_shareInstance;
@@ -1335,6 +1337,16 @@ static BentoShop *_shareInstance;
     }
     
     return NO;
+}
+
+- (void)setSignInStatus:(BOOL)status
+{
+    signedIn = status;
+}
+
+- (BOOL)isSignedIn
+{
+    return signedIn;
 }
 
 @end

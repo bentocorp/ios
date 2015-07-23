@@ -40,6 +40,9 @@
 - (BOOL)isClosed;
 - (BOOL)isSoldOut;
 
+- (void)setSignInStatus:(BOOL)status;
+- (BOOL)isSignedIn;
+
 - (BOOL)canAddDish:(NSInteger)dishID;
 - (BOOL)isDishSoldOut:(NSInteger)menuID;
 
