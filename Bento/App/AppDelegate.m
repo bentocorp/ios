@@ -39,7 +39,6 @@
 #import "AppStrings.h"
 
 // Adjust..attribution tracking
-#import "Adjust.h"
 #define ADJUST_TOKEN @"ltd8yvnhnkrw"
 
 
@@ -65,6 +64,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 @end
 
 @implementation AppDelegate
+
+- (void)adjustAttributionChanged:(ADJAttribution *)attribution
+{
+    NSLog(@"adjust attribution %@", attribution.);
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
@@ -119,18 +123,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Adjust Tracking (so far, onyl tracking organic installs)
     NSString *yourAppToken = ADJUST_TOKEN;
-    
-//    NSString *environment = ADJEnvironmentSandbox;
-    NSString *environment = ADJEnvironmentProduction;
+    NSString *environment = ADJEnvironmentProduction; // or ADJEnvironmentSandbox
     
     ADJConfig *adjustConfig = [ADJConfig configWithAppToken:yourAppToken environment:environment];
     [adjustConfig setLogLevel:ADJLogLevelVerbose]; // enable all logging
-//    [adjustConfig setLogLevel:ADJLogLevelDebug];   // enable more logging
-//    [adjustConfig setLogLevel:ADJLogLevelInfo];    // the default
-//    [adjustConfig setLogLevel:ADJLogLevelWarn];    // disable info logging
-//    [adjustConfig setLogLevel:ADJLogLevelError];   // disable warnings as well
-//    [adjustConfig setLogLevel:ADJLogLevelAssert];  // disable errors as well
-    
+    [adjustConfig setDelegate:self];
     [Adjust appDidLaunch:adjustConfig];
     
     // Mixpanel Tracking
@@ -147,15 +144,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Mixpanel tracking Opened App Outside of Service Area
     if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]])
     {
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
         [mixpanel track:@"Opened App Outside of Service Area" properties:nil];
         NSLog(@"OUT OF SERVICE AREA");
     }
-    else
-    {
-        NSLog(@"WITHIN SERVICE AREA");
-    }
-    
+
     // Stripe
 #ifdef DEV_MODE
     [Stripe setDefaultPublishableKey:StripePublishableTestKey];
