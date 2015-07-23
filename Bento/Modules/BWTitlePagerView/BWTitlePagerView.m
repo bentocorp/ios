@@ -106,7 +106,7 @@
     }
     
     _isObservingScrollView = YES;
-    
+
     [self.observedScrollView addObserver:self forKeyPath:@"contentOffset" options:NSKeyValueObservingOptionNew context:nil];
 }
 

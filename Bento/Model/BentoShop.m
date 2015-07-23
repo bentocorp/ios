@@ -1297,7 +1297,8 @@ static BentoShop *_shareInstance;
 
 - (void)resetBentoArray
 {
-    [self.aryBentos removeAllObjects];
+    if (self.aryBentos != nil)
+        [self.aryBentos removeAllObjects];
 }
 
 #pragma mark Response to State Change

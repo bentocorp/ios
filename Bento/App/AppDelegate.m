@@ -65,9 +65,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 @implementation AppDelegate
 
+// adjust callback
 - (void)adjustAttributionChanged:(ADJAttribution *)attribution
 {
-    NSLog(@"adjust attribution %@", attribution.);
+    // Organic? Facebook? Twitter?
+    NSLog(@"adjust attribution %@", attribution.trackerName);
+    
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -123,7 +126,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Adjust Tracking (so far, onyl tracking organic installs)
     NSString *yourAppToken = ADJUST_TOKEN;
-    NSString *environment = ADJEnvironmentProduction; // or ADJEnvironmentSandbox
+    NSString *environment = ADJEnvironmentSandbox; // or ADJEnvironmentSandbox
     
     ADJConfig *adjustConfig = [ADJConfig configWithAppToken:yourAppToken environment:environment];
     [adjustConfig setLogLevel:ADJLogLevelVerbose]; // enable all logging
@@ -187,7 +190,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             
-            /*---------------------------FORCED UPDATE----------------------------*/
+/*---------------------------FORCED UPDATE----------------------------*/
 #ifdef DEV_MODE
             {
                 aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", globalShop.iosCurrentVersion, globalShop.iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
@@ -210,7 +213,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                     [aV show];
             }
             
-            /*-----------------------*/
+/*--------------------------------------------------------------------*/
             
             // Date Change, reset
             NSLog(@"ORIGINAL DATE STRING ON LAUNCH: %@", [[BentoShop sharedInstance] getMenuDateString]);
