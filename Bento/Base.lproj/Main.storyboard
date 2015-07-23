@@ -41,19 +41,6 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Light.ttf">
             <string>OpenSans-Light</string>
@@ -87,9 +74,6 @@
             <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
-            <string>OpenSans-Semibold</string>
-            <string>OpenSans-Semibold</string>
-            <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
@@ -305,7 +289,7 @@
         <!--First View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
-                <viewController id="vXZ-lx-hvc" customClass="FirstViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FirstViewController" id="vXZ-lx-hvc" customClass="FirstViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="kh9-bI-dsS">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -351,7 +335,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="787" y="462"/>
+            <point key="canvasLocation" x="791" y="462"/>
         </scene>
         <!--Intro View Controller-->
         <scene sceneID="UdI-NS-1Dg">
@@ -461,321 +445,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fy6-LN-dRc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1234" y="462"/>
-        </scene>
-        <!--My Bento View Controller-->
-        <scene sceneID="RYP-cm-1PN">
-            <objects>
-                <viewController storyboardIdentifier="MyBentoViewController" id="diU-FL-EY2" customClass="MyBentoViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ClA-IU-eIm">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="q9X-aU-dkj">
-                                <rect key="frame" x="30" y="85" width="260" height="353"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <subviews>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" id="7AP-v0-tnQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="154"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="KQy-bw-YSx">
-                                                <rect key="frame" x="0.0" y="0.0" width="260" height="154"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                                <state key="normal" title="+ MAIN ENTREE">
-                                                    <color key="titleColor" red="0.53333333329999999" green="0.68627450980000004" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onAddMainDish:" destination="diU-FL-EY2" eventType="touchUpInside" id="wft-yt-4Ym"/>
-                                                </connections>
-                                            </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="San-at-zvT">
-                                                <rect key="frame" x="0.0" y="0.0" width="260" height="154"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISH TITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="BPl-wb-MAe">
-                                                <rect key="frame" x="0.0" y="0.0" width="260" height="154"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="18"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="RZZ-jU-O8M">
-                                                <rect key="frame" x="219" y="0.0" width="41" height="41"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" id="2eQ-aA-4Yo">
-                                        <rect key="frame" x="0.0" y="100" width="130" height="168"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="cwM-DC-TXG">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                                <state key="normal" title="+ SIDE">
-                                                    <color key="titleColor" red="0.53333333329999999" green="0.68627450980000004" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onAddSideDish:" destination="diU-FL-EY2" eventType="touchUpInside" id="5Lu-Np-Yyf"/>
-                                                </connections>
-                                            </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="cro-qA-bIw">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISH TITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="3PR-0M-5ql">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="YdG-bB-86p">
-                                                <rect key="frame" x="89" y="0.0" width="41" height="41"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" id="CgN-k4-DKq">
-                                        <rect key="frame" x="130" y="100" width="130" height="168"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3Yz-gN-QBo">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                                <state key="normal" title="+ SIDE">
-                                                    <color key="titleColor" red="0.53333333329999999" green="0.68627450980000004" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onAddSideDish:" destination="diU-FL-EY2" eventType="touchUpInside" id="puE-Qn-CcP"/>
-                                                </connections>
-                                            </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="mdZ-cn-fVj">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISH TITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="VQS-pA-9AJ">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="frH-Fe-vBi">
-                                                <rect key="frame" x="89" y="0.0" width="41" height="41"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" id="JdU-Tb-QQ0">
-                                        <rect key="frame" x="0.0" y="188" width="130" height="168"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="a67-DD-r0D">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                                <state key="normal" title="+ SIDE">
-                                                    <color key="titleColor" red="0.53333333329999999" green="0.68627450980000004" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onAddSideDish:" destination="diU-FL-EY2" eventType="touchUpInside" id="EwV-I6-dxa"/>
-                                                </connections>
-                                            </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="lfA-Wz-nRX">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISH TITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="RmR-pc-tPb">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="5XU-32-iHW">
-                                                <rect key="frame" x="89" y="0.0" width="41" height="41"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                    <view clipsSubviews="YES" contentMode="scaleToFill" id="9kY-eq-xP5">
-                                        <rect key="frame" x="130" y="188" width="130" height="168"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                        <subviews>
-                                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="VaD-cs-f6w">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                                <state key="normal" title="+ SIDE">
-                                                    <color key="titleColor" red="0.53333333329999999" green="0.68627450980000004" blue="0.37647058820000001" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                                </state>
-                                                <connections>
-                                                    <action selector="onAddSideDish:" destination="diU-FL-EY2" eventType="touchUpInside" id="74v-D4-kTI"/>
-                                                </connections>
-                                            </button>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="gjV-5p-XOO">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            </imageView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="DISH TITLE" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="fIE-Lf-r4q">
-                                                <rect key="frame" x="0.0" y="0.0" width="130" height="168"/>
-                                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
-                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" id="Efm-j8-36b">
-                                                <rect key="frame" x="89" y="0.0" width="41" height="41"/>
-                                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                            </imageView>
-                                        </subviews>
-                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="0.96078431372549022" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                            </view>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zIH-ge-XjD">
-                                <rect key="frame" x="0.0" y="76" width="320" height="28"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" red="0.9137254901960784" green="0.44705882352941173" blue="0.0078431372549019607" alpha="0.80000000000000004" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <view contentMode="scaleToFill" id="gLj-9Q-Sid">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="7lf-wi-EiQ">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build Your Bento" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hgo-zt-rAE">
-                                        <rect key="frame" x="50" y="20" width="220" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
-                                        <color key="textColor" red="0.3411764705882353" green="0.37647058823529411" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="1ZN-wJ-xL2">
-                                        <rect key="frame" x="270" y="20" width="50" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="mybento_nav_cart_inact.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <state key="selected" image="mybento_nav_cart_act.png"/>
-                                        <connections>
-                                            <action selector="onCart:" destination="diU-FL-EY2" eventType="touchUpInside" id="DHe-RM-i5q"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="EnC-v7-ODr">
-                                        <rect key="frame" x="277" y="25" width="14" height="14"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.8901960784313725" green="0.24705882352941178" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
-                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user.png" id="9L0-V1-V3X">
-                                        <rect key="frame" x="12" y="30" width="25" height="25"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="lW4-aV-d51">
-                                        <rect key="frame" x="0.0" y="20" width="50" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <connections>
-                                            <action selector="onSettings:" destination="diU-FL-EY2" eventType="touchUpInside" id="obp-JS-SS4"/>
-                                        </connections>
-                                    </button>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JtB-oX-RW9">
-                                <rect key="frame" x="0.0" y="523" width="320" height="45"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                <state key="normal" title="CONTINUE">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="onContinue:" destination="diU-FL-EY2" eventType="touchUpInside" id="map-Ww-I67"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="9hp-xO-ItZ">
-                                <rect key="frame" x="30" y="458" width="260" height="45"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                <color key="backgroundColor" red="0.96078431372549022" green="0.96862745098039216" blue="0.96862745098039216" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                <state key="normal" title="ADD ANOTHER BENTO">
-                                    <color key="titleColor" red="0.53333333333333333" green="0.68627450980392157" blue="0.37647058823529411" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="disabled">
-                                    <color key="titleColor" red="0.67843137254901964" green="0.78431372549019607" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
-                                </state>
-                                <connections>
-                                    <action selector="onAddAnotherBento:" destination="diU-FL-EY2" eventType="touchUpInside" id="KB9-WY-Mrr"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="QSI-kA-xGm"/>
-                    <connections>
-                        <outlet property="btnAddAnotherBento" destination="9hp-xO-ItZ" id="dy9-PC-imv"/>
-                        <outlet property="btnCart" destination="1ZN-wJ-xL2" id="V0N-fr-fUM"/>
-                        <outlet property="btnMainDish" destination="KQy-bw-YSx" id="rC5-Ts-GEn"/>
-                        <outlet property="btnSideDish1" destination="cwM-DC-TXG" id="IYb-WN-9fx"/>
-                        <outlet property="btnSideDish2" destination="3Yz-gN-QBo" id="xjH-tr-af3"/>
-                        <outlet property="btnSideDish3" destination="a67-DD-r0D" id="R6R-GL-mI7"/>
-                        <outlet property="btnSideDish4" destination="VaD-cs-f6w" id="Qb7-7a-IIF"/>
-                        <outlet property="btnState" destination="JtB-oX-RW9" id="MiM-le-yNG"/>
-                        <outlet property="ivBannerMainDish" destination="RZZ-jU-O8M" id="KTM-HO-pZX"/>
-                        <outlet property="ivBannerSideDish1" destination="YdG-bB-86p" id="R3g-Vj-aew"/>
-                        <outlet property="ivBannerSideDish2" destination="frH-Fe-vBi" id="f1K-nc-LPa"/>
-                        <outlet property="ivBannerSideDish3" destination="5XU-32-iHW" id="ks0-fH-OtZ"/>
-                        <outlet property="ivBannerSideDish4" destination="Efm-j8-36b" id="VqU-XP-M77"/>
-                        <outlet property="ivMainDish" destination="San-at-zvT" id="ybT-U9-nLY"/>
-                        <outlet property="ivSideDish1" destination="cro-qA-bIw" id="eEv-bf-vuJ"/>
-                        <outlet property="ivSideDish2" destination="mdZ-cn-fVj" id="xwd-kP-ghG"/>
-                        <outlet property="ivSideDish3" destination="lfA-Wz-nRX" id="mAG-fi-KvZ"/>
-                        <outlet property="ivSideDish4" destination="gjV-5p-XOO" id="9pc-ya-Cqw"/>
-                        <outlet property="lblBadge" destination="EnC-v7-ODr" id="Cff-IH-6r6"/>
-                        <outlet property="lblBanner" destination="zIH-ge-XjD" id="kee-i1-05z"/>
-                        <outlet property="lblMainDish" destination="BPl-wb-MAe" id="Dky-Nc-MTa"/>
-                        <outlet property="lblSideDish1" destination="3PR-0M-5ql" id="hxP-oe-RLK"/>
-                        <outlet property="lblSideDish2" destination="VQS-pA-9AJ" id="q3D-xX-RfT"/>
-                        <outlet property="lblSideDish3" destination="RmR-pc-tPb" id="DOh-zU-hg8"/>
-                        <outlet property="lblSideDish4" destination="fIE-Lf-r4q" id="BeG-tg-8Mp"/>
-                        <outlet property="lblTitle" destination="Hgo-zt-rAE" id="VRP-1i-7oj"/>
-                        <outlet property="settingsButton" destination="lW4-aV-d51" id="zIK-lR-cRo"/>
-                        <outlet property="viewDishs" destination="q9X-aU-dkj" id="pSE-sz-tOy"/>
-                        <outlet property="viewMainEntree" destination="7AP-v0-tnQ" id="Fhq-NS-BGr"/>
-                        <outlet property="viewSide1" destination="2eQ-aA-4Yo" id="A2S-Tg-wgU"/>
-                        <outlet property="viewSide2" destination="CgN-k4-DKq" id="wt9-95-fXm"/>
-                        <outlet property="viewSide3" destination="JdU-Tb-QQ0" id="x9Y-LQ-khH"/>
-                        <outlet property="viewSide4" destination="9kY-eq-xP5" id="re3-Ef-YKM"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="V6d-St-eXW" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1187" y="-982"/>
+            <point key="canvasLocation" x="1232" y="462"/>
         </scene>
         <!--Choose Main Dish View Controller-->
         <scene sceneID="blW-Mz-28m">
@@ -850,7 +520,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EMt-78-ygp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="388"/>
+            <point key="canvasLocation" x="2022" y="418"/>
         </scene>
         <!--Register View Controller-->
         <scene sceneID="8U0-dj-nvw">
@@ -1134,12 +804,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IwZ-gB-3gc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-223" y="2456"/>
+            <point key="canvasLocation" x="-223" y="2496"/>
         </scene>
         <!--Phone Number View Controller-->
         <scene sceneID="xTy-Lv-o3p">
             <objects>
-                <viewController id="Uml-6W-39g" customClass="PhoneNumberViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="PhoneNumberViewController" id="Uml-6W-39g" customClass="PhoneNumberViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="oZa-oV-wxY">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1272,7 +942,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Nvk-7O-cZq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="224" y="2148"/>
+            <point key="canvasLocation" x="229" y="2148"/>
         </scene>
         <!--Delivery Location View Controller-->
         <scene sceneID="Qcn-rT-Ef9">
@@ -1805,7 +1475,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="M4n-7T-zdy" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1420" y="2452"/>
+            <point key="canvasLocation" x="1420" y="2396"/>
         </scene>
         <!--Enter Credit Card View Controller-->
         <scene sceneID="l9o-iz-hyu">
@@ -1913,7 +1583,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O0y-jd-YVS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1832" y="2452"/>
+            <point key="canvasLocation" x="1832" y="2396"/>
         </scene>
         <!--Order Confirm View Controller-->
         <scene sceneID="g3z-gP-hSU">
@@ -2003,7 +1673,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZa-6b-62c" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1420" y="3077"/>
+            <point key="canvasLocation" x="1420" y="2988"/>
         </scene>
         <!--Out Of Delivery Address View Controller-->
         <scene sceneID="dzF-gT-KqI">
@@ -2381,7 +2051,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aWl-hV-82G" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-223" y="1822"/>
+            <point key="canvasLocation" x="-223" y="1845"/>
         </scene>
         <!--Choose Side Dish View Controller-->
         <scene sceneID="dUe-qW-yIy">
@@ -2456,12 +2126,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bbc-AW-6Bs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2028" y="1010"/>
+            <point key="canvasLocation" x="2022" y="1044"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="hpL-ZN-c77">
             <objects>
-                <navigationController navigationBarHidden="YES" id="bfp-2n-wGh" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="firstView" navigationBarHidden="YES" id="bfp-2n-wGh" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eWz-cT-XFp">
@@ -2474,7 +2144,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dst-6O-L74" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="337" y="462"/>
+            <point key="canvasLocation" x="345" y="462"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="87V-Tm-w6N">
@@ -2492,7 +2162,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ucs-hA-xgP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-637" y="1822"/>
+            <point key="canvasLocation" x="-637" y="1845"/>
         </scene>
         <!--Faq View Controller-->
         <scene sceneID="f2w-P5-EhP">
@@ -2598,75 +2268,10 @@
             </objects>
             <point key="canvasLocation" x="632" y="2148"/>
         </scene>
-        <!--Sneak Preview View Controller-->
-        <scene sceneID="Pv5-xi-fdb">
-            <objects>
-                <viewController storyboardIdentifier="SneakPreviewViewController" id="yMB-Wh-SQX" customClass="SneakPreviewViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="lPD-Ja-duM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" id="T2o-aw-Dae">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="yAy-vf-97d">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="187-hY-aeY">
-                                        <rect key="frame" x="0.0" y="20" width="50" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" image="nav_btn_back.png">
-                                            <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onBack:" destination="yMB-Wh-SQX" eventType="touchUpInside" id="EWK-Ii-U68"/>
-                                        </connections>
-                                    </button>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Upcoming Menu" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="02Z-HF-rui">
-                                        <rect key="frame" x="50" y="20" width="220" height="45"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
-                                        <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                            </view>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="OMv-ut-2RE">
-                                <rect key="frame" x="0.0" y="65" width="320" height="503"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="Txz-Rd-6NR">
-                                    <size key="itemSize" width="50" height="50"/>
-                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
-                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
-                                </collectionViewFlowLayout>
-                                <cells/>
-                                <connections>
-                                    <outlet property="dataSource" destination="yMB-Wh-SQX" id="Jku-tS-8tI"/>
-                                    <outlet property="delegate" destination="yMB-Wh-SQX" id="xgs-GQ-gGR"/>
-                                </connections>
-                            </collectionView>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="43S-dm-cwV"/>
-                    <connections>
-                        <outlet property="cvDishes" destination="OMv-ut-2RE" id="ia8-wK-gBE"/>
-                        <outlet property="lblTitle" destination="02Z-HF-rui" id="lqi-LO-MsU"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Uev-9I-8EH" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="746" y="-968"/>
-        </scene>
         <!--Network Error View Controller-->
         <scene sceneID="nH8-xd-X1c">
             <objects>
-                <viewController id="Vjq-Ie-QbH" customClass="NetworkErrorViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="NetworkErrorViewController" id="Vjq-Ie-QbH" customClass="NetworkErrorViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="G1G-nn-CXf">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -2705,12 +2310,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7jA-Ty-yDl" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="569" y="1130"/>
+            <point key="canvasLocation" x="538" y="1162"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="zIc-fy-jDr">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="UNB-lt-Ye8" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Register" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="UNB-lt-Ye8" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uc5-tN-Xon">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -2723,21 +2328,17 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6cE-WQ-fFu" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-637" y="2456"/>
+            <point key="canvasLocation" x="-637" y="2496"/>
         </scene>
     </scenes>
     <resources>
-        <image name="banner_sold_out.png" width="154" height="154"/>
         <image name="creditcard_btn_clear.png" width="20" height="20"/>
         <image name="deliverylocation_icon_navigation.png" width="16" height="16"/>
         <image name="deliverylocation_icon_search.png" width="16" height="16"/>
-        <image name="icon-user.png" width="36" height="36"/>
         <image name="image_checked.png" width="28" height="28"/>
         <image name="image_unchecked.png" width="28" height="28"/>
         <image name="logo.png" width="500" height="107"/>
         <image name="logo_title.png" width="182" height="41"/>
-        <image name="mybento_nav_cart_act.png" width="21" height="21"/>
-        <image name="mybento_nav_cart_inact.png" width="21" height="21"/>
         <image name="mybento_nav_help.png" width="18" height="18"/>
         <image name="nav_background.png" width="642" height="131"/>
         <image name="nav_btn_back.png" width="10" height="16"/>
