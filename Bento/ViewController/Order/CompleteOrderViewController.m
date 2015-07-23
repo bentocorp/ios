@@ -1399,7 +1399,10 @@
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
         [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
         
-        [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
+        
+            [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
+        
+        
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         

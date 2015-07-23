@@ -299,7 +299,7 @@
 
 - (void)gotoMyBentoScreen
 {
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
     BentoShop *globalShop = [BentoShop sharedInstance];
     
