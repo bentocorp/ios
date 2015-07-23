@@ -65,12 +65,21 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 @implementation AppDelegate
 
-// adjust callback
+// adjust callback, Organic? Facebook? Twitter?
 - (void)adjustAttributionChanged:(ADJAttribution *)attribution
 {
-    // Organic? Facebook? Twitter?
-    NSLog(@"adjust attribution %@", attribution.trackerName);
+    NSLog(@"ATTRIBUTION: %@", attribution);
     
+    if (attribution.trackerName != nil)
+    {
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        [mixpanel track:@"App Installed" properties:@{@"Source": attribution.trackerName}];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:attribution.trackerName forKey:@"SourceOfInstall"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        NSLog(@"SourceOfInstall: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"]);
+    }
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -79,7 +88,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-
+//7F0C0A0E-10FC-4CBA-BC4F-89979CDC24EE
+//7F0C0A0E-10FC-4CBA-BC4F-89979CDC24EE
     googleReach = [Reachability reachabilityWithHostname:@"www.google.com"];
     
     googleReach.reachableBlock = ^(Reachability * reachability)
@@ -143,6 +153,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"App Launched" properties:nil];
+
+    NSLog(@"DISTINCT ID: %@", mixpanel.distinctId);
     
     // Mixpanel tracking Opened App Outside of Service Area
     if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]])
