@@ -221,7 +221,7 @@
     btnState.hidden = NO;
     
     //
-    AppDelegate *delegate = [[UIApplication sharedApplication] delegate];
+    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
     BentoShop *globalShop = [BentoShop sharedInstance];
     if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)

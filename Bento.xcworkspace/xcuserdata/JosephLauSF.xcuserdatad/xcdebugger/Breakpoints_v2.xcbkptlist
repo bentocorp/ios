@@ -41,7 +41,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1483"
             endingLineNumber = "1483"
-            landmarkName = "-handlePaymentAuthorizationWithPayment:completion:"
+            landmarkName = "-handlePaymentAuthorizationWithCard:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

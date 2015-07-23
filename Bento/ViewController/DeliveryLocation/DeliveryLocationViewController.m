@@ -130,7 +130,7 @@
         
         // Move to current location and zoom enough
         MKCoordinateRegion mapRegion;
-        AppDelegate *appDelegate = [[UIApplication sharedApplication] delegate];
+        AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         CLLocationCoordinate2D curLocation = [appDelegate getCurrentLocation];
         if (curLocation.latitude == 0 && curLocation.longitude == 0)
         {
