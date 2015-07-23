@@ -190,6 +190,8 @@
         NSLog(@"auto login response - %@", response);
 
         [self processAfterLogin];
+
+        [[BentoShop sharedInstance] setSignInStatus:YES];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         [self.activityIndicator stopAnimating];

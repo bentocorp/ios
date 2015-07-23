@@ -460,6 +460,8 @@
         [pref setObject:nil forKey:@"loginRequest"];
         [pref synchronize];
         
+        [[BentoShop sharedInstance] setSignInStatus:NO];
+        
         // dismiss view
         [self dismissViewControllerAnimated:YES completion:nil];
         
