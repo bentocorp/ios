@@ -115,7 +115,7 @@
     [manager stopUpdatingLocation];
 }
 
--(NSString *)getCurrentLocation
+-(NSString *)getCurrentDate
 {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     formatter.dateFormat = @"M/d/yyyy";
@@ -336,7 +336,7 @@
     NSString *registerOrSignIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"RegisterOrSignIn"];
     
     /*------------------TEST DATA LOG FOR MIXPANEL BEFORE PROCESSING*-----------------*/
-    NSLog(@"%@, %@, %@, %@, %@, %@, %@", registerOrSignIn, source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
+    NSLog(@"%@, %@, %@, %@, %@, %@, %@", registerOrSignIn, source, [self getCurrentDate], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
     /*--------------------------------------------------------------------------------*/
     
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
@@ -385,7 +385,7 @@
         // set initial properties once
         [mixpanel.people setOnce:@{
                                    @"Installed Source":source,
-                                   @"Sign Up Date": [self getCurrentLocation],
+                                   @"Sign Up Date": [self getCurrentDate],
                                    @"Sign Up Address": currentAddress
                                    }];
         
@@ -396,7 +396,7 @@
                                @"Phone": strPhoneNumber,
                                }];
         
-        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
+        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentDate], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
         
 /*--------------------------------------------------------------------*/
         

@@ -24,10 +24,11 @@
 #import "Mixpanel.h"
 
 #import "BentoShop.h"
+#import "SVGeocoder.h"
 
 #import "CompleteOrderViewController.h"
 
-@interface RegisterViewController () <FBManagerDelegate, MyAlertViewDelegate>
+@interface RegisterViewController () <FBManagerDelegate, MyAlertViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
@@ -64,6 +65,9 @@
     BOOL beganRegistration;
     JGProgressHUD *loadingHUD;
     Mixpanel *mixpanel;
+    
+    CLLocationManager *locationManager;
+    NSString *currentAddress;
 }
 
 - (void)viewDidLoad {
@@ -115,6 +119,49 @@
     
     //
     _activeField = nil;
+    
+    /*---------------------------LOCATION MANAGER--------------------------*/
+    
+    // Initialize location manager.
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    [locationManager startUpdatingLocation];
+    
+    /*---------------------------------------------------------------------*/
+    
+    NSLog(@"CURRENT DATE: %@", [self getCurrentDate]);
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = locations[0];
+    
+    // get address from coordinates
+    [SVGeocoder reverseGeocode:location.coordinate completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error == nil && placemarks.count > 0)
+        {
+            SVPlacemark *placeMark = [placemarks firstObject];
+            
+            currentAddress = placeMark.formattedAddress;
+            
+            NSLog(@"ADDRESS: %@", placeMark.formattedAddress);
+        }
+    }];
+    
+    [manager stopUpdatingLocation];
+}
+
+-(NSString *)getCurrentDate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"M/d/yyyy";
+    NSString *currentDate = [formatter stringFromDate:[NSDate date]];
+    
+    NSLog(@"CURRENT DATE: %@", currentDate);
+    
+    return currentDate;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -143,13 +190,9 @@
         SignInViewController *vcSignIn = segue.destinationViewController;
         
         if(sender != nil)
-        {
             vcSignIn.txtEmail.text = sender;
-        }
         else
-        {
             vcSignIn.txtEmail.text = @"";
-        }
     }
 }
 
@@ -190,12 +233,6 @@
     [loadingHUD dismiss];
     loadingHUD = nil;
 }
-
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
 
 - (void)checkCurrentMode
 {
@@ -443,12 +480,13 @@
         
         [self signInWithRegisteredData:dicRequest];
         
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
         
-        [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
-            
+        
         [mixpanel track:@"Completed Registration" properties:nil];
         NSLog(@"COMPLETED REGISTRATION");
+        
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popViewControllerAnimated:YES];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         

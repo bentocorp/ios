@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignIn/RegisterViewController.m"
-            timestampString = "459456255.201945"
+            timestampString = "459459870.777355"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "825"
-            endingLineNumber = "825"
+            startingLineNumber = "863"
+            endingLineNumber = "863"
             landmarkName = "-dismissKeyboard"
             landmarkType = "5">
          </BreakpointContent>
