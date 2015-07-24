@@ -363,7 +363,6 @@
     [self.mapView addAnnotation:self.mapAnnotation];
     
     self.placeInfo = nil;
-//    [self updateUI];
     
     [SVGeocoder reverseGeocode:coordinate completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil && placemarks.count > 0)

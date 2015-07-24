@@ -20,6 +20,10 @@
 #import "FacebookManager.h"
 
 #import "BentoShop.h"
+#import "Mixpanel.h"
+
+#import "AppDelegate.h"
+#import "SVGeocoder.h"
 
 @interface PhoneNumberViewController ()
 
@@ -314,11 +318,43 @@
                                          @"fb_id" : strFBID,
                                          @"fb_token" : strAccessToken,
                                        };
+        
         NSDictionary *saveRequest = @{@"data" : [fbloginRequest jsonEncodedKeyValueString]};
         [pref setObject:saveRequest forKey:@"loginRequest"];
         [pref synchronize];
         
         [[BentoShop sharedInstance] setSignInStatus:YES];
+
+/*-----------------------------MIXPANEL-------------------------------*/
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        // link custom id with default id
+        [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
+        
+        // identify user for current session
+        [mixpanel identify:strMailAddr];
+        
+        NSString *source;
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
+            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+        
+        // set initial properties once
+        [mixpanel.people setOnce:@{
+                                   @"Installed Source":source,
+                                   @"Sign Up Date": @"",
+                                   @"Sign Up Address": 
+                                   }];
+        
+        // set properties
+        [mixpanel.people set:@{
+                               @"Username": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
+                               @"Email": strMailAddr,
+                               @"Phone": strPhoneNumber,
+                               }];
+        
+        
+        
+/*--------------------------------------------------------------------*/
         
         [self showErrorMessage:nil code:ERROR_NONE];
         [self gotoDeliveryLocationScreen];
