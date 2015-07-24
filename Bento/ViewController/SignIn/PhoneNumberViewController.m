@@ -371,32 +371,32 @@
 
 /*-----------------------------MIXPANEL-------------------------------*/
         
-//        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-//        
-//        if ([registerOrSignIn isEqualToString:@"Register"])
-//        {
-//            // link custom id with default id
-//            [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
-//        }
-//        
-//        // identify user for current session
-//        [mixpanel identify:strMailAddr];
-//
-//        // set initial properties once
-//        [mixpanel.people setOnce:@{
-//                                   @"Installed Source":source,
-//                                   @"Sign Up Date": [self getCurrentLocation],
-//                                   @"Sign Up Address": currentAddress
-//                                   }];
-//        
-//        // set properties
-//        [mixpanel.people set:@{
-//                               @"Username": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
-//                               @"Email": strMailAddr,
-//                               @"Phone": strPhoneNumber,
-//                               }];
-//        
-//        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        if ([registerOrSignIn isEqualToString:@"Register"])
+        {
+            // link custom id with default id
+            [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
+        }
+        
+        // identify user for current session
+        [mixpanel identify:strMailAddr];
+
+        // set initial properties once
+        [mixpanel.people setOnce:@{
+                                   @"Installed Source":source,
+                                   @"Sign Up Date": [self getCurrentLocation],
+                                   @"Sign Up Address": currentAddress
+                                   }];
+        
+        // set properties
+        [mixpanel.people set:@{
+                               @"Username": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
+                               @"Email": strMailAddr,
+                               @"Phone": strPhoneNumber,
+                               }];
+        
+        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
         
 /*--------------------------------------------------------------------*/
         
