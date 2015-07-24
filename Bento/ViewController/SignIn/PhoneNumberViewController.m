@@ -113,6 +113,17 @@
     }];
 }
 
+-(NSString *)getCurrentLocation
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"M/d/yyyy";
+    NSString *currentDate = [formatter stringFromDate:[NSDate date]];
+    
+    NSLog(@"CURRENT DATE: %@", currentDate);
+    
+    return currentDate;
+}
+
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
     textField.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
@@ -274,18 +285,6 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-/*
-- (IBAction)onPrivacyPolicy:(id)sender
-{
-    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_PRIVACY]];
-}
-
-- (IBAction)onTermsAndConditions:(id)sender
-{
-    [self performSegueWithIdentifier:@"Faq" sender:[NSNumber numberWithInt:CONTENT_TERMS]];
-}
-*/
-
 - (void)processRegister
 {
     NSString *strMailAddr = [self.userInfo valueForKey:@"email"];
@@ -358,52 +357,31 @@
         [[BentoShop sharedInstance] setSignInStatus:YES];
 
 /*-----------------------------MIXPANEL-------------------------------*/
-//        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-//        
-//        // link custom id with default id
-//        [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
-//        
-//        // identify user for current session
-//        [mixpanel identify:strMailAddr];
-//        
-//        NSString *source;
-//        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
-//            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
-//        
-//        NS
-//        
-//        NSString *currentAddress;
-//        
-//        [SVGeocoder reverseGeocode:coordinate completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
-//            if (error == nil && placemarks.count > 0)
-//            {
-//                SVPlacemark *placeMark = [placemarks firstObject];
-//                self.placeInfo = placeMark;
-//                self.txtAddress.text = placeMark.formattedAddress;
-//                NSLog(@"Address: %@", self.txtAddress.text);
-//                [self updateUI];
-//            }
-//            else
-//            {
-//                self.placeInfo = nil;
-//                self.txtAddress.text = @"";
-//                [self updateUI];
-//            }
-//        }];
-//        
-//        // set initial properties once
-//        [mixpanel.people setOnce:@{
-//                                   @"Installed Source":source,
-//                                   @"Sign Up Date": ,
-//                                   @"Sign Up Address":
-//                                   }];
-//        
-//        // set properties
-//        [mixpanel.people set:@{
-//                               @"Username": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
-//                               @"Email": strMailAddr,
-//                               @"Phone": strPhoneNumber,
-//                               }];
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        // link custom id with default id
+        [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
+        
+        // identify user for current session
+        [mixpanel identify:strMailAddr];
+        
+        NSString *source;
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
+            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+        
+        // set initial properties once
+        [mixpanel.people setOnce:@{
+                                   @"Installed Source":source,
+                                   @"Sign Up Date": [self getCurrentLocation],
+                                   @"Sign Up Address": currentAddress
+                                   }];
+        
+        // set properties
+        [mixpanel.people set:@{
+                               @"Username": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
+                               @"Email": strMailAddr,
+                               @"Phone": strPhoneNumber,
+                               }];
         
 /*--------------------------------------------------------------------*/
         
