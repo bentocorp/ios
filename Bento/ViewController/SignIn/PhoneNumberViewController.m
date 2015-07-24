@@ -328,6 +328,14 @@
                               @"fb_token" : strAccessToken,
                               };
     
+    /*------------------TEST DATA LOG FOR MIXPANEL*-----------------*/
+    NSString *source;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
+        source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+    
+    NSLog(@"%@, %@, %@, %@, %@, %@", source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
+    /*--------------------------------------------------------------*/
+    
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
     
@@ -359,31 +367,34 @@
         [[BentoShop sharedInstance] setSignInStatus:YES];
 
 /*-----------------------------MIXPANEL-------------------------------*/
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
-        // link custom id with default id
-        [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
-        
-        // identify user for current session
-        [mixpanel identify:strMailAddr];
-        
+//        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//        
+//        // link custom id with default id
+//        [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
+//        
+//        // identify user for current session
+//        [mixpanel identify:strMailAddr];
+//        
         NSString *source;
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
             source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+//
+//        // set initial properties once
+//        [mixpanel.people setOnce:@{
+//                                   @"Installed Source":source,
+//                                   @"Sign Up Date": [self getCurrentLocation],
+//                                   @"Sign Up Address": currentAddress
+//                                   }];
+//        
+//        // set properties
+//        [mixpanel.people set:@{
+//                               @"Username": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
+//                               @"Email": strMailAddr,
+//                               @"Phone": strPhoneNumber,
+//                               }];
         
-        // set initial properties once
-        [mixpanel.people setOnce:@{
-                                   @"Installed Source":source,
-                                   @"Sign Up Date": [self getCurrentLocation],
-                                   @"Sign Up Address": currentAddress
-                                   }];
-        
-        // set properties
-        [mixpanel.people set:@{
-                               @"Username": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
-                               @"Email": strMailAddr,
-                               @"Phone": strPhoneNumber,
-                               }];
+        NSLog(@"%@, %@, %@, %@, %@, %@", source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
         
 /*--------------------------------------------------------------------*/
         
