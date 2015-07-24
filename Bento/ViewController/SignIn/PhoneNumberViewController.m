@@ -111,6 +111,8 @@
             NSLog(@"ADDRESS: %@", placeMark.formattedAddress);
         }
     }];
+    
+    [manager stopUpdatingLocation];
 }
 
 -(NSString *)getCurrentLocation
