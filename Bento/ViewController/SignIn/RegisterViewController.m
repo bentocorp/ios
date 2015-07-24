@@ -130,8 +130,6 @@
     [locationManager startUpdatingLocation];
     
     /*---------------------------------------------------------------------*/
-    
-    NSLog(@"CURRENT DATE: %@", [self getCurrentDate]);
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -449,6 +447,12 @@
                                 @"password" : strPassword,
                                 };
     
+    NSString *source;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
+        source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+    
+    NSString *registerOrSignIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"RegisterOrSignIn"];
+    
     NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
     
@@ -480,7 +484,34 @@
         
         [self signInWithRegisteredData:dicRequest];
         
+/*-----------------------------MIXPANEL-------------------------------*/
         
+        if ([registerOrSignIn isEqualToString:@"Register"])
+        {
+            // link custom id with default id
+            [mixpanel createAlias:strEmail forDistinctID:mixpanel.distinctId];
+        }
+        
+        // identify user for current session
+        [mixpanel identify:strEmail];
+        
+        // set initial properties once
+        [mixpanel.people setOnce:@{
+                                   @"Installed Source":source,
+                                   @"Sign Up Date": [self getCurrentDate],
+                                   @"Sign Up Address": currentAddress
+                                   }];
+        
+        // set properties
+        [mixpanel.people set:@{
+                               @"Username": strUserName,
+                               @"Email": strEmail,
+                               @"Phone": strPhoneNumber,
+                               }];
+        
+        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentDate], currentAddress, strUserName, strEmail, strPhoneNumber);
+        
+/*--------------------------------------------------------------------*/
         
         [mixpanel track:@"Completed Registration" properties:nil];
         NSLog(@"COMPLETED REGISTRATION");
