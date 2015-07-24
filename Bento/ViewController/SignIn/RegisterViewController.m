@@ -453,6 +453,10 @@
     
     NSString *registerOrSignIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"RegisterOrSignIn"];
     
+    /*------------------TEST DATA LOG FOR MIXPANEL BEFORE PROCESSING*-----------------*/
+    NSLog(@"%@, %@, %@, %@, %@, %@, %@, %@", registerOrSignIn, mixpanel.distinctId, source, [self getCurrentDate], currentAddress, strUserName, strEmail, strPhoneNumber);
+    /*--------------------------------------------------------------------------------*/
+    
     NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
     

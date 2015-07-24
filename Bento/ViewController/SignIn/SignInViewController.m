@@ -21,9 +21,12 @@
 #import "FacebookManager.h"
 #import "BentoShop.h"
 
+#import "SVGeocoder.h"
+#import "Mixpanel.h"
+
 #import "SignedOutSettingsViewController.h"
 
-@interface SignInViewController () <FBManagerDelegate, MyAlertViewDelegate>
+@interface SignInViewController () <FBManagerDelegate, MyAlertViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
@@ -38,7 +41,6 @@
 @property (nonatomic, weak) IBOutlet UIImageView *ivEmail;
 @property (nonatomic, weak) IBOutlet UIImageView *ivPassword;
 
-
 @property (nonatomic, weak) IBOutlet UILabel *signUpLabel;
 @property (nonatomic, weak) IBOutlet UIButton *signUpButton;
 - (IBAction)onSignUpButton:(id)sender;
@@ -48,6 +50,9 @@
 @implementation SignInViewController
 {
     JGProgressHUD *loadingHUD;
+    
+    CLLocationManager *locationManager;
+    NSString *currentAddress;
 }
 
 - (void)viewDidLoad {
@@ -68,11 +73,51 @@
                                    initWithTarget:self
                                    action:@selector(dismissKeyboard)];
     [self.view addGestureRecognizer:tap];
+    
+    /*---------------------------LOCATION MANAGER--------------------------*/
+    
+    // Initialize location manager.
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    [locationManager startUpdatingLocation];
+    
+    /*---------------------------------------------------------------------*/
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = locations[0];
+    
+    // get address from coordinates
+    [SVGeocoder reverseGeocode:location.coordinate completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error == nil && placemarks.count > 0)
+        {
+            SVPlacemark *placeMark = [placemarks firstObject];
+            
+            currentAddress = placeMark.formattedAddress;
+            
+            NSLog(@"ADDRESS: %@", placeMark.formattedAddress);
+        }
+    }];
+    
+    [manager stopUpdatingLocation];
+}
+
+-(NSString *)getCurrentDate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"M/d/yyyy";
+    NSString *currentDate = [formatter stringFromDate:[NSDate date]];
+    
+    NSLog(@"CURRENT DATE: %@", currentDate);
+    
+    return currentDate;
 }
 
 #pragma mark - Navigation
@@ -126,12 +171,6 @@
     [loadingHUD dismiss];
     loadingHUD = nil;
 }
-
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
 
 - (void)checkCurrentMode
 {
@@ -295,6 +334,28 @@
         
         [self showErrorMessage:nil code:ERROR_NONE];
         [self gotoDeliveryLocationScreen];
+        
+        /*-----------------------------MIXPANEL-------------------------------*/
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+
+        // identify user for current session
+        [mixpanel identify:strEmail];
+        
+        NSString *source;
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
+            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+        
+        // set properties
+        [mixpanel.people set:@{
+                               @"Username": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
+                               @"Email": response[@"email"],
+                               @"Phone": response[@"phone"],
+                               }];
+        
+        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentDate], currentAddress, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"]);
+        
+        /*--------------------------------------------------------------------*/
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
         [self.navigationController popViewControllerAnimated:YES]; // if not this will run
