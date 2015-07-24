@@ -25,7 +25,9 @@
 #import "AppDelegate.h"
 #import "SVGeocoder.h"
 
-@interface PhoneNumberViewController ()
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
+@interface PhoneNumberViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UIView *viewError;
@@ -41,6 +43,8 @@
 @implementation PhoneNumberViewController
 {
     JGProgressHUD *loadingHUD;
+    CLLocationManager *locationManager;
+    NSString *currentAddress;
 }
 
 - (void)onTextChanged:(UITextField *)textField
@@ -79,6 +83,34 @@
     }];
     
     [self.txtPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
+    
+    /*---------------------------LOCATION MANAGER--------------------------*/
+    
+    // Initialize location manager.
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    [locationManager startUpdatingLocation];
+    
+    /*---------------------------------------------------------------------*/
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = locations[0];
+    
+    // get address from coordinates
+    [SVGeocoder reverseGeocode:location.coordinate completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error == nil && placemarks.count > 0)
+        {
+            SVPlacemark *placeMark = [placemarks firstObject];
+            
+            currentAddress = placeMark.formattedAddress;
+            
+            NSLog(@"ADDRESS: %@", placeMark.formattedAddress);
+        }
+    }];
 }
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
@@ -326,33 +358,52 @@
         [[BentoShop sharedInstance] setSignInStatus:YES];
 
 /*-----------------------------MIXPANEL-------------------------------*/
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        
-        // link custom id with default id
-        [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
-        
-        // identify user for current session
-        [mixpanel identify:strMailAddr];
-        
-        NSString *source;
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
-            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
-        
-        // set initial properties once
-        [mixpanel.people setOnce:@{
-                                   @"Installed Source":source,
-                                   @"Sign Up Date": @"",
-                                   @"Sign Up Address": 
-                                   }];
-        
-        // set properties
-        [mixpanel.people set:@{
-                               @"Username": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
-                               @"Email": strMailAddr,
-                               @"Phone": strPhoneNumber,
-                               }];
-        
-        
+//        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//        
+//        // link custom id with default id
+//        [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
+//        
+//        // identify user for current session
+//        [mixpanel identify:strMailAddr];
+//        
+//        NSString *source;
+//        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
+//            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+//        
+//        NS
+//        
+//        NSString *currentAddress;
+//        
+//        [SVGeocoder reverseGeocode:coordinate completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+//            if (error == nil && placemarks.count > 0)
+//            {
+//                SVPlacemark *placeMark = [placemarks firstObject];
+//                self.placeInfo = placeMark;
+//                self.txtAddress.text = placeMark.formattedAddress;
+//                NSLog(@"Address: %@", self.txtAddress.text);
+//                [self updateUI];
+//            }
+//            else
+//            {
+//                self.placeInfo = nil;
+//                self.txtAddress.text = @"";
+//                [self updateUI];
+//            }
+//        }];
+//        
+//        // set initial properties once
+//        [mixpanel.people setOnce:@{
+//                                   @"Installed Source":source,
+//                                   @"Sign Up Date": ,
+//                                   @"Sign Up Address":
+//                                   }];
+//        
+//        // set properties
+//        [mixpanel.people set:@{
+//                               @"Username": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
+//                               @"Email": strMailAddr,
+//                               @"Phone": strPhoneNumber,
+//                               }];
         
 /*--------------------------------------------------------------------*/
         
