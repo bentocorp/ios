@@ -339,6 +339,10 @@
                      dispatch_async(dispatch_get_main_queue(), ^{
                          
                          [[BentoShop sharedInstance] setSignInStatus:NO];
+                         
+                         [[NSUserDefaults standardUserDefaults] setObject:@"Register" forKey:@"RegisterOrSignIn"];
+                         [[NSUserDefaults standardUserDefaults] synchronize];
+                         
                          [self gotoPhoneNumberScreen:user];
                      });
                      

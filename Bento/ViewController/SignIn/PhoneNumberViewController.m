@@ -328,13 +328,16 @@
                               @"fb_token" : strAccessToken,
                               };
     
-    /*------------------TEST DATA LOG FOR MIXPANEL*-----------------*/
+    
     NSString *source;
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
         source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
     
-    NSLog(@"%@, %@, %@, %@, %@, %@", source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
-    /*--------------------------------------------------------------*/
+    NSString *registerOrSignIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"RegisterOrSignIn"];
+    
+    /*------------------TEST DATA LOG FOR MIXPANEL BEFORE PROCESSING*-----------------*/
+    NSLog(@"%@, %@, %@, %@, %@, %@, %@", registerOrSignIn, source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
+    /*--------------------------------------------------------------------------------*/
     
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
@@ -370,15 +373,14 @@
         
 //        Mixpanel *mixpanel = [Mixpanel sharedInstance];
 //        
-//        // link custom id with default id
-//        [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
+//        if ([registerOrSignIn isEqualToString:@"Register"])
+//        {
+//            // link custom id with default id
+//            [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
+//        }
 //        
 //        // identify user for current session
 //        [mixpanel identify:strMailAddr];
-//        
-        NSString *source;
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
-            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
 //
 //        // set initial properties once
 //        [mixpanel.people setOnce:@{
@@ -393,8 +395,8 @@
 //                               @"Email": strMailAddr,
 //                               @"Phone": strPhoneNumber,
 //                               }];
-        
-        NSLog(@"%@, %@, %@, %@, %@, %@", source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
+//        
+//        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentLocation], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
         
 /*--------------------------------------------------------------------*/
         

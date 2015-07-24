@@ -422,6 +422,11 @@
                  {
                      
                      [[BentoShop sharedInstance] setSignInStatus:NO];
+                     
+                     // this really isn't used, since i'm only checking for Register
+                     [[NSUserDefaults standardUserDefaults] setObject:@"SignIn" forKey:@"RegisterOrSignIn"];
+                     [[NSUserDefaults standardUserDefaults] synchronize];
+                     
                      [self gotoPhoneNumberScreen:user];
                      return;
                  }
