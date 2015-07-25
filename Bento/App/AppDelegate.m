@@ -499,8 +499,20 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 #pragma mark Current Location
 
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    // show once
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"LocationServices"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"Enabled" forKey:@"LocationServices"];
+        [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
+    }
+    
     CLLocation *location = locations[0];
     coordinate = location.coordinate;
     

@@ -15,6 +15,7 @@
 #import "AppStrings.h"
 #import "WebManager.h"
 #import "DataManager.h"
+#import "Mixpanel.h"
 
 @interface PromoCodeView()
 
@@ -90,6 +91,12 @@
             NSInteger discount = [[response objectForKey:@"amountOff"] integerValue];
             if (self.delegate != nil)
                 [self.delegate setDiscound:discount strCouponCode:strPromoCode];
+            
+            /*TRACK PROMO MIXPANEL*/
+            [[Mixpanel sharedInstance] track:@"Entered Promo Code" properties:@{
+                                                                                @"code": strPromoCode,
+                                                                                @"discount": [NSString stringWithFormat:@"%ld", discount]
+                                                                                }];
             
              NSLog(@"json response %@", response);
         }

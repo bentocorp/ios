@@ -131,6 +131,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[Mixpanel sharedInstance] track:@"Viewed Summary Screen"];
+    
     // Initialize location manager.
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -688,6 +690,8 @@
 
 - (IBAction)onChangePayment:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"Clicked Change Payment"];
+    
     if (![self applePayEnabled])
         [self gotoCreditScreen];
     else
@@ -1592,7 +1596,7 @@
 #pragma mark PromoCodeViewDelegate
 
 - (void)setDiscound:(NSInteger)priceDiscount strCouponCode:(NSString *)strCouponCode
-{
+{   
 //    self.strPromoCode = strCouponCode;
 //    self.promoDiscount = priceDiscount;
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];

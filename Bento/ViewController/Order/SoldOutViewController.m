@@ -25,6 +25,7 @@
 #import "AppStrings.h"
 #import "WebManager.h"
 #import "DataManager.h"
+#import "Mixpanel.h"
 
 @interface SoldOutViewController ()
 
@@ -140,6 +141,8 @@
     
     if (self.type == 0) // Closed
     {
+        [[Mixpanel sharedInstance] track:@"Viewed Closed Screen"];
+        
         self.lblMessageTitle.text = [[AppStrings sharedInstance] getString:CLOSED_TEXT_TITLE];
         self.lblMessageContent.text = [self getClosedText];
         
@@ -150,6 +153,8 @@
     }
     else if (self.type == 1) // Sold Out
     {
+        [[Mixpanel sharedInstance] track:@"Viewed Sold-out Screen"];
+        
         self.lblMessageTitle.text = [[AppStrings sharedInstance] getString:SOLDOUT_TEXT_TITLE];
         self.lblMessageContent.text = [[AppStrings sharedInstance] getString:SOLDOUT_TEXT_CONTENT];
         
