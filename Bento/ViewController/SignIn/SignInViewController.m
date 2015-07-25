@@ -57,7 +57,7 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
     self.lblTitle.text = [[AppStrings sharedInstance] getString:SIGNIN_TITLE];
     [self.btnSignIn setTitle:[[AppStrings sharedInstance] getString:SIGNIN_BUTTON_SIGNIN] forState:UIControlStateNormal];
     
@@ -84,6 +84,8 @@
     [locationManager startUpdatingLocation];
     
     /*---------------------------------------------------------------------*/
+    
+    NSLog(@"TIME AND DATE: %@", [NSString stringWithFormat:@"%@ %@", [self getCurrentTime], [self getCurrentDate]]);
 }
 
 - (void)didReceiveMemoryWarning {
@@ -115,9 +117,17 @@
     formatter.dateFormat = @"M/d/yyyy";
     NSString *currentDate = [formatter stringFromDate:[NSDate date]];
     
-    NSLog(@"CURRENT DATE: %@", currentDate);
-    
     return currentDate;
+}
+
+- (NSString *)getCurrentTime
+{
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *currentTime = [dateFormatter stringFromDate:today];
+    
+    return currentTime;
 }
 
 #pragma mark - Navigation
@@ -342,18 +352,16 @@
         // identify user for current session
         [mixpanel identify:strEmail];
         
-        NSString *source;
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
-            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
-        
         // set properties
         [mixpanel.people set:@{
                                @"Username": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
                                @"Email": response[@"email"],
                                @"Phone": response[@"phone"],
+                               @"Last Login": [NSString stringWithFormat:@"%@ %@", [self getCurrentTime], [self getCurrentDate]],
+                               @"Last Login Location": currentAddress
                                }];
         
-        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentDate], currentAddress, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"]);
+        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"], [self getCurrentTime], [self getCurrentDate], currentAddress);
         
         /*--------------------------------------------------------------------*/
         
