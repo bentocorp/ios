@@ -510,7 +510,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"LocationServices"])
     {
         [[NSUserDefaults standardUserDefaults] setObject:@"Enabled" forKey:@"LocationServices"];
-        [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
+        [[Mixpanel sharedInstance] track:@"Allow Location Services"];
     }
     
     CLLocation *location = locations[0];
