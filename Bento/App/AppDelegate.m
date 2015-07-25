@@ -135,7 +135,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Adjust Tracking (so far, onyl tracking organic installs)
     NSString *yourAppToken = ADJUST_TOKEN;
-    NSString *environment = ADJEnvironmentSandbox; // or ADJEnvironmentSandbox, ADJEnvironmentProduction
+    NSString *environment = ADJEnvironmentProduction; // or ADJEnvironmentSandbox, ADJEnvironmentProduction
     
     ADJConfig *adjustConfig = [ADJConfig configWithAppToken:yourAppToken environment:environment];
     [adjustConfig setLogLevel:ADJLogLevelVerbose]; // enable all logging

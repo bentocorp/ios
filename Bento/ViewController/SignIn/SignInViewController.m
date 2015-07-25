@@ -354,11 +354,10 @@
         
         // set properties
         [mixpanel.people set:@{
-                               @"Username": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
-                               @"Email": response[@"email"],
-                               @"Phone": response[@"phone"],
-                               @"Last Login": [NSString stringWithFormat:@"%@ %@", [self getCurrentTime], [self getCurrentDate]],
-                               @"Last Login Location": currentAddress
+                               @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
+                               @"$email": response[@"email"],
+                               @"$phone": response[@"phone"],
+                               @"Last Login Address": currentAddress
                                }];
         
         NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"], [self getCurrentTime], [self getCurrentDate], currentAddress);

@@ -502,15 +502,15 @@
         // set initial properties once
         [mixpanel.people setOnce:@{
                                    @"Installed Source":source,
-                                   @"Sign Up Date": [self getCurrentDate],
+                                   @"$created": [self getCurrentDate],
                                    @"Sign Up Address": currentAddress
                                    }];
         
         // set properties
         [mixpanel.people set:@{
-                               @"Username": strUserName,
-                               @"Email": strEmail,
-                               @"Phone": strPhoneNumber,
+                               @"$name": strUserName,
+                               @"$email": strEmail,
+                               @"$phone": strPhoneNumber,
                                }];
         
         NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentDate], currentAddress, strUserName, strEmail, strPhoneNumber);
