@@ -26,7 +26,10 @@
 #import "CustomBentoViewController.h"
 #import "FixedBentoViewController.h"
 
-@interface FirstViewController ()
+#import "Mixpanel.h"
+#import "SVGeocoder.h"
+
+@interface FirstViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
 
@@ -42,6 +45,9 @@
 {
     BOOL _hasInit;
     NSString *isThereConnection;
+    
+    CLLocationManager *locationManager;
+    NSString *currentAddress;
 }
 
 - (void)viewDidLoad {
@@ -64,10 +70,59 @@
     if (strSlogan == nil || strSlogan.length > 0)
         strSlogan = @"Delicious Asian Food Delivered in Minutes.";
     self.lblLaunchSlogan.text = strSlogan;
+    
+    /*---------------------------LOCATION MANAGER--------------------------*/
+    
+    // Initialize location manager.
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    [locationManager startUpdatingLocation];
+    
+    /*---------------------------------------------------------------------*/
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = locations[0];
+    
+    // get address from coordinates
+    [SVGeocoder reverseGeocode:location.coordinate completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error == nil && placemarks.count > 0)
+        {
+            SVPlacemark *placeMark = [placemarks firstObject];
+            
+            currentAddress = placeMark.formattedAddress;
+            
+            NSLog(@"ADDRESS: %@", placeMark.formattedAddress);
+        }
+    }];
+    
+    [manager stopUpdatingLocation];
+}
+
+-(NSString *)getCurrentDate
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    formatter.dateFormat = @"M/d/yyyy";
+    NSString *currentDate = [formatter stringFromDate:[NSDate date]];
+    
+    return currentDate;
+}
+
+- (NSString *)getCurrentTime
+{
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *currentTime = [dateFormatter stringFromDate:today];
+    
+    return currentTime;
 }
 
 #pragma mark - Navigation
@@ -188,6 +243,27 @@
         [[DataManager shareDataManager] setUserInfo:response];
         
         NSLog(@"auto login response - %@", response);
+        
+        /*-----------------------------MIXPANEL-------------------------------*/
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        // identify user for current session
+        if (![response[@"email"] isEqual:[NSNull null]])
+//            [mixpanel identify:response[@"email"]];
+        
+        // set properties
+//        [mixpanel.people set:@{
+//                               @"Username": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
+//                               @"Email": response[@"email"],
+//                               @"Phone": response[@"phone"],
+//                               @"Last Login": [NSString stringWithFormat:@"%@ %@", [self getCurrentTime], [self getCurrentDate]],
+//                               @"Last Login Location": currentAddress
+//                               }];
+        
+        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"], [self getCurrentTime], [self getCurrentDate], currentAddress);
+        
+        /*--------------------------------------------------------------------*/
 
         [self processAfterLogin];
 
