@@ -23,6 +23,8 @@
 
 #import "BentoShop.h"
 
+#import "Mixpanel.h"
+
 @interface SignedInSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
 
 @end
@@ -461,6 +463,10 @@
         [pref synchronize];
         
         [[BentoShop sharedInstance] setSignInStatus:NO];
+        
+/*------CLEAR MIXPANEL ID AND PROPERTIES ON LOGOUT------*/
+        [[Mixpanel sharedInstance] reset];
+/*------------------------------------------------------*/
         
         // dismiss view
         [self dismissViewControllerAnimated:YES completion:nil];
