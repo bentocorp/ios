@@ -408,6 +408,16 @@
     }
 }
 
+- (NSString *)getCurrentTime
+{
+    NSDate *today = [NSDate date];
+    NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
+    [dateFormatter setTimeStyle:NSDateFormatterShortStyle];
+    NSString *currentTime = [dateFormatter stringFromDate:today];
+    
+    return currentTime;
+}
+
 #pragma mark - Navigation
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
@@ -856,6 +866,10 @@
                                                                     @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                     @"Success/Failure": successOrFailure
                                                                     }];
+                    // track revenue
+                    [mixpanel.people trackCharge:@([self getTotalPrice]) withProperties:@{
+                                                                                          @"time": [self getCurrentTime]
+                                                                                          }];
                 }
             }];
         }
@@ -871,6 +885,10 @@
                                                         @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                         @"Success/Failure": successOrFailure
                                                         }];
+        // track revenue
+        [mixpanel.people trackCharge:@([self getTotalPrice]) withProperties:@{
+                                                                              @"time": [self getCurrentTime]
+                                                                              }];
         return;
     }
     else if (curPaymentMethod == Payment_ApplePay)
@@ -1350,7 +1368,7 @@
     NSLog(@"order JSON - %@", dicRequest);
     NSLog(@"ORDER ITEMS: %@", request[@"OrderItems"]);
     
-    /* Track empty orders, show message, then reset app */
+/*-----------Track empty orders, show message, then reset app------------*/
     if (!request[@"OrderItems"])
     {
         // bento exists
@@ -1473,6 +1491,11 @@
                                                                 @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                 @"Success/Failure": successOrFailure
                                                                 }];
+                
+                // track revenue
+                [mixpanel.people trackCharge:@([self getTotalPrice]) withProperties:@{
+                                                                  @"time": [self getCurrentTime]
+                                                                  }];
             }
         }
         
@@ -1520,6 +1543,10 @@
                                                                 @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                 @"Success/Failure": successOrFailure
                                                                 }];
+                // track revenue
+                [mixpanel.people trackCharge:@([self getTotalPrice]) withProperties:@{
+                                                                                      @"time": [self getCurrentTime]
+                                                                                      }];
             }
         }
         
