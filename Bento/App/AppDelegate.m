@@ -146,27 +146,28 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #ifndef DEV_MODE
     {
         [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];  // Use MixPanel for production build only
+        
+        
+        // Tell iOS you want your app to receive push notifications
+        // This code will work in iOS 8.0 xcode 6.0 or later:
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+        {
+            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
+        // This code will work in iOS 7.0 and below:
+        else
+        {
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+        }
     }
 #endif
     {}
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-    // Tell iOS you want your app to receive push notifications
-    // This code will work in iOS 8.0 xcode 6.0 or later:
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    // This code will work in iOS 7.0 and below:
-    else
-    {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    }
-    
-    // Call .identify to flush the People record to Mixpanel
-    [mixpanel identify:mixpanel.distinctId];
+//    // Call .identify to flush the People record to Mixpanel
+//    [mixpanel identify:mixpanel.distinctId];
     
     // TRACK: "App Launched"
     [mixpanel track:@"App Launched" properties:nil];
@@ -554,6 +555,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people addPushDeviceToken:deviceToken];
+    
+    NSLog(@"%@", deviceToken);
 }
 
 @end

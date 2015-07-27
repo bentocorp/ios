@@ -2417,7 +2417,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "f9da4048-51bf-4a66-ac89-16d32c3f8ee5";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2447,7 +2447,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "f9da4048-51bf-4a66-ac89-16d32c3f8ee5";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -2560,7 +2560,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bc9f2478-96e6-41fd-bbc2-6ac71aa9548c";
+				PROVISIONING_PROFILE = "f9da4048-51bf-4a66-ac89-16d32c3f8ee5";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2586,7 +2586,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bc9f2478-96e6-41fd-bbc2-6ac71aa9548c";
+				PROVISIONING_PROFILE = "f9da4048-51bf-4a66-ac89-16d32c3f8ee5";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
