@@ -100,6 +100,7 @@
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
+            <string>OpenSans-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1327,8 +1328,8 @@
                                         <color key="textColor" red="0.30588235294117649" green="0.34509803921568627" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$40.52" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G2i-DY-dBo">
-                                        <rect key="frame" x="205" y="11" width="100" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$24.52" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G2i-DY-dBo">
+                                        <rect key="frame" x="245" y="11" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1347,6 +1348,13 @@
                                             <action selector="onAddPromo:" destination="IGL-x5-TQo" eventType="touchUpInside" id="qWV-vP-6Xa"/>
                                         </connections>
                                     </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$44.67" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WeE-11-Aef">
+                                        <rect key="frame" x="177" y="11" width="60" height="21"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
+                                        <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -1461,6 +1469,7 @@
                         <outlet property="lblPromoDiscount" destination="AEx-9y-g8p" id="DQ4-qB-Vih"/>
                         <outlet property="lblTax" destination="V4F-Un-VVC" id="sN4-rN-ZZB"/>
                         <outlet property="lblTitle" destination="J8l-Tx-PpD" id="cEQ-oZ-HkR"/>
+                        <outlet property="lblTitleOldTotal" destination="WeE-11-Aef" id="Pwn-YL-dan"/>
                         <outlet property="lblTitlePromo" destination="T88-Z1-qyD" id="vTw-ev-g2v"/>
                         <outlet property="lblTitleTax" destination="sMP-XO-0sa" id="fwW-Wx-34z"/>
                         <outlet property="lblTitleTip" destination="7po-kz-3DU" id="iza-vx-JOz"/>

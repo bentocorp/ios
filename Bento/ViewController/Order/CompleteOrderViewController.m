@@ -63,6 +63,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblTitleTax;
 @property (nonatomic, weak) IBOutlet UILabel *lblTitleTip;
 @property (nonatomic, weak) IBOutlet UILabel *lblTitleTotal;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitleOldTotal;
 
 @property (nonatomic, weak) IBOutlet UILabel *lblAddress;
 
