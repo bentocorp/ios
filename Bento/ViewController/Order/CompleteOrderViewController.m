@@ -63,7 +63,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblTitleTax;
 @property (nonatomic, weak) IBOutlet UILabel *lblTitleTip;
 @property (nonatomic, weak) IBOutlet UILabel *lblTitleTotal;
-@property (weak, nonatomic) IBOutlet UILabel *lblTitleOldTotal;
 
 @property (nonatomic, weak) IBOutlet UILabel *lblAddress;
 
@@ -74,6 +73,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblTax;
 @property (nonatomic, weak) IBOutlet UILabel *lblDeliveryTip;
 @property (nonatomic, weak) IBOutlet UILabel *lblTotal;
+@property (weak, nonatomic) IBOutlet UILabel *lblTotalPrevious;
 
 @property (nonatomic, weak) IBOutlet UITableView *tvBentos;
 
@@ -107,6 +107,7 @@
     
     NSString *_strPromoCode;
     NSInteger _promoDiscount;
+    NSString *cutText;
     
     JGProgressHUD *loadingHUD;
     
@@ -599,6 +600,8 @@
     else
         totalPrice = 0; // if Promo hasn't been used up yet ie. subtotal(13.80) - promo(85),
     
+    cutText = [NSString stringWithFormat:@"$%.2f", subTotal];
+    
     NSLog(@"PROMO CREDIT LEFT: %f", _promoDiscount - subTotal);
     NSLog(@"SUB TOTAL: %f", subTotal);
     NSLog(@"GRAND TOTAL: %f", totalPrice);
@@ -613,6 +616,12 @@
     self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
+    
+    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:cutText];
+    [titleString addAttribute:NSStrikethroughStyleAttributeName
+                        value:[NSNumber numberWithInteger:NSUnderlineStyleSingle]
+                        range:NSMakeRange(0, [titleString length])];
+    self.lblTotalPrevious.attributedText = titleString;
 }
 
 - (void)updateUI

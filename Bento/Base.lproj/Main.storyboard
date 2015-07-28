@@ -1329,7 +1329,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$24.52" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G2i-DY-dBo">
-                                        <rect key="frame" x="245" y="11" width="60" height="21"/>
+                                        <rect key="frame" x="241" y="11" width="64" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -1349,10 +1349,10 @@
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$44.67" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WeE-11-Aef">
-                                        <rect key="frame" x="177" y="11" width="60" height="21"/>
+                                        <rect key="frame" x="182" y="11" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
-                                        <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="0.5" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
+                                        <color key="textColor" red="0.88235294119999996" green="0.36470588240000001" blue="0.14117647059999999" alpha="0.75" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
@@ -1469,12 +1469,12 @@
                         <outlet property="lblPromoDiscount" destination="AEx-9y-g8p" id="DQ4-qB-Vih"/>
                         <outlet property="lblTax" destination="V4F-Un-VVC" id="sN4-rN-ZZB"/>
                         <outlet property="lblTitle" destination="J8l-Tx-PpD" id="cEQ-oZ-HkR"/>
-                        <outlet property="lblTitleOldTotal" destination="WeE-11-Aef" id="Pwn-YL-dan"/>
                         <outlet property="lblTitlePromo" destination="T88-Z1-qyD" id="vTw-ev-g2v"/>
                         <outlet property="lblTitleTax" destination="sMP-XO-0sa" id="fwW-Wx-34z"/>
                         <outlet property="lblTitleTip" destination="7po-kz-3DU" id="iza-vx-JOz"/>
                         <outlet property="lblTitleTotal" destination="R8F-6H-yJt" id="kiy-gj-n2K"/>
                         <outlet property="lblTotal" destination="G2i-DY-dBo" id="qUl-hw-fuk"/>
+                        <outlet property="lblTotalPrevious" destination="WeE-11-Aef" id="ayO-7A-9vx"/>
                         <outlet property="tvBentos" destination="Lth-bX-9L2" id="sEt-iJ-Lnf"/>
                         <outlet property="viewList" destination="hVC-th-zts" id="HUh-JG-6eS"/>
                         <outlet property="viewPromo" destination="tfC-0t-xL2" id="7kF-tZ-iG9"/>
