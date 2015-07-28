@@ -263,7 +263,7 @@
                                @"Last Login Address": address
                                }];
         
-        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"], [self getCurrentTime], [self getCurrentDate], currentAddress);
+        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"], [self getCurrentTime], [self getCurrentDate], address);
         
         /*--------------------------------------------------------------------*/
 
