@@ -62,8 +62,6 @@
     UIColor *color2 = [DataManager getGradientColor2];
     gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
-    
-//    [self.ivBackground setImage:[UIImage imageNamed:@"first_background"]];
     [self.ivLaunchLogo setImage:[UIImage imageNamed:@"logo"]];
     
     NSString *strSlogan = [[NSUserDefaults standardUserDefaults] objectForKey:@"Slogan"];
@@ -251,12 +249,18 @@
         // identify user for current session
         [mixpanel identify:response[@"email"]];
         
+        NSString *address;
+        if (currentAddress != nil)
+            address = currentAddress;
+        else
+            address = @"Not Found";
+            
         // set properties
         [mixpanel.people set:@{
                                @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
                                @"$email": response[@"email"],
                                @"$phone": response[@"phone"],
-                               @"Last Login Address": currentAddress
+                               @"Last Login Address": address
                                }];
         
         NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"], [self getCurrentTime], [self getCurrentDate], currentAddress);
