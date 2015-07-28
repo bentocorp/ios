@@ -624,11 +624,17 @@
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
     
-    NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:cutText];
-    [titleString addAttribute:NSStrikethroughStyleAttributeName
-                        value:[NSNumber numberWithInteger:NSUnderlineStyleSingle]
-                        range:NSMakeRange(0, [titleString length])];
-    self.lblTotalPrevious.attributedText = titleString;
+    // set previous price tag label
+    if (cutText != nil)
+    {
+        NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:cutText];
+        
+        [titleString addAttribute:NSStrikethroughStyleAttributeName
+                            value:[NSNumber numberWithInteger:NSUnderlineStyleSingle]
+                            range:NSMakeRange(0, [titleString length])];
+        
+        self.lblTotalPrevious.attributedText = titleString;
+    }
 }
 
 - (void)updateUI
