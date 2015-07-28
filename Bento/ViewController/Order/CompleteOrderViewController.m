@@ -602,11 +602,12 @@
     else
         totalPrice = 0; // if Promo hasn't been used up yet ie. subtotal(13.80) - promo(85),
     
-    cutText = [NSString stringWithFormat:@"$%.2f", subTotal];
-    
     // show old price
     if (_promoDiscount > 0)
+    {
         self.lblTotalPrevious.hidden = NO;
+        cutText = [NSString stringWithFormat:@"$%.2f", subTotal];
+    }
     
     NSLog(@"PROMO CREDIT LEFT: %f", _promoDiscount - subTotal);
     NSLog(@"SUB TOTAL: %f", subTotal);
