@@ -1392,7 +1392,7 @@
     NSString *strRequest = [NSString stringWithFormat:@"%@/order?api_token=%@", SERVER_URL, [[DataManager shareDataManager] getAPIToken]];
     
     NSLog(@"order URL - %@", strRequest);
-    NSLog(@"order JSON - %@", dicRequest);
+    NSLog(@"order JSON - %@", dicRequest[@"OrderItems"]);
     NSLog(@"ORDER ITEMS: %@", request[@"OrderItems"]);
     
 /*-----------Track empty orders, show message, then reset app------------*/
@@ -1445,10 +1445,7 @@
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
         [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
         
-        
-            [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
-        
-        
+        [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         

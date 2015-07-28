@@ -39,19 +39,16 @@
     NSUserDefaults *defaults;
     
     NSString *originalStatus;
-    
     NSString *currentMode;
+    NSString *todayDate;
+    NSString *dinnerMapURLString;
+    NSString *lunchMapURLString;
+    NSString *geofenceOrderRadiusMetersString;
     
     float lunchTime;
     float dinnerTime;
     float currentTime;
     float bufferTime;
-    NSString *todayDate;
-    
-    NSString *dinnerMapURLString;
-    NSString *lunchMapURLString;
-    
-    NSString *geofenceOrderRadiusMetersString;
     
     BOOL signedIn;
 }
@@ -60,12 +57,10 @@ static BentoShop *_shareInstance;
 
 + (BentoShop *)sharedInstance
 {
-    @synchronized(self) {
-        
+    @synchronized(self)
+    {
         if (_shareInstance == nil)
-        {
             _shareInstance = [[BentoShop alloc] init];
-        }
     }
     
     return _shareInstance;
@@ -74,9 +69,7 @@ static BentoShop *_shareInstance;
 + (void)releaseInstance
 {
     if (_shareInstance != nil)
-    {
         _shareInstance = nil;
-    }
 }
 
 - (id)init
@@ -150,23 +143,20 @@ static BentoShop *_shareInstance;
     NSError *error = nil;
     self.dicStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
-    
     if (originalStatus.length == 0) {
         originalStatus = self.dicStatus[@"overall"][@"value"];
     }
     
     NSString *newStatus = self.dicStatus[@"overall"][@"value"];
     
-    if (![originalStatus isEqualToString:newStatus]) {
-        
+    if (![originalStatus isEqualToString:newStatus])
+    {
         [[AppStrings sharedInstance] getAppStrings];
         
         originalStatus = @"";
         
         NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
     }
-    
-    NSLog(@"originalStatus - %@, newStatus - %@", originalStatus, newStatus);
     
     strRequest = [NSString stringWithFormat:@"%@/status/menu", SERVER_URL];
     
@@ -289,7 +279,6 @@ static BentoShop *_shareInstance;
     NSData *dataDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuToday[@"dinner"][@"MenuItems"]];
     [defaults setObject:dataLunch forKey:@"lunchMenuItems"];
     [defaults setObject:dataDinner forKey:@"dinnerMenuItems"];
-    
     [defaults synchronize];
     
     [self prefetchImages:self.menuToday];

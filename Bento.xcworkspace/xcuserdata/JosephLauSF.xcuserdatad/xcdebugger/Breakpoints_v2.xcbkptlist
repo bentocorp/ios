@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "459803600.513365"
+            timestampString = "459816258.932801"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1532"
-            endingLineNumber = "1532"
+            startingLineNumber = "1529"
+            endingLineNumber = "1529"
             landmarkName = "-handlePaymentAuthorizationWithCard:completion:"
             landmarkType = "5">
          </BreakpointContent>
@@ -89,6 +89,38 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1372"
             endingLineNumber = "1372"
+            landmarkName = "-createBackendChargeWithToken:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "459813606.672891"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1384"
+            endingLineNumber = "1384"
+            landmarkName = "-createBackendChargeWithToken:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "459814532.345452"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1435"
+            endingLineNumber = "1435"
             landmarkName = "-createBackendChargeWithToken:completion:"
             landmarkType = "5">
          </BreakpointContent>

@@ -15,9 +15,9 @@
 
 @implementation Bento
 
-- (id) init
+- (id)init
 {
-    if ( (self = [super init]) )
+    if (self = [super init])
     {
         self.indexMainDish = 0;
         self.indexSideDish1 = 0;
