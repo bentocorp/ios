@@ -160,6 +160,8 @@
     
     _isEditingBentos = NO;
     
+    self.lblTotalPrevious.hidden = YES;
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     _strPromoCode = [userDefaults objectForKey:KEY_PROMO_CODE];
     _promoDiscount = [userDefaults integerForKey:KEY_PROMO_DISCOUNT];
@@ -392,7 +394,7 @@
     loadingHUD = nil;
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -601,6 +603,10 @@
         totalPrice = 0; // if Promo hasn't been used up yet ie. subtotal(13.80) - promo(85),
     
     cutText = [NSString stringWithFormat:@"$%.2f", subTotal];
+    
+    // show old price
+    if (_promoDiscount > 0)
+        self.lblTotalPrevious.hidden = NO;
     
     NSLog(@"PROMO CREDIT LEFT: %f", _promoDiscount - subTotal);
     NSLog(@"SUB TOTAL: %f", subTotal);

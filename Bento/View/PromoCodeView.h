@@ -16,6 +16,6 @@
 
 @interface PromoCodeView : UIView
 
-@property (nonatomic, weak) id<PromoCodeViewDelegate> delegate;
+@property (nonatomic, weak) id <PromoCodeViewDelegate> delegate;
 
 @end
