@@ -2,6 +2,7 @@ PODS:
   - Adjust (4.2.7):
     - Adjust/Core (= 4.2.7)
   - Adjust/Core (4.2.7)
+  - Branch (0.10.5)
   - Canvas (0.1.2)
   - Mixpanel (2.7.3):
     - Mixpanel/MPCategoryHelpers (= 2.7.3)
@@ -18,6 +19,7 @@ PODS:
 
 DEPENDENCIES:
   - Adjust (from `git://github.com/adjust/ios_sdk.git`, tag `v4.2.7`)
+  - Branch
   - Canvas
   - Mixpanel
   - mopub-ios-sdk
@@ -37,6 +39,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Adjust: 2c3d4db6047c6bba68d7c5ede63fbdc989eb57b7
+  Branch: c12209a965c1f93083fb515084a4f5b8cbfc7c56
   Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
   Mixpanel: 1d387d76800e07e953958c62c97fea27f13632dd
   mopub-ios-sdk: c41d03bf7a9e13281e72665e792881a2bf5dc31c

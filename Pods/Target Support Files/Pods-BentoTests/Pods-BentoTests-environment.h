@@ -18,6 +18,12 @@
 #define COCOAPODS_VERSION_MINOR_Adjust_Core 2
 #define COCOAPODS_VERSION_PATCH_Adjust_Core 7
 
+// Branch
+#define COCOAPODS_POD_AVAILABLE_Branch
+#define COCOAPODS_VERSION_MAJOR_Branch 0
+#define COCOAPODS_VERSION_MINOR_Branch 10
+#define COCOAPODS_VERSION_PATCH_Branch 5
+
 // Canvas
 #define COCOAPODS_POD_AVAILABLE_Canvas
 #define COCOAPODS_VERSION_MAJOR_Canvas 0
