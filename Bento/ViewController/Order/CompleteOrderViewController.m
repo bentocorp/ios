@@ -1396,7 +1396,9 @@
     NSLog(@"ORDER ITEMS: %@", request[@"OrderItems"]);
     
 /*-----------Track empty orders, show message, then reset app------------*/
-    if (!request[@"OrderItems"])
+    NSArray *orderItemsArray = request[@"OrderItems"];
+    
+    if (orderItemsArray.count == 0 || orderItemsArray == nil)
     {
         // bento exists
         if (self.aryBentos)
