@@ -31,6 +31,9 @@
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
+// Branch
+#import "Branch.h"
+
 // Facebook
 #import "FacebookManager.h"
 #import <FacebookSDK/FacebookSDK.h>
@@ -122,6 +125,14 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     };
     
     [googleReach startNotifier];
+    
+/*----------------------------------------BRANCH--------------------------------------------*/
+    
+    Branch *branch = [Branch getInstance];
+    [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+        // params are the deep linked params associated with the link that the user clicked before showing up.
+        NSLog(@"deep link data: %@", [params description]);
+    }];
 
 /*--------------------------------------TRACKING--------------------------------------------*/
     
@@ -431,6 +442,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
 {
     // Note this handler block should be the exact same as the handler passed to any open calls.
+    
+    // Branch (make sure this is called first before any other SDK's)
+    [[Branch getInstance] handleDeepLink:url];
     
     // Facebook
 #ifndef DEV_MODE
