@@ -33,6 +33,7 @@
 
 // Branch
 #import "Branch.h"
+#import "ChooseMainDishViewController.h"
 
 // Facebook
 #import "FacebookManager.h"
@@ -126,23 +127,36 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     [googleReach startNotifier];
     
-/*----------------------------------------BRANCH--------------------------------------------*/
+/*--------------------------------------BRANCH-----------------------------------------*/
     
     Branch *branch = [Branch getInstance];
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
         // params are the deep linked params associated with the link that the user clicked before showing up.
         NSLog(@"deep link data: %@", [params description]);
     }];
-
-/*--------------------------------------TRACKING--------------------------------------------*/
     
-    NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion]);
+    ///
+    
+    ChooseMainDishViewController *chooseMainDishVC = [[UIStoryboard storyboardWithName:@"Main"
+                                                                          bundle:[NSBundle mainBundle]]
+                                                instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    
+    [branch registerDeepLinkController:chooseMainDishVC forKey:@"product_picture"];
+    [branch initSessionWithLaunchOptions:launchOptions automaticallyDisplayDeepLinkController:YES];
+
+/*--------------------------------------FACEBOOK-----------------------------------------*/
     
     // Crashlytics
     [Fabric with:@[CrashlyticsKit]];
     
+    NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion]);
+    
+/*--------------------------------------TWITTER-----------------------------------------*/
+    
     // Twitter Conversion Tracking, MoPub
     [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"963634117"];
+    
+/*--------------------------------------ADJUST-----------------------------------------*/
     
     // Adjust Tracking (so far, onyl tracking organic installs)
     NSString *yourAppToken = ADJUST_TOKEN;
@@ -153,11 +167,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [adjustConfig setDelegate:self];
     [Adjust appDidLaunch:adjustConfig];
     
-    // Mixpanel Tracking
+/*--------------------------------------MIXPANEL-----------------------------------------*/
 #ifndef DEV_MODE
     {
         [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];  // Use MixPanel for production build only
-        
         
         // Tell iOS you want your app to receive push notifications
         // This code will work in iOS 8.0 xcode 6.0 or later:
@@ -177,9 +190,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-//    // Call .identify to flush the People record to Mixpanel
-//    [mixpanel identify:mixpanel.distinctId];
-    
     // TRACK: "App Launched"
     [mixpanel track:@"App Launched" properties:nil];
     
@@ -192,7 +202,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         NSLog(@"OUT OF SERVICE AREA");
     }
 
-    // Stripe
+/*--------------------------------------STRIPE-----------------------------------------*/
 #ifdef DEV_MODE
     [Stripe setDefaultPublishableKey:StripePublishableTestKey];
 #else
@@ -457,8 +467,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         NSLog(@"<%@ (%p) %@ handled:%@>\r url: %@\r sourceApplication: %@", NSStringFromClass([self class]), self, NSStringFromSelector(_cmd), handled ? @"YES" : @"NO", url.absoluteString, sourceApplication);
         
         return handled;
+
     }
-    
     return YES;
 }
 

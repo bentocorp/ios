@@ -17,7 +17,9 @@
 #import "SoldOutViewController.h"
 #import "DishCollectionViewCell.h"
 
-@interface ChooseMainDishViewController () <DishCollectionViewCellDelegate>
+#import "Branch.h"
+
+@interface ChooseMainDishViewController () <DishCollectionViewCellDelegate, BranchDeepLinkingController>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UICollectionView *cvMainDishes;
@@ -45,6 +47,25 @@
     [self.cvMainDishes registerNib:cellNib forCellWithReuseIdentifier:@"cell"];
     
     [self.lblTitle setText:[[AppStrings sharedInstance] getString:MAINDISH_TITLE]];
+}
+
+- (void)configureControlWithData:(NSDictionary *)data
+{
+    NSString *pictureUrl = data[@"product_picture"];
+    
+    // show the picture
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData *imageData = [NSData dataWithContentsOfURL:[NSURL URLWithString:pictureUrl]];
+        UIImage *image = [UIImage imageWithData:imageData];
+        dispatch_async(dispatch_get_main_queue(), ^{
+//            self.productImageView.image = image;
+        });
+    });
+}
+
+- (void)closePressed
+{
+    [self.completionDelegate deepLinkingControllerCompleted];
 }
 
 - (void)didReceiveMemoryWarning {
