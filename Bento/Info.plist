@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>branch_key</key>
-	<string>key_live_giiqrOp6DiHgCZr7oWZ7GfikneiUFqZM</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -26,6 +24,16 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb791688527544905</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
+			<string>io.branch.sdk</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>bentoapp</string>
 			</array>
 		</dict>
 	</array>
@@ -86,5 +94,7 @@
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
 	</array>
+	<key>branch_key</key>
+	<string>key_live_giiqrOp6DiHgCZr7oWZ7GfikneiUFqZM</string>
 </dict>
 </plist>

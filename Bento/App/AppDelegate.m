@@ -130,19 +130,19 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 /*--------------------------------------BRANCH-----------------------------------------*/
     
     Branch *branch = [Branch getInstance];
-    [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error) {
+    
+    [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error)
+    {
         // params are the deep linked params associated with the link that the user clicked before showing up.
         NSLog(@"deep link data: %@", [params description]);
     }];
     
-    ///
-    
-    ChooseMainDishViewController *chooseMainDishVC = [[UIStoryboard storyboardWithName:@"Main"
-                                                                          bundle:[NSBundle mainBundle]]
-                                                instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    
-    [branch registerDeepLinkController:chooseMainDishVC forKey:@"product_picture"];
-    [branch initSessionWithLaunchOptions:launchOptions automaticallyDisplayDeepLinkController:YES];
+    // Content Sharing
+    [[Branch getInstance] getShortURLWithParams:@{@"foo": @"bar"} andChannel:@"sms" andFeature:BRANCH_FEATURE_TAG_SHARE andCallback:^(NSString *url, NSError *error)
+    {
+        if (!error)
+            NSLog(@"got my Branch link to share: %@", url);
+    }];
 
 /*--------------------------------------FACEBOOK-----------------------------------------*/
     
