@@ -135,14 +135,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     {
         // params are the deep linked params associated with the link that the user clicked before showing up.
         NSLog(@"deep link data: %@", [params description]);
+        
+        
     }];
-    
-//    // Content Sharing
-//    [[Branch getInstance] getShortURLWithParams:@{@"menu1": @"main_dishes"} andChannel:@"sms" andFeature:BRANCH_FEATURE_TAG_SHARE andCallback:^(NSString *url, NSError *error)
-//    {
-//        if (!error)
-//            NSLog(@"got my Branch link to share: %@", url);
-//    }];
 
 /*--------------------------------------FACEBOOK-----------------------------------------*/
     
