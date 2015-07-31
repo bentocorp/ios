@@ -137,12 +137,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         NSLog(@"deep link data: %@", [params description]);
     }];
     
-    // Content Sharing
-    [[Branch getInstance] getShortURLWithParams:@{@"foo": @"bar"} andChannel:@"sms" andFeature:BRANCH_FEATURE_TAG_SHARE andCallback:^(NSString *url, NSError *error)
-    {
-        if (!error)
-            NSLog(@"got my Branch link to share: %@", url);
-    }];
+//    // Content Sharing
+//    [[Branch getInstance] getShortURLWithParams:@{@"menu1": @"main_dishes"} andChannel:@"sms" andFeature:BRANCH_FEATURE_TAG_SHARE andCallback:^(NSString *url, NSError *error)
+//    {
+//        if (!error)
+//            NSLog(@"got my Branch link to share: %@", url);
+//    }];
 
 /*--------------------------------------FACEBOOK-----------------------------------------*/
     
@@ -156,7 +156,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Twitter Conversion Tracking, MoPub
     [[MPAdConversionTracker sharedConversionTracker] reportApplicationOpenForApplicationID:@"963634117"];
     
-/*--------------------------------------ADJUST-----------------------------------------*/
+/*---------------------------------------ADJUST-----------------------------------------*/
     
     // Adjust Tracking (so far, onyl tracking organic installs)
     NSString *yourAppToken = ADJUST_TOKEN;
