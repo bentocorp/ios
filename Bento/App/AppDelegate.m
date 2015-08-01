@@ -134,9 +134,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error)
     {
         // params are the deep linked params associated with the link that the user clicked before showing up.
+        
         NSLog(@"deep link data: %@", [params description]);
         
-        
+        [[NSUserDefaults standardUserDefaults] setObject:params forKey:@"branchParams"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }];
 
 /*--------------------------------------FACEBOOK-----------------------------------------*/
