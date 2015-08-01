@@ -45,6 +45,8 @@
     NSString *lunchMapURLString;
     NSString *geofenceOrderRadiusMetersString;
     
+    NSDictionary *branchParams;
+    
     float lunchTime;
     float dinnerTime;
     float currentTime;
@@ -207,6 +209,22 @@ static BentoShop *_shareInstance;
     formatter = nil;
     
     return strDate;
+}
+
+#pragma mark Branch Params
+
+- (void)setBranchParams:(NSDictionary *)params
+{
+    branchParams = params;
+    
+    NSLog(@"SET BRANCH PARAMS: %@", params);
+}
+
+- (NSDictionary *)getBranchParams
+{
+    NSLog(@"GET BRANCH PRAMS: %@", branchParams);
+    
+    return branchParams;
 }
 
 #pragma mark Get Menus

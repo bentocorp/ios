@@ -51,6 +51,9 @@
 - (void)getMenus;
 - (void)getServiceArea;
 
+- (void)setBranchParams:(NSDictionary *)params;
+- (NSDictionary *)getBranchParams;
+
 - (NSURL *)getMenuImageURL;
 - (NSString *)getMenuDateString;
 - (NSString *)getMenuWeekdayString;

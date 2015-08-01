@@ -25,6 +25,8 @@
 
 #import "CustomBentoViewController.h"
 #import "FixedBentoViewController.h"
+#import "ChooseMainDishViewController.h"
+#import "ChooseSideDishViewController.h"
 
 #import "Mixpanel.h"
 #import "SVGeocoder.h"
@@ -394,15 +396,38 @@
     // this is dynamic to times of day
     NSString *menuType = [[BentoShop sharedInstance] getMenuType];
     
+    NSDictionary *branchParams = [[BentoShop sharedInstance] getBranchParams];
+    NSLog(@"BRANCH PARAMS: %@", branchParams);
+    
+    NSString *mainOrSide = branchParams[@"ChooseDish"];
+    
     if ([menuType isEqualToString:@"fixed"])
     {
         FixedBentoViewController *fixedBentoViewController = [[FixedBentoViewController alloc] init];
         [self.navigationController pushViewController:fixedBentoViewController animated:needsAnimation];
+        
+        /*THIS NEEDS TO BE SET UP*/
     }
     else if ([menuType isEqualToString:@"custom"])
     {
         CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
-        [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
+        
+        if ([mainOrSide isEqualToString:@"Main"])
+        {
+            ChooseMainDishViewController *chooseMainDishVC = [[ChooseMainDishViewController alloc] init];
+            [self.navigationController pushViewController:customBentoViewController animated:NO];
+            [self.navigationController pushViewController:chooseMainDishVC animated:YES];
+        }
+        else if ([mainOrSide isEqualToString:@"Side"])
+        {
+            ChooseSideDishViewController *chooseSideDishVC = [[ChooseSideDishViewController alloc] init];
+            [self.navigationController pushViewController:customBentoViewController animated:NO];
+            [self.navigationController pushViewController:chooseSideDishVC animated:YES];
+        }
+        else
+        {
+            [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
+        }
     }
 }
 

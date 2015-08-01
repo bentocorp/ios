@@ -137,8 +137,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         NSLog(@"deep link data: %@", [params description]);
         
-        [[NSUserDefaults standardUserDefaults] setObject:params forKey:@"branchParams"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [[BentoShop sharedInstance] setBranchParams:params];
     }];
 
 /*--------------------------------------FACEBOOK-----------------------------------------*/
