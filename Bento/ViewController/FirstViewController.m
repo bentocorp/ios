@@ -412,18 +412,24 @@
     {
         CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
         
+        // deep link to Choose Your Main Dish
         if ([mainOrSide isEqualToString:@"Main"])
         {
             ChooseMainDishViewController *chooseMainDishVC = [[ChooseMainDishViewController alloc] init];
             [self.navigationController pushViewController:customBentoViewController animated:NO];
             [self.navigationController pushViewController:chooseMainDishVC animated:YES];
         }
+        
+        // deep link to Choose Your Side Disg
         else if ([mainOrSide isEqualToString:@"Side"])
         {
             ChooseSideDishViewController *chooseSideDishVC = [[ChooseSideDishViewController alloc] init];
             [self.navigationController pushViewController:customBentoViewController animated:NO];
             [self.navigationController pushViewController:chooseSideDishVC animated:YES];
         }
+        
+        // regular opening flow of the app. changed for later use then stop
+        // 
         else
         {
             [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
