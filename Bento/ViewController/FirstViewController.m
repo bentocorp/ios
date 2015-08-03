@@ -397,10 +397,7 @@
     NSString *menuType = [[BentoShop sharedInstance] getMenuType];
     
     NSDictionary *branchParams = [[BentoShop sharedInstance] getBranchParams];
-    NSLog(@"BRANCH PARAMS: %@", branchParams);
-    
     NSString *mainOrSide = branchParams[@"choose"];
-    NSLog(@"ChooseDish: %@", mainOrSide);
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     

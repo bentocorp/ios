@@ -134,22 +134,20 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error)
     {
         // params are the deep linked params associated with the link that the user clicked before showing up.
-        if (error != nil)
+        NSLog(@"CHOOSE: %@", params[@"choose"]);
+        if (params[@"choose"] != nil)
         {
-            NSLog(@"CHOOSE: %@", params[@"choose"]);
-            if (params[@"choose"] != nil)
-            {
-                // if the app is already open in the background
-                UINavigationController *myNavCon = (UINavigationController*)self.window.rootViewController;
-                [(UINavigationController *)myNavCon.presentingViewController popToRootViewControllerAnimated:NO];
-                [myNavCon dismissViewControllerAnimated:NO completion:nil];
-                [myNavCon popToRootViewControllerAnimated:NO];
-            }
-                
-            [[BentoShop sharedInstance] setBranchParams:params];
-            
-            NSLog(@"deep link data: %@", [params description]);
+            // if the app is already open in the background
+            UINavigationController *myNavCon = (UINavigationController*)self.window.rootViewController;
+            [(UINavigationController *)myNavCon.presentingViewController popToRootViewControllerAnimated:NO];
+            [myNavCon dismissViewControllerAnimated:NO completion:nil];
+            [myNavCon popToRootViewControllerAnimated:NO];
         }
+            
+        [[BentoShop sharedInstance] setBranchParams:params];
+        
+        NSLog(@"deep link data: %@", [params description]);
+
     }];
 
 /*--------------------------------------FACEBOOK-----------------------------------------*/
