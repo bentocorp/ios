@@ -135,6 +135,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     {
         // params are the deep linked params associated with the link that the user clicked before showing up.
         
+        // if the app is already open in the background
+        UINavigationController *myNavCon = (UINavigationController*)self.window.rootViewController;
+        [(UINavigationController *)myNavCon.presentingViewController popToRootViewControllerAnimated:NO];
+        [myNavCon dismissViewControllerAnimated:NO completion:nil];
+        [myNavCon popToRootViewControllerAnimated:NO];
+        
         NSLog(@"deep link data: %@", [params description]);
         
         [[BentoShop sharedInstance] setBranchParams:params];
@@ -385,6 +391,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                 NSLog(@"WITHIN SERVICE AREA");
         });
     });
+    
+    
 }
 
 - (void)showLocationAlert

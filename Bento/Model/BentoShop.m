@@ -1306,7 +1306,7 @@ static BentoShop *_shareInstance;
 
 - (void)resetBentoArray
 {
-    if (self.aryBentos != nil)
+    if (self.aryBentos != nil) // try to add && self.aryBentos.count != 0
         [self.aryBentos removeAllObjects];
 }
 

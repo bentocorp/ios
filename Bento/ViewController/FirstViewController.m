@@ -399,37 +399,37 @@
     NSDictionary *branchParams = [[BentoShop sharedInstance] getBranchParams];
     NSLog(@"BRANCH PARAMS: %@", branchParams);
     
-    NSString *mainOrSide = branchParams[@"ChooseDish"];
+    NSString *mainOrSide = branchParams[@"choose"];
+    NSLog(@"ChooseDish: %@", mainOrSide);
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     if ([menuType isEqualToString:@"fixed"])
     {
         FixedBentoViewController *fixedBentoViewController = [[FixedBentoViewController alloc] init];
         [self.navigationController pushViewController:fixedBentoViewController animated:needsAnimation];
-        
-        /*THIS NEEDS TO BE SET UP*/
     }
     else if ([menuType isEqualToString:@"custom"])
     {
         CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
         
         // deep link to Choose Your Main Dish
-        if ([mainOrSide isEqualToString:@"Main"])
+        if ([mainOrSide isEqualToString:@"main"])
         {
-            ChooseMainDishViewController *chooseMainDishVC = [[ChooseMainDishViewController alloc] init];
+            ChooseMainDishViewController *chooseMainDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
             [self.navigationController pushViewController:customBentoViewController animated:NO];
             [self.navigationController pushViewController:chooseMainDishVC animated:YES];
         }
         
         // deep link to Choose Your Side Disg
-        else if ([mainOrSide isEqualToString:@"Side"])
+        else if ([mainOrSide isEqualToString:@"side"])
         {
-            ChooseSideDishViewController *chooseSideDishVC = [[ChooseSideDishViewController alloc] init];
+            ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
             [self.navigationController pushViewController:customBentoViewController animated:NO];
             [self.navigationController pushViewController:chooseSideDishVC animated:YES];
         }
         
         // regular opening flow of the app. changed for later use then stop
-        // 
         else
         {
             [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
