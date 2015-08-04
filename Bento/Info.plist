@@ -60,7 +60,7 @@
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Bento would like to use your location</string>
+	<string>Bento needs your zipcode to check your delivery area</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ss-social-regular.ttf</string>
