@@ -237,7 +237,7 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    return CGSizeMake(self.cvMainDishes.frame.size.width, self.cvMainDishes.frame.size.height / 3);
+    return CGSizeMake(self.cvMainDishes.frame.size.width, self.cvMainDishes.frame.size.height / 3 - 10);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
