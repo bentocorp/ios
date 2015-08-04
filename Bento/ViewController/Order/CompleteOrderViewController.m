@@ -133,7 +133,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Mixpanel
     [[Mixpanel sharedInstance] track:@"Viewed Summary Screen"];
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Credit Card Screen For First Time"] == nil &&
+        [[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Summary Screen For First Time Without Credit Card"] == nil)
+    {
+        [[Mixpanel sharedInstance] track:@"Viewed Summary Screen For First Time Without Credit Card"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Viewed Summary Screen For First Time Without Credit Card"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
     
     // Initialize location manager.
     locationManager = [[CLLocationManager alloc] init];
