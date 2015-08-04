@@ -22,6 +22,8 @@
 
 #import "BentoShop.h"
 
+#import "Mixpanel.h"
+
 @interface EnterCreditCardViewController () <PTKViewDelegate>
 {
     STPCard *_creditCard;
@@ -47,6 +49,15 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // Mixpanel: Viewed Credit Card Screen For First Time
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Credit Card Screen For First Time"] == nil)
+    {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Viewed Credit Card Screen For First Time"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
+        [[Mixpanel sharedInstance] track:@"Viewed Credit Card Screen For First Time"];
+    }
+    
     self.lblTitle.text = [[AppStrings sharedInstance] getString:CREDITCARD_TITLE];
     self.lblMessage.text = [[AppStrings sharedInstance] getString:CREDITCARD_TEXT];
     
@@ -71,9 +82,7 @@
     NSArray *subviews = self.paymentView.subviews;
     for (UIView *subview in subviews) {
         if([subview isKindOfClass:[UIImageView class]] && subview != self.paymentView.placeholderView)
-        {
             subview.hidden = YES;
-        }
     }
     
     _creditCard = nil;
@@ -83,7 +92,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
@@ -189,7 +198,18 @@
 - (IBAction)onContinueToPayment:(id)sender
 {
     if (self.delegate != nil)
+    {
         [self.delegate setCardInfo:_creditCard];
+        
+        // Mixpanel: "Saved Credit Card For First Time"
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Saved Credit Card For First Time"] == nil)
+        {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Saved Credit Card For First Time"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [[Mixpanel sharedInstance] track:@"Saved Credit Card For First Time"];
+        }
+    }
     
     [self hideKeyboard];
     [self dismissViewControllerAnimated:YES completion:nil];
