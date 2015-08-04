@@ -136,15 +136,6 @@
     // Mixpanel
     [[Mixpanel sharedInstance] track:@"Viewed Summary Screen"];
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Credit Card Screen For First Time"] == nil &&
-        [[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Summary Screen For First Time Without Credit Card"] == nil)
-    {
-        [[Mixpanel sharedInstance] track:@"Viewed Summary Screen For First Time Without Credit Card"];
-        
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Viewed Summary Screen For First Time Without Credit Card"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    
     // Initialize location manager.
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -189,7 +180,17 @@
         if (![self applePayEnabled])
             [self gotoCreditScreen];
         else
+        {
             [[DataManager shareDataManager] setPaymentMethod:Payment_ApplePay];
+            
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Summary Screen For First Time - Apple Pay Enabled"] == nil)
+            {
+                [[Mixpanel sharedInstance] track:@"Viewed Summary Screen For First Time - Apple Pay Enabled"];
+                
+                [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Viewed Summary Screen For First Time - Apple Pay Enabled"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        }
     }
 }
 
