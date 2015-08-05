@@ -508,7 +508,7 @@
         if (source != nil)
             sourceFinal = source;
         else
-            sourceFinal = @"N/A ";
+            sourceFinal = @"N/A";
         
         if (currentDate != nil)
             currentDateFinal = currentDate;

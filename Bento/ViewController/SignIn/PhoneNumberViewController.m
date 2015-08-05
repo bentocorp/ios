@@ -381,12 +381,33 @@
         
         // identify user for current session
         [mixpanel identify:strMailAddr];
-
+        
+        NSString *currentDate = [self getCurrentDate];
+        
+        NSString *sourceFinal;
+        NSString *currentDateFinal;
+        NSString *currentAddressFinal;
+        
+        if (source != nil)
+            sourceFinal = source;
+        else
+            sourceFinal = @"N/A";
+        
+        if (currentDate != nil)
+            currentDateFinal = currentDate;
+        else
+            currentDateFinal = @"N/A";
+        
+        if (currentAddress != nil)
+            currentAddressFinal = currentAddress;
+        else
+            currentAddressFinal = @"N/A";
+        
         // set initial properties once
         [mixpanel.people setOnce:@{
-                                   @"Installed Source":source,
-                                   @"$created": [self getCurrentDate],
-                                   @"Sign Up Address": currentAddress
+                                   @"Installed Source":sourceFinal,
+                                   @"$created": currentDateFinal,
+                                   @"Sign Up Address": currentAddressFinal
                                    }];
         
         // set properties

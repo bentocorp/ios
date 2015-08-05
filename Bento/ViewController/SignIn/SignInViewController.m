@@ -352,12 +352,19 @@
         // identify user for current session
         [mixpanel identify:strEmail];
         
+        NSString *currentAddressFinal;
+        
+        if (currentAddress != nil)
+            currentAddressFinal = currentAddress;
+        else
+            currentAddressFinal = @"N/A";
+            
         // set properties
         [mixpanel.people set:@{
                                @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
                                @"$email": response[@"email"],
                                @"$phone": response[@"phone"],
-                               @"Last Login Address": currentAddress
+                               @"Last Login Address": currentAddressFinal
                                }];
         
         NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"], [self getCurrentTime], [self getCurrentDate], currentAddress);
