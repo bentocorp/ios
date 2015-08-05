@@ -2538,7 +2538,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
@@ -2573,7 +2573,7 @@
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
