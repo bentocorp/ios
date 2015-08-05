@@ -122,7 +122,7 @@
             NSLog(@"self.aryDishes - %@", self.aryDishes);
         }
     }
-    
+
     _originalDishIndex = NSNotFound;
     _selectedIndex = NSNotFound;
     _selectedItemState = DISH_CELL_NORMAL;

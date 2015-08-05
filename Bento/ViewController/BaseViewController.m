@@ -107,11 +107,9 @@
 {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
+    
     SoldOutViewController *vcSoldOut = (SoldOutViewController *)nav.topViewController;
     vcSoldOut.type = [identifier integerValue];
-    
-//    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
-//    [self dismissViewControllerAnimated:YES completion:nil];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
