@@ -46,8 +46,9 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnPolicy;
 @property (nonatomic, weak) IBOutlet UIButton *btnTerms;
 
-@property (nonatomic, weak) IBOutlet UILabel *lunchAndDinnerHoursLabel;
 @property (nonatomic, weak) IBOutlet UILabel *openingHoursLabel;
+@property (nonatomic, weak) IBOutlet UILabel *lunchAndDinnerHoursLabel;
+
 
 @end
 
@@ -104,7 +105,9 @@
     [self.view addSubview:settingsButton];
     
     self.openingHoursLabel.adjustsFontSizeToFitWidth = YES;
+    self.openingHoursLabel.text = [[AppStrings sharedInstance] getString:OPEN_LINE_1];
     self.lunchAndDinnerHoursLabel.adjustsFontSizeToFitWidth = YES;
+    self.lunchAndDinnerHoursLabel.text = [[AppStrings sharedInstance] getString:OPEN_LINE_2];
     
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.ivBackground.bounds;

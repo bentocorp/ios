@@ -207,6 +207,10 @@
 // Force Update
 #define IOS_MIN_VERSION                         @"ios_min_version"
 
+// Open days/hours
+#define OPEN_LINE_1                             @"open-line1"
+#define OPEN_LINE_2                             @"open-line2"
+
 @interface AppStrings : NSObject
 
 @property (nonatomic) NSArray *appStrings;

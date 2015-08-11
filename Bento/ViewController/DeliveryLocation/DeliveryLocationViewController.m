@@ -588,6 +588,7 @@
     {
         NSString *strTitle = @"CONFIRM ADDRESS";
         
+        [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
         NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         float spacing = 1.0f;
         [attributedTitle addAttribute:NSKernAttributeName
@@ -596,9 +597,9 @@
         
         // Anything less than iOS 8.0
         if ([[UIDevice currentDevice].systemVersion intValue] < 8)
-            [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
+            self.btnBottomButton.titleLabel.text = strTitle;
         else
-            [self.btnBottomButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+            self.btnBottomButton.titleLabel.attributedText = attributedTitle;
         
         self.btnBottomButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:176.0f / 255.0f blue:95.0f / 255.0f alpha:1.0f];
     }
@@ -608,6 +609,7 @@
         {
             NSString *strTitle = @"CONFIRM ADDRESS";
             
+            [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
             NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
             float spacing = 1.0f;
             [attributedTitle addAttribute:NSKernAttributeName
@@ -616,9 +618,9 @@
             
             // Anything less than iOS 8.0
             if ([[UIDevice currentDevice].systemVersion intValue] < 8)
-                [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
+                self.btnBottomButton.titleLabel.text = strTitle;
             else
-                [self.btnBottomButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+                self.btnBottomButton.titleLabel.attributedText = attributedTitle;
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:176.0f / 255.0f blue:95.0f / 255.0f alpha:1.0f];
         }
@@ -628,6 +630,7 @@
             
             if (strTitle != nil)
             {
+                [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
                 NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
                 float spacing = 1.0f;
                 [attributedTitle addAttribute:NSKernAttributeName
@@ -636,9 +639,9 @@
                 
                 // Anything less than iOS 8.0
                 if ([[UIDevice currentDevice].systemVersion intValue] < 8)
-                    [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
+                    self.btnBottomButton.titleLabel.text = strTitle;
                 else
-                    [self.btnBottomButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+                    self.btnBottomButton.titleLabel.attributedText = attributedTitle;
             }
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:145.0f / 255.0f alpha:1.0f];

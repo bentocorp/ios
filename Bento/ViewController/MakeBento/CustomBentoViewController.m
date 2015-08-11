@@ -383,7 +383,6 @@
     btnAddAnotherBento = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45, SCREEN_WIDTH - 60, 45)];
     btnAddAnotherBento.layer.borderColor = BORDER_COLOR.CGColor;
     btnAddAnotherBento.layer.borderWidth = 1.0f;
-    [btnAddAnotherBento setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
     btnAddAnotherBento.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
     [btnAddAnotherBento addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnAddAnotherBento];

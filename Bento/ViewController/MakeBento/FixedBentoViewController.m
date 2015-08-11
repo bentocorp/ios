@@ -178,7 +178,7 @@
     lblBanner.textColor = [UIColor whiteColor];
     lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
     lblBanner.hidden = YES;
-    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6 + 10, self.view.frame.size.width / 8 + 10);
+    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
     lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
     lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     [scrollView addSubview:lblBanner];
