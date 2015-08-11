@@ -203,7 +203,12 @@
                             value:@(spacing)
                             range:NSMakeRange(0, [strTitle length])];
     
-    btnState.titleLabel.attributedText = attributedTitle;
+    // Anything less than iOS 8.0
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+        btnState.titleLabel.text = strTitle;
+    else
+        btnState.titleLabel.attributedText = attributedTitle;
+        
     attributedTitle = nil;
 
     
