@@ -613,7 +613,11 @@
                                     value:@(spacing)
                                     range:NSMakeRange(0, [strTitle length])];
             
-            self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+            // Anything less than iOS 8.0
+            if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+                self.btnBottomButton.titleLabel.text = strTitle;
+            else
+                self.btnBottomButton.titleLabel.attributedText = attributedTitle;
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:176.0f / 255.0f blue:95.0f / 255.0f alpha:1.0f];
         }
@@ -631,7 +635,11 @@
                                         value:@(spacing)
                                         range:NSMakeRange(0, [strTitle length])];
                 
-                self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+                // Anything less than iOS 8.0
+                if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+                    self.btnBottomButton.titleLabel.text = strTitle;
+                else
+                    self.btnBottomButton.titleLabel.attributedText = attributedTitle;
             }
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:145.0f / 255.0f alpha:1.0f];

@@ -245,9 +245,9 @@
     
     [cell setSmallDishCell];
     
-    if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
-        // iOS 8.0 and above
-    } else {
+    // Anything less than iOS 8.0
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+    {
         // Anything less than iOS 8.0
         NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];

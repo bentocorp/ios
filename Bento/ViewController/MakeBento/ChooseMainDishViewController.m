@@ -218,10 +218,9 @@
     DishCollectionViewCell *cell = (DishCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
     
-    if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
-        // iOS 8.0 and above
-    } else {
-        // Anything less than iOS 8.0
+    // Anything less than iOS 8.0
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+    {
         NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID]];

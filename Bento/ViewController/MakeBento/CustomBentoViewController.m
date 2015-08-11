@@ -427,7 +427,11 @@
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
-        btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
+        // Anything less than iOS 8.0
+        if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+            btnAddAnotherBento.titleLabel.text = strTitle;
+        else
+            btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
         
         // Continue Button
         strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
@@ -438,7 +442,11 @@
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
-        btnState.titleLabel.attributedText = attributedTitle;
+        // Anything less than iOS 8.0
+        if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+            btnState.titleLabel.text = strTitle;
+        else
+            btnState.titleLabel.attributedText = attributedTitle;
         attributedTitle = nil;
     }
     
@@ -1094,13 +1102,12 @@
         if (strTitle != nil)
         {
             // Add Another Bento Button
-            [btnAddAnotherBento setTitle:strTitle forState:UIControlStateNormal];
             NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
             float spacing = 1.0f;
             [attributedTitle addAttribute:NSKernAttributeName
                                     value:@(spacing)
                                     range:NSMakeRange(0, [strTitle length])];
-            btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
+            [btnAddAnotherBento setAttributedTitle:attributedTitle forState:UIControlStateNormal];
         }
     }
     
@@ -1127,13 +1134,12 @@
         if (strTitle != nil)
         {
             // Add Another Bento Button
-            [btnAddAnotherBento setTitle:strTitle forState:UIControlStateNormal];
             NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
             float spacing = 1.0f;
             [attributedTitle addAttribute:NSKernAttributeName
                                     value:@(spacing)
                                     range:NSMakeRange(0, [strTitle length])];
-            btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
+            [btnAddAnotherBento setAttributedTitle:attributedTitle forState:UIControlStateNormal];
         }
     }
     
@@ -1292,6 +1298,36 @@
     
     if (indexPath.section == 1)
         [cell setSmallDishCell];
+    
+    // Anything less than iOS 8.0
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+    {
+        [self setDishesBySection0MainOrSection1Side:indexPath.section];
+        
+        // MAINS
+        if (indexPath.section == 0)
+        {
+            NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
+            [cell setDishInfo:dishInfo];
+            
+            if (_selectedPathMainRight == indexPath.row)
+                [cell setCellState:YES];
+            else
+                [cell setCellState:NO];
+        }
+        
+        // SIDES
+        else if (indexPath.section == 1)
+        {
+            NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
+            [cell setDishInfo:dishInfo];
+            
+            if (_selectedPathSideRight == indexPath.row)
+                [cell setCellState:YES];
+            else
+                [cell setCellState:NO];
+        }
+    }
     
     return cell;
 }
