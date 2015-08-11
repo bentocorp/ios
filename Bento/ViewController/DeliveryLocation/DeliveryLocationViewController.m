@@ -186,7 +186,7 @@
     }
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
 
@@ -198,7 +198,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
     
     [self updateUI];
-    
 }
 
 - (void)noConnection
@@ -562,7 +561,7 @@
     [self.txtAddress resignFirstResponder];
 }
 
-- (void) updateUI
+- (void)updateUI
 {
     if (self.mapAnnotation != nil)
     {
@@ -588,7 +587,6 @@
     if (self.placeInfo != nil && self.btnMeetMyDrive.selected && [[BentoShop sharedInstance] getCompletedBentoCount] > 0)
     {
         NSString *strTitle = @"CONFIRM ADDRESS";
-        [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
         
         NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         float spacing = 1.0f;
@@ -596,7 +594,11 @@
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
         
-        self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+        // Anything less than iOS 8.0
+        if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+            [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
+        else
+            [self.btnBottomButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
         
         self.btnBottomButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:176.0f / 255.0f blue:95.0f / 255.0f alpha:1.0f];
     }
@@ -605,7 +607,6 @@
         if (self.placeInfo != nil && self.btnMeetMyDrive.selected && _nextToBuild)
         {
             NSString *strTitle = @"CONFIRM ADDRESS";
-            [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
             
             NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
             float spacing = 1.0f;
@@ -615,9 +616,9 @@
             
             // Anything less than iOS 8.0
             if ([[UIDevice currentDevice].systemVersion intValue] < 8)
-                self.btnBottomButton.titleLabel.text = strTitle;
+                [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
             else
-                self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+                [self.btnBottomButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:176.0f / 255.0f blue:95.0f / 255.0f alpha:1.0f];
         }
@@ -627,8 +628,6 @@
             
             if (strTitle != nil)
             {
-                [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
-                
                 NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
                 float spacing = 1.0f;
                 [attributedTitle addAttribute:NSKernAttributeName
@@ -637,9 +636,9 @@
                 
                 // Anything less than iOS 8.0
                 if ([[UIDevice currentDevice].systemVersion intValue] < 8)
-                    self.btnBottomButton.titleLabel.text = strTitle;
+                    [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
                 else
-                    self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+                    [self.btnBottomButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
             }
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:145.0f / 255.0f alpha:1.0f];
