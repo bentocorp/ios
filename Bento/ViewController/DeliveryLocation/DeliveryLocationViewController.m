@@ -484,6 +484,10 @@
         else
         {
             [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
+            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude] forKey:@"savedLongitude"];
+            
             [NSUserDefaults standardUserDefaults];
             
             [self gotoAddAnotherBentoScreen];
@@ -494,8 +498,6 @@
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude] forKey:@"savedLongitude"];
         [NSUserDefaults standardUserDefaults];
-        
-        NSLog(@"lat: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"]);
         
         [self doConfirmOrder];
     }
