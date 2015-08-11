@@ -239,13 +239,7 @@
     if (regionRadius > locationManager.maximumRegionMonitoringDistance)
         regionRadius = locationManager.maximumRegionMonitoringDistance;
     
-    NSString *version = [[UIDevice currentDevice] systemVersion];
-    CLRegion * region = nil;
-    
-    if ([version floatValue] >= 7.0f) // for iOS7+
-        region =  [[CLCircularRegion alloc] initWithCenter:centerCoordinate radius:regionRadius identifier:identifier];
-    else // iOS 7 below
-        region = [[CLRegion alloc] initCircularRegionWithCenter:centerCoordinate radius:regionRadius identifier:identifier];
+    CLRegion * region = [[CLCircularRegion alloc] initWithCenter:centerCoordinate radius:regionRadius identifier:identifier];
     
     return region;
 }
