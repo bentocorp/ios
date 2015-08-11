@@ -399,37 +399,43 @@
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
-    if ([menuType isEqualToString:@"fixed"])
+    // prevent unbalanced call to vc error
+    double delayInSeconds = 0.1;
+    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
     {
-        FixedBentoViewController *fixedBentoViewController = [[FixedBentoViewController alloc] init];
-        [self.navigationController pushViewController:fixedBentoViewController animated:needsAnimation];
-    }
-    else if ([menuType isEqualToString:@"custom"])
-    {
-        CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
-        
-        // deep link to Choose Your Main Dish
-        if ([mainOrSide isEqualToString:@"main"])
+        if ([menuType isEqualToString:@"fixed"])
         {
-            ChooseMainDishViewController *chooseMainDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-            [self.navigationController pushViewController:customBentoViewController animated:NO];
-            [self.navigationController pushViewController:chooseMainDishVC animated:YES];
+            FixedBentoViewController *fixedBentoViewController = [[FixedBentoViewController alloc] init];
+            [self.navigationController pushViewController:fixedBentoViewController animated:needsAnimation];
         }
-        
-        // deep link to Choose Your Side Disg
-        else if ([mainOrSide isEqualToString:@"side"])
+        else if ([menuType isEqualToString:@"custom"])
         {
-            ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-            [self.navigationController pushViewController:customBentoViewController animated:NO];
-            [self.navigationController pushViewController:chooseSideDishVC animated:YES];
+            CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
+            
+            // deep link to Choose Your Main Dish
+            if ([mainOrSide isEqualToString:@"main"])
+            {
+                ChooseMainDishViewController *chooseMainDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+                [self.navigationController pushViewController:customBentoViewController animated:NO];
+                [self.navigationController pushViewController:chooseMainDishVC animated:YES];
+            }
+            
+            // deep link to Choose Your Side Disg
+            else if ([mainOrSide isEqualToString:@"side"])
+            {
+                ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+                [self.navigationController pushViewController:customBentoViewController animated:NO];
+                [self.navigationController pushViewController:chooseSideDishVC animated:YES];
+            }
+            
+            // regular opening flow of the app. changed for later use then stop
+            else
+            {
+                [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
+            }
         }
-        
-        // regular opening flow of the app. changed for later use then stop
-        else
-        {
-            [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
-        }
-    }
+    });
 }
 
 - (void)showSoldoutScreen:(NSNumber *)identifier
