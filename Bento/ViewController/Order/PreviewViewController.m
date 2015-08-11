@@ -912,28 +912,14 @@
 
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (collectionView == cvDishesLeft) // left side
-    {
-        PreviewCollectionViewCell *cell = (PreviewCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PreviewCollectionViewCell" forIndexPath:indexPath];
-        
-        [cell initView];
-        
-        if (indexPath.section == 1)
-            [cell setSmallDishCell];
-        
-        return cell;
-    }
-    else // right side
-    {
-        PreviewCollectionViewCell *cell = (PreviewCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PreviewCollectionViewCell" forIndexPath:indexPath];
-        
-        [cell initView];
-        
-        if (indexPath.section == 1)
-            [cell setSmallDishCell];
-        
-        return cell;
-    }
+    PreviewCollectionViewCell *cell = (PreviewCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PreviewCollectionViewCell" forIndexPath:indexPath];
+    
+    [cell initView];
+    
+    if (indexPath.section == 1)
+        [cell setSmallDishCell];
+    
+    return cell;
 }
 
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
