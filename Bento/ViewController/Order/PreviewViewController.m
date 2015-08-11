@@ -919,9 +919,76 @@
     if (indexPath.section == 1)
         [cell setSmallDishCell];
     
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 8)
+    {
+        // iOS 8.0 and above
+    }
+    else
+    {
+        // Anything less than iOS 8.0
+        
+        NSArray *aryMain;
+        NSArray *arySide;
+        
+        if (collectionView == cvDishesLeft) // left side
+        {
+            aryMain = aryMainDishesLeft;
+            arySide = arySideDishesLeft;
+        }
+        else // right side
+        {
+            aryMain = aryMainDishesRight;
+            arySide = arySideDishesRight;
+        }
+        
+        PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
+        
+        if (indexPath.section == 0) // Main Dish
+        {
+            NSDictionary *dishInfo = [aryMain objectAtIndex:indexPath.row];
+            [myCell setDishInfo:dishInfo];
+            
+            if (collectionView == cvDishesLeft)
+            {
+                if (_selectedPathMainLeft == indexPath.row)
+                    [myCell setCellState:YES];
+                else
+                    [myCell setCellState:NO];
+            }
+            else
+            {
+                if (_selectedPathMainRight == indexPath.row)
+                    [myCell setCellState:YES];
+                else
+                    [myCell setCellState:NO];
+            }
+        }
+        else if (indexPath.section == 1) // Side Dish
+        {
+            NSDictionary *dishInfo = [arySide objectAtIndex:indexPath.row];
+            [myCell setDishInfo:dishInfo];
+            
+            if (collectionView == cvDishesLeft)
+            {
+                if (_selectedPathSideLeft == indexPath.row)
+                    [myCell setCellState:YES];
+                else
+                    [myCell setCellState:NO];
+            }
+            else
+            {
+                if (_selectedPathSideRight == indexPath.row)
+                    [myCell setCellState:YES];
+                else
+                    [myCell setCellState:NO];
+            }
+        }
+    }
+    
     return cell;
 }
 
+// iOS 7 does not call willDisplayCell
 - (void)collectionView:(UICollectionView *)collectionView willDisplayCell:(UICollectionViewCell *)cell forItemAtIndexPath:(NSIndexPath *)indexPath
 {
     NSArray *aryMain;
