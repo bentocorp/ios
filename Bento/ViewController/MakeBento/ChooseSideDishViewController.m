@@ -245,6 +245,25 @@
     
     [cell setSmallDishCell];
     
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
+        // iOS 8.0 and above
+    } else {
+        // Anything less than iOS 8.0
+        NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
+        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+        
+        BOOL canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID];
+        canBeAdded = canBeAdded && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
+        [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:canBeAdded];
+        
+        [cell setSmallDishCell];
+        
+        if (_selectedIndex == indexPath.item)
+            [cell setCellState:_selectedItemState index:indexPath.item];
+        else
+            [cell setCellState:DISH_CELL_NORMAL index:indexPath.item];
+    }
+    
     return cell;
 }
 
