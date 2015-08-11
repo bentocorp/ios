@@ -1046,6 +1046,36 @@
     if (indexPath.section == 1)
         [cell setSmallDishCell];
     
+    // Anything less than iOS 8.0
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+    {
+        [self setDishesBySection0MainOrSection1Side:indexPath.section];
+        
+        // MAINS
+        if (indexPath.section == 0)
+        {
+            NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
+            [cell setDishInfo:dishInfo];
+            
+            if (_selectedPathMainRight == indexPath.row)
+                [cell setCellState:YES];
+            else
+                [cell setCellState:NO];
+        }
+        
+        // SIDES
+        else if (indexPath.section == 1)
+        {
+            NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
+            [cell setDishInfo:dishInfo];
+            
+            if (_selectedPathSideRight == indexPath.row)
+                [cell setCellState:YES];
+            else
+                [cell setCellState:NO];
+        }
+    }
+    
     return cell;
 }
 
