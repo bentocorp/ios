@@ -1172,15 +1172,13 @@
         NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
         if (strTitle == nil)
             strTitle = [@"FINALIZE ORDER!" mutableCopy];
-            
-        [btnState setTitle:strTitle forState:UIControlStateNormal];
+        
         NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         float spacing = 1.0f;
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
-        
-        btnState.titleLabel.attributedText = attributedTitle;
+        [btnState setAttributedTitle:attributedTitle forState:UIControlStateNormal];
         attributedTitle = nil;
     }
     else
@@ -1190,14 +1188,12 @@
         NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
         if (strTitle != nil)
         {
-            [btnState setTitle:strTitle forState:UIControlStateNormal];
             NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
             float spacing = 1.0f;
             [attributedTitle addAttribute:NSKernAttributeName
                                     value:@(spacing)
                                     range:NSMakeRange(0, [strTitle length])];
-            
-            btnState.titleLabel.attributedText = attributedTitle;
+            [btnState setAttributedTitle:attributedTitle forState:UIControlStateNormal];
             attributedTitle = nil;
         }
     }
