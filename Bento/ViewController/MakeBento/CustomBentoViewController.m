@@ -45,6 +45,8 @@
 #import <QuartzCore/QuartzCore.h>
 #import "JGProgressHUD.h"
 
+#import "Mixpanel/MPTweakInline.h"
+
 @interface CustomBentoViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
@@ -403,7 +405,18 @@
     lblBanner = [[UILabel alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 28)];
     lblBanner.textAlignment = NSTextAlignmentCenter;
     lblBanner.textColor = [UIColor whiteColor];
-    lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
+    
+    if (MPTweakValue(@"show alternate view", NO))
+    {
+        // Show alternate view.
+        lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
+    }
+    else
+    {
+        // Show original view
+        lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
+    }
+    
     lblBanner.hidden = YES;
     lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
     lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
