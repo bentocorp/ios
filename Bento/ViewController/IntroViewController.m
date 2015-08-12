@@ -52,11 +52,30 @@
     
     CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
+    
+    BOOL isPushEnabled;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
+    /*----------------Check if push notifications are enabled----------------*/
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]){
+        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
+            isPushEnabled = NO;
+        else
+            isPushEnabled = YES;
+    } else {
+        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        if (types & UIRemoteNotificationTypeAlert)
+            isPushEnabled = YES;
+        else
+            isPushEnabled = NO;
+    }
+    /*-----------------------------------------------------------------------*/
+    
     // Gradient
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.ivBackground.bounds;
@@ -181,17 +200,15 @@
 
 - (IBAction)onGetStarted:(id)sender
 {
-//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-//    [self.navigationController popViewControllerAnimated:YES];
-    
     [self firstAnimation];
 }
 
 - (IBAction)onNoThanks:(id)sender
 {
-    NSLog(@"No Thanks");
+    // if push hasn't been asked, then ask for push
+    
+    // if push is already asked, pop
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (IBAction)onOK:(id)sender
@@ -201,6 +218,7 @@
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.distanceFilter = 50; // only update if moved 50 meters
     
 #ifdef __IPHONE_8_0
     if (IS_OS_8_OR_LATER)
@@ -219,6 +237,8 @@
         self.lblPlatform.center = CGPointMake(self.lblPlatform.center.x - 400, self.lblPlatform.center.y);
         self.btnGetStarted.center = CGPointMake(self.btnGetStarted.center.x, self.btnGetStarted.center.y + 100);
     } completion:^(BOOL finished) {
+        self.lblPlatform.hidden = YES;
+        
         [self secondAnimation];
     }];
 }
@@ -240,12 +260,11 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    // Location allowed, proceed to 1) push notifications request OR 2) popVC
-    
     // show once
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"LocationServices"])
     {
@@ -259,6 +278,15 @@
     NSLog(@"lat: %f, long: %f", coordinate.latitude, coordinate.longitude);
     
     [manager stopUpdatingLocation];
+    
+    // if push hasn't been asked, then ask for push
+    if (isPushEnabled)
+    {
+        NSLog(@"PUSH ENABLED");
+    }
+    // if push is already asked, pop
+    else
+        [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (CLLocationCoordinate2D )getCurrentLocation
