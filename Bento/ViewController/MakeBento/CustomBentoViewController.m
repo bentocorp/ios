@@ -406,18 +406,13 @@
     lblBanner.textAlignment = NSTextAlignmentCenter;
     lblBanner.textColor = [UIColor whiteColor];
     
-    if (MPTweakValue(@"show alternate view", NO))
-    {
-        // Show alternate view.
-        lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
-    }
+    if (MPTweakValue(@"Show green banner for regular price", NO))
+        // test
+        lblBanner.hidden = NO;
     else
-    {
-        // Show original view
-        lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
-    }
+        // original
+        lblBanner.hidden = YES;
     
-    lblBanner.hidden = YES;
     lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
     lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
     lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
@@ -1095,6 +1090,8 @@
     if (salePrice != 0 && salePrice < unitPrice)
     {
         lblBanner.hidden = NO;
+        lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
+        
         lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
         
         if (currentBento == nil || ![currentBento isCompleted])
@@ -1129,7 +1126,18 @@
     /*---Regular Price---*/
     else
     {
-        lblBanner.hidden = YES;
+//        lblBanner.hidden = YES;
+        
+        if (MPTweakValue(@"Show green banner for regular price", NO))
+        {
+            // test
+            lblBanner.hidden = NO;
+            lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
+            lblBanner.text = [NSString stringWithFormat:@"ONLY $%ld", (long)salePrice];
+        }
+        else
+            // original
+            lblBanner.hidden = YES;
         
         if (currentBento == nil || ![currentBento isCompleted])
         {
