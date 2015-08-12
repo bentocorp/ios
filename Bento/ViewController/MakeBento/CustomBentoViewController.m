@@ -383,6 +383,7 @@
     btnAddAnotherBento = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45, SCREEN_WIDTH - 60, 45)];
     btnAddAnotherBento.layer.borderColor = BORDER_COLOR.CGColor;
     btnAddAnotherBento.layer.borderWidth = 1.0f;
+    [btnAddAnotherBento setTitleColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
     btnAddAnotherBento.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
     [btnAddAnotherBento addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnAddAnotherBento];
@@ -1088,6 +1089,7 @@
 //            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], salePrice]; // show price
             strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
             btnAddAnotherBento.enabled = NO;
+            btnAddAnotherBento.titleLabel.textColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f];
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
         }
         else
@@ -1095,6 +1097,7 @@
 //            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], salePrice]; // show price
             strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
             btnAddAnotherBento.enabled = YES;
+            btnAddAnotherBento.titleLabel.textColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:243.0f / 255.0f green:245.0f / 255.0f blue:245.0f / 255.0f alpha:1.0f]];
         }
         
@@ -1120,6 +1123,7 @@
 //            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], unitPrice]; // show price
             strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
             btnAddAnotherBento.enabled = NO;
+            btnAddAnotherBento.titleLabel.textColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f];
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
         }
         else
@@ -1127,6 +1131,7 @@
 //            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], unitPrice]; // show price
             strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
             btnAddAnotherBento.enabled = YES;
+            btnAddAnotherBento.titleLabel.textColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:243.0f / 255.0f green:245.0f / 255.0f blue:245.0f / 255.0f alpha:1.0f]];
         }
         
