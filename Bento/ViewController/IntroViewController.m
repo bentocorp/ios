@@ -43,6 +43,9 @@
 @implementation IntroViewController
 {
     JGProgressHUD *loadingHUD;
+    
+    UIView *lblLocationPlatform;
+    UILabel *lblLocationRequest;
 }
 
 
@@ -79,6 +82,12 @@
     self.btnNoThanks.layer.cornerRadius = 3;
     self.btnAllow.layer.cornerRadius = 3;
     
+    self.btnNoThanks.hidden = YES;
+    self.btnAllow.hidden = YES;
+    
+    self.btnNoThanks.center = CGPointMake(self.btnNoThanks.center.x, self.btnNoThanks.center.y + 100);
+    self.btnAllow.center = CGPointMake(self.btnAllow.center.x, self.btnAllow.center.y + 100);
+    
     // Download bento logo, then set it, use placeholder if unavailable
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivLogo sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo"]];
@@ -108,6 +117,11 @@
     
     // Get button title text and set it to button
     [self.btnGetStarted setTitle:[[AppStrings sharedInstance] getString:ABOUT_BUTTON_TITLE] forState:UIControlStateNormal];
+    
+    // Location Request
+    lblLocationPlatform = [UIView alloc] ;
+    
+    lblLocationRequest = [UILabel alloc] initWithFrame:CGRectMake(<#CGFloat x#>, self.view., 250, 44);
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -139,14 +153,28 @@
     
 //    [self.navigationController popViewControllerAnimated:YES];
     
-//    [self.btnGetStarted setTitle:@"GET STARTED" forState:UIControlStateNormal];
-    
+    [self firstAnimation];
+}
+
+- (void)firstAnimation
+{
     [UIView animateWithDuration:0.5 animations:^{
         self.lblPlatform.center = CGPointMake(self.lblPlatform.center.x - 400, self.lblPlatform.center.y);
-        
         self.btnGetStarted.center = CGPointMake(self.btnGetStarted.center.x, self.btnGetStarted.center.y + 100);
     } completion:^(BOOL finished) {
+        [self secondAnimation];
+    }];
+}
 
+- (void)secondAnimation
+{
+    [UIView animateWithDuration:0.5 animations:^{
+        self.btnNoThanks.hidden = NO;
+        self.btnAllow.hidden = NO;
+        self.btnNoThanks.center = CGPointMake(self.btnNoThanks.center.x, self.btnNoThanks.center.y - 100);
+        self.btnAllow.center = CGPointMake(self.btnAllow.center.x, self.btnAllow.center.y - 100);
+    } completion:^(BOOL finished) {
+        
     }];
 }
 
