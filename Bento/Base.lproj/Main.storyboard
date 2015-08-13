@@ -378,6 +378,9 @@
                                     <color key="titleColor" red="0.36862745099999999" green="0.48627450979999998" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onOK:" destination="cih-YB-hrD" eventType="touchUpInside" id="xaB-eN-V0U"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" id="SXG-3G-eRw">
                                 <rect key="frame" x="0.0" y="112" width="320" height="255"/>
@@ -447,6 +450,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="onNoThanks:" destination="cih-YB-hrD" eventType="touchUpInside" id="qbp-95-a2Z"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

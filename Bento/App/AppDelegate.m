@@ -230,6 +230,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = kCLDistanceFilterNone;
     
+    // If location has already been requested before in IntroVC
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"HasLaunchedOnce"] isEqualToString:@"YES"])
+    {
 #ifdef __IPHONE_8_0
     if (IS_OS_8_OR_LATER)
         // Use one or the other, not both. Depending on what you put in info.plist
@@ -237,6 +240,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #endif
     
     [locationManager startUpdatingLocation];
+    }
     
 /*---------------------------------------------------------------------*/
     

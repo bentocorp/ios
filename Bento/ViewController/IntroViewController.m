@@ -14,6 +14,9 @@
 #import "AppStrings.h"
 #import "DataManager.h"
 #import "JGProgressHUD.h"
+#import "Mixpanel.h"
+
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @interface IntroViewController()
 
@@ -37,7 +40,6 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnNoThanks;
 @property (weak, nonatomic) IBOutlet UIButton *btnAllow;
 
-
 @end
 
 @implementation IntroViewController
@@ -47,8 +49,10 @@
     UIView *lblLocationPlatform;
     UILabel *lblLocationRequest;
     UILabel *lblLocationComment;
+    
+    CLLocationManager *locationManager;
+    CLLocationCoordinate2D coordinate;
 }
-
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -185,6 +189,28 @@
     [self firstAnimation];
 }
 
+- (IBAction)onNoThanks:(id)sender
+{
+    NSLog(@"No Thanks");
+}
+
+- (IBAction)onOK:(id)sender
+{
+    // Initialize location manager.
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    
+#ifdef __IPHONE_8_0
+    if (IS_OS_8_OR_LATER)
+        // Use one or the other, not both. Depending on what you put in info.plist
+        [locationManager requestWhenInUseAuthorization];
+#endif
+    
+    [locationManager startUpdatingLocation];
+}
+
 - (void)firstAnimation
 {
     [UIView animateWithDuration:0.5 animations:^{
@@ -207,6 +233,42 @@
     } completion:^(BOOL finished) {
         
     }];
+}
+
+#pragma mark Current Location
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    // Location allowed, proceed to 1) push notifications request OR 2) popVC
+    
+    // show once
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"LocationServices"])
+    {
+        [[NSUserDefaults standardUserDefaults] setObject:@"Enabled" forKey:@"LocationServices"];
+        [[Mixpanel sharedInstance] track:@"Allow Location Services"];
+    }
+    
+    CLLocation *location = locations[0];
+    coordinate = location.coordinate;
+    
+    NSLog(@"lat: %f, long: %f", coordinate.latitude, coordinate.longitude);
+    
+    [manager stopUpdatingLocation];
+}
+
+- (CLLocationCoordinate2D )getCurrentLocation
+{
+#if (TARGET_IPHONE_SIMULATOR)
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:33.571895f longitude:-117.7379837036132f];
+    return location.coordinate;
+#endif
+    
+    return coordinate;
 }
 
 - (void)didReceiveMemoryWarning {
