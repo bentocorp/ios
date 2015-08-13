@@ -46,6 +46,7 @@
     
     UIView *lblLocationPlatform;
     UILabel *lblLocationRequest;
+    UILabel *lblLocationComment;
 }
 
 
@@ -120,16 +121,25 @@
     
     // Location Request
     lblLocationPlatform = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 255)];
-    lblLocationPlatform.center = self.lblPlatform.center;
+    lblLocationPlatform.center = CGPointMake(self.lblPlatform.center.x + 400, self.lblPlatform.center.y);
     [self.view addSubview:lblLocationPlatform];
     
     lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 44)];
     lblLocationRequest.center = self.lblComment.center;
     lblLocationRequest.textAlignment = NSTextAlignmentCenter;
-    lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
+    lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:18];
     lblLocationRequest.textColor = [UIColor whiteColor];
-    lblLocationRequest.text = @"Use Location?";
+    lblLocationRequest.text = @"Want speedier delivery?";
     [lblLocationPlatform addSubview:lblLocationRequest];
+    
+    lblLocationComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
+    lblLocationComment.center = CGPointMake(lblLocationRequest.center.x, lblLocationRequest.center.y + 100);
+    lblLocationComment.numberOfLines = 0;
+    lblLocationComment.textAlignment = NSTextAlignmentCenter;
+    lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:18];
+    lblLocationComment.textColor = [UIColor whiteColor];
+    lblLocationComment.text = @"Bento needs your zipcode to check your delivery area.";
+    [lblLocationPlatform addSubview:lblLocationComment];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -167,6 +177,8 @@
 - (void)firstAnimation
 {
     [UIView animateWithDuration:0.5 animations:^{
+        lblLocationPlatform.center  = self.lblPlatform.center;
+        
         self.lblPlatform.center = CGPointMake(self.lblPlatform.center.x - 400, self.lblPlatform.center.y);
         self.btnGetStarted.center = CGPointMake(self.btnGetStarted.center.x, self.btnGetStarted.center.y + 100);
     } completion:^(BOOL finished) {
