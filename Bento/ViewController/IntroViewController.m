@@ -20,7 +20,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
 @property (nonatomic, weak) IBOutlet UIImageView *ivLogo;
 
-@property (weak, nonatomic) IBOutlet UIView *lblPlaform;
+@property (weak, nonatomic) IBOutlet UIView *lblPlatform;
 
 @property (nonatomic, weak) IBOutlet UILabel *lblComment;
 
@@ -132,7 +132,13 @@
 //    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
 //    [[NSUserDefaults standardUserDefaults] synchronize];
     
-    [self.navigationController popViewControllerAnimated:YES];
+//    [self.navigationController popViewControllerAnimated:YES];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.lblPlatform.center = CGPointMake(self.lblPlatform.center.x - 400, self.lblPlatform.center.y);
+    } completion:^(BOOL finished) {
+
+    }];
 }
 
 - (void)didReceiveMemoryWarning {

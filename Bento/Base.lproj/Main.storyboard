@@ -442,7 +442,7 @@
                         <outlet property="lblNumber1" destination="NJw-qI-yTX" id="5pU-0j-xMA"/>
                         <outlet property="lblNumber2" destination="zve-5b-5vS" id="0aj-6h-8ri"/>
                         <outlet property="lblNumber3" destination="Igs-fu-eRb" id="McC-pQ-gga"/>
-                        <outlet property="lblPlaform" destination="SXG-3G-eRw" id="MKE-hV-PRa"/>
+                        <outlet property="lblPlatform" destination="SXG-3G-eRw" id="3tm-c7-r6i"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fy6-LN-dRc" userLabel="First Responder" sceneMemberID="firstResponder"/>
