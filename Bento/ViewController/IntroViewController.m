@@ -127,16 +127,27 @@
     lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 44)];
     lblLocationRequest.center = self.lblComment.center;
     lblLocationRequest.textAlignment = NSTextAlignmentCenter;
-    lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:18];
+    if (self.view.bounds.size.width == 320)
+        lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:17];
+    else if (self.view.bounds.size.width == 375)
+        lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
+    else
+        lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
     lblLocationRequest.textColor = [UIColor whiteColor];
     lblLocationRequest.text = @"Want speedier delivery?";
     [lblLocationPlatform addSubview:lblLocationRequest];
     
     lblLocationComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
     lblLocationComment.center = CGPointMake(lblLocationRequest.center.x, lblLocationRequest.center.y + 100);
+//    lblLocationComment.adjustsFontSizeToFitWidth = YES;
+    if (self.view.bounds.size.width == 320)
+        lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
+    else if (self.view.bounds.size.width == 375)
+        lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
+    else
+        lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:24];
     lblLocationComment.numberOfLines = 0;
     lblLocationComment.textAlignment = NSTextAlignmentCenter;
-    lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:18];
     lblLocationComment.textColor = [UIColor whiteColor];
     lblLocationComment.text = @"Bento needs your zipcode to check your delivery area.";
     [lblLocationPlatform addSubview:lblLocationComment];
