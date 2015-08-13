@@ -119,9 +119,17 @@
     [self.btnGetStarted setTitle:[[AppStrings sharedInstance] getString:ABOUT_BUTTON_TITLE] forState:UIControlStateNormal];
     
     // Location Request
-    lblLocationPlatform = [UIView alloc] ;
+    lblLocationPlatform = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 255)];
+    lblLocationPlatform.center = self.lblPlatform.center;
+    [self.view addSubview:lblLocationPlatform];
     
-    lblLocationRequest = [UILabel alloc] initWithFrame:CGRectMake(<#CGFloat x#>, self.view., 250, 44);
+    lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 44)];
+    lblLocationRequest.center = self.lblComment.center;
+    lblLocationRequest.textAlignment = NSTextAlignmentCenter;
+    lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
+    lblLocationRequest.textColor = [UIColor whiteColor];
+    lblLocationRequest.text = @"Use Location?";
+    [lblLocationPlatform addSubview:lblLocationRequest];
 }
 
 - (void)viewWillAppear:(BOOL)animated
