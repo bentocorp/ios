@@ -18,14 +18,15 @@
 @interface IntroViewController()
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
+@property (nonatomic, weak) IBOutlet UIImageView *ivLogo;
+
+@property (weak, nonatomic) IBOutlet UIView *lblPlaform;
 
 @property (nonatomic, weak) IBOutlet UILabel *lblComment;
 
 @property (nonatomic, weak) IBOutlet UILabel *lblNumber1;
 @property (nonatomic, weak) IBOutlet UILabel *lblNumber2;
 @property (nonatomic, weak) IBOutlet UILabel *lblNumber3;
-
-@property (nonatomic, weak) IBOutlet UIImageView *ivLogo;
 
 @property (nonatomic, weak) IBOutlet UILabel *lblItem0;
 @property (nonatomic, weak) IBOutlet UILabel *lblItem1;
@@ -49,15 +50,15 @@
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.ivBackground.bounds;
     
-    // get colors for gradient
+    // Get colors for gradient
     UIColor *color1 = [DataManager getGradientColor1];
     UIColor *color2 = [DataManager getGradientColor2];
     
-    // set gradient (light to darker green)
+    // Set gradient (light to darker green)
     gradient.colors = @[(id)[color1 CGColor], (id)[color2 CGColor]];
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     
-    // Asynchronously download background image URL, then set it, use placeholder if unavailable
+    // Download background image URL, then set it, use placeholder if unavailable
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
     [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
@@ -73,7 +74,7 @@
     
     self.btnGetStarted.layer.cornerRadius = 3;
     
-    // Asynchronously download bento logo, then set it, use placeholder if unavailable
+    // Download bento logo, then set it, use placeholder if unavailable
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivLogo sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo"]];
     
@@ -81,26 +82,26 @@
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     
-    // set price string
+    // Set price string
     NSString *strPrice = @"";
 
-    // sale price is not 0 and less than unit price
+    // Sale price is not 0 and less than unit price
     if (salePrice != 0 && salePrice < unitPrice)
         strPrice = [NSString stringWithFormat:@"$%ld!", (long)salePrice]; // set price string as sale price
     else
         strPrice = [NSString stringWithFormat:@"$%ld!", (long)unitPrice]; //  set price string as unit price
     
-    // set up string for about text
+    // Set up string for about text
     NSString *strItem0 = [[AppStrings sharedInstance] getString:ABOUT_ITEM_0]; // "Build your Bento for only $X" ?
     strItem0 = [strItem0 stringByReplacingOccurrencesOfString:@"$X!" withString:strPrice]; // replace $X with actualy price string
     self.lblItem0. text = strItem0; // set the about label text
     
-    // get instructional text and set as item label text
+    // Get instructional text and set as item label text
     self.lblItem1.text = [[AppStrings sharedInstance] getString:ABOUT_ITEM_1];
     self.lblItem2.text = [[AppStrings sharedInstance] getString:ABOUT_ITEM_2];
     self.lblItem3.text = [[AppStrings sharedInstance] getString:ABOUT_ITEM_3];
     
-    // get button title text and set it to button
+    // Get button title text and set it to button
     [self.btnGetStarted setTitle:[[AppStrings sharedInstance] getString:ABOUT_BUTTON_TITLE] forState:UIControlStateNormal];
 }
 
@@ -128,11 +129,9 @@
 
 - (IBAction)onGetStarted:(id)sender
 {
-    // persist a BOOL value of YES for HasLaunchedOnce
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+//    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"HasLaunchedOnce"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
     
-    // dismiss view
     [self.navigationController popViewControllerAnimated:YES];
 }
 
