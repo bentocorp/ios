@@ -34,6 +34,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblItem3;
 
 @property (nonatomic, weak) IBOutlet UIButton *btnGetStarted;
+@property (weak, nonatomic) IBOutlet UIButton *btnNoThanks;
+@property (weak, nonatomic) IBOutlet UIButton *btnAllow;
+
 
 @end
 
@@ -73,6 +76,8 @@
     self.lblNumber3.clipsToBounds = YES;
     
     self.btnGetStarted.layer.cornerRadius = 3;
+    self.btnNoThanks.layer.cornerRadius = 3;
+    self.btnAllow.layer.cornerRadius = 3;
     
     // Download bento logo, then set it, use placeholder if unavailable
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
@@ -134,8 +139,12 @@
     
 //    [self.navigationController popViewControllerAnimated:YES];
     
+//    [self.btnGetStarted setTitle:@"GET STARTED" forState:UIControlStateNormal];
+    
     [UIView animateWithDuration:0.5 animations:^{
         self.lblPlatform.center = CGPointMake(self.lblPlatform.center.x - 400, self.lblPlatform.center.y);
+        
+        self.btnGetStarted.center = CGPointMake(self.btnGetStarted.center.x, self.btnGetStarted.center.y + 100);
     } completion:^(BOOL finished) {
 
     }];

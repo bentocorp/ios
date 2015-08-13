@@ -41,6 +41,8 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Light.ttf">
             <string>OpenSans-Light</string>
@@ -367,6 +369,32 @@
                                     <action selector="onGetStarted:" destination="cih-YB-hrD" eventType="touchUpInside" id="ti1-Pw-yvT"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oH4-ps-7ak">
+                                <rect key="frame" x="165" y="406" width="125" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                <state key="normal" title="ALLOW">
+                                    <color key="titleColor" red="0.36862745099999999" green="0.48627450979999998" blue="0.26274509800000001" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onGetStarted:" destination="cih-YB-hrD" eventType="touchUpInside" id="7IA-aW-SRR"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hQT-2N-3pe">
+                                <rect key="frame" x="30" y="406" width="125" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <color key="backgroundColor" red="0.30375412600000001" green="0.44812147009999997" blue="0.17722049989999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                <state key="normal" title="NO THANKS">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="onGetStarted:" destination="cih-YB-hrD" eventType="touchUpInside" id="plB-aQ-ZSM"/>
+                                </connections>
+                            </button>
                             <view contentMode="scaleToFill" id="SXG-3G-eRw">
                                 <rect key="frame" x="0.0" y="112" width="320" height="255"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
@@ -431,7 +459,9 @@
                     </view>
                     <navigationItem key="navigationItem" id="NNT-Ti-aDn"/>
                     <connections>
+                        <outlet property="btnAllow" destination="oH4-ps-7ak" id="WIf-u8-e40"/>
                         <outlet property="btnGetStarted" destination="9V8-fy-NiP" id="hJe-Xd-3ju"/>
+                        <outlet property="btnNoThanks" destination="hQT-2N-3pe" id="I51-dx-JmB"/>
                         <outlet property="ivBackground" destination="et5-BV-R37" id="nRK-AU-eeD"/>
                         <outlet property="ivLogo" destination="dzM-tT-Uvv" id="JJL-8T-ySi"/>
                         <outlet property="lblComment" destination="jUz-WA-vPg" id="ss0-Jl-9cr"/>
