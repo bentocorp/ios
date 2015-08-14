@@ -687,8 +687,8 @@
 		FC599F591B0FEDB600989E1B /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
 		FC7229791B16905700C9A9AF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Bento/Modules/WebManager/Reachability.h; sourceTree = SOURCE_ROOT; };
 		FC72297A1B16905700C9A9AF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Bento/Modules/WebManager/Reachability.m; sourceTree = SOURCE_ROOT; };
-		FC7B609E1B0FF11300A00467 /* BentoModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BentoModelTests.m; path = "../../Bento Tests/BentoModelTests.m"; sourceTree = "<group>"; };
-		FC7B60A01B10045D00A00467 /* BentoShopTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BentoShopTests.m; sourceTree = "<group>"; };
+		FC7B609E1B0FF11300A00467 /* BentoModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BentoModelTests.m; sourceTree = "<group>"; };
+		FC7B60A01B10045D00A00467 /* BentoShopTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BentoShopTests.m; path = ../Bento/Model/BentoShopTests.m; sourceTree = "<group>"; };
 		FC8285C61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
 		FC8285C71AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		FC8285C81AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
@@ -952,10 +952,8 @@
 			children = (
 				722333661A6D57CB006C2446 /* Bento.h */,
 				722333671A6D57CB006C2446 /* Bento.m */,
-				FC7B609E1B0FF11300A00467 /* BentoModelTests.m */,
 				722333691A6D5847006C2446 /* BentoShop.h */,
 				7223336A1A6D5847006C2446 /* BentoShop.m */,
-				FC7B60A01B10045D00A00467 /* BentoShopTests.m */,
 				7279E5DE1A6B5F3A00591CB2 /* Manager */,
 			);
 			path = Model;
@@ -1470,6 +1468,8 @@
 			isa = PBXGroup;
 			children = (
 				FC599F591B0FEDB600989E1B /* Bento_Tests.m */,
+				FC7B609E1B0FF11300A00467 /* BentoModelTests.m */,
+				FC7B60A01B10045D00A00467 /* BentoShopTests.m */,
 				FC599F571B0FEDB600989E1B /* Supporting Files */,
 			);
 			path = "Bento Tests";

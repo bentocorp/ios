@@ -31,6 +31,8 @@
 #import "Mixpanel.h"
 #import "SVGeocoder.h"
 
+#import "IntroViewController.h"
+
 @interface FirstViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
@@ -360,9 +362,20 @@
     }
 }
 
-- (void) gotoIntroScreen
+- (void)gotoIntroScreen
 {
-    [self performSegueWithIdentifier:@"Intro" sender:nil];
+    CATransition *transition = [CATransition animation];
+    
+    transition.duration = 0.5;
+    transition.type = kCATransitionFade;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    IntroViewController *introVC = [storyboard instantiateViewControllerWithIdentifier:@"IntroViewController"];
+    
+    [[self navigationController].view.layer addAnimation:transition forKey:kCATransition];
+    [[self navigationController] pushViewController:introVC animated:NO];
+    
+//    [self performSegueWithIdentifier:@"Intro" sender:nil];
 }
 
 - (void) gotoClosedScreen

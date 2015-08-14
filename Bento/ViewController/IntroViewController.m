@@ -52,29 +52,10 @@
     
     CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
-    
-    BOOL isPushEnabled;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    /*----------------Check if push notifications are enabled----------------*/
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]){
-        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        
-        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
-            isPushEnabled = NO;
-        else
-            isPushEnabled = YES;
-    } else {
-        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-        if (types & UIRemoteNotificationTypeAlert)
-            isPushEnabled = YES;
-        else
-            isPushEnabled = NO;
-    }
-    /*-----------------------------------------------------------------------*/
     
     // Gradient
     CAGradientLayer *gradient = [CAGradientLayer layer];
@@ -95,12 +76,15 @@
     // Round out corners for number labels
     self.lblNumber1.layer.cornerRadius = self.lblNumber1.frame.size.width / 2;
     self.lblNumber1.clipsToBounds = YES;
+    self.lblNumber1.alpha = 0;
 
     self.lblNumber2.layer.cornerRadius = self.lblNumber2.frame.size.width / 2;
     self.lblNumber2.clipsToBounds = YES;
+    self.lblNumber2.alpha = 0;
     
     self.lblNumber3.layer.cornerRadius = self.lblNumber3.frame.size.width / 2;
     self.lblNumber3.clipsToBounds = YES;
+    self.lblNumber3.alpha = 0;
     
     self.btnGetStarted.layer.cornerRadius = 3;
     self.btnNoThanks.layer.cornerRadius = 3;
@@ -111,6 +95,9 @@
     
     self.btnNoThanks.center = CGPointMake(self.btnNoThanks.center.x, self.btnNoThanks.center.y + 100);
     self.btnAllow.center = CGPointMake(self.btnAllow.center.x, self.btnAllow.center.y + 100);
+    
+    self.ivLogo.alpha = 0;
+    self.btnGetStarted.alpha = 0;
     
     // Download bento logo, then set it, use placeholder if unavailable
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
@@ -139,6 +126,11 @@
     self.lblItem2.text = [[AppStrings sharedInstance] getString:ABOUT_ITEM_2];
     self.lblItem3.text = [[AppStrings sharedInstance] getString:ABOUT_ITEM_3];
     
+    self.lblItem0.alpha = 0;
+    self.lblItem1.alpha = 0;
+    self.lblItem2.alpha = 0;
+    self.lblItem3.alpha = 0;
+    
     // Get button title text and set it to button
     [self.btnGetStarted setTitle:[[AppStrings sharedInstance] getString:ABOUT_BUTTON_TITLE] forState:UIControlStateNormal];
     
@@ -162,7 +154,6 @@
     
     lblLocationComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
     lblLocationComment.center = CGPointMake(lblLocationRequest.center.x, lblLocationRequest.center.y + 100);
-//    lblLocationComment.adjustsFontSizeToFitWidth = YES;
     if (self.view.bounds.size.width == 320)
         lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
     else if (self.view.bounds.size.width == 375)
@@ -180,6 +171,48 @@
 {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+}
+
+- (void)viewDidLayoutSubviews
+{
+    [UIView animateWithDuration:2 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.ivLogo.alpha = 1;
+    } completion:^(BOOL finished) {
+
+    }];
+    
+    [UIView animateWithDuration:2 delay:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblItem0.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber1.alpha = 1;
+        self.lblItem1.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:1.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber2.alpha = 1;
+        self.lblItem2.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:2.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber3.alpha = 1;
+        self.lblItem3.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:2.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.btnGetStarted.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 - (void)noConnection
@@ -205,10 +238,12 @@
 
 - (IBAction)onNoThanks:(id)sender
 {
-    // if push hasn't been asked, then ask for push
-    
     // if push is already asked, pop
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self isPushEnabled])
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    // if push hasn't been asked, then animate push labels
+    else
+        [self showPushTutorial];
 }
 
 - (IBAction)onOK:(id)sender
@@ -279,14 +314,12 @@
     
     [manager stopUpdatingLocation];
     
-    // if push hasn't been asked, then ask for push
-    if (isPushEnabled)
-    {
-        NSLog(@"PUSH ENABLED");
-    }
     // if push is already asked, pop
-    else
+    if ([self isPushEnabled])
         [self.navigationController popToRootViewControllerAnimated:YES];
+    // if push hasn't been asked, then ask for push
+    else
+        [self showPushTutorial];
 }
 
 - (CLLocationCoordinate2D )getCurrentLocation
@@ -303,5 +336,35 @@
     [super didReceiveMemoryWarning];
 }
 
+- (BOOL)isPushEnabled
+{
+    BOOL enabled;
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)])
+    {
+        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
+            enabled = NO;
+        else
+            enabled = YES;
+    }
+    else
+    {
+        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        
+        if (types & UIRemoteNotificationTypeAlert)
+            enabled = YES;
+        else
+            enabled = NO;
+    }
+    
+    return enabled;
+}
+         
+- (void)showPushTutorial
+{
+    
+}
 
 @end
