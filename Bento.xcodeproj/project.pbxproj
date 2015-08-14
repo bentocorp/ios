@@ -352,6 +352,211 @@
 		FC8DB7491AF18674003045A3 /* icon-square-phone.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7361AF18674003045A3 /* icon-square-phone.png */; };
 		FC8DB74A1AF18674003045A3 /* icon-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7371AF18674003045A3 /* icon-user.png */; };
 		FC8DB74B1AF18674003045A3 /* icon-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7371AF18674003045A3 /* icon-user.png */; };
+		FC92E0DE1B7E5C880073C5D7 /* WebManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333CD1A6F46DF006C2446 /* WebManager.m */; };
+		FC92E0DF1B7E5C880073C5D7 /* CreditCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */; };
+		FC92E0E01B7E5C880073C5D7 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7A81A5D81C300D034CF /* RegisterViewController.m */; };
+		FC92E0E11B7E5C880073C5D7 /* STPTestDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333EE1A72C133006C2446 /* STPTestDataTableViewController.m */; };
+		FC92E0E21B7E5C880073C5D7 /* JGProgressHUDRingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333571A6D4058006C2446 /* JGProgressHUDRingIndicatorView.m */; };
+		FC92E0E31B7E5C880073C5D7 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333031A6C0F5C006C2446 /* FacebookManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
+		FC92E0E41B7E5C880073C5D7 /* NSUserDefaults+RMSaveCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB491A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m */; };
+		FC92E0E51B7E5C880073C5D7 /* JGProgressHUDErrorIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223334B1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m */; };
+		FC92E0E61B7E5C880073C5D7 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 723BD40C1A8DD831000AD4F1 /* FXBlurView.m */; };
+		FC92E0E71B7E5C880073C5D7 /* NetworkErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */; };
+		FC92E0E81B7E5C880073C5D7 /* SignedInSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47991AE9E03B00CA1743 /* SignedInSettingsViewController.m */; };
+		FC92E0E91B7E5C880073C5D7 /* ChooseSideDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D81A5BF301003DC872 /* ChooseSideDishViewController.m */; };
+		FC92E0EA1B7E5C880073C5D7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
+		FC92E0EB1B7E5C880073C5D7 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BE1A6F46DF006C2446 /* NSDate+RFC1123.m */; };
+		FC92E0EC1B7E5C880073C5D7 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339C1A6EADBD006C2446 /* UIImage+GIF.m */; };
+		FC92E0ED1B7E5C880073C5D7 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333931A6EADBD006C2446 /* SDWebImageDownloaderOperation.m */; };
+		FC92E0EE1B7E5C880073C5D7 /* JGProgressHUDAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333491A6D4058006C2446 /* JGProgressHUDAnimation.m */; };
+		FC92E0EF1B7E5C880073C5D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0991A5BCC7B003DC872 /* AppDelegate.m */; };
+		FC92E0F01B7E5C880073C5D7 /* PromoCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A553E11A60035D001F9DA7 /* PromoCodeView.m */; };
+		FC92E0F11B7E5C880073C5D7 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333891A6EADBD006C2446 /* NSData+ImageContentType.m */; };
+		FC92E0F21B7E5C880073C5D7 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333511A6D4058006C2446 /* JGProgressHUDIndeterminateIndicatorView.m */; };
+		FC92E0F31B7E5C880073C5D7 /* PhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7BC1A5D990800D034CF /* PhoneNumberViewController.m */; };
+		FC92E0F41B7E5C880073C5D7 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7B91A5D963300D034CF /* SignInViewController.m */; };
+		FC92E0F51B7E5C880073C5D7 /* STPTestPaymentSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F21A72C133006C2446 /* STPTestPaymentSummaryViewController.m */; };
+		FC92E0F61B7E5C880073C5D7 /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
+		FC92E0F71B7E5C880073C5D7 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A61A6EADBD006C2446 /* UIView+WebCacheOperation.m */; };
+		FC92E0F81B7E5C880073C5D7 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C81A6F46DF006C2446 /* MKNetworkEngine.m */; };
+		FC92E0F91B7E5C880073C5D7 /* NSObject+RMArchivable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB451A7D8BE800D03DCE /* NSObject+RMArchivable.m */; };
+		FC92E0FA1B7E5C880073C5D7 /* SHSFlagAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E0891A780A1200D18D7A /* SHSFlagAccessoryView.m */; };
+		FC92E0FB1B7E5C880073C5D7 /* DishCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0E91A5C3346003DC872 /* DishCollectionViewCell.m */; };
+		FC92E0FC1B7E5C880073C5D7 /* CAGradientLayer+SJSGradients.m in Sources */ = {isa = PBXBuildFile; fileRef = 90220A371A6424BC00ECECEF /* CAGradientLayer+SJSGradients.m */; };
+		FC92E0FD1B7E5C880073C5D7 /* JGProgressHUDSuccessIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333591A6D4058006C2446 /* JGProgressHUDSuccessIndicatorView.m */; };
+		FC92E0FE1B7E5C880073C5D7 /* ChooseMainDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */; };
+		FC92E0FF1B7E5C880073C5D7 /* Bento.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333671A6D57CB006C2446 /* Bento.m */; };
+		FC92E1001B7E5C880073C5D7 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C41A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m */; };
+		FC92E1011B7E5C880073C5D7 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338D1A6EADBD006C2446 /* SDWebImageCompat.m */; };
+		FC92E1021B7E5C880073C5D7 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339E1A6EADBD006C2446 /* UIImage+MultiFormat.m */; };
+		FC92E1031B7E5C880073C5D7 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
+		FC92E1041B7E5C880073C5D7 /* EnterCreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */; };
+		FC92E1051B7E5C880073C5D7 /* JGProgressHUDIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333531A6D4058006C2446 /* JGProgressHUDIndicatorView.m */; };
+		FC92E1061B7E5C880073C5D7 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A01A6EADBD006C2446 /* UIImage+WebP.m */; };
+		FC92E1071B7E5C880073C5D7 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333951A6EADBD006C2446 /* SDWebImageManager.m */; };
+		FC92E1081B7E5C880073C5D7 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338B1A6EADBD006C2446 /* SDImageCache.m */; };
+		FC92E1091B7E5C880073C5D7 /* SHSPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E0901A780A1200D18D7A /* SHSPhoneNumberFormatter.m */; };
+		FC92E10A1B7E5C880073C5D7 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7279E5E01A6B5F3A00591CB2 /* DataManager.m */; };
+		FC92E10B1B7E5C880073C5D7 /* SHSPhoneLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E08C1A780A1200D18D7A /* SHSPhoneLogic.m */; };
+		FC92E10C1B7E5C880073C5D7 /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C61A6F46DF006C2446 /* UIImageView+MKNetworkKitAdditions.m */; };
+		FC92E10D1B7E5C880073C5D7 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333981A6EADBD006C2446 /* SDWebImagePrefetcher.m */; };
+		FC92E10E1B7E5C880073C5D7 /* MyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7A31A5D6B6E00D034CF /* MyAlertView.m */; };
+		FC92E10F1B7E5C880073C5D7 /* STPTestShippingMethodStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F51A72C133006C2446 /* STPTestShippingMethodStore.m */; };
+		FC92E1101B7E5C880073C5D7 /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C01A6F46DF006C2446 /* NSDictionary+RequestEncoding.m */; };
+		FC92E1111B7E5C880073C5D7 /* JGProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333471A6D4058006C2446 /* JGProgressHUD.m */; };
+		FC92E1121B7E5C880073C5D7 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333871A6EADBD006C2446 /* MKAnnotationView+WebCache.m */; };
+		FC92E1131B7E5C880073C5D7 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
+		FC92E1141B7E5C880073C5D7 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0A41A5BD05C003DC872 /* FirstViewController.m */; };
+		FC92E1151B7E5C880073C5D7 /* BentoShop.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223336A1A6D5847006C2446 /* BentoShop.m */; };
+		FC92E1161B7E5C880073C5D7 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338F1A6EADBD006C2446 /* SDWebImageDecoder.m */; };
+		FC92E1171B7E5C880073C5D7 /* SVGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E07C1A76BD1800D18D7A /* SVGeocoder.m */; };
+		FC92E1181B7E5C880073C5D7 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E08E1A780A1200D18D7A /* SHSPhoneNumberFormatter+UserConfig.m */; };
+		FC92E1191B7E5C880073C5D7 /* STPTestPaymentAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F01A72C133006C2446 /* STPTestPaymentAuthorizationViewController.m */; };
+		FC92E11A1B7E5C880073C5D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0731A5BCC04003DC872 /* main.m */; };
+		FC92E11B1B7E5C880073C5D7 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A21A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m */; };
+		FC92E11C1B7E5C880073C5D7 /* SVPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E07E1A76BD1800D18D7A /* SVPlacemark.m */; };
+		FC92E11D1B7E5C880073C5D7 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */; };
+		FC92E11E1B7E5C880073C5D7 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333CB1A6F46DF006C2446 /* MKNetworkOperation.m */; };
+		FC92E11F1B7E5C880073C5D7 /* NSAlert+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BA1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m */; };
+		FC92E1201B7E5C880073C5D7 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 726CE35A1A82693900296182 /* BaseViewController.m */; };
+		FC92E1211B7E5C880073C5D7 /* CompleteOrderViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7D71A5E2FE900D034CF /* CompleteOrderViewController.m */; };
+		FC92E1221B7E5C880073C5D7 /* JGProgressHUDPieIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333551A6D4058006C2446 /* JGProgressHUDPieIndicatorView.m */; };
+		FC92E1231B7E5C880073C5D7 /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C21A6F46DF006C2446 /* NSString+MKNetworkKitAdditions.m */; };
+		FC92E1241B7E5C880073C5D7 /* STPTestCardStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333EB1A72C133006C2446 /* STPTestCardStore.m */; };
+		FC92E1251B7E5C880073C5D7 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339A1A6EADBD006C2446 /* UIButton+WebCache.m */; };
+		FC92E1261B7E5C880073C5D7 /* STPTestAddressStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333E91A72C133006C2446 /* STPTestAddressStore.m */; };
+		FC92E1271B7E5C880073C5D7 /* DeliveryLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7C91A5E24B900D034CF /* DeliveryLocationViewController.m */; };
+		FC92E1281B7E5C880073C5D7 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A41A6EADBD006C2446 /* UIImageView+WebCache.m */; };
+		FC92E1291B7E5C880073C5D7 /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
+		FC92E12A1B7E5C880073C5D7 /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
+		FC92E12B1B7E5C880073C5D7 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
+		FC92E12C1B7E5C880073C5D7 /* SignedOutSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */; };
+		FC92E12D1B7E5C880073C5D7 /* JGProgressHUDFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223334D1A6D4058006C2446 /* JGProgressHUDFadeAnimation.m */; };
+		FC92E12E1B7E5C880073C5D7 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BC1A6F46DF006C2446 /* NSData+MKBase64.m */; };
+		FC92E12F1B7E5C880073C5D7 /* PKPayment+STPTestKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333E71A72C133006C2446 /* PKPayment+STPTestKeys.m */; };
+		FC92E1301B7E5C880073C5D7 /* RMMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB4B1A7D8BE800D03DCE /* RMMapper.m */; };
+		FC92E1311B7E5C880073C5D7 /* SHSPhoneTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E0921A780A1200D18D7A /* SHSPhoneTextField.m */; };
+		FC92E1321B7E5C880073C5D7 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333911A6EADBD006C2446 /* SDWebImageDownloader.m */; };
+		FC92E1331B7E5C880073C5D7 /* OutOfDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7CC1A5E252800D034CF /* OutOfDeliveryAddressViewController.m */; };
+		FC92E1341B7E5C880073C5D7 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223336D1A6D66E8006C2446 /* IntroViewController.m */; };
+		FC92E1351B7E5C880073C5D7 /* JGProgressHUDFadeZoomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223334F1A6D4058006C2446 /* JGProgressHUDFadeZoomAnimation.m */; };
+		FC92E1361B7E5C880073C5D7 /* NSObject+RMCopyable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB471A7D8BE800D03DCE /* NSObject+RMCopyable.m */; };
+		FC92E1371B7E5C880073C5D7 /* AppStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333771A6E0DFD006C2446 /* AppStrings.m */; };
+		FC92E1381B7E5C880073C5D7 /* SoldOutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7DD1A5E30AD00D034CF /* SoldOutViewController.m */; };
+		FC92E1391B7E5C880073C5D7 /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
+		FC92E13A1B7E5C880073C5D7 /* OrderConfirmViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7DA1A5E304D00D034CF /* OrderConfirmViewController.m */; };
+		FC92E13B1B7E5C880073C5D7 /* BentoTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A553DE1A5FFEEB001F9DA7 /* BentoTableViewCell.m */; };
+		FC92E13C1B7E5C880073C5D7 /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
+		FC92E13E1B7E5C880073C5D7 /* AdSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC89D5D41B6029B900D8D310 /* AdSupport.framework */; };
+		FC92E13F1B7E5C880073C5D7 /* iAd.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC89D5D21B6029B400D8D310 /* iAd.framework */; };
+		FC92E1401B7E5C880073C5D7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
+		FC92E1411B7E5C880073C5D7 /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
+		FC92E1421B7E5C880073C5D7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7209E0811A76BD3500D18D7A /* CoreLocation.framework */; };
+		FC92E1431B7E5C880073C5D7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333821A6E55B6006C2446 /* CoreData.framework */; };
+		FC92E1441B7E5C880073C5D7 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333801A6E5570006C2446 /* ImageIO.framework */; };
+		FC92E1451B7E5C880073C5D7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337E1A6E5535006C2446 /* GLKit.framework */; };
+		FC92E1461B7E5C880073C5D7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337C1A6E5504006C2446 /* libc++.dylib */; };
+		FC92E1471B7E5C880073C5D7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333411A6C1B2E006C2446 /* libz.dylib */; };
+		FC92E1481B7E5C880073C5D7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 725BA0341A84EDBF005C18D3 /* Fabric.framework */; };
+		FC92E1491B7E5C880073C5D7 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337A1A6E5387006C2446 /* GoogleMaps.framework */; };
+		FC92E14A1B7E5C880073C5D7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */; };
+		FC92E14B1B7E5C880073C5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E41A6BC7E6006C2446 /* Security.framework */; };
+		FC92E14C1B7E5C880073C5D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E21A6BC7DE006C2446 /* Foundation.framework */; };
+		FC92E14D1B7E5C880073C5D7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7279E5D81A68397D00591CB2 /* FacebookSDK.framework */; };
+		FC92E14E1B7E5C880073C5D7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC0B59E0C21EA384AF9FA91 /* libPods.a */; };
+		FC92E1501B7E5C880073C5D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
+		FC92E1511B7E5C880073C5D7 /* deliverylocation_icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7CF1A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png */; };
+		FC92E1521B7E5C880073C5D7 /* register_icon_email_err.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7C01A5E126C00D034CF /* register_icon_email_err.png */; };
+		FC92E1531B7E5C880073C5D7 /* completeorder_cell_btn_remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C5B0171A8B82BD008FA7DA /* completeorder_cell_btn_remove@2x.png */; };
+		FC92E1541B7E5C880073C5D7 /* STPTestPaymentSummaryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 722333F31A72C133006C2446 /* STPTestPaymentSummaryViewController.xib */; };
+		FC92E1551B7E5C880073C5D7 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0BF1A5BE72F003DC872 /* OpenSans-SemiboldItalic.ttf */; };
+		FC92E1561B7E5C880073C5D7 /* icon-circle-facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB72E1AF18674003045A3 /* icon-circle-facebook.png */; };
+		FC92E1571B7E5C880073C5D7 /* icon-square-phone.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7361AF18674003045A3 /* icon-square-phone.png */; };
+		FC92E1581B7E5C880073C5D7 /* sample.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0ED1A5C38DA003DC872 /* sample.png */; };
+		FC92E1591B7E5C880073C5D7 /* orderconfirm_image_remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90359C211A5EC49700AAD5D2 /* orderconfirm_image_remove@2x.png */; };
+		FC92E15A1B7E5C880073C5D7 /* BentoTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47C5B0141A8B8038008FA7DA /* BentoTableViewCell.xib */; };
+		FC92E15B1B7E5C880073C5D7 /* icon-circle-twitter.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7311AF18674003045A3 /* icon-circle-twitter.png */; };
+		FC92E15C1B7E5C880073C5D7 /* icon-square-creditcard.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7331AF18674003045A3 /* icon-square-creditcard.png */; };
+		FC92E15D1B7E5C880073C5D7 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0BA1A5BE72F003DC872 /* OpenSans-Italic.ttf */; };
+		FC92E15E1B7E5C880073C5D7 /* Icon-Small-40.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220B1ADC3ADF006B2750 /* Icon-Small-40.png */; };
+		FC92E15F1B7E5C880073C5D7 /* deliverylocation_icon_navigation@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7CE1A5E2B3B00D034CF /* deliverylocation_icon_navigation@2x.png */; };
+		FC92E1601B7E5C880073C5D7 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0B61A5BE72F003DC872 /* OpenSans-Bold.ttf */; };
+		FC92E1611B7E5C880073C5D7 /* icon-circle-messages.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7301AF18674003045A3 /* icon-circle-messages.png */; };
+		FC92E1621B7E5C880073C5D7 /* icon-square-email.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7341AF18674003045A3 /* icon-square-email.png */; };
+		FC92E1631B7E5C880073C5D7 /* PromoCodeView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90A553E31A60038C001F9DA7 /* PromoCodeView.xib */; };
+		FC92E1641B7E5C880073C5D7 /* icon-square-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA1C8C11AF1973E004715F1 /* icon-square-user.png */; };
+		FC92E1651B7E5C880073C5D7 /* image_gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0EF1A5C391D003DC872 /* image_gradient.png */; };
+		FC92E1661B7E5C880073C5D7 /* register_icon_alert.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7B61A5D856200D034CF /* register_icon_alert.png */; };
+		FC92E1671B7E5C880073C5D7 /* creditcard_btn_clear.png in Resources */ = {isa = PBXBuildFile; fileRef = 722333FE1A7425CA006C2446 /* creditcard_btn_clear.png */; };
+		FC92E1681B7E5C880073C5D7 /* soldout_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E21A5E37E300D034CF /* soldout_background.png */; };
+		FC92E1691B7E5C880073C5D7 /* Icon-76@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220A1ADC3ADF006B2750 /* Icon-76@2x.png */; };
+		FC92E16A1B7E5C880073C5D7 /* image_unchecked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7D31A5E2C4C00D034CF /* image_unchecked@2x.png */; };
+		FC92E16B1B7E5C880073C5D7 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22131ADC3ADF006B2750 /* Icon.png */; };
+		FC92E16C1B7E5C880073C5D7 /* icon-navigateright.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7321AF18674003045A3 /* icon-navigateright.png */; };
+		FC92E16D1B7E5C880073C5D7 /* JGProgressHUD Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 722333451A6D4058006C2446 /* JGProgressHUD Resources.bundle */; };
+		FC92E16E1B7E5C880073C5D7 /* polygon_service_area.png in Resources */ = {isa = PBXBuildFile; fileRef = 726A92051A8CBA4900E04EFE /* polygon_service_area.png */; };
+		FC92E16F1B7E5C880073C5D7 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220E1ADC3ADF006B2750 /* Icon-Small-50.png */; };
+		FC92E1701B7E5C880073C5D7 /* nav_btn_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0E21A5C1E70003DC872 /* nav_btn_back@2x.png */; };
+		FC92E1711B7E5C880073C5D7 /* Icon-72@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22081ADC3ADF006B2750 /* Icon-72@2x.png */; };
+		FC92E1721B7E5C880073C5D7 /* register_icon_facebook.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7AB1A5D84B800D034CF /* register_icon_facebook.png */; };
+		FC92E1731B7E5C880073C5D7 /* register_icon_username.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7AE1A5D84B800D034CF /* register_icon_username.png */; };
+		FC92E1741B7E5C880073C5D7 /* logo_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E41A5E39A500D034CF /* logo_title.png */; };
+		FC92E1751B7E5C880073C5D7 /* mybento_image_bottom.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7A51A5D7F7100D034CF /* mybento_image_bottom.png */; };
+		FC92E1761B7E5C880073C5D7 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22041ADC3ADF006B2750 /* Icon-60.png */; };
+		FC92E1771B7E5C880073C5D7 /* mybento_nav_cart_act@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0DC1A5C04DE003DC872 /* mybento_nav_cart_act@2x.png */; };
+		FC92E1781B7E5C880073C5D7 /* orderconfirm_image_minute@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90359C1F1A5EC49700AAD5D2 /* orderconfirm_image_minute@2x.png */; };
+		FC92E1791B7E5C880073C5D7 /* string_confirmaddress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C421A6BE52800064857 /* string_confirmaddress@2x.png */; };
+		FC92E17A1B7E5C880073C5D7 /* icon-circle-mail.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB72F1AF18674003045A3 /* icon-circle-mail.png */; };
+		FC92E17B1B7E5C880073C5D7 /* orderconfirm_image_credit.png in Resources */ = {isa = PBXBuildFile; fileRef = 90359C1E1A5EC49700AAD5D2 /* orderconfirm_image_credit.png */; };
+		FC92E17C1B7E5C880073C5D7 /* register_icon_phone_err.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7C21A5E126C00D034CF /* register_icon_phone_err.png */; };
+		FC92E17D1B7E5C880073C5D7 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0B81A5BE72F003DC872 /* OpenSans-ExtraBold.ttf */; };
+		FC92E17E1B7E5C880073C5D7 /* icon-square-help.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7351AF18674003045A3 /* icon-square-help.png */; };
+		FC92E17F1B7E5C880073C5D7 /* LaunchScreen.png in Resources */ = {isa = PBXBuildFile; fileRef = 7209E0841A77715000D18D7A /* LaunchScreen.png */; };
+		FC92E1801B7E5C880073C5D7 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0AF1A5BE22E003DC872 /* logo.png */; };
+		FC92E1811B7E5C880073C5D7 /* string_continue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C431A6BE52800064857 /* string_continue@2x.png */; };
+		FC92E1821B7E5C880073C5D7 /* orderconfirm_image_applepay.png in Resources */ = {isa = PBXBuildFile; fileRef = 90359C1C1A5EC49700AAD5D2 /* orderconfirm_image_applepay.png */; };
+		FC92E1831B7E5C880073C5D7 /* nav_btn_close@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7BE1A5D9B0800D034CF /* nav_btn_close@2x.png */; };
+		FC92E1841B7E5C880073C5D7 /* register_icon_password_err.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7C11A5E126C00D034CF /* register_icon_password_err.png */; };
+		FC92E1851B7E5C880073C5D7 /* DishCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0EA1A5C3346003DC872 /* DishCollectionViewCell.xib */; };
+		FC92E1861B7E5C880073C5D7 /* orderconfirm_image_countpanel.png in Resources */ = {isa = PBXBuildFile; fileRef = 90359C1D1A5EC49700AAD5D2 /* orderconfirm_image_countpanel.png */; };
+		FC92E1871B7E5C880073C5D7 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */; };
+		FC92E1881B7E5C880073C5D7 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0BB1A5BE72F003DC872 /* OpenSans-Light.ttf */; };
+		FC92E1891B7E5C880073C5D7 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
+		FC92E18A1B7E5C880073C5D7 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22141ADC3ADF006B2750 /* Icon@2x.png */; };
+		FC92E18B1B7E5C880073C5D7 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22101ADC3ADF006B2750 /* Icon-Small.png */; };
+		FC92E18C1B7E5C880073C5D7 /* banner_sold_out.png in Resources */ = {isa = PBXBuildFile; fileRef = 722333E01A6FF9C5006C2446 /* banner_sold_out.png */; };
+		FC92E18D1B7E5C880073C5D7 /* register_icon_username_err.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7C31A5E126C00D034CF /* register_icon_username_err.png */; };
+		FC92E18E1B7E5C880073C5D7 /* Icon-Small-40@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220C1ADC3ADF006B2750 /* Icon-Small-40@2x.png */; };
+		FC92E18F1B7E5C880073C5D7 /* icon-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FC8DB7371AF18674003045A3 /* icon-user.png */; };
+		FC92E1901B7E5C880073C5D7 /* first_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0AE1A5BE22E003DC872 /* first_background.png */; };
+		FC92E1911B7E5C880073C5D7 /* orderconfirm_image_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */; };
+		FC92E1921B7E5C880073C5D7 /* register_icon_phone.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7AD1A5D84B800D034CF /* register_icon_phone.png */; };
+		FC92E1931B7E5C880073C5D7 /* Icon-76.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22091ADC3ADF006B2750 /* Icon-76.png */; };
+		FC92E1941B7E5C880073C5D7 /* nav_background.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0DA1A5C0320003DC872 /* nav_background.png */; };
+		FC92E1951B7E5C880073C5D7 /* image_checked@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7D21A5E2C4C00D034CF /* image_checked@2x.png */; };
+		FC92E1961B7E5C880073C5D7 /* string_addanotherbento@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C461A6BE52F00064857 /* string_addanotherbento@2x.png */; };
+		FC92E1971B7E5C880073C5D7 /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
+		FC92E1981B7E5C880073C5D7 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0BE1A5BE72F003DC872 /* OpenSans-Semibold.ttf */; };
+		FC92E1991B7E5C880073C5D7 /* mybento_nav_cart_inact@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0DD1A5C04DE003DC872 /* mybento_nav_cart_inact@2x.png */; };
+		FC92E19A1B7E5C880073C5D7 /* Icon-60@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22061ADC3ADF006B2750 /* Icon-60@3x.png */; };
+		FC92E19B1B7E5C880073C5D7 /* completeorder_cell_btn_minute@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C5B0161A8B82BD008FA7DA /* completeorder_cell_btn_minute@2x.png */; };
+		FC92E19C1B7E5C880073C5D7 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0B91A5BE72F003DC872 /* OpenSans-ExtraBoldItalic.ttf */; };
+		FC92E19D1B7E5C880073C5D7 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0BD1A5BE72F003DC872 /* OpenSans-Regular.ttf */; };
+		FC92E19E1B7E5C880073C5D7 /* Icon-Small-40@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220D1ADC3ADF006B2750 /* Icon-Small-40@3x.png */; };
+		FC92E19F1B7E5C880073C5D7 /* Icon-Small@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22121ADC3ADF006B2750 /* Icon-Small@3x.png */; };
+		FC92E1A01B7E5C880073C5D7 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0B71A5BE72F003DC872 /* OpenSans-BoldItalic.ttf */; };
+		FC92E1A11B7E5C880073C5D7 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0BC1A5BE72F003DC872 /* OpenSans-LightItalic.ttf */; };
+		FC92E1A21B7E5C880073C5D7 /* orderconfirm_image_plus@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90359C201A5EC49700AAD5D2 /* orderconfirm_image_plus@2x.png */; };
+		FC92E1A31B7E5C880073C5D7 /* register_image_or.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7AF1A5D84B800D034CF /* register_image_or.png */; };
+		FC92E1A41B7E5C880073C5D7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07E1A5BCC04003DC872 /* Images.xcassets */; };
+		FC92E1A51B7E5C880073C5D7 /* register_icon_email.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7AA1A5D84B800D034CF /* register_icon_email.png */; };
+		FC92E1A61B7E5C880073C5D7 /* mybento_nav_help@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90BED0DE1A5C04DE003DC872 /* mybento_nav_help@2x.png */; };
+		FC92E1A71B7E5C880073C5D7 /* Icon-Small-50@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF220F1ADC3ADF006B2750 /* Icon-Small-50@2x.png */; };
+		FC92E1A81B7E5C880073C5D7 /* register_icon_password.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7AC1A5D84B800D034CF /* register_icon_password.png */; };
+		FC92E1A91B7E5C880073C5D7 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22071ADC3ADF006B2750 /* Icon-72.png */; };
+		FC92E1AA1B7E5C880073C5D7 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22111ADC3ADF006B2750 /* Icon-Small@2x.png */; };
+		FC92E1B31B7E5D500073C5D7 /* calabash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC92E1B21B7E5D500073C5D7 /* calabash.framework */; };
+		FC92E1B51B7E5D830073C5D7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */; };
 		FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
 		FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
 		FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
@@ -758,6 +963,10 @@
 		FC8DB7351AF18674003045A3 /* icon-square-help.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-help.png"; sourceTree = "<group>"; };
 		FC8DB7361AF18674003045A3 /* icon-square-phone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-phone.png"; sourceTree = "<group>"; };
 		FC8DB7371AF18674003045A3 /* icon-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-user.png"; sourceTree = "<group>"; };
+		FC92E1B01B7E5C880073C5D7 /* Bento-cal.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Bento-cal.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		FC92E1B11B7E5C890073C5D7 /* Bento copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bento copy-Info.plist"; path = "/Users/JosephLauSF/_github/Bento/Bento copy-Info.plist"; sourceTree = "<absolute>"; };
+		FC92E1B21B7E5D500073C5D7 /* calabash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = calabash.framework; sourceTree = "<group>"; };
+		FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FC99D4ED1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoPreviewViewController.h; sourceTree = "<group>"; };
 		FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoPreviewViewController.m; sourceTree = "<group>"; };
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
@@ -851,6 +1060,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC92E13D1B7E5C880073C5D7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC92E1B51B7E5D830073C5D7 /* CFNetwork.framework in Frameworks */,
+				FC92E1B31B7E5D500073C5D7 /* calabash.framework in Frameworks */,
+				FC92E13E1B7E5C880073C5D7 /* AdSupport.framework in Frameworks */,
+				FC92E13F1B7E5C880073C5D7 /* iAd.framework in Frameworks */,
+				FC92E1401B7E5C880073C5D7 /* SystemConfiguration.framework in Frameworks */,
+				FC92E1411B7E5C880073C5D7 /* Crashlytics.framework in Frameworks */,
+				FC92E1421B7E5C880073C5D7 /* CoreLocation.framework in Frameworks */,
+				FC92E1431B7E5C880073C5D7 /* CoreData.framework in Frameworks */,
+				FC92E1441B7E5C880073C5D7 /* ImageIO.framework in Frameworks */,
+				FC92E1451B7E5C880073C5D7 /* GLKit.framework in Frameworks */,
+				FC92E1461B7E5C880073C5D7 /* libc++.dylib in Frameworks */,
+				FC92E1471B7E5C880073C5D7 /* libz.dylib in Frameworks */,
+				FC92E1481B7E5C880073C5D7 /* Fabric.framework in Frameworks */,
+				FC92E1491B7E5C880073C5D7 /* GoogleMaps.framework in Frameworks */,
+				FC92E14A1B7E5C880073C5D7 /* MapKit.framework in Frameworks */,
+				FC92E14B1B7E5C880073C5D7 /* Security.framework in Frameworks */,
+				FC92E14C1B7E5C880073C5D7 /* Foundation.framework in Frameworks */,
+				FC92E14D1B7E5C880073C5D7 /* FacebookSDK.framework in Frameworks */,
+				FC92E14E1B7E5C880073C5D7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1140,6 +1375,7 @@
 				6FD3F1724EE25B5F8E1A5D58 /* Pods */,
 				C994F09FDA3B8896E57F29B5 /* Frameworks */,
 				7216B7B51AA64C7C0006FFE9 /* Bento Dev-Info.plist */,
+				FC92E1B11B7E5C890073C5D7 /* Bento copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1149,6 +1385,7 @@
 				90BED06E1A5BCC04003DC872 /* Bento.app */,
 				7216B7B41AA64C7C0006FFE9 /* Bento Dev.app */,
 				FC599F551B0FEDB600989E1B /* BentoTests.xctest */,
+				FC92E1B01B7E5C880073C5D7 /* Bento-cal.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1403,6 +1640,8 @@
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */,
+				FC92E1B21B7E5D500073C5D7 /* calabash.framework */,
 				FC89D5D41B6029B900D8D310 /* AdSupport.framework */,
 				FC89D5D21B6029B400D8D310 /* iAd.framework */,
 				FCE3B9411B14176300301353 /* SystemConfiguration.framework */,
@@ -1790,6 +2029,26 @@
 			productReference = FC599F551B0FEDB600989E1B /* BentoTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		FC92E0DB1B7E5C880073C5D7 /* Bento-cal */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FC92E1AD1B7E5C880073C5D7 /* Build configuration list for PBXNativeTarget "Bento-cal" */;
+			buildPhases = (
+				FC92E0DC1B7E5C880073C5D7 /* Check Pods Manifest.lock */,
+				FC92E0DD1B7E5C880073C5D7 /* Sources */,
+				FC92E13D1B7E5C880073C5D7 /* Frameworks */,
+				FC92E14F1B7E5C880073C5D7 /* Resources */,
+				FC92E1AB1B7E5C880073C5D7 /* Copy Pods Resources */,
+				FC92E1AC1B7E5C880073C5D7 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Bento-cal";
+			productName = Bento;
+			productReference = FC92E1B01B7E5C880073C5D7 /* Bento-cal.app */;
+			productType = "com.apple.product-type.application";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -1845,6 +2104,7 @@
 				90BED06D1A5BCC04003DC872 /* Bento */,
 				7216B7061AA64C7C0006FFE9 /* BentoDev */,
 				FC599F541B0FEDB600989E1B /* BentoTests */,
+				FC92E0DB1B7E5C880073C5D7 /* Bento-cal */,
 			);
 		};
 /* End PBXProject section */
@@ -2053,6 +2313,104 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FC92E14F1B7E5C880073C5D7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC92E1501B7E5C880073C5D7 /* Main.storyboard in Resources */,
+				FC92E1511B7E5C880073C5D7 /* deliverylocation_icon_search@2x.png in Resources */,
+				FC92E1521B7E5C880073C5D7 /* register_icon_email_err.png in Resources */,
+				FC92E1531B7E5C880073C5D7 /* completeorder_cell_btn_remove@2x.png in Resources */,
+				FC92E1541B7E5C880073C5D7 /* STPTestPaymentSummaryViewController.xib in Resources */,
+				FC92E1551B7E5C880073C5D7 /* OpenSans-SemiboldItalic.ttf in Resources */,
+				FC92E1561B7E5C880073C5D7 /* icon-circle-facebook.png in Resources */,
+				FC92E1571B7E5C880073C5D7 /* icon-square-phone.png in Resources */,
+				FC92E1581B7E5C880073C5D7 /* sample.png in Resources */,
+				FC92E1591B7E5C880073C5D7 /* orderconfirm_image_remove@2x.png in Resources */,
+				FC92E15A1B7E5C880073C5D7 /* BentoTableViewCell.xib in Resources */,
+				FC92E15B1B7E5C880073C5D7 /* icon-circle-twitter.png in Resources */,
+				FC92E15C1B7E5C880073C5D7 /* icon-square-creditcard.png in Resources */,
+				FC92E15D1B7E5C880073C5D7 /* OpenSans-Italic.ttf in Resources */,
+				FC92E15E1B7E5C880073C5D7 /* Icon-Small-40.png in Resources */,
+				FC92E15F1B7E5C880073C5D7 /* deliverylocation_icon_navigation@2x.png in Resources */,
+				FC92E1601B7E5C880073C5D7 /* OpenSans-Bold.ttf in Resources */,
+				FC92E1611B7E5C880073C5D7 /* icon-circle-messages.png in Resources */,
+				FC92E1621B7E5C880073C5D7 /* icon-square-email.png in Resources */,
+				FC92E1631B7E5C880073C5D7 /* PromoCodeView.xib in Resources */,
+				FC92E1641B7E5C880073C5D7 /* icon-square-user.png in Resources */,
+				FC92E1651B7E5C880073C5D7 /* image_gradient.png in Resources */,
+				FC92E1661B7E5C880073C5D7 /* register_icon_alert.png in Resources */,
+				FC92E1671B7E5C880073C5D7 /* creditcard_btn_clear.png in Resources */,
+				FC92E1681B7E5C880073C5D7 /* soldout_background.png in Resources */,
+				FC92E1691B7E5C880073C5D7 /* Icon-76@2x.png in Resources */,
+				FC92E16A1B7E5C880073C5D7 /* image_unchecked@2x.png in Resources */,
+				FC92E16B1B7E5C880073C5D7 /* Icon.png in Resources */,
+				FC92E16C1B7E5C880073C5D7 /* icon-navigateright.png in Resources */,
+				FC92E16D1B7E5C880073C5D7 /* JGProgressHUD Resources.bundle in Resources */,
+				FC92E16E1B7E5C880073C5D7 /* polygon_service_area.png in Resources */,
+				FC92E16F1B7E5C880073C5D7 /* Icon-Small-50.png in Resources */,
+				FC92E1701B7E5C880073C5D7 /* nav_btn_back@2x.png in Resources */,
+				FC92E1711B7E5C880073C5D7 /* Icon-72@2x.png in Resources */,
+				FC92E1721B7E5C880073C5D7 /* register_icon_facebook.png in Resources */,
+				FC92E1731B7E5C880073C5D7 /* register_icon_username.png in Resources */,
+				FC92E1741B7E5C880073C5D7 /* logo_title.png in Resources */,
+				FC92E1751B7E5C880073C5D7 /* mybento_image_bottom.png in Resources */,
+				FC92E1761B7E5C880073C5D7 /* Icon-60.png in Resources */,
+				FC92E1771B7E5C880073C5D7 /* mybento_nav_cart_act@2x.png in Resources */,
+				FC92E1781B7E5C880073C5D7 /* orderconfirm_image_minute@2x.png in Resources */,
+				FC92E1791B7E5C880073C5D7 /* string_confirmaddress@2x.png in Resources */,
+				FC92E17A1B7E5C880073C5D7 /* icon-circle-mail.png in Resources */,
+				FC92E17B1B7E5C880073C5D7 /* orderconfirm_image_credit.png in Resources */,
+				FC92E17C1B7E5C880073C5D7 /* register_icon_phone_err.png in Resources */,
+				FC92E17D1B7E5C880073C5D7 /* OpenSans-ExtraBold.ttf in Resources */,
+				FC92E17E1B7E5C880073C5D7 /* icon-square-help.png in Resources */,
+				FC92E17F1B7E5C880073C5D7 /* LaunchScreen.png in Resources */,
+				FC92E1801B7E5C880073C5D7 /* logo.png in Resources */,
+				FC92E1811B7E5C880073C5D7 /* string_continue@2x.png in Resources */,
+				FC92E1821B7E5C880073C5D7 /* orderconfirm_image_applepay.png in Resources */,
+				FC92E1831B7E5C880073C5D7 /* nav_btn_close@2x.png in Resources */,
+				FC92E1841B7E5C880073C5D7 /* register_icon_password_err.png in Resources */,
+				FC92E1851B7E5C880073C5D7 /* DishCollectionViewCell.xib in Resources */,
+				FC92E1861B7E5C880073C5D7 /* orderconfirm_image_countpanel.png in Resources */,
+				FC92E1871B7E5C880073C5D7 /* Icon-60@2x.png in Resources */,
+				FC92E1881B7E5C880073C5D7 /* OpenSans-Light.ttf in Resources */,
+				FC92E1891B7E5C880073C5D7 /* iTunesArtwork@2x.png in Resources */,
+				FC92E18A1B7E5C880073C5D7 /* Icon@2x.png in Resources */,
+				FC92E18B1B7E5C880073C5D7 /* Icon-Small.png in Resources */,
+				FC92E18C1B7E5C880073C5D7 /* banner_sold_out.png in Resources */,
+				FC92E18D1B7E5C880073C5D7 /* register_icon_username_err.png in Resources */,
+				FC92E18E1B7E5C880073C5D7 /* Icon-Small-40@2x.png in Resources */,
+				FC92E18F1B7E5C880073C5D7 /* icon-user.png in Resources */,
+				FC92E1901B7E5C880073C5D7 /* first_background.png in Resources */,
+				FC92E1911B7E5C880073C5D7 /* orderconfirm_image_car.png in Resources */,
+				FC92E1921B7E5C880073C5D7 /* register_icon_phone.png in Resources */,
+				FC92E1931B7E5C880073C5D7 /* Icon-76.png in Resources */,
+				FC92E1941B7E5C880073C5D7 /* nav_background.png in Resources */,
+				FC92E1951B7E5C880073C5D7 /* image_checked@2x.png in Resources */,
+				FC92E1961B7E5C880073C5D7 /* string_addanotherbento@2x.png in Resources */,
+				FC92E1971B7E5C880073C5D7 /* PreviewCollectionViewCell.xib in Resources */,
+				FC92E1981B7E5C880073C5D7 /* OpenSans-Semibold.ttf in Resources */,
+				FC92E1991B7E5C880073C5D7 /* mybento_nav_cart_inact@2x.png in Resources */,
+				FC92E19A1B7E5C880073C5D7 /* Icon-60@3x.png in Resources */,
+				FC92E19B1B7E5C880073C5D7 /* completeorder_cell_btn_minute@2x.png in Resources */,
+				FC92E19C1B7E5C880073C5D7 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				FC92E19D1B7E5C880073C5D7 /* OpenSans-Regular.ttf in Resources */,
+				FC92E19E1B7E5C880073C5D7 /* Icon-Small-40@3x.png in Resources */,
+				FC92E19F1B7E5C880073C5D7 /* Icon-Small@3x.png in Resources */,
+				FC92E1A01B7E5C880073C5D7 /* OpenSans-BoldItalic.ttf in Resources */,
+				FC92E1A11B7E5C880073C5D7 /* OpenSans-LightItalic.ttf in Resources */,
+				FC92E1A21B7E5C880073C5D7 /* orderconfirm_image_plus@2x.png in Resources */,
+				FC92E1A31B7E5C880073C5D7 /* register_image_or.png in Resources */,
+				FC92E1A41B7E5C880073C5D7 /* Images.xcassets in Resources */,
+				FC92E1A51B7E5C880073C5D7 /* register_icon_email.png in Resources */,
+				FC92E1A61B7E5C880073C5D7 /* mybento_nav_help@2x.png in Resources */,
+				FC92E1A71B7E5C880073C5D7 /* Icon-Small-50@2x.png in Resources */,
+				FC92E1A81B7E5C880073C5D7 /* register_icon_password.png in Resources */,
+				FC92E1A91B7E5C880073C5D7 /* Icon-72.png in Resources */,
+				FC92E1AA1B7E5C880073C5D7 /* Icon-Small@2x.png in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -2141,6 +2499,49 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		FC92E0DC1B7E5C880073C5D7 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		FC92E1AB1B7E5C880073C5D7 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FC92E1AC1B7E5C880073C5D7 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = "./Fabric.framework/run e416b51207b62057016bf1d61606566656652d9a 94f22fb1715a37a11893e5911e99464e0721aa230defd6059edcf2392a850bbf";
+			shellScript = "";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -2356,6 +2757,108 @@
 				FC7B609F1B0FF11300A00467 /* BentoModelTests.m in Sources */,
 				FC599F5A1B0FEDB600989E1B /* Bento_Tests.m in Sources */,
 				FC7B60A11B10045D00A00467 /* BentoShopTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FC92E0DD1B7E5C880073C5D7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FC92E0DE1B7E5C880073C5D7 /* WebManager.m in Sources */,
+				FC92E0DF1B7E5C880073C5D7 /* CreditCardInfoViewController.m in Sources */,
+				FC92E0E01B7E5C880073C5D7 /* RegisterViewController.m in Sources */,
+				FC92E0E11B7E5C880073C5D7 /* STPTestDataTableViewController.m in Sources */,
+				FC92E0E21B7E5C880073C5D7 /* JGProgressHUDRingIndicatorView.m in Sources */,
+				FC92E0E31B7E5C880073C5D7 /* FacebookManager.m in Sources */,
+				FC92E0E41B7E5C880073C5D7 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
+				FC92E0E51B7E5C880073C5D7 /* JGProgressHUDErrorIndicatorView.m in Sources */,
+				FC92E0E61B7E5C880073C5D7 /* FXBlurView.m in Sources */,
+				FC92E0E71B7E5C880073C5D7 /* NetworkErrorViewController.m in Sources */,
+				FC92E0E81B7E5C880073C5D7 /* SignedInSettingsViewController.m in Sources */,
+				FC92E0E91B7E5C880073C5D7 /* ChooseSideDishViewController.m in Sources */,
+				FC92E0EA1B7E5C880073C5D7 /* FaqViewController.m in Sources */,
+				FC92E0EB1B7E5C880073C5D7 /* NSDate+RFC1123.m in Sources */,
+				FC92E0EC1B7E5C880073C5D7 /* UIImage+GIF.m in Sources */,
+				FC92E0ED1B7E5C880073C5D7 /* SDWebImageDownloaderOperation.m in Sources */,
+				FC92E0EE1B7E5C880073C5D7 /* JGProgressHUDAnimation.m in Sources */,
+				FC92E0EF1B7E5C880073C5D7 /* AppDelegate.m in Sources */,
+				FC92E0F01B7E5C880073C5D7 /* PromoCodeView.m in Sources */,
+				FC92E0F11B7E5C880073C5D7 /* NSData+ImageContentType.m in Sources */,
+				FC92E0F21B7E5C880073C5D7 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
+				FC92E0F31B7E5C880073C5D7 /* PhoneNumberViewController.m in Sources */,
+				FC92E0F41B7E5C880073C5D7 /* SignInViewController.m in Sources */,
+				FC92E0F51B7E5C880073C5D7 /* STPTestPaymentSummaryViewController.m in Sources */,
+				FC92E0F61B7E5C880073C5D7 /* FixedBentoPreviewViewController.m in Sources */,
+				FC92E0F71B7E5C880073C5D7 /* UIView+WebCacheOperation.m in Sources */,
+				FC92E0F81B7E5C880073C5D7 /* MKNetworkEngine.m in Sources */,
+				FC92E0F91B7E5C880073C5D7 /* NSObject+RMArchivable.m in Sources */,
+				FC92E0FA1B7E5C880073C5D7 /* SHSFlagAccessoryView.m in Sources */,
+				FC92E0FB1B7E5C880073C5D7 /* DishCollectionViewCell.m in Sources */,
+				FC92E0FC1B7E5C880073C5D7 /* CAGradientLayer+SJSGradients.m in Sources */,
+				FC92E0FD1B7E5C880073C5D7 /* JGProgressHUDSuccessIndicatorView.m in Sources */,
+				FC92E0FE1B7E5C880073C5D7 /* ChooseMainDishViewController.m in Sources */,
+				FC92E0FF1B7E5C880073C5D7 /* Bento.m in Sources */,
+				FC92E1001B7E5C880073C5D7 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
+				FC92E1011B7E5C880073C5D7 /* SDWebImageCompat.m in Sources */,
+				FC92E1021B7E5C880073C5D7 /* UIImage+MultiFormat.m in Sources */,
+				FC92E1031B7E5C880073C5D7 /* FixedBentoCell.m in Sources */,
+				FC92E1041B7E5C880073C5D7 /* EnterCreditCardViewController.m in Sources */,
+				FC92E1051B7E5C880073C5D7 /* JGProgressHUDIndicatorView.m in Sources */,
+				FC92E1061B7E5C880073C5D7 /* UIImage+WebP.m in Sources */,
+				FC92E1071B7E5C880073C5D7 /* SDWebImageManager.m in Sources */,
+				FC92E1081B7E5C880073C5D7 /* SDImageCache.m in Sources */,
+				FC92E1091B7E5C880073C5D7 /* SHSPhoneNumberFormatter.m in Sources */,
+				FC92E10A1B7E5C880073C5D7 /* DataManager.m in Sources */,
+				FC92E10B1B7E5C880073C5D7 /* SHSPhoneLogic.m in Sources */,
+				FC92E10C1B7E5C880073C5D7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
+				FC92E10D1B7E5C880073C5D7 /* SDWebImagePrefetcher.m in Sources */,
+				FC92E10E1B7E5C880073C5D7 /* MyAlertView.m in Sources */,
+				FC92E10F1B7E5C880073C5D7 /* STPTestShippingMethodStore.m in Sources */,
+				FC92E1101B7E5C880073C5D7 /* NSDictionary+RequestEncoding.m in Sources */,
+				FC92E1111B7E5C880073C5D7 /* JGProgressHUD.m in Sources */,
+				FC92E1121B7E5C880073C5D7 /* MKAnnotationView+WebCache.m in Sources */,
+				FC92E1131B7E5C880073C5D7 /* FixedBentoViewController.m in Sources */,
+				FC92E1141B7E5C880073C5D7 /* FirstViewController.m in Sources */,
+				FC92E1151B7E5C880073C5D7 /* BentoShop.m in Sources */,
+				FC92E1161B7E5C880073C5D7 /* SDWebImageDecoder.m in Sources */,
+				FC92E1171B7E5C880073C5D7 /* SVGeocoder.m in Sources */,
+				FC92E1181B7E5C880073C5D7 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
+				FC92E1191B7E5C880073C5D7 /* STPTestPaymentAuthorizationViewController.m in Sources */,
+				FC92E11A1B7E5C880073C5D7 /* main.m in Sources */,
+				FC92E11B1B7E5C880073C5D7 /* UIImageView+HighlightedWebCache.m in Sources */,
+				FC92E11C1B7E5C880073C5D7 /* SVPlacemark.m in Sources */,
+				FC92E11D1B7E5C880073C5D7 /* SettingsTableViewCell.m in Sources */,
+				FC92E11E1B7E5C880073C5D7 /* MKNetworkOperation.m in Sources */,
+				FC92E11F1B7E5C880073C5D7 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
+				FC92E1201B7E5C880073C5D7 /* BaseViewController.m in Sources */,
+				FC92E1211B7E5C880073C5D7 /* CompleteOrderViewController.m in Sources */,
+				FC92E1221B7E5C880073C5D7 /* JGProgressHUDPieIndicatorView.m in Sources */,
+				FC92E1231B7E5C880073C5D7 /* NSString+MKNetworkKitAdditions.m in Sources */,
+				FC92E1241B7E5C880073C5D7 /* STPTestCardStore.m in Sources */,
+				FC92E1251B7E5C880073C5D7 /* UIButton+WebCache.m in Sources */,
+				FC92E1261B7E5C880073C5D7 /* STPTestAddressStore.m in Sources */,
+				FC92E1271B7E5C880073C5D7 /* DeliveryLocationViewController.m in Sources */,
+				FC92E1281B7E5C880073C5D7 /* UIImageView+WebCache.m in Sources */,
+				FC92E1291B7E5C880073C5D7 /* CustomBentoViewController.m in Sources */,
+				FC92E12A1B7E5C880073C5D7 /* BWTitlePagerView.m in Sources */,
+				FC92E12B1B7E5C880073C5D7 /* PreviewViewController.m in Sources */,
+				FC92E12C1B7E5C880073C5D7 /* SignedOutSettingsViewController.m in Sources */,
+				FC92E12D1B7E5C880073C5D7 /* JGProgressHUDFadeAnimation.m in Sources */,
+				FC92E12E1B7E5C880073C5D7 /* NSData+MKBase64.m in Sources */,
+				FC92E12F1B7E5C880073C5D7 /* PKPayment+STPTestKeys.m in Sources */,
+				FC92E1301B7E5C880073C5D7 /* RMMapper.m in Sources */,
+				FC92E1311B7E5C880073C5D7 /* SHSPhoneTextField.m in Sources */,
+				FC92E1321B7E5C880073C5D7 /* SDWebImageDownloader.m in Sources */,
+				FC92E1331B7E5C880073C5D7 /* OutOfDeliveryAddressViewController.m in Sources */,
+				FC92E1341B7E5C880073C5D7 /* IntroViewController.m in Sources */,
+				FC92E1351B7E5C880073C5D7 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
+				FC92E1361B7E5C880073C5D7 /* NSObject+RMCopyable.m in Sources */,
+				FC92E1371B7E5C880073C5D7 /* AppStrings.m in Sources */,
+				FC92E1381B7E5C880073C5D7 /* SoldOutViewController.m in Sources */,
+				FC92E1391B7E5C880073C5D7 /* Reachability.m in Sources */,
+				FC92E13A1B7E5C880073C5D7 /* OrderConfirmViewController.m in Sources */,
+				FC92E13B1B7E5C880073C5D7 /* BentoTableViewCell.m in Sources */,
+				FC92E13C1B7E5C880073C5D7 /* PreviewCollectionViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2638,6 +3141,171 @@
 			};
 			name = Release;
 		};
+		FC92E1AE1B7E5C880073C5D7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3561C29F3B08D2974FA2BADA /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
+					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Bento",
+				);
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"DEBUG=1",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
+					"$(inherited)",
+					"COCOAPODS=1",
+					"DEBUG=1",
+				);
+				INFOPLIST_FILE = "Bento copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"MPCategoryHelpers\"",
+					"-force_load",
+					"\"$(SRCROOT)/calabash.framework/calabash\"",
+					"-lstdc++",
+					"-l\"Pods-Adjust\"",
+					"-l\"Pods-Branch\"",
+					"-l\"Pods-Canvas\"",
+					"-l\"Pods-Mixpanel\"",
+					"-l\"Pods-PaymentKit\"",
+					"-l\"Pods-Stripe\"",
+					"-l\"Pods-mopub-ios-sdk\"",
+					"-l\"icucore\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"AdSupport\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"EventKit\"",
+					"-framework",
+					"\"EventKitUI\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"AdSupport\"",
+					"-weak_framework",
+					"\"AddressBook\"",
+					"-weak_framework",
+					"\"PassKit\"",
+					"-weak_framework",
+					"\"StoreKit\"",
+					"-weak_framework",
+					"\"iAd\"",
+				);
+				PRODUCT_NAME = "Bento-cal";
+				PROVISIONING_PROFILE = "198c4532-e5b7-47da-aef6-3c363bb81cfb";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Debug;
+		};
+		FC92E1AF1B7E5C880073C5D7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6EC9DF39CFE2AE0B67A3FFE5 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
+					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
+					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Bento",
+				);
+				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
+				INFOPLIST_FILE = "Bento copy-Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_LDFLAGS = (
+					"$(inherited)",
+					"-ObjC",
+					"-l\"MPCategoryHelpers\"",
+					"-force_load",
+					"\"$(SRCROOT)/calabash.framework/calabash\"",
+					"-lstdc++",
+					"-l\"Pods-Adjust\"",
+					"-l\"Pods-Branch\"",
+					"-l\"Pods-Canvas\"",
+					"-l\"Pods-Mixpanel\"",
+					"-l\"Pods-PaymentKit\"",
+					"-l\"Pods-Stripe\"",
+					"-l\"Pods-mopub-ios-sdk\"",
+					"-l\"icucore\"",
+					"-framework",
+					"\"Accelerate\"",
+					"-framework",
+					"\"AdSupport\"",
+					"-framework",
+					"\"CoreGraphics\"",
+					"-framework",
+					"\"CoreLocation\"",
+					"-framework",
+					"\"CoreTelephony\"",
+					"-framework",
+					"\"EventKit\"",
+					"-framework",
+					"\"EventKitUI\"",
+					"-framework",
+					"\"Foundation\"",
+					"-framework",
+					"\"MediaPlayer\"",
+					"-framework",
+					"\"QuartzCore\"",
+					"-framework",
+					"\"Security\"",
+					"-framework",
+					"\"SystemConfiguration\"",
+					"-framework",
+					"\"UIKit\"",
+					"-weak_framework",
+					"\"AdSupport\"",
+					"-weak_framework",
+					"\"AddressBook\"",
+					"-weak_framework",
+					"\"PassKit\"",
+					"-weak_framework",
+					"\"StoreKit\"",
+					"-weak_framework",
+					"\"iAd\"",
+				);
+				PRODUCT_NAME = "Bento-cal";
+				PROVISIONING_PROFILE = "198c4532-e5b7-47da-aef6-3c363bb81cfb";
+				TARGETED_DEVICE_FAMILY = 1;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -2673,6 +3341,15 @@
 			buildConfigurations = (
 				FC599F5E1B0FEDB600989E1B /* Debug */,
 				FC599F5F1B0FEDB600989E1B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FC92E1AD1B7E5C880073C5D7 /* Build configuration list for PBXNativeTarget "Bento-cal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FC92E1AE1B7E5C880073C5D7 /* Debug */,
+				FC92E1AF1B7E5C880073C5D7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
