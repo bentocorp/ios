@@ -57,8 +57,8 @@
     CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
     
-    BOOL passedLocationNoThanks;
-    BOOL passedLocationAllow;
+    BOOL pressedNoThanksOnce;
+    BOOL pressedOKOnce;
     
     NSString *exitOnWhichScreen;
 }
@@ -286,10 +286,8 @@
 - (IBAction)onNoThanks:(id)sender
 {
     // NO THANKS pressed in locations walk-through
-    if (passedLocationNoThanks == NO)
+    if (pressedNoThanksOnce == NO)
     {
-        passedLocationNoThanks = YES;
-        
         // if push is already asked, exit introVC
         if ([self isPushEnabled])
         {
@@ -308,12 +306,14 @@
         exitOnWhichScreen = @"Push";
         [self exitIntroScreen];
     }
+    
+    pressedNoThanksOnce = YES;
 }
 
 - (IBAction)onOK:(id)sender
 {
     /*----------------LOCATIONS----------------*/
-    if (passedLocationAllow == NO)
+    if (pressedOKOnce == NO)
     {
         // Initialize location manager.
         locationManager = [[CLLocationManager alloc] init];
@@ -353,6 +353,8 @@
         [self exitIntroScreen];
 #endif
     }
+    
+    pressedOKOnce = YES;
 }
 
 - (void)firstAnimation
@@ -416,9 +418,6 @@
 {
     [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
     
-    // Tapped OK, but then tapped Don't Allow
-    passedLocationAllow = YES;
-    
     // if push is already asked, exit introVC
     if ([self isPushEnabled])
     {
@@ -440,8 +439,6 @@
         [[Mixpanel sharedInstance] track:@"Allow Location Services"];
     }
     
-    passedLocationAllow = YES;
-    
     CLLocation *location = locations[0];
     coordinate = location.coordinate;
     
@@ -451,7 +448,10 @@
     
     // if push is already asked, pop
     if ([self isPushEnabled])
+    {
+        exitOnWhichScreen = @"Location";
         [self exitIntroScreen];
+    }
     // if push hasn't been asked, then ask for push
     else
         [self showPushTutorial];

@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 #import "BaseViewController.h"
 
-@interface DeliveryLocationViewController : BaseViewController
+@interface DeliveryLocationViewController : BaseViewController <CLLocationManagerDelegate>
 
 @property (nonatomic) BOOL isFromOrder;
+
+// Get my current location using CLLocationManager
+- (CLLocationCoordinate2D )getCurrentLocation;
 
 @end

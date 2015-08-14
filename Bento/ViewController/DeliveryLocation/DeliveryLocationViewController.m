@@ -31,12 +31,17 @@
 
 #import "JGProgressHUD.h"
 
+#define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+
 @interface DeliveryLocationViewController () <MKMapViewDelegate, MyAlertViewDelegate>
 {
     BOOL _nextToBuild;
     BOOL _showedLocationTableView;
     
     JGProgressHUD *loadingHUD;
+    
+    CLLocationManager *locationManager;
+    CLLocationCoordinate2D coord;
 }
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
@@ -383,6 +388,22 @@
 
 - (IBAction)onNavigation:(id)sender
 {
+    // Initialize location manager.
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.distanceFilter = 50; // only update if moved 50 meters
+    
+#ifdef __IPHONE_8_0
+    if (IS_OS_8_OR_LATER)
+        // Use one or the other, not both. Depending on what you put in info.plist
+        [locationManager requestWhenInUseAuthorization];
+#endif
+    
+    [locationManager startUpdatingLocation];
+    
+    
     [self stopSearch];
     
     CLLocationCoordinate2D curLocation = self.mapView.userLocation.location.coordinate;
@@ -391,6 +412,28 @@
         [self.mapView setCenterCoordinate:curLocation animated:YES];
         [self addAnnotation:self.mapView.userLocation.location.coordinate];
     }
+}
+
+#pragma mark Current Location
+
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
+{
+    CLLocation *location = locations[0];
+    coord = location.coordinate;
+    
+    NSLog(@"lat: %f, long: %f", coord.latitude, coord.longitude);
+    
+    [manager stopUpdatingLocation];
+}
+
+- (CLLocationCoordinate2D )getCurrentLocation
+{
+#if (TARGET_IPHONE_SIMULATOR)
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:33.571895f longitude:-117.7379837036132f];
+    return location.coordinate;
+#endif
+    
+    return coord;
 }
 
 - (IBAction)onSearchLocation:(id)sender
@@ -851,5 +894,6 @@
 //    mapRect.origin.y = pt.y - mapRect.size.height * 0.25;
 //    [self.mapView setVisibleMapRect:mapRect animated:YES];
 }
+
 
 @end
