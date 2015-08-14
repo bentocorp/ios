@@ -158,15 +158,11 @@
     [[NSUserDefaults standardUserDefaults] setObject:strSlogan forKey:@"Slogan"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 
-    
-//    [self.activityIndicator stopAnimating];
-
     if (isThereConnection)
     {
-        // Check the app is already launched
-        if (![[NSUserDefaults standardUserDefaults] boolForKey:@"HasLaunchedOnce"])
+        // If IntroVC has not already been completely processed once, gotoIntroScreen
+        if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"])
         {
-            // This is the first launch ever
             [self performSelector:@selector(gotoIntroScreen) withObject:nil afterDelay:1.0f];
             return;
         }

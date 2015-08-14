@@ -15,6 +15,7 @@
 #import "DataManager.h"
 #import "JGProgressHUD.h"
 #import "Mixpanel.h"
+#import "FirstViewController.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -55,6 +56,11 @@
     
     CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
+    
+    BOOL passedLocationNoThanks;
+    BOOL passedLocationAllow;
+    
+    NSString *exitOnWhichScreen;
 }
 
 - (void)viewDidLoad {
@@ -158,6 +164,7 @@
     
     lblLocationComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
     lblLocationComment.center = CGPointMake(lblLocationRequest.center.x, lblLocationRequest.center.y + 100);
+    lblLocationComment.adjustsFontSizeToFitWidth = YES;
     if (self.view.bounds.size.width == 320)
         lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
     else if (self.view.bounds.size.width == 375)
@@ -188,6 +195,7 @@
     
     lblPushComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
     lblPushComment.center = CGPointMake(lblLocationRequest.center.x, lblLocationRequest.center.y + 100);
+    lblPushComment.adjustsFontSizeToFitWidth = YES;
     if (self.view.bounds.size.width == 320)
         lblPushComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
     else if (self.view.bounds.size.width == 375)
@@ -200,6 +208,10 @@
     lblPushComment.text = @"Allow push notifications to get timely updates & information about your order status!";
     lblPushComment.alpha = 0;
     [lblLocationPlatform addSubview:lblPushComment];
+}
+
+- (void)didReceiveMemoryWarning {
+    [super didReceiveMemoryWarning];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -273,18 +285,35 @@
 
 - (IBAction)onNoThanks:(id)sender
 {
-    // if push is already asked, pop
-    if ([self isPushEnabled])
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    // if push hasn't been asked, then animate push labels
+    // NO THANKS pressed in locations walk-through
+    if (passedLocationNoThanks == NO)
+    {
+        passedLocationNoThanks = YES;
+        
+        // if push is already asked, exit introVC
+        if ([self isPushEnabled])
+        {
+            exitOnWhichScreen = @"Location";
+            [self exitIntroScreen];
+        }
+        
+        // if push hasn't been asked, then show push tutorial
+        else
+            [self showPushTutorial];
+    }
+    
+    // NO THANKS pressed in push walk-through
     else
-        [self showPushTutorial];
+    {
+        exitOnWhichScreen = @"Push";
+        [self exitIntroScreen];
+    }
 }
 
 - (IBAction)onOK:(id)sender
 {
     /*----------------LOCATIONS----------------*/
-    if ()
+    if (passedLocationAllow == NO)
     {
         // Initialize location manager.
         locationManager = [[CLLocationManager alloc] init];
@@ -314,12 +343,14 @@
             [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
             [[UIApplication sharedApplication] registerForRemoteNotifications];
         }
-        
         // This code will work in iOS 7.0 and below:
         else
         {
             [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-    }
+        }
+        
+        exitOnWhichScreen = @"Push";
+        [self exitIntroScreen];
 #endif
     }
 }
@@ -384,17 +415,32 @@
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    // Tapped OK, but then tapped Don't Allow
+    passedLocationAllow = YES;
+    
+    // if push is already asked, exit introVC
+    if ([self isPushEnabled])
+    {
+        exitOnWhichScreen = @"Location";
+        [self exitIntroScreen];
+    }
+    
+    // if push hasn't been asked, then show push tutorial
+    else
+        [self showPushTutorial];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    // show once
+    // ran once
     if (![[NSUserDefaults standardUserDefaults] objectForKey:@"LocationServices"])
     {
         [[NSUserDefaults standardUserDefaults] setObject:@"Enabled" forKey:@"LocationServices"];
         [[Mixpanel sharedInstance] track:@"Allow Location Services"];
     }
+    
+    passedLocationAllow = YES;
     
     CLLocation *location = locations[0];
     coordinate = location.coordinate;
@@ -404,8 +450,8 @@
     [manager stopUpdatingLocation];
     
     // if push is already asked, pop
-    if (![self isPushEnabled])
-        [self.navigationController popToRootViewControllerAnimated:YES];
+    if ([self isPushEnabled])
+        [self exitIntroScreen];
     // if push hasn't been asked, then ask for push
     else
         [self showPushTutorial];
@@ -421,8 +467,79 @@
     return coordinate;
 }
 
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
+- (void)exitIntroScreen
+{
+    // fade locations labels
+    if ([exitOnWhichScreen isEqualToString:@"Location"])
+    {
+        [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.ivLogo.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            lblLocationRequest.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            lblLocationComment.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:1 delay:0.6 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.btnNoThanks.alpha = 0;
+            self.btnAllow.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self fadeOutOnExit];
+        }];
+    }
+    
+    // fade push labels
+    else if ([exitOnWhichScreen isEqualToString:@"Push"])
+    {
+        [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.ivLogo.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            lblPushRequest.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            lblPushComment.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:1 delay:0.6 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.btnNoThanks.alpha = 0;
+            self.btnAllow.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self fadeOutOnExit];
+        }];
+    }
+    
+    // Intro has been processed, so don't show Intro screen again
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"IntroProcessed"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)fadeOutOnExit
+{
+    CATransition *transition = [CATransition animation];
+    transition.duration = 0.5;
+    transition.type = kCATransitionFade;
+    
+    [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
+    [self.navigationController popViewControllerAnimated:NO];
 }
 
 - (BOOL)isPushEnabled
@@ -487,5 +604,6 @@
     
     NSLog(@"%@", deviceToken);
 }
+
 
 @end

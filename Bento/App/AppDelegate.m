@@ -211,22 +211,16 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
 /*---------------------------LOCATION MANAGER--------------------------*/
     
-    // Initialize location manager.
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    
-    // If location has already been requested before in IntroVC
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"HasLaunchedOnce"] isEqualToString:@"YES"])
+    // If IntroVC has already been completely processed once, startUpdatingLocation
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"])
     {
-#ifdef __IPHONE_8_0
-    if (IS_OS_8_OR_LATER)
-        // Use one or the other, not both. Depending on what you put in info.plist
-        [locationManager requestWhenInUseAuthorization];
-#endif
-    
-    [locationManager startUpdatingLocation];
+        // Initialize location manager.
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.distanceFilter = kCLDistanceFilterNone;
+        
+        [locationManager startUpdatingLocation];
     }
     
 /*---------------------------------------------------------------------*/
@@ -386,8 +380,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                 NSLog(@"WITHIN SERVICE AREA");
         });
     });
-    
-    
 }
 
 - (void)showLocationAlert
@@ -540,20 +532,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 #pragma mark Current Location
 
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
-}
-
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
-    // show once
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"LocationServices"])
-    {
-        [[NSUserDefaults standardUserDefaults] setObject:@"Enabled" forKey:@"LocationServices"];
-        [[Mixpanel sharedInstance] track:@"Allow Location Services"];
-    }
-    
     CLLocation *location = locations[0];
     coordinate = location.coordinate;
     
