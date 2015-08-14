@@ -84,12 +84,26 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/IntroViewController.m"
-            timestampString = "461205271.847379"
+            timestampString = "461232428.782352"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "326"
-            endingLineNumber = "326"
-            landmarkName = "-getCurrentLocation"
+            startingLineNumber = "593"
+            endingLineNumber = "593">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/IntroViewController.m"
+            timestampString = "461232365.289179"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "275"
+            endingLineNumber = "275"
+            landmarkName = "-onNoThanks:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -100,12 +114,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/IntroViewController.m"
-            timestampString = "461205271.847379"
+            timestampString = "461232365.289179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
-            landmarkName = "-locationManager:didFailWithError:"
+            startingLineNumber = "285"
+            endingLineNumber = "285"
+            landmarkName = "-onOK:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -116,11 +130,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/IntroViewController.m"
-            timestampString = "461205271.847379"
+            timestampString = "461232365.289179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "507"
-            endingLineNumber = "507">
+            startingLineNumber = "380"
+            endingLineNumber = "380"
+            landmarkName = "-locationManager:didUpdateLocations:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

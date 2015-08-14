@@ -50,6 +50,9 @@
     UILabel *lblLocationRequest;
     UILabel *lblLocationComment;
     
+    UILabel *lblPushRequest;
+    UILabel *lblPushComment;
+    
     CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
 }
@@ -90,11 +93,11 @@
     self.btnNoThanks.layer.cornerRadius = 3;
     self.btnAllow.layer.cornerRadius = 3;
     
-    self.btnNoThanks.hidden = YES;
-    self.btnAllow.hidden = YES;
+    self.btnNoThanks.alpha = 0;
+    self.btnAllow.alpha = 0;
     
-    self.btnNoThanks.center = CGPointMake(self.btnNoThanks.center.x, self.btnNoThanks.center.y + 100);
-    self.btnAllow.center = CGPointMake(self.btnAllow.center.x, self.btnAllow.center.y + 100);
+    self.btnNoThanks.center = CGPointMake(self.btnNoThanks.center.x, self.btnNoThanks.center.y);
+    self.btnAllow.center = CGPointMake(self.btnAllow.center.x, self.btnAllow.center.y);
     
     self.ivLogo.alpha = 0;
     self.btnGetStarted.alpha = 0;
@@ -136,7 +139,7 @@
     
     // Location Request
     lblLocationPlatform = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 255)];
-    lblLocationPlatform.center = CGPointMake(self.lblPlatform.center.x + 400, self.lblPlatform.center.y);
+    lblLocationPlatform.center = CGPointMake(self.lblPlatform.center.x, self.lblPlatform.center.y);
     [self.view addSubview:lblLocationPlatform];
     
     lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 44)];
@@ -150,6 +153,7 @@
         lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
     lblLocationRequest.textColor = [UIColor whiteColor];
     lblLocationRequest.text = @"Want speedier delivery?";
+    lblLocationRequest.alpha = 0;
     [lblLocationPlatform addSubview:lblLocationRequest];
     
     lblLocationComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
@@ -164,7 +168,38 @@
     lblLocationComment.textAlignment = NSTextAlignmentCenter;
     lblLocationComment.textColor = [UIColor whiteColor];
     lblLocationComment.text = @"Bento needs your zipcode to check your delivery area.";
+    lblLocationComment.alpha = 0;
     [lblLocationPlatform addSubview:lblLocationComment];
+    
+    // Push Notifications Request
+    lblPushRequest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 44)];
+    lblPushRequest.center = self.lblComment.center;
+    lblLocationRequest.textAlignment = NSTextAlignmentCenter;
+    if (self.view.bounds.size.width == 320)
+        lblPushRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:17];
+    else if (self.view.bounds.size.width == 375)
+        lblPushRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
+    else
+        lblPushRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
+    lblPushRequest.textColor = [UIColor whiteColor];
+    lblPushRequest.text = @"Want speedier delivery?";
+    lblPushRequest.alpha = 0;
+    [lblLocationPlatform addSubview:lblPushRequest];
+    
+    lblPushComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
+    lblPushComment.center = CGPointMake(lblLocationRequest.center.x, lblLocationRequest.center.y + 100);
+    if (self.view.bounds.size.width == 320)
+        lblPushComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
+    else if (self.view.bounds.size.width == 375)
+        lblPushComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
+    else
+        lblPushComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:24];
+    lblPushComment.numberOfLines = 0;
+    lblPushComment.textAlignment = NSTextAlignmentCenter;
+    lblPushComment.textColor = [UIColor whiteColor];
+    lblPushComment.text = @"Bento needs your zipcode to check your delivery area.";
+    lblPushComment.alpha = 0;
+    [lblLocationPlatform addSubview:lblPushComment];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -266,25 +301,54 @@
 
 - (void)firstAnimation
 {
-    [UIView animateWithDuration:0.5 animations:^{
-        lblLocationPlatform.center  = self.lblPlatform.center;
-        
-        self.lblPlatform.center = CGPointMake(self.lblPlatform.center.x - 400, self.lblPlatform.center.y);
-        self.btnGetStarted.center = CGPointMake(self.btnGetStarted.center.x, self.btnGetStarted.center.y + 100);
+    [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblItem0.alpha = 0;
     } completion:^(BOOL finished) {
-        self.lblPlatform.hidden = YES;
         
-        [self secondAnimation];
     }];
-}
-
-- (void)secondAnimation
-{
-    [UIView animateWithDuration:0.5 animations:^{
-        self.btnNoThanks.hidden = NO;
-        self.btnAllow.hidden = NO;
-        self.btnNoThanks.center = CGPointMake(self.btnNoThanks.center.x, self.btnNoThanks.center.y - 100);
-        self.btnAllow.center = CGPointMake(self.btnAllow.center.x, self.btnAllow.center.y - 100);
+    
+    [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber1.alpha = 0;
+        self.lblItem1.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber2.alpha = 0;
+        self.lblItem2.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:1 delay:0.6 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber3.alpha = 0;
+        self.lblItem3.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:1 delay:0.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.btnGetStarted.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:0.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblLocationRequest.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:1.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblLocationComment.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:1.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.btnNoThanks.alpha = 1;
+        self.btnAllow.alpha = 1;
     } completion:^(BOOL finished) {
         
     }];
@@ -364,7 +428,29 @@
          
 - (void)showPushTutorial
 {
+    [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblLocationRequest.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
     
+    [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblLocationComment.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblPushRequest.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:0.7 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblPushComment.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 @end
