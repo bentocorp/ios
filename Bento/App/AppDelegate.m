@@ -180,16 +180,16 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         // Tell iOS you want your app to receive push notifications
         // This code will work in iOS 8.0 xcode 6.0 or later:
-//        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-//        {
-//            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-//            [[UIApplication sharedApplication] registerForRemoteNotifications];
-//        }
-//        // This code will work in iOS 7.0 and below:
-//        else
-//        {
-//            [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-//        }
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+        {
+            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
+        // This code will work in iOS 7.0 and below:
+        else
+        {
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+        }
     }
 #endif
     {}
@@ -231,16 +231,16 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     locationManager.distanceFilter = kCLDistanceFilterNone;
     
     // If location has already been requested before in IntroVC
-//    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"HasLaunchedOnce"] isEqualToString:@"YES"])
-//    {
-//#ifdef __IPHONE_8_0
-//    if (IS_OS_8_OR_LATER)
-//        // Use one or the other, not both. Depending on what you put in info.plist
-//        [locationManager requestWhenInUseAuthorization];
-//#endif
-//    
-//    [locationManager startUpdatingLocation];
-//    }
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"HasLaunchedOnce"] isEqualToString:@"YES"])
+    {
+#ifdef __IPHONE_8_0
+    if (IS_OS_8_OR_LATER)
+        // Use one or the other, not both. Depending on what you put in info.plist
+        [locationManager requestWhenInUseAuthorization];
+#endif
+    
+    [locationManager startUpdatingLocation];
+    }
     
 /*---------------------------------------------------------------------*/
     
