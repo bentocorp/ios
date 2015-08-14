@@ -177,19 +177,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #ifndef DEV_MODE
     {
         [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];  // Use MixPanel for production build only
-        
-        // Tell iOS you want your app to receive push notifications
-        // This code will work in iOS 8.0 xcode 6.0 or later:
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-        {
-            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
-        }
-        // This code will work in iOS 7.0 and below:
-        else
-        {
-            [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-        }
     }
 #endif
     {}
@@ -583,16 +570,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #endif
     
     return coordinate;
-}
-
-#pragma mark Push Notifications
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people addPushDeviceToken:deviceToken];
-    
-    NSLog(@"%@", deviceToken);
 }
 
 @end

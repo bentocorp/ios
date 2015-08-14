@@ -174,7 +174,7 @@
     // Push Notifications Request
     lblPushRequest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 44)];
     lblPushRequest.center = self.lblComment.center;
-    lblLocationRequest.textAlignment = NSTextAlignmentCenter;
+    lblPushRequest.textAlignment = NSTextAlignmentCenter;
     if (self.view.bounds.size.width == 320)
         lblPushRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:17];
     else if (self.view.bounds.size.width == 375)
@@ -182,7 +182,7 @@
     else
         lblPushRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
     lblPushRequest.textColor = [UIColor whiteColor];
-    lblPushRequest.text = @"Want speedier delivery?";
+    lblPushRequest.text = @"Don't miss your order!";
     lblPushRequest.alpha = 0;
     [lblLocationPlatform addSubview:lblPushRequest];
     
@@ -197,7 +197,7 @@
     lblPushComment.numberOfLines = 0;
     lblPushComment.textAlignment = NSTextAlignmentCenter;
     lblPushComment.textColor = [UIColor whiteColor];
-    lblPushComment.text = @"Bento needs your zipcode to check your delivery area.";
+    lblPushComment.text = @"Allow push notifications to get timely updates & information about your order status!";
     lblPushComment.alpha = 0;
     [lblLocationPlatform addSubview:lblPushComment];
 }
@@ -283,20 +283,45 @@
 
 - (IBAction)onOK:(id)sender
 {
-    // Initialize location manager.
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    locationManager.distanceFilter = 50; // only update if moved 50 meters
+    /*----------------LOCATIONS----------------*/
+    if ()
+    {
+        // Initialize location manager.
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.distanceFilter = kCLDistanceFilterNone;
+        locationManager.distanceFilter = 50; // only update if moved 50 meters
+        
+    #ifdef __IPHONE_8_0
+        if (IS_OS_8_OR_LATER)
+            // Use one or the other, not both. Depending on what you put in info.plist
+            [locationManager requestWhenInUseAuthorization];
+    #endif
+        
+        [locationManager startUpdatingLocation];
+    }
     
-#ifdef __IPHONE_8_0
-    if (IS_OS_8_OR_LATER)
-        // Use one or the other, not both. Depending on what you put in info.plist
-        [locationManager requestWhenInUseAuthorization];
+    /*------------PUSH NOTIFICATIONS----------*/
+    else
+    {
+#ifndef DEV_MODE
+        // Tell iOS you want your app to receive push notifications
+        
+        // This code will work in iOS 8.0 xcode 6.0 or later:
+        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+        {
+            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+            [[UIApplication sharedApplication] registerForRemoteNotifications];
+        }
+        
+        // This code will work in iOS 7.0 and below:
+        else
+        {
+            [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    }
 #endif
-    
-    [locationManager startUpdatingLocation];
+    }
 }
 
 - (void)firstAnimation
@@ -379,7 +404,7 @@
     [manager stopUpdatingLocation];
     
     // if push is already asked, pop
-    if ([self isPushEnabled])
+    if (![self isPushEnabled])
         [self.navigationController popToRootViewControllerAnimated:YES];
     // if push hasn't been asked, then ask for push
     else
@@ -451,6 +476,16 @@
     } completion:^(BOOL finished) {
         
     }];
+}
+
+#pragma mark Push Notifications
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people addPushDeviceToken:deviceToken];
+    
+    NSLog(@"%@", deviceToken);
 }
 
 @end
