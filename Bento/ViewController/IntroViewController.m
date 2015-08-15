@@ -46,21 +46,16 @@
 @implementation IntroViewController
 {
     JGProgressHUD *loadingHUD;
-    
-    UIView *lblLocationPlatform;
+
     UILabel *lblLocationRequest;
-    UILabel *lblLocationComment;
     
     UILabel *lblPushRequest;
     UILabel *lblPushComment;
     
+    NSString *exitOnWhichScreen;
+    
     CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
-    
-    BOOL pressedNoThanksOnce;
-    BOOL pressedOKOnce;
-    
-    NSString *exitOnWhichScreen;
 }
 
 - (void)viewDidLoad {
@@ -105,7 +100,6 @@
     self.btnNoThanks.center = CGPointMake(self.btnNoThanks.center.x, self.btnNoThanks.center.y);
     self.btnAllow.center = CGPointMake(self.btnAllow.center.x, self.btnAllow.center.y);
     
-    self.ivLogo.alpha = 0;
     self.btnGetStarted.alpha = 0;
     
     // Download bento logo, then set it, use placeholder if unavailable
@@ -143,40 +137,21 @@
     // Get button title text and set it to button
     [self.btnGetStarted setTitle:[[AppStrings sharedInstance] getString:ABOUT_BUTTON_TITLE] forState:UIControlStateNormal];
     
-    // Location Request
-    lblLocationPlatform = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, 255)];
-    lblLocationPlatform.center = CGPointMake(self.lblPlatform.center.x, self.lblPlatform.center.y);
-    [self.view addSubview:lblLocationPlatform];
-    
-    lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 44)];
-    lblLocationRequest.center = self.lblComment.center;
-    lblLocationRequest.textAlignment = NSTextAlignmentCenter;
-    if (self.view.bounds.size.width == 320)
-        lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:17];
-    else if (self.view.bounds.size.width == 375)
-        lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
-    else
-        lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
-    lblLocationRequest.textColor = [UIColor whiteColor];
-    lblLocationRequest.text = @"Want speedier delivery?";
-    lblLocationRequest.alpha = 0;
-    [lblLocationPlatform addSubview:lblLocationRequest];
-    
-    lblLocationComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
-    lblLocationComment.center = CGPointMake(lblLocationRequest.center.x, lblLocationRequest.center.y + 100);
-    lblLocationComment.adjustsFontSizeToFitWidth = YES;
-    if (self.view.bounds.size.width == 320)
-        lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
-    else if (self.view.bounds.size.width == 375)
-        lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
-    else
-        lblLocationComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:24];
-    lblLocationComment.numberOfLines = 0;
-    lblLocationComment.textAlignment = NSTextAlignmentCenter;
-    lblLocationComment.textColor = [UIColor whiteColor];
-    lblLocationComment.text = @"Bento needs your zipcode to check your delivery area.";
-    lblLocationComment.alpha = 0;
-    [lblLocationPlatform addSubview:lblLocationComment];
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Shown Location Request"] == nil)
+    {
+        // Location Request
+        lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, self.ivLogo.frame.origin.y + 77 + 30, self.view.bounds.size.width - 80, 44)];
+        lblLocationRequest.textAlignment = NSTextAlignmentCenter;
+        if (self.view.bounds.size.width == 320)
+            lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:17];
+        else if (self.view.bounds.size.width == 375)
+            lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
+        else
+            lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
+        lblLocationRequest.textColor = [UIColor whiteColor];
+        lblLocationRequest.text = @"Want speedier delivery?";
+        [self.view addSubview:lblLocationRequest];
+    }
     
     // Push Notifications Request
     lblPushRequest = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 44)];
@@ -191,7 +166,7 @@
     lblPushRequest.textColor = [UIColor whiteColor];
     lblPushRequest.text = @"Don't miss your order!";
     lblPushRequest.alpha = 0;
-    [lblLocationPlatform addSubview:lblPushRequest];
+    [self.lblPlatform addSubview:lblPushRequest];
     
     lblPushComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
     lblPushComment.center = CGPointMake(lblLocationRequest.center.x, lblLocationRequest.center.y + 100);
@@ -207,12 +182,16 @@
     lblPushComment.textColor = [UIColor whiteColor];
     lblPushComment.text = @"Allow push notifications to get timely updates & information about your order status!";
     lblPushComment.alpha = 0;
-    [lblLocationPlatform addSubview:lblPushComment];
+    [self.lblPlatform addSubview:lblPushComment];
+    
+    [self requestForLocationServices];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
+
+#pragma mark Network Connectivity
 
 - (void)viewWillAppear:(BOOL)animated
 {
@@ -220,14 +199,23 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
 }
 
-- (void)viewDidLayoutSubviews
+- (void)noConnection
 {
-    [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.ivLogo.alpha = 1;
-    } completion:^(BOOL finished) {
-        [self requestForLocationServices];
-    }];
+    if (loadingHUD == nil)
+    {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
 }
+
+- (void)yesConnection
+{
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+}
+
+#pragma mark Location Services
 
 - (void)requestForLocationServices
 {
@@ -247,195 +235,14 @@
     [locationManager startUpdatingLocation];
 }
 
-- (void)showTutorial
-{
-    //    [UIView animateWithDuration:2 delay:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-    //        self.lblItem0.alpha = 1;
-    //    } completion:^(BOOL finished) {
-    //
-    //    }];
-    //
-    //    [UIView animateWithDuration:2 delay:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-    //        self.lblNumber1.alpha = 1;
-    //        self.lblItem1.alpha = 1;
-    //    } completion:^(BOOL finished) {
-    //
-    //    }];
-    //
-    //    [UIView animateWithDuration:2 delay:1.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-    //        self.lblNumber2.alpha = 1;
-    //        self.lblItem2.alpha = 1;
-    //    } completion:^(BOOL finished) {
-    //
-    //    }];
-    //
-    //    [UIView animateWithDuration:2 delay:2.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-    //        self.lblNumber3.alpha = 1;
-    //        self.lblItem3.alpha = 1;
-    //    } completion:^(BOOL finished) {
-    //
-    //    }];
-    //
-    //    [UIView animateWithDuration:2 delay:2.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-    //        self.btnGetStarted.alpha = 1;
-    //    } completion:^(BOOL finished) {
-    //        
-    //    }];
-}
-
-- (void)noConnection
-{
-    if (loadingHUD == nil)
-    {
-        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
-        [loadingHUD showInView:self.view];
-    }
-}
-
-- (void)yesConnection
-{
-    [loadingHUD dismiss];
-    loadingHUD = nil;
-}
-
-- (IBAction)onGetStarted:(id)sender
-{
-    [self firstAnimation];
-}
-
-- (IBAction)onNoThanks:(id)sender
-{
-    // NO THANKS pressed in locations walk-through
-    if (pressedNoThanksOnce == NO)
-    {
-        // if push is already asked, exit introVC
-        if ([self isPushEnabled])
-        {
-            exitOnWhichScreen = @"Location";
-            [self exitIntroScreen];
-        }
-        
-        // if push hasn't been asked, then show push tutorial
-        else
-            [self showPushTutorial];
-    }
-    
-    // NO THANKS pressed in push walk-through
-    else
-    {
-        exitOnWhichScreen = @"Push";
-        [self exitIntroScreen];
-    }
-    
-    pressedNoThanksOnce = YES;
-}
-
-- (IBAction)onOK:(id)sender
-{
-    /*----------------LOCATIONS----------------*/
-    if (pressedOKOnce == NO)
-    {
-        
-    }
-    
-    /*------------PUSH NOTIFICATIONS----------*/
-    else
-    {
-#ifndef DEV_MODE
-        // Tell iOS you want your app to receive push notifications
-        
-        // This code will work in iOS 8.0 xcode 6.0 or later:
-        if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-        {
-            [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-            [[UIApplication sharedApplication] registerForRemoteNotifications];
-        }
-        // This code will work in iOS 7.0 and below:
-        else
-        {
-            [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
-        }
-        
-        exitOnWhichScreen = @"Push";
-        [self exitIntroScreen];
-#endif
-    }
-    
-    pressedOKOnce = YES;
-}
-
-- (void)firstAnimation
-{
-    [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.lblItem0.alpha = 0;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.lblNumber1.alpha = 0;
-        self.lblItem1.alpha = 0;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.lblNumber2.alpha = 0;
-        self.lblItem2.alpha = 0;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:1 delay:0.6 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.lblNumber3.alpha = 0;
-        self.lblItem3.alpha = 0;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:1 delay:0.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.btnGetStarted.alpha = 0;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:2 delay:0.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        lblLocationRequest.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:2 delay:1.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        lblLocationComment.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:2 delay:1.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.btnNoThanks.alpha = 1;
-        self.btnAllow.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
-#pragma mark Current Location
-
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
     [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
     
-    // if push is already asked, exit introVC
-    if ([self isPushEnabled])
-    {
-        exitOnWhichScreen = @"Location";
-        [self exitIntroScreen];
-    }
+    [self showTutorial];
     
-    // if push hasn't been asked, then show push tutorial
-    else
-        [self showPushTutorial];
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Shown Location Request"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -463,6 +270,9 @@
     // if push hasn't been asked, then ask for push
     else
         [self showPushTutorial];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Shown Location Request"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 - (CLLocationCoordinate2D )getCurrentLocation
@@ -474,6 +284,177 @@
     
     return coordinate;
 }
+
+
+#pragma mark Intro Tutorial
+
+- (void)showTutorial
+{
+    [UIView animateWithDuration:1 animations:^{
+        lblLocationRequest.alpha = 0;
+    }];
+    
+    [UIView animateWithDuration:2 delay:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblItem0.alpha = 1;
+    } completion:^(BOOL finished) {
+
+    }];
+
+    [UIView animateWithDuration:2 delay:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber1.alpha = 1;
+        self.lblItem1.alpha = 1;
+    } completion:^(BOOL finished) {
+
+    }];
+
+    [UIView animateWithDuration:2 delay:1.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber2.alpha = 1;
+        self.lblItem2.alpha = 1;
+    } completion:^(BOOL finished) {
+
+    }];
+
+    [UIView animateWithDuration:2 delay:2.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber3.alpha = 1;
+        self.lblItem3.alpha = 1;
+    } completion:^(BOOL finished) {
+
+    }];
+
+    [UIView animateWithDuration:2 delay:2.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.btnGetStarted.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (IBAction)onGetStarted:(id)sender
+{
+    [self showPushTutorial];
+}
+
+
+
+- (void)firstAnimation
+{
+//    [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//        self.lblItem0.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//    
+//    [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//        self.lblNumber1.alpha = 0;
+//        self.lblItem1.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//    
+//    [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//        self.lblNumber2.alpha = 0;
+//        self.lblItem2.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//    
+//    [UIView animateWithDuration:1 delay:0.6 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//        self.lblNumber3.alpha = 0;
+//        self.lblItem3.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+//    
+//    [UIView animateWithDuration:1 delay:0.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+//        self.btnGetStarted.alpha = 0;
+//    } completion:^(BOOL finished) {
+//        
+//    }];
+}
+
+#pragma mark Push Notifications
+
+- (BOOL)isPushEnabled
+{
+    BOOL enabled;
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)])
+    {
+        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
+            enabled = NO;
+        else
+            enabled = YES;
+    }
+    else
+    {
+        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        
+        if (types & UIRemoteNotificationTypeAlert)
+            enabled = YES;
+        else
+            enabled = NO;
+    }
+    
+    return enabled;
+}
+
+- (void)showPushTutorial
+{
+    [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblLocationRequest.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblPushRequest.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:0.7 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblPushComment.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+}
+
+- (IBAction)onNoThanks:(id)sender
+{
+    exitOnWhichScreen = @"Push";
+    [self exitIntroScreen];
+}
+
+- (IBAction)onOK:(id)sender
+{
+    //Request for Push Notifications
+    // iOS 8 and up
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    
+    // iOS 7 and below
+    else
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    }
+    
+    exitOnWhichScreen = @"Push";
+    [self exitIntroScreen];
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people addPushDeviceToken:deviceToken];
+    
+    NSLog(@"%@", deviceToken);
+}
+
+#pragma mark Exit Screen
 
 - (void)exitIntroScreen
 {
@@ -488,12 +469,6 @@
         
         [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             lblLocationRequest.alpha = 0;
-        } completion:^(BOOL finished) {
-            
-        }];
-        
-        [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            lblLocationComment.alpha = 0;
         } completion:^(BOOL finished) {
             
         }];
@@ -549,69 +524,5 @@
     [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
     [self.navigationController popViewControllerAnimated:NO];
 }
-
-- (BOOL)isPushEnabled
-{
-    BOOL enabled;
-    
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)])
-    {
-        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        
-        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
-            enabled = NO;
-        else
-            enabled = YES;
-    }
-    else
-    {
-        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-        
-        if (types & UIRemoteNotificationTypeAlert)
-            enabled = YES;
-        else
-            enabled = NO;
-    }
-    
-    return enabled;
-}
-         
-- (void)showPushTutorial
-{
-    [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        lblLocationRequest.alpha = 0;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        lblLocationComment.alpha = 0;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:2 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        lblPushRequest.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:2 delay:0.7 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        lblPushComment.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-}
-
-#pragma mark Push Notifications
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people addPushDeviceToken:deviceToken];
-    
-    NSLog(@"%@", deviceToken);
-}
-
 
 @end
