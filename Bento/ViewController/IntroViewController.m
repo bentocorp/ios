@@ -222,44 +222,65 @@
 
 - (void)viewDidLayoutSubviews
 {
-    [UIView animateWithDuration:2 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         self.ivLogo.alpha = 1;
     } completion:^(BOOL finished) {
+        [self requestForLocationServices];
+    }];
+}
 
-    }];
+- (void)requestForLocationServices
+{
+    // Initialize location manager.
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = kCLDistanceFilterNone;
+    locationManager.distanceFilter = 50; // only update if moved 50 meters
     
-    [UIView animateWithDuration:2 delay:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.lblItem0.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
+#ifdef __IPHONE_8_0
+    if (IS_OS_8_OR_LATER)
+        // Use one or the other, not both. Depending on what you put in info.plist
+        [locationManager requestWhenInUseAuthorization];
+#endif
     
-    [UIView animateWithDuration:2 delay:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.lblNumber1.alpha = 1;
-        self.lblItem1.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:2 delay:1.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.lblNumber2.alpha = 1;
-        self.lblItem2.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:2 delay:2.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.lblNumber3.alpha = 1;
-        self.lblItem3.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
-    
-    [UIView animateWithDuration:2 delay:2.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        self.btnGetStarted.alpha = 1;
-    } completion:^(BOOL finished) {
-        
-    }];
+    [locationManager startUpdatingLocation];
+}
+
+- (void)showTutorial
+{
+    //    [UIView animateWithDuration:2 delay:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    //        self.lblItem0.alpha = 1;
+    //    } completion:^(BOOL finished) {
+    //
+    //    }];
+    //
+    //    [UIView animateWithDuration:2 delay:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    //        self.lblNumber1.alpha = 1;
+    //        self.lblItem1.alpha = 1;
+    //    } completion:^(BOOL finished) {
+    //
+    //    }];
+    //
+    //    [UIView animateWithDuration:2 delay:1.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    //        self.lblNumber2.alpha = 1;
+    //        self.lblItem2.alpha = 1;
+    //    } completion:^(BOOL finished) {
+    //
+    //    }];
+    //
+    //    [UIView animateWithDuration:2 delay:2.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    //        self.lblNumber3.alpha = 1;
+    //        self.lblItem3.alpha = 1;
+    //    } completion:^(BOOL finished) {
+    //
+    //    }];
+    //
+    //    [UIView animateWithDuration:2 delay:2.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    //        self.btnGetStarted.alpha = 1;
+    //    } completion:^(BOOL finished) {
+    //        
+    //    }];
 }
 
 - (void)noConnection
@@ -315,20 +336,7 @@
     /*----------------LOCATIONS----------------*/
     if (pressedOKOnce == NO)
     {
-        // Initialize location manager.
-        locationManager = [[CLLocationManager alloc] init];
-        locationManager.delegate = self;
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.distanceFilter = kCLDistanceFilterNone;
-        locationManager.distanceFilter = 50; // only update if moved 50 meters
         
-    #ifdef __IPHONE_8_0
-        if (IS_OS_8_OR_LATER)
-            // Use one or the other, not both. Depending on what you put in info.plist
-            [locationManager requestWhenInUseAuthorization];
-    #endif
-        
-        [locationManager startUpdatingLocation];
     }
     
     /*------------PUSH NOTIFICATIONS----------*/

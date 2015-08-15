@@ -416,6 +416,22 @@
 
 #pragma mark Current Location
 
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    // don't call if user tapped Don't Allow for the first time
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"DidNotAllowLocation"] isEqualToString:@"YES"])
+    {
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Settings"];
+        alertView.tag = 21;
+        
+        [alertView showInView:self.view];
+        alertView = nil;
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"DidNotAllowLocation"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = locations[0];
@@ -818,6 +834,15 @@
         {
             self.btnMeetMyDrive.selected = YES;
             [self updateUI];
+        }
+    }
+    
+    // go to settings
+    if (alertView.tag == 21)
+    {
+        if (buttonIndex == 1)
+        {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }
     }
 }
