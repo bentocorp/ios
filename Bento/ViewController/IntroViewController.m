@@ -97,13 +97,16 @@
     self.btnNoThanks.layer.cornerRadius = 3;
     self.btnAllow.layer.cornerRadius = 3;
     
+    self.btnGetStarted.enabled = NO;
+    self.btnNoThanks.enabled = NO;
+    self.btnAllow.enabled = NO;
+    
+    self.btnGetStarted.alpha = 0;
     self.btnNoThanks.alpha = 0;
     self.btnAllow.alpha = 0;
     
     self.btnNoThanks.center = CGPointMake(self.btnNoThanks.center.x, self.btnNoThanks.center.y);
     self.btnAllow.center = CGPointMake(self.btnAllow.center.x, self.btnAllow.center.y);
-    
-    self.btnGetStarted.alpha = 0;
     
     // Download bento logo, then set it, use placeholder if unavailable
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
@@ -140,8 +143,12 @@
     // Get button title text and set it to button
     [self.btnGetStarted setTitle:[[AppStrings sharedInstance] getString:ABOUT_BUTTON_TITLE] forState:UIControlStateNormal];
     
+    self.arrowPlatform.alpha = 0;
+    
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Shown Location Request"] == nil)
     {
+        self.arrowPlatform.alpha = 1;
+        
         // Location Request
         
         CGSize result = [[UIScreen mainScreen] bounds].size;
@@ -345,6 +352,7 @@
 {
     [UIView animateWithDuration:1 animations:^{
         lblLocationRequest.alpha = 0;
+        self.arrowPlatform.alpha = 0;
     }];
     
     [UIView animateWithDuration:2 delay:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
@@ -377,14 +385,17 @@
     [UIView animateWithDuration:2 delay:2.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         self.btnGetStarted.alpha = 1;
     } completion:^(BOOL finished) {
-        
+        self.btnGetStarted.enabled = YES;
     }];
 }
 
 - (IBAction)onGetStarted:(id)sender
 {
     if ([self isPushEnabled])
+    {
+        exitOnWhichScreen = @"Intro";
         [self exitIntroScreen];
+    }
     else
         [self showPushTutorial];
     
@@ -450,6 +461,7 @@
     }];
 
     [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.btnGetStarted.enabled = NO;
         self.btnGetStarted.alpha = 0;
     } completion:^(BOOL finished) {
         
@@ -471,7 +483,8 @@
         self.btnNoThanks.alpha = 1;
         self.btnAllow.alpha = 1;
     } completion:^(BOOL finished) {
-        
+        self.btnNoThanks.enabled = YES;
+        self.btnAllow.enabled = YES;
     }];
 }
 
@@ -493,7 +506,8 @@
         self.btnNoThanks.alpha = 1;
         self.btnAllow.alpha = 1;
     } completion:^(BOOL finished) {
-        
+        self.btnNoThanks.enabled = YES;
+        self.btnAllow.enabled = YES;
     }];
 }
 
@@ -536,23 +550,38 @@
 - (void)exitIntroScreen
 {
     // fade locations labels
-    if ([exitOnWhichScreen isEqualToString:@"Location"])
+    if ([exitOnWhichScreen isEqualToString:@"Intro"])
     {
         [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            self.ivLogo.alpha = 0;
+            self.lblItem0.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+        
+        [UIView animateWithDuration:1 delay:0.1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.lblNumber1.alpha = 0;
+            self.lblItem1.alpha = 0;
         } completion:^(BOOL finished) {
             
         }];
         
         [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            lblLocationRequest.alpha = 0;
+            self.lblNumber2.alpha = 0;
+            self.lblItem2.alpha = 0;
         } completion:^(BOOL finished) {
             
         }];
         
-        [UIView animateWithDuration:1 delay:0.6 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-            self.btnNoThanks.alpha = 0;
-            self.btnAllow.alpha = 0;
+        [UIView animateWithDuration:1 delay:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.lblNumber3.alpha = 0;
+            self.lblItem3.alpha = 0;
+        } completion:^(BOOL finished) {
+            
+        }];
+
+        [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.btnGetStarted.enabled = NO;
+            self.btnGetStarted.alpha = 0;
         } completion:^(BOOL finished) {
             [self fadeOutOnExit];
         }];
@@ -567,19 +596,21 @@
             
         }];
         
-        [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView animateWithDuration:1 delay:0.1 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             lblPushRequest.alpha = 0;
         } completion:^(BOOL finished) {
             
         }];
         
-        [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             lblPushComment.alpha = 0;
         } completion:^(BOOL finished) {
             
         }];
         
-        [UIView animateWithDuration:1 delay:0.6 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        [UIView animateWithDuration:1 delay:0.3 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+            self.btnNoThanks.enabled = NO;
+            self.btnAllow.enabled = NO;
             self.btnNoThanks.alpha = 0;
             self.btnAllow.alpha = 0;
         } completion:^(BOOL finished) {
