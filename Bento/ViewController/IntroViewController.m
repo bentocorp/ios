@@ -169,7 +169,7 @@
     [self.lblPlatform addSubview:lblPushRequest];
     
     lblPushComment = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
-    lblPushComment.center = CGPointMake(lblLocationRequest.center.x, lblLocationRequest.center.y + 100);
+    lblPushComment.center = CGPointMake(self.lblComment.center.x, self.lblComment.center.y + 100);
     lblPushComment.adjustsFontSizeToFitWidth = YES;
     if (self.view.bounds.size.width == 320)
         lblPushComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
@@ -261,15 +261,7 @@
     
     [manager stopUpdatingLocation];
     
-    // if push is already asked, pop
-    if ([self isPushEnabled])
-    {
-        exitOnWhichScreen = @"Location";
-        [self exitIntroScreen];
-    }
-    // if push hasn't been asked, then ask for push
-    else
-        [self showPushTutorial];
+    [self showTutorial];
     
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Shown Location Request"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -330,45 +322,10 @@
 
 - (IBAction)onGetStarted:(id)sender
 {
-    [self showPushTutorial];
-}
-
-
-
-- (void)firstAnimation
-{
-//    [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-//        self.lblItem0.alpha = 0;
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-//    
-//    [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-//        self.lblNumber1.alpha = 0;
-//        self.lblItem1.alpha = 0;
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-//    
-//    [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-//        self.lblNumber2.alpha = 0;
-//        self.lblItem2.alpha = 0;
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-//    
-//    [UIView animateWithDuration:1 delay:0.6 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-//        self.lblNumber3.alpha = 0;
-//        self.lblItem3.alpha = 0;
-//    } completion:^(BOOL finished) {
-//        
-//    }];
-//    
-//    [UIView animateWithDuration:1 delay:0.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-//        self.btnGetStarted.alpha = 0;
-//    } completion:^(BOOL finished) {
-//        
-//    }];
+    if ([self isPushEnabled])
+        [self exitIntroScreen];
+    else
+        [self showPushTutorial];
 }
 
 #pragma mark Push Notifications
@@ -402,19 +359,53 @@
 - (void)showPushTutorial
 {
     [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        lblLocationRequest.alpha = 0;
+        self.lblItem0.alpha = 0;
+    } completion:^(BOOL finished) {
+
+    }];
+
+    [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber1.alpha = 0;
+        self.lblItem1.alpha = 0;
+    } completion:^(BOOL finished) {
+
+    }];
+
+    [UIView animateWithDuration:1 delay:0.4 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber2.alpha = 0;
+        self.lblItem2.alpha = 0;
+    } completion:^(BOOL finished) {
+
+    }];
+
+    [UIView animateWithDuration:1 delay:0.6 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.lblNumber3.alpha = 0;
+        self.lblItem3.alpha = 0;
+    } completion:^(BOOL finished) {
+
+    }];
+
+    [UIView animateWithDuration:1 delay:0.8 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.btnGetStarted.alpha = 0;
     } completion:^(BOOL finished) {
         
     }];
     
-    [UIView animateWithDuration:2 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [UIView animateWithDuration:2 delay:1.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         lblPushRequest.alpha = 1;
     } completion:^(BOOL finished) {
         
     }];
     
-    [UIView animateWithDuration:2 delay:0.7 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+    [UIView animateWithDuration:2 delay:1.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         lblPushComment.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:2.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        self.btnNoThanks.alpha = 1;
+        self.btnAllow.alpha = 1;
     } completion:^(BOOL finished) {
         
     }];
