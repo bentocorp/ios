@@ -212,6 +212,8 @@
     {
         // You need to authorize Location Services for the APP
         [self commitOnGetItNow];
+        
+        return;
     }
     
     CLRegion *region = [self getRegion];
