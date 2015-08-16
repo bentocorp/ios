@@ -1014,6 +1014,8 @@
     }
     
     [self processPayment];
+    
+    self.btnGetItNow.enabled = NO;
 }
 
 - (IBAction)onMinusTip:(id)sender
