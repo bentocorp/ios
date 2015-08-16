@@ -14,7 +14,4 @@
 
 @property (nonatomic) BOOL isFromOrder;
 
-// Get my current location using CLLocationManager
-- (CLLocationCoordinate2D )getCurrentLocation;
-
 @end

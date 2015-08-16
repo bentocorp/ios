@@ -395,12 +395,6 @@
     locationManager.distanceFilter = kCLDistanceFilterNone;
     locationManager.distanceFilter = 50; // only update if moved 50 meters
     
-#ifdef __IPHONE_8_0
-    if (IS_OS_8_OR_LATER)
-        // Use one or the other, not both. Depending on what you put in info.plist
-        [locationManager requestWhenInUseAuthorization];
-#endif
-    
     [locationManager startUpdatingLocation];
     
     
@@ -418,38 +412,19 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    // don't call if user tapped Don't Allow for the first time
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"DidNotAllowLocation"] isEqualToString:@"YES"])
-    {
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Settings"];
-        alertView.tag = 21;
-        
-        [alertView showInView:self.view];
-        alertView = nil;
-    }
+    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Settings"];
+    alertView.tag = 21;
     
-    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"DidNotAllowLocation"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    [alertView showInView:self.view];
+    alertView = nil;
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = locations[0];
     coord = location.coordinate;
-    
-    NSLog(@"lat: %f, long: %f", coord.latitude, coord.longitude);
-    
-    [manager stopUpdatingLocation];
-}
 
-- (CLLocationCoordinate2D )getCurrentLocation
-{
-#if (TARGET_IPHONE_SIMULATOR)
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:33.571895f longitude:-117.7379837036132f];
-    return location.coordinate;
-#endif
-    
-    return coord;
+    [manager stopUpdatingLocation];
 }
 
 - (IBAction)onSearchLocation:(id)sender
