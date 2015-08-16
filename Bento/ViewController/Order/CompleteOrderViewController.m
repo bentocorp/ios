@@ -196,7 +196,7 @@
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = 50; // only update if moved 50 meters
+    locationManager.distanceFilter = 500; // only update if moved 500 meters
     
     if(![CLLocationManager locationServicesEnabled])
     {

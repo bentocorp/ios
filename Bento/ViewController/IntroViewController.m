@@ -542,6 +542,9 @@
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people addPushDeviceToken:deviceToken];
     
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     NSLog(@"%@", deviceToken);
 }
 
