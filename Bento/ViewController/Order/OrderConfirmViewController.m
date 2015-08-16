@@ -15,6 +15,7 @@
 
 #import "AppStrings.h"
 #import "BentoShop.h"
+#import "Mixpanel.h"
 
 #import "JGProgressHUD.h"
 
@@ -45,7 +46,7 @@
 {
     [super viewDidLoad];
     
-    if ([self isPushEnabled])
+    if (![self isPushEnabled])
         [self requestPush];
     
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
@@ -182,6 +183,14 @@
     {
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel.people addPushDeviceToken:deviceToken];
+    
+    NSLog(@"%@", deviceToken);
 }
 
 @end

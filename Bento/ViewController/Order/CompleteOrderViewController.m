@@ -1001,6 +1001,8 @@
 
 -(void)commitOnGetItNow
 {
+    self.btnGetItNow.enabled = NO;
+    
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
     if (strAPIToken == nil || strAPIToken.length == 0)
     {
@@ -1017,8 +1019,6 @@
     }
     
     [self processPayment];
-    
-    self.btnGetItNow.enabled = NO;
 }
 
 - (IBAction)onMinusTip:(id)sender
