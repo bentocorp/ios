@@ -43,9 +43,6 @@
 @implementation OrderConfirmViewController
 {
     JGProgressHUD *loadingHUD;
-    
-    UILabel *lblPushRequest;
-    UILabel *lblPushComment;
 }
 
 - (void)viewDidLoad
@@ -63,82 +60,18 @@
     [self.btnQuestion setTitle:[[AppStrings sharedInstance] getString:COMPLETED_LINK_QUESTION] forState:UIControlStateNormal];
     [self.btnBuild setTitle:[[AppStrings sharedInstance] getString:COMPLETED_BUTTON_COMPLETE] forState:UIControlStateNormal];
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Push Requested"] == nil)
-    {
-        self.ivCompleted.alpha = 0;
-        self.lblCompletedTitle.alpha = 0;
-        self.lblCompletedText.alpha = 0;
-        self.btnQuestion.alpha = 0;
-        
-        // Push Notifications Request
-        CGSize result = [[UIScreen mainScreen] bounds].size;
-        if(result.height == 480)
-        {
-            // iphone 4
-            lblPushRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, 120, self.view.bounds.size.width - 80, 44)];
-            lblPushComment = [[UILabel alloc] initWithFrame:CGRectMake(20, 330, self.view.bounds.size.width - 40, 250)];
-        }
-        
-        else if(result.height == 568)
-        {
-            // iphone 5
-            lblPushRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, 120, self.view.bounds.size.width - 80, 44)];
-            lblPushComment = [[UILabel alloc] initWithFrame:CGRectMake(20, 330, self.view.bounds.size.width - 40, 250)];
-        }
-        
-        else if(result.height == 667)
-        {
-            // iphone 6
-            lblPushRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, 140, self.view.bounds.size.width - 80, 44)];
-            lblPushComment = [[UILabel alloc] initWithFrame:CGRectMake(40, 390, self.view.bounds.size.width - 80, 250)];
-        }
-        
-        else if(result.height == 736)
-        {
-            // iphone 6+
-            lblPushRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, 200, self.view.bounds.size.width - 80, 44)];
-            lblPushComment = [[UILabel alloc] initWithFrame:CGRectMake(40, 400, self.view.bounds.size.width - 80, 250)];
-        }
-        
-        // title
-        lblPushRequest.textAlignment = NSTextAlignmentCenter;
-        if (self.view.bounds.size.width == 320)
-            lblPushRequest.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
-        else if (self.view.bounds.size.width == 375)
-            lblPushRequest.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
-        else
-            lblPushRequest.font = [UIFont fontWithName:@"OpenSans-Semibold" size:24];
-        lblPushRequest.textColor = [UIColor darkGrayColor];
-        lblPushRequest.text = @"Don't miss your order!";
-        [self.view addSubview:lblPushRequest];
-        
-        // comment
-        lblPushComment.adjustsFontSizeToFitWidth = YES;
-        if (self.view.bounds.size.width == 320)
-            lblPushComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
-        else if (self.view.bounds.size.width == 375)
-            lblPushComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
-        else
-            lblPushComment.font = [UIFont fontWithName:@"OpenSans-Semibold" size:24];
-        lblPushComment.numberOfLines = 0;
-        lblPushComment.textAlignment = NSTextAlignmentCenter;
-        lblPushComment.textColor = [UIColor darkGrayColor];
-        lblPushComment.text = @"Allow push notifications to get timely updates & information about your order status!";
-        [self.view addSubview:lblPushComment];
-        
+    if ([self isPushEnabled])
         [self requestPush];
-    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
 
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
@@ -211,9 +144,34 @@
 
 #pragma mark Push Notifications
 
+- (BOOL)isPushEnabled
+{
+    BOOL enabled;
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)])
+    {
+        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
+            enabled = NO;
+        else
+            enabled = YES;
+    }
+    else
+    {
+        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        
+        if (types & UIRemoteNotificationTypeAlert)
+            enabled = YES;
+        else
+            enabled = NO;
+    }
+    
+    return enabled;
+}
+
 - (void)requestPush
 {
-    //Request for Push Notifications
     // iOS 8 and up
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
     {
@@ -232,11 +190,6 @@
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people addPushDeviceToken:deviceToken];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    NSLog(@"%@", deviceToken);
 }
 
 @end
