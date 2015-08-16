@@ -412,7 +412,18 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
-    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Settings"];
+    MyAlertView *alertView;
+    
+    // if ios 8+
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 8)
+    {
+        alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Settings"];
+    }
+    else
+    {
+      alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
+    }
+    
     alertView.tag = 21;
     
     [alertView showInView:self.view];
@@ -816,9 +827,7 @@
     if (alertView.tag == 21)
     {
         if (buttonIndex == 1)
-        {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-        }
     }
 }
 	

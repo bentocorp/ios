@@ -136,12 +136,6 @@
     // Mixpanel
     [[Mixpanel sharedInstance] track:@"Viewed Summary Screen"];
     
-    // Initialize location manager.
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = 50; // only update if moved 50 meters
-    
     // Mixpanel track for Placed An Order
     mixpanel = [Mixpanel sharedInstance];
     
@@ -198,6 +192,12 @@
 
 - (void)initializeRegionMonitoring
 {
+    // Initialize location manager.
+    locationManager = [[CLLocationManager alloc] init];
+    locationManager.delegate = self;
+    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+    locationManager.distanceFilter = 50; // only update if moved 50 meters
+    
     if(![CLLocationManager locationServicesEnabled])
     {
         // You need to enable Location Services
@@ -211,6 +211,7 @@
     if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted)
     {
         // You need to authorize Location Services for the APP
+        [self commitOnGetItNow];
     }
     
     CLRegion *region = [self getRegion];
