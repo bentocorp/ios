@@ -41,6 +41,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *btnNoThanks;
 @property (weak, nonatomic) IBOutlet UIButton *btnAllow;
 
+@property (weak, nonatomic) IBOutlet UIView *arrowPlatform;
+@property (weak, nonatomic) IBOutlet UILabel *lblTapAllow;
+
 @end
 
 @implementation IntroViewController
@@ -140,14 +143,52 @@
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Shown Location Request"] == nil)
     {
         // Location Request
-        lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, self.ivLogo.frame.origin.y + 77 + 30, self.view.bounds.size.width - 80, 44)];
+        
+        CGSize result = [[UIScreen mainScreen] bounds].size;
+        if(result.height == 480)
+        {
+            // iphone 4
+            self.arrowPlatform.center = CGPointMake(225, 375);
+            lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, self.ivLogo.frame.origin.y + 65, self.view.bounds.size.width - 80, 44)];
+        }
+        
+        else if(result.height == 568)
+        {
+            // iphone 5
+            self.arrowPlatform.center = CGPointMake(225, 415);
+            lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, self.ivLogo.frame.origin.y + 85, self.view.bounds.size.width - 80, 44)];
+        }
+        
+        else if(result.height == 667)
+        {
+            // iphone 6
+            self.arrowPlatform.center = CGPointMake(250, 465);
+            lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, self.ivLogo.frame.origin.y + 77 + 30, self.view.bounds.size.width - 80, 44)];
+        }
+        
+        else if(result.height == 736)
+        {
+            // iphone 6+
+            self.arrowPlatform.center = CGPointMake(275, 500);
+            lblLocationRequest = [[UILabel alloc] initWithFrame:CGRectMake(40, self.ivLogo.frame.origin.y + 110, self.view.bounds.size.width - 80, 44)];
+        }
+        
         lblLocationRequest.textAlignment = NSTextAlignmentCenter;
         if (self.view.bounds.size.width == 320)
+        {
             lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:17];
+            self.lblTapAllow.font = [UIFont fontWithName:@"OpenSans-Bold" size:17];
+        }
         else if (self.view.bounds.size.width == 375)
+        {
             lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
+            self.lblTapAllow.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
+        }
         else
+        {
             lblLocationRequest.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
+            self.lblTapAllow.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
+        }
         lblLocationRequest.textColor = [UIColor whiteColor];
         lblLocationRequest.text = @"Want speedier delivery?";
         [self.view addSubview:lblLocationRequest];

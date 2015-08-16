@@ -43,6 +43,7 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Light.ttf">
             <string>OpenSans-Light</string>
@@ -454,11 +455,30 @@
                                     <action selector="onNoThanks:" destination="cih-YB-hrD" eventType="touchUpInside" id="qbp-95-a2Z"/>
                                 </connections>
                             </button>
+                            <view contentMode="scaleToFill" id="7Qm-ma-d7m">
+                                <rect key="frame" x="135" y="305" width="128" height="97"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UpFilled-100.png" id="ixQ-5c-QdG">
+                                        <rect key="frame" x="48" y="15" width="40" height="40"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap &quot;Allow&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="sQv-Tw-WJg">
+                                        <rect key="frame" x="0.0" y="50" width="136" height="33"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="19"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="NNT-Ti-aDn"/>
                     <connections>
+                        <outlet property="arrowPlatform" destination="7Qm-ma-d7m" id="Bde-N6-7Uf"/>
                         <outlet property="btnAllow" destination="oH4-ps-7ak" id="WIf-u8-e40"/>
                         <outlet property="btnGetStarted" destination="9V8-fy-NiP" id="hJe-Xd-3ju"/>
                         <outlet property="btnNoThanks" destination="hQT-2N-3pe" id="I51-dx-JmB"/>
@@ -473,6 +493,7 @@
                         <outlet property="lblNumber2" destination="zve-5b-5vS" id="0aj-6h-8ri"/>
                         <outlet property="lblNumber3" destination="Igs-fu-eRb" id="McC-pQ-gga"/>
                         <outlet property="lblPlatform" destination="SXG-3G-eRw" id="3tm-c7-r6i"/>
+                        <outlet property="lblTapAllow" destination="sQv-Tw-WJg" id="g9G-AW-U0q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fy6-LN-dRc" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2372,6 +2393,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="UpFilled-100.png" width="100" height="100"/>
         <image name="creditcard_btn_clear.png" width="20" height="20"/>
         <image name="deliverylocation_icon_navigation.png" width="16" height="16"/>
         <image name="deliverylocation_icon_search.png" width="16" height="16"/>

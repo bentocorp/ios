@@ -563,6 +563,9 @@
 		FC99D4F41AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
 		FCA1C8C21AF1973E004715F1 /* icon-square-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA1C8C11AF1973E004715F1 /* icon-square-user.png */; };
 		FCA1C8C31AF1973E004715F1 /* icon-square-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA1C8C11AF1973E004715F1 /* icon-square-user.png */; };
+		FCA72F5E1B806B3D009DD71A /* UpFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */; };
+		FCA72F5F1B806B3D009DD71A /* UpFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */; };
+		FCA72F601B806B3D009DD71A /* UpFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */; };
 		FCAA479C1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */; };
 		FCAA479D1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */; };
 		FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */; };
@@ -972,6 +975,7 @@
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
 		FC99D4F21AFC161300BEE40B /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviewViewController.m; path = Order/PreviewViewController.m; sourceTree = "<group>"; };
 		FCA1C8C11AF1973E004715F1 /* icon-square-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-user.png"; sourceTree = "<group>"; };
+		FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UpFilled-100.png"; sourceTree = "<group>"; };
 		FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardInfoViewController.h; sourceTree = "<group>"; };
 		FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardInfoViewController.m; sourceTree = "<group>"; };
 		FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewCell.h; path = ../ViewController/SettingsTableViewCell.h; sourceTree = "<group>"; };
@@ -1419,6 +1423,7 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */,
 				FC82867B1AEEF3D2009D073D /* Settings Icons */,
 				FC8DB72D1AF18674003045A3 /* Images */,
 				FCDF22031ADC3ADF006B2750 /* Squared Icons */,
@@ -2136,6 +2141,7 @@
 				7216B77D1AA64C7C0006FFE9 /* PromoCodeView.xib in Resources */,
 				FCA1C8C31AF1973E004715F1 /* icon-square-user.png in Resources */,
 				7216B77E1AA64C7C0006FFE9 /* image_gradient.png in Resources */,
+				FCA72F5F1B806B3D009DD71A /* UpFilled-100.png in Resources */,
 				7216B77F1AA64C7C0006FFE9 /* register_icon_alert.png in Resources */,
 				7216B7801AA64C7C0006FFE9 /* creditcard_btn_clear.png in Resources */,
 				7216B7811AA64C7C0006FFE9 /* soldout_background.png in Resources */,
@@ -2234,6 +2240,7 @@
 				90A553E41A60038C001F9DA7 /* PromoCodeView.xib in Resources */,
 				FCA1C8C21AF1973E004715F1 /* icon-square-user.png in Resources */,
 				90BED0F01A5C391D003DC872 /* image_gradient.png in Resources */,
+				FCA72F5E1B806B3D009DD71A /* UpFilled-100.png in Resources */,
 				90D8F7B71A5D856200D034CF /* register_icon_alert.png in Resources */,
 				722333FF1A7425CA006C2446 /* creditcard_btn_clear.png in Resources */,
 				90D8F7E31A5E37E300D034CF /* soldout_background.png in Resources */,
@@ -2339,6 +2346,7 @@
 				FC92E1631B7E5C880073C5D7 /* PromoCodeView.xib in Resources */,
 				FC92E1641B7E5C880073C5D7 /* icon-square-user.png in Resources */,
 				FC92E1651B7E5C880073C5D7 /* image_gradient.png in Resources */,
+				FCA72F601B806B3D009DD71A /* UpFilled-100.png in Resources */,
 				FC92E1661B7E5C880073C5D7 /* register_icon_alert.png in Resources */,
 				FC92E1671B7E5C880073C5D7 /* creditcard_btn_clear.png in Resources */,
 				FC92E1681B7E5C880073C5D7 /* soldout_background.png in Resources */,
