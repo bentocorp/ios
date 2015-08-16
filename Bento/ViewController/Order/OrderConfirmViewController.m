@@ -41,9 +41,13 @@
     JGProgressHUD *loadingHUD;
 }
 
-- (void)viewDidLoad {
+- (void)viewDidLoad
+{
     [super viewDidLoad];
-    // Do any additional setup after loading the view.
+    
+    if ([self isPushEnabled])
+        [self requestPush];
+    
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
     
@@ -89,12 +93,6 @@
     loadingHUD = nil;
 }
 
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
-
 - (void)checkCurrentMode
 {
     if ([[BentoShop sharedInstance] didModeOrDateChange])
@@ -106,7 +104,7 @@
     }
 }
 
-- (void) viewWillDisappear:(BOOL)animated
+- (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
@@ -139,6 +137,51 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
     [self.navigationController pushViewController:destVC animated:YES];
+}
+
+#pragma mark Push Notifications
+
+- (BOOL)isPushEnabled
+{
+    BOOL enabled;
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)])
+    {
+        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
+            enabled = NO;
+        else
+            enabled = YES;
+    }
+    else
+    {
+        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        
+        if (types & UIRemoteNotificationTypeAlert)
+            enabled = YES;
+        else
+            enabled = NO;
+    }
+    
+    return enabled;
+}
+
+- (void)requestPush
+{
+    //Request for Push Notifications
+    // iOS 8 and up
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
+    {
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+    
+    // iOS 7 and below
+    else
+    {
+        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
+    }
 }
 
 @end
