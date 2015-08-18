@@ -301,6 +301,7 @@ static BentoShop *_shareInstance;
     
     [self prefetchImages:self.menuToday];
     
+    // if today date is not same as date from backend
     if (![strDate isEqualToString:self.strToday])
     {
         [self resetBentoArray];
@@ -1306,7 +1307,7 @@ static BentoShop *_shareInstance;
 
 - (void)resetBentoArray
 {
-    if (self.aryBentos != nil || self.aryBentos.count != 0)
+    if (self.aryBentos != nil && self.aryBentos.count != 0)
         [self.aryBentos removeAllObjects];
 }
 

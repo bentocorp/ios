@@ -55,7 +55,8 @@
     [self.views removeAllObjects];
     
     [objects enumerateObjectsUsingBlock:^(id object, NSUInteger idx, BOOL *stop) {
-        if ([object isKindOfClass:[NSString class]]) {
+        if ([object isKindOfClass:[NSString class]])
+        {
             UILabel *textLabel = [[UILabel alloc] init];
             textLabel.text = object;
             textLabel.adjustsFontSizeToFitWidth = YES;

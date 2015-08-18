@@ -846,15 +846,8 @@
 - (void)viewWillDisappear:(BOOL)animated
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-//    @try
-//    {
-        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
-//    }
-//    @catch(id anException)
-//    {
-        //do nothing, obviously it wasn't attached because an exception was thrown
-//    }
+
+    [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
     
     [super viewWillDisappear:animated];
 }
