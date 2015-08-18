@@ -1339,7 +1339,7 @@
     [detailInfo setObject:coordInfo forKey:@"coords"];
     
     // Coupon Discount (cents)
-    float couponDiscount = (int)_promoDiscount/100.f;
+    float couponDiscount = (int)_promoDiscount * 100;
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)couponDiscount] forKey:@"coupon_discount_cents"];
     
     // - Tax
@@ -1636,6 +1636,7 @@
 {   
 //    self.strPromoCode = strCouponCode;
 //    self.promoDiscount = priceDiscount;
+    
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:strCouponCode forKey:KEY_PROMO_CODE];
     [userDefaults setInteger:priceDiscount forKey:KEY_PROMO_DISCOUNT];

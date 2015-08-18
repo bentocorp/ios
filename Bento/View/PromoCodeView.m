@@ -44,14 +44,6 @@
     [self.btnCancel setTitle:[[AppStrings sharedInstance] getString:PROMOCODE_BUTTON_CANCEL] forState:UIControlStateNormal];
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect {
-    // Drawing code
-}
-*/
-
 - (void)process
 {
     [self.txtPromoCode resignFirstResponder];
@@ -59,7 +51,6 @@
     NSString *strPromoCode = self.txtPromoCode.text;
     
     // Remove all whitespaces
-//    strPromoCode = [strPromoCode stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     NSArray* words = [strPromoCode componentsSeparatedByCharactersInSet :[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     strPromoCode = [words componentsJoinedByString:@""];
     
@@ -123,40 +114,17 @@
         alertView = nil;
         return;
         
-//        if (error.code == 400)
-//        {
-//            NSString *strTitle = [[AppStrings sharedInstance] getString:ALERT_IPC_TITLE];
-//            NSString *strText = [[AppStrings sharedInstance] getString:ALERT_IPC_TEXT];
-//            NSString *strConfirm = [[AppStrings sharedInstance] getString:ALERT_IPC_BUTTON_OK];
-//            
-//            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:strTitle message:strText delegate:nil cancelButtonTitle:strConfirm otherButtonTitle:nil];
-//            
-//            [alertView showInView:self];
-//            alertView = nil;
-//            return;
-//        }
-//        else
-//        {
-//            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-//            [alertView showInView:self];
-//            alertView = nil;
-//            return;
-//        }
-        
     } isJSON:NO];
 #else
     NSInteger discount = 15; // promo discount - hardcoded for testing
-    if (self.delegate != nil)
+    if (self.delegate != nil) {
         [self.delegate setDiscound:discount strCouponCode:@"ridev"];
+    }
 
     [UIView animateWithDuration:0.3f animations:^{
-        
         self.alpha = 0.0f;
-        
     } completion:^(BOOL finished) {
-        
         [self removeFromSuperview];
-        
     }];
 #endif
 }

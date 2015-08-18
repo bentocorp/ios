@@ -97,13 +97,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/MakeBento/ChooseSideDishViewController.m"
-            timestampString = "461546494.339819"
+            filePath = "Bento/View/PromoCodeView.m"
+            timestampString = "461618650.513274"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "328"
-            endingLineNumber = "328"
-            landmarkName = "-onActionDishCell:"
+            startingLineNumber = "48"
+            endingLineNumber = "48"
+            landmarkName = "-process"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
