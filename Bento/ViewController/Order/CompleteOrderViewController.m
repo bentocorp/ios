@@ -1249,6 +1249,7 @@
         
         NSMutableDictionary *bentoInfo = [[NSMutableDictionary alloc] init];
         [bentoInfo setObject:@"CustomerBentoBox" forKey:@"item_type"];
+        [bentoInfo setObject:[NSString stringWithFormat:@"%ld", (long)_totalPrice] forKey:@"unit_price"];
         
         NSMutableArray *dishArray = [[NSMutableArray alloc] init];
         
@@ -1314,7 +1315,6 @@
     
     // Address
     NSMutableDictionary *addressInfo = [[NSMutableDictionary alloc] init];
-    NSLog(@"%@", self.placeInfo);
     
     NSString *strNumber = self.placeInfo.subThoroughfare;
     if (strNumber == nil)
@@ -1337,6 +1337,10 @@
     [coordInfo setObject:[NSString stringWithFormat:@"%.6f", self.placeInfo.location.coordinate.longitude] forKey:@"long"];
     
     [detailInfo setObject:coordInfo forKey:@"coords"];
+    
+    // Coupon Discount (cents)
+    float couponDiscount = (int)_promoDiscount/100.f;
+    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)couponDiscount] forKey:@"coupon_discount_cents"];
     
     // - Tax
     float tax = (int)(_totalPrice * _taxPercent) / 100.f;
@@ -1403,7 +1407,7 @@
     
     NSLog(@"order URL - %@", strRequest);
     NSLog(@"order JSON - %@", dicRequest[@"OrderItems"]);
-    NSLog(@"ORDER ITEMS: %@", request[@"OrderItems"]);
+    NSLog(@"ORDER ITEMS: %@", request);
     
 /*-----------Track empty orders, show message, then reset app------------*/
     NSArray *orderItemsArray = request[@"OrderItems"];
