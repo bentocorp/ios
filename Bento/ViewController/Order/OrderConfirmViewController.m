@@ -125,8 +125,8 @@
     
     for (UIViewController *vc in viewControllers) {
         
-        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]])
-        {
+        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]]) {
+
             [[BentoShop sharedInstance] addNewBento];
             [self.navigationController popToViewController:vc animated:YES];
             

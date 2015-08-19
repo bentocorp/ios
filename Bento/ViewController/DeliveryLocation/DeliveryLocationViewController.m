@@ -39,9 +39,6 @@
     BOOL _showedLocationTableView;
     
     JGProgressHUD *loadingHUD;
-    
-    CLLocationManager *locationManager;
-    CLLocationCoordinate2D coord;
 }
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
@@ -105,8 +102,8 @@
     
     self.viewError.alpha = 0.0f;
     
-    if (self.placeInfo != nil)
-    {
+    if (self.placeInfo != nil) {
+        
         self.btnMeetMyDrive.selected = YES;
         
         self.txtAddress.text = self.placeInfo.formattedAddress;
@@ -114,21 +111,18 @@
         MKCoordinateRegion mapRegion;
         mapRegion.center = self.placeInfo.location.coordinate;
         
-        if (self.isFromOrder)
-        {
+        if (self.isFromOrder) {
             mapRegion.span.latitudeDelta = 0.005;
             mapRegion.span.longitudeDelta = 0.005;
         }
-        else
-        {
+        else {
             mapRegion.span.latitudeDelta = 0.2;
             mapRegion.span.longitudeDelta = 0.2;
         }
         
         [self.mapView setRegion:mapRegion animated: YES];
     }
-    else
-    {
+    else {
         self.btnMeetMyDrive.selected = NO;
         
         self.txtAddress.text = @"";
@@ -137,16 +131,14 @@
         MKCoordinateRegion mapRegion;
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         CLLocationCoordinate2D curLocation = [appDelegate getCurrentLocation];
-        if (curLocation.latitude == 0 && curLocation.longitude == 0)
-        {
+        if (curLocation.latitude == 0 && curLocation.longitude == 0) {
             // Move to delivery location
             MKMapRect curRect = [polygon boundingMapRect];
             UIEdgeInsets insets = UIEdgeInsetsMake(50, 50, 50, 50);
             MKMapRect newRect = [self.mapView mapRectThatFits:curRect edgePadding:insets];
             [self.mapView setRegion:MKCoordinateRegionForMapRect(newRect)];
         }
-        else
-        {
+        else {
             mapRegion.center = curLocation;
             mapRegion.span.latitudeDelta = 0.005;
             mapRegion.span.longitudeDelta = 0.005;
@@ -155,37 +147,32 @@
     }
     
     _nextToBuild = NO;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"nextToBuild"])
-    {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"nextToBuild"]) {
+        
         _nextToBuild = YES;
         
         [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"nextToBuild"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     
-    if (_nextToBuild)
+    if (_nextToBuild) {
         self.btnBack.hidden = YES;
-    else
+    }
+    else {
         self.btnBack.hidden = NO;
-    
-//    if (!self.isFromOrder)
-//    {
-//        self.priceDiscount = 0;
-//        self.strPromoCode = nil;
-//    }
+    }
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 #pragma mark - Navigation
 
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
-{
-    if ([segue.identifier isEqualToString:@"OutOfDelivery"])
-    {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    
+    if ([segue.identifier isEqualToString:@"OutOfDelivery"]) {
+        
         OutOfDeliveryAddressViewController *vcOutOfZone = segue.destinationViewController;
         vcOutOfZone.strAddress = (NSString *)sender;
     }
@@ -205,39 +192,33 @@
     [self updateUI];
 }
 
-- (void)noConnection
-{
-    if (loadingHUD == nil)
-    {
+- (void)noConnection {
+    
+    if (loadingHUD == nil) {
+        
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
         [loadingHUD showInView:self.view];
     }
 }
 
-- (void)yesConnection
-{
+- (void)yesConnection {
+    
     [loadingHUD dismiss];
     loadingHUD = nil;
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
 
     [super viewWillDisappear:animated];
 }
 
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
-
-- (void)checkCurrentMode
-{
-    if ([[BentoShop sharedInstance] didModeOrDateChange])
-    {
+- (void)checkCurrentMode {
+    
+    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
+        
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -245,23 +226,25 @@
     }
 }
 
-- (void) onUpdatedStatus:(NSNotification *)notification
+- (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+    if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+    }
+    else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-    else
+    }
+    else {
         [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    }
 }
 
-- (IBAction)onBack:(id)sender
-{
+- (IBAction)onBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void) gotoAddAnotherBentoScreen
-{
+- (void)gotoAddAnotherBentoScreen {
+    
     [self stopSearch];
     
     NSArray *viewControllers = self.navigationController.viewControllers;
@@ -388,15 +371,28 @@
 
 - (IBAction)onNavigation:(id)sender
 {
-    // Initialize location manager.
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    locationManager.distanceFilter = 50; // only update if moved 50 meters
-    
-    [locationManager startUpdatingLocation];
-    
+    if([CLLocationManager locationServicesEnabled]) {
+        
+        if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied) {
+            
+            MyAlertView *alertView;
+            
+            // if ios 8+
+            if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
+                
+                alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Settings"];
+            }
+            else {
+                alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
+            }
+            
+            alertView.tag = 21;
+            
+            [alertView showInView:self.view];
+            
+            alertView = nil;
+        }
+    }
     
     [self stopSearch];
     
@@ -408,42 +404,14 @@
     }
 }
 
-#pragma mark Current Location
-
-- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
-{
-    MyAlertView *alertView;
-    
-    // if ios 8+
-    if ([[UIDevice currentDevice].systemVersion intValue] >= 8)
-    {
-        alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Settings"];
-    }
-    else
-    {
-      alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable location services, go to settings, scroll to Bento Now and change location permissions." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
-    }
-    
-    alertView.tag = 21;
-    
-    [alertView showInView:self.view];
-    alertView = nil;
-}
-
-- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
-{
-    CLLocation *location = locations[0];
-    coord = location.coordinate;
-
-    [manager stopUpdatingLocation];
-}
-
 - (IBAction)onSearchLocation:(id)sender
 {
-    if (_showedLocationTableView)
+    if (_showedLocationTableView) {
         [self stopSearch];
-    else
+    }
+    else {
         [self startSearch];
+    }
 }
 
 - (IBAction)onHelp:(id)sender
@@ -470,63 +438,50 @@
 
 - (IBAction)onMeetMyDriver:(id)sender
 {
-    if (self.btnMeetMyDrive.selected)
-    {
+    if (self.btnMeetMyDrive.selected) {
         self.btnMeetMyDrive.selected = NO;
         [self updateUI];
     }
-    else
-    {
+    else {
         self.btnMeetMyDrive.selected = YES;
         [self updateUI];
     }
 }
 
-- (IBAction)onChangeAddress:(id)sender
-{
+- (IBAction)onChangeAddress:(id)sender {
     [self updateUI];
 }
 
-- (void)hideErrorView
-{
+- (void)hideErrorView {
     [UIView animateWithDuration:0.3f animations:^{
-        
         self.viewError.alpha = 0.0f;
-        
-    } completion:^(BOOL finished) {
-        
     }];
 }
 
-- (IBAction)onBottomButton:(id)sender
-{
-    if (!self.btnMeetMyDrive.selected)
-    {
+- (IBAction)onBottomButton:(id)sender {
+    if (!self.btnMeetMyDrive.selected) {
         [UIView animateWithDuration:0.3f animations:^{
-            
             self.viewError.alpha = 1.0f;
-            
-        } completion:^(BOOL finished) {
-            
+        }
+        completion:^(BOOL finished) {
             [self performSelector:@selector(hideErrorView) withObject:nil afterDelay:3.0f];
-            
         }];
         
         return;
     }
     
-    if (_nextToBuild)
-    {
+    if (_nextToBuild) {
         [self stopSearch];
         
-        if (self.placeInfo == nil)
+        if (self.placeInfo == nil) {
             return;
+        }
 
         CLLocationCoordinate2D location = self.placeInfo.location.coordinate;
-        if (![[BentoShop sharedInstance] checkLocation:location])
+        if (![[BentoShop sharedInstance] checkLocation:location]) {
             [self gotoNoneDeliveryAreaScreen];
-        else
-        {
+        }
+        else {
             [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
             
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
@@ -537,8 +492,7 @@
             [self gotoAddAnotherBentoScreen];
         }
     }
-    else
-    {
+    else {
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude] forKey:@"savedLongitude"];
         [NSUserDefaults standardUserDefaults];
@@ -547,27 +501,28 @@
     }
 }
 
-- (void) gotoNoneDeliveryAreaScreen
-{
-    [self stopSearch];
+- (void)gotoNoneDeliveryAreaScreen {
     
+    [self stopSearch];
     [self performSegueWithIdentifier:@"OutOfDelivery" sender:self.placeInfo.formattedAddress];
 }
 
-- (void) startSearch
-{
+- (void)startSearch {
+    
     [self showLocationTableView];
 }
 
-- (void) stopSearch
-{
+- (void)stopSearch {
+    
     [self hideKeyboard];
     [self hideLocationTableView];
 }
 
-- (void) showLocationTableView
-{
-    if (_showedLocationTableView) return;
+- (void)showLocationTableView {
+    
+    if (_showedLocationTableView) {
+        return;
+    }
     
     _showedLocationTableView = YES;
     
@@ -577,60 +532,48 @@
     self.tvLocations.frame = CGRectMake(0, tableViewPos, CGRectGetWidth(self.view.frame), 0);
     
     [UIView animateWithDuration:0.3f animations:^{
-        
         self.tvLocations.frame = CGRectMake(0, tableViewPos, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame) - (tableViewPos + keyboardHeight));
-        
-    } completion:^(BOOL finished) {
-        
     }];
 }
 
-- (void) hideLocationTableView
-{
-    if (!_showedLocationTableView) return;
+- (void)hideLocationTableView {
+    
+    if (!_showedLocationTableView) {
+        return;
+    }
     
     _showedLocationTableView = NO;
     
     [UIView animateWithDuration:0.3f animations:^{
-        
         float tableViewPos = self.viewSearchLocation.frame.origin.y + CGRectGetHeight(self.viewSearchLocation.frame);
         self.tvLocations.frame = CGRectMake(0, tableViewPos, CGRectGetWidth(self.view.frame), 0);
-        
-    } completion:^(BOOL finished) {
-        
     }];
 }
 
-- (void)hideKeyboard
-{
+- (void)hideKeyboard {
+    
     [self.txtAddress resignFirstResponder];
 }
 
-- (void)updateUI
-{
-    if (self.mapAnnotation != nil)
-    {
+- (void)updateUI {
+    
+    if (self.mapAnnotation != nil) {
+        
         [self.mapView removeAnnotation:self.mapAnnotation];
         self.mapAnnotation = nil;
     }
     
-    if (self.placeInfo != nil)
-    {
+    if (self.placeInfo != nil) {
+        
         self.mapAnnotation = [[MKPointAnnotation alloc] init];
         self.mapAnnotation.coordinate = self.placeInfo.location.coordinate;
-        
-//        self.txtAddress.text = [DataManager getAddressString:self.placeInfo];
         
         [self.mapView addAnnotation:self.mapAnnotation];
         self.mapView.centerCoordinate = self.mapAnnotation.coordinate;
     }
-    else
-    {
-//        self.txtAddress.text = @"";
-    }
     
-    if (self.placeInfo != nil && self.btnMeetMyDrive.selected && [[BentoShop sharedInstance] getCompletedBentoCount] > 0)
-    {
+    if (self.placeInfo != nil && self.btnMeetMyDrive.selected && [[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        
         NSString *strTitle = @"CONFIRM ADDRESS";
         
         [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
@@ -641,17 +584,19 @@
                                 range:NSMakeRange(0, [strTitle length])];
         
         // Anything less than iOS 8.0
-        if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+        if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
             self.btnBottomButton.titleLabel.text = strTitle;
-        else
+        }
+        else {
             self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+        }
         
         self.btnBottomButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:176.0f / 255.0f blue:95.0f / 255.0f alpha:1.0f];
     }
-    else
-    {
-        if (self.placeInfo != nil && self.btnMeetMyDrive.selected && _nextToBuild)
-        {
+    else {
+        
+        if (self.placeInfo != nil && self.btnMeetMyDrive.selected && _nextToBuild) {
+            
             NSString *strTitle = @"CONFIRM ADDRESS";
             
             [self.btnBottomButton setTitle:strTitle forState:UIControlStateNormal];
@@ -662,15 +607,17 @@
                                     range:NSMakeRange(0, [strTitle length])];
             
             // Anything less than iOS 8.0
-            if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+            if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
                 self.btnBottomButton.titleLabel.text = strTitle;
-            else
+            }
+            else {
                 self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+            }
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:176.0f / 255.0f blue:95.0f / 255.0f alpha:1.0f];
         }
-        else
-        {
+        else {
+            
             NSString *strTitle = [[AppStrings sharedInstance] getString:LOCATION_BUTTON_CONTINUE];
             
             if (strTitle != nil)
@@ -683,10 +630,12 @@
                                         range:NSMakeRange(0, [strTitle length])];
                 
                 // Anything less than iOS 8.0
-                if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+                if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
                     self.btnBottomButton.titleLabel.text = strTitle;
-                else
+                }
+                else {
                     self.btnBottomButton.titleLabel.attributedText = attributedTitle;
+                }
             }
             
             self.btnBottomButton.backgroundColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:145.0f / 255.0f alpha:1.0f];
@@ -694,8 +643,8 @@
     }
 }
 
-- (void)onTapMapView:(UITapGestureRecognizer *)recognizer
-{
+- (void)onTapMapView:(UITapGestureRecognizer *)recognizer {
+    
     CGPoint point = [recognizer locationInView:self.mapView];
     CLLocationCoordinate2D tapPoint = [self.mapView convertPoint:point toCoordinateFromView:self.mapView];
     [self addAnnotation:tapPoint];
@@ -703,8 +652,8 @@
 
 #pragma mark UITextFieldDelegate
 
-- (CLLocationDistance)getDistanceFrom:(CLLocationCoordinate2D)start to:(CLLocationCoordinate2D)end
-{
+- (CLLocationDistance)getDistanceFrom:(CLLocationCoordinate2D)start to:(CLLocationCoordinate2D)end {
+    
     CLLocation *startLoc = [[CLLocation alloc] initWithLatitude:start.latitude longitude:start.longitude];
     CLLocation *endLoc = [[CLLocation alloc] initWithLatitude:end.latitude longitude:end.longitude];
     CLLocationDistance retVal = [startLoc distanceFromLocation:endLoc];
@@ -712,18 +661,19 @@
     return retVal;
 }
 
-- (void)geocodeAddress
-{
+- (void)geocodeAddress {
+    
     NSString *strSearch = self.txtAddress.text;
     
     NSArray *aryStrings = [strSearch componentsSeparatedByCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
     strSearch = @"";
-    for (NSString *subString in aryStrings)
-    {
-        if (strSearch.length == 0)
+    for (NSString *subString in aryStrings) {
+        if (strSearch.length == 0) {
             strSearch = subString;
-        else
+        }
+        else {
             strSearch = [NSString stringWithFormat:@"%@+%@", strSearch, subString];
+        }
     }
     
     MKMapRect mRect = self.mapView.visibleMapRect;
@@ -736,58 +686,55 @@
     CLCircularRegion *region = [[CLCircularRegion alloc] initWithCenter:self.mapView.centerCoordinate radius:(diameter/2) identifier:@"mapWindow"];
     
     [SVGeocoder geocode:strSearch region:region completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error == nil && placemarks.count > 0)
-        {
-            if (self.aryDisplay != nil)
+        
+        if (error == nil && placemarks.count > 0) {
+            if (self.aryDisplay != nil) {
                 self.aryDisplay = nil;
+            }
             
             self.aryDisplay = [[NSMutableArray alloc] init];
-            for (SVPlacemark *placeMark in placemarks)
-            {
-                if (placeMark.subThoroughfare == nil && placeMark.thoroughfare == nil)
+            for (SVPlacemark *placeMark in placemarks) {
+                if (placeMark.subThoroughfare == nil && placeMark.thoroughfare == nil) {
                     continue;
-                
-                if (placeMark.locality == nil && placeMark.administrativeAreaCode == nil)
+                }
+            
+                if (placeMark.locality == nil && placeMark.administrativeAreaCode == nil) {
                     continue;
+                }
                 
                 [self.aryDisplay addObject:placeMark];
             }
             
             [self.tvLocations reloadData];
         }
-        else
-        {
+        else {
+            
             self.aryDisplay = nil;
             [self.tvLocations reloadData];
         }
     }];
 }
 
-- (void)textFieldDidChange:(NSNotification *)notification
-{
+- (void)textFieldDidChange:(NSNotification *)notification {
+    
     self.placeInfo = nil;
     [self updateUI];
     
     self.aryDisplay = nil;
     [self.tvLocations reloadData];
     
-//    if (_isSearching)
-//        return;
-//
-//    _isSearching = YES;
-    
     [self geocodeAddress];
 }
 
-- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField
-{
+- (BOOL)textFieldShouldBeginEditing:(UITextField *)textField {
+    
     [self startSearch];
     
     return YES;
 }
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    
 //    [self stopSearch];
     
     return YES;
@@ -809,39 +756,33 @@
 
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 0)
-    {
-        if (buttonIndex == 0)
-        {
-//            self.btnMeetMyDrive.selected = NO;
-//            [self updateUI];
-        }
-        else if (buttonIndex == 1)
-        {
+    if (alertView.tag == 0) {
+        if (buttonIndex == 1) {
             self.btnMeetMyDrive.selected = YES;
             [self updateUI];
         }
     }
     
     // go to settings
-    if (alertView.tag == 21)
-    {
-        if (buttonIndex == 1)
+    if (alertView.tag == 21) {
+        if (buttonIndex == 1) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }
     }
 }
 	
 #pragma mark UITableViewDelegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    
     return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (self.aryDisplay == nil)
+    if (self.aryDisplay == nil) {
         return 0;
+    }
     
     return self.aryDisplay.count;
 }
@@ -850,58 +791,56 @@
 {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell"];
     
-    if (cell == nil)
-    {
+    if (cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:@"cell"];
     }
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     cell.textLabel.font = [UIFont fontWithName:@"Open Sans" size:14.0f];
     cell.detailTextLabel.font = [UIFont fontWithName:@"Open Sans" size:12.0f];
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-//    NSDictionary *placeInfo = [self.aryDisplay objectAtIndex:indexPath.row];
-//    if (placeInfo != nil)
-//        cell.textLabel.text = [placeInfo objectForKey:@"formatted_address"];
     SVPlacemark *placeMark = [self.aryDisplay objectAtIndex:indexPath.row];
     
-    if (placeMark.subThoroughfare && placeMark.thoroughfare)
+    if (placeMark.subThoroughfare && placeMark.thoroughfare) {
         cell.textLabel.text = [NSString stringWithFormat:@"%@ %@", placeMark.subThoroughfare, placeMark.thoroughfare];
-    else if (placeMark.subThoroughfare)
+    }
+    else if (placeMark.subThoroughfare) {
         cell.textLabel.text = placeMark.subThoroughfare;
-    else if (placeMark.thoroughfare)
+    }
+    else if (placeMark.thoroughfare) {
         cell.textLabel.text = placeMark.thoroughfare;
-    else
+    }
+    else {
         cell.textLabel.text = @"";
+    }
     
-    if (placeMark.locality && placeMark.administrativeAreaCode)
+    if (placeMark.locality && placeMark.administrativeAreaCode) {
         cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ %@", placeMark.locality, placeMark.administrativeAreaCode];
-    else if (placeMark.locality)
+    }
+    else if (placeMark.locality) {
         cell.detailTextLabel.text = placeMark.locality;
-    else if (placeMark.thoroughfare)
+    }
+    else if (placeMark.thoroughfare) {
         cell.detailTextLabel.text = placeMark.administrativeArea;
-    else
+    }
+    else {
         cell.detailTextLabel.text = @"";
+    }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     [self stopSearch];
     
     self.placeInfo = [self.aryDisplay objectAtIndex:indexPath.row];
     self.txtAddress.text = self.placeInfo.formattedAddress;
     [self updateUI];
-    
-//    MKMapRect mapRect = [self.mapView visibleMapRect];
-//    MKMapPoint pt = MKMapPointForCoordinate([self.mapAnnotation coordinate]);
-//    mapRect.origin.x = pt.x - mapRect.size.width * 0.5;
-//    mapRect.origin.y = pt.y - mapRect.size.height * 0.25;
-//    [self.mapView setVisibleMapRect:mapRect animated:YES];
 }
 
 

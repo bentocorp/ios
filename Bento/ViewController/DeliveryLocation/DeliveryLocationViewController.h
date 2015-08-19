@@ -10,7 +10,7 @@
 #import <CoreLocation/CoreLocation.h>
 #import "BaseViewController.h"
 
-@interface DeliveryLocationViewController : BaseViewController <CLLocationManagerDelegate>
+@interface DeliveryLocationViewController : BaseViewController
 
 @property (nonatomic) BOOL isFromOrder;
 

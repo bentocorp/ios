@@ -35,8 +35,9 @@
         return @"";
     
     NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:self.indexMainDish];
-    if (dishInfo == nil)
+    if (dishInfo == nil) {
         return @"";
+    }
     
     return [dishInfo objectForKey:@"name"];
 }
@@ -123,11 +124,13 @@
         for (NSDictionary *dishInfo in aryMainDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex]) {
                 continue;
+            }
             
-            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex]) {
                 continue;
+            }
             
             self.indexMainDish = dishIndex;
             break;
@@ -168,7 +171,7 @@
             
             if (![self canAddSideDish:dishIndex])
                 continue;
-            
+
             self.indexSideDish2 = dishIndex;
             break;
         }
@@ -220,28 +223,35 @@
 - (BOOL)canAddSideDish:(NSInteger)sideDishID
 {   
     NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:sideDishID];
-    if (dishInfo == nil)
+    if (dishInfo == nil) {
         return NO;
+    }
     
     id object = [dishInfo objectForKey:@"max_per_order"];
-    if (object == [NSNull null])
+    if (object == [NSNull null]) {
         return YES;
+    }
     
     NSInteger maxPerOrder = [object integerValue];
-    if (self.indexSideDish1 == sideDishID)
+    if (self.indexSideDish1 == sideDishID) {
         maxPerOrder --;
+    }
 
-    if (self.indexSideDish2 == sideDishID)
+    if (self.indexSideDish2 == sideDishID) {
         maxPerOrder --;
+    }
     
-    if (self.indexSideDish3 == sideDishID)
+    if (self.indexSideDish3 == sideDishID) {
         maxPerOrder --;
+    }
     
-    if (self.indexSideDish4 == sideDishID)
+    if (self.indexSideDish4 == sideDishID) {
         maxPerOrder --;
+    }
     
-    if (maxPerOrder <= 0)
+    if (maxPerOrder <= 0) {
         return NO;
+    }
     
     return YES;
 }
