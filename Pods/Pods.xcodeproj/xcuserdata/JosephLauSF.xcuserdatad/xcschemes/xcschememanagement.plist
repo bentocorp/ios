@@ -4,293 +4,125 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
-		<key>Pods-Adjust.xcscheme</key>
+		<key>Adjust.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>3</integer>
 		</dict>
-		<key>Pods-Bento-Adjust.xcscheme</key>
+		<key>Branch.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>5</integer>
 		</dict>
-		<key>Pods-Bento-Branch.xcscheme</key>
+		<key>Canvas.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>6</integer>
 		</dict>
-		<key>Pods-Bento-Canvas.xcscheme</key>
+		<key>KIF.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>7</integer>
 		</dict>
-		<key>Pods-Bento-Mixpanel.xcscheme</key>
+		<key>Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>8</integer>
 		</dict>
-		<key>Pods-Bento-PaymentKit.xcscheme</key>
+		<key>PaymentKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>10</integer>
-		</dict>
-		<key>Pods-Bento-Stripe.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>11</integer>
-		</dict>
-		<key>Pods-Bento-mopub-ios-sdk.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>9</integer>
 		</dict>
 		<key>Pods-Bento.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>4</integer>
-		</dict>
-		<key>Pods-BentoTests-Adjust.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>13</integer>
-		</dict>
-		<key>Pods-BentoTests-Branch.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>14</integer>
-		</dict>
-		<key>Pods-BentoTests-Canvas.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>15</integer>
-		</dict>
-		<key>Pods-BentoTests-Mixpanel.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>16</integer>
-		</dict>
-		<key>Pods-BentoTests-PaymentKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>18</integer>
-		</dict>
-		<key>Pods-BentoTests-Stripe.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>19</integer>
-		</dict>
-		<key>Pods-BentoTests-mopub-ios-sdk.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>17</integer>
 		</dict>
 		<key>Pods-BentoTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>12</integer>
 		</dict>
-		<key>Pods-Branch.xcscheme</key>
+		<key>Pods-UI Tests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>20</integer>
-		</dict>
-		<key>Pods-Canvas.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>21</integer>
-		</dict>
-		<key>Pods-Mixpanel.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>22</integer>
-		</dict>
-		<key>Pods-PaymentKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>24</integer>
-		</dict>
-		<key>Pods-Stripe.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>25</integer>
-		</dict>
-		<key>Pods-mopub-ios-sdk.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-			<key>orderHint</key>
-			<integer>23</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
-			<key>orderHint</key>
-			<integer>2</integer>
+		</dict>
+		<key>Stripe.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>mopub-ios-sdk.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>14E4AF2AE1D57465B27B1F5B</key>
+		<key>0B1FEC366F2CB2DF8D9A806654E776E0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1C1303317BC0F11A5B090B4D</key>
+		<key>2289748C69DDE22DA86A045F91903EC1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2A36C74E364F95581C92396A</key>
+		<key>40C6801DEC7AC54B17F2AE69CE468311</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3A640893D30D47DCC3CB74EF</key>
+		<key>499716BC98BBE4FD8FCAE8B8C4ACF7CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3C5D528775C7768B226BBFC4</key>
+		<key>614E654B3955850791855B86E0DCF463</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3DE7B45674ADACB26B6AB7A1</key>
+		<key>6C09D4C8545287E6C17650EE89208FE3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5D97700192487A557F787308</key>
+		<key>8523BCE189C13E53F74D3C826C8405DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7578373B6959D6222F0FCBC2</key>
+		<key>92E61797216A4814423EA097ADE4C536</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>78518C263860E03C0643C045</key>
+		<key>9471A4243D144BADAA7A891698529CA2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7F2CE2E43C8307BF0CDA3E5F</key>
+		<key>94FD270579AFBE7BB66DFE5CB8ACE3E7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>886442EE2D9D0C9BA2966DDE</key>
+		<key>B325CBFF8870F10196CD17F6469B6531</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F8D0EB550624C7589E9F996</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A275D069CA082DB1E54542D4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C3CE7ECBE61DEC010AB37EF8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C6DC1FC33992E120FFE3C28D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CFEB29E5F04C72249B6BD694</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D9798377DF15FA7A3A258BB6</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DFC28B0C00E908E7ECF62399</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E2DCE3D675F628EA7296FB60</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E689454FF170E4C44D9069A8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EF5EA0EA95C0B93D048A1555</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F448B07727F94C68EE580912</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F77CE48B2AE350C9DBD4F512</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FD8E9B9F854B5D06EAF2EFEC</key>
+		<key>D56E3AF94F3FD7B160FD570639E4B9FF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

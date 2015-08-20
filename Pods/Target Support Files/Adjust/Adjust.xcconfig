@@ -1,0 +1,1 @@
+ADJUST_OTHER_LDFLAGS = -framework "SystemConfiguration" -weak_framework "AdSupport" -weak_framework "iAd"

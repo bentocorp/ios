@@ -48,6 +48,34 @@
                ReferencedContainer = "container:Bento.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC05FAFE1B86809E0021B7D2"
+               BuildableName = "BentoTests copy.xctest"
+               BlueprintName = "KIFTests"
+               ReferencedContainer = "container:Bento.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC05FB0F1B8684100021B7D2"
+               BuildableName = "UI Tests.xctest"
+               BlueprintName = "UI Tests"
+               ReferencedContainer = "container:Bento.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -73,6 +101,26 @@
                BlueprintIdentifier = "FC599F541B0FEDB600989E1B"
                BuildableName = "BentoTests.xctest"
                BlueprintName = "BentoTests"
+               ReferencedContainer = "container:Bento.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC05FAFE1B86809E0021B7D2"
+               BuildableName = "BentoTests copy.xctest"
+               BlueprintName = "KIFTests"
+               ReferencedContainer = "container:Bento.xcodeproj">
+            </BuildableReference>
+         </TestableReference>
+         <TestableReference
+            skipped = "NO">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "FC05FB0F1B8684100021B7D2"
+               BuildableName = "UI Tests.xctest"
+               BlueprintName = "UI Tests"
                ReferencedContainer = "container:Bento.xcodeproj">
             </BuildableReference>
          </TestableReference>
