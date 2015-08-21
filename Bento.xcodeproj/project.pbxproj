@@ -317,6 +317,7 @@
 		90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */; };
 		BEC1CA650F5DB649F7E5C7FD /* libPods-UI Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A837E96C1042B222158ABF7 /* libPods-UI Tests.a */; };
 		FC05FB151B8684100021B7D2 /* UI_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC05FB141B8684100021B7D2 /* UI_Tests.m */; };
+		FC05FB1F1B869B920021B7D2 /* KifTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC05FB1E1B869B920021B7D2 /* KifTests.m */; };
 		FC08AB241AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
@@ -898,6 +899,8 @@
 		FC05FB101B8684100021B7D2 /* UI Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UI Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC05FB131B8684100021B7D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC05FB141B8684100021B7D2 /* UI_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UI_Tests.m; sourceTree = "<group>"; };
+		FC05FB1D1B869B920021B7D2 /* KifTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KifTests.h; sourceTree = "<group>"; };
+		FC05FB1E1B869B920021B7D2 /* KifTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KifTests.m; sourceTree = "<group>"; };
 		FC08AB221AF713DD00CFB44D /* CustomBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBentoViewController.h; sourceTree = "<group>"; };
 		FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBentoViewController.m; sourceTree = "<group>"; };
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
@@ -1699,6 +1702,8 @@
 			isa = PBXGroup;
 			children = (
 				FC05FB141B8684100021B7D2 /* UI_Tests.m */,
+				FC05FB1D1B869B920021B7D2 /* KifTests.h */,
+				FC05FB1E1B869B920021B7D2 /* KifTests.m */,
 				FC05FB121B8684100021B7D2 /* Supporting Files */,
 			);
 			path = "UI Tests";
@@ -2872,6 +2877,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC05FB1F1B869B920021B7D2 /* KifTests.m in Sources */,
 				FC05FB151B8684100021B7D2 /* UI_Tests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

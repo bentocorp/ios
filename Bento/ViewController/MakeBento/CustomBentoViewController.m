@@ -163,6 +163,9 @@
     [settingsButton addTarget:self action:@selector(onSettings) forControlEvents:UIControlEventTouchUpInside];
     [navigationBarView addSubview:settingsButton];
     
+    /*FOR KIF TESTS*/
+    settingsButton.accessibilityLabel = @"Settings Button";
+    
 /*---Cart Button---*/
     
     btnCart = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 20, 50, 45)];
