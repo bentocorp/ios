@@ -6,14 +6,16 @@
 //  Copyright (c) 2015 bentonow. All rights reserved.
 //
 
+#define SETTINGS_BUTTON     @"Settings Button"
+
 #import "KifTests.h"
 
 @implementation KifTests
 
 - (void)testSettings
 {
-    [tester waitForTappableViewWithAccessibilityLabel:@"Settings Button"];
-    [tester tapViewWithAccessibilityLabel:@"Settings Button"];
+    [tester waitForTappableViewWithAccessibilityLabel:SETTINGS_BUTTON];
+    [tester tapViewWithAccessibilityLabel:SETTINGS_BUTTON];
 }
 
 @end
