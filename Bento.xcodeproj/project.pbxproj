@@ -625,6 +625,12 @@
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCF2787C1B26370700130F7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
 		FCF2787D1B264C0100130F7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
+		FCF5E0A21B8BDC28002E823C /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A11B8BDC28002E823C /* placeholder.png */; };
+		FCF5E0A31B8BDC28002E823C /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A11B8BDC28002E823C /* placeholder.png */; };
+		FCF5E0A41B8BDC28002E823C /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A11B8BDC28002E823C /* placeholder.png */; };
+		FCF5E0A61B8BE3CF002E823C /* placeholder-gray.JPG in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */; };
+		FCF5E0A71B8BE3CF002E823C /* placeholder-gray.JPG in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */; };
+		FCF5E0A81B8BE3CF002E823C /* placeholder-gray.JPG in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -994,7 +1000,7 @@
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
 		FC99D4F21AFC161300BEE40B /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviewViewController.m; path = Order/PreviewViewController.m; sourceTree = "<group>"; };
 		FCA1C8C11AF1973E004715F1 /* icon-square-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-user.png"; sourceTree = "<group>"; };
-		FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "UpFilled-100.png"; sourceTree = "<group>"; };
+		FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UpFilled-100.png"; path = "../UpFilled-100.png"; sourceTree = "<group>"; };
 		FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardInfoViewController.h; sourceTree = "<group>"; };
 		FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardInfoViewController.m; sourceTree = "<group>"; };
 		FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewCell.h; path = ../ViewController/SettingsTableViewCell.h; sourceTree = "<group>"; };
@@ -1030,6 +1036,8 @@
 		FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCF2787B1B26370700130F7A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
+		FCF5E0A11B8BDC28002E823C /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../placeholder.png; sourceTree = "<group>"; };
+		FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-gray.JPG"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1455,7 +1463,6 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */,
 				FC82867B1AEEF3D2009D073D /* Settings Icons */,
 				FC8DB72D1AF18674003045A3 /* Images */,
 				FCDF22031ADC3ADF006B2750 /* Squared Icons */,
@@ -1606,10 +1613,13 @@
 		90BED0AC1A5BD180003DC872 /* Other */ = {
 			isa = PBXGroup;
 			children = (
+				FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */,
 				90D8F7E41A5E39A500D034CF /* logo_title.png */,
 				90D8F7D21A5E2C4C00D034CF /* image_checked@2x.png */,
 				90D8F7D31A5E2C4C00D034CF /* image_unchecked@2x.png */,
 				90D8F7BE1A5D9B0800D034CF /* nav_btn_close@2x.png */,
+				FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */,
+				FCF5E0A11B8BDC28002E823C /* placeholder.png */,
 				90BED0ED1A5C38DA003DC872 /* sample.png */,
 				90BED0E21A5C1E70003DC872 /* nav_btn_back@2x.png */,
 				90BED0DA1A5C0320003DC872 /* nav_background.png */,
@@ -2205,6 +2215,7 @@
 				7216B7741AA64C7C0006FFE9 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				FC8DB7391AF18674003045A3 /* icon-circle-facebook.png in Resources */,
 				FC8DB7491AF18674003045A3 /* icon-square-phone.png in Resources */,
+				FCF5E0A71B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
 				7216B7751AA64C7C0006FFE9 /* sample.png in Resources */,
 				7216B7761AA64C7C0006FFE9 /* orderconfirm_image_remove@2x.png in Resources */,
 				7216B7771AA64C7C0006FFE9 /* BentoTableViewCell.xib in Resources */,
@@ -2284,6 +2295,7 @@
 				7216B7AA1AA64C7C0006FFE9 /* register_image_or.png in Resources */,
 				7216B7AB1AA64C7C0006FFE9 /* Images.xcassets in Resources */,
 				7216B7AC1AA64C7C0006FFE9 /* register_icon_email.png in Resources */,
+				FCF5E0A31B8BDC28002E823C /* placeholder.png in Resources */,
 				7216B7AD1AA64C7C0006FFE9 /* mybento_nav_help@2x.png in Resources */,
 				FCDF222D1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				7216B7AE1AA64C7C0006FFE9 /* register_icon_password.png in Resources */,
@@ -2304,6 +2316,7 @@
 				90BED0CA1A5BE72F003DC872 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				FC8DB7381AF18674003045A3 /* icon-circle-facebook.png in Resources */,
 				FC8DB7481AF18674003045A3 /* icon-square-phone.png in Resources */,
+				FCF5E0A61B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
 				90BED0EE1A5C38DA003DC872 /* sample.png in Resources */,
 				90359C271A5EC49700AAD5D2 /* orderconfirm_image_remove@2x.png in Resources */,
 				47C5B0151A8B8038008FA7DA /* BentoTableViewCell.xib in Resources */,
@@ -2383,6 +2396,7 @@
 				90D8F7B51A5D84B800D034CF /* register_image_or.png in Resources */,
 				90BED07F1A5BCC04003DC872 /* Images.xcassets in Resources */,
 				90D8F7B01A5D84B800D034CF /* register_icon_email.png in Resources */,
+				FCF5E0A21B8BDC28002E823C /* placeholder.png in Resources */,
 				90BED0E11A5C04DE003DC872 /* mybento_nav_help@2x.png in Resources */,
 				FCDF222C1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				90D8F7B21A5D84B800D034CF /* register_icon_password.png in Resources */,
@@ -2417,6 +2431,7 @@
 				FC92E1551B7E5C880073C5D7 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				FC92E1561B7E5C880073C5D7 /* icon-circle-facebook.png in Resources */,
 				FC92E1571B7E5C880073C5D7 /* icon-square-phone.png in Resources */,
+				FCF5E0A81B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
 				FC92E1581B7E5C880073C5D7 /* sample.png in Resources */,
 				FC92E1591B7E5C880073C5D7 /* orderconfirm_image_remove@2x.png in Resources */,
 				FC92E15A1B7E5C880073C5D7 /* BentoTableViewCell.xib in Resources */,
@@ -2496,6 +2511,7 @@
 				FC92E1A31B7E5C880073C5D7 /* register_image_or.png in Resources */,
 				FC92E1A41B7E5C880073C5D7 /* Images.xcassets in Resources */,
 				FC92E1A51B7E5C880073C5D7 /* register_icon_email.png in Resources */,
+				FCF5E0A41B8BDC28002E823C /* placeholder.png in Resources */,
 				FC92E1A61B7E5C880073C5D7 /* mybento_nav_help@2x.png in Resources */,
 				FC92E1A71B7E5C880073C5D7 /* Icon-Small-50@2x.png in Resources */,
 				FC92E1A81B7E5C880073C5D7 /* register_icon_password.png in Resources */,

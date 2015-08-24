@@ -319,7 +319,7 @@
     }];
 }
 
-- (void) moveToShowablePosition:(float)keyboardHeight
+- (void)moveToShowablePosition:(float)keyboardHeight
 {
     if(self.viewMain.center.y > (self.view.frame.size.height - keyboardHeight))
     {
@@ -404,16 +404,14 @@
     
     NSString *strToken = [[DataManager shareDataManager] getAPIToken];
     NSDictionary* postInfo = nil;
-    if (strToken != nil && strToken.length > 0)
-    {
+    if (strToken != nil && strToken.length > 0) {
         postInfo = @{
                      @"email" : strEmail,
                      @"reason" : strReason,
                      @"api_token" : strToken,
                      };
     }
-    else
-    {
+    else {
         postInfo = @{
                      @"email" : strEmail,
                      @"reason" : strReason,
@@ -459,8 +457,7 @@
 
 - (IBAction)onGotoMenu:(id)sender
 {
-    if (areThereAnyMenus)
-    {
+    if (areThereAnyMenus) {
         PreviewViewController *previewViewController = [[PreviewViewController alloc] init];
         [self.navigationController pushViewController:previewViewController animated:YES];
     }
@@ -477,15 +474,13 @@
     UINavigationController *navC;
     
     // signed in or not?
-    if (currentUserInfo == nil)
-    {
+    if (currentUserInfo == nil) {
         // navigate to signed out settings vc
         navC = [[UINavigationController alloc] initWithRootViewController:signedOutSettingsViewController];
         navC.navigationBar.hidden = YES;
         [self.navigationController presentViewController:navC animated:YES completion:nil];
     }
-    else
-    {
+    else {
         // navigate to signed in settings vc
         navC = [[UINavigationController alloc] initWithRootViewController:signedInSettingsViewController];
         navC.navigationBar.hidden = YES;

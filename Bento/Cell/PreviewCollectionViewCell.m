@@ -63,12 +63,12 @@
     [self.ivImage.layer insertSublayer:self.gradientLayer atIndex:0];
 }
 
-- (void) setSmallDishCell
+- (void)setSmallDishCell
 {
     _isSideDishCell = YES;
 }
 
-- (void) setDishInfo:(NSDictionary *)dishInfo
+- (void)setDishInfo:(NSDictionary *)dishInfo
 {
     if (dishInfo == nil)
         return;
@@ -80,10 +80,15 @@
     self.lblDescription.text = strDescription;
     
     NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-    [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
+    if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+        self.ivImage.image = [UIImage imageNamed:@"placeholder-gray.jpg"];
+    }
+    else {
+        [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
+    }
 }
 
-- (void) setCellState:(BOOL)isSelected
+- (void)setCellState:(BOOL)isSelected
 {
     if (!isSelected)
     {

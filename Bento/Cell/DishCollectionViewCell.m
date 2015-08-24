@@ -116,7 +116,14 @@
     self.lblDescription.text = strDescription;
     
     NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-    [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
+    if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+        self.ivImage.image = [UIImage imageNamed:@"placeholder-gray.jpg"];
+    }
+    else {
+        [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
+    }
+    
+    NSLog(@"image url: %@", strImageURL);
 }
 
 
