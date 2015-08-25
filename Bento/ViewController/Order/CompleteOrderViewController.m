@@ -117,12 +117,14 @@
     
     CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
+    
+    // idempotent token
+    NSString *uuid;
 }
 
 - (BOOL)applePayEnabled
 {
-    if ([PKPaymentRequest class])
-    {
+    if ([PKPaymentRequest class]) {
         PKPaymentRequest *paymentRequest = [Stripe paymentRequestWithMerchantIdentifier:APPLE_MERCHANT_ID];
         return [Stripe canSubmitPaymentRequest:paymentRequest];
     }
@@ -169,16 +171,14 @@
     
     self.tvBentos.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
-    if ([[DataManager shareDataManager] getPaymentMethod] == Payment_None)
-    {
-        if (![self applePayEnabled])
+    if ([[DataManager shareDataManager] getPaymentMethod] == Payment_None) {
+        if (![self applePayEnabled]) {
             [self gotoCreditScreen];
-        else
-        {
+        }
+        else {
             [[DataManager shareDataManager] setPaymentMethod:Payment_ApplePay];
             
-            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Summary Screen For First Time - Apple Pay Enabled"] == nil)
-            {
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Summary Screen For First Time - Apple Pay Enabled"] == nil) {
                 [[Mixpanel sharedInstance] track:@"Viewed Summary Screen For First Time - Apple Pay Enabled"];
                 
                 [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Viewed Summary Screen For First Time - Apple Pay Enabled"];
@@ -336,14 +336,15 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
-    // set array every time view appears (edit: moved from viewDidLoad)
+    uuid = [[NSUUID UUID] UUIDString];
+    NSLog(@"UUID = %@", uuid);
+    
     self.aryBentos = [[NSMutableArray alloc] init];
-    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
-    {
+    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++) {
         Bento *bento = [[BentoShop sharedInstance] getBento:index];
         if ([bento isCompleted])
             [self.aryBentos addObject:bento];
@@ -362,22 +363,25 @@
     self.lblAddress.text = @"";
     
     self.placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-    if (self.placeInfo != nil)
-    {
-        if (self.placeInfo.subThoroughfare && self.placeInfo.thoroughfare)
+    if (self.placeInfo != nil) {
+        
+        if (self.placeInfo.subThoroughfare && self.placeInfo.thoroughfare) {
             self.lblAddress.text = [NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare];
-        else if (self.placeInfo.subThoroughfare)
+        }
+        else if (self.placeInfo.subThoroughfare) {
             self.lblAddress.text = self.placeInfo.subThoroughfare;
-        else if (self.placeInfo.thoroughfare)
+        }
+        else if (self.placeInfo.thoroughfare) {
             self.lblAddress.text = self.placeInfo.thoroughfare;
-        else
+        }
+        else {
             self.lblAddress.text = @"";
+        }
         
         [self.lblAddress setTextColor:[UIColor colorWithRed:78.f/255.f green:88.f/255.f blue:99.f/255.f alpha:1.0f]];
         [self.btnChangeAddr setTitle:@"CHANGE" forState:UIControlStateNormal];
     }
-    else
-    {
+    else {
         self.lblAddress.text = @"Delivery Destination";
         [self.lblAddress setTextColor:[UIColor lightGrayColor]];
         [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
@@ -1379,15 +1383,18 @@
     
     [request setObject:strPromoCode forKey:@"CouponCode"];
     
+    // Idempotent Token
+    [request setObject:uuid forKey:@"IdempotentToken"];
+    
     return request;
 }
 
 - (void)createBackendChargeWithToken:(STPToken *)token completion:(void (^)(PKPaymentAuthorizationStatus))completion
 {
-    if (token.tokenId == nil || token.tokenId.length == 0)
-    {
-        if ([self getTotalPrice] > 0 && [[DataManager shareDataManager] getPaymentMethod] != Payment_Server)
+    if (token.tokenId == nil || token.tokenId.length == 0) {
+        if ([self getTotalPrice] > 0 && [[DataManager shareDataManager] getPaymentMethod] != Payment_Server) {
             return;
+        }
     }
     
     NSDictionary *request = nil;
