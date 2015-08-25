@@ -773,7 +773,7 @@
             lblMainDish.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+            [ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"placeholder-gray.jpg"]];
             
             if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex])
                 ivBannerMainDish.hidden = NO;
@@ -801,7 +801,7 @@
             lblSideDish1.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivSideDish1 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+            [ivSideDish1 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"placeholder-gray.jpg"]];
             
             if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex])
                 ivBannerSideDish1.hidden = NO;
@@ -829,7 +829,7 @@
             lblSideDish2.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivSideDish2 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+            [ivSideDish2 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"placeholder-gray.jpg"]];
             
             if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex])
                 ivBannerSideDish2.hidden = NO;
@@ -857,7 +857,7 @@
             lblSideDish3.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivSideDish3 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+            [ivSideDish3 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"placeholder-gray.jpg"]];
             
             if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex])
                 ivBannerSideDish3.hidden = NO;
@@ -886,7 +886,7 @@
             lblSideDish4.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivSideDish4 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"sample"]];
+            [ivSideDish4 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"placeholder-gray.jpg"]];
         }
         
         if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex])
