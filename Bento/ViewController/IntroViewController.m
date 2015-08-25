@@ -519,19 +519,19 @@
 
 - (IBAction)onOK:(id)sender
 {
-    //Request for Push Notifications
     // iOS 8 and up
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
     
     // iOS 7 and below
-    else
-    {
+    else {
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
     
     exitOnWhichScreen = @"Push";
     [self exitIntroScreen];

@@ -26,6 +26,8 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivTitle;
 
+@property (weak, nonatomic) IBOutlet UIView *confirmationPlatform;
+
 @property (nonatomic, weak) IBOutlet UIImageView *ivCompleted;
 
 @property (nonatomic, weak) IBOutlet UILabel *lblCompletedTitle;
@@ -35,6 +37,8 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnQuestion;
 
 @property (nonatomic, weak) IBOutlet UIButton *btnBuild;
+
+@property (weak, nonatomic) IBOutlet UIView *pushPlatform;
 
 - (IBAction)onHelp:(id)sender;
 
@@ -60,8 +64,10 @@
     [self.btnQuestion setTitle:[[AppStrings sharedInstance] getString:COMPLETED_LINK_QUESTION] forState:UIControlStateNormal];
     [self.btnBuild setTitle:[[AppStrings sharedInstance] getString:COMPLETED_BUTTON_COMPLETE] forState:UIControlStateNormal];
     
-//    if (![self isPushEnabled])
-//        [self requestPush];
+    if ([self isPushEnabled]) {
+        self.confirmationPlatform.center = self.view.center;
+        self.pushPlatform.hidden = YES;
+    }
 }
 
 - (void)didReceiveMemoryWarning {
@@ -173,15 +179,14 @@
 - (void)requestPush
 {
     // iOS 8 and up
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
-    {
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
-    
     // iOS 7 and below
-    else
-    {
+    else {
+        
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
 }
@@ -190,6 +195,22 @@
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people addPushDeviceToken:deviceToken];
+}
+
+- (IBAction)onTurnOnPush:(id)sender
+{
+    // push request not prompted before
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Push Requested"] == nil) {
+        
+        [self requestPush];
+    
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    else {
+        // go to Bento settings
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }
 }
 
 @end
