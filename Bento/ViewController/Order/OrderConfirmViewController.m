@@ -60,8 +60,8 @@
     [self.btnQuestion setTitle:[[AppStrings sharedInstance] getString:COMPLETED_LINK_QUESTION] forState:UIControlStateNormal];
     [self.btnBuild setTitle:[[AppStrings sharedInstance] getString:COMPLETED_BUTTON_COMPLETE] forState:UIControlStateNormal];
     
-    if (![self isPushEnabled])
-        [self requestPush];
+//    if (![self isPushEnabled])
+//        [self requestPush];
 }
 
 - (void)didReceiveMemoryWarning {
