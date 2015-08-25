@@ -96,13 +96,17 @@
     self.lblMainDish.text = [strName uppercaseString];
     
     NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-    [self.ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
+    if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+        self.ivMainDish.image = [UIImage imageNamed:@"placeholder-gray.jpg"];
+    }
+    else {
+        [self.ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
+    }
+    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
     [super setSelected:selected animated:animated];
-
-    // Configure the view for the selected state
 }
 
 @end

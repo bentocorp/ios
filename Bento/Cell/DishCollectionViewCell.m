@@ -122,8 +122,6 @@
     else {
         [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
     }
-    
-    NSLog(@"image url: %@", strImageURL);
 }
 
 
