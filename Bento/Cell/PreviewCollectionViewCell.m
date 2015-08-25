@@ -82,7 +82,6 @@
     NSString *strImageURL = [dishInfo objectForKey:@"image1"];
     if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
         self.ivImage.image = [UIImage imageNamed:@"empty-main"];
-        self.lblTitle.text = [NSString stringWithFormat:@"%@ coming soon...", [dishInfo objectForKey:@"name"]];
     }
     else {
         [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-main"]];
