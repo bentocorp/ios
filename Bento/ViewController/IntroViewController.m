@@ -228,7 +228,7 @@
     lblPushComment.numberOfLines = 0;
     lblPushComment.textAlignment = NSTextAlignmentCenter;
     lblPushComment.textColor = [UIColor whiteColor];
-    lblPushComment.text = @"Allow push notifications to get timely updates & information about your order status!";
+    lblPushComment.text = @"Allow push notifications to get timely updates!";
     lblPushComment.alpha = 0;
     [self.lblPlatform addSubview:lblPushComment];
     
