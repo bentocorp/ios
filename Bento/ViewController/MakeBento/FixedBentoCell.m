@@ -97,10 +97,10 @@
     
     NSString *strImageURL = [dishInfo objectForKey:@"image1"];
     if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
-        self.ivMainDish.image = [UIImage imageNamed:@"placeholder-gray.jpg"];
+        self.ivMainDish.image = [UIImage imageNamed:@"empty-main"];
     }
     else {
-        [self.ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL]];
+        [self.ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-main"]];
     }
     
 }
