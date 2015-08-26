@@ -123,60 +123,15 @@
 
 -(void)viewWillAppear:(BOOL)animated
 {
-    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]])
-    {
+    if ([currentUserInfo[@"card"] isKindOfClass:[NSNull class]]) {
         // no card info
         creditCardImage.image = [UIImage imageNamed:@"placeholder"];
     }
-    else
-    {
+    else {
         // has card info
         creditCardImage.image = [UIImage imageNamed:[currentUserInfo[@"card"][@"brand"] lowercaseString]];
         creditCardDigitsLabel.text = currentUserInfo[@"card"][@"last4"];
     }
-    
-    // COME BACK HERE HOMIE!
-//    NSDictionary *curUserInfo = [[DataManager shareDataManager] getUserInfo];
-//    if (curUserInfo == nil)
-//        return;
-//    
-//    NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
-//    if (strAPIToken == nil || strAPIToken.length == 0)
-//        return;
-//    
-//    WebManager *webManager = [[WebManager alloc] init];
-//    
-//    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-//    loadingHUD.textLabel.text = @"Loading...";
-//    [loadingHUD showInView:self.view];
-//    
-//    NSString *strRequest = [NSString stringWithFormat:@"%@/user/info?api_token=%@", SERVER_URL, strAPIToken];
-//    [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
-//        [loadingHUD dismiss];
-//        
-//        [[DataManager shareDataManager] setUserInfo:nil];
-//        [[DataManager shareDataManager] setCreditCard:nil];
-//        
-//        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-//        [pref setObject:nil forKey:@"apiName"];
-//        [pref setObject:nil forKey:@"loginRequest"];
-//        [pref synchronize];
-//        
-//        // dismiss view
-//        [self dismissViewControllerAnimated:YES completion:nil];
-//        
-//    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-//        [loadingHUD dismiss];
-//        
-//        NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-//        if (strMessage == nil)
-//            strMessage = error.localizedDescription;
-//        
-//        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-//        [alertView showInView:self.view];
-//        alertView = nil;
-//        
-//    } isJSON:NO];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
@@ -185,8 +140,7 @@
 
 - (void)noConnection
 {
-    if (loadingHUD == nil)
-    {
+    if (loadingHUD == nil) {
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
         [loadingHUD showInView:self.view];
@@ -201,8 +155,7 @@
 
 - (void)checkCurrentMode
 {
-    if ([[BentoShop sharedInstance] didModeOrDateChange])
-    {
+    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
         

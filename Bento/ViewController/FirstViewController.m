@@ -200,11 +200,19 @@
             
             [[BentoShop sharedInstance] refreshStart];
             
-            if (!_hasInit) {
+            if (!_hasInit || [[[NSUserDefaults standardUserDefaults] objectForKey:@"Came from PhoneNumberViewController"] isEqualToString:@"YES"]) {
+                
+                // current VC has init once before
                 _hasInit = YES;
+                
+                // reset status
+                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"Came from PhoneNumberViewController"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
                 [self performSelector:@selector(initProcedure) withObject:nil afterDelay:0.01f];
             }
             else {
+                // go to which screen next?
                 [self processAfterLogin];
             }
             
@@ -220,9 +228,8 @@
 
 - (void)processAutoLogin
 {
-    NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-    NSString *strAPIName = [pref objectForKey:@"apiName"];
-    NSDictionary *dicRequest = [pref objectForKey:@"loginRequest"];
+    NSString *strAPIName = [[NSUserDefaults standardUserDefaults] objectForKey:@"apiName"];
+    NSDictionary *dicRequest = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginRequest"];
     
     NSLog(@"auto login dicRequest - %@", dicRequest);
     
@@ -267,9 +274,9 @@
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         [self.activityIndicator stopAnimating];
         
-        [pref setObject:nil forKey:@"apiName"];
-        [pref setObject:nil forKey:@"loginRequest"];
-        [pref synchronize];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"apiName"];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"loginRequest"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
         if (strMessage == nil)
@@ -315,7 +322,8 @@
     }
 }
 
-- (void)process {
+- (void)process
+{
     if ([isThereConnection isEqualToString:@"NO"]) {
         [self showNetworkErrorScreen];
     }

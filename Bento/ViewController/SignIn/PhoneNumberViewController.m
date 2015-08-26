@@ -335,9 +335,9 @@
     
     NSString *registerOrSignIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"RegisterOrSignIn"];
     
-    /*------------------TEST DATA LOG FOR MIXPANEL BEFORE PROCESSING*-----------------*/
-    NSLog(@"%@, %@, %@, %@, %@, %@, %@", registerOrSignIn, source, [self getCurrentDate], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
-    /*--------------------------------------------------------------------------------*/
+//    /*------------------TEST DATA LOG FOR MIXPANEL BEFORE PROCESSING*-----------------*/
+//    NSLog(@"%@, %@, %@, %@, %@, %@, %@", registerOrSignIn, source, [self getCurrentDate], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
+//    /*--------------------------------------------------------------------------------*/
     
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
@@ -347,15 +347,16 @@
     [loadingHUD showInView:self.view];
     
     NSString *strRequest = [NSString stringWithFormat:@"%@/user/fbsignup", SERVER_URL];
+    
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+        
         [loadingHUD dismiss];
         
         NSDictionary *response = networkOperation.responseJSON;
         [[DataManager shareDataManager] setUserInfo:response];
         
-        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
         NSString *strRequest = [NSString stringWithFormat:@"%@/user/fblogin", SERVER_URL];
-        [pref setObject:strRequest forKey:@"apiName"];
+        [[NSUserDefaults standardUserDefaults] setObject:strRequest forKey:@"apiName"];
         
         NSDictionary *fbloginRequest = @{
                                          @"email" : strMailAddr,
@@ -364,8 +365,8 @@
                                        };
         
         NSDictionary *saveRequest = @{@"data" : [fbloginRequest jsonEncodedKeyValueString]};
-        [pref setObject:saveRequest forKey:@"loginRequest"];
-        [pref synchronize];
+        [[NSUserDefaults standardUserDefaults] setObject:saveRequest forKey:@"loginRequest"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[BentoShop sharedInstance] setSignInStatus:YES];
 
@@ -422,7 +423,7 @@
 /*--------------------------------------------------------------------*/
         
         [self showErrorMessage:nil code:ERROR_NONE];
-        [self gotoDeliveryLocationScreen];
+        [self dissmodal];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         
@@ -516,18 +517,16 @@
     }
 }
 
-
-- (void)gotoDeliveryLocationScreen
-{
-    [self dissmodal];
-}
-
 - (void)dissmodal
 {
     [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
+    
+    // for FirstViewController, used for autologin
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Came from PhoneNumberViewController"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
 @end

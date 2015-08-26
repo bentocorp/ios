@@ -349,10 +349,9 @@
                  NSDictionary *response = networkOperation.responseJSON;
                  [[DataManager shareDataManager] setUserInfo:response];
                  
-                 NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-                 [pref setObject:strRequest forKey:@"apiName"];
-                 [pref setObject:dicRequest forKey:@"loginRequest"];
-                 [pref synchronize];
+                 [[NSUserDefaults standardUserDefaults] setObject:strRequest forKey:@"apiName"];
+                 [[NSUserDefaults standardUserDefaults] setObject:dicRequest forKey:@"loginRequest"];
+                 [[NSUserDefaults standardUserDefaults] synchronize];
                  
                  [self showErrorWithString:nil code:ERROR_NONE];
 
@@ -417,8 +416,9 @@
     
     FacebookManager *fbManager = [FacebookManager sharedInstance];
     
-    if (isRetry)
+    if (isRetry) {
         [fbManager login];
+    }
     else
     {
         if ([fbManager isSessionOpen])

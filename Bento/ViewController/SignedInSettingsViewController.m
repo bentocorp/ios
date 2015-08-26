@@ -457,10 +457,9 @@
         [[DataManager shareDataManager] setUserInfo:nil];
         [[DataManager shareDataManager] setCreditCard:nil];
         
-        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-        [pref setObject:nil forKey:@"apiName"];
-        [pref setObject:nil forKey:@"loginRequest"];
-        [pref synchronize];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"apiName"];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"loginRequest"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[BentoShop sharedInstance] setSignInStatus:NO];
         
