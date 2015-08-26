@@ -517,14 +517,17 @@
 }
 
 
-- (void) gotoDeliveryLocationScreen
+- (void)gotoDeliveryLocationScreen
 {
     [self dissmodal];
 }
 
-- (void) dissmodal
+- (void)dissmodal
 {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

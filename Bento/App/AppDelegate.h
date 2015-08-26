@@ -18,4 +18,3 @@
 - (CLLocationCoordinate2D )getCurrentLocation;
 
 @end
-

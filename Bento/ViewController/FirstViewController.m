@@ -55,6 +55,7 @@
 }
 
 - (void)viewDidLoad {
+    
     [super viewDidLoad];
     
     _hasInit = NO;
@@ -69,8 +70,9 @@
     [self.ivLaunchLogo setImage:[UIImage imageNamed:@"logo"]];
     
     NSString *strSlogan = [[NSUserDefaults standardUserDefaults] objectForKey:@"Slogan"];
-    if (strSlogan == nil || strSlogan.length > 0)
+    if (strSlogan == nil || strSlogan.length > 0) {
         strSlogan = @"Delicious Asian Food Delivered in Minutes.";
+    }
     self.lblLaunchSlogan.text = strSlogan;
     
     /*---------------------------LOCATION MANAGER--------------------------*/
@@ -95,10 +97,8 @@
     
     // get address from coordinates
     [SVGeocoder reverseGeocode:location.coordinate completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error == nil && placemarks.count > 0)
-        {
+        if (error == nil && placemarks.count > 0) {
             SVPlacemark *placeMark = [placemarks firstObject];
-            
             currentAddress = placeMark.formattedAddress;
             
             NSLog(@"ADDRESS: %@", placeMark.formattedAddress);
@@ -188,8 +188,7 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
-        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
-        {
+        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
             [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [[AppStrings sharedInstance] getAppStrings];
             [[BentoShop sharedInstance] getMenus];
@@ -201,19 +200,18 @@
             
             [[BentoShop sharedInstance] refreshStart];
             
-            if (!_hasInit)
-            {
+            if (!_hasInit) {
                 _hasInit = YES;
                 [self performSelector:@selector(initProcedure) withObject:nil afterDelay:0.01f];
             }
-            else
-            {
+            else {
                 [self processAfterLogin];
             }
             
             // reset if closed
-            if ([globalShop isClosed])
+            if ([globalShop isClosed]) {
                 [globalShop resetBentoArray];
+            }
             
             [self.activityIndicator stopAnimating];
         });
@@ -229,9 +227,6 @@
     NSLog(@"auto login dicRequest - %@", dicRequest);
     
     WebManager *webManager = [[WebManager alloc] init];
-    
-//    self.activityIndicator.hidden = NO;
-//    [self.activityIndicator startAnimating];
     
     [webManager AsyncProcess:strAPIName method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation)
     {
@@ -320,46 +315,22 @@
     }
 }
 
-- (void)process
-{
-    if ([isThereConnection isEqualToString:@"NO"])
-    {
+- (void)process {
+    if ([isThereConnection isEqualToString:@"NO"]) {
         [self showNetworkErrorScreen];
     }
-    else
-    {
-        NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-        /*
-        #ifdef DEBUG
-            if ([pref objectForKey:@"apiName"] == nil)
-                [pref setObject:@"/user/login" forKey:@"apiName"];
-            
-            if ([pref objectForKey:@"loginRequest"] == nil)
-            {
-                NSDictionary* loginInfo = @{
-                                            @"email" : @"ridev@bentonow.com",
-                                            @"password" : @"12345678",
-                                            };
-                
-                NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
-                [pref setObject:dicRequest forKey:@"loginRequest"];
-            }
-        #endif
-        */
-        
-        if ([pref objectForKey:@"apiName"] != nil && [pref objectForKey:@"loginRequest"] != nil)
-        {
+    else {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"apiName"] != nil &&
+            [[NSUserDefaults standardUserDefaults] objectForKey:@"loginRequest"] != nil) {
             [self processAutoLogin];
         }
-        else
-        {
+        else {
             [self processAfterLogin];
         }
     }
 }
 
-- (void)gotoIntroScreen
-{
+- (void)gotoIntroScreen {
     CATransition *transition = [CATransition animation];
     
     transition.duration = 0.5;
@@ -370,24 +341,18 @@
     
     [[self navigationController].view.layer addAnimation:transition forKey:kCATransition];
     [[self navigationController] pushViewController:introVC animated:NO];
-    
-//    [self performSegueWithIdentifier:@"Intro" sender:nil];
 }
 
-- (void) gotoClosedScreen
-{
-//    [self performSegueWithIdentifier:@"SoldOut" sender:[NSNumber numberWithInt:0]];
+- (void)gotoClosedScreen {
     [self showSoldoutScreen:[NSNumber numberWithInt:0]];
 }
 
-- (void) gotoSoldOutScreen
-{
-//    [self performSegueWithIdentifier:@"SoldOut" sender:[NSNumber numberWithInt:1]];
+- (void)gotoSoldOutScreen {
     [self showSoldoutScreen:[NSNumber numberWithInt:1]];
 }
 
-- (void)gotoMyBentoScreen
-{
+- (void)gotoMyBentoScreen {
+    
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
     BentoShop *globalShop = [BentoShop sharedInstance];
@@ -411,36 +376,31 @@
     // prevent unbalanced call to vc error
     double delayInSeconds = 0.1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
-    dispatch_after(popTime, dispatch_get_main_queue(), ^(void)
-    {
-        if ([menuType isEqualToString:@"fixed"])
-        {
+    dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+        
+        if ([menuType isEqualToString:@"fixed"]) {
+            
             FixedBentoViewController *fixedBentoViewController = [[FixedBentoViewController alloc] init];
             [self.navigationController pushViewController:fixedBentoViewController animated:needsAnimation];
         }
-        else if ([menuType isEqualToString:@"custom"])
-        {
+        else if ([menuType isEqualToString:@"custom"]) {
+            
             CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
             
             // deep link to Choose Your Main Dish
-            if ([mainOrSide isEqualToString:@"main"])
-            {
+            if ([mainOrSide isEqualToString:@"main"]) {
                 ChooseMainDishViewController *chooseMainDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
                 [self.navigationController pushViewController:customBentoViewController animated:NO];
                 [self.navigationController pushViewController:chooseMainDishVC animated:YES];
             }
-            
             // deep link to Choose Your Side Disg
-            else if ([mainOrSide isEqualToString:@"side"])
-            {
+            else if ([mainOrSide isEqualToString:@"side"]) {
                 ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
                 [self.navigationController pushViewController:customBentoViewController animated:NO];
                 [self.navigationController pushViewController:chooseSideDishVC animated:YES];
             }
-            
             // regular opening flow of the app. changed for later use then stop
-            else
-            {
+            else {
                 [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
             }
         }
