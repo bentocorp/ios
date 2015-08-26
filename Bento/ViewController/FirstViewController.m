@@ -200,14 +200,10 @@
             
             [[BentoShop sharedInstance] refreshStart];
             
-            if (!_hasInit || [[[NSUserDefaults standardUserDefaults] objectForKey:@"Came from PhoneNumberViewController"] isEqualToString:@"YES"]) {
+            if (!_hasInit) {
                 
                 // current VC has init once before
                 _hasInit = YES;
-                
-                // reset status
-                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"Came from PhoneNumberViewController"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
                 
                 [self performSelector:@selector(initProcedure) withObject:nil afterDelay:0.01f];
             }

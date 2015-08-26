@@ -522,15 +522,12 @@
 
 - (void)dissmodal
 {
-    // for FirstViewController, used for autologin
-//    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Came from PhoneNumberViewController"];
-//    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    // reset app
+    // dismiss to home page
     [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    [self.navigationController popToRootViewControllerAnimated:YES];
+    // pop back to home page
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
 }
 
 - (void)processAutoLogin
@@ -544,8 +541,6 @@
     
     [webManager AsyncProcess:strAPIName method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation)
      {
-//         [self.activityIndicator stopAnimating];
-         
          NSDictionary *response = networkOperation.responseJSON;
          [[DataManager shareDataManager] setUserInfo:response];
          
@@ -577,7 +572,6 @@
          [[BentoShop sharedInstance] setSignInStatus:YES];
          
      } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-//         [self.activityIndicator stopAnimating];
          
          [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"apiName"];
          [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"loginRequest"];
