@@ -827,12 +827,12 @@
     {
         if (self.type == 0) // Closed
         {
-            if (![[BentoShop sharedInstance] isClosed])
+            if ([[BentoShop sharedInstance] isClosed] == NO)
                 [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
         }
         else if (self.type == 1) // Sold Out
         {
-            if (![[BentoShop sharedInstance] isSoldOut])
+            if ([[BentoShop sharedInstance] isSoldOut] == NO)
                 [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
         }
     }

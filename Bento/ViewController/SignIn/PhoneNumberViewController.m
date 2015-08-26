@@ -335,9 +335,9 @@
     
     NSString *registerOrSignIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"RegisterOrSignIn"];
     
-//    /*------------------TEST DATA LOG FOR MIXPANEL BEFORE PROCESSING*-----------------*/
-//    NSLog(@"%@, %@, %@, %@, %@, %@, %@", registerOrSignIn, source, [self getCurrentDate], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
-//    /*--------------------------------------------------------------------------------*/
+    /*------------------TEST DATA LOG FOR MIXPANEL BEFORE PROCESSING*-----------------*/
+    NSLog(@"%@, %@, %@, %@, %@, %@, %@", registerOrSignIn, source, [self getCurrentDate], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
+    /*--------------------------------------------------------------------------------*/
     
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
@@ -423,6 +423,9 @@
 /*--------------------------------------------------------------------*/
         
         [self showErrorMessage:nil code:ERROR_NONE];
+        
+        [self processAutoLogin];
+        
         [self dissmodal];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
@@ -519,14 +522,77 @@
 
 - (void)dissmodal
 {
+    // for FirstViewController, used for autologin
+//    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Came from PhoneNumberViewController"];
+//    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // reset app
     [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [self.navigationController popToRootViewControllerAnimated:YES];
-    
-    // for FirstViewController, used for autologin
-    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Came from PhoneNumberViewController"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
 }
+
+- (void)processAutoLogin
+{
+    NSString *strAPIName = [[NSUserDefaults standardUserDefaults] objectForKey:@"apiName"];
+    NSDictionary *dicRequest = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginRequest"];
+    
+    NSLog(@"auto login dicRequest - %@", dicRequest);
+    
+    WebManager *webManager = [[WebManager alloc] init];
+    
+    [webManager AsyncProcess:strAPIName method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation)
+     {
+//         [self.activityIndicator stopAnimating];
+         
+         NSDictionary *response = networkOperation.responseJSON;
+         [[DataManager shareDataManager] setUserInfo:response];
+         
+         NSLog(@"auto login response - %@", response);
+         
+         /*-----------------------------MIXPANEL-------------------------------*/
+         
+         Mixpanel *mixpanel = [Mixpanel sharedInstance];
+         
+         // identify user for current session
+         [mixpanel identify:response[@"email"]];
+         
+         NSString *currentAddressFinal;
+         if (currentAddress != nil)
+             currentAddressFinal = currentAddress;
+         else
+             currentAddressFinal = @"N/A";
+         
+         // set properties
+         [mixpanel.people set:@{
+                                @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
+                                @"$email": response[@"email"],
+                                @"$phone": response[@"phone"],
+                                @"Last Login Address": currentAddressFinal
+                                }];
+         
+         /*--------------------------------------------------------------------*/
+         
+         [[BentoShop sharedInstance] setSignInStatus:YES];
+         
+     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
+//         [self.activityIndicator stopAnimating];
+         
+         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"apiName"];
+         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"loginRequest"];
+         [[NSUserDefaults standardUserDefaults] synchronize];
+         
+         NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
+         if (strMessage == nil)
+             strMessage = error.localizedDescription;
+         
+         MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+         [alertView showInView:self.view];
+         alertView = nil;
+         
+     } isJSON:NO];
+}
+
 
 @end
