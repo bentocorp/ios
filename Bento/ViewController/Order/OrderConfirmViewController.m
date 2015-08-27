@@ -24,7 +24,7 @@
 
 #import "MyAlertView.h"
 
-@interface OrderConfirmViewController ()
+@interface OrderConfirmViewController () <MyAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivTitle;
 
@@ -211,13 +211,27 @@
     }
     else {
         // go to Bento settings if ios 8+
-        if ([[UIDevice currentDevice].systemVersion intValue] > 8) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
+            
+            MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:@"Turn On"];
+            alertView1.tag = 911;
+            [alertView1 showInView:self.view];
         }
         // if ios 7, show alert
         else {
-            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable Push Notifications, go to Settings, scroll to Bento Now and change notification permissions." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-            [alertView showInView:self.view];
+            MyAlertView *alertView2 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
+            [alertView2 showInView:self.view];
+        }
+    }
+}
+
+#pragma mark MyAlertViewDelegate
+
+- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 911) {
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
         }
     }
 }
