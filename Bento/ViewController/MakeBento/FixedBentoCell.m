@@ -13,6 +13,7 @@
 #import "FixedBentoCell.h"
 #import "CAGradientLayer+SJSGradients.h"
 #import "UIImageView+WebCache.h"
+#import "UIColor+CustomColors.h"
 
 @implementation FixedBentoCell
 
@@ -56,7 +57,7 @@
         
         self.lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(10, self.viewDish.frame.size.height - 45, self.viewDish.frame.size.width - 20, 45)];
         self.lblMainDish.adjustsFontSizeToFitWidth = YES; // dynamically changes font size
-        self.lblMainDish.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+        self.lblMainDish.textColor = [UIColor colorWithBentoTitleGray];
         self.lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
         self.lblMainDish.textAlignment = NSTextAlignmentCenter;
         [self.viewDish addSubview:self.lblMainDish];

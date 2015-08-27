@@ -18,6 +18,8 @@
 
 #import "BentoShop.h"
 
+#import "UIColor+CustomColors.h"
+
 // Stripe
 #import "Stripe.h"
 #import "STPToken.h"
@@ -69,7 +71,7 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 110, 20, 220, 45)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    titleLabel.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+    titleLabel.textColor = [UIColor colorWithBentoTitleGray];
     titleLabel.text = @"Credit Card";
     [self.view addSubview:titleLabel];
     
@@ -106,7 +108,7 @@
     // credit card digits
     creditCardDigitsLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 12, 150, 21)];
     creditCardDigitsLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    creditCardDigitsLabel.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+    creditCardDigitsLabel.textColor = [UIColor colorWithBentoTitleGray];
     [whiteBackgroundView addSubview:creditCardDigitsLabel];
     
     // change credit card button

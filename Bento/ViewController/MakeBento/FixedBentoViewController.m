@@ -45,6 +45,8 @@
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
+#import "UIColor+CustomColors.h"
+
 
 @interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -383,7 +385,7 @@
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    pagingTitleView.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+    pagingTitleView.currentTintColor = [UIColor colorWithBentoTitleGray];
     [pagingTitleView observeScrollView:scrollView];
     
     if (shouldShowOneMenu) // shorten scrollview's width

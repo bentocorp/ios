@@ -20,6 +20,7 @@
 #import "MyAlertView.h"
 #import "JGProgressHUD.h"
 #import "BentoShop.h"
+#import "UIColor+CustomColors.h"
 
 @interface SignedOutSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -52,7 +53,7 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 110, 20, 220, 45)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    titleLabel.textColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+    titleLabel.textColor = [UIColor colorWithBentoTitleGray];
     titleLabel.text = @"Settings";
     [self.view addSubview:titleLabel];
     
