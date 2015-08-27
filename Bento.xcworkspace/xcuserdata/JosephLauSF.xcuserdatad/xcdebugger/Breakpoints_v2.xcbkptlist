@@ -4,18 +4,28 @@
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         BreakpointExtensionID = "Xcode.Breakpoint.ExceptionBreakpoint">
          <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/SignIn/PhoneNumberViewController.m"
-            timestampString = "462322075.305779"
+            scope = "1"
+            stopOnStyle = "0">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/Order/PreviewViewController.m"
+            timestampString = "458094096.562424"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "534"
-            endingLineNumber = "534"
-            landmarkName = "-processAutoLogin"
+            startingLineNumber = "617"
+            endingLineNumber = "617"
+            landmarkName = "-setTitlesMainAndSideDishes"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -25,12 +35,28 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/SignIn/PhoneNumberViewController.m"
-            timestampString = "462321019.31794"
+            filePath = "Bento/ViewController/Order/EnterCreditCardViewController.m"
+            timestampString = "460421098.358731"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "291"
-            endingLineNumber = "291"
+            startingLineNumber = "199"
+            endingLineNumber = "199"
+            landmarkName = "-onContinueToPayment:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/SignIn/RegisterViewController.m"
+            timestampString = "460426933.613364"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "501"
+            endingLineNumber = "501"
             landmarkName = "-processRegister"
             landmarkType = "5">
          </BreakpointContent>
@@ -41,13 +67,41 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/SignIn/PhoneNumberViewController.m"
-            timestampString = "462321025.87485"
+            filePath = "Bento/ViewController/IntroViewController.m"
+            timestampString = "461460760.338009"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "426"
-            endingLineNumber = "426"
-            landmarkName = "-processRegister"
+            startingLineNumber = "773"
+            endingLineNumber = "773">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/IntroViewController.m"
+            timestampString = "461407452.024727"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "327"
+            endingLineNumber = "327">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "461459643.368697"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "326"
+            endingLineNumber = "326"
+            landmarkName = "-getCurrentLocation"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -57,13 +111,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/SignIn/PhoneNumberViewController.m"
-            timestampString = "462321029.567254"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "461460424.916271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "432"
-            endingLineNumber = "432"
-            landmarkName = "-processRegister"
+            startingLineNumber = "292"
+            endingLineNumber = "292"
+            landmarkName = "-locationManager:didUpdateLocations:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -73,13 +127,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/FirstViewController.m"
-            timestampString = "462322075.305779"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "461460424.916271"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "226"
-            endingLineNumber = "226"
-            landmarkName = "-processAutoLogin"
+            startingLineNumber = "305"
+            endingLineNumber = "305"
+            landmarkName = "-locationManager:didUpdateLocations:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

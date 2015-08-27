@@ -22,6 +22,8 @@
 
 #import "JGProgressHUD.h"
 
+#import "MyAlertView.h"
+
 @interface OrderConfirmViewController ()
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivTitle;
@@ -208,8 +210,15 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
     else {
-        // go to Bento settings
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        // go to Bento settings if ios 8+
+        if ([[UIDevice currentDevice].systemVersion intValue] > 8) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }
+        // if ios 7, show alert
+        else {
+            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"To enable Push Notifications, go to Settings, scroll to Bento Now and change notification permissions." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+            [alertView showInView:self.view];
+        }
     }
 }
 
