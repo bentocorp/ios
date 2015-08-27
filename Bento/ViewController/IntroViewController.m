@@ -16,6 +16,7 @@
 #import "JGProgressHUD.h"
 #import "Mixpanel.h"
 #import "FirstViewController.h"
+#import "UIColor+CustomColors.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -69,8 +70,8 @@
     gradient.frame = self.ivBackground.bounds;
     
     // Get colors for gradient
-    UIColor *color1 = [DataManager getGradientColor1];
-    UIColor *color2 = [DataManager getGradientColor2];
+    UIColor *color1 = [UIColor bentoGradient1];
+    UIColor *color2 = [UIColor bentoGradient2];
     
     // Set gradient (light to darker green)
     gradient.colors = @[(id)[color1 CGColor], (id)[color2 CGColor]];

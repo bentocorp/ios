@@ -40,7 +40,7 @@
     // initialize yes
     isThereConnection = YES;
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.914f green:0.925f blue:0.925f alpha:1.0f];
+    self.view.backgroundColor = [UIColor bentoBackgroundGray];
     
     /*-----------------------------------------------------------*/
     
@@ -53,7 +53,7 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 110, 20, 220, 45)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    titleLabel.textColor = [UIColor colorWithBentoTitleGray];
+    titleLabel.textColor = [UIColor bentoTitleGray];
     titleLabel.text = @"Settings";
     [self.view addSubview:titleLabel];
     

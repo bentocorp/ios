@@ -737,7 +737,7 @@
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH / 2 - 100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    pagingTitleView.currentTintColor = [UIColor colorWithBentoTitleGray];
+    pagingTitleView.currentTintColor = [UIColor bentoTitleGray];
     [pagingTitleView observeScrollView:scrollView];
     
     if (shouldShowOneMenu)

@@ -25,6 +25,8 @@
 #import "AppDelegate.h"
 #import "SVGeocoder.h"
 
+#import "UIColor+CustomColors.h"
+
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @interface PhoneNumberViewController () <CLLocationManagerDelegate>
@@ -73,7 +75,7 @@
             NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:textField.text];
             
             [newString addAttribute:NSForegroundColorAttributeName
-                              value:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]
+                              value:[UIColor bentoBrandGreen]
                               range:NSMakeRange([textField.text length]-1, 1)];
             
             textField.attributedText = newString;
@@ -255,8 +257,8 @@
         self.lblError.text = errorMsg;
     }
     
-    UIColor *errorColor = [UIColor colorWithRed:233.0f / 255.0f green:114.0f / 255.0f blue:2.0f / 255.0f alpha:1.0f];
-    UIColor *correctColor = [UIColor colorWithRed:109.0f / 255.0f green:117.0f / 255.0f blue:131.0f / 255.0f alpha:1.0f];
+    UIColor *errorColor = [UIColor bentoErrorTextOrange];
+    UIColor *correctColor = [UIColor bentoCorrectTextGray];
     
     switch (errorCode) {
         case ERROR_NONE:
@@ -468,12 +470,12 @@
     if (strPhoneNumber.length > 0 && [DataManager isValidPhoneNumber:strPhoneNumber])
     {
         self.btnDone.enabled = YES;
-        [self.btnDone setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+        [self.btnDone setBackgroundColor:[UIColor bentoBrandGreen]];
     }
     else
     {
 //        self.btnDone.enabled = NO;
-        [self.btnDone setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+        [self.btnDone setBackgroundColor:[UIColor bentoButtonGray]];
     }
 }
 
@@ -489,8 +491,8 @@
         self.lblError.text = errorMsg;
     }
     
-    UIColor *errorColor = [UIColor colorWithRed:233.0f / 255.0f green:114.0f / 255.0f blue:2.0f / 255.0f alpha:1.0f];
-    UIColor *correctColor = [UIColor colorWithRed:109.0f / 255.0f green:117.0f / 255.0f blue:131.0f / 255.0f alpha:1.0f];
+    UIColor *errorColor = [UIColor bentoErrorTextOrange];
+    UIColor *correctColor = [UIColor bentoCorrectTextGray];
     
     switch (errorCode) {
         case ERROR_NONE:

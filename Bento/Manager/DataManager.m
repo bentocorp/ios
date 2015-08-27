@@ -59,16 +59,6 @@ static DataManager *_shareDataManager;
 	return self;
 }
 
-+ (UIColor *)getGradientColor1
-{
-    return [UIColor colorWithRed:156.f/255.f green:211.f/255.f blue:101.f/255.f alpha:0.8f];
-}
-
-+ (UIColor *)getGradientColor2
-{
-    return [UIColor colorWithRed:125.f/255.f green:170.f/255.f blue:82.f/255.f alpha:0.8f];
-}
-
 + (BOOL)isValidMailAddress:(NSString *)strMailAddr
 {
     NSString *emailRegex = @"[A-Z0-9a-z._%+-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,4}";

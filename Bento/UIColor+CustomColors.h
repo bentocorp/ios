@@ -10,6 +10,18 @@
 
 @interface UIColor (CustomColors)
 
-+ (UIColor *)colorWithBentoTitleGray;
++ (UIColor *)bentoBrandGreen;
+
++ (UIColor *)bentoTitleGray;
+
++ (UIColor *)bentoButtonGray;
+
++ (UIColor *)bentoBackgroundGray;
+
++ (UIColor *)bentoErrorTextOrange;
++ (UIColor *)bentoCorrectTextGray;
+
++ (UIColor *)bentoGradient1;
++ (UIColor *)bentoGradient2;
 
 @end

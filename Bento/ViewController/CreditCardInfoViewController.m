@@ -20,6 +20,8 @@
 
 #import "UIColor+CustomColors.h"
 
+#import "UIColor+CustomColors.h"
+
 // Stripe
 #import "Stripe.h"
 #import "STPToken.h"
@@ -60,7 +62,7 @@
     
     currentUserInfo = [[DataManager shareDataManager] getUserInfo];
 
-    self.view.backgroundColor = [UIColor colorWithRed:0.914f green:0.925f blue:0.925f alpha:1.0f];
+    self.view.backgroundColor = [UIColor bentoBackgroundGray];
     
     // navigation bar color
     UIView *navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
@@ -71,7 +73,7 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 110, 20, 220, 45)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    titleLabel.textColor = [UIColor colorWithBentoTitleGray];
+    titleLabel.textColor = [UIColor bentoTitleGray];
     titleLabel.text = @"Credit Card";
     [self.view addSubview:titleLabel];
     
@@ -108,7 +110,7 @@
     // credit card digits
     creditCardDigitsLabel = [[UILabel alloc] initWithFrame:CGRectMake(70, 12, 150, 21)];
     creditCardDigitsLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    creditCardDigitsLabel.textColor = [UIColor colorWithBentoTitleGray];
+    creditCardDigitsLabel.textColor = [UIColor bentoTitleGray];
     [whiteBackgroundView addSubview:creditCardDigitsLabel];
     
     // change credit card button
@@ -117,7 +119,7 @@
 //        [changeButton setTitle:@"ADD" forState:UIControlStateNormal];
 //    else
 //        [changeButton setTitle:@"CHANGE" forState:UIControlStateNormal];
-//    [changeButton setTitleColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
+//    [changeButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
 //    changeButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:10];
 //    [changeButton addTarget:self action:@selector(onChange) forControlEvents:UIControlEventTouchUpInside];
 //    [whiteBackgroundView addSubview:changeButton];

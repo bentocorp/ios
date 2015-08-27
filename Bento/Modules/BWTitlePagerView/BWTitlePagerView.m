@@ -39,7 +39,7 @@
         self.pageControl = [[UIPageControl alloc] init];
         
         self.tintColor = [UIColor lightGrayColor];
-//        self.currentTintColor = [UIColor colorWithRed:0.341f green:0.376f blue:0.439f alpha:1.0f];
+//        self.currentTintColor = ;
 //        self.font = [UIFont systemFontOfSize:17];
         
         _isObservingScrollView = NO;

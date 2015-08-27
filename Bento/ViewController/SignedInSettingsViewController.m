@@ -55,7 +55,7 @@
         couponCodeString = @"--";
     
     
-    self.view.backgroundColor = [UIColor colorWithRed:0.914f green:0.925f blue:0.925f alpha:1.0f];
+    self.view.backgroundColor = [UIColor bentoBackgroundGray];
     
 /*-----------------------------------------------------------*/
     
@@ -86,7 +86,7 @@
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 110, 20, 220, 45)];
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    titleLabel.textColor = [UIColor colorWithBentoTitleGray];
+    titleLabel.textColor = [UIColor bentoTitleGray];
     titleLabel.text = @"Settings";
     [self.view addSubview:titleLabel];
     
@@ -188,7 +188,7 @@
         
         // create social labels
         UILabel *socialLabel = [[UILabel alloc] initWithFrame:CGRectMake(((SCREEN_WIDTH - (SCREEN_WIDTH - (SCREEN_WIDTH / 4 - 20))) / 2) + (SCREEN_WIDTH / 4 - 10) * i, 65, 50, 21)];
-        socialLabel.textColor = [UIColor colorWithBentoTitleGray];
+        socialLabel.textColor = [UIColor bentoTitleGray];
         socialLabel.textAlignment = NSTextAlignmentCenter;
         socialLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
 

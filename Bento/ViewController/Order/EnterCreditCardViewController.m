@@ -24,6 +24,8 @@
 
 #import "Mixpanel.h"
 
+#import "UIColor+CustomColors.h"
+
 @interface EnterCreditCardViewController () <PTKViewDelegate>
 {
     STPCard *_creditCard;
@@ -105,7 +107,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
     
     self.btnContinue.enabled = NO;
-    [self.btnContinue setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+    [self.btnContinue setBackgroundColor:[UIColor bentoButtonGray]];
 }
 
 - (void)noConnection
@@ -240,13 +242,13 @@
         NSLog(@"CARD INFO: Number: %@, Month: %ld, Year: %ld, CVC: %@", card.number, card.expMonth, card.expYear, card.cvc);
         
         self.btnContinue.enabled = YES;
-        [self.btnContinue setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+        [self.btnContinue setBackgroundColor:[UIColor bentoBrandGreen]];
     }
     else
     {
         _creditCard = nil;
         self.btnContinue.enabled = NO;
-        [self.btnContinue setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+        [self.btnContinue setBackgroundColor:[UIColor bentoButtonGray]];
     }
 }
 

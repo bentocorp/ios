@@ -390,7 +390,7 @@
     btnAddAnotherBento = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45, SCREEN_WIDTH - 60, 45)];
     btnAddAnotherBento.layer.borderColor = BORDER_COLOR.CGColor;
     btnAddAnotherBento.layer.borderWidth = 1.0f;
-    [btnAddAnotherBento setTitleColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f] forState:UIControlStateNormal];
+    [btnAddAnotherBento setTitleColor:[UIColor bentoButtonGray] forState:UIControlStateNormal];
     btnAddAnotherBento.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
     [btnAddAnotherBento addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnAddAnotherBento];
@@ -399,8 +399,6 @@
     
     btnState = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45-65, SCREEN_WIDTH, 45)];
     [btnState setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    [btnState setBackgroundColor:[UIColor colorWithRed:0.475f green:0.522f blue:0.569f alpha:1.0f]];
-    btnState.backgroundColor = [UIColor blackColor];
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
     [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnState];
@@ -632,7 +630,7 @@
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    pagingTitleView.currentTintColor = [UIColor colorWithBentoTitleGray];
+    pagingTitleView.currentTintColor = [UIColor bentoTitleGray];
     [pagingTitleView observeScrollView:scrollView];
     
     if (shouldShowOneMenu)
@@ -1104,7 +1102,7 @@
 //            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], salePrice]; // show price
             strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
             btnAddAnotherBento.enabled = NO;
-            btnAddAnotherBento.titleLabel.textColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f];
+            btnAddAnotherBento.titleLabel.textColor = [UIColor bentoButtonGray];
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
         }
         else
@@ -1149,7 +1147,7 @@
 //            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], unitPrice]; // show price
             strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
             btnAddAnotherBento.enabled = NO;
-            btnAddAnotherBento.titleLabel.textColor = [UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f];
+            btnAddAnotherBento.titleLabel.textColor = [UIColor bentoButtonGray];
             [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
         }
         else
@@ -1197,7 +1195,7 @@
     /*---Finalize Button---*/
     if ([self isCompletedToMakeMyBento])
     {
-        [btnState setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+        [btnState setBackgroundColor:[UIColor bentoBrandGreen]];
         
         NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
         if (strTitle == nil)
@@ -1213,7 +1211,7 @@
     }
     else
     {
-        [btnState setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+        [btnState setBackgroundColor:[UIColor bentoButtonGray]];
         
         NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
         if (strTitle != nil)

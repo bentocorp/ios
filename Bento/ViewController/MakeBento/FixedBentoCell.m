@@ -57,7 +57,7 @@
         
         self.lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(10, self.viewDish.frame.size.height - 45, self.viewDish.frame.size.width - 20, 45)];
         self.lblMainDish.adjustsFontSizeToFitWidth = YES; // dynamically changes font size
-        self.lblMainDish.textColor = [UIColor colorWithBentoTitleGray];
+        self.lblMainDish.textColor = [UIColor bentoTitleGray];
         self.lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
         self.lblMainDish.textAlignment = NSTextAlignmentCenter;
         [self.viewDish addSubview:self.lblMainDish];

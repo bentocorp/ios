@@ -34,6 +34,8 @@
 
 #import <CoreLocation/CoreLocation.h>
 
+#import "UIColor+CustomColors.h"
+
 // Stripe
 #import "Stripe.h"
 #import "STPToken.h"
@@ -672,9 +674,9 @@
     
     self.btnGetItNow.enabled = isReady;
     if (isReady)
-        [self.btnGetItNow setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+        [self.btnGetItNow setBackgroundColor:[UIColor bentoBrandGreen]];
     else
-        [self.btnGetItNow setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+        [self.btnGetItNow setBackgroundColor:[UIColor bentoButtonGray]];
 }
 
 - (void) onUpdatedStatus:(NSNotification *)notification

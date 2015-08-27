@@ -385,7 +385,7 @@
     pagingTitleView = [[BWTitlePagerView alloc] init];
     pagingTitleView.frame = CGRectMake(SCREEN_WIDTH/2-100, 32.5 - 10, 200, 40);
     pagingTitleView.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    pagingTitleView.currentTintColor = [UIColor colorWithBentoTitleGray];
+    pagingTitleView.currentTintColor = [UIColor bentoTitleGray];
     [pagingTitleView observeScrollView:scrollView];
     
     if (shouldShowOneMenu) // shorten scrollview's width
@@ -570,13 +570,13 @@
     {
         servingLunchCell.ivBannerMainDish.hidden = NO;
         servingLunchCell.addButton.enabled = NO;
-        [servingLunchCell.addButton setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+        [servingLunchCell.addButton setBackgroundColor:[UIColor bentoButtonGray]];
     }
     else
     {
         servingLunchCell.ivBannerMainDish.hidden = YES;
         servingLunchCell.addButton.enabled = YES;
-        [servingLunchCell.addButton setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+        [servingLunchCell.addButton setBackgroundColor:[UIColor bentoBrandGreen]];
     }
     
     // add bento button
@@ -661,7 +661,7 @@
         btnCart.selected = YES;
         [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
         
-        [btnState setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+        [btnState setBackgroundColor:[UIColor bentoBrandGreen]];
         btnState.enabled = YES;
     }
     else
@@ -669,7 +669,7 @@
         btnCart.enabled = NO;
         btnCart.selected = NO;
         
-        [btnState setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+        [btnState setBackgroundColor:[UIColor bentoButtonGray]];
         btnState.enabled = NO;
     }
     

@@ -15,6 +15,7 @@
 #import "UIImageView+WebCache.h"
 #import "AppDelegate.h"
 #import "JGProgressHUD.h"
+#import "UIColor+CustomColors.h"
 
 @interface NetworkErrorViewController ()
 
@@ -33,8 +34,8 @@
     
     globalShop = [BentoShop sharedInstance];
     
-    UIColor *color1 = [DataManager getGradientColor1];
-    UIColor *color2 = [DataManager getGradientColor2];
+    UIColor *color1 = [UIColor bentoGradient1];
+    UIColor *color2 = [UIColor bentoGradient2];
     
     ivBackground = [[UIImageView alloc] initWithFrame:self.view.bounds];
     

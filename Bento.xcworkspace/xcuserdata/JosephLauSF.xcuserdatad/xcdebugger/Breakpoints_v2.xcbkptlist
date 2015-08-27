@@ -36,11 +36,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/Order/EnterCreditCardViewController.m"
-            timestampString = "460421098.358731"
+            timestampString = "462395555.95551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "199"
-            endingLineNumber = "199"
+            startingLineNumber = "201"
+            endingLineNumber = "201"
             landmarkName = "-onContinueToPayment:"
             landmarkType = "5">
          </BreakpointContent>
@@ -52,11 +52,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignIn/RegisterViewController.m"
-            timestampString = "460426933.613364"
+            timestampString = "462395555.95551"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "501"
-            endingLineNumber = "501"
+            startingLineNumber = "503"
+            endingLineNumber = "503"
             landmarkName = "-processRegister"
             landmarkType = "5">
          </BreakpointContent>
@@ -68,11 +68,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/IntroViewController.m"
-            timestampString = "461460760.338009"
+            timestampString = "462396967.059375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "773"
-            endingLineNumber = "773">
+            startingLineNumber = "774"
+            endingLineNumber = "774">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -82,11 +82,13 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/IntroViewController.m"
-            timestampString = "461407452.024727"
+            timestampString = "462396967.059375"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "327"
-            endingLineNumber = "327">
+            startingLineNumber = "328"
+            endingLineNumber = "328"
+            landmarkName = "-locationManager:didUpdateLocations:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

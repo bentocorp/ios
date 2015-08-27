@@ -28,6 +28,8 @@
 
 #import "CompleteOrderViewController.h"
 
+#import "UIColor+CustomColors.h"
+
 @interface RegisterViewController () <FBManagerDelegate, MyAlertViewDelegate, CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
@@ -95,7 +97,7 @@
         {
             NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:textField.text];
 //            [newString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"OpenSans-Bold" size:20] range:NSMakeRange(0, [textField.text length])];
-            [newString addAttribute:NSForegroundColorAttributeName value:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f] range:NSMakeRange([textField.text length]-1, 1)];
+            [newString addAttribute:NSForegroundColorAttributeName value:[UIColor bentoBrandGreen] range:NSMakeRange([textField.text length]-1, 1)];
             
             textField.attributedText = newString;
         }
@@ -668,8 +670,8 @@
         self.lblError.text = errorMsg;
     }
     
-    UIColor *errorColor = [UIColor colorWithRed:233.0f / 255.0f green:114.0f / 255.0f blue:2.0f / 255.0f alpha:1.0f];
-    UIColor *correctColor = [UIColor colorWithRed:109.0f / 255.0f green:117.0f / 255.0f blue:131.0f / 255.0f alpha:1.0f];
+    UIColor *errorColor = [UIColor bentoErrorTextOrange];
+    UIColor *correctColor = [UIColor bentoCorrectTextGray];
     
     switch (errorCode) {
         case ERROR_NONE:
@@ -823,9 +825,9 @@
 
 //    self.btnRegister.enabled = isValid;
     if (isValid)
-        [self.btnRegister setBackgroundColor:[UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f]];
+        [self.btnRegister setBackgroundColor:[UIColor bentoBrandGreen]];
     else
-        [self.btnRegister setBackgroundColor:[UIColor colorWithRed:122.0f / 255.0f green:133.0f / 255.0f blue:146.0f / 255.0f alpha:1.0f]];
+        [self.btnRegister setBackgroundColor:[UIColor bentoButtonGray]];
     
     /*------------------------------------------------------------*/
     

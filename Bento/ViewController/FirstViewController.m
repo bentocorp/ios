@@ -33,6 +33,8 @@
 
 #import "IntroViewController.h"
 
+#import "UIColor+CustomColors.h"
+
 @interface FirstViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
@@ -63,8 +65,8 @@
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.ivBackground.bounds;
 
-    UIColor *color1 = [DataManager getGradientColor1];
-    UIColor *color2 = [DataManager getGradientColor2];
+    UIColor *color1 = [UIColor bentoGradient1];
+    UIColor *color2 = [UIColor bentoGradient2];
     gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     [self.ivLaunchLogo setImage:[UIImage imageNamed:@"logo"]];

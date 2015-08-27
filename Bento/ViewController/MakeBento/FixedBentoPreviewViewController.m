@@ -52,7 +52,7 @@
     titleLabel.adjustsFontSizeToFitWidth = YES;
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    titleLabel.textColor = [UIColor colorWithBentoTitleGray];
+    titleLabel.textColor = [UIColor bentoTitleGray];
     titleLabel.text = self.titleText;
     [self.view addSubview:titleLabel];
     

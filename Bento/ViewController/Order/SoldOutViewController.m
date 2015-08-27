@@ -26,6 +26,7 @@
 #import "WebManager.h"
 #import "DataManager.h"
 #import "Mixpanel.h"
+#import "UIColor+CustomColors.h"
 
 @interface SoldOutViewController ()
 
@@ -112,8 +113,8 @@
     CAGradientLayer *gradient = [CAGradientLayer layer];
     gradient.frame = self.ivBackground.bounds;
     
-    UIColor *color1 = [DataManager getGradientColor1];
-    UIColor *color2 = [DataManager getGradientColor2];
+    UIColor *color1 = [UIColor bentoGradient1];
+    UIColor *color2 = [UIColor bentoGradient2];
     gradient.colors = [NSArray arrayWithObjects:(id)[color1 CGColor], (id)[color2 CGColor], nil];
     [self.ivBackground.layer insertSublayer:gradient atIndex:0];
     
