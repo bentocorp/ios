@@ -1026,6 +1026,7 @@
 		FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkErrorViewController.m; sourceTree = "<group>"; };
 		FCC529C41B8F889000B49F34 /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+CustomColors.h"; path = "../UIColor+CustomColors.h"; sourceTree = "<group>"; };
 		FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CustomColors.m"; path = "../UIColor+CustomColors.m"; sourceTree = "<group>"; };
+		FCC529CA1B8FAD4A00B49F34 /* Bento-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bento-Prefix.pch"; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
 		FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCollectionViewCell.m; sourceTree = "<group>"; };
 		FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1243,8 +1244,6 @@
 				722333671A6D57CB006C2446 /* Bento.m */,
 				722333691A6D5847006C2446 /* BentoShop.h */,
 				7223336A1A6D5847006C2446 /* BentoShop.m */,
-				FCC529C41B8F889000B49F34 /* UIColor+CustomColors.h */,
-				FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */,
 				7279E5DE1A6B5F3A00591CB2 /* Manager */,
 			);
 			path = Model;
@@ -1458,6 +1457,7 @@
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
 				722333651A6D57AD006C2446 /* Model */,
+				FCC529C91B8FA38700B49F34 /* Extensions */,
 				90BED09C1A5BCC7B003DC872 /* View */,
 				90BED09D1A5BCC7B003DC872 /* Controller */,
 				90BED09A1A5BCC7B003DC872 /* Resource */,
@@ -1471,6 +1471,7 @@
 			children = (
 				90BED0721A5BCC04003DC872 /* Info.plist */,
 				90BED0731A5BCC04003DC872 /* main.m */,
+				FCC529CA1B8FAD4A00B49F34 /* Bento-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -2009,6 +2010,16 @@
 				726CE35A1A82693900296182 /* BaseViewController.m */,
 			);
 			name = "At Launch";
+			sourceTree = "<group>";
+		};
+		FCC529C91B8FA38700B49F34 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				FCC529C41B8F889000B49F34 /* UIColor+CustomColors.h */,
+				FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */,
+			);
+			name = Extensions;
+			path = ThirdParty;
 			sourceTree = "<group>";
 		};
 		FCDF22031ADC3ADF006B2750 /* Squared Icons */ = {
@@ -3228,6 +3239,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
 					"COCOAPODS=1",
@@ -3263,6 +3276,8 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
 				INFOPLIST_FILE = Bento/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;

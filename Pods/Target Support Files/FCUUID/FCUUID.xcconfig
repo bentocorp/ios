@@ -1,0 +1,1 @@
+FCUUID_OTHER_LDFLAGS = -framework "Foundation" -framework "Security" -framework "UIKit"

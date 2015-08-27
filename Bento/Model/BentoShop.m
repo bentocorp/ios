@@ -1308,8 +1308,9 @@ static BentoShop *_shareInstance;
 - (void)resetBentoArray
 {
     // reset only if not nil and not empty
-    if (self.aryBentos != nil && self.aryBentos.count != 0)
+    if (self.aryBentos.count) {
         [self.aryBentos removeAllObjects];
+    }
 }
 
 #pragma mark Response to State Change

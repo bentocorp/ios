@@ -21,6 +21,7 @@
 #import "JGProgressHUD.h"
 #import "BentoShop.h"
 #import "UIColor+CustomColors.h"
+#import <PureLayout/PureLayout.h>
 
 @interface SignedOutSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -34,6 +35,16 @@
     BOOL isThereConnection;
 }
 
+// AUTOLAYOUT EXAMPLE
+//- (void)updateViewConstraints {
+//    [self.box autoSetDimensionsToSize:CGSizeMake(30, 30)];
+//    [box autoAlignAxisToSuperviewAxis:ALAxisHorizontal];
+//    [box autoAlignAxisToSuperviewAxis:ALAxisVertical];
+//
+//    
+//    [super updateViewConstraints];
+//}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
     
@@ -42,6 +53,12 @@
     
     self.view.backgroundColor = [UIColor bentoBackgroundGray];
     
+    
+//    UIView *box = [[UIView alloc] initForAutoLayout];
+//
+//    [self.view addSubview:box];
+//    [self.view setNeedsUpdateConstraints];
+//    
     /*-----------------------------------------------------------*/
     
     // navigation bar color
