@@ -182,11 +182,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     {}
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    [mixpanel identify:mixpanel.distinctId];
     
     // TRACK: "App Launched"
     [mixpanel track:@"App Launched" properties:nil];
-    
-    NSLog(@"DISTINCT ID: %@", mixpanel.distinctId);
     
     // Mixpanel tracking Opened App Outside of Service Area
     if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]])
