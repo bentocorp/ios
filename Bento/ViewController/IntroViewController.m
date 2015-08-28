@@ -531,6 +531,9 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
     
+    // Call .identify to flush the People record to Mixpanel
+    [[Mixpanel sharedInstance] identify:[Mixpanel sharedInstance].distinctId];
+    
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -542,6 +545,9 @@
 {
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel.people addPushDeviceToken:deviceToken];
+    
+    UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", deviceToken] delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    [alertView show];
     
     NSLog(@"%@", deviceToken);
 }

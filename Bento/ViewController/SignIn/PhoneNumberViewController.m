@@ -383,7 +383,7 @@
         }
         
         // identify user for current session
-        [mixpanel identify:strMailAddr];
+        [mixpanel identify:mixpanel.distinctId];
         
         NSString *currentDate = [self getCurrentDate];
         

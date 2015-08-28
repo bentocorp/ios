@@ -191,6 +191,9 @@
         
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
+    
+    // Call .identify to flush the People record to Mixpanel
+    [[Mixpanel sharedInstance] identify:[Mixpanel sharedInstance].distinctId];
 }
 
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken

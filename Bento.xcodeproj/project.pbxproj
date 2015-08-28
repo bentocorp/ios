@@ -115,7 +115,6 @@
 		7216B76A1AA64C7C0006FFE9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */; };
 		7216B76B1AA64C7C0006FFE9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E41A6BC7E6006C2446 /* Security.framework */; };
 		7216B76C1AA64C7C0006FFE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E21A6BC7DE006C2446 /* Foundation.framework */; };
-		7216B76D1AA64C7C0006FFE9 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7279E5D81A68397D00591CB2 /* FacebookSDK.framework */; };
 		7216B76E1AA64C7C0006FFE9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC0B59E0C21EA384AF9FA91 /* libPods.a */; };
 		7216B7701AA64C7C0006FFE9 /* deliverylocation_icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7CF1A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png */; };
 		7216B7711AA64C7C0006FFE9 /* register_icon_email_err.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7C01A5E126C00D034CF /* register_icon_email_err.png */; };
@@ -242,7 +241,6 @@
 		725BA0361A84EDBF005C18D3 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 725BA0341A84EDBF005C18D3 /* Fabric.framework */; };
 		726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */ = {isa = PBXBuildFile; fileRef = 726A92051A8CBA4900E04EFE /* polygon_service_area.png */; };
 		726CE35B1A82693900296182 /* BaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 726CE35A1A82693900296182 /* BaseViewController.m */; };
-		7279E5D91A68397D00591CB2 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7279E5D81A68397D00591CB2 /* FacebookSDK.framework */; };
 		7279E5E11A6B5F3B00591CB2 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7279E5E01A6B5F3A00591CB2 /* DataManager.m */; };
 		7286EB4C1A7D8BE800D03DCE /* NSObject+RMArchivable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB451A7D8BE800D03DCE /* NSObject+RMArchivable.m */; };
 		7286EB4D1A7D8BE800D03DCE /* NSObject+RMCopyable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB471A7D8BE800D03DCE /* NSObject+RMCopyable.m */; };
@@ -471,7 +469,6 @@
 		FC92E14A1B7E5C880073C5D7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */; };
 		FC92E14B1B7E5C880073C5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E41A6BC7E6006C2446 /* Security.framework */; };
 		FC92E14C1B7E5C880073C5D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E21A6BC7DE006C2446 /* Foundation.framework */; };
-		FC92E14D1B7E5C880073C5D7 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7279E5D81A68397D00591CB2 /* FacebookSDK.framework */; };
 		FC92E14E1B7E5C880073C5D7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC0B59E0C21EA384AF9FA91 /* libPods.a */; };
 		FC92E1501B7E5C880073C5D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
 		FC92E1511B7E5C880073C5D7 /* deliverylocation_icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7CF1A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png */; };
@@ -590,6 +587,9 @@
 		FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
 		FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
 		FCC529C81B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
+		FCC529D41B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */; };
+		FCC529D51B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */; };
+		FCC529D61B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */; };
 		FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED11AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
@@ -807,7 +807,6 @@
 		726A92051A8CBA4900E04EFE /* polygon_service_area.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = polygon_service_area.png; sourceTree = "<group>"; };
 		726CE3591A82693900296182 /* BaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BaseViewController.h; sourceTree = "<group>"; };
 		726CE35A1A82693900296182 /* BaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BaseViewController.m; sourceTree = "<group>"; };
-		7279E5D81A68397D00591CB2 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FacebookSDK.framework; sourceTree = "<group>"; };
 		7279E5DF1A6B5F3A00591CB2 /* DataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataManager.h; sourceTree = "<group>"; };
 		7279E5E01A6B5F3A00591CB2 /* DataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataManager.m; sourceTree = "<group>"; };
 		7286EB441A7D8BE800D03DCE /* NSObject+RMArchivable.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+RMArchivable.h"; sourceTree = "<group>"; };
@@ -1027,6 +1026,7 @@
 		FCC529C41B8F889000B49F34 /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+CustomColors.h"; path = "../UIColor+CustomColors.h"; sourceTree = "<group>"; };
 		FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CustomColors.m"; path = "../UIColor+CustomColors.m"; sourceTree = "<group>"; };
 		FCC529CA1B8FAD4A00B49F34 /* Bento-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bento-Prefix.pch"; sourceTree = "<group>"; };
+		FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../ViewController/FacebookSDK.framework; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
 		FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCollectionViewCell.m; sourceTree = "<group>"; };
 		FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1070,9 +1070,9 @@
 				7216B7681AA64C7C0006FFE9 /* Fabric.framework in Frameworks */,
 				7216B7691AA64C7C0006FFE9 /* GoogleMaps.framework in Frameworks */,
 				7216B76A1AA64C7C0006FFE9 /* MapKit.framework in Frameworks */,
+				FCC529D51B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */,
 				7216B76B1AA64C7C0006FFE9 /* Security.framework in Frameworks */,
 				7216B76C1AA64C7C0006FFE9 /* Foundation.framework in Frameworks */,
-				7216B76D1AA64C7C0006FFE9 /* FacebookSDK.framework in Frameworks */,
 				7216B76E1AA64C7C0006FFE9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1089,6 +1089,7 @@
 				722333831A6E55B6006C2446 /* CoreData.framework in Frameworks */,
 				722333811A6E5570006C2446 /* ImageIO.framework in Frameworks */,
 				7223337F1A6E5535006C2446 /* GLKit.framework in Frameworks */,
+				FCC529D41B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */,
 				7223337D1A6E5504006C2446 /* libc++.dylib in Frameworks */,
 				722333421A6C1B2E006C2446 /* libz.dylib in Frameworks */,
 				725BA0361A84EDBF005C18D3 /* Fabric.framework in Frameworks */,
@@ -1096,7 +1097,6 @@
 				722332E81A6BDEEF006C2446 /* MapKit.framework in Frameworks */,
 				722332E51A6BC7E6006C2446 /* Security.framework in Frameworks */,
 				722332E31A6BC7DE006C2446 /* Foundation.framework in Frameworks */,
-				7279E5D91A68397D00591CB2 /* FacebookSDK.framework in Frameworks */,
 				1E0788627C732857C288841E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1121,6 +1121,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC92E1B51B7E5D830073C5D7 /* CFNetwork.framework in Frameworks */,
+				FCC529D61B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */,
 				FC92E1B31B7E5D500073C5D7 /* calabash.framework in Frameworks */,
 				FC92E13E1B7E5C880073C5D7 /* AdSupport.framework in Frameworks */,
 				FC92E13F1B7E5C880073C5D7 /* iAd.framework in Frameworks */,
@@ -1137,7 +1138,6 @@
 				FC92E14A1B7E5C880073C5D7 /* MapKit.framework in Frameworks */,
 				FC92E14B1B7E5C880073C5D7 /* Security.framework in Frameworks */,
 				FC92E14C1B7E5C880073C5D7 /* Foundation.framework in Frameworks */,
-				FC92E14D1B7E5C880073C5D7 /* FacebookSDK.framework in Frameworks */,
 				FC92E14E1B7E5C880073C5D7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1380,7 +1380,7 @@
 			children = (
 				722333021A6C0F5C006C2446 /* FacebookManager.h */,
 				722333031A6C0F5C006C2446 /* FacebookManager.m */,
-				7279E5D81A68397D00591CB2 /* FacebookSDK.framework */,
+				FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */,
 			);
 			path = FacebookSDK;
 			sourceTree = "<group>";
@@ -3099,6 +3099,8 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
+					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
+					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -3130,6 +3132,8 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
+					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
+					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -3238,6 +3242,8 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
+					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
+					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3275,6 +3281,8 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
+					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
+					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3399,6 +3407,8 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
+					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
+					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -3486,6 +3496,8 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
+					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
+					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
 				INFOPLIST_FILE = "Bento copy-Info.plist";
