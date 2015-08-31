@@ -384,6 +384,7 @@
         
         // identify user for current session
         [mixpanel identify:mixpanel.distinctId];
+        NSLog(@"Distinct ID - %@", mixpanel.distinctId);
         
         NSString *currentDate = [self getCurrentDate];
         

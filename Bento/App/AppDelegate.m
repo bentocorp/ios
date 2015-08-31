@@ -135,6 +135,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     {
         // params are the deep linked params associated with the link that the user clicked before showing up.
         NSLog(@"CHOOSE: %@", params[@"choose"]);
+        
         if (params[@"choose"] != nil)
         {
             // if the app is already open in the background
@@ -147,7 +148,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         [[BentoShop sharedInstance] setBranchParams:params];
         
         NSLog(@"deep link data: %@", [params description]);
-
     }];
 
 /*--------------------------------------FACEBOOK-----------------------------------------*/
@@ -182,16 +182,17 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     {}
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//    NSString *UUID = [[NSUUID UUID] UUIDString];
+//    [mixpanel identify:UUID];
     
-    NSLog(@"Distinct ID - %@", mixpanel.distinctId);
+//    NSLog(@"UUID - %@, Distinct ID - %@", UUID, mixpanel.distinctId);
     
     // TRACK: "App Launched"
-    [mixpanel track:@"App Launched" properties:nil];
+    [mixpanel track:@"App Launched"];
     
     // Mixpanel tracking Opened App Outside of Service Area
-    if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]])
-    {
-        [mixpanel track:@"Opened App Outside of Service Area" properties:nil];
+    if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]]) {
+        [mixpanel track:@"Opened App Outside of Service Area"];
         NSLog(@"OUT OF SERVICE AREA");
     }
 

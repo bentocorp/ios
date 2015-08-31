@@ -492,14 +492,14 @@
         
 /*-----------------------------MIXPANEL-------------------------------*/
         
-        if ([registerOrSignIn isEqualToString:@"Register"])
-        {
+        if ([registerOrSignIn isEqualToString:@"Register"]) {
             // link custom id with default id
             [mixpanel createAlias:strEmail forDistinctID:mixpanel.distinctId];
         }
         
         // identify user for current session
         [mixpanel identify:mixpanel.distinctId];
+        NSLog(@"Distinct ID - %@", mixpanel.distinctId);
         
         NSString *currentDate = [self getCurrentDate];
         

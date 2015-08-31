@@ -23,6 +23,5 @@ pod 'Adjust', :git => 'git://github.com/adjust/ios_sdk.git', :tag => 'v4.2.7'
 pod 'Branch'
 pod 'FCUUID'
 pod 'PureLayout'
-pod ''
 
 
