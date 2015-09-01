@@ -73,16 +73,38 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (void)adjustAttributionChanged:(ADJAttribution *)attribution
 {
     NSLog(@"ATTRIBUTION: %@", attribution);
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-    if (attribution.trackerName != nil)
-    {
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel track:@"App Installed" properties:@{@"Source": attribution.trackerName}];
+//    if (attribution.trackerName != nil)
+//    {
+//        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//        [mixpanel track:@"App Installed" properties:@{@"Source": attribution.trackerName}];
+//        
+//        [[NSUserDefaults standardUserDefaults] setObject:attribution.trackerName forKey:@"SourceOfInstall"];
+//        [[NSUserDefaults standardUserDefaults] synchronize];
+//        
+//        NSLog(@"SourceOfInstall: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"]);
+//    }
+    
+    if (attribution.network != nil) {
+        [mixpanel registerSuperProperties:@{@"[Adjust]Network":  attribution.network}];
         
-        [[NSUserDefaults standardUserDefaults] setObject:attribution.trackerName forKey:@"SourceOfInstall"];
+        [[NSUserDefaults standardUserDefaults] setObject:attribution.network forKey:@"SourceOfInstall"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        
+
         NSLog(@"SourceOfInstall: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"]);
+    }
+    
+    if (attribution.campaign != nil) {
+        [mixpanel registerSuperProperties:@{@"[Adjust]Campaign": attribution.campaign}];
+    }
+    
+    if (attribution.adgroup != nil) {
+        [mixpanel registerSuperProperties:@{@"[Adjust]Adgroup":  attribution.adgroup}];
+    }
+    
+    if (attribution.creative != nil) {
+        [mixpanel registerSuperProperties:@{@"[Adjust]Creative": attribution.creative}];
     }
 }
 
@@ -182,19 +204,13 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     {}
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
 //    NSString *UUID = [[NSUUID UUID] UUIDString];
 //    [mixpanel identify:UUID];
-    
 //    NSLog(@"UUID - %@, Distinct ID - %@", UUID, mixpanel.distinctId);
     
     // TRACK: "App Launched"
     [mixpanel track:@"App Launched"];
-    
-    // Mixpanel tracking Opened App Outside of Service Area
-    if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]]) {
-        [mixpanel track:@"Opened App Outside of Service Area"];
-        NSLog(@"OUT OF SERVICE AREA");
-    }
 
 /*--------------------------------------STRIPE-----------------------------------------*/
 #ifdef DEV_MODE
@@ -213,8 +229,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 /*---------------------------LOCATION MANAGER--------------------------*/
     
     // If IntroVC has already been completely processed once, startUpdatingLocation
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"])
-    {
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"]) {
+        
         // Initialize location manager.
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
@@ -368,17 +384,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             // Perform check for new version of your app
             if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
                 [aV show];
-            
-            /*---------*/
-            
-            if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]])
-            {
-                Mixpanel *mixpanel = [Mixpanel sharedInstance];
-                [mixpanel track:@"Opened App Outside of Service Area" properties:nil];
-                NSLog(@"OUT OF SERVICE AREA");
-            }
-            else
-                NSLog(@"WITHIN SERVICE AREA");
         });
     });
 }
@@ -551,6 +556,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     NSLog(@"lat: %f, long: %f", coordinate.latitude, coordinate.longitude);
     
     [manager stopUpdatingLocation];
+    
+    /*---Mixpanel tracking Opened App Outside of Service Area---*/
+    if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]]) {
+        [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
+        NSLog(@"OUT OF SERVICE AREA");
+    }
 }
 
 - (CLLocationCoordinate2D )getCurrentLocation
