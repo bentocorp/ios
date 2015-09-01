@@ -1166,8 +1166,9 @@ static BentoShop *_shareInstance;
 
 - (BOOL)checkLocation:(CLLocationCoordinate2D)location
 {
-    if (self.serviceArea == nil)
+    if (self.serviceArea == nil) {
         return NO;
+    }
     
     MKMapPoint mapPoint = MKMapPointForCoordinate(location);
     
@@ -1176,14 +1177,16 @@ static BentoShop *_shareInstance;
     MKMapPoint *polygonPoints = self.serviceArea.points;
     size_t nCount = self.serviceArea.pointCount;
     
-    for (int p = 0; p < nCount; p++)
-    {
+    for (int p = 0; p < nCount; p++) {
+        
         MKMapPoint mp = polygonPoints[p];
         
-        if (p == 0)
+        if (p == 0) {
             CGPathMoveToPoint(mpr, NULL, mp.x, mp.y);
-        else
+        }
+        else {
             CGPathAddLineToPoint(mpr, NULL, mp.x, mp.y);
+        }
     }
     
     CGPoint mapPointAsCGP = CGPointMake(mapPoint.x, mapPoint.y);

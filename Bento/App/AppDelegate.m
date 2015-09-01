@@ -72,11 +72,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 // adjust callback, Organic? Facebook? Twitter?
 - (void)adjustAttributionChanged:(ADJAttribution *)attribution
 {
-    NSLog(@"ATTRIBUTION: %@", attribution);
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    
     if (attribution.network != nil) {
-        [mixpanel registerSuperProperties:@{@"[Adjust]Network":  attribution.network}];
         
         [[NSUserDefaults standardUserDefaults] setObject:attribution.network forKey:@"SourceOfInstall"];
         [[NSUserDefaults standardUserDefaults] synchronize];
@@ -84,17 +80,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         NSLog(@"SourceOfInstall: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"]);
     }
     
-    if (attribution.campaign != nil) {
-        [mixpanel registerSuperProperties:@{@"[Adjust]Campaign": attribution.campaign}];
-    }
-    
-    if (attribution.adgroup != nil) {
-        [mixpanel registerSuperProperties:@{@"[Adjust]Adgroup":  attribution.adgroup}];
-    }
-    
-    if (attribution.creative != nil) {
-        [mixpanel registerSuperProperties:@{@"[Adjust]Creative": attribution.creative}];
-    }
+    NSLog(@"ATTRIBUTION: %@", attribution);
 }
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
@@ -224,7 +210,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.distanceFilter = kCLDistanceFilterNone;
+        locationManager.distanceFilter = 500;
         
         [locationManager startUpdatingLocation];
     }
@@ -542,12 +528,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     CLLocation *location = locations[0];
     coordinate = location.coordinate;
     
-    NSLog(@"lat: %f, long: %f", coordinate.latitude, coordinate.longitude);
-    
     [manager stopUpdatingLocation];
     
     /*---Mixpanel tracking Opened App Outside of Service Area---*/
-    if (![[BentoShop sharedInstance] checkLocation:[self getCurrentLocation]]) {
+    if ([[BentoShop sharedInstance] checkLocation:coordinate] == NO) {
         [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
         NSLog(@"OUT OF SERVICE AREA");
     }
