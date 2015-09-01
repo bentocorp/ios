@@ -146,11 +146,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/App/AppDelegate.m"
-            timestampString = "462831785.402333"
+            timestampString = "462833359.160499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "198"
-            endingLineNumber = "198"
+            startingLineNumber = "184"
+            endingLineNumber = "184"
             landmarkName = "-application:didFinishLaunchingWithOptions:"
             landmarkType = "5">
          </BreakpointContent>
@@ -162,11 +162,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/App/AppDelegate.m"
-            timestampString = "462831785.402333"
+            timestampString = "462833605.682878"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "333"
-            endingLineNumber = "333"
+            startingLineNumber = "304"
+            endingLineNumber = "304"
             landmarkName = "-applicationWillEnterForeground:"
             landmarkType = "5">
             <Locations>
@@ -178,11 +178,11 @@
                   moduleName = "Bento"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/App/AppDelegate.m"
-                  timestampString = "462832739.829248"
+                  timestampString = "462833605.956207"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "336"
-                  endingLineNumber = "336"
+                  startingLineNumber = "307"
+                  endingLineNumber = "307"
                   offsetFromSymbolStart = "52">
                </Location>
                <Location
@@ -193,11 +193,11 @@
                   moduleName = "Bento"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/App/AppDelegate.m"
-                  timestampString = "462832739.82947"
+                  timestampString = "462833605.956328"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "336"
-                  endingLineNumber = "336"
+                  startingLineNumber = "307"
+                  endingLineNumber = "307"
                   offsetFromSymbolStart = "32">
                </Location>
             </Locations>
@@ -210,11 +210,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/App/AppDelegate.m"
-            timestampString = "462832580.492779"
+            timestampString = "462833603.078359"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "549"
-            endingLineNumber = "549"
+            startingLineNumber = "534"
+            endingLineNumber = "534"
             landmarkName = "-locationManager:didUpdateLocations:"
             landmarkType = "5">
          </BreakpointContent>
@@ -225,13 +225,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/Model/BentoShop.m"
-            timestampString = "462832719.645741"
+            filePath = "Bento/App/AppDelegate.m"
+            timestampString = "462833588.318909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1168"
-            endingLineNumber = "1168"
-            landmarkName = "-checkLocation:"
+            startingLineNumber = "378"
+            endingLineNumber = "378"
+            landmarkName = "-applicationDidBecomeActive:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

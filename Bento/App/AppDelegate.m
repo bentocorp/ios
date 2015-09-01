@@ -200,21 +200,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // Bento Shop
     globalShop = [BentoShop sharedInstance];
     
-    
-/*---------------------------LOCATION MANAGER--------------------------*/
-    
-    // If IntroVC has already been completely processed once, startUpdatingLocation
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"]) {
-        
-        // Initialize location manager.
-        locationManager = [[CLLocationManager alloc] init];
-        locationManager.delegate = self;
-        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.distanceFilter = 500;
-        
-        [locationManager startUpdatingLocation];
-    }
-    
 /*---------------------------------------------------------------------*/
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -377,16 +362,33 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
     
-    if ([self connected])
-    {
-        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion)
-        {
+    if ([self connected]) {
+        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [globalShop setLunchOrDinnerModeByTimes];
                 [globalShop getMenus];
                 [globalShop getStatus];
                 [globalShop getServiceArea];
+                
+                /*---------------------------LOCATION MANAGER--------------------------*/
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    
+                    // If IntroVC has already been completely processed once, startUpdatingLocation
+                    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"]) {
+                        
+                        // Initialize location manager.
+                        locationManager = [[CLLocationManager alloc] init];
+                        locationManager.delegate = self;
+                        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+                        locationManager.distanceFilter = 500;
+                        
+                        [locationManager startUpdatingLocation];
+                    }
+                });
+                /*---------------------------------------------------------------------*/
             });
+            
+            
             
             [globalShop refreshResume];
         }
@@ -447,8 +449,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #pragma mark MyAlertViewDelegate
 - (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 007)
+    if (alertView.tag == 007) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
+    }
 }
 
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
@@ -466,24 +469,23 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 {
     Reachability * reach = [note object];
     
-    if(reach == googleReach)
-    {
+    if(reach == googleReach) {
+        
         NSLog(@"REACHABLE");
         
-        if([reach isReachable])
-        {
-            if (ranFirstTime == NO)
-            {
+        if([reach isReachable]) {
+            if (ranFirstTime == NO) {
+                
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"networkConnected" object:nil];
                 
                 ranFirstTime = YES;
             }
         }
-        else
-        {
+        else {
             NSLog(@"UNREACHABLE");
             
             NSLog(@"PREVENT POST NETWORK CONNECTED");
+            
             [connectionTimer invalidate]; // prevent posting "networkConnected"
             
             [globalShop refreshPause]; // stop trying to call API
