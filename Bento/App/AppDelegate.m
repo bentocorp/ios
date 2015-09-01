@@ -75,17 +75,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     NSLog(@"ATTRIBUTION: %@", attribution);
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     
-//    if (attribution.trackerName != nil)
-//    {
-//        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-//        [mixpanel track:@"App Installed" properties:@{@"Source": attribution.trackerName}];
-//        
-//        [[NSUserDefaults standardUserDefaults] setObject:attribution.trackerName forKey:@"SourceOfInstall"];
-//        [[NSUserDefaults standardUserDefaults] synchronize];
-//        
-//        NSLog(@"SourceOfInstall: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"]);
-//    }
-    
     if (attribution.network != nil) {
         [mixpanel registerSuperProperties:@{@"[Adjust]Network":  attribution.network}];
         
