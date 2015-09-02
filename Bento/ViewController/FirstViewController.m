@@ -113,14 +113,6 @@
     }];
     
     [manager stopUpdatingLocation];
-    
-    /*---Mixpanel tracking Opened App Outside of Service Area---*/
-    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    CLLocationCoordinate2D coordinate = [delegate getCurrentLocation];
-    if ([[BentoShop sharedInstance] checkLocation:coordinate] == NO) {
-        [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
-        NSLog(@"OUT OF SERVICE AREA");
-    }
 }
 
 -(NSString *)getCurrentDate

@@ -184,6 +184,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
 #endif
     
+    NSLog(@"DISTINCT ID ON LAUNCH - %@", [[Mixpanel sharedInstance] distinctId]);
+    
 /*--------------------------------------STRIPE-----------------------------------------*/
 #ifdef DEV_MODE
     [Stripe setDefaultPublishableKey:StripePublishableTestKey];
@@ -516,6 +518,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     coordinate = location.coordinate;
     
     [manager stopUpdatingLocation];
+    
+    /*---Mixpanel tracking Opened App Outside of Service Area---*/
+    if ([[BentoShop sharedInstance] checkLocation:coordinate] == NO) {
+        [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
+        NSLog(@"OUT OF SERVICE AREA");
+    }
 }
 
 - (CLLocationCoordinate2D )getCurrentLocation
