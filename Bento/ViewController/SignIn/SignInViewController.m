@@ -353,22 +353,25 @@
 
         // identify user for current session
         [mixpanel identify:strEmail];
-        NSLog(@"DISTINCT ID - %@", mixpanel.distinctId);
         
-        NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
-        [mixpanel.people addPushDeviceToken:deviceToken];
-        NSLog(@"Device Token - %@", deviceToken);
-        
-        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", deviceToken] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
-        [alert show];
+        // reregister deviceToken to server
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] != nil) {
+            
+            NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+            [mixpanel.people addPushDeviceToken:deviceToken];
+            
+            NSLog(@"Device Token - %@", deviceToken);
+        }
         
         NSString *currentAddressFinal;
         
-        if (currentAddress != nil)
+        if (currentAddress != nil) {
             currentAddressFinal = currentAddress;
-        else
+        }
+        else {
             currentAddressFinal = @"N/A";
-            
+        }
+        
         // set properties
         [mixpanel.people set:@{
                                @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
@@ -376,8 +379,6 @@
                                @"$phone": response[@"phone"],
                                @"Last Login Address": currentAddressFinal
                                }];
-        
-        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]], response[@"email"], response[@"phone"], [self getCurrentTime], [self getCurrentDate], currentAddress);
         
         /*--------------------------------------------------------------------*/
         

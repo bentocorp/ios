@@ -385,7 +385,14 @@
         // identify user for current session
         [mixpanel identify:strMailAddr];
         
-        NSLog(@"Distinct ID - %@", mixpanel.distinctId);
+        // reregister deviceToken to server
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] != nil) {
+            
+            NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+            [mixpanel.people addPushDeviceToken:deviceToken];
+            
+            NSLog(@"Device Token - %@", deviceToken);
+        }
         
         NSString *currentDate = [self getCurrentDate];
         
@@ -393,20 +400,26 @@
         NSString *currentDateFinal;
         NSString *currentAddressFinal;
         
-        if (source != nil)
+        if (source != nil) {
             sourceFinal = source;
-        else
+        }
+        else {
             sourceFinal = @"N/A";
+        }
         
-        if (currentDate != nil)
+        if (currentDate != nil) {
             currentDateFinal = currentDate;
-        else
+        }
+        else {
             currentDateFinal = @"N/A";
+        }
         
-        if (currentAddress != nil)
+        if (currentAddress != nil) {
             currentAddressFinal = currentAddress;
-        else
+        }
+        else {
             currentAddressFinal = @"N/A";
+        }
         
         // set initial properties once
         [mixpanel.people setOnce:@{
@@ -422,7 +435,8 @@
                                @"$phone": strPhoneNumber,
                                }];
         
-        NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentDate], currentAddress, [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName], strMailAddr, strPhoneNumber);
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"registeredLogin"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
 /*--------------------------------------------------------------------*/
         
@@ -557,11 +571,22 @@
          // identify user for current session
          [mixpanel identify:response[@"email"]];
          
+         // reregister deviceToken to server
+         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] != nil) {
+             
+             NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+             [mixpanel.people addPushDeviceToken:deviceToken];
+             
+             NSLog(@"Device Token - %@", deviceToken);
+         }
+         
          NSString *currentAddressFinal;
-         if (currentAddress != nil)
+         if (currentAddress != nil) {
              currentAddressFinal = currentAddress;
-         else
+         }
+         else {
              currentAddressFinal = @"N/A";
+         }
          
          // set properties
          [mixpanel.people set:@{

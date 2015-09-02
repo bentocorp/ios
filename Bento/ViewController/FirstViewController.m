@@ -78,13 +78,18 @@
     self.lblLaunchSlogan.text = strSlogan;
     
     /*---------------------------LOCATION MANAGER--------------------------*/
-    
-    // Initialize location manager.
-    locationManager = [[CLLocationManager alloc] init];
-    locationManager.delegate = self;
-    locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = kCLDistanceFilterNone;
-    [locationManager startUpdatingLocation];
+        
+        // If IntroVC has already been completely processed once, startUpdatingLocation
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"]) {
+            
+            // Initialize location manager.
+            locationManager = [[CLLocationManager alloc] init];
+            locationManager.delegate = self;
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+            locationManager.distanceFilter = 500;
+            
+            [locationManager startUpdatingLocation];
+        }
     
     /*---------------------------------------------------------------------*/
 }
@@ -108,6 +113,14 @@
     }];
     
     [manager stopUpdatingLocation];
+    
+    /*---Mixpanel tracking Opened App Outside of Service Area---*/
+    AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    CLLocationCoordinate2D coordinate = [delegate getCurrentLocation];
+    if ([[BentoShop sharedInstance] checkLocation:coordinate] == NO) {
+        [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
+        NSLog(@"OUT OF SERVICE AREA");
+    }
 }
 
 -(NSString *)getCurrentDate
@@ -249,11 +262,23 @@
         // identify user for current session
         [mixpanel identify:response[@"email"]];
         
+        // reregister deviceToken to server
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] != nil) {
+            
+            NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+            [mixpanel.people addPushDeviceToken:deviceToken];
+            
+            NSLog(@"Device Token - %@", deviceToken);
+        }
+        
         NSString *currentAddressFinal;
-        if (currentAddress != nil)
+        
+        if (currentAddress != nil) {
             currentAddressFinal = currentAddress;
-        else
+        }
+        else {
             currentAddressFinal = @"N/A";
+        }
             
         // set properties
         [mixpanel.people set:@{
@@ -322,18 +347,46 @@
 
 - (void)process
 {
-    if ([isThereConnection isEqualToString:@"NO"]) {
-        [self showNetworkErrorScreen];
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+    
+    // first time launching, reset default distinctID to custom one using newly generated UUID, then save it to persistent storage
+    if ([userDefaults objectForKey:@"Launched Once"] == nil) {
+        
+        NSString *UUID = [[NSUUID UUID] UUIDString];
+        [mixpanel identify:UUID];
+        
+        [userDefaults setObject:UUID forKey:@"UUID String"];
+        [userDefaults setObject:@"YES" forKey:@"Launched Once"];
+        [userDefaults synchronize];
+        
+        [self processAfterLogin];
     }
+    // not first time launching, use UUID from persistent storage
     else {
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"apiName"] != nil &&
-            [[NSUserDefaults standardUserDefaults] objectForKey:@"loginRequest"] != nil) {
-            [self processAutoLogin];
+        
+        // no connection, show error screen
+        if ([isThereConnection isEqualToString:@"NO"]) {
+            [self showNetworkErrorScreen];
         }
         else {
-            [self processAfterLogin];
+            if ([[NSUserDefaults standardUserDefaults] objectForKey:@"apiName"] != nil
+                && [[NSUserDefaults standardUserDefaults] objectForKey:@"loginRequest"] != nil) {
+                
+                // logged in, identify with alias
+                [self processAutoLogin];
+            }
+            else {
+                // logged out, identify with saved UUID
+                NSString *UUID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UUID String"];
+                [mixpanel identify:UUID];
+                
+                [self processAfterLogin];
+            }
         }
     }
+    
+    [mixpanel track:@"App Launched"];
 }
 
 - (void)gotoIntroScreen {
@@ -399,7 +452,7 @@
                 [self.navigationController pushViewController:customBentoViewController animated:NO];
                 [self.navigationController pushViewController:chooseMainDishVC animated:YES];
             }
-            // deep link to Choose Your Side Disg
+            // deep link to Choose Your Side Dish
             else if ([mainOrSide isEqualToString:@"side"]) {
                 ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
                 [self.navigationController pushViewController:customBentoViewController animated:NO];

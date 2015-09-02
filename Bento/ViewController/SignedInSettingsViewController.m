@@ -468,7 +468,29 @@
         [[BentoShop sharedInstance] setSignInStatus:NO];
         
 /*------CLEAR MIXPANEL ID AND PROPERTIES ON LOGOUT------*/
-        [[Mixpanel sharedInstance] reset];
+        
+        Mixpanel *mixpanel = [Mixpanel sharedInstance];
+        
+        NSString *UUID;
+        
+        // logged in by registering new account
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"registeredLogin"] isEqualToString:@"YES"]) {
+            UUID = [[NSUUID UUID] UUIDString];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:UUID forKey:@"UUID String"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        // looged in normally
+        else {
+            // reset distinctId with preexisting UUID, so mixpanel profile doesn't break
+            UUID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UUID String"];
+        }
+        
+        [mixpanel identify:UUID];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"registeredLogin"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+        
 /*------------------------------------------------------*/
         
         // dismiss view

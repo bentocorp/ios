@@ -46,6 +46,7 @@
 #import "JGProgressHUD.h"
 
 #import "Mixpanel/MPTweakInline.h"
+#import "Mixpanel.h"
 
 #import "UIColor+CustomColors.h"
 
@@ -661,6 +662,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
 
+    NSLog(@"DISTINCT ID - %@", [[Mixpanel sharedInstance] distinctId]);
 }
 
 - (void)noConnection

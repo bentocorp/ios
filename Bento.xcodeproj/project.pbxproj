@@ -3234,8 +3234,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
@@ -3261,7 +3261,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "198c4532-e5b7-47da-aef6-3c363bb81cfb";
+				PROVISIONING_PROFILE = "0254d43c-34e5-40dd-bdf7-f0c8f02b6188";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3273,8 +3273,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
@@ -3291,7 +3291,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "198c4532-e5b7-47da-aef6-3c363bb81cfb";
+				PROVISIONING_PROFILE = "0254d43c-34e5-40dd-bdf7-f0c8f02b6188";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

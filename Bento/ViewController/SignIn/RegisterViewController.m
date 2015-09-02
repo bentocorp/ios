@@ -493,9 +493,14 @@
         
         [mixpanel identify:strEmail];
         
-        NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
-        [mixpanel.people addPushDeviceToken:deviceToken];
-        NSLog(@"Device Token - %@", deviceToken);
+        // reregister deviceToken to server
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] != nil) {
+            
+            NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+            [mixpanel.people addPushDeviceToken:deviceToken];
+            
+            NSLog(@"Device Token - %@", deviceToken);
+        }
         
         NSString *currentDate = [self getCurrentDate];
         NSString *sourceFinal;
@@ -537,7 +542,10 @@
                                @"$phone": strPhoneNumber,
                                }];
         
-        [mixpanel track:@"Completed Registration" properties:nil];
+        [mixpanel track:@"Completed Registration"];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"registeredLogin"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
         
 /*---------------------------------------------------------------------*/
         
@@ -860,8 +868,7 @@
     
     //
     
-    if (textField.tag == 101)
-    {
+    if (textField.tag == 101) {
         textField.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
     }
 }
@@ -895,8 +902,7 @@
     
     //
     
-    if (textField.tag == 101)
-    {
+    if (textField.tag == 101) {
         textField.font = [UIFont fontWithName:@"OpenSans" size:14];
     }
 }

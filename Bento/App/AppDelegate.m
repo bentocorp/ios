@@ -85,6 +85,14 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+    [[UIApplication sharedApplication] registerForRemoteNotifications];
+
+
+    
+    
+    
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
@@ -176,9 +184,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
 #endif
     
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"App Launched"];
-
 /*--------------------------------------STRIPE-----------------------------------------*/
 #ifdef DEV_MODE
     [Stripe setDefaultPublishableKey:StripePublishableTestKey];
@@ -352,9 +357,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                 [globalShop getStatus];
                 [globalShop getServiceArea];
                 
-                /*---------------------------LOCATION MANAGER--------------------------*/
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    
                     // If IntroVC has already been completely processed once, startUpdatingLocation
                     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"]) {
                         
@@ -367,11 +370,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                         [locationManager startUpdatingLocation];
                     }
                 });
-                /*---------------------------------------------------------------------*/
             });
-            
-            
-            
+
             [globalShop refreshResume];
         }
     }
@@ -433,10 +433,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #pragma mark Remote Notifications
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
-//    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-//    [mixpanel identify:mixpanel.distinctId]; // Call identify to flush the People record to Mixpanel
-//    [mixpanel.people addPushDeviceToken:deviceToken];
-    
     [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
@@ -477,7 +473,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             
             [connectionTimer invalidate]; // prevent posting "networkConnected"
             
-            [globalShop refreshPause]; // stop trying to call API
+            [globalShop refreshPause];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"networkError" object:nil];
         }
@@ -520,12 +516,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     coordinate = location.coordinate;
     
     [manager stopUpdatingLocation];
-    
-    /*---Mixpanel tracking Opened App Outside of Service Area---*/
-    if ([[BentoShop sharedInstance] checkLocation:coordinate] == NO) {
-        [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
-        NSLog(@"OUT OF SERVICE AREA");
-    }
 }
 
 - (CLLocationCoordinate2D )getCurrentLocation
