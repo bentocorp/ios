@@ -85,26 +85,29 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    /*-----------------------------------------------------------------------------------------*/
+    /*------------------------------------REGISTER NOTIFICATIONS-------------------------------------*/
     
-    if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
+    if ([self isPushEnabled]) {
+        
+        if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
 #ifdef __IPHONE_8_0
-        UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
-                                                                                             | UIUserNotificationTypeBadge
-                                                                                             | UIUserNotificationTypeSound) categories:nil];
-        [application registerUserNotificationSettings:settings];
+            UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
+                                                                                                 | UIUserNotificationTypeBadge
+                                                                                                 | UIUserNotificationTypeSound) categories:nil];
+            [application registerUserNotificationSettings:settings];
 #endif
-    } else {
-        UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-        [application registerForRemoteNotificationTypes:myTypes];
+        } else {
+            UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
+            [application registerForRemoteNotificationTypes:myTypes];
+        }
     }
+
+    /*-----------------------------------------------------------------------------------------*/
 
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(reachabilityChanged:)
                                                  name:kReachabilityChangedNotification
                                                object:nil];
-    
-    /*-----------------------------------------------------------------------------------------*/
     
     googleReach = [Reachability reachabilityWithHostname:@"www.google.com"];
     
@@ -441,6 +444,25 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 
 #pragma mark Remote Notifications
+#ifdef __IPHONE_8_0
+- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+{
+    // register to receive notifications
+    [application registerForRemoteNotifications];
+}
+
+- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
+{
+    // handle the actions
+    if ([identifier isEqualToString:@"declineAction"]) {
+        
+    }
+    else if ([identifier isEqualToString:@"answerAction"]) {
+        
+    }
+}
+#endif
+
 - (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
 {
     [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];
@@ -459,22 +481,31 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     NSLog(@"Received remote notification");
 }
 
-#ifdef __IPHONE_8_0
-- (void)application:(UIApplication *)application didRegisterUserNotificationSettings:(UIUserNotificationSettings *)notificationSettings
+- (BOOL)isPushEnabled
 {
-    //register to receive notifications
-    [application registerForRemoteNotifications];
-}
-
-- (void)application:(UIApplication *)application handleActionWithIdentifier:(NSString *)identifier forRemoteNotification:(NSDictionary *)userInfo completionHandler:(void(^)())completionHandler
-{
-    //handle the actions
-    if ([identifier isEqualToString:@"declineAction"]){
+    BOOL enabled;
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)])
+    {
+        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
+            enabled = NO;
+        else
+            enabled = YES;
     }
-    else if ([identifier isEqualToString:@"answerAction"]){
+    else
+    {
+        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
+        
+        if (types & UIRemoteNotificationTypeAlert)
+            enabled = YES;
+        else
+            enabled = NO;
     }
+    
+    return enabled;
 }
-#endif
 
 #pragma mark TMReachability Notification Method
 -(void)reachabilityChanged:(NSNotification*)note
