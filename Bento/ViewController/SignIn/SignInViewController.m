@@ -359,6 +359,9 @@
         [mixpanel.people addPushDeviceToken:deviceToken];
         NSLog(@"Device Token - %@", deviceToken);
         
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:[NSString stringWithFormat:@"%@", deviceToken] delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        [alert show];
+        
         NSString *currentAddressFinal;
         
         if (currentAddress != nil)
