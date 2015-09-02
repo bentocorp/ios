@@ -273,7 +273,7 @@
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = kCLDistanceFilterNone;
-    locationManager.distanceFilter = 50; // only update if moved 50 meters
+    locationManager.distanceFilter = 500; // only update if moved 500 meters
     
 #ifdef __IPHONE_8_0
     if (IS_OS_8_OR_LATER)
@@ -288,16 +288,16 @@
 {
     [[Mixpanel sharedInstance] track:@"Don't Allow Location Services"];
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Pressed Get Started"] == nil)
-    {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Pressed Get Started"] == nil) {
         [self showTutorial];
     }
-    else
-    {
-        if ([self isPushEnabled])
+    else {
+        if ([self isPushEnabled]) {
             [self exitIntroScreen];
-        else
+        }
+        else {
             [self showPushTutorialV2];
+        }
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Shown Location Request"];
@@ -307,8 +307,7 @@
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     // ran once
-    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"LocationServices"])
-    {
+    if (![[NSUserDefaults standardUserDefaults] objectForKey:@"LocationServices"]) {
         [[NSUserDefaults standardUserDefaults] setObject:@"Enabled" forKey:@"LocationServices"];
         [[Mixpanel sharedInstance] track:@"Allow Location Services"];
     }
@@ -531,23 +530,11 @@
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
     
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel identify:mixpanel.distinctId]; // Call identify to flush the People record to Mixpanel
-    NSLog(@"Distinct ID - %@", mixpanel.distinctId);
-    
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     exitOnWhichScreen = @"Push";
     [self exitIntroScreen];
-}
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people addPushDeviceToken:deviceToken];
-    
-    NSLog(@"%@", deviceToken);
 }
 
 #pragma mark Exit Screen

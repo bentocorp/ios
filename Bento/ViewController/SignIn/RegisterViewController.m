@@ -450,13 +450,12 @@
                                 };
     
     NSString *source;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil) {
         source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
-    
-    NSString *registerOrSignIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"RegisterOrSignIn"];
+    }
     
     /*------------------TEST DATA LOG FOR MIXPANEL BEFORE PROCESSING*-----------------*/
-    NSLog(@"%@, %@, %@, %@, %@, %@, %@, %@", registerOrSignIn, mixpanel.distinctId, source, [self getCurrentDate], currentAddress, strUserName, strEmail, strPhoneNumber);
+    NSLog(@"%@, %@, %@, %@, %@, %@, %@", mixpanel.distinctId, source, [self getCurrentDate], currentAddress, strUserName, strEmail, strPhoneNumber);
     /*--------------------------------------------------------------------------------*/
     
     NSDictionary *dicRequest = @{@"data" : [loginInfo jsonEncodedKeyValueString]};
@@ -469,9 +468,6 @@
     NSString *strRequest = [NSString stringWithFormat:@"%@/user/signup", SERVER_URL];
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
-        
-//        NSDictionary *response = networkOperation.responseJSON;
-//        [[DataManager shareDataManager] setUserInfo:response];
         
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
         NSString *strRequest = [NSString stringWithFormat:@"%@/user/login", SERVER_URL];
@@ -492,35 +488,40 @@
         
 /*-----------------------------MIXPANEL-------------------------------*/
         
-        if ([registerOrSignIn isEqualToString:@"Register"]) {
-            // link custom id with default id
-            [mixpanel createAlias:strEmail forDistinctID:mixpanel.distinctId];
-        }
+        // link custom alias to default distintId
+        [mixpanel createAlias:strEmail forDistinctID:mixpanel.distinctId];
         
-        // identify user for current session
-        [mixpanel identify:mixpanel.distinctId];
-        NSLog(@"Distinct ID - %@", mixpanel.distinctId);
+        [mixpanel identify:strEmail];
+        
+        NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+        [mixpanel.people addPushDeviceToken:deviceToken];
+        NSLog(@"Device Token - %@", deviceToken);
         
         NSString *currentDate = [self getCurrentDate];
-        
         NSString *sourceFinal;
         NSString *currentDateFinal;
         NSString *currentAddressFinal;
         
-        if (source != nil)
+        if (source != nil) {
             sourceFinal = source;
-        else
+        }
+        else {
             sourceFinal = @"N/A";
+        }
         
-        if (currentDate != nil)
+        if (currentDate != nil) {
             currentDateFinal = currentDate;
-        else
+        }
+        else {
             currentDateFinal = @"N/A";
+        }
         
-        if (currentAddress != nil)
+        if (currentAddress != nil) {
             currentAddressFinal = currentAddress;
-        else
+        }
+        else {
             currentAddressFinal = @"N/A";
+        }
         
         // set initial properties once
         [mixpanel.people setOnce:@{
@@ -536,10 +537,9 @@
                                @"$phone": strPhoneNumber,
                                }];
         
-/*--------------------------------------------------------------------*/
-        
         [mixpanel track:@"Completed Registration" properties:nil];
-        NSLog(@"COMPLETED REGISTRATION");
+        
+/*---------------------------------------------------------------------*/
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
         [self.navigationController popViewControllerAnimated:YES];

@@ -172,19 +172,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
 /*--------------------------------------MIXPANEL-----------------------------------------*/
 #ifndef DEV_MODE
-    {
-        [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];  // Use MixPanel for production build only
-    }
+    // set for prod build only, won't track dev
+    [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
 #endif
-    {}
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    
-//    NSString *UUID = [[NSUUID UUID] UUIDString];
-//    [mixpanel identify:UUID];
-//    NSLog(@"UUID - %@, Distinct ID - %@", UUID, mixpanel.distinctId);
-    
-    // TRACK: "App Launched"
     [mixpanel track:@"App Launched"];
 
 /*--------------------------------------STRIPE-----------------------------------------*/
@@ -348,16 +340,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     });
 }
 
-- (void)showLocationAlert
-{
-    UINavigationController *vcNav = (UINavigationController *)self.window.rootViewController;
-    UIViewController *vcCurrent = vcNav.visibleViewController;
-    
-    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Warning" message:@"You're out of delivery zone now." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-    [alertView showInView:vcCurrent.view];
-    alertView = nil;
-}
-
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
@@ -393,13 +375,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             [globalShop refreshResume];
         }
     }
-    
-/*
-    // Check User Location and Confirm
-    CLLocationCoordinate2D location = [self getCurrentLocation];
-    if (![globalShop checkLocation:location])
-        [self showLocationAlert];
-*/
   
     // Facebook event tracking
 #ifndef DEV_MODE
@@ -454,14 +429,28 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     }
 }
 
+
+#pragma mark Remote Notifications
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
+{
+//    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+//    [mixpanel identify:mixpanel.distinctId]; // Call identify to flush the People record to Mixpanel
+//    [mixpanel.people addPushDeviceToken:deviceToken];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:deviceToken forKey:@"deviceToken"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"Device Token - %@", deviceToken);
+}
+
+- (void)application:(UIApplication*)application didFailToRegisterForRemoteNotificationsWithError:(NSError*)error
+{
+    NSLog(@"Failed to get token, error: %@", error);
+}
+
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
-    // Show alert for push notifications recevied while the app is running
-    NSString *message = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
-    
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
-    
-    [alert show];
+    NSLog(@"Received remote notification");
 }
 
 #pragma mark TMReachability Notification Method

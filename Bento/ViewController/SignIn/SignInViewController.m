@@ -353,6 +353,11 @@
 
         // identify user for current session
         [mixpanel identify:strEmail];
+        NSLog(@"DISTINCT ID - %@", mixpanel.distinctId);
+        
+        NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+        [mixpanel.people addPushDeviceToken:deviceToken];
+        NSLog(@"Device Token - %@", deviceToken);
         
         NSString *currentAddressFinal;
         

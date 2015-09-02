@@ -468,12 +468,7 @@
         [[BentoShop sharedInstance] setSignInStatus:NO];
         
 /*------CLEAR MIXPANEL ID AND PROPERTIES ON LOGOUT------*/
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        [mixpanel reset];
-        
-        // Because default distinctID (IFA) isn't being reset, reset it using fresh UUID
-        [mixpanel identify:[[NSUUID UUID] UUIDString]];
-        NSLog(@"Distinct ID - %@", mixpanel.distinctId);
+        [[Mixpanel sharedInstance] reset];
 /*------------------------------------------------------*/
         
         // dismiss view

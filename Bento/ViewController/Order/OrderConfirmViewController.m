@@ -191,19 +191,6 @@
         
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
-    
-    // Call .identify to flush the People record to Mixpanel
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel identify:mixpanel.distinctId];
-    NSLog(@"Distinct ID - %@", mixpanel.distinctId);
-}
-
-- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken
-{
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel.people addPushDeviceToken:deviceToken];
-    
-    NSLog(@"Device Token - %@", deviceToken);
 }
 
 - (IBAction)onTurnOnPush:(id)sender
