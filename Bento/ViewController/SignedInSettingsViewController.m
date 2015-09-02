@@ -469,8 +469,6 @@
         
 /*------CLEAR MIXPANEL ID AND PROPERTIES ON LOGOUT------*/
         
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-        
         NSString *UUID;
         
         // logged in by registering new account
@@ -486,7 +484,7 @@
             UUID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UUID String"];
         }
         
-        [mixpanel identify:UUID];
+        [[Mixpanel sharedInstance] identify:UUID];
         
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"registeredLogin"];
         [[NSUserDefaults standardUserDefaults] synchronize];
