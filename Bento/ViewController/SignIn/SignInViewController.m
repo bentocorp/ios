@@ -363,6 +363,20 @@
             NSLog(@"Device Token - %@", deviceToken);
         }
         
+        // install source
+        NSString *source;
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil) {
+            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+        }
+        
+        NSString *sourceFinal;
+        if (source != nil) {
+            sourceFinal = source;
+        }
+        else {
+            sourceFinal = @"N/A";
+        }
+        
         NSString *currentAddressFinal;
         
         if (currentAddress != nil) {
@@ -377,6 +391,7 @@
                                @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
                                @"$email": response[@"email"],
                                @"$phone": response[@"phone"],
+                               @"Installed Source":sourceFinal,
                                @"Last Login Address": currentAddressFinal
                                }];
         

@@ -530,7 +530,6 @@
         
         // set initial properties once
         [mixpanel.people setOnce:@{
-                                   @"Installed Source":sourceFinal,
                                    @"$created": currentDateFinal,
                                    @"Sign Up Address": currentAddressFinal
                                    }];
@@ -540,6 +539,7 @@
                                @"$name": strUserName,
                                @"$email": strEmail,
                                @"$phone": strPhoneNumber,
+                               @"Installed Source":sourceFinal
                                }];
         
         [mixpanel track:@"Completed Registration"];

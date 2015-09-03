@@ -332,8 +332,9 @@
     
     
     NSString *source;
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil)
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil) {
         source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+    }
     
     NSString *registerOrSignIn = [[NSUserDefaults standardUserDefaults] objectForKey:@"RegisterOrSignIn"];
     
@@ -423,7 +424,6 @@
         
         // set initial properties once
         [mixpanel.people setOnce:@{
-                                   @"Installed Source":sourceFinal,
                                    @"$created": currentDateFinal,
                                    @"Sign Up Address": currentAddressFinal
                                    }];
@@ -433,6 +433,7 @@
                                @"$name": [NSString stringWithFormat:@"%@ %@", strFirstName, strLastName],
                                @"$email": strMailAddr,
                                @"$phone": strPhoneNumber,
+                               @"Installed Source":sourceFinal,
                                }];
         
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"registeredLogin"];
@@ -580,6 +581,21 @@
              NSLog(@"Device Token - %@", deviceToken);
          }
          
+         // install source
+         NSString *source;
+         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil) {
+             source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+         }
+         
+         NSString *sourceFinal;
+         if (source != nil) {
+             sourceFinal = source;
+         }
+         else {
+             sourceFinal = @"N/A";
+         }
+         
+         // current address
          NSString *currentAddressFinal;
          if (currentAddress != nil) {
              currentAddressFinal = currentAddress;
@@ -593,6 +609,7 @@
                                 @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
                                 @"$email": response[@"email"],
                                 @"$phone": response[@"phone"],
+                                @"Installed Source":sourceFinal,
                                 @"Last Login Address": currentAddressFinal
                                 }];
          
