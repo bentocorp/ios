@@ -64,7 +64,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SDWebImage.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Stripe.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>UIActivityIndicator-for-SDWebImage.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -82,22 +92,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>25EE4B2CF0014501EAF402EADCB00F66</key>
+		<key>0834885558A15E687E3ACB49F6B861A8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2AE939BED119A64559C08CBA23E49F77</key>
+		<key>0AE6F44C7EC78FF2B0869CE4895A0FA1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2D14266745B8F2665F64538E9DCA040F</key>
+		<key>24248952551AA32FDF9EAF923A9D6477</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2E4628E9D48D8B60534629B82A5FACFB</key>
+		<key>3B3126F12C2540587648A459A34CC4DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -117,12 +127,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7CF857C3F7EEFDF0F7822A2733D7FAFD</key>
+		<key>51E1FE670EDE7608D2D351B8F05D291D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8BDE8852058C5B688B29912C27E5CB23</key>
+		<key>7CF857C3F7EEFDF0F7822A2733D7FAFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,27 +142,37 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9B1CB8A1597186F3A0A80FA546B4366F</key>
+		<key>B39CE56AB7ED982879ED150957C49B85</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A2DA72B1AF8527F977333FAD6A4618F4</key>
+		<key>B3D34A00B1F34467E2E6EB2F53A0DD9F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B7F68EFF8206C43B7A0AD81030625F53</key>
+		<key>B81D3058AE4AF8BD4A987B2C440E7089</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C4908BF58D5A6AF914E7D54BCAC9DC8B</key>
+		<key>D21F678253F6920C841EEF53EAC113DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FE27CFE67E55BD61D1A54ADDBA18A435</key>
+		<key>D717650372C9D4994C8DB8D9BE8CADA9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E889253A39A9CF811B8D754B63760110</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EC511E28905FE2C20E23DA0E564D2673</key>
 		<dict>
 			<key>primary</key>
 			<true/>

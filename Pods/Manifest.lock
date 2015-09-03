@@ -17,11 +17,16 @@ PODS:
   - mopub-ios-sdk/MoPubSDK (3.8.0)
   - PaymentKit (1.1.1)
   - PureLayout (3.0.0)
+  - SDWebImage (3.7.3):
+    - SDWebImage/Core (= 3.7.3)
+  - SDWebImage/Core (3.7.3)
   - Stripe (3.1.0):
     - Stripe/Core (= 3.1.0)
   - Stripe/ApplePay (3.1.0):
     - Stripe/Core
   - Stripe/Core (3.1.0)
+  - UIActivityIndicator-for-SDWebImage (1.2):
+    - SDWebImage (~> 3.7)
   - UICKeyChainStore (1.0.5)
 
 DEPENDENCIES:
@@ -36,6 +41,7 @@ DEPENDENCIES:
   - PureLayout
   - Stripe
   - Stripe/ApplePay
+  - UIActivityIndicator-for-SDWebImage
 
 EXTERNAL SOURCES:
   Adjust:
@@ -57,7 +63,9 @@ SPEC CHECKSUMS:
   mopub-ios-sdk: c41d03bf7a9e13281e72665e792881a2bf5dc31c
   PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
   PureLayout: 270dfee2236f697ab1d5e2771c2e5c248495fa0d
+  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
+  UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
   UICKeyChainStore: e81dc3b58d56ffaed61ab6669eb97071e53fc377
 
 COCOAPODS: 0.38.2

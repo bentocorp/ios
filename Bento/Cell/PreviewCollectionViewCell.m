@@ -11,6 +11,7 @@
 #import "CAGradientLayer+SJSGradients.h"
 
 #import "UIImageView+WebCache.h"
+#import <UIImageView+UIActivityIndicatorForSDWebImage.h>
 
 #import "AppStrings.h"
 
@@ -84,7 +85,9 @@
         self.ivImage.image = [UIImage imageNamed:@"empty-main"];
     }
     else {
-        [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-main"]];
+//        [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-main"]];
+        
+        [self.ivImage setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     }
 }
 

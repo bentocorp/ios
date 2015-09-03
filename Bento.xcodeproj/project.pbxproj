@@ -33,17 +33,13 @@
 		7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 723BD40C1A8DD831000AD4F1 /* FXBlurView.m */; };
 		7216B7121AA64C7C0006FFE9 /* ChooseSideDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D81A5BF301003DC872 /* ChooseSideDishViewController.m */; };
 		7216B7131AA64C7C0006FFE9 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BE1A6F46DF006C2446 /* NSDate+RFC1123.m */; };
-		7216B7141AA64C7C0006FFE9 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339C1A6EADBD006C2446 /* UIImage+GIF.m */; };
-		7216B7161AA64C7C0006FFE9 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333931A6EADBD006C2446 /* SDWebImageDownloaderOperation.m */; };
 		7216B7171AA64C7C0006FFE9 /* JGProgressHUDAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333491A6D4058006C2446 /* JGProgressHUDAnimation.m */; };
 		7216B7181AA64C7C0006FFE9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0991A5BCC7B003DC872 /* AppDelegate.m */; };
 		7216B7191AA64C7C0006FFE9 /* PromoCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A553E11A60035D001F9DA7 /* PromoCodeView.m */; };
-		7216B71A1AA64C7C0006FFE9 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333891A6EADBD006C2446 /* NSData+ImageContentType.m */; };
 		7216B71B1AA64C7C0006FFE9 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333511A6D4058006C2446 /* JGProgressHUDIndeterminateIndicatorView.m */; };
 		7216B71C1AA64C7C0006FFE9 /* PhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7BC1A5D990800D034CF /* PhoneNumberViewController.m */; };
 		7216B71D1AA64C7C0006FFE9 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7B91A5D963300D034CF /* SignInViewController.m */; };
 		7216B71E1AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F21A72C133006C2446 /* STPTestPaymentSummaryViewController.m */; };
-		7216B71F1AA64C7C0006FFE9 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A61A6EADBD006C2446 /* UIView+WebCacheOperation.m */; };
 		7216B7201AA64C7C0006FFE9 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C81A6F46DF006C2446 /* MKNetworkEngine.m */; };
 		7216B7211AA64C7C0006FFE9 /* NSObject+RMArchivable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB451A7D8BE800D03DCE /* NSObject+RMArchivable.m */; };
 		7216B7221AA64C7C0006FFE9 /* SHSFlagAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E0891A780A1200D18D7A /* SHSFlagAccessoryView.m */; };
@@ -53,31 +49,22 @@
 		7216B7261AA64C7C0006FFE9 /* ChooseMainDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */; };
 		7216B7271AA64C7C0006FFE9 /* Bento.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333671A6D57CB006C2446 /* Bento.m */; };
 		7216B7281AA64C7C0006FFE9 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C41A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m */; };
-		7216B7291AA64C7C0006FFE9 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338D1A6EADBD006C2446 /* SDWebImageCompat.m */; };
-		7216B72A1AA64C7C0006FFE9 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339E1A6EADBD006C2446 /* UIImage+MultiFormat.m */; };
 		7216B72B1AA64C7C0006FFE9 /* EnterCreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */; };
 		7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333531A6D4058006C2446 /* JGProgressHUDIndicatorView.m */; };
-		7216B72D1AA64C7C0006FFE9 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A01A6EADBD006C2446 /* UIImage+WebP.m */; };
-		7216B72E1AA64C7C0006FFE9 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333951A6EADBD006C2446 /* SDWebImageManager.m */; };
-		7216B72F1AA64C7C0006FFE9 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338B1A6EADBD006C2446 /* SDImageCache.m */; };
 		7216B7301AA64C7C0006FFE9 /* SHSPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E0901A780A1200D18D7A /* SHSPhoneNumberFormatter.m */; };
 		7216B7311AA64C7C0006FFE9 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7279E5E01A6B5F3A00591CB2 /* DataManager.m */; };
 		7216B7321AA64C7C0006FFE9 /* SHSPhoneLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E08C1A780A1200D18D7A /* SHSPhoneLogic.m */; };
 		7216B7331AA64C7C0006FFE9 /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C61A6F46DF006C2446 /* UIImageView+MKNetworkKitAdditions.m */; };
-		7216B7341AA64C7C0006FFE9 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333981A6EADBD006C2446 /* SDWebImagePrefetcher.m */; };
 		7216B7351AA64C7C0006FFE9 /* MyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7A31A5D6B6E00D034CF /* MyAlertView.m */; };
 		7216B7361AA64C7C0006FFE9 /* STPTestShippingMethodStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F51A72C133006C2446 /* STPTestShippingMethodStore.m */; };
 		7216B7371AA64C7C0006FFE9 /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C01A6F46DF006C2446 /* NSDictionary+RequestEncoding.m */; };
 		7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333471A6D4058006C2446 /* JGProgressHUD.m */; };
-		7216B73A1AA64C7C0006FFE9 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333871A6EADBD006C2446 /* MKAnnotationView+WebCache.m */; };
 		7216B73B1AA64C7C0006FFE9 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0A41A5BD05C003DC872 /* FirstViewController.m */; };
 		7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223336A1A6D5847006C2446 /* BentoShop.m */; };
-		7216B73E1AA64C7C0006FFE9 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338F1A6EADBD006C2446 /* SDWebImageDecoder.m */; };
 		7216B73F1AA64C7C0006FFE9 /* SVGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E07C1A76BD1800D18D7A /* SVGeocoder.m */; };
 		7216B7401AA64C7C0006FFE9 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E08E1A780A1200D18D7A /* SHSPhoneNumberFormatter+UserConfig.m */; };
 		7216B7411AA64C7C0006FFE9 /* STPTestPaymentAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F01A72C133006C2446 /* STPTestPaymentAuthorizationViewController.m */; };
 		7216B7421AA64C7C0006FFE9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0731A5BCC04003DC872 /* main.m */; };
-		7216B7431AA64C7C0006FFE9 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A21A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m */; };
 		7216B7441AA64C7C0006FFE9 /* SVPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E07E1A76BD1800D18D7A /* SVPlacemark.m */; };
 		7216B7471AA64C7C0006FFE9 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333CB1A6F46DF006C2446 /* MKNetworkOperation.m */; };
 		7216B7481AA64C7C0006FFE9 /* NSAlert+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BA1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m */; };
@@ -86,16 +73,13 @@
 		7216B74B1AA64C7C0006FFE9 /* JGProgressHUDPieIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333551A6D4058006C2446 /* JGProgressHUDPieIndicatorView.m */; };
 		7216B74C1AA64C7C0006FFE9 /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C21A6F46DF006C2446 /* NSString+MKNetworkKitAdditions.m */; };
 		7216B74D1AA64C7C0006FFE9 /* STPTestCardStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333EB1A72C133006C2446 /* STPTestCardStore.m */; };
-		7216B74E1AA64C7C0006FFE9 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339A1A6EADBD006C2446 /* UIButton+WebCache.m */; };
 		7216B74F1AA64C7C0006FFE9 /* STPTestAddressStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333E91A72C133006C2446 /* STPTestAddressStore.m */; };
 		7216B7501AA64C7C0006FFE9 /* DeliveryLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7C91A5E24B900D034CF /* DeliveryLocationViewController.m */; };
-		7216B7511AA64C7C0006FFE9 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A41A6EADBD006C2446 /* UIImageView+WebCache.m */; };
 		7216B7521AA64C7C0006FFE9 /* JGProgressHUDFadeAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223334D1A6D4058006C2446 /* JGProgressHUDFadeAnimation.m */; };
 		7216B7531AA64C7C0006FFE9 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BC1A6F46DF006C2446 /* NSData+MKBase64.m */; };
 		7216B7541AA64C7C0006FFE9 /* PKPayment+STPTestKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333E71A72C133006C2446 /* PKPayment+STPTestKeys.m */; };
 		7216B7551AA64C7C0006FFE9 /* RMMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB4B1A7D8BE800D03DCE /* RMMapper.m */; };
 		7216B7561AA64C7C0006FFE9 /* SHSPhoneTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E0921A780A1200D18D7A /* SHSPhoneTextField.m */; };
-		7216B7571AA64C7C0006FFE9 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333911A6EADBD006C2446 /* SDWebImageDownloader.m */; };
 		7216B7581AA64C7C0006FFE9 /* OutOfDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7CC1A5E252800D034CF /* OutOfDeliveryAddressViewController.m */; };
 		7216B7591AA64C7C0006FFE9 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223336D1A6D66E8006C2446 /* IntroViewController.m */; };
 		7216B75A1AA64C7C0006FFE9 /* JGProgressHUDFadeZoomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223334F1A6D4058006C2446 /* JGProgressHUDFadeZoomAnimation.m */; };
@@ -201,22 +185,6 @@
 		7223337F1A6E5535006C2446 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337E1A6E5535006C2446 /* GLKit.framework */; };
 		722333811A6E5570006C2446 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333801A6E5570006C2446 /* ImageIO.framework */; };
 		722333831A6E55B6006C2446 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333821A6E55B6006C2446 /* CoreData.framework */; };
-		722333A71A6EADBD006C2446 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333871A6EADBD006C2446 /* MKAnnotationView+WebCache.m */; };
-		722333A81A6EADBD006C2446 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333891A6EADBD006C2446 /* NSData+ImageContentType.m */; };
-		722333A91A6EADBD006C2446 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338B1A6EADBD006C2446 /* SDImageCache.m */; };
-		722333AA1A6EADBD006C2446 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338D1A6EADBD006C2446 /* SDWebImageCompat.m */; };
-		722333AB1A6EADBD006C2446 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338F1A6EADBD006C2446 /* SDWebImageDecoder.m */; };
-		722333AC1A6EADBD006C2446 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333911A6EADBD006C2446 /* SDWebImageDownloader.m */; };
-		722333AD1A6EADBD006C2446 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333931A6EADBD006C2446 /* SDWebImageDownloaderOperation.m */; };
-		722333AE1A6EADBD006C2446 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333951A6EADBD006C2446 /* SDWebImageManager.m */; };
-		722333AF1A6EADBD006C2446 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333981A6EADBD006C2446 /* SDWebImagePrefetcher.m */; };
-		722333B01A6EADBD006C2446 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339A1A6EADBD006C2446 /* UIButton+WebCache.m */; };
-		722333B11A6EADBD006C2446 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339C1A6EADBD006C2446 /* UIImage+GIF.m */; };
-		722333B21A6EADBD006C2446 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339E1A6EADBD006C2446 /* UIImage+MultiFormat.m */; };
-		722333B31A6EADBD006C2446 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A01A6EADBD006C2446 /* UIImage+WebP.m */; };
-		722333B41A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A21A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m */; };
-		722333B51A6EADBD006C2446 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A41A6EADBD006C2446 /* UIImageView+WebCache.m */; };
-		722333B61A6EADBD006C2446 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A61A6EADBD006C2446 /* UIView+WebCacheOperation.m */; };
 		722333CE1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BA1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m */; };
 		722333CF1A6F46DF006C2446 /* NSData+MKBase64.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BC1A6F46DF006C2446 /* NSData+MKBase64.m */; };
 		722333D01A6F46DF006C2446 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BE1A6F46DF006C2446 /* NSDate+RFC1123.m */; };
@@ -373,18 +341,14 @@
 		FC92E0E91B7E5C880073C5D7 /* ChooseSideDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D81A5BF301003DC872 /* ChooseSideDishViewController.m */; };
 		FC92E0EA1B7E5C880073C5D7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
 		FC92E0EB1B7E5C880073C5D7 /* NSDate+RFC1123.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333BE1A6F46DF006C2446 /* NSDate+RFC1123.m */; };
-		FC92E0EC1B7E5C880073C5D7 /* UIImage+GIF.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339C1A6EADBD006C2446 /* UIImage+GIF.m */; };
-		FC92E0ED1B7E5C880073C5D7 /* SDWebImageDownloaderOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333931A6EADBD006C2446 /* SDWebImageDownloaderOperation.m */; };
 		FC92E0EE1B7E5C880073C5D7 /* JGProgressHUDAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333491A6D4058006C2446 /* JGProgressHUDAnimation.m */; };
 		FC92E0EF1B7E5C880073C5D7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0991A5BCC7B003DC872 /* AppDelegate.m */; };
 		FC92E0F01B7E5C880073C5D7 /* PromoCodeView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90A553E11A60035D001F9DA7 /* PromoCodeView.m */; };
-		FC92E0F11B7E5C880073C5D7 /* NSData+ImageContentType.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333891A6EADBD006C2446 /* NSData+ImageContentType.m */; };
 		FC92E0F21B7E5C880073C5D7 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333511A6D4058006C2446 /* JGProgressHUDIndeterminateIndicatorView.m */; };
 		FC92E0F31B7E5C880073C5D7 /* PhoneNumberViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7BC1A5D990800D034CF /* PhoneNumberViewController.m */; };
 		FC92E0F41B7E5C880073C5D7 /* SignInViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7B91A5D963300D034CF /* SignInViewController.m */; };
 		FC92E0F51B7E5C880073C5D7 /* STPTestPaymentSummaryViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F21A72C133006C2446 /* STPTestPaymentSummaryViewController.m */; };
 		FC92E0F61B7E5C880073C5D7 /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
-		FC92E0F71B7E5C880073C5D7 /* UIView+WebCacheOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A61A6EADBD006C2446 /* UIView+WebCacheOperation.m */; };
 		FC92E0F81B7E5C880073C5D7 /* MKNetworkEngine.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C81A6F46DF006C2446 /* MKNetworkEngine.m */; };
 		FC92E0F91B7E5C880073C5D7 /* NSObject+RMArchivable.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB451A7D8BE800D03DCE /* NSObject+RMArchivable.m */; };
 		FC92E0FA1B7E5C880073C5D7 /* SHSFlagAccessoryView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E0891A780A1200D18D7A /* SHSFlagAccessoryView.m */; };
@@ -394,33 +358,24 @@
 		FC92E0FE1B7E5C880073C5D7 /* ChooseMainDishViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */; };
 		FC92E0FF1B7E5C880073C5D7 /* Bento.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333671A6D57CB006C2446 /* Bento.m */; };
 		FC92E1001B7E5C880073C5D7 /* UIAlertView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C41A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m */; };
-		FC92E1011B7E5C880073C5D7 /* SDWebImageCompat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338D1A6EADBD006C2446 /* SDWebImageCompat.m */; };
-		FC92E1021B7E5C880073C5D7 /* UIImage+MultiFormat.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339E1A6EADBD006C2446 /* UIImage+MultiFormat.m */; };
 		FC92E1031B7E5C880073C5D7 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
 		FC92E1041B7E5C880073C5D7 /* EnterCreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */; };
 		FC92E1051B7E5C880073C5D7 /* JGProgressHUDIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333531A6D4058006C2446 /* JGProgressHUDIndicatorView.m */; };
-		FC92E1061B7E5C880073C5D7 /* UIImage+WebP.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A01A6EADBD006C2446 /* UIImage+WebP.m */; };
-		FC92E1071B7E5C880073C5D7 /* SDWebImageManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333951A6EADBD006C2446 /* SDWebImageManager.m */; };
-		FC92E1081B7E5C880073C5D7 /* SDImageCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338B1A6EADBD006C2446 /* SDImageCache.m */; };
 		FC92E1091B7E5C880073C5D7 /* SHSPhoneNumberFormatter.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E0901A780A1200D18D7A /* SHSPhoneNumberFormatter.m */; };
 		FC92E10A1B7E5C880073C5D7 /* DataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 7279E5E01A6B5F3A00591CB2 /* DataManager.m */; };
 		FC92E10B1B7E5C880073C5D7 /* SHSPhoneLogic.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E08C1A780A1200D18D7A /* SHSPhoneLogic.m */; };
 		FC92E10C1B7E5C880073C5D7 /* UIImageView+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C61A6F46DF006C2446 /* UIImageView+MKNetworkKitAdditions.m */; };
-		FC92E10D1B7E5C880073C5D7 /* SDWebImagePrefetcher.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333981A6EADBD006C2446 /* SDWebImagePrefetcher.m */; };
 		FC92E10E1B7E5C880073C5D7 /* MyAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7A31A5D6B6E00D034CF /* MyAlertView.m */; };
 		FC92E10F1B7E5C880073C5D7 /* STPTestShippingMethodStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F51A72C133006C2446 /* STPTestShippingMethodStore.m */; };
 		FC92E1101B7E5C880073C5D7 /* NSDictionary+RequestEncoding.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C01A6F46DF006C2446 /* NSDictionary+RequestEncoding.m */; };
 		FC92E1111B7E5C880073C5D7 /* JGProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333471A6D4058006C2446 /* JGProgressHUD.m */; };
-		FC92E1121B7E5C880073C5D7 /* MKAnnotationView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333871A6EADBD006C2446 /* MKAnnotationView+WebCache.m */; };
 		FC92E1131B7E5C880073C5D7 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC92E1141B7E5C880073C5D7 /* FirstViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0A41A5BD05C003DC872 /* FirstViewController.m */; };
 		FC92E1151B7E5C880073C5D7 /* BentoShop.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223336A1A6D5847006C2446 /* BentoShop.m */; };
-		FC92E1161B7E5C880073C5D7 /* SDWebImageDecoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223338F1A6EADBD006C2446 /* SDWebImageDecoder.m */; };
 		FC92E1171B7E5C880073C5D7 /* SVGeocoder.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E07C1A76BD1800D18D7A /* SVGeocoder.m */; };
 		FC92E1181B7E5C880073C5D7 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E08E1A780A1200D18D7A /* SHSPhoneNumberFormatter+UserConfig.m */; };
 		FC92E1191B7E5C880073C5D7 /* STPTestPaymentAuthorizationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333F01A72C133006C2446 /* STPTestPaymentAuthorizationViewController.m */; };
 		FC92E11A1B7E5C880073C5D7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 90BED0731A5BCC04003DC872 /* main.m */; };
-		FC92E11B1B7E5C880073C5D7 /* UIImageView+HighlightedWebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A21A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m */; };
 		FC92E11C1B7E5C880073C5D7 /* SVPlacemark.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E07E1A76BD1800D18D7A /* SVPlacemark.m */; };
 		FC92E11D1B7E5C880073C5D7 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */; };
 		FC92E11E1B7E5C880073C5D7 /* MKNetworkOperation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333CB1A6F46DF006C2446 /* MKNetworkOperation.m */; };
@@ -430,10 +385,8 @@
 		FC92E1221B7E5C880073C5D7 /* JGProgressHUDPieIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333551A6D4058006C2446 /* JGProgressHUDPieIndicatorView.m */; };
 		FC92E1231B7E5C880073C5D7 /* NSString+MKNetworkKitAdditions.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333C21A6F46DF006C2446 /* NSString+MKNetworkKitAdditions.m */; };
 		FC92E1241B7E5C880073C5D7 /* STPTestCardStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333EB1A72C133006C2446 /* STPTestCardStore.m */; };
-		FC92E1251B7E5C880073C5D7 /* UIButton+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223339A1A6EADBD006C2446 /* UIButton+WebCache.m */; };
 		FC92E1261B7E5C880073C5D7 /* STPTestAddressStore.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333E91A72C133006C2446 /* STPTestAddressStore.m */; };
 		FC92E1271B7E5C880073C5D7 /* DeliveryLocationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7C91A5E24B900D034CF /* DeliveryLocationViewController.m */; };
-		FC92E1281B7E5C880073C5D7 /* UIImageView+WebCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333A41A6EADBD006C2446 /* UIImageView+WebCache.m */; };
 		FC92E1291B7E5C880073C5D7 /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC92E12A1B7E5C880073C5D7 /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC92E12B1B7E5C880073C5D7 /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
@@ -443,7 +396,6 @@
 		FC92E12F1B7E5C880073C5D7 /* PKPayment+STPTestKeys.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333E71A72C133006C2446 /* PKPayment+STPTestKeys.m */; };
 		FC92E1301B7E5C880073C5D7 /* RMMapper.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB4B1A7D8BE800D03DCE /* RMMapper.m */; };
 		FC92E1311B7E5C880073C5D7 /* SHSPhoneTextField.m in Sources */ = {isa = PBXBuildFile; fileRef = 7209E0921A780A1200D18D7A /* SHSPhoneTextField.m */; };
-		FC92E1321B7E5C880073C5D7 /* SDWebImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333911A6EADBD006C2446 /* SDWebImageDownloader.m */; };
 		FC92E1331B7E5C880073C5D7 /* OutOfDeliveryAddressViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7CC1A5E252800D034CF /* OutOfDeliveryAddressViewController.m */; };
 		FC92E1341B7E5C880073C5D7 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223336D1A6D66E8006C2446 /* IntroViewController.m */; };
 		FC92E1351B7E5C880073C5D7 /* JGProgressHUDFadeZoomAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223334F1A6D4058006C2446 /* JGProgressHUDFadeZoomAnimation.m */; };
@@ -729,39 +681,6 @@
 		7223337E1A6E5535006C2446 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		722333801A6E5570006C2446 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		722333821A6E55B6006C2446 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
-		722333861A6EADBD006C2446 /* MKAnnotationView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MKAnnotationView+WebCache.h"; sourceTree = "<group>"; };
-		722333871A6EADBD006C2446 /* MKAnnotationView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MKAnnotationView+WebCache.m"; sourceTree = "<group>"; };
-		722333881A6EADBD006C2446 /* NSData+ImageContentType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+ImageContentType.h"; sourceTree = "<group>"; };
-		722333891A6EADBD006C2446 /* NSData+ImageContentType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+ImageContentType.m"; sourceTree = "<group>"; };
-		7223338A1A6EADBD006C2446 /* SDImageCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImageCache.h; sourceTree = "<group>"; };
-		7223338B1A6EADBD006C2446 /* SDImageCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImageCache.m; sourceTree = "<group>"; };
-		7223338C1A6EADBD006C2446 /* SDWebImageCompat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageCompat.h; sourceTree = "<group>"; };
-		7223338D1A6EADBD006C2446 /* SDWebImageCompat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageCompat.m; sourceTree = "<group>"; };
-		7223338E1A6EADBD006C2446 /* SDWebImageDecoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDecoder.h; sourceTree = "<group>"; };
-		7223338F1A6EADBD006C2446 /* SDWebImageDecoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDecoder.m; sourceTree = "<group>"; };
-		722333901A6EADBD006C2446 /* SDWebImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloader.h; sourceTree = "<group>"; };
-		722333911A6EADBD006C2446 /* SDWebImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDownloader.m; sourceTree = "<group>"; };
-		722333921A6EADBD006C2446 /* SDWebImageDownloaderOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageDownloaderOperation.h; sourceTree = "<group>"; };
-		722333931A6EADBD006C2446 /* SDWebImageDownloaderOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageDownloaderOperation.m; sourceTree = "<group>"; };
-		722333941A6EADBD006C2446 /* SDWebImageManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageManager.h; sourceTree = "<group>"; };
-		722333951A6EADBD006C2446 /* SDWebImageManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImageManager.m; sourceTree = "<group>"; };
-		722333961A6EADBD006C2446 /* SDWebImageOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImageOperation.h; sourceTree = "<group>"; };
-		722333971A6EADBD006C2446 /* SDWebImagePrefetcher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWebImagePrefetcher.h; sourceTree = "<group>"; };
-		722333981A6EADBD006C2446 /* SDWebImagePrefetcher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWebImagePrefetcher.m; sourceTree = "<group>"; };
-		722333991A6EADBD006C2446 /* UIButton+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIButton+WebCache.h"; sourceTree = "<group>"; };
-		7223339A1A6EADBD006C2446 /* UIButton+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIButton+WebCache.m"; sourceTree = "<group>"; };
-		7223339B1A6EADBD006C2446 /* UIImage+GIF.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+GIF.h"; sourceTree = "<group>"; };
-		7223339C1A6EADBD006C2446 /* UIImage+GIF.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+GIF.m"; sourceTree = "<group>"; };
-		7223339D1A6EADBD006C2446 /* UIImage+MultiFormat.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+MultiFormat.h"; sourceTree = "<group>"; };
-		7223339E1A6EADBD006C2446 /* UIImage+MultiFormat.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+MultiFormat.m"; sourceTree = "<group>"; };
-		7223339F1A6EADBD006C2446 /* UIImage+WebP.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+WebP.h"; sourceTree = "<group>"; };
-		722333A01A6EADBD006C2446 /* UIImage+WebP.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+WebP.m"; sourceTree = "<group>"; };
-		722333A11A6EADBD006C2446 /* UIImageView+HighlightedWebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+HighlightedWebCache.h"; sourceTree = "<group>"; };
-		722333A21A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+HighlightedWebCache.m"; sourceTree = "<group>"; };
-		722333A31A6EADBD006C2446 /* UIImageView+WebCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImageView+WebCache.h"; sourceTree = "<group>"; };
-		722333A41A6EADBD006C2446 /* UIImageView+WebCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImageView+WebCache.m"; sourceTree = "<group>"; };
-		722333A51A6EADBD006C2446 /* UIView+WebCacheOperation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIView+WebCacheOperation.h"; sourceTree = "<group>"; };
-		722333A61A6EADBD006C2446 /* UIView+WebCacheOperation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIView+WebCacheOperation.m"; sourceTree = "<group>"; };
 		722333B91A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSAlert+MKNetworkKitAdditions.h"; sourceTree = "<group>"; };
 		722333BA1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSAlert+MKNetworkKitAdditions.m"; sourceTree = "<group>"; };
 		722333BB1A6F46DF006C2446 /* NSData+MKBase64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+MKBase64.h"; sourceTree = "<group>"; };
@@ -1203,7 +1122,6 @@
 				7209E07A1A76BD1800D18D7A /* SVGeocoder */,
 				722333E51A72C133006C2446 /* ApplePayStubs */,
 				722333B71A6F46DF006C2446 /* WebManager */,
-				722333851A6EADBD006C2446 /* SDWebImage */,
 				722333441A6D4058006C2446 /* JGProgressHUD */,
 			);
 			path = Modules;
@@ -1255,46 +1173,6 @@
 				7223337A1A6E5387006C2446 /* GoogleMaps.framework */,
 			);
 			path = GoogleMapsSDK;
-			sourceTree = "<group>";
-		};
-		722333851A6EADBD006C2446 /* SDWebImage */ = {
-			isa = PBXGroup;
-			children = (
-				722333861A6EADBD006C2446 /* MKAnnotationView+WebCache.h */,
-				722333871A6EADBD006C2446 /* MKAnnotationView+WebCache.m */,
-				722333881A6EADBD006C2446 /* NSData+ImageContentType.h */,
-				722333891A6EADBD006C2446 /* NSData+ImageContentType.m */,
-				7223338A1A6EADBD006C2446 /* SDImageCache.h */,
-				7223338B1A6EADBD006C2446 /* SDImageCache.m */,
-				7223338C1A6EADBD006C2446 /* SDWebImageCompat.h */,
-				7223338D1A6EADBD006C2446 /* SDWebImageCompat.m */,
-				7223338E1A6EADBD006C2446 /* SDWebImageDecoder.h */,
-				7223338F1A6EADBD006C2446 /* SDWebImageDecoder.m */,
-				722333901A6EADBD006C2446 /* SDWebImageDownloader.h */,
-				722333911A6EADBD006C2446 /* SDWebImageDownloader.m */,
-				722333921A6EADBD006C2446 /* SDWebImageDownloaderOperation.h */,
-				722333931A6EADBD006C2446 /* SDWebImageDownloaderOperation.m */,
-				722333941A6EADBD006C2446 /* SDWebImageManager.h */,
-				722333951A6EADBD006C2446 /* SDWebImageManager.m */,
-				722333961A6EADBD006C2446 /* SDWebImageOperation.h */,
-				722333971A6EADBD006C2446 /* SDWebImagePrefetcher.h */,
-				722333981A6EADBD006C2446 /* SDWebImagePrefetcher.m */,
-				722333991A6EADBD006C2446 /* UIButton+WebCache.h */,
-				7223339A1A6EADBD006C2446 /* UIButton+WebCache.m */,
-				7223339B1A6EADBD006C2446 /* UIImage+GIF.h */,
-				7223339C1A6EADBD006C2446 /* UIImage+GIF.m */,
-				7223339D1A6EADBD006C2446 /* UIImage+MultiFormat.h */,
-				7223339E1A6EADBD006C2446 /* UIImage+MultiFormat.m */,
-				7223339F1A6EADBD006C2446 /* UIImage+WebP.h */,
-				722333A01A6EADBD006C2446 /* UIImage+WebP.m */,
-				722333A11A6EADBD006C2446 /* UIImageView+HighlightedWebCache.h */,
-				722333A21A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m */,
-				722333A31A6EADBD006C2446 /* UIImageView+WebCache.h */,
-				722333A41A6EADBD006C2446 /* UIImageView+WebCache.m */,
-				722333A51A6EADBD006C2446 /* UIView+WebCacheOperation.h */,
-				722333A61A6EADBD006C2446 /* UIView+WebCacheOperation.m */,
-			);
-			path = SDWebImage;
 			sourceTree = "<group>";
 		};
 		722333B71A6F46DF006C2446 /* WebManager */ = {
@@ -2737,19 +2615,15 @@
 				7216B7121AA64C7C0006FFE9 /* ChooseSideDishViewController.m in Sources */,
 				FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */,
 				7216B7131AA64C7C0006FFE9 /* NSDate+RFC1123.m in Sources */,
-				7216B7141AA64C7C0006FFE9 /* UIImage+GIF.m in Sources */,
-				7216B7161AA64C7C0006FFE9 /* SDWebImageDownloaderOperation.m in Sources */,
 				7216B7171AA64C7C0006FFE9 /* JGProgressHUDAnimation.m in Sources */,
 				7216B7181AA64C7C0006FFE9 /* AppDelegate.m in Sources */,
 				7216B7191AA64C7C0006FFE9 /* PromoCodeView.m in Sources */,
-				7216B71A1AA64C7C0006FFE9 /* NSData+ImageContentType.m in Sources */,
 				7216B71B1AA64C7C0006FFE9 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
 				7216B71C1AA64C7C0006FFE9 /* PhoneNumberViewController.m in Sources */,
 				7216B71D1AA64C7C0006FFE9 /* SignInViewController.m in Sources */,
 				FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
 				7216B71E1AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
-				7216B71F1AA64C7C0006FFE9 /* UIView+WebCacheOperation.m in Sources */,
 				7216B7201AA64C7C0006FFE9 /* MKNetworkEngine.m in Sources */,
 				7216B7211AA64C7C0006FFE9 /* NSObject+RMArchivable.m in Sources */,
 				7216B7221AA64C7C0006FFE9 /* SHSFlagAccessoryView.m in Sources */,
@@ -2759,33 +2633,24 @@
 				7216B7261AA64C7C0006FFE9 /* ChooseMainDishViewController.m in Sources */,
 				7216B7271AA64C7C0006FFE9 /* Bento.m in Sources */,
 				7216B7281AA64C7C0006FFE9 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
-				7216B7291AA64C7C0006FFE9 /* SDWebImageCompat.m in Sources */,
-				7216B72A1AA64C7C0006FFE9 /* UIImage+MultiFormat.m in Sources */,
 				FC3C4E7E1AF96B42005D7197 /* FixedBentoCell.m in Sources */,
 				7216B72B1AA64C7C0006FFE9 /* EnterCreditCardViewController.m in Sources */,
 				7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */,
-				7216B72D1AA64C7C0006FFE9 /* UIImage+WebP.m in Sources */,
-				7216B72E1AA64C7C0006FFE9 /* SDWebImageManager.m in Sources */,
-				7216B72F1AA64C7C0006FFE9 /* SDImageCache.m in Sources */,
 				7216B7301AA64C7C0006FFE9 /* SHSPhoneNumberFormatter.m in Sources */,
 				7216B7311AA64C7C0006FFE9 /* DataManager.m in Sources */,
 				7216B7321AA64C7C0006FFE9 /* SHSPhoneLogic.m in Sources */,
 				7216B7331AA64C7C0006FFE9 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
-				7216B7341AA64C7C0006FFE9 /* SDWebImagePrefetcher.m in Sources */,
 				7216B7351AA64C7C0006FFE9 /* MyAlertView.m in Sources */,
 				7216B7361AA64C7C0006FFE9 /* STPTestShippingMethodStore.m in Sources */,
 				7216B7371AA64C7C0006FFE9 /* NSDictionary+RequestEncoding.m in Sources */,
 				7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */,
-				7216B73A1AA64C7C0006FFE9 /* MKAnnotationView+WebCache.m in Sources */,
 				FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
 				7216B73B1AA64C7C0006FFE9 /* FirstViewController.m in Sources */,
 				7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */,
-				7216B73E1AA64C7C0006FFE9 /* SDWebImageDecoder.m in Sources */,
 				7216B73F1AA64C7C0006FFE9 /* SVGeocoder.m in Sources */,
 				7216B7401AA64C7C0006FFE9 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
 				7216B7411AA64C7C0006FFE9 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				7216B7421AA64C7C0006FFE9 /* main.m in Sources */,
-				7216B7431AA64C7C0006FFE9 /* UIImageView+HighlightedWebCache.m in Sources */,
 				7216B7441AA64C7C0006FFE9 /* SVPlacemark.m in Sources */,
 				FCAA479F1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				7216B7471AA64C7C0006FFE9 /* MKNetworkOperation.m in Sources */,
@@ -2795,10 +2660,8 @@
 				7216B74B1AA64C7C0006FFE9 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				7216B74C1AA64C7C0006FFE9 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				7216B74D1AA64C7C0006FFE9 /* STPTestCardStore.m in Sources */,
-				7216B74E1AA64C7C0006FFE9 /* UIButton+WebCache.m in Sources */,
 				7216B74F1AA64C7C0006FFE9 /* STPTestAddressStore.m in Sources */,
 				7216B7501AA64C7C0006FFE9 /* DeliveryLocationViewController.m in Sources */,
-				7216B7511AA64C7C0006FFE9 /* UIImageView+WebCache.m in Sources */,
 				FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */,
 				FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */,
 				FC99D4F41AFC161300BEE40B /* PreviewViewController.m in Sources */,
@@ -2808,7 +2671,6 @@
 				7216B7541AA64C7C0006FFE9 /* PKPayment+STPTestKeys.m in Sources */,
 				7216B7551AA64C7C0006FFE9 /* RMMapper.m in Sources */,
 				7216B7561AA64C7C0006FFE9 /* SHSPhoneTextField.m in Sources */,
-				7216B7571AA64C7C0006FFE9 /* SDWebImageDownloader.m in Sources */,
 				7216B7581AA64C7C0006FFE9 /* OutOfDeliveryAddressViewController.m in Sources */,
 				7216B7591AA64C7C0006FFE9 /* IntroViewController.m in Sources */,
 				7216B75A1AA64C7C0006FFE9 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
@@ -2840,19 +2702,15 @@
 				90BED0D91A5BF301003DC872 /* ChooseSideDishViewController.m in Sources */,
 				FCB906131AEC7FBF003041F7 /* FaqViewController.m in Sources */,
 				722333D01A6F46DF006C2446 /* NSDate+RFC1123.m in Sources */,
-				722333B11A6EADBD006C2446 /* UIImage+GIF.m in Sources */,
-				722333AD1A6EADBD006C2446 /* SDWebImageDownloaderOperation.m in Sources */,
 				7223335C1A6D4058006C2446 /* JGProgressHUDAnimation.m in Sources */,
 				90BED0A01A5BCC7B003DC872 /* AppDelegate.m in Sources */,
 				90A553E21A60035D001F9DA7 /* PromoCodeView.m in Sources */,
-				722333A81A6EADBD006C2446 /* NSData+ImageContentType.m in Sources */,
 				722333601A6D4058006C2446 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
 				90D8F7BD1A5D990800D034CF /* PhoneNumberViewController.m in Sources */,
 				90D8F7BA1A5D963300D034CF /* SignInViewController.m in Sources */,
 				FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
 				722333FB1A72C133006C2446 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
-				722333B61A6EADBD006C2446 /* UIView+WebCacheOperation.m in Sources */,
 				722333D51A6F46DF006C2446 /* MKNetworkEngine.m in Sources */,
 				7286EB4C1A7D8BE800D03DCE /* NSObject+RMArchivable.m in Sources */,
 				7209E0931A780A1200D18D7A /* SHSFlagAccessoryView.m in Sources */,
@@ -2862,33 +2720,24 @@
 				90BED0D61A5BF2F4003DC872 /* ChooseMainDishViewController.m in Sources */,
 				722333681A6D57CB006C2446 /* Bento.m in Sources */,
 				722333D31A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
-				722333AA1A6EADBD006C2446 /* SDWebImageCompat.m in Sources */,
-				722333B21A6EADBD006C2446 /* UIImage+MultiFormat.m in Sources */,
 				FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */,
 				90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */,
 				722333611A6D4058006C2446 /* JGProgressHUDIndicatorView.m in Sources */,
-				722333B31A6EADBD006C2446 /* UIImage+WebP.m in Sources */,
-				722333AE1A6EADBD006C2446 /* SDWebImageManager.m in Sources */,
-				722333A91A6EADBD006C2446 /* SDImageCache.m in Sources */,
 				7209E0961A780A1200D18D7A /* SHSPhoneNumberFormatter.m in Sources */,
 				7279E5E11A6B5F3B00591CB2 /* DataManager.m in Sources */,
 				7209E0941A780A1200D18D7A /* SHSPhoneLogic.m in Sources */,
 				722333D41A6F46DF006C2446 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
-				722333AF1A6EADBD006C2446 /* SDWebImagePrefetcher.m in Sources */,
 				90D8F7A41A5D6B6E00D034CF /* MyAlertView.m in Sources */,
 				722333FD1A72C133006C2446 /* STPTestShippingMethodStore.m in Sources */,
 				722333D11A6F46DF006C2446 /* NSDictionary+RequestEncoding.m in Sources */,
 				7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */,
-				722333A71A6EADBD006C2446 /* MKAnnotationView+WebCache.m in Sources */,
 				FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
 				90BED0A81A5BD05C003DC872 /* FirstViewController.m in Sources */,
 				7223336B1A6D5847006C2446 /* BentoShop.m in Sources */,
-				722333AB1A6EADBD006C2446 /* SDWebImageDecoder.m in Sources */,
 				7209E07F1A76BD1800D18D7A /* SVGeocoder.m in Sources */,
 				7209E0951A780A1200D18D7A /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
 				722333FA1A72C133006C2446 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				90BED0741A5BCC04003DC872 /* main.m in Sources */,
-				722333B41A6EADBD006C2446 /* UIImageView+HighlightedWebCache.m in Sources */,
 				7209E0801A76BD1800D18D7A /* SVPlacemark.m in Sources */,
 				FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				722333D61A6F46DF006C2446 /* MKNetworkOperation.m in Sources */,
@@ -2898,10 +2747,8 @@
 				722333621A6D4058006C2446 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				722333D21A6F46DF006C2446 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				722333F81A72C133006C2446 /* STPTestCardStore.m in Sources */,
-				722333B01A6EADBD006C2446 /* UIButton+WebCache.m in Sources */,
 				722333F71A72C133006C2446 /* STPTestAddressStore.m in Sources */,
 				90D8F7CA1A5E24B900D034CF /* DeliveryLocationViewController.m in Sources */,
-				722333B51A6EADBD006C2446 /* UIImageView+WebCache.m in Sources */,
 				FC08AB241AF713DD00CFB44D /* CustomBentoViewController.m in Sources */,
 				FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */,
 				FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */,
@@ -2911,7 +2758,6 @@
 				722333F61A72C133006C2446 /* PKPayment+STPTestKeys.m in Sources */,
 				7286EB4F1A7D8BE800D03DCE /* RMMapper.m in Sources */,
 				7209E0971A780A1200D18D7A /* SHSPhoneTextField.m in Sources */,
-				722333AC1A6EADBD006C2446 /* SDWebImageDownloader.m in Sources */,
 				90D8F7CD1A5E252800D034CF /* OutOfDeliveryAddressViewController.m in Sources */,
 				7223336E1A6D66E8006C2446 /* IntroViewController.m in Sources */,
 				7223335F1A6D4058006C2446 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
@@ -2962,19 +2808,15 @@
 				FC92E0E91B7E5C880073C5D7 /* ChooseSideDishViewController.m in Sources */,
 				FC92E0EA1B7E5C880073C5D7 /* FaqViewController.m in Sources */,
 				FC92E0EB1B7E5C880073C5D7 /* NSDate+RFC1123.m in Sources */,
-				FC92E0EC1B7E5C880073C5D7 /* UIImage+GIF.m in Sources */,
-				FC92E0ED1B7E5C880073C5D7 /* SDWebImageDownloaderOperation.m in Sources */,
 				FC92E0EE1B7E5C880073C5D7 /* JGProgressHUDAnimation.m in Sources */,
 				FC92E0EF1B7E5C880073C5D7 /* AppDelegate.m in Sources */,
 				FC92E0F01B7E5C880073C5D7 /* PromoCodeView.m in Sources */,
-				FC92E0F11B7E5C880073C5D7 /* NSData+ImageContentType.m in Sources */,
 				FC92E0F21B7E5C880073C5D7 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
 				FC92E0F31B7E5C880073C5D7 /* PhoneNumberViewController.m in Sources */,
 				FC92E0F41B7E5C880073C5D7 /* SignInViewController.m in Sources */,
 				FCC529C81B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
 				FC92E0F51B7E5C880073C5D7 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC92E0F61B7E5C880073C5D7 /* FixedBentoPreviewViewController.m in Sources */,
-				FC92E0F71B7E5C880073C5D7 /* UIView+WebCacheOperation.m in Sources */,
 				FC92E0F81B7E5C880073C5D7 /* MKNetworkEngine.m in Sources */,
 				FC92E0F91B7E5C880073C5D7 /* NSObject+RMArchivable.m in Sources */,
 				FC92E0FA1B7E5C880073C5D7 /* SHSFlagAccessoryView.m in Sources */,
@@ -2984,33 +2826,24 @@
 				FC92E0FE1B7E5C880073C5D7 /* ChooseMainDishViewController.m in Sources */,
 				FC92E0FF1B7E5C880073C5D7 /* Bento.m in Sources */,
 				FC92E1001B7E5C880073C5D7 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
-				FC92E1011B7E5C880073C5D7 /* SDWebImageCompat.m in Sources */,
-				FC92E1021B7E5C880073C5D7 /* UIImage+MultiFormat.m in Sources */,
 				FC92E1031B7E5C880073C5D7 /* FixedBentoCell.m in Sources */,
 				FC92E1041B7E5C880073C5D7 /* EnterCreditCardViewController.m in Sources */,
 				FC92E1051B7E5C880073C5D7 /* JGProgressHUDIndicatorView.m in Sources */,
-				FC92E1061B7E5C880073C5D7 /* UIImage+WebP.m in Sources */,
-				FC92E1071B7E5C880073C5D7 /* SDWebImageManager.m in Sources */,
-				FC92E1081B7E5C880073C5D7 /* SDImageCache.m in Sources */,
 				FC92E1091B7E5C880073C5D7 /* SHSPhoneNumberFormatter.m in Sources */,
 				FC92E10A1B7E5C880073C5D7 /* DataManager.m in Sources */,
 				FC92E10B1B7E5C880073C5D7 /* SHSPhoneLogic.m in Sources */,
 				FC92E10C1B7E5C880073C5D7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
-				FC92E10D1B7E5C880073C5D7 /* SDWebImagePrefetcher.m in Sources */,
 				FC92E10E1B7E5C880073C5D7 /* MyAlertView.m in Sources */,
 				FC92E10F1B7E5C880073C5D7 /* STPTestShippingMethodStore.m in Sources */,
 				FC92E1101B7E5C880073C5D7 /* NSDictionary+RequestEncoding.m in Sources */,
 				FC92E1111B7E5C880073C5D7 /* JGProgressHUD.m in Sources */,
-				FC92E1121B7E5C880073C5D7 /* MKAnnotationView+WebCache.m in Sources */,
 				FC92E1131B7E5C880073C5D7 /* FixedBentoViewController.m in Sources */,
 				FC92E1141B7E5C880073C5D7 /* FirstViewController.m in Sources */,
 				FC92E1151B7E5C880073C5D7 /* BentoShop.m in Sources */,
-				FC92E1161B7E5C880073C5D7 /* SDWebImageDecoder.m in Sources */,
 				FC92E1171B7E5C880073C5D7 /* SVGeocoder.m in Sources */,
 				FC92E1181B7E5C880073C5D7 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
 				FC92E1191B7E5C880073C5D7 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				FC92E11A1B7E5C880073C5D7 /* main.m in Sources */,
-				FC92E11B1B7E5C880073C5D7 /* UIImageView+HighlightedWebCache.m in Sources */,
 				FC92E11C1B7E5C880073C5D7 /* SVPlacemark.m in Sources */,
 				FC92E11D1B7E5C880073C5D7 /* SettingsTableViewCell.m in Sources */,
 				FC92E11E1B7E5C880073C5D7 /* MKNetworkOperation.m in Sources */,
@@ -3020,10 +2853,8 @@
 				FC92E1221B7E5C880073C5D7 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				FC92E1231B7E5C880073C5D7 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				FC92E1241B7E5C880073C5D7 /* STPTestCardStore.m in Sources */,
-				FC92E1251B7E5C880073C5D7 /* UIButton+WebCache.m in Sources */,
 				FC92E1261B7E5C880073C5D7 /* STPTestAddressStore.m in Sources */,
 				FC92E1271B7E5C880073C5D7 /* DeliveryLocationViewController.m in Sources */,
-				FC92E1281B7E5C880073C5D7 /* UIImageView+WebCache.m in Sources */,
 				FC92E1291B7E5C880073C5D7 /* CustomBentoViewController.m in Sources */,
 				FC92E12A1B7E5C880073C5D7 /* BWTitlePagerView.m in Sources */,
 				FC92E12B1B7E5C880073C5D7 /* PreviewViewController.m in Sources */,
@@ -3033,7 +2864,6 @@
 				FC92E12F1B7E5C880073C5D7 /* PKPayment+STPTestKeys.m in Sources */,
 				FC92E1301B7E5C880073C5D7 /* RMMapper.m in Sources */,
 				FC92E1311B7E5C880073C5D7 /* SHSPhoneTextField.m in Sources */,
-				FC92E1321B7E5C880073C5D7 /* SDWebImageDownloader.m in Sources */,
 				FC92E1331B7E5C880073C5D7 /* OutOfDeliveryAddressViewController.m in Sources */,
 				FC92E1341B7E5C880073C5D7 /* IntroViewController.m in Sources */,
 				FC92E1351B7E5C880073C5D7 /* JGProgressHUDFadeZoomAnimation.m in Sources */,

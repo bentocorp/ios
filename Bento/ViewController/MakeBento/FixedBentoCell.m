@@ -13,6 +13,7 @@
 #import "FixedBentoCell.h"
 #import "CAGradientLayer+SJSGradients.h"
 #import "UIImageView+WebCache.h"
+#import <UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import "UIColor+CustomColors.h"
 
 @implementation FixedBentoCell
@@ -101,9 +102,8 @@
         self.ivMainDish.image = [UIImage imageNamed:@"empty-main"];
     }
     else {
-        [self.ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-main"]];
+        [self.ivMainDish setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     }
-    
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated {
