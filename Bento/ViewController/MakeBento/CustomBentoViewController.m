@@ -34,6 +34,7 @@
 #import "CAGradientLayer+SJSGradients.h"
 
 #import "UIImageView+WebCache.h"
+#import <UIImageView+UIActivityIndicatorForSDWebImage.h>
 
 #import "BentoShop.h"
 #import "AppStrings.h"
@@ -764,27 +765,34 @@
     }
     
 /*-Main-*/
-    if (mainDishIndex > 0)
-    {
+    if (mainDishIndex > 0) {
+        
         ivMainDish.hidden = NO;
         lblMainDish.hidden = NO;
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
-        if (dishInfo != nil)
-        {
+        if (dishInfo != nil) {
             lblMainDish.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivMainDish sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-main"]];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                ivMainDish.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                // download image and display activity indicator in process
+                [ivMainDish setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex])
+            if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
                 ivBannerMainDish.hidden = NO;
-            else
+            }
+            else {
                 ivBannerMainDish.hidden = YES;
+            }
         }
     }
-    else
-    {
+    else {
         ivMainDish.image = nil;
         ivMainDish.hidden = YES;
         lblMainDish.hidden = YES;
@@ -792,27 +800,35 @@
     }
     
 /*-Side 1-*/
-    if (side1DishIndex > 0)
-    {
+    if (side1DishIndex > 0) {
+        
         ivSideDish1.hidden = NO;
         lblSideDish1.hidden = NO;
     
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
-        if (dishInfo != nil)
-        {
+        if (dishInfo != nil) {
+            
             lblSideDish1.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivSideDish1 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-side"]];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                ivSideDish1.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                // download image and display activity indicator in process
+                [ivSideDish1 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex])
+            if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
                 ivBannerSideDish1.hidden = NO;
-            else
+            }
+            else {
                 ivBannerSideDish1.hidden = YES;
+            }
         }
     }
-    else
-    {
+    else {
         ivSideDish1.image = nil;
         ivSideDish1.hidden = YES;
         lblSideDish1.hidden = YES;
@@ -820,27 +836,35 @@
     }
     
 /*-Side 2-*/
-    if (side2DishIndex > 0)
-    {
+    if (side2DishIndex > 0) {
+        
         ivSideDish2.hidden = NO;
         lblSideDish2.hidden = NO;
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
-        if (dishInfo != nil)
-        {
+        if (dishInfo != nil) {
+            
             lblSideDish2.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivSideDish2 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-side"]];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                ivSideDish2.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                // download image and display activity indicator in process
+                [ivSideDish2 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex])
+            if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
                 ivBannerSideDish2.hidden = NO;
-            else
+            }
+            else {
                 ivBannerSideDish2.hidden = YES;
+            }
         }
     }
-    else
-    {
+    else {
         ivSideDish2.image = nil;
         ivSideDish2.hidden = YES;
         lblSideDish2.hidden = YES;
@@ -848,27 +872,34 @@
     }
 
 /*-Side 3-*/
-    if (side3DishIndex > 0)
-    {
+    if (side3DishIndex > 0) {
+        
         ivSideDish3.hidden = NO;
         lblSideDish3.hidden = NO;
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
-        if (dishInfo != nil)
-        {
+        if (dishInfo != nil) {
             lblSideDish3.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivSideDish3 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-side"]];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                ivSideDish3.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                // download image and display activity indicator in process
+                [ivSideDish3 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex])
+            if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
                 ivBannerSideDish3.hidden = NO;
-            else
+            }
+            else {
                 ivBannerSideDish3.hidden = YES;
+            }
         }
     }
-    else
-    {
+    else {
         ivSideDish3.image = nil;
         ivSideDish3.hidden = YES;
         lblSideDish3.hidden = YES;
@@ -876,28 +907,35 @@
     }
     
 /*-Side 4-*/
-    if (side4DishIndex > 0)
-    {
+    if (side4DishIndex > 0) {
+        
         ivSideDish4.hidden = NO;
         lblSideDish4.hidden = NO;
         
-        
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
-        if (dishInfo != nil)
-        {
+        if (dishInfo != nil) {
+            
             lblSideDish4.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            [ivSideDish4 sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-side"]];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                ivSideDish4.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                // download image and display activity indicator in process
+                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
+                ivBannerSideDish4.hidden = NO;
+            }
+            else {
+                ivBannerSideDish4.hidden = YES;
+            }
         }
-        
-        if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex])
-            ivBannerSideDish4.hidden = NO;
-        else
-            ivBannerSideDish4.hidden = YES;
     }
-    else
-    {
+    else {
         ivSideDish4.image = nil;
         ivSideDish4.hidden = YES;
         lblSideDish4.hidden = YES;

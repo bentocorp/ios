@@ -121,8 +121,6 @@
         self.ivImage.image = [UIImage imageNamed:@"empty-main"];
     }
     else {
-//        [self.ivImage sd_setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"empty-main"]];
-        
         [self.ivImage setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     }
 }
