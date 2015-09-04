@@ -154,7 +154,18 @@
     self.lblTitlePromo.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_DISCOUNT];
     self.lblTitleTax.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TAX];
     self.lblTitleTip.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TIP];
-    [self.btnAddPromo setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_PROMO] forState:UIControlStateNormal];
+    
+    // if no promo added
+    if (_promoDiscount <= 0) {
+        // display 'ADD PROMO'
+        [self.btnAddPromo setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_PROMO] forState:UIControlStateNormal];
+    }
+    // if promo added
+    else {
+        [self.btnAddPromo setTitle:@"REMOVE PROMO" forState:UIControlStateNormal];
+        [self.btnAddPromo setTitleColor:[UIColor bentoErrorTextOrange] forState:UIControlStateNormal];
+    }
+    
     [self.btnGetItNow setTitle:[[AppStrings sharedInstance] getString:COMPLETE_BUTTON_FINISH] forState:UIControlStateNormal];
     
     _isEditingBentos = NO;
@@ -621,6 +632,9 @@
     {
         self.lblTotalPrevious.hidden = NO;
         cutText = [NSString stringWithFormat:@"$%.2f", (_totalPrice + (_totalPrice * (_taxPercent/100.f)) + deliveryTip)];
+        
+        [self.btnAddPromo setTitle:@"REMOVE PROMO" forState:UIControlStateNormal];
+        [self.btnAddPromo setTitleColor:[UIColor bentoErrorTextOrange] forState:UIControlStateNormal];
     }
     
     NSLog(@"PROMO CREDIT LEFT: %f", _promoDiscount - subTotal);
