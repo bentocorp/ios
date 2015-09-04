@@ -1665,10 +1665,7 @@
 #pragma mark PromoCodeViewDelegate
 
 - (void)setDiscound:(NSInteger)priceDiscount strCouponCode:(NSString *)strCouponCode
-{   
-//    self.strPromoCode = strCouponCode;
-//    self.promoDiscount = priceDiscount;
-    
+{
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:strCouponCode forKey:KEY_PROMO_CODE];
     [userDefaults setInteger:priceDiscount forKey:KEY_PROMO_DISCOUNT];
@@ -1719,6 +1716,19 @@
     else if (alertView.tag == 333) {
         if (buttonIndex == 1) {
             NSLog(@"ok was pressed");
+            
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:nil forKey:KEY_PROMO_CODE];
+            [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
+            
+            _strPromoCode = nil;
+            _promoDiscount = 0;
+            
+            self.lblTotalPrevious.hidden = YES;
+            [self.btnAddPromo setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+            [self.btnAddPromo setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_PROMO] forState:UIControlStateNormal];
+            
+            [self updateUI];
         }
     }
 }
