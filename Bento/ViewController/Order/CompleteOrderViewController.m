@@ -807,27 +807,36 @@
     [self.tvBentos reloadData];
 }
 
+// ON 'ADD PROMO' / 'REMOVE PROMO'
 - (IBAction)onAddPromo:(id)sender
 {
-    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PromoCodeView" owner:nil options:nil];
-    PromoCodeView *promoCodeView = [nib objectAtIndex:0];
-    promoCodeView.delegate = self;
-    
-    promoCodeView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
-    promoCodeView.alpha = 0.0f;
-    
-    [self.view addSubview:promoCodeView];
-    
-    [self.view bringSubviewToFront:promoCodeView];
-    
-    [UIView animateWithDuration:0.3f animations:^{
+    // no promo
+    if (_promoDiscount <= 0) {
+        NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"PromoCodeView" owner:nil options:nil];
+        PromoCodeView *promoCodeView = [nib objectAtIndex:0];
+        promoCodeView.delegate = self;
         
-        promoCodeView.alpha = 1.0f;
+        promoCodeView.frame = CGRectMake(0, 0, CGRectGetWidth(self.view.frame), CGRectGetHeight(self.view.frame));
+        promoCodeView.alpha = 0.0f;
         
-    } completion:^(BOOL finished) {
+        [self.view addSubview:promoCodeView];
         
-    }];
-    
+        [self.view bringSubviewToFront:promoCodeView];
+        
+        [UIView animateWithDuration:0.3f animations:^{
+            
+            promoCodeView.alpha = 1.0f;
+            
+        } completion:^(BOOL finished) {
+            
+        }];
+    }
+    else {
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Would you like to remove promo?" delegate:nil cancelButtonTitle:@"CANCEL" otherButtonTitle:@"OK"];
+        alertView.tag = 333;
+        [alertView showInView:self.view];
+        alertView = nil;
+    }
 }
 
 /*
@@ -1704,6 +1713,11 @@
         {
             [self onChangeAddress:nil];
         }
+    }
+    
+    // Remove promo
+    else if (alertView.tag == 333) {
+        
     }
 }
 
