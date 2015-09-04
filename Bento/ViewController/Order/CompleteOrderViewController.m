@@ -832,7 +832,7 @@
         }];
     }
     else {
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Would you like to remove promo?" delegate:nil cancelButtonTitle:@"CANCEL" otherButtonTitle:@"OK"];
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Are you sure you want to remove promo?" delegate:self cancelButtonTitle:@"CANCEL" otherButtonTitle:@"OK"];
         alertView.tag = 333;
         [alertView showInView:self.view];
         alertView = nil;
@@ -1717,7 +1717,9 @@
     
     // Remove promo
     else if (alertView.tag == 333) {
-        
+        if (buttonIndex == 1) {
+            NSLog(@"ok was pressed");
+        }
     }
 }
 
