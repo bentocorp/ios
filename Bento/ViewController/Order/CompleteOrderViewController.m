@@ -274,6 +274,13 @@
     [outsideRegionAlert showInView:self.view];
 }
 
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
+{
+    [self commitOnGetItNow];
+    
+    [[Mixpanel sharedInstance] track:@"GPS Failed On Let's Eat"];
+}
+
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
     CLLocation *location = locations[0];

@@ -87,7 +87,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "372"
             endingLineNumber = "372"
-            landmarkName = "-process"
+            landmarkName = "-gotoMyBentoScreen"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -103,7 +103,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "367"
             endingLineNumber = "367"
-            landmarkName = "-process"
+            landmarkName = "-gotoMyBentoScreen"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -119,7 +119,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "347"
             endingLineNumber = "347"
-            landmarkName = "-process"
+            landmarkName = "-gotoIntroScreen"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -198,9 +198,7 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "580"
-            endingLineNumber = "580"
-            landmarkName = "-locationManager:didUpdateLocations:"
-            landmarkType = "5">
+            endingLineNumber = "580">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -231,7 +229,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "455"
             endingLineNumber = "455"
-            landmarkName = "-application:handleActionWithIdentifier:forRemoteNotification:completionHandler:"
+            landmarkName = "-application:openURL:sourceApplication:annotation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -247,7 +245,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "449"
             endingLineNumber = "449"
-            landmarkName = "-application:didRegisterUserNotificationSettings:"
+            landmarkName = "-application:openURL:sourceApplication:annotation:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -279,7 +277,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "467"
             endingLineNumber = "467"
-            landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
+            landmarkName = "-alertView:clickedButtonAtIndex:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -295,7 +293,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "475"
             endingLineNumber = "475"
-            landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
+            landmarkName = "-reachabilityChanged:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -311,7 +309,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "480"
             endingLineNumber = "480"
-            landmarkName = "-application:didReceiveRemoteNotification:"
+            landmarkName = "-reachabilityChanged:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -344,6 +342,22 @@
             startingLineNumber = "112"
             endingLineNumber = "112"
             landmarkName = "-setImageWithURL:placeholderImage:options:progress:completed:usingActivityIndicatorStyle:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "463103655.291445"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "265"
+            endingLineNumber = "265"
+            landmarkName = "-locationManager:didExitRegion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
