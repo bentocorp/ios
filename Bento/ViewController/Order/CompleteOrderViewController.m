@@ -637,7 +637,7 @@
     }
 
     // Meal + Tax + Tip
-    float subTotal = _totalPrice + tax + deliveryPrice + deliveryTip; // tip is subtracted from promo code, once used up, it starts charging user's card
+    float subTotal = _totalPrice + tax + deliveryTip; // tip is subtracted from promo code, once used up, it starts charging user's card
     
     // Grand Total
     float totalPrice;
