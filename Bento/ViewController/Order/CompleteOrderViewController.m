@@ -122,6 +122,8 @@
     
     // idempotent token
     NSString *uuid;
+    
+    float deliveryPrice;
 }
 
 - (BOOL)applePayEnabled
@@ -610,7 +612,7 @@
 {
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
-    float deliveryPrice = [[AppStrings sharedInstance] getFloat:DELIVERY_FEE];
+    deliveryPrice = [[AppStrings sharedInstance] getFloat:DELIVERY_FEE];
     
     // Meal (_totalPrice)
     if (salePrice != 0 && salePrice < unitPrice) {
@@ -1401,6 +1403,9 @@
     // - Total
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(totalPrice * 100)] forKey:@"total_cents"];
     
+    // - Delivery Pric
+    [detailInfo setObject:[NSString stringWithFormat:@"%f", deliveryPrice] forKey:@"delivery_price"];
+
     [request setObject:detailInfo forKey:@"OrderDetails"];
     
     // Stripe
@@ -1421,8 +1426,9 @@
     // PromoCode
     NSString *strPromoCode = @"";
 
-    if (_strPromoCode != nil && _strPromoCode.length > 0)
+    if (_strPromoCode != nil && _strPromoCode.length > 0) {
         strPromoCode = _strPromoCode;
+    }
     
     [request setObject:strPromoCode forKey:@"CouponCode"];
     
