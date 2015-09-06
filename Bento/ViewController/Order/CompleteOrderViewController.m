@@ -73,6 +73,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *lblPromoDiscount;
 @property (nonatomic, weak) IBOutlet UILabel *lblTax;
+@property (weak, nonatomic) IBOutlet UILabel *lblDeliveryPrice;
 @property (nonatomic, weak) IBOutlet UILabel *lblDeliveryTip;
 @property (nonatomic, weak) IBOutlet UILabel *lblTotal;
 @property (weak, nonatomic) IBOutlet UILabel *lblTotalPrevious;
@@ -613,6 +614,7 @@
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     deliveryPrice = [[AppStrings sharedInstance] getFloat:DELIVERY_FEE];
+    self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", deliveryPrice];
     
     // Meal (_totalPrice)
     if (salePrice != 0 && salePrice < unitPrice) {
