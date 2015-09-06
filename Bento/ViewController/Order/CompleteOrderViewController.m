@@ -137,6 +137,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // delivery price is 2.75
+//    NSLog(@"delivery - %@", [[AppStrings sharedInstance] getString:DELIVERY_FEE]);
+    
     // Mixpanel
     [[Mixpanel sharedInstance] track:@"Viewed Summary Screen"];
     
@@ -607,6 +610,7 @@
 {
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    float deliveryPrice = [[AppStrings sharedInstance] getFloat:DELIVERY_FEE];
     
     // Meal (_totalPrice)
     if (salePrice != 0 && salePrice < unitPrice)
@@ -1397,12 +1401,13 @@
     NSDictionary *stripeInfo = nil;
     PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
     
-    if ([self getTotalPrice] == 0 || curPaymentMethod == Payment_Server)
+    if ([self getTotalPrice] == 0 || curPaymentMethod == Payment_Server) {
         stripeInfo = @{ @"stripeToken" : @"NULL" };
-    else
-    {
-        if (stripeToken != nil)
+    }
+    else {
+        if (stripeToken != nil) {
             stripeInfo = @{ @"stripeToken" : stripeToken };
+        }
     }
     
     [request setObject:stripeInfo forKey:@"Stripe"];
@@ -1417,6 +1422,9 @@
     
     // Idempotent Token
     [request setObject:uuid forKey:@"IdempotentToken"];
+    
+    // Platform
+    [request setObject:@"iOS" forKey:@"Platform"];
     
     return request;
 }

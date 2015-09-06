@@ -211,6 +211,9 @@
 #define OPEN_LINE_1                             @"open-line1"
 #define OPEN_LINE_2                             @"open-line2"
 
+// Delivery Fee
+#define DELIVERY_FEE                            @"delivery_price"
+
 @interface AppStrings : NSObject
 
 @property (nonatomic) NSArray *appStrings;
@@ -222,6 +225,7 @@
 - (NSURL *)getURL:(NSString *)strKey;
 - (NSString *)getString:(NSString *)strKey;
 - (NSInteger)getInteger:(NSString *)strKey;
+- (float)getFloat:(NSString *)strKey;
 
 - (NSString *)getContactMail;
 

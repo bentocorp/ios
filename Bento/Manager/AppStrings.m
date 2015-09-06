@@ -69,6 +69,8 @@ static AppStrings *_shareInstance;
         return;
     
     self.appStrings = [aryRet copy];
+    
+    NSLog(@"app strings - %@", self.appStrings);
 }
 
 - (NSURL *)getURL:(NSString *)strKey
@@ -121,6 +123,25 @@ static AppStrings *_shareInstance;
         if ([key isEqualToString:strKey] && [type isEqualToString:@"number"])
         {
             NSInteger value = [[info objectForKey:@"value"] integerValue];
+            return value;
+        }
+    }
+    
+    return 0;
+}
+
+- (float)getFloat:(NSString *)strKey
+{
+    if (self.appStrings == nil)
+        return 0;
+    
+    for (NSDictionary *info in self.appStrings)
+    {
+        NSString *key = [info objectForKey:@"key"];
+        NSString *type = [info objectForKey:@"type"];
+        if ([key isEqualToString:strKey] && [type isEqualToString:@"number"])
+        {
+            float value = [[info objectForKey:@"value"] floatValue];
             return value;
         }
     }
