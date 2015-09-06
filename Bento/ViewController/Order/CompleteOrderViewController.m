@@ -613,34 +613,40 @@
     float deliveryPrice = [[AppStrings sharedInstance] getFloat:DELIVERY_FEE];
     
     // Meal (_totalPrice)
-    if (salePrice != 0 && salePrice < unitPrice)
+    if (salePrice != 0 && salePrice < unitPrice) {
         _totalPrice = self.aryBentos.count * salePrice;
-    else
+    }
+    else {
         _totalPrice = self.aryBentos.count * unitPrice;
+    }
     
     // Meal * % = Tip
     float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
     
     // (Meal - Promo) * 0.875(tax) = Tax
     float tax;
-    if (_promoDiscount <= _totalPrice)
+    if (_promoDiscount <= _totalPrice) {
         tax = (int)((_totalPrice - _promoDiscount) * _taxPercent) / 100.f;
-    else
+    }
+    else {
         tax = 0; // if Promo is greater than Meal
+    }
 
     // Meal + Tax + Tip
-    float subTotal = _totalPrice + tax + deliveryTip; // tip is subtracted from promo code, once used up, it starts charging user's card
+    float subTotal = _totalPrice + tax + deliveryPrice + deliveryTip; // tip is subtracted from promo code, once used up, it starts charging user's card
     
     // Grand Total
     float totalPrice;
-    if (subTotal - _promoDiscount >= 0) // ie. subtotal(13.80) - promo(5)
+    if (subTotal - _promoDiscount >= 0) { // ie. subtotal(13.80) - promo(5)
         totalPrice = subTotal - _promoDiscount;
-    else
+    }
+    else {
         totalPrice = 0; // if Promo hasn't been used up yet ie. subtotal(13.80) - promo(85),
+    }
     
     // show old price
-    if (_promoDiscount > 0)
-    {
+    if (_promoDiscount > 0) {
+        
         self.lblTotalPrevious.hidden = NO;
         cutText = [NSString stringWithFormat:@"$%.2f", (_totalPrice + (_totalPrice * (_taxPercent/100.f)) + deliveryTip)];
         
