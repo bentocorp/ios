@@ -1403,8 +1403,8 @@
     // - Total
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(totalPrice * 100)] forKey:@"total_cents"];
     
-    // - Delivery Pric
-    [detailInfo setObject:[NSString stringWithFormat:@"%f", deliveryPrice] forKey:@"delivery_price"];
+    // - Delivery Price
+    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", deliveryPrice] forKey:@"delivery_price"];
 
     [request setObject:detailInfo forKey:@"OrderDetails"];
     
