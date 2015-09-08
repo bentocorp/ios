@@ -158,17 +158,6 @@
     self.lblTitleTax.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TAX];
     self.lblTitleTip.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TIP];
     
-    // if no promo added
-    if (_promoDiscount <= 0) {
-        // display 'ADD PROMO'
-        [self.btnAddPromo setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_PROMO] forState:UIControlStateNormal];
-    }
-    // if promo added
-    else {
-        [self.btnAddPromo setTitle:@"REMOVE PROMO" forState:UIControlStateNormal];
-        [self.btnAddPromo setTitleColor:[UIColor bentoErrorTextOrange] forState:UIControlStateNormal];
-    }
-    
     [self.btnGetItNow setTitle:[[AppStrings sharedInstance] getString:COMPLETE_BUTTON_FINISH] forState:UIControlStateNormal];
     
     _isEditingBentos = NO;
@@ -678,6 +667,18 @@
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
     self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", deliveryPrice];
+    
+    // if no promo added
+    if (_promoDiscount <= 0) {
+        // display 'ADD PROMO'
+        [self.btnAddPromo setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+        [self.btnAddPromo setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_PROMO] forState:UIControlStateNormal];
+    }
+    // if promo added
+    else {
+        [self.btnAddPromo setTitleColor:[UIColor bentoErrorTextOrange] forState:UIControlStateNormal];
+        [self.btnAddPromo setTitle:@"REMOVE PROMO" forState:UIControlStateNormal];
+    }
     
     // set previous price tag label
     if (cutText != nil)
@@ -1760,8 +1761,6 @@
             _promoDiscount = 0;
             
             self.lblTotalPrevious.hidden = YES;
-            [self.btnAddPromo setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
-            [self.btnAddPromo setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_PROMO] forState:UIControlStateNormal];
             
             [self updateUI];
         }
