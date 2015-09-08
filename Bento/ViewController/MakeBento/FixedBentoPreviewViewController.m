@@ -262,10 +262,12 @@
             NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
             [cell setDishInfo:dishInfo];
             
-            if (_selectedPathSide == indexPath.row)
+            if (_selectedPathSide == indexPath.row) {
                 [cell setCellState:YES];
-            else
+            }
+            else {
                 [cell setCellState:NO];
+            }
         }
     }
     
