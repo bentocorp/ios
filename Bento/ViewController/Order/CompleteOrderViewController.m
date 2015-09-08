@@ -620,17 +620,20 @@
     }
     
     // Meal * % = Tip
-    float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
+    float deliveryTip = (_totalPrice * _deliveryTipPercent) / 100.f;
     
-    // (Meal - Promo) * 0.875(tax) = Tax
+    // Add Delivery Fee
+    _totalPrice += deliveryPrice;
+    
+    // (Meal + deliveryPrice) - Promo) * 0.875(tax) = Tax
     float tax;
     if (_promoDiscount <= _totalPrice) {
-        tax = (int)((_totalPrice - _promoDiscount) * _taxPercent) / 100.f;
+        tax = [self roundToNearestHundredth:((_totalPrice - _promoDiscount) * _taxPercent) / 100.f];
     }
     else {
         tax = 0; // if Promo is greater than Meal
     }
-
+    
     // Meal + Tax + Tip
     float subTotal = _totalPrice + tax + deliveryTip; // tip is subtracted from promo code, once used up, it starts charging user's card
     
@@ -645,12 +648,8 @@
     
     // show old price
     if (_promoDiscount > 0) {
-        
         self.lblTotalPrevious.hidden = NO;
         cutText = [NSString stringWithFormat:@"$%.2f", (_totalPrice + (_totalPrice * (_taxPercent/100.f)) + deliveryTip)];
-        
-        [self.btnAddPromo setTitle:@"REMOVE PROMO" forState:UIControlStateNormal];
-        [self.btnAddPromo setTitleColor:[UIColor bentoErrorTextOrange] forState:UIControlStateNormal];
     }
     
     NSLog(@"PROMO CREDIT LEFT: %f", _promoDiscount - subTotal);
@@ -660,6 +659,17 @@
     self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
     
     return totalPrice;
+}
+
+// works for x.xxxxxxxx
+- (float)roundToNearestHundredth:(float)originalNumber
+{
+    originalNumber += 0.005;
+    originalNumber *= 100;
+    originalNumber = floor(originalNumber);
+    originalNumber /= 100;
+    
+    return originalNumber;
 }
 
 - (void)updatePriceLabels

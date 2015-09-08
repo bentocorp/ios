@@ -87,7 +87,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "372"
             endingLineNumber = "372"
-            landmarkName = "-gotoMyBentoScreen"
+            landmarkName = "-process"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -103,7 +103,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "367"
             endingLineNumber = "367"
-            landmarkName = "-gotoMyBentoScreen"
+            landmarkName = "-process"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -119,7 +119,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "347"
             endingLineNumber = "347"
-            landmarkName = "-gotoIntroScreen"
+            landmarkName = "-process"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -198,7 +198,9 @@
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "580"
-            endingLineNumber = "580">
+            endingLineNumber = "580"
+            landmarkName = "-locationManager:didUpdateLocations:"
+            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -229,7 +231,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "455"
             endingLineNumber = "455"
-            landmarkName = "-application:openURL:sourceApplication:annotation:"
+            landmarkName = "-application:handleActionWithIdentifier:forRemoteNotification:completionHandler:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -245,7 +247,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "449"
             endingLineNumber = "449"
-            landmarkName = "-application:openURL:sourceApplication:annotation:"
+            landmarkName = "-application:didRegisterUserNotificationSettings:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -277,7 +279,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "467"
             endingLineNumber = "467"
-            landmarkName = "-alertView:clickedButtonAtIndex:"
+            landmarkName = "-application:didRegisterForRemoteNotificationsWithDeviceToken:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -293,7 +295,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "475"
             endingLineNumber = "475"
-            landmarkName = "-reachabilityChanged:"
+            landmarkName = "-application:didFailToRegisterForRemoteNotificationsWithError:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -309,7 +311,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "480"
             endingLineNumber = "480"
-            landmarkName = "-reachabilityChanged:"
+            landmarkName = "-application:didReceiveRemoteNotification:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -368,11 +370,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "463268319.453945"
+            timestampString = "463430834.061896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1686"
-            endingLineNumber = "1686"
+            startingLineNumber = "1695"
+            endingLineNumber = "1695"
             landmarkName = "-setCardInfo:"
             landmarkType = "5">
          </BreakpointContent>
@@ -384,12 +386,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "463268319.453945"
+            timestampString = "463430834.061896"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1677"
-            endingLineNumber = "1677"
-            landmarkName = "-paymentAuthorizationViewController:didAuthorizePayment:completion:"
+            startingLineNumber = "1686"
+            endingLineNumber = "1686"
+            landmarkName = "-paymentAuthorizationViewControllerDidFinish:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
