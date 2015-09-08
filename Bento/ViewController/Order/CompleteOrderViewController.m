@@ -140,9 +140,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // delivery price is 2.75
-//    NSLog(@"delivery - %@", [[AppStrings sharedInstance] getString:DELIVERY_FEE]);
-    
     // Mixpanel
     [[Mixpanel sharedInstance] track:@"Viewed Summary Screen"];
     
@@ -217,18 +214,15 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = 500; // only update if moved 500 meters
     
-    if(![CLLocationManager locationServicesEnabled])
-    {
-        // You need to enable Location Services
-    }
+//    if(![CLLocationManager locationServicesEnabled]) {
+//        // You need to enable Location Services
+//    }
+//    
+//    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]]) {
+//        // Region monitoring is not available for this Class
+//    }
     
-    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]])
-    {
-        // Region monitoring is not available for this Class
-    }
-    
-    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted)
-    {
+    if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
         // You need to authorize Location Services for the APP
         [self commitOnGetItNow];
         
@@ -253,13 +247,16 @@
     CLLocationDistance regionRadius;
     NSString *geofenceOrderRadiusMeters = [[BentoShop sharedInstance] getGeofenceRadius];
     
-    if (geofenceOrderRadiusMeters != nil)
+    if (geofenceOrderRadiusMeters != nil) {
         regionRadius = [geofenceOrderRadiusMeters integerValue];
-    else
+    }
+    else {
         regionRadius = 100;
+    }
     
-    if (regionRadius > locationManager.maximumRegionMonitoringDistance)
+    if (regionRadius > locationManager.maximumRegionMonitoringDistance) {
         regionRadius = locationManager.maximumRegionMonitoringDistance;
+    }
     
     CLRegion * region = [[CLCircularRegion alloc] initWithCenter:centerCoordinate radius:regionRadius identifier:identifier];
     
@@ -296,8 +293,7 @@
     
     NSSet * monitoredRegions = locationManager.monitoredRegions;
     
-    if (monitoredRegions)
-    {
+    if (monitoredRegions) {
         [monitoredRegions enumerateObjectsUsingBlock:^(CLRegion *region, BOOL *stop)
          {
              NSString *identifer = region.identifier;
@@ -310,8 +306,8 @@
              NSLog(@"SAVED LAT: %f, SAVED LONG: %f, DISTANCE: %@", centerCoords.latitude, centerCoords.longitude, currentLocationDistance);
              
              // Outside radius
-             if ([currentLocationDistance floatValue] > radius)
-             {
+             if ([currentLocationDistance floatValue] > radius) {
+                 
                  NSLog(@"Invoking didExitRegion manually for region: %@", identifer);
                  
                  //stop Monitoring Region temporarily
@@ -614,7 +610,6 @@
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
     deliveryPrice = [[AppStrings sharedInstance] getFloat:DELIVERY_FEE];
-    self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", deliveryPrice];
     
     // Meal (_totalPrice)
     if (salePrice != 0 && salePrice < unitPrice) {
@@ -672,6 +667,7 @@
     self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
+    self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", deliveryPrice];
     
     // set previous price tag label
     if (cutText != nil)
