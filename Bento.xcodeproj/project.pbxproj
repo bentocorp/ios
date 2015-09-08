@@ -536,6 +536,18 @@
 		FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
 		FCBF06FA1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */; };
 		FCBF06FB1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */; };
+		FCC1E2261B9F715B0029C92D /* gradient-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E2251B9F715B0029C92D /* gradient-placeholder.png */; };
+		FCC1E2271B9F715B0029C92D /* gradient-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E2251B9F715B0029C92D /* gradient-placeholder.png */; };
+		FCC1E2281B9F715B0029C92D /* gradient-placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E2251B9F715B0029C92D /* gradient-placeholder.png */; };
+		FCC1E22A1B9F740A0029C92D /* green-gradient-placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E2291B9F740A0029C92D /* green-gradient-placeholder.jpg */; };
+		FCC1E22B1B9F740A0029C92D /* green-gradient-placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E2291B9F740A0029C92D /* green-gradient-placeholder.jpg */; };
+		FCC1E22C1B9F740A0029C92D /* green-gradient-placeholder.jpg in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E2291B9F740A0029C92D /* green-gradient-placeholder.jpg */; };
+		FCC1E22E1B9F7A1B0029C92D /* gradient-placeholder2.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E22D1B9F7A1B0029C92D /* gradient-placeholder2.png */; };
+		FCC1E22F1B9F7A1B0029C92D /* gradient-placeholder2.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E22D1B9F7A1B0029C92D /* gradient-placeholder2.png */; };
+		FCC1E2301B9F7A1B0029C92D /* gradient-placeholder2.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E22D1B9F7A1B0029C92D /* gradient-placeholder2.png */; };
+		FCC1E2321B9F7AAC0029C92D /* gradient-placeholder1.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E2311B9F7AAC0029C92D /* gradient-placeholder1.png */; };
+		FCC1E2331B9F7AAC0029C92D /* gradient-placeholder1.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E2311B9F7AAC0029C92D /* gradient-placeholder1.png */; };
+		FCC1E2341B9F7AAC0029C92D /* gradient-placeholder1.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E2311B9F7AAC0029C92D /* gradient-placeholder1.png */; };
 		FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
 		FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
 		FCC529C81B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
@@ -942,6 +954,10 @@
 		FCB906121AEC7FBF003041F7 /* FaqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FaqViewController.m; path = MakeBento/FaqViewController.m; sourceTree = "<group>"; };
 		FCBF06F81B1522C800EEC177 /* NetworkErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkErrorViewController.h; sourceTree = "<group>"; };
 		FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NetworkErrorViewController.m; sourceTree = "<group>"; };
+		FCC1E2251B9F715B0029C92D /* gradient-placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient-placeholder.png"; sourceTree = "<group>"; };
+		FCC1E2291B9F740A0029C92D /* green-gradient-placeholder.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "green-gradient-placeholder.jpg"; sourceTree = "<group>"; };
+		FCC1E22D1B9F7A1B0029C92D /* gradient-placeholder2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient-placeholder2.png"; sourceTree = "<group>"; };
+		FCC1E2311B9F7AAC0029C92D /* gradient-placeholder1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gradient-placeholder1.png"; sourceTree = "<group>"; };
 		FCC529C41B8F889000B49F34 /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+CustomColors.h"; path = "../UIColor+CustomColors.h"; sourceTree = "<group>"; };
 		FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CustomColors.m"; path = "../UIColor+CustomColors.m"; sourceTree = "<group>"; };
 		FCC529CA1B8FAD4A00B49F34 /* Bento-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bento-Prefix.pch"; sourceTree = "<group>"; };
@@ -1488,6 +1504,10 @@
 		90BED0AB1A5BD180003DC872 /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				FCC1E2311B9F7AAC0029C92D /* gradient-placeholder1.png */,
+				FCC1E22D1B9F7A1B0029C92D /* gradient-placeholder2.png */,
+				FCC1E2291B9F740A0029C92D /* green-gradient-placeholder.jpg */,
+				FCC1E2251B9F715B0029C92D /* gradient-placeholder.png */,
 				726A92051A8CBA4900E04EFE /* polygon_service_area.png */,
 				47C5B0161A8B82BD008FA7DA /* completeorder_cell_btn_minute@2x.png */,
 				47C5B0171A8B82BD008FA7DA /* completeorder_cell_btn_remove@2x.png */,
@@ -2120,6 +2140,7 @@
 				7216B7731AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.xib in Resources */,
 				7216B7741AA64C7C0006FFE9 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				FC8DB7391AF18674003045A3 /* icon-circle-facebook.png in Resources */,
+				FCC1E2331B9F7AAC0029C92D /* gradient-placeholder1.png in Resources */,
 				FC8DB7491AF18674003045A3 /* icon-square-phone.png in Resources */,
 				FCF5E0A71B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
 				7216B7751AA64C7C0006FFE9 /* sample.png in Resources */,
@@ -2140,6 +2161,7 @@
 				7216B77F1AA64C7C0006FFE9 /* register_icon_alert.png in Resources */,
 				7216B7801AA64C7C0006FFE9 /* creditcard_btn_clear.png in Resources */,
 				7216B7811AA64C7C0006FFE9 /* soldout_background.png in Resources */,
+				FCC1E22F1B9F7A1B0029C92D /* gradient-placeholder2.png in Resources */,
 				FCDF22231ADC3ADF006B2750 /* Icon-76@2x.png in Resources */,
 				7216B7821AA64C7C0006FFE9 /* image_unchecked@2x.png in Resources */,
 				FCDF22351ADC3ADF006B2750 /* Icon.png in Resources */,
@@ -2174,11 +2196,13 @@
 				7216B7991AA64C7C0006FFE9 /* OpenSans-Light.ttf in Resources */,
 				FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */,
 				FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */,
+				FCC1E2271B9F715B0029C92D /* gradient-placeholder.png in Resources */,
 				FCDF222F1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				7216B79A1AA64C7C0006FFE9 /* banner_sold_out.png in Resources */,
 				7216B79B1AA64C7C0006FFE9 /* register_icon_username_err.png in Resources */,
 				FCDF22271ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				FC8DB74B1AF18674003045A3 /* icon-user.png in Resources */,
+				FCC1E22B1B9F740A0029C92D /* green-gradient-placeholder.jpg in Resources */,
 				FC7EACB61B8D0C2700B15FC8 /* empty-side.png in Resources */,
 				7216B79C1AA64C7C0006FFE9 /* first_background.png in Resources */,
 				7216B79D1AA64C7C0006FFE9 /* orderconfirm_image_car.png in Resources */,
@@ -2223,6 +2247,7 @@
 				722333FC1A72C133006C2446 /* STPTestPaymentSummaryViewController.xib in Resources */,
 				90BED0CA1A5BE72F003DC872 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				FC8DB7381AF18674003045A3 /* icon-circle-facebook.png in Resources */,
+				FCC1E2321B9F7AAC0029C92D /* gradient-placeholder1.png in Resources */,
 				FC8DB7481AF18674003045A3 /* icon-square-phone.png in Resources */,
 				FCF5E0A61B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
 				90BED0EE1A5C38DA003DC872 /* sample.png in Resources */,
@@ -2243,6 +2268,7 @@
 				90D8F7B71A5D856200D034CF /* register_icon_alert.png in Resources */,
 				722333FF1A7425CA006C2446 /* creditcard_btn_clear.png in Resources */,
 				90D8F7E31A5E37E300D034CF /* soldout_background.png in Resources */,
+				FCC1E22E1B9F7A1B0029C92D /* gradient-placeholder2.png in Resources */,
 				FCDF22221ADC3ADF006B2750 /* Icon-76@2x.png in Resources */,
 				90D8F7D51A5E2C4C00D034CF /* image_unchecked@2x.png in Resources */,
 				FCDF22341ADC3ADF006B2750 /* Icon.png in Resources */,
@@ -2277,11 +2303,13 @@
 				90BED0C61A5BE72F003DC872 /* OpenSans-Light.ttf in Resources */,
 				FCDF22381ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */,
 				FCDF22361ADC3ADF006B2750 /* Icon@2x.png in Resources */,
+				FCC1E2261B9F715B0029C92D /* gradient-placeholder.png in Resources */,
 				FCDF222E1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				722333E11A6FF9C5006C2446 /* banner_sold_out.png in Resources */,
 				90D8F7C71A5E126C00D034CF /* register_icon_username_err.png in Resources */,
 				FCDF22261ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				FC8DB74A1AF18674003045A3 /* icon-user.png in Resources */,
+				FCC1E22A1B9F740A0029C92D /* green-gradient-placeholder.jpg in Resources */,
 				FC7EACB51B8D0C2700B15FC8 /* empty-side.png in Resources */,
 				90BED0B11A5BE22E003DC872 /* first_background.png in Resources */,
 				90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */,
@@ -2340,6 +2368,7 @@
 				FC92E1541B7E5C880073C5D7 /* STPTestPaymentSummaryViewController.xib in Resources */,
 				FC92E1551B7E5C880073C5D7 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				FC92E1561B7E5C880073C5D7 /* icon-circle-facebook.png in Resources */,
+				FCC1E2341B9F7AAC0029C92D /* gradient-placeholder1.png in Resources */,
 				FC92E1571B7E5C880073C5D7 /* icon-square-phone.png in Resources */,
 				FCF5E0A81B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
 				FC92E1581B7E5C880073C5D7 /* sample.png in Resources */,
@@ -2360,6 +2389,7 @@
 				FC92E1661B7E5C880073C5D7 /* register_icon_alert.png in Resources */,
 				FC92E1671B7E5C880073C5D7 /* creditcard_btn_clear.png in Resources */,
 				FC92E1681B7E5C880073C5D7 /* soldout_background.png in Resources */,
+				FCC1E2301B9F7A1B0029C92D /* gradient-placeholder2.png in Resources */,
 				FC92E1691B7E5C880073C5D7 /* Icon-76@2x.png in Resources */,
 				FC92E16A1B7E5C880073C5D7 /* image_unchecked@2x.png in Resources */,
 				FC92E16B1B7E5C880073C5D7 /* Icon.png in Resources */,
@@ -2394,11 +2424,13 @@
 				FC92E1881B7E5C880073C5D7 /* OpenSans-Light.ttf in Resources */,
 				FC92E1891B7E5C880073C5D7 /* iTunesArtwork@2x.png in Resources */,
 				FC92E18A1B7E5C880073C5D7 /* Icon@2x.png in Resources */,
+				FCC1E2281B9F715B0029C92D /* gradient-placeholder.png in Resources */,
 				FC92E18B1B7E5C880073C5D7 /* Icon-Small.png in Resources */,
 				FC92E18C1B7E5C880073C5D7 /* banner_sold_out.png in Resources */,
 				FC92E18D1B7E5C880073C5D7 /* register_icon_username_err.png in Resources */,
 				FC92E18E1B7E5C880073C5D7 /* Icon-Small-40@2x.png in Resources */,
 				FC92E18F1B7E5C880073C5D7 /* icon-user.png in Resources */,
+				FCC1E22C1B9F740A0029C92D /* green-gradient-placeholder.jpg in Resources */,
 				FC7EACB71B8D0C2700B15FC8 /* empty-side.png in Resources */,
 				FC92E1901B7E5C880073C5D7 /* first_background.png in Resources */,
 				FC92E1911B7E5C880073C5D7 /* orderconfirm_image_car.png in Resources */,
