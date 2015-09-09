@@ -352,8 +352,8 @@
     
     NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
     
-    if (_selectedItemState == DISH_CELL_SELECTED)
-    {
+    if (_selectedItemState == DISH_CELL_SELECTED) {
+        
         _originalDishIndex = NSNotFound;
         _selectedItemState = DISH_CELL_FOCUS;
         
@@ -369,9 +369,10 @@
             else if (self.sideDishIndex == 3)
                 [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:0];
         }
+        
+        [[Mixpanel sharedInstance] track:@"Withdrew Side Dish"];
     }
-    else
-    {
+    else {
         _selectedItemState = DISH_CELL_SELECTED;
         
         if (self.sideDishIndex == 0)

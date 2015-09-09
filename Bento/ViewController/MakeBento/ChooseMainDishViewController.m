@@ -328,7 +328,7 @@
             [[[BentoShop sharedInstance] getCurrentBento] setMainDish:0];
         }
         
-        [[Mixpanel sharedInstance] track:@"Withdrew Main dish"];
+        [[Mixpanel sharedInstance] track:@"Withdrew Main Dish"];
     }
     // add to bento
     else {
