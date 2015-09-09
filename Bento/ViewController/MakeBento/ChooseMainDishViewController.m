@@ -312,26 +312,26 @@
     
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:_selectedIndex];
     
-    if (dishInfo == nil)
+    if (dishInfo == nil) {
         return;
+    }
     
     NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
     
     // delete from bento
-    if (_selectedItemState == DISH_CELL_SELECTED)
-    {
+    if (_selectedItemState == DISH_CELL_SELECTED) {
+        
         _originalDishIndex = NSNotFound;
         _selectedItemState = DISH_CELL_FOCUS;
         
-        if ([[BentoShop sharedInstance] getCurrentBento] != nil)
-        {
+        if ([[BentoShop sharedInstance] getCurrentBento] != nil) {
             [[[BentoShop sharedInstance] getCurrentBento] setMainDish:0];
         }
+        
+        [[Mixpanel sharedInstance] track:@"Withdrew Main dish"];
     }
-    
     // add to bento
-    else
-    {
+    else {
         _selectedItemState = DISH_CELL_SELECTED;
         
         [[[BentoShop sharedInstance] getCurrentBento] setMainDish:dishIndex];
@@ -341,8 +341,9 @@
     
     [self updateUI];
 
-    if (_selectedItemState == DISH_CELL_SELECTED)
+    if (_selectedItemState == DISH_CELL_SELECTED) {
         [self.navigationController popViewControllerAnimated:YES];
+    }
 }
 
 @end

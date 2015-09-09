@@ -65,8 +65,9 @@
 
 - (IBAction)onAction:(id)sender
 {
-    if (_isSoldOut || (!_canBeAdded && self.state == DISH_CELL_FOCUS))
+    if (_isSoldOut || (!_canBeAdded && self.state == DISH_CELL_FOCUS)) {
         return;
+    }
     
     // if current bento is not empty
     if ([[[BentoShop sharedInstance] getCurrentBento] isEmpty])
@@ -74,17 +75,17 @@
         // if not tracked yet
         if (trackingCurrentBento == NO)
         {
-            Mixpanel *mixpanel = [Mixpanel sharedInstance];
-            [mixpanel track:@"Began Building A Bento" properties:nil];
+            [[Mixpanel sharedInstance] track:@"Began Building A Bento"];
             
             trackingCurrentBento = YES;
             
             NSLog(@"BEGAN BUILDING A BENTO");
         }
     }
-    else
+    else {
         // since current bento is already filled, it's been tracked already
         trackingCurrentBento = YES;
+    }
     
     [self.delegate onActionDishCell:self.index];
 }
