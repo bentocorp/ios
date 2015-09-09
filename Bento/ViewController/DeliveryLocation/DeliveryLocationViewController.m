@@ -31,6 +31,8 @@
 
 #import "JGProgressHUD.h"
 
+#import "Mixpanel.h"
+
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
 @interface DeliveryLocationViewController () <MKMapViewDelegate, MyAlertViewDelegate>
@@ -188,8 +190,32 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
     [self updateUI];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
+}
+
+#pragma mark Duration on screen
+- (void)startTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Delivery Location Screen"];
+}
+
+- (void)endTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] track:@"Viewed Delivery Location Screen"];
 }
 
 - (void)noConnection {
@@ -206,13 +232,6 @@
     
     [loadingHUD dismiss];
     loadingHUD = nil;
-}
-
-- (void)viewWillDisappear:(BOOL)animated {
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    [super viewWillDisappear:animated];
 }
 
 - (void)checkCurrentMode {
