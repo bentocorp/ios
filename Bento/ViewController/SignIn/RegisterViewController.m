@@ -206,6 +206,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
     [self showErrorWithString:nil code:ERROR_NONE];
     
@@ -214,8 +216,31 @@
     /*----------------*/
     
     // this should run when signed in from checkout
-    if ([[DataManager shareDataManager] getUserInfo] != nil)
+    if ([[DataManager shareDataManager] getUserInfo] != nil) {
         [self.navigationController popViewControllerAnimated:NO];
+    }
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
+}
+
+#pragma mark Duration on screen
+- (void)startTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Register Screen"];
+}
+
+- (void)endTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] track:@"Viewed Register Screen"];
 }
 
 - (void)noConnection
@@ -243,13 +268,6 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    [super viewWillDisappear:animated];
 }
 
 - (void) willShowKeyboard:(NSNotification*)notification
