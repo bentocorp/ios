@@ -89,10 +89,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    /* Track Previewed Today's Menu */
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Previewed Today's Menu" properties:nil];
-    
     /*---Initialize to YES---*/
     
     isThereConnection = YES;
@@ -820,6 +816,37 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    //
+    @try {
+        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
+    }@catch(id anException){
+        //do nothing, obviously it wasn't attached because an exception was thrown
+    }
+    
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
+}
+
+#pragma mark Duration on screen
+- (void)startTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] timeEvent:@"Previewed Today's Menu"];
+}
+
+- (void)endTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] track:@"Previewed Today's Menu"];
 }
 
 - (void)onUpdatedStatus
@@ -833,20 +860,6 @@
 - (void)onBack
 {
     [self.navigationController popToRootViewControllerAnimated:YES];
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    //
-    @try {
-        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
-    }@catch(id anException){
-        //do nothing, obviously it wasn't attached because an exception was thrown
-    }
-    
-    [super viewWillDisappear:animated];
 }
 
 - (void)noConnection
