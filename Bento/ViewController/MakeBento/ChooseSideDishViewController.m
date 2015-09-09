@@ -161,12 +161,12 @@
 #pragma mark Duration on screen
 - (void)startTimerOnViewedScreen
 {
-    [[Mixpanel sharedInstance] timeEvent:@"Viewed Choose Your Side Dish"];
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Choose Your Side Dish Screen"];
 }
 
 - (void)endTimerOnViewedScreen
 {
-    [[Mixpanel sharedInstance] track:@"Viewed Choose Your Side Dish"];
+    [[Mixpanel sharedInstance] track:@"Viewed Choose Your Side Dish Screen"];
 }
 
 - (void)noConnection
