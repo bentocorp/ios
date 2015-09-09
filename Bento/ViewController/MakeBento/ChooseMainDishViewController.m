@@ -63,7 +63,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trackViewedChooseYourMainDish) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
     self.aryDishes = [[NSMutableArray alloc] init];
     
@@ -120,7 +121,7 @@
     
     [self updateUI];
     
-    [self trackViewedChooseYourMainDish];
+    [self startTimerOnViewScreen];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -129,12 +130,18 @@
     
     [super viewWillDisappear:animated];
     
-    [[Mixpanel sharedInstance] track:@"Viewed Choose Your Main Dish"];
+    [self endTimerOnViewedScreen];
 }
 
-- (void)trackViewedChooseYourMainDish
+#pragma mark Duration on screen
+- (void)startTimerOnViewScreen
 {
     [[Mixpanel sharedInstance] timeEvent:@"Viewed Choose Your Main Dish"];
+}
+
+- (void)endTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] track:@"Viewed Choose Your Main Dish"];
 }
 
 - (void)noConnection
