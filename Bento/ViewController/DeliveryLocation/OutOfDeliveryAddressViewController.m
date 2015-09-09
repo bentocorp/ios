@@ -116,7 +116,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) viewWillAppear:(BOOL)animated
+- (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
     
@@ -125,8 +125,31 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willChangeKeyboardFrame:) name:UIKeyboardWillChangeFrameNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
+}
+
+#pragma mark Duration on screen
+- (void)startTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Out of Delivery Zone Screen"];
+}
+
+- (void)endTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] track:@"Viewed Out of Delivery Zone Screen"];
 }
 
 - (void)noConnection
@@ -145,12 +168,6 @@
     loadingHUD = nil;
 }
 
-//- (void)preloadCheckCurrentMode
-//{
-//    // so date string can refresh first
-//    [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkCurrentMode) userInfo:nil repeats:NO];
-//}
-
 - (void)checkCurrentMode
 {
     if ([[BentoShop sharedInstance] didModeOrDateChange])
@@ -160,13 +177,6 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-}
-
-- (void) viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-
-    [super viewWillDisappear:animated];
 }
 
 - (void) willShowKeyboard:(NSNotification*)notification
