@@ -17,6 +17,8 @@
 #import "SoldOutViewController.h"
 #import "DishCollectionViewCell.h"
 
+#import "Mixpanel.h"
+
 @interface ChooseMainDishViewController () <DishCollectionViewCellDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
@@ -61,6 +63,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trackViewedChooseYourMainDish) name:@"enteredForeground" object:nil];
     
     self.aryDishes = [[NSMutableArray alloc] init];
     
@@ -116,6 +119,22 @@
     }
     
     [self updateUI];
+    
+    [self trackViewedChooseYourMainDish];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+    
+    [[Mixpanel sharedInstance] track:@"Viewed Choose Your Main Dish"];
+}
+
+- (void)trackViewedChooseYourMainDish
+{
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Choose Your Main Dish"];
 }
 
 - (void)noConnection
@@ -153,13 +172,6 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [super viewWillDisappear:animated];
 }
 
 - (void)onUpdatedStatus:(NSNotification *)notification
