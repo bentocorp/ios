@@ -22,6 +22,7 @@
 #import "BentoShop.h"
 #import "UIColor+CustomColors.h"
 #import <PureLayout/PureLayout.h>
+#import "Mixpanel.h"
 
 @interface SignedOutSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -103,27 +104,34 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [self startTimerOnViewedScreen];
 }
 
-//- (void)onUpdatedStatus:(NSNotification *)notification
-//{
-//    if (isThereConnection)
-//    {
-//        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
-//        {
-//            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-//        }
-//        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
-//        {
-//            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-//        }
-//    }
-//}
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
+}
+
+#pragma mark Duration on screen
+- (void)startTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Signed Out Settings Screen"];
+}
+
+- (void)endTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] track:@"Viewed Signed Out Settings Screen"];
+}
 
 - (void)noConnection
 {
@@ -150,13 +158,6 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [super viewWillDisappear:animated];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
