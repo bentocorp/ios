@@ -231,22 +231,50 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     // Set promo code string
-    if (currentUserInfo[@"coupon_code"] != [NSNull null] || currentUserInfo[@"coupon_code"] != nil)
+    if (currentUserInfo[@"coupon_code"] != [NSNull null] || currentUserInfo[@"coupon_code"] != nil) {
         couponCodeString = currentUserInfo[@"coupon_code"];
-    else
+    }
+    else {
         couponCodeString = @"--";
+    }
     
     NSString *sharePrecomposedMessageOriginal;
     
-    if ([[AppStrings sharedInstance] getString:SHARE_PRECOMPOSED_MESSAGE] != nil)
+    if ([[AppStrings sharedInstance] getString:SHARE_PRECOMPOSED_MESSAGE] != nil) {
         sharePrecomposedMessageOriginal = [[AppStrings sharedInstance] getString:SHARE_PRECOMPOSED_MESSAGE];
+    }
     
-    if (couponCodeString != nil)
+    if (couponCodeString != nil) {
         sharePrecomposedMessageNew = [sharePrecomposedMessageOriginal stringByReplacingOccurrencesOfString:@"%@" withString:couponCodeString];
+    }
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
+}
+
+#pragma mark Duration on screen
+- (void)startTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Signed In Settings Screen"];
+}
+
+- (void)endTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] track:@"Viewed Signed In Settings Screen"];
 }
 
 - (void)noConnection
@@ -274,13 +302,6 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [super viewWillDisappear:animated];
 }
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
