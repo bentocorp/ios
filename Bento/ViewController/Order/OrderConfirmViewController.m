@@ -231,7 +231,7 @@
             }
             else {
                 // this case is for when they go outside of app to turn on then come back in
-                MyAlertView *pushAlreadyAlertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Notifications are already enabled." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+                MyAlertView *pushAlreadyAlertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Notifications are already enabled." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitle:nil];
                 [pushAlreadyAlertView showInView:self.view];
             }
         }

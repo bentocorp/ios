@@ -17,10 +17,11 @@
 #import "Mixpanel.h"
 #import "FirstViewController.h"
 #import "UIColor+CustomColors.h"
+#import "MyAlertView.h"
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
-@interface IntroViewController()
+@interface IntroViewController() <MyAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
 @property (nonatomic, weak) IBOutlet UIImageView *ivLogo;
@@ -343,16 +344,16 @@
     
     [manager stopUpdatingLocation];
     
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Pressed Get Started"] == nil)
-    {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Pressed Get Started"] == nil) {
         [self showTutorial];
     }
-    else
-    {
-        if ([self isPushEnabled])
+    else {
+        if ([self isPushEnabled]) {
             [self exitIntroScreen];
-        else
+        }
+        else {
             [self showPushTutorialV2];
+        }
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Shown Location Request"];
@@ -437,19 +438,23 @@
     {
         UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
         
-        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
             enabled = NO;
-        else
+        }
+        else {
             enabled = YES;
+        }
     }
     else
     {
         UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
         
-        if (types & UIRemoteNotificationTypeAlert)
+        if (types & UIRemoteNotificationTypeAlert) {
             enabled = YES;
-        else
+        }
+        else {
             enabled = NO;
+        }
     }
     
     return enabled;
@@ -541,24 +546,44 @@
     [self exitIntroScreen];
 }
 
-- (IBAction)onOK:(id)sender
+- (void)requestPush
 {
     // iOS 8 and up
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
     }
-    
     // iOS 7 and below
     else {
         [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
+}
+
+- (IBAction)onOK:(id)sender
+{   
+    [self requestPush];
     
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
     [[NSUserDefaults standardUserDefaults] synchronize];
     
     exitOnWhichScreen = @"Push";
     [self exitIntroScreen];
+
+    // go to Bento settings if ios 8+
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
+        
+        if ([self isPushEnabled] == NO) {
+            MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Turn On"];
+            alertView1.tag = 911;
+            [alertView1 showInView:self.view];
+        }
+    }
+
+    // if ios 7, show alert
+    else {
+        MyAlertView *alertView2 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        [alertView2 showInView:self.view];
+    }
 }
 
 #pragma mark Exit Screen
@@ -647,6 +672,20 @@
     
     [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
     [self.navigationController popViewControllerAnimated:NO];
+}
+
+#pragma mark MyAlertViewDelegate
+
+- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    exitOnWhichScreen = @"Push";
+    [self exitIntroScreen];
+    
+    if (alertView.tag == 911) {
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }
+    }
 }
 
 @end
