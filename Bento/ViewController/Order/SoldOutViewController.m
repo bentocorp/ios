@@ -145,8 +145,6 @@
     
     if (self.type == 0) // Closed
     {
-        [[Mixpanel sharedInstance] track:@"Viewed Closed Screen"];
-        
         self.lblMessageTitle.text = [[AppStrings sharedInstance] getString:CLOSED_TEXT_TITLE];
         self.lblMessageContent.text = [self getClosedText];
         
@@ -157,8 +155,6 @@
     }
     else if (self.type == 1) // Sold Out
     {
-        [[Mixpanel sharedInstance] track:@"Viewed Sold-out Screen"];
-        
         self.lblMessageTitle.text = [[AppStrings sharedInstance] getString:SOLDOUT_TEXT_TITLE];
         self.lblMessageContent.text = [[AppStrings sharedInstance] getString:SOLDOUT_TEXT_CONTENT];
         
@@ -182,6 +178,41 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setPreviewButtonText) name:@"enteredForeground" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self endTimerOnViewedScreen];
+}
+
+#pragma mark Duration on screen
+- (void)startTimerOnViewedScreen
+{
+    if (self.type == 0) {
+        [[Mixpanel sharedInstance] timeEvent:@"Viewed Closed Screen"];
+    }
+    else {
+        [[Mixpanel sharedInstance] timeEvent:@"Viewed Sold-out Screen"];
+    }
+}
+
+- (void)endTimerOnViewedScreen
+{
+    if (self.type == 0) {
+        [[Mixpanel sharedInstance] track:@"Viewed Closed Screen"];
+    }
+    else {
+        [[Mixpanel sharedInstance] track:@"Viewed Sold-out Screen"];
+    }
 }
 
 - (void)noConnection
@@ -208,14 +239,6 @@
     [loadingHUD dismiss];
     loadingHUD = nil;
     [self viewWillAppear:YES];
-}
-
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [super viewWillDisappear:animated];
-    
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)setPreviewButtonText
