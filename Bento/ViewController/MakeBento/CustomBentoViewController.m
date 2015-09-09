@@ -662,16 +662,33 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trackViewedCustomHomeScreen) name:@"enteredForeground" object:nil];
 
     NSLog(@"DISTINCT ID - %@", [[Mixpanel sharedInstance] distinctId]);
+    
+    [self trackViewedCustomHomeScreen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+    
+    [[Mixpanel sharedInstance] track:@"Viewed Custom Home Screen"];
+}
+
+- (void)trackViewedCustomHomeScreen
+{
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Custom Home Screen"];
 }
 
 - (void)noConnection
 {
     isThereConnection = NO;
     
-    if (loadingHUD == nil)
-    {
+    if (loadingHUD == nil) {
+        
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
         [loadingHUD showInView:self.view];
@@ -694,8 +711,7 @@
 
 - (void)checkCurrentMode
 {
-    if ([[BentoShop sharedInstance] didModeOrDateChange])
-    {
+    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -703,46 +719,35 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [super viewWillDisappear:animated];
-}
-
 - (void)dealloc
 {
-//    @try
-//    {
-        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
-//    }
-//    @catch(id anException)
-//    {
-        //do nothing, obviously it wasn't attached because an exception was thrown
-//    }
+    [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
 }
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if (isThereConnection)
-    {
-        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+    if (isThereConnection) {
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
             [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+        }
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser]) {
             [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-        else
+        }
+        else {
             [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        }
     }
 }
 
 - (void)loadSelectedDishes
 {
     NSMutableArray *aryBentos = [[NSMutableArray alloc] init];
-    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++)
-    {
+    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++) {
+        
         Bento *bento = [[BentoShop sharedInstance] getBento:index];
-        if ([bento isCompleted])
+        if ([bento isCompleted]) {
             [aryBentos addObject:bento];
+        }
     }
     
     NSLog(@"TOTAL BENTOS: %ld", (long)[[BentoShop sharedInstance] getTotalBentoCount]);
