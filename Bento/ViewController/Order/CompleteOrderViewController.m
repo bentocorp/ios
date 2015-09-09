@@ -140,9 +140,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Mixpanel
-    [[Mixpanel sharedInstance] track:@"Viewed Summary Screen"];
-    
     // Mixpanel track for Placed An Order
     mixpanel = [Mixpanel sharedInstance];
     
@@ -369,6 +366,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
     // ADDRESS
     self.lblAddress.text = @"";
@@ -399,6 +398,30 @@
     }
     
     [self updateUI];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [self.aryBentos removeAllObjects];
+    
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
+}
+
+#pragma mark Duration on screen
+- (void)startTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Summary Screen"];
+}
+
+- (void)endTimerOnViewedScreen
+{
+    [[Mixpanel sharedInstance] track:@"Viewed Summary Screen"];
 }
 
 - (void)noConnection
@@ -415,15 +438,6 @@
 {
     [loadingHUD dismiss];
     loadingHUD = nil;
-}
-
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [self.aryBentos removeAllObjects];
-    
-    [super viewWillDisappear:animated];
 }
 
 - (void)checkCurrentMode
