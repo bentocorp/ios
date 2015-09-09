@@ -1283,10 +1283,12 @@
     
     _currentIndexPath = indexPath;
     
-    if (self.aryBentos.count > 1)
+    if (self.aryBentos.count > 1) {
         [self removeBento];
-    else
+    }
+    else {
         [self showStartOverAlert];
+    }
 }
 
 - (void)removeBento
@@ -1297,6 +1299,8 @@
     [self.tvBentos reloadData];
     _currentIndexPath = nil;
     [self updateUI];
+    
+    [[Mixpanel sharedInstance] track:@"Removed Bento"];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForDeleteConfirmationButtonForRowAtIndexPath:(NSIndexPath *)indexPath
