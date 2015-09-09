@@ -299,6 +299,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Global Data Manager
     [globalShop refreshPause];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"enteringBackground" object:nil];
 }
 
 - (void)applicationDidEnterBackground:(UIApplication *)application
@@ -553,8 +555,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             
             [globalShop refreshResume];
             
-            if ([self connected])
+            if ([self connected]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"networkConnected" object:nil];
+            }
         });
     });
 }

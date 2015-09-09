@@ -662,11 +662,12 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(trackViewedCustomHomeScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedCustomHomeScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedCustomHomeScreen) name:@"enteringBackground" object:nil];
 
     NSLog(@"DISTINCT ID - %@", [[Mixpanel sharedInstance] distinctId]);
     
-    [self trackViewedCustomHomeScreen];
+    [self startTimerOnViewedCustomHomeScreen];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -675,12 +676,18 @@
     
     [super viewWillDisappear:animated];
     
-    [[Mixpanel sharedInstance] track:@"Viewed Custom Home Screen"];
+    [self endTimerOnViewedCustomHomeScreen];
 }
 
-- (void)trackViewedCustomHomeScreen
+#pragma mark Duration on screen
+- (void)startTimerOnViewedCustomHomeScreen
 {
     [[Mixpanel sharedInstance] timeEvent:@"Viewed Custom Home Screen"];
+}
+
+- (void)endTimerOnViewedCustomHomeScreen
+{
+    [[Mixpanel sharedInstance] track:@"Viewed Custom Home Screen"];
 }
 
 - (void)noConnection
