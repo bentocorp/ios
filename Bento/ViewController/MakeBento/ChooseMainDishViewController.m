@@ -121,7 +121,7 @@
     
     [self updateUI];
     
-    [self startTimerOnViewScreen];
+    [self startTimerOnViewedScreen];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -134,7 +134,7 @@
 }
 
 #pragma mark Duration on screen
-- (void)startTimerOnViewScreen
+- (void)startTimerOnViewedScreen
 {
     [[Mixpanel sharedInstance] timeEvent:@"Viewed Choose Your Main Dish Screen"];
 }

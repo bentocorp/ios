@@ -255,8 +255,6 @@
         stpCard.cvc = card.cvc;
         _creditCard = stpCard;
         
-        NSLog(@"CARD INFO: Number: %@, Month: %ld, Year: %ld, CVC: %@", card.number, card.expMonth, card.expYear, card.cvc);
-        
         self.btnContinue.enabled = YES;
         [self.btnContinue setBackgroundColor:[UIColor bentoBrandGreen]];
     }

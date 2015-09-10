@@ -2937,7 +2937,6 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
-					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
 					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
@@ -2970,7 +2969,6 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
-					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
 					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
@@ -3080,7 +3078,6 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
-					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
 					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3119,7 +3116,6 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
-					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
 					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
@@ -3245,7 +3241,6 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
-					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
 					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -3334,7 +3329,6 @@
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
-					"/Users/JosephLauSF/Downloads/FacebookSDKs-iOS-20150813",
 					"$(PROJECT_DIR)/Bento/ViewController",
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
