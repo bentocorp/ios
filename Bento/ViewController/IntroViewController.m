@@ -416,13 +416,13 @@
 
 - (IBAction)onGetStarted:(id)sender
 {
-    if ([self isPushEnabled])
-    {
+    if ([self isPushEnabled]) {
         exitOnWhichScreen = @"Intro";
         [self exitIntroScreen];
     }
-    else
+    else {
         [self showPushTutorial];
+    }
     
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Pressed Get Started"];
     [[NSUserDefaults standardUserDefaults] synchronize];
@@ -560,7 +560,20 @@
 }
 
 - (IBAction)onOK:(id)sender
-{   
+{
+    // locations is asked everytime app is reinstalled
+    // if upgraded, it shouldnt ask for it again
+    
+    
+    // three cases when they tap on OK:
+    
+    // first time installing the app, haven't seen the system prompt, in this case show the prompt
+    
+    // upgrading the app, persistent data should be in effect, they shouldn't see the push tutorial?
+    
+    // deleted and reinstalled the app, peristent data is reset. we don't know if seen system alert before. in this case should we prompt system alert or direct to settings
+    
+    
     [self requestPush];
     
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
