@@ -548,7 +548,7 @@
 
 - (IBAction)onOK:(id)sender
 {
-    [SSLWrite(<#SSLContextRef context#>, <#const void *data#>, <#size_t dataLength#>, <#size_t *processed#>)];
+    [ss];
     
     // if system alert has not been shown before
     if () {

@@ -6,6 +6,7 @@ PODS:
   - Canvas (0.1.2)
   - FCUUID (1.1.4):
     - UICKeyChainStore (~> 1.0.5)
+  - FDKeychain (1.2.2)
   - KIF (3.2.3):
     - KIF/XCTest (= 3.2.3)
   - KIF/XCTest (3.2.3)
@@ -34,6 +35,7 @@ DEPENDENCIES:
   - Branch
   - Canvas
   - FCUUID
+  - FDKeychain
   - KIF (~> 3.0)
   - Mixpanel
   - mopub-ios-sdk
@@ -58,6 +60,7 @@ SPEC CHECKSUMS:
   Branch: c12209a965c1f93083fb515084a4f5b8cbfc7c56
   Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
   FCUUID: 178c3d7907b1399137f1093f9c04ce4825755292
+  FDKeychain: ce0d5e4fac972c28e921e893ffe982832695d17b
   KIF: a94bffe9c97e449e44f8fa481c53243d21309e1e
   Mixpanel: 1d387d76800e07e953958c62c97fea27f13632dd
   mopub-ios-sdk: c41d03bf7a9e13281e72665e792881a2bf5dc31c
