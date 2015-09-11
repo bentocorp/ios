@@ -434,8 +434,8 @@
 {
     BOOL enabled;
     
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)])
-    {
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]) {
+        
         UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
         
         if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
@@ -445,8 +445,7 @@
             enabled = YES;
         }
     }
-    else
-    {
+    else {
         UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
         
         if (types & UIRemoteNotificationTypeAlert) {
@@ -517,6 +516,7 @@
     }];
 }
 
+// call this if user had pressed get started before, but closed the app before finishing the entire onboarding process
 - (void)showPushTutorialV2
 {
     [UIView animateWithDuration:2 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
@@ -546,6 +546,26 @@
     [self exitIntroScreen];
 }
 
+- (IBAction)onOK:(id)sender
+{
+    [SSLWrite(<#SSLContextRef context#>, <#const void *data#>, <#size_t dataLength#>, <#size_t *processed#>)];
+    
+    // if system alert has not been shown before
+    if () {
+        [self requestPush];
+    
+        exitOnWhichScreen = @"Push";
+        [self exitIntroScreen];
+    }
+    // if system alert has been shown before
+    else {
+        [self showRouteToDeviceSettingsAlert];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (void)requestPush
 {
     // iOS 8 and up
@@ -559,43 +579,33 @@
     }
 }
 
-- (IBAction)onOK:(id)sender
+- (void)showRouteToDeviceSettingsAlert
 {
-    // locations is asked everytime app is reinstalled
-    // if upgraded, it shouldnt ask for it again
-    
-    
-    // three cases when they tap on OK:
-    
-    // first time installing the app, haven't seen the system prompt, in this case show the prompt
-    
-    // upgrading the app, persistent data should be in effect, they shouldn't see the push tutorial?
-    
-    // deleted and reinstalled the app, peristent data is reset. we don't know if seen system alert before. in this case should we prompt system alert or direct to settings
-    
-    
-    [self requestPush];
-    
-    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    exitOnWhichScreen = @"Push";
-    [self exitIntroScreen];
-
     // go to Bento settings if ios 8+
     if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
         
-        if ([self isPushEnabled] == NO) {
-            MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Turn On"];
-            alertView1.tag = 911;
-            [alertView1 showInView:self.view];
-        }
+        MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Turn On"];
+        alertView1.tag = 911;
+        [alertView1 showInView:self.view];
     }
-
-    // if ios 7, show alert
+    // if ios 7, just show alert with explanation
     else {
         MyAlertView *alertView2 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
         [alertView2 showInView:self.view];
+    }
+}
+
+#pragma mark MyAlertViewDelegate
+
+- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    exitOnWhichScreen = @"Push";
+    [self exitIntroScreen];
+    
+    if (alertView.tag == 911) {
+        if (buttonIndex == 1) {
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+        }
     }
 }
 
@@ -685,20 +695,6 @@
     
     [self.navigationController.view.layer addAnimation:transition forKey:kCATransition];
     [self.navigationController popViewControllerAnimated:NO];
-}
-
-#pragma mark MyAlertViewDelegate
-
-- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    exitOnWhichScreen = @"Push";
-    [self exitIntroScreen];
-    
-    if (alertView.tag == 911) {
-        if (buttonIndex == 1) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-        }
-    }
 }
 
 @end

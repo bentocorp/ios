@@ -225,13 +225,13 @@
         if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
             
             if ([self isPushEnabled] == NO) {
-                MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:@"Turn On"];
+                MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Turn On"];
                 alertView1.tag = 911;
                 [alertView1 showInView:self.view];
             }
             else {
                 // this case is for when they go outside of app to turn on then come back in
-                MyAlertView *pushAlreadyAlertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Notifications are already enabled." delegate:nil cancelButtonTitle:@"Cancel" otherButtonTitle:nil];
+                MyAlertView *pushAlreadyAlertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Notifications are already enabled." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
                 [pushAlreadyAlertView showInView:self.view];
             }
         }
