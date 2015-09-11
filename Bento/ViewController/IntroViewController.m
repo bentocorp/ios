@@ -58,8 +58,6 @@
     UILabel *lblPushRequest;
     UILabel *lblPushComment;
     
-    NSString *exitOnWhichScreen;
-    
     CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
 }
@@ -319,7 +317,7 @@
     }
     else {
         if ([self isPushEnabled]) {
-            [self exitIntroScreen];
+            [self exitOnboardingScreen:@""];
         }
         else {
             [self showPushTutorialV2];
@@ -350,7 +348,7 @@
     }
     else {
         if ([self isPushEnabled]) {
-            [self exitIntroScreen];
+            [self exitOnboardingScreen:@""];
         }
         else {
             [self showPushTutorialV2];
@@ -418,8 +416,7 @@
 - (IBAction)onGetStarted:(id)sender
 {
     if ([self isPushEnabled]) {
-        exitOnWhichScreen = @"Intro";
-        [self exitIntroScreen];
+        [self exitOnboardingScreen:@"Intro"];
     }
     else {
         [self showPushTutorial];
@@ -543,31 +540,28 @@
 
 - (IBAction)onNoThanks:(id)sender
 {
-    exitOnWhichScreen = @"Push";
-    [self exitIntroScreen];
+    [self exitOnboardingScreen:@"Push"];
 }
 
 - (IBAction)onOK:(id)sender
 {
+    // register for remote notifications whether system alert has been prompted before or not - required for notifications to show up in settings
+    [self requestPush];
+    
+    // try to retrieve flag in keychain - to check if we should redirect to settings or not
     NSError *error = nil;
     NSString *has_shown_push_alert = [FDKeychain itemForKey: @"has_shown_push_alert"
                                      forService: @"Bento"
                                           error: &error];
     
-    // if system alert has been shown before
+    // if system alert has been shown before, redirect to settings
     if ([has_shown_push_alert isEqualToString:@"YES"]) {
         [self showRouteToDeviceSettingsAlert];
     }
-    // if system alert has not been shown before
+    // if system alert has not been shown before - this should also prompt the system alert when registering for remote notifications above
     else {
-        [self requestPush];
-        
-        exitOnWhichScreen = @"Push";
-        [self exitIntroScreen];
+        [self exitOnboardingScreen:@"Push"];
     }
-    
-    [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
     
     // save a flag to keychain
     [FDKeychain saveItem:@"YES"
@@ -609,8 +603,7 @@
 
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    exitOnWhichScreen = @"Push";
-    [self exitIntroScreen];
+    [self exitOnboardingScreen:@"Push"];
     
     if (alertView.tag == 911) {
         if (buttonIndex == 1) {
@@ -621,10 +614,10 @@
 
 #pragma mark Exit Screen
 
-- (void)exitIntroScreen
+- (void)exitOnboardingScreen:(NSString *)IntroOrPush
 {
     // fade locations labels
-    if ([exitOnWhichScreen isEqualToString:@"Intro"])
+    if ([IntroOrPush isEqualToString:@"Intro"])
     {
         [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             self.lblItem0.alpha = 0;
@@ -662,7 +655,7 @@
     }
     
     // fade push labels
-    else if ([exitOnWhichScreen isEqualToString:@"Push"])
+    else if ([IntroOrPush isEqualToString:@"Push"])
     {
         [UIView animateWithDuration:1 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             self.ivLogo.alpha = 0;
