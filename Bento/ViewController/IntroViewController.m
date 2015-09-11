@@ -18,6 +18,7 @@
 #import "FirstViewController.h"
 #import "UIColor+CustomColors.h"
 #import "MyAlertView.h"
+#import <FDKeychain/FDKeychain.h>
 
 #define IS_OS_8_OR_LATER ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0)
 
@@ -548,22 +549,31 @@
 
 - (IBAction)onOK:(id)sender
 {
-    [ss];
+    NSError *error = nil;
+    NSString *has_shown_push_alert = [FDKeychain itemForKey: @"has_shown_push_alert"
+                                     forService: @"Bento"
+                                          error: &error];
     
+    // if system alert has been shown before
+    if ([has_shown_push_alert isEqualToString:@"YES"]) {
+        [self showRouteToDeviceSettingsAlert];
+    }
     // if system alert has not been shown before
-    if () {
+    else {
         [self requestPush];
-    
+        
         exitOnWhichScreen = @"Push";
         [self exitIntroScreen];
-    }
-    // if system alert has been shown before
-    else {
-        [self showRouteToDeviceSettingsAlert];
     }
     
     [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
     [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    // save a flag to keychain
+    [FDKeychain saveItem:@"YES"
+                  forKey:@"has_shown_push_alert"
+              forService:@"Bento"
+                   error:&error];
 }
 
 - (void)requestPush
