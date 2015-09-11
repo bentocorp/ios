@@ -31,6 +31,7 @@
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
 #import "Mixpanel.h"
+#import "Mixpanel/MPTweakInline.h"
 
 #import <CoreLocation/CoreLocation.h>
 
@@ -612,7 +613,15 @@
 {
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
-    deliveryPrice = [[AppStrings sharedInstance] getFloat:DELIVERY_FEE];
+    
+    if (MPTweakValue(@"$0.00 Delivery Fee", NO)) {
+        // test
+        deliveryPrice = 0.00;
+    }
+    else {
+        // original
+        deliveryPrice = [[AppStrings sharedInstance] getFloat:DELIVERY_FEE];
+    }
     
     // Meal (_totalPrice)
     if (salePrice != 0 && salePrice < unitPrice) {

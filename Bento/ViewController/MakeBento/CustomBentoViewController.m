@@ -1200,9 +1200,10 @@
             lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
             lblBanner.text = [NSString stringWithFormat:@"ONLY $%ld", (long)salePrice];
         }
-        else
+        else {
             // original
             lblBanner.hidden = YES;
+        }
         
         if (currentBento == nil || ![currentBento isCompleted])
         {
