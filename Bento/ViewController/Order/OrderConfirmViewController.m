@@ -24,6 +24,8 @@
 
 #import "MyAlertView.h"
 
+#import <FDKeychain/FDKeychain.h>
+
 @interface OrderConfirmViewController () <MyAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivTitle;
@@ -212,34 +214,49 @@
 
 - (IBAction)onTurnOnPush:(id)sender
 {
-    // push request not prompted before
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Push Requested"] == nil) {
-        
-        [self requestPush];
+    // register for remote notifications whether system alert has been prompted before or not - required for notifications to show up in settings
+    [self requestPush];
     
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Push Requested"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+    // try to retrieve flag in keychain - to check if we should redirect to settings or not
+    NSError *error = nil;
+    NSString *has_shown_push_alert = [FDKeychain itemForKey: @"has_shown_push_alert"
+                                                 forService: @"Bento"
+                                                      error: &error];
+    
+    // push request not prompted before
+    if (has_shown_push_alert == nil) {
+    
+        // save a flag to keychain
+        [FDKeychain saveItem:@"not_nil"
+                      forKey:@"has_shown_push_alert"
+                  forService:@"Bento"
+                       error:&error];
     }
     else {
-        // go to Bento settings if ios 8+
-        if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
-            
-            if ([self isPushEnabled] == NO) {
-                MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Turn On"];
-                alertView1.tag = 911;
-                [alertView1 showInView:self.view];
-            }
-            else {
-                // this case is for when they go outside of app to turn on then come back in
-                MyAlertView *pushAlreadyAlertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Notifications are already enabled." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-                [pushAlreadyAlertView showInView:self.view];
-            }
+        [self showCustomPushAlert];
+    }
+}
+
+- (void)showCustomPushAlert
+{
+    // go to Bento settings if ios 8+
+    if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
+        
+        if ([self isPushEnabled] == NO) {
+            MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Turn On"];
+            alertView1.tag = 911;
+            [alertView1 showInView:self.view];
         }
-        // if ios 7, show alert
         else {
-            MyAlertView *alertView2 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
-            [alertView2 showInView:self.view];
+            // this case is for when they go outside of app to turn on then come back in
+            MyAlertView *pushAlreadyAlertView = [[MyAlertView alloc] initWithTitle:@"" message:@"Notifications are already enabled." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+            [pushAlreadyAlertView showInView:self.view];
         }
+    }
+    // if ios 7, show alert
+    else {
+        MyAlertView *alertView2 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        [alertView2 showInView:self.view];
     }
 }
 

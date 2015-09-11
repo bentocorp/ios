@@ -317,7 +317,7 @@
     }
     else {
         if ([self isPushEnabled]) {
-            [self exitOnboardingScreen:@""];
+            [self exitOnboardingScreen:@"Push"]; // will this ever be called?
         }
         else {
             [self showPushTutorialV2];
@@ -348,7 +348,7 @@
     }
     else {
         if ([self isPushEnabled]) {
-            [self exitOnboardingScreen:@""];
+            [self exitOnboardingScreen:@"Push"]; // will this ever be called?
         }
         else {
             [self showPushTutorialV2];
@@ -554,17 +554,17 @@
                                      forService: @"Bento"
                                           error: &error];
     
-    // if system alert has been shown before, redirect to settings
-    if ([has_shown_push_alert isEqualToString:@"YES"]) {
-        [self showRouteToDeviceSettingsAlert];
-    }
     // if system alert has not been shown before - this should also prompt the system alert when registering for remote notifications above
-    else {
+    if (has_shown_push_alert == nil) {
         [self exitOnboardingScreen:@"Push"];
+    }
+    // if system alert has been shown before, redirect to settings
+    else {
+        [self showRouteToDeviceSettingsAlert];
     }
     
     // save a flag to keychain
-    [FDKeychain saveItem:@"YES"
+    [FDKeychain saveItem:@"not_nil"
                   forKey:@"has_shown_push_alert"
               forService:@"Bento"
                    error:&error];
