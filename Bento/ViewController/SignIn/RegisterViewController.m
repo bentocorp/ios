@@ -560,8 +560,6 @@
                                @"Installed Source":sourceFinal
                                }];
         
-        [mixpanel track:@"Completed Registration"];
-        
         [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"registeredLogin"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -605,6 +603,8 @@
         [pref synchronize];
         
         [[BentoShop sharedInstance] setSignInStatus:YES];
+        
+        [mixpanel track:@"Completed Registration"];
         
         // dismiss vc
         [self dismissViewControllerAnimated:YES completion:nil];

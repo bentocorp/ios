@@ -534,6 +534,9 @@
     if (alertView.tag == 1)
     {
         if (buttonIndex == 1) {
+            
+            [[Mixpanel sharedInstance] track:@"Logged Out"];
+            
             [self processLogout];
         }
     }

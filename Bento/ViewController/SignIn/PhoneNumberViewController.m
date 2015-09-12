@@ -630,6 +630,8 @@
                                 @"Last Login Address": currentAddressFinal
                                 }];
          
+         [mixpanel track:@"Logged In"];
+         
          /*--------------------------------------------------------------------*/
          
          [[BentoShop sharedInstance] setSignInStatus:YES];

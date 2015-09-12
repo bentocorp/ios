@@ -55,13 +55,13 @@
 {
     [super viewWillAppear:animated];
     
-    [self initContent];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [self initContent];
     
     [self startTimerOnViewedScreen];
 }
@@ -78,12 +78,42 @@
 #pragma mark Duration on screen
 - (void)startTimerOnViewedScreen
 {
-    [[Mixpanel sharedInstance] timeEvent:@"Viewed Signed In Settings Screen"];
+    switch (self.contentType) {
+        case CONTENT_PRIVACY:
+            [[Mixpanel sharedInstance] timeEvent:@"Viewed Privacy Policy Screen"];
+            break;
+            
+        case CONTENT_TERMS:
+            [[Mixpanel sharedInstance] timeEvent:@"Viewed Terms and Conditions Screen"];
+            break;
+            
+        case CONTENT_FAQ:
+            [[Mixpanel sharedInstance] timeEvent:@"Viewed FAQ Screen"];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)endTimerOnViewedScreen
 {
-    [[Mixpanel sharedInstance] track:@"Viewed Signed In Settings Screen"];
+    switch (self.contentType) {
+        case CONTENT_PRIVACY:
+            [[Mixpanel sharedInstance] track:@"Viewed Privacy Policy Screen"];
+            break;
+            
+        case CONTENT_TERMS:
+            [[Mixpanel sharedInstance] track:@"Viewed Terms and Conditions Screen"];
+            break;
+            
+        case CONTENT_FAQ:
+            [[Mixpanel sharedInstance] track:@"Viewed FAQ Screen"];
+            break;
+            
+        default:
+            break;
+    }
 }
 
 - (void)noConnection
@@ -113,7 +143,7 @@
     }
 }
 
-- (void) initContent
+- (void)initContent
 {
     NSURL *urlNavigate = nil;
     

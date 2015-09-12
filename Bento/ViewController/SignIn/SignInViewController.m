@@ -412,6 +412,7 @@
                                @"Last Login Address": currentAddressFinal
                                }];
         
+        [mixpanel track:@"Logged In"];
         /*--------------------------------------------------------------------*/
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
@@ -530,6 +531,8 @@
                  [pref setObject:strRequest forKey:@"apiName"];
                  [pref setObject:dicRequest forKey:@"loginRequest"];
                  [pref synchronize];
+                 
+                 [[Mixpanel sharedInstance] track:@"Logged In"];
                  
                  [self showErrorMessage:nil code:ERROR_NONE];
                  [self gotoDeliveryLocationScreen];
