@@ -243,7 +243,7 @@ static BentoShop *_shareInstance;
         for (NSDictionary *menuDetailedInfo in menuInfo)
         {
             NSString *strMenuBack = menuInfo[menuDetailedInfo][@"Menu"][@"bgimg"]; // ie. menuInfo[@"lunch"][@"Menu"][@"bgimg"]
-            
+            NSLog(@"strMEnuBack - %@", strMenuBack);
             if (strMenuBack != nil && [strMenuBack isKindOfClass:[NSString class]] && strMenuBack.length > 0)
                 [urls addObject:[NSURL URLWithString:strMenuBack]];
 
@@ -270,7 +270,7 @@ static BentoShop *_shareInstance;
         for (NSDictionary *dishInfo in aryDishesDinner)
         {
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            
+
             if (strImageURL != nil && [strImageURL isKindOfClass:[NSString class]] && strImageURL.length > 0)
                 [urls addObject:[NSURL URLWithString:strImageURL]];
         }
