@@ -679,6 +679,15 @@
     [self endTimerOnViewedScreen];
 }
 
+- (void)dealloc
+{
+    @try {
+        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
+    }@catch(id anException){
+        //do nothing, obviously it wasn't attached because an exception was thrown
+    }
+}
+
 #pragma mark Duration on screen
 - (void)startTimerOnViewedScreen
 {
@@ -724,11 +733,6 @@
         
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-}
-
-- (void)dealloc
-{
-    [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
 }
 
 - (void)onUpdatedStatus:(NSNotification *)notification

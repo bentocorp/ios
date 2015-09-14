@@ -497,13 +497,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/Manager/AppStrings.m"
-            timestampString = "463950380.964641"
+            filePath = "Bento/ViewController/SignIn/SignInViewController.m"
+            timestampString = "463957221.052536"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
-            landmarkName = "-getAppStrings"
+            startingLineNumber = "477"
+            endingLineNumber = "477"
+            landmarkName = "-onForgot:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -513,13 +513,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/SignIn/SignInViewController.m"
-            timestampString = "463957221.052536"
+            filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
+            timestampString = "463958773.670387"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "477"
-            endingLineNumber = "477"
-            landmarkName = "-onForgot:"
+            startingLineNumber = "510"
+            endingLineNumber = "510"
+            landmarkName = "-dealloc"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

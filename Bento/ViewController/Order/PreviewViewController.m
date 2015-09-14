@@ -826,7 +826,6 @@
 {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
-    //
     @try {
         [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
     }@catch(id anException){

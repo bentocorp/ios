@@ -147,11 +147,11 @@
     }];
 }
 
-- (void)dealloc {
-    if (_isObservingScrollView) {
-        [self.observedScrollView removeObserver:self forKeyPath:@"contentOffset"];
-    }
-}
+//- (void)dealloc {
+//    if (_isObservingScrollView) {
+//        [self.observedScrollView removeObserver:self forKeyPath:@"contentOffset"];
+//    }
+//}
 
 #pragma mark Getters and setters
 

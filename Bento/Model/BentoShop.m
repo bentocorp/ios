@@ -243,7 +243,7 @@ static BentoShop *_shareInstance;
         for (NSDictionary *menuDetailedInfo in menuInfo)
         {
             NSString *strMenuBack = menuInfo[menuDetailedInfo][@"Menu"][@"bgimg"]; // ie. menuInfo[@"lunch"][@"Menu"][@"bgimg"]
-            NSLog(@"strMEnuBack - %@", strMenuBack);
+
             if (strMenuBack != nil && [strMenuBack isKindOfClass:[NSString class]] && strMenuBack.length > 0)
                 [urls addObject:[NSURL URLWithString:strMenuBack]];
 
