@@ -616,7 +616,7 @@
     
     if (MPTweakValue(@"$0.00 Delivery Fee", NO)) {
         // test
-        deliveryPrice = 2.4;
+        deliveryPrice = 0.00;
     }
     else {
         // original
