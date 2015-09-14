@@ -86,7 +86,7 @@
             /*TRACK PROMO MIXPANEL*/
             [[Mixpanel sharedInstance] track:@"Entered Promo Code" properties:@{
                                                                                 @"code": strPromoCode,
-                                                                                @"discount": [NSString stringWithFormat:@"%ld", discount]
+                                                                                @"discount": [NSString stringWithFormat:@"%ld", (long)discount]
                                                                                 }];
             
              NSLog(@"json response %@", response);
