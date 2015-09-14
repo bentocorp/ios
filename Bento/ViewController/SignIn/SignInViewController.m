@@ -474,8 +474,9 @@
 - (IBAction)onForgot:(id)sender
 {
     NSURL *urlReset = [[AppStrings sharedInstance] getURL:SIGNIN_LINK_RESET];
-    if (urlReset != nil && [[UIApplication sharedApplication] canOpenURL:urlReset])
+    if (urlReset != nil && [[UIApplication sharedApplication] canOpenURL:urlReset]) {
         [[UIApplication sharedApplication] openURL:urlReset];
+    }
     
     [[Mixpanel sharedInstance] track:@"Tapped On Forgot Password"];
 }
