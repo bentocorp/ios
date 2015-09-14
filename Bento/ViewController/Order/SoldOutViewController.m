@@ -68,19 +68,6 @@
 
 - (NSString *)getClosedText
 {
-    NSDate* currentDate = [NSDate date];
-    
-#ifdef DEBUG
-    NSTimeZone* currentTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT-08:00"];
-    NSTimeZone* nowTimeZone = [NSTimeZone systemTimeZone];
-    
-    NSInteger currentGMTOffset = [currentTimeZone secondsFromGMTForDate:currentDate];
-    NSInteger nowGMTOffset = [nowTimeZone secondsFromGMTForDate:currentDate];
-    
-    NSTimeInterval interval = currentGMTOffset - nowGMTOffset;
-    currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
-#endif
-    
     currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
     lunchTime = [[[BentoShop sharedInstance] getLunchTime] floatValue];
     dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
