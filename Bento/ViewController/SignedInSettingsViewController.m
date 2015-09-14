@@ -543,7 +543,7 @@
     else if (alertView.tag == 2)
     {
         if (buttonIndex == 1) {
-            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:4153001332"]];
+            [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:1-415-300-1332"]];
         }
     }
 }
