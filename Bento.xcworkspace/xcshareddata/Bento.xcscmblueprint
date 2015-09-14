@@ -1,0 +1,30 @@
+{
+  "DVTSourceControlWorkspaceBlueprintPrimaryRemoteRepositoryKey" : "58F321B027D03517BA0A9783C5C85D80A7A07508",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyRepositoryLocationsKey" : {
+
+  },
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyStatesKey" : {
+    "F76BA38EFFC55E46E8D0815660EDB772ADABA782" : 0,
+    "58F321B027D03517BA0A9783C5C85D80A7A07508" : 0
+  },
+  "DVTSourceControlWorkspaceBlueprintIdentifierKey" : "74705F58-2DF6-4FC7-9260-92959ECA4A2F",
+  "DVTSourceControlWorkspaceBlueprintWorkingCopyPathsKey" : {
+    "F76BA38EFFC55E46E8D0815660EDB772ADABA782" : "",
+    "58F321B027D03517BA0A9783C5C85D80A7A07508" : "bento-ios"
+  },
+  "DVTSourceControlWorkspaceBlueprintNameKey" : "Bento",
+  "DVTSourceControlWorkspaceBlueprintVersion" : 204,
+  "DVTSourceControlWorkspaceBlueprintRelativePathToProjectKey" : "Bento.xcworkspace",
+  "DVTSourceControlWorkspaceBlueprintRemoteRepositoriesKey" : [
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/demant\/bento-ios.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "58F321B027D03517BA0A9783C5C85D80A7A07508"
+    },
+    {
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryURLKey" : "https:\/\/github.com\/JosephLauSF\/AppCoda_NoStoryboard_CustomTableWithPropertyList.git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositorySystemKey" : "com.apple.dt.Xcode.sourcecontrol.Git",
+      "DVTSourceControlWorkspaceBlueprintRemoteRepositoryIdentifierKey" : "F76BA38EFFC55E46E8D0815660EDB772ADABA782"
+    }
+  ]
+}
