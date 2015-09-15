@@ -27,9 +27,11 @@
 
 #import "UIColor+CustomColors.h"
 
+#import "EditPhoneNumberView.h"
+
 //#import <FBSDKShareKit/FBSDKShareKit.h>
 
-@interface SignedInSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate>
+@interface SignedInSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, EditPhoneNumberDelegate>
 
 @end
 
@@ -41,11 +43,13 @@
     JGProgressHUD *loadingHUD;
     
     NSString *couponCodeString;
+    
+    EditPhoneNumberView *editPhoneNumberView;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
+    
     // get current user info
     currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     NSLog(@"current user info - %@", currentUserInfo);
@@ -59,7 +63,7 @@
     
     self.view.backgroundColor = [UIColor bentoBackgroundGray];
     
-/*-----------------------------------------------------------*/
+    /*-----------------------------------------------------------*/
     
     // scroll view
     scrollView = [[UIScrollView alloc] initWithFrame:CGRectMake(0, -20, SCREEN_WIDTH, SCREEN_HEIGHT + 20)];
@@ -77,7 +81,7 @@
     scrollView.contentSize = CGSizeMake(SCREEN_WIDTH, scrollViewContentSizeHeight);
     [self.view addSubview:scrollView];
     
-/*-----------------------------------------------------------*/
+    /*-----------------------------------------------------------*/
     
     // navigation bar color
     UIView *navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
@@ -103,42 +107,64 @@
     longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [self.view addSubview:longLineSepartor1];
     
-/*-----------------------------------------------------------*/
+    /*-----------------------------------------------------------*/
     
     // name label
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, 290, 24)];
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 80, SCREEN_WIDTH - 40, 24)];
     nameLabel.textColor = [UIColor colorWithRed:0.427f green:0.459f blue:0.514f alpha:1.0f];
-    [nameLabel setFont:[UIFont fontWithName:@"OpenSans-Semibold" size:14]];
+    [nameLabel setFont:[UIFont fontWithName:@"OpenSans-Semibold" size:16]];
     nameLabel.text = [NSString stringWithFormat:@"%@ %@", currentUserInfo[@"firstname"], currentUserInfo[@"lastname"]];
+    nameLabel.adjustsFontSizeToFitWidth = YES;
     [scrollView addSubview:nameLabel];
     
     // phone label
-    UILabel *phoneNumberLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 100, 250, 24)];
+    UILabel *phoneNumberLabel = [[UILabel alloc] init];
     phoneNumberLabel.textColor = [UIColor colorWithRed:0.427f green:0.459f blue:0.514f alpha:1.0f];
-    phoneNumberLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
+    phoneNumberLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     phoneNumberLabel.text = currentUserInfo[@"phone"];
+    phoneNumberLabel.adjustsFontSizeToFitWidth = YES;
+    
+    if ([phoneNumberLabel.text rangeOfString:@"+1"].location == NSNotFound) {
+        // doesn't contain +1, retract
+        phoneNumberLabel.frame = CGRectMake(25, 105, 105, 24);
+    }
+    else {
+        // contains +1, extend
+        phoneNumberLabel.frame = CGRectMake(25, 105, 125, 24);
+    }
+    
     [scrollView addSubview:phoneNumberLabel];
     
     // email label
-    UILabel *emailLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 120, 250, 24)];
+    UILabel *emailLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 130, 250, 24)];
     emailLabel.textColor = [UIColor colorWithRed:0.427f green:0.459f blue:0.514f alpha:1.0f];
-    emailLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
+    emailLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     emailLabel.text = currentUserInfo[@"email"];
+    emailLabel.adjustsFontSizeToFitWidth = YES;
     [scrollView addSubview:emailLabel];
     
+    // edit phone number image
+    UIImageView *ivPencil = [[UIImageView alloc] initWithFrame:CGRectMake(25 + phoneNumberLabel.frame.size.width + 5, 105, 15, 15)];
+    ivPencil.image = [UIImage imageNamed:@"pencil-bento"];
+    [scrollView addSubview:ivPencil];
+    
+    // edit phone number button
+    UIButton *btnPencil = [[UIButton alloc] initWithFrame:CGRectMake(25 + phoneNumberLabel.frame.size.width, 100, 25, 25)];
+    [btnPencil addTarget:self action:@selector(onEditPhoneNumber) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:btnPencil];
+    
     // logout button
-    UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, 117, 60, 30)];
+    UIButton *logoutButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 80, 127, 60, 30)];
     [logoutButton setTitleColor:[UIColor colorWithRed:0.459f green:0.639f blue:0.302f alpha:1.0f] forState:UIControlStateNormal];
     [logoutButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:14]];
     [logoutButton setTitle:@"Log out" forState:UIControlStateNormal];
     [logoutButton addTarget:self action:@selector(onLogout) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:logoutButton];
-
-/*-----------------------------------------------------------*/
+    
+    /*-----------------------------------------------------------*/
     
     // table view
-//    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 160, SCREEN_WIDTH, 180)];
-    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 160, SCREEN_WIDTH, 135)];
+    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 170, SCREEN_WIDTH, 135)];
     settingsTableView.alwaysBounceVertical = NO;
     [settingsTableView setSeparatorInset:UIEdgeInsetsMake(0, 60, 0, 0)];
     settingsTableView.delegate = self;
@@ -146,12 +172,11 @@
     [scrollView addSubview:settingsTableView];
     
     // line separator at bottom of table view
-//    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 339, SCREEN_WIDTH, 2)];
-    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 294, SCREEN_WIDTH, 2)];
+    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 304, SCREEN_WIDTH, 2)];
     longLineSepartor2.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [scrollView addSubview:longLineSepartor2];
     
-/*-----------------------------------------------------------*/
+    /*-----------------------------------------------------------*/
     
     // promo gray background view
     UIView *promoGrayBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, scrollView.contentSize.height - 180, SCREEN_WIDTH, 80)];
@@ -175,7 +200,7 @@
     [promoCodeButton addTarget:self action:@selector(copyCode) forControlEvents:UIControlEventTouchUpInside];
     [promoGrayBackgroundView addSubview:promoCodeButton];
     
-/*-----------------------------------------------------------*/
+    /*-----------------------------------------------------------*/
     
     // promo white background view
     UIView *promoWhiteBackgroundView = [[UIView alloc] initWithFrame:CGRectMake(0, scrollView.contentSize.height - 100, SCREEN_WIDTH, 100)];
@@ -193,13 +218,13 @@
         socialLabel.textColor = [UIColor bentoTitleGray];
         socialLabel.textAlignment = NSTextAlignmentCenter;
         socialLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
-
+        
         // set button images, events and labels
         switch (i) {
             case 0:
                 [socialIconButton setImage:[UIImage imageNamed:@"icon-circle-facebook"] forState:UIControlStateNormal];
                 [socialIconButton addTarget:self action:@selector(postToFacebook) forControlEvents:UIControlEventTouchUpInside];
-
+                
                 socialLabel.text = @"SHARE";
                 break;
             case 1:
@@ -226,6 +251,17 @@
         [promoWhiteBackgroundView addSubview:socialIconButton];
         [promoWhiteBackgroundView addSubview:socialLabel];
     }
+    
+    // edit phone number view
+    NSArray *nib = [[NSBundle mainBundle] loadNibNamed:@"EditPhoneNumberView" owner:nil options:nil];
+    editPhoneNumberView = [nib objectAtIndex:0];
+    editPhoneNumberView.delegate = self;
+    
+    editPhoneNumberView.frame = CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT);
+    editPhoneNumberView.alpha = 0.0f;
+    
+    [self.view addSubview:editPhoneNumberView];
+    [self.view bringSubviewToFront:editPhoneNumberView];
 }
 
 - (void)viewWillAppear:(BOOL)animated
@@ -322,13 +358,13 @@
         settingsTableViewCell = [[SettingsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-//    settingsTableViewCell.iconImageView.backgroundColor = [UIColor colorWithRed:0.694f green:0.702f blue:0.729f alpha:1.0f];
+    //    settingsTableViewCell.iconImageView.backgroundColor = [UIColor colorWithRed:0.694f green:0.702f blue:0.729f alpha:1.0f];
     
     switch (indexPath.row) {
-//        case 0:
-//            settingsTableViewCell.settingsLabel.text = @"Credit Card";
-//            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
-//            break;
+            //        case 0:
+            //            settingsTableViewCell.settingsLabel.text = @"Credit Card";
+            //            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
+            //            break;
         case 0:
             settingsTableViewCell.settingsLabel.text = @"FAQ";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-help"];
@@ -356,19 +392,19 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *destVC;
     
-//    CreditCardInfoViewController *creditCardInfoViewController = [[CreditCardInfoViewController alloc] init];
+    //    CreditCardInfoViewController *creditCardInfoViewController = [[CreditCardInfoViewController alloc] init];
     
     NSArray *toEmailRecipentsArray;
     MFMailComposeViewController *mailComposeViewController;
     
     switch (indexPath.row) {
-//        case 0:
-//            
-//            // go to credit card
-//            [self.navigationController pushViewController:creditCardInfoViewController animated:YES];
-//            
-//            break;
-//            
+            //        case 0:
+            //
+            //            // go to credit card
+            //            [self.navigationController pushViewController:creditCardInfoViewController animated:YES];
+            //
+            //            break;
+            //
         case 0:
         {
             // go to faq
@@ -391,7 +427,7 @@
             }
             
             break;
-        
+            
         case 2:
             
             // show call alert
@@ -415,7 +451,7 @@
     
     if ([MFMailComposeViewController canSendMail]) {
         mailComposeViewController.mailComposeDelegate = self;
-//        [mailComposeViewController setSubject:@"Check out Bento"];
+        //        [mailComposeViewController setSubject:@"Check out Bento"];
         [mailComposeViewController setToRecipients:toEmailRecipentsArray];
         [mailComposeViewController setMessageBody:sharePrecomposedMessageNew isHTML:NO];
         
@@ -488,7 +524,7 @@
         
         [[BentoShop sharedInstance] setSignInStatus:NO];
         
-/*------CLEAR MIXPANEL ID AND PROPERTIES ON LOGOUT------*/
+        /*------CLEAR MIXPANEL ID AND PROPERTIES ON LOGOUT------*/
         
         NSString *UUID;
         
@@ -510,7 +546,7 @@
         [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"registeredLogin"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
-/*------------------------------------------------------*/
+        /*------------------------------------------------------*/
         
         // dismiss view
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -548,6 +584,13 @@
     }
 }
 
+- (void)onEditPhoneNumber
+{
+    [UIView animateWithDuration:0.3f animations:^{
+        editPhoneNumberView.alpha = 1.0f;
+    }];
+}
+
 - (void)postToTwitter
 {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
@@ -572,10 +615,10 @@
         SLComposeViewController *faceSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
         // this is against FB's new policy now - does not work
-//        [faceSheet setInitialText:sharePrecomposedMessageNew];
+        //        [faceSheet setInitialText:sharePrecomposedMessageNew];
         
-//        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-//        content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
+        //        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
+        //        content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
         
         [self presentViewController:faceSheet animated:YES completion:Nil];
     } else {

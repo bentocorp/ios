@@ -270,7 +270,7 @@
     }
 }
 
-- (void) willShowKeyboard:(NSNotification*)notification
+- (void)willShowKeyboard:(NSNotification*)notification
 {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
@@ -279,7 +279,7 @@
     [self collapseScrollView:keyboardFrameBeginRect.size.height];
 }
 
-- (void) willChangeKeyboardFrame:(NSNotification *)notification
+- (void)willChangeKeyboardFrame:(NSNotification *)notification
 {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
@@ -288,7 +288,7 @@
     [self collapseScrollView:keyboardFrameBeginRect.size.height];
 }
 
-- (void) willHideKeyboard:(NSNotification *)notification
+- (void)willHideKeyboard:(NSNotification *)notification
 {
     [self expandScrollView];
 }

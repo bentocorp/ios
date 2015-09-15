@@ -298,6 +298,15 @@
 		FC599F5A1B0FEDB600989E1B /* Bento_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC599F591B0FEDB600989E1B /* Bento_Tests.m */; };
 		FC72297B1B16905700C9A9AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
 		FC72297C1B16905700C9A9AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
+		FC7291231BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7291211BA8BC9F00BCBDE7 /* EditPhoneNumberView.m */; settings = {ASSET_TAGS = (); }; };
+		FC7291241BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7291211BA8BC9F00BCBDE7 /* EditPhoneNumberView.m */; settings = {ASSET_TAGS = (); }; };
+		FC7291251BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7291211BA8BC9F00BCBDE7 /* EditPhoneNumberView.m */; settings = {ASSET_TAGS = (); }; };
+		FC7291261BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7291221BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib */; settings = {ASSET_TAGS = (); }; };
+		FC7291271BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7291221BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib */; settings = {ASSET_TAGS = (); }; };
+		FC7291281BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7291221BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib */; settings = {ASSET_TAGS = (); }; };
+		FC72912A1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7291291BA8BD6B00BCBDE7 /* pencil-bento.png */; settings = {ASSET_TAGS = (); }; };
+		FC72912B1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7291291BA8BD6B00BCBDE7 /* pencil-bento.png */; settings = {ASSET_TAGS = (); }; };
+		FC72912C1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7291291BA8BD6B00BCBDE7 /* pencil-bento.png */; settings = {ASSET_TAGS = (); }; };
 		FC7B609F1B0FF11300A00467 /* BentoModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B609E1B0FF11300A00467 /* BentoModelTests.m */; };
 		FC7B60A11B10045D00A00467 /* BentoShopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B60A01B10045D00A00467 /* BentoShopTests.m */; };
 		FC7EACB21B8D0C2700B15FC8 /* empty-main.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7EACB01B8D0C2700B15FC8 /* empty-main.png */; };
@@ -851,6 +860,10 @@
 		FC599F591B0FEDB600989E1B /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
 		FC7229791B16905700C9A9AF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Bento/Modules/WebManager/Reachability.h; sourceTree = SOURCE_ROOT; };
 		FC72297A1B16905700C9A9AF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Bento/Modules/WebManager/Reachability.m; sourceTree = SOURCE_ROOT; };
+		FC7291201BA8BC9F00BCBDE7 /* EditPhoneNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPhoneNumberView.h; sourceTree = "<group>"; };
+		FC7291211BA8BC9F00BCBDE7 /* EditPhoneNumberView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EditPhoneNumberView.m; sourceTree = "<group>"; };
+		FC7291221BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EditPhoneNumberView.xib; sourceTree = "<group>"; };
+		FC7291291BA8BD6B00BCBDE7 /* pencil-bento.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil-bento.png"; sourceTree = "<group>"; };
 		FC7B609E1B0FF11300A00467 /* BentoModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BentoModelTests.m; sourceTree = "<group>"; };
 		FC7B60A01B10045D00A00467 /* BentoShopTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BentoShopTests.m; path = ../Bento/Model/BentoShopTests.m; sourceTree = "<group>"; };
 		FC7EACB01B8D0C2700B15FC8 /* empty-main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty-main.png"; sourceTree = "<group>"; };
@@ -1362,6 +1375,7 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FC7291291BA8BD6B00BCBDE7 /* pencil-bento.png */,
 				FC82867B1AEEF3D2009D073D /* Settings Icons */,
 				FC8DB72D1AF18674003045A3 /* Images */,
 				FCDF22031ADC3ADF006B2750 /* Squared Icons */,
@@ -1398,6 +1412,9 @@
 				90A553E01A60035D001F9DA7 /* PromoCodeView.h */,
 				90A553E11A60035D001F9DA7 /* PromoCodeView.m */,
 				90A553E31A60038C001F9DA7 /* PromoCodeView.xib */,
+				FC7291201BA8BC9F00BCBDE7 /* EditPhoneNumberView.h */,
+				FC7291211BA8BC9F00BCBDE7 /* EditPhoneNumberView.m */,
+				FC7291221BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib */,
 				90BED0E71A5C3333003DC872 /* Cell */,
 			);
 			path = View;
@@ -1426,8 +1443,9 @@
 				90D8F7CB1A5E252800D034CF /* OutOfDeliveryAddressViewController.h */,
 				90D8F7CC1A5E252800D034CF /* OutOfDeliveryAddressViewController.m */,
 			);
-			path = DeliveryLocation;
-			sourceTree = "<group>";
+			name = DeliveryLocation;
+			path = Bento/ViewController/DeliveryLocation;
+			sourceTree = SOURCE_ROOT;
 		};
 		90BED0A51A5BD05C003DC872 /* Homepage */ = {
 			isa = PBXGroup;
@@ -2190,6 +2208,7 @@
 				7216B79C1AA64C7C0006FFE9 /* first_background.png in Resources */,
 				7216B79D1AA64C7C0006FFE9 /* orderconfirm_image_car.png in Resources */,
 				FC7EACB31B8D0C2700B15FC8 /* empty-main.png in Resources */,
+				FC72912B1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
 				FCDF22211ADC3ADF006B2750 /* Icon-76.png in Resources */,
 				7216B79F1AA64C7C0006FFE9 /* nav_background.png in Resources */,
@@ -2209,6 +2228,7 @@
 				7216B7A81AA64C7C0006FFE9 /* OpenSans-LightItalic.ttf in Resources */,
 				7216B7A91AA64C7C0006FFE9 /* orderconfirm_image_plus@2x.png in Resources */,
 				7216B7AA1AA64C7C0006FFE9 /* register_image_or.png in Resources */,
+				FC7291271BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */,
 				7216B7AB1AA64C7C0006FFE9 /* Images.xcassets in Resources */,
 				7216B7AC1AA64C7C0006FFE9 /* register_icon_email.png in Resources */,
 				FCF5E0A31B8BDC28002E823C /* placeholder.png in Resources */,
@@ -2276,6 +2296,7 @@
 				FC8DB7461AF18674003045A3 /* icon-square-help.png in Resources */,
 				7209E0851A77715000D18D7A /* LaunchScreen.png in Resources */,
 				90BED0B21A5BE22E003DC872 /* logo.png in Resources */,
+				FC7291261BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */,
 				47AA1C451A6BE52800064857 /* string_continue@2x.png in Resources */,
 				90359C221A5EC49700AAD5D2 /* orderconfirm_image_applepay.png in Resources */,
 				90D8F7BF1A5D9B0800D034CF /* nav_btn_close@2x.png in Resources */,
@@ -2302,6 +2323,7 @@
 				47AA1C471A6BE52F00064857 /* string_addanotherbento@2x.png in Resources */,
 				FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */,
 				90BED0C91A5BE72F003DC872 /* OpenSans-Semibold.ttf in Resources */,
+				FC72912A1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
 				90BED0E01A5C04DE003DC872 /* mybento_nav_cart_inact@2x.png in Resources */,
 				FCDF221A1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */,
 				47C5B0181A8B82BD008FA7DA /* completeorder_cell_btn_minute@2x.png in Resources */,
@@ -2394,6 +2416,7 @@
 				FC92E17E1B7E5C880073C5D7 /* icon-square-help.png in Resources */,
 				FC92E17F1B7E5C880073C5D7 /* LaunchScreen.png in Resources */,
 				FC92E1801B7E5C880073C5D7 /* logo.png in Resources */,
+				FC7291281BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */,
 				FC92E1811B7E5C880073C5D7 /* string_continue@2x.png in Resources */,
 				FC92E1821B7E5C880073C5D7 /* orderconfirm_image_applepay.png in Resources */,
 				FC92E1831B7E5C880073C5D7 /* nav_btn_close@2x.png in Resources */,
@@ -2420,6 +2443,7 @@
 				FC92E1961B7E5C880073C5D7 /* string_addanotherbento@2x.png in Resources */,
 				FC92E1971B7E5C880073C5D7 /* PreviewCollectionViewCell.xib in Resources */,
 				FC92E1981B7E5C880073C5D7 /* OpenSans-Semibold.ttf in Resources */,
+				FC72912C1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
 				FC92E1991B7E5C880073C5D7 /* mybento_nav_cart_inact@2x.png in Resources */,
 				FC92E19A1B7E5C880073C5D7 /* Icon-60@3x.png in Resources */,
 				FC92E19B1B7E5C880073C5D7 /* completeorder_cell_btn_minute@2x.png in Resources */,
@@ -2671,6 +2695,7 @@
 				7216B74C1AA64C7C0006FFE9 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				7216B74D1AA64C7C0006FFE9 /* STPTestCardStore.m in Sources */,
 				7216B74F1AA64C7C0006FFE9 /* STPTestAddressStore.m in Sources */,
+				FC7291241BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				7216B7501AA64C7C0006FFE9 /* DeliveryLocationViewController.m in Sources */,
 				FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */,
 				FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */,
@@ -2758,6 +2783,7 @@
 				722333D21A6F46DF006C2446 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				722333F81A72C133006C2446 /* STPTestCardStore.m in Sources */,
 				722333F71A72C133006C2446 /* STPTestAddressStore.m in Sources */,
+				FC7291231BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				90D8F7CA1A5E24B900D034CF /* DeliveryLocationViewController.m in Sources */,
 				FC08AB241AF713DD00CFB44D /* CustomBentoViewController.m in Sources */,
 				FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */,
@@ -2864,6 +2890,7 @@
 				FC92E1231B7E5C880073C5D7 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				FC92E1241B7E5C880073C5D7 /* STPTestCardStore.m in Sources */,
 				FC92E1261B7E5C880073C5D7 /* STPTestAddressStore.m in Sources */,
+				FC7291251BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				FC92E1271B7E5C880073C5D7 /* DeliveryLocationViewController.m in Sources */,
 				FC92E1291B7E5C880073C5D7 /* CustomBentoViewController.m in Sources */,
 				FC92E12A1B7E5C880073C5D7 /* BWTitlePagerView.m in Sources */,
