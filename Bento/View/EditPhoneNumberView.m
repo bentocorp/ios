@@ -13,6 +13,8 @@
 #import "WebManager.h"
 #import "DataManager.h"
 #import "Mixpanel.h"
+#import "UIColor+CustomColors.h"
+#import "SHSPhoneTextField.h"
 
 
 @interface EditPhoneNumberView()
@@ -20,8 +22,8 @@
 @property (weak, nonatomic) IBOutlet UIView *viewEnterPhoneNumber;
 @property (weak, nonatomic) IBOutlet UIView *viewConfirmPhoneNumber;
 
-@property (weak, nonatomic) IBOutlet UITextField *txtEnterPhoneNumber;
-@property (weak, nonatomic) IBOutlet UITextField *txtConfirmPhoneNumber;
+@property (weak, nonatomic) IBOutlet SHSPhoneTextField *txtEnterPhoneNumber;
+@property (weak, nonatomic) IBOutlet SHSPhoneTextField *txtConfirmPhoneNumber;
 
 @property (weak, nonatomic) IBOutlet UIButton *btnChangePhoneNumber;
 @property (weak, nonatomic) IBOutlet UIButton *btnCancel;
@@ -44,26 +46,75 @@
     self.btnChangePhoneNumber.layer.cornerRadius = 3;
     self.btnChangePhoneNumber.clipsToBounds = YES;
     
-//    [self showErrorWithString:nil code:ERROR_NONE];
-    
     self.viewError.alpha = 0;
+    
+    [self.txtEnterPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
+    [self.txtEnterPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
+    
+        // set the last character in attributed text to have a bolder font
+        if ([textField.attributedText length] > 0) {
+            NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:textField.text];
+            [newString addAttribute:NSForegroundColorAttributeName
+                              value:[UIColor bentoBrandGreen]
+                              range:NSMakeRange([textField.text length]-1, 1)];
+            textField.attributedText = newString;
+        }
+    }];
+    
+    [self.txtConfirmPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
+    [self.txtConfirmPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
+        
+        // set the last character in attributed text to have a bolder font
+        if ([textField.attributedText length] > 0) {
+            NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:textField.text];
+            [newString addAttribute:NSForegroundColorAttributeName
+                              value:[UIColor bentoBrandGreen]
+                              range:NSMakeRange([textField.text length]-1, 1)];
+            textField.attributedText = newString;
+        }
+    }];
 }
 
 - (IBAction)onChangePhoneNumber:(id)sender
 {
+    [self.txtEnterPhoneNumber resignFirstResponder];
+    [self.txtConfirmPhoneNumber resignFirstResponder];
+    
     [self process];
+    
+    NSString *strPhoneNumber = self.txtConfirmPhoneNumber.text;
+    BOOL isValid = (strPhoneNumber.length > 0 && [DataManager isValidPhoneNumber:strPhoneNumber]);
+    if (isValid) {
+        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoBrandGreen]];
+    }
+    else {
+        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
+    }
+    
+//    NSString *strPhoneNumber = self.txtPhoneNumber.text;
+//    if (strPhoneNumber.length == 0)
+//    {
+//        [self showErrorWithString:@"Please enter a phone number." code:ERROR_PHONENUMBER];
+//        return;
+//    }
+//    
+//    if (![DataManager isValidPhoneNumber:strPhoneNumber])
+//    {
+//        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
+//        return;
+//    }
 }
 
 - (IBAction)onCancel:(id)sender
 {
+    [self.txtEnterPhoneNumber resignFirstResponder];
+    [self.txtConfirmPhoneNumber resignFirstResponder];
+    
     [self fadeView];
 }
 
 - (void)process
 {
-    [self.txtEnterPhoneNumber resignFirstResponder];
-    [self.txtConfirmPhoneNumber resignFirstResponder];
-    
     NSString *strPhoneNumber = self.txtConfirmPhoneNumber.text;
     
     if (strPhoneNumber.length == 0) {
@@ -117,9 +168,6 @@
 
 - (void)fadeView
 {
-    [self.txtEnterPhoneNumber resignFirstResponder];
-    [self.txtConfirmPhoneNumber resignFirstResponder];
-    
     [UIView animateWithDuration:0.3f animations:^{
         self.alpha = 0.0f;
     }];

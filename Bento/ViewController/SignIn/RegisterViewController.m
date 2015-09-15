@@ -89,7 +89,7 @@
     self.btnRegister.clipsToBounds = YES;
     
     self.svMain.contentSize = CGSizeMake(self.svMain.frame.size.width, 504);
-    
+
     [self.txtPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
         
         // set the last character in attributed text to have a bolder font
@@ -850,10 +850,12 @@
                     strPassword.length > 0);
 
 //    self.btnRegister.enabled = isValid;
-    if (isValid)
+    if (isValid) {
         [self.btnRegister setBackgroundColor:[UIColor bentoBrandGreen]];
-    else
+    }
+    else {
         [self.btnRegister setBackgroundColor:[UIColor bentoButtonGray]];
+    }
     
     /*------------------------------------------------------------*/
     
