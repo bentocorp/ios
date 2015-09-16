@@ -285,13 +285,6 @@
 
 #pragma mark UITextFieldDelegate
 
-- (BOOL)textFieldShouldReturn:(UITextField *)textField
-{
-    [self process];
-    
-    return YES;
-}
-
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
     [self.txtEnterPhoneNumber resignFirstResponder];
