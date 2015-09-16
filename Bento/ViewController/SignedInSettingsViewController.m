@@ -45,6 +45,10 @@
     NSString *couponCodeString;
     
     EditPhoneNumberView *editPhoneNumberView;
+    
+    UILabel *phoneNumberLabel;
+    UIImageView *ivPencil;
+    UIButton *btnPencil;
 }
 
 - (void)viewDidLoad {
@@ -118,7 +122,7 @@
     [scrollView addSubview:nameLabel];
     
     // phone label
-    UILabel *phoneNumberLabel = [[UILabel alloc] init];
+    phoneNumberLabel = [[UILabel alloc] init];
     phoneNumberLabel.textColor = [UIColor colorWithRed:0.427f green:0.459f blue:0.514f alpha:1.0f];
     phoneNumberLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
     phoneNumberLabel.text = currentUserInfo[@"phone"];
@@ -144,12 +148,12 @@
     [scrollView addSubview:emailLabel];
     
     // edit phone number image
-    UIImageView *ivPencil = [[UIImageView alloc] initWithFrame:CGRectMake(25 + phoneNumberLabel.frame.size.width + 5, 105, 15, 15)];
+    ivPencil = [[UIImageView alloc] initWithFrame:CGRectMake(25 + phoneNumberLabel.frame.size.width + 5, 105, 15, 15)];
     ivPencil.image = [UIImage imageNamed:@"pencil-bento"];
     [scrollView addSubview:ivPencil];
     
     // edit phone number button
-    UIButton *btnPencil = [[UIButton alloc] initWithFrame:CGRectMake(25 + phoneNumberLabel.frame.size.width, 100, 25, 25)];
+    btnPencil = [[UIButton alloc] initWithFrame:CGRectMake(25 + phoneNumberLabel.frame.size.width, 100, 25, 25)];
     [btnPencil addTarget:self action:@selector(onEditPhoneNumber) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnPencil];
     
@@ -687,6 +691,23 @@
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
+}
+
+-(void)changePhoneNumber:(NSString *)newPhoneNumber
+{
+    phoneNumberLabel.text = newPhoneNumber;
+    if ([phoneNumberLabel.text rangeOfString:@"+1"].location == NSNotFound) {
+        // doesn't contain +1, retract
+        phoneNumberLabel.frame = CGRectMake(25, 105, 105, 24);
+    }
+    else {
+        // contains +1, extend
+        phoneNumberLabel.frame = CGRectMake(25, 105, 125, 24);
+    }
+    
+    ivPencil.frame = CGRectMake(25 + phoneNumberLabel.frame.size.width + 5, 105, 15, 15);
+    
+    btnPencil.frame = CGRectMake(25 + phoneNumberLabel.frame.size.width, 100, 25, 25);
 }
 
 @end

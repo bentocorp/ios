@@ -239,23 +239,16 @@
     [self.txtEnterPhoneNumber resignFirstResponder];
     [self.txtConfirmPhoneNumber resignFirstResponder];
     
-    [self process];
+//    [self process];
+    
+    [self.delegate changePhoneNumber:self.txtConfirmPhoneNumber.text];
+    
+    [self doCancel];
 }
 
 - (IBAction)onCancel:(id)sender
 {
-    // dismiss keyboard
-    [self.txtEnterPhoneNumber resignFirstResponder];
-    [self.txtConfirmPhoneNumber resignFirstResponder];
-    
-    // clear textfields
-    self.txtEnterPhoneNumber.text = @"";
-    self.txtConfirmPhoneNumber.text = @"";
-    
-    // hide error message
-    self.viewError.hidden = YES;
-    
-    [self fadeView];
+    [self doCancel];
 }
 
 #pragma mark UITextFieldDelegate
@@ -290,4 +283,21 @@
         [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
     }
 }
+
+- (void)doCancel
+{
+    // dismiss keyboard
+    [self.txtEnterPhoneNumber resignFirstResponder];
+    [self.txtConfirmPhoneNumber resignFirstResponder];
+    
+    // clear textfields
+    self.txtEnterPhoneNumber.text = @"";
+    self.txtConfirmPhoneNumber.text = @"";
+    
+    // hide error message
+    self.viewError.hidden = YES;
+    
+    [self fadeView];
+}
+
 @end
