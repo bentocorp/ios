@@ -31,6 +31,9 @@
 @property (nonatomic, weak) IBOutlet UIView *viewError;
 @property (nonatomic, weak) IBOutlet UILabel *lblError;
 
+@property (nonatomic) BOOL enterPhoneIsActive;
+@property (nonatomic) BOOL confirmPhoneIsActive;
+
 @end
 
 @implementation EditPhoneNumberView
@@ -160,6 +163,22 @@
             self.viewError.hidden = YES;
             self.txtEnterPhoneNumber.textColor = correctColor;
             self.txtConfirmPhoneNumber.textColor = correctColor;
+            
+            if (self.txtEnterPhoneNumber.enabled == YES && self.txtEnterPhoneNumber.text.length > 0 && self.enterPhoneIsActive == YES) {
+                NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:self.txtEnterPhoneNumber.text];
+                [newString addAttribute:NSForegroundColorAttributeName
+                                  value:[UIColor bentoBrandGreen]
+                                  range:NSMakeRange([self.txtEnterPhoneNumber.text length]-1, 1)];
+                self.txtEnterPhoneNumber.attributedText = newString;
+            }
+            
+            if (self.txtConfirmPhoneNumber.text.length > 0 && self.confirmPhoneIsActive == YES) {
+                NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:self.txtConfirmPhoneNumber.text];
+                [newString addAttribute:NSForegroundColorAttributeName
+                                  value:[UIColor bentoBrandGreen]
+                                  range:NSMakeRange([self.txtConfirmPhoneNumber.text length]-1, 1)];
+                self.txtConfirmPhoneNumber.attributedText = newString;
+            }
         }
             break;
             
@@ -281,11 +300,29 @@
 
 - (void)textFieldDidBeginEditing:(UITextField *)textField
 {
+    if (textField.tag == 2) {
+        self.enterPhoneIsActive = NO;
+        self.confirmPhoneIsActive = YES;
+    }
+    else {
+        self.enterPhoneIsActive = YES;
+        self.confirmPhoneIsActive = NO;
+    }
+    
     textField.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
 }
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
+    if (textField.tag == 2) {
+        self.enterPhoneIsActive = YES;
+        self.confirmPhoneIsActive = NO;
+    }
+    else {
+        self.enterPhoneIsActive = NO;
+        self.confirmPhoneIsActive = YES;
+    }
+    
     textField.font = [UIFont fontWithName:@"OpenSans" size:14];
     
     [self validate];
@@ -311,8 +348,6 @@
 
 - (void)doCancel
 {
-    [self validate];
-    
     // dismiss keyboard
     [self.txtEnterPhoneNumber resignFirstResponder];
     [self.txtConfirmPhoneNumber resignFirstResponder];
@@ -320,6 +355,12 @@
     // clear textfields
     self.txtEnterPhoneNumber.text = @"";
     self.txtConfirmPhoneNumber.text = @"";
+    
+    // fix enable
+    self.txtEnterPhoneNumber.enabled = YES;
+    self.txtConfirmPhoneNumber.enabled = NO;
+    self.viewEnterPhoneNumber.backgroundColor = [UIColor whiteColor];
+    self.viewConfirmPhoneNumber.backgroundColor = [UIColor colorWithRed:0.824f green:0.820f blue:0.839f alpha:1.0f];
     
     // hide error message
     self.viewError.hidden = YES;
