@@ -64,6 +64,7 @@
     }];
     
     self.txtConfirmPhoneNumber.delegate = self;
+    self.txtConfirmPhoneNumber.tag = 2;
     [self.txtConfirmPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
     [self.txtConfirmPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
         if ([textField.attributedText length] > 0) {
@@ -201,10 +202,22 @@
     if (strPhoneNumber1.length > 0 && strPhoneNumber1.length < 17 && [DataManager isValidPhoneNumber:strPhoneNumber1] == YES) {
         self.txtConfirmPhoneNumber.enabled = YES;
         self.viewConfirmPhoneNumber.backgroundColor = [UIColor whiteColor];
+        
+        if (strPhoneNumber2.length > 0) {
+            self.txtEnterPhoneNumber.enabled = NO;
+            self.viewEnterPhoneNumber.backgroundColor = [UIColor colorWithRed:0.824f green:0.820f blue:0.839f alpha:1.0f];
+        }
+        else {
+            self.txtEnterPhoneNumber.enabled = YES;
+            self.viewEnterPhoneNumber.backgroundColor = [UIColor whiteColor];
+        }
     }
     else {
         self.txtConfirmPhoneNumber.enabled = NO;
-        self.viewConfirmPhoneNumber.backgroundColor = [UIColor colorWithRed:0.851f green:0.851f blue:0.863f alpha:1.0f]; // super light gray
+        self.viewConfirmPhoneNumber.backgroundColor = [UIColor colorWithRed:0.824f green:0.820f blue:0.839f alpha:1.0f];
+        
+        self.txtEnterPhoneNumber.enabled = YES;
+        self.viewEnterPhoneNumber.backgroundColor = [UIColor whiteColor];
     }
     
     NSString *firstChars;
@@ -281,11 +294,25 @@
     
     if (strPhoneNumber1.length > 0 && ![DataManager isValidPhoneNumber:strPhoneNumber1]) {
         [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
+        return;
+    }
+    
+    if (textField.tag == 2) {
+        if ( self.txtConfirmPhoneNumber.enabled == YES && self.txtConfirmPhoneNumber.text.length > 0 &&
+            ![self.txtConfirmPhoneNumber.text isEqualToString:self.txtEnterPhoneNumber.text]) {
+            
+            UIColor *errorColor = [UIColor bentoErrorTextOrange];
+            self.viewError.hidden = NO;
+            self.lblError.text = @"Phone numbers entered must match.";
+            self.txtConfirmPhoneNumber.textColor = errorColor;
+        }
     }
 }
 
 - (void)doCancel
 {
+    [self validate];
+    
     // dismiss keyboard
     [self.txtEnterPhoneNumber resignFirstResponder];
     [self.txtConfirmPhoneNumber resignFirstResponder];
