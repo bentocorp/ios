@@ -17,7 +17,7 @@
 #import "SHSPhoneTextField.h"
 
 
-@interface EditPhoneNumberView()
+@interface EditPhoneNumberView() <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *viewEnterPhoneNumber;
 @property (weak, nonatomic) IBOutlet UIView *viewConfirmPhoneNumber;
@@ -37,6 +37,9 @@
 
 - (void)awakeFromNib
 {
+    // error message
+    self.viewError.alpha = 0;
+    
     self.viewEnterPhoneNumber.layer.cornerRadius = 3;
     self.viewEnterPhoneNumber.clipsToBounds = YES;
     
@@ -46,12 +49,9 @@
     self.btnChangePhoneNumber.layer.cornerRadius = 3;
     self.btnChangePhoneNumber.clipsToBounds = YES;
     
-    self.viewError.alpha = 0;
-    
+    self.txtEnterPhoneNumber.delegate = self;
     [self.txtEnterPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
     [self.txtEnterPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
-    
-        // set the last character in attributed text to have a bolder font
         if ([textField.attributedText length] > 0) {
             NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:textField.text];
             [newString addAttribute:NSForegroundColorAttributeName
@@ -59,12 +59,13 @@
                               range:NSMakeRange([textField.text length]-1, 1)];
             textField.attributedText = newString;
         }
+        
+        [self validate];
     }];
     
+    self.txtConfirmPhoneNumber.delegate = self;
     [self.txtConfirmPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
     [self.txtConfirmPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
-        
-        // set the last character in attributed text to have a bolder font
         if ([textField.attributedText length] > 0) {
             NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:textField.text];
             [newString addAttribute:NSForegroundColorAttributeName
@@ -72,45 +73,11 @@
                               range:NSMakeRange([textField.text length]-1, 1)];
             textField.attributedText = newString;
         }
+        
+        [self validate];
     }];
-}
 
-- (IBAction)onChangePhoneNumber:(id)sender
-{
-    [self.txtEnterPhoneNumber resignFirstResponder];
-    [self.txtConfirmPhoneNumber resignFirstResponder];
-    
-    [self process];
-    
-    NSString *strPhoneNumber = self.txtConfirmPhoneNumber.text;
-    BOOL isValid = (strPhoneNumber.length > 0 && [DataManager isValidPhoneNumber:strPhoneNumber]);
-    if (isValid) {
-        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoBrandGreen]];
-    }
-    else {
-        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
-    }
-    
-//    NSString *strPhoneNumber = self.txtPhoneNumber.text;
-//    if (strPhoneNumber.length == 0)
-//    {
-//        [self showErrorWithString:@"Please enter a phone number." code:ERROR_PHONENUMBER];
-//        return;
-//    }
-//    
-//    if (![DataManager isValidPhoneNumber:strPhoneNumber])
-//    {
-//        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
-//        return;
-//    }
-}
-
-- (IBAction)onCancel:(id)sender
-{
-    [self.txtEnterPhoneNumber resignFirstResponder];
-    [self.txtConfirmPhoneNumber resignFirstResponder];
-    
-    [self fadeView];
+    [self validate];
 }
 
 - (void)process
@@ -173,6 +140,110 @@
     }];
 }
 
+- (void)showErrorWithString:(NSString *)errorMsg code:(int)errorCode
+{
+    if (errorMsg == nil || errorMsg.length == 0) {
+        self.viewError.hidden = YES;
+    }
+    else {
+        self.viewError.hidden = NO;
+        self.lblError.text = errorMsg;
+    }
+    
+    UIColor *errorColor = [UIColor bentoErrorTextOrange];
+    UIColor *correctColor = [UIColor bentoCorrectTextGray];
+    
+    switch (errorCode) {
+        case ERROR_NONE:
+        {
+            self.viewError.hidden = YES;
+            self.txtEnterPhoneNumber.textColor = correctColor;
+            self.txtConfirmPhoneNumber.textColor = correctColor;
+        }
+            break;
+            
+        case ERROR_PHONENUMBER:
+        {
+            self.viewError.hidden = NO;
+            self.txtEnterPhoneNumber.textColor = errorColor;
+            self.txtConfirmPhoneNumber.textColor = errorColor;
+        }
+            break;
+            
+        default:
+        case ERROR_UNKNOWN:
+        {
+            self.viewError.hidden = NO;
+            self.txtEnterPhoneNumber.textColor = correctColor;
+            self.txtConfirmPhoneNumber.textColor = correctColor;
+        }
+            break;
+    }
+}
+
+- (void)validate
+{
+    NSString *strPhoneNumber1 = self.txtEnterPhoneNumber.text;
+    NSString *strPhoneNumber2 = self.txtConfirmPhoneNumber.text;
+    
+    BOOL isValid = (strPhoneNumber1.length > 0 && [DataManager isValidPhoneNumber:strPhoneNumber1] &&
+                    strPhoneNumber2.length > 0 && [DataManager isValidPhoneNumber:strPhoneNumber2] &&
+                    [strPhoneNumber1 isEqualToString:strPhoneNumber2]);
+    
+    self.btnChangePhoneNumber.enabled = isValid;
+    if (isValid) {
+        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoBrandGreen]];
+    }
+    else {
+        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
+    }
+}
+
+#pragma mark On Tap
+
+- (IBAction)onChangePhoneNumber:(id)sender
+{
+    [self.txtEnterPhoneNumber resignFirstResponder];
+    [self.txtConfirmPhoneNumber resignFirstResponder];
+    
+    [self process];
+    
+    NSString *strPhoneNumber = self.txtConfirmPhoneNumber.text;
+    BOOL isValid = (strPhoneNumber.length > 0 && [DataManager isValidPhoneNumber:strPhoneNumber]);
+    if (isValid) {
+        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoBrandGreen]];
+    }
+    else {
+        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
+    }
+    
+    //    NSString *strPhoneNumber = self.txtPhoneNumber.text;
+    //    if (strPhoneNumber.length == 0)
+    //    {
+    //        [self showErrorWithString:@"Please enter a phone number." code:ERROR_PHONENUMBER];
+    //        return;
+    //    }
+    //
+    //    if (![DataManager isValidPhoneNumber:strPhoneNumber])
+    //    {
+    //        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
+    //        return;
+    //    }
+}
+
+- (IBAction)onCancel:(id)sender
+{
+    // dismiss keyboard
+    [self.txtEnterPhoneNumber resignFirstResponder];
+    [self.txtConfirmPhoneNumber resignFirstResponder];
+    
+    // clear textfields
+    self.txtEnterPhoneNumber.text = @"";
+    self.txtConfirmPhoneNumber.text = @"";
+    
+    [self fadeView];
+}
+
 #pragma mark UITextFieldDelegate
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
@@ -188,4 +259,28 @@
     [self.txtConfirmPhoneNumber resignFirstResponder];
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField
+{
+    textField.font = [UIFont fontWithName:@"OpenSans-Bold" size:20];
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField
+{
+    NSString *strPhoneNumber = self.txtEnterPhoneNumber.text;
+    NSString *strPhoneNumber2 = self.txtConfirmPhoneNumber.text;
+    
+    if (strPhoneNumber.length != 0 && ![DataManager isValidPhoneNumber:strPhoneNumber]) {
+        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
+        return;
+    }
+    
+    if (strPhoneNumber2.length != 0 && ![DataManager isValidPhoneNumber:strPhoneNumber2]) {
+        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
+        return;
+    }
+    
+    [self showErrorWithString:nil code:ERROR_NONE];
+    
+    textField.font = [UIFont fontWithName:@"OpenSans" size:14];
+}
 @end

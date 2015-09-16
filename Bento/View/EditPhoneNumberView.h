@@ -18,6 +18,4 @@
 
 @property (nonatomic, weak) id <EditPhoneNumberDelegate> delegate;
 
-@property (weak, nonatomic) IBOutlet UIView *viewBackground;
-
 @end

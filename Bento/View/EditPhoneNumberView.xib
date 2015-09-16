@@ -126,7 +126,6 @@
                 <outlet property="lblError" destination="YVc-mG-ktS" id="15M-z7-iZR"/>
                 <outlet property="txtConfirmPhoneNumber" destination="Ode-ff-Koi" id="QnL-kF-eoU"/>
                 <outlet property="txtEnterPhoneNumber" destination="ojy-5H-hPN" id="etC-5s-OAX"/>
-                <outlet property="viewBackground" destination="7cp-nO-uLZ" id="1Np-7f-fQF"/>
                 <outlet property="viewConfirmPhoneNumber" destination="0nj-hG-3V6" id="L5H-un-RI0"/>
                 <outlet property="viewEnterPhoneNumber" destination="YKd-LZ-eHX" id="DKt-Se-ayH"/>
                 <outlet property="viewError" destination="Aic-ti-txT" id="3tP-3K-Ju5"/>

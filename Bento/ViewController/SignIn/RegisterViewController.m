@@ -93,10 +93,8 @@
     [self.txtPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
         
         // set the last character in attributed text to have a bolder font
-        if ([textField.attributedText length] > 0) // if textField length is not empty
-        {
+        if ([textField.attributedText length] > 0) {
             NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:textField.text];
-//            [newString addAttribute:NSFontAttributeName value:[UIFont fontWithName:@"OpenSans-Bold" size:20] range:NSMakeRange(0, [textField.text length])];
             [newString addAttribute:NSForegroundColorAttributeName value:[UIColor bentoBrandGreen] range:NSMakeRange([textField.text length]-1, 1)];
             
             textField.attributedText = newString;
