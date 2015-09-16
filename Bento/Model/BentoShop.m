@@ -941,6 +941,8 @@ static BentoShop *_shareInstance;
                 [self getServiceArea];
             }
         });
+        
+        [self checkModeOrDateChange];
     }
     
     _isCallingApi = NO;
@@ -1317,6 +1319,11 @@ static BentoShop *_shareInstance;
 }
 
 #pragma mark Response to State Change
+
+- (void)checkModeOrDateChange
+{
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"checkModeOrDateChange" object:nil];
+}
 
 - (BOOL)didModeOrDateChange
 {

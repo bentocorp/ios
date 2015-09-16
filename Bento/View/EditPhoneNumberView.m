@@ -40,7 +40,6 @@
 
 - (void)awakeFromNib
 {
-    // error message
     self.viewError.hidden = YES;
     
     self.viewEnterPhoneNumber.layer.cornerRadius = 3;
@@ -52,6 +51,7 @@
     self.btnChangePhoneNumber.layer.cornerRadius = 3;
     self.btnChangePhoneNumber.clipsToBounds = YES;
     
+    // set up formatting
     self.txtEnterPhoneNumber.delegate = self;
     [self.txtEnterPhoneNumber.formatter setDefaultOutputPattern:@"(###) ### - ####"];
     [self.txtEnterPhoneNumber setTextDidChangeBlock:^(UITextField *textField) {
@@ -82,59 +82,6 @@
     }];
 
     [self validate];
-}
-
-- (void)process
-{
-    NSString *strPhoneNumber = self.txtConfirmPhoneNumber.text;
-    
-    if (strPhoneNumber.length == 0) {
-        return;
-    }
-    
-    NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
-    if (strAPIToken == nil || strAPIToken.length == 0) {
-        return;
-    }
-    
-    WebManager *webManager = [[WebManager alloc] init];
-    
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    loadingHUD.textLabel.text = @"Processing...";
-    [loadingHUD showInView:self];
-    
-    NSString *strRequest = [NSString stringWithFormat:@"%@/coupon/apply/%@?api_token=%@", SERVER_URL, strPhoneNumber, strAPIToken];
-    
-    [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
-        [loadingHUD dismiss];
-        
-//        NSDictionary *response = networkOperation.responseJSON;
-//        id amountOff = [response objectForKey:@"amountOff"];
-//        if (response != nil && amountOff != nil && [amountOff isKindOfClass:[NSString class]]) {
-        
-//            NSInteger discount = [[response objectForKey:@"amountOff"] integerValue];
-//            if (self.delegate != nil) {
-//                [self.delegate setDiscound:discount strCouponCode:strPhoneNumber];
-//            }
-//        }
-        
-        // fade out animation
-        [self fadeView];
-        
-    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-        [loadingHUD dismiss];
-        
-        NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-        if (strMessage == nil) {
-            strMessage = error.localizedDescription;
-        }
-        
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-        [alertView showInView:self];
-        alertView = nil;
-        return;
-        
-    } isJSON:NO];
 }
 
 - (void)fadeView
@@ -283,6 +230,83 @@
     [self doCancel];
 }
 
+- (void)process
+{
+    NSString *strPhoneNumber = self.txtConfirmPhoneNumber.text;
+    
+    if (strPhoneNumber.length == 0) {
+        return;
+    }
+    
+    NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
+    if (strAPIToken == nil || strAPIToken.length == 0) {
+        return;
+    }
+    
+    WebManager *webManager = [[WebManager alloc] init];
+    
+    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD.textLabel.text = @"Processing...";
+    [loadingHUD showInView:self];
+    
+    NSString *strRequest = [NSString stringWithFormat:@"%@/coupon/apply/%@?api_token=%@", SERVER_URL, strPhoneNumber, strAPIToken];
+    
+    [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
+        [loadingHUD dismiss];
+        
+        //        NSDictionary *response = networkOperation.responseJSON;
+        //        id amountOff = [response objectForKey:@"amountOff"];
+        //        if (response != nil && amountOff != nil && [amountOff isKindOfClass:[NSString class]]) {
+        
+        //            NSInteger discount = [[response objectForKey:@"amountOff"] integerValue];
+        //            if (self.delegate != nil) {
+        //                [self.delegate setDiscound:discount strCouponCode:strPhoneNumber];
+        //            }
+        //        }
+        
+        // fade out animation
+        [self fadeView];
+        
+    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
+        [loadingHUD dismiss];
+        
+        NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
+        if (strMessage == nil) {
+            strMessage = error.localizedDescription;
+        }
+        
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        [alertView showInView:self];
+        alertView = nil;
+        return;
+        
+    } isJSON:NO];
+}
+
+- (void)doCancel
+{
+    // dismiss keyboard
+    [self.txtEnterPhoneNumber resignFirstResponder];
+    [self.txtConfirmPhoneNumber resignFirstResponder];
+    
+    // clear textfields
+    self.txtEnterPhoneNumber.text = @"";
+    self.txtConfirmPhoneNumber.text = @"";
+    
+    // reset enabled
+    self.txtEnterPhoneNumber.enabled = YES;
+    self.txtConfirmPhoneNumber.enabled = NO;
+    self.viewEnterPhoneNumber.backgroundColor = [UIColor whiteColor];
+    self.viewConfirmPhoneNumber.backgroundColor = [UIColor colorWithRed:0.824f green:0.820f blue:0.839f alpha:1.0f];
+    self.btnChangePhoneNumber.enabled = NO;
+    [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
+    
+    // hide error message
+    self.viewError.hidden = YES;
+    
+    [self fadeView];
+}
+
 #pragma mark UITextFieldDelegate
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -337,30 +361,6 @@
             self.txtConfirmPhoneNumber.textColor = errorColor;
         }
     }
-}
-
-- (void)doCancel
-{
-    // dismiss keyboard
-    [self.txtEnterPhoneNumber resignFirstResponder];
-    [self.txtConfirmPhoneNumber resignFirstResponder];
-    
-    // clear textfields
-    self.txtEnterPhoneNumber.text = @"";
-    self.txtConfirmPhoneNumber.text = @"";
-    
-    // fix enable
-    self.txtEnterPhoneNumber.enabled = YES;
-    self.txtConfirmPhoneNumber.enabled = NO;
-    self.viewEnterPhoneNumber.backgroundColor = [UIColor whiteColor];
-    self.viewConfirmPhoneNumber.backgroundColor = [UIColor colorWithRed:0.824f green:0.820f blue:0.839f alpha:1.0f];
-    self.btnChangePhoneNumber.enabled = NO;
-    [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
-    
-    // hide error message
-    self.viewError.hidden = YES;
-    
-    [self fadeView];
 }
 
 @end

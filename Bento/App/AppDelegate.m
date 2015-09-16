@@ -334,11 +334,13 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
             
             // 12:00am - dinner opening (ie. 16.5)
-            if (currentTime >= 0 && currentTime < dinnerTime)
+            if (currentTime >= 0 && currentTime < dinnerTime) {
                 [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
+            }
             // dinner opening - 11:59pm
-            else if (currentTime >= dinnerTime && currentTime < 24)
+            else if (currentTime >= dinnerTime && currentTime < 24) {
                 [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
+            }
             
             [[NSUserDefaults standardUserDefaults] synchronize];
     
