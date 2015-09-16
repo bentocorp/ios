@@ -38,7 +38,7 @@
 - (void)awakeFromNib
 {
     // error message
-    self.viewError.alpha = 0;
+    self.viewError.hidden = YES;
     
     self.viewEnterPhoneNumber.layer.cornerRadius = 3;
     self.viewEnterPhoneNumber.clipsToBounds = YES;
@@ -197,6 +197,39 @@
     else {
         [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
     }
+    
+    if (strPhoneNumber1.length > 0 && strPhoneNumber1.length < 17 && [DataManager isValidPhoneNumber:strPhoneNumber1] == YES) {
+        self.txtConfirmPhoneNumber.enabled = YES;
+        self.viewConfirmPhoneNumber.backgroundColor = [UIColor whiteColor];
+    }
+    else {
+        self.txtConfirmPhoneNumber.enabled = NO;
+        self.viewConfirmPhoneNumber.backgroundColor = [UIColor colorWithRed:0.851f green:0.851f blue:0.863f alpha:1.0f]; // super light gray
+    }
+    
+    NSString *firstChars;
+    
+    if (strPhoneNumber1.length > 0) {
+        firstChars = [strPhoneNumber1 substringToIndex:2];
+    }
+    
+    if ([firstChars isEqualToString:@"(1"]) {
+        [self showErrorWithString:@"Phone number cannot start with \"1\"." code:ERROR_PHONENUMBER];
+        return;
+    }
+    
+    if (self.txtConfirmPhoneNumber.enabled == YES) {
+        NSString *strPhoneNumber1UpToSubstring = [strPhoneNumber1 substringToIndex:strPhoneNumber2.length];
+        
+        if (![strPhoneNumber1UpToSubstring isEqualToString:strPhoneNumber2]) {
+            [self showErrorWithString:@"Phone numbers entered must match." code:ERROR_PHONENUMBER];
+            return;
+        }
+        
+        NSLog(@"%@", strPhoneNumber1UpToSubstring);
+    }
+    
+    [self showErrorWithString:nil code:ERROR_NONE];
 }
 
 #pragma mark On Tap
@@ -207,28 +240,6 @@
     [self.txtConfirmPhoneNumber resignFirstResponder];
     
     [self process];
-    
-    NSString *strPhoneNumber = self.txtConfirmPhoneNumber.text;
-    BOOL isValid = (strPhoneNumber.length > 0 && [DataManager isValidPhoneNumber:strPhoneNumber]);
-    if (isValid) {
-        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoBrandGreen]];
-    }
-    else {
-        [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
-    }
-    
-    //    NSString *strPhoneNumber = self.txtPhoneNumber.text;
-    //    if (strPhoneNumber.length == 0)
-    //    {
-    //        [self showErrorWithString:@"Please enter a phone number." code:ERROR_PHONENUMBER];
-    //        return;
-    //    }
-    //
-    //    if (![DataManager isValidPhoneNumber:strPhoneNumber])
-    //    {
-    //        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
-    //        return;
-    //    }
 }
 
 - (IBAction)onCancel:(id)sender
@@ -240,6 +251,9 @@
     // clear textfields
     self.txtEnterPhoneNumber.text = @"";
     self.txtConfirmPhoneNumber.text = @"";
+    
+    // hide error message
+    self.viewError.hidden = YES;
     
     [self fadeView];
 }
@@ -266,21 +280,14 @@
 
 - (void)textFieldDidEndEditing:(UITextField *)textField
 {
-    NSString *strPhoneNumber = self.txtEnterPhoneNumber.text;
-    NSString *strPhoneNumber2 = self.txtConfirmPhoneNumber.text;
-    
-    if (strPhoneNumber.length != 0 && ![DataManager isValidPhoneNumber:strPhoneNumber]) {
-        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
-        return;
-    }
-    
-    if (strPhoneNumber2.length != 0 && ![DataManager isValidPhoneNumber:strPhoneNumber2]) {
-        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
-        return;
-    }
-    
-    [self showErrorWithString:nil code:ERROR_NONE];
-    
     textField.font = [UIFont fontWithName:@"OpenSans" size:14];
+    
+    [self validate];
+    
+    NSString *strPhoneNumber1 = self.txtEnterPhoneNumber.text;
+    
+    if (strPhoneNumber1.length > 0 && ![DataManager isValidPhoneNumber:strPhoneNumber1]) {
+        [self showErrorWithString:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
+    }
 }
 @end

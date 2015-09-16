@@ -79,8 +79,9 @@ static DataManager *_shareDataManager;
         [characters addObject:ichar];
     }
     
-    if ([characters[1] isEqualToString:@"1"])
+    if ([characters[1] isEqualToString:@"1"]) {
         return NO;
+    }
     
     BOOL isValid = [phoneTest evaluateWithObject:strPhoneNumber];
     return isValid;

@@ -732,16 +732,19 @@
     [self.btnEdit setTitleColor:(_isEditingBentos ? doneColor : editColor) forState:UIControlStateNormal];
 
     BOOL isReady = NO;
-    if (self.placeInfo != nil && [[DataManager shareDataManager] getPaymentMethod] != Payment_None)
+    if (self.placeInfo != nil && [[DataManager shareDataManager] getPaymentMethod] != Payment_None) {
         isReady = YES;
+    }
     
     NSLog(@"payment - %lu, placeinfo - %@", (unsigned long)[[DataManager shareDataManager] getPaymentMethod], self.placeInfo);
     
     self.btnGetItNow.enabled = isReady;
-    if (isReady)
+    if (isReady) {
         [self.btnGetItNow setBackgroundColor:[UIColor bentoBrandGreen]];
-    else
+    }
+    else {
         [self.btnGetItNow setBackgroundColor:[UIColor bentoButtonGray]];
+    }
 }
 
 - (void) onUpdatedStatus:(NSNotification *)notification
