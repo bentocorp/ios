@@ -259,8 +259,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             if (currentTime >= 0 && currentTime < dinnerTime)
             {
                 // this is only set once in the lifetime of the app because subsequent changes to original will be made in didModeOrDateChange
-                if (![[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"])
+                if (![[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]) {
                     [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"OriginalLunchOrDinnerMode"];
+                }
                 
                 [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
             }
@@ -268,8 +269,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             else if (currentTime >= dinnerTime && currentTime < 24)
             {
                 // this is only set once in the lifetime of the app because subsequent changes to original will be made in didModeOrDateChange
-                if (![[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"])
+                if (![[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]) {
                     [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"OriginalLunchOrDinnerMode"];
+                }
                 
                 [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
             }
@@ -356,8 +358,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             [globalShop refreshPause];
             
             // Perform check for new version of your app
-            if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
+            if (globalShop.iosCurrentVersion < globalShop.iosMinVersion) {
                 [aV show];
+            }
         });
     });
 }

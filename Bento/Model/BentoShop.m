@@ -1336,8 +1336,6 @@ static BentoShop *_shareInstance;
     
     [[NSUserDefaults standardUserDefaults] synchronize];
     
-    NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"checkModeOrDateChange" object:nil];
 }
 
@@ -1346,22 +1344,30 @@ static BentoShop *_shareInstance;
     NSString *originalDateString = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalDateString"];
     NSString *newDateString = [self getMenuDateString];
     
-    NSLog(@"ENTERED FOREGROUND: orig - %@, new - %@", originalDateString, newDateString);
+    NSLog(@"orig - %@, new - %@", originalDateString, newDateString);
     
-    // if date changed
-    if (![originalDateString isEqualToString:newDateString])
-    {
+    BOOL shouldReset = NO;
+    
+    // if nothing changed, most likely because there's no menu for today, date string returns nil
+    if (originalDateString == nil && newDateString == nil) {
         [[NSUserDefaults standardUserDefaults] setObject:newDateString forKey:@"OriginalDateString"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
+        // should not reset
+    }
+    // if date changed - or if mode changes to/from nil menu (meaning app could not get the date string from nil menu)
+    else if (![originalDateString isEqualToString:newDateString]) {
+        [[NSUserDefaults standardUserDefaults] setObject:newDateString forKey:@"OriginalDateString"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    
         [self resetBentoArray];
-        
-        return YES;
+    
+        shouldReset = YES;
     }
     
     // if mode changed, and is not all-day
-    else if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]] && [[BentoShop sharedInstance] isAllDay] == NO)
-    {
+    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]] && [[BentoShop sharedInstance] isAllDay] == NO) {
+        
         // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
         [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]
                                                   forKey:@"OriginalLunchOrDinnerMode"];
@@ -1369,10 +1375,10 @@ static BentoShop *_shareInstance;
         
         [self resetBentoArray];
         
-        return YES;
+        shouldReset = YES;
     }
     
-    return NO;
+    return shouldReset;
 }
 
 - (void)setSignInStatus:(BOOL)status
