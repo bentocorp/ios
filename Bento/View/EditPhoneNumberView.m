@@ -361,6 +361,8 @@
     self.txtConfirmPhoneNumber.enabled = NO;
     self.viewEnterPhoneNumber.backgroundColor = [UIColor whiteColor];
     self.viewConfirmPhoneNumber.backgroundColor = [UIColor colorWithRed:0.824f green:0.820f blue:0.839f alpha:1.0f];
+    self.btnChangePhoneNumber.enabled = NO;
+    [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
     
     // hide error message
     self.viewError.hidden = YES;
