@@ -1322,6 +1322,22 @@ static BentoShop *_shareInstance;
 
 - (void)checkModeOrDateChange
 {
+    // lunch/dinner times changed, reset
+    // set currentMode
+    
+    // 12:00am - dinner opening (ie. 16.5)
+    if (currentTime >= 0 && currentTime < dinnerTime) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
+    }
+    // dinner opening - 11:59pm
+    else if (currentTime >= dinnerTime && currentTime < 24) {
+        [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
+    }
+    
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
+    
     [[NSNotificationCenter defaultCenter] postNotificationName:@"checkModeOrDateChange" object:nil];
 }
 
