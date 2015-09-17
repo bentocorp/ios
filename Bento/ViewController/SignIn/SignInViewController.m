@@ -352,93 +352,93 @@
         NSDictionary *response = networkOperation.responseJSON;
         [[DataManager shareDataManager] setUserInfo:response];
         
-        NSLog(@"email log in response - %@", response);
+        NSLog(@"Email login response - %@", response);
         
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
         [pref setObject:strRequest forKey:@"apiName"];
         [pref setObject:dicRequest forKey:@"loginRequest"];
+        [pref setObject:nil forKey:@"new_phone_number"];
         [pref synchronize];
         
         [[BentoShop sharedInstance] setSignInStatus:YES];
         
+        [self trackLogin:strEmail responseJSON:response];
         [self showErrorMessage:nil code:ERROR_NONE];
         [self gotoDeliveryLocationScreen];
         
-        /*-----------------------------MIXPANEL-------------------------------*/
-        
-        Mixpanel *mixpanel = [Mixpanel sharedInstance];
-
-        // identify user for current session
-        [mixpanel identify:strEmail];
-        
-        // reregister deviceToken to server
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] != nil) {
-            
-            NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
-            [mixpanel.people addPushDeviceToken:deviceToken];
-            
-            NSLog(@"Device Token - %@", deviceToken);
-        }
-        
-        // install source
-        NSString *source;
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil) {
-            source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
-        }
-        
-        NSString *sourceFinal;
-        if (source != nil) {
-            sourceFinal = source;
-        }
-        else {
-            sourceFinal = @"N/A";
-        }
-        
-        NSString *currentAddressFinal;
-        
-        if (currentAddress != nil) {
-            currentAddressFinal = currentAddress;
-        }
-        else {
-            currentAddressFinal = @"N/A";
-        }
-        
-        // set properties
-        [mixpanel.people set:@{
-                               @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
-                               @"$email": response[@"email"],
-                               @"$phone": response[@"phone"],
-                               @"Installed Source":sourceFinal,
-                               @"Last Login Address": currentAddressFinal
-                               }];
-        
-        [mixpanel track:@"Logged In"];
-        /*--------------------------------------------------------------------*/
-        
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
-        [self.navigationController popViewControllerAnimated:YES]; // if not this will run
+        [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try 1st
+        [self.navigationController popViewControllerAnimated:YES]; // if not, this will run
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         [loadingHUD dismiss];
 
         NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-        if (strMessage == nil)
+        if (strMessage == nil) {
             strMessage = error.localizedDescription;
+        }
         
-        if (error.code == 403)
-        {
+        if (error.code == 403) {
             [self showErrorMessage:strMessage code:ERROR_PASSWORD];
         }
-        else if (error.code == 404)
-        {
+        else if (error.code == 404) {
             [self showErrorMessage:strMessage code:ERROR_EMAIL];
         }
-        else
-        {
+        else {
             [self showErrorMessage:strMessage code:ERROR_UNKNOWN];
         }
     
     } isJSON:NO];
+}
+
+- (void)trackLogin:(NSString *)strEmail responseJSON:(NSDictionary *)response
+{
+    Mixpanel *mixpanel = [Mixpanel sharedInstance];
+    
+    // identify user for current session
+    [mixpanel identify:strEmail];
+    
+    // reregister deviceToken to server
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] != nil) {
+        
+        NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+        [mixpanel.people addPushDeviceToken:deviceToken];
+        
+        NSLog(@"Device Token - %@", deviceToken);
+    }
+    
+    // install source
+    NSString *source;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil) {
+        source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+    }
+    
+    NSString *sourceFinal;
+    if (source != nil) {
+        sourceFinal = source;
+    }
+    else {
+        sourceFinal = @"N/A";
+    }
+    
+    NSString *currentAddressFinal;
+    
+    if (currentAddress != nil) {
+        currentAddressFinal = currentAddress;
+    }
+    else {
+        currentAddressFinal = @"N/A";
+    }
+    
+    // set properties
+    [mixpanel.people set:@{
+                           @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
+                           @"$email": response[@"email"],
+                           @"$phone": response[@"phone"],
+                           @"Installed Source":sourceFinal,
+                           @"Last Login Address": currentAddressFinal
+                           }];
+    
+    [mixpanel track:@"Logged In"];
 }
 
 - (void)doSignin
@@ -531,10 +531,10 @@
                  NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
                  [pref setObject:strRequest forKey:@"apiName"];
                  [pref setObject:dicRequest forKey:@"loginRequest"];
+                 [pref setObject:nil forKey:@"new_phone_number"];
                  [pref synchronize];
                  
-                 [[Mixpanel sharedInstance] track:@"Logged In"];
-                 
+                 [self trackLogin:strMailAddr responseJSON:response];
                  [self showErrorMessage:nil code:ERROR_NONE];
                  [self gotoDeliveryLocationScreen];
                  
@@ -542,9 +542,7 @@
                  
                  [loadingHUD dismiss];
                  
-                 if (error.code == 403 || error.code == 404)
-                 {
-                     
+                 if (error.code == 403 || error.code == 404) {
                      [[BentoShop sharedInstance] setSignInStatus:NO];
                      
                      // this really isn't used, since i'm only checking for Register
@@ -554,11 +552,11 @@
                      [self gotoPhoneNumberScreen:user];
                      return;
                  }
-                 else
-                 {
+                 else {
                      NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-                     if (strMessage == nil)
+                     if (strMessage == nil) {
                          strMessage = error.localizedDescription;
+                     }
                      
                      MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
                      [alertView showInView:self.view];
@@ -587,14 +585,16 @@
     [[BentoShop sharedInstance] setSignInStatus:YES];
     
     FacebookManager *fbManager = [FacebookManager sharedInstance];
-    if (isRetry)
+    if (isRetry) {
         [fbManager login];
-    else
-    {
-        if ([fbManager isSessionOpen])
+    }
+    else {
+        if ([fbManager isSessionOpen]) {
             [self reqFacebookUserInfo];
-        else
+        }
+        else {
             [fbManager login];
+        }
     }
 }
 
@@ -620,18 +620,18 @@
     
     BOOL isValid = (strEmail.length > 0 && [DataManager isValidMailAddress:strEmail] && strPassword.length > 0);
     
-    //    self.btnRegister.enabled = isValid;
-    if (isValid)
+    if (isValid) {
         [self.btnSignIn setBackgroundColor:[UIColor bentoBrandGreen]];
-    else
+    }
+    else {
         [self.btnSignIn setBackgroundColor:[UIColor bentoButtonGray]];
+    }
     
     /*------------------------------------------------------------*/
     
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     
-    if ([[defaults objectForKey:@"cameFromWhichVC"] isEqualToString:@"cameFromRegister"])
-    {
+    if ([[defaults objectForKey:@"cameFromWhichVC"] isEqualToString:@"cameFromRegister"]) {
         self.signUpButton.hidden = YES;
         self.signUpLabel.hidden = YES;
     }
@@ -646,10 +646,12 @@
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField
 {
-    if (textField == self.txtEmail)
+    if (textField == self.txtEmail) {
         [self.txtPassword becomeFirstResponder];
-    else
+    }
+    else {
         [self doSignin];
+    }
     
     return YES;
 }
@@ -676,8 +678,7 @@
 
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 1)
-    {
+    if (buttonIndex == 1) {
         [self performSelector:@selector(doReauthorise) withObject:nil];
     }
 }

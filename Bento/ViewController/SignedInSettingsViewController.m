@@ -125,7 +125,15 @@
     phoneNumberLabel = [[UILabel alloc] init];
     phoneNumberLabel.textColor = [UIColor colorWithRed:0.427f green:0.459f blue:0.514f alpha:1.0f];
     phoneNumberLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-    phoneNumberLabel.text = currentUserInfo[@"phone"];
+    
+    NSString *newPhoneNumber = [[NSUserDefaults standardUserDefaults] objectForKey:@"new_phone_number"];
+    if (newPhoneNumber == nil) {
+        phoneNumberLabel.text = currentUserInfo[@"phone"];
+    }
+    else {
+        phoneNumberLabel.text = newPhoneNumber;
+    }
+    
     phoneNumberLabel.adjustsFontSizeToFitWidth = YES;
     
     if ([phoneNumberLabel.text rangeOfString:@"+1"].location == NSNotFound) {
@@ -696,6 +704,9 @@
 
 -(void)changePhoneNumber:(NSString *)newPhoneNumber
 {
+    [[NSUserDefaults standardUserDefaults] setObject:newPhoneNumber forKey:@"new_phone_number"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
     phoneNumberLabel.text = newPhoneNumber;
     if ([phoneNumberLabel.text rangeOfString:@"+1"].location == NSNotFound) {
         // doesn't contain +1, retract

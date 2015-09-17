@@ -373,18 +373,14 @@
                  [[NSUserDefaults standardUserDefaults] synchronize];
                  
                  [self showErrorWithString:nil code:ERROR_NONE];
-
                  [self signInWithRegisteredData:dicRequest];
                  
+                 [mixpanel track:@"Logged In"];
+                 
                  [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
-                
                  [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
                  
-                 [mixpanel track:@"Completed Registration" properties:nil];
-                 NSLog(@"COMPLETED REGISTRATION");
-                 
              } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-                 
                  [loadingHUD dismiss];
                  
                  if (error.code == 403 || error.code == 404)
@@ -497,6 +493,8 @@
         
         NSDictionary *saveRequest = @{@"data" : [loginRequest jsonEncodedKeyValueString]};
         [pref setObject:saveRequest forKey:@"loginRequest"];
+        [pref setObject:nil forKey:@"new_phone_number"];
+        [pref setObject:@"YES" forKey:@"registeredLogin"];
         [pref synchronize];
         
         [self showErrorWithString:nil code:ERROR_NONE];
@@ -559,9 +557,8 @@
                                @"Installed Source":sourceFinal
                                }];
         
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"registeredLogin"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
+        [mixpanel track:@"Completed Registration"];
+
 /*---------------------------------------------------------------------*/
         
         [self.navigationController dismissViewControllerAnimated:YES completion:nil];
@@ -599,13 +596,11 @@
         NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
         [pref setObject:strRequest forKey:@"apiName"];
         [pref setObject:registeredData forKey:@"loginRequest"];
+        [pref setObject:nil forKey:@"new_phone_number"];
         [pref synchronize];
         
         [[BentoShop sharedInstance] setSignInStatus:YES];
         
-        [mixpanel track:@"Completed Registration"];
-        
-        // dismiss vc
         [self dismissViewControllerAnimated:YES completion:nil];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {

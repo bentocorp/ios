@@ -140,13 +140,9 @@
 
 #pragma mark - Navigation
 
-// In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
-    // Get the new view controller using [segue destinationViewController].
-    // Pass the selected object to the new view controller.
-    
-    if ([segue.identifier isEqualToString:@"Faq"])
-    {
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
+{
+    if ([segue.identifier isEqualToString:@"Faq"]) {
         FaqViewController *vc = segue.destinationViewController;
         vc.contentType = [sender intValue];
     }
@@ -193,8 +189,7 @@
 
 - (void)noConnection
 {
-    if (loadingHUD == nil)
-    {
+    if (loadingHUD == nil) {
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
         [loadingHUD showInView:self.view];
@@ -209,8 +204,7 @@
 
 - (void)checkCurrentMode
 {
-    if ([[BentoShop sharedInstance] didModeOrDateChange])
-    {
+    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -218,7 +212,7 @@
     }
 }
 
-- (void) willShowKeyboard:(NSNotification*)notification
+- (void)willShowKeyboard:(NSNotification*)notification
 {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
@@ -227,7 +221,7 @@
     [self repositionPhoneView:keyboardFrameBeginRect.size.height];
 }
 
-- (void) willChangeKeyboardFrame:(NSNotification *)notification
+- (void)willChangeKeyboardFrame:(NSNotification *)notification
 {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
@@ -236,25 +230,21 @@
     [self repositionPhoneView:keyboardFrameBeginRect.size.height];
 }
 
-- (void) willHideKeyboard:(NSNotification *)notification
+- (void)willHideKeyboard:(NSNotification *)notification
 {
     [UIView animateWithDuration:0.3f animations:^{
-        
         self.viewPhoneNumber.center = CGPointMake(self.viewPhoneNumber.center.x, self.view.frame.size.height / 2);
-        
     } completion:^(BOOL finished) {
-        
     }];
 }
 
-- (void) repositionPhoneView:(float) keyboardHeight
+- (void)repositionPhoneView:(float) keyboardHeight
 {
     [UIView animateWithDuration:0.3f animations:^{
         
         float newCenterY = self.view.frame.size.height - keyboardHeight - self.viewPhoneNumber.frame.size.height / 2;
         
-        if(newCenterY < self.viewPhoneNumber.center.y)
-        {
+        if(newCenterY < self.viewPhoneNumber.center.y) {
             self.viewPhoneNumber.center = CGPointMake(self.viewPhoneNumber.center.x, newCenterY);
         }
         
@@ -323,20 +313,24 @@
     NSDictionary *ageRangeDict = [[FacebookManager sharedInstance].userDetails objectForKey:@"age_range"];
     if (ageRangeDict != nil)
     {
-        if ([ageRangeDict objectForKey:@"min"] != nil && [ageRangeDict objectForKey:@"max"] != nil)
+        if ([ageRangeDict objectForKey:@"min"] != nil && [ageRangeDict objectForKey:@"max"] != nil) {
             strAgeRange = [NSString stringWithFormat:@"%@-%@", [ageRangeDict objectForKey:@"min"], [ageRangeDict objectForKey:@"max"]];
-        else if ([ageRangeDict objectForKey:@"min"] != nil)
+        }
+        else if ([ageRangeDict objectForKey:@"min"] != nil) {
             strAgeRange = [NSString stringWithFormat:@"%@+", [ageRangeDict objectForKey:@"min"]];
-        else if ([ageRangeDict objectForKey:@"max"] != nil)
+        }
+        else if ([ageRangeDict objectForKey:@"max"] != nil) {
             strAgeRange = [NSString stringWithFormat:@"-%@", [ageRangeDict objectForKey:@"max"]];
-        else
+        }
+        else {
             strAgeRange = @"";
+        }
     }
     
     if (strGender == nil)
         strGender = @"";
     
-    NSDictionary* request = @{
+    NSDictionary *request = @{
                               @"firstname" : strFirstName,
                               @"lastname" : strLastName,
                               @"email" : strMailAddr,
@@ -387,6 +381,8 @@
         
         NSDictionary *saveRequest = @{@"data" : [fbloginRequest jsonEncodedKeyValueString]};
         [[NSUserDefaults standardUserDefaults] setObject:saveRequest forKey:@"loginRequest"];
+        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"registeredLogin"];
+        [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"new_phone_number"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
         [[BentoShop sharedInstance] setSignInStatus:YES];
@@ -396,7 +392,6 @@
         Mixpanel *mixpanel = [Mixpanel sharedInstance];
         
         if ([registerOrSignIn isEqualToString:@"Register"]) {
-            
             // link custom id with default id
             [mixpanel createAlias:strMailAddr forDistinctID:mixpanel.distinctId];
         }
@@ -454,8 +449,7 @@
                                @"Installed Source":sourceFinal,
                                }];
         
-        [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"registeredLogin"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [mixpanel track:@"Completed Registration"];
         
 /*--------------------------------------------------------------------*/
         
@@ -479,92 +473,6 @@
         return;
         
     } isJSON:NO];
-}
-
-- (IBAction)onDone:(id)sender
-{
-    NSString *strPhoneNumber = self.txtPhoneNumber.text;
-    if (strPhoneNumber.length == 0)
-    {
-        [self showErrorMessage:@"Please enter a phone number." code:ERROR_PHONENUMBER];
-        return;
-    }
-    
-    if (![DataManager isValidPhoneNumber:strPhoneNumber])
-    {
-        [self showErrorMessage:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
-        return;
-    }
-    
-    [self processRegister];
-}
-
-- (void)updateUI
-{
-    NSString *strPhoneNumber = self.txtPhoneNumber.text;
-    if (strPhoneNumber.length > 0 && [DataManager isValidPhoneNumber:strPhoneNumber])
-    {
-        self.btnDone.enabled = YES;
-        [self.btnDone setBackgroundColor:[UIColor bentoBrandGreen]];
-    }
-    else
-    {
-//        self.btnDone.enabled = NO;
-        [self.btnDone setBackgroundColor:[UIColor bentoButtonGray]];
-    }
-}
-
-- (void) showErrorWithString:(NSString *)errorMsg code:(int)errorCode
-{
-    if (errorMsg == nil || errorMsg.length == 0)
-    {
-        self.viewError.hidden = YES;
-    }
-    else
-    {
-        self.viewError.hidden = NO;
-        self.lblError.text = errorMsg;
-    }
-    
-    UIColor *errorColor = [UIColor bentoErrorTextOrange];
-    UIColor *correctColor = [UIColor bentoCorrectTextGray];
-    
-    switch (errorCode) {
-        case ERROR_NONE:
-        {
-            self.viewError.hidden = YES;
-            self.txtPhoneNumber.textColor = correctColor;
-            self.ivPhoneNumber.image = [UIImage imageNamed:@"register_icon_phone"];
-        }
-            break;
-            
-        case ERROR_PHONENUMBER:
-        {
-            self.viewError.hidden = NO;
-            self.txtPhoneNumber.textColor = errorColor;
-            self.ivPhoneNumber.image = [UIImage imageNamed:@"register_icon_phone_err"];
-        }
-            break;
-            
-        default:
-        case ERROR_UNKNOWN:
-        {
-            self.viewError.hidden = NO;
-            self.txtPhoneNumber.textColor = correctColor;
-            self.ivPhoneNumber.image = [UIImage imageNamed:@"register_icon_phone"];
-        }
-            break;
-    }
-}
-
-- (void)dissmodal
-{
-    // dismiss to home page
-    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
-    [self dismissViewControllerAnimated:YES completion:nil];
-    
-    // pop back to home page
-    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
 }
 
 - (void)processAutoLogin
@@ -654,5 +562,89 @@
      } isJSON:NO];
 }
 
+
+- (IBAction)onDone:(id)sender
+{
+    NSString *strPhoneNumber = self.txtPhoneNumber.text;
+    if (strPhoneNumber.length == 0) {
+        [self showErrorMessage:@"Please enter a phone number." code:ERROR_PHONENUMBER];
+        return;
+    }
+    
+    if (![DataManager isValidPhoneNumber:strPhoneNumber]) {
+        [self showErrorMessage:@"Please enter a valid phone number." code:ERROR_PHONENUMBER];
+        return;
+    }
+    
+    [self processRegister];
+}
+
+- (void)updateUI
+{
+    NSString *strPhoneNumber = self.txtPhoneNumber.text;
+    if (strPhoneNumber.length > 0 && [DataManager isValidPhoneNumber:strPhoneNumber])
+    {
+        self.btnDone.enabled = YES;
+        [self.btnDone setBackgroundColor:[UIColor bentoBrandGreen]];
+    }
+    else
+    {
+//        self.btnDone.enabled = NO;
+        [self.btnDone setBackgroundColor:[UIColor bentoButtonGray]];
+    }
+}
+
+- (void) showErrorWithString:(NSString *)errorMsg code:(int)errorCode
+{
+    if (errorMsg == nil || errorMsg.length == 0)
+    {
+        self.viewError.hidden = YES;
+    }
+    else
+    {
+        self.viewError.hidden = NO;
+        self.lblError.text = errorMsg;
+    }
+    
+    UIColor *errorColor = [UIColor bentoErrorTextOrange];
+    UIColor *correctColor = [UIColor bentoCorrectTextGray];
+    
+    switch (errorCode) {
+        case ERROR_NONE:
+        {
+            self.viewError.hidden = YES;
+            self.txtPhoneNumber.textColor = correctColor;
+            self.ivPhoneNumber.image = [UIImage imageNamed:@"register_icon_phone"];
+        }
+            break;
+            
+        case ERROR_PHONENUMBER:
+        {
+            self.viewError.hidden = NO;
+            self.txtPhoneNumber.textColor = errorColor;
+            self.ivPhoneNumber.image = [UIImage imageNamed:@"register_icon_phone_err"];
+        }
+            break;
+            
+        default:
+        case ERROR_UNKNOWN:
+        {
+            self.viewError.hidden = NO;
+            self.txtPhoneNumber.textColor = correctColor;
+            self.ivPhoneNumber.image = [UIImage imageNamed:@"register_icon_phone"];
+        }
+            break;
+    }
+}
+
+- (void)dissmodal
+{
+    // dismiss to home page
+    [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // pop back to home page
+    [self.navigationController popToViewController:[[self.navigationController viewControllers] objectAtIndex:1] animated:YES];
+}
 
 @end

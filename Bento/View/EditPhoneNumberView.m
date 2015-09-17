@@ -218,11 +218,7 @@
     [self.txtEnterPhoneNumber resignFirstResponder];
     [self.txtConfirmPhoneNumber resignFirstResponder];
     
-//    [self process];
-    
-    [self.delegate changePhoneNumber:self.txtConfirmPhoneNumber.text];
-    
-    [self doCancel];
+    [self process];
 }
 
 - (IBAction)onCancel:(id)sender
@@ -243,29 +239,28 @@
         return;
     }
     
-    WebManager *webManager = [[WebManager alloc] init];
+    NSDictionary *newPhoneNumber = @{
+                                     @"new_phone":strPhoneNumber
+                                    };
+    
+    NSDictionary *dicRequest = @{@"data" : [newPhoneNumber jsonEncodedKeyValueString]};
     
     JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     loadingHUD.textLabel.text = @"Processing...";
     [loadingHUD showInView:self];
     
-    NSString *strRequest = [NSString stringWithFormat:@"%@/coupon/apply/%@?api_token=%@", SERVER_URL, strPhoneNumber, strAPIToken];
+    NSString *strRequest = [NSString stringWithFormat:@"%@/user/phone", SERVER_URL];
+    if ([[DataManager shareDataManager] getUserInfo] != nil) {
+        strRequest = [NSString stringWithFormat:@"%@?api_token=%@", strRequest, [[DataManager shareDataManager] getAPIToken]]; // basically use this one, with api_token
+    }
     
-    [webManager AsyncProcess:strRequest method:GET parameters:nil success:^(MKNetworkOperation *networkOperation) {
+    WebManager *webManager = [[WebManager alloc] init];
+    [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
         [loadingHUD dismiss];
         
-        //        NSDictionary *response = networkOperation.responseJSON;
-        //        id amountOff = [response objectForKey:@"amountOff"];
-        //        if (response != nil && amountOff != nil && [amountOff isKindOfClass:[NSString class]]) {
+        [self.delegate changePhoneNumber:strPhoneNumber];
         
-        //            NSInteger discount = [[response objectForKey:@"amountOff"] integerValue];
-        //            if (self.delegate != nil) {
-        //                [self.delegate setDiscound:discount strCouponCode:strPhoneNumber];
-        //            }
-        //        }
-        
-        // fade out animation
-        [self fadeView];
+        [self doCancel];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         [loadingHUD dismiss];
