@@ -289,6 +289,51 @@
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC29F26B1BA7638A00625B8F /* Bento Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC29F26A1BA7638A00625B8F /* Bento Dev-Info.plist */; settings = {ASSET_TAGS = (); }; };
+		FC3001231BAB74C000E60BB6 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001141BAB74C000E60BB6 /* SocketAckManager.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001241BAB74C000E60BB6 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001141BAB74C000E60BB6 /* SocketAckManager.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001251BAB74C000E60BB6 /* SocketAckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001141BAB74C000E60BB6 /* SocketAckManager.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001261BAB74C000E60BB6 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001151BAB74C000E60BB6 /* SocketAnyEvent.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001271BAB74C000E60BB6 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001151BAB74C000E60BB6 /* SocketAnyEvent.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001281BAB74C000E60BB6 /* SocketAnyEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001151BAB74C000E60BB6 /* SocketAnyEvent.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001291BAB74C000E60BB6 /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001161BAB74C000E60BB6 /* SocketEngine.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30012A1BAB74C000E60BB6 /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001161BAB74C000E60BB6 /* SocketEngine.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30012B1BAB74C000E60BB6 /* SocketEngine.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001161BAB74C000E60BB6 /* SocketEngine.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30012C1BAB74C000E60BB6 /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001171BAB74C000E60BB6 /* SocketEngineClient.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30012D1BAB74C000E60BB6 /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001171BAB74C000E60BB6 /* SocketEngineClient.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30012E1BAB74C000E60BB6 /* SocketEngineClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001171BAB74C000E60BB6 /* SocketEngineClient.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30012F1BAB74C000E60BB6 /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001181BAB74C000E60BB6 /* SocketEventHandler.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001301BAB74C000E60BB6 /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001181BAB74C000E60BB6 /* SocketEventHandler.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001311BAB74C000E60BB6 /* SocketEventHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001181BAB74C000E60BB6 /* SocketEventHandler.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001321BAB74C000E60BB6 /* SocketFixUTF8.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001191BAB74C000E60BB6 /* SocketFixUTF8.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001331BAB74C000E60BB6 /* SocketFixUTF8.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001191BAB74C000E60BB6 /* SocketFixUTF8.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001341BAB74C000E60BB6 /* SocketFixUTF8.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001191BAB74C000E60BB6 /* SocketFixUTF8.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001351BAB74C000E60BB6 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011A1BAB74C000E60BB6 /* SocketIOClient.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001361BAB74C000E60BB6 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011A1BAB74C000E60BB6 /* SocketIOClient.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001371BAB74C000E60BB6 /* SocketIOClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011A1BAB74C000E60BB6 /* SocketIOClient.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001381BAB74C000E60BB6 /* SocketIOClientStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011B1BAB74C000E60BB6 /* SocketIOClientStatus.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001391BAB74C000E60BB6 /* SocketIOClientStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011B1BAB74C000E60BB6 /* SocketIOClientStatus.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30013A1BAB74C000E60BB6 /* SocketIOClientStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011B1BAB74C000E60BB6 /* SocketIOClientStatus.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30013B1BAB74C000E60BB6 /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011C1BAB74C000E60BB6 /* SocketLogger.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30013C1BAB74C000E60BB6 /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011C1BAB74C000E60BB6 /* SocketLogger.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30013D1BAB74C000E60BB6 /* SocketLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011C1BAB74C000E60BB6 /* SocketLogger.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30013E1BAB74C000E60BB6 /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011D1BAB74C000E60BB6 /* SocketPacket.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30013F1BAB74C000E60BB6 /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011D1BAB74C000E60BB6 /* SocketPacket.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001401BAB74C000E60BB6 /* SocketPacket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011D1BAB74C000E60BB6 /* SocketPacket.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001411BAB74C000E60BB6 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011E1BAB74C000E60BB6 /* SocketParser.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001421BAB74C000E60BB6 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011E1BAB74C000E60BB6 /* SocketParser.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001431BAB74C000E60BB6 /* SocketParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011E1BAB74C000E60BB6 /* SocketParser.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001441BAB74C000E60BB6 /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011F1BAB74C000E60BB6 /* SocketStringReader.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001451BAB74C000E60BB6 /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011F1BAB74C000E60BB6 /* SocketStringReader.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001461BAB74C000E60BB6 /* SocketStringReader.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC30011F1BAB74C000E60BB6 /* SocketStringReader.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001471BAB74C000E60BB6 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001201BAB74C000E60BB6 /* SocketTypes.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001481BAB74C000E60BB6 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001201BAB74C000E60BB6 /* SocketTypes.swift */; settings = {ASSET_TAGS = (); }; };
+		FC3001491BAB74C000E60BB6 /* SocketTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001201BAB74C000E60BB6 /* SocketTypes.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30014A1BAB74C000E60BB6 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001211BAB74C000E60BB6 /* SwiftRegex.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30014B1BAB74C000E60BB6 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001211BAB74C000E60BB6 /* SwiftRegex.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30014C1BAB74C000E60BB6 /* SwiftRegex.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001211BAB74C000E60BB6 /* SwiftRegex.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30014D1BAB74C000E60BB6 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001221BAB74C000E60BB6 /* WebSocket.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30014E1BAB74C000E60BB6 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001221BAB74C000E60BB6 /* WebSocket.swift */; settings = {ASSET_TAGS = (); }; };
+		FC30014F1BAB74C000E60BB6 /* WebSocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC3001221BAB74C000E60BB6 /* WebSocket.swift */; settings = {ASSET_TAGS = (); }; };
 		FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
@@ -851,6 +896,21 @@
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
 		FC29F26A1BA7638A00625B8F /* Bento Dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bento Dev-Info.plist"; sourceTree = SOURCE_ROOT; };
+		FC3001141BAB74C000E60BB6 /* SocketAckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckManager.swift; sourceTree = "<group>"; };
+		FC3001151BAB74C000E60BB6 /* SocketAnyEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAnyEvent.swift; sourceTree = "<group>"; };
+		FC3001161BAB74C000E60BB6 /* SocketEngine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngine.swift; sourceTree = "<group>"; };
+		FC3001171BAB74C000E60BB6 /* SocketEngineClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEngineClient.swift; sourceTree = "<group>"; };
+		FC3001181BAB74C000E60BB6 /* SocketEventHandler.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketEventHandler.swift; sourceTree = "<group>"; };
+		FC3001191BAB74C000E60BB6 /* SocketFixUTF8.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketFixUTF8.swift; sourceTree = "<group>"; };
+		FC30011A1BAB74C000E60BB6 /* SocketIOClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClient.swift; sourceTree = "<group>"; };
+		FC30011B1BAB74C000E60BB6 /* SocketIOClientStatus.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketIOClientStatus.swift; sourceTree = "<group>"; };
+		FC30011C1BAB74C000E60BB6 /* SocketLogger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketLogger.swift; sourceTree = "<group>"; };
+		FC30011D1BAB74C000E60BB6 /* SocketPacket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketPacket.swift; sourceTree = "<group>"; };
+		FC30011E1BAB74C000E60BB6 /* SocketParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketParser.swift; sourceTree = "<group>"; };
+		FC30011F1BAB74C000E60BB6 /* SocketStringReader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketStringReader.swift; sourceTree = "<group>"; };
+		FC3001201BAB74C000E60BB6 /* SocketTypes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketTypes.swift; sourceTree = "<group>"; };
+		FC3001211BAB74C000E60BB6 /* SwiftRegex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftRegex.swift; sourceTree = "<group>"; };
+		FC3001221BAB74C000E60BB6 /* WebSocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebSocket.swift; sourceTree = "<group>"; };
 		FC3C4E771AF96A41005D7197 /* FixedBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoViewController.h; sourceTree = "<group>"; };
 		FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoViewController.m; sourceTree = "<group>"; };
 		FC3C4E7B1AF96B42005D7197 /* FixedBentoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoCell.h; sourceTree = "<group>"; };
@@ -1393,6 +1453,7 @@
 		90BED09B1A5BCC7B003DC872 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				FC3001131BAB74C000E60BB6 /* SocketIOClientSwift */,
 				FCF2787B1B26370700130F7A /* Crashlytics.framework */,
 				722333791A6E5387006C2446 /* GoogleMapsSDK */,
 				7279E5D71A68397D00591CB2 /* FacebookSDK */,
@@ -1664,6 +1725,29 @@
 			);
 			name = "Fixed Menu Cell";
 			path = ../ViewController/MakeBento;
+			sourceTree = "<group>";
+		};
+		FC3001131BAB74C000E60BB6 /* SocketIOClientSwift */ = {
+			isa = PBXGroup;
+			children = (
+				FC3001141BAB74C000E60BB6 /* SocketAckManager.swift */,
+				FC3001151BAB74C000E60BB6 /* SocketAnyEvent.swift */,
+				FC3001161BAB74C000E60BB6 /* SocketEngine.swift */,
+				FC3001171BAB74C000E60BB6 /* SocketEngineClient.swift */,
+				FC3001181BAB74C000E60BB6 /* SocketEventHandler.swift */,
+				FC3001191BAB74C000E60BB6 /* SocketFixUTF8.swift */,
+				FC30011A1BAB74C000E60BB6 /* SocketIOClient.swift */,
+				FC30011B1BAB74C000E60BB6 /* SocketIOClientStatus.swift */,
+				FC30011C1BAB74C000E60BB6 /* SocketLogger.swift */,
+				FC30011D1BAB74C000E60BB6 /* SocketPacket.swift */,
+				FC30011E1BAB74C000E60BB6 /* SocketParser.swift */,
+				FC30011F1BAB74C000E60BB6 /* SocketStringReader.swift */,
+				FC3001201BAB74C000E60BB6 /* SocketTypes.swift */,
+				FC3001211BAB74C000E60BB6 /* SwiftRegex.swift */,
+				FC3001221BAB74C000E60BB6 /* WebSocket.swift */,
+			);
+			name = SocketIOClientSwift;
+			path = ../SocketIOClientSwift;
 			sourceTree = "<group>";
 		};
 		FC3C4E7F1AF97FCD005D7197 /* Fixed Bento */ = {
@@ -2635,12 +2719,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC3001451BAB74C000E60BB6 /* SocketStringReader.swift in Sources */,
 				7216B7091AA64C7C0006FFE9 /* WebManager.m in Sources */,
 				FCAA479D1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */,
 				7216B70A1AA64C7C0006FFE9 /* RegisterViewController.m in Sources */,
 				7216B70B1AA64C7C0006FFE9 /* STPTestDataTableViewController.m in Sources */,
 				7216B70C1AA64C7C0006FFE9 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				7216B70D1AA64C7C0006FFE9 /* FacebookManager.m in Sources */,
+				FC3001331BAB74C000E60BB6 /* SocketFixUTF8.swift in Sources */,
 				7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */,
@@ -2656,14 +2742,17 @@
 				7216B71C1AA64C7C0006FFE9 /* PhoneNumberViewController.m in Sources */,
 				7216B71D1AA64C7C0006FFE9 /* SignInViewController.m in Sources */,
 				FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
+				FC3001271BAB74C000E60BB6 /* SocketAnyEvent.swift in Sources */,
 				7216B71E1AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
+				FC30012A1BAB74C000E60BB6 /* SocketEngine.swift in Sources */,
 				7216B7201AA64C7C0006FFE9 /* MKNetworkEngine.m in Sources */,
 				7216B7211AA64C7C0006FFE9 /* NSObject+RMArchivable.m in Sources */,
 				7216B7221AA64C7C0006FFE9 /* SHSFlagAccessoryView.m in Sources */,
 				7216B7231AA64C7C0006FFE9 /* DishCollectionViewCell.m in Sources */,
 				7216B7241AA64C7C0006FFE9 /* CAGradientLayer+SJSGradients.m in Sources */,
 				7216B7251AA64C7C0006FFE9 /* JGProgressHUDSuccessIndicatorView.m in Sources */,
+				FC3001391BAB74C000E60BB6 /* SocketIOClientStatus.swift in Sources */,
 				7216B7261AA64C7C0006FFE9 /* ChooseMainDishViewController.m in Sources */,
 				7216B7271AA64C7C0006FFE9 /* Bento.m in Sources */,
 				7216B7281AA64C7C0006FFE9 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
@@ -2676,24 +2765,29 @@
 				7216B7331AA64C7C0006FFE9 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				7216B7351AA64C7C0006FFE9 /* MyAlertView.m in Sources */,
 				7216B7361AA64C7C0006FFE9 /* STPTestShippingMethodStore.m in Sources */,
+				FC30013F1BAB74C000E60BB6 /* SocketPacket.swift in Sources */,
 				7216B7371AA64C7C0006FFE9 /* NSDictionary+RequestEncoding.m in Sources */,
 				7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */,
+				FC30014E1BAB74C000E60BB6 /* WebSocket.swift in Sources */,
 				FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
 				7216B73B1AA64C7C0006FFE9 /* FirstViewController.m in Sources */,
 				7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */,
 				7216B73F1AA64C7C0006FFE9 /* SVGeocoder.m in Sources */,
 				7216B7401AA64C7C0006FFE9 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
+				FC3001241BAB74C000E60BB6 /* SocketAckManager.swift in Sources */,
 				7216B7411AA64C7C0006FFE9 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				7216B7421AA64C7C0006FFE9 /* main.m in Sources */,
 				7216B7441AA64C7C0006FFE9 /* SVPlacemark.m in Sources */,
 				FCAA479F1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				7216B7471AA64C7C0006FFE9 /* MKNetworkOperation.m in Sources */,
+				FC3001421BAB74C000E60BB6 /* SocketParser.swift in Sources */,
 				7216B7481AA64C7C0006FFE9 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				7216B7491AA64C7C0006FFE9 /* BaseViewController.m in Sources */,
 				7216B74A1AA64C7C0006FFE9 /* CompleteOrderViewController.m in Sources */,
 				7216B74B1AA64C7C0006FFE9 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				7216B74C1AA64C7C0006FFE9 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				7216B74D1AA64C7C0006FFE9 /* STPTestCardStore.m in Sources */,
+				FC3001301BAB74C000E60BB6 /* SocketEventHandler.swift in Sources */,
 				7216B74F1AA64C7C0006FFE9 /* STPTestAddressStore.m in Sources */,
 				FC7291241BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				7216B7501AA64C7C0006FFE9 /* DeliveryLocationViewController.m in Sources */,
@@ -2701,18 +2795,23 @@
 				FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */,
 				FC99D4F41AFC161300BEE40B /* PreviewViewController.m in Sources */,
 				FCAA47A31AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */,
+				FC3001361BAB74C000E60BB6 /* SocketIOClient.swift in Sources */,
 				7216B7521AA64C7C0006FFE9 /* JGProgressHUDFadeAnimation.m in Sources */,
 				7216B7531AA64C7C0006FFE9 /* NSData+MKBase64.m in Sources */,
 				7216B7541AA64C7C0006FFE9 /* PKPayment+STPTestKeys.m in Sources */,
 				7216B7551AA64C7C0006FFE9 /* RMMapper.m in Sources */,
 				7216B7561AA64C7C0006FFE9 /* SHSPhoneTextField.m in Sources */,
 				7216B7581AA64C7C0006FFE9 /* OutOfDeliveryAddressViewController.m in Sources */,
+				FC3001481BAB74C000E60BB6 /* SocketTypes.swift in Sources */,
 				7216B7591AA64C7C0006FFE9 /* IntroViewController.m in Sources */,
 				7216B75A1AA64C7C0006FFE9 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				7216B75B1AA64C7C0006FFE9 /* NSObject+RMCopyable.m in Sources */,
+				FC30012D1BAB74C000E60BB6 /* SocketEngineClient.swift in Sources */,
+				FC30014B1BAB74C000E60BB6 /* SwiftRegex.swift in Sources */,
 				7216B75C1AA64C7C0006FFE9 /* AppStrings.m in Sources */,
 				7216B75D1AA64C7C0006FFE9 /* SoldOutViewController.m in Sources */,
 				FC72297C1B16905700C9A9AF /* Reachability.m in Sources */,
+				FC30013C1BAB74C000E60BB6 /* SocketLogger.swift in Sources */,
 				7216B75E1AA64C7C0006FFE9 /* OrderConfirmViewController.m in Sources */,
 				7216B75F1AA64C7C0006FFE9 /* BentoTableViewCell.m in Sources */,
 				FCD51ED11AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */,
@@ -2723,12 +2822,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC3001441BAB74C000E60BB6 /* SocketStringReader.swift in Sources */,
 				722333D71A6F46DF006C2446 /* WebManager.m in Sources */,
 				FCAA479C1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */,
 				90D8F7A91A5D81C300D034CF /* RegisterViewController.m in Sources */,
 				722333F91A72C133006C2446 /* STPTestDataTableViewController.m in Sources */,
 				722333631A6D4058006C2446 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				722333041A6C0F5C006C2446 /* FacebookManager.m in Sources */,
+				FC3001321BAB74C000E60BB6 /* SocketFixUTF8.swift in Sources */,
 				7286EB4E1A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */,
@@ -2744,14 +2845,17 @@
 				90D8F7BD1A5D990800D034CF /* PhoneNumberViewController.m in Sources */,
 				90D8F7BA1A5D963300D034CF /* SignInViewController.m in Sources */,
 				FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
+				FC3001261BAB74C000E60BB6 /* SocketAnyEvent.swift in Sources */,
 				722333FB1A72C133006C2446 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
+				FC3001291BAB74C000E60BB6 /* SocketEngine.swift in Sources */,
 				722333D51A6F46DF006C2446 /* MKNetworkEngine.m in Sources */,
 				7286EB4C1A7D8BE800D03DCE /* NSObject+RMArchivable.m in Sources */,
 				7209E0931A780A1200D18D7A /* SHSFlagAccessoryView.m in Sources */,
 				90BED0EB1A5C3346003DC872 /* DishCollectionViewCell.m in Sources */,
 				90220A381A6424BC00ECECEF /* CAGradientLayer+SJSGradients.m in Sources */,
 				722333641A6D4058006C2446 /* JGProgressHUDSuccessIndicatorView.m in Sources */,
+				FC3001381BAB74C000E60BB6 /* SocketIOClientStatus.swift in Sources */,
 				90BED0D61A5BF2F4003DC872 /* ChooseMainDishViewController.m in Sources */,
 				722333681A6D57CB006C2446 /* Bento.m in Sources */,
 				722333D31A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
@@ -2764,24 +2868,29 @@
 				722333D41A6F46DF006C2446 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				90D8F7A41A5D6B6E00D034CF /* MyAlertView.m in Sources */,
 				722333FD1A72C133006C2446 /* STPTestShippingMethodStore.m in Sources */,
+				FC30013E1BAB74C000E60BB6 /* SocketPacket.swift in Sources */,
 				722333D11A6F46DF006C2446 /* NSDictionary+RequestEncoding.m in Sources */,
 				7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */,
+				FC30014D1BAB74C000E60BB6 /* WebSocket.swift in Sources */,
 				FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
 				90BED0A81A5BD05C003DC872 /* FirstViewController.m in Sources */,
 				7223336B1A6D5847006C2446 /* BentoShop.m in Sources */,
 				7209E07F1A76BD1800D18D7A /* SVGeocoder.m in Sources */,
 				7209E0951A780A1200D18D7A /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
+				FC3001231BAB74C000E60BB6 /* SocketAckManager.swift in Sources */,
 				722333FA1A72C133006C2446 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				90BED0741A5BCC04003DC872 /* main.m in Sources */,
 				7209E0801A76BD1800D18D7A /* SVPlacemark.m in Sources */,
 				FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				722333D61A6F46DF006C2446 /* MKNetworkOperation.m in Sources */,
+				FC3001411BAB74C000E60BB6 /* SocketParser.swift in Sources */,
 				722333CE1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				726CE35B1A82693900296182 /* BaseViewController.m in Sources */,
 				90D8F7D81A5E2FE900D034CF /* CompleteOrderViewController.m in Sources */,
 				722333621A6D4058006C2446 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				722333D21A6F46DF006C2446 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				722333F81A72C133006C2446 /* STPTestCardStore.m in Sources */,
+				FC30012F1BAB74C000E60BB6 /* SocketEventHandler.swift in Sources */,
 				722333F71A72C133006C2446 /* STPTestAddressStore.m in Sources */,
 				FC7291231BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				90D8F7CA1A5E24B900D034CF /* DeliveryLocationViewController.m in Sources */,
@@ -2789,18 +2898,23 @@
 				FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */,
 				FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */,
 				FCAA47A21AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */,
+				FC3001351BAB74C000E60BB6 /* SocketIOClient.swift in Sources */,
 				7223335E1A6D4058006C2446 /* JGProgressHUDFadeAnimation.m in Sources */,
 				722333CF1A6F46DF006C2446 /* NSData+MKBase64.m in Sources */,
 				722333F61A72C133006C2446 /* PKPayment+STPTestKeys.m in Sources */,
 				7286EB4F1A7D8BE800D03DCE /* RMMapper.m in Sources */,
 				7209E0971A780A1200D18D7A /* SHSPhoneTextField.m in Sources */,
 				90D8F7CD1A5E252800D034CF /* OutOfDeliveryAddressViewController.m in Sources */,
+				FC3001471BAB74C000E60BB6 /* SocketTypes.swift in Sources */,
 				7223336E1A6D66E8006C2446 /* IntroViewController.m in Sources */,
 				7223335F1A6D4058006C2446 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				7286EB4D1A7D8BE800D03DCE /* NSObject+RMCopyable.m in Sources */,
+				FC30012C1BAB74C000E60BB6 /* SocketEngineClient.swift in Sources */,
+				FC30014A1BAB74C000E60BB6 /* SwiftRegex.swift in Sources */,
 				722333781A6E0DFD006C2446 /* AppStrings.m in Sources */,
 				90D8F7DE1A5E30AD00D034CF /* SoldOutViewController.m in Sources */,
 				FC72297B1B16905700C9A9AF /* Reachability.m in Sources */,
+				FC30013B1BAB74C000E60BB6 /* SocketLogger.swift in Sources */,
 				90D8F7DB1A5E304D00D034CF /* OrderConfirmViewController.m in Sources */,
 				90A553DF1A5FFEEB001F9DA7 /* BentoTableViewCell.m in Sources */,
 				FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */,
@@ -2830,12 +2944,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC3001461BAB74C000E60BB6 /* SocketStringReader.swift in Sources */,
 				FC92E0DE1B7E5C880073C5D7 /* WebManager.m in Sources */,
 				FC92E0DF1B7E5C880073C5D7 /* CreditCardInfoViewController.m in Sources */,
 				FC92E0E01B7E5C880073C5D7 /* RegisterViewController.m in Sources */,
 				FC92E0E11B7E5C880073C5D7 /* STPTestDataTableViewController.m in Sources */,
 				FC92E0E21B7E5C880073C5D7 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				FC92E0E31B7E5C880073C5D7 /* FacebookManager.m in Sources */,
+				FC3001341BAB74C000E60BB6 /* SocketFixUTF8.swift in Sources */,
 				FC92E0E41B7E5C880073C5D7 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				FC92E0E51B7E5C880073C5D7 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				FC92E0E61B7E5C880073C5D7 /* FXBlurView.m in Sources */,
@@ -2851,14 +2967,17 @@
 				FC92E0F31B7E5C880073C5D7 /* PhoneNumberViewController.m in Sources */,
 				FC92E0F41B7E5C880073C5D7 /* SignInViewController.m in Sources */,
 				FCC529C81B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
+				FC3001281BAB74C000E60BB6 /* SocketAnyEvent.swift in Sources */,
 				FC92E0F51B7E5C880073C5D7 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC92E0F61B7E5C880073C5D7 /* FixedBentoPreviewViewController.m in Sources */,
+				FC30012B1BAB74C000E60BB6 /* SocketEngine.swift in Sources */,
 				FC92E0F81B7E5C880073C5D7 /* MKNetworkEngine.m in Sources */,
 				FC92E0F91B7E5C880073C5D7 /* NSObject+RMArchivable.m in Sources */,
 				FC92E0FA1B7E5C880073C5D7 /* SHSFlagAccessoryView.m in Sources */,
 				FC92E0FB1B7E5C880073C5D7 /* DishCollectionViewCell.m in Sources */,
 				FC92E0FC1B7E5C880073C5D7 /* CAGradientLayer+SJSGradients.m in Sources */,
 				FC92E0FD1B7E5C880073C5D7 /* JGProgressHUDSuccessIndicatorView.m in Sources */,
+				FC30013A1BAB74C000E60BB6 /* SocketIOClientStatus.swift in Sources */,
 				FC92E0FE1B7E5C880073C5D7 /* ChooseMainDishViewController.m in Sources */,
 				FC92E0FF1B7E5C880073C5D7 /* Bento.m in Sources */,
 				FC92E1001B7E5C880073C5D7 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
@@ -2871,24 +2990,29 @@
 				FC92E10C1B7E5C880073C5D7 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				FC92E10E1B7E5C880073C5D7 /* MyAlertView.m in Sources */,
 				FC92E10F1B7E5C880073C5D7 /* STPTestShippingMethodStore.m in Sources */,
+				FC3001401BAB74C000E60BB6 /* SocketPacket.swift in Sources */,
 				FC92E1101B7E5C880073C5D7 /* NSDictionary+RequestEncoding.m in Sources */,
 				FC92E1111B7E5C880073C5D7 /* JGProgressHUD.m in Sources */,
+				FC30014F1BAB74C000E60BB6 /* WebSocket.swift in Sources */,
 				FC92E1131B7E5C880073C5D7 /* FixedBentoViewController.m in Sources */,
 				FC92E1141B7E5C880073C5D7 /* FirstViewController.m in Sources */,
 				FC92E1151B7E5C880073C5D7 /* BentoShop.m in Sources */,
 				FC92E1171B7E5C880073C5D7 /* SVGeocoder.m in Sources */,
 				FC92E1181B7E5C880073C5D7 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
+				FC3001251BAB74C000E60BB6 /* SocketAckManager.swift in Sources */,
 				FC92E1191B7E5C880073C5D7 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				FC92E11A1B7E5C880073C5D7 /* main.m in Sources */,
 				FC92E11C1B7E5C880073C5D7 /* SVPlacemark.m in Sources */,
 				FC92E11D1B7E5C880073C5D7 /* SettingsTableViewCell.m in Sources */,
 				FC92E11E1B7E5C880073C5D7 /* MKNetworkOperation.m in Sources */,
+				FC3001431BAB74C000E60BB6 /* SocketParser.swift in Sources */,
 				FC92E11F1B7E5C880073C5D7 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
 				FC92E1201B7E5C880073C5D7 /* BaseViewController.m in Sources */,
 				FC92E1211B7E5C880073C5D7 /* CompleteOrderViewController.m in Sources */,
 				FC92E1221B7E5C880073C5D7 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				FC92E1231B7E5C880073C5D7 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				FC92E1241B7E5C880073C5D7 /* STPTestCardStore.m in Sources */,
+				FC3001311BAB74C000E60BB6 /* SocketEventHandler.swift in Sources */,
 				FC92E1261B7E5C880073C5D7 /* STPTestAddressStore.m in Sources */,
 				FC7291251BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				FC92E1271B7E5C880073C5D7 /* DeliveryLocationViewController.m in Sources */,
@@ -2896,18 +3020,23 @@
 				FC92E12A1B7E5C880073C5D7 /* BWTitlePagerView.m in Sources */,
 				FC92E12B1B7E5C880073C5D7 /* PreviewViewController.m in Sources */,
 				FC92E12C1B7E5C880073C5D7 /* SignedOutSettingsViewController.m in Sources */,
+				FC3001371BAB74C000E60BB6 /* SocketIOClient.swift in Sources */,
 				FC92E12D1B7E5C880073C5D7 /* JGProgressHUDFadeAnimation.m in Sources */,
 				FC92E12E1B7E5C880073C5D7 /* NSData+MKBase64.m in Sources */,
 				FC92E12F1B7E5C880073C5D7 /* PKPayment+STPTestKeys.m in Sources */,
 				FC92E1301B7E5C880073C5D7 /* RMMapper.m in Sources */,
 				FC92E1311B7E5C880073C5D7 /* SHSPhoneTextField.m in Sources */,
 				FC92E1331B7E5C880073C5D7 /* OutOfDeliveryAddressViewController.m in Sources */,
+				FC3001491BAB74C000E60BB6 /* SocketTypes.swift in Sources */,
 				FC92E1341B7E5C880073C5D7 /* IntroViewController.m in Sources */,
 				FC92E1351B7E5C880073C5D7 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				FC92E1361B7E5C880073C5D7 /* NSObject+RMCopyable.m in Sources */,
+				FC30012E1BAB74C000E60BB6 /* SocketEngineClient.swift in Sources */,
+				FC30014C1BAB74C000E60BB6 /* SwiftRegex.swift in Sources */,
 				FC92E1371B7E5C880073C5D7 /* AppStrings.m in Sources */,
 				FC92E1381B7E5C880073C5D7 /* SoldOutViewController.m in Sources */,
 				FC92E1391B7E5C880073C5D7 /* Reachability.m in Sources */,
+				FC30013D1BAB74C000E60BB6 /* SocketLogger.swift in Sources */,
 				FC92E13A1B7E5C880073C5D7 /* OrderConfirmViewController.m in Sources */,
 				FC92E13B1B7E5C880073C5D7 /* BentoTableViewCell.m in Sources */,
 				FC92E13C1B7E5C880073C5D7 /* PreviewCollectionViewCell.m in Sources */,
