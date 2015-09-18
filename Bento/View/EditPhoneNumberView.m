@@ -91,62 +91,98 @@
     }];
 }
 
-- (void)showErrorWithString:(NSString *)errorMsg code:(int)errorCode
+#pragma mark On Tap
+
+- (IBAction)onChangePhoneNumber:(id)sender
 {
-    if (errorMsg == nil || errorMsg.length == 0) {
-        self.viewError.hidden = YES;
-    }
-    else {
-        self.viewError.hidden = NO;
-        self.lblError.text = errorMsg;
-    }
+    [self.txtEnterPhoneNumber resignFirstResponder];
+    [self.txtConfirmPhoneNumber resignFirstResponder];
     
-    UIColor *errorColor = [UIColor bentoErrorTextOrange];
-    UIColor *correctColor = [UIColor bentoCorrectTextGray];
-    
-    switch (errorCode) {
-        case ERROR_NONE:
-        {
-            self.viewError.hidden = YES;
-            self.txtEnterPhoneNumber.textColor = correctColor;
-            self.txtConfirmPhoneNumber.textColor = correctColor;
-            
-            if (self.txtEnterPhoneNumber.enabled == YES && self.txtEnterPhoneNumber.text.length > 0 && self.enterPhoneIsActive == YES) {
-                NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:self.txtEnterPhoneNumber.text];
-                [newString addAttribute:NSForegroundColorAttributeName
-                                  value:[UIColor bentoBrandGreen]
-                                  range:NSMakeRange([self.txtEnterPhoneNumber.text length]-1, 1)];
-                self.txtEnterPhoneNumber.attributedText = newString;
-            }
-            
-            if (self.txtConfirmPhoneNumber.text.length > 0 && self.confirmPhoneIsActive == YES) {
-                NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:self.txtConfirmPhoneNumber.text];
-                [newString addAttribute:NSForegroundColorAttributeName
-                                  value:[UIColor bentoBrandGreen]
-                                  range:NSMakeRange([self.txtConfirmPhoneNumber.text length]-1, 1)];
-                self.txtConfirmPhoneNumber.attributedText = newString;
-            }
-        }
-            break;
-            
-        case ERROR_PHONENUMBER:
-        {
-            self.viewError.hidden = NO;
-            self.txtEnterPhoneNumber.textColor = errorColor;
-            self.txtConfirmPhoneNumber.textColor = errorColor;
-        }
-            break;
-            
-        default:
-        case ERROR_UNKNOWN:
-        {
-            self.viewError.hidden = NO;
-            self.txtEnterPhoneNumber.textColor = correctColor;
-            self.txtConfirmPhoneNumber.textColor = correctColor;
-        }
-            break;
-    }
+    [self process];
 }
+
+- (IBAction)onCancel:(id)sender
+{
+    [self doCancel];
+}
+
+- (void)doCancel
+{
+    // dismiss keyboard
+    [self.txtEnterPhoneNumber resignFirstResponder];
+    [self.txtConfirmPhoneNumber resignFirstResponder];
+    
+    // clear textfields
+    self.txtEnterPhoneNumber.text = @"";
+    self.txtConfirmPhoneNumber.text = @"";
+    
+    // reset enabled
+    self.txtEnterPhoneNumber.enabled = YES;
+    self.txtConfirmPhoneNumber.enabled = NO;
+    self.viewEnterPhoneNumber.backgroundColor = [UIColor whiteColor];
+    self.viewConfirmPhoneNumber.backgroundColor = [UIColor colorWithRed:0.824f green:0.820f blue:0.839f alpha:1.0f];
+    self.btnChangePhoneNumber.enabled = NO;
+    [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
+    
+    // hide error message
+    self.viewError.hidden = YES;
+    
+    [self fadeView];
+}
+
+- (void)process
+{
+    NSString *strPhoneNumber = self.txtConfirmPhoneNumber.text;
+    
+    if (strPhoneNumber.length == 0) {
+        return;
+    }
+    
+    NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
+    if (strAPIToken == nil || strAPIToken.length == 0) {
+        return;
+    }
+    
+    NSDictionary *newPhoneNumber = @{
+                                     @"new_phone":strPhoneNumber
+                                    };
+    
+    NSDictionary *dicRequest = @{@"data" : [newPhoneNumber jsonEncodedKeyValueString]};
+    
+    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    loadingHUD.textLabel.text = @"Processing...";
+    [loadingHUD showInView:self];
+    
+    NSString *strRequest = [NSString stringWithFormat:@"%@/user/phone", SERVER_URL];
+    if ([[DataManager shareDataManager] getUserInfo] != nil) {
+        strRequest = [NSString stringWithFormat:@"%@?api_token=%@", strRequest, [[DataManager shareDataManager] getAPIToken]]; // basically use this one, with api_token
+    }
+    
+    WebManager *webManager = [[WebManager alloc] init];
+    [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+        [loadingHUD dismiss];
+        
+        [self.delegate changePhoneNumber:strPhoneNumber];
+        
+        [self doCancel];
+        
+    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
+        [loadingHUD dismiss];
+        
+        NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
+        if (strMessage == nil) {
+            strMessage = error.localizedDescription;
+        }
+        
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        [alertView showInView:self];
+        alertView = nil;
+        return;
+        
+    } isJSON:NO];
+}
+
+#pragma mark Validation
 
 - (void)validate
 {
@@ -211,95 +247,61 @@
     [self showErrorWithString:nil code:ERROR_NONE];
 }
 
-#pragma mark On Tap
-
-- (IBAction)onChangePhoneNumber:(id)sender
+- (void)showErrorWithString:(NSString *)errorMsg code:(int)errorCode
 {
-    [self.txtEnterPhoneNumber resignFirstResponder];
-    [self.txtConfirmPhoneNumber resignFirstResponder];
-    
-    [self process];
-}
-
-- (IBAction)onCancel:(id)sender
-{
-    [self doCancel];
-}
-
-- (void)process
-{
-    NSString *strPhoneNumber = self.txtConfirmPhoneNumber.text;
-    
-    if (strPhoneNumber.length == 0) {
-        return;
+    if (errorMsg == nil || errorMsg.length == 0) {
+        self.viewError.hidden = YES;
+    }
+    else {
+        self.viewError.hidden = NO;
+        self.lblError.text = errorMsg;
     }
     
-    NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
-    if (strAPIToken == nil || strAPIToken.length == 0) {
-        return;
-    }
+    UIColor *errorColor = [UIColor bentoErrorTextOrange];
+    UIColor *correctColor = [UIColor bentoCorrectTextGray];
     
-    NSDictionary *newPhoneNumber = @{
-                                     @"new_phone":strPhoneNumber
-                                    };
-    
-    NSDictionary *dicRequest = @{@"data" : [newPhoneNumber jsonEncodedKeyValueString]};
-    
-    JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    loadingHUD.textLabel.text = @"Processing...";
-    [loadingHUD showInView:self];
-    
-    NSString *strRequest = [NSString stringWithFormat:@"%@/user/phone", SERVER_URL];
-    if ([[DataManager shareDataManager] getUserInfo] != nil) {
-        strRequest = [NSString stringWithFormat:@"%@?api_token=%@", strRequest, [[DataManager shareDataManager] getAPIToken]]; // basically use this one, with api_token
-    }
-    
-    WebManager *webManager = [[WebManager alloc] init];
-    [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
-        [loadingHUD dismiss];
-        
-        [self.delegate changePhoneNumber:strPhoneNumber];
-        
-        [self doCancel];
-        
-    } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-        [loadingHUD dismiss];
-        
-        NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-        if (strMessage == nil) {
-            strMessage = error.localizedDescription;
+    switch (errorCode) {
+        case ERROR_NONE:
+        {
+            self.viewError.hidden = YES;
+            self.txtEnterPhoneNumber.textColor = correctColor;
+            self.txtConfirmPhoneNumber.textColor = correctColor;
+            
+            if (self.txtEnterPhoneNumber.enabled == YES && self.txtEnterPhoneNumber.text.length > 0 && self.enterPhoneIsActive == YES) {
+                NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:self.txtEnterPhoneNumber.text];
+                [newString addAttribute:NSForegroundColorAttributeName
+                                  value:[UIColor bentoBrandGreen]
+                                  range:NSMakeRange([self.txtEnterPhoneNumber.text length]-1, 1)];
+                self.txtEnterPhoneNumber.attributedText = newString;
+            }
+            
+            if (self.txtConfirmPhoneNumber.text.length > 0 && self.confirmPhoneIsActive == YES) {
+                NSMutableAttributedString *newString = [[NSMutableAttributedString alloc] initWithString:self.txtConfirmPhoneNumber.text];
+                [newString addAttribute:NSForegroundColorAttributeName
+                                  value:[UIColor bentoBrandGreen]
+                                  range:NSMakeRange([self.txtConfirmPhoneNumber.text length]-1, 1)];
+                self.txtConfirmPhoneNumber.attributedText = newString;
+            }
         }
-        
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-        [alertView showInView:self];
-        alertView = nil;
-        return;
-        
-    } isJSON:NO];
-}
-
-- (void)doCancel
-{
-    // dismiss keyboard
-    [self.txtEnterPhoneNumber resignFirstResponder];
-    [self.txtConfirmPhoneNumber resignFirstResponder];
-    
-    // clear textfields
-    self.txtEnterPhoneNumber.text = @"";
-    self.txtConfirmPhoneNumber.text = @"";
-    
-    // reset enabled
-    self.txtEnterPhoneNumber.enabled = YES;
-    self.txtConfirmPhoneNumber.enabled = NO;
-    self.viewEnterPhoneNumber.backgroundColor = [UIColor whiteColor];
-    self.viewConfirmPhoneNumber.backgroundColor = [UIColor colorWithRed:0.824f green:0.820f blue:0.839f alpha:1.0f];
-    self.btnChangePhoneNumber.enabled = NO;
-    [self.btnChangePhoneNumber setBackgroundColor:[UIColor bentoButtonGray]];
-    
-    // hide error message
-    self.viewError.hidden = YES;
-    
-    [self fadeView];
+            break;
+            
+        case ERROR_PHONENUMBER:
+        {
+            self.viewError.hidden = NO;
+            self.txtEnterPhoneNumber.textColor = errorColor;
+            self.txtConfirmPhoneNumber.textColor = errorColor;
+        }
+            break;
+            
+        default:
+        case ERROR_UNKNOWN:
+        {
+            self.viewError.hidden = NO;
+            self.txtEnterPhoneNumber.textColor = correctColor;
+            self.txtConfirmPhoneNumber.textColor = correctColor;
+        }
+            break;
+    }
 }
 
 #pragma mark UITextFieldDelegate

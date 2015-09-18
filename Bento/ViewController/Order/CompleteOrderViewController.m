@@ -126,6 +126,8 @@
     NSString *uuid;
     
     float deliveryPrice;
+    
+    BOOL allowCommitOnKeep;
 }
 
 - (BOOL)applePayEnabled
@@ -140,6 +142,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    allowCommitOnKeep = YES;
     
     // Mixpanel track for Placed An Order
     mixpanel = [Mixpanel sharedInstance];
@@ -201,13 +205,13 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = 500; // only update if moved 500 meters
     
-//    if(![CLLocationManager locationServicesEnabled]) {
-//        // You need to enable Location Services
-//    }
-//    
-//    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]]) {
-//        // Region monitoring is not available for this Class
-//    }
+    if(![CLLocationManager locationServicesEnabled]) {
+        // You need to enable Location Services
+    }
+    
+    if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]]) {
+        // Region monitoring is not available for this Class
+    }
     
     if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
         // You need to authorize Location Services for the APP
@@ -217,8 +221,6 @@
     }
     
     CLRegion *region = [self getRegion];
-    NSLog(@"getRegion: %@", region);
-    
     [locationManager startMonitoringForRegion:region];
     [locationManager startUpdatingLocation];
 }
@@ -305,10 +307,10 @@
                  //start Monitoing Region again.
                  [locationManager startMonitoringForRegion:region];
              }
-             
              // Within radius
-             else
+             else {
                  [self commitOnGetItNow];
+             }
          }];
     
         // Stop Location Updation, we dont need it now.
@@ -1088,21 +1090,20 @@
     self.btnGetItNow.enabled = NO;
     
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
-    if (strAPIToken == nil || strAPIToken.length == 0)
-    {
+    if (strAPIToken == nil || strAPIToken.length == 0) {
         [self openAccountViewController:[CompleteOrderViewController class]];
-        
         return;
     }
     
     float totalPrice = [self getTotalPrice];
-    if (totalPrice == 0.0f)
-    {
+    if (totalPrice == 0.0f) {
         [self createBackendChargeWithToken:nil completion:nil];
         return;
     }
     
     [self processPayment];
+    
+    NSLog(@"ON COMMIT NOW!!!");
 }
 
 - (IBAction)onMinusTip:(id)sender
@@ -1748,33 +1749,37 @@
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     // Deleting last bento response
-    if (alertView.tag == 1)
-    {
-        if (buttonIndex == 0)
-        {
+    if (alertView.tag == 1) {
+        if (buttonIndex == 0) {
             _currentIndexPath = nil;
         }
-        else if (buttonIndex == 1)
-        {
+        else if (buttonIndex == 1) {
             [self removeBento];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
     
     // Empty Order Response
-    else if (alertView.tag == 2)
-    {
+    else if (alertView.tag == 2) {
         [[BentoShop sharedInstance] resetBentoArray];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
     
     // User selected Keep when confirming address
-    else if (alertView.tag == 911)
-    {
-        if (buttonIndex == 0)
-            [self commitOnGetItNow];
-        else
-        {
+    else if (alertView.tag == 911) {
+        if (buttonIndex == 0) {
+            
+            NSLog(@"Tapped on keep");
+            
+            if (allowCommitOnKeep == YES) {
+                [self commitOnGetItNow];
+                
+                // used to prevent multiple taps
+                allowCommitOnKeep = NO;
+                [NSTimer timerWithTimeInterval:3 target:self selector:@selector(updateAllowCommitOnKeep) userInfo:nil repeats:NO];
+            }
+        }
+        else {
             [self onChangeAddress:nil];
         }
     }
@@ -1782,7 +1787,6 @@
     // Remove promo
     else if (alertView.tag == 333) {
         if (buttonIndex == 1) {
-            NSLog(@"ok was pressed");
             
             NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
             [userDefaults setObject:nil forKey:KEY_PROMO_CODE];
@@ -1798,18 +1802,21 @@
     }
 }
 
+- (void)updateAllowCommitOnKeep
+{
+    allowCommitOnKeep = YES;
+}
+
 #pragma mark UIActionSheetDelegate
 
 - (void)actionSheet:(UIActionSheet *)actionSheet clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (buttonIndex == 0)
-    {
+    if (buttonIndex == 0) {
         [[DataManager shareDataManager] setCreditCard:nil];
         [[DataManager shareDataManager] setPaymentMethod:Payment_ApplePay];
         [self updateUI];
     }
-    else if (buttonIndex == 1)
-    {
+    else if (buttonIndex == 1) {
         [self performSelector:@selector(gotoCreditScreen) withObject:nil afterDelay:0.3f];
     }
 }
