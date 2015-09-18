@@ -24,6 +24,7 @@
 #import <PureLayout/PureLayout.h>
 #import "Mixpanel.h"
 
+
 @interface SignedOutSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
 @end
@@ -48,6 +49,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+
     
     // initialize yes
     isThereConnection = YES;

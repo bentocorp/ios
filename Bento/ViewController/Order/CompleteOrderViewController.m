@@ -1551,8 +1551,9 @@
         
         [loadingHUD dismiss];
         
-        if (completion)
+        if (completion) {
             completion(PKPaymentAuthorizationStatusSuccess);
+        }
 
         [[BentoShop sharedInstance] resetBentoArray]; // remove from temp
         [[BentoShop sharedInstance] saveBentoArray]; // save empty to persistent storage

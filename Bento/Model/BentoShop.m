@@ -305,7 +305,7 @@ static BentoShop *_shareInstance;
     if (![strDate isEqualToString:self.strToday])
     {
         [self resetBentoArray];
-        
+
         self.strToday = strDate;
         [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_MENU object:nil];
     }
@@ -1312,10 +1312,12 @@ static BentoShop *_shareInstance;
 
 - (void)resetBentoArray
 {
-    // reset only if not nil and not empty
-    if (self.aryBentos.count) {
-        [self.aryBentos removeAllObjects];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        // reset only if not nil and not empty
+        if (self.aryBentos.count) {
+            [self.aryBentos removeAllObjects];
+        }
+    });
 }
 
 #pragma mark Response to State Change
