@@ -23,7 +23,7 @@
 #import "UIColor+CustomColors.h"
 #import <PureLayout/PureLayout.h>
 #import "Mixpanel.h"
-
+#import "Bento-Swift.h"
 
 @interface SignedOutSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -50,7 +50,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-
     
     // initialize yes
     isThereConnection = YES;
