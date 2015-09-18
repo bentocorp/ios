@@ -50,6 +50,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:@"http://54.191.141.101:8081" opts:nil];
+    
+    [socket on:@"connect" callback:^(NSArray * nonnull, SocketAckEmitter * nullable) {
+        NSLog(@"socket connected");
+    }];
+    
+    [socket on:@"connect_erorr" callback:^(NSArray * nonnull, SocketAckEmitter * nullable) {
+        NSLog(@"socket error");
+    }];
+    
+    [socket connect];
     
     // initialize yes
     isThereConnection = YES;
