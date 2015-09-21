@@ -203,7 +203,7 @@
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = 500; // only update if moved 500 meters
+//    locationManager.distanceFilter = 500; // only update if moved 500 meters
     
     if(![CLLocationManager locationServicesEnabled]) {
         // You need to enable Location Services
@@ -1777,7 +1777,7 @@
                 
                 // used to prevent multiple taps
                 allowCommitOnKeep = NO;
-                [NSTimer timerWithTimeInterval:3 target:self selector:@selector(updateAllowCommitOnKeep) userInfo:nil repeats:NO];
+                [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(updateAllowCommitOnKeep) userInfo:nil repeats:NO];
             }
         }
         else {

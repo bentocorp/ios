@@ -96,5 +96,10 @@
 	</array>
 	<key>branch_key</key>
 	<string>key_live_giiqrOp6DiHgCZr7oWZ7GfikneiUFqZM</string>
+	<key>NSAppTransportSecurity</key>
+	<dict>
+		<key>NSAllowsArbitraryLoads</key>
+		<true/>
+	</dict>
 </dict>
 </plist>

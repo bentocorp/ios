@@ -23,7 +23,6 @@
 #import "UIColor+CustomColors.h"
 #import <PureLayout/PureLayout.h>
 #import "Mixpanel.h"
-#import "Bento-Swift.h"
 
 @interface SignedOutSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
 
@@ -50,23 +49,10 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:@"http://54.191.141.101:8081" opts:nil];
-    
-    [socket on:@"connect" callback:^(NSArray * nonnull, SocketAckEmitter * nullable) {
-        NSLog(@"socket connected");
-    }];
-    
-    [socket on:@"connect_erorr" callback:^(NSArray * nonnull, SocketAckEmitter * nullable) {
-        NSLog(@"socket error");
-    }];
-    
-    [socket connect];
-    
     // initialize yes
     isThereConnection = YES;
     
     self.view.backgroundColor = [UIColor bentoBackgroundGray];
-    
     
 //    UIView *box = [[UIView alloc] initForAutoLayout];
 //
