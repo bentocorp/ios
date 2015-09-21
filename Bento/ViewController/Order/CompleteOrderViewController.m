@@ -270,6 +270,10 @@
 {
     [self commitOnGetItNow];
     
+    // Stop Location Updation, we dont need it now
+    [locationManager stopUpdatingLocation];
+    locationManager = nil;
+    
     [[Mixpanel sharedInstance] track:@"GPS Failed On Let's Eat"];
 }
 
