@@ -309,11 +309,14 @@
                  [self locationManager:locationManager didExitRegion:region];
                  
                  //start Monitoing Region again.
-                 [locationManager startMonitoringForRegion:region];
+//                 [locationManager startMonitoringForRegion:region];  // wtf why did i add this before?
+                 
+                 [[Mixpanel sharedInstance] track:@"Outside Geofence"];
              }
              // Within radius
              else {
                  [self commitOnGetItNow];
+                 [[Mixpanel sharedInstance] track:@"Within Geofence"];
              }
          }];
     
@@ -777,6 +780,8 @@
 
 - (IBAction)onChangeAddress:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"Tapped On Change - Address"];
+    
     NSArray *aryViewControllers = self.navigationController.viewControllers;
     
     BOOL found = NO;
@@ -803,7 +808,7 @@
 
 - (IBAction)onChangePayment:(id)sender
 {
-    [[Mixpanel sharedInstance] track:@"Clicked Change Payment"];
+    [[Mixpanel sharedInstance] track:@"Tapped On Change - Payment"];
     
     if (![self applePayEnabled])
         [self gotoCreditScreen];
@@ -1088,6 +1093,8 @@
 {
     // set geofence
     [self initializeRegionMonitoring];
+    
+    [[Mixpanel sharedInstance] track:@"Tapped On Let's Eat"];
 }
 
 -(void)commitOnGetItNow
@@ -1776,6 +1783,8 @@
         if (buttonIndex == 0) {
             
             NSLog(@"Tapped on keep");
+            
+            [[Mixpanel sharedInstance] track:@"Tapped On Keep"];
             
             if (allowCommitOnKeep == YES) {
                 [self commitOnGetItNow];
