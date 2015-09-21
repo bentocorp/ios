@@ -1775,9 +1775,9 @@
             if (allowCommitOnKeep == YES) {
                 [self commitOnGetItNow];
                 
-                // used to prevent multiple taps
+                // used to prevent multiple commitOnGetItNow's for 10 seconds after tapping keep the first time
                 allowCommitOnKeep = NO;
-                [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(updateAllowCommitOnKeep) userInfo:nil repeats:NO];
+                [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(updateAllowCommitOnKeep) userInfo:nil repeats:NO];
             }
         }
         else {
