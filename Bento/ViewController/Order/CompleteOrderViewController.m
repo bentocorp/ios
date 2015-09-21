@@ -203,7 +203,7 @@
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-//    locationManager.distanceFilter = 500; // only update if moved 500 meters
+    locationManager.distanceFilter = 99999; // only update if moved 99999 meters
     
     if(![CLLocationManager locationServicesEnabled]) {
         // You need to enable Location Services
@@ -315,6 +315,7 @@
     
         // Stop Location Updation, we dont need it now.
         [locationManager stopUpdatingLocation];
+        locationManager = nil;
     }
 }
 
@@ -1775,9 +1776,9 @@
             if (allowCommitOnKeep == YES) {
                 [self commitOnGetItNow];
                 
-                // used to prevent multiple commitOnGetItNow's for 10 seconds after tapping keep the first time
+                // used to prevent multiple commitOnGetItNow's for 5 seconds after tapping keep the first time
                 allowCommitOnKeep = NO;
-                [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(updateAllowCommitOnKeep) userInfo:nil repeats:NO];
+                [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateAllowCommitOnKeep) userInfo:nil repeats:NO];
             }
         }
         else {
