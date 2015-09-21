@@ -203,7 +203,7 @@
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-    locationManager.distanceFilter = 99999; // only update if moved 99999 meters
+    locationManager.distanceFilter = 999999;
     
     if(![CLLocationManager locationServicesEnabled]) {
         // You need to enable Location Services
@@ -301,22 +301,22 @@
              // Outside radius
              if ([currentLocationDistance floatValue] > radius) {
                  
-                 NSLog(@"Invoking didExitRegion manually for region: %@", identifer);
-                 
                  //stop Monitoring Region temporarily
                  [locationManager stopMonitoringForRegion:region];
                  
                  [self locationManager:locationManager didExitRegion:region];
                  
                  //start Monitoing Region again.
-//                 [locationManager startMonitoringForRegion:region];  // wtf why did i add this before?
+//                 [locationManager startMonitoringForRegion:region];  // wtf...why did i add this before?
                  
-                 [[Mixpanel sharedInstance] track:@"Outside Geofence"];
+                 NSLog(@"Invoking didExitRegion manually for region: %@", identifer);
+                 
+                 [[Mixpanel sharedInstance] track:@"Geofence - Outside"];
              }
              // Within radius
              else {
                  [self commitOnGetItNow];
-                 [[Mixpanel sharedInstance] track:@"Within Geofence"];
+                 [[Mixpanel sharedInstance] track:@"Geofence - Inside"];
              }
          }];
     
