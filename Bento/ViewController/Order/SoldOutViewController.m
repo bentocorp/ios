@@ -51,7 +51,6 @@
 @property (nonatomic, weak) IBOutlet UILabel *openingHoursLabel;
 @property (nonatomic, weak) IBOutlet UILabel *lunchAndDinnerHoursLabel;
 
-
 @end
 
 @implementation SoldOutViewController
@@ -85,14 +84,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    SocketIOClient* socket = [[SocketIOClient alloc] initWithSocketURL:@"https://54.191.141.101:8081" opts:nil];
-
-    [socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
-        NSLog(@"socket connected");
-    }];
-
-    [socket connect];
     
     isThereConnection = YES;
     

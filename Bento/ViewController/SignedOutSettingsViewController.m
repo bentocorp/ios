@@ -23,8 +23,11 @@
 #import "UIColor+CustomColors.h"
 #import <PureLayout/PureLayout.h>
 #import "Mixpanel.h"
+#import "Bento-Swift.h"
 
 @interface SignedOutSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate>
+
+@property (nonatomic, strong) SocketIOClient *socket;
 
 @end
 
@@ -48,6 +51,14 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.socket = [[SocketIOClient alloc] initWithSocketURL:@"ec2-54-191-141-101.us-west-2.compute.amazonaws.com" opts:@{@"log": @YES}];
+
+    [self.socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
+        NSLog(@"socket connected");
+    }];
+    
+    [self.socket connect];
     
     // initialize yes
     isThereConnection = YES;
