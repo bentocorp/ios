@@ -21,6 +21,7 @@ PODS:
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
+  - SIOSocket (0.2.0)
   - Stripe (3.1.0):
     - Stripe/Core (= 3.1.0)
   - Stripe/ApplePay (3.1.0):
@@ -41,6 +42,7 @@ DEPENDENCIES:
   - mopub-ios-sdk
   - PaymentKit
   - PureLayout
+  - SIOSocket (~> 0.2.0)
   - Stripe
   - Stripe/ApplePay
   - UIActivityIndicator-for-SDWebImage
@@ -67,6 +69,7 @@ SPEC CHECKSUMS:
   PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
   PureLayout: 270dfee2236f697ab1d5e2771c2e5c248495fa0d
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SIOSocket: 2facc0bd02ae72d98c223634a46dd8ebdf9be321
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
   UICKeyChainStore: e81dc3b58d56ffaed61ab6669eb97071e53fc377

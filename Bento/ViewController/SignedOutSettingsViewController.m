@@ -37,6 +37,9 @@
     JGProgressHUD *loadingHUD;
     
     BOOL isThereConnection;
+    
+    __block NSString *userID;
+    __block NSString *token;
 }
 
 // AUTOLAYOUT EXAMPLE
@@ -52,10 +55,54 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.socket = [[SocketIOClient alloc] initWithSocketURL:@"ec2-54-191-141-101.us-west-2.compute.amazonaws.com" opts:@{@"log": @YES}];
-
-    [self.socket on:@"connect" callback:^(NSArray* data, SocketAckEmitter* ack) {
-        NSLog(@"socket connected");
+    self.socket = [[SocketIOClient alloc] initWithSocketURL:@"http://54.191.141.101:8081" opts:@{@"log": @YES}];
+    
+    [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        
+        NSLog(@"SOCKET CONNECTED");
+        
+        // request to authenticate
+        [self.socket emitWithAck:@"get" withItems:@[@"/api/authenticate?username=atlas01&password=password&type=customer"]](0, ^(NSArray *data) {
+            
+            NSString *jsonString = data[0];
+            
+            NSError *jsonError;
+            NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData
+                                                                 options:NSJSONReadingMutableContainers
+                                                                   error:&jsonError];
+            
+            NSLog(@"json - %@", json);
+            
+//            NSDictionary *ret = json[@"ret"];
+            
+//            userID = ret[@"uid"];
+//            token = ret[@"token"];
+        });
+        
+        // request to track driver
+        [self.socket emitWithAck:@"get" withItems:@[@"/api/track?client_id=d-8"]](0, ^(NSArray *data) {
+            
+            NSString *jsonString = data[0];
+            
+            NSError *jsonError;
+            NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+            NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData
+                                                                 options:NSJSONReadingMutableContainers
+                                                                   error:&jsonError];
+            
+            // server lets me know if driver is online/offline and confirms driverID
+            NSLog(@"json2 - %@", json);
+        });
+        
+        [self.socket on:@"loc" callback:^(NSArray * data, SocketAckEmitter * ack) {
+            NSLog(@"loc data - %@", data);
+        }];
+        
+        [self.socket on:@"stat" callback:^(NSArray * data, SocketAckEmitter * ack) {
+            NSLog(@"stat data - %@", data);
+        }];
+        
     }];
     
     [self.socket connect];
