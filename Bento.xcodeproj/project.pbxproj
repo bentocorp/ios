@@ -525,6 +525,9 @@
 		FC92E1AA1B7E5C880073C5D7 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22111ADC3ADF006B2750 /* Icon-Small@2x.png */; };
 		FC92E1B31B7E5D500073C5D7 /* calabash.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC92E1B21B7E5D500073C5D7 /* calabash.framework */; };
 		FC92E1B51B7E5D830073C5D7 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */; };
+		FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; settings = {ASSET_TAGS = (); }; };
+		FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; settings = {ASSET_TAGS = (); }; };
+		FC94E33F1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
 		FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
 		FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
@@ -989,6 +992,8 @@
 		FC92E1B11B7E5C890073C5D7 /* Bento copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bento copy-Info.plist"; path = "/Users/JosephLauSF/_github/Bento/Bento copy-Info.plist"; sourceTree = "<absolute>"; };
 		FC92E1B21B7E5D500073C5D7 /* calabash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = calabash.framework; sourceTree = "<group>"; };
 		FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusViewController.h; sourceTree = "<group>"; };
+		FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusViewController.m; sourceTree = "<group>"; };
 		FC99D4ED1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoPreviewViewController.h; sourceTree = "<group>"; };
 		FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoPreviewViewController.m; sourceTree = "<group>"; };
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
@@ -1529,6 +1534,8 @@
 				90D8F7D71A5E2FE900D034CF /* CompleteOrderViewController.m */,
 				90D8F7D91A5E304D00D034CF /* OrderConfirmViewController.h */,
 				90D8F7DA1A5E304D00D034CF /* OrderConfirmViewController.m */,
+				FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */,
+				FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */,
 				90D8F7E61A5E3F7500D034CF /* EnterCreditCardViewController.h */,
 				90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */,
 			);
@@ -2732,6 +2739,7 @@
 				7216B70D1AA64C7C0006FFE9 /* FacebookManager.m in Sources */,
 				7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
+				FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */,
 				FC9E82021BACE4250099DBF5 /* SocketIOClient.swift in Sources */,
 				FCBF06FB1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
@@ -2836,6 +2844,7 @@
 				722333041A6C0F5C006C2446 /* FacebookManager.m in Sources */,
 				7286EB4E1A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
+				FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */,
 				FC9E82011BACE4250099DBF5 /* SocketIOClient.swift in Sources */,
 				FCBF06FA1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
@@ -2959,6 +2968,7 @@
 				FC92E0E31B7E5C880073C5D7 /* FacebookManager.m in Sources */,
 				FC92E0E41B7E5C880073C5D7 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				FC92E0E51B7E5C880073C5D7 /* JGProgressHUDErrorIndicatorView.m in Sources */,
+				FC94E33F1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				FC92E0E61B7E5C880073C5D7 /* FXBlurView.m in Sources */,
 				FC9E82031BACE4250099DBF5 /* SocketIOClient.swift in Sources */,
 				FC92E0E71B7E5C880073C5D7 /* NetworkErrorViewController.m in Sources */,

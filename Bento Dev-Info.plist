@@ -53,11 +53,15 @@
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>MGLMapboxAccessToken</key>
+	<string>pk.eyJ1IjoiYmVudG9ub3ciLCJhIjoiNjI2ZmIwM2JkNzliMDZjYWEwYzkzOTc3YzdiYTQ2MmYifQ.LdRS3yQDx8_tWtEvY1bOjw</string>
 	<key>NSAppTransportSecurity</key>
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Bento needs your zipcode to check your delivery area</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Bento would like to use your location</string>
 	<key>UIAppFonts</key>
@@ -80,6 +84,7 @@
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
+		<string>location</string>
 	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>Main</string>
