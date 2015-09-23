@@ -26,6 +26,8 @@
 
 #import <FDKeychain/FDKeychain.h>
 
+#import "OrderStatusViewController.h"
+
 @interface OrderConfirmViewController () <MyAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivTitle;
@@ -149,18 +151,21 @@
 
 - (void)gotoAddAnotherBentoScreen
 {
-    NSArray *viewControllers = self.navigationController.viewControllers;
+//    NSArray *viewControllers = self.navigationController.viewControllers;
+//    
+//    for (UIViewController *vc in viewControllers) {
+//        
+//        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]]) {
+//
+//            [[BentoShop sharedInstance] addNewBento];
+//            [self.navigationController popToViewController:vc animated:YES];
+//            
+//            return;
+//        }
+//    }
     
-    for (UIViewController *vc in viewControllers) {
-        
-        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]]) {
-
-            [[BentoShop sharedInstance] addNewBento];
-            [self.navigationController popToViewController:vc animated:YES];
-            
-            return;
-        }
-    }
+    OrderStatusViewController *orderStatusVC = [[OrderStatusViewController alloc] init];
+    [self.navigationController presentViewController:orderStatusVC animated:YES completion:nil];
 }
 
 - (IBAction)onHelp:(id)sender

@@ -528,6 +528,9 @@
 		FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; settings = {ASSET_TAGS = (); }; };
 		FC94E33F1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; settings = {ASSET_TAGS = (); }; };
+		FC94E3411BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
+		FC94E3421BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
+		FC94E3431BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; settings = {ASSET_TAGS = (); }; };
 		FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
 		FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
 		FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
@@ -994,6 +997,7 @@
 		FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusViewController.h; sourceTree = "<group>"; };
 		FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusViewController.m; sourceTree = "<group>"; };
+		FC94E3401BB3529500E2104E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FC99D4ED1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoPreviewViewController.h; sourceTree = "<group>"; };
 		FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoPreviewViewController.m; sourceTree = "<group>"; };
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
@@ -1414,6 +1418,7 @@
 			isa = PBXGroup;
 			children = (
 				722333011A6BF172006C2446 /* Bento.entitlements */,
+				FC94E3401BB3529500E2104E /* Settings.bundle */,
 				90BED0981A5BCC7B003DC872 /* AppDelegate.h */,
 				90BED0991A5BCC7B003DC872 /* AppDelegate.m */,
 				722333051A6C12FC006C2446 /* Modules */,
@@ -2251,6 +2256,7 @@
 				7216B77A1AA64C7C0006FFE9 /* deliverylocation_icon_navigation@2x.png in Resources */,
 				7216B77B1AA64C7C0006FFE9 /* OpenSans-Bold.ttf in Resources */,
 				FC8DB73D1AF18674003045A3 /* icon-circle-messages.png in Resources */,
+				FC94E3421BB3529500E2104E /* Settings.bundle in Resources */,
 				FC8DB7451AF18674003045A3 /* icon-square-email.png in Resources */,
 				7216B77D1AA64C7C0006FFE9 /* PromoCodeView.xib in Resources */,
 				FCA1C8C31AF1973E004715F1 /* icon-square-user.png in Resources */,
@@ -2411,6 +2417,7 @@
 				90BED0B11A5BE22E003DC872 /* first_background.png in Resources */,
 				90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */,
 				FC7EACB21B8D0C2700B15FC8 /* empty-main.png in Resources */,
+				FC94E3411BB3529500E2104E /* Settings.bundle in Resources */,
 				90D8F7B31A5D84B800D034CF /* register_icon_phone.png in Resources */,
 				FCDF22201ADC3ADF006B2750 /* Icon-76.png in Resources */,
 				90BED0DB1A5C0320003DC872 /* nav_background.png in Resources */,
@@ -2531,6 +2538,7 @@
 				FC92E1901B7E5C880073C5D7 /* first_background.png in Resources */,
 				FC92E1911B7E5C880073C5D7 /* orderconfirm_image_car.png in Resources */,
 				FC7EACB41B8D0C2700B15FC8 /* empty-main.png in Resources */,
+				FC94E3431BB3529500E2104E /* Settings.bundle in Resources */,
 				FC92E1921B7E5C880073C5D7 /* register_icon_phone.png in Resources */,
 				FC92E1931B7E5C880073C5D7 /* Icon-76.png in Resources */,
 				FC92E1941B7E5C880073C5D7 /* nav_background.png in Resources */,
