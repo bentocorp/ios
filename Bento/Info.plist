@@ -70,6 +70,8 @@
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
 	</dict>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>Bento needs your zipcode to check your delivery area</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Bento needs your zipcode to check your delivery area</string>
 	<key>UIAppFonts</key>
