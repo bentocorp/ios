@@ -167,7 +167,7 @@ static BentoShop *_shareInstance;
     BOOL isClosed = [self isClosed];
     BOOL isSoldOut = [self isSoldOut];
     
-    NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
+//    NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
     
     [self getNextMenus];
 
