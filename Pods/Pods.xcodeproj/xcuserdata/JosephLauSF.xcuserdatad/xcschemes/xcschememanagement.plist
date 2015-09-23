@@ -34,6 +34,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Mapbox-iOS-SDK-Mapbox.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Mapbox-iOS-SDK.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -102,27 +112,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1E65E7E609573EB76FC559BCB4851BAF</key>
+		<key>23A99980F2A5BCE9C25FC59221818CCC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1EABB7251FE14018C9C251DC8019296B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>27BDE0E993558C0AEC9448E0AA8795CD</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>28EC14F1DD47720F37A5D7F84022F99F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>340E62D52EC0840B30814636E1A6AEB2</key>
+		<key>2AAABF0D844F60A5112BC73BBE4F98CC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,7 +127,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>48E046DD7EEB04B9432CA1D6B61535AB</key>
+		<key>44D2638A8786F99AC74780B17B96C4CF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,47 +142,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4CCF90A6C833077025265966BBFA8446</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>519D3C01AB6F4FDFA8E4CD257350EE8C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5FF7499E0FF9F7C7EA66150CBE67F8A2</key>
+		<key>5CFDC9724BCF570ADFA6BCA2B7E171A9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>61FB25BA02506D9D3BC8036CE0147C8E</key>
+		<key>6BA83E281AF52CC14122C6F4D8AFC0EE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6493318816A748179005A535A5CDBE8A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6770A1E5DD9A3D103CFAA959028074A5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>6E72B3B8891B79F0980F3B8EF4B22165</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>747D4C0F22F10A7BF619E549F9F1D3BC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>7AD7B3B34B4A32D3F550289DA4976CC2</key>
+		<key>701B09C0E34EAD629DD84E628DDA14C8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -197,12 +167,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>80C00721182E0BDE04AE30A928A63D0F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>8809A1C5D87D89148BDB20CE6242DE78</key>
+		<key>85DA9915A2AA4BDC2A3939FE060039AA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -212,47 +177,42 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A7D461F9AF3E1A93B195ECD998BD73FE</key>
+		<key>A1F98491816227CD840B61F112C4C9AC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>ABE7D1202AC04BDA8AFBD9373D940F76</key>
+		<key>A58CF18EB7F2093C9FC7AC57A36CEEA7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BED1D47B09C44B5617BC4C54B12D50B2</key>
+		<key>ABDA8FC5BB51174032801C0C9F06447E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C00A4E0A8DE15337C1CA70C756A516E0</key>
+		<key>BB9A088CE6631ABDB0C76835A67AFE23</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C64E8CC13F9CF0A9D5198D599D1B755C</key>
+		<key>BFEDE8DA5AF74D4D30A12BFB85D3C2F8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CB5C987CCEC238259D3C0D58634341EB</key>
+		<key>C8ABD9D39110E9681A8881C7611B8AC8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E2ECC5B7C7FEE481182666DBCEC17CD1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>EC511E28905FE2C20E23DA0E564D2673</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EF116C8737372AEA39361925BDC0D592</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F3C67B06CB094926D8B9E5398FA8EACF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
