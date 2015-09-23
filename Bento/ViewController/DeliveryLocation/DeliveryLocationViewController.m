@@ -498,15 +498,16 @@
         }
 
         CLLocationCoordinate2D location = self.placeInfo.location.coordinate;
+        
+        // outside delivery zone
         if (![[BentoShop sharedInstance] checkLocation:location]) {
             [self gotoNoneDeliveryAreaScreen];
         }
+        // inside delivery zone
         else {
             [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
-            
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
             [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude] forKey:@"savedLongitude"];
-            
             [NSUserDefaults standardUserDefaults];
             
             [self gotoAddAnotherBentoScreen];

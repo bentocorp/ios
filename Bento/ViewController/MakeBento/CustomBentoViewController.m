@@ -1018,53 +1018,55 @@
 
 - (void)gotoOrderScreen
 {
+    // instantiate view controllers
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
     
+    // user and place info
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     
-    if (currentUserInfo == nil)
-    {
-        if (placeInfo == nil)
-        {
+    // if no user info
+    if (currentUserInfo == nil) {
+        // if no place info
+        if (placeInfo == nil) {
             [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromHomepage"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             [self openAccountViewController:[DeliveryLocationViewController class]];
         }
-        else // if bento user already has saved address
-        {
-            // check if saved address is within CURRENT service area
+        // if bento user already has saved address
+        else {
+            // check if saved address is inside CURRENT service area
             CLLocationCoordinate2D location = placeInfo.location.coordinate;
             
-            // not within service area
-            if (![[BentoShop sharedInstance] checkLocation:location])
+            // outside service area
+            if (![[BentoShop sharedInstance] checkLocation:location]) {
                 [self openAccountViewController:[DeliveryLocationViewController class]];
-            
-            // within service area
-            else
+            }
+            // inside service area
+            else {
                 [self openAccountViewController:[CompleteOrderViewController class]];
+            }
         }
     }
-    else
-    {
-        if (placeInfo == nil)
+    else {
+        if (placeInfo == nil) {
             [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-        else
-        {
-            // check if saved address is within CURRENT service area
+        }
+        else {
+            // check if saved address is inside CURRENT service area
             CLLocationCoordinate2D location = placeInfo.location.coordinate;
             
-            // not within service area
-            if (![[BentoShop sharedInstance] checkLocation:location])
+            // outside service area
+            if (![[BentoShop sharedInstance] checkLocation:location]) {
                 [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-                
-            // within service area
-            else
+            }
+            // inisde service area
+            else {
                 [self.navigationController pushViewController:completeOrderViewController animated:YES];
-            
+            }
         }
     }
 }
