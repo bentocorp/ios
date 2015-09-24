@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E26a" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="bfp-2n-wGh">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="8191" systemVersion="15B17c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" initialViewController="bfp-2n-wGh">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="8154"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Bold.ttf">
@@ -122,10 +122,12 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="rYp-Bh-ycX">
                                 <rect key="frame" x="0.0" y="64" width="320" height="504"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gIC-MI-qhK">
                                 <rect key="frame" x="0.0" y="528" width="130" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                 <state key="normal" title="Privacy Policy">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -139,6 +141,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="dyi-MF-TAk">
                                 <rect key="frame" x="160" y="528" width="160" height="40"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                 <state key="normal" title="Terms &amp; Conditions">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -156,6 +159,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We’re closed now!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Q40-KE-h1E">
                                         <rect key="frame" x="20" y="0.0" width="280" height="34"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -167,6 +171,7 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your address" minimumFontSize="17" id="g4w-Ug-cU5">
                                                 <rect key="frame" x="50" y="7" width="262" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
                                                 <connections>
@@ -176,13 +181,16 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_email.png" id="Ixq-vL-Tg8">
                                                 <rect key="frame" x="15" y="14" width="21" height="16"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="T1p-OR-Sjv">
                                         <rect key="frame" x="0.0" y="193" width="320" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                         <state key="normal" title="SEND FREE BENTO COUPON">
@@ -196,6 +204,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Mon-fri" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="O9U-8i-K0n">
                                         <rect key="frame" x="60" y="254" width="200" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="17"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -203,6 +212,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We’ll be back tomorrow at 9am. Here’s a promo code for 10% off your next order." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gfc-m1-4dc">
                                         <rect key="frame" x="25" y="42" width="270" height="100"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -210,11 +220,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="L: 11:00-2:00pm | D: 5:00-10:00pm" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gO4-mp-9Hi">
                                         <rect key="frame" x="20" y="284" width="272" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="K7J-A1-RNo">
@@ -224,10 +236,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="Abx-Ej-o3y">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="PzO-0S-tXz">
                                         <rect key="frame" x="270" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="mybento_nav_help.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -238,13 +252,16 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_title.png" id="gyq-DU-jyO">
                                         <rect key="frame" x="115" y="33" width="91" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="B7g-ac-1UF">
                                 <rect key="frame" x="40" y="462" width="240" height="40"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <state key="normal" title="SEE TODAYS MENU">
@@ -255,6 +272,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="jij-xh-7tu"/>
@@ -285,6 +303,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="J4S-0K-8uE">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="eCr-57-e09" kind="relationship" relationship="rootViewController" id="qZS-EP-RhR"/>
@@ -305,6 +324,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="8IQ-jD-y7k">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                             </imageView>
                             <view contentMode="scaleToFill" id="oQJ-nI-ge0">
                                 <rect key="frame" x="0.0" y="140" width="320" height="200"/>
@@ -313,6 +333,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Takeout, delivered instantly." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000000000007" id="ZuD-Ad-TM9">
                                         <rect key="frame" x="40" y="101" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -320,15 +341,19 @@
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="dqF-xI-AMZ">
                                         <rect key="frame" x="142" y="152" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </activityIndicatorView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="IlR-5c-RNW">
                                         <rect key="frame" x="35" y="18" width="250" height="92"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="1Dm-oX-14y"/>
@@ -356,14 +381,17 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="et5-BV-R37">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                             </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="dzM-tT-Uvv">
                                 <rect key="frame" x="35" y="41" width="250" height="77"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <animations/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="9V8-fy-NiP">
                                 <rect key="frame" x="30" y="406" width="260" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <state key="normal" title="GET STARTED">
@@ -377,6 +405,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="oH4-ps-7ak">
                                 <rect key="frame" x="165" y="406" width="125" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <state key="normal" title="OK">
@@ -394,6 +423,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Build your Bento for only $14" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="jUz-WA-vPg">
                                         <rect key="frame" x="39" y="33" width="243" height="33"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -401,6 +431,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="NJw-qI-yTX">
                                         <rect key="frame" x="37" y="84" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.54117647058823526" green="0.6705882352941176" blue="0.47450980392156861" alpha="1" colorSpace="calibratedRGB"/>
@@ -409,6 +440,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zve-5b-5vS">
                                         <rect key="frame" x="37" y="138" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.54117647059999996" green="0.6705882353" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -417,6 +449,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Igs-fu-eRb">
                                         <rect key="frame" x="38" y="190" width="32" height="32"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.54117647059999996" green="0.6705882353" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
@@ -425,6 +458,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose a main dish.        " lineBreakMode="tailTruncation" minimumScaleFactor="0.5" id="IVg-0A-jmy">
                                         <rect key="frame" x="83" y="84" width="180" height="32"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -432,6 +466,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Pick your 4 side dishes.   " lineBreakMode="tailTruncation" minimumScaleFactor="0.5" id="cZZ-OZ-YoM">
                                         <rect key="frame" x="84" y="138" width="180" height="32"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -439,16 +474,19 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter your address. Done." lineBreakMode="tailTruncation" minimumScaleFactor="0.5" id="GsT-oE-bTu">
                                         <rect key="frame" x="84" y="190" width="180" height="32"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="hQT-2N-3pe">
                                 <rect key="frame" x="30" y="406" width="125" height="44"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.30375412600000001" green="0.44812147009999997" blue="0.17722049989999999" alpha="0.59999999999999998" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <state key="normal" title="NO THANKS">
@@ -466,18 +504,22 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="UpFilled-100.png" id="ixQ-5c-QdG">
                                         <rect key="frame" x="48" y="15" width="40" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap &quot;Allow&quot;" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="sQv-Tw-WJg">
                                         <rect key="frame" x="0.0" y="50" width="136" height="33"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="19"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="NNT-Ti-aDn"/>
@@ -519,10 +561,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="fdf-hu-jiA">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Main Dish" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Rfm-67-QKg">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -530,6 +574,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qZn-Vw-YhQ">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -538,11 +583,13 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="jEL-Ah-vpE">
                                 <rect key="frame" x="0.0" y="65" width="320" height="503"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="WPl-1B-bjh">
                                     <size key="itemSize" width="50" height="50"/>
@@ -557,8 +604,10 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <animations/>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -567,6 +616,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="Ys0-Ok-xvL"/>
@@ -598,15 +648,18 @@
                                             <view contentMode="scaleToFill" id="Yuw-j7-Trs">
                                                 <rect key="frame" x="50" y="0.0" width="1" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_facebook.png" id="xNZ-IO-RGY">
                                                 <rect key="frame" x="19" y="11" width="11" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MrB-hI-MCA">
                                                 <rect key="frame" x="50" y="0.0" width="240" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                                 <state key="normal" title="REGISTER WITH FACEBOOK">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -617,11 +670,13 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.23137254901960785" green="0.34901960784313724" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_image_or.png" id="uYK-Cl-F6A">
                                         <rect key="frame" x="99" y="92" width="122" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <view contentMode="scaleToFill" id="KSO-l3-wn5">
                                         <rect key="frame" x="0.0" y="120" width="320" height="181"/>
@@ -630,52 +685,63 @@
                                             <view contentMode="scaleToFill" id="wJK-ej-GB8">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862745098034" green="0.92549019607843142" blue="0.93725490196078431" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="X5S-Zc-4uz">
                                                 <rect key="frame" x="0.0" y="45" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="aRM-8U-eSR">
                                                 <rect key="frame" x="0.0" y="90" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="BdY-3H-wSU">
                                                 <rect key="frame" x="0.0" y="135" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="fwE-3y-CF9">
                                                 <rect key="frame" x="0.0" y="180" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="rBL-a4-99d">
                                                 <rect key="frame" x="50" y="0.0" width="1" height="181"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_username.png" id="SrB-MV-sqR">
                                                 <rect key="frame" x="14" y="13" width="21" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_email.png" id="uqH-ab-4iu">
                                                 <rect key="frame" x="14" y="60" width="21" height="16"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_phone.png" id="bH6-Eq-hhm">
                                                 <rect key="frame" x="18" y="102" width="13" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_password.png" id="Mxf-HM-j7P">
                                                 <rect key="frame" x="14" y="147" width="21" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Your name" minimumFontSize="17" id="ic4-6W-vmE">
                                                 <rect key="frame" x="70" y="9" width="230" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="textColor" red="0.42745098039215684" green="0.45882352941176469" blue="0.51372549019607838" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocapitalizationType="words" autocorrectionType="no" returnKeyType="next"/>
@@ -687,6 +753,7 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="cMx-iM-tth">
                                                 <rect key="frame" x="70" y="143" width="230" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -698,6 +765,7 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" minimumFontSize="17" id="XyA-3w-KKd">
                                                 <rect key="frame" x="70" y="53" width="230" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
@@ -709,6 +777,7 @@
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone number" minimumFontSize="17" id="kss-ag-dM8" customClass="SHSPhoneTextField">
                                                 <rect key="frame" x="70" y="98" width="230" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad" returnKeyType="next"/>
@@ -717,11 +786,13 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="pAs-iW-6ri">
                                         <rect key="frame" x="0.0" y="436" width="130" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                         <state key="normal" title="Privacy Policy">
                                             <color key="titleColor" red="0.54117647058823526" green="0.73333333333333328" blue="0.3529411764705882" alpha="1" colorSpace="calibratedRGB"/>
@@ -734,6 +805,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="uyR-XF-uAc">
                                         <rect key="frame" x="160" y="436" width="160" height="40"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                         <state key="normal" title="Terms &amp; Conditions">
                                             <color key="titleColor" red="0.54117647059999996" green="0.73333333329999995" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -746,6 +818,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="GaG-xX-Wfd">
                                         <rect key="frame" x="15" y="317" width="290" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.47843137254901957" green="0.52156862745098043" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                         <state key="normal" title="REGISTER">
@@ -763,6 +836,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Already have an account?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="nx4-5n-dKx">
                                                 <rect key="frame" x="36" y="4" width="176" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -770,6 +844,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="xU4-oM-8sq">
                                                 <rect key="frame" x="216" y="0.0" width="68" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <state key="normal" title="Sign in.">
                                                     <color key="titleColor" red="0.54117647059999996" green="0.73333333329999995" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -780,9 +855,11 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view contentMode="scaleToFill" id="Xu7-Pc-pJz">
@@ -792,15 +869,18 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_alert.png" id="2O2-KX-VYd">
                                         <rect key="frame" x="15" y="14" width="16" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid email address." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="E2l-23-qlK">
                                         <rect key="frame" x="47" y="11" width="259" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.9137254901960784" green="0.44705882352941173" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="OEH-cW-HdF">
@@ -810,10 +890,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="cgY-Fi-5eC">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Register" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="wHK-m1-5eO">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -821,6 +903,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VWf-Qc-3sP">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -830,9 +913,11 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="vxr-FP-eD2"/>
@@ -882,21 +967,25 @@
                                             <view contentMode="scaleToFill" id="fOy-ri-luE">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="xgs-r7-JD0">
                                                 <rect key="frame" x="0.0" y="45" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="to2-2o-V8Y">
                                                 <rect key="frame" x="50" y="0.0" width="1" height="46"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Phone Number" minimumFontSize="17" id="ZWs-Us-ZYu" customClass="SHSPhoneTextField">
                                                 <rect key="frame" x="70" y="8" width="230" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" keyboardType="phonePad"/>
@@ -907,13 +996,16 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_phone.png" id="nbX-wa-VWK">
                                                 <rect key="frame" x="18" y="12" width="13" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="b5I-6l-4Lz">
                                         <rect key="frame" x="15" y="135" width="290" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                         <state key="normal" title="DONE">
@@ -927,11 +1019,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We need your phone number to let you know when your delivery is ready." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="imE-ZK-euc">
                                         <rect key="frame" x="31" y="0.0" width="258" height="59"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.3411764705882353" green="0.37647058823529411" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="PZA-0Y-sTk">
@@ -941,10 +1035,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="KBT-Cx-B70">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Phone Number" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5Bu-cl-ZKd">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -952,6 +1048,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="97P-BX-47P">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -961,6 +1058,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="lBv-mA-Qf0">
@@ -970,18 +1068,22 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_alert.png" id="Avv-nm-FxL">
                                         <rect key="frame" x="15" y="14" width="16" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid email address." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="zze-hN-6Ks">
                                         <rect key="frame" x="47" y="11" width="256" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.91372549020000005" green="0.44705882349999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="WWm-Vk-54t"/>
@@ -1016,6 +1118,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your address" minimumFontSize="17" clearButtonMode="whileEditing" id="PrE-gh-x4k">
                                         <rect key="frame" x="50" y="7" width="220" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" returnKeyType="search"/>
                                         <connections>
@@ -1026,6 +1129,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cbK-pc-cfu">
                                         <rect key="frame" x="0.0" y="0.0" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="deliverylocation_icon_search.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1036,6 +1140,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="s79-up-FtP">
                                         <rect key="frame" x="276" y="0.0" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="deliverylocation_icon_navigation.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1046,9 +1151,11 @@
                                     <view contentMode="scaleToFill" id="OHS-2w-E89">
                                         <rect key="frame" x="0.0" y="43" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.90980392156862744" green="0.90980392156862744" blue="0.90980392156862744" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="N5Q-Pe-K8d">
@@ -1058,6 +1165,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0U3-tR-rVN">
                                         <rect key="frame" x="276" y="0.0" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="image_unchecked.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1069,6 +1177,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="I agree to meet my driver curbside." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="HsG-Vf-ZpK">
                                         <rect key="frame" x="14" y="11" width="232" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="12"/>
                                         <color key="textColor" red="0.30588235294117649" green="0.34509803921568627" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1076,6 +1185,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="qAA-7o-dfd">
                                         <rect key="frame" x="219" y="0.0" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="mybento_nav_help.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1084,6 +1194,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="OST-Yr-10X">
@@ -1093,10 +1204,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="OGm-C1-azT">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery Location" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7gg-Lq-6Aa">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1104,6 +1217,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="QKw-5b-gs7">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1114,6 +1228,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="nFe-Tv-Vjx">
                                         <rect key="frame" x="276" y="21" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="mybento_nav_help.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1122,11 +1237,13 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" showsUserLocation="YES" id="x1o-Jf-fPe">
                                 <rect key="frame" x="0.0" y="108" width="320" height="284"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <connections>
                                     <outlet property="delegate" destination="cjF-1z-ADL" id="szf-Ef-JYe"/>
                                 </connections>
@@ -1134,6 +1251,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="64" sectionHeaderHeight="22" sectionFooterHeight="22" id="epU-fh-v9M">
                                 <rect key="frame" x="0.0" y="108" width="320" height="108"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="dataSource" destination="cjF-1z-ADL" id="DzC-60-CDl"/>
@@ -1143,6 +1261,7 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="VCZ-aB-4bV">
                                 <rect key="frame" x="0.0" y="435" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <state key="normal" title="CONTINUE">
@@ -1160,14 +1279,17 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please tap the checkbox to agree curbside delivery." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" id="jHS-3E-dw8">
                                         <rect key="frame" x="8" y="11" width="304" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.91372549020000005" green="0.44705882349999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="Smn-XZ-o9M"/>
@@ -1207,10 +1329,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="vN0-ei-c0c">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete Order" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="J8l-Tx-PpD">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1218,6 +1342,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="jGm-zx-31v">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1226,6 +1351,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="QE3-nQ-WT3">
@@ -1235,6 +1361,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iiJ-Jj-yAJ">
                                         <rect key="frame" x="235" y="0.0" width="85" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="CHANGE">
@@ -1248,16 +1375,19 @@
                                     <view contentMode="scaleToFill" id="fe9-3H-ErC">
                                         <rect key="frame" x="0.0" y="43" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.83921568627450982" green="0.85098039215686272" blue="0.85098039215686272" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery Destination" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="LX8-ou-bJ7">
                                         <rect key="frame" x="15" y="11" width="229" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235294117649" green="0.34509803921568627" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="agK-tb-ytI">
@@ -1267,6 +1397,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="cOo-Wx-ePj">
                                         <rect key="frame" x="235" y="0.0" width="85" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="CHANGE">
@@ -1280,20 +1411,24 @@
                                     <view contentMode="scaleToFill" id="VmQ-OB-ol4">
                                         <rect key="frame" x="0.0" y="43" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderconfirm_image_applepay.png" id="cls-zz-h40">
                                         <rect key="frame" x="15" y="11" width="46" height="22"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Payment Method" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5KH-qE-afz">
                                         <rect key="frame" x="69" y="11" width="158" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30196078431372547" green="0.34509803921568627" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="hVC-th-zts">
@@ -1303,6 +1438,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pbc-Hz-gCU">
                                         <rect key="frame" x="0.0" y="0.0" width="140" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <state key="normal" title="ADD ANOTHER BENTO">
                                             <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
@@ -1315,6 +1451,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ryh-p2-U6Y">
                                         <rect key="frame" x="234" y="0.0" width="86" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="EDIT">
@@ -1328,11 +1465,13 @@
                                     <view contentMode="scaleToFill" id="HwP-O1-VPc">
                                         <rect key="frame" x="0.0" y="42" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lth-bX-9L2">
                                         <rect key="frame" x="0.0" y="42" width="320" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="dataSource" destination="IGL-x5-TQo" id="Ka0-en-mcs"/>
@@ -1340,6 +1479,7 @@
                                         </connections>
                                     </tableView>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="tfC-0t-xL2">
@@ -1349,11 +1489,13 @@
                                     <view contentMode="scaleToFill" id="9qR-Yl-vN9">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Promo Discount" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="T88-Z1-qyD">
                                         <rect key="frame" x="15" y="11" width="163" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1361,11 +1503,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$3" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="AEx-9y-g8p">
                                         <rect key="frame" x="205" y="11" width="100" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="qlf-uw-Z71">
@@ -1375,11 +1519,13 @@
                                     <view contentMode="scaleToFill" id="xBI-Bh-zre">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R8F-6H-yJt">
                                         <rect key="frame" x="15" y="11" width="35" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235294117649" green="0.34509803921568627" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1387,6 +1533,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$24.52" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="G2i-DY-dBo">
                                         <rect key="frame" x="241" y="11" width="64" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1394,6 +1541,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$44.67" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="WeE-11-Aef">
                                         <rect key="frame" x="182" y="11" width="60" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.91552734375" green="0.49854745344053775" blue="0.34104120994848103" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1401,6 +1549,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="fxD-Rl-wWD">
                                         <rect key="frame" x="58" y="0.0" width="110" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                         <size key="titleShadowOffset" width="14" height="8"/>
                                         <state key="normal" title="ADD PROMO">
@@ -1412,6 +1561,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="hQ1-sj-gfQ">
@@ -1421,11 +1571,13 @@
                                     <view contentMode="scaleToFill" id="6tI-HZ-ciW">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tax" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="sMP-XO-0sa">
                                         <rect key="frame" x="15" y="11" width="42" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1433,11 +1585,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$4" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="V4F-Un-VVC">
                                         <rect key="frame" x="205" y="11" width="100" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="76i-t7-otd">
@@ -1447,15 +1601,18 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderconfirm_image_countpanel.png" id="51A-TH-pQ4">
                                         <rect key="frame" x="211" y="8" width="94" height="28"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <view contentMode="scaleToFill" id="wjo-ny-Lt7">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery Tip" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7po-kz-3DU">
                                         <rect key="frame" x="15" y="11" width="86" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1463,6 +1620,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="uhp-ni-hOr">
                                         <rect key="frame" x="204" y="0.0" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <state key="normal" image="orderconfirm_image_minute.png">
                                             <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
@@ -1475,6 +1633,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="o1K-1D-u7N">
                                         <rect key="frame" x="269" y="0.0" width="44" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <state key="normal" image="orderconfirm_image_plus.png">
                                             <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
@@ -1487,16 +1646,19 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="kjF-xR-Bb6">
                                         <rect key="frame" x="238" y="11" width="40" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2Gh-RT-7qO">
                                 <rect key="frame" x="-1" y="434" width="321" height="46"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <state key="normal" title="GET IT NOW">
@@ -1514,11 +1676,13 @@
                                     <view contentMode="scaleToFill" id="z46-x5-NOg">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery Fee" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="phu-Ws-izo">
                                         <rect key="frame" x="15" y="11" width="80" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1526,14 +1690,17 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$2...." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="jf1-R6-9fd">
                                         <rect key="frame" x="205" y="11" width="100" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="QU5-XD-J3S"/>
@@ -1584,10 +1751,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="fWL-Ar-OLr">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Credit Card" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="qID-zg-qkA">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1595,6 +1764,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="oeF-dY-UMi">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_close.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1603,6 +1773,7 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="snp-dy-QJr">
@@ -1612,6 +1783,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="A single Bento is only…" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Pi3-yZ-jYd">
                                         <rect key="frame" x="66" y="28" width="188" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.47843137254901957" green="0.52156862745098043" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1619,6 +1791,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$12" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Eds-o0-foK">
                                         <rect key="frame" x="139" y="56" width="42" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="21"/>
                                         <color key="textColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1630,6 +1803,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="IAt-I3-Gvk">
                                                 <rect key="frame" x="270" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <inset key="contentEdgeInsets" minX="20" minY="20" maxX="20" maxY="20"/>
                                                 <state key="normal" image="creditcard_btn_clear.png">
                                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -1639,18 +1813,22 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="xd0-pM-PF2">
                                         <rect key="frame" x="0.0" y="104" width="270" height="50"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </view>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.87450980392156863" green="0.89411764705882346" blue="0.90980392156862744" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="JGv-H3-Wl4">
                                 <rect key="frame" x="30" y="395" width="260" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <state key="normal" title="CONTINUE TO PAYMENT">
@@ -1662,6 +1840,7 @@
                                 </connections>
                             </button>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="jxA-Re-dca"/>
@@ -1692,17 +1871,21 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="eb5-eb-gNb">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_title.png" id="3ha-dd-TkX">
                                         <rect key="frame" x="115" y="33" width="91" height="20"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="yrg-wJ-aDW">
                                 <rect key="frame" x="0.0" y="435" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <state key="normal" title="BUILD ANOTHER BENTO">
@@ -1720,6 +1903,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Tn4-bX-m7M">
                                         <rect key="frame" x="54" y="74" width="212" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                         <state key="normal" title="TURN ON">
                                             <color key="titleColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -1732,11 +1916,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Want to receive push notifications for regular menu updates?" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Qiv-8X-7ok">
                                         <rect key="frame" x="17" y="20" width="287" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="Ola-bI-RE7">
@@ -1746,6 +1932,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Confirmed!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R4d-b6-xQx">
                                         <rect key="frame" x="0.0" y="65" width="320" height="34"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" red="0.47843137254901957" green="0.52156862745098043" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1753,6 +1940,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="We’ll send you text message updates while your delivery is on the way.  " textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="gqW-wd-92A">
                                         <rect key="frame" x="17" y="103" width="287" height="46"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764705882353" green="0.37647058823529411" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1760,6 +1948,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="aUl-qg-PQb">
                                         <rect key="frame" x="54" y="152" width="212" height="38"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                         <state key="normal" title="QUESTIONS OR CONCERNS?">
                                             <color key="titleColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
@@ -1772,11 +1961,14 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="orderconfirm_image_car.png" id="sge-pH-T9f">
                                         <rect key="frame" x="85" y="9" width="150" height="36"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="9Bv-av-lbz"/>
@@ -1810,10 +2002,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="Nas-e3-yTN">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="eWO-kW-Xak">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1824,16 +2018,19 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Delivery Zone" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="JME-Oj-OCQ">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" id="PtN-1g-STY">
                                 <rect key="frame" x="0.0" y="64" width="320" height="328"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <connections>
                                     <outlet property="delegate" destination="nhj-Yn-paf" id="Prb-S8-Xcl"/>
                                 </connections>
@@ -1845,6 +2042,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Enter your address" minimumFontSize="17" id="3U9-GH-Je9">
                                         <rect key="frame" x="50" y="7" width="262" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" keyboardType="emailAddress" returnKeyType="done"/>
                                         <connections>
@@ -1854,8 +2052,10 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_email.png" id="80d-UX-fRQ">
                                         <rect key="frame" x="15" y="14" width="21" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <view contentMode="scaleToFill" id="DeG-u7-UDM">
@@ -1865,6 +2065,7 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="4" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="dvS-wU-jf6">
                                         <rect key="frame" x="8" y="49" width="304" height="84"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <string key="text">We don’t deliver there yet! Available locations are highlighted above. Enter your email and we’ll buy you a free Bento when we come to your area.</string>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.3411764705882353" green="0.37647058823529411" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -1873,11 +2074,13 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bummer!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="hJa-G6-7id">
                                         <rect key="frame" x="74" y="20" width="173" height="21"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" red="0.90196078431372551" green="0.40000000000000002" blue="0.20000000000000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.92941176470588238" green="0.94117647058823528" blue="0.94117647058823528" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="KMN-9L-51E">
@@ -1887,6 +2090,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="M10-yU-3wC">
                                         <rect key="frame" x="254" y="0.0" width="66" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <state key="normal" title="CHANGE">
                                             <color key="titleColor" red="0.58431372549019611" green="0.792156862745098" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
@@ -1899,16 +2103,19 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="PPj-wh-C03">
                                         <rect key="frame" x="14" y="11" width="232" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.30588235294117649" green="0.34509803921568627" blue="0.38823529411764707" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="0P7-hr-NeD">
                                 <rect key="frame" x="0.0" y="435" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                 <size key="titleShadowOffset" width="1" height="1"/>
@@ -1923,12 +2130,14 @@
                             <webView contentMode="scaleToFill" id="4wb-Ep-2xw">
                                 <rect key="frame" x="0.0" y="64" width="320" height="134"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="nhj-Yn-paf" id="lYw-HA-yoT"/>
                                 </connections>
                             </webView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="w1w-wb-Xt0"/>
@@ -1967,30 +2176,36 @@
                                             <view contentMode="scaleToFill" id="yM8-bq-0WT">
                                                 <rect key="frame" x="0.0" y="0.0" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="agq-0f-GMX">
                                                 <rect key="frame" x="0.0" y="45" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="d7c-4G-Lpm">
                                                 <rect key="frame" x="0.0" y="90" width="320" height="1"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <view contentMode="scaleToFill" id="oCP-17-a1E">
                                                 <rect key="frame" x="50" y="0.0" width="1" height="91"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" red="0.92156862750000001" green="0.92549019610000005" blue="0.93725490199999995" alpha="1" colorSpace="calibratedRGB"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_email.png" id="7dU-5X-tqC">
                                                 <rect key="frame" x="14" y="16" width="21" height="16"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Email address" minimumFontSize="17" id="I3D-oS-dls">
                                                 <rect key="frame" x="70" y="9" width="230" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" autocorrectionType="no" keyboardType="emailAddress" returnKeyType="next"/>
@@ -2002,10 +2217,12 @@
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_password.png" id="W4o-q0-xdI">
                                                 <rect key="frame" x="14" y="57" width="21" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Password" minimumFontSize="17" id="Odn-0J-lVe">
                                                 <rect key="frame" x="70" y="53" width="230" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="textColor" red="0.42745098040000001" green="0.45882352939999999" blue="0.51372549020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits" returnKeyType="done" secureTextEntry="YES"/>
@@ -2015,11 +2232,13 @@
                                                 </connections>
                                             </textField>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="ghu-rM-FL3">
                                         <rect key="frame" x="15" y="184" width="290" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                         <state key="normal" title="SIGN IN">
@@ -2033,6 +2252,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="C5J-49-6A0">
                                         <rect key="frame" x="70" y="237" width="180" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Light" family="Open Sans" pointSize="14"/>
                                         <state key="normal" title="Forgot password?">
                                             <color key="titleColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
@@ -2045,6 +2265,7 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_image_or.png" id="sE5-js-woy">
                                         <rect key="frame" x="99" y="280" width="122" height="10"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <view contentMode="scaleToFill" id="CyY-Bc-maQ">
                                         <rect key="frame" x="0.0" y="412" width="320" height="30"/>
@@ -2053,6 +2274,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Don't have an account yet?" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="pCF-xw-dY1">
                                                 <rect key="frame" x="25" y="4" width="187" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2060,6 +2282,7 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="2uv-Er-zXO">
                                                 <rect key="frame" x="220" y="0.0" width="68" height="30"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                                                 <state key="normal" title="Sign up.">
                                                     <color key="titleColor" red="0.54117647059999996" green="0.73333333329999995" blue="0.35294117650000001" alpha="1" colorSpace="calibratedRGB"/>
@@ -2070,6 +2293,7 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                     <view contentMode="scaleToFill" id="RjP-Wp-6V4">
@@ -2079,15 +2303,18 @@
                                             <view contentMode="scaleToFill" id="0Gv-gr-IwH">
                                                 <rect key="frame" x="50" y="0.0" width="1" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
+                                                <animations/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_facebook.png" id="Osl-gf-G2R">
                                                 <rect key="frame" x="19" y="11" width="11" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="q3G-gO-Mjx">
                                                 <rect key="frame" x="50" y="0.0" width="240" height="44"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                                 <state key="normal" title="SIGN IN WITH FACEBOOK">
                                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2098,9 +2325,11 @@
                                                 </connections>
                                             </button>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" red="0.23137254900000001" green="0.34901960780000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                     </view>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </scrollView>
                             <view contentMode="scaleToFill" id="gOi-qB-KDA">
@@ -2110,15 +2339,18 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="register_icon_alert.png" id="ly0-iG-qIe">
                                         <rect key="frame" x="15" y="14" width="16" height="16"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please enter a valid email address." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="abB-3C-2vh">
                                         <rect key="frame" x="47" y="11" width="256" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.91372549020000005" green="0.44705882349999998" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="8Sd-BN-omv">
@@ -2128,10 +2360,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="fGA-uS-lIj">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign In" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="OP1-If-5jg">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2139,6 +2373,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="ZA3-lc-9gk">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2147,9 +2382,11 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="YGI-bd-QLa"/>
@@ -2188,10 +2425,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="5dn-uK-zLC">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Choose Side Dish" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="K7d-zv-DtO">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2199,6 +2438,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="R8P-qS-2EY">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2207,11 +2447,13 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" id="KIA-L3-xvh">
                                 <rect key="frame" x="0.0" y="65" width="320" height="503"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="0.0" minimumInteritemSpacing="0.0" id="vix-d0-JfD">
                                     <size key="itemSize" width="50" height="50"/>
@@ -2226,8 +2468,10 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <animations/>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
+                                        <animations/>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -2236,6 +2480,7 @@
                                 </connections>
                             </collectionView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.52941176470588236" green="0.69019607843137254" blue="0.37254901960784315" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="OQJ-he-WeM"/>
@@ -2257,6 +2502,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eWz-cT-XFp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <connections>
                         <segue destination="vXZ-lx-hvc" kind="relationship" relationship="rootViewController" id="GHh-Se-W81"/>
@@ -2274,6 +2520,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="YYE-LZ-zGp">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -2303,6 +2550,7 @@
                                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Questions?                  or call 555-555-5555" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" id="8OU-nd-cFn">
                                                 <rect key="frame" x="0.0" y="11" width="320" height="21"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <nil key="highlightedColor"/>
@@ -2310,6 +2558,7 @@
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" id="Da2-gh-Zb8">
                                                 <rect key="frame" x="0.0" y="4" width="320" height="36"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <animations/>
                                                 <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <attributedString key="attributedText">
                                                     <fragment content="Contact">
@@ -2327,9 +2576,11 @@
                                                 </connections>
                                             </textView>
                                         </subviews>
+                                        <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     </view>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" red="0.47843137250000001" green="0.52156862749999999" blue="0.56862745100000001" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
                             <view contentMode="scaleToFill" id="C05-S7-dDF">
@@ -2339,10 +2590,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" id="SSq-If-1v5">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="65"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Faq" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="IiI-SB-FEy">
                                         <rect key="frame" x="50" y="20" width="220" height="45"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                         <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
@@ -2350,6 +2603,7 @@
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="q9X-0s-EvR">
                                         <rect key="frame" x="0.0" y="20" width="50" height="45"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <state key="normal" image="nav_btn_back.png">
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -2358,11 +2612,13 @@
                                         </connections>
                                     </button>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <webView contentMode="scaleToFill" id="mxe-Mc-DEi">
                                 <rect key="frame" x="0.0" y="108" width="320" height="465"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
                                     <outlet property="delegate" destination="wdM-kJ-Zs9" id="F0W-QT-daU"/>
@@ -2371,8 +2627,10 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" id="its-Uo-k0s">
                                 <rect key="frame" x="151" y="312" width="20" height="20"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                <animations/>
                             </activityIndicatorView>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" red="0.92941176469999998" green="0.94117647059999998" blue="0.94117647059999998" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
                     <navigationItem key="navigationItem" id="O47-K6-eVS"/>
@@ -2399,6 +2657,7 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="0He-02-pgs">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <animations/>
                             </imageView>
                             <view contentMode="scaleToFill" id="19r-ix-ep1">
                                 <rect key="frame" x="0.0" y="184" width="320" height="200"/>
@@ -2407,10 +2666,12 @@
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo.png" id="lf3-jj-qq2">
                                         <rect key="frame" x="35" y="18" width="250" height="92"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Takeout, delivered instantly." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.20000000298023224" id="KT4-tC-ub7">
                                         <rect key="frame" x="40" y="101" width="240" height="30"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="24"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
@@ -2418,11 +2679,14 @@
                                     <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="whiteLarge" id="N8P-wN-B8E">
                                         <rect key="frame" x="142" y="155" width="37" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                                        <animations/>
                                     </activityIndicatorView>
                                 </subviews>
+                                <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
+                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" id="4FG-X8-3ZD"/>
@@ -2440,6 +2704,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Uc5-tN-Xon">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <animations/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
@@ -2477,11 +2742,6 @@
         <image name="register_icon_username.png" width="42" height="42"/>
         <image name="register_image_or.png" width="245" height="20"/>
     </resources>
-    <simulatedMetricsContainer key="defaultSimulatedMetrics">
-        <simulatedStatusBarMetrics key="statusBar"/>
-        <simulatedOrientationMetrics key="orientation"/>
-        <simulatedScreenMetrics key="destination" type="retina4"/>
-    </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
         <segue reference="Xro-hm-UPB"/>
     </inferredMetricsTieBreakers>

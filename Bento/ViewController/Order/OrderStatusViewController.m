@@ -16,6 +16,7 @@
 @interface OrderStatusViewController () <MGLMapViewDelegate>
 
 @property (nonatomic) MGLMapView *mapView;
+@property (nonatomic) UIActivityIndicatorView *viewActivity;
 
 @end
 
@@ -23,6 +24,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    /*-----------------------------------------------------------------------------------------------------*/
     
     // navigation bar color
     UIView *navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
@@ -48,36 +51,49 @@
     longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [self.view addSubview:longLineSepartor1];
     
-    // initialize the map view
-    self.mapView = [[MGLMapView alloc] initWithFrame:CGRectMake(0, 66, SCREEN_WIDTH, SCREEN_HEIGHT-66)];
-    self.mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    /*-----------------------------------------------------------------------------------------------------*/
     
-    // set the map's center coordinate
-    [self.mapView setCenterCoordinate:CLLocationCoordinate2DMake(38.894368, -77.036487)
-                            zoomLevel:15
-                             animated:NO];
+    /*-------------------------------------------MAPBOX----------------------------------------------------*/
     
-    [self.view addSubview:self.mapView];
+    _mapView = [[MGLMapView alloc] initWithFrame:CGRectMake(0, 66, SCREEN_WIDTH, SCREEN_HEIGHT-66)];
+    _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     
-    self.mapView.delegate = self;
+    // Set the map's bounds to Pisa, Italy
+    MGLCoordinateBounds bounds = MGLCoordinateBoundsMake(CLLocationCoordinate2DMake(43.7115, 10.3725), CLLocationCoordinate2DMake(43.7318, 10.4222));
+    [_mapView setVisibleCoordinateBounds:bounds];
     
-    // Declare the annotation `point` and set its coordinates, title, and subtitle
-    MGLPointAnnotation *point = [[MGLPointAnnotation alloc] init];
-    point.coordinate = CLLocationCoordinate2DMake(38.894368, -77.036487);
-    point.title = @"Hello world!";
-    point.subtitle = @"Welcome to The Ellipse.";
+    [self.view addSubview:_mapView];
     
-    // Add annotation `point` to the map
-    [self.mapView addAnnotation:point];
+    // Set the delegate property of our map view to self after instantiating it
+    _mapView.delegate = self;
+    
+    // Initialize and add the marker annotation
+    MGLPointAnnotation *pisa = [[MGLPointAnnotation alloc] init];
+    pisa.coordinate = CLLocationCoordinate2DMake(43.72305, 10.396633);
+    pisa.title = @"Leaning Tower of Pisa";
+    
+    MGLPointAnnotation *pisa2 = [[MGLPointAnnotation alloc] init];
+    pisa2.coordinate = CLLocationCoordinate2DMake(43.72305, 10.4);
+    pisa2.title = @"Leaning Tower of Pisa2";
+    
+    [_mapView addAnnotations:@[pisa, pisa2]];
+    
+    /*-----------------------------------------------------------------------------------------------------*/
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
+// Allow markers callouts to show when tapped
+- (BOOL)mapView:(MGLMapView *)mapView annotationCanShowCallout:(id <MGLAnnotation>)annotation
+{
+    return YES;
+}
+
 - (void)onCloseButton
 {
-    [self.navigationController dismissViewControllerAnimated:YES completion:nil];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
