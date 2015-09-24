@@ -23,6 +23,9 @@
 
 #import "Mixpanel.h"
 
+#import "NSUserDefaults+RMSaveCustomObject.h"
+#import "SVPlacemark.h"
+
 @interface OutOfDeliveryAddressViewController () <UIWebViewDelegate>
 
 @property (nonatomic, weak) IBOutlet MKMapView *mapView;
@@ -54,6 +57,44 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    SVPlacemark *placeInfo;
+    
+    // check if address was saved
+    if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
+        
+        // if saved, get placeInfo
+        placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+        
+        // set savedAddress string
+        NSString *savedAddress;
+        if (placeInfo.subThoroughfare && placeInfo.thoroughfare) {
+            savedAddress = [NSString stringWithFormat:@"%@ %@", placeInfo.subThoroughfare, placeInfo.thoroughfare];
+        }
+        else if (placeInfo.subThoroughfare) {
+            savedAddress = placeInfo.subThoroughfare;
+        }
+        else if (placeInfo.thoroughfare) {
+            savedAddress = placeInfo.thoroughfare;
+        }
+        else {
+            savedAddress = @"";
+        }
+    
+        // get current mode
+        NSString *currentMode;
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"LunchMode"]) {
+            currentMode = @"lunch";
+        }
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"DinnerMode"]) {
+            currentMode = @"dinner";
+        }
+    
+        // alert user that saved address is unavailable
+        NSString *alertString = [NSString stringWithFormat:@"Service to %@ is currently unavailable for %@.", savedAddress, currentMode];
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        [alertView showInView:self.view];
+    }
 
     self.lblTitle.text = @"Delivery Zone"; // hardcoded instead of [[AppStrings sharedInstance] getString:OUTOFAREA_TITLE]
     self.lblMiddleTitle.text = [[AppStrings sharedInstance] getString:OUTOFAREA_MIDDLE_TITLE];

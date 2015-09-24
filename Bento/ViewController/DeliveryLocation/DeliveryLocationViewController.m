@@ -183,36 +183,6 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
-    
-    NSString *savedAddress;
-    
-    if (self.placeInfo != nil) {
-        if (self.placeInfo.subThoroughfare && self.placeInfo.thoroughfare) {
-            savedAddress = [NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare];
-        }
-        else if (self.placeInfo.subThoroughfare) {
-            savedAddress = self.placeInfo.subThoroughfare;
-        }
-        else if (self.placeInfo.thoroughfare) {
-            savedAddress = self.placeInfo.thoroughfare;
-        }
-        else {
-            savedAddress = @"";
-        }
-    }
-    
-    NSString *currentMode;
-    
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"LunchMode"]) {
-        currentMode = @"lunch";
-    }
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"DinnerMode"]) {
-        currentMode = @"dinner";
-    }
-    
-    NSString *alertString = [NSString stringWithFormat:@"Service to %@ is currently unavailable for %@.", savedAddress, currentMode];
-    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
-    [alertView showInView:self.view];
 
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
