@@ -58,6 +58,13 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    /*-------------------------------------------------------------------------------*/
+    
+    // this screen is ONLY shown if selected address is outside service area
+    // if there is a saved address, show alert. i don't need to check if that saved address is within service area on this screen, because it has already been checked before coming here..
+    // if invalid selected address is different from invalid saved address, then no need to display alert
+    // make sure they match before displaying alert
+    
     SVPlacemark *placeInfo;
     
     // check if address was saved
@@ -66,35 +73,41 @@
         // if saved, get placeInfo
         placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
         
-        // set savedAddress string
-        NSString *savedAddress;
-        if (placeInfo.subThoroughfare && placeInfo.thoroughfare) {
-            savedAddress = [NSString stringWithFormat:@"%@ %@", placeInfo.subThoroughfare, placeInfo.thoroughfare];
+        // if saved address (no longer valid) == selected address (invalid)
+        if ([placeInfo.formattedAddress isEqualToString:self.strAddress]) {
+        
+            // set savedAddress string
+            NSString *savedAddress;
+            if (placeInfo.subThoroughfare && placeInfo.thoroughfare) {
+                savedAddress = [NSString stringWithFormat:@"%@ %@", placeInfo.subThoroughfare, placeInfo.thoroughfare];
+            }
+            else if (placeInfo.subThoroughfare) {
+                savedAddress = placeInfo.subThoroughfare;
+            }
+            else if (placeInfo.thoroughfare) {
+                savedAddress = placeInfo.thoroughfare;
+            }
+            else {
+                savedAddress = @"";
+            }
+        
+            // get current mode
+            NSString *currentMode;
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"LunchMode"]) {
+                currentMode = @"lunch";
+            }
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"DinnerMode"]) {
+                currentMode = @"dinner";
+            }
+        
+            // alert user that saved address is unavailable
+            NSString *alertString = [NSString stringWithFormat:@"Service to %@ is currently unavailable for %@.", savedAddress, currentMode];
+            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:alertString delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+            [alertView showInView:self.view];
         }
-        else if (placeInfo.subThoroughfare) {
-            savedAddress = placeInfo.subThoroughfare;
-        }
-        else if (placeInfo.thoroughfare) {
-            savedAddress = placeInfo.thoroughfare;
-        }
-        else {
-            savedAddress = @"";
-        }
-    
-        // get current mode
-        NSString *currentMode;
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"LunchMode"]) {
-            currentMode = @"lunch";
-        }
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"DinnerMode"]) {
-            currentMode = @"dinner";
-        }
-    
-        // alert user that saved address is unavailable
-        NSString *alertString = [NSString stringWithFormat:@"Service to %@ is currently unavailable for %@.", savedAddress, currentMode];
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:alertString delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
-        [alertView showInView:self.view];
     }
+    
+    /*-------------------------------------------------------------------------------*/
 
     self.lblTitle.text = @"Delivery Zone"; // hardcoded instead of [[AppStrings sharedInstance] getString:OUTOFAREA_TITLE]
     self.lblMiddleTitle.text = [[AppStrings sharedInstance] getString:OUTOFAREA_MIDDLE_TITLE];
