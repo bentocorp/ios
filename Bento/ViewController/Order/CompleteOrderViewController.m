@@ -1140,54 +1140,59 @@
 {
     NSString *strAdd = nil;
     
-    if (placeMark == nil)
+    if (placeMark == nil) {
         return strAdd;
+    }
     
-    if ([placeMark.subThoroughfare length] != 0)
+    if ([placeMark.subThoroughfare length] != 0) {
         strAdd = placeMark.subThoroughfare;
+    }
     
-    if ([placeMark.thoroughfare length] != 0)
-    {
+    if ([placeMark.thoroughfare length] != 0) {
         // strAdd -> store value of current location
-        if ([strAdd length] != 0)
+        if ([strAdd length] != 0) {
             strAdd = [NSString stringWithFormat:@"%@, %@",strAdd,[placeMark thoroughfare]];
-        else
-        {
+        }
+        else {
             // strAdd -> store only this value,which is not null
             strAdd = placeMark.thoroughfare;
         }
     }
     
-    if ([placeMark.postalCode length] != 0)
-    {
-        if ([strAdd length] != 0)
+    if ([placeMark.postalCode length] != 0) {
+        if ([strAdd length] != 0) {
             strAdd = [NSString stringWithFormat:@"%@, %@",strAdd,[placeMark postalCode]];
-        else
+        }
+        else {
             strAdd = placeMark.postalCode;
+        }
     }
     
-    if ([placeMark.locality length] != 0)
-    {
-        if ([strAdd length] != 0)
+    if ([placeMark.locality length] != 0) {
+        if ([strAdd length] != 0) {
             strAdd = [NSString stringWithFormat:@"%@, %@",strAdd,[placeMark locality]];
-        else
+        }
+        else {
             strAdd = placeMark.locality;
+        }
     }
     
-    if ([placeMark.administrativeArea length] != 0)
-    {
-        if ([strAdd length] != 0)
+    if ([placeMark.administrativeArea length] != 0) {
+        if ([strAdd length] != 0) {
             strAdd = [NSString stringWithFormat:@"%@, %@",strAdd,[placeMark administrativeArea]];
-        else
+        }
+        else {
             strAdd = placeMark.administrativeArea;
+        }
     }
     
-    if ([placeMark.country length] != 0)
-    {
-        if ([strAdd length] != 0)
+    if ([placeMark.country length] != 0) {
+        if ([strAdd length] != 0) {
             strAdd = [NSString stringWithFormat:@"%@, %@",strAdd,[placeMark country]];
-        else
+        }
+        else {
             strAdd = placeMark.country;
+        }
     }
     
     return strAdd;

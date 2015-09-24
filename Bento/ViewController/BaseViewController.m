@@ -28,19 +28,18 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void) viewDidAppear:(BOOL)animated
+- (void)viewDidAppear:(BOOL)animated
 {
     [super viewDidAppear:animated];
     
-    if(self.isOpenningAccountView && [[DataManager shareDataManager] getUserInfo] != nil)
-    {
+    if (self.isOpenningAccountView && [[DataManager shareDataManager] getUserInfo] != nil) {
         self.isOpenningAccountView = NO;
         
         [self performSelector:@selector(gotoNextViewController) withObject:nil];
     }
 }
 
-- (void)openAccountViewController:(id) nextViewControllerClass
+- (void)openAccountViewController:(id)nextViewControllerClass
 {
     self.isOpenningAccountView = YES;
     self.nextViewController = nextViewControllerClass;
@@ -55,7 +54,7 @@
     [self.navigationController pushViewController:destVC animated:YES];
 }
 
-- (void) openAccountViewControllerWithComplete:(void (^)())completion
+- (void)openAccountViewControllerWithComplete:(void (^)())completion
 {
     self.isOpenningAccountView = YES;
     
@@ -68,28 +67,23 @@
     [self.navigationController presentViewController:navACcount animated:YES completion:nil];
 }
 
-- (void) gotoNextViewController
+- (void)gotoNextViewController
 {
-    if(self.complete)
-    {
+    if (self.complete) {
         self.complete();
     }
-    else if(self.nextViewController)
-    {
+    else if (self.nextViewController) {
         NSArray *aryViewControllers = self.navigationController.viewControllers;
         
         BOOL found = NO;
-        for (UIViewController *vc in aryViewControllers)
-        {
-            if([vc isKindOfClass:self.nextViewController])
-            {
+        for (UIViewController *vc in aryViewControllers) {
+            if ([vc isKindOfClass:self.nextViewController]) {
                 found = YES;
                 [self.navigationController popToViewController:vc animated:YES];
             }
         }
         
-        if(!found)
-        {
+        if (!found) {
             NSString *classIdentifier = NSStringFromClass(self.nextViewController);
             
             UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

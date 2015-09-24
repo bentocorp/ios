@@ -1027,16 +1027,16 @@
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     
-    // if no user info
+    // logged out
     if (currentUserInfo == nil) {
-        // if no place info
+        // no saved address
         if (placeInfo == nil) {
             [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromHomepage"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
             [self openAccountViewController:[DeliveryLocationViewController class]];
         }
-        // if bento user already has saved address
+        // has saved address
         else {
             // check if saved address is inside CURRENT service area
             CLLocationCoordinate2D location = placeInfo.location.coordinate;
@@ -1051,10 +1051,13 @@
             }
         }
     }
+    // logged in
     else {
+        // no saved address
         if (placeInfo == nil) {
             [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
         }
+        // has saved address
         else {
             // check if saved address is inside CURRENT service area
             CLLocationCoordinate2D location = placeInfo.location.coordinate;

@@ -651,8 +651,9 @@ static BentoShop *_shareInstance;
         }
     }
     
-    if (strPoints == nil)
+    if (strPoints == nil) {
         NSLog(@"WARNING!!! SERVICE AREA strPoints == nil");
+    }
     
     NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
     
