@@ -1616,6 +1616,8 @@
             completion(PKPaymentAuthorizationStatusFailure);
         }
         
+        NSMutableArray *aryNamesOfSoldOutItems = [@[] mutableCopy];
+        
         // Add by Han 2015/03/11 for check Quantity.
         if (error.code == 410) // The inventory is not available.
         {
@@ -1640,15 +1642,24 @@
                 [[NSUserDefaults standardUserDefaults] setObject:arySoldOutItems forKey:@"arySoldOutItems"]; // save arySoldOutItems
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-                for (int i = 0; i < self.aryBentos.count; i++) {
-                    Bento *curBento = [self.aryBentos objectAtIndex:i];
-                    
-                    if ([curBento checkIfItemIsSoldOut:self.aryBentos]) {
-                        
+                //////////////////
+                
+                // get names of sold-out items
+                NSMutableArray *combinedDishes = [[[self getMainDishesArray] arrayByAddingObjectsFromArray:[self getSideDishesArray]] mutableCopy];
+                    NSLog(@"combined dishes - %@", combinedDishes);
+                
+                // loop through combined dishes
+                for (int i = 0; i < combinedDishes.count; i++) {
+                    // loop through arySoldOutItems
+                    for (int k = 0; k < arySoldOutItems.count; k++) {
+                        // get matching items
+                        if ([combinedDishes[i][@"itemId"] isEqualToString:arySoldOutItems[k]]) {
+                            [aryNamesOfSoldOutItems addObject:combinedDishes[i][@"name"]];
+                        }
                     }
                 }
                 
-                
+                /////////////////
             }
         }
         
@@ -1657,12 +1668,96 @@
             strMessage = error.localizedDescription;
         }
         
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:strMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        for (int i = 0; i < aryNamesOfSoldOutItems.count; i++) {
+            strMessage = [NSString stringWithFormat:@"%@\n• %@", strMessage, aryNamesOfSoldOutItems[i]];
+        }
+        
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
         alertView.tag = 888;
         [alertView showInView:self.view];
         alertView = nil;
         
     } isJSON:NO];
+}
+
+- (NSMutableArray *)getMainDishesArray
+{
+    NSMutableArray *mainDishesArray = [@[] mutableCopy];
+    
+    NSString *lunchOrDinnerString;
+    
+    /* IS ALL-DAY */
+    if ([[BentoShop sharedInstance] isAllDay]) {
+        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
+            lunchOrDinnerString = @"todayLunch";
+        }
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
+            lunchOrDinnerString = @"todayDinner";
+        }
+    }
+    
+    /* IS NOT ALL-DAY */
+    else {
+        // 00:00 - 16:29
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+            lunchOrDinnerString = @"todayLunch";
+        }
+        
+        // 16:30 - 23:59
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+            lunchOrDinnerString = @"todayDinner";
+        }
+    }
+    
+    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:lunchOrDinnerString]) {
+        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+        
+        if ([[BentoShop sharedInstance] canAddDish:dishID]) {
+            [mainDishesArray addObject:dishInfo];
+        }
+    }
+    
+    return mainDishesArray;
+}
+
+- (NSMutableArray *)getSideDishesArray
+{
+    NSMutableArray *sideDishesArray = [@[] mutableCopy];
+    
+    NSString *lunchOrDinnerString;
+    
+    /* IS ALL-DAY */
+    if ([[BentoShop sharedInstance] isAllDay]) {
+        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
+            lunchOrDinnerString = @"todayLunch";
+        }
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
+            lunchOrDinnerString = @"todayDinner";
+        }
+    }
+    
+    /* IS NOT ALL-DAY */
+    else {
+        // 00:00 - 16:29
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+            lunchOrDinnerString = @"todayLunch";
+        }
+        
+        // 16:30 - 23:59
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+            lunchOrDinnerString = @"todayDinner";
+        }
+    }
+    
+    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes:lunchOrDinnerString]) {
+        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+        
+        if ([[BentoShop sharedInstance] canAddDish:dishID]) {
+            [sideDishesArray addObject:dishInfo];
+        }
+    }
+    
+    return sideDishesArray;
 }
 
 /* Send card info to Stripe. Stripe returns a one-time token. */
