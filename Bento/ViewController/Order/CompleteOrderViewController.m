@@ -1259,30 +1259,13 @@
     
     cell.lblBentoName.text = [NSString stringWithFormat:@"%@ Bento", [curBento getBentoName]];
     cell.lblBentoName.textColor = [UIColor bentoBrandGreen];
+    cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans" size:14];
     
     // if there is sold out item
     if (arySoldOutItems.count > 0) {
-        
-        // check if any of the sold out items are inside bento
-        for (int i = 0; i < arySoldOutItems.count; i++) {
-            
-            // see if there is sold-out item in current bento
-            NSInteger itemID = [arySoldOutItems[i] integerValue];
-            [curBento checkIfItemIsSoldOut:itemID];
-            
-            
-            // haven't found sold-out item in current bento yet
-            if (![curBento.hasSoldOutItem isEqualToString:@"YES"]) {
-                
-                // see if there is sold-out item in current bento
-                NSInteger itemID = [arySoldOutItems[i] integerValue];
-                [curBento checkIfItemIsSoldOut:itemID];
-            }
-            // once found sold out item
-            else {
-                cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
-                break;
-            }
+        if ([curBento checkIfItemIsSoldOut:arySoldOutItems]) {
+            cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
+            cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
         }
     }
     
@@ -1656,6 +1639,16 @@
                 
                 [[NSUserDefaults standardUserDefaults] setObject:arySoldOutItems forKey:@"arySoldOutItems"]; // save arySoldOutItems
                 [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                for (int i = 0; i < self.aryBentos.count; i++) {
+                    Bento *curBento = [self.aryBentos objectAtIndex:i];
+                    
+                    if ([curBento checkIfItemIsSoldOut:self.aryBentos]) {
+                        
+                    }
+                }
+                
+                
             }
         }
         
