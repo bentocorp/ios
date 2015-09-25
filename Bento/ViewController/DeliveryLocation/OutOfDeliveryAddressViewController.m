@@ -101,7 +101,7 @@
             }
         
             // alert user that saved address is unavailable
-            NSString *alertString = [NSString stringWithFormat:@"%@ service to %@ is currently unavailable.", currentMode, savedAddress];
+            NSString *alertString = [NSString stringWithFormat:@"%@ service to %@ is temporarily unavailable.", currentMode, savedAddress];
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:alertString delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
             [alertView showInView:self.view];
         }

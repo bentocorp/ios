@@ -365,8 +365,9 @@
     self.aryBentos = [[NSMutableArray alloc] init];
     for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++) {
         Bento *bento = [[BentoShop sharedInstance] getBento:index];
-        if ([bento isCompleted])
+        if ([bento isCompleted]) {
             [self.aryBentos addObject:bento];
+        }
     }
     NSLog(@"aryBentos checkout - %@", self.aryBentos);
     
@@ -1256,19 +1257,15 @@
     
     cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
     
-    if(_isEditingBentos)
-    {
-        if(indexPath.row == _clickedMinuteButtonIndex)
-        {
+    if(_isEditingBentos) {
+        if(indexPath.row == _clickedMinuteButtonIndex) {
             [cell setRemoveState];
         }
-        else
-        {
+        else {
             [cell setEditState];
         }
     }
-    else
-    {
+    else {
         [cell setNormalState];
     }
     
@@ -1496,6 +1493,8 @@
     // Platform
     [request setObject:@"iOS" forKey:@"Platform"];
     
+    NSLog(@"BUILD REQUEST - %@", request);
+    
     return request;
 }
 
@@ -1508,10 +1507,12 @@
     }
     
     NSDictionary *request = nil;
-    if (token.tokenId != nil)
+    if (token.tokenId != nil) {
         request = [self buildRequest:token.tokenId];
-    else if ([self getTotalPrice] == 0.0f || [[DataManager shareDataManager] getPaymentMethod] == Payment_Server)
+    }
+    else if ([self getTotalPrice] == 0.0f || [[DataManager shareDataManager] getPaymentMethod] == Payment_Server) {
         request = [self buildRequest:nil];
+    }
     
     NSDictionary *dicRequest = @{@"data" : [request jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
@@ -1585,21 +1586,34 @@
         
         [loadingHUD dismiss];
         
-        if (completion)
+        if (completion) {
             completion(PKPaymentAuthorizationStatusFailure);
+        }
         
         // Add by Han 2015/03/11 for check Quantity.
         if (error.code == 410) // The inventory is not available.
         {
             id menuStatus = [errorOp.responseJSON objectForKey:@"MenuStatus"];
             
-            if ([menuStatus isKindOfClass:[NSArray class]])
+            NSLog(@"menuStatus - %@", menuStatus);
+            
+            if ([menuStatus isKindOfClass:[NSArray class]]) {
                 [[BentoShop sharedInstance] setStatus:menuStatus];
+                
+//                for (int i = 0; i < [menuStatus count]; i++) {
+//                    if ([menuStatus[i][@"qty"] isEqualToString:@"0"]) {
+//                        NSLog(@"0 - %@", menuStatus[i]);
+//                        
+//                        menuStatus[i][@"itemID"];
+//                    }
+//                }
+            }
         }
         
         NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-        if (strMessage == nil)
+        if (strMessage == nil) {
             strMessage = error.localizedDescription;
+        }
         
         MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
         [alertView showInView:self.view];

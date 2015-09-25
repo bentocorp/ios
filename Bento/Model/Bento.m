@@ -256,4 +256,14 @@
     return YES;
 }
 
+- (void)checkIfItemIsSoldOut:(NSInteger)itemID
+{
+    // itemID == sold-out item, if any bento item matches sold out itemID, then return YES
+    self.hasSoldOutItem = (self.indexMainDish == itemID ||
+                           self.indexSideDish1 == itemID ||
+                           self.indexSideDish2 == itemID ||
+                           self.indexSideDish3 == itemID ||
+                           self.indexSideDish4 == itemID);
+}
+
 @end
