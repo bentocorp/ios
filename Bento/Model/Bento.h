@@ -17,8 +17,6 @@
 @property (nonatomic) NSInteger indexSideDish3;
 @property (nonatomic) NSInteger indexSideDish4;
 
-@property (nonatomic) NSString *hasSoldOutItem;
-
 // Testing
 - (NSInteger)getMainDish;
 - (NSInteger)getSideDish1;
@@ -44,6 +42,6 @@
 // Testing
 - (BOOL)canAddSideDish:(NSInteger)sideDishID;
 
-- (void)checkIfItemIsSoldOut:(NSInteger)itemID;
+- (BOOL)checkIfItemIsSoldOut:(NSMutableArray *)itemIds;
 
 @end

@@ -24,8 +24,6 @@
         self.indexSideDish2 = 0;
         self.indexSideDish3 = 0;
         self.indexSideDish4 = 0;
-        
-        self.hasSoldOutItem = @"";
     }
     
     return self;
@@ -258,20 +256,23 @@
     return YES;
 }
 
-- (void)checkIfItemIsSoldOut:(NSInteger)itemID
+- (BOOL)checkIfItemIsSoldOut:(NSMutableArray *)itemIds
 {
-    // itemID == sold-out item, if any bento item matches sold out itemID, then return YES
-    if  (self.indexMainDish == itemID ||
-         self.indexSideDish1 == itemID ||
-         self.indexSideDish2 == itemID ||
-         self.indexSideDish3 == itemID ||
-         self.indexSideDish4 == itemID) {
+    for (int i = 0; i < itemIds.count; i++) {
         
-        self.hasSoldOutItem = @"YES";
+        NSInteger itemId = [itemIds[i] integerValue];
+        
+        if  (self.indexMainDish == itemId ||
+             self.indexSideDish1 == itemId ||
+             self.indexSideDish2 == itemId ||
+             self.indexSideDish3 == itemId ||
+             self.indexSideDish4 == itemId) {
+            
+            return YES; // sold-out item exists in bento
+        }
     }
-    else {
-        self.hasSoldOutItem = @"NO";
-    }
+    
+    return NO; // no sold-out item exists in bento
 }
 
 @end

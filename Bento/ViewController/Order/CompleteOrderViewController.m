@@ -199,7 +199,7 @@
     ////////
     
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"arySoldOutItems"] != nil) {
-        arySoldOutItems = [[NSUserDefaults standardUserDefaults] objectForKey:@"arySoldOutItems"];
+        arySoldOutItems = [[[NSUserDefaults standardUserDefaults] objectForKey:@"arySoldOutItems"] mutableCopy];
     }
     else {
         arySoldOutItems = [[NSMutableArray alloc] init];
@@ -1258,6 +1258,7 @@
     Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
     
     cell.lblBentoName.text = [NSString stringWithFormat:@"%@ Bento", [curBento getBentoName]];
+    cell.lblBentoName.textColor = [UIColor bentoBrandGreen];
     
     // if there is sold out item
     if (arySoldOutItems.count > 0) {
@@ -1265,13 +1266,23 @@
         // check if any of the sold out items are inside bento
         for (int i = 0; i < arySoldOutItems.count; i++) {
             
+            // see if there is sold-out item in current bento
             NSInteger itemID = [arySoldOutItems[i] integerValue];
             [curBento checkIfItemIsSoldOut:itemID];
-        }
-        
-        // if yes, change color to orange
-        if ([curBento.hasSoldOutItem isEqualToString:@"YES"]) {
-            cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
+            
+            
+            // haven't found sold-out item in current bento yet
+            if (![curBento.hasSoldOutItem isEqualToString:@"YES"]) {
+                
+                // see if there is sold-out item in current bento
+                NSInteger itemID = [arySoldOutItems[i] integerValue];
+                [curBento checkIfItemIsSoldOut:itemID];
+            }
+            // once found sold out item
+            else {
+                cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
+                break;
+            }
         }
     }
     
@@ -1346,6 +1357,8 @@
     else {
         [self showStartOverAlert];
     }
+    
+    [self.tvBentos reloadData];
 }
 
 - (void)removeBento
@@ -1629,6 +1642,8 @@
             
             if ([menuStatus isKindOfClass:[NSArray class]]) {
                 [[BentoShop sharedInstance] setStatus:menuStatus];
+                
+                [arySoldOutItems removeAllObjects]; // so itemID's don't keep stacking up in array
                 
                 for (int i = 0; i < [menuStatus count]; i++) {
                     if ([menuStatus[i][@"qty"] isEqualToString:@"0"]) {
