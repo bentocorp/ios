@@ -17,7 +17,7 @@
 @property (nonatomic) NSInteger indexSideDish3;
 @property (nonatomic) NSInteger indexSideDish4;
 
-@property (nonatomic) BOOL hasSoldOutItem;
+@property (nonatomic) NSString *hasSoldOutItem;
 
 // Testing
 - (NSInteger)getMainDish;

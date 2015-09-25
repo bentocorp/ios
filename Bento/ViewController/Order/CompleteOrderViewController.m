@@ -128,6 +128,8 @@
     float deliveryPrice;
     
     BOOL allowCommitOnKeep;
+    
+    NSMutableArray *arySoldOutItems;
 }
 
 - (BOOL)applePayEnabled
@@ -192,6 +194,15 @@
                 [[NSUserDefaults standardUserDefaults] synchronize];
             }
         }
+    }
+    
+    ////////
+    
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"arySoldOutItems"] != nil) {
+        arySoldOutItems = [[NSUserDefaults standardUserDefaults] objectForKey:@"arySoldOutItems"];
+    }
+    else {
+        arySoldOutItems = [[NSMutableArray alloc] init];
     }
 }
 
@@ -1248,12 +1259,30 @@
     
     cell.lblBentoName.text = [NSString stringWithFormat:@"%@ Bento", [curBento getBentoName]];
     
+    // if there is sold out item
+    if (arySoldOutItems.count > 0) {
+        
+        // check if any of the sold out items are inside bento
+        for (int i = 0; i < arySoldOutItems.count; i++) {
+            
+            NSInteger itemID = [arySoldOutItems[i] integerValue];
+            [curBento checkIfItemIsSoldOut:itemID];
+        }
+        
+        // if yes, change color to orange
+        if ([curBento.hasSoldOutItem isEqualToString:@"YES"]) {
+            cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
+        }
+    }
+    
     NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
     NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
-    if (salePrice != 0 && salePrice < unitPrice)
+    if (salePrice != 0 && salePrice < unitPrice) {
         cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)salePrice];
-    else
+    }
+    else {
         cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
+    }
     
     cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
     
@@ -1579,6 +1608,7 @@
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
         [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
+        [userDefaults setObject:nil forKey:@"arySoldOutItems"]; // clear out arySoldOutItems
         
         [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
         
@@ -1600,13 +1630,17 @@
             if ([menuStatus isKindOfClass:[NSArray class]]) {
                 [[BentoShop sharedInstance] setStatus:menuStatus];
                 
-//                for (int i = 0; i < [menuStatus count]; i++) {
-//                    if ([menuStatus[i][@"qty"] isEqualToString:@"0"]) {
-//                        NSLog(@"0 - %@", menuStatus[i]);
-//                        
-//                        menuStatus[i][@"itemID"];
-//                    }
-//                }
+                for (int i = 0; i < [menuStatus count]; i++) {
+                    if ([menuStatus[i][@"qty"] isEqualToString:@"0"]) {
+
+                        [arySoldOutItems addObject:menuStatus[i][@"itemId"]];
+                        
+                        NSLog(@"Sold-out itemID - %@", menuStatus[i][@"itemId"]);
+                    }
+                }
+                
+                [[NSUserDefaults standardUserDefaults] setObject:arySoldOutItems forKey:@"arySoldOutItems"]; // save arySoldOutItems
+                [[NSUserDefaults standardUserDefaults] synchronize];
             }
         }
         
@@ -1615,7 +1649,8 @@
             strMessage = error.localizedDescription;
         }
         
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:strMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        alertView.tag = 888;
         [alertView showInView:self.view];
         alertView = nil;
         
@@ -1833,6 +1868,11 @@
             
             [self updateUI];
         }
+    }
+    
+    // reload tableview if sold out item exists
+    else if (alertView.tag == 888) {
+        [self.tvBentos reloadData];
     }
 }
 
