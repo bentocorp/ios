@@ -1668,6 +1668,7 @@
             strMessage = error.localizedDescription;
         }
         
+        // append name of sold out item to error message
         for (int i = 0; i < aryNamesOfSoldOutItems.count; i++) {
             strMessage = [NSString stringWithFormat:@"%@\n• %@", strMessage, aryNamesOfSoldOutItems[i]];
         }

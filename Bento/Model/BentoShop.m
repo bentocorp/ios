@@ -1317,6 +1317,9 @@ static BentoShop *_shareInstance;
         // reset only if not nil and not empty
         if (self.aryBentos.count) {
             [self.aryBentos removeAllObjects];
+            
+            [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"arySoldOutItems"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
         }
     });
 }
