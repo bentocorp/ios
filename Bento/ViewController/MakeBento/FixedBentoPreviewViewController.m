@@ -133,13 +133,14 @@
 
 - (void)onUpdatedStatus:(NSNotification *)notification
 {
-    if (isThereConnection)
-    {
-        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
-            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+    if (isThereConnection) {
         
-        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
+            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        }
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser]) {
             [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+        }
     }
 }
 
@@ -147,8 +148,7 @@
 {
     isThereConnection = NO;
     
-    if (loadingHUD == nil)
-    {
+    if (loadingHUD == nil) {
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
         [loadingHUD showInView:self.view];
@@ -197,10 +197,12 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (section == 0)
+    if (section == 0) {
         return 1; // 1 main dish
-    else
+    }
+    else {
         return 4; // 4 side dishes
+    }
     
     return 0;
 }
@@ -211,8 +213,9 @@
     
     [cell initView];
     
-    if (indexPath.section == 1)
+    if (indexPath.section == 1) {
         [cell setSmallDishCell];
+    }
     
     // Anything less than iOS 8.0
     if ([[UIDevice currentDevice].systemVersion intValue] < 8)
@@ -226,31 +229,36 @@
             /* IS ALL DAY */
             if ([[BentoShop sharedInstance] isAllDay])
             {
-                if([[BentoShop sharedInstance] isThereLunchMenu])
+                if([[BentoShop sharedInstance] isThereLunchMenu]) {
                     aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-                else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                }
+                else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
                     aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+                }
             }
             
             /* IS NOT ALL DAY */
             else
             {
                 // 00:00 - 16:29
-                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
                     aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-                
+                }
                 // 16:30 - 23:59
-                else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+                else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
                     aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+                }
             }
             
             NSDictionary *dishInfo = [aryMainDishes objectAtIndex:self.fromWhichVC];
             [cell setDishInfo:dishInfo];
             
-            if (_selectedPathMain == indexPath.row)
+            if (_selectedPathMain == indexPath.row) {
                 [cell setCellState:YES];
-            else
+            }
+            else {
                 [cell setCellState:NO];
+            }
             
         }
         else if (indexPath.section == 1) // Side Dish
@@ -260,22 +268,25 @@
             /* IS ALL DAY */
             if ([[BentoShop sharedInstance] isAllDay])
             {
-                if([[BentoShop sharedInstance] isThereLunchMenu])
+                if([[BentoShop sharedInstance] isThereLunchMenu]) {
                     arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-                else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                }
+                else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
                     arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+                }
             }
             
             /* IS NOT ALL DAY */
             else
             {
                 // 00:00 - 16:29
-                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
                     arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-                
+                }
                 // 16:30 - 23:59
-                else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+                else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
                     arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+                }
             }
             
             NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
@@ -297,105 +308,111 @@
 {
     PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
     
-    if (indexPath.section == 0) // Main Dish
-    {
+    if (indexPath.section == 0) { // Main Dish
+
         NSArray *aryMainDishes;
         
         /* IS ALL DAY */
-        if ([[BentoShop sharedInstance] isAllDay])
-        {
-            if([[BentoShop sharedInstance] isThereLunchMenu])
+        if ([[BentoShop sharedInstance] isAllDay]) {
+            
+            if([[BentoShop sharedInstance] isThereLunchMenu]) {
                 aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-            else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            }
+            else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
                 aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            }
         }
         
         /* IS NOT ALL DAY */
-        else
-        {
+        else {
             // 00:00 - 16:29
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
                 aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-            
+            }
             // 16:30 - 23:59
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
                 aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+            }
         }
         
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:self.fromWhichVC];
         [myCell setDishInfo:dishInfo];
         
-        if (_selectedPathMain == indexPath.row)
+        if (_selectedPathMain == indexPath.row) {
             [myCell setCellState:YES];
-        else
+        }
+        else {
             [myCell setCellState:NO];
-        
+        }
     }
-    else if (indexPath.section == 1) // Side Dish
-    {
+    else if (indexPath.section == 1) { // Side Dish
+    
         NSArray *arySideDishes;
         
         /* IS ALL DAY */
-        if ([[BentoShop sharedInstance] isAllDay])
-        {
-            if([[BentoShop sharedInstance] isThereLunchMenu])
+        if ([[BentoShop sharedInstance] isAllDay]) {
+            
+            if([[BentoShop sharedInstance] isThereLunchMenu]) {
                 arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-            else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+            }
+            else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
                 arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+            }
         }
         
         /* IS NOT ALL DAY */
-        else
-        {
+        else {
             // 00:00 - 16:29
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
                 arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+            }
             
             // 16:30 - 23:59
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
                 arySideDishes = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+            }
         }
         
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
         
-        if (_selectedPathSide == indexPath.row)
+        if (_selectedPathSide == indexPath.row) {
             [myCell setCellState:YES];
-        else
+        }
+        else {
             [myCell setCellState:NO];
+        }
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) // Main Dish
+    if (indexPath.section == 0) { // Main Dish
         return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width * 3 / 5);
-    else if (indexPath.section == 1) // Side Dish
+    }
+    else if (indexPath.section == 1) { // Side Dish
         return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
+    }
     
     return CGSizeMake(0, 0);
 }
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0)
-    {
-        if (_selectedPathMain == indexPath.row)
+    if (indexPath.section == 0) {
+        if (_selectedPathMain == indexPath.row) {
             _selectedPathMain = -1;
-        else
-        {
+        }
+        else {
             _selectedPathMain = indexPath.row;
             _selectedPathSide = -1;
         }
     }
-    else
-    {
-        if (_selectedPathSide == indexPath.row)
-        {
+    else {
+        if (_selectedPathSide == indexPath.row) {
             _selectedPathSide = -1;
         }
-        else
-        {
+        else {
             _selectedPathSide = indexPath.row;
             _selectedPathMain = -1;
         }
@@ -411,24 +428,25 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (section == 0 || section == 1)
+    if (section == 0 || section == 1) {
         return CGSizeMake(cvDishes.frame.size.width, 44);
+    }
     
     return CGSizeMake(0, 0);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
 {
-    if ([kind isEqualToString:UICollectionElementKindSectionHeader])
-    {
+    if ([kind isEqualToString:UICollectionElementKindSectionHeader]) {
+        
         UICollectionReusableView *reusableview = [collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
         
-        if (reusableview == nil)
+        if (reusableview == nil) {
             reusableview = [[UICollectionReusableView alloc] initWithFrame:CGRectMake(0, 0, cvDishes.frame.size.width, 44)];
+        }
         
         UILabel *label = (UILabel *)[reusableview viewWithTag:1];
-        if (label == nil)
-        {
+        if (label == nil) {
             label = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, reusableview.frame.size.width, reusableview.frame.size.height)];
             label.tag = 1;
             [reusableview addSubview:label];
@@ -438,10 +456,12 @@
         label.textAlignment = NSTextAlignmentCenter;
         label.font = [UIFont fontWithName:@"OpenSans-Semibold" size:16.0f];
         
-        if (indexPath.section == 0)
+        if (indexPath.section == 0) {
             label.text = @"Main Dish";
-        else if (indexPath.section == 1)
+        }
+        else if (indexPath.section == 1) {
             label.text = @"Side Dishes";
+        }
         
         reusableview.backgroundColor = [UIColor darkGrayColor];
         

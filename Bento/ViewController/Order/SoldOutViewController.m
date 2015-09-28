@@ -244,9 +244,9 @@
     
     NSString *strTitle;
     
-    // CLOSED && 00:00 - 17:29
-    if (self.type == 0 && currentTime >= 0 && currentTime < (dinnerTime + bufferTime))
-    {
+    // CLOSED && 00:00 - 12:29
+    if (self.type == 0 && currentTime >= 0 && currentTime < (lunchTime + bufferTime)) {
+        
         if ([[BentoShop sharedInstance] isThereLunchMenu] || [[BentoShop sharedInstance] isThereDinnerMenu]) {
             strTitle = todayMenuString;
         }
@@ -255,7 +255,21 @@
         }
         else {
             strTitle = noAvailableMenuString;
-            
+            areThereAnyMenus = NO;
+        }
+    }
+    
+    // CLOSED && 12:30 - 17:29
+    else if (self.type == 0 && currentTime >= (lunchTime + bufferTime) && currentTime < (dinnerTime + bufferTime)) {
+        
+        if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
+            strTitle = todayMenuString;
+        }
+        else if ([[BentoShop sharedInstance] isThereLunchNextMenu] || [[BentoShop sharedInstance] isThereDinnerNextMenu]) {
+            strTitle = nextMenuString;
+        }
+        else {
+            strTitle = noAvailableMenuString;
             areThereAnyMenus = NO;
         }
     }
