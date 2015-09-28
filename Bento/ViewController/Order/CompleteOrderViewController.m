@@ -1642,24 +1642,32 @@
                 [[NSUserDefaults standardUserDefaults] setObject:arySoldOutItems forKey:@"arySoldOutItems"]; // save arySoldOutItems
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
-                //////////////////
+                /*---------------------------Get items in order that are sold out---------------------------*/
                 
-                // get names of sold-out items
-                NSMutableArray *combinedDishes = [[[self getMainDishesArray] arrayByAddingObjectsFromArray:[self getSideDishesArray]] mutableCopy];
-                    NSLog(@"combined dishes - %@", combinedDishes);
+                // get order items
+                NSArray *orderItems = request[@"OrderItems"];
                 
-                // loop through combined dishes
-                for (int i = 0; i < combinedDishes.count; i++) {
-                    // loop through arySoldOutItems
-                    for (int k = 0; k < arySoldOutItems.count; k++) {
-                        // get matching items
-                        if ([combinedDishes[i][@"itemId"] isEqualToString:arySoldOutItems[k]]) {
-                            [aryNamesOfSoldOutItems addObject:combinedDishes[i][@"name"]];
+                // loop through order items, each index is an individual bento
+                for (int index = 0; index < orderItems.count; index++) {
+                    
+                    // get list of all items within current bento
+                    NSArray *items = request[@"OrderItems"][index][@"items"];
+                    
+                    // loop through items within current bento
+                    for (int i = 0; i < items.count; i++) {
+                        
+                        NSLog(@"orderItems - %ld", [items[i][@"id"] integerValue]);
+                        
+                        // check if current item is sold out
+                        if ([[BentoShop sharedInstance] isDishSoldOut:[items[i][@"id"] integerValue]]) {
+                            
+                            // if current item is sold out, add to aryNamesOfSoldOutItems to be appended to error message below
+                            [aryNamesOfSoldOutItems addObject:items[i][@"name"]];
                         }
                     }
                 }
                 
-                /////////////////
+                /*------------------------------------------------------*/
             }
         }
         
@@ -1679,86 +1687,6 @@
         alertView = nil;
         
     } isJSON:NO];
-}
-
-- (NSMutableArray *)getMainDishesArray
-{
-    NSMutableArray *mainDishesArray = [@[] mutableCopy];
-    
-    NSString *lunchOrDinnerString;
-    
-    /* IS ALL-DAY */
-    if ([[BentoShop sharedInstance] isAllDay]) {
-        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
-            lunchOrDinnerString = @"todayLunch";
-        }
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
-            lunchOrDinnerString = @"todayDinner";
-        }
-    }
-    
-    /* IS NOT ALL-DAY */
-    else {
-        // 00:00 - 16:29
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-            lunchOrDinnerString = @"todayLunch";
-        }
-        
-        // 16:30 - 23:59
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-            lunchOrDinnerString = @"todayDinner";
-        }
-    }
-    
-    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:lunchOrDinnerString]) {
-        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-        
-        if ([[BentoShop sharedInstance] canAddDish:dishID]) {
-            [mainDishesArray addObject:dishInfo];
-        }
-    }
-    
-    return mainDishesArray;
-}
-
-- (NSMutableArray *)getSideDishesArray
-{
-    NSMutableArray *sideDishesArray = [@[] mutableCopy];
-    
-    NSString *lunchOrDinnerString;
-    
-    /* IS ALL-DAY */
-    if ([[BentoShop sharedInstance] isAllDay]) {
-        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
-            lunchOrDinnerString = @"todayLunch";
-        }
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
-            lunchOrDinnerString = @"todayDinner";
-        }
-    }
-    
-    /* IS NOT ALL-DAY */
-    else {
-        // 00:00 - 16:29
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-            lunchOrDinnerString = @"todayLunch";
-        }
-        
-        // 16:30 - 23:59
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-            lunchOrDinnerString = @"todayDinner";
-        }
-    }
-    
-    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes:lunchOrDinnerString]) {
-        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-        
-        if ([[BentoShop sharedInstance] canAddDish:dishID]) {
-            [sideDishesArray addObject:dishInfo];
-        }
-    }
-    
-    return sideDishesArray;
 }
 
 /* Send card info to Stripe. Stripe returns a one-time token. */

@@ -86,7 +86,7 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
@@ -139,22 +139,6 @@
             continueAfterRunningActions = "No"
             scope = "0"
             stopOnStyle = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "464921931.076689"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1650"
-            endingLineNumber = "1650"
-            landmarkName = "-createBackendChargeWithToken:completion:"
-            landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -234,22 +218,6 @@
             startingLineNumber = "262"
             endingLineNumber = "262"
             landmarkName = "-checkIfItemIsSoldOut:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "464921931.076689"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1661"
-            endingLineNumber = "1661"
-            landmarkName = "-createBackendChargeWithToken:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -442,6 +410,102 @@
             startingLineNumber = "547"
             endingLineNumber = "547"
             landmarkName = "-reqFacebookUserInfo"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "465173458.033667"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "1683"
+            endingLineNumber = "1683"
+            landmarkName = "-createBackendChargeWithToken:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "465172797.664988"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "894"
+            endingLineNumber = "894"
+            landmarkName = "-isDishSoldOut:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "465172798.72604"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "897"
+            endingLineNumber = "897"
+            landmarkName = "-isDishSoldOut:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "465172804.419258"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "920"
+            endingLineNumber = "920"
+            landmarkName = "-isDishSoldOut:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "465172805.960536"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "916"
+            endingLineNumber = "916"
+            landmarkName = "-isDishSoldOut:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "465172806.721206"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "914"
+            endingLineNumber = "914"
+            landmarkName = "-isDishSoldOut:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
