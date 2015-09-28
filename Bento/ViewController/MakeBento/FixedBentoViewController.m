@@ -781,7 +781,7 @@
 {
     // Track began add a bento
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Began Registration" properties:nil];
+    [mixpanel track:@"Began Building A Bento" properties:nil];
     NSLog(@"BEGAN BUILDING A BENTO");
     
     // animate badge
