@@ -60,6 +60,10 @@
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tel:1-415-300-1332</string>
+		<string>fbapi</string>
+		<string>fb-messenger-api</string>
+		<string>fbauth2</string>
+		<string>fbshareextension</string>
 	</array>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
@@ -69,28 +73,32 @@
 	<dict>
 		<key>NSAllowsArbitraryLoads</key>
 		<true/>
+		<key>NSExceptionDomains</key>
+		<dict>
+			<key>facebook.com</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+			<key>fbcdn.net</key>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
+			<key>akamaihd.net</key>
+			<dict/>
+			<key>NSIncludesSubdomains</key>
+			<true/>
+			<key>NSExceptionRequiresForwardSecrecy</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>Bento needs your zip code to check your delivery area</string>
-	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Bento needs your zip code to check your delivery area</string>
-	<key>UIAppFonts</key>
-	<array>
-		<string>ss-social-regular.ttf</string>
-		<string>ss-social-circle.ttf</string>
-		<string>ss-air.ttf</string>
-		<string>ss-standard.ttf</string>
-		<string>OpenSans-Bold.ttf</string>
-		<string>OpenSans-BoldItalic.ttf</string>
-		<string>OpenSans-ExtraBold.ttf</string>
-		<string>OpenSans-ExtraBoldItalic.ttf</string>
-		<string>OpenSans-Italic.ttf</string>
-		<string>OpenSans-Light.ttf</string>
-		<string>OpenSans-LightItalic.ttf</string>
-		<string>OpenSans-Regular.ttf</string>
-		<string>OpenSans-Semibold.ttf</string>
-		<string>OpenSans-SemiboldItalic.ttf</string>
-	</array>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
