@@ -1616,7 +1616,10 @@
             completion(PKPaymentAuthorizationStatusFailure);
         }
         
+        /*--for listing sold out items--*/
         NSMutableArray *aryNamesOfSoldOutItems = [@[] mutableCopy];
+        NSMutableArray *aryFilteredDuplicateNamesOfSoldOutItems = [@[] mutableCopy];
+        /*------------------------------*/
         
         // Add by Han 2015/03/11 for check Quantity.
         if (error.code == 410) // The inventory is not available.
@@ -1667,7 +1670,13 @@
                     }
                 }
                 
-                /*------------------------------------------------------*/
+                // filter our duplicate values in aryNamesOfSoldOutItems
+                [aryFilteredDuplicateNamesOfSoldOutItems addObjectsFromArray:[[NSSet setWithArray:aryNamesOfSoldOutItems] allObjects]];
+                
+                // sort array alphabetically
+                [aryFilteredDuplicateNamesOfSoldOutItems sortUsingSelector:@selector(localizedCaseInsensitiveCompare:)];
+                
+                /*----------------------------------------------------------------------------------------*/
             }
         }
         
@@ -1677,8 +1686,8 @@
         }
         
         // append name of sold out item to error message
-        for (int i = 0; i < aryNamesOfSoldOutItems.count; i++) {
-            strMessage = [NSString stringWithFormat:@"%@\n• %@", strMessage, aryNamesOfSoldOutItems[i]];
+        for (int i = 0; i < aryFilteredDuplicateNamesOfSoldOutItems.count; i++) {
+            strMessage = [NSString stringWithFormat:@"%@\n• %@", strMessage, aryFilteredDuplicateNamesOfSoldOutItems[i]];
         }
         
         MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
