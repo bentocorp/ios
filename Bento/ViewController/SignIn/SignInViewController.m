@@ -542,7 +542,17 @@
                  
                  [loadingHUD dismiss];
                  
-                 if (error.code == 403 || error.code == 404) {
+                 // if bad fb_token token (according to docs)
+                 if (error.code == 403) {
+                     [[BentoShop sharedInstance] setSignInStatus:NO];
+                     
+                     MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"An error occured while trying to connect to Facebook." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+                     [alertView showInView:self.view];
+                     alertView = nil;
+                     return;
+                 }
+                 // if email not found (...in database?) (according to docs)
+                 else if (error.code == 404) {
                      [[BentoShop sharedInstance] setSignInStatus:NO];
                      
                      // this really isn't used, since i'm only checking for Register
@@ -552,6 +562,7 @@
                      [self gotoPhoneNumberScreen:user];
                      return;
                  }
+                 //
                  else {
                      NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
                      if (strMessage == nil) {

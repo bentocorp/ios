@@ -61,9 +61,9 @@
 		<true/>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>
-	<string>Bento needs your zipcode to check your delivery area</string>
+	<string>Bento needs your zip code to check your delivery area</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Bento would like to use your location</string>
+	<string>Bento needs your zip code to check your delivery area</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>ss-air.ttf</string>
