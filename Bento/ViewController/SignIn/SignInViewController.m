@@ -504,15 +504,16 @@
         
         [login logInWithReadPermissions:@[@"public_profile", @"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
             
-            NSLog(@"token - %@", result.token.appID);
+            NSLog(@"token - %@", result.token.tokenString);
             NSLog(@"error - %@", error);
             
             NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-            [parameters setValue:@"id,name,email" forKey:@"fields"];
+            [parameters setValue:@"first_name, last_name, email, id, picture, gender, age_range" forKey:@"fields"];
             
             [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters]
              startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-                 NSLog(@"result - %@, error - %@", result, error);
+                 
+                 NSLog(@"result - %@", result);
              }];
             
 //            if (error == nil) {
