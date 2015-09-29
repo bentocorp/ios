@@ -492,6 +492,8 @@
     
     if ([FBSDKAccessToken currentAccessToken]) {
         // TODO:Token is already available.
+        
+        NSLog(@"token is already available");
     }
     
     if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
@@ -507,133 +509,157 @@
             NSLog(@"token - %@", result.token.tokenString);
             NSLog(@"error - %@", error);
             
-            NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
-            [parameters setValue:@"first_name, last_name, email, id, picture, gender, age_range" forKey:@"fields"];
+            NSString *strAccessToken = result.token.tokenString;
             
-            [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters]
-             startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
-                 
-                 NSLog(@"result - %@", result);
-             }];
-            
-//            if (error == nil) {
-//                
-//                if ([result.declinedPermissions containsObject:@"publish_actions"]) {
-//                    // do not request permissions again immediately. Consider providing a NUX describing why the app want this permission
-//                    [loadingHUD dismiss];
-//                    
-//                    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@""
-//                                                                        message:@"Error! We need your email to submit your order. We promise, no spam! Do you want to try again?"
-//                                                                       delegate:self
-//                                                              cancelButtonTitle:@"NO"
-//                                                               otherButtonTitle:@"YES"];
-//                    [alertView showInView:self.view];
-//                    alertView = nil;
-//                    
-//                    return;
-//                }
-//                else {
-//                    
-//                    if (result.isCancelled) {
-//                        NSLog(@"Cancelled");
-//                    }
-//                    else {
-//                        NSLog(@"Logged in");
-//                        
-//                        NSString *strAccessToken = result.token.tokenString;
-//            
-//                        NSDictionary* loginInfo = @{
-//                                                    @"email": strMailAddr,
-//                                                    @"fb_token": strAccessToken
-//                                                    };
-//            
-//                        NSDictionary *dicRequest = @{
-//                                                     @"data":[loginInfo jsonEncodedKeyValueString]
-//                                                     };
-//            
-//                         NSLog(@"Facebook login dictRequest - %@", dicRequest);
-//            
-//                         WebManager *webManager = [[WebManager alloc] init];
-//            
-//                         NSString *strRequest = [NSString stringWithFormat:@"%@/user/fblogin", SERVER_URL];
-//                         [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
-//                             [loadingHUD dismiss];
-//            
-//                             NSDictionary *response = networkOperation.responseJSON;
-//                             [[DataManager shareDataManager] setUserInfo:response];
-//            
-//                             NSLog(@"/user/fblogin response - %@", response);
-//            
-//                             NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
-//                             [pref setObject:strRequest forKey:@"apiName"];
-//                             [pref setObject:dicRequest forKey:@"loginRequest"];
-//                             [pref setObject:nil forKey:@"new_phone_number"];
-//                             [pref synchronize];
-//            
-//                             [self trackLogin:strMailAddr responseJSON:response];
-//                             [self showErrorMessage:nil code:ERROR_NONE];
-//                             [self gotoDeliveryLocationScreen];
-//            
-//                         } failure:^(MKNetworkOperation *errorOp, NSError *error) {
-//            
-//                             [loadingHUD dismiss];
-//            
-//                             // if bad fb_token token (according to docs)
-//                             if (error.code == 403) {
-//                                 [[BentoShop sharedInstance] setSignInStatus:NO];
-//            
-//                                 MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"An error occured while trying to connect to Facebook." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-//                                 [alertView showInView:self.view];
-//                                 alertView = nil;
-//                                 return;
-//                             }
-//                             // if email not found (...in database?) (according to docs)
-//                             else if (error.code == 404) {
-//                                 [[BentoShop sharedInstance] setSignInStatus:NO];
-//                                 
-//                                 // this really isn't used, since i'm only checking for Register
-//                                 [[NSUserDefaults standardUserDefaults] setObject:@"SignIn" forKey:@"RegisterOrSignIn"];
-//                                 [[NSUserDefaults standardUserDefaults] synchronize];
-//                                 
-//                                 [self gotoPhoneNumberScreen:user];
-//                                 return;
-//                             }
-//                             //
-//                             else {
-//                                 NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-//                                 if (strMessage == nil) {
-//                                     strMessage = error.localizedDescription;
-//                                 }
-//                                 
-//                                 MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@""
-//                                                                                     message:strMessage
-//                                                                                    delegate:nil
-//                                                                           cancelButtonTitle:@"OK"
-//                                                                            otherButtonTitle:nil];
-//                                 [alertView showInView:self.view];
-//                                 alertView = nil;
-//                                 return;
-//                             }
-//                             
-//                         } isJSON:NO];
-//                    }
-//                }
-//            }
-//            else {
-//                NSLog(@"Process error");
-//                
-//                [loadingHUD dismiss];
-//
-//                MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error"
-//                                                                    message:error.debugDescription
-//                                                                   delegate:nil
-//                                                          cancelButtonTitle:@"OK"
-//                                                           otherButtonTitle:nil];
-//                [alertView showInView:self.view];
-//                alertView = nil;
-//                
-//                return;
-//            }
+            if (error == nil) {
+                
+                // how to test declined permissions? should this
+                if ([result.declinedPermissions containsObject:@"publish_actions"]) {
+                    // do not request permissions again immediately. Consider providing a NUX describing why the app want this permission
+                    [loadingHUD dismiss];
+                    
+                    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@""
+                                                                        message:@"Error! We need your email to submit your order. We promise, no spam! Do you want to try again?"
+                                                                       delegate:self
+                                                              cancelButtonTitle:@"NO"
+                                                               otherButtonTitle:@"YES"];
+                    [alertView showInView:self.view];
+                    alertView = nil;
+                    
+                    return;
+                }
+                else {
+                    if (result.isCancelled) {
+                        NSLog(@"Cancelled");
+                    }
+                    else {
+                        
+                        NSLog(@"Logged in");
+                        
+                        // call graph api once logged in
+                        NSMutableDictionary* parameters = [NSMutableDictionary dictionary];
+                        [parameters setValue:@"first_name, last_name, email, id, picture, gender, age_range" forKey:@"fields"];
+                        
+                        [[[FBSDKGraphRequest alloc] initWithGraphPath:@"me" parameters:parameters]
+                         startWithCompletionHandler:^(FBSDKGraphRequestConnection *connection, id result, NSError *error) {
+                             
+                             NSDictionary *graphAPIResults = result;
+                             NSLog(@"result - %@", graphAPIResults);
+                             
+                             NSString *strFirstName = graphAPIResults[@"first_name"];
+                             NSString *strLastName = graphAPIResults[@"last_name"];
+                             NSString *strEmail = graphAPIResults[@"email"];
+                             NSString *strId = graphAPIResults[@"id"];
+                             NSString *strPhotoURL = graphAPIResults[@"picture"][@"data"][@"url"]; // might want to test no URL
+                             NSString *strGender = graphAPIResults[@"gender"];
+                             NSDictionary *dictAgeRange = graphAPIResults[@"age_range"];
+                             
+                             NSDictionary *dictUserInfo = @{
+                                                        @"firstname" : strFirstName,
+                                                        @"lastname" : strLastName,
+                                                        @"email" : strEmail,
+                                                        @"fb_id" : strId,
+                                                        @"fb_profile_pic" : strPhotoURL,
+                                                        @"fb_gender" : strGender,
+                                                        @"fb_age_range" : dictAgeRange,
+                                                        @"fb_token" : strAccessToken,
+                                                        };
+                             
+                             NSLog(@"user info - %@", dictUserInfo);
+                             
+                             NSDictionary* loginInfo = @{
+                                                         @"email": strEmail,
+                                                         @"fb_token": strAccessToken
+                                                         };
+                             
+                             NSDictionary *dicRequest = @{
+                                                          @"data":[loginInfo jsonEncodedKeyValueString]
+                                                          };
+                             
+                             NSLog(@"Facebook login dictRequest - %@", dicRequest);
+                             
+                             WebManager *webManager = [[WebManager alloc] init];
+                             
+                             NSString *strRequest = [NSString stringWithFormat:@"%@/user/fblogin", SERVER_URL];
+                             [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
+                                 [loadingHUD dismiss];
+                                 
+                                 NSDictionary *response = networkOperation.responseJSON;
+                                 [[DataManager shareDataManager] setUserInfo:response];
+                                 
+                                 NSLog(@"/user/fblogin response - %@", response);
+                                 
+                                 NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
+                                 [pref setObject:strRequest forKey:@"apiName"];
+                                 [pref setObject:dicRequest forKey:@"loginRequest"];
+                                 [pref setObject:nil forKey:@"new_phone_number"];
+                                 [pref synchronize];
+                                 
+                                 [self trackLogin:strEmail responseJSON:response];
+                                 [self showErrorMessage:nil code:ERROR_NONE];
+                                 [self gotoDeliveryLocationScreen];
+                                 
+                             } failure:^(MKNetworkOperation *errorOp, NSError *error) {
+                                 
+                                 [loadingHUD dismiss];
+                                 
+                                 // if bad fb_token token (according to docs)
+                                 if (error.code == 403) {
+                                     [[BentoShop sharedInstance] setSignInStatus:NO];
+                                     
+                                     MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"An error occured while trying to connect to Facebook." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+                                     [alertView showInView:self.view];
+                                     alertView = nil;
+                                     return;
+                                 }
+                                 // if email not found (...in database?) (according to docs)
+                                 else if (error.code == 404) {
+                                     [[BentoShop sharedInstance] setSignInStatus:NO];
+                                     
+                                     // this really isn't used, since i'm only checking for Register
+                                     [[NSUserDefaults standardUserDefaults] setObject:@"SignIn" forKey:@"RegisterOrSignIn"];
+                                     [[NSUserDefaults standardUserDefaults] synchronize];
+                                     
+                                     [self gotoPhoneNumberScreen:dictUserInfo];
+                                     return;
+                                 }
+                                 //
+                                 else {
+                                     NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
+                                     if (strMessage == nil) {
+                                         strMessage = error.localizedDescription;
+                                     }
+                                     
+                                     MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@""
+                                                                                         message:strMessage
+                                                                                        delegate:nil
+                                                                               cancelButtonTitle:@"OK"
+                                                                                otherButtonTitle:nil];
+                                     [alertView showInView:self.view];
+                                     alertView = nil;
+                                     return;
+                                 }
+                                 
+                             } isJSON:NO];
+                        }];
+                    }
+                }
+            }
+            else {
+                NSLog(@"Process error");
+                
+                [loadingHUD dismiss];
+
+                MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error"
+                                                                    message:error.debugDescription
+                                                                   delegate:nil
+                                                          cancelButtonTitle:@"OK"
+                                                           otherButtonTitle:nil];
+                [alertView showInView:self.view];
+                alertView = nil;
+                
+                return;
+            }
         }];
     }
     
@@ -766,10 +792,10 @@
     [self doSignInWithFacebook:NO];
 }
 
-//- (void) gotoPhoneNumberScreen:(NSDictionary<FBGraphUser> *)userInfo
-//{
-//    [self performSegueWithIdentifier:@"PhoneNumber" sender:userInfo];
-//}
+- (void)gotoPhoneNumberScreen:(NSDictionary *)userInfo
+{
+    [self performSegueWithIdentifier:@"PhoneNumber" sender:userInfo];
+}
 
 - (IBAction)onTextChanged:(id)sender
 {

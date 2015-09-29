@@ -17,7 +17,6 @@
 #import "AppStrings.h"
 #import "WebManager.h"
 #import "DataManager.h"
-#import "FacebookManager.h"
 
 #import "BentoShop.h"
 #import "Mixpanel.h"
@@ -299,28 +298,27 @@
 
 - (void)processRegister
 {
-    NSString *strMailAddr = [self.userInfo valueForKey:@"email"];
-    NSString *strFirstName = [self.userInfo valueForKey:@"first_name"];
-    NSString *strLastName = [self.userInfo valueForKey:@"last_name"];
-    NSString *strFBID = [self.userInfo valueForKey:@"id"];
-//    NSString *strUserName = [self.userInfo valueForKey:@"name"];
-    NSString *strGender = [self.userInfo valueForKey:@"gender"];
-    NSString *strPhotoURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", strFBID];
+    NSString *strFirstName = self.userInfo[@"first_name"];
+    NSString *strLastName = self.userInfo[@"last_name"];
+    NSString *strMailAddr = self.userInfo[@"email"];
+    NSString *strId = self.userInfo[@"id"];
+    NSString *strGender = self.userInfo[@"gender"];
+    NSString *strPhotoURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", strId];
     NSString *strPhoneNumber = self.txtPhoneNumber.text;
-    NSString *strAccessToken = [[[FBSession activeSession] accessTokenData] accessToken];
+    NSString *strAccessToken = self.userInfo[@"strAccessToken"];
     
-    NSString *strAgeRange = @"";
-    NSDictionary *ageRangeDict = [[FacebookManager sharedInstance].userDetails objectForKey:@"age_range"];
-    if (ageRangeDict != nil)
+    NSString *strAgeRange;
+    NSDictionary *dictAgeRange = self.userInfo[@"dictAgeRange"];
+    if (dictAgeRange != nil)
     {
-        if ([ageRangeDict objectForKey:@"min"] != nil && [ageRangeDict objectForKey:@"max"] != nil) {
-            strAgeRange = [NSString stringWithFormat:@"%@-%@", [ageRangeDict objectForKey:@"min"], [ageRangeDict objectForKey:@"max"]];
+        if ([dictAgeRange objectForKey:@"min"] != nil && [dictAgeRange objectForKey:@"max"] != nil) {
+            strAgeRange = [NSString stringWithFormat:@"%@-%@", [dictAgeRange objectForKey:@"min"], [dictAgeRange objectForKey:@"max"]];
         }
-        else if ([ageRangeDict objectForKey:@"min"] != nil) {
-            strAgeRange = [NSString stringWithFormat:@"%@+", [ageRangeDict objectForKey:@"min"]];
+        else if ([dictAgeRange objectForKey:@"min"] != nil) {
+            strAgeRange = [NSString stringWithFormat:@"%@+", [dictAgeRange objectForKey:@"min"]];
         }
-        else if ([ageRangeDict objectForKey:@"max"] != nil) {
-            strAgeRange = [NSString stringWithFormat:@"-%@", [ageRangeDict objectForKey:@"max"]];
+        else if ([dictAgeRange objectForKey:@"max"] != nil) {
+            strAgeRange = [NSString stringWithFormat:@"-%@", [dictAgeRange objectForKey:@"max"]];
         }
         else {
             strAgeRange = @"";
@@ -335,7 +333,7 @@
                               @"lastname" : strLastName,
                               @"email" : strMailAddr,
                               @"phone" : strPhoneNumber,
-                              @"fb_id" : strFBID,
+                              @"fb_id" : strId,
                               @"fb_profile_pic" : strPhotoURL,
                               @"fb_gender" : strGender,
                               @"fb_age_range" : strAgeRange,
@@ -375,7 +373,7 @@
         
         NSDictionary *fbloginRequest = @{
                                          @"email" : strMailAddr,
-                                         @"fb_id" : strFBID,
+                                         @"fb_id" : strId,
                                          @"fb_token" : strAccessToken,
                                        };
         
