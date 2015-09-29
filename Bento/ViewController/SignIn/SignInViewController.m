@@ -222,45 +222,6 @@
     }
 }
 
-- (void) willShowKeyboard:(NSNotification*)notification
-{
-    NSDictionary* keyboardInfo = [notification userInfo];
-    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
-    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
-    
-    [self collapseScrollView:keyboardFrameBeginRect.size.height];
-}
-
-- (void) willChangeKeyboardFrame:(NSNotification *)notification
-{
-    NSDictionary* keyboardInfo = [notification userInfo];
-    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
-    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
-    
-    [self collapseScrollView:keyboardFrameBeginRect.size.height];
-}
-
-- (void) willHideKeyboard:(NSNotification *)notification
-{
-    [self expandScrollView];
-}
-
-- (void) collapseScrollView:(float)keyboardHeight
-{
-    self.svMain.frame = CGRectMake(self.svMain.frame.origin.x, self.svMain.frame.origin.y, self.svMain.frame.size.width, self.view.frame.size.height - self.svMain.frame.origin.y - keyboardHeight);
-}
-
-- (void) expandScrollView
-{
-    self.svMain.frame = CGRectMake(self.svMain.frame.origin.x, self.svMain.frame.origin.y, self.svMain.frame.size.width, self.view.frame.size.height - self.svMain.frame.origin.y);
-}
-
-- (void)hideKeyboard
-{
-    [self.txtEmail resignFirstResponder];
-    [self.txtPassword resignFirstResponder];
-}
-
 - (void)showErrorMessage:(NSString *)errorMsg code:(int)errorCode
 {
     if (errorMsg == nil || errorMsg.length == 0)
@@ -461,16 +422,6 @@
     [self doSignin];
 }
 
-- (IBAction)onForgot:(id)sender
-{
-    NSURL *urlReset = [[AppStrings sharedInstance] getURL:SIGNIN_LINK_RESET];
-    if (urlReset != nil && [[UIApplication sharedApplication] canOpenURL:urlReset]) {
-        [[UIApplication sharedApplication] openURL:urlReset];
-    }
-    
-    [[Mixpanel sharedInstance] track:@"Tapped On Forgot Password"];
-}
-
 - (void)reqFacebookUserInfo
 {
     loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
@@ -484,7 +435,7 @@
 //    }
 
 //    if ([[FBSDKAccessToken currentAccessToken] hasGranted:@"publish_actions"]) {
-//        // TODO: publish content
+//        // publish content
 //        
 //        NSLog(@"has granted");
 //    }
@@ -617,7 +568,8 @@
                              alertView = nil;
                              return;
                          }
-                         // if email not found (according to docs)...i think this means not founf in DB
+                         // if email not found (according to docs)...i think this means not found in DB
+                         // NOT REGISTERED BENTO USER, GO TO PHONE NUMBER SCREEN TO REGISTER USING FB INFO AND ENTERED PHONE NUMBER FROM NEXT SCREEN
                          else if (error.code == 404) {
                              [[BentoShop sharedInstance] setSignInStatus:NO];
                              
@@ -739,6 +691,45 @@
     return YES;
 }
 
+- (void)willShowKeyboard:(NSNotification*)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    
+    [self collapseScrollView:keyboardFrameBeginRect.size.height];
+}
+
+- (void)willChangeKeyboardFrame:(NSNotification *)notification
+{
+    NSDictionary* keyboardInfo = [notification userInfo];
+    NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
+    CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
+    
+    [self collapseScrollView:keyboardFrameBeginRect.size.height];
+}
+
+- (void)willHideKeyboard:(NSNotification *)notification
+{
+    [self expandScrollView];
+}
+
+- (void)collapseScrollView:(float)keyboardHeight
+{
+    self.svMain.frame = CGRectMake(self.svMain.frame.origin.x, self.svMain.frame.origin.y, self.svMain.frame.size.width, self.view.frame.size.height - self.svMain.frame.origin.y - keyboardHeight);
+}
+
+- (void)expandScrollView
+{
+    self.svMain.frame = CGRectMake(self.svMain.frame.origin.x, self.svMain.frame.origin.y, self.svMain.frame.size.width, self.view.frame.size.height - self.svMain.frame.origin.y);
+}
+
+- (void)hideKeyboard
+{
+    [self.txtEmail resignFirstResponder];
+    [self.txtPassword resignFirstResponder];
+}
+
 -(void)dismissKeyboard
 {
     [self.txtEmail endEditing:YES];
@@ -778,6 +769,16 @@
 {
     [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
     [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
+}
+
+- (IBAction)onForgot:(id)sender
+{
+    NSURL *urlReset = [[AppStrings sharedInstance] getURL:SIGNIN_LINK_RESET];
+    if (urlReset != nil && [[UIApplication sharedApplication] canOpenURL:urlReset]) {
+        [[UIApplication sharedApplication] openURL:urlReset];
+    }
+    
+    [[Mixpanel sharedInstance] track:@"Tapped On Forgot Password"];
 }
 
 
