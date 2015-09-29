@@ -27,7 +27,6 @@
 		7216B70A1AA64C7C0006FFE9 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7A81A5D81C300D034CF /* RegisterViewController.m */; };
 		7216B70B1AA64C7C0006FFE9 /* STPTestDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333EE1A72C133006C2446 /* STPTestDataTableViewController.m */; };
 		7216B70C1AA64C7C0006FFE9 /* JGProgressHUDRingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333571A6D4058006C2446 /* JGProgressHUDRingIndicatorView.m */; };
-		7216B70D1AA64C7C0006FFE9 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333031A6C0F5C006C2446 /* FacebookManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB491A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m */; };
 		7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223334B1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m */; };
 		7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 723BD40C1A8DD831000AD4F1 /* FXBlurView.m */; };
@@ -163,7 +162,6 @@
 		722332E31A6BC7DE006C2446 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E21A6BC7DE006C2446 /* Foundation.framework */; };
 		722332E51A6BC7E6006C2446 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E41A6BC7E6006C2446 /* Security.framework */; };
 		722332E81A6BDEEF006C2446 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */; };
-		722333041A6C0F5C006C2446 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333031A6C0F5C006C2446 /* FacebookManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		722333421A6C1B2E006C2446 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333411A6C1B2E006C2446 /* libz.dylib */; };
 		7223335A1A6D4058006C2446 /* JGProgressHUD Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 722333451A6D4058006C2446 /* JGProgressHUD Resources.bundle */; };
 		7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333471A6D4058006C2446 /* JGProgressHUD.m */; };
@@ -288,6 +286,38 @@
 		FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
+		FC1D61541BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60601BBA0C0A0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset */; settings = {ASSET_TAGS = (); }; };
+		FC1D61551BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60601BBA0C0A0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset */; settings = {ASSET_TAGS = (); }; };
+		FC1D61561BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60601BBA0C0A0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset */; settings = {ASSET_TAGS = (); }; };
+		FC1D61571BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60611BBA0C0A0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset */; settings = {ASSET_TAGS = (); }; };
+		FC1D61581BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60611BBA0C0A0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset */; settings = {ASSET_TAGS = (); }; };
+		FC1D61591BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60611BBA0C0A0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset */; settings = {ASSET_TAGS = (); }; };
+		FC1D615A1BBA0C0B0012FFB3 /* FacebookSDK-4_6-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60621BBA0C0A0012FFB3 /* FacebookSDK-4_6-for-iOS.docset */; settings = {ASSET_TAGS = (); }; };
+		FC1D615B1BBA0C0B0012FFB3 /* FacebookSDK-4_6-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60621BBA0C0A0012FFB3 /* FacebookSDK-4_6-for-iOS.docset */; settings = {ASSET_TAGS = (); }; };
+		FC1D615C1BBA0C0B0012FFB3 /* FacebookSDK-4_6-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60621BBA0C0A0012FFB3 /* FacebookSDK-4_6-for-iOS.docset */; settings = {ASSET_TAGS = (); }; };
+		FC1D615D1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60631BBA0C0A0012FFB3 /* install_docsets.sh */; settings = {ASSET_TAGS = (); }; };
+		FC1D615E1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60631BBA0C0A0012FFB3 /* install_docsets.sh */; settings = {ASSET_TAGS = (); }; };
+		FC1D615F1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60631BBA0C0A0012FFB3 /* install_docsets.sh */; settings = {ASSET_TAGS = (); }; };
+		FC1D61601BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60641BBA0C0A0012FFB3 /* FacebookSDKStrings.bundle */; settings = {ASSET_TAGS = (); }; };
+		FC1D61611BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60641BBA0C0A0012FFB3 /* FacebookSDKStrings.bundle */; settings = {ASSET_TAGS = (); }; };
+		FC1D61621BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60641BBA0C0A0012FFB3 /* FacebookSDKStrings.bundle */; settings = {ASSET_TAGS = (); }; };
+		FC1D61631BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60651BBA0C0A0012FFB3 /* FBAudienceNetwork.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D61641BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60651BBA0C0A0012FFB3 /* FBAudienceNetwork.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D61651BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60651BBA0C0A0012FFB3 /* FBAudienceNetwork.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D61661BBA0C0B0012FFB3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D61671BBA0C0B0012FFB3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D61681BBA0C0B0012FFB3 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D61691BBA0C0B0012FFB3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60671BBA0C0A0012FFB3 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D616A1BBA0C0B0012FFB3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60671BBA0C0A0012FFB3 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D616B1BBA0C0B0012FFB3 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60671BBA0C0A0012FFB3 /* FBSDKLoginKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D616C1BBA0C0B0012FFB3 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60681BBA0C0A0012FFB3 /* FBSDKMessengerShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D616D1BBA0C0B0012FFB3 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60681BBA0C0A0012FFB3 /* FBSDKMessengerShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D616E1BBA0C0B0012FFB3 /* FBSDKMessengerShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60681BBA0C0A0012FFB3 /* FBSDKMessengerShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D616F1BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D61701BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D61711BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
+		FC1D63111BBA0DFE0012FFB3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */; };
+		FC1D63121BBA0E0B0012FFB3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */; };
 		FC29F26B1BA7638A00625B8F /* Bento Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC29F26A1BA7638A00625B8F /* Bento Dev-Info.plist */; settings = {ASSET_TAGS = (); }; };
 		FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
@@ -342,7 +372,6 @@
 		FC92E0E01B7E5C880073C5D7 /* RegisterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7A81A5D81C300D034CF /* RegisterViewController.m */; };
 		FC92E0E11B7E5C880073C5D7 /* STPTestDataTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333EE1A72C133006C2446 /* STPTestDataTableViewController.m */; };
 		FC92E0E21B7E5C880073C5D7 /* JGProgressHUDRingIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333571A6D4058006C2446 /* JGProgressHUDRingIndicatorView.m */; };
-		FC92E0E31B7E5C880073C5D7 /* FacebookManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333031A6C0F5C006C2446 /* FacebookManager.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		FC92E0E41B7E5C880073C5D7 /* NSUserDefaults+RMSaveCustomObject.m in Sources */ = {isa = PBXBuildFile; fileRef = 7286EB491A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m */; };
 		FC92E0E51B7E5C880073C5D7 /* JGProgressHUDErrorIndicatorView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223334B1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m */; };
 		FC92E0E61B7E5C880073C5D7 /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = 723BD40C1A8DD831000AD4F1 /* FXBlurView.m */; };
@@ -606,9 +635,6 @@
 		FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
 		FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
 		FCC529C81B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
-		FCC529D41B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */; };
-		FCC529D51B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */; };
-		FCC529D61B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */; };
 		FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED11AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
@@ -710,8 +736,6 @@
 		722332E21A6BC7DE006C2446 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		722332E41A6BC7E6006C2446 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		722333011A6BF172006C2446 /* Bento.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Bento.entitlements; sourceTree = "<group>"; };
-		722333021A6C0F5C006C2446 /* FacebookManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FacebookManager.h; sourceTree = "<group>"; };
-		722333031A6C0F5C006C2446 /* FacebookManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FacebookManager.m; sourceTree = "<group>"; };
 		722333411A6C1B2E006C2446 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		722333451A6D4058006C2446 /* JGProgressHUD Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "JGProgressHUD Resources.bundle"; sourceTree = "<group>"; };
 		722333461A6D4058006C2446 /* JGProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUD.h; sourceTree = "<group>"; };
@@ -904,6 +928,17 @@
 		FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBentoViewController.m; sourceTree = "<group>"; };
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
+		FC1D60601BBA0C0A0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "FacebookAudienceNetworkSDK-4_6-for-iOS.docset"; sourceTree = "<group>"; };
+		FC1D60611BBA0C0A0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "FacebookMessengerShareKitSDK-1_3-for-iOS.docset"; sourceTree = "<group>"; };
+		FC1D60621BBA0C0A0012FFB3 /* FacebookSDK-4_6-for-iOS.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "FacebookSDK-4_6-for-iOS.docset"; sourceTree = "<group>"; };
+		FC1D60631BBA0C0A0012FFB3 /* install_docsets.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install_docsets.sh; sourceTree = "<group>"; };
+		FC1D60641BBA0C0A0012FFB3 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
+		FC1D60651BBA0C0A0012FFB3 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
+		FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		FC1D60671BBA0C0A0012FFB3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		FC1D60681BBA0C0A0012FFB3 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
+		FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		FC29F26A1BA7638A00625B8F /* Bento Dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bento Dev-Info.plist"; sourceTree = SOURCE_ROOT; };
 		FC3C4E771AF96A41005D7197 /* FixedBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoViewController.h; sourceTree = "<group>"; };
 		FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoViewController.m; sourceTree = "<group>"; };
@@ -1036,7 +1071,6 @@
 		FCC529C41B8F889000B49F34 /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+CustomColors.h"; path = "../UIColor+CustomColors.h"; sourceTree = "<group>"; };
 		FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CustomColors.m"; path = "../UIColor+CustomColors.m"; sourceTree = "<group>"; };
 		FCC529CA1B8FAD4A00B49F34 /* Bento-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bento-Prefix.pch"; sourceTree = "<group>"; };
-		FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FacebookSDK.framework; path = ../../ViewController/FacebookSDK.framework; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
 		FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCollectionViewCell.m; sourceTree = "<group>"; };
 		FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1069,18 +1103,23 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1D63121BBA0E0B0012FFB3 /* CoreMotion.framework in Frameworks */,
 				FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */,
+				FC1D616A1BBA0C0B0012FFB3 /* FBSDKLoginKit.framework in Frameworks */,
+				FC1D616D1BBA0C0B0012FFB3 /* FBSDKMessengerShareKit.framework in Frameworks */,
+				FC1D61671BBA0C0B0012FFB3 /* FBSDKCoreKit.framework in Frameworks */,
 				FCF2787D1B264C0100130F7A /* Crashlytics.framework in Frameworks */,
 				7216B7611AA64C7C0006FFE9 /* CoreLocation.framework in Frameworks */,
 				7216B7621AA64C7C0006FFE9 /* CoreData.framework in Frameworks */,
 				7216B7641AA64C7C0006FFE9 /* ImageIO.framework in Frameworks */,
 				7216B7651AA64C7C0006FFE9 /* GLKit.framework in Frameworks */,
+				FC1D61641BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */,
 				7216B7661AA64C7C0006FFE9 /* libc++.dylib in Frameworks */,
+				FC1D61701BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */,
 				7216B7671AA64C7C0006FFE9 /* libz.dylib in Frameworks */,
 				7216B7681AA64C7C0006FFE9 /* Fabric.framework in Frameworks */,
 				7216B7691AA64C7C0006FFE9 /* GoogleMaps.framework in Frameworks */,
 				7216B76A1AA64C7C0006FFE9 /* MapKit.framework in Frameworks */,
-				FCC529D51B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */,
 				7216B76B1AA64C7C0006FFE9 /* Security.framework in Frameworks */,
 				7216B76C1AA64C7C0006FFE9 /* Foundation.framework in Frameworks */,
 				7216B76E1AA64C7C0006FFE9 /* libPods.a in Frameworks */,
@@ -1091,21 +1130,26 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC1D63111BBA0DFE0012FFB3 /* CoreMotion.framework in Frameworks */,
 				FC89D5D51B6029B900D8D310 /* AdSupport.framework in Frameworks */,
 				FC89D5D31B6029B400D8D310 /* iAd.framework in Frameworks */,
+				FC1D61691BBA0C0B0012FFB3 /* FBSDKLoginKit.framework in Frameworks */,
 				FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */,
 				FCF2787C1B26370700130F7A /* Crashlytics.framework in Frameworks */,
 				7209E0821A76BD3500D18D7A /* CoreLocation.framework in Frameworks */,
+				FC1D616F1BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */,
 				722333831A6E55B6006C2446 /* CoreData.framework in Frameworks */,
 				722333811A6E5570006C2446 /* ImageIO.framework in Frameworks */,
 				7223337F1A6E5535006C2446 /* GLKit.framework in Frameworks */,
-				FCC529D41B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */,
+				FC1D61661BBA0C0B0012FFB3 /* FBSDKCoreKit.framework in Frameworks */,
 				7223337D1A6E5504006C2446 /* libc++.dylib in Frameworks */,
 				722333421A6C1B2E006C2446 /* libz.dylib in Frameworks */,
 				725BA0361A84EDBF005C18D3 /* Fabric.framework in Frameworks */,
+				FC1D616C1BBA0C0B0012FFB3 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				7223337B1A6E5387006C2446 /* GoogleMaps.framework in Frameworks */,
 				722332E81A6BDEEF006C2446 /* MapKit.framework in Frameworks */,
 				722332E51A6BC7E6006C2446 /* Security.framework in Frameworks */,
+				FC1D61631BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */,
 				722332E31A6BC7DE006C2446 /* Foundation.framework in Frameworks */,
 				1E0788627C732857C288841E /* libPods.a in Frameworks */,
 			);
@@ -1131,11 +1175,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				FC92E1B51B7E5D830073C5D7 /* CFNetwork.framework in Frameworks */,
-				FCC529D61B8FDE6200B49F34 /* FacebookSDK.framework in Frameworks */,
 				FC92E1B31B7E5D500073C5D7 /* calabash.framework in Frameworks */,
+				FC1D61651BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */,
+				FC1D61681BBA0C0B0012FFB3 /* FBSDKCoreKit.framework in Frameworks */,
 				FC92E13E1B7E5C880073C5D7 /* AdSupport.framework in Frameworks */,
+				FC1D616E1BBA0C0B0012FFB3 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				FC92E13F1B7E5C880073C5D7 /* iAd.framework in Frameworks */,
+				FC1D61711BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */,
 				FC92E1401B7E5C880073C5D7 /* SystemConfiguration.framework in Frameworks */,
+				FC1D616B1BBA0C0B0012FFB3 /* FBSDKLoginKit.framework in Frameworks */,
 				FC92E1411B7E5C880073C5D7 /* Crashlytics.framework in Frameworks */,
 				FC92E1421B7E5C880073C5D7 /* CoreLocation.framework in Frameworks */,
 				FC92E1431B7E5C880073C5D7 /* CoreData.framework in Frameworks */,
@@ -1344,16 +1392,6 @@
 			path = FXBlurView;
 			sourceTree = "<group>";
 		};
-		7279E5D71A68397D00591CB2 /* FacebookSDK */ = {
-			isa = PBXGroup;
-			children = (
-				722333021A6C0F5C006C2446 /* FacebookManager.h */,
-				722333031A6C0F5C006C2446 /* FacebookManager.m */,
-				FCC529D31B8FDE6200B49F34 /* FacebookSDK.framework */,
-			);
-			path = FacebookSDK;
-			sourceTree = "<group>";
-		};
 		7279E5DE1A6B5F3A00591CB2 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1467,10 +1505,10 @@
 		90BED09B1A5BCC7B003DC872 /* ThirdParty */ = {
 			isa = PBXGroup;
 			children = (
+				FC1D605D1BBA0C0A0012FFB3 /* FacebookSDKs */,
 				FC9E81DB1BACE4250099DBF5 /* SocketIOClientSwift */,
 				FCF2787B1B26370700130F7A /* Crashlytics.framework */,
 				722333791A6E5387006C2446 /* GoogleMapsSDK */,
-				7279E5D71A68397D00591CB2 /* FacebookSDK */,
 				90220A351A6424BB00ECECEF /* GradientLayer */,
 			);
 			path = ThirdParty;
@@ -1684,6 +1722,7 @@
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */,
 				FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */,
 				FC92E1B21B7E5D500073C5D7 /* calabash.framework */,
 				FC89D5D41B6029B900D8D310 /* AdSupport.framework */,
@@ -1741,6 +1780,31 @@
 			);
 			name = "Fixed Menu Cell";
 			path = ../ViewController/MakeBento;
+			sourceTree = "<group>";
+		};
+		FC1D605D1BBA0C0A0012FFB3 /* FacebookSDKs */ = {
+			isa = PBXGroup;
+			children = (
+				FC1D605F1BBA0C0A0012FFB3 /* DocSets */,
+				FC1D60641BBA0C0A0012FFB3 /* FacebookSDKStrings.bundle */,
+				FC1D60651BBA0C0A0012FFB3 /* FBAudienceNetwork.framework */,
+				FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */,
+				FC1D60671BBA0C0A0012FFB3 /* FBSDKLoginKit.framework */,
+				FC1D60681BBA0C0A0012FFB3 /* FBSDKMessengerShareKit.framework */,
+				FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */,
+			);
+			path = FacebookSDKs;
+			sourceTree = "<group>";
+		};
+		FC1D605F1BBA0C0A0012FFB3 /* DocSets */ = {
+			isa = PBXGroup;
+			children = (
+				FC1D60601BBA0C0A0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset */,
+				FC1D60611BBA0C0A0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset */,
+				FC1D60621BBA0C0A0012FFB3 /* FacebookSDK-4_6-for-iOS.docset */,
+				FC1D60631BBA0C0A0012FFB3 /* install_docsets.sh */,
+			);
+			path = DocSets;
 			sourceTree = "<group>";
 		};
 		FC3C4E7F1AF97FCD005D7197 /* Fixed Bento */ = {
@@ -2278,8 +2342,11 @@
 				7216B7861AA64C7C0006FFE9 /* register_icon_facebook.png in Resources */,
 				7216B7871AA64C7C0006FFE9 /* register_icon_username.png in Resources */,
 				7216B7881AA64C7C0006FFE9 /* logo_title.png in Resources */,
+				FC1D61581BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */,
 				7216B7891AA64C7C0006FFE9 /* mybento_image_bottom.png in Resources */,
 				FCDF22171ADC3ADF006B2750 /* Icon-60.png in Resources */,
+				FC1D615B1BBA0C0B0012FFB3 /* FacebookSDK-4_6-for-iOS.docset in Resources */,
+				FC1D61611BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */,
 				7216B78A1AA64C7C0006FFE9 /* mybento_nav_cart_act@2x.png in Resources */,
 				7216B78B1AA64C7C0006FFE9 /* orderconfirm_image_minute@2x.png in Resources */,
 				7216B78C1AA64C7C0006FFE9 /* string_confirmaddress@2x.png in Resources */,
@@ -2308,6 +2375,7 @@
 				FC7EACB61B8D0C2700B15FC8 /* empty-side.png in Resources */,
 				7216B79C1AA64C7C0006FFE9 /* first_background.png in Resources */,
 				7216B79D1AA64C7C0006FFE9 /* orderconfirm_image_car.png in Resources */,
+				FC1D61551BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */,
 				FC7EACB31B8D0C2700B15FC8 /* empty-main.png in Resources */,
 				FC72912B1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
@@ -2315,6 +2383,7 @@
 				7216B79F1AA64C7C0006FFE9 /* nav_background.png in Resources */,
 				7216B7A01AA64C7C0006FFE9 /* image_checked@2x.png in Resources */,
 				7216B7A11AA64C7C0006FFE9 /* string_addanotherbento@2x.png in Resources */,
+				FC1D615E1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */,
 				FCD51ED31AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */,
 				7216B7A21AA64C7C0006FFE9 /* OpenSans-Semibold.ttf in Resources */,
 				FC29F26B1BA7638A00625B8F /* Bento Dev-Info.plist in Resources */,
@@ -2356,6 +2425,7 @@
 				FCF5E0A61B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
 				90BED0EE1A5C38DA003DC872 /* sample.png in Resources */,
 				90359C271A5EC49700AAD5D2 /* orderconfirm_image_remove@2x.png in Resources */,
+				FC1D61571BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */,
 				47C5B0151A8B8038008FA7DA /* BentoTableViewCell.xib in Resources */,
 				FC8DB73E1AF18674003045A3 /* icon-circle-twitter.png in Resources */,
 				FC8DB7421AF18674003045A3 /* icon-square-creditcard.png in Resources */,
@@ -2380,6 +2450,7 @@
 				7223335A1A6D4058006C2446 /* JGProgressHUD Resources.bundle in Resources */,
 				726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */,
 				FCDF222A1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
+				FC1D61601BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */,
 				90BED0E31A5C1E70003DC872 /* nav_btn_back@2x.png in Resources */,
 				FCDF221E1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
 				90D8F7B11A5D84B800D034CF /* register_icon_facebook.png in Resources */,
@@ -2414,6 +2485,7 @@
 				FCDF22261ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				FC8DB74A1AF18674003045A3 /* icon-user.png in Resources */,
 				FC7EACB51B8D0C2700B15FC8 /* empty-side.png in Resources */,
+				FC1D615D1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */,
 				90BED0B11A5BE22E003DC872 /* first_background.png in Resources */,
 				90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */,
 				FC7EACB21B8D0C2700B15FC8 /* empty-main.png in Resources */,
@@ -2428,6 +2500,7 @@
 				FC72912A1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
 				90BED0E01A5C04DE003DC872 /* mybento_nav_cart_inact@2x.png in Resources */,
 				FCDF221A1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */,
+				FC1D615A1BBA0C0B0012FFB3 /* FacebookSDK-4_6-for-iOS.docset in Resources */,
 				47C5B0181A8B82BD008FA7DA /* completeorder_cell_btn_minute@2x.png in Resources */,
 				90BED0C41A5BE72F003DC872 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				90BED0C81A5BE72F003DC872 /* OpenSans-Regular.ttf in Resources */,
@@ -2444,6 +2517,7 @@
 				FCDF222C1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				90D8F7B21A5D84B800D034CF /* register_icon_password.png in Resources */,
 				FCDF221C1ADC3ADF006B2750 /* Icon-72.png in Resources */,
+				FC1D61541BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */,
 				FCDF22301ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2477,6 +2551,7 @@
 				FCF5E0A81B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
 				FC92E1581B7E5C880073C5D7 /* sample.png in Resources */,
 				FC92E1591B7E5C880073C5D7 /* orderconfirm_image_remove@2x.png in Resources */,
+				FC1D61591BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */,
 				FC92E15A1B7E5C880073C5D7 /* BentoTableViewCell.xib in Resources */,
 				FC92E15B1B7E5C880073C5D7 /* icon-circle-twitter.png in Resources */,
 				FC92E15C1B7E5C880073C5D7 /* icon-square-creditcard.png in Resources */,
@@ -2501,6 +2576,7 @@
 				FC92E16D1B7E5C880073C5D7 /* JGProgressHUD Resources.bundle in Resources */,
 				FC92E16E1B7E5C880073C5D7 /* polygon_service_area.png in Resources */,
 				FC92E16F1B7E5C880073C5D7 /* Icon-Small-50.png in Resources */,
+				FC1D61621BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */,
 				FC92E1701B7E5C880073C5D7 /* nav_btn_back@2x.png in Resources */,
 				FC92E1711B7E5C880073C5D7 /* Icon-72@2x.png in Resources */,
 				FC92E1721B7E5C880073C5D7 /* register_icon_facebook.png in Resources */,
@@ -2535,6 +2611,7 @@
 				FC92E18E1B7E5C880073C5D7 /* Icon-Small-40@2x.png in Resources */,
 				FC92E18F1B7E5C880073C5D7 /* icon-user.png in Resources */,
 				FC7EACB71B8D0C2700B15FC8 /* empty-side.png in Resources */,
+				FC1D615F1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */,
 				FC92E1901B7E5C880073C5D7 /* first_background.png in Resources */,
 				FC92E1911B7E5C880073C5D7 /* orderconfirm_image_car.png in Resources */,
 				FC7EACB41B8D0C2700B15FC8 /* empty-main.png in Resources */,
@@ -2549,6 +2626,7 @@
 				FC72912C1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
 				FC92E1991B7E5C880073C5D7 /* mybento_nav_cart_inact@2x.png in Resources */,
 				FC92E19A1B7E5C880073C5D7 /* Icon-60@3x.png in Resources */,
+				FC1D615C1BBA0C0B0012FFB3 /* FacebookSDK-4_6-for-iOS.docset in Resources */,
 				FC92E19B1B7E5C880073C5D7 /* completeorder_cell_btn_minute@2x.png in Resources */,
 				FC92E19C1B7E5C880073C5D7 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				FC92E19D1B7E5C880073C5D7 /* OpenSans-Regular.ttf in Resources */,
@@ -2565,6 +2643,7 @@
 				FC92E1A71B7E5C880073C5D7 /* Icon-Small-50@2x.png in Resources */,
 				FC92E1A81B7E5C880073C5D7 /* register_icon_password.png in Resources */,
 				FC92E1A91B7E5C880073C5D7 /* Icon-72.png in Resources */,
+				FC1D61561BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */,
 				FC92E1AA1B7E5C880073C5D7 /* Icon-Small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2744,7 +2823,6 @@
 				7216B70A1AA64C7C0006FFE9 /* RegisterViewController.m in Sources */,
 				7216B70B1AA64C7C0006FFE9 /* STPTestDataTableViewController.m in Sources */,
 				7216B70C1AA64C7C0006FFE9 /* JGProgressHUDRingIndicatorView.m in Sources */,
-				7216B70D1AA64C7C0006FFE9 /* FacebookManager.m in Sources */,
 				7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
@@ -2849,7 +2927,6 @@
 				90D8F7A91A5D81C300D034CF /* RegisterViewController.m in Sources */,
 				722333F91A72C133006C2446 /* STPTestDataTableViewController.m in Sources */,
 				722333631A6D4058006C2446 /* JGProgressHUDRingIndicatorView.m in Sources */,
-				722333041A6C0F5C006C2446 /* FacebookManager.m in Sources */,
 				7286EB4E1A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
@@ -2973,7 +3050,6 @@
 				FC92E0E01B7E5C880073C5D7 /* RegisterViewController.m in Sources */,
 				FC92E0E11B7E5C880073C5D7 /* STPTestDataTableViewController.m in Sources */,
 				FC92E0E21B7E5C880073C5D7 /* JGProgressHUDRingIndicatorView.m in Sources */,
-				FC92E0E31B7E5C880073C5D7 /* FacebookManager.m in Sources */,
 				FC92E0E41B7E5C880073C5D7 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				FC92E0E51B7E5C880073C5D7 /* JGProgressHUDErrorIndicatorView.m in Sources */,
 				FC94E33F1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
@@ -3122,6 +3198,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -3156,6 +3233,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -3273,6 +3351,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3314,6 +3393,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3445,6 +3525,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -3535,6 +3616,7 @@
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
 				INFOPLIST_FILE = "Bento copy-Info.plist";
