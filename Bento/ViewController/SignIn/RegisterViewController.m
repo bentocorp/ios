@@ -20,7 +20,7 @@
 //#import "AppStrings.h"
 //#import "WebManager.h"
 //#import "DataManager.h"
-//#import "FacebookManager.h"
+////#import "FacebookManager.h"
 //#import "Mixpanel.h"
 //
 //#import "BentoShop.h"
@@ -29,6 +29,8 @@
 //#import "CompleteOrderViewController.h"
 //
 //#import "UIColor+CustomColors.h"
+//
+//#import <FBSDKLoginKit/FBSDKLoginKit.h>
 //
 //@interface RegisterViewController () <FBManagerDelegate, MyAlertViewDelegate, CLLocationManagerDelegate>
 //
@@ -244,8 +246,8 @@
 //
 //- (void)noConnection
 //{
-//    if (loadingHUD == nil)
-//    {
+//    if (loadingHUD == nil) {
+//        
 //        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
 //        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
 //        [loadingHUD showInView:self.view];
@@ -260,11 +262,10 @@
 //
 //- (void)checkCurrentMode
 //{
-//    if ([[BentoShop sharedInstance] didModeOrDateChange])
-//    {
+//    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
+//        
 //        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
 //        [self dismissViewControllerAnimated:YES completion:nil];
-//        
 //        [self.navigationController popToRootViewControllerAnimated:YES];
 //    }
 //}
@@ -809,7 +810,7 @@
 //    }
 //}
 //
-//- (void) gotoPhoneNumberScreen:(NSDictionary<FBGraphUser> *)userInfo
+//- (void)gotoPhoneNumberScreen:(NSDictionary<FBGraphUser> *)userInfo
 //{
 //    [self performSegueWithIdentifier:@"PhoneNumber" sender:userInfo];
 //}
