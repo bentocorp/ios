@@ -427,12 +427,14 @@
                          NSUserDefaults *pref = [NSUserDefaults standardUserDefaults];
                          [pref setObject:strRequest forKey:@"apiName"];
                          [pref setObject:dicRequest forKey:@"loginRequest"];
-                         [pref setObject:nil forKey:@"new_phone_number"];
                          [pref synchronize];
                          
+                         [self showErrorWithString:nil code:ERROR_NONE];
+                         [self signInWithRegisteredData:dicRequest];
                          [self trackLogin:strEmail responseJSON:response];
-                         [self showErrorMessage:nil code:ERROR_NONE];
-                         [self gotoDeliveryLocationScreen];
+                         
+                         [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
+                         [self.navigationController popViewControllerAnimated:YES]; // if ^ doesn't execute, do this
                          
                      } failure:^(MKNetworkOperation *errorOp, NSError *error) {
                          
@@ -702,6 +704,7 @@
     } isJSON:NO];
 }
 
+// Make api call to login user after successfully signing up
 -(void)signInWithRegisteredData:(NSDictionary *)registeredData
 {
     WebManager *webManager = [[WebManager alloc] init];
