@@ -298,17 +298,17 @@
 
 - (void)processRegister
 {
-    NSString *strFirstName = self.userInfo[@"first_name"];
-    NSString *strLastName = self.userInfo[@"last_name"];
+    NSString *strFirstName = self.userInfo[@"firstname"];
+    NSString *strLastName = self.userInfo[@"lastname"];
     NSString *strMailAddr = self.userInfo[@"email"];
-    NSString *strId = self.userInfo[@"id"];
-    NSString *strGender = self.userInfo[@"gender"];
+    NSString *strId = self.userInfo[@"fb_id"];
+    NSString *strGender = self.userInfo[@"fb_gender"];
     NSString *strPhotoURL = [NSString stringWithFormat:@"https://graph.facebook.com/%@/picture?type=large", strId];
     NSString *strPhoneNumber = self.txtPhoneNumber.text;
-    NSString *strAccessToken = self.userInfo[@"strAccessToken"];
+    NSString *strAccessToken = self.userInfo[@"fb_token"];
     
     NSString *strAgeRange;
-    NSDictionary *dictAgeRange = self.userInfo[@"dictAgeRange"];
+    NSDictionary *dictAgeRange = self.userInfo[@"fb_age_range"];
     if (dictAgeRange != nil)
     {
         if ([dictAgeRange objectForKey:@"min"] != nil && [dictAgeRange objectForKey:@"max"] != nil) {
@@ -325,8 +325,9 @@
         }
     }
     
-    if (strGender == nil)
+    if (strGender == nil) {
         strGender = @"";
+    }
     
     NSDictionary *request = @{
                               @"firstname" : strFirstName,
