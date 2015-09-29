@@ -342,9 +342,10 @@
         if (error == nil) {
             
             if ([result.declinedPermissions containsObject:@"publish_actions"]) {
+                [loadingHUD dismiss];
                 NSLog(@"Declined");
             }
-            if (result.isCancelled) {
+            else if (result.isCancelled) {
                 [loadingHUD dismiss];
                 
                 NSLog(@"Cancelled");
@@ -430,7 +431,7 @@
                          [pref synchronize];
                          
                          [self showErrorWithString:nil code:ERROR_NONE];
-                         [self signInWithRegisteredData:dicRequest];
+//                         [self signInWithRegisteredData:dicRequest]; // wtf i need to login with dictrequest if i already logged in?
                          [self trackLogin:strEmail responseJSON:response];
                          
                          [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try first
