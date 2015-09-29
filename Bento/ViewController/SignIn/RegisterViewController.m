@@ -517,6 +517,55 @@
     [self doRegisterWithFacebook];
 }
 
+- (void)trackLogin:(NSString *)strEmail responseJSON:(NSDictionary *)response
+{
+    // identify user for current session
+    [mixpanel identify:strEmail];
+    
+    // reregister deviceToken to server
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"] != nil) {
+        
+        NSData *deviceToken = [[NSUserDefaults standardUserDefaults] objectForKey:@"deviceToken"];
+        [mixpanel.people addPushDeviceToken:deviceToken];
+        
+        NSLog(@"Device Token - %@", deviceToken);
+    }
+    
+    // install source
+    NSString *source;
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"] != nil) {
+        source = [[NSUserDefaults standardUserDefaults] objectForKey:@"SourceOfInstall"];
+    }
+    
+    NSString *sourceFinal;
+    if (source != nil) {
+        sourceFinal = source;
+    }
+    else {
+        sourceFinal = @"N/A";
+    }
+    
+    NSString *currentAddressFinal;
+    
+    if (currentAddress != nil) {
+        currentAddressFinal = currentAddress;
+    }
+    else {
+        currentAddressFinal = @"N/A";
+    }
+    
+    // set properties
+    [mixpanel.people set:@{
+                           @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
+                           @"$email": response[@"email"],
+                           @"$phone": response[@"phone"],
+                           @"Installed Source":sourceFinal,
+                           @"Last Login Address": currentAddressFinal
+                           }];
+    
+    [mixpanel track:@"Logged In"];
+}
+
 #pragma mark Email Register
 
 - (void)processRegister
