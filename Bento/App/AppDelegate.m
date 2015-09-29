@@ -36,6 +36,7 @@
 #import "ChooseMainDishViewController.h"
 
 // Facebook
+#import <FBSDKCoreKit/FBSDKCoreKit.h>
 
 // Force Update
 #import "AppStrings.h"
@@ -164,12 +165,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         NSLog(@"deep link data: %@", [params description]);
     }];
 
-/*--------------------------------------FACEBOOK-----------------------------------------*/
+/*---------------------------------CRASHLYTICS---------------------------------------*/
     
-    // Crashlytics
     [Fabric with:@[CrashlyticsKit]];
-    
-//    NSLog( @"### running FB sdk version: %@", [FBSettings sdkVersion]);
     
 /*--------------------------------------TWITTER-----------------------------------------*/
     
@@ -289,7 +287,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         });
     });
     
-    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                    didFinishLaunchingWithOptions:launchOptions];
+    
+//    return YES;
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
@@ -394,17 +395,17 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         }
     }
   
-    // Facebook event tracking
+    // FACEBOOK TRACK EVENT
 #ifndef DEV_MODE
     static NSString *facebookKey = @"791688527544905"; // prod key
 #else
     static NSString *facebookKey = @"823525551027869"; // dev key
 #endif
     {
-//        [FBSettings setDefaultAppID: facebookKey];
-//        [FBAppEvents activateApp];
+        [FBSDKSettings setAppID:facebookKey];
+        [FBSDKAppEvents activateApp];
         
-//        NSLog(@"facebook key - %@", facebookKey);
+        NSLog(@"facebook key - %@", facebookKey);
     }
 }
 
@@ -430,11 +431,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     if ([[url scheme] isEqualToString:@"fb823525551027869"])
 #endif
     {
-//        BOOL handled = [[FacebookManager sharedInstance] handleOpenURL:url sourceApplication:sourceApplication];
-//        NSLog(@"<%@ (%p) %@ handled:%@>\r url: %@\r sourceApplication: %@", NSStringFromClass([self class]), self, NSStringFromSelector(_cmd), handled ? @"YES" : @"NO", url.absoluteString, sourceApplication);
-        
-//        return handled;
-
+        return [[FBSDKApplicationDelegate sharedInstance] application:application
+                                                              openURL:url
+                                                    sourceApplication:sourceApplication
+                                                           annotation:annotation];
     }
     return YES;
 }

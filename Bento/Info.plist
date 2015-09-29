@@ -37,6 +37,10 @@
 			</array>
 		</dict>
 	</array>
+	<key>FacebookAppID</key>
+	<string>791688527544905</string>
+	<key>FacebookDisplayName</key>
+	<string>Bento</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Fabric</key>
@@ -53,10 +57,6 @@
 			</dict>
 		</array>
 	</dict>
-	<key>FacebookAppID</key>
-	<string>791688527544905</string>
-	<key>FacebookDisplayName</key>
-	<string>Bento</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tel:1-415-300-1332</string>
@@ -90,11 +90,12 @@
 				<false/>
 			</dict>
 			<key>akamaihd.net</key>
-			<dict/>
-			<key>NSIncludesSubdomains</key>
-			<true/>
-			<key>NSExceptionRequiresForwardSecrecy</key>
-			<false/>
+			<dict>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+			</dict>
 		</dict>
 	</dict>
 	<key>NSLocationAlwaysUsageDescription</key>

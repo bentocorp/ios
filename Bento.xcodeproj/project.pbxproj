@@ -934,7 +934,7 @@
 		FC1D60631BBA0C0A0012FFB3 /* install_docsets.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = install_docsets.sh; sourceTree = "<group>"; };
 		FC1D60641BBA0C0A0012FFB3 /* FacebookSDKStrings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = FacebookSDKStrings.bundle; sourceTree = "<group>"; };
 		FC1D60651BBA0C0A0012FFB3 /* FBAudienceNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBAudienceNetwork.framework; sourceTree = "<group>"; };
-		FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = FBSDKCoreKit.framework; path = Bento/ThirdParty/FacebookSDKs/FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		FC1D60671BBA0C0A0012FFB3 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		FC1D60681BBA0C0A0012FFB3 /* FBSDKMessengerShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKMessengerShareKit.framework; sourceTree = "<group>"; };
 		FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
@@ -1722,6 +1722,7 @@
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */,
 				FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */,
 				FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */,
 				FC92E1B21B7E5D500073C5D7 /* calabash.framework */,
@@ -1788,7 +1789,6 @@
 				FC1D605F1BBA0C0A0012FFB3 /* DocSets */,
 				FC1D60641BBA0C0A0012FFB3 /* FacebookSDKStrings.bundle */,
 				FC1D60651BBA0C0A0012FFB3 /* FBAudienceNetwork.framework */,
-				FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */,
 				FC1D60671BBA0C0A0012FFB3 /* FBSDKLoginKit.framework */,
 				FC1D60681BBA0C0A0012FFB3 /* FBSDKMessengerShareKit.framework */,
 				FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */,
@@ -3199,6 +3199,7 @@
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -3234,6 +3235,7 @@
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -3352,6 +3354,7 @@
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3394,6 +3397,7 @@
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3526,6 +3530,7 @@
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -3617,6 +3622,7 @@
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
+					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
 				INFOPLIST_FILE = "Bento copy-Info.plist";
