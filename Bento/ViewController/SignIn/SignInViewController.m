@@ -422,19 +422,19 @@
     [self doSignin];
 }
 
-- (void)reqFacebookUserInfo
+- (void)reqFacebookUserInfo:(BOOL)isRetry
 {
     loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     loadingHUD.textLabel.text = @"Logging in...";
     [loadingHUD showInView:self.view];
     
     // Token is already available
-    if ([FBSDKAccessToken currentAccessToken]) {
+    if ([FBSDKAccessToken currentAccessToken] && isRetry != NO) {
         
         // request user info using graph api
         [self reqGraphAPI:[[FBSDKAccessToken currentAccessToken] tokenString]];
     }
-    // Token not saved
+    // Token not saved, or saved, but didn't provide email, so retrying -> show webview again
     else {
         // REQUEST PERMISSIONS/AUTHORIZATION FROM FB...
         // displays a webview,
@@ -614,18 +614,19 @@
     } isJSON:NO];
 }
 
-- (void)doSignInWithFacebook
+- (void)doSignInWithFacebook:(BOOL)isRetry
 {
     [self hideKeyboard];
     
     [[BentoShop sharedInstance] setSignInStatus:YES];
     
-    [self reqFacebookUserInfo];
+    [self reqFacebookUserInfo:isRetry];
 }
 
 - (IBAction)onSignInWithFacebook:(id)sender
 {
-    [self doSignInWithFacebook];
+    // if user taps on the register button, set retry to NO
+    [self doSignInWithFacebook:NO];
 }
 
 - (void)gotoPhoneNumberScreen:(NSDictionary *)userInfo
@@ -731,8 +732,13 @@
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
     if (buttonIndex == 1) {
-        [self performSelector:@selector(doSignInWithFacebook) withObject:nil];
+        [self performSelector:@selector(authorizeFBWebView) withObject:nil];
     }
+}
+
+- (void)authorizeFBWebView
+{
+    [self doSignInWithFacebook:YES];
 }
 
 #pragma mark Navigation
