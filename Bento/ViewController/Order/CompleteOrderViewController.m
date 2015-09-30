@@ -976,6 +976,7 @@
             loadingHUD.textLabel.text = @"Processing...";
             [loadingHUD showInView:self.view];
             
+            // send crddit card info to Stripe, retuns a token
             [[STPAPIClient sharedClient] createTokenWithCard:cardInfo completion:^(STPToken *token, NSError *error) {
                 if (error)
                 {
