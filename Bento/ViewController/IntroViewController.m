@@ -555,6 +555,7 @@
                                           error: &error];
     
     // if system alert has not been shown before - this should also prompt the system alert when registering for remote notifications above
+    // if ios 9+, don't need to route to settings because push is reset everytime user reinstalls
     if (has_shown_push_alert == nil || [[UIDevice currentDevice].systemVersion intValue] >= 9) {
         [self exitOnboardingScreen:@"Push"];
     }
@@ -563,7 +564,7 @@
         [self showRouteToDeviceSettingsAlert];
     }
     
-    // save a flag to keychain
+    // save a flag to keycha
     [FDKeychain saveItem:@"not_nil"
                   forKey:@"has_shown_push_alert"
               forService:@"Bento"
