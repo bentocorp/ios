@@ -452,6 +452,10 @@
             
             if (error == nil) {
 
+                if ([result.declinedPermissions containsObject:@"email"])
+                {
+                    NSLog(@"declined permissions");
+                }
                 if (result.isCancelled) {
                     [loadingHUD dismiss];
                     NSLog(@"Cancelled");
