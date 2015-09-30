@@ -223,23 +223,27 @@
     // register for remote notifications whether system alert has been prompted before or not - required for notifications to show up in settings
     [self requestPush];
     
-    // try to retrieve flag in keychain - to check if we should redirect to settings or not
-    NSError *error = nil;
-    NSString *has_shown_push_alert = [FDKeychain itemForKey: @"has_shown_push_alert"
-                                                 forService: @"Bento"
-                                                      error: &error];
+    // if under ios 9, don't need to route to settings because push is reset everytime user reinstalls
+    if ([[UIDevice currentDevice].systemVersion intValue] < 9) {
     
-    // push request not prompted before
-    if (has_shown_push_alert == nil) {
-    
-        // save a flag to keychain
-        [FDKeychain saveItem:@"not_nil"
-                      forKey:@"has_shown_push_alert"
-                  forService:@"Bento"
-                       error:&error];
-    }
-    else {
-        [self showCustomPushAlert];
+        // try to retrieve flag in keychain - to check if we should redirect to settings or not
+        NSError *error = nil;
+        NSString *has_shown_push_alert = [FDKeychain itemForKey: @"has_shown_push_alert"
+                                                     forService: @"Bento"
+                                                          error: &error];
+        
+        // push request not prompted before
+        if (has_shown_push_alert == nil) {
+        
+            // save a flag to keychain
+            [FDKeychain saveItem:@"not_nil"
+                          forKey:@"has_shown_push_alert"
+                      forService:@"Bento"
+                           error:&error];
+        }
+        else {
+            [self showCustomPushAlert];
+        }
     }
 }
 

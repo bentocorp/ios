@@ -548,27 +548,30 @@
     // register for remote notifications whether system alert has been prompted before or not - required for notifications to show up in settings
     [self requestPush];
     
-    // try to retrieve flag in keychain - to check if we should redirect to settings or not
-    NSError *error = nil;
-    NSString *has_shown_push_alert = [FDKeychain itemForKey: @"has_shown_push_alert"
-                                     forService: @"Bento"
-                                          error: &error];
+    // if under ios 9, don't need to route to settings because push is reset everytime user reinstalls
+    if ([[UIDevice currentDevice].systemVersion intValue] < 9) {
     
-    // if system alert has not been shown before - this should also prompt the system alert when registering for remote notifications above
-    // if ios 9+, don't need to route to settings because push is reset everytime user reinstalls
-    if (has_shown_push_alert == nil || [[UIDevice currentDevice].systemVersion intValue] >= 9) {
-        [self exitOnboardingScreen:@"Push"];
+        // try to retrieve flag in keychain - to check if we should redirect to settings or not
+        NSError *error = nil;
+        NSString *has_shown_push_alert = [FDKeychain itemForKey: @"has_shown_push_alert"
+                                         forService: @"Bento"
+                                              error: &error];
+        
+        // if system alert has not been shown before - this should also prompt the system alert when registering for remote notifications above
+        if (has_shown_push_alert == nil) {
+            [self exitOnboardingScreen:@"Push"];
+        }
+        // if system alert has been shown before, redirect to settings
+        else {
+            [self showRouteToDeviceSettingsAlert];
+        }
+        
+        // save a flag to keycha
+        [FDKeychain saveItem:@"not_nil"
+                      forKey:@"has_shown_push_alert"
+                  forService:@"Bento"
+                       error:&error];
     }
-    // if system alert has been shown before, redirect to settings
-    else {
-        [self showRouteToDeviceSettingsAlert];
-    }
-    
-    // save a flag to keycha
-    [FDKeychain saveItem:@"not_nil"
-                  forKey:@"has_shown_push_alert"
-              forService:@"Bento"
-                   error:&error];
 }
 
 - (void)requestPush
