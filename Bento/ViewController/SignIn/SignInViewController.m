@@ -452,11 +452,7 @@
             
             if (error == nil) {
 
-                if ([result.declinedPermissions containsObject:@"publish_actions"]) {
-                    [loadingHUD dismiss];
-                    NSLog(@"Declined");
-                }
-                else if (result.isCancelled) {
+                if (result.isCancelled) {
                     [loadingHUD dismiss];
                     NSLog(@"Cancelled");
                 }
