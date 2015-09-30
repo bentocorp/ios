@@ -572,6 +572,10 @@
                   forService:@"Bento"
                        error:&error];
     }
+    // if ios 9+
+    else {
+        [self exitOnboardingScreen:@"Push"];
+    }
 }
 
 - (void)requestPush
