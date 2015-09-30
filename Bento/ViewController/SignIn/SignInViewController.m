@@ -429,7 +429,7 @@
     [loadingHUD showInView:self.view];
     
     // Token is already available
-    if ([FBSDKAccessToken currentAccessToken] && isRetry != NO) {
+    if ([FBSDKAccessToken currentAccessToken] && isRetry == NO) {
         
         // request user info using graph api
         [self reqGraphAPI:[[FBSDKAccessToken currentAccessToken] tokenString]];
