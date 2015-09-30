@@ -555,7 +555,7 @@
                                           error: &error];
     
     // if system alert has not been shown before - this should also prompt the system alert when registering for remote notifications above
-    if (has_shown_push_alert == nil) {
+    if (has_shown_push_alert == nil || [[UIDevice currentDevice].systemVersion intValue] >= 9) {
         [self exitOnboardingScreen:@"Push"];
     }
     // if system alert has been shown before, redirect to settings
