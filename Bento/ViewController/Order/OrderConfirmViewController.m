@@ -223,7 +223,7 @@
     // register for remote notifications whether system alert has been prompted before or not - required for notifications to show up in settings
     [self requestPush];
     
-    // if under ios 9, don't need to route to settings because push is reset everytime user reinstalls
+    // if under ios 9
     if ([[UIDevice currentDevice].systemVersion intValue] < 9) {
     
         // try to retrieve flag in keychain - to check if we should redirect to settings or not
@@ -244,6 +244,15 @@
         else {
             [self showCustomPushAlert];
         }
+    }
+    // ios 9+, if shown alert before
+    else if ([[NSUserDefaults standardUserDefaults] boolForKey:@"hasShownPushAlert"] == YES) {
+        [self showCustomPushAlert];
+    }
+    // ios 9+, push alert was shown here
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasShownPushAlert"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }
 

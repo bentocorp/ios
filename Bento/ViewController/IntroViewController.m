@@ -538,9 +538,19 @@
     }];
 }
 
+// this is only used for ios 9 because below 9 uses keychain to check
+- (void)setHasShownOushAlert:(BOOL)hasShown
+{
+    [[NSUserDefaults standardUserDefaults] setBool:hasShown forKey:@"hasShownPushAlert"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
 - (IBAction)onNoThanks:(id)sender
 {
     [self exitOnboardingScreen:@"Push"];
+    
+    // this is only used for ios 9 because below 9 uses keychain to check
+    [self setHasShownOushAlert:NO];
 }
 
 - (IBAction)onOK:(id)sender
@@ -575,6 +585,9 @@
     // if ios 9+
     else {
         [self exitOnboardingScreen:@"Push"];
+        
+        // this is only used for ios 9 because below 9 uses keychain to check
+        [self setHasShownOushAlert:YES];
     }
 }
 
