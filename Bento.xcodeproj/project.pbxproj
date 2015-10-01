@@ -318,7 +318,6 @@
 		FC1D61711BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */; settings = {ASSET_TAGS = (); }; };
 		FC1D63111BBA0DFE0012FFB3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */; };
 		FC1D63121BBA0E0B0012FFB3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */; };
-		FC29F26B1BA7638A00625B8F /* Bento Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = FC29F26A1BA7638A00625B8F /* Bento Dev-Info.plist */; settings = {ASSET_TAGS = (); }; };
 		FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
@@ -2400,7 +2399,6 @@
 				FC1D615E1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */,
 				FCD51ED31AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */,
 				7216B7A21AA64C7C0006FFE9 /* OpenSans-Semibold.ttf in Resources */,
-				FC29F26B1BA7638A00625B8F /* Bento Dev-Info.plist in Resources */,
 				7216B7A31AA64C7C0006FFE9 /* mybento_nav_cart_inact@2x.png in Resources */,
 				FCDF221B1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */,
 				7216B7A41AA64C7C0006FFE9 /* completeorder_cell_btn_minute@2x.png in Resources */,
@@ -3210,7 +3208,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
@@ -3247,7 +3244,6 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
