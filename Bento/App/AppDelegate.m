@@ -23,7 +23,7 @@
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
-#import "MoPub.h"
+#import <MoPub/MoPub.h>
 
 // Mixpanel
 #import "Mixpanel.h"

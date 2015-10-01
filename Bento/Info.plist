@@ -37,10 +37,6 @@
 			</array>
 		</dict>
 	</array>
-	<key>FacebookAppID</key>
-	<string>791688527544905</string>
-	<key>FacebookDisplayName</key>
-	<string>Bento</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
 	<key>Fabric</key>
@@ -55,8 +51,18 @@
 				<key>KitName</key>
 				<string>Crashlytics</string>
 			</dict>
+			<dict>
+				<key>KitInfo</key>
+				<dict/>
+				<key>KitName</key>
+				<string>MoPub</string>
+			</dict>
 		</array>
 	</dict>
+	<key>FacebookAppID</key>
+	<string>791688527544905</string>
+	<key>FacebookDisplayName</key>
+	<string>Bento</string>
 	<key>LSApplicationQueriesSchemes</key>
 	<array>
 		<string>tel:1-415-300-1332</string>
@@ -75,26 +81,26 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>facebook.com</key>
+			<key>akamaihd.net</key>
 			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
+			<key>facebook.com</key>
+			<dict>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<false/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
 			</dict>
 			<key>fbcdn.net</key>
 			<dict>
-				<key>NSIncludesSubdomains</key>
-				<true/>
 				<key>NSExceptionRequiresForwardSecrecy</key>
 				<false/>
-			</dict>
-			<key>akamaihd.net</key>
-			<dict>
 				<key>NSIncludesSubdomains</key>
 				<true/>
-				<key>NSExceptionRequiresForwardSecrecy</key>
-				<false/>
 			</dict>
 		</dict>
 	</dict>

@@ -677,6 +677,12 @@
 		FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
 		FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
+		FCEFB7691BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; settings = {ASSET_TAGS = (); }; };
+		FCEFB76A1BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; settings = {ASSET_TAGS = (); }; };
+		FCEFB76B1BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; settings = {ASSET_TAGS = (); }; };
+		FCEFB76C1BBCEBF500C3E34D /* MoPub.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */; settings = {ASSET_TAGS = (); }; };
+		FCEFB76D1BBCEBF500C3E34D /* MoPub.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */; settings = {ASSET_TAGS = (); }; };
+		FCEFB76E1BBCEBF500C3E34D /* MoPub.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */; settings = {ASSET_TAGS = (); }; };
 		FCF2787C1B26370700130F7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
 		FCF2787D1B264C0100130F7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
 		FCF5E0A21B8BDC28002E823C /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A11B8BDC28002E823C /* placeholder.png */; };
@@ -1093,6 +1099,8 @@
 		FCDF22141ADC3ADF006B2750 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
+		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
 		FCF2787B1B26370700130F7A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
 		FCF5E0A11B8BDC28002E823C /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../placeholder.png; sourceTree = "<group>"; };
 		FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-gray.JPG"; sourceTree = "<group>"; };
@@ -1116,6 +1124,7 @@
 				FC1D61641BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */,
 				7216B7661AA64C7C0006FFE9 /* libc++.dylib in Frameworks */,
 				FC1D61701BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */,
+				FCEFB76A1BBCEBF500C3E34D /* MoPub.framework in Frameworks */,
 				7216B7671AA64C7C0006FFE9 /* libz.dylib in Frameworks */,
 				7216B7681AA64C7C0006FFE9 /* Fabric.framework in Frameworks */,
 				7216B7691AA64C7C0006FFE9 /* GoogleMaps.framework in Frameworks */,
@@ -1130,6 +1139,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FCEFB7691BBCEBF500C3E34D /* MoPub.framework in Frameworks */,
 				FC1D63111BBA0DFE0012FFB3 /* CoreMotion.framework in Frameworks */,
 				FC89D5D51B6029B900D8D310 /* AdSupport.framework in Frameworks */,
 				FC89D5D31B6029B400D8D310 /* iAd.framework in Frameworks */,
@@ -1196,6 +1206,7 @@
 				FC92E14A1B7E5C880073C5D7 /* MapKit.framework in Frameworks */,
 				FC92E14B1B7E5C880073C5D7 /* Security.framework in Frameworks */,
 				FC92E14C1B7E5C880073C5D7 /* Foundation.framework in Frameworks */,
+				FCEFB76B1BBCEBF500C3E34D /* MoPub.framework in Frameworks */,
 				FC92E14E1B7E5C880073C5D7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1508,6 +1519,8 @@
 				FC1D605D1BBA0C0A0012FFB3 /* FacebookSDKs */,
 				FC9E81DB1BACE4250099DBF5 /* SocketIOClientSwift */,
 				FCF2787B1B26370700130F7A /* Crashlytics.framework */,
+				FCEFB7671BBCEBF500C3E34D /* MoPub.framework */,
+				FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */,
 				722333791A6E5387006C2446 /* GoogleMapsSDK */,
 				90220A351A6424BB00ECECEF /* GradientLayer */,
 			);
@@ -2141,7 +2154,7 @@
 				7216B7601AA64C7C0006FFE9 /* Frameworks */,
 				7216B76F1AA64C7C0006FFE9 /* Resources */,
 				7216B7AF1AA64C7C0006FFE9 /* Copy Pods Resources */,
-				7216B7B01AA64C7C0006FFE9 /* ShellScript */,
+				7216B7B01AA64C7C0006FFE9 /* Run Script */,
 			);
 			buildRules = (
 			);
@@ -2380,6 +2393,7 @@
 				FC72912B1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
 				FCDF22211ADC3ADF006B2750 /* Icon-76.png in Resources */,
+				FCEFB76D1BBCEBF500C3E34D /* MoPub.bundle in Resources */,
 				7216B79F1AA64C7C0006FFE9 /* nav_background.png in Resources */,
 				7216B7A01AA64C7C0006FFE9 /* image_checked@2x.png in Resources */,
 				7216B7A11AA64C7C0006FFE9 /* string_addanotherbento@2x.png in Resources */,
@@ -2417,6 +2431,7 @@
 				FC4A37591B4C862B00020F8C /* Main.storyboard in Resources */,
 				90D8F7D11A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png in Resources */,
 				90D8F7C41A5E126C00D034CF /* register_icon_email_err.png in Resources */,
+				FCEFB76C1BBCEBF500C3E34D /* MoPub.bundle in Resources */,
 				47C5B0191A8B82BD008FA7DA /* completeorder_cell_btn_remove@2x.png in Resources */,
 				722333FC1A72C133006C2446 /* STPTestPaymentSummaryViewController.xib in Resources */,
 				90BED0CA1A5BE72F003DC872 /* OpenSans-SemiboldItalic.ttf in Resources */,
@@ -2543,6 +2558,7 @@
 				FC92E1501B7E5C880073C5D7 /* Main.storyboard in Resources */,
 				FC92E1511B7E5C880073C5D7 /* deliverylocation_icon_search@2x.png in Resources */,
 				FC92E1521B7E5C880073C5D7 /* register_icon_email_err.png in Resources */,
+				FCEFB76E1BBCEBF500C3E34D /* MoPub.bundle in Resources */,
 				FC92E1531B7E5C880073C5D7 /* completeorder_cell_btn_remove@2x.png in Resources */,
 				FC92E1541B7E5C880073C5D7 /* STPTestPaymentSummaryViewController.xib in Resources */,
 				FC92E1551B7E5C880073C5D7 /* OpenSans-SemiboldItalic.ttf in Resources */,
@@ -2711,13 +2727,14 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7216B7B01AA64C7C0006FFE9 /* ShellScript */ = {
+		7216B7B01AA64C7C0006FFE9 /* Run Script */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
+			name = "Run Script";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3200,6 +3217,7 @@
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
+					"$(PROJECT_DIR)/Bento/ThirdParty",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -3236,6 +3254,7 @@
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
+					"$(PROJECT_DIR)/Bento/ThirdParty",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = DEV_MODE;
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = (
@@ -3348,13 +3367,13 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
+					"$(PROJECT_DIR)/Bento/ThirdParty",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3391,13 +3410,13 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDK",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
+					"$(PROJECT_DIR)/Bento/ThirdParty",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3531,6 +3550,7 @@
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
+					"$(PROJECT_DIR)/Bento/ThirdParty",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"$(inherited)",
@@ -3623,6 +3643,7 @@
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
+					"$(PROJECT_DIR)/Bento/ThirdParty",
 				);
 				"GCC_PREPROCESSOR_DEFINITIONS[arch=*]" = STRIPE_ENABLE_APPLEPAY;
 				INFOPLIST_FILE = "Bento copy-Info.plist";

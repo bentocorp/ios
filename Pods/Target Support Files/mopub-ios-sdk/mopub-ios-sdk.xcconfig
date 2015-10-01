@@ -1,1 +1,0 @@
-MOPUB_IOS_SDK_OTHER_LDFLAGS = -framework "CoreGraphics" -framework "CoreLocation" -framework "CoreTelephony" -framework "EventKit" -framework "EventKitUI" -framework "Foundation" -framework "MediaPlayer" -framework "QuartzCore" -framework "SystemConfiguration" -framework "UIKit" -weak_framework "AdSupport" -weak_framework "StoreKit"

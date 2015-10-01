@@ -34,16 +34,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Mapbox-iOS-SDK-Mapbox.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Mapbox-iOS-SDK.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Mixpanel.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -104,25 +94,20 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>mopub-ios-sdk.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>23A99980F2A5BCE9C25FC59221818CCC</key>
+		<key>0FE911EC1BE8A0518B86D0685544303C</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2AAABF0D844F60A5112BC73BBE4F98CC</key>
+		<key>22F5408F41E6A45CDF9E585F50739A69</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>2FDCA278D424D056847A6AEDB1E58509</key>
+		<key>311B42B5FF610322B0C553DD1D7B6ABF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,12 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6553EB3EFF921B23A919519B0550FA19</key>
+		<key>562DCF2606C238F094ACCFEF14D80D1E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6BA83E281AF52CC14122C6F4D8AFC0EE</key>
+		<key>6C59E96371ECCC869E48DB3DD8E7F231</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,37 +147,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7ED578477BF348CC851FCD37A2176219</key>
+		<key>8139A46A3A876DA84F95F2E24768C739</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9471A4243D144BADAA7A891698529CA2</key>
+		<key>D50244253CF9D1986B6A9F303EAB85AF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9ADA37A4C79B5DCD7D6679ED00759FD0</key>
+		<key>D775C5049AF2D4914E707F4EA7D3DBCC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B55DAA24D36CE4D51804CF02AFAAE758</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>DAC8D4B0BD46F8771E2BC4793531A799</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E0BBA9CCBCC5529822A3E8D5EA476F6E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E3AD1E27CFACC07DB30DEF1D57B04F61</key>
+		<key>E6BB762AC062D848A803026618F0D7F9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -202,17 +172,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F26899B48F2D2E7AE8DB139A02ADD65C</key>
+		<key>F7D51169AF32D95DE9FAD460FDC40757</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F4F285F1D8CA5CEAD6DDEBC95ACBB07C</key>
+		<key>FA4AB8874EC2350B571A675C416ED434</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FA5538E9D41464CC0915A6B0ADA5D149</key>
+		<key>FCEF766A97D295C50B46D4D855ED2507</key>
 		<dict>
 			<key>primary</key>
 			<true/>

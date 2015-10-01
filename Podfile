@@ -1,5 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '7.0'
+# platform :ios, '9.0'
 
 target 'Bento' do
 
@@ -18,7 +18,6 @@ pod 'Stripe/ApplePay'
 pod 'PaymentKit'
 pod 'Mixpanel'
 pod 'Canvas'
-pod 'mopub-ios-sdk'
 pod 'Adjust', :git => 'git://github.com/adjust/ios_sdk.git', :tag => 'v4.2.7'
 pod 'Branch'
 pod 'FCUUID'
@@ -26,4 +25,3 @@ pod 'PureLayout'
 pod 'UIActivityIndicator-for-SDWebImage'
 pod 'FDKeychain'
 pod 'SIOSocket', '~> 0.2.0'
-pod 'Mapbox-iOS-SDK'
