@@ -590,11 +590,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignIn/SignInViewController.m"
-            timestampString = "465416085.704359"
+            timestampString = "465416535.548414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "556"
-            endingLineNumber = "556"
+            startingLineNumber = "558"
+            endingLineNumber = "558"
             landmarkName = "-fbLoginAPICallToBackend:dictRequest:"
             landmarkType = "5">
          </BreakpointContent>
@@ -606,11 +606,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignIn/SignInViewController.m"
-            timestampString = "465416085.704359"
+            timestampString = "465416535.548414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "519"
-            endingLineNumber = "519"
+            startingLineNumber = "521"
+            endingLineNumber = "521"
             landmarkName = "-reqGraphAPI:"
             landmarkType = "5">
          </BreakpointContent>
@@ -622,11 +622,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignIn/SignInViewController.m"
-            timestampString = "465416085.704359"
+            timestampString = "465416535.548414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "551"
-            endingLineNumber = "551"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
             landmarkName = "-reqGraphAPI:"
             landmarkType = "5">
          </BreakpointContent>
@@ -638,11 +638,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignIn/SignInViewController.m"
-            timestampString = "465416085.704359"
+            timestampString = "465416535.548414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "478"
-            endingLineNumber = "478"
+            startingLineNumber = "480"
+            endingLineNumber = "480"
             landmarkName = "-reqFacebookUserInfo"
             landmarkType = "5">
          </BreakpointContent>
@@ -654,11 +654,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignIn/SignInViewController.m"
-            timestampString = "465416085.704359"
+            timestampString = "465416535.548414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "470"
-            endingLineNumber = "470"
+            startingLineNumber = "472"
+            endingLineNumber = "472"
             landmarkName = "-reqFacebookUserInfo"
             landmarkType = "5">
          </BreakpointContent>
@@ -670,11 +670,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignIn/SignInViewController.m"
-            timestampString = "465416085.704359"
+            timestampString = "465416535.548414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "458"
-            endingLineNumber = "458"
+            startingLineNumber = "460"
+            endingLineNumber = "460"
             landmarkName = "-reqFacebookUserInfo"
             landmarkType = "5">
          </BreakpointContent>
@@ -686,11 +686,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/SignIn/SignInViewController.m"
-            timestampString = "465416085.704359"
+            timestampString = "465416535.548414"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "463"
-            endingLineNumber = "463"
+            startingLineNumber = "465"
+            endingLineNumber = "465"
             landmarkName = "-reqFacebookUserInfo"
             landmarkType = "5">
          </BreakpointContent>

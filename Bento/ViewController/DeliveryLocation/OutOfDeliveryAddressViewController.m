@@ -92,16 +92,16 @@
             }
         
             // get current mode
-            NSString *currentMode;
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"LunchMode"]) {
-                currentMode = @"Lunch";
-            }
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"DinnerMode"]) {
-                currentMode = @"Dinner";
-            }
+//            NSString *currentMode;
+//            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"LunchMode"]) {
+//                currentMode = @"Lunch";
+//            }
+//            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"DinnerMode"]) {
+//                currentMode = @"Dinner";
+//            }
         
             // alert user that saved address is unavailable
-            NSString *alertString = [NSString stringWithFormat:@"%@ service to %@ is temporarily unavailable.", currentMode, savedAddress];
+            NSString *alertString = [NSString stringWithFormat:@"Sorry, we've updated our delivery zone! %@ is temporarily unavailable", savedAddress];
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:alertString delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
             [alertView showInView:self.view];
         }
