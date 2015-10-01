@@ -14,7 +14,7 @@ PODS:
     - Mixpanel/Mixpanel (= 2.8.3)
   - Mixpanel/Mixpanel (2.8.3)
   - PaymentKit (1.1.1)
-  - PureLayout (3.0.0)
+  - PureLayout (3.0.1)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -62,7 +62,7 @@ SPEC CHECKSUMS:
   KIF: 0a82046d06f3648799cac522d2d0f7934214caac
   Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
   PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
-  PureLayout: 270dfee2236f697ab1d5e2771c2e5c248495fa0d
+  PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SIOSocket: 2facc0bd02ae72d98c223634a46dd8ebdf9be321
   Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
