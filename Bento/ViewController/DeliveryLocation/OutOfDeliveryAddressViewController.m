@@ -99,7 +99,7 @@
 //            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:@"DinnerMode"]) {
 //                currentMode = @"Dinner";
 //            }
-        
+            
             // alert user that saved address is unavailable
             NSString *alertString = [NSString stringWithFormat:@"Sorry, we've updated our delivery zone! %@ is temporarily unavailable", savedAddress];
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:alertString delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
