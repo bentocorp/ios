@@ -428,14 +428,17 @@
     loadingHUD.textLabel.text = @"Logging in...";
     [loadingHUD showInView:self.view];
     
+    /*commented out saved token check, because what if user wants to log in with a different fb account?*/
+    
     // Token is already available, not retrying && email has been granted already
-    if ([FBSDKAccessToken currentAccessToken] && [[FBSDKAccessToken currentAccessToken].declinedPermissions containsObject:@"email"] == NO) {
-        
-        // request user info using graph api
-        [self reqGraphAPI:[[FBSDKAccessToken currentAccessToken] tokenString]];
-    }
+//    if ([FBSDKAccessToken currentAccessToken] && [[FBSDKAccessToken currentAccessToken].declinedPermissions containsObject:@"email"] == NO) {
+//        
+//        // request user info using graph api
+//        [self reqGraphAPI:[[FBSDKAccessToken currentAccessToken] tokenString]];
+//    }
     // Token not saved, or saved, but didn't provide email, so retrying -> show webview again
-    else {
+//    else {
+    
         // REQUEST PERMISSIONS/AUTHORIZATION FROM FB...
         // displays a webview,
         // first time - user needs to login with email/password
@@ -448,6 +451,11 @@
         // but what if user wants to log into another account? they can manually log out from safari
         
         FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    
+        // if there was a token saved from earlier, logout before trying to login another user
+        // remove this line of code if checking for token above
+        [login logOut];
+    
         [login logInWithReadPermissions:@[@"public_profile", @"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
             
             if (error == nil) {
@@ -483,7 +491,7 @@
                 return;
             }
         }];
-    }
+//    }
 }
 
 - (void)reqGraphAPI:(NSString *)strAccessToken
