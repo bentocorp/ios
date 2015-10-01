@@ -1660,7 +1660,7 @@
                     // loop through items within current bento
                     for (int i = 0; i < items.count; i++) {
                         
-                        NSLog(@"orderItems - %ld", [items[i][@"id"] integerValue]);
+//                        NSLog(@"orderItems - %ld", [items[i][@"id"] integerValue]);
                         
                         // check if current item is sold out
                         if ([[BentoShop sharedInstance] isDishSoldOut:[items[i][@"id"] integerValue]]) {

@@ -3363,8 +3363,8 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
@@ -3407,8 +3407,8 @@
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
-					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
 					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
