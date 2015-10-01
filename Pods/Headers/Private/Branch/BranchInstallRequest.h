@@ -1,1 +1,1 @@
-../../../Branch/Branch-SDK/Branch-SDK/BranchInstallRequest.h
+../../../Branch/Branch-SDK/Branch-SDK/Requests/BranchInstallRequest.h

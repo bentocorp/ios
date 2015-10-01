@@ -24,6 +24,7 @@ typedef void (^callbackWithParams) (NSDictionary *params, NSError *error);
 typedef void (^callbackWithUrl) (NSString *url, NSError *error);
 typedef void (^callbackWithStatus) (BOOL changed, NSError *error);
 typedef void (^callbackWithList) (NSArray *list, NSError *error);
+typedef void (^callbackWithUrlAndSpotlightIdentifier) (NSString *url, NSString *spotlightIdentifier, NSError *error);
 
 ///----------------
 /// @name Constants
@@ -381,6 +382,13 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
  */
 - (BOOL)handleDeepLink:(NSURL *)url;
 
+/**
+ Allow Branch to handle restoration from an NSUserActivity, returning whether or not it was from a Branch link.
+ 
+ @param userActivity The NSUserActivity that caused the app to be opened.
+*/
+- (BOOL)continueUserActivity:(NSUserActivity *)userActivity;
+
 #pragma mark - Deep Link Controller methods
 
 ///---------------------------
@@ -415,7 +423,7 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
  
  @param retryInterval Number of seconds to wait between retries.
  */
-- (void)setRetryInterval:(NSInteger)retryInterval;
+- (void)setRetryInterval:(NSTimeInterval)retryInterval;
 
 /**
  Specify the max number of times to retry in the case of a Branch server error
@@ -429,7 +437,12 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
  
  @param timeout Number of seconds to before a request is considered timed out.
  */
-- (void)setNetworkTimeout:(NSInteger)timeout;
+- (void)setNetworkTimeout:(NSTimeInterval)timeout;
+
+/**
+ Specify that Branch should not use an invisible SFSafariViewController to attempt cookie-based matching.
+ */
+- (void)enableCookieBasedMatching;
 
 #pragma mark - Session Item methods
 
@@ -754,6 +767,23 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
 - (NSString *)getShortURLWithParams:(NSDictionary *)params andTags:(NSArray *)tags andChannel:(NSString *)channel andFeature:(NSString *)feature andStage:(NSString *)stage andAlias:(NSString *)alias ignoreUAString:(NSString *)ignoreUAString;
 
 /**
+ Get a short url with specified tags, params, channel, feature, and stage. The usage type will default to unlimited.
+ 
+ @param params Dictionary of parameters to include in the link.
+ @param tags An array of tags to associate with this link, useful for tracking.
+ @param channel The channel for the link. Examples could be Facebook, Twitter, SMS, etc, depending on where it will be shared.
+ @param feature The feature this is utilizing. Examples could be Sharing, Referring, Inviting, etc.
+ @param stage The stage used for the generated link, indicating what part of a funnel the user is in.
+ @param alias The alias for a link.
+ @param ignoreUAString The User Agent string to tell the server to ignore the next request from, to prevent it from treating a preview scrape as a link click.
+ @param forceLinkCreation Whether we should create a link from the Branch Key even if initSession failed. Defaults to NO.
+ @warning This method makes a synchronous url request.
+ @warning This method is primarily intended to be an internal Branch method, used to work around a bug with SLComposeViewController
+ @warning This can fail if the alias is already taken.
+ */
+- (NSString *)getShortURLWithParams:(NSDictionary *)params andTags:(NSArray *)tags andChannel:(NSString *)channel andFeature:(NSString *)feature andStage:(NSString *)stage andAlias:(NSString *)alias ignoreUAString:(NSString *)ignoreUAString forceLinkCreation:(BOOL)forceLinkCreation;
+
+/**
  Get a short url with specified tags, params, channel, feature, stage, and type.
  
  @param params Dictionary of parameters to include in the link.
@@ -1049,6 +1079,151 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
  @param callback Callback called with the url.
  */
 - (void)getReferralUrlWithParams:(NSDictionary *)params andTags:(NSArray *)tags andChannel:(NSString *)channel andCallback:(callbackWithUrl)callback;
+
+- (void)getSpotlightUrlWithParams:(NSDictionary *)params callback:(callbackWithParams)callback;
+
+#pragma mark - Content Discovery methods
+
+///--------------------------------
+/// @name Content Discovery methods
+///--------------------------------
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. It will not be public by default. Type defaults to kUTTypeImage.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. It will not be public by default. Type defaults to kUTTypeImage.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param callback Callback called with the Branch url this will fallback to.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description callback:(callbackWithUrl)callback;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. Will be public if specified. Type defaults to kUTTypeImage.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param publiclyIndexable Whether or not this item should be added to Apple's public search index.
+ @param callback Callback called with the Branch url this will fallback to.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description publiclyIndexable:(BOOL)publiclyIndexable callback:(callbackWithUrl)callback;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. Will be public if specified. You can override the type as desired, using one of the types provided in MobileCoreServices.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param type The type to use for the NSUserActivity, taken from the list of constants provided in the MobileCoreServices framework.
+ @param publiclyIndexable Whether or not this item should be added to Apple's public search index.
+ @param callback Callback called with the Branch url this will fallback to.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description type:(NSString *)type publiclyIndexable:(BOOL)publiclyIndexable callback:(callbackWithUrl)callback;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. Will be public if specified. You can override the type as desired, using one of the types provided in MobileCoreServices.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param thumbnailUrl Url to an image to be used for the thumnbail in spotlight.
+ @param type The type to use for the NSUserActivity, taken from the list of constants provided in the MobileCoreServices framework.
+ @param publiclyIndexable Whether or not this item should be added to Apple's public search index.
+ @param callback Callback called with the Branch url this will fallback to.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description thumbnailUrl:(NSURL *)thumbnailUrl type:(NSString *)type publiclyIndexable:(BOOL)publiclyIndexable callback:(callbackWithUrl)callback;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. Will be public if specified. You can override the type as desired, using one of the types provided in MobileCoreServices.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param publiclyIndexable Whether or not this item should be added to Apple's public search index.
+ @param thumbnailUrl Url to an image to be used for the thumnbail in spotlight.
+ @param type The type to use for the NSUserActivity, taken from the list of constants provided in the MobileCoreServices framework.
+ @param keywords A set of keywords to be used in Apple's search index.
+ @param callback Callback called with the Branch url this will fallback to.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description thumbnailUrl:(NSURL *)thumbnailUrl type:(NSString *)type publiclyIndexable:(BOOL)publiclyIndexable keywords:(NSSet *)keywords callback:(callbackWithUrl)callback;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. Will be public if specified. You can override the type as desired, using one of the types provided in MobileCoreServices.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param thumbnailUrl Url to an image to be used for the thumnbail in spotlight.
+ @param linkParams Additional params to be added to the NSUserActivity. These will also be added to the Branch link.
+ @param publiclyIndexable Whether or not this item should be added to Apple's public search index.
+ @param keywords A set of keywords to be used in Apple's search index.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description thumbnailUrl:(NSURL *)thumbnailUrl linkParams:(NSDictionary *)linkParams publiclyIndexable:(BOOL)publiclyIndexable keywords:(NSSet *)keywords;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. Will be public if specified. You can override the type as desired, using one of the types provided in MobileCoreServices.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param thumbnailUrl Url to an image to be used for the thumnbail in spotlight.
+ @param linkParams Additional params to be added to the NSUserActivity. These will also be added to the Branch link.
+ @param type The type to use for the NSUserActivity, taken from the list of constants provided in the MobileCoreServices framework.
+ @param publiclyIndexable Whether or not this item should be added to Apple's public search index.
+ @param keywords A set of keywords to be used in Apple's search index.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description thumbnailUrl:(NSURL *)thumbnailUrl linkParams:(NSDictionary *)linkParams type:(NSString *)type publiclyIndexable:(BOOL)publiclyIndexable keywords:(NSSet *)keywords;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. Will be public if specified. You can override the type as desired, using one of the types provided in MobileCoreServices.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param thumbnailUrl Url to an image to be used for the thumnbail in spotlight.
+ @param type The type to use for the NSUserActivity, taken from the list of constants provided in the MobileCoreServices framework.
+ @param publiclyIndexable Whether or not this item should be added to Apple's public search index.
+ @param keywords A set of keywords to be used in Apple's search index.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description thumbnailUrl:(NSURL *)thumbnailUrl type:(NSString *)type publiclyIndexable:(BOOL)publiclyIndexable keywords:(NSSet *)keywords;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. Will be public if specified. You can override the type as desired, using one of the types provided in MobileCoreServices.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param thumbnailUrl Url to an image to be used for the thumnbail in spotlight.
+ @param type The type to use for the NSUserActivity, taken from the list of constants provided in the MobileCoreServices framework.
+ @param publiclyIndexable Whether or not this item should be added to Apple's public search index.
+ @param keywords A set of keywords to be used in Apple's search index.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description thumbnailUrl:(NSURL *)thumbnailUrl linkParams:(NSDictionary *)linkParams publiclyIndexable:(BOOL)publiclyIndexable;
+
+/**
+ Take the current screen and make it discoverable, adding it to Apple's Core Spotlight index. Will be public if specified. You can override the type as desired, using one of the types provided in MobileCoreServices.
+ 
+ @param title Title for the spotlight preview item.
+ @param description Description for the spotlight preview item.
+ @param thumbnailUrl Url to an image to be used for the thumnbail in spotlight.
+ @param linkParams Additional params to be added to the NSUserActivity. These will also be added to the Branch link.
+ @param publiclyIndexable Whether or not this item should be added to Apple's public search index.
+ @param type The type to use for the NSUserActivity, taken from the list of constants provided in the MobileCoreServices framework.
+ @param keywords A set of keywords to be used in Apple's search index.
+ @param callback Callback called with the Branch url this will fallback to.
+ @warning These functions are only usable on iOS 9 or above. Earlier versions will simply receive the callback with an error.
+ */
+- (void)createDiscoverableContentWithTitle:(NSString *)title description:(NSString *)description thumbnailUrl:(NSURL *)thumbnailUrl linkParams:(NSDictionary *)linkParams type:(NSString *)type publiclyIndexable:(BOOL)publiclyIndexable keywords:(NSSet *)keywords callback:(callbackWithUrl)callback;
 
 #pragma mark - Referral Code methods
 

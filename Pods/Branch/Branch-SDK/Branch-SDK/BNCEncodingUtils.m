@@ -198,7 +198,9 @@ static const short _base64DecodingTable[256] = {
 }
 
 + (NSData *)encodeDictionaryToJsonData:(NSDictionary *)dictionary {
-    return [[BNCEncodingUtils encodeDictionaryToJsonString:dictionary] dataUsingEncoding:NSUTF8StringEncoding];
+    NSString *jsonString = [BNCEncodingUtils encodeDictionaryToJsonString:dictionary];
+    NSUInteger length = [jsonString lengthOfBytesUsingEncoding:NSUTF8StringEncoding];
+    return [NSData dataWithBytes:[jsonString UTF8String] length:length];
 }
 
 + (NSString *)encodeDictionaryToJsonString:(NSDictionary *)dictionary {
@@ -328,7 +330,9 @@ static const short _base64DecodingTable[256] = {
 }
 
 + (NSString *)urlEncodedString:(NSString *)string {
-    return (NSString *)CFBridgingRelease(CFURLCreateStringByAddingPercentEscapes(NULL, (CFStringRef)string, NULL, CFSTR("!*'\"();:@&=+$,/?%#[]% "), CFStringConvertNSStringEncodingToEncoding(NSUTF8StringEncoding)));
+    NSMutableCharacterSet *charSet = [[NSCharacterSet URLQueryAllowedCharacterSet] mutableCopy];
+    [charSet removeCharactersInString:@"!*'\"();:@&=+$,/?%#[]% "];
+    return [string stringByAddingPercentEncodingWithAllowedCharacters:charSet];
 }
 
 + (NSString *)encodeDictionaryToQueryString:(NSDictionary *)dictionary {
@@ -411,7 +415,7 @@ static const short _base64DecodingTable[256] = {
         NSArray *kv = [pair componentsSeparatedByString:@"="];
         if (kv.count > 1) { // If this key has a value (so, not foo&bar=...)
             NSString *key = kv[0];
-            NSString *val = [kv[1] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+            NSString *val = [kv[1] stringByRemovingPercentEncoding]; // uses the default UTF-8 encoding
             
             // Don't add empty items
             if (val.length) {

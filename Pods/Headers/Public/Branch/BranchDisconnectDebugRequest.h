@@ -1,1 +1,1 @@
-../../../Branch/Branch-SDK/Branch-SDK/BranchDisconnectDebugRequest.h
+../../../Branch/Branch-SDK/Branch-SDK/Requests/BranchDisconnectDebugRequest.h

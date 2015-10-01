@@ -1,1 +1,1 @@
-../../../Branch/Branch-SDK/Branch-SDK/BranchLogRequest.h
+../../../Branch/Branch-SDK/Branch-SDK/Requests/BranchLogRequest.h

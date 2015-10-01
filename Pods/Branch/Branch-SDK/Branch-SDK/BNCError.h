@@ -13,10 +13,12 @@ FOUNDATION_EXPORT NSString * const BNCErrorDomain;
 enum {
     BNCInitError = 1000,
     BNCDuplicateResourceError,
-    BNCInvalidReferralCodeError,
+    BNCInvalidPromoCodeError,
     BNCRedeemCreditsError,
     BNCBadRequestError,
-    BNCServerProblemError
+    BNCServerProblemError,
+    BNCNilLogError,
+    BNCVersionError
 };
 
 @interface BNCError : NSObject

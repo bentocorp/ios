@@ -1,1 +1,1 @@
-../../../Branch/Branch-SDK/Branch-SDK/BranchLogoutRequest.h
+../../../Branch/Branch-SDK/Branch-SDK/Requests/BranchLogoutRequest.h

@@ -1,1 +1,1 @@
-../../../Branch/Branch-SDK/Branch-SDK/BranchCreditHistoryRequest.h
+../../../Branch/Branch-SDK/Branch-SDK/Requests/BranchCreditHistoryRequest.h

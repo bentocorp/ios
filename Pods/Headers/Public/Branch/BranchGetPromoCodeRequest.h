@@ -1,1 +1,1 @@
-../../../Branch/Branch-SDK/Branch-SDK/BranchGetPromoCodeRequest.h
+../../../Branch/Branch-SDK/Branch-SDK/Requests/BranchGetPromoCodeRequest.h

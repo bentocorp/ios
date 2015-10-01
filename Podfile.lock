@@ -2,17 +2,17 @@ PODS:
   - Adjust (4.2.7):
     - Adjust/Core (= 4.2.7)
   - Adjust/Core (4.2.7)
-  - Branch (0.10.5)
+  - Branch (0.11.6)
   - Canvas (0.1.2)
   - FCUUID (1.1.4):
     - UICKeyChainStore (~> 1.0.5)
   - FDKeychain (1.2.2)
-  - KIF (3.2.3):
-    - KIF/XCTest (= 3.2.3)
-  - KIF/XCTest (3.2.3)
-  - Mixpanel (2.7.3):
-    - Mixpanel/MPCategoryHelpers (= 2.7.3)
-  - Mixpanel/MPCategoryHelpers (2.7.3)
+  - KIF (3.3.0):
+    - KIF/Core (= 3.3.0)
+  - KIF/Core (3.3.0)
+  - Mixpanel (2.8.3):
+    - Mixpanel/Mixpanel (= 2.8.3)
+  - Mixpanel/Mixpanel (2.8.3)
   - PaymentKit (1.1.1)
   - PureLayout (3.0.0)
   - SDWebImage (3.7.3):
@@ -55,12 +55,12 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Adjust: 2c3d4db6047c6bba68d7c5ede63fbdc989eb57b7
-  Branch: c12209a965c1f93083fb515084a4f5b8cbfc7c56
+  Branch: 30126fc6fbb24a912e52cf2c5ca12d2433abdb3d
   Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
   FCUUID: 178c3d7907b1399137f1093f9c04ce4825755292
   FDKeychain: ce0d5e4fac972c28e921e893ffe982832695d17b
-  KIF: a94bffe9c97e449e44f8fa481c53243d21309e1e
-  Mixpanel: 1d387d76800e07e953958c62c97fea27f13632dd
+  KIF: 0a82046d06f3648799cac522d2d0f7934214caac
+  Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
   PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
   PureLayout: 270dfee2236f697ab1d5e2771c2e5c248495fa0d
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84

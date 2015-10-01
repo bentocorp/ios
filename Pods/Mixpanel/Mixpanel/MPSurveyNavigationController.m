@@ -34,6 +34,9 @@
 
 @implementation MPSurveyNavigationController
 
+// Since view is declared as a different class in superclass UIViewController,
+// indicate dynamic to use parent accessors.
+@dynamic view;
 
 - (void)viewDidLoad
 {
@@ -145,8 +148,7 @@
         if ((NSNull *)controller == [NSNull null]) {
             MPSurveyQuestion *question = _survey.questions[index];
             NSString *storyboardIdentifier = [NSString stringWithFormat:@"%@ViewController", NSStringFromClass([question class])];
-            UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-            controller = [storyboard instantiateViewControllerWithIdentifier:storyboardIdentifier];
+            controller = [self.storyboard instantiateViewControllerWithIdentifier:storyboardIdentifier];
             if (controller) {
                 controller.delegate = self;
                 controller.question = question;
