@@ -307,58 +307,55 @@
     loadingHUD.textLabel.text = @"Logging in...";
     [loadingHUD showInView:self.view];
     
-    // Token is already available, not retrying && email has been granted already
-    if ([FBSDKAccessToken currentAccessToken] && [[FBSDKAccessToken currentAccessToken].declinedPermissions containsObject:@"email"] == NO) {
+    /*Unlike Sign In flow, don't check for currentAccessToken, show webview every time*/
+    
+    // REQUEST PERMISSIONS/AUTHORIZATION FROM FB...
+    // displays a webview,
+    // first time - user needs to login with email/password
+    // then they can choose which permissions to grant (public profile is mandatory, but email is optional)
+    // if they chose to not provide email (strEmail == nil), app will prompt an error alert and allow them to retry because
+    // once they authorized public profile before, FB login won't ask for it again when choosing permissions to grant
+    // not providing email this time would disable the OK button in the FB webview - can't continue further
+    // if all info have been authorized before, "You have already authorize Bento" would be shown in webview
+    // if 'done' or 'cancel' (both sets result.isCancelled to yes), dismiss loadingHUD, and cancel out login
+    // but what if user wants to log into another account? they can manually log out from safari
+    
+    FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
+    
+    // if there was a token saved from earlier, logout before trying to login another user
+    [login logOut];
+    
+    [login logInWithReadPermissions:@[@"public_profile", @"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
         
-        // request user info using graph api
-        [self reqGraphAPI:[[FBSDKAccessToken currentAccessToken] tokenString]];
-    }
-    // Token not saved, or saved, but didn't provide email, so retrying -> show webview again
-    else {
-        // REQUEST PERMISSIONS/AUTHORIZATION FROM FB...
-        // displays a webview,
-        // first time - user needs to login with email/password
-        // then they can choose which permissions to grant (public profile is mandatory, but email is optional)
-        // if they chose to not provide email (strEmail == nil), app will prompt an error alert and allow them to retry because
-        // once they authorized public profile before, FB login won't ask for it again when choosing permissions to grant
-        // not providing email this time would disable the OK button in the FB webview - can't continue further
-        // if all info have been authorized before, "You have already authorize Bento" would be shown in webview
-        // if 'done' or 'cancel' (both sets result.isCancelled to yes), dismiss loadingHUD, and cancel out login
-        // but what if user wants to log into another account? they can manually log out from safari
-        
-        FBSDKLoginManager *login = [[FBSDKLoginManager alloc] init];
-        [login logInWithReadPermissions:@[@"public_profile", @"email"] fromViewController:self handler:^(FBSDKLoginManagerLoginResult *result, NSError *error) {
+        if (error == nil) {
             
-            if (error == nil) {
-                
-                if (result.isCancelled) {
-                    [loadingHUD dismiss];
-                    NSLog(@"Cancelled");
-                }
-                else {
-                    NSLog(@"Logged in");
-                    
-                    [self reqGraphAPI:[[FBSDKAccessToken currentAccessToken] tokenString]];
-                }
-            }
-            // error != nil
-            else {
-                NSLog(@"Process error");
-                
+            if (result.isCancelled) {
                 [loadingHUD dismiss];
-                
-                MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error"
-                                                                    message:error.debugDescription
-                                                                   delegate:nil
-                                                          cancelButtonTitle:@"OK"
-                                                           otherButtonTitle:nil];
-                [alertView showInView:self.view];
-                alertView = nil;
-                
-                return;
+                NSLog(@"Cancelled");
             }
-        }];
-    }
+            else {
+                NSLog(@"Logged in");
+                
+                [self reqGraphAPI:[[FBSDKAccessToken currentAccessToken] tokenString]];
+            }
+        }
+        // error != nil
+        else {
+            NSLog(@"Process error - %@", error.description);
+            
+            [loadingHUD dismiss];
+            
+            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@""
+                                                                message:@"An error occured while trying to connect to Facebook."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                       otherButtonTitle:nil];
+            [alertView showInView:self.view];
+            alertView = nil;
+            
+            return;
+        }
+    }];
 }
 
 - (void)reqGraphAPI:(NSString *)strAccessToken
@@ -459,7 +456,11 @@
         if (error.code == 403) {
             [[BentoShop sharedInstance] setSignInStatus:NO];
             
-            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:@"An error occured while trying to connect to Facebook." delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@""
+                                                                message:@"An error occured while trying to connect to Facebook."
+                                                               delegate:nil
+                                                      cancelButtonTitle:@"OK"
+                                                       otherButtonTitle:nil];
             [alertView showInView:self.view];
             alertView = nil;
             return;
