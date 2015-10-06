@@ -226,7 +226,7 @@
     
     if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
         // You need to authorize Location Services for the APP
-        [self commitOnGetItNow];
+        [self commitOnGetItNow]; // disallowed location services
         
         return;
     }
@@ -1112,6 +1112,8 @@
 
 -(void)commitOnGetItNow
 {
+    [[Mixpanel sharedInstance] track:@"Commit Order Processing"];
+    
     self.btnGetItNow.enabled = NO;
     
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
