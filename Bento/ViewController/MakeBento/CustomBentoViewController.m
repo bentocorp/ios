@@ -411,12 +411,14 @@
     lblBanner.textAlignment = NSTextAlignmentCenter;
     lblBanner.textColor = [UIColor whiteColor];
     
-    if (MPTweakValue(@"Show green banner for regular price", NO))
-        // test
+    if (MPTweakValue(@"Show green banner for regular price", NO)) {
+        // test, show banner
         lblBanner.hidden = NO;
-    else
-        // original
+    }
+    else {
+        // original, don't show banner
         lblBanner.hidden = YES;
+    }
     
     lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
     lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
