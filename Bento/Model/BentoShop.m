@@ -362,10 +362,8 @@ static BentoShop *_shareInstance;
         return [self getNextMenuWeekdayString];
 }
 
-#pragma mark Times, Version Numbers, iOS Min Version
 
-- (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers
-{
+- (NSDictionary *)makeInitCall {
     // API call
     NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest2]];
@@ -374,23 +372,32 @@ static BentoShop *_shareInstance;
     NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
     
     if (data == nil)
-        return;
+        return nil;
     
     NSInteger statusCode = 0;
     if ([response isKindOfClass:[NSHTTPURLResponse class]])
         statusCode = [(NSHTTPURLResponse *)response statusCode];
     
     if (error2 != nil || statusCode != 200)
-        return;
+        return nil;
     
     // parse json
     NSError *parseError = nil;
     NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
     if (initDic == nil)
-        return;
+        return nil;
     
     // set /init results to dictionary
     NSDictionary *initDictionary = [initDic copy];
+    
+    return initDictionary;
+}
+
+#pragma mark Times, Version Numbers, iOS Min Version
+
+- (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers
+{
+    
     
     // Get time strings from /init call
     NSString *lunchTimeString = initDictionary[@"meals"][@"2"][@"startTime"];

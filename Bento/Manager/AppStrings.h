@@ -18,7 +18,6 @@
 #define ABOUT_ITEM_1                            @"about-item-1"
 #define ABOUT_ITEM_2                            @"about-item-2"
 #define ABOUT_ITEM_3                            @"about-item-3"
-#define ABOUT_PRICE                             @"price"
 #define ABOUT_BUTTON_TITLE                      @"about-button"
 
 // Build Screen.
@@ -122,7 +121,7 @@
 #define COMPLETE_TEXT_TOTAL                     @"complete-total"
 #define COMPLETE_TEXT_ADD_PROMO                 @"complete-add-promo"
 #define COMPLETE_BUTTON_FINISH                  @"complete-button"
-#define COMPLETE_TAX_PERCENT                    @"tax_percent"
+
 
 // Remove Bento Confirmation Alert
 #define ALERT_RB_TEXT                           @"complete-remove-all-text"
@@ -192,9 +191,6 @@
 #define OUTOFAREA_PLACEHOLDER_EMAIL             @"out-of-area-input-text"
 #define OUTOFAREA_BUTTON_RECEIVE_COUPON         @"out-of-area-button"
 
-// Sale Price
-#define SALE_PRICE                              @"sale_price"
-
 // Sneak Preview
 #define SNEAK_PREVIEW_BUTTON                    @"closed-sneak-preview-button"
 #define SNEAK_PREVIEW_MAIN_DISH                 @"closed-main-add-button"
@@ -211,8 +207,11 @@
 #define OPEN_LINE_1                             @"open-line1"
 #define OPEN_LINE_2                             @"open-line2"
 
-// Delivery Fee
-#define DELIVERY_FEE                            @"delivery_price"
+// getting from to settings instead of ioscopy
+//#define ABOUT_PRICE                             @"price"
+//#define SALE_PRICE                              @"sale_price"
+//#define DELIVERY_FEE                            @"delivery_price"
+//#define COMPLETE_TAX_PERCENT                    @"tax_percent"
 
 @interface AppStrings : NSObject
 
