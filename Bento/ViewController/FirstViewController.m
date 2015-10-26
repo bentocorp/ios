@@ -196,6 +196,8 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
         if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
+            [[BentoShop sharedInstance] getInit];
+            [[BentoShop sharedInstance] getiOSMinAndCurrentVersions];
             [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [[AppStrings sharedInstance] getAppStrings];
             [[BentoShop sharedInstance] getMenus];

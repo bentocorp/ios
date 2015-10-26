@@ -42,7 +42,7 @@
     
     NSString *originalStatus;
     NSString *currentMode;
-    NSString *todayDate;
+    NSString *todayDate; // ?
     NSString *dinnerMapURLString;
     NSString *lunchMapURLString;
     NSString *geofenceOrderRadiusMetersString;
@@ -395,6 +395,8 @@ static BentoShop *_shareInstance;
     
     // set init results to dictionary
     self.dicInit = [dic copy];
+    
+    NSLog(@"dicInit: %@", self.dicInit);
 }
 
 #pragma mark Times, Version Numbers, iOS Min Version
