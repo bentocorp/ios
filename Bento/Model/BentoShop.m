@@ -22,13 +22,15 @@
 
 @interface BentoShop ()
 
-@property (nonatomic) NSString *strToday;
+
+@property (nonatomic) NSDictionary *dicInit;
 @property (nonatomic) NSDictionary *dicStatus;
 @property (nonatomic) NSDictionary *menuToday;
 @property (nonatomic) NSDictionary *menuNext;
 @property (nonatomic) NSArray *menuStatus;
 @property (nonatomic) MKPolygon *serviceArea;
 @property (nonatomic) NSMutableArray *aryBentos;
+@property (nonatomic) NSString *strToday;
 @property (nonatomic) BOOL prevClosed;
 @property (nonatomic) BOOL prevSoldOut;
 
@@ -363,7 +365,7 @@ static BentoShop *_shareInstance;
 }
 
 
-- (NSDictionary *)makeInitCall {
+- (void)makeInitCall {
     // API call
     NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest2]];
@@ -372,25 +374,23 @@ static BentoShop *_shareInstance;
     NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
     
     if (data == nil)
-        return nil;
+        return;
     
     NSInteger statusCode = 0;
     if ([response isKindOfClass:[NSHTTPURLResponse class]])
         statusCode = [(NSHTTPURLResponse *)response statusCode];
     
     if (error2 != nil || statusCode != 200)
-        return nil;
+        return;
     
     // parse json
     NSError *parseError = nil;
     NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
     if (initDic == nil)
-        return nil;
+        return;
     
-    // set /init results to dictionary
-    NSDictionary *initDictionary = [initDic copy];
-    
-    return initDictionary;
+    // set init results to dictionary
+    self.dicInit = [initDic copy];
 }
 
 #pragma mark Times, Version Numbers, iOS Min Version
