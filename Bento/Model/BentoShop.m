@@ -365,7 +365,7 @@ static BentoShop *_shareInstance;
 }
 
 
-- (void)makeInitCall {
+- (void)getInit {
     // API call
     NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest2]];
@@ -373,35 +373,37 @@ static BentoShop *_shareInstance;
     NSError *error2 = nil;
     NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
     
-    if (data == nil)
+    if (data == nil) {
         return;
+    }
     
     NSInteger statusCode = 0;
-    if ([response isKindOfClass:[NSHTTPURLResponse class]])
+    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
         statusCode = [(NSHTTPURLResponse *)response statusCode];
+    }
     
-    if (error2 != nil || statusCode != 200)
+    if (error2 != nil || statusCode != 200) {
         return;
+    }
     
     // parse json
     NSError *parseError = nil;
-    NSDictionary *initDic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-    if (initDic == nil)
+    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
+    if (dic == nil) {
         return;
+    }
     
     // set init results to dictionary
-    self.dicInit = [initDic copy];
+    self.dicInit = [dic copy];
 }
 
 #pragma mark Times, Version Numbers, iOS Min Version
 
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers
 {
-    
-    
     // Get time strings from /init call
-    NSString *lunchTimeString = initDictionary[@"meals"][@"2"][@"startTime"];
-    NSString *dinnerTimeString = initDictionary[@"meals"][@"3"][@"startTime"];
+    NSString *lunchTimeString = self.dicInit[@"meals"][@"2"][@"startTime"];
+    NSString *dinnerTimeString = self.dicInit[@"meals"][@"3"][@"startTime"];
     
     // set date format
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -420,33 +422,18 @@ static BentoShop *_shareInstance;
     dinnerTime = (float)[componentsDinner hour] + ((float)[componentsDinner minute] / 60);
     
     // Buffer Time
-    NSString *bufferString = initDictionary[@"settings"][@"buffer_minutes"];
+    NSString *bufferString = self.dicInit[@"settings"][@"buffer_minutes"];
     bufferTime = [bufferString floatValue] / 60;
     
     // Current Time
     NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
-    
-    /*-------------------------------------extra: for forced update------------------------------------------------*/
-    self.iosMinVersion = (CGFloat)[initDictionary[@"ios_min_version"] floatValue];
+}
+
+- (void)getiOSMinAndCurrentVersions {
+    /*------------------for forced update---------------*/
+    self.iosMinVersion = (CGFloat)[self.dicInit[@"ios_min_version"] floatValue];
     self.iosCurrentVersion = (CGFloat)[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
-    
-    /*--------------------------------------extra: for service area URL's-------------------------------------------*/
-    lunchMapURLString = initDictionary[@"settings"][@"serviceArea_lunch_map"];
-    dinnerMapURLString = initDictionary[@"settings"][@"serviceArea_dinner_map"];
-    
-    /*--------------------------------------extra: set geofence-------------------------------------------*/
-    [self setGeofenceRadius:initDictionary];
-}
-
-- (void)setGeofenceRadius: (NSDictionary *)initDict
-{
-    geofenceOrderRadiusMetersString = initDict[@"settings"][@"geofence_order_radius_meters"];
-}
-
-- (NSString *)getGeofenceRadius
-{
-    return geofenceOrderRadiusMetersString;
 }
 
 - (NSNumber *)getCurrentTime
@@ -599,9 +586,32 @@ static BentoShop *_shareInstance;
     return menuItems;
 }
 
+- (void)getServiceAreaMapURLs {
+    /*----------------- for service area URL's-------------------*/
+    lunchMapURLString = self.dicInit[@"settings"][@"serviceArea_lunch_map"];
+    dinnerMapURLString = self.dicInit[@"settings"][@"serviceArea_dinner_map"];
+}
+
+- (void)setGeofenceRadius {
+    /*------------------set geofence------------------*/
+    [self setGeofenceRadius:self.dicInit];
+}
+
+- (void)setGeofenceRadius: (NSDictionary *)initDict
+{
+    geofenceOrderRadiusMetersString = initDict[@"settings"][@"geofence_order_radius_meters"];
+}
+
+- (NSString *)getGeofenceRadius
+{
+    return geofenceOrderRadiusMetersString;
+}
 
 - (void)getServiceArea
 {
+    [self getServiceAreaMapURLs];
+    [self setGeofenceRadius];
+    
     NSString *strRequest = [NSString stringWithFormat:@"%@/servicearea", SERVER_URL];
     
     NSError *error = nil;
@@ -941,6 +951,8 @@ static BentoShop *_shareInstance;
             // check version first
             if (self.iosCurrentVersion >= self.iosMinVersion)
             {
+                [self getInit];
+                [self getiOSMinAndCurrentVersions];
                 [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
                 [self setLunchOrDinnerModeByTimes];
                 [self checkIfBentoArrayNeedsToBeReset];
