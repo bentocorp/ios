@@ -949,8 +949,8 @@ static BentoShop *_shareInstance;
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
             
             // check version first
-            if (self.iosCurrentVersion >= self.iosMinVersion)
-            {
+            if (self.iosCurrentVersion >= self.iosMinVersion) {
+                
                 [self getInit];
                 [self getiOSMinAndCurrentVersions];
                 [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
