@@ -208,10 +208,10 @@
 #define OPEN_LINE_2                             @"open-line2"
 
 // getting from to settings instead of ioscopy
-#define ABOUT_PRICE                             @"price"
-#define SALE_PRICE                              @"sale_price"
-#define DELIVERY_FEE                            @"delivery_price"
-#define COMPLETE_TAX_PERCENT                    @"tax_percent"
+//#define ABOUT_PRICE                             @"price"
+//#define SALE_PRICE                              @"sale_price"
+//#define DELIVERY_FEE                            @"delivery_price"
+//#define COMPLETE_TAX_PERCENT                    @"tax_percent"
 
 @interface AppStrings : NSObject
 

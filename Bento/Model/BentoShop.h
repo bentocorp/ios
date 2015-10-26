@@ -115,4 +115,9 @@
 
 - (BOOL)didModeOrDateChange;
 
+- (NSString *)getUnitPrice;
+- (NSString *)getSalePrice;
+- (NSString *)getDeliveryPrice;
+- (NSString *)getTaxPercent;
+
 @end

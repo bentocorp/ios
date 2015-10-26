@@ -1158,8 +1158,8 @@
 
 - (void)updateUI
 {
-    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
-    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
+    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     NSString *strTitle;
     

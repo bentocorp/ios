@@ -603,8 +603,8 @@
     [servingLunchCell.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
     
 //    // Prices
-//    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
-//    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+//    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
+//    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
 //    if (salePrice != 0 && salePrice < unitPrice)
 //    {
 //        // Normal Price
@@ -623,8 +623,8 @@
 
 - (void)updateUI
 {
-    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
-    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
+    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     
     if (salePrice != 0 && salePrice < unitPrice)
     {

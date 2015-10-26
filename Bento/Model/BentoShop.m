@@ -758,6 +758,23 @@ static BentoShop *_shareInstance;
     return [menuInfo objectForKey:@"day_text"];
 }
 
+#pragma mark Prices and Tax
+- (NSString *)getUnitPrice {
+    return self.dicInit[@"settings"][@"price"];
+}
+
+- (NSString *)getSalePrice {
+    return self.dicInit[@"settings"][@"sale_price"];
+}
+
+- (NSString *)getDeliveryPrice {
+    return self.dicInit[@"settings"][@"delivery_price"];
+}
+
+- (NSString *)getTaxPercent {
+    return self.dicInit[@"settings"][@"tax_percent"];
+}
+
 - (NSString *)getNextMenuWeekdayString
 {
     if (self.menuNext == nil)

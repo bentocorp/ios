@@ -63,8 +63,8 @@
     self.lblTitle.text = [[AppStrings sharedInstance] getString:CREDITCARD_TITLE];
     self.lblMessage.text = [[AppStrings sharedInstance] getString:CREDITCARD_TEXT];
     
-    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
-    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
+    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     
     if (salePrice != 0 && salePrice < unitPrice)
         self.lblPrice.text = [NSString stringWithFormat:@"$%ld", (long)salePrice];

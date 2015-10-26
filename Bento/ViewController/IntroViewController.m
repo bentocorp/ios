@@ -114,8 +114,8 @@
     [self.ivLogo sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo"]];
     
     // Get prices
-    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
-    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
+    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     
     // Set price string
     NSString *strPrice = @"";

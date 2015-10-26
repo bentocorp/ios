@@ -173,7 +173,7 @@
     _promoDiscount = [userDefaults integerForKey:KEY_PROMO_DISCOUNT];
     
     _deliveryTipPercent = 15;
-    _taxPercent = [[[AppStrings sharedInstance] getString:COMPLETE_TAX_PERCENT] floatValue];
+    _taxPercent = [[[BentoShop sharedInstance] getTaxPercent] floatValue];
     [self updatePriceLabels];
     
     _currentIndexPath = nil;
@@ -634,8 +634,8 @@
 
 - (float)getTotalPrice
 {
-    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
-    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
+    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     
     if (MPTweakValue(@"$0.00 Delivery Fee", NO)) {
         // test
@@ -643,7 +643,7 @@
     }
     else {
         // original
-        deliveryPrice = [[AppStrings sharedInstance] getFloat:DELIVERY_FEE];
+        deliveryPrice = [[[BentoShop sharedInstance] getDeliveryPrice] floatValue];
     }
     
     // Meal (_totalPrice)
@@ -1272,8 +1272,8 @@
         }
     }
     
-    NSInteger salePrice = [[AppStrings sharedInstance] getInteger:SALE_PRICE];
-    NSInteger unitPrice = [[AppStrings sharedInstance] getInteger:ABOUT_PRICE];
+    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
+    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     if (salePrice != 0 && salePrice < unitPrice) {
         cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)salePrice];
     }
