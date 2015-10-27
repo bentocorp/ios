@@ -286,7 +286,7 @@
             [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_SELECT] forState:UIControlStateNormal];
         }
         else {
-            [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_SELECT] forState:UIControlStateNormal];
+//            [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_SELECT] forState:UIControlStateNormal];
         }
         
         [UIView setAnimationsEnabled:YES];
