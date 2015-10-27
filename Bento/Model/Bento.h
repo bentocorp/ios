@@ -33,7 +33,7 @@
 
 // Not Testing
 - (NSString *)getBentoName;
-- (NSInteger)getUnitPrice;
+- (float)getUnitPrice;
 
 // Testing
 - (BOOL)isEmpty;

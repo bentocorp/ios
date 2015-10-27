@@ -41,7 +41,7 @@
     return [dishInfo objectForKey:@"name"];
 }
 
-- (NSInteger)getUnitPrice {
+- (float)getUnitPrice {
     if (self.indexMainDish == 0)
         return 0;
     
@@ -51,10 +51,10 @@
     }
     
     if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""]) {
-        return [[[BentoShop sharedInstance] getUnitPrice] integerValue];
+        return [[[BentoShop sharedInstance] getUnitPrice] floatValue];
     }
     
-    return [dishInfo[@"price"] integerValue];
+    return [dishInfo[@"price"] floatValue];
 }
 
 - (NSInteger)getMainDish

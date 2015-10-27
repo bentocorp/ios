@@ -143,11 +143,6 @@
             }
             else {
                 self.strUnitPrice = dishInfo[@"price"]; // unit price
-                
-                // testing
-                NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-                [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-                NSLog(@"%@", [numberFormatter stringFromNumber:@([[[BentoShop sharedInstance] getUnitPrice] floatValue])]);
             }
         }
     }
@@ -155,7 +150,7 @@
     //
     if (self.isMain == YES && self.priceTagLabel == nil) {
         // price tag shown on normal state only
-        self.priceTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 40, self.frame.size.height - 46, 80, 36)];
+        self.priceTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 30, self.frame.size.height - 46, 60, 36)];
         self.priceTagLabel.backgroundColor = [UIColor clearColor];
         self.priceTagLabel.textColor = [UIColor whiteColor];
         self.priceTagLabel.layer.cornerRadius = 5;
@@ -224,7 +219,12 @@
         // check to see if price has been properly set
         if ([self.strUnitPrice isEqualToString:@""]) {
             // no price set
-            self.unitPriceLabel.text = [NSString stringWithFormat:@"$%@", [[BentoShop sharedInstance] getUnitPrice]]; // set default settings.price
+            
+            // format to currency style
+            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+            [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+            
+            self.unitPriceLabel.text = [NSString stringWithFormat:@"%@", [numberFormatter stringFromNumber:@([[[BentoShop sharedInstance] getUnitPrice] floatValue])]]; // set default settings.price
         }
         else {
             self.unitPriceLabel.text = [NSString stringWithFormat:@"$%@", self.strUnitPrice]; // set unit price

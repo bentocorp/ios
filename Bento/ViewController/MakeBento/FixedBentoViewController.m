@@ -602,7 +602,10 @@
     
     if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""])
     {
-        servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"$%@", [[BentoShop sharedInstance] getUnitPrice]]; // default settings.price
+        // format to currency style
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+        servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"%@", [numberFormatter stringFromNumber:@([[[BentoShop sharedInstance] getUnitPrice] floatValue])]]; // default settings.price
     }
     else {
         servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"$%@", dishInfo[@"price"]]; // custom price

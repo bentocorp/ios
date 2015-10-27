@@ -1287,7 +1287,11 @@
     }
     else {
 //        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
-        cell.lblBentoPrice.text = [NSString stringWithFormat:@"%ld", (long)[curBento getUnitPrice]];
+        
+        // format to currency style
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+        cell.lblBentoPrice.text = [NSString stringWithFormat:@"%@", [numberFormatter stringFromNumber:@([curBento getUnitPrice])]];
     }
     
     cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
