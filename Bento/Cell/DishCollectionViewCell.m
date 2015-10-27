@@ -36,6 +36,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UILabel *lblDescription;
 
+@property (nonatomic) BOOL hasSetOnce;
 @property (nonatomic) BOOL isMain;
 @property (nonatomic) NSString *strUnitPrice;
 
@@ -45,6 +46,10 @@
 
 @property (nonatomic) NSInteger state;
 @property (nonatomic) NSInteger index;
+
+@property (nonatomic) UIView *lineDivider;
+@property (nonatomic) UILabel *addToBentoLabel;
+@property (nonatomic) UILabel *unitPriceLabel;
 
 @end
 
@@ -63,7 +68,7 @@
     self.gradientLayer.opacity = 0.8f;
     
     self.ivMask.hidden = YES;
-    [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
+//    [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
 }
 
 - (IBAction)onAction:(id)sender
@@ -131,7 +136,13 @@
     if (isMain == YES) {
         if ([dishInfo[@"type"] isEqualToString:@"main"]) {
             self.isMain = isMain; // YES
-            self.strUnitPrice = dishInfo[@"price"]; // unit price
+            
+            if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""]) {
+                self.strUnitPrice = @""; // null
+            }
+            else {
+                self.strUnitPrice = dishInfo[@"price"]; // unit price
+            }
         }
     }
     
@@ -161,38 +172,49 @@
     
     // if current item is main
     if (self.isMain == YES) {
-        // check to see if price has been properly set
-        if (self.strUnitPrice != 0 || ![self.strUnitPrice isEqualToString:@""] || [self.strUnitPrice isEqual:[NSNull null]]) {
-            // create a line divider
-            UIView *lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, 1, self.btnAction.frame.size.height)];
-            lineDivider.backgroundColor = [UIColor whiteColor];
-            [self.btnAction addSubview:lineDivider];
             
-            // display price label
+        // only create(set) the labels once! but OK to reset text!
+        if (self.hasSetOnce == NO) {
+            self.hasSetOnce = YES;
+            
+            // create a line divider
+            self.lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, 1, self.btnAction.frame.size.height)];
+            self.lineDivider.backgroundColor = [UIColor whiteColor];
+            [self.btnAction addSubview:self.lineDivider];
+            
+            // SPACING
             float priceSpacingWidth = (self.btnAction.frame.size.width - (self.btnAction.frame.size.width * 0.75));
-            UILabel *unitPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, priceSpacingWidth, self.btnAction.frame.size.height)];
-            unitPriceLabel.textAlignment = NSTextAlignmentCenter;
-            unitPriceLabel.backgroundColor = [UIColor clearColor];
-            unitPriceLabel.textColor = [UIColor whiteColor];
-            unitPriceLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
-            unitPriceLabel.text = @"$9.00";
-            [self.btnAction addSubview:unitPriceLabel];
+            
+            // ADD TO BENTO
+            self.addToBentoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.btnAction.frame.size.width - priceSpacingWidth, self.btnAction.frame.size.height)];
+            self.addToBentoLabel.textAlignment = NSTextAlignmentCenter;
+            self.addToBentoLabel.backgroundColor = [UIColor clearColor];
+            self.addToBentoLabel.textColor = [UIColor whiteColor];
+            self.addToBentoLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
+            self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: MAINDISH_ADD_BUTTON_NORMAL];
+            [self.btnAction addSubview:self.addToBentoLabel];
+            
+            // PRICE LABEL
+            self.unitPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, priceSpacingWidth, self.btnAction.frame.size.height)];
+            self.unitPriceLabel.textAlignment = NSTextAlignmentCenter;
+            self.unitPriceLabel.backgroundColor = [UIColor clearColor];
+            self.unitPriceLabel.textColor = [UIColor whiteColor];
+            self.unitPriceLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
+            [self.btnAction addSubview:self.unitPriceLabel];
+        }
+        
+        // check to see if price has been properly set
+        if ([self.strUnitPrice isEqualToString:@""]) {
+            // no price set
+            self.unitPriceLabel.text = [NSString stringWithFormat:@"$%@", [[BentoShop sharedInstance] getUnitPrice]]; // set default settings.price
         }
         else {
-            // price was not properly set...
-    
-            // testing...
-            // display price label
-            float priceSpacingWidth = (self.btnAction.frame.size.width - (self.btnAction.frame.size.width * 0.75));
-            UILabel *unitPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, priceSpacingWidth, self.btnAction.frame.size.height)];
-            unitPriceLabel.textAlignment = NSTextAlignmentCenter;
-            unitPriceLabel.backgroundColor = [UIColor clearColor];
-            unitPriceLabel.textColor = [UIColor whiteColor];
-            unitPriceLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
-            unitPriceLabel.text = @"$9.00";
-            [self.btnAction addSubview:unitPriceLabel];
+            self.unitPriceLabel.text = [NSString stringWithFormat:@"$%@", self.strUnitPrice]; // set unit price
         }
+
     }
+    
+    NSLog(@"priceLabel: %@", self.strUnitPrice);
     
     self.ivBanner.frame = CGRectMake(self.frame.size.width - self.frame.size.height / 2, 0, self.frame.size.height / 2, self.frame.size.height / 2);
     
@@ -202,16 +224,16 @@
     if (self.state == DISH_CELL_NORMAL) {
         
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, self.viewMain.frame.size.height / 2);
-        
         self.lblDescription.hidden = YES;
         self.btnAction.hidden = YES;
-        
         self.ivMask.hidden = YES;
         
-        if (_isSoldOut)
+        if (_isSoldOut) {
             self.ivBanner.hidden = NO;
-        else
+        }
+        else {
             self.ivBanner.hidden = YES;
+        }
     }
     else if (self.state == DISH_CELL_FOCUS) {
         
@@ -221,9 +243,7 @@
         [self.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
         self.lblDescription.hidden = NO;
-        
         self.btnAction.hidden = NO;
-        
         self.ivBanner.hidden = YES;
         
         if (_isSoldOut) {
@@ -239,7 +259,7 @@
                 [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
             }
             else {
-                [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
+//                [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
             }
             
             [UIView setAnimationsEnabled:YES];

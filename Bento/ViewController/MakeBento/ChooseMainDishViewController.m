@@ -248,14 +248,13 @@
         if ([dishInfo[@"type"] isEqualToString:@"main"]) {
             [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
         }
-        else {
-            [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
-        }
         
-        if (_selectedIndex == indexPath.item)
+        if (_selectedIndex == indexPath.item) {
             [cell setCellState:_selectedItemState index:indexPath.item];
-        else
+        }
+        else {
             [cell setCellState:DISH_CELL_NORMAL index:indexPath.item];
+        }
     }
     
     return cell;
@@ -267,18 +266,18 @@
     
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+    
     // if main dish, set isMain to true
     if ([dishInfo[@"type"] isEqualToString:@"main"]) {
         [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
     }
-    else {
-        [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
-    }
     
-    if (_selectedIndex == indexPath.item)
+    if (_selectedIndex == indexPath.item) {
         [myCell setCellState:_selectedItemState index:indexPath.item];
-    else
+    }
+    else {
         [myCell setCellState:DISH_CELL_NORMAL index:indexPath.item];
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -286,30 +285,30 @@
     return CGSizeMake(self.cvMainDishes.frame.size.width, self.cvMainDishes.frame.size.height / 3 - 10);
 }
 
-- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath{
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (_selectedIndex == indexPath.item)
-    {
-        if (_selectedItemState == DISH_CELL_NORMAL)
-        {
-            if (_selectedIndex == _originalDishIndex)
+    if (_selectedIndex == indexPath.item) {
+        if (_selectedItemState == DISH_CELL_NORMAL) {
+            if (_selectedIndex == _originalDishIndex) {
                 _selectedItemState = DISH_CELL_SELECTED;
-            else
+            }
+            else {
                 _selectedItemState = DISH_CELL_FOCUS;
+            }
         }
-        else if (_selectedItemState == DISH_CELL_FOCUS || _selectedItemState == DISH_CELL_SELECTED)
+        else if (_selectedItemState == DISH_CELL_FOCUS || _selectedItemState == DISH_CELL_SELECTED) {
             _selectedItemState = DISH_CELL_NORMAL;
+        }
     }
-    else
-    {
+    else {
         _selectedIndex = indexPath.item;
-        if (_selectedIndex == _originalDishIndex)
+        if (_selectedIndex == _originalDishIndex) {
             _selectedItemState = DISH_CELL_SELECTED;
-        else
+        }
+        else {
             _selectedItemState = DISH_CELL_FOCUS;
+        }
     }
-    
-    [collectionView reloadData];
     
     [self updateUI];
 }
