@@ -177,11 +177,6 @@
         if (self.hasSetOnce == NO) {
             self.hasSetOnce = YES;
             
-            // create a line divider
-            self.lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, 1, self.btnAction.frame.size.height)];
-            self.lineDivider.backgroundColor = [UIColor whiteColor];
-            [self.btnAction addSubview:self.lineDivider];
-            
             // SPACING
             float priceSpacingWidth = (self.btnAction.frame.size.width - (self.btnAction.frame.size.width * 0.75));
             
@@ -189,7 +184,6 @@
             self.addToBentoLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.btnAction.frame.size.width - priceSpacingWidth, self.btnAction.frame.size.height)];
             self.addToBentoLabel.textAlignment = NSTextAlignmentCenter;
             self.addToBentoLabel.backgroundColor = [UIColor clearColor];
-            self.addToBentoLabel.textColor = [UIColor whiteColor];
             self.addToBentoLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
             self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: MAINDISH_ADD_BUTTON_NORMAL];
             [self.btnAction addSubview:self.addToBentoLabel];
@@ -198,9 +192,12 @@
             self.unitPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, priceSpacingWidth, self.btnAction.frame.size.height)];
             self.unitPriceLabel.textAlignment = NSTextAlignmentCenter;
             self.unitPriceLabel.backgroundColor = [UIColor clearColor];
-            self.unitPriceLabel.textColor = [UIColor whiteColor];
             self.unitPriceLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
             [self.btnAction addSubview:self.unitPriceLabel];
+            
+            // line divider
+            self.lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, 1, self.btnAction.frame.size.height)];
+            [self.btnAction addSubview:self.lineDivider];
         }
         
         // check to see if price has been properly set
@@ -242,6 +239,13 @@
         self.btnAction.backgroundColor = [UIColor clearColor];
         [self.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         
+        // change to white color when button not yet tapped
+        if (self.isMain == YES) {
+            self.unitPriceLabel.textColor = [UIColor whiteColor];
+            self.addToBentoLabel.textColor = [UIColor whiteColor];
+            self.lineDivider.backgroundColor = [UIColor whiteColor];
+        }
+        
         self.lblDescription.hidden = NO;
         self.btnAction.hidden = NO;
         self.ivBanner.hidden = YES;
@@ -274,10 +278,15 @@
         self.btnAction.backgroundColor = [UIColor whiteColor];
         [self.btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
         
+        // change to black color when button tapped
+        if (self.isMain == YES) {
+            self.unitPriceLabel.textColor = [UIColor blackColor];
+            self.addToBentoLabel.textColor = [UIColor blackColor];
+            self.lineDivider.backgroundColor = [UIColor blackColor];
+        }
+        
         self.ivBanner.hidden = YES;
-        
         self.lblDescription.hidden = NO;
-        
         self.btnAction.hidden = NO;
         
         [UIView setAnimationsEnabled:NO];
