@@ -274,7 +274,14 @@
         
         BOOL canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID];
         canBeAdded = canBeAdded && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
-        [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:canBeAdded];
+        
+        // if main dish, set isMain to true
+        if ([dishInfo[@"type"] isEqualToString:@"main"]) {
+            [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+        }
+        else {
+            [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
+        }
         
         [cell setSmallDishCell];
         
@@ -296,7 +303,14 @@
     
     BOOL canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID];
     canBeAdded = canBeAdded && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
-    [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:canBeAdded];
+    
+    // if main dish, set isMain to true
+    if ([dishInfo[@"type"] isEqualToString:@"main"]) {
+        [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+    }
+    else {
+        [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
+    }
     
     [myCell setSmallDishCell];
     

@@ -267,7 +267,13 @@
     
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-    [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID]];
+    // if main dish, set isMain to true
+    if ([dishInfo[@"type"] isEqualToString:@"main"]) {
+        [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+    }
+    else {
+        [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
+    }
     
     if (_selectedIndex == indexPath.item)
         [myCell setCellState:_selectedItemState index:indexPath.item];
