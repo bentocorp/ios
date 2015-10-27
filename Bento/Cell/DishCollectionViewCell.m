@@ -68,7 +68,6 @@
     self.gradientLayer.opacity = 0.8f;
     
     self.ivMask.hidden = YES;
-//    [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
 }
 
 - (IBAction)onAction:(id)sender
@@ -222,7 +221,26 @@
         
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, self.viewMain.frame.size.height / 2);
         self.lblDescription.hidden = YES;
-        self.btnAction.hidden = YES;
+        
+        if (self.isMain == YES) {
+            // show
+            [self.btnAction setTitle:self.unitPriceLabel.text forState:UIControlStateNormal];
+            [self.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+            self.btnAction.backgroundColor = [UIColor clearColor];
+            self.btnAction.hidden = NO;
+            self.btnAction.userInteractionEnabled = NO;
+            [self.btnAction sizeThatFits:CGSizeMake(100, self.btnAction.frame.size.height)];
+        }
+        // side
+        else {
+            self.btnAction.hidden = YES;
+        }
+        
+        // hide
+        self.unitPriceLabel.hidden = YES;
+        self.lineDivider.hidden = YES;
+        self.addToBentoLabel.hidden = YES;
+         
         self.ivMask.hidden = YES;
         
         if (_isSoldOut) {
@@ -244,6 +262,13 @@
             self.unitPriceLabel.textColor = [UIColor whiteColor];
             self.addToBentoLabel.textColor = [UIColor whiteColor];
             self.lineDivider.backgroundColor = [UIColor whiteColor];
+            
+            self.unitPriceLabel.hidden = NO;
+            self.lineDivider.hidden = NO;
+            self.addToBentoLabel.hidden = NO;
+            
+            self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: MAINDISH_ADD_BUTTON_NORMAL];
+            self.btnAction.userInteractionEnabled = YES;
         }
         
         self.lblDescription.hidden = NO;
@@ -262,8 +287,9 @@
             if (_isSideDishCell) {
                 [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
             }
+            // main
             else {
-//                [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
+                [self.btnAction setTitle:@"" forState:UIControlStateNormal];
             }
             
             [UIView setAnimationsEnabled:YES];
@@ -283,6 +309,14 @@
             self.unitPriceLabel.textColor = [UIColor blackColor];
             self.addToBentoLabel.textColor = [UIColor blackColor];
             self.lineDivider.backgroundColor = [UIColor blackColor];
+            
+            self.unitPriceLabel.hidden = NO;
+            self.lineDivider.hidden = NO;
+            self.addToBentoLabel.hidden = NO;
+            
+            // in your bento
+            self.addToBentoLabel.text = [[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_SELECT];
+            self.btnAction.userInteractionEnabled = YES;
         }
         
         self.ivBanner.hidden = YES;
@@ -294,8 +328,9 @@
         if (_isSideDishCell) {
             [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_SELECT] forState:UIControlStateNormal];
         }
+        // main
         else {
-//            [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_SELECT] forState:UIControlStateNormal];
+            [self.btnAction setTitle:@"" forState:UIControlStateNormal];
         }
         
         [UIView setAnimationsEnabled:YES];
