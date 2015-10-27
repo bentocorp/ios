@@ -50,6 +50,8 @@
 @property (nonatomic) UIView *lineDivider;
 @property (nonatomic) UILabel *addToBentoLabel;
 @property (nonatomic) UILabel *unitPriceLabel;
+@property (nonatomic) UILabel *priceTagLabel;
+
 
 @end
 
@@ -141,8 +143,27 @@
             }
             else {
                 self.strUnitPrice = dishInfo[@"price"]; // unit price
+                
+                // testing
+                NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+                [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+                NSLog(@"%@", [numberFormatter stringFromNumber:@([[[BentoShop sharedInstance] getUnitPrice] floatValue])]);
             }
         }
+    }
+    
+    //
+    if (self.isMain == YES && self.priceTagLabel == nil) {
+        // price tag shown on normal state only
+        self.priceTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 40, self.frame.size.height - 46, 80, 36)];
+        self.priceTagLabel.backgroundColor = [UIColor clearColor];
+        self.priceTagLabel.textColor = [UIColor whiteColor];
+        self.priceTagLabel.layer.cornerRadius = 5;
+        self.priceTagLabel.layer.borderWidth = 1;
+        self.priceTagLabel.layer.borderColor = [UIColor whiteColor].CGColor;
+        self.priceTagLabel.textAlignment = NSTextAlignmentCenter;
+        self.priceTagLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+        [self addSubview:self.priceTagLabel];
     }
     
     // Image
@@ -222,19 +243,12 @@
         
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, self.viewMain.frame.size.height / 2);
         self.lblDescription.hidden = YES;
+        self.btnAction.hidden = YES;
         
+        // price tag label for normal state only
         if (self.isMain == YES) {
-            // show
-            [self.btnAction setTitle:self.unitPriceLabel.text forState:UIControlStateNormal];
-            [self.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-            self.btnAction.backgroundColor = [UIColor clearColor];
-            self.btnAction.hidden = NO;
-            self.btnAction.userInteractionEnabled = NO;
-            [self.btnAction sizeThatFits:CGSizeMake(100, self.btnAction.frame.size.height)];
-        }
-        // side
-        else {
-            self.btnAction.hidden = YES;
+            self.priceTagLabel.text = self.unitPriceLabel.text;
+            self.priceTagLabel.hidden = NO;
         }
         
         // hide
@@ -270,6 +284,9 @@
             
             self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: MAINDISH_ADD_BUTTON_NORMAL];
             self.btnAction.userInteractionEnabled = YES;
+            
+            // price tag label for normal state only
+            self.priceTagLabel.hidden = YES;
         }
         
         self.lblDescription.hidden = NO;
@@ -277,16 +294,22 @@
         self.ivBanner.hidden = YES;
         
         if (_isSoldOut) {
-//            [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
-            
-            self.addToBentoLabel.text = @"Sold Out";
-            [self.btnAction setTitle:@"" forState:UIControlStateNormal];
+            if (self.isMain == YES) {
+                self.addToBentoLabel.text = @"Sold Out";
+                [self.btnAction setTitle:@"" forState:UIControlStateNormal];
+            }
+            else {
+                [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
+            }
         }
         else if (!_canBeAdded) {
-//            [self.btnAction setTitle:@"Reached to max" forState:UIControlStateNormal];
-            
-            self.addToBentoLabel.text = @"Reached to max";
-            [self.btnAction setTitle:@"" forState:UIControlStateNormal];
+            if (self.isMain == YES) {
+                self.addToBentoLabel.text = @"Reached to max";
+                [self.btnAction setTitle:@"" forState:UIControlStateNormal];
+            }
+            else {
+                [self.btnAction setTitle:@"Reached to max" forState:UIControlStateNormal];
+            }
         }
         else {
             [UIView setAnimationsEnabled:NO];
@@ -324,6 +347,9 @@
             // in your bento
             self.addToBentoLabel.text = [[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_SELECT];
             self.btnAction.userInteractionEnabled = YES;
+            
+            // price tag label for normal state only
+            self.priceTagLabel.hidden = YES;
         }
         
         self.ivBanner.hidden = YES;

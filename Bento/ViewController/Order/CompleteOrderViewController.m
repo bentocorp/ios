@@ -1287,7 +1287,7 @@
     }
     else {
 //        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
-        cell.lblBentoPrice.text = [NSString stringWithFormat:@"%ld", [curBento getUnitPrice]];
+        cell.lblBentoPrice.text = [NSString stringWithFormat:@"%ld", (long)[curBento getUnitPrice]];
     }
     
     cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
@@ -1389,7 +1389,8 @@
         
         NSMutableDictionary *bentoInfo = [[NSMutableDictionary alloc] init];
         [bentoInfo setObject:@"CustomerBentoBox" forKey:@"item_type"];
-        [bentoInfo setObject:[NSString stringWithFormat:@"%ld", (long)_totalPrice] forKey:@"unit_price"];
+        
+        [bentoInfo setObject:[NSString stringWithFormat:@"%ld", (long)[bento getUnitPrice]] forKey:@"unit_price"];
         
         NSMutableArray *dishArray = [[NSMutableArray alloc] init];
         
