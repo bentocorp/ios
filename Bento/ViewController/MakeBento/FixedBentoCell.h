@@ -22,6 +22,8 @@
 
 @property (nonatomic) UIButton *addButton;
 
+@property (nonatomic) UILabel *priceLabel;
+
 - (void)setDishInfo:(NSDictionary *)dishInfo;
 
 @end

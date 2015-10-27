@@ -83,6 +83,30 @@
         self.addButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
         [self.addButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
         [self addSubview:self.addButton];
+        
+        
+        // Add Bento To Cart Label
+        UILabel *addBentoToCartLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.addButton.frame.size.width * 0.75, self.addButton.frame.size.height)];
+        addBentoToCartLabel.backgroundColor = [UIColor clearColor];
+        addBentoToCartLabel.textColor = [UIColor whiteColor];
+        addBentoToCartLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+        addBentoToCartLabel.textAlignment = NSTextAlignmentCenter;
+        addBentoToCartLabel.text = @"ADD BENTO TO CART";
+        [self.addButton addSubview:addBentoToCartLabel];
+        
+        // Price Label
+        self.priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.addButton.frame.size.width * 0.75, 0, self.addButton.frame.size.width - (self.addButton.frame.size.width * 0.75), self.addButton.frame.size.height)];
+        self.priceLabel.backgroundColor = [UIColor clearColor];
+        self.priceLabel.textColor = [UIColor whiteColor];
+        self.priceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+        self.priceLabel.textAlignment = NSTextAlignmentCenter;
+        [self.addButton addSubview:self.priceLabel];
+        
+        // Line divider
+        UIView *lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.addButton.frame.size.width * 0.75, 4, 1, self.addButton.frame.size.height-8)];
+        lineDivider.backgroundColor = [UIColor whiteColor];
+        lineDivider.alpha = 0.1;
+        [self.addButton addSubview:lineDivider];
     }
     
     return self;

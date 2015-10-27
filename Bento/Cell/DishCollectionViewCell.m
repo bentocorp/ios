@@ -195,7 +195,8 @@
             [self.btnAction addSubview:self.unitPriceLabel];
             
             // line divider
-            self.lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, 1, self.btnAction.frame.size.height)];
+            self.lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 4, 1, self.btnAction.frame.size.height-8)];
+            self.lineDivider.alpha = 0.1;
             [self.btnAction addSubview:self.lineDivider];
         }
         
@@ -276,10 +277,16 @@
         self.ivBanner.hidden = YES;
         
         if (_isSoldOut) {
-            [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
+//            [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
+            
+            self.addToBentoLabel.text = @"Sold Out";
+            [self.btnAction setTitle:@"" forState:UIControlStateNormal];
         }
         else if (!_canBeAdded) {
-            [self.btnAction setTitle:@"Reached to max" forState:UIControlStateNormal];
+//            [self.btnAction setTitle:@"Reached to max" forState:UIControlStateNormal];
+            
+            self.addToBentoLabel.text = @"Reached to max";
+            [self.btnAction setTitle:@"" forState:UIControlStateNormal];
         }
         else {
             [UIView setAnimationsEnabled:NO];

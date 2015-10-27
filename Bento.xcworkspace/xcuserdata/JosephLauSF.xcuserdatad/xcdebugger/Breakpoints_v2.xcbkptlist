@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
-            timestampString = "464921034.130658"
+            timestampString = "467664260.106064"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "647"
-            endingLineNumber = "647"
+            startingLineNumber = "653"
+            endingLineNumber = "653"
             landmarkName = "-updateUI"
             landmarkType = "5">
          </BreakpointContent>
@@ -148,11 +148,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
-            timestampString = "464921319.32659"
+            timestampString = "467664260.106064"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "691"
-            endingLineNumber = "691"
+            startingLineNumber = "697"
+            endingLineNumber = "697"
             landmarkName = "-updateUI"
             landmarkType = "5">
          </BreakpointContent>
@@ -164,11 +164,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
-            timestampString = "464921321.426844"
+            timestampString = "467664260.106064"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "696"
-            endingLineNumber = "696"
+            startingLineNumber = "702"
+            endingLineNumber = "702"
             landmarkName = "-updateUI"
             landmarkType = "5">
          </BreakpointContent>
@@ -196,11 +196,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
-            timestampString = "465176200.388914"
+            timestampString = "467664260.106064"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "781"
-            endingLineNumber = "781"
+            startingLineNumber = "787"
+            endingLineNumber = "787"
             landmarkName = "-onAddBento:"
             landmarkType = "5">
          </BreakpointContent>

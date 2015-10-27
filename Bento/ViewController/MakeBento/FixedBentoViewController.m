@@ -600,7 +600,13 @@
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoHighlight:) forControlEvents:UIControlEventTouchDown];
     [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
     
-    [servingLunchCell.addButton setTitle:@"ADD BENTO TO CART" forState:UIControlStateNormal];
+    if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""])
+    {
+        servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"$%@", [[BentoShop sharedInstance] getUnitPrice]]; // default settings.price
+    }
+    else {
+        servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"$%@", dishInfo[@"price"]]; // custom price
+    }
     
 //    // Prices
 //    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
