@@ -26,7 +26,7 @@ typedef enum : NSUInteger {
 
 @property (nonatomic, weak) IBOutlet UIButton *btnAction;
 
-- (void) setDishInfo:(NSDictionary *)dishInfo isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded;
+- (void)setDishInfo:(NSDictionary *)dishInfo isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded isMain:(BOOL)isMain;
 
 - (void) setSmallDishCell;
 - (void) setCellState:(NSInteger)state index:(NSInteger)index;

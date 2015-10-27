@@ -36,6 +36,9 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 @property (nonatomic, weak) IBOutlet UILabel *lblDescription;
 
+@property (nonatomic) BOOL isMain;
+@property (nonatomic) NSString *strUnitPrice;
+
 @property (nonatomic, weak) IBOutlet UIImageView *ivMask;
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBanner;
@@ -70,11 +73,11 @@
     }
     
     // if current bento is not empty
-    if ([[[BentoShop sharedInstance] getCurrentBento] isEmpty])
-    {
+    if ([[[BentoShop sharedInstance] getCurrentBento] isEmpty]) {
+        
         // if not tracked yet
-        if (trackingCurrentBento == NO)
-        {
+        if (trackingCurrentBento == NO) {
+            
             [[Mixpanel sharedInstance] track:@"Began Building A Bento"];
             
             trackingCurrentBento = YES;
@@ -95,40 +98,56 @@
 {
     _isSideDishCell = YES;
     
-    if (_isSoldOut)
+    if (_isSoldOut) {
         [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
-    else if (!_canBeAdded)
+    }
+    else if (!_canBeAdded) {
         [self.btnAction setTitle:@"Reached to max" forState:UIControlStateNormal];
-    else
+    }
+    else {
         [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
+    }
 }
 
-- (void)setDishInfo:(NSDictionary *)dishInfo isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded
+#pragma mark Cell Info
+- (void)setDishInfo:(NSDictionary *)dishInfo isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded isMain:(BOOL)isMain
 {
-    if (dishInfo == nil)
+    if (dishInfo == nil) {
         return;
+    }
     
     _isSoldOut = isSoldOut;
     _canBeAdded = canBeAdded;
     
-    NSString *strName = [dishInfo objectForKey:@"name"];
+    // Name
+    NSString *strName = dishInfo[@"name"];
     self.lblTitle.text = [strName uppercaseString];
     
-    NSString *strDescription = [dishInfo objectForKey:@"description"];
+    // Description
+    NSString *strDescription = dishInfo[@"description"];
     self.lblDescription.text = strDescription;
     
-    NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+    // Price by main
+    if (isMain == YES) {
+        if ([dishInfo[@"type"] isEqualToString:@"main"]) {
+            self.isMain = isMain; // YES
+            self.strUnitPrice = dishInfo[@"price"]; // unit price
+        }
+    }
+    
+    // Image
+    NSString *strImageURL = dishInfo[@"image1"];
     if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
         self.ivImage.image = [UIImage imageNamed:@"empty-main"];
     }
     else {
-//        [self.ivImage setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        
-        [self.ivImage setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [self.ivImage setImageWithURL:[NSURL URLWithString:strImageURL]
+                     placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"]
+          usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     }
 }
 
-
+#pragma mark Cell State
 - (void)setCellState:(NSInteger)state index:(NSInteger)index
 {
     self.viewMain.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
@@ -140,13 +159,48 @@
     self.btnAction.layer.borderColor = [UIColor whiteColor].CGColor;
     self.btnAction.layer.borderWidth = 1.0f;
     
+    // if current item is main
+    if (self.isMain == YES) {
+        // check to see if price has been properly set
+        if (self.strUnitPrice != 0 || ![self.strUnitPrice isEqualToString:@""] || [self.strUnitPrice isEqual:[NSNull null]]) {
+            // create a line divider
+            UIView *lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, 1, self.btnAction.frame.size.height)];
+            lineDivider.backgroundColor = [UIColor whiteColor];
+            [self.btnAction addSubview:lineDivider];
+            
+            // display price label
+            float priceSpacingWidth = (self.btnAction.frame.size.width - (self.btnAction.frame.size.width * 0.75));
+            UILabel *unitPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, priceSpacingWidth, self.btnAction.frame.size.height)];
+            unitPriceLabel.textAlignment = NSTextAlignmentCenter;
+            unitPriceLabel.backgroundColor = [UIColor clearColor];
+            unitPriceLabel.textColor = [UIColor whiteColor];
+            unitPriceLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
+            unitPriceLabel.text = @"$9.00";
+            [self.btnAction addSubview:unitPriceLabel];
+        }
+        else {
+            // price was not properly set...
+    
+            // testing...
+            // display price label
+            float priceSpacingWidth = (self.btnAction.frame.size.width - (self.btnAction.frame.size.width * 0.75));
+            UILabel *unitPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, priceSpacingWidth, self.btnAction.frame.size.height)];
+            unitPriceLabel.textAlignment = NSTextAlignmentCenter;
+            unitPriceLabel.backgroundColor = [UIColor clearColor];
+            unitPriceLabel.textColor = [UIColor whiteColor];
+            unitPriceLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
+            unitPriceLabel.text = @"$9.00";
+            [self.btnAction addSubview:unitPriceLabel];
+        }
+    }
+    
     self.ivBanner.frame = CGRectMake(self.frame.size.width - self.frame.size.height / 2, 0, self.frame.size.height / 2, self.frame.size.height / 2);
     
     self.state = state;
     self.index = index;
     
-    if (self.state == DISH_CELL_NORMAL)
-    {
+    if (self.state == DISH_CELL_NORMAL) {
+        
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, self.viewMain.frame.size.height / 2);
         
         self.lblDescription.hidden = YES;
@@ -159,8 +213,8 @@
         else
             self.ivBanner.hidden = YES;
     }
-    else if (self.state == DISH_CELL_FOCUS)
-    {
+    else if (self.state == DISH_CELL_FOCUS) {
+        
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
         
         self.btnAction.backgroundColor = [UIColor clearColor];
@@ -172,30 +226,29 @@
         
         self.ivBanner.hidden = YES;
         
-        if (_isSoldOut)
-        {
+        if (_isSoldOut) {
             [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
         }
-        else if (!_canBeAdded)
-        {
+        else if (!_canBeAdded) {
             [self.btnAction setTitle:@"Reached to max" forState:UIControlStateNormal];
         }
-        else
-        {
+        else {
             [UIView setAnimationsEnabled:NO];
             
-            if (_isSideDishCell)
+            if (_isSideDishCell) {
                 [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
-            else
+            }
+            else {
                 [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
+            }
             
             [UIView setAnimationsEnabled:YES];
         }
         
         self.ivMask.hidden = NO;
     }
-    else if (self.state == DISH_CELL_SELECTED)
-    {
+    else if (self.state == DISH_CELL_SELECTED) {
+        
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
         
         self.btnAction.backgroundColor = [UIColor whiteColor];
@@ -209,10 +262,12 @@
         
         [UIView setAnimationsEnabled:NO];
         
-        if (_isSideDishCell)
+        if (_isSideDishCell) {
             [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_SELECT] forState:UIControlStateNormal];
-        else
+        }
+        else {
             [self.btnAction setTitle:[[AppStrings sharedInstance] getString:MAINDISH_ADD_BUTTON_SELECT] forState:UIControlStateNormal];
+        }
         
         [UIView setAnimationsEnabled:YES];
         
