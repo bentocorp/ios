@@ -691,7 +691,7 @@
     // show old price
     if (_promoDiscount > 0) {
         self.lblTotalPrevious.hidden = NO;
-        cutText = [NSString stringWithFormat:@"$%.2f", (_totalPrice + (_totalPrice * (_taxPercent/100.f)) + deliveryTip)];
+        cutText = [NSString stringWithFormat:@"$%.2f", (_totalPrice + [self roundToNearestHundredth:(_totalPrice * (_taxPercent/100.f))] + deliveryTip)];
     }
     
     NSLog(@"PROMO CREDIT LEFT: %f", _promoDiscount - subTotal);
