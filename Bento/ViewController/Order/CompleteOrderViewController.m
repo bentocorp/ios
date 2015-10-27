@@ -634,7 +634,7 @@
 
 - (float)getTotalPrice
 {
-    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
+    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue]; // we not going on sale anymore?
     NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     
     if (MPTweakValue(@"$0.00 Delivery Fee", NO)) {
@@ -648,10 +648,17 @@
     
     // Meal (_totalPrice)
     if (salePrice != 0 && salePrice < unitPrice) {
-        _totalPrice = self.aryBentos.count * salePrice;
+        _totalPrice = self.aryBentos.count * salePrice; // we not going on sale anymore?
     }
     else {
-        _totalPrice = self.aryBentos.count * unitPrice;
+//        _totalPrice = self.aryBentos.count * unitPrice;
+        
+        _totalPrice = 0; // prevents total from adding up everytime data reloads
+
+        for (int i = 0; i < self.aryBentos.count; i++) {
+            Bento *curBento = self.aryBentos[i];
+            _totalPrice += [curBento getUnitPrice];
+        }
     }
     
     // Meal * % = Tip
@@ -1274,11 +1281,13 @@
     
     NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
     NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
+    
     if (salePrice != 0 && salePrice < unitPrice) {
         cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)salePrice];
     }
     else {
-        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
+//        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
+        cell.lblBentoPrice.text = [NSString stringWithFormat:@"%ld", [curBento getUnitPrice]];
     }
     
     cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);

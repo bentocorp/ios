@@ -17,8 +17,7 @@
 
 - (id)init
 {
-    if (self = [super init])
-    {
+    if (self = [super init]) {
         self.indexMainDish = 0;
         self.indexSideDish1 = 0;
         self.indexSideDish2 = 0;
@@ -42,15 +41,25 @@
     return [dishInfo objectForKey:@"name"];
 }
 
+- (NSInteger)getUnitPrice {
+    if (self.indexMainDish == 0)
+        return 0;
+    
+    NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:self.indexMainDish];
+    if (dishInfo == nil) {
+        return 0;
+    }
+    
+    if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""]) {
+        return [[[BentoShop sharedInstance] getUnitPrice] integerValue];
+    }
+    
+    return [dishInfo[@"price"] integerValue];
+}
+
 - (NSInteger)getMainDish
 {
     return self.indexMainDish;
-}
-
-- (void)setMainDish:(NSInteger)indexMainDish
-{
-    self.indexMainDish = indexMainDish;
-    [[BentoShop sharedInstance] saveBentoArray];
 }
 
 - (NSInteger)getSideDish1
@@ -71,6 +80,12 @@
 - (NSInteger)getSideDish4
 {
     return self.indexSideDish4;
+}
+
+- (void)setMainDish:(NSInteger)indexMainDish
+{
+    self.indexMainDish = indexMainDish;
+    [[BentoShop sharedInstance] saveBentoArray];
 }
 
 - (void)setSideDish1:(NSInteger)indexSideDish
