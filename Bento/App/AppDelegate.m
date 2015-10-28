@@ -44,6 +44,7 @@
 // Adjust..attribution tracking
 #define ADJUST_TOKEN @"ltd8yvnhnkrw"
 
+#import "SocketHandler.h"
 
 NSString * const StripePublishableTestKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
 NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
@@ -84,6 +85,13 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    // testing socket handler
+    
+    
+//    [SocketHandler sharedSocket] connectAndAuthenticate:<#(NSString *)#> password:<#(NSString *)#>];
+    
+    
+    
     /*------------------------------------REGISTER NOTIFICATIONS-------------------------------------*/
     
     if ([self isPushEnabled]) {

@@ -7,7 +7,17 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "Bento-Swift.h"
 
 @interface SocketHandler : NSObject
+
+// porpeties
+@property (nonatomic, strong) SocketIOClient *socket;
+
+// class methods
++ (instancetype)sharedSocket;
+
+// instance methods
+- (void)connectAndAuthenticate:(NSString *)username password:(NSString *)password;
 
 @end
