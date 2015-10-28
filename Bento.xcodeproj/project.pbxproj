@@ -322,6 +322,8 @@
 		FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
 		FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
 		FC3C4E7E1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
+		FC46DE8D1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */; };
+		FC46DE8E1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */; };
 		FC4A37591B4C862B00020F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
 		FC4A375A1B4C863500020F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
 		FC599F5A1B0FEDB600989E1B /* Bento_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC599F591B0FEDB600989E1B /* Bento_Tests.m */; };
@@ -949,6 +951,8 @@
 		FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoViewController.m; sourceTree = "<group>"; };
 		FC3C4E7B1AF96B42005D7197 /* FixedBentoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoCell.h; sourceTree = "<group>"; };
 		FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoCell.m; sourceTree = "<group>"; };
+		FC46DE8B1BE14AEA00E9A7B1 /* SocketHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketHandler.h; sourceTree = "<group>"; };
+		FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketHandler.m; sourceTree = "<group>"; };
 		FC599F551B0FEDB600989E1B /* BentoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BentoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC599F581B0FEDB600989E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC599F591B0FEDB600989E1B /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
@@ -1308,6 +1312,8 @@
 			isa = PBXGroup;
 			children = (
 				722333661A6D57CB006C2446 /* Bento.h */,
+				FC46DE8B1BE14AEA00E9A7B1 /* SocketHandler.h */,
+				FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */,
 				722333671A6D57CB006C2446 /* Bento.m */,
 				722333691A6D5847006C2446 /* BentoShop.h */,
 				7223336A1A6D5847006C2446 /* BentoShop.m */,
@@ -2885,6 +2891,7 @@
 				7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */,
 				FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
 				7216B73B1AA64C7C0006FFE9 /* FirstViewController.m in Sources */,
+				FC46DE8E1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */,
 				7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */,
 				7216B73F1AA64C7C0006FFE9 /* SVGeocoder.m in Sources */,
 				7216B7401AA64C7C0006FFE9 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
@@ -2989,6 +2996,7 @@
 				7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */,
 				FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
 				90BED0A81A5BD05C003DC872 /* FirstViewController.m in Sources */,
+				FC46DE8D1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */,
 				7223336B1A6D5847006C2446 /* BentoShop.m in Sources */,
 				7209E07F1A76BD1800D18D7A /* SVGeocoder.m in Sources */,
 				7209E0951A780A1200D18D7A /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,

@@ -632,16 +632,61 @@
 
 - (void)updateUI
 {
-    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
-    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
+//    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
+//    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     
-    if (salePrice != 0 && salePrice < unitPrice)
-    {
-        lblBanner.hidden = NO;
-        lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
-    } else {
-        lblBanner.hidden = YES;
+//    if (salePrice != 0 && salePrice < unitPrice)
+//    {
+//        lblBanner.hidden = NO;
+//        lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
+//    } else {
+//        lblBanner.hidden = YES;
+//    }
+    
+    // get current main dishes
+    NSMutableArray *mainDishesArray;
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+        mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
     }
+    else {
+        mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+    }
+    
+    // get main prices
+    NSMutableArray *mainPrices = [@[] mutableCopy];
+    for (int i = 0; i < mainDishesArray.count; i++) {
+        
+        NSString *price = mainDishesArray[i][@"price"];
+        
+        if (price == nil || [price isEqual:[NSNull null]] || [price isEqualToString:@"0"] || [price isEqualToString:@""]) {
+            [mainPrices addObject:[[BentoShop sharedInstance] getUnitPrice]]; // default settings.price
+        }
+        else {
+            [mainPrices addObject:price]; // custom price
+        }
+    }
+    
+    // sort prices, lowest first
+    NSArray *sortedMainPrices = [mainPrices sortedArrayUsingDescriptors: @[[NSSortDescriptor sortDescriptorWithKey:@"doubleValue"ascending:YES]]];
+    NSLog(@"main prices: %@", sortedMainPrices);
+    
+    // get and then check if cents are 0
+    double integral;
+    double cents = modf([sortedMainPrices[0] floatValue], &integral);
+    
+    // if no cents, just show whole number
+    if (cents == 0) {
+        lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+    }
+    // if exists, show normal
+    else {
+        lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+    }
+    
+    lblBanner.hidden = NO;
+    lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
+    lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+
     
     // Get rid of any empty bentos and update persistent data
     savedArray  = [[[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"bento_array"] mutableCopy];
