@@ -1203,20 +1203,51 @@
     /*---Regular Price---*/
     else
     {
-//        lblBanner.hidden = YES;
-        
-        if (MPTweakValue(@"Show green banner for regular price", NO))
-        {
-            // test
-            lblBanner.hidden = NO;
-            lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
-            lblBanner.text = [NSString stringWithFormat:@"ONLY $%ld", (long)salePrice];
+        // get current main dishes
+        NSMutableArray *mainDishesArray;
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+            mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
         }
         else {
-            // original
-            lblBanner.hidden = YES;
+            mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
         }
         
+        // get main prices
+        NSMutableArray *mainPrices = [@[] mutableCopy];
+        for (int i = 0; i < mainDishesArray.count; i++) {
+            
+            NSString *price = mainDishesArray[i][@"price"];
+            
+            if (price == nil || [price isEqual:[NSNull null]] || [price isEqualToString:@"0"] || [price isEqualToString:@""]) {
+                [mainPrices addObject:[[BentoShop sharedInstance] getUnitPrice]]; // default settings.price
+            }
+            else {
+                [mainPrices addObject:price]; // custom price
+            }
+        }
+        
+        // sort prices, lowest first
+        NSArray *sortedMainPrices = [mainPrices sortedArrayUsingDescriptors: @[[NSSortDescriptor sortDescriptorWithKey:@"doubleValue"ascending:YES]]];
+        NSLog(@"main prices: %@", sortedMainPrices);
+        
+        // get and then check if cents are 0
+        double integral;
+        double cents = modf([sortedMainPrices[0] floatValue], &integral);
+        
+        // if no cents, just show whole number
+        if (cents == 0) {
+            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+        }
+        // if exists, show normal
+        else {
+            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+        }
+        
+        lblBanner.hidden = NO;
+        lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
+        lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+        
+    
         if (currentBento == nil || ![currentBento isCompleted])
         {
 //            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], unitPrice]; // show price

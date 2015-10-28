@@ -105,7 +105,7 @@
         // Line divider
         UIView *lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.addButton.frame.size.width * 0.75, 4, 1, self.addButton.frame.size.height-8)];
         lineDivider.backgroundColor = [UIColor whiteColor];
-        lineDivider.alpha = 0.1;
+        lineDivider.alpha = 0.2;
         [self.addButton addSubview:lineDivider];
     }
     

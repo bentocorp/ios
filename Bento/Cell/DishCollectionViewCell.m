@@ -212,7 +212,7 @@
             
             // line divider
             self.lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 4, 1, self.btnAction.frame.size.height-8)];
-            self.lineDivider.alpha = 0.1;
+            self.lineDivider.alpha = 0.2;
             [self.btnAction addSubview:self.lineDivider];
         }
         
