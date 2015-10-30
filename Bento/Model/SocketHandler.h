@@ -18,6 +18,6 @@
 + (instancetype)sharedSocket;
 
 // instance methods
-- (void)connectAndAuthenticate:(NSString *)username password:(NSString *)password;
+- (void)connectAndAuthenticate:(NSString*)email token:(NSString *)token;
 
 @end
