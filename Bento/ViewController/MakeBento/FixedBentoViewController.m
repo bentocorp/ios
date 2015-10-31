@@ -666,27 +666,31 @@
         }
     }
     
+    
     // sort prices, lowest first
     NSArray *sortedMainPrices = [mainPrices sortedArrayUsingDescriptors: @[[NSSortDescriptor sortDescriptorWithKey:@"doubleValue"ascending:YES]]];
     NSLog(@"main prices: %@", sortedMainPrices);
     
-    // get and then check if cents are 0
-    double integral;
-    double cents = modf([sortedMainPrices[0] floatValue], &integral);
-    
-    // if no cents, just show whole number
-    if (cents == 0) {
-        lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+    // check for empty before trying to set to prevent crash in case there is no menu defined for current mode
+    if (sortedMainPrices.count != 0 && sortedMainPrices != nil) {
+        
+        // get and then check if cents are 0
+        double integral;
+        double cents = modf([sortedMainPrices[0] floatValue], &integral);
+        
+        // if no cents, just show whole number
+        if (cents == 0) {
+            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+        }
+        // if exists, show normal
+        else {
+            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+        }
+        
+        lblBanner.hidden = NO;
+        lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
+        lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
     }
-    // if exists, show normal
-    else {
-        lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
-    }
-    
-    lblBanner.hidden = NO;
-    lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
-    lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
-
     
     // Get rid of any empty bentos and update persistent data
     savedArray  = [[[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"bento_array"] mutableCopy];
@@ -762,8 +766,7 @@
 
 - (void)reloadDishes
 {
-    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
-    {
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         [cvDishes reloadData];
         [myTableView reloadData];
     }

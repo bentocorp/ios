@@ -632,11 +632,31 @@
     }
 }
 
+- (float)getTotalPriceByMain {
+    // add up all bentos by main
+    float totalPriceByBentos = 0;
+    
+    for (int i = 0; i < self.aryBentos.count; i++) {
+        Bento *curBento = self.aryBentos[i];
+         totalPriceByBentos += [curBento getUnitPrice];
+    }
+    
+    return [self roundToNearestHundredth:totalPriceByBentos];
+}
+
+- (float)getTotalPriceByMainPlusDeliveryFee {
+    return [self getTotalPriceByMain] + deliveryPrice;
+}
+
+- (float)getTips {
+    float deliveryTips = ([self getTotalPriceByMain] * _deliveryTipPercent) / 100.f;
+    return [self roundToNearestHundredth: deliveryTips];
+}
+
+
 - (float)getTotalPrice
 {
-    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue]; // we not going on sale anymore?
-    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
-    
+    // tweak delivery price
     if (MPTweakValue(@"$0.00 Delivery Fee", NO)) {
         // test
         deliveryPrice = 0.00;
@@ -646,38 +666,16 @@
         deliveryPrice = [[[BentoShop sharedInstance] getDeliveryPrice] floatValue];
     }
     
-    // Meal (_totalPrice)
-    if (salePrice != 0 && salePrice < unitPrice) {
-        _totalPrice = self.aryBentos.count * salePrice; // we not going on sale anymore?
-    }
-    else {
-//        _totalPrice = self.aryBentos.count * unitPrice;
-        
-        _totalPrice = 0; // prevents total from adding up everytime data reloads
-
-        for (int i = 0; i < self.aryBentos.count; i++) {
-            Bento *curBento = self.aryBentos[i];
-            _totalPrice += [curBento getUnitPrice];
-        }
-    }
-    
-    // Meal * % = Tip
-    float deliveryTip = (_totalPrice * _deliveryTipPercent) / 100.f;
-    
-    // Add Delivery Fee
-    _totalPrice += deliveryPrice;
-    
-    // (Meal + deliveryPrice) - Promo) * 0.875(tax) = Tax
     float tax;
-    if (_promoDiscount <= _totalPrice) {
-        tax = [self roundToNearestHundredth:((_totalPrice - _promoDiscount) * _taxPercent) / 100.f];
+    if (_promoDiscount <= [self getTotalPriceByMainPlusDeliveryFee]) {
+        tax = [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee] - _promoDiscount) * _taxPercent) / 100.f];
     }
     else {
         tax = 0; // if Promo is greater than Meal
     }
     
     // Meal + Tax + Tip
-    float subTotal = _totalPrice + tax + deliveryTip; // tip is subtracted from promo code, once used up, it starts charging user's card
+    float subTotal = [self getTotalPriceByMainPlusDeliveryFee] + tax + [self getTips];
     
     // Grand Total
     float totalPrice;
@@ -691,12 +689,8 @@
     // show old price
     if (_promoDiscount > 0) {
         self.lblTotalPrevious.hidden = NO;
-        cutText = [NSString stringWithFormat:@"$%.2f", (_totalPrice + [self roundToNearestHundredth:(_totalPrice * (_taxPercent/100.f))] + deliveryTip)];
+        cutText = [NSString stringWithFormat:@"$%.2f", ([self getTotalPriceByMainPlusDeliveryFee] + [self roundToNearestHundredth:(_totalPrice * (_taxPercent/100.f))] + [self getTips])];
     }
-    
-    NSLog(@"PROMO CREDIT LEFT: %f", _promoDiscount - subTotal);
-    NSLog(@"SUB TOTAL: %f", subTotal);
-    NSLog(@"GRAND TOTAL: %f", totalPrice);
     
     self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
     
@@ -924,29 +918,6 @@
         alertView = nil;
     }
 }
-
-/*
-- (NSArray *)summaryItemsForShippingMethod:(PKShippingMethod *)shippingMethod
-{
-    NSString *strPrice = [NSString stringWithFormat:@"%.2f", _totalPrice];
-    PKPaymentSummaryItem *shirtItem = [PKPaymentSummaryItem summaryItemWithLabel:@"Purchase of Bento" amount:[NSDecimalNumber decimalNumberWithString:strPrice]];
-    NSDecimalNumber *total = [shirtItem.amount decimalNumberByAdding:shippingMethod.amount];
-    PKPaymentSummaryItem *totalItem = [PKPaymentSummaryItem summaryItemWithLabel:@"Stripe Shirt Shop" amount:total];
-    return @[shirtItem, shippingMethod, totalItem];
-}
-
-- (NSArray *)shippingMethods
-{
-    PKShippingMethod *normalItem = [PKShippingMethod summaryItemWithLabel:@"Shipping" amount:[NSDecimalNumber decimalNumberWithString:@"20.00"]];
-    normalItem.detail = @"3-5 Business Days";
-    normalItem.identifier = normalItem.label;
-    PKShippingMethod *expressItem =
-    [PKShippingMethod summaryItemWithLabel:@"Llama California Express Shipping" amount:[NSDecimalNumber decimalNumberWithString:@"30.00"]];
-    expressItem.detail = @"Next Day";
-    expressItem.identifier = expressItem.label;
-    return @[normalItem, expressItem];
-}
-*/
 
 - (void)processPayment
 {
@@ -1279,20 +1250,15 @@
         }
     }
     
-    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
     NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
+
+    cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
     
-    if (salePrice != 0 && salePrice < unitPrice) {
-        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)salePrice];
-    }
-    else {
-//        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
-        
-        // format to currency style
-        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-        cell.lblBentoPrice.text = [NSString stringWithFormat:@"%@", [numberFormatter stringFromNumber:@([curBento getUnitPrice])]];
-    }
+    // format to currency style
+    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+    cell.lblBentoPrice.text = [NSString stringWithFormat:@"%@", [numberFormatter stringFromNumber:@([curBento getUnitPrice])]];
+
     
     cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
     
@@ -1394,7 +1360,7 @@
         NSMutableDictionary *bentoInfo = [[NSMutableDictionary alloc] init];
         [bentoInfo setObject:@"CustomerBentoBox" forKey:@"item_type"];
         
-        [bentoInfo setObject:[NSString stringWithFormat:@"%ld", (long)[bento getUnitPrice]] forKey:@"unit_price"];
+        [bentoInfo setObject:[NSString stringWithFormat:@"%.2f", [bento getUnitPrice]] forKey:@"unit_price"];
         
         NSMutableArray *dishArray = [[NSMutableArray alloc] init];
         
@@ -1488,11 +1454,11 @@
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)couponDiscount] forKey:@"coupon_discount_cents"];
     
     // - Tax
-    float tax = (int)(_totalPrice * _taxPercent) / 100.f;
+    float tax = [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee] - _promoDiscount) * _taxPercent) / 100.f];
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(tax * 100)] forKey:@"tax_cents"];
     
     // - Tip
-    float deliveryTip = (int)(_totalPrice * _deliveryTipPercent) / 100.f;
+    float deliveryTip = [self getTips];
 
     float totalPrice = [self getTotalPrice];
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(deliveryTip * 100)] forKey:@"tip_cents"];
