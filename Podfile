@@ -1,17 +1,5 @@
 # Uncomment this line to define a global platform for your project
-# platform :ios, '9.0'
-
-target 'Bento' do
-
-end
-
-target 'BentoTests' do
-
-end
-
-target 'UI Tests', :exclusive => true do
-    pod 'KIF', '~> 3.0', :configurations => ['Debug']
-end
+platform :ios, '7.0'
 
 pod 'Stripe'
 pod 'Stripe/ApplePay'
@@ -26,12 +14,12 @@ pod 'UIActivityIndicator-for-SDWebImage'
 pod 'FDKeychain'
 pod 'SIOSocket', '~> 0.2.0'
 
-#pod 'Mapbox-iOS-SDK'
-## disable bitcode in every sub-target
-#post_install do |installer|
-#    installer.pods_project.targets.each do |target|
-#        target.build_configurations.each do |config|
-#            config.build_settings['ENABLE_BITCODE'] = 'NO'
-#        end
-#    end
-#end
+pod 'Mapbox-iOS-SDK'
+# disable bitcode in every sub-target
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+        target.build_configurations.each do |config|
+            config.build_settings['ENABLE_BITCODE'] = 'NO'
+        end
+    end
+end

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1BC204FCA40BC908C673FB4E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 55988AA329FC4C356970FA16 /* libPods.a */; };
 		47AA1C441A6BE52800064857 /* string_confirmaddress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C421A6BE52800064857 /* string_confirmaddress@2x.png */; };
 		47AA1C451A6BE52800064857 /* string_continue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C431A6BE52800064857 /* string_continue@2x.png */; };
 		47AA1C471A6BE52F00064857 /* string_addanotherbento@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C461A6BE52F00064857 /* string_addanotherbento@2x.png */; };
@@ -273,8 +274,6 @@
 		90D8F7E51A5E39A500D034CF /* logo_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E41A5E39A500D034CF /* logo_title.png */; };
 		90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */; };
 		90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */; };
-		FC05FB151B8684100021B7D2 /* UI_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC05FB141B8684100021B7D2 /* UI_Tests.m */; };
-		FC05FB1F1B869B920021B7D2 /* KifTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC05FB1E1B869B920021B7D2 /* KifTests.m */; };
 		FC08AB241AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
@@ -691,13 +690,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FC05FB161B8684100021B7D2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 90BED0661A5BCC04003DC872 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 90BED06D1A5BCC04003DC872;
-			remoteInfo = Bento;
-		};
 		FC599F5B1B0FEDB600989E1B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 90BED0661A5BCC04003DC872 /* Project object */;
@@ -715,6 +707,7 @@
 		47C5B0141A8B8038008FA7DA /* BentoTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BentoTableViewCell.xib; sourceTree = "<group>"; };
 		47C5B0161A8B82BD008FA7DA /* completeorder_cell_btn_minute@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "completeorder_cell_btn_minute@2x.png"; sourceTree = "<group>"; };
 		47C5B0171A8B82BD008FA7DA /* completeorder_cell_btn_remove@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "completeorder_cell_btn_remove@2x.png"; sourceTree = "<group>"; };
+		55988AA329FC4C356970FA16 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6EC9DF39CFE2AE0B67A3FFE5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		7209E07B1A76BD1800D18D7A /* SVGeocoder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SVGeocoder.h; sourceTree = "<group>"; };
 		7209E07C1A76BD1800D18D7A /* SVGeocoder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SVGeocoder.m; sourceTree = "<group>"; };
@@ -915,14 +908,7 @@
 		90D8F7E61A5E3F7500D034CF /* EnterCreditCardViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EnterCreditCardViewController.h; sourceTree = "<group>"; };
 		90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterCreditCardViewController.m; sourceTree = "<group>"; };
 		90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderconfirm_image_car.png; sourceTree = "<group>"; };
-		91078CA4A842E8009823F302 /* Pods-UI Tests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI Tests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-UI Tests/Pods-UI Tests.debug.xcconfig"; sourceTree = "<group>"; };
-		B993AFEFFBF1C0ABE62BA7F9 /* Pods-UI Tests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-UI Tests.release.xcconfig"; path = "Pods/Target Support Files/Pods-UI Tests/Pods-UI Tests.release.xcconfig"; sourceTree = "<group>"; };
 		FC05FB0B1B86809F0021B7D2 /* BentoTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "BentoTests copy-Info.plist"; path = "/Users/JosephLauSF/_github/Bento/BentoTests copy-Info.plist"; sourceTree = "<absolute>"; };
-		FC05FB101B8684100021B7D2 /* UI Tests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "UI Tests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
-		FC05FB131B8684100021B7D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FC05FB141B8684100021B7D2 /* UI_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = UI_Tests.m; sourceTree = "<group>"; };
-		FC05FB1D1B869B920021B7D2 /* KifTests.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KifTests.h; sourceTree = "<group>"; };
-		FC05FB1E1B869B920021B7D2 /* KifTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KifTests.m; sourceTree = "<group>"; };
 		FC08AB221AF713DD00CFB44D /* CustomBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBentoViewController.h; sourceTree = "<group>"; };
 		FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBentoViewController.m; sourceTree = "<group>"; };
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
@@ -1037,8 +1023,8 @@
 		FC92E1B11B7E5C890073C5D7 /* Bento copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bento copy-Info.plist"; path = "/Users/JosephLauSF/_github/Bento/Bento copy-Info.plist"; sourceTree = "<absolute>"; };
 		FC92E1B21B7E5D500073C5D7 /* calabash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = calabash.framework; sourceTree = "<group>"; };
 		FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderStatusViewController.h; sourceTree = "<group>"; };
-		FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderStatusViewController.m; sourceTree = "<group>"; };
+		FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderStatusViewController.h; path = ../ViewController/Order/OrderStatusViewController.h; sourceTree = "<group>"; };
+		FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderStatusViewController.m; path = ../ViewController/Order/OrderStatusViewController.m; sourceTree = "<group>"; };
 		FC94E3401BB3529500E2104E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FC99D4ED1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoPreviewViewController.h; sourceTree = "<group>"; };
 		FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoPreviewViewController.m; sourceTree = "<group>"; };
@@ -1157,13 +1143,7 @@
 				722332E51A6BC7E6006C2446 /* Security.framework in Frameworks */,
 				FC1D61631BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */,
 				722332E31A6BC7DE006C2446 /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		FC05FB0D1B8684100021B7D2 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
+				1BC204FCA40BC908C673FB4E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1210,8 +1190,6 @@
 			children = (
 				3561C29F3B08D2974FA2BADA /* Pods.debug.xcconfig */,
 				6EC9DF39CFE2AE0B67A3FFE5 /* Pods.release.xcconfig */,
-				91078CA4A842E8009823F302 /* Pods-UI Tests.debug.xcconfig */,
-				B993AFEFFBF1C0ABE62BA7F9 /* Pods-UI Tests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1435,7 +1413,6 @@
 			children = (
 				90BED0701A5BCC04003DC872 /* Bento */,
 				FC599F561B0FEDB600989E1B /* Bento Tests */,
-				FC05FB111B8684100021B7D2 /* UI Tests */,
 				90BED06F1A5BCC04003DC872 /* Products */,
 				6FD3F1724EE25B5F8E1A5D58 /* Pods */,
 				C994F09FDA3B8896E57F29B5 /* Frameworks */,
@@ -1449,7 +1426,6 @@
 				7216B7B41AA64C7C0006FFE9 /* Bento Dev.app */,
 				FC599F551B0FEDB600989E1B /* BentoTests.xctest */,
 				FC92E1B01B7E5C880073C5D7 /* Bento-cal.app */,
-				FC05FB101B8684100021B7D2 /* UI Tests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1582,8 +1558,6 @@
 				90D8F7D71A5E2FE900D034CF /* CompleteOrderViewController.m */,
 				90D8F7D91A5E304D00D034CF /* OrderConfirmViewController.h */,
 				90D8F7DA1A5E304D00D034CF /* OrderConfirmViewController.m */,
-				FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */,
-				FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */,
 				90D8F7E61A5E3F7500D034CF /* EnterCreditCardViewController.h */,
 				90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */,
 			);
@@ -1742,27 +1716,9 @@
 				90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */,
 				722332E41A6BC7E6006C2446 /* Security.framework */,
 				722332E21A6BC7DE006C2446 /* Foundation.framework */,
+				55988AA329FC4C356970FA16 /* libPods.a */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		FC05FB111B8684100021B7D2 /* UI Tests */ = {
-			isa = PBXGroup;
-			children = (
-				FC05FB141B8684100021B7D2 /* UI_Tests.m */,
-				FC05FB1D1B869B920021B7D2 /* KifTests.h */,
-				FC05FB1E1B869B920021B7D2 /* KifTests.m */,
-				FC05FB121B8684100021B7D2 /* Supporting Files */,
-			);
-			path = "UI Tests";
-			sourceTree = "<group>";
-		};
-		FC05FB121B8684100021B7D2 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				FC05FB131B8684100021B7D2 /* Info.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		FC08AB261AF7143500CFB44D /* BWTitlePagerView */ = {
@@ -1817,6 +1773,8 @@
 				FC386F0B1BE1F2E700961A17 /* Push.m */,
 				FC4327B21BE2EE8E00E91D9B /* DriverLocation.h */,
 				FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */,
+				FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */,
+				FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */,
 			);
 			name = "Driver Tracking";
 			path = Model;
@@ -2189,26 +2147,6 @@
 			productReference = 90BED06E1A5BCC04003DC872 /* Bento.app */;
 			productType = "com.apple.product-type.application";
 		};
-		FC05FB0F1B8684100021B7D2 /* UI Tests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = FC05FB181B8684100021B7D2 /* Build configuration list for PBXNativeTarget "UI Tests" */;
-			buildPhases = (
-				314FBCF6BFCEEEEB5699A20F /* Check Pods Manifest.lock */,
-				FC05FB0C1B8684100021B7D2 /* Sources */,
-				FC05FB0D1B8684100021B7D2 /* Frameworks */,
-				FC05FB0E1B8684100021B7D2 /* Resources */,
-				690E86C305FCED66D67E7388 /* Copy Pods Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				FC05FB171B8684100021B7D2 /* PBXTargetDependency */,
-			);
-			name = "UI Tests";
-			productName = "UI Tests";
-			productReference = FC05FB101B8684100021B7D2 /* UI Tests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		FC599F541B0FEDB600989E1B /* BentoTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = FC599F5D1B0FEDB600989E1B /* Build configuration list for PBXNativeTarget "BentoTests" */;
@@ -2279,11 +2217,6 @@
 							};
 						};
 					};
-					FC05FB0F1B8684100021B7D2 = {
-						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = WFJ7C63625;
-						TestTargetID = 90BED06D1A5BCC04003DC872;
-					};
 					FC599F541B0FEDB600989E1B = {
 						CreatedOnToolsVersion = 6.3.1;
 						DevelopmentTeam = WFJ7C63625;
@@ -2308,7 +2241,6 @@
 				7216B7061AA64C7C0006FFE9 /* BentoDev */,
 				FC599F541B0FEDB600989E1B /* BentoTests */,
 				FC92E0DB1B7E5C880073C5D7 /* Bento-cal */,
-				FC05FB0F1B8684100021B7D2 /* UI Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -2540,13 +2472,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC05FB0E1B8684100021B7D2 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FC599F531B0FEDB600989E1B /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -2670,36 +2595,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		314FBCF6BFCEEEEB5699A20F /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		690E86C305FCED66D67E7388 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-UI Tests/Pods-UI Tests-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		7216B7071AA64C7C0006FFE9 /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3049,15 +2944,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		FC05FB0C1B8684100021B7D2 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				FC05FB1F1B869B920021B7D2 /* KifTests.m in Sources */,
-				FC05FB151B8684100021B7D2 /* UI_Tests.m in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		FC599F511B0FEDB600989E1B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -3175,11 +3061,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FC05FB171B8684100021B7D2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 90BED06D1A5BCC04003DC872 /* Bento */;
-			targetProxy = FC05FB161B8684100021B7D2 /* PBXContainerItemProxy */;
-		};
 		FC599F5C1B0FEDB600989E1B /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 90BED06D1A5BCC04003DC872 /* Bento */;
@@ -3378,11 +3259,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
-					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
 					"$(PROJECT_DIR)/Bento/ThirdParty",
+					"$(PROJECT_DIR)/Bento/",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3422,11 +3303,11 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 					"$(PROJECT_DIR)/Bento/ThirdParty/GoogleMapsSDK",
-					"$(PROJECT_DIR)/Bento",
 					"$(PROJECT_DIR)/Bento/ViewController",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs",
 					"$(PROJECT_DIR)/Bento/ThirdParty/FacebookSDKs/FacebookSDKStrings.bundle",
 					"$(PROJECT_DIR)/Bento/ThirdParty",
+					"$(PROJECT_DIR)/Bento/",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "Bento/Bento-Prefix.pch";
@@ -3439,57 +3320,6 @@
 				PROVISIONING_PROFILE = "198c4532-e5b7-47da-aef6-3c363bb81cfb";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;
-			};
-			name = Release;
-		};
-		FC05FB191B8684100021B7D2 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = 91078CA4A842E8009823F302 /* Pods-UI Tests.debug.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_NO_COMMON_BLOCKS = YES;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"DEBUG=1",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = "UI Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.josephlau.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bento.app/Bento";
-			};
-			name = Debug;
-		};
-		FC05FB1A1B8684100021B7D2 /* Release */ = {
-			isa = XCBuildConfiguration;
-			baseConfigurationReference = B993AFEFFBF1C0ABE62BA7F9 /* Pods-UI Tests.release.xcconfig */;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				COPY_PHASE_STRIP = NO;
-				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
-				FRAMEWORK_SEARCH_PATHS = (
-					"$(SDKROOT)/Developer/Library/Frameworks",
-					"$(inherited)",
-				);
-				GCC_NO_COMMON_BLOCKS = YES;
-				INFOPLIST_FILE = "UI Tests/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "co.josephlau.$(PRODUCT_NAME:rfc1034identifier)";
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Bento.app/Bento";
 			};
 			name = Release;
 		};
@@ -3745,15 +3575,6 @@
 			buildConfigurations = (
 				90BED0921A5BCC04003DC872 /* Debug */,
 				90BED0931A5BCC04003DC872 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		FC05FB181B8684100021B7D2 /* Build configuration list for PBXNativeTarget "UI Tests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				FC05FB191B8684100021B7D2 /* Debug */,
-				FC05FB1A1B8684100021B7D2 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

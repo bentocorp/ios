@@ -93,6 +93,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_resource "PaymentKit/PaymentKit/Resources/gradient@2x.png"
   install_resource "PaymentKit/PaymentKit/Resources/textfield.png"
   install_resource "PaymentKit/PaymentKit/Resources/textfield@2x.png"
+  install_resource "${BUILT_PRODUCTS_DIR}/Mapbox.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "Mixpanel/Mixpanel/Media.xcassets/MPArrowLeft.imageset/MPArrowLeft.png"
@@ -130,6 +131,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_resource "PaymentKit/PaymentKit/Resources/gradient@2x.png"
   install_resource "PaymentKit/PaymentKit/Resources/textfield.png"
   install_resource "PaymentKit/PaymentKit/Resources/textfield@2x.png"
+  install_resource "${BUILT_PRODUCTS_DIR}/Mapbox.bundle"
 fi
 
 mkdir -p "${CONFIGURATION_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}"

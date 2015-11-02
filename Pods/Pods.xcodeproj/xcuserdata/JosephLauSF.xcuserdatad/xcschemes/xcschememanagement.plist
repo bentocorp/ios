@@ -29,7 +29,12 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>KIF.xcscheme</key>
+		<key>Mapbox-iOS-SDK-Mapbox.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>Mapbox-iOS-SDK.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -40,21 +45,6 @@
 			<false/>
 		</dict>
 		<key>PaymentKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-Bento.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-BentoTests.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>Pods-UI Tests.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -97,17 +87,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>1F3D7026067815B93F2ABA361BC8FFF8</key>
+		<key>061A84A8468200EF688D7A52DE09ECB7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3367A933A629EC949420182B2455C3C3</key>
+		<key>124DA88367F3068350F464D0079CE147</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>40C6801DEC7AC54B17F2AE69CE468311</key>
+		<key>3D0190CBD10D9B90DD7686B5BE47BA2B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4B200D0452E5A5BA217E01B59A3C15DA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,12 +117,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>58D716EC24933DBA6CF158BCFD78FD54</key>
+		<key>5AAD39102F7E8AFB4A253CD263E68627</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6757A19BA824B5DB51E30A5DD15D268E</key>
+		<key>701B2ED557F0A0F325AC8F6DB414D139</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>7083176DE50DD3667D979BF28FFE8A62</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -137,52 +137,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>78D6DFA2B69D7FBF3BF6E9A15867664E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>7CF857C3F7EEFDF0F7822A2733D7FAFD</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C1BF1B8CD9712755FD001E1F8A31864D</key>
+		<key>8E8F19C065F761F6F9C5DA39D7FC66D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CA45187BA0A117953AE03512A6E330C8</key>
+		<key>8FDCEF07CD284C56F86D6E95E0DC6EE1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D36ACD10C4EC92AE0B9740584CDE2E3B</key>
+		<key>97BD6C16ABAFCD7AE81E43C674192CF9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D50244253CF9D1986B6A9F303EAB85AF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>E0987168EDD1914CBF7C01BEEB35FB24</key>
+		<key>A5A6DB18FB81CADAF8188997EA6E3900</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>EC511E28905FE2C20E23DA0E564D2673</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F7D51169AF32D95DE9FAD460FDC40757</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FCEF766A97D295C50B46D4D855ED2507</key>
 		<dict>
 			<key>primary</key>
 			<true/>
