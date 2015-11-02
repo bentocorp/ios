@@ -1581,7 +1581,11 @@
         }
 
         [[BentoShop sharedInstance] resetBentoArray]; // remove from temp
-        [[BentoShop sharedInstance] saveBentoArray]; // save empty to persistent storage
+        
+        dispatch_async(dispatch_get_main_queue(), ^{ // because resetbentoarray is done in main queue, these should follow
+            [[BentoShop sharedInstance] saveBentoArray]; // save empty to persistent storage
+            [[BentoShop sharedInstance] addNewBento];
+        });
         
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
