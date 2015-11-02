@@ -51,6 +51,9 @@
 
 #import "UIColor+CustomColors.h"
 
+#import "OrderListViewController.h"
+#import "OrderStatusViewController.h"
+
 @interface CustomBentoViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
@@ -155,7 +158,7 @@
     longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [navigationBarView addSubview:longLineSepartor1];
     
-/*---Back button---*/
+/*---Settings Image button---*/
     
     UIImageView *settingsImageView = [[UIImageView alloc] initWithFrame:CGRectMake(12, 30, 25, 25)];
     settingsImageView.image = [UIImage imageNamed:@"icon-user"];
@@ -167,15 +170,18 @@
     [settingsButton addTarget:self action:@selector(onSettings) forControlEvents:UIControlEventTouchUpInside];
     [navigationBarView addSubview:settingsButton];
     
-    /*FOR KIF TESTS*/
-    settingsButton.accessibilityLabel = @"Settings Button";
-    
 /*---Cart Button---*/
     
     btnCart = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 20, 50, 45)];
     [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_inact"] forState:UIControlStateNormal];
     [btnCart addTarget:self action:@selector(onCart) forControlEvents:UIControlEventTouchUpInside];
     [navigationBarView addSubview:btnCart];
+    
+    // Tracking
+    UIButton *orderStatusButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 27, 30, 30)];
+    [orderStatusButton addTarget:self action:@selector(onOrderStatus) forControlEvents:UIControlEventTouchUpInside];
+    [orderStatusButton setImage:[UIImage imageNamed:@"in-transit-64"] forState:UIControlStateNormal];
+    [navigationBarView addSubview:orderStatusButton];
     
 /*---Count Badge---*/
     
@@ -998,13 +1004,27 @@
     }
 }
 
+- (void)onOrderStatus {
+    
+    // if more than one order, show orderlist
+//    if () {
+//        [self.navigationController presentViewController:[[OrderListViewController alloc] init] animated:YES completion:nil];
+//    }
+    // if only one order, just show order
+//    else {
+        [self.navigationController presentViewController:[[OrderStatusViewController alloc] init] animated:YES completion:nil];
+//    }
+}
+
 - (void)onCart
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted])
+    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
         [self showConfirmMsg];
-    else
+    }
+    else {
         [self gotoOrderScreen];
+    }
 }
 
 - (void)showConfirmMsg
