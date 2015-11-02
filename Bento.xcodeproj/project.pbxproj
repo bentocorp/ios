@@ -932,6 +932,7 @@
 		FC2F06A01BE8175B007B6A82 /* OrderListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderListViewController.h; sourceTree = "<group>"; };
 		FC2F06A11BE8175B007B6A82 /* OrderListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderListViewController.m; sourceTree = "<group>"; };
 		FC2F06A41BE81F64007B6A82 /* in-transit-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "in-transit-64.png"; sourceTree = "<group>"; };
+		FC2F06A71BE8227A007B6A82 /* libAdjust.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAdjust.a; path = "Pods/../build/Debug-iphoneos/libAdjust.a"; sourceTree = "<group>"; };
 		FC386F0A1BE1F2E700961A17 /* Push.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Push.h; sourceTree = "<group>"; };
 		FC386F0B1BE1F2E700961A17 /* Push.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Push.m; sourceTree = "<group>"; };
 		FC3C4E771AF96A41005D7197 /* FixedBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoViewController.h; sourceTree = "<group>"; };
@@ -1709,6 +1710,7 @@
 		C994F09FDA3B8896E57F29B5 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				FC2F06A71BE8227A007B6A82 /* libAdjust.a */,
 				FC1D60661BBA0C0A0012FFB3 /* FBSDKCoreKit.framework */,
 				FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */,
 				FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */,
@@ -3133,6 +3135,7 @@
 				INFOPLIST_FILE = "Bento Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
 				PROVISIONING_PROFILE = "564c2f70-e302-4011-bbaf-f93205a540be";
@@ -3168,6 +3171,7 @@
 				INFOPLIST_FILE = "Bento Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LIBRARY_SEARCH_PATHS = "$(inherited)";
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
 				PROVISIONING_PROFILE = "564c2f70-e302-4011-bbaf-f93205a540be";

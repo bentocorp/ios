@@ -1,7 +1,7 @@
 PODS:
-  - Adjust (4.2.7):
-    - Adjust/Core (= 4.2.7)
-  - Adjust/Core (4.2.7)
+  - Adjust (4.4.1):
+    - Adjust/Core (= 4.4.1)
+  - Adjust/Core (4.4.1)
   - Branch (0.11.6)
   - Canvas (0.1.2)
   - FCUUID (1.1.4):
@@ -27,7 +27,7 @@ PODS:
   - UICKeyChainStore (1.0.5)
 
 DEPENDENCIES:
-  - Adjust (from `git://github.com/adjust/ios_sdk.git`, tag `v4.2.7`)
+  - Adjust
   - Branch
   - Canvas
   - FCUUID
@@ -41,18 +41,8 @@ DEPENDENCIES:
   - Stripe/ApplePay
   - UIActivityIndicator-for-SDWebImage
 
-EXTERNAL SOURCES:
-  Adjust:
-    :git: git://github.com/adjust/ios_sdk.git
-    :tag: v4.2.7
-
-CHECKOUT OPTIONS:
-  Adjust:
-    :git: git://github.com/adjust/ios_sdk.git
-    :tag: v4.2.7
-
 SPEC CHECKSUMS:
-  Adjust: 2c3d4db6047c6bba68d7c5ede63fbdc989eb57b7
+  Adjust: e81e2cbe1df388fb181adfc27d6a1f4ddf71b339
   Branch: 30126fc6fbb24a912e52cf2c5ca12d2433abdb3d
   Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
   FCUUID: 178c3d7907b1399137f1093f9c04ce4825755292

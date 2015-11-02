@@ -32,7 +32,7 @@ static const char * const kInternalQueueName     = "io.adjust.ActivityQueue";
 @property (nonatomic, retain) ADJActivityState *activityState;
 @property (nonatomic, retain) ADJTimerCycle *timer;
 @property (nonatomic, retain) id<ADJLogger> logger;
-@property (nonatomic, retain) NSObject<AdjustDelegate> *delegate;
+@property (nonatomic, weak) NSObject<AdjustDelegate> *delegate;
 @property (nonatomic, copy) ADJAttribution *attribution;
 @property (nonatomic, copy) ADJConfig *adjustConfig;
 
@@ -114,15 +114,13 @@ static const char * const kInternalQueueName     = "io.adjust.ActivityQueue";
 
     NSURL* deepLinkUrl = [NSURL URLWithString:deepLink];
 
-    if (![[UIApplication sharedApplication]
-          canOpenURL:deepLinkUrl]) {
-        [self.logger error:@"Unable to open deep link (%@)", deepLink];
-        return;
-    }
-
     [self.logger info:@"Open deep link (%@)", deepLink];
 
-    [[UIApplication sharedApplication] openURL:deepLinkUrl];
+    BOOL success = [[UIApplication sharedApplication] openURL:deepLinkUrl];
+
+    if (!success) {
+        [self.logger error:@"Unable to open deep link (%@)", deepLink];
+    }
 }
 
 - (void)setEnabled:(BOOL)enabled {
@@ -255,6 +253,9 @@ remainsPausedMessage:(NSString *)remainsPausedMessage
 
 - (void)launchAttributionDelegate{
     if (self.delegate == nil) {
+        return;
+    }
+    if (![self.delegate respondsToSelector:@selector(adjustAttributionChanged:)]) {
         return;
     }
     [self.delegate performSelectorOnMainThread:@selector(adjustAttributionChanged:)
