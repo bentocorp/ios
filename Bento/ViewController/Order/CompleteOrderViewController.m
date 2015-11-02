@@ -125,8 +125,6 @@
     // idempotent token
     NSString *uuid;
     
-    float deliveryPrice;
-    
     BOOL allowCommitOnKeep;
     
     NSMutableArray *arySoldOutItems;
@@ -645,7 +643,7 @@
 }
 
 - (float)getTotalPriceByMainPlusDeliveryFee {
-    return [self getTotalPriceByMain] + deliveryPrice;
+    return [self getTotalPriceByMain] + [self getDeliveryPrice];
 }
 
 - (float)getTips {
@@ -653,19 +651,20 @@
     return [self roundToNearestHundredth: deliveryTips];
 }
 
-
-- (float)getTotalPrice
-{
+- (float)getDeliveryPrice {
     // tweak delivery price
     if (MPTweakValue(@"$0.00 Delivery Fee", NO)) {
         // test
-        deliveryPrice = 0.00;
-    }
-    else {
-        // original
-        deliveryPrice = [[[BentoShop sharedInstance] getDeliveryPrice] floatValue];
+        return 0.00;
     }
     
+    // original
+    return [[[BentoShop sharedInstance] getDeliveryPrice] floatValue];
+}
+
+
+- (float)getTotalPrice
+{
     float tax;
     if (_promoDiscount <= [self getTotalPriceByMainPlusDeliveryFee]) {
         tax = [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee] - _promoDiscount) * _taxPercent) / 100.f];
@@ -689,7 +688,7 @@
     // show old price
     if (_promoDiscount > 0) {
         self.lblTotalPrevious.hidden = NO;
-        cutText = [NSString stringWithFormat:@"$%.2f", ([self getTotalPriceByMainPlusDeliveryFee] + [self roundToNearestHundredth:(_totalPrice * (_taxPercent/100.f))] + [self getTips])];
+        cutText = [NSString stringWithFormat:@"$%.2f", ([self getTotalPriceByMainPlusDeliveryFee] + [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee]) * _taxPercent) / 100.f] + [self getTips])];
     }
     
     self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
@@ -713,7 +712,7 @@
     self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
-    self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", deliveryPrice];
+    self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [self getDeliveryPrice]];
     
     // if no promo added
     if (_promoDiscount <= 0) {
@@ -1458,16 +1457,16 @@
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(tax * 100)] forKey:@"tax_cents"];
     
     // - Tip
-    float deliveryTip = [self getTips];
-
-    float totalPrice = [self getTotalPrice];
-    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(deliveryTip * 100)] forKey:@"tip_cents"];
+    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)([self getTips] * 100)] forKey:@"tip_cents"];
+    
+    // - Tip Percentage
+    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)_deliveryTipPercent] forKey:@"tip_percentage"];
     
     // - Total
-    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(totalPrice * 100)] forKey:@"total_cents"];
+    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)([self getTotalPrice] * 100)] forKey:@"total_cents"];
     
     // - Delivery Price
-    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", deliveryPrice] forKey:@"delivery_price"];
+    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self getDeliveryPrice]] forKey:@"delivery_price"];
 
     [request setObject:detailInfo forKey:@"OrderDetails"];
     
