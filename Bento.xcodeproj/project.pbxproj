@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1E0788627C732857C288841E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC0B59E0C21EA384AF9FA91 /* libPods.a */; };
 		47AA1C441A6BE52800064857 /* string_confirmaddress@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C421A6BE52800064857 /* string_confirmaddress@2x.png */; };
 		47AA1C451A6BE52800064857 /* string_continue@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C431A6BE52800064857 /* string_continue@2x.png */; };
 		47AA1C471A6BE52F00064857 /* string_addanotherbento@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47AA1C461A6BE52F00064857 /* string_addanotherbento@2x.png */; };
@@ -91,14 +90,11 @@
 		7216B7621AA64C7C0006FFE9 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333821A6E55B6006C2446 /* CoreData.framework */; };
 		7216B7641AA64C7C0006FFE9 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333801A6E5570006C2446 /* ImageIO.framework */; };
 		7216B7651AA64C7C0006FFE9 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337E1A6E5535006C2446 /* GLKit.framework */; };
-		7216B7661AA64C7C0006FFE9 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337C1A6E5504006C2446 /* libc++.dylib */; };
-		7216B7671AA64C7C0006FFE9 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333411A6C1B2E006C2446 /* libz.dylib */; };
 		7216B7681AA64C7C0006FFE9 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 725BA0341A84EDBF005C18D3 /* Fabric.framework */; };
 		7216B7691AA64C7C0006FFE9 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337A1A6E5387006C2446 /* GoogleMaps.framework */; };
 		7216B76A1AA64C7C0006FFE9 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */; };
 		7216B76B1AA64C7C0006FFE9 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E41A6BC7E6006C2446 /* Security.framework */; };
 		7216B76C1AA64C7C0006FFE9 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E21A6BC7DE006C2446 /* Foundation.framework */; };
-		7216B76E1AA64C7C0006FFE9 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC0B59E0C21EA384AF9FA91 /* libPods.a */; };
 		7216B7701AA64C7C0006FFE9 /* deliverylocation_icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7CF1A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png */; };
 		7216B7711AA64C7C0006FFE9 /* register_icon_email_err.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7C01A5E126C00D034CF /* register_icon_email_err.png */; };
 		7216B7721AA64C7C0006FFE9 /* completeorder_cell_btn_remove@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 47C5B0171A8B82BD008FA7DA /* completeorder_cell_btn_remove@2x.png */; };
@@ -162,7 +158,6 @@
 		722332E31A6BC7DE006C2446 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E21A6BC7DE006C2446 /* Foundation.framework */; };
 		722332E51A6BC7E6006C2446 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E41A6BC7E6006C2446 /* Security.framework */; };
 		722332E81A6BDEEF006C2446 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */; };
-		722333421A6C1B2E006C2446 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333411A6C1B2E006C2446 /* libz.dylib */; };
 		7223335A1A6D4058006C2446 /* JGProgressHUD Resources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 722333451A6D4058006C2446 /* JGProgressHUD Resources.bundle */; };
 		7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333471A6D4058006C2446 /* JGProgressHUD.m */; };
 		7223335C1A6D4058006C2446 /* JGProgressHUDAnimation.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333491A6D4058006C2446 /* JGProgressHUDAnimation.m */; };
@@ -179,7 +174,6 @@
 		7223336E1A6D66E8006C2446 /* IntroViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 7223336D1A6D66E8006C2446 /* IntroViewController.m */; };
 		722333781A6E0DFD006C2446 /* AppStrings.m in Sources */ = {isa = PBXBuildFile; fileRef = 722333771A6E0DFD006C2446 /* AppStrings.m */; };
 		7223337B1A6E5387006C2446 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337A1A6E5387006C2446 /* GoogleMaps.framework */; };
-		7223337D1A6E5504006C2446 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337C1A6E5504006C2446 /* libc++.dylib */; };
 		7223337F1A6E5535006C2446 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337E1A6E5535006C2446 /* GLKit.framework */; };
 		722333811A6E5570006C2446 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333801A6E5570006C2446 /* ImageIO.framework */; };
 		722333831A6E55B6006C2446 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333821A6E55B6006C2446 /* CoreData.framework */; };
@@ -279,7 +273,6 @@
 		90D8F7E51A5E39A500D034CF /* logo_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E41A5E39A500D034CF /* logo_title.png */; };
 		90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */; };
 		90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */; };
-		BEC1CA650F5DB649F7E5C7FD /* libPods-UI Tests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A837E96C1042B222158ABF7 /* libPods-UI Tests.a */; };
 		FC05FB151B8684100021B7D2 /* UI_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC05FB141B8684100021B7D2 /* UI_Tests.m */; };
 		FC05FB1F1B869B920021B7D2 /* KifTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC05FB1E1B869B920021B7D2 /* KifTests.m */; };
 		FC08AB241AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
@@ -460,14 +453,11 @@
 		FC92E1431B7E5C880073C5D7 /* CoreData.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333821A6E55B6006C2446 /* CoreData.framework */; };
 		FC92E1441B7E5C880073C5D7 /* ImageIO.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333801A6E5570006C2446 /* ImageIO.framework */; };
 		FC92E1451B7E5C880073C5D7 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337E1A6E5535006C2446 /* GLKit.framework */; };
-		FC92E1461B7E5C880073C5D7 /* libc++.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337C1A6E5504006C2446 /* libc++.dylib */; };
-		FC92E1471B7E5C880073C5D7 /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 722333411A6C1B2E006C2446 /* libz.dylib */; };
 		FC92E1481B7E5C880073C5D7 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 725BA0341A84EDBF005C18D3 /* Fabric.framework */; };
 		FC92E1491B7E5C880073C5D7 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7223337A1A6E5387006C2446 /* GoogleMaps.framework */; };
 		FC92E14A1B7E5C880073C5D7 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */; };
 		FC92E14B1B7E5C880073C5D7 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E41A6BC7E6006C2446 /* Security.framework */; };
 		FC92E14C1B7E5C880073C5D7 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 722332E21A6BC7DE006C2446 /* Foundation.framework */; };
-		FC92E14E1B7E5C880073C5D7 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3CC0B59E0C21EA384AF9FA91 /* libPods.a */; };
 		FC92E1501B7E5C880073C5D7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
 		FC92E1511B7E5C880073C5D7 /* deliverylocation_icon_search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7CF1A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png */; };
 		FC92E1521B7E5C880073C5D7 /* register_icon_email_err.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7C01A5E126C00D034CF /* register_icon_email_err.png */; };
@@ -718,9 +708,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A837E96C1042B222158ABF7 /* libPods-UI Tests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-UI Tests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3561C29F3B08D2974FA2BADA /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		3CC0B59E0C21EA384AF9FA91 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		47AA1C421A6BE52800064857 /* string_confirmaddress@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string_confirmaddress@2x.png"; sourceTree = "<group>"; };
 		47AA1C431A6BE52800064857 /* string_continue@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string_continue@2x.png"; sourceTree = "<group>"; };
 		47AA1C461A6BE52F00064857 /* string_addanotherbento@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "string_addanotherbento@2x.png"; sourceTree = "<group>"; };
@@ -749,7 +737,6 @@
 		722332E21A6BC7DE006C2446 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		722332E41A6BC7E6006C2446 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		722333011A6BF172006C2446 /* Bento.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Bento.entitlements; sourceTree = "<group>"; };
-		722333411A6C1B2E006C2446 /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		722333451A6D4058006C2446 /* JGProgressHUD Resources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = "JGProgressHUD Resources.bundle"; sourceTree = "<group>"; };
 		722333461A6D4058006C2446 /* JGProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JGProgressHUD.h; sourceTree = "<group>"; };
 		722333471A6D4058006C2446 /* JGProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JGProgressHUD.m; sourceTree = "<group>"; };
@@ -780,7 +767,6 @@
 		722333761A6E0DFD006C2446 /* AppStrings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppStrings.h; sourceTree = "<group>"; };
 		722333771A6E0DFD006C2446 /* AppStrings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppStrings.m; sourceTree = "<group>"; };
 		7223337A1A6E5387006C2446 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
-		7223337C1A6E5504006C2446 /* libc++.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = "libc++.dylib"; path = "usr/lib/libc++.dylib"; sourceTree = SDKROOT; };
 		7223337E1A6E5535006C2446 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		722333801A6E5570006C2446 /* ImageIO.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ImageIO.framework; path = System/Library/Frameworks/ImageIO.framework; sourceTree = SDKROOT; };
 		722333821A6E55B6006C2446 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
@@ -1137,16 +1123,13 @@
 				7216B7641AA64C7C0006FFE9 /* ImageIO.framework in Frameworks */,
 				7216B7651AA64C7C0006FFE9 /* GLKit.framework in Frameworks */,
 				FC1D61641BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */,
-				7216B7661AA64C7C0006FFE9 /* libc++.dylib in Frameworks */,
 				FC1D61701BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */,
 				FCEFB76A1BBCEBF500C3E34D /* MoPub.framework in Frameworks */,
-				7216B7671AA64C7C0006FFE9 /* libz.dylib in Frameworks */,
 				7216B7681AA64C7C0006FFE9 /* Fabric.framework in Frameworks */,
 				7216B7691AA64C7C0006FFE9 /* GoogleMaps.framework in Frameworks */,
 				7216B76A1AA64C7C0006FFE9 /* MapKit.framework in Frameworks */,
 				7216B76B1AA64C7C0006FFE9 /* Security.framework in Frameworks */,
 				7216B76C1AA64C7C0006FFE9 /* Foundation.framework in Frameworks */,
-				7216B76E1AA64C7C0006FFE9 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1167,8 +1150,6 @@
 				722333811A6E5570006C2446 /* ImageIO.framework in Frameworks */,
 				7223337F1A6E5535006C2446 /* GLKit.framework in Frameworks */,
 				FC1D61661BBA0C0B0012FFB3 /* FBSDKCoreKit.framework in Frameworks */,
-				7223337D1A6E5504006C2446 /* libc++.dylib in Frameworks */,
-				722333421A6C1B2E006C2446 /* libz.dylib in Frameworks */,
 				725BA0361A84EDBF005C18D3 /* Fabric.framework in Frameworks */,
 				FC1D616C1BBA0C0B0012FFB3 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				7223337B1A6E5387006C2446 /* GoogleMaps.framework in Frameworks */,
@@ -1176,7 +1157,6 @@
 				722332E51A6BC7E6006C2446 /* Security.framework in Frameworks */,
 				FC1D61631BBA0C0B0012FFB3 /* FBAudienceNetwork.framework in Frameworks */,
 				722332E31A6BC7DE006C2446 /* Foundation.framework in Frameworks */,
-				1E0788627C732857C288841E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1184,7 +1164,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				BEC1CA650F5DB649F7E5C7FD /* libPods-UI Tests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1214,15 +1193,12 @@
 				FC92E1431B7E5C880073C5D7 /* CoreData.framework in Frameworks */,
 				FC92E1441B7E5C880073C5D7 /* ImageIO.framework in Frameworks */,
 				FC92E1451B7E5C880073C5D7 /* GLKit.framework in Frameworks */,
-				FC92E1461B7E5C880073C5D7 /* libc++.dylib in Frameworks */,
-				FC92E1471B7E5C880073C5D7 /* libz.dylib in Frameworks */,
 				FC92E1481B7E5C880073C5D7 /* Fabric.framework in Frameworks */,
 				FC92E1491B7E5C880073C5D7 /* GoogleMaps.framework in Frameworks */,
 				FC92E14A1B7E5C880073C5D7 /* MapKit.framework in Frameworks */,
 				FC92E14B1B7E5C880073C5D7 /* Security.framework in Frameworks */,
 				FC92E14C1B7E5C880073C5D7 /* Foundation.framework in Frameworks */,
 				FCEFB76B1BBCEBF500C3E34D /* MoPub.framework in Frameworks */,
-				FC92E14E1B7E5C880073C5D7 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1763,13 +1739,9 @@
 				722333821A6E55B6006C2446 /* CoreData.framework */,
 				722333801A6E5570006C2446 /* ImageIO.framework */,
 				7223337E1A6E5535006C2446 /* GLKit.framework */,
-				7223337C1A6E5504006C2446 /* libc++.dylib */,
-				722333411A6C1B2E006C2446 /* libz.dylib */,
 				90A553DA1A5FD5B2001F9DA7 /* MapKit.framework */,
 				722332E41A6BC7E6006C2446 /* Security.framework */,
 				722332E21A6BC7DE006C2446 /* Foundation.framework */,
-				3CC0B59E0C21EA384AF9FA91 /* libPods.a */,
-				0A837E96C1042B222158ABF7 /* libPods-UI Tests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";

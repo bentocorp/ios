@@ -630,6 +630,18 @@
     }
 }
 
+#pragma mark Calculations
+
+// works for x.xxxxxxxx
+- (float)roundToNearestHundredth:(float)originalNumber {
+    originalNumber += 0.005;
+    originalNumber *= 100;
+    originalNumber = floor(originalNumber);
+    originalNumber /= 100;
+    
+    return originalNumber;
+}
+
 - (float)getTotalPriceByMain {
     // add up all bentos by main
     float totalPriceByBentos = 0;
@@ -662,19 +674,20 @@
     return [[[BentoShop sharedInstance] getDeliveryPrice] floatValue];
 }
 
+- (float)getTax {
+
+    if (_promoDiscount <= [self getTotalPriceByMainPlusDeliveryFee]) {
+        return [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee] - _promoDiscount) * _taxPercent) / 100.f];
+    }
+    else {
+        return 0; // if Promo is greater than Meal
+    }
+}
 
 - (float)getTotalPrice
 {
-    float tax;
-    if (_promoDiscount <= [self getTotalPriceByMainPlusDeliveryFee]) {
-        tax = [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee] - _promoDiscount) * _taxPercent) / 100.f];
-    }
-    else {
-        tax = 0; // if Promo is greater than Meal
-    }
-    
     // Meal + Tax + Tip
-    float subTotal = [self getTotalPriceByMainPlusDeliveryFee] + tax + [self getTips];
+    float subTotal = [self getTotalPriceByMainPlusDeliveryFee] + [self getTax] + [self getTips];
     
     // Grand Total
     float totalPrice;
@@ -691,21 +704,11 @@
         cutText = [NSString stringWithFormat:@"$%.2f", ([self getTotalPriceByMainPlusDeliveryFee] + [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee]) * _taxPercent) / 100.f] + [self getTips])];
     }
     
-    self.lblTax.text = [NSString stringWithFormat:@"$%.2f", tax];
+    self.lblTax.text = [NSString stringWithFormat:@"$%.2f", [self getTax]];
     
     return totalPrice;
 }
 
-// works for x.xxxxxxxx
-- (float)roundToNearestHundredth:(float)originalNumber
-{
-    originalNumber += 0.005;
-    originalNumber *= 100;
-    originalNumber = floor(originalNumber);
-    originalNumber /= 100;
-    
-    return originalNumber;
-}
 
 - (void)updatePriceLabels
 {
@@ -1453,14 +1456,13 @@
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)couponDiscount] forKey:@"coupon_discount_cents"];
     
     // - Tax
-    float tax = [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee] - _promoDiscount) * _taxPercent) / 100.f];
-    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)(tax * 100)] forKey:@"tax_cents"];
-    
-    // - Tip
-    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)([self getTips] * 100)] forKey:@"tip_cents"];
+    [detailInfo setObject:[NSString stringWithFormat:@"%ld", lroundf([self getTax] * 100)] forKey:@"tax_cents"];
     
     // - Tip Percentage
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)_deliveryTipPercent] forKey:@"tip_percentage"];
+    
+    // - Tip
+    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)([self getTips] * 100)] forKey:@"tip_cents"];
     
     // - Total
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)([self getTotalPrice] * 100)] forKey:@"total_cents"];
