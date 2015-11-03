@@ -64,29 +64,21 @@
     
     /*-----------------------------------------------------------------------------------------------------*/
     
-    // Map View
-    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 66, SCREEN_WIDTH, SCREEN_HEIGHT-66)];
-    self.mapView.mapType = MKMapTypeStandard;
-    self.mapView.zoomEnabled = YES;
-    self.mapView.scrollEnabled = YES;
-    self.mapView.showsUserLocation = YES;
-    [self.view addSubview: self.mapView];
+//    // Center
+//    CLLocationCoordinate2D center;
+//    center.latitude = SF_LAT;
+//    center.longitude = SF_LNG;
+//    
+//    // Span
+//    MKCoordinateSpan span;
+//    span.latitudeDelta = THE_SPAN;
+//    span.longitudeDelta = THE_SPAN;
     
-    // Center
-    CLLocationCoordinate2D center;
-    center.latitude = SF_LAT;
-    center.longitude = SF_LNG;
-    
-    // Span
-    MKCoordinateSpan span;
-    span.latitudeDelta = THE_SPAN;
-    span.longitudeDelta = THE_SPAN;
-    
-    // Set mapview region
-    MKCoordinateRegion sfRegion;
-    sfRegion.center = center;
-    sfRegion.span = span;
-    [self.mapView setRegion:sfRegion animated:YES];
+//    // Set mapview region
+//    MKCoordinateRegion sfRegion;
+//    sfRegion.center = center;
+//    sfRegion.span = span;
+//    [self.mapView setRegion:sfRegion animated:YES];
     
     
     // Annotation
@@ -97,8 +89,22 @@
     annotation.title = @"Delivery Address";
     annotation.subtitle = placeMark.formattedAddress;
     
+    MKPointAnnotation *annotation2 = [[MKPointAnnotation alloc] init];
+    annotation2.coordinate = CLLocationCoordinate2DMake(37.7545193, -122.440437);
+    
+    NSMutableArray *annotations = [[NSMutableArray alloc] init];
+    [annotations addObject:annotation];
+    [annotations addObject:annotation2];
+    
     // Add annotation to mapview
-    [self.mapView addAnnotation:annotation];
+    // Map View
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 66, SCREEN_WIDTH, SCREEN_HEIGHT-66)];
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.zoomEnabled = YES;
+    self.mapView.scrollEnabled = YES;
+    [self.mapView showAnnotations:annotations animated:YES];
+    [self.mapView addAnnotations:annotations];
+    [self.view addSubview: self.mapView];
 }
 
 - (void)didReceiveMemoryWarning {
