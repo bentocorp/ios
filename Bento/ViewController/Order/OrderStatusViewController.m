@@ -13,6 +13,8 @@
 #import "UIColor+CustomColors.h"
 #import <MapKit/MapKit.h>
 #import "Annotation.h"
+#import "SVGeocoder.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
 
 @interface OrderStatusViewController () <MKMapViewDelegate>
 
@@ -70,9 +72,6 @@
     self.mapView.showsUserLocation = YES;
     [self.view addSubview: self.mapView];
     
-    // Create the region
-    MKCoordinateRegion sfRegion;
-    
     // Center
     CLLocationCoordinate2D center;
     center.latitude = SF_LAT;
@@ -83,20 +82,23 @@
     span.latitudeDelta = THE_SPAN;
     span.longitudeDelta = THE_SPAN;
     
+    // Set mapview region
+    MKCoordinateRegion sfRegion;
     sfRegion.center = center;
     sfRegion.span = span;
-    
-    // Set mapview region
     [self.mapView setRegion:sfRegion animated:YES];
     
+    
     // Annotation
-    Annotation *customerAnnotation = [[Annotation alloc] init];
-    customerAnnotation.coordinate = center;
-    customerAnnotation.title = @"Customer";
-    customerAnnotation.subtitle = @"Delivering to this location";
+    SVPlacemark *placeMark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    
+    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
+    annotation.coordinate = placeMark.location.coordinate;
+    annotation.title = @"Delivery Address";
+    annotation.subtitle = placeMark.formattedAddress;
     
     // Add annotation to mapview
-    [self.mapView addAnnotation:customerAnnotation];
+    [self.mapView addAnnotation:annotation];
 }
 
 - (void)didReceiveMemoryWarning {
