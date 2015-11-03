@@ -29,6 +29,9 @@
 
 #import "EditPhoneNumberView.h"
 
+#import "OrderListViewController.h"
+#import "OrderStatusViewController.h"
+
 
 //#import <FBSDKShareKit/FBSDKShareKit.h>
 
@@ -106,6 +109,12 @@
     [closeButton setImage:[UIImage imageNamed:@"nav_btn_close"] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(onCloseButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
+    
+    // Tracking
+    UIButton *orderStatusButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 45, 30, 30, 30)];
+    [orderStatusButton addTarget:self action:@selector(onOrderStatus) forControlEvents:UIControlEventTouchUpInside];
+    [orderStatusButton setImage:[UIImage imageNamed:@"in-transit-64"] forState:UIControlStateNormal];
+    [navigationBarView addSubview:orderStatusButton];
     
     // line separator under nav bar
     UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 1)];
@@ -456,6 +465,18 @@
 - (void)onCloseButton
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)onOrderStatus {
+    
+    // if more than one order, show orderlist
+    //    if () {
+    
+    //    }
+    // if only one order, just show order
+    //    else {
+    [self.navigationController pushViewController:[[OrderStatusViewController alloc] init] animated:YES];
+    //    }
 }
 
 - (void)openEmailFromSharing

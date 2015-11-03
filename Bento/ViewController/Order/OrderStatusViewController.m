@@ -11,19 +11,28 @@
 
 #import "OrderStatusViewController.h"
 #import "UIColor+CustomColors.h"
-#import "Mapbox.h"
+#import <MapKit/MapKit.h>
+#import "Annotation.h"
 
-@interface OrderStatusViewController () <MGLMapViewDelegate>
+@interface OrderStatusViewController () <MKMapViewDelegate>
 
-@property (nonatomic) MGLMapView *mapView;
-@property (nonatomic) UIActivityIndicatorView *viewActivity;
+@property (nonatomic) MKMapView *mapView;
 
 @end
+
+// SF Coordinates
+#define SF_LAT 37.7545193;
+#define SF_LNG -122.440437;
+
+// Span
+#define THE_SPAN 0.15f;
 
 @implementation OrderStatusViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     /*-----------------------------------------------------------------------------------------------------*/
     
@@ -42,7 +51,7 @@
     
     // back button
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 50, 45)];
-    [closeButton setImage:[UIImage imageNamed:@"nav_btn_close"] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(onCloseButton) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
     
@@ -53,47 +62,52 @@
     
     /*-----------------------------------------------------------------------------------------------------*/
     
-    /*-------------------------------------------MAPBOX----------------------------------------------------*/
+    // Map View
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 66, SCREEN_WIDTH, SCREEN_HEIGHT-66)];
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.zoomEnabled = YES;
+    self.mapView.scrollEnabled = YES;
+    self.mapView.showsUserLocation = YES;
+    [self.view addSubview: self.mapView];
     
-    _mapView = [[MGLMapView alloc] initWithFrame:CGRectMake(0, 66, SCREEN_WIDTH, SCREEN_HEIGHT-66)];
-    _mapView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    // Create the region
+    MKCoordinateRegion sfRegion;
     
-    // Set the map's bounds to Pisa, Italy
-    MGLCoordinateBounds bounds = MGLCoordinateBoundsMake(CLLocationCoordinate2DMake(43.7115, 10.3725), CLLocationCoordinate2DMake(43.7318, 10.4222));
-    [_mapView setVisibleCoordinateBounds:bounds];
+    // Center
+    CLLocationCoordinate2D center;
+    center.latitude = SF_LAT;
+    center.longitude = SF_LNG;
     
-    [self.view addSubview:_mapView];
+    // Span
+    MKCoordinateSpan span;
+    span.latitudeDelta = THE_SPAN;
+    span.longitudeDelta = THE_SPAN;
     
-    // Set the delegate property of our map view to self after instantiating it
-    _mapView.delegate = self;
+    sfRegion.center = center;
+    sfRegion.span = span;
     
-    // Initialize and add the marker annotation
-    MGLPointAnnotation *pisa = [[MGLPointAnnotation alloc] init];
-    pisa.coordinate = CLLocationCoordinate2DMake(43.72305, 10.396633);
-    pisa.title = @"Leaning Tower of Pisa";
+    // Set mapview region
+    [self.mapView setRegion:sfRegion animated:YES];
     
-    MGLPointAnnotation *pisa2 = [[MGLPointAnnotation alloc] init];
-    pisa2.coordinate = CLLocationCoordinate2DMake(43.72305, 10.4);
-    pisa2.title = @"Leaning Tower of Pisa2";
+    // Annotation
+    Annotation *customerAnnotation = [[Annotation alloc] init];
+    customerAnnotation.coordinate = center;
+    customerAnnotation.title = @"Customer";
+    customerAnnotation.subtitle = @"Delivering to this location";
     
-    [_mapView addAnnotations:@[pisa, pisa2]];
-    
-    /*-----------------------------------------------------------------------------------------------------*/
+    // Add annotation to mapview
+    [self.mapView addAnnotation:customerAnnotation];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }
 
-// Allow markers callouts to show when tapped
-- (BOOL)mapView:(MGLMapView *)mapView annotationCanShowCallout:(id <MGLAnnotation>)annotation
-{
-    return YES;
-}
+// there will be a delegate method here from sockethandler didRecieveCoordianates
 
-- (void)onCloseButton
-{
-    [self dismissViewControllerAnimated:YES completion:nil];
+#pragma mark Dismiss View
+- (void)onCloseButton {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 @end

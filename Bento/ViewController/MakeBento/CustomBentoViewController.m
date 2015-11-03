@@ -51,9 +51,6 @@
 
 #import "UIColor+CustomColors.h"
 
-#import "OrderListViewController.h"
-#import "OrderStatusViewController.h"
-
 @interface CustomBentoViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
@@ -176,12 +173,6 @@
     [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_inact"] forState:UIControlStateNormal];
     [btnCart addTarget:self action:@selector(onCart) forControlEvents:UIControlEventTouchUpInside];
     [navigationBarView addSubview:btnCart];
-    
-    // Tracking
-    UIButton *orderStatusButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 90, 27, 30, 30)];
-    [orderStatusButton addTarget:self action:@selector(onOrderStatus) forControlEvents:UIControlEventTouchUpInside];
-    [orderStatusButton setImage:[UIImage imageNamed:@"in-transit-64"] forState:UIControlStateNormal];
-    [navigationBarView addSubview:orderStatusButton];
     
 /*---Count Badge---*/
     
@@ -1002,18 +993,6 @@
         navC.navigationBar.hidden = YES;
         [self.navigationController presentViewController:navC animated:YES completion:nil];
     }
-}
-
-- (void)onOrderStatus {
-    
-    // if more than one order, show orderlist
-//    if () {
-//        [self.navigationController presentViewController:[[OrderListViewController alloc] init] animated:YES completion:nil];
-//    }
-    // if only one order, just show order
-//    else {
-        [self.navigationController presentViewController:[[OrderStatusViewController alloc] init] animated:YES completion:nil];
-//    }
 }
 
 - (void)onCart
