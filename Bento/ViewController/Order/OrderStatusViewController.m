@@ -12,9 +12,9 @@
 #import "OrderStatusViewController.h"
 #import "UIColor+CustomColors.h"
 #import <MapKit/MapKit.h>
-#import "Annotation.h"
 #import "SVGeocoder.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
+#import "DriverAnnotationView.h"
 
 @interface OrderStatusViewController () <MKMapViewDelegate>
 
@@ -22,17 +22,16 @@
 
 @end
 
-// SF Coordinates
-#define SF_LAT 37.7545193;
-#define SF_LNG -122.440437;
-
-// Span
-#define THE_SPAN 0.15f;
-
-@implementation OrderStatusViewController
+@implementation OrderStatusViewController {
+    float diu;
+    float diulei;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    diu = 0.001;
+    diulei = -122.440437;
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -64,47 +63,57 @@
     
     /*-----------------------------------------------------------------------------------------------------*/
     
-//    // Center
-//    CLLocationCoordinate2D center;
-//    center.latitude = SF_LAT;
-//    center.longitude = SF_LNG;
-//    
-//    // Span
-//    MKCoordinateSpan span;
-//    span.latitudeDelta = THE_SPAN;
-//    span.longitudeDelta = THE_SPAN;
-    
-//    // Set mapview region
-//    MKCoordinateRegion sfRegion;
-//    sfRegion.center = center;
-//    sfRegion.span = span;
-//    [self.mapView setRegion:sfRegion animated:YES];
-    
-    
-    // Annotation
     SVPlacemark *placeMark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     
+    // Delivery Address
     MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
     annotation.coordinate = placeMark.location.coordinate;
     annotation.title = @"Delivery Address";
     annotation.subtitle = placeMark.formattedAddress;
     
-    MKPointAnnotation *annotation2 = [[MKPointAnnotation alloc] init];
-    annotation2.coordinate = CLLocationCoordinate2DMake(37.7545193, -122.440437);
+    // Driver Location
+    //37.7545193, -122.440437
     
+    // Annotations Array
     NSMutableArray *annotations = [[NSMutableArray alloc] init];
     [annotations addObject:annotation];
-    [annotations addObject:annotation2];
     
-    // Add annotation to mapview
     // Map View
-    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 66, SCREEN_WIDTH, SCREEN_HEIGHT-66)];
+    self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 66, SCREEN_WIDTH, SCREEN_HEIGHT - 66)];
+    self.mapView.delegate = self;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.zoomEnabled = YES;
     self.mapView.scrollEnabled = YES;
     [self.mapView showAnnotations:annotations animated:YES];
-    [self.mapView addAnnotations:annotations];
+    [self.mapView addAnnotation:annotation];
     [self.view addSubview: self.mapView];
+    
+//    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
+}
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
+    // set reuseidentifier
+    NSString *annotationIdentifier = @"CustomViewAnnotation";
+    
+    // reuse annotation view
+    DriverAnnotationView *driverAnnotationView = (DriverAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+    
+    // if no annotation view, create new one
+    if (driverAnnotationView == nil) {
+        driverAnnotationView = [[DriverAnnotationView alloc] initWithAnnotationWithImage:annotation
+                                                                         reuseIdentifier:annotationIdentifier
+                                                                     annotationViewImage:[UIImage imageNamed:@"in-transit-64"]];
+        
+        driverAnnotationView.canShowCallout = YES;
+    }
+    
+    return driverAnnotationView;
+}
+
+- (void)updateDriver {
+    diulei += diu;
+//    self.driverAnnotationView.annotation = CLLocationCoordinate2DMake(37.7545193, diulei);
 }
 
 - (void)didReceiveMemoryWarning {
