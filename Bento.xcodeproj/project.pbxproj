@@ -675,6 +675,10 @@
 		FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22141ADC3ADF006B2750 /* Icon@2x.png */; };
 		FCDF22381ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
 		FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
+		FCE036DA1BEAAE5200F7605B /* CustomerAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036D91BEAAE5200F7605B /* CustomerAnnotationView.m */; };
+		FCE036DB1BEAAE5200F7605B /* CustomerAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036D91BEAAE5200F7605B /* CustomerAnnotationView.m */; };
+		FCE036DF1BEAB06800F7605B /* location-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE036DE1BEAB06800F7605B /* location-64.png */; };
+		FCE036E01BEAB06800F7605B /* location-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE036DE1BEAB06800F7605B /* location-64.png */; };
 		FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCEFB7691BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
@@ -1093,6 +1097,9 @@
 		FCDF22131ADC3ADF006B2750 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		FCDF22141ADC3ADF006B2750 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
+		FCE036D81BEAAE5200F7605B /* CustomerAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerAnnotationView.h; sourceTree = "<group>"; };
+		FCE036D91BEAAE5200F7605B /* CustomerAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerAnnotationView.m; sourceTree = "<group>"; };
+		FCE036DE1BEAB06800F7605B /* location-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-64.png"; sourceTree = "<group>"; };
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
 		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
@@ -1474,6 +1481,7 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FCE036DE1BEAB06800F7605B /* location-64.png */,
 				FC2F06A41BE81F64007B6A82 /* in-transit-64.png */,
 				FC7291291BA8BD6B00BCBDE7 /* pencil-bento.png */,
 				FC82867B1AEEF3D2009D073D /* Settings Icons */,
@@ -1774,27 +1782,25 @@
 			path = DocSets;
 			sourceTree = "<group>";
 		};
-		FC2AB1671BE9829A00223B8A /* New Group */ = {
+		FC2AB1671BE9829A00223B8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FC46DE8B1BE14AEA00E9A7B1 /* SocketHandler.h */,
-				FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */,
 				FC386F0A1BE1F2E700961A17 /* Push.h */,
 				FC386F0B1BE1F2E700961A17 /* Push.m */,
 				FC4327B21BE2EE8E00E91D9B /* DriverLocation.h */,
 				FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */,
-				FC2AB1631BE9813F00223B8A /* DriverAnnotationView.h */,
-				FC2AB1641BE9813F00223B8A /* DriverAnnotationView.m */,
+				FCE036DC1BEAAE6300F7605B /* Annotation */,
 			);
-			name = "New Group";
+			name = Model;
 			sourceTree = "<group>";
 		};
 		FC386F0E1BE1F48900961A17 /* Driver Tracking */ = {
 			isa = PBXGroup;
 			children = (
-				FC2AB1671BE9829A00223B8A /* New Group */,
-				FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */,
-				FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */,
+				FC46DE8B1BE14AEA00E9A7B1 /* SocketHandler.h */,
+				FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */,
+				FC2AB1671BE9829A00223B8A /* Model */,
+				FCE036DD1BEAAE7C00F7605B /* View Controller */,
 			);
 			name = "Driver Tracking";
 			path = Model;
@@ -2107,6 +2113,26 @@
 			path = ../Squared;
 			sourceTree = "<group>";
 		};
+		FCE036DC1BEAAE6300F7605B /* Annotation */ = {
+			isa = PBXGroup;
+			children = (
+				FCE036D81BEAAE5200F7605B /* CustomerAnnotationView.h */,
+				FCE036D91BEAAE5200F7605B /* CustomerAnnotationView.m */,
+				FC2AB1631BE9813F00223B8A /* DriverAnnotationView.h */,
+				FC2AB1641BE9813F00223B8A /* DriverAnnotationView.m */,
+			);
+			name = Annotation;
+			sourceTree = "<group>";
+		};
+		FCE036DD1BEAAE7C00F7605B /* View Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */,
+				FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */,
+			);
+			name = "View Controller";
+			sourceTree = "<group>";
+		};
 		FCFD79F01AE8880D002AD322 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -2280,6 +2306,7 @@
 				FC8DB7491AF18674003045A3 /* icon-square-phone.png in Resources */,
 				FCF5E0A71B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
 				7216B7751AA64C7C0006FFE9 /* sample.png in Resources */,
+				FCE036E01BEAB06800F7605B /* location-64.png in Resources */,
 				7216B7761AA64C7C0006FFE9 /* orderconfirm_image_remove@2x.png in Resources */,
 				7216B7771AA64C7C0006FFE9 /* BentoTableViewCell.xib in Resources */,
 				FC8DB73F1AF18674003045A3 /* icon-circle-twitter.png in Resources */,
@@ -2394,6 +2421,7 @@
 				FC8DB7381AF18674003045A3 /* icon-circle-facebook.png in Resources */,
 				FC8DB7481AF18674003045A3 /* icon-square-phone.png in Resources */,
 				FCF5E0A61B8BE3CF002E823C /* placeholder-gray.JPG in Resources */,
+				FCE036DF1BEAB06800F7605B /* location-64.png in Resources */,
 				90BED0EE1A5C38DA003DC872 /* sample.png in Resources */,
 				90359C271A5EC49700AAD5D2 /* orderconfirm_image_remove@2x.png in Resources */,
 				FC1D61571BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */,
@@ -2850,6 +2878,7 @@
 				7216B75A1AA64C7C0006FFE9 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				7216B75B1AA64C7C0006FFE9 /* NSObject+RMCopyable.m in Sources */,
 				7216B75C1AA64C7C0006FFE9 /* AppStrings.m in Sources */,
+				FCE036DB1BEAAE5200F7605B /* CustomerAnnotationView.m in Sources */,
 				7216B75D1AA64C7C0006FFE9 /* SoldOutViewController.m in Sources */,
 				FC72297C1B16905700C9A9AF /* Reachability.m in Sources */,
 				7216B75E1AA64C7C0006FFE9 /* OrderConfirmViewController.m in Sources */,
@@ -2959,6 +2988,7 @@
 				7223335F1A6D4058006C2446 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				7286EB4D1A7D8BE800D03DCE /* NSObject+RMCopyable.m in Sources */,
 				722333781A6E0DFD006C2446 /* AppStrings.m in Sources */,
+				FCE036DA1BEAAE5200F7605B /* CustomerAnnotationView.m in Sources */,
 				90D8F7DE1A5E30AD00D034CF /* SoldOutViewController.m in Sources */,
 				FC72297B1B16905700C9A9AF /* Reachability.m in Sources */,
 				90D8F7DB1A5E304D00D034CF /* OrderConfirmViewController.m in Sources */,
