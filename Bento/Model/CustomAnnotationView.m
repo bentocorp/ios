@@ -1,14 +1,14 @@
 //
-//  DriverAnnotationView.m
+//  CustomAnnotationView.m
 //  Bento
 //
-//  Created by Joseph Lau on 11/3/15.
+//  Created by Joseph Lau on 11/4/15.
 //  Copyright © 2015 bentonow. All rights reserved.
 //
 
-#import "DriverAnnotationView.h"
+#import "CustomAnnotationView.h"
 
-@implementation DriverAnnotationView
+@implementation CustomAnnotationView
 
 - (id)initWithAnnotationWithImage:(id<MKAnnotation>)annotation
                   reuseIdentifier:(NSString *)reuseIdentifier

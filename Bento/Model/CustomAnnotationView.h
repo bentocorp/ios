@@ -1,5 +1,5 @@
 //
-//  CustomerAnnotationView.h
+//  CustomAnnotationView.h
 //  Bento
 //
 //  Created by Joseph Lau on 11/4/15.
@@ -8,7 +8,7 @@
 
 #import <MapKit/MapKit.h>
 
-@interface CustomerAnnotationView : MKAnnotationView
+@interface CustomAnnotationView : MKAnnotationView
 
 - (id)initWithAnnotationWithImage:(id<MKAnnotation>)annotation
                   reuseIdentifier:(NSString *)reuseIdentifier

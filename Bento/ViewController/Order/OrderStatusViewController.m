@@ -14,8 +14,9 @@
 #import <MapKit/MapKit.h>
 #import "SVGeocoder.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
-#import "CustomerAnnotationView.h"
-#import "DriverAnnotationView.h"
+
+#import "CustomAnnotation.h"
+#import "CustomAnnotationView.h"
 
 @interface OrderStatusViewController () <MKMapViewDelegate>
 
@@ -64,54 +65,68 @@
     
     /*-----------------------------------------------------------------------------------------------------*/
     
-    SVPlacemark *placeMark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-    
-    // Delivery Address
-
-    
-    MKPointAnnotation *annotation = [[MKPointAnnotation alloc] init];
-    annotation.coordinate = placeMark.location.coordinate;
-    annotation.title = @"Delivery Address";
-    annotation.subtitle = placeMark.formattedAddress;
-    
-    // Driver Location
-    //37.7545193, -122.440437
-    
-    // Annotations Array
-    NSMutableArray *annotations = [[NSMutableArray alloc] init];
-    [annotations addObject:annotation];
-    
     // Map View
     self.mapView = [[MKMapView alloc] initWithFrame:CGRectMake(0, 66, SCREEN_WIDTH, SCREEN_HEIGHT - 66)];
     self.mapView.delegate = self;
     self.mapView.mapType = MKMapTypeStandard;
     self.mapView.zoomEnabled = YES;
     self.mapView.scrollEnabled = YES;
-    [self.mapView showAnnotations:annotations animated:YES];
-    [self.mapView addAnnotation:annotation];
     [self.view addSubview: self.mapView];
+    
+    // Annotations
+    SVPlacemark *placeMark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+
+    CustomAnnotation *customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
+                                                                          subtitle:placeMark.formattedAddress
+                                                                        coordinate:placeMark.location.coordinate
+                                                                              type:@"customer"];
+    
+    CustomAnnotation *driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Driver"
+                                                                        subtitle:@""
+                                                                      coordinate:CLLocationCoordinate2DMake(37.7545193, -122.440437)
+                                                                            type:@"driver"];
+    
+    
+    // Annotations Array
+    NSMutableArray *allAnnotations = [[NSMutableArray alloc] init];
+    [allAnnotations addObject:customerAnnotation];
+    [allAnnotations addObject:driverAnnotation];
+    
+    // Add annotations to map view
+    [self.mapView showAnnotations:allAnnotations animated:YES];
+    [self.mapView addAnnotations:allAnnotations];
     
 //    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
-    // set reuseidentifier
+    // set reuse identifier
     NSString *annotationIdentifier = @"CustomViewAnnotation";
     
-    // reuse annotation view
-    DriverAnnotationView *driverAnnotationView = (DriverAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+    CustomAnnotationView *customAnnotationView = (CustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
     
-    // if no annotation view, create new one
-    if (driverAnnotationView == nil) {
-        driverAnnotationView = [[DriverAnnotationView alloc] initWithAnnotationWithImage:annotation
-                                                                         reuseIdentifier:annotationIdentifier
-                                                                     annotationViewImage:[UIImage imageNamed:@"in-transit-64"]];
+    CustomAnnotation *customAnnotation = (CustomAnnotation *)annotation;
+    if ([customAnnotation.type isEqualToString:@"customer"]) {
         
-        driverAnnotationView.canShowCallout = YES;
+        if (customAnnotationView == nil) {
+            customAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
+                                                                             reuseIdentifier:annotationIdentifier
+                                                                         annotationViewImage:[UIImage imageNamed:@"location-64"]];
+        }
+    }
+    else if ([customAnnotation.type isEqualToString:@"driver"]) {
+        
+        if (customAnnotationView == nil) {
+            customAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
+                                                                             reuseIdentifier:annotationIdentifier
+                                                                         annotationViewImage:[UIImage imageNamed:@"in-transit-64"]];
+        }
     }
     
-    return driverAnnotationView;
+    customAnnotationView.canShowCallout = YES;
+    
+    return customAnnotationView;
 }
 
 - (void)updateDriver {

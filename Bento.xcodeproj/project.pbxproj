@@ -310,8 +310,6 @@
 		FC1D61711BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */; };
 		FC1D63111BBA0DFE0012FFB3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */; };
 		FC1D63121BBA0E0B0012FFB3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */; };
-		FC2AB1651BE9813F00223B8A /* DriverAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2AB1641BE9813F00223B8A /* DriverAnnotationView.m */; };
-		FC2AB1661BE9813F00223B8A /* DriverAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2AB1641BE9813F00223B8A /* DriverAnnotationView.m */; };
 		FC2F06A51BE81F64007B6A82 /* in-transit-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2F06A41BE81F64007B6A82 /* in-transit-64.png */; };
 		FC2F06A61BE81F64007B6A82 /* in-transit-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2F06A41BE81F64007B6A82 /* in-transit-64.png */; };
 		FC386F0C1BE1F2E700961A17 /* Push.m in Sources */ = {isa = PBXBuildFile; fileRef = FC386F0B1BE1F2E700961A17 /* Push.m */; };
@@ -675,10 +673,12 @@
 		FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22141ADC3ADF006B2750 /* Icon@2x.png */; };
 		FCDF22381ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
 		FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */; };
-		FCE036DA1BEAAE5200F7605B /* CustomerAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036D91BEAAE5200F7605B /* CustomerAnnotationView.m */; };
-		FCE036DB1BEAAE5200F7605B /* CustomerAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036D91BEAAE5200F7605B /* CustomerAnnotationView.m */; };
 		FCE036DF1BEAB06800F7605B /* location-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE036DE1BEAB06800F7605B /* location-64.png */; };
 		FCE036E01BEAB06800F7605B /* location-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FCE036DE1BEAB06800F7605B /* location-64.png */; };
+		FCE036E31BEABA1B00F7605B /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E21BEABA1B00F7605B /* CustomAnnotationView.m */; };
+		FCE036E41BEABA1B00F7605B /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E21BEABA1B00F7605B /* CustomAnnotationView.m */; };
+		FCE036E71BEAC39000F7605B /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E61BEAC39000F7605B /* CustomAnnotation.m */; };
+		FCE036E81BEAC39000F7605B /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E61BEAC39000F7605B /* CustomAnnotation.m */; };
 		FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCEFB7691BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
@@ -933,8 +933,6 @@
 		FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		FC29F26A1BA7638A00625B8F /* Bento Dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bento Dev-Info.plist"; sourceTree = SOURCE_ROOT; };
-		FC2AB1631BE9813F00223B8A /* DriverAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverAnnotationView.h; sourceTree = "<group>"; };
-		FC2AB1641BE9813F00223B8A /* DriverAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverAnnotationView.m; sourceTree = "<group>"; };
 		FC2F06A41BE81F64007B6A82 /* in-transit-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "in-transit-64.png"; sourceTree = "<group>"; };
 		FC2F06A71BE8227A007B6A82 /* libAdjust.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAdjust.a; path = "Pods/../build/Debug-iphoneos/libAdjust.a"; sourceTree = "<group>"; };
 		FC386F0A1BE1F2E700961A17 /* Push.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Push.h; sourceTree = "<group>"; };
@@ -1097,9 +1095,11 @@
 		FCDF22131ADC3ADF006B2750 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		FCDF22141ADC3ADF006B2750 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		FCDF22151ADC3ADF006B2750 /* iTunesArtwork@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iTunesArtwork@2x.png"; sourceTree = "<group>"; };
-		FCE036D81BEAAE5200F7605B /* CustomerAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomerAnnotationView.h; sourceTree = "<group>"; };
-		FCE036D91BEAAE5200F7605B /* CustomerAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomerAnnotationView.m; sourceTree = "<group>"; };
 		FCE036DE1BEAB06800F7605B /* location-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "location-64.png"; sourceTree = "<group>"; };
+		FCE036E11BEABA1B00F7605B /* CustomAnnotationView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotationView.h; sourceTree = "<group>"; };
+		FCE036E21BEABA1B00F7605B /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
+		FCE036E51BEAC39000F7605B /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
+		FCE036E61BEAC39000F7605B /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
 		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
@@ -2116,10 +2116,10 @@
 		FCE036DC1BEAAE6300F7605B /* Annotation */ = {
 			isa = PBXGroup;
 			children = (
-				FCE036D81BEAAE5200F7605B /* CustomerAnnotationView.h */,
-				FCE036D91BEAAE5200F7605B /* CustomerAnnotationView.m */,
-				FC2AB1631BE9813F00223B8A /* DriverAnnotationView.h */,
-				FC2AB1641BE9813F00223B8A /* DriverAnnotationView.m */,
+				FCE036E51BEAC39000F7605B /* CustomAnnotation.h */,
+				FCE036E61BEAC39000F7605B /* CustomAnnotation.m */,
+				FCE036E11BEABA1B00F7605B /* CustomAnnotationView.h */,
+				FCE036E21BEABA1B00F7605B /* CustomAnnotationView.m */,
 			);
 			name = Annotation;
 			sourceTree = "<group>";
@@ -2808,9 +2808,11 @@
 				FC9E821A1BACE4250099DBF5 /* WebSocket.swift in Sources */,
 				7216B71C1AA64C7C0006FFE9 /* PhoneNumberViewController.m in Sources */,
 				7216B71D1AA64C7C0006FFE9 /* SignInViewController.m in Sources */,
+				FCE036E41BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
 				FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
 				7216B71E1AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
+				FCE036E81BEAC39000F7605B /* CustomAnnotation.m in Sources */,
 				7216B7201AA64C7C0006FFE9 /* MKNetworkEngine.m in Sources */,
 				7216B7211AA64C7C0006FFE9 /* NSObject+RMArchivable.m in Sources */,
 				7216B7221AA64C7C0006FFE9 /* SHSFlagAccessoryView.m in Sources */,
@@ -2839,7 +2841,6 @@
 				7216B73B1AA64C7C0006FFE9 /* FirstViewController.m in Sources */,
 				FC46DE8E1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */,
 				7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */,
-				FC2AB1661BE9813F00223B8A /* DriverAnnotationView.m in Sources */,
 				7216B73F1AA64C7C0006FFE9 /* SVGeocoder.m in Sources */,
 				7216B7401AA64C7C0006FFE9 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
 				FC9E81FC1BACE4250099DBF5 /* SocketEventHandler.swift in Sources */,
@@ -2878,7 +2879,6 @@
 				7216B75A1AA64C7C0006FFE9 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				7216B75B1AA64C7C0006FFE9 /* NSObject+RMCopyable.m in Sources */,
 				7216B75C1AA64C7C0006FFE9 /* AppStrings.m in Sources */,
-				FCE036DB1BEAAE5200F7605B /* CustomerAnnotationView.m in Sources */,
 				7216B75D1AA64C7C0006FFE9 /* SoldOutViewController.m in Sources */,
 				FC72297C1B16905700C9A9AF /* Reachability.m in Sources */,
 				7216B75E1AA64C7C0006FFE9 /* OrderConfirmViewController.m in Sources */,
@@ -2918,9 +2918,11 @@
 				FC9E82191BACE4250099DBF5 /* WebSocket.swift in Sources */,
 				90D8F7BD1A5D990800D034CF /* PhoneNumberViewController.m in Sources */,
 				90D8F7BA1A5D963300D034CF /* SignInViewController.m in Sources */,
+				FCE036E31BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
 				FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
 				722333FB1A72C133006C2446 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
+				FCE036E71BEAC39000F7605B /* CustomAnnotation.m in Sources */,
 				722333D51A6F46DF006C2446 /* MKNetworkEngine.m in Sources */,
 				7286EB4C1A7D8BE800D03DCE /* NSObject+RMArchivable.m in Sources */,
 				7209E0931A780A1200D18D7A /* SHSFlagAccessoryView.m in Sources */,
@@ -2949,7 +2951,6 @@
 				90BED0A81A5BD05C003DC872 /* FirstViewController.m in Sources */,
 				FC46DE8D1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */,
 				7223336B1A6D5847006C2446 /* BentoShop.m in Sources */,
-				FC2AB1651BE9813F00223B8A /* DriverAnnotationView.m in Sources */,
 				7209E07F1A76BD1800D18D7A /* SVGeocoder.m in Sources */,
 				7209E0951A780A1200D18D7A /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
 				FC9E81FB1BACE4250099DBF5 /* SocketEventHandler.swift in Sources */,
@@ -2988,7 +2989,6 @@
 				7223335F1A6D4058006C2446 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
 				7286EB4D1A7D8BE800D03DCE /* NSObject+RMCopyable.m in Sources */,
 				722333781A6E0DFD006C2446 /* AppStrings.m in Sources */,
-				FCE036DA1BEAAE5200F7605B /* CustomerAnnotationView.m in Sources */,
 				90D8F7DE1A5E30AD00D034CF /* SoldOutViewController.m in Sources */,
 				FC72297B1B16905700C9A9AF /* Reachability.m in Sources */,
 				90D8F7DB1A5E304D00D034CF /* OrderConfirmViewController.m in Sources */,
