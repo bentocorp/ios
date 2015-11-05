@@ -1589,6 +1589,22 @@
             [[BentoShop sharedInstance] addNewBento];
         });
         
+        // get array
+        NSMutableArray *placeInfoArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoArray"] mutableCopy];
+        if (placeInfoArray.count != 0 || placeInfoArray != nil) {
+            // add placeInfo to array
+            [placeInfoArray addObject:self.placeInfo];
+            
+            // re-set persistent array
+            [[NSUserDefaults standardUserDefaults] setObject:placeInfoArray forKey:@"placeInfoArray"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        else {
+            NSMutableArray *newPlaceInfoArray = [@[self.placeInfo] mutableCopy];
+            [[NSUserDefaults standardUserDefaults] setObject:newPlaceInfoArray forKey:@"placeInfoArray"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+        }
+        
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
         [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
