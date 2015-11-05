@@ -1018,7 +1018,7 @@
     else if (curPaymentMethod == Payment_ApplePay)
     {
 #ifndef DEBUG
-        if (![PKPaymentAuthorizationViewController canMakePayments])
+        if (![PKPaymentAuthorizationV iewController canMakePayments])
         {
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
             [alertView showInView:self.view];
@@ -1589,21 +1589,31 @@
             [[BentoShop sharedInstance] addNewBento];
         });
         
-        // get array
-        NSMutableArray *placeInfoArray = [[[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoArray"] mutableCopy];
+        
+        
+        
+        // unarchive data, set placeInfoArray - an array of SVPlaceMarks
+        NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
+        NSMutableArray *placeInfoArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        
         if (placeInfoArray.count != 0 || placeInfoArray != nil) {
             // add placeInfo to array
             [placeInfoArray addObject:self.placeInfo];
             
             // re-set persistent array
-            [[NSUserDefaults standardUserDefaults] setObject:placeInfoArray forKey:@"placeInfoArray"];
+            NSData *placeInfoData = [NSKeyedArchiver archivedDataWithRootObject:placeInfoArray];
+            [[NSUserDefaults standardUserDefaults] setObject:placeInfoData forKey:@"placeInfoData"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
         else {
+            // create a brand new array and start it out
             NSMutableArray *newPlaceInfoArray = [@[self.placeInfo] mutableCopy];
-            [[NSUserDefaults standardUserDefaults] setObject:newPlaceInfoArray forKey:@"placeInfoArray"];
+            NSData *placeInfoData = [NSKeyedArchiver archivedDataWithRootObject:newPlaceInfoArray];
+            [[NSUserDefaults standardUserDefaults] setObject:placeInfoData forKey:@"placeInfoData"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
+        
+        
         
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];

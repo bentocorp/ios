@@ -926,30 +926,38 @@ static BentoShop *_shareInstance;
 
 - (BOOL)isDishSoldOut:(NSInteger)menuID
 {
-    if (self.menuToday == nil || self.menuStatus == nil)
+    // no menu
+    if (self.menuToday == nil || self.menuStatus == nil) {
         return YES;
+    }
     
-    if ([self isSoldOut])
+    // store is sold out
+    if ([self isSoldOut]) {
         return YES;
+    }
 
-    for (NSDictionary *menuItem in self.menuStatus)
-    {
+    for (NSDictionary *menuItem in self.menuStatus) {
+        
         NSInteger itemID;
         
-        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]]) // this should prevent nil being sent into NSNull
+        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]]) { // this should prevent nil being sent into NSNull
             itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+        }
         
-        if (itemID == menuID)
-        {
+        if (itemID == menuID) {
+            
             NSInteger quantity;
             
-            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]]) // this should prevent nil being sent into NSNull
+            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]]) { // this should prevent nil being sent into NSNull
                 quantity = [[menuItem objectForKey:@"qty"] integerValue];
+            }
             
-            if (quantity > 0)
+            if (quantity > 0) {
                 return NO;
-            else
+            }
+            else {
                 return YES;
+            }
         }
     }
     

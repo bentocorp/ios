@@ -15,6 +15,13 @@
               annotationViewImage:(UIImage *)image
 {
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
+    
+    CGRect viewRect = CGRectMake(-20, -20, 40, 40);
+    UIImageView* imageView = [[UIImageView alloc] initWithFrame:viewRect];
+    imageView.contentMode = UIViewContentModeScaleAspectFit;
+    imageView = imageView;
+    [self addSubview:imageView];
+    
     self.image = image;
     
     return self;

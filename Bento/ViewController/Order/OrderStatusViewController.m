@@ -27,6 +27,7 @@
 @implementation OrderStatusViewController {
     float diu;
     float diulei;
+    CustomAnnotation *driverAnnotation;
 }
 
 - (void)viewDidLoad {
@@ -73,30 +74,36 @@
     self.mapView.scrollEnabled = YES;
     [self.view addSubview: self.mapView];
     
-    // Annotations
-    SVPlacemark *placeMark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-
-    CustomAnnotation *customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
-                                                                          subtitle:placeMark.formattedAddress
-                                                                        coordinate:placeMark.location.coordinate
-                                                                              type:@"customer"];
-    
-    CustomAnnotation *driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Driver"
-                                                                        subtitle:@""
-                                                                      coordinate:CLLocationCoordinate2DMake(37.7545193, -122.440437)
-                                                                            type:@"driver"];
-    
+    // should probably nil check
     
     // Annotations Array
     NSMutableArray *allAnnotations = [[NSMutableArray alloc] init];
-    [allAnnotations addObject:customerAnnotation];
+    CustomAnnotation *customerAnnotation;
+    
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
+    NSMutableArray *placeInfoArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    for (int i = 0; i < placeInfoArray.count; i ++) {
+        
+        SVPlacemark *placeInfo = placeInfoArray[i];
+        
+        customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
+                                                            subtitle:placeInfo.formattedAddress
+                                                          coordinate:placeInfo.location.coordinate
+                                                                type:@"customer"];
+        [allAnnotations addObject:customerAnnotation];
+    }
+    
+    driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Driver"
+                                                      subtitle:@""
+                                                    coordinate:CLLocationCoordinate2DMake(37.7545193, -122.440437)
+                                                          type:@"driver"];
     [allAnnotations addObject:driverAnnotation];
     
     // Add annotations to map view
     [self.mapView showAnnotations:allAnnotations animated:YES];
     [self.mapView addAnnotations:allAnnotations];
     
-//    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -104,7 +111,10 @@
     // set reuse identifier
     NSString *annotationIdentifier = @"CustomViewAnnotation";
     
-    CustomAnnotationView *customAnnotationView = (CustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+    // not reusing because 1) there's not going to be many annotations to begin with, 2) it's causing the annotations to switch with each other
+//    CustomAnnotationView *customAnnotationView = (CustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+    
+    CustomAnnotationView *customAnnotationView;
     
     CustomAnnotation *customAnnotation = (CustomAnnotation *)annotation;
     if ([customAnnotation.type isEqualToString:@"customer"]) {
@@ -131,7 +141,7 @@
 
 - (void)updateDriver {
     diulei += diu;
-//    self.driverAnnotationView.annotation = CLLocationCoordinate2DMake(37.7545193, diulei);
+    driverAnnotation.coordinate = CLLocationCoordinate2DMake(37.7545193, diulei);
 }
 
 - (void)didReceiveMemoryWarning {
