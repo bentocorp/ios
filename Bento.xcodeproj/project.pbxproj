@@ -278,6 +278,10 @@
 		FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
+		FC1809EF1BED3BE3009CE159 /* DishInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809EE1BED3BE3009CE159 /* DishInfo.m */; };
+		FC1809F01BED3BE3009CE159 /* DishInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809EE1BED3BE3009CE159 /* DishInfo.m */; };
+		FC1809F31BED4416009CE159 /* BentoBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809F21BED4416009CE159 /* BentoBox.m */; };
+		FC1809F41BED4416009CE159 /* BentoBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809F21BED4416009CE159 /* BentoBox.m */; };
 		FC1D61541BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60601BBA0C0A0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset */; };
 		FC1D61551BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60601BBA0C0A0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset */; };
 		FC1D61561BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */ = {isa = PBXBuildFile; fileRef = FC1D60601BBA0C0A0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset */; };
@@ -310,6 +314,8 @@
 		FC1D61711BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */; };
 		FC1D63111BBA0DFE0012FFB3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */; };
 		FC1D63121BBA0E0B0012FFB3 /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */; };
+		FC2C88381BEC2CBA00C7249A /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2C88371BEC2CBA00C7249A /* Order.m */; };
+		FC2C88391BEC2CBA00C7249A /* Order.m in Sources */ = {isa = PBXBuildFile; fileRef = FC2C88371BEC2CBA00C7249A /* Order.m */; };
 		FC2F06A51BE81F64007B6A82 /* in-transit-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2F06A41BE81F64007B6A82 /* in-transit-64.png */; };
 		FC2F06A61BE81F64007B6A82 /* in-transit-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2F06A41BE81F64007B6A82 /* in-transit-64.png */; };
 		FC386F0C1BE1F2E700961A17 /* Push.m in Sources */ = {isa = PBXBuildFile; fileRef = FC386F0B1BE1F2E700961A17 /* Push.m */; };
@@ -921,6 +927,10 @@
 		FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBentoViewController.m; sourceTree = "<group>"; };
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
+		FC1809ED1BED3BE3009CE159 /* DishInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishInfo.h; sourceTree = "<group>"; };
+		FC1809EE1BED3BE3009CE159 /* DishInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishInfo.m; sourceTree = "<group>"; };
+		FC1809F11BED4416009CE159 /* BentoBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BentoBox.h; sourceTree = "<group>"; };
+		FC1809F21BED4416009CE159 /* BentoBox.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BentoBox.m; sourceTree = "<group>"; };
 		FC1D60601BBA0C0A0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "FacebookAudienceNetworkSDK-4_6-for-iOS.docset"; sourceTree = "<group>"; };
 		FC1D60611BBA0C0A0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "FacebookMessengerShareKitSDK-1_3-for-iOS.docset"; sourceTree = "<group>"; };
 		FC1D60621BBA0C0A0012FFB3 /* FacebookSDK-4_6-for-iOS.docset */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = "FacebookSDK-4_6-for-iOS.docset"; sourceTree = "<group>"; };
@@ -933,6 +943,8 @@
 		FC1D60691BBA0C0A0012FFB3 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		FC1D63101BBA0DFE0012FFB3 /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
 		FC29F26A1BA7638A00625B8F /* Bento Dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Bento Dev-Info.plist"; sourceTree = SOURCE_ROOT; };
+		FC2C88361BEC2CBA00C7249A /* Order.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Order.h; sourceTree = "<group>"; };
+		FC2C88371BEC2CBA00C7249A /* Order.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Order.m; sourceTree = "<group>"; };
 		FC2F06A41BE81F64007B6A82 /* in-transit-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "in-transit-64.png"; sourceTree = "<group>"; };
 		FC2F06A71BE8227A007B6A82 /* libAdjust.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAdjust.a; path = "Pods/../build/Debug-iphoneos/libAdjust.a"; sourceTree = "<group>"; };
 		FC386F0A1BE1F2E700961A17 /* Push.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Push.h; sourceTree = "<group>"; };
@@ -1758,6 +1770,19 @@
 			path = ../ViewController/MakeBento;
 			sourceTree = "<group>";
 		};
+		FC1809EC1BED3BD0009CE159 /* Order */ = {
+			isa = PBXGroup;
+			children = (
+				FC2C88361BEC2CBA00C7249A /* Order.h */,
+				FC2C88371BEC2CBA00C7249A /* Order.m */,
+				FC1809F11BED4416009CE159 /* BentoBox.h */,
+				FC1809F21BED4416009CE159 /* BentoBox.m */,
+				FC1809ED1BED3BE3009CE159 /* DishInfo.h */,
+				FC1809EE1BED3BE3009CE159 /* DishInfo.m */,
+			);
+			name = Order;
+			sourceTree = "<group>";
+		};
 		FC1D605D1BBA0C0A0012FFB3 /* FacebookSDKs */ = {
 			isa = PBXGroup;
 			children = (
@@ -1789,6 +1814,7 @@
 				FC386F0B1BE1F2E700961A17 /* Push.m */,
 				FC4327B21BE2EE8E00E91D9B /* DriverLocation.h */,
 				FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */,
+				FC1809EC1BED3BD0009CE159 /* Order */,
 				FCE036DC1BEAAE6300F7605B /* Annotation */,
 			);
 			name = Model;
@@ -2838,6 +2864,7 @@
 				7216B7371AA64C7C0006FFE9 /* NSDictionary+RequestEncoding.m in Sources */,
 				7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */,
 				FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
+				FC1809F41BED4416009CE159 /* BentoBox.m in Sources */,
 				7216B73B1AA64C7C0006FFE9 /* FirstViewController.m in Sources */,
 				FC46DE8E1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */,
 				7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */,
@@ -2868,6 +2895,8 @@
 				7216B7521AA64C7C0006FFE9 /* JGProgressHUDFadeAnimation.m in Sources */,
 				FC9E820E1BACE4250099DBF5 /* SocketParser.swift in Sources */,
 				7216B7531AA64C7C0006FFE9 /* NSData+MKBase64.m in Sources */,
+				FC1809F01BED3BE3009CE159 /* DishInfo.m in Sources */,
+				FC2C88391BEC2CBA00C7249A /* Order.m in Sources */,
 				7216B7541AA64C7C0006FFE9 /* PKPayment+STPTestKeys.m in Sources */,
 				7216B7551AA64C7C0006FFE9 /* RMMapper.m in Sources */,
 				FC386F0D1BE1F2E700961A17 /* Push.m in Sources */,
@@ -2948,6 +2977,7 @@
 				722333D11A6F46DF006C2446 /* NSDictionary+RequestEncoding.m in Sources */,
 				7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */,
 				FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
+				FC1809F31BED4416009CE159 /* BentoBox.m in Sources */,
 				90BED0A81A5BD05C003DC872 /* FirstViewController.m in Sources */,
 				FC46DE8D1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */,
 				7223336B1A6D5847006C2446 /* BentoShop.m in Sources */,
@@ -2978,6 +3008,8 @@
 				7223335E1A6D4058006C2446 /* JGProgressHUDFadeAnimation.m in Sources */,
 				FC9E820D1BACE4250099DBF5 /* SocketParser.swift in Sources */,
 				722333CF1A6F46DF006C2446 /* NSData+MKBase64.m in Sources */,
+				FC1809EF1BED3BE3009CE159 /* DishInfo.m in Sources */,
+				FC2C88381BEC2CBA00C7249A /* Order.m in Sources */,
 				722333F61A72C133006C2446 /* PKPayment+STPTestKeys.m in Sources */,
 				7286EB4F1A7D8BE800D03DCE /* RMMapper.m in Sources */,
 				FC386F0C1BE1F2E700961A17 /* Push.m in Sources */,
