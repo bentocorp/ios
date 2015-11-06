@@ -22,7 +22,13 @@
         // Do any other initialization stuff here...
         
         // Socket URL
-//        sharedSocket.socket = [[SocketIOClient alloc] initWithSocketURL:@"http://54.191.141.101:8081" opts:@{@"log": @YES}];
+        
+        // dev http://54.191.141.101:8081 ?
+        // prod http://52.32.68.149:8081 ?
+        
+        // dev http://houston.dev.bentonow.com/api
+        // prod http://houston.bentonow.com/api
+        
         sharedSocket.socket = [[SocketIOClient alloc] initWithSocketURL:@"http://54.191.141.101:8081" opts: nil];
     });
     return sharedSocket;
@@ -31,21 +37,21 @@
 - (void)connectAndAuthenticate:(NSString*)email token:(NSString *)token {
     NSLog(@"'connectAndAuthenticate' called");
 
-    [self connectAndAuthenticate:<#(NSString *)#> token:<#(NSString *)#>];
+    [self connectAndAuthenticate:email token:token];
 }
 
 #pragma mark Connect
-- (void)connectUse:(NSString*)email token:(NSString *)token {
+- (void)connectUser:(NSString*)email token:(NSString *)token {
     
     [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
         
         NSLog(@"socket connected");
         
-        [self authenticateUser:<#(NSString *)#> token:<#(NSString *)#>];
+        [self authenticateUser:email token:token];
     }];
     
-    [self.socket connectWithTimeoutAfter:<#(NSInteger)#> withTimeoutHandler:^{
-
+    [self.socket connectWithTimeoutAfter:10 withTimeoutHandler:^{
+        // handle connection error
     }];
 }
 
@@ -69,6 +75,9 @@
         userID = ret[@"uid"]; // ?
         authtoken = ret[@"token"];
         
+        // once authetnciated socket,
+        
+        
         [self listenToChannels];
     });
 }
@@ -77,17 +86,29 @@
 - (void)listenToChannels {
     
     // Ex. { rid: rst_7#5y, from: "houston", to: "c-5", subject: "Test", body: "Hi!" }
-    [self.socket on:@"push" callback:^(NSArray *data, SocketAckEmitter *ack) {
-        NSLog(@"push data - %@", data);
-        
-        // if driver has accepted my order, node will pass me his clientId
-        // then i take that i call request to track
-        if () {
-            [self requestToTrackDriver];
-        }
-    }];
+//    [self.socket on:@"push" callback:^(NSArray *data, SocketAckEmitter *ack) {
+//        NSLog(@"push data - %@", data);
+//        
+//        // if driver has accepted my order, node will pass me his clientId
+//        // then i take that i call request to track
+//        if () {
+//            [self requestToTrackDriver:];
+//        }
+//    }];
     
-    // Ex. { clientId: d-8, lat: 127.901, lng: 90.123 }
+    // Ex. { clientId: d-8, status: "connected" } note: not really needed for customer app
+//    [self.socket on:@"stat" callback:^(NSArray * data, SocketAckEmitter * ack) {
+//        NSLog(@"stat data - %@", data);
+//    }];
+    
+    /* 
+    Ex.
+    {
+     clientId: d-10,
+     lat: 127.901,
+     lng: 90.123
+    }
+    */
     [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"loc data - %@", data);
         
@@ -95,15 +116,10 @@
         // this is where i call delegate method to maybe prompt an alert
         // which routes to Settings -> Current Orders -> Current Order
     }];
-    
-    // Ex. { clientId: d-8, status: "connected" } note: not really needed for customer app
-    [self.socket on:@"stat" callback:^(NSArray * data, SocketAckEmitter * ack) {
-        NSLog(@"stat data - %@", data);
-    }];
 }
 
 #pragma mark Request To Track Driver
-- (void)requestToTrackDriver
+- (void)requestToTrackDriver: (NSString *)driverId
 {
     [self.socket emitWithAck:@"get" withItems:@[@"/api/track?client_id=d-10"]](0, ^(NSArray *data) {
         

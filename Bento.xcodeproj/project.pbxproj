@@ -1814,8 +1814,6 @@
 				FC386F0B1BE1F2E700961A17 /* Push.m */,
 				FC4327B21BE2EE8E00E91D9B /* DriverLocation.h */,
 				FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */,
-				FC1809EC1BED3BD0009CE159 /* Order */,
-				FCE036DC1BEAAE6300F7605B /* Annotation */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1825,8 +1823,10 @@
 			children = (
 				FC46DE8B1BE14AEA00E9A7B1 /* SocketHandler.h */,
 				FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */,
-				FC2AB1671BE9829A00223B8A /* Model */,
+				FC1809EC1BED3BD0009CE159 /* Order */,
+				FCE036DC1BEAAE6300F7605B /* Annotation */,
 				FCE036DD1BEAAE7C00F7605B /* View Controller */,
+				FC2AB1671BE9829A00223B8A /* Model */,
 			);
 			name = "Driver Tracking";
 			path = Model;
