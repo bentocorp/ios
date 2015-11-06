@@ -29,7 +29,7 @@
 
 #import "EditPhoneNumberView.h"
 
-#import "OrderStatusViewController.h"
+//#import "OrderStatusViewController.h"
 
 
 //#import <FBSDKShareKit/FBSDKShareKit.h>
@@ -466,17 +466,17 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)onOrderStatus {
-    
-    // if more than one order, show orderlist
-    //    if () {
-    
-    //    }
-    // if only one order, just show order
-    //    else {
-    [self.navigationController pushViewController:[[OrderStatusViewController alloc] init] animated:YES];
-    //    }
-}
+//- (void)onOrderStatus {
+//    
+//    // if more than one order, show orderlist
+//    //    if () {
+//    
+//    //    }
+//    // if only one order, just show order
+//    //    else {
+//    [self.navigationController pushViewController:[[OrderStatusViewController alloc] init] animated:YES];
+//    //    }
+//}
 
 - (void)openEmailFromSharing
 {

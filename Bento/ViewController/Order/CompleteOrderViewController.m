@@ -1590,7 +1590,7 @@
         });
         
         
-        
+/* for driver tracking
         
         // unarchive data, set placeInfoArray - an array of SVPlaceMarks
         NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
@@ -1612,7 +1612,8 @@
             [[NSUserDefaults standardUserDefaults] setObject:placeInfoData forKey:@"placeInfoData"];
             [[NSUserDefaults standardUserDefaults] synchronize];
         }
-        
+ 
+*/
         
         
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
