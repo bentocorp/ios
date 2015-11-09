@@ -684,15 +684,23 @@
     }
 }
 
+- (float)getSubtotal {
+    // Meal + Tax + Tip
+    return [self getTotalPriceByMainPlusDeliveryFee] + [self getTax] - _promoDiscount;
+}
+
+- (float)getTotalWithoutPromo {
+    return [self getSubtotal] + [self getTips];
+}
+
 - (float)getTotalPrice
 {
-    // Meal + Tax + Tip
-    float subTotal = [self getTotalPriceByMainPlusDeliveryFee] + [self getTax] + [self getTips];
+    float totalWithoutPromo = [self getTotalWithoutPromo];
     
     // Grand Total
     float totalPrice;
-    if (subTotal - _promoDiscount >= 0) { // ie. subtotal(13.80) - promo(5)
-        totalPrice = subTotal - _promoDiscount;
+    if (totalWithoutPromo - _promoDiscount >= 0) { // ie. subtotal(13.80) - promo(5)
+        totalPrice = totalWithoutPromo - _promoDiscount;
     }
     else {
         totalPrice = 0; // if Promo hasn't been used up yet ie. subtotal(13.80) - promo(85),
@@ -1450,6 +1458,15 @@
     [coordInfo setObject:[NSString stringWithFormat:@"%.6f", self.placeInfo.location.coordinate.longitude] forKey:@"long"];
     
     [detailInfo setObject:coordInfo forKey:@"coords"];
+    
+    // Items Total
+    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self getTotalPriceByMain]] forKey:@"items_total"];
+    
+    // Subtotal
+    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self getSubtotal]] forKey:@"subtotal"];
+    
+    // Total Cents Without Coupon
+    [detailInfo setObject:[NSString stringWithFormat:@"%.ld", (long)([self getTotalWithoutPromo] * 100)] forKey:@"total_cents_without_coupon"];
     
     // Coupon Discount (cents)
     float couponDiscount = (int)_promoDiscount * 100;
