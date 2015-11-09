@@ -1456,6 +1456,7 @@
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)couponDiscount] forKey:@"coupon_discount_cents"];
     
     // - Tax
+    [detailInfo setObject:[NSString stringWithFormat:@"%@", [[BentoShop sharedInstance] getTaxPercent]] forKey:@"tax_percentage"];
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", lroundf([self getTax] * 100)] forKey:@"tax_cents"];
     
     // - Tip Percentage
@@ -1501,6 +1502,9 @@
     
     // Platform
     [request setObject:@"iOS" forKey:@"Platform"];
+    
+    // App Version
+    [request setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"AppVersion"];
     
     NSLog(@"BUILD REQUEST - %@", request);
     
@@ -1614,7 +1618,6 @@
         }
  
 */
-        
         
         NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
         [userDefaults setObject:@"" forKey:KEY_PROMO_CODE];
