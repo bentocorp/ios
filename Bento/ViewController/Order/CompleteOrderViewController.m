@@ -685,7 +685,11 @@
 }
 
 - (float)getSubtotal {
-    // Meal + Tax + Tip
+    // Meal + Tax
+    return [self getTotalPriceByMainPlusDeliveryFee] + [self getTax];
+}
+
+- (float)getSubtotalWithPromo {
     return [self getTotalPriceByMainPlusDeliveryFee] + [self getTax] - _promoDiscount;
 }
 
@@ -1463,10 +1467,10 @@
     [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self getTotalPriceByMain]] forKey:@"items_total"];
     
     // Subtotal
-    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self getSubtotal]] forKey:@"subtotal"];
+    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self getSubtotalWithPromo]] forKey:@"subtotal"];
     
     // Total Cents Without Coupon
-    [detailInfo setObject:[NSString stringWithFormat:@"%.ld", (long)([self getTotalWithoutPromo] * 100)] forKey:@"total_cents_without_coupon"];
+    [detailInfo setObject:[NSString stringWithFormat:@"%.ld", (long)(([self getTotalPriceByMainPlusDeliveryFee] + [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee]) * _taxPercent) / 100.f] + [self getTips]) * 100)] forKey:@"total_cents_without_coupon"];
     
     // Coupon Discount (cents)
     float couponDiscount = (int)_promoDiscount * 100;
