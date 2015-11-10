@@ -150,7 +150,7 @@
     //
     if (self.isMain == YES && self.priceTagLabel == nil) {
         // price tag shown on normal state only
-        self.priceTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 30, self.frame.size.height - 46, 60, 36)];
+        self.priceTagLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.frame.size.width/2 - 30, self.frame.size.height - 65, 60, 36)];
         self.priceTagLabel.backgroundColor = [UIColor clearColor];
         self.priceTagLabel.textColor = [UIColor whiteColor];
         self.priceTagLabel.layer.cornerRadius = 5;
