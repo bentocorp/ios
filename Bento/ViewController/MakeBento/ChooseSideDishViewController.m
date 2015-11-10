@@ -117,16 +117,29 @@
             lunchOrDinnerString = @"todayDinner";
     }
     
+    NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
+    
     for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes:lunchOrDinnerString])
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         
-        if ([[BentoShop sharedInstance] canAddDish:dishID] && ([[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID] || dishID == sideDishIndex))
-        {
-            [self.aryDishes addObject:dishInfo];
-            NSLog(@"self.aryDishes - %@", self.aryDishes);
+        if ([[BentoShop sharedInstance] canAddDish:dishID] && ([[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID] || dishID == sideDishIndex)) {
+            
+            // 1) add to self.aryDishes only if it's not sold out
+            if ([[BentoShop sharedInstance] isDishSoldOut:dishID] == NO) {
+                
+                [self.aryDishes addObject:dishInfo];
+            }
+            else {
+                // 2) add all sold out dishes to soldOutDishesArray
+                [soldOutDishesArray addObject:dishInfo];
+            }
+            
         }
     }
+    
+    // 3) append sold out dishes to self.aryDishes
+    self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
 
     _originalDishIndex = NSNotFound;
     _selectedIndex = NSNotFound;
