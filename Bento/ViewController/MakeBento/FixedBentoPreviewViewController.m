@@ -54,7 +54,7 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     titleLabel.textColor = [UIColor bentoTitleGray];
-    titleLabel.text = self.titleText;
+    titleLabel.text = self.mainDishInfo[@"name"];
     [self.view addSubview:titleLabel];
     
     // back button
@@ -224,34 +224,7 @@
         
         if (indexPath.section == 0) // Main Dish
         {
-            NSArray *aryMainDishes;
-            
-            /* IS ALL DAY */
-            if ([[BentoShop sharedInstance] isAllDay])
-            {
-                if([[BentoShop sharedInstance] isThereLunchMenu]) {
-                    aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-                }
-                else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
-                    aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-                }
-            }
-            
-            /* IS NOT ALL DAY */
-            else
-            {
-                // 00:00 - 16:29
-                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-                    aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-                }
-                // 16:30 - 23:59
-                else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-                    aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-                }
-            }
-            
-            NSDictionary *dishInfo = [aryMainDishes objectAtIndex:self.fromWhichVC];
-            [cell setDishInfo:dishInfo];
+            [cell setDishInfo:self.mainDishInfo];
             
             if (_selectedPathMain == indexPath.row) {
                 [cell setCellState:YES];
@@ -310,33 +283,7 @@
     
     if (indexPath.section == 0) { // Main Dish
 
-        NSArray *aryMainDishes;
-        
-        /* IS ALL DAY */
-        if ([[BentoShop sharedInstance] isAllDay]) {
-            
-            if([[BentoShop sharedInstance] isThereLunchMenu]) {
-                aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-            }
-            else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
-                aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-            }
-        }
-        
-        /* IS NOT ALL DAY */
-        else {
-            // 00:00 - 16:29
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-                aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-            }
-            // 16:30 - 23:59
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-                aryMainDishes = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-            }
-        }
-        
-        NSDictionary *dishInfo = [aryMainDishes objectAtIndex:self.fromWhichVC];
-        [myCell setDishInfo:dishInfo];
+        [myCell setDishInfo:self.mainDishInfo];
         
         if (_selectedPathMain == indexPath.row) {
             [myCell setCellState:YES];

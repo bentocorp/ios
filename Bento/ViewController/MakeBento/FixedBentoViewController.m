@@ -838,27 +838,10 @@
     UIButton *selectedButton = (UIButton *)sender;
     
     FixedBentoPreviewViewController *fixedBentoPreviewViewController = [[FixedBentoPreviewViewController alloc] init];
-    fixedBentoPreviewViewController.fromWhichVC = selectedButton.tag;
     
-    NSArray *aryMainDishesLeft;
+    NSDictionary *dishInfo = [self.aryDishes objectAtIndex:selectedButton.tag];
     
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-    }
-    else
-    {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-    }
-    
-    NSDictionary *dishInfo = [aryMainDishesLeft objectAtIndex:selectedButton.tag];
-    fixedBentoPreviewViewController.titleText = [NSString stringWithFormat:@"%@ Bento", [dishInfo objectForKey:@"name"]];
+    fixedBentoPreviewViewController.mainDishInfo = dishInfo;
     
     [self.navigationController pushViewController:fixedBentoPreviewViewController animated:YES];
 }

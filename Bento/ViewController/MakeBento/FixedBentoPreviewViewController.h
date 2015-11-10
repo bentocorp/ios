@@ -11,7 +11,6 @@
 
 @interface FixedBentoPreviewViewController : BaseViewController
 
-@property (nonatomic) NSInteger fromWhichVC;
-@property (nonatomic) NSString *titleText;
+@property (nonatomic) NSDictionary *mainDishInfo;
 
 @end
