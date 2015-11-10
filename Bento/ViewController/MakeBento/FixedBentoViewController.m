@@ -865,39 +865,28 @@
     /*---Add items to empty bento---*/
     UIButton *selectedButton = (UIButton *)sender;
     
-    NSArray *aryMainDishesLeft;
     NSArray *arySideDishesLeft;
     
     // use all day logic
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-        {
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+    if ([[BentoShop sharedInstance] isAllDay]) {
+        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
             arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
         }
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-        {
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
             arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
         }
     }
-    else // use regular logic
-    {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-        {
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
+    else { // use regular logic
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
             arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
         }
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-        {
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
             arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
         }
     }
     
     // Add main to Bento
-    NSDictionary *mainDishInfo = [aryMainDishesLeft objectAtIndex:selectedButton.tag];
+    NSDictionary *mainDishInfo = [self.aryDishes objectAtIndex:selectedButton.tag];
     [[[BentoShop sharedInstance] getCurrentBento] setMainDish:[[mainDishInfo objectForKey:@"itemId"] integerValue]];
     
     // Add all sides to Bento
