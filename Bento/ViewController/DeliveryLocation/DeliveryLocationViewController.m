@@ -255,6 +255,7 @@
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     }
     else {
+        
         [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
     }
 }

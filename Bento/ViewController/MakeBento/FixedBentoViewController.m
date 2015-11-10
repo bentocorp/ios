@@ -525,28 +525,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    /* IS ALL-DAY */
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-            return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            return [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] count];
-    }
-    
-    /* IS NOT ALL-DAY */
-    else
-    {
-        // 00:00 - 16:29
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            return [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] count];
-        
-        // 16:30 - 23:59
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            return [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] count];
-    }
-    
-    return 0;
+    return self.aryDishes.count;
 }
 
 - (void)sortAryDishesLeft {
@@ -604,7 +583,7 @@
     if (servingLunchCell == nil) {
         servingLunchCell = [[FixedBentoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
-    
+
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     [servingLunchCell setDishInfo:dishInfo];
     
@@ -1014,15 +993,26 @@
         }
         else
         {
-            [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateUIOnMainThread) userInfo:nil repeats:NO];
+//            [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateUIOnMainThread) userInfo:nil repeats:NO];
+            
+            if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self reloadDishes];
+                    [self updateUI];
+                });
+            }
         }
     }
 }
 
 - (void)updateUIOnMainThread
 {
-    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
-        [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self reloadDishes];
+            [self updateUI];
+        });
+    }
 }
 
 - (void)showConfirmMsg

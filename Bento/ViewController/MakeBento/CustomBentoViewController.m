@@ -1386,8 +1386,9 @@
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
-    if (isThereConnection)
-    [self updateUI];
+    if (isThereConnection) {
+        [self updateUI];
+    }
 }
 
 #pragma mark - COLLECTION VIEW
