@@ -132,11 +132,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
-            timestampString = "468815958.229458"
+            timestampString = "468879217.306408"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "862"
-            endingLineNumber = "862"
+            startingLineNumber = "897"
+            endingLineNumber = "897"
             landmarkName = "-onAddBento:"
             landmarkType = "5">
          </BreakpointContent>
@@ -500,6 +500,22 @@
             startingLineNumber = "302"
             endingLineNumber = "302"
             landmarkName = "-processSignin"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
+            timestampString = "468879202.271786"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "553"
+            endingLineNumber = "553"
+            landmarkName = "-sortAryDishesLeft"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

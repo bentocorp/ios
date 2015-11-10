@@ -413,13 +413,13 @@
     // set aryDishes array
     self.aryDishes = [[NSMutableArray alloc] init];
     
-    for (NSDictionary *dishInfo in [[BentoShop sharedInstance] getMainDishes:@"todayDinner"])
-    {
-        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-        
-        if ([[BentoShop sharedInstance] canAddDish:dishID])
-            [self.aryDishes addObject:dishInfo];
-    }
+//    for (NSDictionary *dishInfo in [[BentoShop sharedInstance] getMainDishes:@"todayDinner"])
+//    {
+//        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+//        
+//        if ([[BentoShop sharedInstance] canAddDish:dishID])
+//            [self.aryDishes addObject:dishInfo];
+//    }
     
     [self updateUI];
 
@@ -549,6 +549,54 @@
     return 0;
 }
 
+- (void)sortAryDishesLeft {
+    
+    [self.aryDishes removeAllObjects];
+    
+    NSMutableArray *aryMainDishesLeft;
+    
+    if ([[BentoShop sharedInstance] isAllDay]) {
+        
+        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
+            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
+        }
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
+            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+        }
+    }
+    else {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
+        }
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+        }
+    }
+
+    NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
+    
+    for (NSDictionary * dishInfo in aryMainDishesLeft) {
+        
+        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+        
+        if ([[BentoShop sharedInstance] canAddDish:dishID]) {
+            
+            // 1) add to self.aryDishes only if it's not sold out
+            if ([[BentoShop sharedInstance] isDishSoldOut:dishID] == NO) {
+                
+                [self.aryDishes addObject:dishInfo];
+            }
+            else {
+                // 2) add all sold out dishes to soldOutDishesArray
+                [soldOutDishesArray addObject:dishInfo];
+            }
+        }
+    }
+    
+    // 3) append sold out dishes to self.aryDishes
+    self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
+}
+
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     servingLunchCell = (FixedBentoCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
@@ -557,24 +605,7 @@
         servingLunchCell = [[FixedBentoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    NSArray *aryMainDishesLeft;
-    
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-    }
-    else
-    {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            aryMainDishesLeft = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
-    }
-    
-    NSDictionary *dishInfo = [aryMainDishesLeft objectAtIndex:indexPath.row];
+    NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     [servingLunchCell setDishInfo:dishInfo];
     
     servingLunchCell.btnMainDish.tag = indexPath.row; // set button tag
@@ -632,6 +663,8 @@
 
 - (void)updateUI
 {
+    [self sortAryDishesLeft];
+    
 //    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
 //    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     
@@ -767,6 +800,8 @@
 - (void)reloadDishes
 {
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
+        
+        [self sortAryDishesLeft];
         [cvDishes reloadData];
         [myTableView reloadData];
     }
