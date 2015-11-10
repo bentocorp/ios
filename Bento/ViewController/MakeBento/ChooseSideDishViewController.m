@@ -78,6 +78,21 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
+    self.aryDishes = [[NSMutableArray alloc] init];
+    
+    _originalDishIndex = NSNotFound;
+    _selectedIndex = NSNotFound;
+    _selectedItemState = DISH_CELL_NORMAL;
+
+    [self updateUI];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)sortAryDishes {
+    
+    [self.aryDishes removeAllObjects];
+    
     // Get Side Dish
     NSInteger sideDishIndex = 0;
     if ([[BentoShop sharedInstance] getCurrentBento] != nil)
@@ -91,8 +106,6 @@
         else if (self.sideDishIndex == 3)
             sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish4];
     }
-    
-    self.aryDishes = [[NSMutableArray alloc] init];
     
     NSString *lunchOrDinnerString;
     
@@ -140,10 +153,6 @@
     
     // 3) append sold out dishes to self.aryDishes
     self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
-
-    _originalDishIndex = NSNotFound;
-    _selectedIndex = NSNotFound;
-    _selectedItemState = DISH_CELL_NORMAL;
     
     if (sideDishIndex != 0)
     {
@@ -158,10 +167,6 @@
             }
         }
     }
-    
-    [self updateUI];
-    
-    [self startTimerOnViewedScreen];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -240,6 +245,8 @@
 
 - (void)updateUI
 {
+    [self sortAryDishes];
+    
     [self.cvSideDishes reloadData];
 }
 

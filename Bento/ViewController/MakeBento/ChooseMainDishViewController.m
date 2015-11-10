@@ -67,7 +67,37 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
+    _selectedIndex = NSNotFound;
+    _selectedItemState = DISH_CELL_NORMAL;
+    
+    _originalDishIndex = NSNotFound;
+    if ([[BentoShop sharedInstance] getCurrentBento] != nil)
+    {
+        NSInteger mainDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getMainDish];
+        
+        for (NSInteger index = 0; index < self.aryDishes.count; index++)
+        {
+            NSDictionary *dishInfo = [self.aryDishes objectAtIndex:index];
+            if ([[dishInfo objectForKey:@"itemId"] integerValue] == mainDishIndex)
+            {
+                _originalDishIndex = index;
+                _selectedIndex = index;
+                _selectedItemState = DISH_CELL_SELECTED;
+            }
+        }
+    }
+    
     self.aryDishes = [[NSMutableArray alloc] init];
+    
+    [self updateUI];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)sortAryDishes {
+    
+    // clear items first
+    [self.aryDishes removeAllObjects];
     
     NSString *lunchOrDinnerString;
     
@@ -114,30 +144,6 @@
     
     // 3) append sold out dishes to self.aryDishes
     self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
-    
-    _selectedIndex = NSNotFound;
-    _selectedItemState = DISH_CELL_NORMAL;
-    
-    _originalDishIndex = NSNotFound;
-    if ([[BentoShop sharedInstance] getCurrentBento] != nil)
-    {
-        NSInteger mainDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getMainDish];
-        
-        for (NSInteger index = 0; index < self.aryDishes.count; index++)
-        {
-            NSDictionary *dishInfo = [self.aryDishes objectAtIndex:index];
-            if ([[dishInfo objectForKey:@"itemId"] integerValue] == mainDishIndex)
-            {
-                _originalDishIndex = index;
-                _selectedIndex = index;
-                _selectedItemState = DISH_CELL_SELECTED;
-            }
-        }
-    }
-    
-    [self updateUI];
-    
-    [self startTimerOnViewedScreen];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -217,6 +223,8 @@
 
 - (void)updateUI
 {
+    [self sortAryDishes];
+    
     [self.cvMainDishes reloadData];
 }
 
