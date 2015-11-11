@@ -20,6 +20,9 @@
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
+#import "Mixpanel.h"
+#import "Mixpanel/MPTweakInline.h"
+
 @interface BentoShop ()
 
 
@@ -762,15 +765,126 @@ static BentoShop *_shareInstance;
 
 #pragma mark Prices and Tax
 - (NSString *)getUnitPrice {
-    return self.dicInit[@"settings"][@"price"];
+    
+    if (MPTweakValue(@"Unit Price", 10.00)) {
+        return @"10.00";
+    }
+    else if (MPTweakValue(@"Unit Price", 10.50)) {
+        return @"10.50";
+    }
+    else if (MPTweakValue(@"Unit Price", 11.00)) {
+        return @"11.00";
+    }
+    else if (MPTweakValue(@"Unit Price", 11.50)) {
+        return @"11.50";
+    }
+    else if (MPTweakValue(@"Unit Price", 12.00)) {
+        return @"12.00";
+    }
+    else if (MPTweakValue(@"Unit Price", 12.50)) {
+        return @"12.50";
+    }
+    else if (MPTweakValue(@"Unit Price", 13.00)) {
+        return @"13.00";
+    }
+    else if (MPTweakValue(@"Unit Price", 13.50)) {
+        return @"13.50";
+    }
+    else if (MPTweakValue(@"Unit Price", 14.00)) {
+        return @"14.00";
+    }
+    else if (MPTweakValue(@"Unit Price", 14.50)) {
+        return @"14.50";
+    }
+    else if (MPTweakValue(@"Unit Price", 15.00)) {
+        return @"15.00";
+    }
+    else if (MPTweakValue(@"Unit Price", 15.50)) {
+        return @"15.50";
+    }
+    else if (MPTweakValue(@"Unit Price", 16.00)) {
+        return @"16.00";
+    }
+    else {
+        // original
+        return self.dicInit[@"settings"][@"price"];
+    }
 }
 
 - (NSString *)getSalePrice {
     return self.dicInit[@"settings"][@"sale_price"];
 }
 
-- (NSString *)getDeliveryPrice {
-    return self.dicInit[@"settings"][@"delivery_price"];
+- (float)getDeliveryPrice {
+    
+    // a/b test delivery fee
+    if (MPTweakValue(@"Delivery Fee", 0.00)) {
+        return 0.00;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 0.25)) {
+        return 0.25;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 0.50)) {
+        return 0.50;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 0.75)) {
+        return 0.75;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 1.00)) {
+        return 1.00;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 1.25)) {
+        return 1.25;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 1.50)) {
+        return 1.50;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 1.75)) {
+        return 1.75;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 2.00)) {
+        return 2.00;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 2.25)) {
+        return 2.25;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 2.50)) {
+        return 2.50;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 2.75)) {
+        return 2.75;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 3.00)) {
+        return 3.00;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 3.25)) {
+        return 3.25;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 3.50)) {
+        return 3.50;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 3.75)) {
+        return 3.75;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 4.00)) {
+        return 4.00;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 4.25)) {
+        return 4.25;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 4.50)) {
+        return 4.50;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 4.75)) {
+        return 4.75;
+    }
+    else if (MPTweakValue(@"Delivery Fee", 5.00)) {
+        return 5.00;
+    }
+    else {
+        // original
+        return [self.dicInit[@"settings"][@"delivery_price"] floatValue];
+    }
 }
 
 - (NSString *)getTaxPercent {

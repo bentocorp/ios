@@ -119,7 +119,7 @@
 
 - (NSString *)getUnitPrice;
 - (NSString *)getSalePrice;
-- (NSString *)getDeliveryPrice;
+- (float)getDeliveryPrice;
 - (NSString *)getTaxPercent;
 
 @end

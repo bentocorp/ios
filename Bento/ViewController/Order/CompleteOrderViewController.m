@@ -655,23 +655,12 @@
 }
 
 - (float)getTotalPriceByMainPlusDeliveryFee {
-    return [self getTotalPriceByMain] + [self getDeliveryPrice];
+    return [self getTotalPriceByMain] + [[BentoShop sharedInstance] getDeliveryPrice];
 }
 
 - (float)getTips {
     float deliveryTips = ([self getTotalPriceByMain] * _deliveryTipPercent) / 100.f;
     return [self roundToNearestHundredth: deliveryTips];
-}
-
-- (float)getDeliveryPrice {
-    // tweak delivery price
-    if (MPTweakValue(@"$0.00 Delivery Fee", NO)) {
-        // test
-        return 0.00;
-    }
-    
-    // original
-    return [[[BentoShop sharedInstance] getDeliveryPrice] floatValue];
 }
 
 - (float)getTax {
@@ -727,7 +716,7 @@
     self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
-    self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [self getDeliveryPrice]];
+    self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [[BentoShop sharedInstance] getDeliveryPrice]];
     
     // if no promo added
     if (_promoDiscount <= 0) {
@@ -1490,7 +1479,7 @@
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)([self getTotalPrice] * 100)] forKey:@"total_cents"];
     
     // - Delivery Price
-    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self getDeliveryPrice]] forKey:@"delivery_price"];
+    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [[BentoShop sharedInstance] getDeliveryPrice]] forKey:@"delivery_price"];
 
     [request setObject:detailInfo forKey:@"OrderDetails"];
     
