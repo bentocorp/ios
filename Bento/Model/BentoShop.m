@@ -766,49 +766,15 @@ static BentoShop *_shareInstance;
 #pragma mark Prices and Tax
 - (NSString *)getUnitPrice {
     
-    if (MPTweakValue(@"Unit Price", 10.00)) {
-        return @"10.00";
+    // can test any amount above 0.00
+    float testValue = MPTweakValue(@"Unit Price", 0.00);
+    
+    if (testValue > 0.00) {
+        return [NSString stringWithFormat:@"%.2f", testValue];
     }
-    else if (MPTweakValue(@"Unit Price", 10.50)) {
-        return @"10.50";
-    }
-    else if (MPTweakValue(@"Unit Price", 11.00)) {
-        return @"11.00";
-    }
-    else if (MPTweakValue(@"Unit Price", 11.50)) {
-        return @"11.50";
-    }
-    else if (MPTweakValue(@"Unit Price", 12.00)) {
-        return @"12.00";
-    }
-    else if (MPTweakValue(@"Unit Price", 12.50)) {
-        return @"12.50";
-    }
-    else if (MPTweakValue(@"Unit Price", 13.00)) {
-        return @"13.00";
-    }
-    else if (MPTweakValue(@"Unit Price", 13.50)) {
-        return @"13.50";
-    }
-    else if (MPTweakValue(@"Unit Price", 14.00)) {
-        return @"14.00";
-    }
-    else if (MPTweakValue(@"Unit Price", 14.50)) {
-        return @"14.50";
-    }
-    else if (MPTweakValue(@"Unit Price", 15.00)) {
-        return @"15.00";
-    }
-    else if (MPTweakValue(@"Unit Price", 15.50)) {
-        return @"15.50";
-    }
-    else if (MPTweakValue(@"Unit Price", 16.00)) {
-        return @"16.00";
-    }
-    else {
-        // original
-        return self.dicInit[@"settings"][@"price"];
-    }
+    
+    // original
+    return self.dicInit[@"settings"][@"price"];
 }
 
 - (NSString *)getSalePrice {
