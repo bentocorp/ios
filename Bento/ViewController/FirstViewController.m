@@ -379,8 +379,6 @@
             }
         }
     }
-    
-    [mixpanel track:@"App Launched"];
 }
 
 - (void)gotoIntroScreen {

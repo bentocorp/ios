@@ -313,12 +313,15 @@
         
         [[BentoShop sharedInstance] setSignInStatus:YES];
         
-        [self trackLogin:strEmail responseJSON:response];
-        [self showErrorMessage:nil code:ERROR_NONE];
-        [self gotoDeliveryLocationScreen];
-        
-        [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try 1st
-        [self.navigationController popViewControllerAnimated:YES]; // if not, this will run
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self trackLogin:strEmail responseJSON:response];
+            [self showErrorMessage:nil code:ERROR_NONE];
+            [self gotoDeliveryLocationScreen];
+            
+            [self.navigationController dismissViewControllerAnimated:YES completion:nil]; // try 1st
+            [self.navigationController popViewControllerAnimated:YES]; // if not, this will run
+        });
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
         [loadingHUD dismiss];

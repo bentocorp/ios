@@ -600,6 +600,8 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
         NSLog(@"OUT OF SERVICE AREA");
     }
+    
+    [self trackAppLaunch: YES];
 }
 
 - (CLLocationCoordinate2D )getCurrentLocation
@@ -610,6 +612,29 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #endif
     
     return coordinate;
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    [self trackAppLaunch: NO];
+}
+
+- (void)trackAppLaunch:(BOOL)locationEnabled {
+    if (locationEnabled == YES) {
+        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(trackAppLaunchWithCoordinate) userInfo:nil repeats:NO];
+    }
+    else {
+        [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(trackAppLaunchWithoutCoordinate) userInfo:nil repeats:NO];
+    }
+}
+
+- (void)trackAppLaunchWithCoordinate {
+    [[Mixpanel sharedInstance] track:@"App Launched With Coordinate" properties:@{@"lat": [NSString stringWithFormat:@"%f", coordinate.latitude],
+                                                                                  @"lng": [NSString stringWithFormat:@"%f", coordinate.longitude]
+                                                                                  }];
+}
+
+- (void)trackAppLaunchWithoutCoordinate {
+    [[Mixpanel sharedInstance] track:@"App Launched Without Coordinate"];
 }
 
 @end
