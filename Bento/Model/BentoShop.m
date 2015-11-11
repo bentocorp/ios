@@ -817,9 +817,12 @@ static BentoShop *_shareInstance;
 
 - (float)getDeliveryPrice {
   
-    float testValue = MPTweakValue(@"Delivery Fee", 0.00);
+    // set default delivery fee to 100.00 instead of 0.00
+    // because we want to be able to test 0.00
+    float testValue = MPTweakValue(@"Delivery Fee", 100.00);
     
-    if (testValue > 0.00) {
+    // we can test any number below 100
+    if (testValue < 100.00) {
         return testValue;
     }
     
