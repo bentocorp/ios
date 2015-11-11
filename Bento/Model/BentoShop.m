@@ -816,75 +816,14 @@ static BentoShop *_shareInstance;
 }
 
 - (float)getDeliveryPrice {
+  
+    float testValue = MPTweakValue(@"Delivery Fee", 0.00);
     
-    // a/b test delivery fee
-    if (MPTweakValue(@"Delivery Fee", 0.00)) {
-        return 0.00;
+    if (testValue > 0.00) {
+        return testValue;
     }
-    else if (MPTweakValue(@"Delivery Fee", 0.25)) {
-        return 0.25;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 0.50)) {
-        return 0.50;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 0.75)) {
-        return 0.75;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 1.00)) {
-        return 1.00;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 1.25)) {
-        return 1.25;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 1.50)) {
-        return 1.50;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 1.75)) {
-        return 1.75;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 2.00)) {
-        return 2.00;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 2.25)) {
-        return 2.25;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 2.50)) {
-        return 2.50;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 2.75)) {
-        return 2.75;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 3.00)) {
-        return 3.00;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 3.25)) {
-        return 3.25;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 3.50)) {
-        return 3.50;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 3.75)) {
-        return 3.75;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 4.00)) {
-        return 4.00;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 4.25)) {
-        return 4.25;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 4.50)) {
-        return 4.50;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 4.75)) {
-        return 4.75;
-    }
-    else if (MPTweakValue(@"Delivery Fee", 5.00)) {
-        return 5.00;
-    }
-    else {
-        // original
-        return [self.dicInit[@"settings"][@"delivery_price"] floatValue];
-    }
+    
+    return [self.dicInit[@"settings"][@"delivery_price"] floatValue];
 }
 
 - (NSString *)getTaxPercent {
