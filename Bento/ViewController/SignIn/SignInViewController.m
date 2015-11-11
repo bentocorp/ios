@@ -388,6 +388,7 @@
                            @"$name": [NSString stringWithFormat:@"%@ %@", response[@"firstname"], response[@"lastname"]],
                            @"$email": response[@"email"],
                            @"$phone": response[@"phone"],
+                           @"Coupon Code": response[@"coupon_code"],
                            @"Installed Source":sourceFinal,
                            @"Last Login Address": currentAddressFinal
                            }];
