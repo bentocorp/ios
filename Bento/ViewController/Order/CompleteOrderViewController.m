@@ -1019,7 +1019,7 @@
     else if (curPaymentMethod == Payment_ApplePay)
     {
 #ifndef DEBUG
-        if (![PKPaymentAuthorizationV iewController canMakePayments])
+        if (![PKPaymentAuthorizationViewController canMakePayments])
         {
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
             [alertView showInView:self.view];
