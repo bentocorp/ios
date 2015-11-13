@@ -386,13 +386,47 @@
     
 /*---Add Another Bento Button---*/
     
-    btnAddAnotherBento = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45, SCREEN_WIDTH - 60, 45)];
+    btnAddAnotherBento = [[UIButton alloc] initWithFrame:CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45)];
     btnAddAnotherBento.layer.borderColor = BORDER_COLOR.CGColor;
     btnAddAnotherBento.layer.borderWidth = 1.0f;
     [btnAddAnotherBento setTitleColor:[UIColor bentoButtonGray] forState:UIControlStateNormal];
     btnAddAnotherBento.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
     [btnAddAnotherBento addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnAddAnotherBento];
+    
+    UILabel *orLabel = [[UILabel alloc] initWithFrame:CGRectMake(btnAddAnotherBento.frame.size.width + 5, viewDishs.frame.size.height + 45, 20, 45)];
+    orLabel.textColor = [UIColor bentoTitleGray];
+    orLabel.text = @"OR";
+    orLabel.textAlignment = NSTextAlignmentCenter;
+//    orLabel.backgroundColor = [UIColor purpleColor];
+    orLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    [scrollView addSubview:orLabel];
+    
+    UIButton *addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBento.frame.size.width + 30, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45)];
+    addonsButton.layer.borderColor = BORDER_COLOR.CGColor;
+    addonsButton.layer.borderWidth = 1.0f;
+    [addonsButton setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
+    [addonsButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+    addonsButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    
+    // Add Another Bento Button
+    NSString *addonsText = @"VIEW ADD-ONS";
+    [addonsButton setTitle:addonsText forState:UIControlStateNormal];
+    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:addonsText];
+    float spacing = 1.0f;
+    [attributedTitle addAttribute:NSKernAttributeName
+                            value:@(spacing)
+                            range:NSMakeRange(0, [addonsText length])];
+    // Anything less than iOS 8.0
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
+        addonsButton.titleLabel.text = addonsText;
+    }
+    else {
+        addonsButton.titleLabel.attributedText = attributedTitle;
+    }
+    
+    [addonsButton addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
+    [scrollView addSubview:addonsButton];
     
 /*---Button State---*/
     
