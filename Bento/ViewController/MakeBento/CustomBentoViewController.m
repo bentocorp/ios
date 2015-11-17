@@ -1136,75 +1136,61 @@
 
 - (void)onAddAnotherBento
 {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    
-    if (currentBento != nil && ![currentBento isCompleted]) {
-        
+
+    if (currentBento == nil || [currentBento isEmpty]) {
+
+        [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
+
+    }
+    else if (![currentBento isCompleted]) {
+
+        if ([currentBento getMainDish] == 0) {
+
+            [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
+        }
+        else if ([currentBento getSideDish1] == 0) {
+
+            chooseSideDishViewController.sideDishIndex = 0;
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        }
+        else if ([currentBento getSideDish2] == 0) {
+
+            chooseSideDishViewController.sideDishIndex = 1;
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        }
+        else if ([currentBento getSideDish3] == 0) {
+
+            chooseSideDishViewController.sideDishIndex = 2;
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        }
+        else if ([currentBento getSideDish4] == 0) {
+
+            chooseSideDishViewController.sideDishIndex = 3;
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        }
+    }
+    else {
+            
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
             [currentBento completeBento:@"todayLunch"];
         }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
             [currentBento completeBento:@"todayDinner"];
         }
+         
+        [[BentoShop sharedInstance] addNewBento];
+        
+        [self updateUI];
     }
-     
-    [[BentoShop sharedInstance] addNewBento];
-    
-    [self updateUI];
 }
 
 - (void)onFinalize
 {
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-//    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-//    
-//    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-//    
-//    if (currentBento == nil || [currentBento isEmpty]) {
-//        
-//        [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
-//        
-//    }
-//    else if (![currentBento isCompleted]) {
-//        
-//        if ([currentBento getMainDish] == 0) {
-//            
-//            [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
-//            
-//        }
-//        else if ([currentBento getSideDish1] == 0) {
-//            
-//            chooseSideDishViewController.sideDishIndex = 0;
-//            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-//            
-//        }
-//        else if ([currentBento getSideDish2] == 0) {
-//            
-//            chooseSideDishViewController.sideDishIndex = 1;
-//            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-//            
-//        }
-//        else if ([currentBento getSideDish3] == 0) {
-//            
-//            chooseSideDishViewController.sideDishIndex = 2;
-//            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-//            
-//        }
-//        else if ([currentBento getSideDish4] == 0) {
-//            
-//            chooseSideDishViewController.sideDishIndex = 3;
-//            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-//        }
-//        
-//    }
-//    else { /* Completed Bento */
-    
-//        [[BentoShop sharedInstance] saveBentoArray];
-//        [self gotoOrderScreen];
-//    }
-    
-    
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         [[BentoShop sharedInstance] saveBentoArray];
         [self gotoOrderScreen];
@@ -1264,16 +1250,15 @@
         lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
     }
 
-    if (currentBento == nil || ![currentBento isCompleted])
-    {
+    if (currentBento == nil || ![currentBento isCompleted]) {
+        
 //            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], unitPrice]; // show price
         strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
 //            btnAddAnotherBento.enabled = NO;
 //            btnAddAnotherBento.titleLabel.textColor = [UIColor bentoButtonGray];
 //            [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
     }
-    else
-    {
+    else {
 //            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], unitPrice]; // show price
         strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
 //            btnAddAnotherBento.enabled = YES;
@@ -1299,7 +1284,7 @@
         [[BentoShop sharedInstance] setCurrentBento:[[BentoShop sharedInstance] getLastBento]]; // set current with current one in array
     }
     
-    // load bento
+    /*---Load Bento---*/
     [self loadSelectedDishes];
     
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
@@ -1320,6 +1305,7 @@
         [btnState setBackgroundColor:[UIColor bentoButtonGray]];
     }
 
+    /*---Cart Badge---*/
     NSInteger bentoCount = [[BentoShop sharedInstance] getCompletedBentoCount];
     if (bentoCount > 0) {
         lblBadge.text = [NSString stringWithFormat:@"%ld", (long)bentoCount];
@@ -1332,15 +1318,6 @@
     
     [cvDishes reloadData];
 }
-
-//- (BOOL)isCompletedToMakeMyBento
-//{
-//    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-//    if (currentBento == nil)
-//        return NO;
-//    
-//    return [currentBento isCompleted];
-//}
 
 #pragma mark MyAlertViewDelegate
 
