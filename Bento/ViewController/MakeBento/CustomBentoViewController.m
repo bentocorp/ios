@@ -386,10 +386,11 @@
     
 /*---Add Another Bento Button---*/
     
-    btnAddAnotherBento = [[UIButton alloc] initWithFrame:CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45)];
+//    btnAddAnotherBento = [[UIButton alloc] initWithFrame:CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45)];
+    btnAddAnotherBento = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45, SCREEN_WIDTH - 60, 45)];
     btnAddAnotherBento.layer.borderColor = BORDER_COLOR.CGColor;
     btnAddAnotherBento.layer.borderWidth = 1.0f;
-    [btnAddAnotherBento setTitleColor:[UIColor bentoButtonGray] forState:UIControlStateNormal];
+    [btnAddAnotherBento setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     btnAddAnotherBento.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
     [btnAddAnotherBento addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnAddAnotherBento];
@@ -398,8 +399,8 @@
     orLabel.textColor = [UIColor bentoTitleGray];
     orLabel.text = @"OR";
     orLabel.textAlignment = NSTextAlignmentCenter;
-//    orLabel.backgroundColor = [UIColor purpleColor];
     orLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    orLabel.hidden = YES;
     [scrollView addSubview:orLabel];
     
     UIButton *addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBento.frame.size.width + 30, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45)];
@@ -407,6 +408,7 @@
     addonsButton.layer.borderWidth = 1.0f;
     [addonsButton setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
     [addonsButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+    addonsButton.hidden = YES;
     addonsButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
     
     // Add Another Bento Button
@@ -433,7 +435,7 @@
     btnState = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45-65, SCREEN_WIDTH, 45)];
     [btnState setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
-    [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
+    [btnState addTarget:self action:@selector(onFinalize) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnState];
     
 /*---Banner---*/
@@ -474,25 +476,30 @@
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
         // Anything less than iOS 8.0
-        if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+        if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
             btnAddAnotherBento.titleLabel.text = strTitle;
-        else
+        }
+        else {
             btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
+        }
         
         // Continue Button
-        strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
+        strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
         [btnState setTitle:strTitle forState:UIControlStateNormal];
-        if (strTitle != nil)
+        if (strTitle != nil) {
             attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        }
         spacing = 1.0f;
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
         // Anything less than iOS 8.0
-        if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+        if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
             btnState.titleLabel.text = strTitle;
-        else
+        }
+        else {
             btnState.titleLabel.attributedText = attributedTitle;
+        }
         attributedTitle = nil;
     }
     
@@ -1130,12 +1137,15 @@
 - (void)onAddAnotherBento
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil && ![currentBento isCompleted])
-    {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+    
+    if (currentBento != nil && ![currentBento isCompleted]) {
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
             [currentBento completeBento:@"todayLunch"];
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+        }
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
             [currentBento completeBento:@"todayDinner"];
+        }
     }
      
     [[BentoShop sharedInstance] addNewBento];
@@ -1143,47 +1153,59 @@
     [self updateUI];
 }
 
-- (void)onContinue
+- (void)onFinalize
 {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+//    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+//    
+//    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+//    
+//    if (currentBento == nil || [currentBento isEmpty]) {
+//        
+//        [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
+//        
+//    }
+//    else if (![currentBento isCompleted]) {
+//        
+//        if ([currentBento getMainDish] == 0) {
+//            
+//            [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
+//            
+//        }
+//        else if ([currentBento getSideDish1] == 0) {
+//            
+//            chooseSideDishViewController.sideDishIndex = 0;
+//            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+//            
+//        }
+//        else if ([currentBento getSideDish2] == 0) {
+//            
+//            chooseSideDishViewController.sideDishIndex = 1;
+//            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+//            
+//        }
+//        else if ([currentBento getSideDish3] == 0) {
+//            
+//            chooseSideDishViewController.sideDishIndex = 2;
+//            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+//            
+//        }
+//        else if ([currentBento getSideDish4] == 0) {
+//            
+//            chooseSideDishViewController.sideDishIndex = 3;
+//            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+//        }
+//        
+//    }
+//    else { /* Completed Bento */
     
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+//        [[BentoShop sharedInstance] saveBentoArray];
+//        [self gotoOrderScreen];
+//    }
     
-    if (currentBento == nil || [currentBento isEmpty]) {
-        
-        [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
-        
-    } else if (![currentBento isCompleted]) {
-        
-        if ([currentBento getMainDish] == 0) {
-            
-            [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
-            
-        } else if ([currentBento getSideDish1] == 0) {
-            
-            chooseSideDishViewController.sideDishIndex = 0;
-            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-            
-        } else if ([currentBento getSideDish2] == 0) {
-            
-            chooseSideDishViewController.sideDishIndex = 1;
-            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-            
-        } else if ([currentBento getSideDish3] == 0) {
-            
-            chooseSideDishViewController.sideDishIndex = 2;
-            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-            
-        } else if ([currentBento getSideDish4] == 0) {
-            
-            chooseSideDishViewController.sideDishIndex = 3;
-            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-        }
-        
-    } else { /* Completed Bento */
-        
+    
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         [[BentoShop sharedInstance] saveBentoArray];
         [self gotoOrderScreen];
     }
@@ -1191,191 +1213,119 @@
 
 - (void)updateUI
 {
-//    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
-//    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     NSString *strTitle;
     
-//    /*---On Sale---*/
-//    if (salePrice != 0 && salePrice < unitPrice)
-//    {
-//        lblBanner.hidden = NO;
-//        lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
-//        
-//        lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
-//        
-//        if (currentBento == nil || ![currentBento isCompleted])
-//        {
-////            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], salePrice]; // show price
-//            strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
+    // get current main dishes
+    NSMutableArray *mainDishesArray;
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+        mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
+    }
+    else {
+        mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+    }
+    
+    // get main prices
+    NSMutableArray *mainPrices = [@[] mutableCopy];
+    for (int i = 0; i < mainDishesArray.count; i++) {
+        
+        NSString *price = mainDishesArray[i][@"price"];
+        
+        if (price == nil || [price isEqual:[NSNull null]] || [price isEqualToString:@"0"] || [price isEqualToString:@""]) {
+            [mainPrices addObject:[[BentoShop sharedInstance] getUnitPrice]]; // default settings.price
+        }
+        else {
+            [mainPrices addObject:price]; // custom price
+        }
+    }
+        
+    // sort prices, lowest first
+    NSArray *sortedMainPrices = [mainPrices sortedArrayUsingDescriptors: @[[NSSortDescriptor sortDescriptorWithKey:@"doubleValue"ascending:YES]]];
+    NSLog(@"main prices: %@", sortedMainPrices);
+    
+    // get and then check if cents are 0
+    double integral;
+
+    // check for empty before trying to set to prevent crash in case there is no menu defined for current mode
+    if (sortedMainPrices.count != 0 && sortedMainPrices != nil) {
+        double cents = modf([sortedMainPrices[0] floatValue], &integral);
+        
+        // if no cents, just show whole number
+        if (cents == 0) {
+            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+        }
+        // if exists, show normal
+        else {
+            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+        }
+        
+        lblBanner.hidden = NO;
+        lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
+        lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+    }
+
+    if (currentBento == nil || ![currentBento isCompleted])
+    {
+//            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], unitPrice]; // show price
+        strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
 //            btnAddAnotherBento.enabled = NO;
 //            btnAddAnotherBento.titleLabel.textColor = [UIColor bentoButtonGray];
 //            [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
-//        }
-//        else
-//        {
-////            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], salePrice]; // show price
-//            strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
-//            btnAddAnotherBento.enabled = YES;
-//            btnAddAnotherBento.titleLabel.textColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
-//            [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:243.0f / 255.0f green:245.0f / 255.0f blue:245.0f / 255.0f alpha:1.0f]];
-//        }
-//        
-//        if (strTitle != nil)
-//        {
-//            // Add Another Bento Button
-//            NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-//            float spacing = 1.0f;
-//            [attributedTitle addAttribute:NSKernAttributeName
-//                                    value:@(spacing)
-//                                    range:NSMakeRange(0, [strTitle length])];
-//            [btnAddAnotherBento setAttributedTitle:attributedTitle forState:UIControlStateNormal];
-//        }
-//    }
-//    
-//    /*---Regular Price---*/
-//    else
-//    {
-        // get current main dishes
-        NSMutableArray *mainDishesArray;
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-            mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
-        }
-        else {
-            mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
-        }
-        
-        // get main prices
-        NSMutableArray *mainPrices = [@[] mutableCopy];
-        for (int i = 0; i < mainDishesArray.count; i++) {
-            
-            NSString *price = mainDishesArray[i][@"price"];
-            
-            if (price == nil || [price isEqual:[NSNull null]] || [price isEqualToString:@"0"] || [price isEqualToString:@""]) {
-                [mainPrices addObject:[[BentoShop sharedInstance] getUnitPrice]]; // default settings.price
-            }
-            else {
-                [mainPrices addObject:price]; // custom price
-            }
-        }
-        
-        // sort prices, lowest first
-        NSArray *sortedMainPrices = [mainPrices sortedArrayUsingDescriptors: @[[NSSortDescriptor sortDescriptorWithKey:@"doubleValue"ascending:YES]]];
-        NSLog(@"main prices: %@", sortedMainPrices);
-        
-        // get and then check if cents are 0
-        double integral;
-    
-        // check for empty before trying to set to prevent crash in case there is no menu defined for current mode
-        if (sortedMainPrices.count != 0 && sortedMainPrices != nil) {
-            double cents = modf([sortedMainPrices[0] floatValue], &integral);
-            
-            // if no cents, just show whole number
-            if (cents == 0) {
-                lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
-            }
-            // if exists, show normal
-            else {
-                lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
-            }
-            
-            lblBanner.hidden = NO;
-            lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
-            lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
-        }
-    
-        if (currentBento == nil || ![currentBento isCompleted])
-        {
-//            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_TITLE], unitPrice]; // show price
-            strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE];
-            btnAddAnotherBento.enabled = NO;
-            btnAddAnotherBento.titleLabel.textColor = [UIColor bentoButtonGray];
-            [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
-        }
-        else
-        {
-//            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], unitPrice]; // show price
-            strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
-            btnAddAnotherBento.enabled = YES;
-            btnAddAnotherBento.titleLabel.textColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
-            [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:243.0f / 255.0f green:245.0f / 255.0f blue:245.0f / 255.0f alpha:1.0f]];
-        }
-        
-        if (strTitle != nil)
-        {
-            // Add Another Bento Button
-            NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-            float spacing = 1.0f;
-            [attributedTitle addAttribute:NSKernAttributeName
-                                    value:@(spacing)
-                                    range:NSMakeRange(0, [strTitle length])];
-            [btnAddAnotherBento setAttributedTitle:attributedTitle forState:UIControlStateNormal];
-        }
-//    }
-    
-    // Bentos
-    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) // no bento
-        [[BentoShop sharedInstance] addNewBento]; // add an empty one
-    else if ([[BentoShop sharedInstance] getCurrentBento] == nil)
-        [[BentoShop sharedInstance] setCurrentBento:[[BentoShop sharedInstance] getLastBento]]; // set current with current one in array
-    
-    // load bento
-    [self loadSelectedDishes];
-    
-    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0)
-    {
-        btnCart.enabled = YES;
-        btnCart.selected = YES;
-        [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
     }
     else
     {
-        btnCart.enabled = NO;
-        btnCart.selected = NO;
+//            strTitle = [NSString stringWithFormat:@"%@ - $%ld", [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON], unitPrice]; // show price
+        strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
+//            btnAddAnotherBento.enabled = YES;
+//            btnAddAnotherBento.titleLabel.textColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
+//            [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:243.0f / 255.0f green:245.0f / 255.0f blue:245.0f / 255.0f alpha:1.0f]];
     }
     
-    /*---Finalize Button---*/
-    if ([self isCompletedToMakeMyBento])
-    {
-        [btnState setBackgroundColor:[UIColor bentoBrandGreen]];
-        
-        NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
-        if (strTitle == nil)
-            strTitle = [@"FINALIZE ORDER!" mutableCopy];
-        
+    if (strTitle != nil) {
+        // Add Another Bento Button
         NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         float spacing = 1.0f;
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
-        [btnState setAttributedTitle:attributedTitle forState:UIControlStateNormal];
-        attributedTitle = nil;
+        [btnAddAnotherBento setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     }
-    else
-    {
+    
+    // Bentos
+    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {// no bento
+        [[BentoShop sharedInstance] addNewBento]; // add an empty one
+    }
+    else if ([[BentoShop sharedInstance] getCurrentBento] == nil) {
+        [[BentoShop sharedInstance] setCurrentBento:[[BentoShop sharedInstance] getLastBento]]; // set current with current one in array
+    }
+    
+    // load bento
+    [self loadSelectedDishes];
+    
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        btnCart.enabled = YES;
+        btnCart.selected = YES;
+        [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
+    }
+    else {
+        btnCart.enabled = NO;
+        btnCart.selected = NO;
+    }
+    
+    /*---Finalize Button---*/
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        [btnState setBackgroundColor:[UIColor bentoBrandGreen]];
+    }
+    else {
         [btnState setBackgroundColor:[UIColor bentoButtonGray]];
-        
-        NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON];
-        if (strTitle != nil)
-        {
-            NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-            float spacing = 1.0f;
-            [attributedTitle addAttribute:NSKernAttributeName
-                                    value:@(spacing)
-                                    range:NSMakeRange(0, [strTitle length])];
-            [btnState setAttributedTitle:attributedTitle forState:UIControlStateNormal];
-            attributedTitle = nil;
-        }
     }
 
     NSInteger bentoCount = [[BentoShop sharedInstance] getCompletedBentoCount];
-    if (bentoCount > 0)
-    {
+    if (bentoCount > 0) {
         lblBadge.text = [NSString stringWithFormat:@"%ld", (long)bentoCount];
         lblBadge.hidden = NO;
     }
-    else
-    {
+    else {
         lblBadge.text = @"";
         lblBadge.hidden = YES;
     }
@@ -1383,14 +1333,14 @@
     [cvDishes reloadData];
 }
 
-- (BOOL)isCompletedToMakeMyBento
-{
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento == nil)
-        return NO;
-    
-    return [currentBento isCompleted];
-}
+//- (BOOL)isCompletedToMakeMyBento
+//{
+//    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+//    if (currentBento == nil)
+//        return NO;
+//    
+//    return [currentBento isCompleted];
+//}
 
 #pragma mark MyAlertViewDelegate
 
