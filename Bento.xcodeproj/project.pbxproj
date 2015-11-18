@@ -278,6 +278,10 @@
 		FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
+		FC11AAAC1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */; };
+		FC11AAAD1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */; };
+		FC11AAB01BFBF8BC0004A83B /* AddonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAAF1BFBF8BC0004A83B /* AddonsViewController.m */; };
+		FC11AAB11BFBF8BC0004A83B /* AddonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAAF1BFBF8BC0004A83B /* AddonsViewController.m */; };
 		FC1809EF1BED3BE3009CE159 /* DishInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809EE1BED3BE3009CE159 /* DishInfo.m */; };
 		FC1809F01BED3BE3009CE159 /* DishInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809EE1BED3BE3009CE159 /* DishInfo.m */; };
 		FC1809F31BED4416009CE159 /* BentoBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809F21BED4416009CE159 /* BentoBox.m */; };
@@ -929,6 +933,10 @@
 		FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBentoViewController.m; sourceTree = "<group>"; };
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
+		FC11AAAA1BFBF8860004A83B /* AddonsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonsTableViewCell.h; sourceTree = "<group>"; };
+		FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddonsTableViewCell.m; sourceTree = "<group>"; };
+		FC11AAAE1BFBF8BC0004A83B /* AddonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonsViewController.h; sourceTree = "<group>"; };
+		FC11AAAF1BFBF8BC0004A83B /* AddonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddonsViewController.m; sourceTree = "<group>"; };
 		FC1809ED1BED3BE3009CE159 /* DishInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishInfo.h; sourceTree = "<group>"; };
 		FC1809EE1BED3BE3009CE159 /* DishInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishInfo.m; sourceTree = "<group>"; };
 		FC1809F11BED4416009CE159 /* BentoBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BentoBox.h; sourceTree = "<group>"; };
@@ -1555,7 +1563,8 @@
 				FCFD79F01AE8880D002AD322 /* Settings */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
 				90BED0A51A5BD05C003DC872 /* Homepage */,
-				90BED0A61A5BD05C003DC872 /* Order */,
+				FC11AAA91BFBF8370004A83B /* Add-ons */,
+				90BED0A61A5BD05C003DC872 /* Finalize Order */,
 				90BED0A71A5BD05C003DC872 /* SignIn */,
 			);
 			name = Controller;
@@ -1584,7 +1593,7 @@
 			path = MakeBento;
 			sourceTree = "<group>";
 		};
-		90BED0A61A5BD05C003DC872 /* Order */ = {
+		90BED0A61A5BD05C003DC872 /* Finalize Order */ = {
 			isa = PBXGroup;
 			children = (
 				90D8F7D61A5E2FE900D034CF /* CompleteOrderViewController.h */,
@@ -1594,6 +1603,7 @@
 				90D8F7E61A5E3F7500D034CF /* EnterCreditCardViewController.h */,
 				90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */,
 			);
+			name = "Finalize Order";
 			path = Order;
 			sourceTree = "<group>";
 		};
@@ -1772,6 +1782,18 @@
 			);
 			name = "Fixed Menu Cell";
 			path = ../ViewController/MakeBento;
+			sourceTree = "<group>";
+		};
+		FC11AAA91BFBF8370004A83B /* Add-ons */ = {
+			isa = PBXGroup;
+			children = (
+				FC11AAAA1BFBF8860004A83B /* AddonsTableViewCell.h */,
+				FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */,
+				FC11AAAE1BFBF8BC0004A83B /* AddonsViewController.h */,
+				FC11AAAF1BFBF8BC0004A83B /* AddonsViewController.m */,
+			);
+			name = "Add-ons";
+			path = Order;
 			sourceTree = "<group>";
 		};
 		FC1809EC1BED3BD0009CE159 /* Order */ = {
@@ -2827,6 +2849,7 @@
 				FC4327B51BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
 				FC9E82021BACE4250099DBF5 /* SocketIOClient.swift in Sources */,
 				FCBF06FB1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
+				FC11AAB11BFBF8BC0004A83B /* AddonsViewController.m in Sources */,
 				FCAA47A11AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				7216B7121AA64C7C0006FFE9 /* ChooseSideDishViewController.m in Sources */,
 				FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */,
@@ -2909,6 +2932,7 @@
 				7216B7561AA64C7C0006FFE9 /* SHSPhoneTextField.m in Sources */,
 				FC9E82171BACE4250099DBF5 /* SwiftRegex.swift in Sources */,
 				7216B7581AA64C7C0006FFE9 /* OutOfDeliveryAddressViewController.m in Sources */,
+				FC11AAAD1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */,
 				FC9E820B1BACE4250099DBF5 /* SocketPacket.swift in Sources */,
 				7216B7591AA64C7C0006FFE9 /* IntroViewController.m in Sources */,
 				7216B75A1AA64C7C0006FFE9 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
@@ -2940,6 +2964,7 @@
 				FC4327B41BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
 				FC9E82011BACE4250099DBF5 /* SocketIOClient.swift in Sources */,
 				FCBF06FA1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
+				FC11AAB01BFBF8BC0004A83B /* AddonsViewController.m in Sources */,
 				FCAA47A01AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				90BED0D91A5BF301003DC872 /* ChooseSideDishViewController.m in Sources */,
 				FCB906131AEC7FBF003041F7 /* FaqViewController.m in Sources */,
@@ -3022,6 +3047,7 @@
 				7209E0971A780A1200D18D7A /* SHSPhoneTextField.m in Sources */,
 				FC9E82161BACE4250099DBF5 /* SwiftRegex.swift in Sources */,
 				90D8F7CD1A5E252800D034CF /* OutOfDeliveryAddressViewController.m in Sources */,
+				FC11AAAC1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */,
 				FC9E820A1BACE4250099DBF5 /* SocketPacket.swift in Sources */,
 				7223336E1A6D66E8006C2446 /* IntroViewController.m in Sources */,
 				7223335F1A6D4058006C2446 /* JGProgressHUDFadeZoomAnimation.m in Sources */,
