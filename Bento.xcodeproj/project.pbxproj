@@ -1796,10 +1796,8 @@
 			isa = PBXGroup;
 			children = (
 				FC11AABE1BFC07B00004A83B /* model */,
-				FC11AAAA1BFBF8860004A83B /* AddonsTableViewCell.h */,
-				FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */,
-				FC11AAAE1BFBF8BC0004A83B /* AddonsViewController.h */,
-				FC11AAAF1BFBF8BC0004A83B /* AddonsViewController.m */,
+				FC11AABF1BFC0E820004A83B /* view */,
+				FC11AAC01BFC0E9B0004A83B /* controller */,
 			);
 			name = "Add-ons";
 			path = Order;
@@ -1814,6 +1812,24 @@
 				FC11AABB1BFC07A60004A83B /* AddonList.m */,
 			);
 			name = model;
+			sourceTree = "<group>";
+		};
+		FC11AABF1BFC0E820004A83B /* view */ = {
+			isa = PBXGroup;
+			children = (
+				FC11AAAA1BFBF8860004A83B /* AddonsTableViewCell.h */,
+				FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */,
+			);
+			name = view;
+			sourceTree = "<group>";
+		};
+		FC11AAC01BFC0E9B0004A83B /* controller */ = {
+			isa = PBXGroup;
+			children = (
+				FC11AAAE1BFBF8BC0004A83B /* AddonsViewController.h */,
+				FC11AAAF1BFBF8BC0004A83B /* AddonsViewController.m */,
+			);
+			name = controller;
 			sourceTree = "<group>";
 		};
 		FC1809EC1BED3BD0009CE159 /* Order */ = {
