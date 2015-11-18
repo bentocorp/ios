@@ -282,6 +282,10 @@
 		FC11AAAD1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */; };
 		FC11AAB01BFBF8BC0004A83B /* AddonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAAF1BFBF8BC0004A83B /* AddonsViewController.m */; };
 		FC11AAB11BFBF8BC0004A83B /* AddonsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAAF1BFBF8BC0004A83B /* AddonsViewController.m */; };
+		FC11AAB81BFC07900004A83B /* Addon.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAB71BFC07900004A83B /* Addon.m */; };
+		FC11AAB91BFC07900004A83B /* Addon.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAB71BFC07900004A83B /* Addon.m */; };
+		FC11AABC1BFC07A60004A83B /* AddonList.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AABB1BFC07A60004A83B /* AddonList.m */; };
+		FC11AABD1BFC07A60004A83B /* AddonList.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AABB1BFC07A60004A83B /* AddonList.m */; };
 		FC1809EF1BED3BE3009CE159 /* DishInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809EE1BED3BE3009CE159 /* DishInfo.m */; };
 		FC1809F01BED3BE3009CE159 /* DishInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809EE1BED3BE3009CE159 /* DishInfo.m */; };
 		FC1809F31BED4416009CE159 /* BentoBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809F21BED4416009CE159 /* BentoBox.m */; };
@@ -937,6 +941,10 @@
 		FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddonsTableViewCell.m; sourceTree = "<group>"; };
 		FC11AAAE1BFBF8BC0004A83B /* AddonsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonsViewController.h; sourceTree = "<group>"; };
 		FC11AAAF1BFBF8BC0004A83B /* AddonsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddonsViewController.m; sourceTree = "<group>"; };
+		FC11AAB61BFC07900004A83B /* Addon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Addon.h; sourceTree = "<group>"; };
+		FC11AAB71BFC07900004A83B /* Addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Addon.m; sourceTree = "<group>"; };
+		FC11AABA1BFC07A60004A83B /* AddonList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonList.h; sourceTree = "<group>"; };
+		FC11AABB1BFC07A60004A83B /* AddonList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddonList.m; sourceTree = "<group>"; };
 		FC1809ED1BED3BE3009CE159 /* DishInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishInfo.h; sourceTree = "<group>"; };
 		FC1809EE1BED3BE3009CE159 /* DishInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishInfo.m; sourceTree = "<group>"; };
 		FC1809F11BED4416009CE159 /* BentoBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BentoBox.h; sourceTree = "<group>"; };
@@ -1787,6 +1795,7 @@
 		FC11AAA91BFBF8370004A83B /* Add-ons */ = {
 			isa = PBXGroup;
 			children = (
+				FC11AABE1BFC07B00004A83B /* model */,
 				FC11AAAA1BFBF8860004A83B /* AddonsTableViewCell.h */,
 				FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */,
 				FC11AAAE1BFBF8BC0004A83B /* AddonsViewController.h */,
@@ -1794,6 +1803,17 @@
 			);
 			name = "Add-ons";
 			path = Order;
+			sourceTree = "<group>";
+		};
+		FC11AABE1BFC07B00004A83B /* model */ = {
+			isa = PBXGroup;
+			children = (
+				FC11AAB61BFC07900004A83B /* Addon.h */,
+				FC11AAB71BFC07900004A83B /* Addon.m */,
+				FC11AABA1BFC07A60004A83B /* AddonList.h */,
+				FC11AABB1BFC07A60004A83B /* AddonList.m */,
+			);
+			name = model;
 			sourceTree = "<group>";
 		};
 		FC1809EC1BED3BD0009CE159 /* Order */ = {
@@ -2883,6 +2903,7 @@
 				7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */,
 				FC9E81ED1BACE4250099DBF5 /* SocketAckEmitter.swift in Sources */,
 				7216B7301AA64C7C0006FFE9 /* SHSPhoneNumberFormatter.m in Sources */,
+				FC11AAB91BFC07900004A83B /* Addon.m in Sources */,
 				7216B7311AA64C7C0006FFE9 /* DataManager.m in Sources */,
 				FC9E81F31BACE4250099DBF5 /* SocketAnyEvent.swift in Sources */,
 				7216B7321AA64C7C0006FFE9 /* SHSPhoneLogic.m in Sources */,
@@ -2899,6 +2920,7 @@
 				7216B73D1AA64C7C0006FFE9 /* BentoShop.m in Sources */,
 				7216B73F1AA64C7C0006FFE9 /* SVGeocoder.m in Sources */,
 				7216B7401AA64C7C0006FFE9 /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
+				FC11AABD1BFC07A60004A83B /* AddonList.m in Sources */,
 				FC9E81FC1BACE4250099DBF5 /* SocketEventHandler.swift in Sources */,
 				7216B7411AA64C7C0006FFE9 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				7216B7421AA64C7C0006FFE9 /* main.m in Sources */,
@@ -2998,6 +3020,7 @@
 				722333611A6D4058006C2446 /* JGProgressHUDIndicatorView.m in Sources */,
 				FC9E81EC1BACE4250099DBF5 /* SocketAckEmitter.swift in Sources */,
 				7209E0961A780A1200D18D7A /* SHSPhoneNumberFormatter.m in Sources */,
+				FC11AAB81BFC07900004A83B /* Addon.m in Sources */,
 				7279E5E11A6B5F3B00591CB2 /* DataManager.m in Sources */,
 				FC9E81F21BACE4250099DBF5 /* SocketAnyEvent.swift in Sources */,
 				7209E0941A780A1200D18D7A /* SHSPhoneLogic.m in Sources */,
@@ -3014,6 +3037,7 @@
 				7223336B1A6D5847006C2446 /* BentoShop.m in Sources */,
 				7209E07F1A76BD1800D18D7A /* SVGeocoder.m in Sources */,
 				7209E0951A780A1200D18D7A /* SHSPhoneNumberFormatter+UserConfig.m in Sources */,
+				FC11AABC1BFC07A60004A83B /* AddonList.m in Sources */,
 				FC9E81FB1BACE4250099DBF5 /* SocketEventHandler.swift in Sources */,
 				722333FA1A72C133006C2446 /* STPTestPaymentAuthorizationViewController.m in Sources */,
 				90BED0741A5BCC04003DC872 /* main.m in Sources */,
