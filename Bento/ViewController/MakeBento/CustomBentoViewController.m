@@ -51,6 +51,8 @@
 
 #import "UIColor+CustomColors.h"
 
+#import "AddonsViewController.h"
+
 @interface CustomBentoViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @end
@@ -393,20 +395,21 @@
     btnAddAnotherBento.layer.borderWidth = 1.0f;
     [btnAddAnotherBento setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     btnAddAnotherBento.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
     [btnAddAnotherBento addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnAddAnotherBento];
     
     
     float btnAddAnotherBentoShortVersionWidth = SCREEN_WIDTH/2 - 15;
-    orLabel = [[UILabel alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 5, viewDishs.frame.size.height + 45, 20, 45)];
-    orLabel.textColor = [UIColor bentoTitleGray];
-    orLabel.text = @"OR";
-    orLabel.textAlignment = NSTextAlignmentCenter;
-    orLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-    orLabel.hidden = YES;
-    [scrollView addSubview:orLabel];
+//    orLabel = [[UILabel alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 5, viewDishs.frame.size.height + 45, 20, 45)];
+//    orLabel.textColor = [UIColor bentoTitleGray];
+//    orLabel.text = @"";
+//    orLabel.textAlignment = NSTextAlignmentCenter;
+//    orLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+//    orLabel.hidden = YES;
+//    [scrollView addSubview:orLabel];
     
-    addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 30, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45)];
+    addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-20, 45)];
     addonsButton.layer.borderColor = BORDER_COLOR.CGColor;
     addonsButton.layer.borderWidth = 1.0f;
     [addonsButton setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
@@ -430,7 +433,7 @@
         addonsButton.titleLabel.attributedText = attributedTitle;
     }
     
-    [addonsButton addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
+    [addonsButton addTarget:self action:@selector(onViewAnotherBento) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:addonsButton];
     
 /*---Button State---*/
@@ -1192,6 +1195,16 @@
     }
 }
 
+- (void)onViewAddons {
+    // TODO: track on mixpanel
+    NSLog(@"Tapped on View Another Bento");
+    
+    [[Mixpanel sharedInstance] track:@"Tapped on View"];
+    
+    AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
+    [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+}
+
 - (void)onFinalize
 {
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
@@ -1264,7 +1277,8 @@
         // show "OR" label and "View Add-ons" button
         orLabel.hidden = NO;
         addonsButton.hidden = NO;
-        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45); // short version
+//        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45); // short version
+        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-10, 45);
     }
     // 0 bentos in cart
     else {
