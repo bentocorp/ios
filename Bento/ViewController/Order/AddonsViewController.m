@@ -45,6 +45,7 @@
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 50, 45)];
     [closeButton setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(onClose) forControlEvents:UIControlEventTouchUpInside];
+//    [closeButton addTarget:self action:@selector(onBack) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
     
     self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, SCREEN_HEIGHT - 65)];
