@@ -44,12 +44,16 @@
     // back button
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 50, 45)];
     [closeButton setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
-    [closeButton addTarget:self action:@selector(onCloseButton) forControlEvents:UIControlEventTouchUpInside];
+    [closeButton addTarget:self action:@selector(onClose) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
     
     self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, SCREEN_HEIGHT - 65)];
     self.myTableView.delegate = self;
     [self.view addSubview:self.myTableView];
+}
+
+- (void)onClose {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
