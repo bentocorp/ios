@@ -10,4 +10,22 @@
 
 @interface AddonsTableViewCell : UITableViewCell
 
+@property (nonatomic) UIView *viewDish;
+
+@property (nonatomic) UIImageView *ivMainDish;
+
+@property (nonatomic) UILabel *lblMainDish;
+
+@property (nonatomic) UIButton *btnMainDish;
+
+@property (nonatomic) UIImageView *ivBannerMainDish;
+
+@property (nonatomic) UIButton *addButton;
+
+@property (nonatomic) UIButton *subtractButton;
+
+@property (nonatomic) UILabel *priceLabel;
+
+- (void)setDishInfo:(NSDictionary *)dishInfo; 
+
 @end

@@ -644,17 +644,6 @@
 {
     [self sortAryDishesLeft];
     
-//    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
-//    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
-    
-//    if (salePrice != 0 && salePrice < unitPrice)
-//    {
-//        lblBanner.hidden = NO;
-//        lblBanner.text = [NSString stringWithFormat:@"NOW ONLY $%ld", (long)salePrice];
-//    } else {
-//        lblBanner.hidden = YES;
-//    }
-    
     // get current main dishes
     NSMutableArray *mainDishesArray;
     if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
@@ -677,7 +666,6 @@
             [mainPrices addObject:price]; // custom price
         }
     }
-    
     
     // sort prices, lowest first
     NSArray *sortedMainPrices = [mainPrices sortedArrayUsingDescriptors: @[[NSSortDescriptor sortDescriptorWithKey:@"doubleValue"ascending:YES]]];
