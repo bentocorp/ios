@@ -87,11 +87,11 @@
 
 - (NSArray *)getMainDishes:(NSString *)whatNeedsMain;
 - (NSArray *)getSideDishes:(NSString *)whatNeedsSides;
-- (NSArray *)getAddons:(NSString *)whatNeedsAddons
+- (NSArray *)getAddons:(NSString *)whatNeedsAddons;
 
 - (NSArray *)getNextMainDishes:(NSString *)whatNeedsMain;
 - (NSArray *)getNextSideDishes:(NSString *)whatNeedsSides;
-- (NSArray *)getNextAddons:(NSString *)whatNeedsAddons
+- (NSArray *)getNextAddons:(NSString *)whatNeedsAddons;
 
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID;
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID;

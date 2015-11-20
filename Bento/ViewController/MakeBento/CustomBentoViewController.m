@@ -409,7 +409,7 @@
 //    orLabel.hidden = YES;
 //    [scrollView addSubview:orLabel];
     
-    addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-20, 45)];
+    addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-10, 45)];
     addonsButton.layer.borderColor = BORDER_COLOR.CGColor;
     addonsButton.layer.borderWidth = 1.0f;
     [addonsButton setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
@@ -433,7 +433,7 @@
         addonsButton.titleLabel.attributedText = attributedTitle;
     }
     
-    [addonsButton addTarget:self action:@selector(onViewAnotherBento) forControlEvents:UIControlEventTouchUpInside];
+    [addonsButton addTarget:self action:@selector(onViewAddons) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:addonsButton];
     
 /*---Button State---*/
@@ -1289,7 +1289,7 @@
     }
     
     // current bento is empty
-    if ([currentBento isEmpty] == YES) {
+    if ([currentBento isEmpty] == YES || currentBento == nil) {
         strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE]; // BUILD YOUR BENTO
     }
     // current bento has at least 1 item
