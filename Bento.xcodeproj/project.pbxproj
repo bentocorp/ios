@@ -735,8 +735,6 @@
 		FCF5E0A61B8BE3CF002E823C /* placeholder-gray.JPG in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */; };
 		FCF5E0A71B8BE3CF002E823C /* placeholder-gray.JPG in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */; };
 		FCF5E0A81B8BE3CF002E823C /* placeholder-gray.JPG in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */; };
-		FCF8720F1BFFB0EB0091A206 /* AddonsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF8720E1BFFB0EB0091A206 /* AddonsCollectionViewCell.m */; };
-		FCF872101BFFB0EB0091A206 /* AddonsCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCF8720E1BFFB0EB0091A206 /* AddonsCollectionViewCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1175,8 +1173,6 @@
 		FCF2787B1B26370700130F7A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
 		FCF5E0A11B8BDC28002E823C /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../placeholder.png; sourceTree = "<group>"; };
 		FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-gray.JPG"; sourceTree = "<group>"; };
-		FCF8720D1BFFB0EB0091A206 /* AddonsCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonsCollectionViewCell.h; sourceTree = "<group>"; };
-		FCF8720E1BFFB0EB0091A206 /* AddonsCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddonsCollectionViewCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1871,8 +1867,6 @@
 		FC11AABF1BFC0E820004A83B /* view */ = {
 			isa = PBXGroup;
 			children = (
-				FCF8720D1BFFB0EB0091A206 /* AddonsCollectionViewCell.h */,
-				FCF8720E1BFFB0EB0091A206 /* AddonsCollectionViewCell.m */,
 			);
 			name = view;
 			sourceTree = "<group>";
@@ -2983,7 +2977,6 @@
 				FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
 				FCE036E81BEAC39000F7605B /* CustomAnnotation.m in Sources */,
 				7216B7201AA64C7C0006FFE9 /* MKNetworkEngine.m in Sources */,
-				FCF872101BFFB0EB0091A206 /* AddonsCollectionViewCell.m in Sources */,
 				7216B7211AA64C7C0006FFE9 /* NSObject+RMArchivable.m in Sources */,
 				7216B7221AA64C7C0006FFE9 /* SHSFlagAccessoryView.m in Sources */,
 				7216B7231AA64C7C0006FFE9 /* DishCollectionViewCell.m in Sources */,
@@ -3101,7 +3094,6 @@
 				FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
 				FCE036E71BEAC39000F7605B /* CustomAnnotation.m in Sources */,
 				722333D51A6F46DF006C2446 /* MKNetworkEngine.m in Sources */,
-				FCF8720F1BFFB0EB0091A206 /* AddonsCollectionViewCell.m in Sources */,
 				7286EB4C1A7D8BE800D03DCE /* NSObject+RMArchivable.m in Sources */,
 				7209E0931A780A1200D18D7A /* SHSFlagAccessoryView.m in Sources */,
 				90BED0EB1A5C3346003DC872 /* DishCollectionViewCell.m in Sources */,
