@@ -26,6 +26,8 @@
 
 @property (nonatomic) UILabel *priceLabel;
 
+@property (nonatomic) UILabel *quantityLabel;
+
 - (void)setDishInfo:(NSDictionary *)dishInfo; 
 
 @end

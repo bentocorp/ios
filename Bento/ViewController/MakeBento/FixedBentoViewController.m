@@ -193,8 +193,7 @@
     [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
     
     NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
-    if (strTitle == nil)
-    {
+    if (strTitle == nil) {
         strTitle = [@"FINALIZE ORDER" mutableCopy];
     }
     
@@ -206,21 +205,23 @@
                             range:NSMakeRange(0, [strTitle length])];
     
     // Anything less than iOS 8.0
-    if ([[UIDevice currentDevice].systemVersion intValue] < 8)
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
         btnState.titleLabel.text = strTitle;
-    else
+    }
+    else {
         btnState.titleLabel.attributedText = attributedTitle;
-        
+    }
+    
     attributedTitle = nil;
-
     
     [scrollView addSubview:btnState];
     
     /*-----*/
     
     // if self.aryBentos is empty, create a new bento
-    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
+    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
         [[BentoShop sharedInstance] addNewBento];
+    }
     
     // Show these items
     lblBadge.hidden = NO;
@@ -620,20 +621,6 @@
     else {
         servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"$%@", dishInfo[@"price"]]; // custom price
     }
-    
-//    // Prices
-//    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
-//    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
-//    if (salePrice != 0 && salePrice < unitPrice)
-//    {
-//        // Normal Price
-//        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", salePrice] forState:UIControlStateNormal];
-//    }
-//    else
-//    {
-//        // On Sale
-//        [servingLunchCell.addButton setTitle:[NSString stringWithFormat:@"ADD BENTO TO CART - $%ld", unitPrice] forState:UIControlStateNormal];
-//    }
     
     return servingLunchCell;
 }
@@ -1061,7 +1048,7 @@
     }
 }
 
-/*------------------------------------------Next Menu Preview---------------------------------------------*/
+
 
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
@@ -1069,7 +1056,7 @@
     if ([self connected] && ![BentoShop sharedInstance]._isPaused)
         [self updateUI];
 }
-
+/*------------------------------------------Next Menu Preview---------------------------------------------*/
 #pragma mark - COLLECTION VIEW
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
