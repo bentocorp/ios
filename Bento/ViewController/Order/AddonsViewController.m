@@ -356,13 +356,11 @@
         addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
+    /*---Dish Info---*/
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     [addonsCell setDishInfo:dishInfo];
     
-    addonsCell.btnMainDish.tag = indexPath.row; // set button tag
-    [addonsCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Check Sold out item, set add to cart button state
+    /*---Sold Out Banner---*/
     NSInteger mainDishId = [[dishInfo objectForKey:@"itemId"] integerValue];
     if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
         addonsCell.ivBannerMainDish.hidden = NO;
@@ -371,13 +369,21 @@
         addonsCell.ivBannerMainDish.hidden = YES;
     }
     
-    // add bento button
-    addonsCell.addButton.tag = indexPath.row;
-//    [addonsCell.addButton addTarget:self action:@selector(onAddBentoHighlight:) forControlEvents:UIControlEventTouchDown];
-    [addonsCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
+    /*---Description---*/
+    addonsCell.btnMainDish.tag = indexPath.row; // set button tag
+    [addonsCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
-    if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""])
-    {
+    /*---Add---*/
+    addonsCell.addButton.tag = indexPath.row;
+    [addonsCell.addButton addTarget:self action:@selector(onAdd:) forControlEvents:UIControlEventTouchUpInside];
+    
+    /*---Subtract---*/
+    addonsCell.subtractButton.tag = indexPath.row;
+    [addonsCell.subtractButton addTarget:self action:@selector(onSubtract:) forControlEvents:UIControlEventTouchUpInside];
+    
+    /*---Price---*/
+    if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""]) {
+        
         // format to currency style
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
@@ -482,10 +488,12 @@
 
 }
 
-- (void)onAddBentoHighlight:(id)sender
-{
-    UIButton *selectedButton = (UIButton *)sender;
-    selectedButton.backgroundColor = [UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:0.7f];
+- (void)onAdd:(id)sender {
+
+}
+
+- (void)onSubtract:(id)sender {
+
 }
 
 - (void)onAddBento:(id)sender
@@ -576,10 +584,12 @@
 - (void)onCart
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted])
+    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
         [self showConfirmMsg];
-    else
+    }
+    else {
         [self gotoOrderScreen];
+    }
 }
 
 - (void)gotoOrderScreen

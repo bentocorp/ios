@@ -71,14 +71,12 @@
         
         self.subtractButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * .25 - 25, self.viewDish.frame.size.height + 45, 50, 50)];
         [self.subtractButton setImage:[UIImage imageNamed:@"minus-green-100"] forState:UIControlStateNormal];
-        [self.subtractButton setImage:[UIImage imageNamed:@"minus-darkgreen-100"] forState:UIControlStateHighlighted];
         [self addSubview:self.subtractButton];
         
         /*---Add Button---*/
         
         self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * .75 - 25, self.viewDish.frame.size.height + 45, 50, 50)];
         [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
-        [self.addButton setImage:[UIImage imageNamed:@"plus-darkgreen-100"] forState:UIControlStateHighlighted];
         [self addSubview:self.addButton];
         
         /*---Quantity Label---*/
