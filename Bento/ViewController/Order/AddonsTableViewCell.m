@@ -88,7 +88,7 @@
         self.quantityLabel.text = @"3";
         [self addSubview:self.quantityLabel];
         
-        /*---Line divider---*/
+        /*---Line Divider---*/
         
         UIView *lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.viewDish.frame.size.width - 80, self.viewDish.frame.size.height - 40, 1, self.lblMainDish.frame.size.height-8)];
         lineDivider.backgroundColor = [UIColor bentoButtonGray];
