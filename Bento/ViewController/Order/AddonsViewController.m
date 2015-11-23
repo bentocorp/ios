@@ -484,7 +484,17 @@
 }
 
 - (void)onDish:(id)sender {
-
+    
+    UIButton *selectedButton = (UIButton *)sender;
+    
+    if (selectedButton.tag == addonsCell.tag) {
+        [addonsCell setSelected:YES];
+    }
+    else {
+        [addonsCell setSelected:NO];
+    }
+    
+    [myTableView reloadData];
 }
 
 - (void)onAdd:(id)sender {

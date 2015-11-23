@@ -13,21 +13,18 @@
 @property (nonatomic) UIView *viewDish;
 
 @property (nonatomic) UIImageView *ivMainDish;
-
-@property (nonatomic) UILabel *lblMainDish;
-
-@property (nonatomic) UIButton *btnMainDish;
-
 @property (nonatomic) UIImageView *ivBannerMainDish;
 
+@property (nonatomic) UIButton *btnMainDish;
 @property (nonatomic) UIButton *addButton;
-
 @property (nonatomic) UIButton *subtractButton;
 
+@property (nonatomic) UILabel *lblMainDish;
 @property (nonatomic) UILabel *priceLabel;
-
 @property (nonatomic) UILabel *quantityLabel;
+@property (nonatomic) UILabel *descriptionLabel;
 
-- (void)setDishInfo:(NSDictionary *)dishInfo; 
+- (void)setDishInfo:(NSDictionary *)dishInfo;
+- (void)setCellState:(BOOL)isSelected;
 
 @end

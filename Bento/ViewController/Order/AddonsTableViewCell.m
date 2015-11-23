@@ -15,6 +15,12 @@
 #import <UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import "UIColor+CustomColors.h"
 
+@interface AddonsTableViewCell()
+
+@property (nonatomic) UIView *maskView;
+
+@end
+
 @implementation AddonsTableViewCell
 
 - (void)awakeFromNib {
@@ -53,6 +59,22 @@
         self.lblMainDish.textAlignment = NSTextAlignmentCenter;
         self.lblMainDish.backgroundColor = BORDER_COLOR;
         [self.viewDish addSubview:self.lblMainDish];
+        
+        /*---Mask View---*/
+        
+        self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.viewDish.frame.size.width, self.viewDish.frame.size.height - 45)];
+        self.maskView.backgroundColor = [UIColor blackColor];
+        self.maskView.alpha = 0.75;
+        [self.viewDish addSubview:self.maskView];
+        
+        /*---Description Label---*/
+        
+        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, self.maskView.frame.size.height / 2 - 75, self.maskView.frame.size.width - 10, 150)];
+        self.descriptionLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
+        self.descriptionLabel.shadowColor = [UIColor blackColor];
+        self.descriptionLabel.shadowOffset = CGSizeMake(0, 2);
+        self.descriptionLabel.adjustsFontSizeToFitWidth = YES;
+        [self.maskView addSubview:self.descriptionLabel];
         
         /*---Dish Button---*/
         
@@ -123,6 +145,18 @@
     }
     else {
         [self.ivMainDish setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    }
+}
+
+- (void)setCellState:(BOOL)isSelected
+{
+    if (!isSelected) {
+        self.descriptionLabel.hidden = YES;
+        self.maskView.hidden = YES;
+    }
+    else {
+        self.descriptionLabel.hidden = NO;
+        self.maskView.hidden = NO;
     }
 }
 
