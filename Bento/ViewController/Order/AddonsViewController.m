@@ -369,7 +369,8 @@
         addonsCell.ivBannerMainDish.hidden = YES;
     }
     
-    /*---Description---*/
+    /*---Description View---*/
+    addonsCell.descriptionLabel.text = dishInfo[@"description"];
     addonsCell.btnMainDish.tag = indexPath.row; // set button tag
     [addonsCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     

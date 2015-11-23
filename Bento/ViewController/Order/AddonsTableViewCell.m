@@ -64,16 +64,20 @@
         
         self.maskView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.viewDish.frame.size.width, self.viewDish.frame.size.height - 45)];
         self.maskView.backgroundColor = [UIColor blackColor];
-        self.maskView.alpha = 0.75;
+        self.maskView.alpha = 0.7;
         [self.viewDish addSubview:self.maskView];
         
         /*---Description Label---*/
         
-        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, self.maskView.frame.size.height / 2 - 75, self.maskView.frame.size.width - 10, 150)];
-        self.descriptionLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:24];
+        self.descriptionLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, self.maskView.frame.size.height / 2 - 50, self.maskView.frame.size.width - 10, 100)];
+        self.descriptionLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+        self.descriptionLabel.textColor = [UIColor whiteColor];
+        self.descriptionLabel.textAlignment = NSTextAlignmentCenter;
         self.descriptionLabel.shadowColor = [UIColor blackColor];
         self.descriptionLabel.shadowOffset = CGSizeMake(0, 2);
         self.descriptionLabel.adjustsFontSizeToFitWidth = YES;
+//        self.descriptionLabel.backgroundColor = [UIColor redColor];
+        self.descriptionLabel.numberOfLines = 0;
         [self.maskView addSubview:self.descriptionLabel];
         
         /*---Dish Button---*/
