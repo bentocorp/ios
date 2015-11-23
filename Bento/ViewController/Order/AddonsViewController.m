@@ -62,10 +62,14 @@
     JGProgressHUD *loadingHUD;
     
     NSMutableArray *savedArray;
+    
+    NSInteger _selectedPath;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    _selectedPath = -1;
     
     /*---Navigation View---*/
     
@@ -360,6 +364,14 @@
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     [addonsCell setDishInfo:dishInfo];
     
+    /*---Set State---*/
+    if (_selectedPath == indexPath.row) {
+        [addonsCell setCellState:YES];
+    }
+    else {
+        [addonsCell setCellState:NO];
+    }
+    
     /*---Sold Out Banner---*/
     NSInteger mainDishId = [[dishInfo objectForKey:@"itemId"] integerValue];
     if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
@@ -371,6 +383,7 @@
     
     /*---Description View---*/
     addonsCell.descriptionLabel.text = dishInfo[@"description"];
+    
     addonsCell.btnMainDish.tag = indexPath.row; // set button tag
     [addonsCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -395,6 +408,17 @@
     }
     
     return addonsCell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (_selectedPath == indexPath.row)
+        _selectedPath = -1;
+    else {
+        _selectedPath = indexPath.row;
+    }
+    
+    [myTableView reloadData];
 }
 
 /*---------------------------------------------------------------------------------------------*/
@@ -484,18 +508,15 @@
     }
 }
 
-- (void)onDish:(id)sender {
+- (void)onDish:(UIButton *)button {
     
-    UIButton *selectedButton = (UIButton *)sender;
+    // search: How to get indexPath in a tableview from a button action in a cell?
     
-    if (selectedButton.tag == addonsCell.tag) {
-        [addonsCell setSelected:YES];
-    }
-    else {
-        [addonsCell setSelected:NO];
-    }
+    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
     
-    [myTableView reloadData];
+    NSIndexPath *indexPath = [myTableView indexPathForCell:cell];
+    
+    [self tableView:myTableView didSelectRowAtIndexPath:indexPath];
 }
 
 - (void)onAdd:(id)sender {
