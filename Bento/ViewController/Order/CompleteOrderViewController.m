@@ -1099,12 +1099,18 @@
     
     NSString *strAPIToken = [[DataManager shareDataManager] getAPIToken];
     if (strAPIToken == nil || strAPIToken.length == 0) {
+        
+        [[Mixpanel sharedInstance] track:@"Stripe API Token Is Nil"];
+        
         [self openAccountViewController:[CompleteOrderViewController class]];
         return;
     }
     
     float totalPrice = [self getTotalPrice];
     if (totalPrice == 0.0f) {
+        
+        [[Mixpanel sharedInstance] track:@"Total Price Is Zero"];
+        
         [self createBackendChargeWithToken:nil completion:nil];
         return;
     }
