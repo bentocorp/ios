@@ -73,8 +73,6 @@
         self.descriptionLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
         self.descriptionLabel.textColor = [UIColor whiteColor];
         self.descriptionLabel.textAlignment = NSTextAlignmentCenter;
-        self.descriptionLabel.shadowColor = [UIColor blackColor];
-        self.descriptionLabel.shadowOffset = CGSizeMake(0, 2);
         self.descriptionLabel.adjustsFontSizeToFitWidth = YES;
 //        self.descriptionLabel.backgroundColor = [UIColor redColor];
         self.descriptionLabel.numberOfLines = 0;
