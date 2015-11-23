@@ -224,6 +224,9 @@
     
     if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
         // You need to authorize Location Services for the APP
+        
+        [[Mixpanel sharedInstance] track:@"Tapped On Let's Eat"];
+        
         [self commitOnGetItNow]; // disallowed location services
         
         return;
@@ -277,13 +280,13 @@
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
 {
+    [[Mixpanel sharedInstance] track:@"GPS Failed On Let's Eat"];
+    
     [self commitOnGetItNow];
     
     // Stop Location Updation, we dont need it now
     [locationManager stopUpdatingLocation];
     locationManager = nil;
-    
-    [[Mixpanel sharedInstance] track:@"GPS Failed On Let's Eat"];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
@@ -926,17 +929,24 @@
 {
     PaymentMethod curPaymentMethod = [[DataManager shareDataManager] getPaymentMethod];
     
-    if (curPaymentMethod == Payment_None)
+    if (curPaymentMethod == Payment_None) {
         trackPaymentMethod = @"Payment_None";
-    else if (curPaymentMethod == Payment_CreditCard)
+    }
+    else if (curPaymentMethod == Payment_CreditCard) {
         trackPaymentMethod = @"Payment_CreditCard";
-    else if (curPaymentMethod == Payment_Server)
+    }
+    else if (curPaymentMethod == Payment_Server) {
         trackPaymentMethod = @"Payment_Server";
-    else if (curPaymentMethod == Payment_ApplePay)
+    }
+    else if (curPaymentMethod == Payment_ApplePay) {
         trackPaymentMethod = @"Payment_ApplePay";
+    }
     
-    if (curPaymentMethod == Payment_None)
-    {
+    [[Mixpanel sharedInstance] track:@"Process Payment Initialized" properties:@{@"Payment Method": trackPaymentMethod}];
+    
+    // NONE
+    if (curPaymentMethod == Payment_None) {
+        
         successOrFailure = @"Failure";
         [mixpanel track:@"Placed An Order" properties:@{
                                                         @"Bento Quantity": [NSString stringWithFormat:@"%lu", (unsigned long)self.aryBentos.count],
@@ -947,20 +957,19 @@
         return;
     }
 
+    // NEW CREDIT CARD
     if (curPaymentMethod == Payment_CreditCard)
     {
         STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
 
-        if (cardInfo != nil) // STPCard
-        {
+        if (cardInfo != nil) { // STPCard
             loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
             loadingHUD.textLabel.text = @"Processing...";
             [loadingHUD showInView:self.view];
             
             // send crddit card info to Stripe, retuns a token
             [[STPAPIClient sharedClient] createTokenWithCard:cardInfo completion:^(STPToken *token, NSError *error) {
-                if (error)
-                {
+                if (error) {
                     [loadingHUD dismiss];
                     
                     MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.localizedDescription delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
@@ -975,8 +984,7 @@
                                                                     @"Success/Failure": successOrFailure
                                                                     }];
                 }
-                else
-                {
+                else {
                     [loadingHUD dismiss];
                     
                     // Save card information
@@ -999,8 +1007,9 @@
             }];
         }
     }
-    else if (curPaymentMethod == Payment_Server)
-    {
+    // SAVED CRDDIT CARD
+    else if (curPaymentMethod == Payment_Server) {
+        
         [self createBackendChargeWithToken:nil completion:nil];
         
         successOrFailure = @"Success";
@@ -1016,11 +1025,10 @@
                                                                               }];
         return;
     }
-    else if (curPaymentMethod == Payment_ApplePay)
-    {
+    // APPLEPAY
+    else if (curPaymentMethod == Payment_ApplePay) {
 #ifndef DEBUG
-        if (![PKPaymentAuthorizationViewController canMakePayments])
-        {
+        if (![PKPaymentAuthorizationViewController canMakePayments]) {
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
             [alertView showInView:self.view];
             alertView = nil;
@@ -1046,8 +1054,8 @@
         NSDecimalNumber *amount = (NSDecimalNumber *)[NSDecimalNumber decimalNumberWithString:[NSString stringWithFormat:@"%.2f", totalPrice]];
         request.paymentSummaryItems = @[ [PKPaymentSummaryItem summaryItemWithLabel:label amount:amount] ];
         
-        if ([self applePayEnabled])
-        {
+        if ([self applePayEnabled]) {
+            
             UIViewController *paymentController;
 #ifdef DEBUG
             paymentController = [[STPTestPaymentAuthorizationViewController alloc] initWithPaymentRequest:request];
@@ -1056,15 +1064,13 @@
             paymentController = [[PKPaymentAuthorizationViewController alloc] initWithPaymentRequest:request];
             ((PKPaymentAuthorizationViewController *)paymentController).delegate = self;
 #endif
-            if (paymentController != nil)
-            {
+            if (paymentController != nil) {
                 // shows the gray pop up
                 [self presentViewController:paymentController animated:YES completion:nil];
             
                 // track in createbackendtoken
             }
-            else
-            {
+            else {
                 MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Your iPhone cannot make in-app payments" delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
                 [alertView showInView:self.view];
                 alertView = nil;
@@ -1085,10 +1091,10 @@
 
 - (IBAction)onGetItNow:(id)sender
 {
+    [[Mixpanel sharedInstance] track:@"Tapped On Let's Eat"];
+    
     // set geofence
     [self initializeRegionMonitoring];
-    
-    [[Mixpanel sharedInstance] track:@"Tapped On Let's Eat"];
 }
 
 -(void)commitOnGetItNow
