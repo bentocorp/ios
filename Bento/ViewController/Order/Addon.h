@@ -14,8 +14,8 @@
 @property (nonatomic) NSInteger qty;
 @property (nonatomic) float unitPrice;
 
-- (id)initWithDictionary:(NSDictionary *)dictionary quantity:(NSInteger)quantity;
-- (void)addItem;
-- (void)removeItem;
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (void)addOneCount;
+- (void)removeOneCount;
 
 @end

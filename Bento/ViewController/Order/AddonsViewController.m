@@ -26,6 +26,8 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "DeliveryLocationViewController.h"
 #import "CompleteOrderViewController.h"
+
+#import "Addon.h"
 #import "AddonList.h"
 
 @interface AddonsViewController () <UITableViewDataSource, UITableViewDelegate>
@@ -502,26 +504,59 @@
     
     /*---Dish Info---*/
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex: button.tag];
+    Addon *selectedAddonItem = [[Addon alloc] initWithDictionary:dishInfo];
     
+    // addonlist is not empty
+    if ([AddonList sharedInstance].addonList.count != 0 || [AddonList sharedInstance].addonList != nil) {
     
-    
-    
-//    // addonlist is not empty
-//    if ([AddonList sharedInstance].addonsDictionary.count != 0) {
-//        
-//        // if dish found in addonlist
-//        if ([AddonList sharedInstance].addonsDictionary[dishInfo[@"name"]] != nil) {
-//            
-//            // add one count
-//        }
-//        else {
-//            
-//        }
-//    }
+        BOOL selectedItemIsInList;
+        
+        // loop through addonlist
+        for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
+            
+            Addon *addonItemInList = [AddonList sharedInstance].addonList[i];
+            
+            // selectedAddonItem is found in addonlist
+            if (selectedAddonItem.itemId == addonItemInList.itemId) {
+                
+                // add one count to prexisting addon
+                [[AddonList sharedInstance].addonList[i] addOneCount];
+                
+                selectedItemIsInList = YES;
+                
+                return;
+            }
+        }
+        
+        if (selectedItemIsInList == NO) {
+            // add addon to list
+            [[AddonList sharedInstance].addonList addObject: selectedAddonItem];
+        }
+    }
 }
 
 - (void)onSubtract:(UIButton *)button {
-//    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
+    
+    /*---Dish Info---*/
+    NSDictionary *dishInfo = [self.aryDishes objectAtIndex: button.tag];
+    Addon *selectedAddonItem = [[Addon alloc] initWithDictionary:dishInfo];
+    
+    // addonlist is not empty
+    if ([AddonList sharedInstance].addonList.count != 0 || [AddonList sharedInstance].addonList != nil) {
+        
+        // loop through addonlist
+        for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
+            
+            Addon *addonItemInList = [AddonList sharedInstance].addonList[i];
+            
+            // selectedAddonItem is found in addonlist
+            if (selectedAddonItem.itemId == addonItemInList.itemId) {
+                
+                // add one count to prexisting addon
+                [[AddonList sharedInstance].addonList[i] removeOneCount];
+            }
+        }
+    }
 }
 
 - (void)onAddBento:(id)sender
