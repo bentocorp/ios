@@ -20,4 +20,19 @@
     return self;
 }
 
++ (AddonList *)sharedInstance {
+    
+    // 1
+    static AddonList *_sharedInstance = nil;
+    
+    // 2
+    static dispatch_once_t oncePredicate;
+    
+    // 3
+    dispatch_once(&oncePredicate, ^{
+        _sharedInstance = [[AddonList alloc] init];
+    });
+    return _sharedInstance;
+}
+
 @end

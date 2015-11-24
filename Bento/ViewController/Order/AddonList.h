@@ -12,4 +12,6 @@
 
 @property (nonatomic) NSMutableArray *addonsArray;
 
++ (AddonList *)sharedInstance;
+
 @end
