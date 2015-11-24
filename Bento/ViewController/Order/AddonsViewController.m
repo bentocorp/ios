@@ -26,7 +26,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "DeliveryLocationViewController.h"
 #import "CompleteOrderViewController.h"
-#import "AddonList.m"
+#import "AddonList.h"
 
 @interface AddonsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -396,6 +396,9 @@
     addonsCell.subtractButton.tag = indexPath.row;
     [addonsCell.subtractButton addTarget:self action:@selector(onSubtract:) forControlEvents:UIControlEventTouchUpInside];
     
+    /*---Quantity---*/
+
+    
     /*---Price---*/
     if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""]) {
         
@@ -521,11 +524,17 @@
 }
 
 - (void)onAdd:(UIButton *)button {
-    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
+//    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
+    
+//    [AddonList sharedInstance].addonsArray.count != 0;
+    
+//    for () {
+//        
+//    }
 }
 
 - (void)onSubtract:(UIButton *)button {
-    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
+//    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
 }
 
 - (void)onAddBento:(id)sender

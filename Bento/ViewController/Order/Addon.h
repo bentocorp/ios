@@ -18,6 +18,9 @@
 @property (nonatomic) int itemId;
 @property (nonatomic) int maxPerOrder;
 
+// add or subtract from add-ons screen
+@property (nonatomic) int quantity;
+
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end

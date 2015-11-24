@@ -122,7 +122,6 @@
         self.quantityLabel.font = [UIFont fontWithName:@"OpenSans-Semibold" size:30];
         self.quantityLabel.textColor = [UIColor bentoTitleGray];
         self.quantityLabel.textAlignment = NSTextAlignmentCenter;
-        self.quantityLabel.text = @"3";
         [self addSubview:self.quantityLabel];
         
         /*---Line Divider---*/
