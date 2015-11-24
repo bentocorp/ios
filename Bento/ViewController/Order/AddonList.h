@@ -10,6 +10,6 @@
 
 @interface AddonList : NSObject
 
-@property (nonatomic) NSMutableArray *items;
+@property (nonatomic) NSMutableArray *addonsArray;
 
 @end

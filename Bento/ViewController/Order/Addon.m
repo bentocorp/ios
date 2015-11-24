@@ -10,7 +10,7 @@
 
 @implementation Addon
 
-- (id)initWithDict:(NSDictionary *)dictionary
+- (id)initWithDictionary:(NSDictionary *)dictionary
 {
     if (self = [super init]) {
 

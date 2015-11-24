@@ -14,6 +14,7 @@
 {
     if (self = [super init]) {
         
+        self.addonsArray = [[NSMutableArray alloc] init];
     }
     
     return self;

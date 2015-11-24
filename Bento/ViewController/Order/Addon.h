@@ -18,6 +18,6 @@
 @property (nonatomic) int itemId;
 @property (nonatomic) int maxPerOrder;
 
-
+- (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
