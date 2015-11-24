@@ -510,7 +510,7 @@
 
 - (void)onDish:(UIButton *)button {
     
-    // search: How to get indexPath in a tableview from a button action in a cell?
+    // search: http://stackoverflow.com/questions/7452389/how-to-get-indexpath-in-a-tableview-from-a-button-action-in-a-cell
     
     AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
     
@@ -520,7 +520,7 @@
 }
 
 - (void)onAdd:(id)sender {
-
+    
 }
 
 - (void)onSubtract:(id)sender {

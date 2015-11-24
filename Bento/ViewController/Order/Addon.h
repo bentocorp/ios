@@ -10,8 +10,14 @@
 
 @interface Addon : NSObject
 
-@property (nonatomic) NSInteger itemId;
-@property (nonatomic) NSInteger quantity;
-@property (nonatomic) float unitPrice;
+@property (nonatomic) NSString *type;
+@property (nonatomic) NSString *name;
+@property (nonatomic) NSString *descript;
+@property (nonatomic) float price;
+@property (nonatomic) NSString *image1;
+@property (nonatomic) int itemId;
+@property (nonatomic) int maxPerOrder;
+
+
 
 @end
