@@ -14,7 +14,7 @@
 {
     if (self = [super init]) {
         
-        self.addonsArray = [[NSMutableArray alloc] init];
+        self.addonsDictionary = [[NSMutableDictionary alloc] init];
     }
     
     return self;

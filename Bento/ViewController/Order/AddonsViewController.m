@@ -355,15 +355,14 @@
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    /*---Dish Info---*/
+    NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
+    
     addonsCell = (AddonsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     if (addonsCell == nil) {
-        addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell" dishInfo: dishInfo];
     }
-    
-    /*---Dish Info---*/
-    NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
-    [addonsCell setDishInfo:dishInfo];
     
     /*---Set State---*/
     if (_selectedPath == indexPath.row) {
@@ -373,18 +372,7 @@
         [addonsCell setCellState:NO];
     }
     
-    /*---Sold Out Banner---*/
-    NSInteger mainDishId = [[dishInfo objectForKey:@"itemId"] integerValue];
-    if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
-        addonsCell.ivBannerMainDish.hidden = NO;
-    }
-    else {
-        addonsCell.ivBannerMainDish.hidden = YES;
-    }
-    
     /*---Description View---*/
-    addonsCell.descriptionLabel.text = dishInfo[@"description"];
-    
     addonsCell.btnMainDish.tag = indexPath.row; // set button tag
     [addonsCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
@@ -395,21 +383,6 @@
     /*---Subtract---*/
     addonsCell.subtractButton.tag = indexPath.row;
     [addonsCell.subtractButton addTarget:self action:@selector(onSubtract:) forControlEvents:UIControlEventTouchUpInside];
-    
-    /*---Quantity---*/
-
-    
-    /*---Price---*/
-    if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""]) {
-        
-        // format to currency style
-        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-        addonsCell.priceLabel.text = [NSString stringWithFormat: @"%@", [numberFormatter stringFromNumber:@([[[BentoShop sharedInstance] getUnitPrice] floatValue])]]; // default settings.price
-    }
-    else {
-        addonsCell.priceLabel.text = [NSString stringWithFormat: @"$%@", dishInfo[@"price"]]; // custom price
-    }
     
     return addonsCell;
 }
@@ -524,13 +497,10 @@
 }
 
 - (void)onAdd:(UIButton *)button {
-//    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
+    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
     
-//    [AddonList sharedInstance].addonsArray.count != 0;
-    
-//    for () {
-//        
-//    }
+    /*---Dish Info---*/
+    NSDictionary *dishInfo = [self.aryDishes objectAtIndex: button.tag];
 }
 
 - (void)onSubtract:(UIButton *)button {
@@ -778,8 +748,9 @@
 - (void)onUpdatedMenu:(NSNotification *)notification
 {
     // is connected and timer is not paused
-    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         [self updateUI];
+    }
 }
 
 @end
