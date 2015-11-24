@@ -14,7 +14,6 @@
 #import "UIImageView+WebCache.h"
 #import <UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import "UIColor+CustomColors.h"
-#import "CAGradientLayer+SJSGradients.h"
 
 @interface AddonsTableViewCell()
 
@@ -79,17 +78,6 @@
 //        self.descriptionLabel.backgroundColor = [UIColor redColor];
         self.descriptionLabel.numberOfLines = 0;
         [self.maskView addSubview:self.descriptionLabel];
-        
-        
-        // gradient
-        UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.ivMainDish.frame.size.width, self.ivMainDish.frame.size.height)];
-        CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
-        backgroundLayer.frame = self.maskView.frame;
-        [view.layer insertSublayer:backgroundLayer atIndex:0];
-        self.gradientLayer = backgroundLayer;
-        self.gradientLayer.opacity = 0.8f;
-        [self.ivMainDish addSubview:view];
-        
         
         /*---Dish Button---*/
         
