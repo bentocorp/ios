@@ -10,20 +10,25 @@
 
 @implementation Addon
 
-- (id)initWithDictionary:(NSDictionary *)dictionary
-{
+- (id)initWithDictionary:(NSDictionary *)dictionary quantity:(NSInteger)quantity {
+    
     if (self = [super init]) {
 
-        self.type = dictionary[@"type"];
-        self.name = dictionary[@"name"];
-        self.descript = dictionary[@"description"];
-        self.price = [dictionary[@"price"] floatValue];
-        self.image1 = dictionary[@"image1"];
-        self.itemId = [dictionary[@"itemId"] intValue];
-        self.maxPerOrder = [dictionary[@"max_per_order"] intValue];
+        self.itemId = [dictionary[@"id"] integerValue];
+        self.unitPrice = [dictionary[@"unit_price"] floatValue];
     }
     
     return self;
+}
+
+- (void)addItem {
+    self.qty += 1;
+}
+
+- (void)removeItem {
+    if (self.qty > 0) {
+        self.qty -= 1;
+    }
 }
 
 @end

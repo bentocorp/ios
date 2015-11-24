@@ -10,7 +10,7 @@
 
 @interface AddonList : NSObject
 
-@property (nonatomic) NSMutableDictionary *addonsDictionary;
+@property (nonatomic) NSMutableArray *addonList;
 
 + (AddonList *)sharedInstance;
 

@@ -361,7 +361,8 @@
     addonsCell = (AddonsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     if (addonsCell == nil) {
-        addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell" dishInfo: dishInfo];
+        addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell" dishInfo: dishInfo]; // set dishInfo
+        addonsCell.tag = indexPath.row;
     }
     
     /*---Set State---*/
@@ -372,8 +373,8 @@
         [addonsCell setCellState:NO];
     }
     
-    /*---Description View---*/
-    addonsCell.btnMainDish.tag = indexPath.row; // set button tag
+    /*---Description---*/
+    addonsCell.btnMainDish.tag = indexPath.row;
     [addonsCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
     /*---Add---*/
@@ -389,8 +390,9 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (_selectedPath == indexPath.row)
+    if (_selectedPath == indexPath.row) {
         _selectedPath = -1;
+    }
     else {
         _selectedPath = indexPath.row;
     }
@@ -472,14 +474,14 @@
         lblBadge.hidden = YES;
     }
     
-    if ([self connected] && ![BentoShop sharedInstance]._isPaused)
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         connectionTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadDishes) userInfo:nil repeats:NO];
+    }
 }
 
 - (void)reloadDishes
 {
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
-        
         [self sortAryDishesLeft];
         [myTableView reloadData];
     }
@@ -497,10 +499,25 @@
 }
 
 - (void)onAdd:(UIButton *)button {
-    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
     
     /*---Dish Info---*/
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex: button.tag];
+    
+    
+    
+    
+//    // addonlist is not empty
+//    if ([AddonList sharedInstance].addonsDictionary.count != 0) {
+//        
+//        // if dish found in addonlist
+//        if ([AddonList sharedInstance].addonsDictionary[dishInfo[@"name"]] != nil) {
+//            
+//            // add one count
+//        }
+//        else {
+//            
+//        }
+//    }
 }
 
 - (void)onSubtract:(UIButton *)button {

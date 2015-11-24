@@ -10,17 +10,12 @@
 
 @interface Addon : NSObject
 
-@property (nonatomic) NSString *type;
-@property (nonatomic) NSString *name;
-@property (nonatomic) NSString *descript;
-@property (nonatomic) float price;
-@property (nonatomic) NSString *image1;
-@property (nonatomic) int itemId;
-@property (nonatomic) int maxPerOrder;
+@property (nonatomic) NSInteger itemId;
+@property (nonatomic) NSInteger qty;
+@property (nonatomic) float unitPrice;
 
-// add or subtract from add-ons screen
-@property (nonatomic) int quantity;
-
-- (id)initWithDictionary:(NSDictionary *)dictionary;
+- (id)initWithDictionary:(NSDictionary *)dictionary quantity:(NSInteger)quantity;
+- (void)addItem;
+- (void)removeItem;
 
 @end

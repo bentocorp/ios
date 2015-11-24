@@ -13,8 +13,7 @@
 - (id)init
 {
     if (self = [super init]) {
-        
-        self.addonsDictionary = [[NSMutableDictionary alloc] init];
+        self.addonList = [[NSMutableArray alloc] init];
     }
     
     return self;
