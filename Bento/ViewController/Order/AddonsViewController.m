@@ -26,6 +26,7 @@
 #import <SystemConfiguration/SystemConfiguration.h>
 #import "DeliveryLocationViewController.h"
 #import "CompleteOrderViewController.h"
+#import "AddonList.m"
 
 @interface AddonsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -519,12 +520,12 @@
     [self tableView:myTableView didSelectRowAtIndexPath:indexPath];
 }
 
-- (void)onAdd:(id)sender {
-    
+- (void)onAdd:(UIButton *)button {
+    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
 }
 
-- (void)onSubtract:(id)sender {
-
+- (void)onSubtract:(UIButton *)button {
+    AddonsTableViewCell *cell = (AddonsTableViewCell *)button.superview.superview;
 }
 
 - (void)onAddBento:(id)sender
