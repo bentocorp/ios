@@ -180,7 +180,7 @@
     
 /*---Count Badge---*/
     
-    lblBadge = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 42.5, 25, 14, 14)];
+    lblBadge = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 45, 25, 17, 17)];
     lblBadge.textAlignment = NSTextAlignmentCenter;
     lblBadge.font = [UIFont fontWithName:@"OpenSans-Semibold" size:10];
     lblBadge.backgroundColor = [UIColor colorWithRed:0.890f green:0.247f blue:0.373f alpha:1.0f];
@@ -1343,9 +1343,8 @@
     }
 
     /*---Cart Badge---*/
-    NSInteger bentoCount = [[BentoShop sharedInstance] getCompletedBentoCount];
-    if (bentoCount > 0) {
-        lblBadge.text = [NSString stringWithFormat:@"%ld", (long)bentoCount];
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount]];
         lblBadge.hidden = NO;
     }
     else {
