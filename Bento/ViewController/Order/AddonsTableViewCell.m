@@ -169,6 +169,8 @@
         
         [self.addButton setImage:[UIImage imageNamed:@"plus-gray-100"] forState:UIControlStateNormal];
         self.addButton.enabled = NO;
+        
+        self.quantityLabel.textColor = [UIColor lightGrayColor];
     }
     else {
         self.ivBannerMainDish.hidden = YES;
@@ -178,6 +180,8 @@
         
         [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
         self.addButton.enabled = YES;
+        
+        self.quantityLabel.textColor = [UIColor bentoTitleGray];
     }
     
     // PRICE

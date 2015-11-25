@@ -164,7 +164,7 @@
     [btnState setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
     btnState.backgroundColor = [UIColor bentoBrandGreen];
-    [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
+    [btnState addTarget:self action:@selector(onFinalize) forControlEvents:UIControlEventTouchUpInside];
     
     NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
     if (strTitle == nil) {
@@ -663,7 +663,7 @@
     alertView = nil;
 }
 
-- (void)onContinue
+- (void)onFinalize
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     

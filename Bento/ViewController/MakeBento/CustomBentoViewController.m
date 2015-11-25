@@ -1216,12 +1216,8 @@
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }
 
-- (void)onFinalize
-{
-    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        [[BentoShop sharedInstance] saveBentoArray];
-        [self gotoOrderScreen];
-    }
+- (void)onFinalize {
+    [self gotoOrderScreen];
 }
 
 - (void)updateUI
@@ -1370,6 +1366,7 @@
     else {
         lblBadge.text = @"";
         lblBadge.hidden = YES;
+        lblBadge2.hidden = YES;
     }
     
     [cvDishes reloadData];
