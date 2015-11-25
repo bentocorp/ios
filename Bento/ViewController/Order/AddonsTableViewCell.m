@@ -183,10 +183,21 @@
     if (!isSelected) {
         self.descriptionLabel.hidden = YES;
         self.maskView.hidden = YES;
+        
+        // sold out
+        NSInteger mainDishId = [[self.dishInfo objectForKey:@"itemId"] integerValue];
+        if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
+            self.ivBannerMainDish.hidden = NO;
+        }
+        else {
+            self.ivBannerMainDish.hidden = YES;
+        }
+
     }
     else {
         self.descriptionLabel.hidden = NO;
         self.maskView.hidden = NO;
+        self.ivBannerMainDish.hidden = YES;
     }
 }
 
