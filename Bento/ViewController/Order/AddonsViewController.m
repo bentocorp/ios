@@ -45,6 +45,7 @@
     UITableView *myTableView;
     
     UILabel *lblBadge;
+    UILabel *lblBadge2;
     UILabel *lblBanner;
     
     UIButton *btnCart;
@@ -61,6 +62,7 @@
     AddonsTableViewCell *addonsCell;
     
     CSAnimationView *animationView;
+    CSAnimationView *animationView2;
     
     JGProgressHUD *loadingHUD;
     
@@ -123,7 +125,7 @@
     
     /*---Count Badge---*/
     
-    animationView = [[CSAnimationView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 43.5, 23, 14, 14)];
+    animationView = [[CSAnimationView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 45, 25, 14, 14)];
     animationView.duration = 0.5;
     animationView.delay = 0;
     animationView.type = CSAnimationTypeZoomOut;
@@ -136,7 +138,24 @@
     lblBadge.textColor = [UIColor whiteColor];
     lblBadge.layer.cornerRadius = lblBadge.frame.size.width / 2;
     lblBadge.clipsToBounds = YES;
+    lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount]];
     [animationView addSubview:lblBadge];
+    
+    animationView2 = [[CSAnimationView alloc] initWithFrame:CGRectMake(animationView.frame.origin.x + 14, 20, 14, 14)];
+    animationView2.duration = 0.5;
+    animationView2.delay = 0;
+    animationView2.type = CSAnimationTypeZoomOut;
+    [navigationBarView addSubview:animationView2];
+    
+    lblBadge2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 17, 17)];
+    lblBadge2.textAlignment = NSTextAlignmentCenter;
+    lblBadge2.font = [UIFont fontWithName:@"OpenSans-Semibold" size:10];
+    lblBadge2.textColor = [UIColor whiteColor];
+    lblBadge2.backgroundColor = [UIColor colorWithRed:0.349f green:0.510f blue:0.855f alpha:1.0f];
+    lblBadge2.text = @"4";
+    lblBadge2.layer.cornerRadius = lblBadge2.frame.size.width / 2;
+    lblBadge2.clipsToBounds = YES;
+    [animationView2 addSubview:lblBadge2];
     
     /*---Button State---*/
     
@@ -459,7 +478,17 @@
     
     // Badge count label state
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount] + [[AddonList sharedInstance] getTotalCount]];
+        
+        if ([[AddonList sharedInstance] getTotalCount] > 0) {
+            lblBadge2.hidden = NO;
+            lblBadge2.text = [NSString stringWithFormat:@"%ld", [[AddonList sharedInstance] getTotalCount]];
+            
+            // animate badge
+            [animationView2 startCanvasAnimation];
+        }
+        else {
+            lblBadge2.hidden = YES;
+        }
     }
     
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
