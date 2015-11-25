@@ -7,6 +7,7 @@
 //
 
 #import "AddonList.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
 
 @implementation AddonList
 
@@ -35,7 +36,7 @@
 }
 
 - (void)saveList {
-    [[NSUserDefaults standardUserDefaults] setObject:self.addonList forKey:@"addonList"];
+    [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.addonList forKey:@"addonList"];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
 
@@ -43,7 +44,7 @@
     if (self.addonList != nil && self.addonList.count != 0) {
         [self.addonList removeAllObjects];
         
-        [[NSUserDefaults standardUserDefaults] setObject:self.addonList forKey:@"addonList"];
+        [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.addonList forKey:@"addonList"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
 }

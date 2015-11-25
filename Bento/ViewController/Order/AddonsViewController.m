@@ -387,6 +387,31 @@
     addonsCell.subtractButton.tag = indexPath.row;
     [addonsCell.subtractButton addTarget:self action:@selector(onSubtract:) forControlEvents:UIControlEventTouchUpInside];
     
+    // quantity
+    // match current cell with addonitem, check if it exists in addonlist
+    
+    Addon *currentAddon = [[Addon alloc] initWithDictionary: dishInfo];
+    
+    BOOL currentItemExistsInAddonList = NO;
+    
+    for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
+        
+        Addon *addOnInList = [AddonList sharedInstance].addonList[i];
+        
+        if (currentAddon.itemId ==  addOnInList.itemId) {
+            
+            addonsCell.quantityLabel.text = [NSString stringWithFormat:@"%ld", addOnInList.qty];
+            
+            currentItemExistsInAddonList = YES;
+            
+            break;
+        }
+    }
+    
+    if (currentItemExistsInAddonList == NO) {
+        addonsCell.quantityLabel.text = @"0";
+    }
+    
     return addonsCell;
 }
 
