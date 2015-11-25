@@ -14,4 +14,7 @@
 
 + (AddonList *)sharedInstance;
 
+- (void)saveList;
+- (void)emptyList;
+
 @end

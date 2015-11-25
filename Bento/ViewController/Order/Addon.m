@@ -7,6 +7,7 @@
 //
 
 #import "Addon.h"
+#import "AddonList.h"
 #import "BentoShop.h"
 
 @implementation Addon
@@ -33,6 +34,9 @@
     self.qty += 1;
     
     NSLog(@"ID: %ld, Quantity - %ld, Unit Price - %f", self.itemId, self.qty, self.unitPrice);
+    
+    // save results
+    [[AddonList sharedInstance] saveList];
 }
 
 - (void)removeOneCount {
@@ -41,6 +45,9 @@
         
         NSLog(@"ID: %ld, Quantity - %ld, Unit Price - %f", self.itemId, self.qty, self.unitPrice);
     }
+    
+    // save results
+    [[AddonList sharedInstance] saveList];
 }
 
 @end

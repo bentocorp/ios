@@ -23,6 +23,8 @@
 #import "Mixpanel.h"
 #import "Mixpanel/MPTweakInline.h"
 
+#import "AddonList.h"
+
 @interface BentoShop ()
 
 
@@ -1448,6 +1450,8 @@ static BentoShop *_shareInstance;
             
             [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"arySoldOutItems"];
             [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [[AddonList sharedInstance] emptyList];
         }
     });
 }

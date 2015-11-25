@@ -34,4 +34,18 @@
     return _sharedInstance;
 }
 
+- (void)saveList {
+    [[NSUserDefaults standardUserDefaults] setObject:self.addonList forKey:@"addonList"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)emptyList {
+    if (self.addonList != nil && self.addonList.count != 0) {
+        [self.addonList removeAllObjects];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:self.addonList forKey:@"addonList"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+}
+
 @end
