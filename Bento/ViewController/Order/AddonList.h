@@ -13,7 +13,6 @@
 @property (nonatomic) NSMutableArray *addonList;
 
 + (AddonList *)sharedInstance;
-
 - (void)saveList;
 - (void)emptyList;
 
