@@ -663,6 +663,10 @@
 		FCB35C501BFE7B0300A590EC /* Collapse Arrow-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB35C4D1BFE7B0300A590EC /* Collapse Arrow-64.png */; };
 		FCB35C511BFE7B0300A590EC /* Expand Arrow-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB35C4E1BFE7B0300A590EC /* Expand Arrow-64.png */; };
 		FCB35C521BFE7B0300A590EC /* Expand Arrow-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB35C4E1BFE7B0300A590EC /* Expand Arrow-64.png */; };
+		FCB672D01C0546650050F2C7 /* minus-gray-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB672CE1C0546650050F2C7 /* minus-gray-100.png */; };
+		FCB672D11C0546650050F2C7 /* minus-gray-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB672CE1C0546650050F2C7 /* minus-gray-100.png */; };
+		FCB672D21C0546650050F2C7 /* plus-gray-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB672CF1C0546650050F2C7 /* plus-gray-100.png */; };
+		FCB672D31C0546650050F2C7 /* plus-gray-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB672CF1C0546650050F2C7 /* plus-gray-100.png */; };
 		FCB906131AEC7FBF003041F7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
 		FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCB906121AEC7FBF003041F7 /* FaqViewController.m */; };
 		FCBF06FA1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCBF06F91B1522C800EEC177 /* NetworkErrorViewController.m */; };
@@ -1137,6 +1141,8 @@
 		FCB35C461BFE74EC00A590EC /* Rectangle-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Rectangle-64.png"; sourceTree = "<group>"; };
 		FCB35C4D1BFE7B0300A590EC /* Collapse Arrow-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Collapse Arrow-64.png"; sourceTree = "<group>"; };
 		FCB35C4E1BFE7B0300A590EC /* Expand Arrow-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Expand Arrow-64.png"; sourceTree = "<group>"; };
+		FCB672CE1C0546650050F2C7 /* minus-gray-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-gray-100.png"; sourceTree = "<group>"; };
+		FCB672CF1C0546650050F2C7 /* plus-gray-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-gray-100.png"; sourceTree = "<group>"; };
 		FCB906111AEC7FB9003041F7 /* FaqViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FaqViewController.h; path = MakeBento/FaqViewController.h; sourceTree = "<group>"; };
 		FCB906121AEC7FBF003041F7 /* FaqViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FaqViewController.m; path = MakeBento/FaqViewController.m; sourceTree = "<group>"; };
 		FCBF06F81B1522C800EEC177 /* NetworkErrorViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NetworkErrorViewController.h; sourceTree = "<group>"; };
@@ -1554,6 +1560,8 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FCB672CE1C0546650050F2C7 /* minus-gray-100.png */,
+				FCB672CF1C0546650050F2C7 /* plus-gray-100.png */,
 				FCF8721E1BFFD12B0091A206 /* minus-green-100.png */,
 				FCF8721F1BFFD12B0091A206 /* plus-green-100.png */,
 				FCB35C4D1BFE7B0300A590EC /* Collapse Arrow-64.png */,
@@ -2482,6 +2490,7 @@
 				FCDF222B1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
 				7216B7851AA64C7C0006FFE9 /* nav_btn_back@2x.png in Resources */,
 				FCDF221F1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
+				FCB672D31C0546650050F2C7 /* plus-gray-100.png in Resources */,
 				7216B7861AA64C7C0006FFE9 /* register_icon_facebook.png in Resources */,
 				7216B7871AA64C7C0006FFE9 /* register_icon_username.png in Resources */,
 				7216B7881AA64C7C0006FFE9 /* logo_title.png in Resources */,
@@ -2539,6 +2548,7 @@
 				FC1D615E1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */,
 				FC2F06A61BE81F64007B6A82 /* in-transit-64.png in Resources */,
 				FCD51ED31AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */,
+				FCB672D11C0546650050F2C7 /* minus-gray-100.png in Resources */,
 				7216B7A21AA64C7C0006FFE9 /* OpenSans-Semibold.ttf in Resources */,
 				7216B7A31AA64C7C0006FFE9 /* mybento_nav_cart_inact@2x.png in Resources */,
 				FCDF221B1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */,
@@ -2612,6 +2622,7 @@
 				726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */,
 				FCDF222A1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
 				FC1D61601BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */,
+				FCB672D21C0546650050F2C7 /* plus-gray-100.png in Resources */,
 				90BED0E31A5C1E70003DC872 /* nav_btn_back@2x.png in Resources */,
 				FCDF221E1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
 				90D8F7B11A5D84B800D034CF /* register_icon_facebook.png in Resources */,
@@ -2669,6 +2680,7 @@
 				90BED0C91A5BE72F003DC872 /* OpenSans-Semibold.ttf in Resources */,
 				FC2F06A51BE81F64007B6A82 /* in-transit-64.png in Resources */,
 				FC72912A1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
+				FCB672D01C0546650050F2C7 /* minus-gray-100.png in Resources */,
 				90BED0E01A5C04DE003DC872 /* mybento_nav_cart_inact@2x.png in Resources */,
 				FCDF221A1ADC3ADF006B2750 /* Icon-60@3x.png in Resources */,
 				FC1D615A1BBA0C0B0012FFB3 /* FacebookSDK-4_6-for-iOS.docset in Resources */,

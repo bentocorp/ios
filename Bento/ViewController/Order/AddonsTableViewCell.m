@@ -100,6 +100,25 @@
         self.btnMainDish = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.viewDish.frame.size.width, self.viewDish.frame.size.height)];
         [self.viewDish addSubview:self.btnMainDish];
         
+        /*---Subtract Button---*/
+        
+        self.subtractButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * .25 - 25, self.viewDish.frame.size.height + 45, 50, 50)];
+        [self addSubview:self.subtractButton];
+        
+        /*---Add Button---*/
+        
+        self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * .75 - 25, self.viewDish.frame.size.height + 45, 50, 50)];
+        [self addSubview:self.addButton];
+        
+        /*---Quantity Label---*/
+        
+        self.quantityLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, self.viewDish.frame.size.height + 45, 100, 50)];
+        self.quantityLabel.font = [UIFont fontWithName:@"OpenSans-Semibold" size:30];
+        self.quantityLabel.textColor = [UIColor bentoTitleGray];
+        self.quantityLabel.textAlignment = NSTextAlignmentCenter;
+        self.quantityLabel.text = [NSString stringWithFormat:@"%i", 0];
+        [self addSubview:self.quantityLabel];
+        
         /*---Sold Out Banner---*/
         
         UIImage *soldOutBannerImage = [UIImage imageNamed:@"banner_sold_out"];
@@ -111,31 +130,22 @@
         NSInteger mainDishId = [[dishInfo objectForKey:@"itemId"] integerValue];
         if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
             self.ivBannerMainDish.hidden = NO;
+            
+            [self.subtractButton setImage:[UIImage imageNamed:@"minus-gray-100"] forState:UIControlStateNormal];
+            self.subtractButton.enabled = NO;
+            
+            [self.addButton setImage:[UIImage imageNamed:@"plus-gray-100"] forState:UIControlStateNormal];
+            self.addButton.enabled = NO;
         }
         else {
             self.ivBannerMainDish.hidden = YES;
+            
+            [self.subtractButton setImage:[UIImage imageNamed:@"minus-green-100"] forState:UIControlStateNormal];
+            self.subtractButton.enabled = YES;
+            
+            [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
+            self.addButton.enabled = YES;
         }
-        
-        /*---Subtract Button---*/
-        
-        self.subtractButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * .25 - 25, self.viewDish.frame.size.height + 45, 50, 50)];
-        [self.subtractButton setImage:[UIImage imageNamed:@"minus-green-100"] forState:UIControlStateNormal];
-        [self addSubview:self.subtractButton];
-        
-        /*---Add Button---*/
-        
-        self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH * .75 - 25, self.viewDish.frame.size.height + 45, 50, 50)];
-        [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
-        [self addSubview:self.addButton];
-        
-        /*---Quantity Label---*/
-        
-        self.quantityLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 50, self.viewDish.frame.size.height + 45, 100, 50)];
-        self.quantityLabel.font = [UIFont fontWithName:@"OpenSans-Semibold" size:30];
-        self.quantityLabel.textColor = [UIColor bentoTitleGray];
-        self.quantityLabel.textAlignment = NSTextAlignmentCenter;
-        self.quantityLabel.text = [NSString stringWithFormat:@"%i", 0];
-        [self addSubview:self.quantityLabel];
         
         /*---Line Divider---*/
         
