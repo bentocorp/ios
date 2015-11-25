@@ -547,15 +547,15 @@
                 
                 // add one count to prexisting addon
                 [[AddonList sharedInstance].addonList[i] removeOneCount];
+                
+                [myTableView reloadData];
+                [self updateUI];
+                [self updateBadgeCount];
             }
         }
     }
     
     NSLog(@"addonlist - %@", [AddonList sharedInstance].addonList);
-    
-    [myTableView reloadData];
-    [self updateUI];
-    [self updateBadgeCount];
 }
 - (void)onCart
 {
