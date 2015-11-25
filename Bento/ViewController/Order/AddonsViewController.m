@@ -360,12 +360,17 @@
     /*---Dish Info---*/
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     
+    NSLog(@"Current Dish: %@", dishInfo);
+    
     addonsCell = (AddonsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
     if (addonsCell == nil) {
-        addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell" dishInfo: dishInfo]; // set dishInfo
+        addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
         addonsCell.tag = indexPath.row;
     }
+    
+    /*---Set dishInfo---*/
+    [addonsCell addDishInfo:dishInfo];
     
     /*---Set State---*/
     if (_selectedPath == indexPath.row) {

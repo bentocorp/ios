@@ -24,7 +24,8 @@
 @property (nonatomic) UILabel *quantityLabel;
 @property (nonatomic) UILabel *descriptionLabel;
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dishInfo:(NSDictionary *)dishInfo;
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
+- (void)addDishInfo:(NSDictionary *)dishInfo;
 - (void)setCellState:(BOOL)isSelected;
 
 @end

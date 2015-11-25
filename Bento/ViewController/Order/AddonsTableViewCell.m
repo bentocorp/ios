@@ -20,7 +20,7 @@
 
 @property (nonatomic) UIView *maskView;
 @property (nonatomic) CAGradientLayer *gradientLayer;
-@property (nonatomic) NSDictionary *dishInfo;
+@property (nonatomic) NSMutableDictionary *dishInfo;
 
 @end
 
@@ -30,15 +30,15 @@
     // Initialization code
 }
 
-- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier dishInfo:(NSDictionary *)dishInfo
+- (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     
     if (self) {
         
-        self.dishInfo = dishInfo;
-        
         self.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
+        
+        self.dishInfo = [@{} mutableCopy];
         
         /*---Dish View---*/
         
@@ -55,16 +55,7 @@
         self.ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
         [self.viewDish addSubview:self.ivMainDish];
         
-        // NAME
-        NSString *strName = [NSString stringWithFormat:@"%@", [dishInfo objectForKey:@"name"]];
         
-        NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-        if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
-            self.ivMainDish.image = [UIImage imageNamed:@"empty-main"];
-        }
-        else {
-            [self.ivMainDish setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        }
         
         /*---Dish Label---*/
         
@@ -74,7 +65,7 @@
         self.lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
         self.lblMainDish.textAlignment = NSTextAlignmentCenter;
         self.lblMainDish.backgroundColor = BORDER_COLOR;
-        self.lblMainDish.text = [strName uppercaseString];
+        
         [self.viewDish addSubview:self.lblMainDish];
         
         /*---Mask View---*/
@@ -92,7 +83,7 @@
         self.descriptionLabel.textAlignment = NSTextAlignmentCenter;
         self.descriptionLabel.adjustsFontSizeToFitWidth = YES;
         self.descriptionLabel.numberOfLines = 0;
-        self.descriptionLabel.text = dishInfo[@"description"];
+        self.descriptionLabel.text = self.dishInfo[@"description"];
         [self.maskView addSubview:self.descriptionLabel];
         
         /*---Dish Button---*/
@@ -127,26 +118,6 @@
         self.ivBannerMainDish.image = soldOutBannerImage;
         [self.viewDish addSubview:self.ivBannerMainDish];
         
-        NSInteger mainDishId = [[dishInfo objectForKey:@"itemId"] integerValue];
-        if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
-            self.ivBannerMainDish.hidden = NO;
-            
-            [self.subtractButton setImage:[UIImage imageNamed:@"minus-gray-100"] forState:UIControlStateNormal];
-            self.subtractButton.enabled = NO;
-            
-            [self.addButton setImage:[UIImage imageNamed:@"plus-gray-100"] forState:UIControlStateNormal];
-            self.addButton.enabled = NO;
-        }
-        else {
-            self.ivBannerMainDish.hidden = YES;
-            
-            [self.subtractButton setImage:[UIImage imageNamed:@"minus-green-100"] forState:UIControlStateNormal];
-            self.subtractButton.enabled = YES;
-            
-            [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
-            self.addButton.enabled = YES;
-        }
-        
         /*---Line Divider---*/
         
         UIView *lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.viewDish.frame.size.width - 80, self.viewDish.frame.size.height - 40, 1, self.lblMainDish.frame.size.height-8)];
@@ -162,20 +133,63 @@
         self.priceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
         self.priceLabel.textAlignment = NSTextAlignmentCenter;
         [self.viewDish addSubview:self.priceLabel];
-        
-        if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""]) {
-            
-            // format to currency style
-            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-            [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-            self.priceLabel.text = [NSString stringWithFormat: @"%@", [numberFormatter stringFromNumber:@([[[BentoShop sharedInstance] getUnitPrice] floatValue])]]; // default settings.price
-        }
-        else {
-            self.priceLabel.text = [NSString stringWithFormat: @"$%@", dishInfo[@"price"]]; // custom price
-        }
     }
     
     return self;
+}
+
+- (void)addDishInfo:(NSDictionary *)dishInfo
+{
+    self.dishInfo = [dishInfo mutableCopy];
+    
+    // NAME
+    NSString *strName = [NSString stringWithFormat:@"%@", [self.dishInfo objectForKey:@"name"]];
+    
+    // DISH IMAGE
+    NSString *strImageURL = [self.dishInfo objectForKey:@"image1"];
+    if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+        self.ivMainDish.image = [UIImage imageNamed:@"empty-main"];
+    }
+    else {
+        [self.ivMainDish setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    }
+    
+    // DISH LABEL
+    self.lblMainDish.text = [strName uppercaseString];
+    
+    // SOLD OUT
+    NSInteger mainDishId = [[self.dishInfo objectForKey:@"itemId"] integerValue];
+    if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
+        self.ivBannerMainDish.hidden = NO;
+        
+        [self.subtractButton setImage:[UIImage imageNamed:@"minus-gray-100"] forState:UIControlStateNormal];
+        self.subtractButton.enabled = NO;
+        
+        [self.addButton setImage:[UIImage imageNamed:@"plus-gray-100"] forState:UIControlStateNormal];
+        self.addButton.enabled = NO;
+    }
+    else {
+        self.ivBannerMainDish.hidden = YES;
+        
+        [self.subtractButton setImage:[UIImage imageNamed:@"minus-green-100"] forState:UIControlStateNormal];
+        self.subtractButton.enabled = YES;
+        
+        [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
+        self.addButton.enabled = YES;
+    }
+    
+    // PRICE
+    if ([self.dishInfo[@"price"] isEqual:[NSNull null]] || self.dishInfo[@"price"] == nil || self.dishInfo[@"price"] == 0 || [self.dishInfo[@"price"] isEqualToString:@""]) {
+        
+        // format to currency style
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+        self.priceLabel.text = [NSString stringWithFormat: @"%@", [numberFormatter stringFromNumber:@([[[BentoShop sharedInstance] getUnitPrice] floatValue])]]; // default settings.price
+    }
+    else {
+        self.priceLabel.text = [NSString stringWithFormat: @"$%@", self.dishInfo[@"price"]]; // custom price
+    }
+
 }
 
 - (void)setCellState:(BOOL)isSelected
