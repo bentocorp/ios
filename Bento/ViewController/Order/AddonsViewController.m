@@ -152,10 +152,11 @@
     lblBadge2.font = [UIFont fontWithName:@"OpenSans-Semibold" size:10];
     lblBadge2.textColor = [UIColor whiteColor];
     lblBadge2.backgroundColor = [UIColor colorWithRed:0.349f green:0.510f blue:0.855f alpha:1.0f];
-    lblBadge2.text = @"4";
     lblBadge2.layer.cornerRadius = lblBadge2.frame.size.width / 2;
     lblBadge2.clipsToBounds = YES;
     [animationView2 addSubview:lblBadge2];
+    
+    [self updateBadgeCount];
     
     /*---Button State---*/
     
@@ -446,53 +447,25 @@
 {
     [self sortAryDishesLeft];
     
-    // Get rid of any empty bentos and update persistent data
-    savedArray  = [[[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"bento_array"] mutableCopy];
-    NSLog(@"SAVED ARRAY: %@", savedArray);
-    
-    // loop through bento array
-    for (int i = 0; i < savedArray.count; i++)
-    {
-        // if bento in current index is empty
-        Bento *bento = savedArray[i];
-        if (bento.indexMainDish == 0 &&
-            bento.indexSideDish1 == 0 &&
-            bento.indexSideDish2 == 0 &&
-            bento.indexSideDish3 == 0 &&
-            bento.indexSideDish4 == 0)
-        {
-            // remove bento from bentos array
-            [savedArray removeObjectAtIndex:i];
-            
-            // get today's date string
-            NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-            [formatter setDateFormat:@"yyyyMMdd"];
-            NSString *strDate = [formatter stringFromDate:[NSDate date]];
-            
-            // update bentos array and strToday to persistent data
-            [[NSUserDefaults standardUserDefaults] rm_setCustomObject:savedArray forKey:@"bento_array"];
-            [[NSUserDefaults standardUserDefaults] setObject:strDate forKey:@"bento_date"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-        }
+    if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
+        connectionTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadDishes) userInfo:nil repeats:NO];
     }
-    
-    // Badge count label state
+}
+
+- (void)updateBadgeCount
+{
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        
+        lblBadge2.text = [NSString stringWithFormat:@"%ld", [[AddonList sharedInstance] getTotalCount]];
+        
+        [animationView2 startCanvasAnimation];
         
         if ([[AddonList sharedInstance] getTotalCount] > 0) {
             lblBadge2.hidden = NO;
-            lblBadge2.text = [NSString stringWithFormat:@"%ld", [[AddonList sharedInstance] getTotalCount]];
-            
-            // animate badge
-            [animationView2 startCanvasAnimation];
         }
         else {
             lblBadge2.hidden = YES;
         }
-    }
-    
-    if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
-        connectionTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadDishes) userInfo:nil repeats:NO];
     }
 }
 
@@ -552,6 +525,7 @@
     
     [myTableView reloadData];
     [self updateUI];
+    [self updateBadgeCount];
 }
 
 - (void)onSubtract:(UIButton *)button {
@@ -581,6 +555,7 @@
     
     [myTableView reloadData];
     [self updateUI];
+    [self updateBadgeCount];
 }
 - (void)onCart
 {
