@@ -509,7 +509,7 @@
     // addonlist is not empty
     if ([AddonList sharedInstance].addonList.count != 0 || [AddonList sharedInstance].addonList != nil) {
     
-        BOOL selectedItemIsInList;
+        BOOL selectedItemIsInList = NO;
         
         // loop through addonlist
         for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
@@ -523,16 +523,19 @@
                 [[AddonList sharedInstance].addonList[i] addOneCount];
                 
                 selectedItemIsInList = YES;
-                
-                return;
             }
         }
         
         if (selectedItemIsInList == NO) {
             // add addon to list
+            [selectedAddonItem addOneCount];
             [[AddonList sharedInstance].addonList addObject: selectedAddonItem];
         }
     }
+    
+    NSLog(@"addonlist - %@", [AddonList sharedInstance].addonList);
+    
+    [myTableView reloadData];
 }
 
 - (void)onSubtract:(UIButton *)button {
@@ -557,6 +560,10 @@
             }
         }
     }
+    
+    NSLog(@"addonlist - %@", [AddonList sharedInstance].addonList);
+    
+    [myTableView reloadData];
 }
 
 - (void)onAddBento:(id)sender
