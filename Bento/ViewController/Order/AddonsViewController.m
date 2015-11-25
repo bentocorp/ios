@@ -117,11 +117,9 @@
     /*---Cart Button---*/
     
     btnCart = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 50, 20, 50, 45)];
-    [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_inact"] forState:UIControlStateNormal];
+    [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
     [btnCart addTarget:self action:@selector(onCart) forControlEvents:UIControlEventTouchUpInside];
     [navigationBarView addSubview:btnCart];
-    
-    btnCart.hidden = NO;
     
     /*---Count Badge---*/
     
@@ -145,6 +143,7 @@
     btnState = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45, SCREEN_WIDTH, 45)];
     [btnState setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
+    btnState.backgroundColor = [UIColor bentoBrandGreen];
     [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
     
     NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
@@ -172,16 +171,6 @@
     [self.view addSubview:btnState];
     
     /*-----*/
-    
-    // if self.aryBentos is empty, create a new bento
-    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
-        [[BentoShop sharedInstance] addNewBento];
-    }
-    
-    // Show these items
-    lblBadge.hidden = NO;
-    btnCart.hidden = NO;
-    btnState.hidden = NO;
     
     //
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -299,7 +288,7 @@
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return SCREEN_HEIGHT/2 + 60;
+    return SCREEN_HEIGHT/2 + 55;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -468,42 +457,9 @@
         }
     }
     
-    // if current bento is completed, add new empty bento
-    if ([[[BentoShop sharedInstance] getLastBento] isCompleted])
-    {
-        [[BentoShop sharedInstance] addNewBento];
-    }
-    
-    // Cart and Finalize button state
-    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0)
-    {
-        btnCart.enabled = YES;
-        btnCart.selected = YES;
-        [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
-        
-        [btnState setBackgroundColor:[UIColor bentoBrandGreen]];
-        btnState.enabled = YES;
-    }
-    else
-    {
-        btnCart.enabled = NO;
-        btnCart.selected = NO;
-        
-        [btnState setBackgroundColor:[UIColor bentoButtonGray]];
-        btnState.enabled = NO;
-    }
-    
     // Badge count label state
-    NSInteger bentoCount = [[BentoShop sharedInstance] getCompletedBentoCount];
-    if (bentoCount > 0)
-    {
-        lblBadge.text = [NSString stringWithFormat:@"%ld", (long)bentoCount];
-        lblBadge.hidden = NO;
-    }
-    else
-    {
-        lblBadge.text = @"";
-        lblBadge.hidden = YES;
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount] + [[AddonList sharedInstance] getTotalCount]];
     }
     
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
@@ -566,6 +522,7 @@
     NSLog(@"addonlist - %@", [AddonList sharedInstance].addonList);
     
     [myTableView reloadData];
+    [self updateUI];
 }
 
 - (void)onSubtract:(UIButton *)button {
@@ -594,93 +551,8 @@
     NSLog(@"addonlist - %@", [AddonList sharedInstance].addonList);
     
     [myTableView reloadData];
-}
-
-- (void)onAddBento:(id)sender
-{
-    // Track began add a bento
-    Mixpanel *mixpanel = [Mixpanel sharedInstance];
-    [mixpanel track:@"Added Bento To Cart" properties:nil];
-    NSLog(@"Added Bento To Cart");
-    
-    // animate badge
-    [animationView startCanvasAnimation];
-    
-    /*---Add items to empty bento---*/
-    UIButton *selectedButton = (UIButton *)sender;
-    
-    NSArray *arySideDishesLeft;
-    
-    // use all day logic
-    if ([[BentoShop sharedInstance] isAllDay]) {
-        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
-            arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-        }
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
-            arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
-        }
-    }
-    else { // use regular logic
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-            arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
-        }
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-            arySideDishesLeft = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
-        }
-    }
-    
-    // Add main to Bento
-    NSDictionary *mainDishInfo = [self.aryDishes objectAtIndex:selectedButton.tag];
-    [[[BentoShop sharedInstance] getCurrentBento] setMainDish:[[mainDishInfo objectForKey:@"itemId"] integerValue]];
-    
-    // Add all sides to Bento
-    for (int i = 0; i < arySideDishesLeft.count; i++) {
-        
-        switch (i) {
-            case 0:
-                [[[BentoShop sharedInstance] getCurrentBento] setSideDish1:[[arySideDishesLeft[i] objectForKey:@"itemId"] integerValue]];
-                break;
-            case 1:
-                [[[BentoShop sharedInstance] getCurrentBento] setSideDish2:[[arySideDishesLeft[i] objectForKey:@"itemId"] integerValue]];
-                break;
-            case 2:
-                [[[BentoShop sharedInstance] getCurrentBento] setSideDish3:[[arySideDishesLeft[i] objectForKey:@"itemId"] integerValue]];
-                break;
-            case 3:
-                [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:[[arySideDishesLeft[i] objectForKey:@"itemId"] integerValue]];
-                break;
-            default:
-                break;
-        }
-    }
-    
-    //[[BentoShop sharedInstance] setCurrentBento:nil];
-    
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil && ![currentBento isCompleted])
-    {
-        if ([[BentoShop sharedInstance] isAllDay])
-        {
-            if ([[BentoShop sharedInstance] isThereLunchMenu])
-                [currentBento completeBento:@"todayLunch"];
-            else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-                [currentBento completeBento:@"todayDinner"];
-        }
-        else
-        {
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-                [currentBento completeBento:@"todayLunch"];
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-                [currentBento completeBento:@"todayDinner"];
-        }
-    }
-    
-    [[BentoShop sharedInstance] addNewBento];
-    
-    [self reloadDishes];
     [self updateUI];
 }
-
 - (void)onCart
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];

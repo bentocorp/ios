@@ -83,7 +83,6 @@
         self.descriptionLabel.textAlignment = NSTextAlignmentCenter;
         self.descriptionLabel.adjustsFontSizeToFitWidth = YES;
         self.descriptionLabel.numberOfLines = 0;
-        self.descriptionLabel.text = self.dishInfo[@"description"];
         [self.maskView addSubview:self.descriptionLabel];
         
         /*---Dish Button---*/
@@ -153,6 +152,9 @@
     else {
         [self.ivMainDish setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     }
+    
+    // DISH DESCRIPTION
+    self.descriptionLabel.text = self.dishInfo[@"description"];
     
     // DISH LABEL
     self.lblMainDish.text = [strName uppercaseString];

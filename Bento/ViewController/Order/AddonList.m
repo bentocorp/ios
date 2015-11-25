@@ -7,6 +7,7 @@
 //
 
 #import "AddonList.h"
+#import "Addon.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
 @implementation AddonList
@@ -47,6 +48,20 @@
         [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.addonList forKey:@"addonList"];
         [[NSUserDefaults standardUserDefaults] synchronize];
     }
+}
+
+- (NSInteger)getTotalCount {
+    
+    NSInteger total = 0;
+    
+    for (int i = 0; i < self.addonList.count; i++) {
+        
+        Addon *addon = self.addonList[i];
+        
+        total += addon.qty;
+    }
+    
+    return total;
 }
 
 @end
