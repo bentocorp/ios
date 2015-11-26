@@ -15,7 +15,14 @@
 - (id)init
 {
     if (self = [super init]) {
-        self.addonList = [[NSMutableArray alloc] init];
+        
+        if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"addonList"] != nil &&
+            [[[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"addonList"] count] != 0) {
+            self.addonList = [[[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"addonList"] mutableCopy];
+        }
+        else {
+           self.addonList = [[NSMutableArray alloc] init];
+        }
     }
     
     return self;

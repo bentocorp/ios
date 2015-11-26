@@ -559,66 +559,75 @@
 }
 - (void)onCart
 {
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
-        [self showConfirmMsg];
-    }
-    else {
-        [self gotoOrderScreen];
-    }
+    [self gotoOrderScreen];
+    
+//    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+//    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
+//        [self showConfirmMsg];
+//    }
+//    else {
+//        [self gotoOrderScreen];
+//    }
 }
 
 - (void)gotoOrderScreen
 {
-    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
-    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    [self dismissViewControllerAnimated:YES completion:nil];
     
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
-    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     
-    if (currentUserInfo == nil) {
-        
-        if (placeInfo == nil) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromHomepage"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            [self openAccountViewController:[DeliveryLocationViewController class]];
-        }
-        // if user already has saved address
-        else {
-
-            // check if saved address is within CURRENT service area
-            CLLocationCoordinate2D location = placeInfo.location.coordinate;
-            
-            // not within service area
-            if (![[BentoShop sharedInstance] checkLocation:location]) {
-                [self openAccountViewController:[DeliveryLocationViewController class]];
-            }
-            // within service area
-            else {
-                [self openAccountViewController:[CompleteOrderViewController class]];
-            }
-        }
-    }
-    else {
-        if (placeInfo == nil) {
-            [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-        }
-        else {
-            // check if saved address is within CURRENT service area
-            CLLocationCoordinate2D location = placeInfo.location.coordinate;
-            
-            // not within service area
-            if (![[BentoShop sharedInstance] checkLocation:location]) {
-                [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-            }
-            // within service area
-            else {
-                [self.navigationController pushViewController:completeOrderViewController animated:YES];
-            }
-        }
-    }
+//    // user and place info
+//    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
+//    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+//    
+//    // summary and delivery screens
+//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+//    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+//    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+//    
+//    // not logged in
+//    if (currentUserInfo == nil) {
+//        
+//        // never saved location
+//        if (placeInfo == nil) {
+//            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromHomepage"];
+//            [[NSUserDefaults standardUserDefaults] synchronize];
+//            
+//            [self openAccountViewController:[DeliveryLocationViewController class]];
+//        }
+//        // already has saved address
+//        else {
+//
+//            // check if saved address is within CURRENT service area
+//            CLLocationCoordinate2D location = placeInfo.location.coordinate;
+//            
+//            // not within service area
+//            if (![[BentoShop sharedInstance] checkLocation:location]) {
+//                [self openAccountViewController:[DeliveryLocationViewController class]];
+//            }
+//            // within service area
+//            else {
+//                [self openAccountViewController:[CompleteOrderViewController class]];
+//            }
+//        }
+//    }
+//    else {
+//        if (placeInfo == nil) {
+//            [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+//        }
+//        else {
+//            // check if saved address is within CURRENT service area
+//            CLLocationCoordinate2D location = placeInfo.location.coordinate;
+//            
+//            // not within service area
+//            if (![[BentoShop sharedInstance] checkLocation:location]) {
+//                [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+//            }
+//            // within service area
+//            else {
+//                [self.navigationController pushViewController:completeOrderViewController animated:YES];
+//            }
+//        }
+//    }
 }
 
 - (void)onUpdatedStatus:(NSNotification *)notification
@@ -665,12 +674,7 @@
 
 - (void)onFinalize
 {
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    
-    if (currentBento != nil || ![currentBento isEmpty]) {
-        [[BentoShop sharedInstance] saveBentoArray];
-        [self gotoOrderScreen];
-    }
+    [self gotoOrderScreen];
 }
 
 - (BOOL)isCompletedToMakeMyBento
