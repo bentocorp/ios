@@ -124,12 +124,14 @@
     
     JGProgressHUD *loadingHUD;
     BOOL isThereConnection;
+    
+    AddonsViewController *addonsVC;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
+    addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
     
     _selectedPathMainRight = -1;
@@ -1209,12 +1211,19 @@
     }
 }
 
+// delegate method
+- (void)addonsViewControllerDidTapOnFinalize:(BOOL)didTapOnFinalize
+{
+    if (didTapOnFinalize == YES) {
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(gotoOrderScreen) userInfo:nil repeats:NO];
+    }
+}
+
 - (void)onViewAddons {
     // TODO: track on mixpanel
     NSLog(@"Tapped on View Another Bento");
     
     [[Mixpanel sharedInstance] track:@"Tapped on View"];
-    
     
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }
