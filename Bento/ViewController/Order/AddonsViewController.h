@@ -9,6 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
+@protocol AddonsViewControllerDelegate <NSObject>
+
+@optional
+- (void)addonsViewControllerDidTapOnFinalize:(BOOL)didTapOnFinalize;
+
+@end
+
 @interface AddonsViewController : BaseViewController
+
+@property (nonatomic) id delegate;
 
 @end

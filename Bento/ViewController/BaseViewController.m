@@ -11,6 +11,7 @@
 #import "DataManager.h"
 #import "SoldOutViewController.h"
 #import "SignInViewController.h"
+#import "AddonsViewController.h"
 
 @interface BaseViewController ()
 

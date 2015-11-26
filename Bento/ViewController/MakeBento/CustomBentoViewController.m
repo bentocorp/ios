@@ -54,7 +54,7 @@
 #import "AddonsViewController.h"
 #import "AddonList.h"
 
-@interface CustomBentoViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface CustomBentoViewController () <MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, AddonsViewControllerDelegate>
 
 @end
 

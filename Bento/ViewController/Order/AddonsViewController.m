@@ -244,6 +244,8 @@
 }
 
 - (void)onClose {
+    [self.delegate addonsViewControllerDidTapOnFinalize:NO];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
@@ -572,6 +574,8 @@
 
 - (void)gotoOrderScreen
 {
+    [self.delegate addonsViewControllerDidTapOnFinalize:YES];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
     
     
