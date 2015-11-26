@@ -129,6 +129,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
+    addonsVC.delegate = self;
+    
     _selectedPathMainRight = -1;
     _selectedPathSideRight = -1;
     
@@ -1212,7 +1215,7 @@
     
     [[Mixpanel sharedInstance] track:@"Tapped on View"];
     
-    AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
+    
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }
 
