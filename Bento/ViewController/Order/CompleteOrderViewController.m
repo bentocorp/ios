@@ -1244,10 +1244,23 @@
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 45)];
-    bgView.backgroundColor = [UIColor ];
+    bgView.backgroundColor = [UIColor bentoBackgroundGray];
     
-    UIView
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, tableView.frame.size.width, 1)];
+    lineView.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
+    [bgView addSubview:lineView];
     
+    UIButton *addAnotherBentoButton = [[UIButton alloc] initWithFrame:CGRectMake(10, bgView.frame.size.height/2-15, 120, 30)];
+    [addAnotherBentoButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
+    [addAnotherBentoButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+    [addAnotherBentoButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
+    [bgView addSubview:addAnotherBentoButton];
+    
+    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(10, bgView.frame.size.height/2-15, 120, 30)];
+    [addAnotherBentoButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
+    [addAnotherBentoButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+    [addAnotherBentoButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
+    [bgView addSubview:addAnotherBentoButton];
     
     return bgView;
 }
