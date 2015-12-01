@@ -1363,7 +1363,7 @@
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="CHANGE">
-                                            <color key="titleColor" red="0.46274509800000002" green="0.63921568630000003" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.46274509803921571" green="0.64313725490196083" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1399,7 +1399,7 @@
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="CHANGE">
-                                            <color key="titleColor" red="0.46274509803921571" green="0.63921568627450975" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.46274509803921571" green="0.64313725490196083" blue="0.28235294117647058" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -2057,7 +2057,7 @@
                                         <animations/>
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <state key="normal" title="CHANGE">
-                                            <color key="titleColor" red="0.58431372549019611" green="0.792156862745098" blue="0.38039215686274508" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>

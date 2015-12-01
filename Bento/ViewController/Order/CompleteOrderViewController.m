@@ -37,6 +37,8 @@
 
 #import "UIColor+CustomColors.h"
 
+#import "AddonList.h"
+
 // Stripe
 #import "Stripe.h"
 #import "STPToken.h"
@@ -1216,7 +1218,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return 2;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
@@ -1229,42 +1231,65 @@
     NSString *strEdit = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_EDIT];
     NSString *strDone = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_DONE];
     
-    UIColor *editColor = [UIColor colorWithRed:149.0f / 255.0f green:201.0f / 255.0f blue:97.0f / 255.0f alpha:1.0f];
-    UIColor *doneColor = [UIColor colorWithRed:230.0f / 255.0f green:102.0f / 255.0f blue:53.0f / 255.0f alpha:1.0f];
+    UIColor *editColor = [UIColor bentoBrandGreen];
+    UIColor *doneColor = [UIColor colorWithRed:230.0f / 255.0f green:102.0f / 255.0f blue:53.0f / 255.0f alpha:1.0f]; // orange
     
-    
-    UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 45)];
+    UIView *bgView = [[UIView alloc] init];
     bgView.backgroundColor = [UIColor bentoBackgroundGray];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, tableView.frame.size.width, 1)];
+    UIButton *addAnotherButton = [[UIButton alloc] init];
+    UIButton *deleteButton = [[UIButton alloc] init];
+    
+    if (section == 0) {
+        bgView.frame = CGRectMake(0, 0, tableView.frame.size.width, 45);
+        addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
+        deleteButton.frame = CGRectMake(tableView.frame.size.width - 86, bgView.frame.size.height/2-15, 86, 30);
+        
+        [addAnotherButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
+        [addAnotherButton addTarget:self action:@selector(gotoAddAnotherBentoScreen) forControlEvents:UIControlEventTouchUpInside];
+    }
+    else {
+        bgView.frame = CGRectMake(0, 0, tableView.frame.size.width, 45);
+        addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
+        deleteButton.frame = CGRectMake(tableView.frame.size.width - 86, bgView.frame.size.height/2-15, 86, 30);
+        
+        [addAnotherButton setTitle:@"ADD ANOTHER ADD-ON" forState:UIControlStateNormal];
+        [addAnotherButton addTarget:self action:@selector(goToAddAnotherAddOnScreen) forControlEvents:UIControlEventTouchUpInside];
+        
+        UIView *lineViewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 1, tableView.frame.size.width, 1)];
+        lineViewTop.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
+        [bgView addSubview:lineViewTop];
+    }
+    
     lineView.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
     [bgView addSubview:lineView];
     
-    UIButton *addAnotherBentoButton = [[UIButton alloc] initWithFrame:CGRectMake(10, bgView.frame.size.height/2-15, 120, 30)];
-    [addAnotherBentoButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
-    [addAnotherBentoButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
-    [addAnotherBentoButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
-    [addAnotherBentoButton addTarget:self action:@selector(gotoAddAnotherBentoScreen) forControlEvents:UIControlEventTouchUpInside];
-    [bgView addSubview:addAnotherBentoButton];
+    [addAnotherButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+    [addAnotherButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
+    addAnotherButton.contentEdgeInsets = UIEdgeInsetsMake(15, 0, 12, 0);
+    addAnotherButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [bgView addSubview:addAnotherButton];
     
-    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 86, bgView.frame.size.height/2-15, 86, 30)];
-    [deleteButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_EDIT] forState:UIControlStateNormal];
-    [deleteButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     [deleteButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
     deleteButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    deleteButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
-    [deleteButton addTarget:self action:@selector(onEditBentos) forControlEvents:UIControlEventTouchUpInside];
-    [bgView addSubview:deleteButton];
-    
+    deleteButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 17);
     [deleteButton setTitle:(_isEditingBentos ? strDone : strEdit) forState:UIControlStateNormal];
     [deleteButton setTitleColor:(_isEditingBentos ? doneColor : editColor) forState:UIControlStateNormal];
+    [deleteButton addTarget:self action:@selector(onEditBentos) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:deleteButton];
     
     return bgView;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.aryBentos.count;
+    if (section == 0) {
+        return self.aryBentos.count;
+    }
+    else {
+        return [AddonList sharedInstance].addonList.count;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1277,29 +1302,33 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(BentoTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
-    
-    cell.lblBentoName.text = [NSString stringWithFormat:@"%@ Bento", [curBento getBentoName]];
-    cell.lblBentoName.textColor = [UIColor bentoBrandGreen];
-    cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans" size:14];
-    
-    // if there is sold out item
-    if (arySoldOutItems.count > 0) {
-        if ([curBento checkIfItemIsSoldOut:arySoldOutItems]) {
-            cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
-            cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+    if (indexPath.section == 0) {
+        Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
+        
+        cell.lblBentoName.text = [NSString stringWithFormat:@"%@ Bento", [curBento getBentoName]];
+        cell.lblBentoName.textColor = [UIColor bentoBrandGreen];
+        cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans" size:14];
+        
+        // if there is sold out item
+        if (arySoldOutItems.count > 0) {
+            if ([curBento checkIfItemIsSoldOut:arySoldOutItems]) {
+                cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
+                cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+            }
         }
+        
+        NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
+        
+        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
+        
+        // format to currency style
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+        cell.lblBentoPrice.text = [NSString stringWithFormat:@"%@", [numberFormatter stringFromNumber:@([curBento getUnitPrice])]];
     }
-    
-    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
-
-    cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
-    
-    // format to currency style
-    NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-    [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-    cell.lblBentoPrice.text = [NSString stringWithFormat:@"%@", [numberFormatter stringFromNumber:@([curBento getUnitPrice])]];
-
+    else {
+//        [AddonList sharedInstance].addonList
+    }
     
     cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
     
