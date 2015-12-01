@@ -84,8 +84,6 @@
 @property (nonatomic, weak) IBOutlet UIButton *btnChangeAddr;
 @property (nonatomic, weak) IBOutlet UIButton *btnChangeMethod;
 
-@property (nonatomic, weak) IBOutlet UIButton *btnAddAnother;
-@property (nonatomic, weak) IBOutlet UIButton *btnEdit;
 @property (nonatomic, weak) IBOutlet UIButton *btnAddPromo;
 @property (nonatomic, weak) IBOutlet UIButton *btnGetItNow;
 
@@ -154,8 +152,6 @@
     [self.tvBentos registerNib:cellNib forCellReuseIdentifier:@"BentoCell"];
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:COMPLETE_TITLE];
-    [self.btnAddAnother setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
-    [self.btnEdit setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_EDIT] forState:UIControlStateNormal];
     self.lblTitlePromo.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_DISCOUNT];
     self.lblTitleTax.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TAX];
     self.lblTitleTip.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TIP];
@@ -751,15 +747,6 @@
     [self updateCardInfo];
     [self updatePromoView];
     [self updatePriceLabels];
-    
-    NSString *strEdit = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_EDIT];
-    NSString *strDone = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_DONE];
-    
-    UIColor *editColor = [UIColor colorWithRed:149.0f / 255.0f green:201.0f / 255.0f blue:97.0f / 255.0f alpha:1.0f];
-    UIColor *doneColor = [UIColor colorWithRed:230.0f / 255.0f green:102.0f / 255.0f blue:53.0f / 255.0f alpha:1.0f];
-    
-    [self.btnEdit setTitle:(_isEditingBentos ? strDone : strEdit) forState:UIControlStateNormal];
-    [self.btnEdit setTitleColor:(_isEditingBentos ? doneColor : editColor) forState:UIControlStateNormal];
 
     BOOL isReady = NO;
     if (self.placeInfo != nil && [[DataManager shareDataManager] getPaymentMethod] != Payment_None) {
@@ -842,11 +829,6 @@
     }
 }
 
-- (IBAction)onAddAnotherBento:(id)sender
-{
-    [self gotoAddAnotherBentoScreen];
-}
-
 - (void)gotoAddAnotherBentoScreen
 {
     NSArray *viewControllers = self.navigationController.viewControllers;
@@ -881,12 +863,13 @@
     alertView = nil;
 }
 
-- (IBAction)onEditBentos:(id)sender
+- (void)onEditBentos
 {
     _isEditingBentos = !_isEditingBentos;
     
-    if(!_isEditingBentos)
+    if(!_isEditingBentos) {
         _clickedMinuteButtonIndex = NSNotFound;
+    }
 
     [self updateUI];
     
@@ -1243,6 +1226,13 @@
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
+    NSString *strEdit = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_EDIT];
+    NSString *strDone = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_DONE];
+    
+    UIColor *editColor = [UIColor colorWithRed:149.0f / 255.0f green:201.0f / 255.0f blue:97.0f / 255.0f alpha:1.0f];
+    UIColor *doneColor = [UIColor colorWithRed:230.0f / 255.0f green:102.0f / 255.0f blue:53.0f / 255.0f alpha:1.0f];
+    
+    
     UIView *bgView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, tableView.frame.size.width, 45)];
     bgView.backgroundColor = [UIColor bentoBackgroundGray];
     
@@ -1254,13 +1244,20 @@
     [addAnotherBentoButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
     [addAnotherBentoButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     [addAnotherBentoButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
+    [addAnotherBentoButton addTarget:self action:@selector(gotoAddAnotherBentoScreen) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:addAnotherBentoButton];
     
-    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(10, bgView.frame.size.height/2-15, 120, 30)];
-    [addAnotherBentoButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
-    [addAnotherBentoButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
-    [addAnotherBentoButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
-    [bgView addSubview:addAnotherBentoButton];
+    UIButton *deleteButton = [[UIButton alloc] initWithFrame:CGRectMake(tableView.frame.size.width - 86, bgView.frame.size.height/2-15, 86, 30)];
+    [deleteButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_EDIT] forState:UIControlStateNormal];
+    [deleteButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+    [deleteButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
+    deleteButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    deleteButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 15);
+    [deleteButton addTarget:self action:@selector(onEditBentos) forControlEvents:UIControlEventTouchUpInside];
+    [bgView addSubview:deleteButton];
+    
+    [deleteButton setTitle:(_isEditingBentos ? strDone : strEdit) forState:UIControlStateNormal];
+    [deleteButton setTitleColor:(_isEditingBentos ? doneColor : editColor) forState:UIControlStateNormal];
     
     return bgView;
 }

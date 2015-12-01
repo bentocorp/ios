@@ -43,8 +43,6 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Light.ttf">
             <string>OpenSans-Light</string>
@@ -1365,7 +1363,7 @@
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="CHANGE">
-                                            <color key="titleColor" red="0.53333333333333333" green="0.78431372549019607" blue="0.31372549019607843" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.46274509800000002" green="0.63921568630000003" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1401,7 +1399,7 @@
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
                                         <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
                                         <state key="normal" title="CHANGE">
-                                            <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.46274509803921571" green="0.63921568627450975" blue="0.30196078431372547" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1435,41 +1433,8 @@
                                 <rect key="frame" x="-1" y="152" width="320" height="153"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="pbc-Hz-gCU">
-                                        <rect key="frame" x="0.0" y="0.0" width="140" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
-                                        <state key="normal" title="ADD ANOTHER BENTO">
-                                            <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onAddAnotherBento:" destination="IGL-x5-TQo" eventType="touchUpInside" id="yb7-Nh-rq0"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="Ryh-p2-U6Y">
-                                        <rect key="frame" x="234" y="0.0" width="86" height="44"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
-                                        <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="16" maxY="0.0"/>
-                                        <state key="normal" title="EDIT">
-                                            <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
-                                            <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                        </state>
-                                        <connections>
-                                            <action selector="onEditBentos:" destination="IGL-x5-TQo" eventType="touchUpInside" id="enk-Qw-Tud"/>
-                                        </connections>
-                                    </button>
-                                    <view contentMode="scaleToFill" id="HwP-O1-VPc">
-                                        <rect key="frame" x="0.0" y="42" width="320" height="1"/>
-                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <animations/>
-                                        <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
-                                    </view>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Lth-bX-9L2">
-                                        <rect key="frame" x="0.0" y="42" width="320" height="109"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="151"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -1553,7 +1518,7 @@
                                         <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                         <size key="titleShadowOffset" width="14" height="8"/>
                                         <state key="normal" title="ADD PROMO">
-                                            <color key="titleColor" red="0.58431372550000005" green="0.79215686269999996" blue="0.3803921569" alpha="1" colorSpace="calibratedRGB"/>
+                                            <color key="titleColor" red="0.46274509800000002" green="0.63921568630000003" blue="0.30196078430000001" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </state>
                                         <connections>
@@ -1706,11 +1671,9 @@
                     <navigationItem key="navigationItem" id="QU5-XD-J3S"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina4"/>
                     <connections>
-                        <outlet property="btnAddAnother" destination="pbc-Hz-gCU" id="zok-SX-x8V"/>
                         <outlet property="btnAddPromo" destination="fxD-Rl-wWD" id="vaf-Hc-Jxj"/>
                         <outlet property="btnChangeAddr" destination="iiJ-Jj-yAJ" id="AeG-2z-uMz"/>
                         <outlet property="btnChangeMethod" destination="cOo-Wx-ePj" id="chj-se-Wk3"/>
-                        <outlet property="btnEdit" destination="Ryh-p2-U6Y" id="63C-hc-6ia"/>
                         <outlet property="btnGetItNow" destination="2Gh-RT-7qO" id="XyJ-pl-SdZ"/>
                         <outlet property="ivCardType" destination="cls-zz-h40" id="irU-AI-WhK"/>
                         <outlet property="lblAddress" destination="LX8-ou-bJ7" id="4fp-mv-xn0"/>
