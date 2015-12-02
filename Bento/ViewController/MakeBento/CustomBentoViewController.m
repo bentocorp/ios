@@ -1223,7 +1223,7 @@
     // TODO: track on mixpanel
     NSLog(@"Tapped on View Another Bento");
     
-    [[Mixpanel sharedInstance] track:@"Tapped on View"];
+    [[Mixpanel sharedInstance] track:@"Tapped on View Another Bento"];
     
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }

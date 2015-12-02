@@ -37,6 +37,7 @@
 
 #import "UIColor+CustomColors.h"
 
+#import "Addon.h"
 #import "AddonList.h"
 
 // Stripe
@@ -100,6 +101,7 @@
 @implementation CompleteOrderViewController
 {
     BOOL _isEditingBentos;
+    BOOL _isEditingAddons;
     
     float _taxPercent;
     NSInteger _deliveryTipPercent;
@@ -161,6 +163,7 @@
     [self.btnGetItNow setTitle:[[AppStrings sharedInstance] getString:COMPLETE_BUTTON_FINISH] forState:UIControlStateNormal];
     
     _isEditingBentos = NO;
+    _isEditingAddons = NO;
     
     self.lblTotalPrevious.hidden = YES;
     
@@ -274,6 +277,7 @@
     outsideRegionAlert.tag = 911;
     
     [outsideRegionAlert showInView:self.view];
+    
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error
@@ -878,6 +882,19 @@
     [self.tvBentos reloadData];
 }
 
+- (void)onEditAddons
+{
+    _isEditingAddons = !_isEditingAddons;
+    
+    if(!_isEditingAddons) {
+        _clickedMinuteButtonIndex = NSNotFound;
+    }
+    
+    [self updateUI];
+    
+    [self.tvBentos reloadData];
+}
+
 // ON 'ADD PROMO' / 'REMOVE PROMO'
 - (IBAction)onAddPromo:(id)sender
 {
@@ -927,7 +944,7 @@
         trackPaymentMethod = @"Payment_ApplePay";
     }
     
-    [[Mixpanel sharedInstance] track:@"Process Payment Initialized" properties:@{@"Payment Method": trackPaymentMethod}];
+    [[Mixpanel sharedInstance] track:@"Process Payment Initiated" properties:@{@"Payment Method": trackPaymentMethod}];
     
     // NONE
     if (curPaymentMethod == Payment_None) {
@@ -968,6 +985,8 @@
                                                                     @"Total Price": [NSString stringWithFormat:@"%f", [self getTotalPrice]],
                                                                     @"Success/Failure": successOrFailure
                                                                     }];
+
+                    [self updateUI];
                 }
                 else {
                     [loadingHUD dismiss];
@@ -1218,6 +1237,10 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
+    if ([AddonList sharedInstance].addonList.count == 0 || [AddonList sharedInstance].addonList == nil) {
+        return 1;
+    }
+    
     return 2;
 }
 
@@ -1243,19 +1266,26 @@
     
     if (section == 0) {
         bgView.frame = CGRectMake(0, 0, tableView.frame.size.width, 45);
-        addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
-        deleteButton.frame = CGRectMake(tableView.frame.size.width - 86, bgView.frame.size.height/2-15, 86, 30);
         
+        addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
         [addAnotherButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
         [addAnotherButton addTarget:self action:@selector(gotoAddAnotherBentoScreen) forControlEvents:UIControlEventTouchUpInside];
+        
+        deleteButton.frame = CGRectMake(tableView.frame.size.width - 86, bgView.frame.size.height/2-15, 86, 30);
+        [deleteButton setTitle:(_isEditingBentos ? strDone : strEdit) forState:UIControlStateNormal];
+        [deleteButton setTitleColor:(_isEditingBentos ? doneColor : editColor) forState:UIControlStateNormal];
+        [deleteButton addTarget:self action:@selector(onEditBentos) forControlEvents:UIControlEventTouchUpInside];
     }
     else {
         bgView.frame = CGRectMake(0, 0, tableView.frame.size.width, 45);
         addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
-        deleteButton.frame = CGRectMake(tableView.frame.size.width - 86, bgView.frame.size.height/2-15, 86, 30);
-        
         [addAnotherButton setTitle:@"ADD ANOTHER ADD-ON" forState:UIControlStateNormal];
         [addAnotherButton addTarget:self action:@selector(goToAddAnotherAddOnScreen) forControlEvents:UIControlEventTouchUpInside];
+        
+        deleteButton.frame = CGRectMake(tableView.frame.size.width - 86, bgView.frame.size.height/2-15, 86, 30);
+        [deleteButton setTitle:(_isEditingAddons ? strDone : strEdit) forState:UIControlStateNormal];
+        [deleteButton setTitleColor:(_isEditingAddons ? doneColor : editColor) forState:UIControlStateNormal];
+        [deleteButton addTarget:self action:@selector(onEditAddons) forControlEvents:UIControlEventTouchUpInside];
         
         UIView *lineViewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 1, tableView.frame.size.width, 1)];
         lineViewTop.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
@@ -1274,9 +1304,6 @@
     [deleteButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
     deleteButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
     deleteButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 17);
-    [deleteButton setTitle:(_isEditingBentos ? strDone : strEdit) forState:UIControlStateNormal];
-    [deleteButton setTitleColor:(_isEditingBentos ? doneColor : editColor) forState:UIControlStateNormal];
-    [deleteButton addTarget:self action:@selector(onEditBentos) forControlEvents:UIControlEventTouchUpInside];
     [bgView addSubview:deleteButton];
     
     return bgView;
@@ -1306,8 +1333,6 @@
         Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
         
         cell.lblBentoName.text = [NSString stringWithFormat:@"%@ Bento", [curBento getBentoName]];
-        cell.lblBentoName.textColor = [UIColor bentoBrandGreen];
-        cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans" size:14];
         
         // if there is sold out item
         if (arySoldOutItems.count > 0) {
@@ -1317,32 +1342,47 @@
             }
         }
         
-        NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
-        
-        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
-        
         // format to currency style
         NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
         [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
         cell.lblBentoPrice.text = [NSString stringWithFormat:@"%@", [numberFormatter stringFromNumber:@([curBento getUnitPrice])]];
+        
+        // edit state
+        if(_isEditingBentos) {
+            if(indexPath.row == _clickedMinuteButtonIndex) {
+                [cell setRemoveState];
+            }
+            else {
+                [cell setEditState];
+            }
+        }
+        else {
+            [cell setNormalState];
+        }
     }
     else {
-//        [AddonList sharedInstance].addonList
+        Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
+        
+        cell.lblBentoName.text = [NSString stringWithFormat:@"(%ld) %ld", addon.qty, addon.itemId];
+        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%.2f", addon.unitPrice];
+        
+        // edit state
+        if(_isEditingAddons) {
+            if(indexPath.row == _clickedMinuteButtonIndex) {
+                [cell setRemoveState];
+            }
+            else {
+                [cell setEditState];
+            }
+        }
+        else {
+            [cell setNormalState];
+        }
     }
     
     cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
-    
-    if(_isEditingBentos) {
-        if(indexPath.row == _clickedMinuteButtonIndex) {
-            [cell setRemoveState];
-        }
-        else {
-            [cell setEditState];
-        }
-    }
-    else {
-        [cell setNormalState];
-    }
+    cell.lblBentoName.textColor = [UIColor bentoBrandGreen];
+    cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans" size:14];
     
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -1369,7 +1409,7 @@
     }
 }
 
-- (void) onClickedMinuteButton:(UIView *)view
+- (void)onClickedMinuteButton:(UIView *)view
 {
     NSIndexPath *indexPath = [self.tvBentos indexPathForCell:(BentoTableViewCell *)view];
     
