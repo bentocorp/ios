@@ -179,6 +179,7 @@
     
     self.tvBentos.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
+    // no credit card saved
     if ([[DataManager shareDataManager] getPaymentMethod] == Payment_None) {
         if (![self applePayEnabled]) {
             [self gotoCreditScreen];
@@ -191,6 +192,20 @@
                 
                 [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"Viewed Summary Screen For First Time - Apple Pay Enabled"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
+            }
+        }
+    }
+    else {
+        // if there is no saved credit card on server AND current session
+        if ([[DataManager shareDataManager] getPaymentMethod] != Payment_Server && [[DataManager shareDataManager] getPaymentMethod] != Payment_CreditCard) {
+            
+            if (![self applePayEnabled]) {
+                // not saved credit card AND apple pay got disabled?!, ok, reset payment to none before asking for credit card
+                [[DataManager shareDataManager] setPaymentMethod:Payment_None];
+                [self gotoCreditScreen];
+            }
+            else {
+                [[DataManager shareDataManager] setPaymentMethod:Payment_ApplePay];
             }
         }
     }
@@ -207,7 +222,7 @@
 
 #pragma mark - Geofence
 
-- (void)initializeRegionMonitoring
+- (void)initiateRegionMonitoring
 {
     // Initialize location manager.
     locationManager = [[CLLocationManager alloc] init];
@@ -986,6 +1001,7 @@
                                                                     @"Success/Failure": successOrFailure
                                                                     }];
 
+                    // to renable let's eat button if card was declined
                     [self updateUI];
                 }
                 else {
@@ -1098,7 +1114,7 @@
     [[Mixpanel sharedInstance] track:@"Tapped On Let's Eat"];
     
     // set geofence
-    [self initializeRegionMonitoring];
+    [self initiateRegionMonitoring];
 }
 
 -(void)commitOnGetItNow
@@ -1956,12 +1972,15 @@
     }
 #else
     [self handlePaymentAuthorizationWithPayment:payment completion:completion];
-#endif//DEBUG
+#endif
 }
 
 - (void)paymentAuthorizationViewControllerDidFinish:(PKPaymentAuthorizationViewController *)controller
 {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // to reenable Let's Eat button
+    [self updateUI];
 }
 
 #pragma mark EnterCreditCardViewControllerDelegate
