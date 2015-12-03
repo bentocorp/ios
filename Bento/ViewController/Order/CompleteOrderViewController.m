@@ -1106,6 +1106,22 @@
                 
             }
         }
+        // apple got disabled!
+        else {
+            // if there is no saved credit card on server AND current session
+            if ([[DataManager shareDataManager] getPaymentMethod] != Payment_Server && [[DataManager shareDataManager] getPaymentMethod] != Payment_CreditCard) {
+                
+                if (![self applePayEnabled]) {
+                    // not saved credit card AND apple pay got disabled?!, ok, reset payment to none
+                    [[DataManager shareDataManager] setPaymentMethod:Payment_None];
+                    [self updateUI];
+                    
+                    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:@"Apple Pay is not enabled" delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
+                    [alertView showInView:self.view];
+                    alertView = nil;
+                }
+            }
+        }
     }
 }
 
@@ -2087,6 +2103,10 @@
     }
     else if (buttonIndex == 1) {
         [self performSelector:@selector(gotoCreditScreen) withObject:nil afterDelay:0.3f];
+    }
+    
+    if (buttonIndex.) {
+        
     }
 }
 
