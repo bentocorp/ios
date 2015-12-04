@@ -39,6 +39,7 @@
 
 #import "Addon.h"
 #import "AddonList.h"
+#import "AddonsViewController.h"
 
 // Stripe
 #import "Stripe.h"
@@ -1265,6 +1266,10 @@
     [userDefaults synchronize];
 }
 
+- (void)goToAddAnotherAddOnScreen {
+    [self presentViewController:[[AddonsViewController alloc] init] animated:YES completion:nil];
+}
+
 #pragma mark UITableViewDelegate
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
@@ -1972,6 +1977,11 @@
     }];
 }
 
+- (void)paymentAuthorizationViewControllerWillAuthorizePayment:(PKPaymentAuthorizationViewController *)controller
+{
+    NSLog(@"will authorize payment");
+}
+
 - (void)paymentAuthorizationViewController:(PKPaymentAuthorizationViewController *)controller
                        didAuthorizePayment:(PKPayment *)payment
                                 completion:(void (^)(PKPaymentAuthorizationStatus))completion
@@ -2103,10 +2113,6 @@
     }
     else if (buttonIndex == 1) {
         [self performSelector:@selector(gotoCreditScreen) withObject:nil afterDelay:0.3f];
-    }
-    
-    if (buttonIndex.) {
-        
     }
 }
 
