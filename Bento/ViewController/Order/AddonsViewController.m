@@ -202,6 +202,7 @@
     self.aryDishes = [[NSMutableArray alloc] init];
     
     [self updateUI];
+    [self autoScrollToIndex];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
@@ -431,7 +432,6 @@
 - (void)updateUI
 {
     [self sortAryDishesLeft];
-    [self autoScrollToIndex];
     
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         connectionTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadDishes) userInfo:nil repeats:NO];
