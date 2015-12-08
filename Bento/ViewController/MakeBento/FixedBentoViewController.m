@@ -47,6 +47,9 @@
 
 #import "UIColor+CustomColors.h"
 
+#import "AddonList.h"
+#import "Addon.h"
+
 
 @interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
@@ -518,6 +521,15 @@
 }
 
 #pragma mark Tableview Datasource
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
+{
+    if ([AddonList sharedInstance].addonList.count == 0 || [AddonList sharedInstance].addonList == nil) {
+        return 1;
+    }
+    
+    return 2;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
