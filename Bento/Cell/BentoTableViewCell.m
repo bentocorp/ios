@@ -32,7 +32,7 @@
     [self.delegate onClickedRemoveButton:self];
 }
 
-- (void) setNormalState
+- (void)setNormalState
 {
     [UIView animateWithDuration:0.3f animations:^{
         self.btnMinute.hidden = YES;
@@ -45,7 +45,7 @@
     }];
 }
 
-- (void) setEditState
+- (void)setEditState
 {
     [UIView animateWithDuration:0.3f animations:^{
         self.btnMinute.hidden = NO;
@@ -58,7 +58,7 @@
     }];
 }
 
-- (void) setRemoveState
+- (void)setRemoveState
 {
     [UIView animateWithDuration:0.3f animations:^{
         self.btnMinute.hidden = YES;

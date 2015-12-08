@@ -547,8 +547,14 @@
             // selectedAddonItem is found in addonlist
             if (selectedAddonItem.itemId == addonItemInList.itemId) {
                 
-                // add one count to prexisting addon
+                // remove one count to prexisting addon
                 [[AddonList sharedInstance].addonList[i] removeOneCount];
+                
+                // if none, remove addon from list
+                Addon *addon = [AddonList sharedInstance].addonList[i];
+                if (addon.qty <= 0) {
+                    [[AddonList sharedInstance].addonList removeObjectAtIndex:i];
+                }
                 
                 [myTableView reloadData];
                 [self updateUI];
