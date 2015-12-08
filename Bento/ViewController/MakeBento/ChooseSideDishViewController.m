@@ -147,7 +147,6 @@
                 // 2) add all sold out dishes to soldOutDishesArray
                 [soldOutDishesArray addObject:dishInfo];
             }
-            
         }
     }
     

@@ -467,7 +467,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1991"
             endingLineNumber = "1991"
-            landmarkName = "-paymentAuthorizationViewController:didAuthorizePayment:completion:"
+            landmarkName = "-handlePaymentAuthorizationWithPayment:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -483,7 +483,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1875"
             endingLineNumber = "1875"
-            landmarkName = "-handlePaymentAuthorizationWithCard:completion:"
+            landmarkName = "-createBackendChargeWithToken:completion:"
             landmarkType = "5">
             <Locations>
                <Location
@@ -531,7 +531,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1879"
             endingLineNumber = "1879"
-            landmarkName = "-handlePaymentAuthorizationWithCard:completion:"
+            landmarkName = "-createBackendChargeWithToken:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -547,7 +547,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "1981"
             endingLineNumber = "1981"
-            landmarkName = "-paymentAuthorizationViewControllerWillAuthorizePayment:"
+            landmarkName = "-handlePaymentAuthorizationWithPayment:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -563,7 +563,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "2005"
             endingLineNumber = "2005"
-            landmarkName = "-paymentAuthorizationViewControllerDidFinish:"
+            landmarkName = "-handlePaymentAuthorizationWithPayment:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

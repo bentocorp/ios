@@ -71,4 +71,8 @@
     return total;
 }
 
+- (void)removeSelectionFromList {
+    
+}
+
 @end

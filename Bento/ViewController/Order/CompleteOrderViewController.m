@@ -1463,11 +1463,47 @@
     
     _currentIndexPath = indexPath;
     
-    if (self.aryBentos.count > 1) {
-        [self removeBento];
+    if (_currentIndexPath.section == 0) {
+        if (self.aryBentos.count > 1) {
+            [self removeBento];
+        }
+        else {
+            [self showStartOverAlert];
+        }
     }
     else {
-        [self showStartOverAlert];
+        // remove addon from list
+        
+        // using current selection, go through addonlist and find match
+        // once found, remove selection from addonlist completely
+        
+        
+        /*---Dish Info---*/
+        NSDictionary *dishInfo = [self.aryDishes objectAtIndex: button.tag];
+        Addon *selectedAddonItem = [[Addon alloc] initWithDictionary:dishInfo];
+        
+        // addonlist is not empty
+        if ([AddonList sharedInstance].addonList.count != 0 || [AddonList sharedInstance].addonList != nil) {
+            
+            // loop through addonlist
+            for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
+                
+                Addon *addonItemInList = [AddonList sharedInstance].addonList[i];
+                
+                // selectedAddonItem is found in addonlist
+                if (selectedAddonItem.itemId == addonItemInList.itemId) {
+                    
+                    // remove one count to prexisting addon
+                    [[AddonList sharedInstance].addonList[i] removeOneCount];
+                    
+                    // if none, remove addon from list
+                    Addon *addon = [AddonList sharedInstance].addonList[i];
+                    if (addon.qty <= 0) {
+                        [[AddonList sharedInstance].addonList removeObjectAtIndex:i];
+                    }
+                }
+            }
+        }
     }
     
     [self.tvBentos reloadData];
