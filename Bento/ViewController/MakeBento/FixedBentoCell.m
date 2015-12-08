@@ -47,12 +47,12 @@
         self.ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
         [self.viewDish addSubview:self.ivMainDish];
         
-//        /*---Gradient Layer---*/
-//        
-//        CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
-//        backgroundLayer.frame = self.ivMainDish.frame;
-//        backgroundLayer.opacity = 0.8f;
-//        [self.ivMainDish.layer insertSublayer:backgroundLayer atIndex:0];
+        /*---Gradient Layer---*/
+        
+        CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = self.ivMainDish.frame;
+        backgroundLayer.opacity = 0.5f;
+        [self.ivMainDish.layer insertSublayer:backgroundLayer atIndex:0];
         
         /*---Dish Label---*/
         
