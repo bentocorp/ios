@@ -1807,7 +1807,6 @@
 				FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */,
 				FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */,
 				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
-				FC08CC1E1B0AA361008D0A84 /* Fixed Menu Cell */,
 			);
 			name = Cell;
 			path = ../Cell;
@@ -1853,7 +1852,6 @@
 				FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */,
 			);
 			name = "Fixed Menu Cell";
-			path = ../ViewController/MakeBento;
 			sourceTree = "<group>";
 		};
 		FC11AAA91BFBF8370004A83B /* Add-ons */ = {
@@ -1965,6 +1963,7 @@
 				FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */,
 				FC99D4ED1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.h */,
 				FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */,
+				FC08CC1E1B0AA361008D0A84 /* Fixed Menu Cell */,
 			);
 			name = "Fixed Bento";
 			sourceTree = "<group>";

@@ -32,8 +32,8 @@
         
         /*---Dish View---*/
         
-        self.viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 30, SCREEN_WIDTH-60, SCREEN_HEIGHT/2.75)];
-//        self.viewDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
+//        self.viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 30, SCREEN_WIDTH-60, SCREEN_HEIGHT/2.75)];
+        self.viewDish = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), 30, SCREEN_WIDTH-60, SCREEN_HEIGHT/2.5)];
         self.viewDish.layer.cornerRadius = 3;
         self.viewDish.clipsToBounds = YES;
         self.viewDish.layer.borderColor = BORDER_COLOR.CGColor;
@@ -47,12 +47,12 @@
         self.ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
         [self.viewDish addSubview:self.ivMainDish];
         
-        /*---Gradient Layer---*/
-        
-        CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
-        backgroundLayer.frame = self.ivMainDish.frame;
-        backgroundLayer.opacity = 0.8f;
-        [self.ivMainDish.layer insertSublayer:backgroundLayer atIndex:0];
+//        /*---Gradient Layer---*/
+//        
+//        CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
+//        backgroundLayer.frame = self.ivMainDish.frame;
+//        backgroundLayer.opacity = 0.8f;
+//        [self.ivMainDish.layer insertSublayer:backgroundLayer atIndex:0];
         
         /*---Dish Label---*/
         
@@ -77,7 +77,7 @@
         [self.viewDish addSubview:self.ivBannerMainDish];
         
         /*---Add Button---*/
-        self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), SCREEN_HEIGHT/3 + 55, SCREEN_WIDTH-60, 44)];
+        self.addButton = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2-((SCREEN_WIDTH-60)/2), self.viewDish.frame.size.height + 45, SCREEN_WIDTH-60, 44)];
         self.addButton.layer.cornerRadius = 3;
         self.addButton.layer.masksToBounds = YES;
         self.addButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
