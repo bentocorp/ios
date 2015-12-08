@@ -73,7 +73,6 @@
     UILabel *lblBanner;
     UILabel *dinnerTitleLabel;
     UILabel *lblBadge;
-    UILabel *lblBadge2;
     UIButton *btnCart;
     
     UIView *viewDishs;
@@ -195,15 +194,6 @@
     lblBadge.layer.cornerRadius = lblBadge.frame.size.width / 2;
     lblBadge.clipsToBounds = YES;
     [navigationBarView addSubview:lblBadge];
-    
-    lblBadge2 = [[UILabel alloc] initWithFrame:CGRectMake(lblBadge.frame.origin.x + 14, 20, 17, 17)];
-    lblBadge2.textAlignment = NSTextAlignmentCenter;
-    lblBadge2.font = [UIFont fontWithName:@"OpenSans-Semibold" size:10];
-    lblBadge2.textColor = [UIColor whiteColor];
-    lblBadge2.backgroundColor = [UIColor colorWithRed:0.349f green:0.510f blue:0.855f alpha:1.0f];
-    lblBadge2.layer.cornerRadius = lblBadge2.frame.size.width / 2;
-    lblBadge2.clipsToBounds = YES;
-    [navigationBarView addSubview:lblBadge2];
     
 /*---Full Dishes View---*/
     
@@ -1363,22 +1353,11 @@
 
     /*---Cart Badge---*/
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount]];
+        lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount] + [[AddonList sharedInstance] getTotalCount]];
         lblBadge.hidden = NO;
-        
-        lblBadge2.text = [NSString stringWithFormat:@"%ld", [[AddonList sharedInstance] getTotalCount]];
-        
-        if ([[AddonList sharedInstance] getTotalCount] > 0) {
-            lblBadge2.hidden = NO;
-        }
-        else {
-            lblBadge2.hidden = YES;
-        }
     }
     else {
         lblBadge.text = @"";
-        lblBadge.hidden = YES;
-        lblBadge2.hidden = YES;
     }
     
     [cvDishes reloadData];
