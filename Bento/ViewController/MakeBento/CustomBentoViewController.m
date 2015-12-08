@@ -1358,6 +1358,7 @@
     }
     else {
         lblBadge.text = @"";
+        lblBadge.hidden = YES;
     }
     
     [cvDishes reloadData];
