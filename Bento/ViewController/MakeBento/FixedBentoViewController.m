@@ -531,14 +531,24 @@
     return 2;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    
+}
+
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return SCREEN_HEIGHT/2 + 55;
 }
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return self.aryDishes.count;
+{   
+    if (section == 0) {
+        return self.aryDishes.count;
+    }
+    else {
+        return [AddonList sharedInstance].addonList.count;
+    }
 }
 
 - (void)sortAryDishesLeft {
