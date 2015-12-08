@@ -366,11 +366,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/MakeBento/FixedBentoViewController.m"
-            timestampString = "471308495.267357"
+            timestampString = "471310020.15627"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "976"
-            endingLineNumber = "976"
+            startingLineNumber = "1159"
+            endingLineNumber = "1159"
             landmarkName = "-onUpdatedStatus:"
             landmarkType = "5">
          </BreakpointContent>
