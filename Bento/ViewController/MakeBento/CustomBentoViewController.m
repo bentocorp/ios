@@ -130,9 +130,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    addonsVC = [[AddonsViewController alloc] init];
-    addonsVC.delegate = self;
-    
     _selectedPathMainRight = -1;
     _selectedPathSideRight = -1;
     
@@ -704,6 +701,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    addonsVC = [[AddonsViewController alloc] init];
+    addonsVC.delegate = self;
     
     [self updateUI];
     
