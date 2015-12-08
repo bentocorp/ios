@@ -20,4 +20,6 @@
 
 @property (nonatomic) id delegate;
 
+@property (nonatomic) NSInteger autoScrollId;
+
 @end

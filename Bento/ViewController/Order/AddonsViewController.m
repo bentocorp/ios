@@ -431,6 +431,7 @@
 - (void)updateUI
 {
     [self sortAryDishesLeft];
+    [self autoScrollToIndex];
     
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         connectionTimer = [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(reloadDishes) userInfo:nil repeats:NO];
@@ -442,6 +443,15 @@
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount] + [[AddonList sharedInstance] getTotalCount]];
         [animationView startCanvasAnimation];
+    }
+}
+
+- (void)autoScrollToIndex {
+    for (int i = 0; i < self.aryDishes.count; i++) {
+        
+        if (self.autoScrollId == [self.aryDishes[i][@"itemId"] integerValue]) {
+            [myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
     }
 }
 

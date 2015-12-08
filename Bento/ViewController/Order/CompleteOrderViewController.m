@@ -1427,22 +1427,30 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
-    NSLog(@"didselect aryBentos - %@", self.aryBentos);
-    
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    
-    for (UIViewController *vc in viewControllers)
-    {    
-        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]])
-        {
-            if ([vc isKindOfClass:[CustomBentoViewController class]])
-                [[BentoShop sharedInstance] setCurrentBento:curBento];
-            
-            [self.navigationController popToViewController:vc animated:YES];
-            
-            return;
+    if (indexPath.section == 0) {
+        Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
+        NSLog(@"didselect aryBentos - %@", self.aryBentos);
+        
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        
+        for (UIViewController *vc in viewControllers) {
+            if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]]) {
+                if ([vc isKindOfClass:[CustomBentoViewController class]]) {
+                    [[BentoShop sharedInstance] setCurrentBento:curBento];
+                }
+                
+                [self.navigationController popToViewController:vc animated:YES];
+                
+                return;
+            }
         }
+    }
+    else {
+        AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
+        Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
+        addonsVC.autoScrollId = addon.itemId;
+        
+        [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
     }
 }
 
