@@ -19,7 +19,7 @@
         self.itemId = [dictionary[@"itemId"] integerValue];
         self.qty = 0;
         
-        if (dictionary[@"price"] == nil || [dictionary[@"price"] isEqual:[NSNull null]] || ![dictionary[@"price"] isEqualToString:@""]) {
+        if (dictionary[@"price"] == nil || [dictionary[@"price"] isEqual:[NSNull null]] || [dictionary[@"price"] isEqualToString:@""]) {
             self.unitPrice = [[[BentoShop sharedInstance] getUnitPrice] floatValue]; // default unit price if not set
         }
         else {
