@@ -55,6 +55,7 @@
 @interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic) NSMutableArray *aryDishes;
+@property(nonatomic) NSMutableArray *addonAryDishes;
 
 @end
 
@@ -420,18 +421,11 @@
 {
     [super viewWillAppear:animated];
 
-    // set aryDishes array
     self.aryDishes = [[NSMutableArray alloc] init];
-    
-//    for (NSDictionary *dishInfo in [[BentoShop sharedInstance] getMainDishes:@"todayDinner"])
-//    {
-//        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-//        
-//        if ([[BentoShop sharedInstance] canAddDish:dishID])
-//            [self.aryDishes addObject:dishInfo];
-//    }
+    self.addonAryDishes = [[NSMutableArray alloc] init];
     
     [self updateUI];
+    [self sortAddonAryDishes];
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
@@ -530,12 +524,13 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([AddonList sharedInstance].addonList.count == 0 || [AddonList sharedInstance].addonList == nil) {
+    if (self.addonAryDishes == nil || self.addonAryDishes.count == 0) {
         return 1;
     }
     
     return 2;
 }
+
 //
 //- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 //{
@@ -553,7 +548,7 @@
         return self.aryDishes.count;
     }
     else {
-        return [AddonList sharedInstance].addonList.count;
+        return self.addonAryDishes.count;
     }
 }
 
@@ -603,6 +598,54 @@
     
     // 3) append sold out dishes to self.aryDishes
     self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
+}
+
+- (void)sortAddonAryDishes {
+    
+    [self.addonAryDishes removeAllObjects];
+    
+    NSMutableArray *aryMainDishesLeft;
+    
+    if ([[BentoShop sharedInstance] isAllDay]) {
+        
+        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
+            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
+        }
+        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
+            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+        }
+    }
+    else {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
+        }
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+        }
+    }
+    
+    NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
+    
+    for (NSDictionary * dishInfo in aryMainDishesLeft) {
+        
+        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+        
+        if ([[BentoShop sharedInstance] canAddDish:dishID]) {
+            
+            // 1) add to addonAryDishes only if it's not sold out
+            if ([[BentoShop sharedInstance] isDishSoldOut:dishID] == NO) {
+                
+                [self.addonAryDishes addObject:dishInfo];
+            }
+            else {
+                // 2) add all sold out dishes to soldOutDishesArray
+                [soldOutDishesArray addObject:dishInfo];
+            }
+        }
+    }
+    
+    // 3) append sold out dishes to addonAryDishes
+    self.addonAryDishes = [[self.addonAryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -659,14 +702,14 @@
     // section 2...
     
     /*---Dish Info---*/
-    NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
+    NSDictionary *dishInfo = [self.addonAryDishes objectAtIndex:indexPath.row];
     
     NSLog(@"Current Dish: %@", dishInfo);
     
-    AddonsTableViewCell *addonsCell = (AddonsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
+    AddonsTableViewCell *addonsCell = (AddonsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"AddonCell"];
     
     if (addonsCell == nil) {
-        addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
+        addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AddonCell"];
         addonsCell.tag = indexPath.row;
     }
     
@@ -738,7 +781,7 @@
 - (void)onAdd:(UIButton *)button {
     
     /*---Dish Info---*/
-    NSDictionary *dishInfo = [self.aryDishes objectAtIndex: button.tag];
+    NSDictionary *dishInfo = [self.addonAryDishes objectAtIndex: button.tag];
     Addon *selectedAddonItem = [[Addon alloc] initWithDictionary:dishInfo];
     
     // addonlist is not empty
@@ -778,7 +821,7 @@
 - (void)onSubtract:(UIButton *)button {
     
     /*---Dish Info---*/
-    NSDictionary *dishInfo = [self.aryDishes objectAtIndex: button.tag];
+    NSDictionary *dishInfo = [self.addonAryDishes objectAtIndex: button.tag];
     Addon *selectedAddonItem = [[Addon alloc] initWithDictionary:dishInfo];
     
     // addonlist is not empty
