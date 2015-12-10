@@ -1349,6 +1349,7 @@
     }
     else {
         [btnState setBackgroundColor:[UIColor bentoButtonGray]];
+        btnState.enabled = NO;
     }
 
     /*---Cart Badge---*/
