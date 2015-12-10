@@ -1295,7 +1295,7 @@
     UIColor *doneColor = [UIColor colorWithRed:230.0f / 255.0f green:102.0f / 255.0f blue:53.0f / 255.0f alpha:1.0f]; // orange
     
     UIView *bgView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, tableView.frame.size.width, 45)];
-    bgView.backgroundColor = [UIColor bentoBackgroundGray];
+    bgView.backgroundColor = [UIColor colorWithRed:0.882f green:0.914f blue:0.914f alpha:1.0f];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, tableView.frame.size.width, 1)];
     UIButton *addAnotherButton = [[UIButton alloc] init];
@@ -1320,7 +1320,7 @@
         [deleteButton setTitleColor:(_isEditingAddons ? doneColor : editColor) forState:UIControlStateNormal];
         [deleteButton addTarget:self action:@selector(onEditAddons) forControlEvents:UIControlEventTouchUpInside];
         
-        UIView *lineViewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 1, tableView.frame.size.width, 1)];
+        UIView *lineViewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 0.5, tableView.frame.size.width, 1)];
         lineViewTop.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
         [bgView addSubview:lineViewTop];
         

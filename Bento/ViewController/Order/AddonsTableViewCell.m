@@ -15,6 +15,7 @@
 #import <UIImageView+UIActivityIndicatorForSDWebImage.h>
 #import "UIColor+CustomColors.h"
 #import "BentoShop.h"
+#import "CAGradientLayer+SJSGradients.h"
 
 @interface AddonsTableViewCell()
 
@@ -54,6 +55,13 @@
         self.ivAddon.clipsToBounds = YES;
         self.ivAddon.contentMode = UIViewContentModeScaleAspectFill;
         [self.viewDish addSubview:self.ivAddon];
+        
+        /*---Gradient Layer---*/
+        
+        CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = self.ivAddon.frame;
+        backgroundLayer.opacity = 0.25f;
+        [self.ivAddon.layer insertSublayer:backgroundLayer atIndex:0];
         
         /*---Dish Label---*/
         
