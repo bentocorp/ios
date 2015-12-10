@@ -669,11 +669,13 @@
     // add up all bentos by main
     float totalPriceByBentos = 0;
     
+    // mains
     for (int i = 0; i < self.aryBentos.count; i++) {
         Bento *curBento = self.aryBentos[i];
          totalPriceByBentos += [curBento getUnitPrice];
     }
     
+    // addons
     for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
         Addon *addon = [AddonList sharedInstance].addonList[i];
         totalPriceByBentos += addon.unitPrice;
