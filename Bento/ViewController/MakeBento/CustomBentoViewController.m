@@ -1346,6 +1346,7 @@
     /*---Finalize Button---*/
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         [btnState setBackgroundColor:[UIColor bentoBrandGreen]];
+        btnState.enabled = YES;
     }
     else {
         [btnState setBackgroundColor:[UIColor bentoButtonGray]];
