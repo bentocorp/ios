@@ -24,7 +24,15 @@
 
 - (IBAction)onMinute:(id)sender
 {
-    [self.delegate onClickedMinuteButton:self];
+    NSRange first = [self.lblBentoName.text rangeOfComposedCharacterSequenceAtIndex:0];
+    NSRange match = [self.lblBentoName.text rangeOfCharacterFromSet:[NSCharacterSet letterCharacterSet] options:0 range:first];
+    if (match.location != NSNotFound) {
+        // self.lblBentoName.text starts with a letter
+        [self.delegate onClickedMinuteButton:self];
+    }
+    else {
+        [self.delegate onClickedMinuteButtonForAddons:self];
+    }
 }
 
 - (IBAction)onRemove:(id)sender

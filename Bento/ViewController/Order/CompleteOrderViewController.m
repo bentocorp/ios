@@ -111,6 +111,7 @@
     NSIndexPath *_currentIndexPath;
     
     NSInteger _clickedMinuteButtonIndex;
+    NSInteger _clickedMinuteButtonIndexForAddons;
     
     NSString *_strPromoCode;
     NSInteger _promoDiscount;
@@ -152,6 +153,7 @@
     mixpanel = [Mixpanel sharedInstance];
     
     _clickedMinuteButtonIndex = NSNotFound;
+    _clickedMinuteButtonIndexForAddons = NSNotFound;
     
     UINib *cellNib = [UINib nibWithNibName:@"BentoTableViewCell" bundle:nil];
     [self.tvBentos registerNib:cellNib forCellReuseIdentifier:@"BentoCell"];
@@ -903,7 +905,7 @@
     _isEditingAddons = !_isEditingAddons;
     
     if(!_isEditingAddons) {
-        _clickedMinuteButtonIndex = NSNotFound;
+        _clickedMinuteButtonIndexForAddons = NSNotFound;
     }
     
     [self updateUI];
@@ -1406,12 +1408,12 @@
     else {
         Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
         
-        cell.lblBentoName.text = [NSString stringWithFormat:@"(%ld) x %@", addon.qty, addon.name];
+        cell.lblBentoName.text = [NSString stringWithFormat:@"(%ld) x %@", (long)addon.qty, addon.name];
         cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%.2f", addon.unitPrice];
         
         // edit state
         if(_isEditingAddons) {
-            if(indexPath.row == _clickedMinuteButtonIndex) {
+            if(indexPath.row == _clickedMinuteButtonIndexForAddons) {
                 [cell setRemoveState];
             }
             else {
@@ -1465,6 +1467,15 @@
     NSIndexPath *indexPath = [self.tvBentos indexPathForCell:(BentoTableViewCell *)view];
     
     _clickedMinuteButtonIndex = indexPath.row;
+    
+    [self.tvBentos reloadData];
+}
+
+- (void)onClickedMinuteButtonForAddons:(UIView *)view
+{
+    NSIndexPath *indexPath = [self.tvBentos indexPathForCell:(BentoTableViewCell *)view];
+    
+    _clickedMinuteButtonIndexForAddons = indexPath.row;
     
     [self.tvBentos reloadData];
 }

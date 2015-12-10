@@ -1355,7 +1355,7 @@
 
     /*---Cart Badge---*/
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount] + [[AddonList sharedInstance] getTotalCount]];
+        lblBadge.text = [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getCompletedBentoCount] + (long)[[AddonList sharedInstance] getTotalCount]];
         lblBadge.hidden = NO;
     }
     else {

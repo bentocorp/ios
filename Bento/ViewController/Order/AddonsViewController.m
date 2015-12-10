@@ -136,7 +136,7 @@
     lblBadge.textColor = [UIColor whiteColor];
     lblBadge.layer.cornerRadius = lblBadge.frame.size.width / 2;
     lblBadge.clipsToBounds = YES;
-    lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount]];
+    lblBadge.text = [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getCompletedBentoCount]];
     [animationView addSubview:lblBadge];
     
     [self updateBadgeCount];
@@ -388,7 +388,7 @@
         
         if (currentAddon.itemId ==  addOnInList.itemId) {
             
-            addonsCell.quantityLabel.text = [NSString stringWithFormat:@"%ld", addOnInList.qty];
+            addonsCell.quantityLabel.text = [NSString stringWithFormat:@"%ld", (long)addOnInList.qty];
             
             currentItemExistsInAddonList = YES;
             
@@ -426,7 +426,7 @@
 
 - (void)updateBadgeCount {
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount] + [[AddonList sharedInstance] getTotalCount]];
+        lblBadge.text = [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getCompletedBentoCount] + (long)[[AddonList sharedInstance] getTotalCount]];
         [animationView startCanvasAnimation];
     }
 }

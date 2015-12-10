@@ -34,7 +34,7 @@
 - (void)addOneCount {
     self.qty += 1;
     
-    NSLog(@"ID: %ld, Quantity - %ld, Unit Price - %f", self.itemId, self.qty, self.unitPrice);
+    NSLog(@"ID: %ld, Quantity - %ld, Unit Price - %f", (long)self.itemId, (long)self.qty, self.unitPrice);
     
     // save results
     [[AddonList sharedInstance] saveList];
@@ -44,7 +44,7 @@
     if (self.qty > 0) {
         self.qty -= 1;
         
-        NSLog(@"ID: %ld, Quantity - %ld, Unit Price - %f", self.itemId, self.qty, self.unitPrice);
+        NSLog(@"ID: %ld, Quantity - %ld, Unit Price - %f", (long)self.itemId, (long)self.qty, self.unitPrice);
     }
     
     // save results

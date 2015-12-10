@@ -11,6 +11,7 @@
 @protocol BentoTableViewCellDelegate <NSObject>
 
 - (void) onClickedMinuteButton:(UIView *)view;
+- (void) onClickedMinuteButtonForAddons:(UIView *)view;
 - (void) onClickedRemoveButton:(UIView *)view;
 
 @end
@@ -26,6 +27,8 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *btnMinute;
 @property (weak, nonatomic) IBOutlet UIButton *btnRemove;
+
+@property (nonatomic) NSString *type;
 
 - (void) setNormalState;
 - (void) setEditState;
