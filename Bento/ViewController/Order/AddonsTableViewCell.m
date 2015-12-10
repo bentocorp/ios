@@ -50,23 +50,21 @@
         
         /*---Dish Image---*/
         
-        self.ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.viewDish.frame.size.width, self.viewDish.frame.size.height - 45)];
-        self.ivMainDish.clipsToBounds = YES;
-        self.ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
-        [self.viewDish addSubview:self.ivMainDish];
-        
-        
+        self.ivAddon = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.viewDish.frame.size.width, self.viewDish.frame.size.height - 45)];
+        self.ivAddon.clipsToBounds = YES;
+        self.ivAddon.contentMode = UIViewContentModeScaleAspectFill;
+        [self.viewDish addSubview:self.ivAddon];
         
         /*---Dish Label---*/
         
-        self.lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(0, self.viewDish.frame.size.height - 45, self.viewDish.frame.size.width - 80, 45)];
-        self.lblMainDish.adjustsFontSizeToFitWidth = YES; // dynamically changes font size
-        self.lblMainDish.textColor = [UIColor bentoTitleGray];
-        self.lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
-        self.lblMainDish.textAlignment = NSTextAlignmentCenter;
-        self.lblMainDish.backgroundColor = BORDER_COLOR;
+        self.lblAddon = [[UILabel alloc] initWithFrame:CGRectMake(0, self.viewDish.frame.size.height - 45, self.viewDish.frame.size.width - 80, 45)];
+        self.lblAddon.adjustsFontSizeToFitWidth = YES; // dynamically changes font size
+        self.lblAddon.textColor = [UIColor bentoTitleGray];
+        self.lblAddon.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+        self.lblAddon.textAlignment = NSTextAlignmentCenter;
+        self.lblAddon.backgroundColor = BORDER_COLOR;
         
-        [self.viewDish addSubview:self.lblMainDish];
+        [self.viewDish addSubview:self.lblAddon];
         
         /*---Mask View---*/
         
@@ -87,8 +85,8 @@
         
         /*---Dish Button---*/
         
-        self.btnMainDish = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.viewDish.frame.size.width, self.viewDish.frame.size.height)];
-        [self.viewDish addSubview:self.btnMainDish];
+        self.btnAddon = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, self.viewDish.frame.size.width, self.viewDish.frame.size.height)];
+        [self.viewDish addSubview:self.btnAddon];
         
         /*---Subtract Button---*/
         
@@ -113,13 +111,13 @@
         
         UIImage *soldOutBannerImage = [UIImage imageNamed:@"banner_sold_out"];
         
-        self.ivBannerMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(self.viewDish.frame.size.width - self.viewDish.frame.size.height / 2, 0, self.self.viewDish.frame.size.height / 2, self.viewDish.frame.size.height / 2)];
-        self.ivBannerMainDish.image = soldOutBannerImage;
-        [self.viewDish addSubview:self.ivBannerMainDish];
+        self.ivBannerAddon = [[UIImageView alloc] initWithFrame:CGRectMake(self.viewDish.frame.size.width - self.viewDish.frame.size.height / 2, 0, self.self.viewDish.frame.size.height / 2, self.viewDish.frame.size.height / 2)];
+        self.ivBannerAddon.image = soldOutBannerImage;
+        [self.viewDish addSubview:self.ivBannerAddon];
         
         /*---Line Divider---*/
         
-        UIView *lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.viewDish.frame.size.width - 80, self.viewDish.frame.size.height - 40, 1, self.lblMainDish.frame.size.height-8)];
+        UIView *lineDivider = [[UIView alloc] initWithFrame:CGRectMake(self.viewDish.frame.size.width - 80, self.viewDish.frame.size.height - 40, 1, self.lblAddon.frame.size.height-8)];
         lineDivider.backgroundColor = [UIColor bentoButtonGray];
         lineDivider.alpha = 0.2;
         [self.viewDish addSubview:lineDivider];
@@ -147,22 +145,22 @@
     // DISH IMAGE
     NSString *strImageURL = [self.dishInfo objectForKey:@"image1"];
     if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
-        self.ivMainDish.image = [UIImage imageNamed:@"empty-main"];
+        self.ivAddon.image = [UIImage imageNamed:@"empty-main"];
     }
     else {
-        [self.ivMainDish setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        [self.ivAddon setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     }
     
     // DISH DESCRIPTION
     self.descriptionLabel.text = self.dishInfo[@"description"];
     
     // DISH LABEL
-    self.lblMainDish.text = [strName uppercaseString];
+    self.lblAddon.text = [strName uppercaseString];
     
     // SOLD OUT
     NSInteger mainDishId = [[self.dishInfo objectForKey:@"itemId"] integerValue];
     if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
-        self.ivBannerMainDish.hidden = NO;
+        self.ivBannerAddon.hidden = NO;
         
         [self.subtractButton setImage:[UIImage imageNamed:@"minus-gray-100"] forState:UIControlStateNormal];
         self.subtractButton.enabled = NO;
@@ -173,7 +171,7 @@
         self.quantityLabel.textColor = [UIColor lightGrayColor];
     }
     else {
-        self.ivBannerMainDish.hidden = YES;
+        self.ivBannerAddon.hidden = YES;
         
         [self.subtractButton setImage:[UIImage imageNamed:@"minus-green-100"] forState:UIControlStateNormal];
         self.subtractButton.enabled = YES;
@@ -207,17 +205,17 @@
         // sold out
         NSInteger mainDishId = [[self.dishInfo objectForKey:@"itemId"] integerValue];
         if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
-            self.ivBannerMainDish.hidden = NO;
+            self.ivBannerAddon.hidden = NO;
         }
         else {
-            self.ivBannerMainDish.hidden = YES;
+            self.ivBannerAddon.hidden = YES;
         }
 
     }
     else {
         self.descriptionLabel.hidden = NO;
         self.maskView.hidden = NO;
-        self.ivBannerMainDish.hidden = YES;
+        self.ivBannerAddon.hidden = YES;
     }
 }
 

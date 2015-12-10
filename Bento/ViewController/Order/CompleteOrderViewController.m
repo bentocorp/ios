@@ -1294,7 +1294,7 @@
     UIColor *editColor = [UIColor bentoBrandGreen];
     UIColor *doneColor = [UIColor colorWithRed:230.0f / 255.0f green:102.0f / 255.0f blue:53.0f / 255.0f alpha:1.0f]; // orange
     
-    UIView *bgView = [[UIView alloc] init];
+    UIView *bgView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, tableView.frame.size.width, 45)];
     bgView.backgroundColor = [UIColor bentoBackgroundGray];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, tableView.frame.size.width, 1)];
@@ -1302,8 +1302,6 @@
     UIButton *deleteButton = [[UIButton alloc] init];
     
     if (section == 0) {
-        bgView.frame = CGRectMake(0, 0, tableView.frame.size.width, 45);
-        
         addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
         [addAnotherButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
         [addAnotherButton addTarget:self action:@selector(gotoAddAnotherBentoScreen) forControlEvents:UIControlEventTouchUpInside];
@@ -1314,7 +1312,6 @@
         [deleteButton addTarget:self action:@selector(onEditBentos) forControlEvents:UIControlEventTouchUpInside];
     }
     else {
-        bgView.frame = CGRectMake(0, 0, tableView.frame.size.width, 45);
         addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
         [addAnotherButton setTitle:@"ADD ANOTHER ADD-ON" forState:UIControlStateNormal];
         [addAnotherButton addTarget:self action:@selector(goToAddAnotherAddOnScreen) forControlEvents:UIControlEventTouchUpInside];

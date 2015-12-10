@@ -194,8 +194,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     // set aryDishes array
@@ -218,8 +217,7 @@
     [self startTimerOnViewedScreen];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super viewWillDisappear:animated];
@@ -229,30 +227,25 @@
 
 - (void)onClose {
     [self.delegate addonsViewControllerDidTapOnFinalize:NO];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 #pragma mark Duration on screen
-- (void)startTimerOnViewedScreen
-{
+- (void)startTimerOnViewedScreen {
     [[Mixpanel sharedInstance] timeEvent:@"Viewed Add-ons Screen"];
 }
 
-- (void)endTimerOnViewedScreen
-{
+- (void)endTimerOnViewedScreen {
     [[Mixpanel sharedInstance] track:@"Viewed Add-ons Screen"];
 }
 
-- (BOOL)connected
-{
+- (BOOL)connected {
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
 }
 
-- (void)noConnection
-{
+- (void)noConnection {
     // if no internet connection and timer has been paused
     if (![self connected] && [BentoShop sharedInstance]._isPaused) {
         if (loadingHUD == nil) {
@@ -263,15 +256,13 @@
     }
 }
 
-- (void)yesConnection
-{
+- (void)yesConnection {
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
     }
 }
 
-- (void)callUpdate
-{
+- (void)callUpdate {
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         [loadingHUD dismiss];
         loadingHUD = nil;
@@ -280,8 +271,7 @@
     }
 }
 
-- (void)checkCurrentMode
-{
+- (void)checkCurrentMode {
     if ([[BentoShop sharedInstance] didModeOrDateChange]) {
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -292,13 +282,11 @@
 
 #pragma mark Tableview Datasource
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return SCREEN_HEIGHT/2 + 55;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     return self.aryDishes.count;
 }
 
@@ -306,29 +294,29 @@
     
     [self.aryDishes removeAllObjects];
     
-    NSMutableArray *aryMainDishesLeft;
+    NSMutableArray *aryAddons;
     
     if ([[BentoShop sharedInstance] isAllDay]) {
         
         if ([[BentoShop sharedInstance] isThereLunchMenu]) {
-            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
+            aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayLunch"] mutableCopy];
         }
         else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
-            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+            aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayDinner"] mutableCopy];
         }
     }
     else {
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
+            aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayLunch"] mutableCopy];
         }
         else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+            aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayDinner"] mutableCopy];
         }
     }
     
     NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
     
-    for (NSDictionary * dishInfo in aryMainDishesLeft) {
+    for (NSDictionary * dishInfo in aryAddons) {
         
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         
@@ -350,8 +338,8 @@
     self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+-(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
     /*---Dish Info---*/
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     
@@ -376,8 +364,8 @@
     }
     
     /*---Description---*/
-    addonsCell.btnMainDish.tag = indexPath.row;
-    [addonsCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
+    addonsCell.btnAddon.tag = indexPath.row;
+    [addonsCell.btnAddon addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
     /*---Add---*/
     addonsCell.addButton.tag = indexPath.row;
@@ -416,7 +404,6 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     if (_selectedPath == indexPath.row) {
         _selectedPath = -1;
     }
@@ -429,8 +416,7 @@
 
 /*---------------------------------------------------------------------------------------------*/
 
-- (void)updateUI
-{
+- (void)updateUI {
     [self sortAryDishesLeft];
     
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
@@ -438,8 +424,7 @@
     }
 }
 
-- (void)updateBadgeCount
-{
+- (void)updateBadgeCount {
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         lblBadge.text = [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getCompletedBentoCount] + [[AddonList sharedInstance] getTotalCount]];
         [animationView startCanvasAnimation];
@@ -550,83 +535,16 @@
     NSLog(@"addonlist - %@", [AddonList sharedInstance].addonList);
 }
 
-- (void)onCart
-{
+- (void)onCart {
     [self gotoOrderScreen];
-    
-//    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-//    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
-//        [self showConfirmMsg];
-//    }
-//    else {
-//        [self gotoOrderScreen];
-//    }
 }
 
-- (void)gotoOrderScreen
-{
+- (void)gotoOrderScreen {
     [self.delegate addonsViewControllerDidTapOnFinalize:YES];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    
-//    // user and place info
-//    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
-//    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-//    
-//    // summary and delivery screens
-//    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-//    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
-//    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-//    
-//    // not logged in
-//    if (currentUserInfo == nil) {
-//        
-//        // never saved location
-//        if (placeInfo == nil) {
-//            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromHomepage"];
-//            [[NSUserDefaults standardUserDefaults] synchronize];
-//            
-//            [self openAccountViewController:[DeliveryLocationViewController class]];
-//        }
-//        // already has saved address
-//        else {
-//
-//            // check if saved address is within CURRENT service area
-//            CLLocationCoordinate2D location = placeInfo.location.coordinate;
-//            
-//            // not within service area
-//            if (![[BentoShop sharedInstance] checkLocation:location]) {
-//                [self openAccountViewController:[DeliveryLocationViewController class]];
-//            }
-//            // within service area
-//            else {
-//                [self openAccountViewController:[CompleteOrderViewController class]];
-//            }
-//        }
-//    }
-//    else {
-//        if (placeInfo == nil) {
-//            [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-//        }
-//        else {
-//            // check if saved address is within CURRENT service area
-//            CLLocationCoordinate2D location = placeInfo.location.coordinate;
-//            
-//            // not within service area
-//            if (![[BentoShop sharedInstance] checkLocation:location]) {
-//                [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-//            }
-//            // within service area
-//            else {
-//                [self.navigationController pushViewController:completeOrderViewController animated:YES];
-//            }
-//        }
-//    }
 }
 
-- (void)onUpdatedStatus:(NSNotification *)notification
-{
+- (void)onUpdatedStatus:(NSNotification *)notification {
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         
         if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
@@ -646,8 +564,7 @@
     }
 }
 
-- (void)updateUIOnMainThread
-{
+- (void)updateUIOnMainThread {
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         dispatch_async(dispatch_get_main_queue(), ^{
             [self reloadDishes];
@@ -656,8 +573,7 @@
     }
 }
 
-- (void)showConfirmMsg
-{
+- (void)showConfirmMsg {
     NSString *strText = [[AppStrings sharedInstance] getString:ALERT_BNF_TEXT];
     NSString *strCancel = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CANCEL];
     NSString *strConfirm = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CONFIRM];
@@ -667,13 +583,11 @@
     alertView = nil;
 }
 
-- (void)onFinalize
-{
+- (void)onFinalize {
     [self gotoOrderScreen];
 }
 
-- (BOOL)isCompletedToMakeMyBento
-{
+- (BOOL)isCompletedToMakeMyBento {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     if (currentBento == nil) {
         return NO;
@@ -682,8 +596,7 @@
     return [currentBento isCompleted];
 }
 
-- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
+- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
     if (buttonIndex == 1) {
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted]) {
@@ -709,8 +622,7 @@
     }
 }
 
-- (void)onUpdatedMenu:(NSNotification *)notification
-{
+- (void)onUpdatedMenu:(NSNotification *)notification {
     // is connected and timer is not paused
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         [self updateUI];

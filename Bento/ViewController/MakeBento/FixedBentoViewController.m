@@ -531,11 +531,41 @@
     return 2;
 }
 
-//
-//- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-//{
-//    
-//}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *bgView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, tableView.frame.size.width, 45)];
+    bgView.backgroundColor = [UIColor bentoBackgroundGray];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, tableView.frame.size.width, 1)];
+    UIButton *addAnotherButton = [[UIButton alloc] init];
+    UIButton *deleteButton = [[UIButton alloc] init];
+    
+    if (section == 0) {
+        addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
+        [addAnotherButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
+    }
+    else {
+        addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
+        [addAnotherButton setTitle:@"ADD ANOTHER ADD-ON" forState:UIControlStateNormal];
+    }
+    
+    lineView.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
+    [bgView addSubview:lineView];
+    
+    [addAnotherButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+    [addAnotherButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
+    addAnotherButton.contentEdgeInsets = UIEdgeInsetsMake(15, 0, 12, 0);
+    addAnotherButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [bgView addSubview:addAnotherButton];
+    
+    [deleteButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
+    deleteButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
+    deleteButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 17);
+    [bgView addSubview:deleteButton];
+    
+    return bgView;
+}
 
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -725,8 +755,8 @@
     }
     
     /*---Description---*/
-    addonsCell.btnMainDish.tag = indexPath.row;
-    [addonsCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
+    addonsCell.btnAddon.tag = indexPath.row;
+    [addonsCell.btnAddon addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
     /*---Add---*/
     addonsCell.addButton.tag = indexPath.row;

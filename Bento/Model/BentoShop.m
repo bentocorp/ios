@@ -1142,28 +1142,27 @@ static BentoShop *_shareInstance;
 
 - (NSArray *)getAddons:(NSString *)whatNeedsAddons
 {
-    if (self.menuToday == nil)
+    if (self.menuToday == nil) {
         return nil;
+    }
     
     NSDictionary *menuItems;
     
-    if ([whatNeedsAddons isEqualToString:@"todayLunch"])
-    {
+    if ([whatNeedsAddons isEqualToString:@"todayLunch"]) {
         NSData *data = [defaults objectForKey:@"lunchMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
-    else if ([whatNeedsAddons isEqualToString:@"todayDinner"])
-    {
+    else if ([whatNeedsAddons isEqualToString:@"todayDinner"]) {
         NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary *dishInfo in menuItems)
-    {
+    for (NSDictionary *dishInfo in menuItems) {
         NSString *strType = [dishInfo objectForKey:@"type"];
-        if ([strType isEqualToString:@"addons"]) // addon or addons
+        if ([strType isEqualToString:@"addon"]) {
             [arrayDishes addObject:dishInfo];
+        }
     }
     
     return (NSArray *)arrayDishes;
@@ -1229,28 +1228,27 @@ static BentoShop *_shareInstance;
 
 - (NSArray *)getNextAddons:(NSString *)whatNeedsAddons
 {
-    if (self.menuNext == nil)
+    if (self.menuNext == nil) {
         return nil;
+    }
     
     NSDictionary *menuItems;
     
-    if ([whatNeedsAddons isEqualToString:@"nextLunchPreview"])
-    {
+    if ([whatNeedsAddons isEqualToString:@"nextLunchPreview"]) {
         NSData *data = [defaults objectForKey:@"nextLunchMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
-    else if ([whatNeedsAddons isEqualToString:@"nextDinnerPreview"])
-    {
+    else if ([whatNeedsAddons isEqualToString:@"nextDinnerPreview"]) {
         NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
         menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary *dishInfo in menuItems)
-    {
+    for (NSDictionary *dishInfo in menuItems) {
         NSString *strType = [dishInfo objectForKey:@"type"];
-        if ([strType isEqualToString:@"addon"]) // addon or addons?
+        if ([strType isEqualToString:@"addon"]) {
             [arrayDishes addObject:dishInfo];
+        }
     }
     
     return (NSArray *)arrayDishes;
