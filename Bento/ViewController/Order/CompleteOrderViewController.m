@@ -1274,9 +1274,9 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    if ([AddonList sharedInstance].addonList.count == 0 || [AddonList sharedInstance].addonList == nil) {
-        return 1;
-    }
+//    if ([AddonList sharedInstance].addonList.count == 0 || [AddonList sharedInstance].addonList == nil) {
+//        return 1;
+//    }
     
     return 2;
 }
@@ -1313,7 +1313,6 @@
     }
     else {
         addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
-        [addAnotherButton setTitle:@"ADD ANOTHER ADD-ON" forState:UIControlStateNormal];
         [addAnotherButton addTarget:self action:@selector(goToAddAnotherAddOnScreen) forControlEvents:UIControlEventTouchUpInside];
         
         deleteButton.frame = CGRectMake(tableView.frame.size.width - 86, bgView.frame.size.height/2-15, 86, 30);
@@ -1324,6 +1323,16 @@
         UIView *lineViewTop = [[UIView alloc] initWithFrame:CGRectMake(0, 1, tableView.frame.size.width, 1)];
         lineViewTop.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
         [bgView addSubview:lineViewTop];
+        
+        if ([AddonList sharedInstance].addonList.count == 0 || [AddonList sharedInstance].addonList == nil) {
+            [addAnotherButton setTitle:@"ADD AN ADD-ON" forState:UIControlStateNormal];
+            _isEditingAddons = NO;
+            deleteButton.hidden = YES;
+        }
+        else {
+            [addAnotherButton setTitle:@"ADD ANOTHER ADD-ON" forState:UIControlStateNormal];
+            deleteButton.hidden = NO;
+        }
     }
     
     lineView.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
