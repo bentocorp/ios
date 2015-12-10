@@ -674,6 +674,11 @@
          totalPriceByBentos += [curBento getUnitPrice];
     }
     
+    for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
+        Addon *addon = [AddonList sharedInstance].addonList[i];
+        totalPriceByBentos += addon.unitPrice;
+    }
+    
     return [self roundToNearestHundredth:totalPriceByBentos];
 }
 
@@ -771,7 +776,7 @@
     [self updateCardInfo];
     [self updatePromoView];
     [self updatePriceLabels];
-
+    
     BOOL isReady = NO;
     if (self.placeInfo != nil && [[DataManager shareDataManager] getPaymentMethod] != Payment_None) {
         isReady = YES;
@@ -1502,6 +1507,7 @@
     }
     
     [self.tvBentos reloadData];
+    [self updateUI];
 }
 
 - (void)removeBento
