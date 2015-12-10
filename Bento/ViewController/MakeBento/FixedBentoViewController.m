@@ -55,7 +55,6 @@
 @interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
 
 @property (nonatomic) NSMutableArray *aryDishes;
-@property(nonatomic) NSMutableArray *addonAryDishes;
 
 @end
 
@@ -422,10 +421,8 @@
     [super viewWillAppear:animated];
 
     self.aryDishes = [[NSMutableArray alloc] init];
-    self.addonAryDishes = [[NSMutableArray alloc] init];
     
     [self updateUI];
-    [self sortAddonAryDishes];
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
@@ -522,51 +519,6 @@
 
 #pragma mark Tableview Datasource
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-    if (self.addonAryDishes == nil || self.addonAryDishes.count == 0) {
-        return 1;
-    }
-    
-    return 2;
-}
-
-
-- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
-{
-    UIView *bgView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, tableView.frame.size.width, 45)];
-    bgView.backgroundColor = [UIColor bentoBackgroundGray];
-    
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, tableView.frame.size.width, 1)];
-    UIButton *addAnotherButton = [[UIButton alloc] init];
-    UIButton *deleteButton = [[UIButton alloc] init];
-    
-    if (section == 0) {
-        addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
-        [addAnotherButton setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ADD_ANOTHER] forState:UIControlStateNormal];
-    }
-    else {
-        addAnotherButton.frame = CGRectMake(10, bgView.frame.size.height/2-15, 175, 30);
-        [addAnotherButton setTitle:@"ADD ANOTHER ADD-ON" forState:UIControlStateNormal];
-    }
-    
-    lineView.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
-    [bgView addSubview:lineView];
-    
-    [addAnotherButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
-    [addAnotherButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
-    addAnotherButton.contentEdgeInsets = UIEdgeInsetsMake(15, 0, 12, 0);
-    addAnotherButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [bgView addSubview:addAnotherButton];
-    
-    [deleteButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:10]];
-    deleteButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentRight;
-    deleteButton.contentEdgeInsets = UIEdgeInsetsMake(0, 0, 0, 17);
-    [bgView addSubview:deleteButton];
-    
-    return bgView;
-}
-
 -(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
     return SCREEN_HEIGHT/2 + 55;
@@ -574,12 +526,7 @@
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    if (section == 0) {
-        return self.aryDishes.count;
-    }
-    else {
-        return self.addonAryDishes.count;
-    }
+    return self.aryDishes.count;
 }
 
 - (void)sortAryDishesLeft {
@@ -630,258 +577,52 @@
     self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
 }
 
-- (void)sortAddonAryDishes {
-    
-    [self.addonAryDishes removeAllObjects];
-    
-    NSMutableArray *aryMainDishesLeft;
-    
-    if ([[BentoShop sharedInstance] isAllDay]) {
-        
-        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
-            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
-        }
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
-            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
-        }
-    }
-    else {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
-        }
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-            aryMainDishesLeft = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
-        }
-    }
-    
-    NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
-    
-    for (NSDictionary * dishInfo in aryMainDishesLeft) {
-        
-        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-        
-        if ([[BentoShop sharedInstance] canAddDish:dishID]) {
-            
-            // 1) add to addonAryDishes only if it's not sold out
-            if ([[BentoShop sharedInstance] isDishSoldOut:dishID] == NO) {
-                
-                [self.addonAryDishes addObject:dishInfo];
-            }
-            else {
-                // 2) add all sold out dishes to soldOutDishesArray
-                [soldOutDishesArray addObject:dishInfo];
-            }
-        }
-    }
-    
-    // 3) append sold out dishes to addonAryDishes
-    self.addonAryDishes = [[self.addonAryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
-}
-
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    // seciton 1...
+    servingLunchCell = (FixedBentoCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
     
-    if (indexPath.section == 0) {
-        servingLunchCell = (FixedBentoCell *)[tableView dequeueReusableCellWithIdentifier:@"Cell"];
-        
-        if (servingLunchCell == nil) {
-            servingLunchCell = [[FixedBentoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
-        }
-        
-        NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
-        [servingLunchCell setDishInfo:dishInfo];
-        
-        servingLunchCell.btnMainDish.tag = indexPath.row; // set button tag
-        [servingLunchCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
-        
-        // Check Sold out item, set add to cart button state
-        NSInteger mainDishId = [[dishInfo objectForKey:@"itemId"] integerValue];
-        if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId])
-        {
-            servingLunchCell.ivBannerMainDish.hidden = NO;
-            servingLunchCell.addButton.enabled = NO;
-            [servingLunchCell.addButton setBackgroundColor:[UIColor bentoButtonGray]];
-        }
-        else
-        {
-            servingLunchCell.ivBannerMainDish.hidden = YES;
-            servingLunchCell.addButton.enabled = YES;
-            [servingLunchCell.addButton setBackgroundColor:[UIColor bentoBrandGreen]];
-        }
-        
-        // add bento button
-        servingLunchCell.addButton.tag = indexPath.row;
-        [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoHighlight:) forControlEvents:UIControlEventTouchDown];
-        [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
-        
-        if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""])
-        {
-            // format to currency style
-            NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
-            [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
-            servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"%@", [numberFormatter stringFromNumber:@([[[BentoShop sharedInstance] getUnitPrice] floatValue])]]; // default settings.price
-        }
-        else {
-            servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"$%@", dishInfo[@"price"]]; // custom price
-        }
-        
-        return servingLunchCell;
+    if (servingLunchCell == nil) {
+        servingLunchCell = [[FixedBentoCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    // section 2...
+    NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
+    [servingLunchCell setDishInfo:dishInfo];
     
-    /*---Dish Info---*/
-    NSDictionary *dishInfo = [self.addonAryDishes objectAtIndex:indexPath.row];
+    servingLunchCell.btnMainDish.tag = indexPath.row; // set button tag
+    [servingLunchCell.btnMainDish addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
     
-    NSLog(@"Current Dish: %@", dishInfo);
-    
-    AddonsTableViewCell *addonsCell = (AddonsTableViewCell *)[tableView dequeueReusableCellWithIdentifier:@"AddonCell"];
-    
-    if (addonsCell == nil) {
-        addonsCell = [[AddonsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"AddonCell"];
-        addonsCell.tag = indexPath.row;
+    // Check Sold out item, set add to cart button state
+    NSInteger mainDishId = [[dishInfo objectForKey:@"itemId"] integerValue];
+    if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId])
+    {
+        servingLunchCell.ivBannerMainDish.hidden = NO;
+        servingLunchCell.addButton.enabled = NO;
+        [servingLunchCell.addButton setBackgroundColor:[UIColor bentoButtonGray]];
+    }
+    else
+    {
+        servingLunchCell.ivBannerMainDish.hidden = YES;
+        servingLunchCell.addButton.enabled = YES;
+        [servingLunchCell.addButton setBackgroundColor:[UIColor bentoBrandGreen]];
     }
     
-    /*---Set dishInfo---*/
-    [addonsCell addDishInfo:dishInfo];
+    // add bento button
+    servingLunchCell.addButton.tag = indexPath.row;
+    [servingLunchCell.addButton addTarget:self action:@selector(onAddBentoHighlight:) forControlEvents:UIControlEventTouchDown];
+    [servingLunchCell.addButton addTarget:self action:@selector(onAddBento:) forControlEvents:UIControlEventTouchUpInside];
     
-    /*---Set State---*/
-    if (_selectedPath == indexPath.row) {
-        [addonsCell setCellState:YES];
+    if ([dishInfo[@"price"] isEqual:[NSNull null]] || dishInfo[@"price"] == nil || dishInfo[@"price"] == 0 || [dishInfo[@"price"] isEqualToString:@""])
+    {
+        // format to currency style
+        NSNumberFormatter *numberFormatter = [[NSNumberFormatter alloc] init];
+        [numberFormatter setNumberStyle: NSNumberFormatterCurrencyStyle];
+        servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"%@", [numberFormatter stringFromNumber:@([[[BentoShop sharedInstance] getUnitPrice] floatValue])]]; // default settings.price
     }
     else {
-        [addonsCell setCellState:NO];
+        servingLunchCell.priceLabel.text = [NSString stringWithFormat: @"$%@", dishInfo[@"price"]]; // custom price
     }
     
-    /*---Description---*/
-    addonsCell.btnAddon.tag = indexPath.row;
-    [addonsCell.btnAddon addTarget:self action:@selector(onDish:) forControlEvents:UIControlEventTouchUpInside];
-    
-    /*---Add---*/
-    addonsCell.addButton.tag = indexPath.row;
-    [addonsCell.addButton addTarget:self action:@selector(onAdd:) forControlEvents:UIControlEventTouchUpInside];
-    
-    /*---Subtract---*/
-    addonsCell.subtractButton.tag = indexPath.row;
-    [addonsCell.subtractButton addTarget:self action:@selector(onSubtract:) forControlEvents:UIControlEventTouchUpInside];
-    
-    // quantity
-    // match current cell with addonitem, check if it exists in addonlist
-    
-    Addon *currentAddon = [[Addon alloc] initWithDictionary: dishInfo];
-    
-    BOOL currentItemExistsInAddonList = NO;
-    
-    for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
-        
-        Addon *addOnInList = [AddonList sharedInstance].addonList[i];
-        
-        if (currentAddon.itemId ==  addOnInList.itemId) {
-            
-            addonsCell.quantityLabel.text = [NSString stringWithFormat:@"%ld", addOnInList.qty];
-            
-            currentItemExistsInAddonList = YES;
-            
-            break;
-        }
-    }
-    
-    if (currentItemExistsInAddonList == NO) {
-        addonsCell.quantityLabel.text = @"0";
-    }
-    
-    return addonsCell;
-}
-
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-    if (indexPath.section == 1) {
-        if (_selectedPath == indexPath.row) {
-            _selectedPath = -1;
-        }
-        else {
-            _selectedPath = indexPath.row;
-        }
-        
-        [myTableView reloadData];
-    }
-}
-
-- (void)onAdd:(UIButton *)button {
-    
-    /*---Dish Info---*/
-    NSDictionary *dishInfo = [self.addonAryDishes objectAtIndex: button.tag];
-    Addon *selectedAddonItem = [[Addon alloc] initWithDictionary:dishInfo];
-    
-    // addonlist is not empty
-    if ([AddonList sharedInstance].addonList.count != 0 || [AddonList sharedInstance].addonList != nil) {
-        
-        BOOL selectedItemIsInList = NO;
-        
-        // loop through addonlist
-        for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
-            
-            Addon *addonItemInList = [AddonList sharedInstance].addonList[i];
-            
-            // selectedAddonItem is found in addonlist
-            if (selectedAddonItem.itemId == addonItemInList.itemId) {
-                
-                // add one count to prexisting addon
-                [[AddonList sharedInstance].addonList[i] addOneCount];
-                
-                selectedItemIsInList = YES;
-            }
-        }
-        
-        if (selectedItemIsInList == NO) {
-            // add addon to list
-            [selectedAddonItem addOneCount];
-            [[AddonList sharedInstance].addonList addObject: selectedAddonItem];
-        }
-    }
-    
-    NSLog(@"addonlist - %@", [AddonList sharedInstance].addonList);
-    
-    [myTableView reloadData];
-    [self updateUI];
-//    [self updateBadgeCount];
-}
-
-- (void)onSubtract:(UIButton *)button {
-    
-    /*---Dish Info---*/
-    NSDictionary *dishInfo = [self.addonAryDishes objectAtIndex: button.tag];
-    Addon *selectedAddonItem = [[Addon alloc] initWithDictionary:dishInfo];
-    
-    // addonlist is not empty
-    if ([AddonList sharedInstance].addonList.count != 0 || [AddonList sharedInstance].addonList != nil) {
-        
-        // loop through addonlist
-        for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
-            
-            Addon *addonItemInList = [AddonList sharedInstance].addonList[i];
-            
-            // selectedAddonItem is found in addonlist
-            if (selectedAddonItem.itemId == addonItemInList.itemId) {
-                
-                // remove one count to prexisting addon
-                [[AddonList sharedInstance].addonList[i] removeOneCount];
-                
-                // if none, remove addon from list
-                Addon *addon = [AddonList sharedInstance].addonList[i];
-                if (addon.qty <= 0) {
-                    [[AddonList sharedInstance].addonList removeObjectAtIndex:i];
-                }
-                
-                [myTableView reloadData];
-                [self updateUI];
-//                [self updateBadgeCount];
-            }
-        }
-    }
-    
-    NSLog(@"addonlist - %@", [AddonList sharedInstance].addonList);
+    return servingLunchCell;
 }
 
 /*---------------------------------------------------------------------------------------------*/
