@@ -11,6 +11,7 @@
 @interface Addon : NSObject
 
 @property (nonatomic) NSInteger itemId;
+@property (nonatomic) NSString *name;
 @property (nonatomic) NSInteger qty;
 @property (nonatomic) float unitPrice;
 

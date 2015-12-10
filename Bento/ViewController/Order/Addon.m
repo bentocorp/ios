@@ -17,6 +17,7 @@
     if (self = [super init]) {
 
         self.itemId = [dictionary[@"itemId"] integerValue];
+        self.name = dictionary[@"name"];
         self.qty = 0;
         
         if (dictionary[@"price"] == nil || [dictionary[@"price"] isEqual:[NSNull null]] || [dictionary[@"price"] isEqualToString:@""]) {

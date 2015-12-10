@@ -193,7 +193,6 @@
     else {
         self.priceLabel.text = [NSString stringWithFormat: @"$%@", self.dishInfo[@"price"]]; // custom price
     }
-
 }
 
 - (void)setCellState:(BOOL)isSelected

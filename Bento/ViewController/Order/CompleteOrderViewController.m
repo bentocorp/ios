@@ -1397,7 +1397,7 @@
     else {
         Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
         
-        cell.lblBentoName.text = [NSString stringWithFormat:@"(%ld) %ld", addon.qty, addon.itemId];
+        cell.lblBentoName.text = [NSString stringWithFormat:@"( %ld ) x %@", addon.qty, addon.name];
         cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%.2f", addon.unitPrice];
         
         // edit state
