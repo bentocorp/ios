@@ -678,7 +678,7 @@
     // addons
     for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
         Addon *addon = [AddonList sharedInstance].addonList[i];
-        totalPriceByBentos += addon.unitPrice;
+        totalPriceByBentos += (addon.unitPrice * addon.qty);
     }
     
     return [self roundToNearestHundredth:totalPriceByBentos];
