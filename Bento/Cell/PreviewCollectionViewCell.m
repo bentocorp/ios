@@ -16,9 +16,6 @@
 #import "AppStrings.h"
 
 @interface PreviewCollectionViewCell()
-{
-    BOOL _isSideDishCell;
-}
 
 @property (nonatomic, weak) IBOutlet UIView *viewMain;
 
@@ -34,6 +31,9 @@
 @end
 
 @implementation PreviewCollectionViewCell
+{
+    BOOL _isSideDishCell;
+}
 
 - (void)awakeFromNib
 {
@@ -51,8 +51,7 @@
 {
     self.viewMain.frame = CGRectMake(0, 0, self.frame.size.width, self.frame.size.height);
     
-    if(self.gradientLayer != nil)
-    {
+    if(self.gradientLayer != nil) {
         [self.gradientLayer removeFromSuperlayer];
         self.gradientLayer = nil;
     }
@@ -86,22 +85,18 @@
         self.ivImage.image = [UIImage imageNamed:@"empty-main"];
     }
     else {
-//        [self.ivImage setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-        
         [self.ivImage setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
     }
 }
 
 - (void)setCellState:(BOOL)isSelected
 {
-    if (!isSelected)
-    {
+    if (!isSelected) {
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, self.viewMain.frame.size.height / 2);
         self.lblDescription.hidden = YES;
         self.ivMask.hidden = YES;
     }
-    else
-    {
+    else {
         self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
         self.lblDescription.hidden = NO;
         self.ivMask.hidden = NO;

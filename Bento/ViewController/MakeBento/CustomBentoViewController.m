@@ -1403,7 +1403,7 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -1411,19 +1411,18 @@
     [self setDishesBySection0MainOrSection1Side:section];
     
     // MAINS
-    if (section == 0)
-    {
-        if (aryMainDishes == nil)
+    if (section == 0) {
+        if (aryMainDishes == nil) {
             return 0;
+        }
         
         return aryMainDishes.count;
     }
-    
     // SIDES
-    else if (section == 1)
-    {
-        if (arySideDishes == nil)
+    else if (section == 1) {
+        if (arySideDishes == nil) {
             return 0;
+        }
         
         return arySideDishes.count;
     }
