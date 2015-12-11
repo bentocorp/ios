@@ -1461,7 +1461,7 @@
                     [[BentoShop sharedInstance] setCurrentBento:curBento];
                 }
                 
-                
+                [self.delegate completeOrderViewControllerDidTapBento:curBento.getBentoName];
                 [self.navigationController popToViewController:vc animated:YES];
                 
                 return;

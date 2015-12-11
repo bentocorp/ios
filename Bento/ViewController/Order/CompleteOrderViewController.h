@@ -15,7 +15,7 @@
 @protocol CompleteOrderViewControllerDelegate <NSObject>
 
 @optional
-- (void)completeOrderViewControllerDidTapBento:(NSInteger)autoScrollId;
+- (void)completeOrderViewControllerDidTapBento:(NSString *)bentoName;
 
 @end
 

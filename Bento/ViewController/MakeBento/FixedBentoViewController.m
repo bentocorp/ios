@@ -53,7 +53,7 @@
 #import "AddonsViewController.h"
 
 
-@interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
+@interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, CompleteOrderViewControllerDelegate>
 
 @property (nonatomic) NSMutableArray *aryDishes;
 
@@ -102,6 +102,8 @@
     // for addon
     NSInteger _selectedPath;
     AddonsViewController *addonsVC;
+    
+    CompleteOrderViewController *completeOrderViewController;
 }
 
 - (void)viewDidLoad {
@@ -330,13 +332,18 @@
     }
 }
 
-- (void)autoScrollToIndex {
+- (void)autoScrollToIndex:(NSString *)bentoName {
     for (int i = 0; i < self.aryDishes.count; i++) {
         
-        if (self.autoScrollId == [self.aryDishes[i][@"itemId"] integerValue]) {
+        if ([bentoName isEqualToString:self.aryDishes[i][@"name"]]) {
             [myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
         }
     }
+}
+
+- (void)completeOrderViewControllerDidTapBento:(NSString *)bentoName
+{
+    [self autoScrollToIndex:bentoName];
 }
 
 #pragma mark Set PageView and ScrollView
@@ -475,13 +482,15 @@
 {
     [super viewWillAppear:animated];
     
+    completeOrderViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+    completeOrderViewController.delegate = self;
+    
     addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
 
     self.aryDishes = [[NSMutableArray alloc] init];
     
     [self updateUI];
-    [self autoScrollToIndex];
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
@@ -968,7 +977,6 @@
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     
     if (currentUserInfo == nil)
