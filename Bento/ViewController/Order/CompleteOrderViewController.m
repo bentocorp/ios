@@ -1605,6 +1605,28 @@
         [mixpanel track:@"Bento Requested" properties:currentBentoDishes];
     }
     
+    // ADD-ONS
+    if ([AddonList sharedInstance].addonList.count != 0 && [AddonList sharedInstance].addonList != nil) {
+        
+        NSMutableDictionary *addonInfo = [[NSMutableDictionary alloc] init];
+        [addonInfo setObject:@"AddonList" forKey:@"item_type"];
+        
+        NSMutableArray *dishArray = [[NSMutableArray alloc] init];
+        
+        for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
+            Addon *addon = [AddonList sharedInstance].addonList[i];
+            NSMutableDictionary *addonItem = [@{@"id": [NSString stringWithFormat:@"%ld", addon.itemId],
+                                                @"qty": [NSString stringWithFormat:@"%ld", addon.qty],
+                                                @"unit_price": [NSString stringWithFormat:@"%.2f", addon.unitPrice]
+                                                } mutableCopy];
+            [dishArray addObject:addonItem];
+        }
+
+        [addonInfo setObject:dishArray forKey:@"items"];
+        
+        [aryBentos addObject:addonInfo];
+    }
+    
     [request setObject:aryBentos forKey:@"OrderItems"];
     
     // Order details
