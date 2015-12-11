@@ -101,6 +101,7 @@
     
     // for addon
     NSInteger _selectedPath;
+    AddonsViewController *addonsVC;
 }
 
 - (void)viewDidLoad {
@@ -318,7 +319,15 @@
 }
 
 - (void)onViewAddons {
-    [self.navigationController presentViewController:[[AddonsViewController alloc] init] animated:YES completion:nil];
+    [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+}
+
+// addons delegate method
+- (void)addonsViewControllerDidTapOnFinalize:(BOOL)didTapOnFinalize
+{
+    if (didTapOnFinalize == YES) {
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(gotoOrderScreen) userInfo:nil repeats:NO];
+    }
 }
 
 #pragma mark Set PageView and ScrollView
@@ -456,6 +465,9 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    addonsVC = [[AddonsViewController alloc] init];
+    addonsVC.delegate = self;
 
     self.aryDishes = [[NSMutableArray alloc] init];
     

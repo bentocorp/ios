@@ -1201,7 +1201,7 @@
     }
 }
 
-// delegate method
+// addons delegate method
 - (void)addonsViewControllerDidTapOnFinalize:(BOOL)didTapOnFinalize
 {
     if (didTapOnFinalize == YES) {
