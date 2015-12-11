@@ -62,9 +62,11 @@
 {
     NSInteger _selectedPathMainRight;
     NSInteger _selectedPathSideRight;
+    NSInteger _selectedPathAddonsRight;
     
     NSArray *aryMainDishes;
     NSArray *arySideDishes;
+    NSArray *aryAddons;
     
     UIView *navigationBarView;
     
@@ -132,6 +134,7 @@
     
     _selectedPathMainRight = -1;
     _selectedPathSideRight = -1;
+    _selectedPathAddonsRight = -1;
     
     // initialize to yes
     isThereConnection = YES;
@@ -1426,6 +1429,14 @@
         
         return arySideDishes.count;
     }
+    // ADD-ONS
+    else {
+        if (aryAddons == nil) {
+            return 0;
+        }
+        
+        return aryAddons.count;
+    }
     
     return 0;
 }
@@ -1442,7 +1453,7 @@
     
     /* Anything less than iOS 8.0 */
     if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
-        [self setDishesBySection0MainOrSection1Side:indexPath.section];
+//        [self setDishesBySection0MainOrSection1Side:indexPath.section];
         
         // MAINS
         if (indexPath.section == 0) {
@@ -1468,6 +1479,18 @@
                 [cell setCellState:NO];
             }
         }
+        // ADD-ONS
+        else {
+            NSDictionary *dishInfo = [aryAddons objectAtIndex:indexPath.row];
+            [cell setDishInfo:dishInfo];
+            
+            if (_selectedPathAddonsRight == indexPath.row) {
+                [cell setCellState:YES];
+            }
+            else {
+                [cell setCellState:NO];
+            }
+        }
     }
     
     return cell;
@@ -1477,7 +1500,7 @@
 {
     PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
     
-    [self setDishesBySection0MainOrSection1Side:indexPath.section];
+//    [self setDishesBySection0MainOrSection1Side:indexPath.section];
     
     // MAINS
     if (indexPath.section == 0) {
@@ -1497,6 +1520,18 @@
         [myCell setDishInfo:dishInfo];
         
         if (_selectedPathSideRight == indexPath.row) {
+            [myCell setCellState:YES];
+        }
+        else {
+            [myCell setCellState:NO];
+        }
+    }
+    // ADD-ONS
+    else {
+        NSDictionary *dishInfo = [aryAddons objectAtIndex:indexPath.row];
+        [myCell setDishInfo:dishInfo];
+        
+        if (_selectedPathAddonsRight == indexPath.row) {
             [myCell setCellState:YES];
         }
         else {
@@ -1525,9 +1560,10 @@
         {
             _selectedPathMainRight = indexPath.row;
             _selectedPathSideRight = -1;
+            _selectedPathAddonsRight = -1;
         }
     }
-    else
+    else if (indexPath.section == 1)
     {
         if (_selectedPathSideRight == indexPath.row)
             _selectedPathSideRight = -1;
@@ -1535,6 +1571,18 @@
         {
             _selectedPathSideRight = indexPath.row;
             _selectedPathMainRight = -1;
+            _selectedPathAddonsRight = -1;
+        }
+    }
+    else
+    {
+        if (_selectedPathAddonsRight == indexPath.row)
+            _selectedPathAddonsRight = -1;
+        else
+        {
+            _selectedPathAddonsRight = indexPath.row;
+            _selectedPathMainRight = -1;
+            _selectedPathSideRight = -1;
         }
     }
     
@@ -1548,10 +1596,7 @@
 // header
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (section == 0 || section == 1)
-        return CGSizeMake(cvDishes.frame.size.width, 44);
-    
-    return CGSizeMake(0, 0);
+    return CGSizeMake(cvDishes.frame.size.width, 44);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -1579,6 +1624,9 @@
             label.text = @"Main Dishes";
         else if (indexPath.section == 1)
             label.text = @"Side Dishes";
+        else {
+            label.text = @"Add-ons";
+        }
         
         reusableview.backgroundColor = [UIColor darkGrayColor];
         
@@ -1608,6 +1656,15 @@
 
     else if ([lunchOrDinner isEqualToString:@"Dinner"])
         arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+}
+
+- (void)setNextAddonsArray:(NSString *)lunchOrDinner
+{
+    if ([lunchOrDinner isEqualToString:@"Lunch"])
+        aryAddons = [[BentoShop sharedInstance] getNextAddons:@"nextLunchPreview"];
+    
+    else if ([lunchOrDinner isEqualToString:@"Dinner"])
+        aryAddons = [[BentoShop sharedInstance] getNextAddons:@"nextDinnerPreview"];
 }
 
 - (void)setDishesBySection0MainOrSection1Side:(NSInteger)section
@@ -1650,7 +1707,7 @@
     }
     
     // SIDE DISHES
-    else
+    else if (section == 1)
     {
         /* IS ALL-DAY */
         if ([[BentoShop sharedInstance] isAllDay])
@@ -1682,6 +1739,43 @@
                     [self setNextSideDishesArray:@"Lunch"];
                 else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
                     [self setNextSideDishesArray:@"Dinner"];
+            }
+        }
+    }
+    
+    // ADD-ONS
+    else
+    {
+        /* IS ALL-DAY */
+        if ([[BentoShop sharedInstance] isAllDay])
+        {
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                [self setNextAddonsArray:@"Lunch"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                [self setNextAddonsArray:@"Dinner"];
+        }
+        
+        /* IS NOT ALL-DAY */
+        else
+        {
+            // 00:00 - 16:29
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            {
+                if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                    aryAddons = [[BentoShop sharedInstance] getAddons:@"todayDinner"];
+                else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    [self setNextAddonsArray:@"Lunch"];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    [self setNextAddonsArray:@"Dinner"];
+            }
+            
+            // 16:30 - 23:59
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            {
+                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    [self setNextAddonsArray:@"Lunch"];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    [self setNextAddonsArray:@"Dinner"];
             }
         }
     }
