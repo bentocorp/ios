@@ -18,5 +18,6 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 - (void)addOneCount;
 - (void)removeOneCount;
+- (BOOL)checkIfItemIsSoldOut:(NSMutableArray *)itemIds;
 
 @end

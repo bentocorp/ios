@@ -1418,6 +1418,14 @@
         cell.lblBentoName.text = [NSString stringWithFormat:@"(%ld) x %@", (long)addon.qty, addon.name];
         cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%.2f", addon.unitPrice];
         
+        // if there is sold out item
+        if (arySoldOutItems.count > 0) {
+            if ([addon checkIfItemIsSoldOut:arySoldOutItems]) {
+                cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
+                cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+            }
+        }
+        
         // edit state
         if(_isEditingAddons) {
             if(indexPath.row == _clickedMinuteButtonIndexForAddons) {
@@ -1616,6 +1624,7 @@
         for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
             Addon *addon = [AddonList sharedInstance].addonList[i];
             NSMutableDictionary *addonItem = [@{@"id": [NSString stringWithFormat:@"%ld", addon.itemId],
+                                                @"name": addon.name,
                                                 @"qty": [NSString stringWithFormat:@"%ld", addon.qty],
                                                 @"unit_price": [NSString stringWithFormat:@"%.2f", addon.unitPrice]
                                                 } mutableCopy];

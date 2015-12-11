@@ -51,4 +51,18 @@
     [[AddonList sharedInstance] saveList];
 }
 
+- (BOOL)checkIfItemIsSoldOut:(NSMutableArray *)itemIds
+{
+    for (int i = 0; i < itemIds.count; i++) {
+        
+        NSInteger itemId = [itemIds[i] integerValue];
+        
+        if  (self.itemId == itemId) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
 @end
