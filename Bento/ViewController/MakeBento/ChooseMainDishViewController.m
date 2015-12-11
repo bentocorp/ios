@@ -57,6 +57,8 @@
 {
     [super viewWillAppear:animated];
     
+    [self startTimerOnViewedScreen];
+    
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
@@ -67,19 +69,22 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
+    self.aryDishes = [[NSMutableArray alloc] init];
+    [self sortAryDishes];
+    
+    _originalDishIndex = NSNotFound;
     _selectedIndex = NSNotFound;
     _selectedItemState = DISH_CELL_NORMAL;
     
-    _originalDishIndex = NSNotFound;
-    if ([[BentoShop sharedInstance] getCurrentBento] != nil)
-    {
+    if ([[BentoShop sharedInstance] getCurrentBento] != nil) {
+        
         NSInteger mainDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getMainDish];
         
-        for (NSInteger index = 0; index < self.aryDishes.count; index++)
-        {
+        for (NSInteger index = 0; index < self.aryDishes.count; index++) {
+            
             NSDictionary *dishInfo = [self.aryDishes objectAtIndex:index];
-            if ([[dishInfo objectForKey:@"itemId"] integerValue] == mainDishIndex)
-            {
+            
+            if ([[dishInfo objectForKey:@"itemId"] integerValue] == mainDishIndex) {
                 _originalDishIndex = index;
                 _selectedIndex = index;
                 _selectedItemState = DISH_CELL_SELECTED;
@@ -87,11 +92,7 @@
         }
     }
     
-    self.aryDishes = [[NSMutableArray alloc] init];
-    
     [self updateUI];
-    
-    [self startTimerOnViewedScreen];
 }
 
 - (void)sortAryDishes {
@@ -266,9 +267,6 @@
     {
         NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
-        
-        
-        
         
         // if main dish, set isMain to true
         if ([dishInfo[@"type"] isEqualToString:@"main"]) {
