@@ -1461,6 +1461,7 @@
                     [[BentoShop sharedInstance] setCurrentBento:curBento];
                 }
                 
+                
                 [self.navigationController popToViewController:vc animated:YES];
                 
                 return;

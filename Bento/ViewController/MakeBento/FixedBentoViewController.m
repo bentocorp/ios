@@ -330,6 +330,15 @@
     }
 }
 
+- (void)autoScrollToIndex {
+    for (int i = 0; i < self.aryDishes.count; i++) {
+        
+        if (self.autoScrollId == [self.aryDishes[i][@"itemId"] integerValue]) {
+            [myTableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:i inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:YES];
+        }
+    }
+}
+
 #pragma mark Set PageView and ScrollView
 
 - (void)setPageAndScrollView
@@ -472,6 +481,7 @@
     self.aryDishes = [[NSMutableArray alloc] init];
     
     [self updateUI];
+    [self autoScrollToIndex];
 
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];

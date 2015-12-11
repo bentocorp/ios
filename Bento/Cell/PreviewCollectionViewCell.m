@@ -71,8 +71,9 @@
 
 - (void)setDishInfo:(NSDictionary *)dishInfo
 {
-    if (dishInfo == nil)
+    if (dishInfo == nil) {
         return;
+    }
     
     NSString *strName = [dishInfo objectForKey:@"name"];
     self.lblTitle.text = [strName uppercaseString];

@@ -12,6 +12,15 @@
 #import "DataManager.h"
 #import "BaseViewController.h"
 
+@protocol CompleteOrderViewControllerDelegate <NSObject>
+
+@optional
+- (void)completeOrderViewControllerDidTapBento:(NSInteger)autoScrollId;
+
+@end
+
 @interface CompleteOrderViewController : BaseViewController
+
+@property (nonatomic) id delegate;
 
 @end
