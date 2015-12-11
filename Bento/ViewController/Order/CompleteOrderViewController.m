@@ -1381,6 +1381,12 @@
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(BentoTableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    cell.accessoryType = UITableViewCellAccessoryNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
+    cell.lblBentoName.textColor = [UIColor bentoBrandGreen];
+    cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans" size:14];
+    
     if (indexPath.section == 0) {
         Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
         
@@ -1439,13 +1445,6 @@
             [cell setNormalState];
         }
     }
-    
-    cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
-    cell.lblBentoName.textColor = [UIColor bentoBrandGreen];
-    cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans" size:14];
-    
-    cell.accessoryType = UITableViewCellAccessoryNone;
-    cell.selectionStyle = UITableViewCellSelectionStyleNone;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
@@ -1623,9 +1622,9 @@
         
         for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
             Addon *addon = [AddonList sharedInstance].addonList[i];
-            NSMutableDictionary *addonItem = [@{@"id": [NSString stringWithFormat:@"%ld", addon.itemId],
+            NSMutableDictionary *addonItem = [@{@"id": [NSString stringWithFormat:@"%ld", (long)addon.itemId],
                                                 @"name": addon.name,
-                                                @"qty": [NSString stringWithFormat:@"%ld", addon.qty],
+                                                @"qty": [NSString stringWithFormat:@"%ld", (long)addon.qty],
                                                 @"unit_price": [NSString stringWithFormat:@"%.2f", addon.unitPrice]
                                                 } mutableCopy];
             [dishArray addObject:addonItem];

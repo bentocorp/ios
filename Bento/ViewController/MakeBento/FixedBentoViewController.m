@@ -50,6 +50,7 @@
 #import "AddonList.h"
 #import "Addon.h"
 #import "AddonsTableViewCell.h"
+#import "AddonsViewController.h"
 
 
 @interface FixedBentoViewController () <UITableViewDataSource, UITableViewDelegate, MyAlertViewDelegate, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout>
@@ -75,6 +76,7 @@
     
     UIButton *btnCart;
     
+    UIButton *btnViewAddons;
     UIButton *btnState;
     
     // Right
@@ -196,7 +198,7 @@
     
 /*---Button State---*/
     
-    btnState = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45-65, SCREEN_WIDTH, 45)];
+    btnState = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+0.25, SCREEN_HEIGHT-45-65, SCREEN_WIDTH/2-0.25, 45)];
     [btnState setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
     [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
@@ -225,7 +227,37 @@
     
     [scrollView addSubview:btnState];
     
-    /*-----*/
+/*-----*/
+    
+/*View Add-ons*/
+    
+    btnViewAddons = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45-65, SCREEN_WIDTH/2-0.25, 45)];
+    [btnViewAddons setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    btnViewAddons.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
+    [btnViewAddons addTarget:self action:@selector(onViewAddons) forControlEvents:UIControlEventTouchUpInside];
+    
+    NSMutableString *strTitleAddons = [@"VIEW ADD-ONS" mutableCopy];
+    
+    [btnViewAddons setTitle:strTitleAddons forState:UIControlStateNormal];
+    NSMutableAttributedString *attributedTitleAddons = [[NSMutableAttributedString alloc] initWithString:strTitle];
+    float spacingAddons = 1.0f;
+    [attributedTitleAddons addAttribute:NSKernAttributeName
+                            value:@(spacingAddons)
+                            range:NSMakeRange(0, [strTitle length])];
+    
+    // Anything less than iOS 8.0
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
+        btnViewAddons.titleLabel.text = strTitle;
+    }
+    else {
+        btnViewAddons.titleLabel.attributedText = attributedTitle;
+    }
+    
+    attributedTitle = nil;
+    
+    [scrollView addSubview:btnViewAddons];
+    
+/*-----*/
     
     // if self.aryBentos is empty, create a new bento
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
@@ -236,6 +268,7 @@
     lblBadge.hidden = NO;
     btnCart.hidden = NO;
     btnState.hidden = NO;
+    btnViewAddons.hidden = NO;
     
     //
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -282,6 +315,10 @@
     // Sunday = 1, Saturday = 7
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
     NSLog(@"today is - %ld", (long)weekday);
+}
+
+- (void)onViewAddons {
+    [self.navigationController presentViewController:[[AddonsViewController alloc] init] animated:YES completion:nil];
 }
 
 #pragma mark Set PageView and ScrollView
@@ -724,6 +761,9 @@
         
         [btnState setBackgroundColor:[UIColor bentoBrandGreen]];
         btnState.enabled = YES;
+        
+        [btnViewAddons setBackgroundColor:[UIColor bentoBrandGreen]];
+        btnViewAddons.enabled = YES;
     }
     else
     {
@@ -732,17 +772,17 @@
         
         [btnState setBackgroundColor:[UIColor bentoButtonGray]];
         btnState.enabled = NO;
+        
+        [btnViewAddons setBackgroundColor:[UIColor bentoButtonGray]];
+        btnViewAddons.enabled = NO;
     }
     
-    // Badge count label state
-    NSInteger bentoCount = [[BentoShop sharedInstance] getCompletedBentoCount];
-    if (bentoCount > 0)
-    {
-        lblBadge.text = [NSString stringWithFormat:@"%ld", (long)bentoCount];
+    /*---Cart Badge---*/
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        lblBadge.text = [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getCompletedBentoCount] + (long)[[AddonList sharedInstance] getTotalCount]];
         lblBadge.hidden = NO;
     }
-    else
-    {
+    else {
         lblBadge.text = @"";
         lblBadge.hidden = YES;
     }
