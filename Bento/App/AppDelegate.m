@@ -26,6 +26,7 @@
 #import <MoPub/MoPub.h>
 
 // Mixpanel
+#import "Mixpanel/MPTweakInline.h"
 #import "Mixpanel.h"
 #define MIXPANEL_TOKEN @"e0b4fc9fdf720bb40b6cbefddb9678f3"
 
@@ -198,6 +199,15 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     // set for prod build only, won't track dev
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
 #endif
+    
+    if (MPTweakValue(@"Auto show add-ons once per order", NO)) {
+        // test, auto show add-ons
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoShowAddons"];
+    }
+    else {
+        // original, don't auto show add-ons
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AutoShowAddons"];
+    }
     
     NSLog(@"DISTINCT ID ON LAUNCH - %@", [[Mixpanel sharedInstance] distinctId]);
     

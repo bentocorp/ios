@@ -1082,9 +1082,15 @@
     {
         [[BentoShop sharedInstance] saveBentoArray];
         
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
-            [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
+        
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
+                [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+            }
+            else {
+                [self gotoOrderScreen];
+            }
         }
         else {
             [self gotoOrderScreen];

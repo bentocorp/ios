@@ -127,8 +127,6 @@
     BOOL isThereConnection;
     
     AddonsViewController *addonsVC;
-    
-    BOOL autoShowAddons;
 }
 
 - (void)viewDidLoad {
@@ -708,15 +706,6 @@
     addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
     
-    if (MPTweakValue(@"Auto show add-ons once per order", NO)) {
-        // test, auto show add-ons
-        autoShowAddons = YES;
-    }
-    else {
-        // original, don't auto show add-ons
-        autoShowAddons = NO;
-    }
-    
     [self updateUI];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -1232,9 +1221,14 @@
 
 - (void)onFinalize
 {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
-        [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
+            [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+        }
+        else {
+            [self gotoOrderScreen];
+        }
     }
     else {
         [self gotoOrderScreen];
