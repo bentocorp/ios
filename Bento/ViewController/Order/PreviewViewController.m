@@ -28,24 +28,37 @@
     
     NSArray *aryMainDishesLeft;
     NSArray *arySideDishesLeft;
+    NSArray *aryAddonsLeft;
+    
     NSArray *aryMainDishesRight;
     NSArray *arySideDishesRight;
+    NSArray *aryAddonsRight;
     
     NSArray *todayLunchMainDishesArray;
     NSArray *todayLunchSideDishesArray;
+    NSArray *todayLunchAddonsArray;
+    
     NSArray *todayDinnerMainDishesArray;
     NSArray *todayDinnerSideDishesArray;
+    NSArray *todayDinnerAddonsArray;
+    
     NSArray *nextLunchMainDishesArray;
     NSArray *nextLunchSideDishesArray;
+    NSArray *nextLunchAddonsArray;
+    
     NSArray *nextDinnerMainDishesArray;
     NSArray *nextDinnerSideDishesArray;
+    NSArray *nextDinnerAddonsArray;
     
     NSString *todayAllDayLunchMenuString;
     NSString *todayAllDayDinnerMenuString;
+    
     NSString *todayLunchMenuString;
     NSString *todayDinnerMenuString;
+    
     NSString *nextAllDayLunchMenuString;
     NSString *nextAllDayDinnerMenuString;
+    
     NSString *nextLunchMenuString;
     NSString *nextDinnerMenuString;
     
@@ -62,8 +75,11 @@
     
     NSInteger _selectedPathMainLeft;
     NSInteger _selectedPathSideLeft;
+    NSInteger _selectedPathAddonsLeft;
+    
     NSInteger _selectedPathMainRight;
     NSInteger _selectedPathSideRight;
+    NSInteger _selectedPathAddonsRight;
     
     float currentTime;
     float lunchTime;
@@ -159,9 +175,11 @@
     // For selection
     _selectedPathMainLeft = -1;
     _selectedPathSideLeft = -1;
+    _selectedPathAddonsLeft = -1;
     
     _selectedPathMainRight = -1;
     _selectedPathSideRight = -1;
+    _selectedPathAddonsRight = -1;
     
     // titles and dishes
     [self setTitlesMainAndSideDishes];
@@ -682,15 +700,19 @@
 {
     todayLunchMainDishesArray = [[BentoShop sharedInstance] getMainDishes:@"todayLunch"];
     todayLunchSideDishesArray = [[BentoShop sharedInstance] getSideDishes:@"todayLunch"];
+    todayLunchAddonsArray = [[BentoShop sharedInstance] getAddons:@"todayLunch"];
     
     todayDinnerMainDishesArray = [[BentoShop sharedInstance] getMainDishes:@"todayDinner"];
     todayDinnerSideDishesArray = [[BentoShop sharedInstance] getSideDishes:@"todayDinner"];
+    todayDinnerAddonsArray = [[BentoShop sharedInstance] getAddons:@"todayDinner"];
     
     nextLunchMainDishesArray = [[BentoShop sharedInstance] getNextMainDishes:@"nextLunchPreview"];
     nextLunchSideDishesArray = [[BentoShop sharedInstance] getNextSideDishes:@"nextLunchPreview"];
+    nextLunchAddonsArray = [[BentoShop sharedInstance] getNextAddons:@"nextLunchPreview"];
     
     nextDinnerMainDishesArray = [[BentoShop sharedInstance] getNextMainDishes:@"nextDinnerPreview"];
     nextDinnerSideDishesArray = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
+    nextDinnerAddonsArray = [[BentoShop sharedInstance] getNextAddons:@"nextDinnerPreview"];
 }
 
 - (void)setBool
@@ -756,11 +778,13 @@
     {
         aryMainDishesLeft = todayLunchMainDishesArray;
         arySideDishesLeft = todayLunchSideDishesArray;
+        aryAddonsLeft = todayLunchAddonsArray;
     }
     else if ([leftOrRight isEqualToString:@"Right"])
     {
         aryMainDishesRight = todayLunchMainDishesArray;
         arySideDishesRight = todayLunchSideDishesArray;
+        aryAddonsRight = todayLunchAddonsArray;
     }
 }
 
@@ -770,11 +794,13 @@
     {
         aryMainDishesLeft = todayDinnerMainDishesArray;
         arySideDishesLeft = todayDinnerSideDishesArray;
+        aryAddonsLeft = todayDinnerAddonsArray;
     }
     else if ([leftOrRight isEqualToString:@"Right"])
     {
         aryMainDishesRight = todayDinnerMainDishesArray;
         arySideDishesRight = todayDinnerSideDishesArray;
+        aryAddonsRight = todayDinnerAddonsArray;
     }
 }
 
@@ -784,11 +810,13 @@
     {
         aryMainDishesLeft = nextLunchMainDishesArray;
         arySideDishesLeft = nextLunchSideDishesArray;
+        aryAddonsLeft = nextLunchAddonsArray;
     }
     else if ([leftOrRight isEqualToString:@"Right"])
     {
         aryMainDishesRight = nextLunchMainDishesArray;
         arySideDishesRight = nextLunchSideDishesArray;
+        aryAddonsRight = nextLunchAddonsArray;
     }
 }
 
@@ -798,11 +826,13 @@
     {
         aryMainDishesLeft = nextDinnerMainDishesArray;
         arySideDishesLeft = nextDinnerSideDishesArray;
+        aryAddonsLeft = nextDinnerAddonsArray;
     }
     else if ([leftOrRight isEqualToString:@"Right"])
     {
         aryMainDishesRight = nextDinnerMainDishesArray;
         arySideDishesRight = nextDinnerSideDishesArray;
+        aryAddonsRight = nextDinnerAddonsArray;
     }
 }
 
@@ -898,23 +928,26 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     NSArray *aryMain;
     NSArray *arySide;
+    NSArray *aryAddons;
     
     if (collectionView == cvDishesLeft) // left side
     {
         aryMain = aryMainDishesLeft;
         arySide = arySideDishesLeft;
+        aryAddons = aryAddonsLeft;
     }
     else // right side
     {
         aryMain = aryMainDishesRight;
         arySide = arySideDishesRight;
+        aryAddons = aryAddonsRight;
     }
     
     if (section == 0) // Main Dishes
@@ -930,6 +963,13 @@
             return 0;
         
         return arySide.count;
+    }
+    else // Add-ons
+    {
+        if (aryAddons == nil)
+            return 0;
+        
+        return aryAddons.count;
     }
     
     return 0;
@@ -949,16 +989,19 @@
     {
         NSArray *aryMain;
         NSArray *arySide;
+        NSArray *aryAddons;
         
         if (collectionView == cvDishesLeft) // left side
         {
             aryMain = aryMainDishesLeft;
             arySide = arySideDishesLeft;
+            aryAddons = aryAddonsLeft;
         }
         else // right side
         {
             aryMain = aryMainDishesRight;
             arySide = arySideDishesRight;
+            aryAddons = aryAddonsRight;
         }
         
         PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
@@ -1003,6 +1046,25 @@
                     [myCell setCellState:NO];
             }
         }
+        else { // Add-ons
+            NSDictionary *dishInfo = [aryAddons objectAtIndex:indexPath.row];
+            [myCell setDishInfo:dishInfo];
+            
+            if (collectionView == cvDishesLeft)
+            {
+                if (_selectedPathAddonsLeft == indexPath.row)
+                    [myCell setCellState:YES];
+                else
+                    [myCell setCellState:NO];
+            }
+            else
+            {
+                if (_selectedPathAddonsRight == indexPath.row)
+                    [myCell setCellState:YES];
+                else
+                    [myCell setCellState:NO];
+            }
+        }
     }
     
     return cell;
@@ -1013,16 +1075,19 @@
 {
     NSArray *aryMain;
     NSArray *arySide;
+    NSArray *aryAddons;
     
     if (collectionView == cvDishesLeft) // left side
     {
         aryMain = aryMainDishesLeft;
         arySide = arySideDishesLeft;
+        aryAddons = aryAddonsLeft;
     }
     else // right side
     {
         aryMain = aryMainDishesRight;
         arySide = arySideDishesRight;
+        aryAddons = aryAddonsRight;
     }
     
     PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
@@ -1067,13 +1132,32 @@
                 [myCell setCellState:NO];
         }
     }
+    else { // Add-ons
+        NSDictionary *dishInfo = [aryAddons objectAtIndex:indexPath.row];
+        [myCell setDishInfo:dishInfo];
+        
+        if (collectionView == cvDishesLeft)
+        {
+            if (_selectedPathAddonsLeft == indexPath.row)
+                [myCell setCellState:YES];
+            else
+                [myCell setCellState:NO];
+        }
+        else
+        {
+            if (_selectedPathAddonsRight == indexPath.row)
+                [myCell setCellState:YES];
+            else
+                [myCell setCellState:NO];
+        }
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     if (collectionView == cvDishesLeft) // left side
     {
-        if (indexPath.section == 0) // Main Dish
+        if (indexPath.section == 0 || indexPath.section == 2) // Main Dish and addons
             return CGSizeMake(cvDishesLeft.frame.size.width, cvDishesLeft.frame.size.width * 3 / 5);
         else if (indexPath.section == 1) // Side Dish
             return CGSizeMake(cvDishesLeft.frame.size.width / 2, cvDishesLeft.frame.size.width / 2);
@@ -1082,7 +1166,7 @@
     }
     else // right side
     {
-        if (indexPath.section == 0) // Main Dish
+        if (indexPath.section == 0 || indexPath.section == 2) // Main Dish and addons
             return CGSizeMake(cvDishesRight.frame.size.width, cvDishesRight.frame.size.width * 3 / 5);
         else if (indexPath.section == 1) // Side Dish
             return CGSizeMake(cvDishesRight.frame.size.width / 2, cvDishesRight.frame.size.width / 2);
@@ -1103,13 +1187,15 @@
             {
                 _selectedPathMainLeft = indexPath.row;
                 _selectedPathSideLeft = -1;
+                _selectedPathAddonsLeft = -1;
                 
                 // deselect everything on the right side
                 _selectedPathMainRight = -1;
                 _selectedPathSideRight = -1;
+                _selectedPathAddonsRight = -1;
             }
         }
-        else
+        else if (indexPath.section == 1)
         {
             if (_selectedPathSideLeft == indexPath.row)
                 _selectedPathSideLeft = -1;
@@ -1117,10 +1203,27 @@
             {
                 _selectedPathSideLeft = indexPath.row;
                 _selectedPathMainLeft = -1;
+                _selectedPathAddonsLeft = -1;
                 
                 // deselect everything on the right side
                 _selectedPathMainRight = -1;
                 _selectedPathSideRight = -1;
+                _selectedPathAddonsRight = -1;
+            }
+        }
+        else {
+            if (_selectedPathAddonsLeft == indexPath.row)
+                _selectedPathAddonsLeft = -1;
+            else
+            {
+                _selectedPathAddonsLeft = indexPath.row;
+                _selectedPathMainLeft = -1;
+                _selectedPathSideLeft = -1;
+                
+                // deselect everything on the right side
+                _selectedPathMainRight = -1;
+                _selectedPathSideRight = -1;
+                _selectedPathAddonsRight = -1;
             }
         }
     }
@@ -1134,13 +1237,15 @@
             {
                 _selectedPathMainRight = indexPath.row;
                 _selectedPathSideRight = -1;
+                _selectedPathAddonsRight = -1;
                 
                 // deselect everything on the left side
                 _selectedPathMainLeft = -1;
                 _selectedPathSideLeft = -1;
+                _selectedPathAddonsLeft = -1;
             }
         }
-        else
+        else if (indexPath.section == 1)
         {
             if (_selectedPathSideRight == indexPath.row)
                 _selectedPathSideRight = -1;
@@ -1148,12 +1253,30 @@
             {
                 _selectedPathSideRight = indexPath.row;
                 _selectedPathMainRight = -1;
+                _selectedPathAddonsRight = -1;
                 
                 // deselect everything on the left side
                 _selectedPathMainLeft = -1;
                 _selectedPathSideLeft = -1;
+                _selectedPathAddonsLeft = -1;
             }
         }
+        else {
+            if (_selectedPathAddonsRight == indexPath.row)
+                _selectedPathAddonsRight = -1;
+            else
+            {
+                _selectedPathAddonsRight = indexPath.row;
+                _selectedPathMainRight = -1;
+                _selectedPathSideRight = -1;
+                
+                // deselect everything on the left side
+                _selectedPathMainLeft = -1;
+                _selectedPathSideLeft = -1;
+                _selectedPathAddonsLeft = -1;
+            }
+        }
+        
     }
     
     [cvDishesLeft reloadData];
@@ -1175,14 +1298,14 @@
 {
     if (collectionView == cvDishesLeft) // left side
     {
-        if (section == 0 || section == 1)
+        if (section == 0 || section == 1 || section == 2)
             return CGSizeMake(cvDishesLeft.frame.size.width, 44);
     
         return CGSizeMake(0, 0);
     }
     else // right side
     {
-        if (section == 0 || section == 1)
+        if (section == 0 || section == 1 || section == 2)
             return CGSizeMake(cvDishesRight.frame.size.width, 44);
     
         return CGSizeMake(0, 0);
@@ -1216,6 +1339,9 @@
                 label.text = @"Main Dishes";
             else if (indexPath.section == 1)
                 label.text = @"Side Dishes";
+            else {
+                label.text = @"Add-ons";
+            }
             
             reusableview.backgroundColor = [UIColor darkGrayColor];
             
@@ -1249,6 +1375,9 @@
                 label.text = @"Main Dishes";
             else if (indexPath.section == 1)
                 label.text = @"Side Dishes";
+            else {
+                label.text = @"Add-ons";
+            }
             
             reusableview.backgroundColor = [UIColor darkGrayColor];
             
