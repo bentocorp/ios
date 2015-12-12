@@ -548,7 +548,8 @@
     [collectionViewFlowLayout setMinimumInteritemSpacing:0];
     [cvDishes setCollectionViewLayout:collectionViewFlowLayout];
     
-    cvDishes = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65) collectionViewLayout:collectionViewFlowLayout];
+    cvDishes = [[UICollectionView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65)
+                                  collectionViewLayout:collectionViewFlowLayout];
     cvDishes.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     cvDishes.dataSource = self;
     cvDishes.delegate = self;
@@ -556,7 +557,6 @@
     UINib *cellNib = [UINib nibWithNibName:@"PreviewCollectionViewCell" bundle:nil];
     [cvDishes registerNib:cellNib forCellWithReuseIdentifier:@"PreviewCollectionViewCell"];
     [cvDishes registerClass:[UICollectionReusableView class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView"];
-    
     [scrollView addSubview:cvDishes];
     
     // Get current hour
@@ -565,11 +565,9 @@
     NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
     
     hour = [components hour];
-    NSLog(@"current hour - %ld", (long)hour);
     
     // Sunday = 1, Saturday = 7
     weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
-    NSLog(@"today is - %ld", (long)weekday);
 }
 
 #pragma mark Set PageView and ScrollView
@@ -1411,7 +1409,7 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    [self setDishesBySection0MainOrSection1Side:section];
+    [self setDishesBySection:section];
     
     // MAINS
     if (section == 0) {
@@ -1430,7 +1428,7 @@
         return arySideDishes.count;
     }
     // ADD-ONS
-    else {
+    else if (section == 2) {
         if (aryAddons == nil) {
             return 0;
         }
@@ -1447,13 +1445,13 @@
                                                                                                              forIndexPath:indexPath];
     [cell initView];
     
+    // sides, set small
     if (indexPath.section == 1) {
         [cell setSmallDishCell];
     }
     
     /* Anything less than iOS 8.0 */
     if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
-//        [self setDishesBySection0MainOrSection1Side:indexPath.section];
         
         // MAINS
         if (indexPath.section == 0) {
@@ -1500,10 +1498,6 @@
 {
     PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
     
-//    [self setDishesBySection0MainOrSection1Side:indexPath.section];
-    
-    NSLog(@"SECTION - %ld", indexPath.section);
-    
     // MAINS
     if (indexPath.section == 0) {
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
@@ -1548,6 +1542,9 @@
         return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width * 3 / 5);
     else if (indexPath.section == 1) // Side Dish
         return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
+    else {
+        return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
+    }
     
     return CGSizeMake(0, 0);
 }
@@ -1669,7 +1666,7 @@
         aryAddons = [[BentoShop sharedInstance] getNextAddons:@"nextDinnerPreview"];
 }
 
-- (void)setDishesBySection0MainOrSection1Side:(NSInteger)section
+- (void)setDishesBySection:(NSInteger)section
 {
     // MAIN DISHES
     if (section == 0)
