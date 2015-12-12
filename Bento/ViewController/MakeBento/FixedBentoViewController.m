@@ -207,7 +207,7 @@
     btnState = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2+0.25, SCREEN_HEIGHT-45-65, SCREEN_WIDTH/2-0.25, 45)];
     [btnState setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
-    [btnState addTarget:self action:@selector(onContinue) forControlEvents:UIControlEventTouchUpInside];
+    [btnState addTarget:self action:@selector(onFinalize) forControlEvents:UIControlEventTouchUpInside];
     
     NSMutableString *strTitle = [[[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON] mutableCopy];
     if (strTitle == nil) {
@@ -1074,14 +1074,21 @@
     alertView = nil;
 }
 
-- (void)onContinue
+- (void)onFinalize
 {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
     if (currentBento != nil || ![currentBento isEmpty])
     {
         [[BentoShop sharedInstance] saveBentoArray];
-        [self gotoOrderScreen];
+        
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
+            [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+        }
+        else {
+            [self gotoOrderScreen];
+        }
     }
 }
 

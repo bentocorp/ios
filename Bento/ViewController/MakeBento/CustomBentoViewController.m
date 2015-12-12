@@ -1230,8 +1230,15 @@
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }
 
-- (void)onFinalize {
-    [self gotoOrderScreen];
+- (void)onFinalize
+{
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
+        [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+    }
+    else {
+        [self gotoOrderScreen];
+    }
 }
 
 - (void)updateUI

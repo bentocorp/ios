@@ -59,6 +59,9 @@
 {
     [super viewDidLoad];
     
+    // reset didAutoShowAddons
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"didAutoShowAddons"];
+    
     NSURL *urlLogo = [[AppStrings sharedInstance] getURL:APP_LOGO];
     [self.ivTitle sd_setImageWithURL:urlLogo placeholderImage:[UIImage imageNamed:@"logo_title"]];
     
