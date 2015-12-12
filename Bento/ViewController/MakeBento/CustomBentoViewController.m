@@ -1502,6 +1502,8 @@
     
 //    [self setDishesBySection0MainOrSection1Side:indexPath.section];
     
+    NSLog(@"SECTION - %ld", indexPath.section);
+    
     // MAINS
     if (indexPath.section == 0) {
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
