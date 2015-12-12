@@ -127,6 +127,8 @@
     BOOL isThereConnection;
     
     AddonsViewController *addonsVC;
+    
+    BOOL autoShowAddons;
 }
 
 - (void)viewDidLoad {
@@ -705,6 +707,15 @@
     
     addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
+    
+    if (MPTweakValue(@"Auto show add-ons once per order", NO)) {
+        // test, auto show add-ons
+        autoShowAddons = YES;
+    }
+    else {
+        // original, don't auto show add-ons
+        autoShowAddons = NO;
+    }
     
     [self updateUI];
     
