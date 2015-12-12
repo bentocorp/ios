@@ -63,6 +63,7 @@
 {
     NSArray *aryMainDishes;
     NSArray *arySideDishes;
+    NSArray *aryAddons;
     
     NSTimer *connectionTimer;
     
@@ -98,6 +99,7 @@
     
     NSInteger _selectedPathMainRight;
     NSInteger _selectedPathSideRight;
+    NSInteger _selectedPathAddonsRight;
     
     // for addon
     NSInteger _selectedPath;
@@ -111,6 +113,7 @@
     
     _selectedPathMainRight = -1;
     _selectedPathSideRight = -1;
+    _selectedPathAddonsRight = -1;
     
     _selectedPath = -1;
     
@@ -1131,29 +1134,36 @@
 
 - (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView
 {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    [self setDishesBySection0MainOrSection1Side:section];
+    [self setDishesBySection:section];
     
     // MAINS
-    if (section == 0)
-    {
-        if (aryMainDishes == nil)
+    if (section == 0) {
+        if (aryMainDishes == nil) {
             return 0;
+        }
         
         return aryMainDishes.count;
     }
-    
     // SIDES
-    else if (section == 1)
-    {
-        if (arySideDishes == nil)
+    else if (section == 1) {
+        if (arySideDishes == nil) {
             return 0;
+        }
         
         return arySideDishes.count;
+    }
+    // ADD-ONS
+    else if (section == 2) {
+        if (aryAddons == nil) {
+            return 0;
+        }
+        
+        return aryAddons.count;
     }
     
     return 0;
@@ -1165,36 +1175,49 @@
                                                                                                              forIndexPath:indexPath];
     [cell initView];
     
-    if (indexPath.section == 1)
+    // sides, set small
+    if (indexPath.section == 1) {
         [cell setSmallDishCell];
+    }
     
-    // Anything less than iOS 8.0
-    if ([[UIDevice currentDevice].systemVersion intValue] < 8)
-    {
-        [self setDishesBySection0MainOrSection1Side:indexPath.section];
+    /* Anything less than iOS 8.0 */
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
         
         // MAINS
-        if (indexPath.section == 0)
-        {
+        if (indexPath.section == 0) {
             NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
             [cell setDishInfo:dishInfo];
             
-            if (_selectedPathMainRight == indexPath.row)
+            if (_selectedPathMainRight == indexPath.row) {
                 [cell setCellState:YES];
-            else
+            }
+            else {
                 [cell setCellState:NO];
+            }
         }
-        
         // SIDES
-        else if (indexPath.section == 1)
-        {
+        else if (indexPath.section == 1) {
             NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
             [cell setDishInfo:dishInfo];
             
-            if (_selectedPathSideRight == indexPath.row)
+            if (_selectedPathSideRight == indexPath.row) {
                 [cell setCellState:YES];
-            else
+            }
+            else {
                 [cell setCellState:NO];
+            }
+        }
+        // ADD-ONS
+        else {
+            NSDictionary *dishInfo = [aryAddons objectAtIndex:indexPath.row];
+            [cell setDishInfo:dishInfo];
+            
+            if (_selectedPathAddonsRight == indexPath.row) {
+                [cell setCellState:YES];
+            }
+            else {
+                [cell setCellState:NO];
+            }
         }
     }
     
@@ -1205,36 +1228,47 @@
 {
     PreviewCollectionViewCell *myCell = (PreviewCollectionViewCell *)cell;
     
-    [self setDishesBySection0MainOrSection1Side:indexPath.section];
-    
     // MAINS
-    if (indexPath.section == 0)
-    {
+    if (indexPath.section == 0) {
         NSDictionary *dishInfo = [aryMainDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
         
-        if (_selectedPathMainRight == indexPath.row)
+        if (_selectedPathMainRight == indexPath.row) {
             [myCell setCellState:YES];
-        else
+        }
+        else {
             [myCell setCellState:NO];
+        }
     }
-    
     // SIDES
-    else if (indexPath.section == 1)
-    {
+    else if (indexPath.section == 1) {
         NSDictionary *dishInfo = [arySideDishes objectAtIndex:indexPath.row];
         [myCell setDishInfo:dishInfo];
         
-        if (_selectedPathSideRight == indexPath.row)
+        if (_selectedPathSideRight == indexPath.row) {
             [myCell setCellState:YES];
-        else
+        }
+        else {
             [myCell setCellState:NO];
+        }
+    }
+    // ADD-ONS
+    else {
+        NSDictionary *dishInfo = [aryAddons objectAtIndex:indexPath.row];
+        [myCell setDishInfo:dishInfo];
+        
+        if (_selectedPathAddonsRight == indexPath.row) {
+            [myCell setCellState:YES];
+        }
+        else {
+            [myCell setCellState:NO];
+        }
     }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) // Main Dish
+    if (indexPath.section == 0 || indexPath.section == 2) // Main Dish and Add-ons
         return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width * 3 / 5);
     else if (indexPath.section == 1) // Side Dish
         return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
@@ -1252,9 +1286,10 @@
         {
             _selectedPathMainRight = indexPath.row;
             _selectedPathSideRight = -1;
+            _selectedPathAddonsRight = -1;
         }
     }
-    else
+    else if (indexPath.section == 1)
     {
         if (_selectedPathSideRight == indexPath.row)
             _selectedPathSideRight = -1;
@@ -1262,6 +1297,18 @@
         {
             _selectedPathSideRight = indexPath.row;
             _selectedPathMainRight = -1;
+            _selectedPathAddonsRight = -1;
+        }
+    }
+    else
+    {
+        if (_selectedPathAddonsRight == indexPath.row)
+            _selectedPathAddonsRight = -1;
+        else
+        {
+            _selectedPathAddonsRight = indexPath.row;
+            _selectedPathMainRight = -1;
+            _selectedPathSideRight = -1;
         }
     }
     
@@ -1276,10 +1323,7 @@
 // header
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section
 {
-    if (section == 0 || section == 1)
-        return CGSizeMake(cvDishes.frame.size.width, 44);
-    
-    return CGSizeMake(0, 0);
+    return CGSizeMake(cvDishes.frame.size.width, 44);
 }
 
 - (UICollectionReusableView *)collectionView:(UICollectionView *)collectionView viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath
@@ -1307,6 +1351,9 @@
             label.text = @"Main Dishes";
         else if (indexPath.section == 1)
             label.text = @"Side Dishes";
+        else {
+            label.text = @"Add-ons";
+        }
         
         reusableview.backgroundColor = [UIColor darkGrayColor];
         
@@ -1338,7 +1385,16 @@
         arySideDishes = [[BentoShop sharedInstance] getNextSideDishes:@"nextDinnerPreview"];
 }
 
-- (void)setDishesBySection0MainOrSection1Side:(NSInteger)section
+- (void)setNextAddonsArray:(NSString *)lunchOrDinner
+{
+    if ([lunchOrDinner isEqualToString:@"Lunch"])
+        aryAddons = [[BentoShop sharedInstance] getNextAddons:@"nextLunchPreview"];
+    
+    else if ([lunchOrDinner isEqualToString:@"Dinner"])
+        aryAddons = [[BentoShop sharedInstance] getNextAddons:@"nextDinnerPreview"];
+}
+
+- (void)setDishesBySection:(NSInteger)section
 {
     // MAIN DISHES
     if (section == 0)
@@ -1378,7 +1434,7 @@
     }
     
     // SIDE DISHES
-    else
+    else if (section == 1)
     {
         /* IS ALL-DAY */
         if ([[BentoShop sharedInstance] isAllDay])
@@ -1410,6 +1466,43 @@
                     [self setNextSideDishesArray:@"Lunch"];
                 else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
                     [self setNextSideDishesArray:@"Dinner"];
+            }
+        }
+    }
+    
+    // ADD-ONS
+    else
+    {
+        /* IS ALL-DAY */
+        if ([[BentoShop sharedInstance] isAllDay])
+        {
+            if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                [self setNextAddonsArray:@"Lunch"];
+            else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                [self setNextAddonsArray:@"Dinner"];
+        }
+        
+        /* IS NOT ALL-DAY */
+        else
+        {
+            // 00:00 - 16:29
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            {
+                if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                    aryAddons = [[BentoShop sharedInstance] getAddons:@"todayDinner"];
+                else if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    [self setNextAddonsArray:@"Lunch"];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    [self setNextAddonsArray:@"Dinner"];
+            }
+            
+            // 16:30 - 23:59
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            {
+                if ([[BentoShop sharedInstance] isThereLunchNextMenu])
+                    [self setNextAddonsArray:@"Lunch"];
+                else if ([[BentoShop sharedInstance] isThereDinnerNextMenu])
+                    [self setNextAddonsArray:@"Dinner"];
             }
         }
     }
