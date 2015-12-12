@@ -1538,13 +1538,10 @@
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) // Main Dish
+    if (indexPath.section == 0 || indexPath.section == 2) // Main Dish and Add-ons
         return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width * 3 / 5);
     else if (indexPath.section == 1) // Side Dish
         return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
-    else {
-        return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
-    }
     
     return CGSizeMake(0, 0);
 }
