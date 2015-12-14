@@ -489,6 +489,7 @@
             // add addon to list
             [selectedAddonItem addOneCount];
             [[AddonList sharedInstance].addonList addObject: selectedAddonItem];
+            [[AddonList sharedInstance] saveList]; // this is necessary or won't save
         }
     }
     
