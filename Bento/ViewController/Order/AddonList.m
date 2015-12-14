@@ -51,9 +51,7 @@
 - (void)emptyList {
     if (self.addonList != nil && self.addonList.count != 0) {
         [self.addonList removeAllObjects];
-        
-        [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.addonList forKey:@"addonList"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
+        [self saveList];
     }
 }
 
