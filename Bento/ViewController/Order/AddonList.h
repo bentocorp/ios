@@ -15,6 +15,7 @@
 + (AddonList *)sharedInstance;
 - (void)saveList;
 - (void)emptyList;
+- (void)removeFromList:(NSInteger)index;
 - (NSInteger)getTotalCount;
 
 @end

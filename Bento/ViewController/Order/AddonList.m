@@ -57,6 +57,11 @@
     }
 }
 
+- (void)removeFromList:(NSInteger)index {
+    [self.addonList removeObjectAtIndex:index];
+    [self saveList];
+}
+
 - (NSInteger)getTotalCount {
     
     NSInteger total = 0;

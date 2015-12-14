@@ -1451,7 +1451,6 @@
 {
     if (indexPath.section == 0) {
         Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
-        NSLog(@"didselect aryBentos - %@", self.aryBentos);
         
         NSArray *viewControllers = self.navigationController.viewControllers;
         
@@ -1513,7 +1512,7 @@
     }
     else {
         // remove addon from list
-        [[AddonList sharedInstance].addonList removeObjectAtIndex:indexPath.row];
+        [[AddonList sharedInstance] removeFromList:indexPath.row];
     }
     
     [self.tvBentos reloadData];
