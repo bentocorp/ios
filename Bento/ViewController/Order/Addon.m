@@ -47,8 +47,24 @@
         NSLog(@"ID: %ld, Quantity - %ld, Unit Price - %f", (long)self.itemId, (long)self.qty, self.unitPrice);
     }
     
+    [self checkIfLastCount];
+    
     // save results
     [[AddonList sharedInstance] saveList];
+}
+
+// if none, remove addon from list
+- (void)checkIfLastCount {
+    if (self.qty <= 0) {
+        for (int i = 0; i < [AddonList sharedInstance].addonList.count; i++) {
+            
+            Addon *addon = [AddonList sharedInstance].addonList[i];
+            
+            if (self.itemId == addon.itemId) {
+                [[AddonList sharedInstance] removeFromList:i];
+            }
+        }
+    }
 }
 
 - (BOOL)checkIfItemIsSoldOut:(NSMutableArray *)itemIds
