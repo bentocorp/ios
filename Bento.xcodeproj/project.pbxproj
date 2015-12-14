@@ -2888,7 +2888,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9d179825-df98-4228-873b-91b083d3dffa";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2972,7 +2972,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "9d179825-df98-4228-873b-91b083d3dffa";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
