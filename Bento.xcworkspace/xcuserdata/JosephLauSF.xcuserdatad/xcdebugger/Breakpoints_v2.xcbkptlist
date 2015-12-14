@@ -238,12 +238,12 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/SignIn/SignInViewController.m"
-                  timestampString = "471826684.483581"
+                  timestampString = "471828779.607693"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "463"
                   endingLineNumber = "463"
-                  offsetFromSymbolStart = "444">
+                  offsetFromSymbolStart = "354">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -253,12 +253,12 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/SignIn/SignInViewController.m"
-                  timestampString = "471826684.483786"
+                  timestampString = "471828779.607847"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "463"
                   endingLineNumber = "463"
-                  offsetFromSymbolStart = "72">
+                  offsetFromSymbolStart = "70">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -580,6 +580,22 @@
             startingLineNumber = "1232"
             endingLineNumber = "1232"
             landmarkName = "-onFinalize"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/Order/AddonsTableViewCell.m"
+            timestampString = "471828765.898265"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "171"
+            endingLineNumber = "171"
+            landmarkName = "-addDishInfo:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

@@ -170,13 +170,11 @@
     if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
         self.ivBannerAddon.hidden = NO;
         
-        [self.subtractButton setImage:[UIImage imageNamed:@"minus-gray-100"] forState:UIControlStateNormal];
+        [self.subtractButton setImage:[UIImage imageNamed:@"minusgray100"] forState:UIControlStateNormal];
         self.subtractButton.enabled = NO;
         
-        [self.addButton setImage:[UIImage imageNamed:@"plus-gray-100"] forState:UIControlStateNormal];
+        [self.addButton setImage:[UIImage imageNamed:@"plusgray100"] forState:UIControlStateNormal];
         self.addButton.enabled = NO;
-        
-        self.quantityLabel.textColor = [UIColor lightGrayColor];
     }
     else {
         self.ivBannerAddon.hidden = YES;
@@ -186,8 +184,6 @@
         
         [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
         self.addButton.enabled = YES;
-        
-        self.quantityLabel.textColor = [UIColor bentoTitleGray];
     }
     
     // PRICE
