@@ -197,7 +197,7 @@
     
 /*---Full Dishes View---*/
     
-    viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 20, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
+    viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
     viewDishs.layer.cornerRadius = 3;
     viewDishs.clipsToBounds = YES;
     viewDishs.layer.borderColor = BORDER_COLOR.CGColor;
@@ -415,7 +415,7 @@
 //    orLabel.hidden = YES;
 //    [scrollView addSubview:orLabel];
     
-    addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-10, 45)];
+    addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45)];
     addonsButton.layer.borderColor = BORDER_COLOR.CGColor;
     addonsButton.layer.borderWidth = 1.0f;
     [addonsButton setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
@@ -452,7 +452,7 @@
     
 /*---Banner---*/
     
-    lblBanner = [[UILabel alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 28)];
+    lblBanner = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 28)];
     lblBanner.textAlignment = NSTextAlignmentCenter;
     lblBanner.textColor = [UIColor whiteColor];
     
@@ -465,8 +465,8 @@
         lblBanner.hidden = YES;
     }
     
-    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
-    lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
+//    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
+//    lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
     lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     [scrollView addSubview:lblBanner];
     
@@ -1300,14 +1300,14 @@
         orLabel.hidden = NO;
         addonsButton.hidden = NO;
 //        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45); // short version
-        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-10, 45);
+        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45);
     }
     // 0 bentos in cart
     else {
         
         orLabel.hidden = YES;
         addonsButton.hidden = YES;
-        btnAddAnotherBento.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45, SCREEN_WIDTH - 60, 45); // long version
+        btnAddAnotherBento.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH - 60, 45); // long version
     }
     
     // current bento is empty
