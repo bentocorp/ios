@@ -439,6 +439,24 @@ static BentoShop *_shareInstance;
     currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
 }
 
+- (NSInteger)getETAMin
+{
+    if (self.dicInit[@"eta"] != nil && ![self.dicInit isEqual:[NSNull null]]) {
+        return [self.dicInit[@"eta"][@"eta_min"] integerValue];
+    }
+    
+    return 0;
+}
+
+- (NSInteger)getETAMax
+{
+    if (self.dicInit[@"eta"] != nil && ![self.dicInit isEqual:[NSNull null]]) {
+        return [self.dicInit[@"eta"][@"eta_max"] integerValue];
+    }
+    
+    return 0;
+}
+
 - (void)getiOSMinAndCurrentVersions {
     /*------------------for forced update---------------*/
     self.iosMinVersion = (CGFloat)[self.dicInit[@"settings"][@"ios_min_version"] floatValue];

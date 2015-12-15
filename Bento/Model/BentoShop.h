@@ -78,6 +78,9 @@
 - (NSString *)getDinnerMapURL;
 - (NSString *)getGeofenceRadius;
 
+- (NSInteger)getETAMin;
+- (NSInteger)getETAMax;
+
 - (void)refreshStart;
 - (void)refreshPause;
 - (void)refreshResume;

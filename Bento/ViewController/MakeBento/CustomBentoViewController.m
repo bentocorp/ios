@@ -1299,13 +1299,11 @@
         if (cents == 0) {
 //            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
             startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
-            ETALabel.text = @"ETA: 15 MIN.";
         }
         // if no cents, just show whole number
         else {
 //            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
             startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
-            ETALabel.text = @"ETA: 15 MIN.";
         }
         
         lblBanner.hidden = NO;
@@ -1313,6 +1311,8 @@
         lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
     }
     /*----------------------*/
+    
+    ETALabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", [[BentoShop sharedInstance] getETAMin], [[BentoShop sharedInstance] getETAMax]];
     
     /*----------------------*/
     

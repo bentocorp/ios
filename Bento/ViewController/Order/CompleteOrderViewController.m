@@ -83,10 +83,11 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblTotal;
 @property (weak, nonatomic) IBOutlet UILabel *lblTotalPrevious;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitleDelivery;
+@property (weak, nonatomic) IBOutlet UILabel *ETARangeLabel;
 
 @property (nonatomic, weak) IBOutlet UITableView *tvBentos;
 
-@property (nonatomic, weak) IBOutlet UIButton *btnChangeAddr;
+//@property (nonatomic, weak) IBOutlet UIButton *btnChangeAddr;
 @property (nonatomic, weak) IBOutlet UIButton *btnChangeMethod;
 
 @property (nonatomic, weak) IBOutlet UIButton *btnAddPromo;
@@ -435,14 +436,17 @@
             self.lblAddress.text = @"";
         }
         
-        [self.lblAddress setTextColor:[UIColor colorWithRed:78.f/255.f green:88.f/255.f blue:99.f/255.f alpha:1.0f]];
-        [self.btnChangeAddr setTitle:@"CHANGE" forState:UIControlStateNormal];
+//        [self.lblAddress setTextColor:[UIColor colorWithRed:78.f/255.f green:88.f/255.f blue:99.f/255.f alpha:1.0f]];
+        [self.lblAddress setTextColor:[UIColor bentoBrandGreen]];
+//        [self.btnChangeAddr setTitle:@"CHANGE" forState:UIControlStateNormal];
     }
     else {
         self.lblAddress.text = @"Delivery Destination";
         [self.lblAddress setTextColor:[UIColor lightGrayColor]];
-        [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
+//        [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
     }
+    
+    self.ETARangeLabel.text = [NSString stringWithFormat:@"%ld-%ld", [[BentoShop sharedInstance] getETAMin], [[BentoShop sharedInstance] getETAMax]];
     
     [self updateUI];
     

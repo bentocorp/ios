@@ -326,6 +326,8 @@
 		FC4327B51BE2EE8E00E91D9B /* DriverLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */; };
 		FC4327B81BE2EF4300E91D9B /* CurrentOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4327B71BE2EF4300E91D9B /* CurrentOrdersViewController.m */; };
 		FC4327B91BE2EF4300E91D9B /* CurrentOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4327B71BE2EF4300E91D9B /* CurrentOrdersViewController.m */; };
+		FC46977F1C1FC2FA001FC162 /* ETA-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FC46977E1C1FC2FA001FC162 /* ETA-50.png */; };
+		FC4697801C1FC2FA001FC162 /* ETA-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FC46977E1C1FC2FA001FC162 /* ETA-50.png */; };
 		FC46DE8D1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */; };
 		FC46DE8E1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */; };
 		FC4A37591B4C862B00020F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
@@ -779,6 +781,7 @@
 		FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverLocation.m; sourceTree = "<group>"; };
 		FC4327B61BE2EF4300E91D9B /* CurrentOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentOrdersViewController.h; sourceTree = "<group>"; };
 		FC4327B71BE2EF4300E91D9B /* CurrentOrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CurrentOrdersViewController.m; sourceTree = "<group>"; };
+		FC46977E1C1FC2FA001FC162 /* ETA-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ETA-50.png"; sourceTree = "<group>"; };
 		FC46DE8B1BE14AEA00E9A7B1 /* SocketHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketHandler.h; sourceTree = "<group>"; };
 		FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketHandler.m; sourceTree = "<group>"; };
 		FC599F551B0FEDB600989E1B /* BentoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BentoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1300,6 +1303,7 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FC46977E1C1FC2FA001FC162 /* ETA-50.png */,
 				FC9EED121C1F8B680071828D /* minusgray100.png */,
 				FC9EED131C1F8B680071828D /* plusgray100.png */,
 				FCF8721E1BFFD12B0091A206 /* minus-green-100.png */,
@@ -2185,6 +2189,7 @@
 				FCDF22251ADC3ADF006B2750 /* Icon-Small-40.png in Resources */,
 				7216B77A1AA64C7C0006FFE9 /* deliverylocation_icon_navigation@2x.png in Resources */,
 				7216B77B1AA64C7C0006FFE9 /* OpenSans-Bold.ttf in Resources */,
+				FC4697801C1FC2FA001FC162 /* ETA-50.png in Resources */,
 				FC8DB73D1AF18674003045A3 /* icon-circle-messages.png in Resources */,
 				FC94E3421BB3529500E2104E /* Settings.bundle in Resources */,
 				FC8DB7451AF18674003045A3 /* icon-square-email.png in Resources */,
@@ -2315,6 +2320,7 @@
 				FC8DB7421AF18674003045A3 /* icon-square-creditcard.png in Resources */,
 				90BED0C51A5BE72F003DC872 /* OpenSans-Italic.ttf in Resources */,
 				FCDF22241ADC3ADF006B2750 /* Icon-Small-40.png in Resources */,
+				FC46977F1C1FC2FA001FC162 /* ETA-50.png in Resources */,
 				90D8F7D01A5E2B3B00D034CF /* deliverylocation_icon_navigation@2x.png in Resources */,
 				90BED0C11A5BE72F003DC872 /* OpenSans-Bold.ttf in Resources */,
 				FC8DB73C1AF18674003045A3 /* icon-circle-messages.png in Resources */,
