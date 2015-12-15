@@ -127,6 +127,9 @@
     BOOL isThereConnection;
     
     AddonsViewController *addonsVC;
+    
+    UILabel *ETALabel;
+    UILabel *startingPriceLabel;
 }
 
 - (void)viewDidLoad {
@@ -469,6 +472,23 @@
 //    lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
     lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     [scrollView addSubview:lblBanner];
+    
+    startingPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, lblBanner.frame.size.height)];
+    startingPriceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+    startingPriceLabel.textColor = [UIColor whiteColor];
+    startingPriceLabel.textAlignment = NSTextAlignmentCenter;
+    [lblBanner addSubview:startingPriceLabel];
+    
+    ETALabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, lblBanner.frame.size.height)];
+    ETALabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+    ETALabel.textColor = [UIColor whiteColor];
+    ETALabel.textAlignment = NSTextAlignmentCenter;
+    [lblBanner addSubview:ETALabel];
+    
+    UIView *bannerDivider = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.25, 5, 0.5, lblBanner.frame.size.height - 8)];
+    bannerDivider.backgroundColor = [UIColor whiteColor];
+    bannerDivider.alpha = 0.5;
+    [lblBanner addSubview:bannerDivider];
     
 /*------*/
     
@@ -1275,13 +1295,17 @@
     if (sortedMainPrices.count != 0 && sortedMainPrices != nil) {
         double cents = modf([sortedMainPrices[0] floatValue], &integral);
         
-        // if no cents, just show whole number
-        if (cents == 0) {
-            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
-        }
         // if exists, show normal
+        if (cents == 0) {
+//            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+            startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+            ETALabel.text = @"ETA: 15 MIN.";
+        }
+        // if no cents, just show whole number
         else {
-            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+//            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+            startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+            ETALabel.text = @"ETA: 15 MIN.";
         }
         
         lblBanner.hidden = NO;
