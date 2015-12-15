@@ -1226,7 +1226,7 @@
 - (void)addonsViewControllerDidTapOnFinalize:(BOOL)didTapOnFinalize
 {
     if (didTapOnFinalize == YES) {
-        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(gotoOrderScreen) userInfo:nil repeats:NO];
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(onFinalize) userInfo:nil repeats:NO];
     }
 }
 
@@ -1241,18 +1241,32 @@
 
 - (void)onFinalize
 {
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
-            [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+    if ([self isInMiddleOfBuildingBento]) {
+        [self showConfirmMsg];
+    }
+    else {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
+                [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+            }
+            else {
+                [self gotoOrderScreen];
+            }
         }
         else {
             [self gotoOrderScreen];
         }
     }
-    else {
-        [self gotoOrderScreen];
+}
+
+- (BOOL)isInMiddleOfBuildingBento {
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
+        return YES;
     }
+    
+    return NO;
 }
 
 - (void)updateUI
@@ -1421,7 +1435,7 @@
                 [currentBento completeBento:@"todayDinner"];
         }
         
-        [self gotoOrderScreen];
+        [self onFinalize];
     }
 }
 
