@@ -200,12 +200,12 @@
 #define SHARE_PRECOMPOSED_MESSAGE               @"share-precomposed-message"
 #define SHARE_PROMO_MESSAGE                     @"share-promo-message"
 
-// Force Update
-#define IOS_MIN_VERSION                         @"ios_min_version"
-
 // Open days/hours
 #define OPEN_LINE_1                             @"open-line1"
 #define OPEN_LINE_2                             @"open-line2"
+
+//
+#define DELIVERY_LABEL_TEXT                     @"delivery_label"
 
 // getting from to settings instead of ioscopy
 //#define ABOUT_PRICE                             @"price"

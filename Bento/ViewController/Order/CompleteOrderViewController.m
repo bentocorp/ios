@@ -82,6 +82,7 @@
 @property (nonatomic, weak) IBOutlet UILabel *lblDeliveryTip;
 @property (nonatomic, weak) IBOutlet UILabel *lblTotal;
 @property (weak, nonatomic) IBOutlet UILabel *lblTotalPrevious;
+@property (weak, nonatomic) IBOutlet UILabel *lblTitleDelivery;
 
 @property (nonatomic, weak) IBOutlet UITableView *tvBentos;
 
@@ -162,6 +163,7 @@
     self.lblTitlePromo.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_DISCOUNT];
     self.lblTitleTax.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TAX];
     self.lblTitleTip.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TIP];
+    self.lblTitleDelivery.text = [[AppStrings sharedInstance] getString:DELIVERY_LABEL_TEXT];
     
     [self.btnGetItNow setTitle:[[AppStrings sharedInstance] getString:COMPLETE_BUTTON_FINISH] forState:UIControlStateNormal];
     
