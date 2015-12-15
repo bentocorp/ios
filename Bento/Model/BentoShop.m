@@ -441,7 +441,7 @@ static BentoShop *_shareInstance;
 
 - (void)getiOSMinAndCurrentVersions {
     /*------------------for forced update---------------*/
-    self.iosMinVersion = (CGFloat)[self.dicInit[@"ios_min_version"] floatValue];
+    self.iosMinVersion = (CGFloat)[self.dicInit[@"settings"][@"ios_min_version"] floatValue];
     self.iosCurrentVersion = (CGFloat)[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
 }
 
@@ -766,6 +766,8 @@ static BentoShop *_shareInstance;
     
     return [menuInfo objectForKey:@"day_text"];
 }
+
+
 
 #pragma mark Prices and Tax
 - (NSString *)getUnitPrice {
