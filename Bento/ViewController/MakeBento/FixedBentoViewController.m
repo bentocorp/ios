@@ -772,7 +772,7 @@
         lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
     }
     
-    ETALabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", [[BentoShop sharedInstance] getETAMin], [[BentoShop sharedInstance] getETAMax]];
+    ETALabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
     
     // Get rid of any empty bentos and update persistent data
     savedArray  = [[[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"bento_array"] mutableCopy];

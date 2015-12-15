@@ -446,7 +446,7 @@
 //        [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
     }
     
-    self.ETARangeLabel.text = [NSString stringWithFormat:@"%ld-%ld", [[BentoShop sharedInstance] getETAMin], [[BentoShop sharedInstance] getETAMax]];
+    self.ETARangeLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
     
     [self updateUI];
     
@@ -1726,8 +1726,8 @@
     
     // ETA
     NSDictionary *etaDict = @{
-                              @"min": [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getETAMin]],
-                              @"max": [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getETAMax]]
+                              @"min": [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getETAMin]],
+                              @"max": [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getETAMax]]
                               };
     
     [request setObject:etaDict forKey:@"Eta"];

@@ -1312,7 +1312,7 @@
     }
     /*----------------------*/
     
-    ETALabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", [[BentoShop sharedInstance] getETAMin], [[BentoShop sharedInstance] getETAMax]];
+    ETALabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
     
     /*----------------------*/
     
