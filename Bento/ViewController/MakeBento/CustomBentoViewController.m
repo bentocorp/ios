@@ -73,6 +73,9 @@
     UIScrollView *scrollView;
     
     UILabel *lblBanner;
+    UILabel *ETALabel;
+    UILabel *startingPriceLabel;
+    
     UILabel *dinnerTitleLabel;
     UILabel *lblBadge;
     UIButton *btnCart;
@@ -127,9 +130,6 @@
     BOOL isThereConnection;
     
     AddonsViewController *addonsVC;
-    
-    UILabel *ETALabel;
-    UILabel *startingPriceLabel;
 }
 
 - (void)viewDidLoad {

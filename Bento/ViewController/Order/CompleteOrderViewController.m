@@ -1427,7 +1427,7 @@
     else {
         Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
         
-        cell.lblBentoName.text = [NSString stringWithFormat:@"(%ld) x %@", (long)addon.qty, addon.name];
+        cell.lblBentoName.text = [NSString stringWithFormat:@"(%ldx) %@", (long)addon.qty, addon.name];
         cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%.2f", addon.unitPrice];
         
         // if there is sold out item
@@ -1724,6 +1724,15 @@
         strPromoCode = _strPromoCode;
     }
     
+    // ETA
+    NSDictionary *etaDict = @{
+                              @"min": [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getETAMin]],
+                              @"max": [NSString stringWithFormat:@"%ld", [[BentoShop sharedInstance] getETAMax]]
+                              };
+    
+    [request setObject:etaDict forKey:@"Eta"];
+    
+    // Coupon Code
     [request setObject:strPromoCode forKey:@"CouponCode"];
     
     // Idempotent Token
@@ -1731,6 +1740,9 @@
     
     // Platform
     [request setObject:@"iOS" forKey:@"Platform"];
+    
+    // App Version
+    [request setObject:[NSString stringWithFormat:@"%.2f", [BentoShop sharedInstance].iosCurrentVersion] forKey:@"AppVersion"];
     
     // App Version
     [request setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"AppVersion"];

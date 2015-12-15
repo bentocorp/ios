@@ -73,7 +73,10 @@
     UITableView *myTableView;
     
     UILabel *lblBadge;
+    
     UILabel *lblBanner;
+    UILabel *ETALabel;
+    UILabel *startingPriceLabel;
     
     UIButton *btnCart;
     
@@ -127,7 +130,7 @@
     
 /*---My Table View---*/
     
-    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT-65 - 45)];
+    myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 10, SCREEN_WIDTH, SCREEN_HEIGHT-65 - 55)];
     myTableView.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     myTableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
     myTableView.separatorInset = UIEdgeInsetsMake(0, SCREEN_WIDTH / 2.5, 0, SCREEN_WIDTH/ 2.5);
@@ -192,15 +195,32 @@
     
 /*---Banner---*/
     
-    lblBanner = [[UILabel alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 28)];
+    lblBanner = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 28)];
     lblBanner.textAlignment = NSTextAlignmentCenter;
     lblBanner.textColor = [UIColor whiteColor];
     lblBanner.backgroundColor = [UIColor colorWithRed:0.882f green:0.361f blue:0.035f alpha:0.8f];
     lblBanner.hidden = YES;
-    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
-    lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
+//    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
+//    lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
     lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     [scrollView addSubview:lblBanner];
+    
+    startingPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, lblBanner.frame.size.height)];
+    startingPriceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+    startingPriceLabel.textColor = [UIColor whiteColor];
+    startingPriceLabel.textAlignment = NSTextAlignmentCenter;
+    [lblBanner addSubview:startingPriceLabel];
+    
+    ETALabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, lblBanner.frame.size.height)];
+    ETALabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+    ETALabel.textColor = [UIColor whiteColor];
+    ETALabel.textAlignment = NSTextAlignmentCenter;
+    [lblBanner addSubview:ETALabel];
+    
+    UIView *bannerDivider = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.25, 5, 0.5, lblBanner.frame.size.height - 8)];
+    bannerDivider.backgroundColor = [UIColor whiteColor];
+    bannerDivider.alpha = 0.5;
+    [lblBanner addSubview:bannerDivider];
     
 /*---Button State---*/
     
@@ -736,19 +756,23 @@
         double integral;
         double cents = modf([sortedMainPrices[0] floatValue], &integral);
         
-        // if no cents, just show whole number
-        if (cents == 0) {
-            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
-        }
         // if exists, show normal
+        if (cents == 0) {
+            //            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+            startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+        }
+        // if no cents, just show whole number
         else {
-            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+            //            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+            startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
         }
         
         lblBanner.hidden = NO;
         lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
         lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
     }
+    
+    ETALabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", [[BentoShop sharedInstance] getETAMin], [[BentoShop sharedInstance] getETAMax]];
     
     // Get rid of any empty bentos and update persistent data
     savedArray  = [[[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"bento_array"] mutableCopy];
