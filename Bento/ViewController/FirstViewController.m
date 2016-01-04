@@ -314,7 +314,7 @@
         [self showNetworkErrorScreen];
     }
     else 
-    {
+    {   
         BentoShop *globalShop = [BentoShop sharedInstance];
         if ([globalShop isClosed])
         {

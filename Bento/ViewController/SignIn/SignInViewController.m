@@ -168,10 +168,9 @@
 //    self.txtPassword.text = @"12345678";
     self.txtEmail.text = @"joseph@bentonow.com";
     self.txtPassword.text = @"123456";
-#endif//DEBUG
+#endif
     
     [self updateUI];
-    
     [self startTimerOnViewedScreen];
 }
 
