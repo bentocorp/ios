@@ -1939,6 +1939,11 @@
             }
         }
         
+        // server error?
+        if (error.code == 500) {
+            [self updateUI];
+        }
+        
         NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
         if (strMessage == nil) {
             strMessage = error.localizedDescription;
