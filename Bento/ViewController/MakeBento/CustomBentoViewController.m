@@ -200,50 +200,85 @@
     
 /*---Full Dishes View---*/
     
-    viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT/2.5)];
+    }
+    else {
+        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
+    }
+    
     viewDishs.layer.cornerRadius = 3;
     viewDishs.clipsToBounds = YES;
     viewDishs.layer.borderColor = BORDER_COLOR.CGColor;
     viewDishs.layer.borderWidth = 1.0f;
     [scrollView addSubview:viewDishs];
     
-    int everyDishHeight = viewDishs.frame.size.height / 3;
+    int everyDishHeight;
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        everyDishHeight = viewDishs.frame.size.height / 2;
+    }
+    else {
+        everyDishHeight = viewDishs.frame.size.height / 3;
+    }
     
 /*---View Dishes---*/
     
-    viewMainEntree = [[UIView alloc] initWithFrame:CGRectMake(-1, -1, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        viewMainEntree = [[UIView alloc] initWithFrame:CGRectMake(-1, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
+        viewSide1 = [[UIView alloc] initWithFrame:CGRectMake(viewDishs.frame.size.width/2, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
+        viewSide2 = [[UIView alloc] initWithFrame:CGRectMake(-1, everyDishHeight, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
+        viewSide3 = [[UIView alloc] initWithFrame:CGRectMake(viewDishs.frame.size.width/2, everyDishHeight, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
+        viewSide4 = [[UIView alloc] init];
+    }
+    else {
+        viewMainEntree = [[UIView alloc] initWithFrame:CGRectMake(-1, -1, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
+        viewSide1 = [[UIView alloc] initWithFrame:CGRectMake(-1, everyDishHeight, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
+        viewSide2 = [[UIView alloc] initWithFrame:CGRectMake(viewDishs.frame.size.width / 2, everyDishHeight, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
+        viewSide3 = [[UIView alloc] initWithFrame:CGRectMake(-1, everyDishHeight * 2, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
+        viewSide4 = [[UIView alloc] initWithFrame:CGRectMake(viewDishs.frame.size.width / 2, everyDishHeight * 2, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
+        
+        viewSide4.layer.borderWidth = 1.0f;
+        viewSide4.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
+        viewSide4.layer.borderColor = BORDER_COLOR.CGColor;
+        [viewDishs addSubview:viewSide4];
+    }
+    
     viewMainEntree.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
     [viewDishs addSubview:viewMainEntree];
     
-    viewSide1 = [[UIView alloc] initWithFrame:CGRectMake(-1, everyDishHeight, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
     viewSide1.layer.borderWidth = 1.0f;
     viewSide1.layer.borderColor = BORDER_COLOR.CGColor;
     viewSide1.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
     [viewDishs addSubview:viewSide1];
     
-    viewSide2 = [[UIView alloc] initWithFrame:CGRectMake(viewDishs.frame.size.width / 2, everyDishHeight, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 1)];
     viewSide2.layer.borderWidth = 1.0f;
     viewSide2.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
     viewSide2.layer.borderColor = BORDER_COLOR.CGColor;
     [viewDishs addSubview:viewSide2];
     
-    viewSide3 = [[UIView alloc] initWithFrame:CGRectMake(-1, everyDishHeight * 2, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
     viewSide3.layer.borderWidth = 1.0f;
     viewSide3.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
     viewSide3.layer.borderColor = BORDER_COLOR.CGColor;
     [viewDishs addSubview:viewSide3];
-
-    viewSide4 = [[UIView alloc] initWithFrame:CGRectMake(viewDishs.frame.size.width / 2, everyDishHeight * 2, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
-    viewSide4.layer.borderWidth = 1.0f;
-    viewSide4.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
-    viewSide4.layer.borderColor = BORDER_COLOR.CGColor;
-    [viewDishs addSubview:viewSide4];
     
 /*---Button Dishes---*/
     
-    btnMainDish = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
-//    btnMainDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
-    btnMainDish.backgroundColor = [UIColor redColor];
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        btnMainDish = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
+    }
+    else {
+        btnMainDish = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
+        
+        btnSideDish4 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
+        [btnSideDish4 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE4_BUTTON] forState:UIControlStateNormal];
+        [btnSideDish4 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
+        btnSideDish4.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+        btnSideDish4.tag = 3;
+        [btnSideDish4 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
+        [viewSide4 addSubview:btnSideDish4];
+    }
+    
+    btnMainDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
     [btnMainDish setTitle:[[AppStrings sharedInstance] getString:BUILD_MAIN_BUTTON] forState:UIControlStateNormal];
     [btnMainDish setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
     btnMainDish.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
@@ -274,17 +309,19 @@
     [btnSideDish3 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
     [viewSide3 addSubview:btnSideDish3];
     
-    btnSideDish4 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
-    [btnSideDish4 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE4_BUTTON] forState:UIControlStateNormal];
-    [btnSideDish4 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
-    btnSideDish4.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-    btnSideDish4.tag = 3;
-    [btnSideDish4 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
-    [viewSide4 addSubview:btnSideDish4];
-    
 /*---Image Dishes*---*/
     
-    ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
+    }
+    else {
+        ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
+        
+        ivSideDish4 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
+        [ivSideDish4 setClipsToBounds:YES];
+        ivSideDish4.contentMode = UIViewContentModeScaleAspectFill;
+        [viewSide4 addSubview:ivSideDish4];
+    }
     [ivMainDish setClipsToBounds:YES];
     ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
     [viewMainEntree addSubview:ivMainDish];
@@ -303,11 +340,6 @@
     [ivSideDish3 setClipsToBounds:YES];
     ivSideDish3.contentMode = UIViewContentModeScaleAspectFill;
     [viewSide3 addSubview:ivSideDish3];
-    
-    ivSideDish4 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
-    [ivSideDish4 setClipsToBounds:YES];
-    ivSideDish4.contentMode = UIViewContentModeScaleAspectFill;
-    [viewSide4 addSubview:ivSideDish4];
     
 /*---Gradient Layer---*/
     
@@ -331,14 +363,12 @@
     backgroundLayer.opacity = 0.8f;
     [ivSideDish3.layer insertSublayer:backgroundLayer atIndex:0];
 
-    backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = ivSideDish4.frame;
-    backgroundLayer.opacity = 0.8f;
-    [ivSideDish4.layer insertSublayer:backgroundLayer atIndex:0];
+    
     
 /*---Label Dishes---*/
     
-    lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
+    lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
+    lblMainDish.numberOfLines = 0;
     lblMainDish.textColor = [UIColor whiteColor];
     lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:18.0f];
     lblMainDish.textAlignment = NSTextAlignmentCenter;
@@ -366,14 +396,21 @@
     lblSideDish3.adjustsFontSizeToFitWidth = YES;
     [viewSide3 addSubview:lblSideDish3];
     
-    lblSideDish4 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
-    lblSideDish4.textColor = [UIColor whiteColor];
-    lblSideDish4.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-    lblSideDish4.textAlignment = NSTextAlignmentCenter;
-    lblSideDish4.adjustsFontSizeToFitWidth = YES;
-    [viewSide4 addSubview:lblSideDish4];
+    if (![[BentoShop sharedInstance] is4PodMode]) {
+        
+        backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = ivSideDish4.frame;
+        backgroundLayer.opacity = 0.8f;
+        [ivSideDish4.layer insertSublayer:backgroundLayer atIndex:0];
+        
+        lblSideDish4 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
+        lblSideDish4.textColor = [UIColor whiteColor];
+        lblSideDish4.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
+        lblSideDish4.textAlignment = NSTextAlignmentCenter;
+        lblSideDish4.adjustsFontSizeToFitWidth = YES;
+        [viewSide4 addSubview:lblSideDish4];
+    }
     
-
 /*---Image Banner---*/
     
     UIImage *soldOutBannerImage = [UIImage imageNamed:@"banner_sold_out"];

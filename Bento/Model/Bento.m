@@ -22,7 +22,7 @@
         self.indexSideDish1 = 0;
         self.indexSideDish2 = 0;
         self.indexSideDish3 = 0;
-        self.indexSideDish4 = 0; // toggle
+        self.indexSideDish4 = 0;
     }
     
     return self;
