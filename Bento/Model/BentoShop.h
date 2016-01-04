@@ -127,4 +127,6 @@
 - (float)getDeliveryPrice;
 - (NSString *)getTaxPercent;
 
+- (BOOL)is4PodMode;
+
 @end

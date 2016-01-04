@@ -15,7 +15,7 @@
 @property (nonatomic) NSInteger indexSideDish1;
 @property (nonatomic) NSInteger indexSideDish2;
 @property (nonatomic) NSInteger indexSideDish3;
-@property (nonatomic) NSInteger indexSideDish4;
+@property (nonatomic) NSInteger indexSideDish4; // toggle
 
 // Testing
 - (NSInteger)getMainDish;
@@ -29,7 +29,7 @@
 - (void)setSideDish1:(NSInteger)indexSideDish;
 - (void)setSideDish2:(NSInteger)indexSideDish;
 - (void)setSideDish3:(NSInteger)indexSideDish;
-- (void)setSideDish4:(NSInteger)indexSideDish;
+- (void)setSideDish4:(NSInteger)indexSideDish; // toggle
 
 // Not Testing
 - (NSString *)getBentoName;

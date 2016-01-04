@@ -1547,4 +1547,8 @@ static BentoShop *_shareInstance;
     return signedIn;
 }
 
+- (BOOL)is4PodMode {
+    return YES;
+}
+
 @end
