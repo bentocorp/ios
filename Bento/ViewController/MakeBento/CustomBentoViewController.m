@@ -201,7 +201,7 @@
 /*---Full Dishes View---*/
     
     if ([[BentoShop sharedInstance] is4PodMode]) {
-        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT/2.5)];
+        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT/2.25)];
     }
     else {
         viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
@@ -375,21 +375,24 @@
     lblMainDish.adjustsFontSizeToFitWidth = YES;
     [viewMainEntree addSubview:lblMainDish];
     
-    lblSideDish1 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
+    lblSideDish1 = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
+    lblSideDish1.numberOfLines = 0;
     lblSideDish1.textColor = [UIColor whiteColor];
     lblSideDish1.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
     lblSideDish1.textAlignment = NSTextAlignmentCenter;
     lblSideDish1.adjustsFontSizeToFitWidth = YES;
     [viewSide1 addSubview:lblSideDish1];
 
-    lblSideDish2 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 1)];
+    lblSideDish2 = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
+    lblSideDish2.numberOfLines = 0;
     lblSideDish2.textColor = [UIColor whiteColor];
     lblSideDish2.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
     lblSideDish2.textAlignment = NSTextAlignmentCenter;
     lblSideDish2.adjustsFontSizeToFitWidth = YES;
     [viewSide2 addSubview:lblSideDish2];
 
-    lblSideDish3 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
+    lblSideDish3 = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
+    lblSideDish3.numberOfLines = 0;
     lblSideDish3.textColor = [UIColor whiteColor];
     lblSideDish3.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
     lblSideDish3.textAlignment = NSTextAlignmentCenter;
