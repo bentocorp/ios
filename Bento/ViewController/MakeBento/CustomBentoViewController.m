@@ -201,7 +201,7 @@
 /*---Full Dishes View---*/
     
     if ([[BentoShop sharedInstance] is4PodMode]) {
-        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT/2.25)];
+        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 60, SCREEN_WIDTH - 60, SCREEN_HEIGHT/2.25)];
     }
     else {
         viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
@@ -488,7 +488,12 @@
     
 /*---Button State---*/
     
-    btnState = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45-65, SCREEN_WIDTH, 45)];
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        btnState = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45-65, SCREEN_WIDTH, 45)];
+    }
+    else {
+        btnState = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45-65, SCREEN_WIDTH, 45)];
+    }
     [btnState setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
     [btnState addTarget:self action:@selector(onFinalize) forControlEvents:UIControlEventTouchUpInside];
@@ -534,13 +539,14 @@
 /*------*/
     
     NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
-    if (strTitle == nil)
+    if (strTitle == nil) {
         strTitle = @"BUILD YOUR BENTO";
+    }
     
 //    NSString *strTitle = @"BUILD YOUR BENTO - $12";
     
-    if (strTitle != nil)
-    {
+    if (strTitle != nil) {
+        
         // Add Another Bento Button
         [btnAddAnotherBento setTitle:strTitle forState:UIControlStateNormal];
         NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
@@ -577,8 +583,9 @@
     }
     
     // an empty empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
-    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0)
+    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
         [[BentoShop sharedInstance] addNewBento];
+    }
     
     lblBadge.hidden = NO;
     btnCart.hidden = NO;
