@@ -991,19 +991,34 @@ static BentoShop *_shareInstance;
     if ([self isSoldOut]) {
         return YES;
     }
-
+    
+    // this is used to check whether or not the current item exists in status/menu
+    // because an item can exist in an menu, but not be added to live inventory
+    // the item is initialized to 0 when setting driver inventory, which makes it not appear in live inventory and status/menu
+    BOOL dishExistInStatusMenu = NO;
+    
+    
+    // check if dishExistInStatusMenu
     for (NSDictionary *menuItem in self.menuStatus) {
         
-        NSInteger itemID;
+        NSInteger itemID; // item from status/menu
         
         if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]]) { // this should prevent nil being sent into NSNull
             itemID = [[menuItem objectForKey:@"itemId"] integerValue];
         }
         
+        // check if item exists in status/menu
         if (itemID == menuID) {
-            
-            NSInteger quantity;
-            
+            dishExistInStatusMenu = YES;
+        }
+    }
+    
+    // if exists, THEN check qty
+    if (dishExistInStatusMenu) {
+        NSInteger quantity;
+        
+        // get qty of menuItem
+        for (NSDictionary *menuItem in self.menuStatus) {
             if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]]) { // this should prevent nil being sent into NSNull
                 quantity = [[menuItem objectForKey:@"qty"] integerValue];
             }
@@ -1015,6 +1030,10 @@ static BentoShop *_shareInstance;
                 return YES;
             }
         }
+    }
+    // if not exist, then it's sold out
+    else {
+        return YES;
     }
     
     return NO;
