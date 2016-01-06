@@ -201,7 +201,12 @@
         return 1; // 1 main dish
     }
     else {
-        return 4; // 4 side dishes
+        if ([[BentoShop sharedInstance] is4PodMode]) {
+            return 3; // 3 side dishes
+        }
+        else {
+            return 4; // 4 side dishes
+        }
     }
     
     return 0;
