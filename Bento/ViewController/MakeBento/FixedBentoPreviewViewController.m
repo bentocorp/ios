@@ -343,7 +343,12 @@
         return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width * 3 / 5);
     }
     else if (indexPath.section == 1) { // Side Dish
-        return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
+        if ([[BentoShop sharedInstance] is4PodMode]) {
+            return CGSizeMake(cvDishes.frame.size.width, cvDishes.frame.size.width / 2);
+        }
+        else {
+            return CGSizeMake(cvDishes.frame.size.width / 2, cvDishes.frame.size.width / 2);
+        }
     }
     
     return CGSizeMake(0, 0);
