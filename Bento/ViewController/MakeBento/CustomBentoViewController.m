@@ -201,7 +201,7 @@
 /*---Full Dishes View---*/
     
     if ([[BentoShop sharedInstance] is4PodMode]) {
-        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(-2, 40, SCREEN_WIDTH+4, SCREEN_WIDTH)];
+        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(-2, 40, SCREEN_WIDTH + 4, SCREEN_HEIGHT - 45 - 65 - 110)];
     }
     else {
         viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
