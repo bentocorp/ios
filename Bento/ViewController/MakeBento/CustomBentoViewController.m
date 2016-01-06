@@ -201,7 +201,7 @@
 /*---Full Dishes View---*/
     
     if ([[BentoShop sharedInstance] is4PodMode]) {
-        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(-2, 40, SCREEN_WIDTH + 4, SCREEN_HEIGHT - 45 - 65 - 110)];
+        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(20, 60, SCREEN_WIDTH - 40, SCREEN_HEIGHT - 45 - 65 - 160)];
     }
     else {
         viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
@@ -445,6 +445,10 @@
     btnAddAnotherBento.layer.borderWidth = 1.0f;
     [btnAddAnotherBento setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     btnAddAnotherBento.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    [btnAddAnotherBento setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)];
+    btnAddAnotherBento.titleLabel.adjustsFontSizeToFitWidth = YES;
+    btnAddAnotherBento.titleLabel.numberOfLines = 0;
+    btnAddAnotherBento.titleLabel.textAlignment = NSTextAlignmentCenter;
     [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
     [btnAddAnotherBento addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
     [scrollView addSubview:btnAddAnotherBento];
@@ -459,13 +463,19 @@
 //    orLabel.hidden = YES;
 //    [scrollView addSubview:orLabel];
     
-    addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45)];
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, SCREEN_HEIGHT - 45 -65 - 65, SCREEN_WIDTH/2-10, 45)];
+    }
+    else {
+        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45)];
+    }
     addonsButton.layer.borderColor = BORDER_COLOR.CGColor;
     addonsButton.layer.borderWidth = 1.0f;
     [addonsButton setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
     [addonsButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     addonsButton.hidden = YES;
     addonsButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    
     
     // Add Another Bento Button
     NSString *addonsText = @"VIEW ADD-ONS";
@@ -1400,7 +1410,14 @@
         orLabel.hidden = NO;
         addonsButton.hidden = NO;
 //        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45); // short version
-        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45);
+        
+        
+        if ([[BentoShop sharedInstance] is4PodMode]) {
+            btnAddAnotherBento.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH/2-10, 45);
+        }
+        else {
+            btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45);
+        }
     }
     // 0 bentos in cart
     else {
@@ -1409,7 +1426,7 @@
         addonsButton.hidden = YES;
         
         if ([[BentoShop sharedInstance] is4PodMode]) {
-            btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH+2, 45); // long version
+            btnAddAnotherBento.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH + 2, 45); // long version
         }
         else {
             btnAddAnotherBento.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH - 60, 45); // long version
