@@ -997,7 +997,6 @@ static BentoShop *_shareInstance;
     // the item is initialized to 0 when setting driver inventory, which makes it not appear in live inventory and status/menu
     BOOL dishExistInStatusMenu = NO;
     
-    
     // check if dishExistInStatusMenu
     for (NSDictionary *menuItem in self.menuStatus) {
         
@@ -1017,17 +1016,27 @@ static BentoShop *_shareInstance;
     if (dishExistInStatusMenu) {
         NSInteger quantity;
         
-        // get qty of menuItem
+        // check quantity of found item
         for (NSDictionary *menuItem in self.menuStatus) {
-            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]]) { // this should prevent nil being sent into NSNull
-                quantity = [[menuItem objectForKey:@"qty"] integerValue];
+            
+            NSInteger itemID;
+            
+            if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]]) {
+                itemID = [[menuItem objectForKey:@"itemId"] integerValue];
             }
             
-            if (quantity > 0) {
-                return NO;
-            }
-            else {
-                return YES;
+            if (itemID == menuID) {
+                
+                if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]]) {
+                    quantity = [[menuItem objectForKey:@"qty"] integerValue];
+                }
+                
+                if (quantity > 0) {
+                    return NO;
+                }
+                else {
+                    return YES;
+                }
             }
         }
     }
@@ -1577,7 +1586,7 @@ static BentoShop *_shareInstance;
 }
 
 - (BOOL)is4PodMode {
-    return YES;
+    return NO;
 }
 
 @end
