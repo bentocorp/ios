@@ -438,7 +438,7 @@
     ivBannerSideDish4.image = soldOutBannerImage;
     [viewSide4 addSubview:ivBannerSideDish4];
     
-/*---Add Another Bento Button---*/
+/*---Add Another Bento Button---*///
     
     btnAddAnotherBento = [[UIButton alloc] init];
     btnAddAnotherBento.layer.borderColor = BORDER_COLOR.CGColor;
