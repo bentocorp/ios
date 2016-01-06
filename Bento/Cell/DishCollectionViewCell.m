@@ -78,7 +78,6 @@
         return;
     }
     
-    // if current bento is not empty
     if ([[[BentoShop sharedInstance] getCurrentBento] isEmpty]) {
         
         // if not tracked yet
@@ -87,8 +86,6 @@
             [[Mixpanel sharedInstance] track:@"Began Building A Bento"];
             
             trackingCurrentBento = YES;
-            
-            NSLog(@"BEGAN BUILDING A BENTO");
         }
     }
     else {

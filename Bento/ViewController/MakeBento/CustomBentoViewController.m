@@ -201,7 +201,7 @@
 /*---Full Dishes View---*/
     
     if ([[BentoShop sharedInstance] is4PodMode]) {
-        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 60, SCREEN_WIDTH - 60, SCREEN_HEIGHT/2.25)];
+        viewDishs = [[UIView alloc] initWithFrame:CGRectMake(-2, 40, SCREEN_WIDTH+4, SCREEN_WIDTH)];
     }
     else {
         viewDishs = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), 40, SCREEN_WIDTH - 60, SCREEN_HEIGHT - 220)];
@@ -440,7 +440,7 @@
     
 /*---Add Another Bento Button---*/
     
-    btnAddAnotherBento = [[UIButton alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45, SCREEN_WIDTH - 60, 45)];
+    btnAddAnotherBento = [[UIButton alloc] init];
     btnAddAnotherBento.layer.borderColor = BORDER_COLOR.CGColor;
     btnAddAnotherBento.layer.borderWidth = 1.0f;
     [btnAddAnotherBento setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
@@ -770,6 +770,20 @@
 - (void)viewWillAppear:(BOOL)animated
 {
     [super viewWillAppear:animated];
+    
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        
+        if ([[[BentoShop sharedInstance] getCurrentBento] getMainDish] == 0 &&
+            [[[BentoShop sharedInstance] getCurrentBento] getSideDish1] == 0 &&
+            [[[BentoShop sharedInstance] getCurrentBento] getSideDish2] == 0 &&
+            [[[BentoShop sharedInstance] getCurrentBento] getSideDish3] == 0) {
+            
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:0];
+        }
+        else {
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:-1];
+        }
+    }
     
     addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
@@ -1393,7 +1407,13 @@
         
         orLabel.hidden = YES;
         addonsButton.hidden = YES;
-        btnAddAnotherBento.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH - 60, 45); // long version
+        
+        if ([[BentoShop sharedInstance] is4PodMode]) {
+            btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH+2, 45); // long version
+        }
+        else {
+            btnAddAnotherBento.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH - 60, 45); // long version
+        }
     }
     
     // current bento is empty

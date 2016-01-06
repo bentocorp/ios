@@ -1599,14 +1599,16 @@
         dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side3", @"name" : strDishName };
         [dishArray addObject:dicDish];
         
-        dishIndex = [bento getSideDish4];
-        dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
-        strDishName = [dishInfo objectForKey:@"name"];
-        if (strDishName != nil) {
-            [currentBentoDishes setObject:strDishName forKey:@"side4"];
+        if (![[BentoShop sharedInstance] is4PodMode]) {
+            dishIndex = [bento getSideDish4];
+            dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+            strDishName = [dishInfo objectForKey:@"name"];
+            if (strDishName != nil) {
+                [currentBentoDishes setObject:strDishName forKey:@"side4"];
+            }
+            dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side4", @"name" : strDishName };
+            [dishArray addObject:dicDish];
         }
-        dicDish = @{ @"id" : [NSString stringWithFormat:@"%ld", (long)dishIndex], @"type" : @"side4", @"name" : strDishName };
-        [dishArray addObject:dicDish];
         
         [bentoInfo setObject:dishArray forKey:@"items"];
         
