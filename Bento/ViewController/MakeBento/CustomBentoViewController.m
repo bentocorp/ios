@@ -368,10 +368,10 @@
 /*---Label Dishes---*/
     
     if ([[BentoShop sharedInstance] is4PodMode]) {
-        lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width - 10, 40)];
+        lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
     }
     else {
-        lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
+        lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width - 10, 40)];
     }
     
     lblMainDish.numberOfLines = 0;
@@ -379,7 +379,6 @@
     lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:18.0f];
     lblMainDish.textAlignment = NSTextAlignmentCenter;
     lblMainDish.adjustsFontSizeToFitWidth = YES;
-    lblMainDish.backgroundColor = [UIColor redColor];
     [viewMainEntree addSubview:lblMainDish];
     
     lblSideDish1 = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
