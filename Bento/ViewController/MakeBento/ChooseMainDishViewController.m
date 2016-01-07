@@ -251,8 +251,9 @@
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
-    if (self.aryDishes == nil)
+    if (self.aryDishes == nil) {
         return 0;
+    }
     
     return self.aryDishes.count;
 }
