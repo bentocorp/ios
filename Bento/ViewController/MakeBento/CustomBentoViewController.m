@@ -363,8 +363,6 @@
     backgroundLayer.opacity = 0.8f;
     [ivSideDish3.layer insertSublayer:backgroundLayer atIndex:0];
 
-    
-    
 /*---Label Dishes---*/
     
     if ([[BentoShop sharedInstance] is4PodMode]) {

@@ -74,7 +74,7 @@
 
 - (IBAction)onAction:(id)sender
 {
-    if (_isSoldOut || (!_canBeAdded && self.state == DISH_CELL_FOCUS)) {
+    if ((_isSoldOut && self.state != DISH_CELL_SELECTED) || (!_canBeAdded && self.state == DISH_CELL_FOCUS)) {
         return;
     }
     
