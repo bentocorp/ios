@@ -1,18 +1,18 @@
 //
-//  HomePageViewController.m
+//  FixedViewController.m
 //  Bento
 //
 //  Created by Joseph Lau on 1/8/16.
 //  Copyright © 2016 bentonow. All rights reserved.
 //
 
-#import "HomePageViewController.h"
+#import "FixedViewController.h"
 
-@interface HomePageViewController ()
+@interface FixedViewController ()
 
 @end
 
-@implementation HomePageViewController
+@implementation FixedViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

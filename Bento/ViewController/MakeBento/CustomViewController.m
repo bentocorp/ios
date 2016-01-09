@@ -1,18 +1,18 @@
 //
-//  HomePageViewController.m
+//  CustomViewController.m
 //  Bento
 //
 //  Created by Joseph Lau on 1/8/16.
 //  Copyright © 2016 bentonow. All rights reserved.
 //
 
-#import "HomePageViewController.h"
+#import "CustomViewController.h"
 
-@interface HomePageViewController ()
+@interface CustomViewController ()
 
 @end
 
-@implementation HomePageViewController
+@implementation CustomViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
