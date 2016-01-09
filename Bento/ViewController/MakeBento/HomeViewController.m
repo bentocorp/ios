@@ -29,8 +29,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // custom and fixed VC are added on left side of scrollView
-    if ([[[BentoShop sharedInstance] getMenuType] isEqualToString:@"custom"]) {
+    NSString *menuType = [[BentoShop sharedInstance] getMenuType];
+    
+    if ([menuType isEqualToString:@"custom"]) {
         self.customVC = [[CustomViewController alloc] init];
         [self addChildViewController:self.customVC];
         [self.scrollView addSubview:self.customVC.view];
@@ -43,7 +44,6 @@
         [self.fixedVC didMoveToParentViewController:self];
     }
     
-    // previewVC is added to right side of scrollView
     PreviewViewController *previewVC = [[PreviewViewController alloc] init];
     CGRect frame = previewVC.view.frame;
     frame.origin.x = SCREEN_WIDTH;
@@ -56,8 +56,6 @@
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT);
     self.scrollView.pagingEnabled = NO;
     self.scrollView.bounces = NO;
-    
-    
 }
 
 - (void)didReceiveMemoryWarning {
