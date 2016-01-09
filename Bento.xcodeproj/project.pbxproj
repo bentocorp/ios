@@ -517,6 +517,10 @@
 		FCF872211BFFD12B0091A206 /* minus-green-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8721E1BFFD12B0091A206 /* minus-green-100.png */; };
 		FCF872221BFFD12B0091A206 /* plus-green-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8721F1BFFD12B0091A206 /* plus-green-100.png */; };
 		FCF872231BFFD12B0091A206 /* plus-green-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8721F1BFFD12B0091A206 /* plus-green-100.png */; };
+		FCFF02451C407D2400EFD584 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF02431C407D2400EFD584 /* HomePageViewController.m */; };
+		FCFF02461C407D2400EFD584 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF02431C407D2400EFD584 /* HomePageViewController.m */; };
+		FCFF02471C407D2400EFD584 /* HomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFF02441C407D2400EFD584 /* HomePageViewController.xib */; };
+		FCFF02481C407D2400EFD584 /* HomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFF02441C407D2400EFD584 /* HomePageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -957,6 +961,9 @@
 		FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-gray.JPG"; sourceTree = "<group>"; };
 		FCF8721E1BFFD12B0091A206 /* minus-green-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-green-100.png"; sourceTree = "<group>"; };
 		FCF8721F1BFFD12B0091A206 /* plus-green-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-green-100.png"; sourceTree = "<group>"; };
+		FCFF02421C407D2400EFD584 /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
+		FCFF02431C407D2400EFD584 /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
+		FCFF02441C407D2400EFD584 /* HomePageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1400,6 +1407,9 @@
 		90BED0A51A5BD05C003DC872 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
+				FCFF02421C407D2400EFD584 /* HomePageViewController.h */,
+				FCFF02431C407D2400EFD584 /* HomePageViewController.m */,
+				FCFF02441C407D2400EFD584 /* HomePageViewController.xib */,
 				FC3C4E801AF97FD7005D7197 /* Custom Bento */,
 				FC3C4E7F1AF97FCD005D7197 /* Fixed Bento */,
 			);
@@ -2209,6 +2219,7 @@
 				7216B7831AA64C7C0006FFE9 /* JGProgressHUD Resources.bundle in Resources */,
 				7216B7841AA64C7C0006FFE9 /* polygon_service_area.png in Resources */,
 				FCDF222B1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
+				FCFF02481C407D2400EFD584 /* HomePageViewController.xib in Resources */,
 				7216B7851AA64C7C0006FFE9 /* nav_btn_back@2x.png in Resources */,
 				FCDF221F1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
 				7216B7861AA64C7C0006FFE9 /* register_icon_facebook.png in Resources */,
@@ -2340,6 +2351,7 @@
 				FC8DB7401AF18674003045A3 /* icon-navigateright.png in Resources */,
 				7223335A1A6D4058006C2446 /* JGProgressHUD Resources.bundle in Resources */,
 				726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */,
+				FCFF02471C407D2400EFD584 /* HomePageViewController.xib in Resources */,
 				FCDF222A1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
 				FC1D61601BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */,
 				90BED0E31A5C1E70003DC872 /* nav_btn_back@2x.png in Resources */,
@@ -2538,6 +2550,7 @@
 				7216B70C1AA64C7C0006FFE9 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
+				FCFF02461C407D2400EFD584 /* HomePageViewController.m in Sources */,
 				FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */,
 				FC4327B51BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
@@ -2655,6 +2668,7 @@
 				722333631A6D4058006C2446 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				7286EB4E1A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
+				FCFF02451C407D2400EFD584 /* HomePageViewController.m in Sources */,
 				FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */,
 				FC4327B41BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
