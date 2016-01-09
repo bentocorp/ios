@@ -6,11 +6,16 @@
 //  Copyright © 2016 bentonow. All rights reserved.
 //
 
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #import "HomeViewController.h"
 #import "CustomViewController.h"
 #import "FixedViewController.h"
 
 @interface HomeViewController ()
+
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
 @end
 
@@ -18,7 +23,24 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view from its nib.
+    
+    CustomViewController *customVC = [[CustomViewController alloc] init];
+    [self addChildViewController:customVC];
+    [self.scrollView addSubview:customVC.view];
+    [customVC didMoveToParentViewController:self];
+    
+    FixedViewController *fixedVC = [[FixedViewController alloc] init];
+    CGRect frame = fixedVC.view.frame;
+    frame.origin.x = SCREEN_WIDTH;
+    fixedVC.view.frame = frame;
+    
+    [self addChildViewController:fixedVC];
+    [self.scrollView addSubview:fixedVC.view];
+    [fixedVC didMoveToParentViewController:self];
+    
+    self.scrollView.contentSize = CGSizeMake(640, SCREEN_HEIGHT);
+    self.scrollView.pagingEnabled = NO;
+    self.scrollView.bounces = NO;
 }
 
 - (void)didReceiveMemoryWarning {
