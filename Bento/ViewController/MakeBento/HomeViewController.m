@@ -12,10 +12,14 @@
 #import "HomeViewController.h"
 #import "CustomViewController.h"
 #import "FixedViewController.h"
+#import "PreviewViewController.h"
 
 @interface HomeViewController ()
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (nonatomic) CustomViewController *customVC;
+@property (nonatomic) FixedViewController *fixedVC;
 
 @end
 
@@ -24,19 +28,29 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    CustomViewController *customVC = [[CustomViewController alloc] init];
-    [self addChildViewController:customVC];
-    [self.scrollView addSubview:customVC.view];
-    [customVC didMoveToParentViewController:self];
+    // custom and fixed VC are added on left side of scrollView
+    if () {
+        self.customVC = [[CustomViewController alloc] init];
+        [self addChildViewController:self.customVC];
+        [self.scrollView addSubview:self.customVC.view];
+        [self.customVC didMoveToParentViewController:self];
+    }
+    else {
+        self.fixedVC = [[FixedViewController alloc] init];
+        [self addChildViewController:self.fixedVC];
+        [self.scrollView addSubview:self.fixedVC.view];
+        [self.fixedVC didMoveToParentViewController:self];
+    }
     
-    FixedViewController *fixedVC = [[FixedViewController alloc] init];
-    CGRect frame = fixedVC.view.frame;
+    // previewVC is added to right side of scrollView
+    PreviewViewController *previewVC = [[PreviewViewController alloc] init];
+    CGRect frame = previewVC.view.frame;
     frame.origin.x = SCREEN_WIDTH;
-    fixedVC.view.frame = frame;
+    previewVC.view.frame = frame;
     
-    [self addChildViewController:fixedVC];
-    [self.scrollView addSubview:fixedVC.view];
-    [fixedVC didMoveToParentViewController:self];
+    [self addChildViewController:previewVC];
+    [self.scrollView addSubview:previewVC.view];
+    [previewVC didMoveToParentViewController:self];
     
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT);
     self.scrollView.pagingEnabled = NO;
