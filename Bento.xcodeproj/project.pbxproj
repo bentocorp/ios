@@ -379,6 +379,10 @@
 		FC8F99691C408CE300004DAE /* FixedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F99661C408CE300004DAE /* FixedViewController.m */; };
 		FC8F996A1C408CE300004DAE /* FixedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99671C408CE300004DAE /* FixedViewController.xib */; };
 		FC8F996B1C408CE300004DAE /* FixedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99671C408CE300004DAE /* FixedViewController.xib */; };
+		FC8F996F1C408DDF00004DAE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F996D1C408DDF00004DAE /* HomeViewController.m */; };
+		FC8F99701C408DDF00004DAE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F996D1C408DDF00004DAE /* HomeViewController.m */; };
+		FC8F99711C408DDF00004DAE /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F996E1C408DDF00004DAE /* HomeViewController.xib */; };
+		FC8F99721C408DDF00004DAE /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F996E1C408DDF00004DAE /* HomeViewController.xib */; };
 		FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; };
 		FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; };
 		FC94E3411BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; };
@@ -525,10 +529,6 @@
 		FCF872211BFFD12B0091A206 /* minus-green-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8721E1BFFD12B0091A206 /* minus-green-100.png */; };
 		FCF872221BFFD12B0091A206 /* plus-green-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8721F1BFFD12B0091A206 /* plus-green-100.png */; };
 		FCF872231BFFD12B0091A206 /* plus-green-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF8721F1BFFD12B0091A206 /* plus-green-100.png */; };
-		FCFF02451C407D2400EFD584 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF02431C407D2400EFD584 /* HomePageViewController.m */; };
-		FCFF02461C407D2400EFD584 /* HomePageViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCFF02431C407D2400EFD584 /* HomePageViewController.m */; };
-		FCFF02471C407D2400EFD584 /* HomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFF02441C407D2400EFD584 /* HomePageViewController.xib */; };
-		FCFF02481C407D2400EFD584 /* HomePageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCFF02441C407D2400EFD584 /* HomePageViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -885,6 +885,9 @@
 		FC8F99651C408CE300004DAE /* FixedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedViewController.h; sourceTree = "<group>"; };
 		FC8F99661C408CE300004DAE /* FixedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedViewController.m; sourceTree = "<group>"; };
 		FC8F99671C408CE300004DAE /* FixedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixedViewController.xib; sourceTree = "<group>"; };
+		FC8F996C1C408DDF00004DAE /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
+		FC8F996D1C408DDF00004DAE /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
+		FC8F996E1C408DDF00004DAE /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		FC92E1B11B7E5C890073C5D7 /* Bento copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bento copy-Info.plist"; path = "/Users/JosephLauSF/_github/Bento/Bento copy-Info.plist"; sourceTree = "<absolute>"; };
 		FC92E1B21B7E5D500073C5D7 /* calabash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = calabash.framework; sourceTree = "<group>"; };
 		FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -975,9 +978,6 @@
 		FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-gray.JPG"; sourceTree = "<group>"; };
 		FCF8721E1BFFD12B0091A206 /* minus-green-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-green-100.png"; sourceTree = "<group>"; };
 		FCF8721F1BFFD12B0091A206 /* plus-green-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "plus-green-100.png"; sourceTree = "<group>"; };
-		FCFF02421C407D2400EFD584 /* HomePageViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomePageViewController.h; sourceTree = "<group>"; };
-		FCFF02431C407D2400EFD584 /* HomePageViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomePageViewController.m; sourceTree = "<group>"; };
-		FCFF02441C407D2400EFD584 /* HomePageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomePageViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1421,9 +1421,9 @@
 		90BED0A51A5BD05C003DC872 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
-				FCFF02421C407D2400EFD584 /* HomePageViewController.h */,
-				FCFF02431C407D2400EFD584 /* HomePageViewController.m */,
-				FCFF02441C407D2400EFD584 /* HomePageViewController.xib */,
+				FC8F996C1C408DDF00004DAE /* HomeViewController.h */,
+				FC8F996D1C408DDF00004DAE /* HomeViewController.m */,
+				FC8F996E1C408DDF00004DAE /* HomeViewController.xib */,
 				FC8F995E1C408CCC00004DAE /* CustomViewController.h */,
 				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
 				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
@@ -2240,7 +2240,6 @@
 				7216B7831AA64C7C0006FFE9 /* JGProgressHUD Resources.bundle in Resources */,
 				7216B7841AA64C7C0006FFE9 /* polygon_service_area.png in Resources */,
 				FCDF222B1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
-				FCFF02481C407D2400EFD584 /* HomePageViewController.xib in Resources */,
 				7216B7851AA64C7C0006FFE9 /* nav_btn_back@2x.png in Resources */,
 				FCDF221F1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
 				7216B7861AA64C7C0006FFE9 /* register_icon_facebook.png in Resources */,
@@ -2315,6 +2314,7 @@
 				FCB35C4A1BFE74EC00A590EC /* Plus Math-64.png in Resources */,
 				7216B7A91AA64C7C0006FFE9 /* orderconfirm_image_plus@2x.png in Resources */,
 				7216B7AA1AA64C7C0006FFE9 /* register_image_or.png in Resources */,
+				FC8F99721C408DDF00004DAE /* HomeViewController.xib in Resources */,
 				FCB35C401BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
 				FC7291271BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */,
 				7216B7AB1AA64C7C0006FFE9 /* Images.xcassets in Resources */,
@@ -2374,7 +2374,6 @@
 				FC8DB7401AF18674003045A3 /* icon-navigateright.png in Resources */,
 				7223335A1A6D4058006C2446 /* JGProgressHUD Resources.bundle in Resources */,
 				726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */,
-				FCFF02471C407D2400EFD584 /* HomePageViewController.xib in Resources */,
 				FCDF222A1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
 				FC1D61601BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */,
 				90BED0E31A5C1E70003DC872 /* nav_btn_back@2x.png in Resources */,
@@ -2449,6 +2448,7 @@
 				FCB35C491BFE74EC00A590EC /* Plus Math-64.png in Resources */,
 				90359C261A5EC49700AAD5D2 /* orderconfirm_image_plus@2x.png in Resources */,
 				90D8F7B51A5D84B800D034CF /* register_image_or.png in Resources */,
+				FC8F99711C408DDF00004DAE /* HomeViewController.xib in Resources */,
 				FCB35C3F1BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
 				90BED07F1A5BCC04003DC872 /* Images.xcassets in Resources */,
 				90D8F7B01A5D84B800D034CF /* register_icon_email.png in Resources */,
@@ -2574,7 +2574,6 @@
 				7216B70C1AA64C7C0006FFE9 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
-				FCFF02461C407D2400EFD584 /* HomePageViewController.m in Sources */,
 				FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */,
 				FC4327B51BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
@@ -2596,6 +2595,7 @@
 				7216B71D1AA64C7C0006FFE9 /* SignInViewController.m in Sources */,
 				FCE036E41BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
 				FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
+				FC8F99701C408DDF00004DAE /* HomeViewController.m in Sources */,
 				7216B71E1AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
 				FCE036E81BEAC39000F7605B /* CustomAnnotation.m in Sources */,
@@ -2694,7 +2694,6 @@
 				722333631A6D4058006C2446 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				7286EB4E1A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
-				FCFF02451C407D2400EFD584 /* HomePageViewController.m in Sources */,
 				FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */,
 				FC4327B41BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
@@ -2716,6 +2715,7 @@
 				90D8F7BA1A5D963300D034CF /* SignInViewController.m in Sources */,
 				FCE036E31BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
 				FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
+				FC8F996F1C408DDF00004DAE /* HomeViewController.m in Sources */,
 				722333FB1A72C133006C2446 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
 				FCE036E71BEAC39000F7605B /* CustomAnnotation.m in Sources */,

@@ -1,5 +1,5 @@
 //
-//  HomePageViewController.h
+//  HomeViewController.h
 //  Bento
 //
 //  Created by Joseph Lau on 1/8/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface HomePageViewController : UIViewController
+@interface HomeViewController : UIViewController
 
 @end
