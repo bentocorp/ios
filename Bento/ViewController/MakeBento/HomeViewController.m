@@ -7,6 +7,8 @@
 //
 
 #import "HomeViewController.h"
+#import "CustomViewController.h"
+#import "FixedViewController.h"
 
 @interface HomeViewController ()
 
