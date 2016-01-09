@@ -13,6 +13,7 @@
 #import "CustomViewController.h"
 #import "FixedViewController.h"
 #import "PreviewViewController.h"
+#import "BentoShop.h"
 
 @interface HomeViewController ()
 
@@ -29,7 +30,7 @@
     [super viewDidLoad];
     
     // custom and fixed VC are added on left side of scrollView
-    if () {
+    if ([[[BentoShop sharedInstance] getMenuType] isEqualToString:@"custom"]) {
         self.customVC = [[CustomViewController alloc] init];
         [self addChildViewController:self.customVC];
         [self.scrollView addSubview:self.customVC.view];
