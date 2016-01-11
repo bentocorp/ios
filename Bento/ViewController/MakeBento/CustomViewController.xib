@@ -7,6 +7,10 @@
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -20,10 +24,10 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MY8-f4-9Hi">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MY8-f4-9Hi" userLabel="customBGView">
                     <rect key="frame" x="0.0" y="93" width="375" height="529"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB" userLabel="buildYourBentoButton">
                             <rect key="frame" x="-1" y="464" width="377" height="45"/>
                             <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
@@ -33,23 +37,59 @@
                             <color key="tintColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="BUILD YOUR BENTO"/>
                         </button>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf" userLabel="dishBGView">
                             <rect key="frame" x="20" y="30" width="335" height="404"/>
                             <subviews>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W">
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W" userLabel="mainDishView">
                                     <rect key="frame" x="-1" y="-1" width="168" height="202"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPQ-6s-zQD" userLabel="addMainButton">
+                                            <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
+                                            <state key="normal" title="+ MAIN DISH">
+                                                <color key="titleColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" red="0.85481753508798386" green="0.8719138857897436" blue="0.8719138857897436" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-fS-Enw">
-                                    <rect key="frame" x="168" y="202" width="168" height="202"/>
-                                    <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
-                                </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6b-ZY-Fdi">
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6b-ZY-Fdi" userLabel="sideDish1View">
                                     <rect key="frame" x="168" y="-1" width="168" height="202"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycq-9B-18e" userLabel="addSide1Button">
+                                            <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
+                                            <state key="normal" title="+ SIDE">
+                                                <color key="titleColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70R-fy-Jjk">
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70R-fy-Jjk" userLabel="sideDish2View">
                                     <rect key="frame" x="-1" y="202" width="168" height="202"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2w-MY-Wp2" userLabel="addSide2Button">
+                                            <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
+                                            <state key="normal" title="+ SIDE">
+                                                <color key="titleColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                </view>
+                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-fS-Enw" userLabel="sideDish3View">
+                                    <rect key="frame" x="168" y="202" width="168" height="202"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fp-9n-rfz" userLabel="addSide3Button">
+                                            <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
+                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
+                                            <state key="normal" title="+ SIDE">
+                                                <color key="titleColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                        </button>
+                                    </subviews>
                                     <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
                                 </view>
                             </subviews>
