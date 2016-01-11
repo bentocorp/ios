@@ -10,13 +10,57 @@
 
 @interface CustomViewController ()
 
+@property (weak, nonatomic) IBOutlet UIView *dishBGView;
+
+@property (weak, nonatomic) IBOutlet UIView *mainDishView;
+@property (weak, nonatomic) IBOutlet UIView *sideDish1View;
+@property (weak, nonatomic) IBOutlet UIView *sideDish2View;
+@property (weak, nonatomic) IBOutlet UIView *sideDish3View;
+
+@property (weak, nonatomic) IBOutlet UIImageView *mainDishImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *sideDish1ImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *sideDish2Imageview;
+@property (weak, nonatomic) IBOutlet UIImageView *sideDish3ImageView;
+
+@property (weak, nonatomic) IBOutlet UILabel *mainDishLabel;
+@property (weak, nonatomic) IBOutlet UILabel *sideDish1Label;
+@property (weak, nonatomic) IBOutlet UILabel *sideDish2Label;
+@property (weak, nonatomic) IBOutlet UILabel *sideDish3Label;
+
+@property (weak, nonatomic) IBOutlet UIButton *addMainButton;
+@property (weak, nonatomic) IBOutlet UIButton *addSide1Button;
+@property (weak, nonatomic) IBOutlet UIButton *addSide2Button;
+@property (weak, nonatomic) IBOutlet UIButton *addSide3Button;
+
+@property (weak, nonatomic) IBOutlet UIButton *buildButton;
+
 @end
 
 @implementation CustomViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+}
+
+- (IBAction)addMainButtonPressed:(id)sender {
     
 }
+
+- (IBAction)addSide1ButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)addSide2ButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)addSide3ButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)buildButtonPressed:(id)sender {
+    
+}
+
 
 @end
