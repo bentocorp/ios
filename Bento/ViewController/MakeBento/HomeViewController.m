@@ -53,8 +53,6 @@
     
     // Scroll View
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT);
-    self.scrollView.pagingEnabled = NO;
-    self.scrollView.bounces = NO;
 }
 
 - (IBAction)settingsButtonPressed:(id)sender {
