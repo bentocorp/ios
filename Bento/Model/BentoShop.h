@@ -86,8 +86,6 @@
 - (void)refreshResume;
 - (void)refreshStop;
 
-- (NSString *)getMenuType;
-
 - (NSArray *)getMainDishes:(NSString *)whatNeedsMain;
 - (NSArray *)getSideDishes:(NSString *)whatNeedsSides;
 - (NSArray *)getAddons:(NSString *)whatNeedsAddons;

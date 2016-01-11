@@ -318,10 +318,6 @@
 		FC2F06A61BE81F64007B6A82 /* in-transit-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2F06A41BE81F64007B6A82 /* in-transit-64.png */; };
 		FC386F0C1BE1F2E700961A17 /* Push.m in Sources */ = {isa = PBXBuildFile; fileRef = FC386F0B1BE1F2E700961A17 /* Push.m */; };
 		FC386F0D1BE1F2E700961A17 /* Push.m in Sources */ = {isa = PBXBuildFile; fileRef = FC386F0B1BE1F2E700961A17 /* Push.m */; };
-		FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
-		FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */; };
-		FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
-		FC3C4E7E1AF96B42005D7197 /* FixedBentoCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */; };
 		FC4327B41BE2EE8E00E91D9B /* DriverLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */; };
 		FC4327B51BE2EE8E00E91D9B /* DriverLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */; };
 		FC4327B81BE2EF4300E91D9B /* CurrentOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4327B71BE2EF4300E91D9B /* CurrentOrdersViewController.m */; };
@@ -383,8 +379,6 @@
 		FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; };
 		FC94E3411BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; };
 		FC94E3421BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; };
-		FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
-		FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */; };
 		FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
 		FC99D4F41AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
 		FC9E81EC1BACE4250099DBF5 /* SocketAckEmitter.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC9E81DC1BACE4250099DBF5 /* SocketAckEmitter.swift */; };
@@ -781,10 +775,6 @@
 		FC2F06A71BE8227A007B6A82 /* libAdjust.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAdjust.a; path = "Pods/../build/Debug-iphoneos/libAdjust.a"; sourceTree = "<group>"; };
 		FC386F0A1BE1F2E700961A17 /* Push.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Push.h; sourceTree = "<group>"; };
 		FC386F0B1BE1F2E700961A17 /* Push.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Push.m; sourceTree = "<group>"; };
-		FC3C4E771AF96A41005D7197 /* FixedBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoViewController.h; sourceTree = "<group>"; };
-		FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoViewController.m; sourceTree = "<group>"; };
-		FC3C4E7B1AF96B42005D7197 /* FixedBentoCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoCell.h; sourceTree = "<group>"; };
-		FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoCell.m; sourceTree = "<group>"; };
 		FC4327B21BE2EE8E00E91D9B /* DriverLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverLocation.h; sourceTree = "<group>"; };
 		FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverLocation.m; sourceTree = "<group>"; };
 		FC4327B61BE2EF4300E91D9B /* CurrentOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentOrdersViewController.h; sourceTree = "<group>"; };
@@ -887,8 +877,6 @@
 		FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderStatusViewController.h; path = ../ViewController/Order/OrderStatusViewController.h; sourceTree = "<group>"; };
 		FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderStatusViewController.m; path = ../ViewController/Order/OrderStatusViewController.m; sourceTree = "<group>"; };
 		FC94E3401BB3529500E2104E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
-		FC99D4ED1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedBentoPreviewViewController.h; sourceTree = "<group>"; };
-		FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedBentoPreviewViewController.m; sourceTree = "<group>"; };
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
 		FC99D4F21AFC161300BEE40B /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviewViewController.m; path = Order/PreviewViewController.m; sourceTree = "<group>"; };
 		FC9E81DC1BACE4250099DBF5 /* SocketAckEmitter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketAckEmitter.swift; sourceTree = "<group>"; };
@@ -1421,7 +1409,6 @@
 				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
 				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
 				FC3C4E801AF97FD7005D7197 /* Custom Bento */,
-				FC3C4E7F1AF97FCD005D7197 /* Fixed Bento */,
 			);
 			name = Homepage;
 			path = MakeBento;
@@ -1607,15 +1594,6 @@
 			path = BWTitlePagerView;
 			sourceTree = "<group>";
 		};
-		FC08CC1E1B0AA361008D0A84 /* Fixed Menu Cell */ = {
-			isa = PBXGroup;
-			children = (
-				FC3C4E7B1AF96B42005D7197 /* FixedBentoCell.h */,
-				FC3C4E7C1AF96B42005D7197 /* FixedBentoCell.m */,
-			);
-			name = "Fixed Menu Cell";
-			sourceTree = "<group>";
-		};
 		FC11AAA91BFBF8370004A83B /* Add-ons */ = {
 			isa = PBXGroup;
 			children = (
@@ -1716,18 +1694,6 @@
 			);
 			name = "Driver Tracking";
 			path = Model;
-			sourceTree = "<group>";
-		};
-		FC3C4E7F1AF97FCD005D7197 /* Fixed Bento */ = {
-			isa = PBXGroup;
-			children = (
-				FC3C4E771AF96A41005D7197 /* FixedBentoViewController.h */,
-				FC3C4E781AF96A41005D7197 /* FixedBentoViewController.m */,
-				FC99D4ED1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.h */,
-				FC99D4EE1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m */,
-				FC08CC1E1B0AA361008D0A84 /* Fixed Menu Cell */,
-			);
-			name = "Fixed Bento";
 			sourceTree = "<group>";
 		};
 		FC3C4E801AF97FD7005D7197 /* Custom Bento */ = {
@@ -2585,7 +2551,6 @@
 				FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
 				FC8F99701C408DDF00004DAE /* HomeViewController.m in Sources */,
 				7216B71E1AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.m in Sources */,
-				FC99D4F01AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
 				FCE036E81BEAC39000F7605B /* CustomAnnotation.m in Sources */,
 				7216B7201AA64C7C0006FFE9 /* MKNetworkEngine.m in Sources */,
 				7216B7211AA64C7C0006FFE9 /* NSObject+RMArchivable.m in Sources */,
@@ -2597,7 +2562,6 @@
 				7216B7261AA64C7C0006FFE9 /* ChooseMainDishViewController.m in Sources */,
 				7216B7271AA64C7C0006FFE9 /* Bento.m in Sources */,
 				7216B7281AA64C7C0006FFE9 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
-				FC3C4E7E1AF96B42005D7197 /* FixedBentoCell.m in Sources */,
 				7216B72B1AA64C7C0006FFE9 /* EnterCreditCardViewController.m in Sources */,
 				7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */,
 				FC9E81ED1BACE4250099DBF5 /* SocketAckEmitter.swift in Sources */,
@@ -2612,7 +2576,6 @@
 				7216B7361AA64C7C0006FFE9 /* STPTestShippingMethodStore.m in Sources */,
 				7216B7371AA64C7C0006FFE9 /* NSDictionary+RequestEncoding.m in Sources */,
 				7216B7381AA64C7C0006FFE9 /* JGProgressHUD.m in Sources */,
-				FC3C4E7A1AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
 				FC1809F41BED4416009CE159 /* BentoBox.m in Sources */,
 				7216B73B1AA64C7C0006FFE9 /* FirstViewController.m in Sources */,
 				FC46DE8E1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */,
@@ -2704,7 +2667,6 @@
 				FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
 				FC8F996F1C408DDF00004DAE /* HomeViewController.m in Sources */,
 				722333FB1A72C133006C2446 /* STPTestPaymentSummaryViewController.m in Sources */,
-				FC99D4EF1AFBFD2A00BEE40B /* FixedBentoPreviewViewController.m in Sources */,
 				FCE036E71BEAC39000F7605B /* CustomAnnotation.m in Sources */,
 				722333D51A6F46DF006C2446 /* MKNetworkEngine.m in Sources */,
 				7286EB4C1A7D8BE800D03DCE /* NSObject+RMArchivable.m in Sources */,
@@ -2716,7 +2678,6 @@
 				90BED0D61A5BF2F4003DC872 /* ChooseMainDishViewController.m in Sources */,
 				722333681A6D57CB006C2446 /* Bento.m in Sources */,
 				722333D31A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
-				FC3C4E7D1AF96B42005D7197 /* FixedBentoCell.m in Sources */,
 				90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */,
 				722333611A6D4058006C2446 /* JGProgressHUDIndicatorView.m in Sources */,
 				FC9E81EC1BACE4250099DBF5 /* SocketAckEmitter.swift in Sources */,
@@ -2731,7 +2692,6 @@
 				722333FD1A72C133006C2446 /* STPTestShippingMethodStore.m in Sources */,
 				722333D11A6F46DF006C2446 /* NSDictionary+RequestEncoding.m in Sources */,
 				7223335B1A6D4058006C2446 /* JGProgressHUD.m in Sources */,
-				FC3C4E791AF96A41005D7197 /* FixedBentoViewController.m in Sources */,
 				FC1809F31BED4416009CE159 /* BentoBox.m in Sources */,
 				90BED0A81A5BD05C003DC872 /* FirstViewController.m in Sources */,
 				FC46DE8D1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */,

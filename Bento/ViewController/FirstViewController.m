@@ -24,7 +24,6 @@
 #import "Reachability.h"
 
 #import "CustomBentoViewController.h"
-#import "FixedBentoViewController.h"
 #import "ChooseMainDishViewController.h"
 #import "ChooseSideDishViewController.h"
 
@@ -410,10 +409,9 @@
     BentoShop *globalShop = [BentoShop sharedInstance];
     
     BOOL needsAnimation = YES;
-    if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
+    if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil) {
         needsAnimation = NO;
-    
-/*--------------Determine whether to show Fixed or Custom--------------*/
+    }
     
     [globalShop setLunchOrDinnerModeByTimes]; // putting this here for when entering app without network connection, otherwise it wont be up to date
     
