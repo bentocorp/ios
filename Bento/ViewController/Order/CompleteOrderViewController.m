@@ -9,7 +9,6 @@
 #import "CompleteOrderViewController.h"
 
 #import "CustomBentoViewController.h"
-#import "FixedBentoViewController.h"
 
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
@@ -873,7 +872,7 @@
     for (UIViewController *vc in viewControllers) {
         
         // dinner or lunch vc
-        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]])
+        if ([vc isKindOfClass:[CustomBentoViewController class]])
         {
             // if dinner, add new bento
             if ([vc isKindOfClass:[CustomBentoViewController class]])
@@ -1461,7 +1460,7 @@
         NSArray *viewControllers = self.navigationController.viewControllers;
         
         for (UIViewController *vc in viewControllers) {
-            if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]]) {
+            if ([vc isKindOfClass:[CustomBentoViewController class]]) {
                 if ([vc isKindOfClass:[CustomBentoViewController class]]) {
                     [[BentoShop sharedInstance] setCurrentBento:curBento];
                 }

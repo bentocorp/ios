@@ -12,7 +12,6 @@
 #import "OrderConfirmViewController.h"
 
 #import "CustomBentoViewController.h"
-#import "FixedBentoViewController.h"
 
 #import "UIImageView+WebCache.h"
 
@@ -158,7 +157,7 @@
     
     for (UIViewController *vc in viewControllers) {
         
-        if ([vc isKindOfClass:[CustomBentoViewController class]] || [vc isKindOfClass:[FixedBentoViewController class]]) {
+        if ([vc isKindOfClass:[CustomBentoViewController class]]]) {
 
 //            [[BentoShop sharedInstance] addNewBento];
             [self.navigationController popToViewController:vc animated:YES];

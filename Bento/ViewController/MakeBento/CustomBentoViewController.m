@@ -25,8 +25,6 @@
 #import "SignedInSettingsViewController.h"
 #import "SignedOutSettingsViewController.h"
 
-#import "FixedBentoCell.h"
-
 #import "PreviewCollectionViewCell.h"
 
 #import "MyAlertView.h"
