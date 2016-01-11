@@ -15,18 +15,30 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="MY8-f4-9Hi">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MY8-f4-9Hi">
                     <rect key="frame" x="0.0" y="93" width="375" height="529"/>
                     <subviews>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf">
-                            <rect key="frame" x="40" y="8" width="296" height="438"/>
+                            <rect key="frame" x="30" y="8" width="315" height="438"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
+                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB">
+                            <rect key="frame" x="30" y="454" width="315" height="48"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="tintColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <state key="normal" title="Button"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="MY8-f4-9Hi" secondAttribute="bottom" constant="45" id="697-3k-l9I"/>
+                <constraint firstItem="MY8-f4-9Hi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="Cg6-tx-v4R"/>
+                <constraint firstAttribute="trailing" secondItem="MY8-f4-9Hi" secondAttribute="trailing" id="JSe-Qy-ISI"/>
+                <constraint firstItem="MY8-f4-9Hi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="93" id="jR1-Qg-gWX"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="208.5" y="390.5"/>
         </view>

@@ -375,10 +375,6 @@
 		FC8F99621C408CCC00004DAE /* CustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F995F1C408CCC00004DAE /* CustomViewController.m */; };
 		FC8F99631C408CCC00004DAE /* CustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99601C408CCC00004DAE /* CustomViewController.xib */; };
 		FC8F99641C408CCC00004DAE /* CustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99601C408CCC00004DAE /* CustomViewController.xib */; };
-		FC8F99681C408CE300004DAE /* FixedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F99661C408CE300004DAE /* FixedViewController.m */; };
-		FC8F99691C408CE300004DAE /* FixedViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F99661C408CE300004DAE /* FixedViewController.m */; };
-		FC8F996A1C408CE300004DAE /* FixedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99671C408CE300004DAE /* FixedViewController.xib */; };
-		FC8F996B1C408CE300004DAE /* FixedViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99671C408CE300004DAE /* FixedViewController.xib */; };
 		FC8F996F1C408DDF00004DAE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F996D1C408DDF00004DAE /* HomeViewController.m */; };
 		FC8F99701C408DDF00004DAE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F996D1C408DDF00004DAE /* HomeViewController.m */; };
 		FC8F99711C408DDF00004DAE /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F996E1C408DDF00004DAE /* HomeViewController.xib */; };
@@ -886,9 +882,6 @@
 		FC8F995E1C408CCC00004DAE /* CustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomViewController.h; sourceTree = "<group>"; };
 		FC8F995F1C408CCC00004DAE /* CustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomViewController.m; sourceTree = "<group>"; };
 		FC8F99601C408CCC00004DAE /* CustomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomViewController.xib; sourceTree = "<group>"; };
-		FC8F99651C408CE300004DAE /* FixedViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FixedViewController.h; sourceTree = "<group>"; };
-		FC8F99661C408CE300004DAE /* FixedViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FixedViewController.m; sourceTree = "<group>"; };
-		FC8F99671C408CE300004DAE /* FixedViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FixedViewController.xib; sourceTree = "<group>"; };
 		FC8F996C1C408DDF00004DAE /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		FC8F996D1C408DDF00004DAE /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		FC8F996E1C408DDF00004DAE /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
@@ -1434,9 +1427,6 @@
 				FC8F995E1C408CCC00004DAE /* CustomViewController.h */,
 				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
 				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
-				FC8F99651C408CE300004DAE /* FixedViewController.h */,
-				FC8F99661C408CE300004DAE /* FixedViewController.m */,
-				FC8F99671C408CE300004DAE /* FixedViewController.xib */,
 				FC8F99771C40933700004DAE /* PreviewViewController.h */,
 				FC8F99781C40933700004DAE /* PreviewViewController.m */,
 				FC8F99791C40933700004DAE /* PreviewViewController.xib */,
@@ -2309,7 +2299,6 @@
 				7216B7A01AA64C7C0006FFE9 /* image_checked@2x.png in Resources */,
 				7216B7A11AA64C7C0006FFE9 /* string_addanotherbento@2x.png in Resources */,
 				FC1D615E1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */,
-				FC8F996B1C408CE300004DAE /* FixedViewController.xib in Resources */,
 				FC2F06A61BE81F64007B6A82 /* in-transit-64.png in Resources */,
 				FCD51ED31AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */,
 				7216B7A21AA64C7C0006FFE9 /* OpenSans-Semibold.ttf in Resources */,
@@ -2444,7 +2433,6 @@
 				47AA1C471A6BE52F00064857 /* string_addanotherbento@2x.png in Resources */,
 				FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */,
 				90BED0C91A5BE72F003DC872 /* OpenSans-Semibold.ttf in Resources */,
-				FC8F996A1C408CE300004DAE /* FixedViewController.xib in Resources */,
 				FC2F06A51BE81F64007B6A82 /* in-transit-64.png in Resources */,
 				FC72912A1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
 				90BED0E01A5C04DE003DC872 /* mybento_nav_cart_inact@2x.png in Resources */,
@@ -2670,7 +2658,6 @@
 				7216B7521AA64C7C0006FFE9 /* JGProgressHUDFadeAnimation.m in Sources */,
 				FC9E820E1BACE4250099DBF5 /* SocketParser.swift in Sources */,
 				7216B7531AA64C7C0006FFE9 /* NSData+MKBase64.m in Sources */,
-				FC8F99691C408CE300004DAE /* FixedViewController.m in Sources */,
 				FC1809F01BED3BE3009CE159 /* DishInfo.m in Sources */,
 				FC2C88391BEC2CBA00C7249A /* Order.m in Sources */,
 				7216B7541AA64C7C0006FFE9 /* PKPayment+STPTestKeys.m in Sources */,
@@ -2791,7 +2778,6 @@
 				7223335E1A6D4058006C2446 /* JGProgressHUDFadeAnimation.m in Sources */,
 				FC9E820D1BACE4250099DBF5 /* SocketParser.swift in Sources */,
 				722333CF1A6F46DF006C2446 /* NSData+MKBase64.m in Sources */,
-				FC8F99681C408CE300004DAE /* FixedViewController.m in Sources */,
 				FC1809EF1BED3BE3009CE159 /* DishInfo.m in Sources */,
 				FC2C88381BEC2CBA00C7249A /* Order.m in Sources */,
 				722333F61A72C133006C2446 /* PKPayment+STPTestKeys.m in Sources */,
