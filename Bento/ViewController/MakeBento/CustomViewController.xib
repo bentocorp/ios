@@ -44,19 +44,19 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf" userLabel="dishBGView">
                             <rect key="frame" x="20" y="30" width="335" height="404"/>
                             <subviews>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W" userLabel="mainDishView">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W" userLabel="mainDishView">
                                     <rect key="frame" x="-1" y="-1" width="168" height="202"/>
                                     <subviews>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GOc-iy-hSZ" userLabel="mainDishImageView">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="GOc-iy-hSZ" userLabel="mainDishImageView">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
                                         </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME OF THE MAIN DISH ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwD-r3-wje" userLabel="mainDishLabel">
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME OF THE MAIN DISH ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nwD-r3-wje" userLabel="mainDishLabel">
                                             <rect key="frame" x="8" y="8" width="152" height="186"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPQ-6s-zQD" userLabel="addMainButton">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPQ-6s-zQD" userLabel="addMainButton">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                             <state key="normal" title="+ MAIN DISH">
@@ -65,20 +65,34 @@
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.85481753508798386" green="0.8719138857897436" blue="0.8719138857897436" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="trailing" secondItem="nwD-r3-wje" secondAttribute="trailing" constant="8" id="8Wi-k3-bjm"/>
+                                        <constraint firstAttribute="trailing" secondItem="QPQ-6s-zQD" secondAttribute="trailing" id="DMb-Lv-AvF"/>
+                                        <constraint firstAttribute="trailing" secondItem="GOc-iy-hSZ" secondAttribute="trailing" id="GHq-ez-IjN"/>
+                                        <constraint firstAttribute="bottom" secondItem="nwD-r3-wje" secondAttribute="bottom" constant="8" id="Jzm-qd-3x5"/>
+                                        <constraint firstItem="GOc-iy-hSZ" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="top" id="NaO-Sz-XMB"/>
+                                        <constraint firstItem="nwD-r3-wje" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="leading" constant="8" id="OeY-az-3p4"/>
+                                        <constraint firstItem="QPQ-6s-zQD" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="top" id="RHa-Nn-gWj"/>
+                                        <constraint firstItem="GOc-iy-hSZ" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="leading" id="Zpm-kt-MAd"/>
+                                        <constraint firstAttribute="bottom" secondItem="QPQ-6s-zQD" secondAttribute="bottom" id="hrD-oZ-LAO"/>
+                                        <constraint firstAttribute="bottom" secondItem="GOc-iy-hSZ" secondAttribute="bottom" id="owO-NM-0Bp"/>
+                                        <constraint firstItem="nwD-r3-wje" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="top" constant="8" id="t6h-uo-aL6"/>
+                                        <constraint firstItem="QPQ-6s-zQD" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="leading" id="vS3-BM-dBH"/>
+                                    </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6b-ZY-Fdi" userLabel="sideDish1View">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u6b-ZY-Fdi" userLabel="sideDish1View">
                                     <rect key="frame" x="168" y="-1" width="168" height="202"/>
                                     <subviews>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="85D-Hp-RMM" userLabel="sideDish1ImageView">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="85D-Hp-RMM" userLabel="sideDish1ImageView">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
                                         </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME OF THE SIDE DISH 1 ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTY-FM-YlE" userLabel="sideDish1Label">
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME OF THE SIDE DISH 1 ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oTY-FM-YlE" userLabel="sideDish1Label">
                                             <rect key="frame" x="8" y="8" width="152" height="186"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycq-9B-18e" userLabel="addSide1Button">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycq-9B-18e" userLabel="addSide1Button">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                             <state key="normal" title="+ SIDE">
@@ -87,20 +101,34 @@
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="oTY-FM-YlE" firstAttribute="leading" secondItem="u6b-ZY-Fdi" secondAttribute="leading" constant="8" id="3Sk-U9-10K"/>
+                                        <constraint firstAttribute="trailing" secondItem="85D-Hp-RMM" secondAttribute="trailing" id="Gnm-LK-JMF"/>
+                                        <constraint firstItem="85D-Hp-RMM" firstAttribute="leading" secondItem="u6b-ZY-Fdi" secondAttribute="leading" id="QZt-3P-6Bi"/>
+                                        <constraint firstAttribute="trailing" secondItem="oTY-FM-YlE" secondAttribute="trailing" constant="8" id="Rch-TF-RWd"/>
+                                        <constraint firstItem="ycq-9B-18e" firstAttribute="leading" secondItem="u6b-ZY-Fdi" secondAttribute="leading" id="SbT-uk-W16"/>
+                                        <constraint firstAttribute="bottom" secondItem="ycq-9B-18e" secondAttribute="bottom" id="fvX-YW-3dm"/>
+                                        <constraint firstAttribute="trailing" secondItem="ycq-9B-18e" secondAttribute="trailing" id="gq0-U7-oj3"/>
+                                        <constraint firstItem="oTY-FM-YlE" firstAttribute="top" secondItem="u6b-ZY-Fdi" secondAttribute="top" constant="8" id="ifv-g1-GEq"/>
+                                        <constraint firstAttribute="bottom" secondItem="85D-Hp-RMM" secondAttribute="bottom" id="jLA-gg-FQM"/>
+                                        <constraint firstItem="85D-Hp-RMM" firstAttribute="top" secondItem="u6b-ZY-Fdi" secondAttribute="top" id="juI-dv-6zG"/>
+                                        <constraint firstAttribute="bottom" secondItem="oTY-FM-YlE" secondAttribute="bottom" constant="8" id="mak-PH-gRe"/>
+                                        <constraint firstItem="ycq-9B-18e" firstAttribute="top" secondItem="u6b-ZY-Fdi" secondAttribute="top" id="t35-SR-xbL"/>
+                                    </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70R-fy-Jjk" userLabel="sideDish2View">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="70R-fy-Jjk" userLabel="sideDish2View">
                                     <rect key="frame" x="-1" y="202" width="168" height="202"/>
                                     <subviews>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="byC-NE-9RS" userLabel="sideDish2ImageView">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="byC-NE-9RS" userLabel="sideDish2ImageView">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
                                         </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME OF THE SIDE DISH 2 ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4r-dB-PhO" userLabel="sideDishLabel">
-                                            <rect key="frame" x="10" y="10" width="152" height="186"/>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME OF THE SIDE DISH 2 ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D4r-dB-PhO" userLabel="sideDishLabel">
+                                            <rect key="frame" x="8" y="8" width="152" height="186"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2w-MY-Wp2" userLabel="addSide2Button">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2w-MY-Wp2" userLabel="addSide2Button">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                             <state key="normal" title="+ SIDE">
@@ -109,15 +137,29 @@
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="D4r-dB-PhO" firstAttribute="leading" secondItem="70R-fy-Jjk" secondAttribute="leading" constant="8" id="KcD-7q-88q"/>
+                                        <constraint firstAttribute="bottom" secondItem="S2w-MY-Wp2" secondAttribute="bottom" id="c2T-Zd-13B"/>
+                                        <constraint firstItem="S2w-MY-Wp2" firstAttribute="leading" secondItem="70R-fy-Jjk" secondAttribute="leading" id="dPv-mO-t7d"/>
+                                        <constraint firstItem="byC-NE-9RS" firstAttribute="leading" secondItem="70R-fy-Jjk" secondAttribute="leading" id="dd7-P6-5uK"/>
+                                        <constraint firstItem="D4r-dB-PhO" firstAttribute="top" secondItem="70R-fy-Jjk" secondAttribute="top" constant="8" id="fpX-sq-akR"/>
+                                        <constraint firstAttribute="trailing" secondItem="byC-NE-9RS" secondAttribute="trailing" id="ihf-mt-z37"/>
+                                        <constraint firstAttribute="bottom" secondItem="byC-NE-9RS" secondAttribute="bottom" id="ipl-O6-Wge"/>
+                                        <constraint firstAttribute="trailing" secondItem="S2w-MY-Wp2" secondAttribute="trailing" id="m3j-Bw-QXe"/>
+                                        <constraint firstItem="byC-NE-9RS" firstAttribute="top" secondItem="70R-fy-Jjk" secondAttribute="top" id="s9z-9v-eFC"/>
+                                        <constraint firstAttribute="bottom" secondItem="D4r-dB-PhO" secondAttribute="bottom" constant="8" id="siL-wm-E5L"/>
+                                        <constraint firstItem="S2w-MY-Wp2" firstAttribute="top" secondItem="70R-fy-Jjk" secondAttribute="top" id="uLZ-9C-bGM"/>
+                                        <constraint firstAttribute="trailing" secondItem="D4r-dB-PhO" secondAttribute="trailing" constant="8" id="v1F-y4-Vme"/>
+                                    </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-fS-Enw" userLabel="sideDish3View">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-fS-Enw" userLabel="sideDish3View">
                                     <rect key="frame" x="168" y="202" width="168" height="202"/>
                                     <subviews>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vax-tj-caD" userLabel="sideDish3ImageView">
+                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Vax-tj-caD" userLabel="sideDish3ImageView">
                                             <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
                                         </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME OF THE SIDE DISH 3 ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qil-DJ-QaM" userLabel="sideDish3Label">
-                                            <rect key="frame" x="10" y="10" width="152" height="186"/>
+                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NAME OF THE SIDE DISH 3 ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qil-DJ-QaM" userLabel="sideDish3Label">
+                                            <rect key="frame" x="8" y="8" width="152" height="186"/>
                                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <nil key="highlightedColor"/>
@@ -131,9 +173,37 @@
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstItem="qil-DJ-QaM" firstAttribute="leading" secondItem="QEC-fS-Enw" secondAttribute="leading" constant="8" id="Bmq-Vt-WYh"/>
+                                        <constraint firstItem="Vax-tj-caD" firstAttribute="leading" secondItem="QEC-fS-Enw" secondAttribute="leading" id="DGv-5R-de1"/>
+                                        <constraint firstAttribute="bottom" secondItem="qil-DJ-QaM" secondAttribute="bottom" constant="8" id="OVi-Rd-Eg9"/>
+                                        <constraint firstAttribute="trailing" secondItem="Vax-tj-caD" secondAttribute="trailing" id="V8H-2s-av4"/>
+                                        <constraint firstItem="qil-DJ-QaM" firstAttribute="top" secondItem="QEC-fS-Enw" secondAttribute="top" constant="8" id="cW0-6h-hMG"/>
+                                        <constraint firstAttribute="trailing" secondItem="qil-DJ-QaM" secondAttribute="trailing" constant="8" id="gq6-TJ-dgK"/>
+                                        <constraint firstAttribute="bottom" secondItem="Vax-tj-caD" secondAttribute="bottom" id="kR5-W2-wYE"/>
+                                        <constraint firstItem="Vax-tj-caD" firstAttribute="top" secondItem="QEC-fS-Enw" secondAttribute="top" id="sap-Lg-w9P"/>
+                                    </constraints>
                                 </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="u6b-ZY-Fdi" secondAttribute="bottom" constant="203" id="33J-Fu-t9j"/>
+                                <constraint firstItem="u6b-ZY-Fdi" firstAttribute="leading" secondItem="nMO-Fa-ewf" secondAttribute="leading" constant="168" id="3RN-j7-zpO"/>
+                                <constraint firstAttribute="bottom" secondItem="QEC-fS-Enw" secondAttribute="bottom" id="41V-uL-LY8"/>
+                                <constraint firstItem="QEC-fS-Enw" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="top" constant="202" id="8ub-46-K6s"/>
+                                <constraint firstAttribute="trailing" secondItem="ay4-Pm-U6W" secondAttribute="trailing" constant="168" id="DZq-k6-nzF"/>
+                                <constraint firstAttribute="trailing" secondItem="u6b-ZY-Fdi" secondAttribute="trailing" constant="-1" id="DkT-7q-0Bh"/>
+                                <constraint firstItem="u6b-ZY-Fdi" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="top" constant="-1" id="Hck-aN-kFI"/>
+                                <constraint firstItem="ay4-Pm-U6W" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="top" constant="-1" id="KKO-zj-fO3"/>
+                                <constraint firstItem="70R-fy-Jjk" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="top" constant="202" id="Y9N-ar-NfW"/>
+                                <constraint firstItem="70R-fy-Jjk" firstAttribute="leading" secondItem="nMO-Fa-ewf" secondAttribute="leading" constant="-1" id="Z40-QD-B0I"/>
+                                <constraint firstAttribute="bottom" secondItem="ay4-Pm-U6W" secondAttribute="bottom" constant="203" id="a7k-8A-FdE"/>
+                                <constraint firstAttribute="trailing" secondItem="70R-fy-Jjk" secondAttribute="trailing" constant="168" id="bmo-Zq-18w"/>
+                                <constraint firstItem="QEC-fS-Enw" firstAttribute="leading" secondItem="nMO-Fa-ewf" secondAttribute="leading" constant="168" id="eY0-Bp-Hsd"/>
+                                <constraint firstItem="ay4-Pm-U6W" firstAttribute="leading" secondItem="nMO-Fa-ewf" secondAttribute="leading" constant="-1" id="k0R-iZ-fD3"/>
+                                <constraint firstAttribute="trailing" secondItem="QEC-fS-Enw" secondAttribute="trailing" constant="-1" id="kIf-2J-h1n"/>
+                                <constraint firstAttribute="bottom" secondItem="70R-fy-Jjk" secondAttribute="bottom" id="uAk-hS-6zN"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
