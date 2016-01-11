@@ -1587,15 +1587,18 @@ static BentoShop *_shareInstance;
 
 - (BOOL)is4PodMode
 {
-    NSString *podMode = self.dicInit[@"settings"][@"pod_mode"];
+//    NSString *podMode = self.dicInit[@"settings"][@"pod_mode"];
+//    
+//    if (podMode != nil || ![podMode isEqualToString:@""]) {
+//        if ([podMode integerValue] == 4) {
+//            return YES;
+//        }
+//    }
+//    
+//    return NO;
     
-    if (podMode != nil || ![podMode isEqualToString:@""]) {
-        if ([podMode integerValue] == 4) {
-            return YES;
-        }
-    }
     
-    return NO;
+    return YES;
 }
 
 @end

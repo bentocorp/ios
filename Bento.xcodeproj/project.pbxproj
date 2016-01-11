@@ -379,10 +379,6 @@
 		FC8F99701C408DDF00004DAE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F996D1C408DDF00004DAE /* HomeViewController.m */; };
 		FC8F99711C408DDF00004DAE /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F996E1C408DDF00004DAE /* HomeViewController.xib */; };
 		FC8F99721C408DDF00004DAE /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F996E1C408DDF00004DAE /* HomeViewController.xib */; };
-		FC8F997A1C40933700004DAE /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F99781C40933700004DAE /* PreviewViewController.m */; };
-		FC8F997B1C40933700004DAE /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F99781C40933700004DAE /* PreviewViewController.m */; };
-		FC8F997C1C40933700004DAE /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99791C40933700004DAE /* PreviewViewController.xib */; };
-		FC8F997D1C40933700004DAE /* PreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99791C40933700004DAE /* PreviewViewController.xib */; };
 		FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; };
 		FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; };
 		FC94E3411BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; };
@@ -885,9 +881,6 @@
 		FC8F996C1C408DDF00004DAE /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
 		FC8F996D1C408DDF00004DAE /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
 		FC8F996E1C408DDF00004DAE /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
-		FC8F99771C40933700004DAE /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewViewController.h; sourceTree = "<group>"; };
-		FC8F99781C40933700004DAE /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewViewController.m; sourceTree = "<group>"; };
-		FC8F99791C40933700004DAE /* PreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewViewController.xib; sourceTree = "<group>"; };
 		FC92E1B11B7E5C890073C5D7 /* Bento copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bento copy-Info.plist"; path = "/Users/JosephLauSF/_github/Bento/Bento copy-Info.plist"; sourceTree = "<absolute>"; };
 		FC92E1B21B7E5D500073C5D7 /* calabash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = calabash.framework; sourceTree = "<group>"; };
 		FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -1427,9 +1420,6 @@
 				FC8F995E1C408CCC00004DAE /* CustomViewController.h */,
 				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
 				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
-				FC8F99771C40933700004DAE /* PreviewViewController.h */,
-				FC8F99781C40933700004DAE /* PreviewViewController.m */,
-				FC8F99791C40933700004DAE /* PreviewViewController.xib */,
 				FC3C4E801AF97FD7005D7197 /* Custom Bento */,
 				FC3C4E7F1AF97FCD005D7197 /* Fixed Bento */,
 			);
@@ -2241,7 +2231,6 @@
 				7216B7841AA64C7C0006FFE9 /* polygon_service_area.png in Resources */,
 				FCDF222B1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
 				7216B7851AA64C7C0006FFE9 /* nav_btn_back@2x.png in Resources */,
-				FC8F997D1C40933700004DAE /* PreviewViewController.xib in Resources */,
 				FCDF221F1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
 				7216B7861AA64C7C0006FFE9 /* register_icon_facebook.png in Resources */,
 				7216B7871AA64C7C0006FFE9 /* register_icon_username.png in Resources */,
@@ -2375,7 +2364,6 @@
 				7223335A1A6D4058006C2446 /* JGProgressHUD Resources.bundle in Resources */,
 				726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */,
 				FCDF222A1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
-				FC8F997C1C40933700004DAE /* PreviewViewController.xib in Resources */,
 				FC1D61601BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */,
 				90BED0E31A5C1E70003DC872 /* nav_btn_back@2x.png in Resources */,
 				FCDF221E1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
@@ -2637,7 +2625,6 @@
 				7216B7421AA64C7C0006FFE9 /* main.m in Sources */,
 				FC9E81F91BACE4250099DBF5 /* SocketEngineClient.swift in Sources */,
 				7216B7441AA64C7C0006FFE9 /* SVPlacemark.m in Sources */,
-				FC8F997B1C40933700004DAE /* PreviewViewController.m in Sources */,
 				FCAA479F1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				7216B7471AA64C7C0006FFE9 /* MKNetworkOperation.m in Sources */,
 				7216B7481AA64C7C0006FFE9 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
@@ -2757,7 +2744,6 @@
 				90BED0741A5BCC04003DC872 /* main.m in Sources */,
 				FC9E81F81BACE4250099DBF5 /* SocketEngineClient.swift in Sources */,
 				7209E0801A76BD1800D18D7A /* SVPlacemark.m in Sources */,
-				FC8F997A1C40933700004DAE /* PreviewViewController.m in Sources */,
 				FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				722333D61A6F46DF006C2446 /* MKNetworkOperation.m in Sources */,
 				722333CE1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m in Sources */,

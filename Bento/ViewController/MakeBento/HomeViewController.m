@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *bottomButton;
 
 @property (nonatomic) CustomViewController *customVC;
-@property (nonatomic) PreviewViewController *previewVC;
+//@property (nonatomic) PreviewViewController *previewVC;
 
 @end
 
@@ -41,15 +41,15 @@
     [self.scrollView addSubview:self.customVC.view];
     [self.customVC didMoveToParentViewController:self];
     
-    // Preview View
-    self.previewVC = [[PreviewViewController alloc] init];
-    CGRect frame = self.previewVC.view.frame;
-    frame.origin.x = SCREEN_WIDTH;
-    self.previewVC.view.frame = frame;
-    
-    [self addChildViewController:self.previewVC];
-    [self.scrollView addSubview:self.previewVC.view];
-    [self.previewVC didMoveToParentViewController:self];
+//    // Preview View
+//    self.previewVC = [[PreviewViewController alloc] init];
+//    CGRect frame = self.previewVC.view.frame;
+//    frame.origin.x = SCREEN_WIDTH;
+//    self.previewVC.view.frame = frame;
+//    
+//    [self addChildViewController:self.previewVC];
+//    [self.scrollView addSubview:self.previewVC.view];
+//    [self.previewVC didMoveToParentViewController:self];
     
     // Scroll View
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT);
