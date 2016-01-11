@@ -23,19 +23,31 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MY8-f4-9Hi">
                     <rect key="frame" x="0.0" y="93" width="375" height="529"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB">
-                            <rect key="frame" x="-1" y="457" width="377" height="45"/>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB">
+                            <rect key="frame" x="-1" y="464" width="377" height="45"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="45" id="P8A-Ap-JfW"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                             <color key="tintColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                             <state key="normal" title="BUILD YOUR BENTO"/>
                         </button>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf">
-                            <rect key="frame" x="20" y="36" width="334" height="393"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf">
+                            <rect key="frame" x="20" y="30" width="335" height="404"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="bottom" secondItem="Mgx-IB-ucB" secondAttribute="bottom" constant="20" id="3hx-77-FFz"/>
+                        <constraint firstAttribute="trailing" secondItem="Mgx-IB-ucB" secondAttribute="trailing" constant="-1" id="HaF-kn-FYo"/>
+                        <constraint firstItem="nMO-Fa-ewf" firstAttribute="top" secondItem="MY8-f4-9Hi" secondAttribute="top" constant="30" id="IKE-Fu-mwg"/>
+                        <constraint firstItem="Mgx-IB-ucB" firstAttribute="leading" secondItem="MY8-f4-9Hi" secondAttribute="leading" constant="-1" id="Ied-6G-650"/>
+                        <constraint firstItem="nMO-Fa-ewf" firstAttribute="leading" secondItem="MY8-f4-9Hi" secondAttribute="leading" constant="20" id="UUs-5O-RS0"/>
+                        <constraint firstAttribute="trailing" secondItem="nMO-Fa-ewf" secondAttribute="trailing" constant="20" id="rCa-sm-aGG"/>
+                        <constraint firstItem="Mgx-IB-ucB" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="bottom" constant="30" id="ulW-Ch-k7n"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
