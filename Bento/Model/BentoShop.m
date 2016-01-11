@@ -879,20 +879,6 @@ static BentoShop *_shareInstance;
         return NO;
 }
 
-- (NSString *)getMenuType
-{
-    if ([self getMenuInfo][@"menu_type"] != nil)
-    {
-        NSLog(@"MEAL TYPE: %@", [self getMenuInfo][@"menu_type"]);
-        
-        // return "fixed" or "custom"
-        return [self getMenuInfo][@"menu_type"];
-    }
-    
-    // this hardcoded value is only used for preventing the app from hanging in case there's no current menu set for current time and the store opens
-    return @"custom";
-}
-
 - (BOOL)isClosed
 {
     NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];

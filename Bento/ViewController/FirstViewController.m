@@ -417,9 +417,6 @@
     
     [globalShop setLunchOrDinnerModeByTimes]; // putting this here for when entering app without network connection, otherwise it wont be up to date
     
-    // this is dynamic to times of day
-    NSString *menuType = [[BentoShop sharedInstance] getMenuType];
-    
     NSDictionary *branchParams = [[BentoShop sharedInstance] getBranchParams];
     NSString *mainOrSide = branchParams[@"choose"];
     
@@ -429,32 +426,24 @@
     double delayInSeconds = 0.1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
+
+        CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
         
-        if ([menuType isEqualToString:@"fixed"]) {
-            
-            FixedBentoViewController *fixedBentoViewController = [[FixedBentoViewController alloc] init];
-            [self.navigationController pushViewController:fixedBentoViewController animated:needsAnimation];
+        // deep link to Choose Your Main Dish
+        if ([mainOrSide isEqualToString:@"main"]) {
+            ChooseMainDishViewController *chooseMainDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+            [self.navigationController pushViewController:customBentoViewController animated:NO];
+            [self.navigationController pushViewController:chooseMainDishVC animated:YES];
         }
-        else if ([menuType isEqualToString:@"custom"]) {
-            
-            CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
-            
-            // deep link to Choose Your Main Dish
-            if ([mainOrSide isEqualToString:@"main"]) {
-                ChooseMainDishViewController *chooseMainDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-                [self.navigationController pushViewController:customBentoViewController animated:NO];
-                [self.navigationController pushViewController:chooseMainDishVC animated:YES];
-            }
-            // deep link to Choose Your Side Dish
-            else if ([mainOrSide isEqualToString:@"side"]) {
-                ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-                [self.navigationController pushViewController:customBentoViewController animated:NO];
-                [self.navigationController pushViewController:chooseSideDishVC animated:YES];
-            }
-            // regular opening flow of the app. changed for later use then stop
-            else {
-                [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
-            }
+        // deep link to Choose Your Side Dish
+        else if ([mainOrSide isEqualToString:@"side"]) {
+            ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+            [self.navigationController pushViewController:customBentoViewController animated:NO];
+            [self.navigationController pushViewController:chooseSideDishVC animated:YES];
+        }
+        // regular opening flow of the app. changed for later use then stop
+        else {
+            [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
         }
     });
 }
