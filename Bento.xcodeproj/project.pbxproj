@@ -1377,11 +1377,11 @@
 				FC99D4F61AFC325100BEE40B /* At Launch */,
 				FC99D4F51AFC323700BEE40B /* Closed/Sold-out */,
 				FCFD79F01AE8880D002AD322 /* Settings */,
+				90BED0A71A5BD05C003DC872 /* Signin/Register */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
 				90BED0A51A5BD05C003DC872 /* Homepage */,
 				FC11AAA91BFBF8370004A83B /* Add-ons */,
 				90BED0A61A5BD05C003DC872 /* Finalize Order */,
-				90BED0A71A5BD05C003DC872 /* SignIn */,
 			);
 			name = Controller;
 			path = ViewController;
@@ -1408,7 +1408,8 @@
 				FC8F995E1C408CCC00004DAE /* CustomViewController.h */,
 				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
 				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
-				FC3C4E801AF97FD7005D7197 /* Custom Bento */,
+				FCCD30EA1C44583A00E29A70 /* Choose Dish Item */,
+				FC3C4E801AF97FD7005D7197 /* Old Custom Bento */,
 			);
 			name = Homepage;
 			path = MakeBento;
@@ -1428,7 +1429,7 @@
 			path = Order;
 			sourceTree = "<group>";
 		};
-		90BED0A71A5BD05C003DC872 /* SignIn */ = {
+		90BED0A71A5BD05C003DC872 /* Signin/Register */ = {
 			isa = PBXGroup;
 			children = (
 				90D8F7A71A5D81C300D034CF /* RegisterViewController.h */,
@@ -1438,6 +1439,7 @@
 				90D8F7BB1A5D990800D034CF /* PhoneNumberViewController.h */,
 				90D8F7BC1A5D990800D034CF /* PhoneNumberViewController.m */,
 			);
+			name = Signin/Register;
 			path = SignIn;
 			sourceTree = "<group>";
 		};
@@ -1696,17 +1698,13 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
-		FC3C4E801AF97FD7005D7197 /* Custom Bento */ = {
+		FC3C4E801AF97FD7005D7197 /* Old Custom Bento */ = {
 			isa = PBXGroup;
 			children = (
 				FC08AB221AF713DD00CFB44D /* CustomBentoViewController.h */,
 				FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */,
-				90BED0D41A5BF2F4003DC872 /* ChooseMainDishViewController.h */,
-				90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */,
-				90BED0D71A5BF301003DC872 /* ChooseSideDishViewController.h */,
-				90BED0D81A5BF301003DC872 /* ChooseSideDishViewController.m */,
 			);
-			name = "Custom Bento";
+			name = "Old Custom Bento";
 			sourceTree = "<group>";
 		};
 		FC599F561B0FEDB600989E1B /* Bento Tests */ = {
@@ -1964,6 +1962,17 @@
 			);
 			name = Extensions;
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		FCCD30EA1C44583A00E29A70 /* Choose Dish Item */ = {
+			isa = PBXGroup;
+			children = (
+				90BED0D41A5BF2F4003DC872 /* ChooseMainDishViewController.h */,
+				90BED0D51A5BF2F4003DC872 /* ChooseMainDishViewController.m */,
+				90BED0D71A5BF301003DC872 /* ChooseSideDishViewController.h */,
+				90BED0D81A5BF301003DC872 /* ChooseSideDishViewController.m */,
+			);
+			name = "Choose Dish Item";
 			sourceTree = "<group>";
 		};
 		FCDF22031ADC3ADF006B2750 /* Squared Icons */ = {
