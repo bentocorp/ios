@@ -17,7 +17,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="bottomButton" destination="kcT-hJ-qY9" id="cQQ-8t-hdG"/>
+                <outlet property="etaLabel" destination="dVh-bN-HTZ" id="nUX-1G-Dja"/>
+                <outlet property="pickerButton" destination="Ype-e7-1l5" id="afI-Av-kmn"/>
                 <outlet property="scrollView" destination="utV-a3-SJd" id="Zue-Up-HPX"/>
+                <outlet property="startingPriceLabel" destination="EBb-ix-ETi" id="FXA-wu-lcJ"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -44,6 +48,9 @@
                     <state key="normal" title="Date &amp; Time Picker">
                         <color key="titleColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="pickerButtonPressed:" destination="-1" eventType="touchUpInside" id="x1J-sa-ieA"/>
+                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user.png" translatesAutoresizingMaskIntoConstraints="NO" id="MU3-6F-z6Y" userLabel="settingsImageView">
                     <rect key="frame" x="12" y="30" width="25" height="25"/>
@@ -61,6 +68,9 @@
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="settingsButtonPressed:" destination="-1" eventType="touchUpInside" id="wRn-SP-Hju"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vz8-kn-c26" userLabel="cartButton">
                     <rect key="frame" x="340" y="32" width="21" height="22"/>
@@ -71,11 +81,14 @@
                     <state key="normal" image="mybento_nav_cart_act.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="cartButtonPressed:" destination="-1" eventType="touchUpInside" id="zJw-Ue-EHf"/>
+                    </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1a-cr-Tq5" userLabel="ETABannerView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1a-cr-Tq5" userLabel="etaBannerView">
                     <rect key="frame" x="0.0" y="64" width="375" height="30"/>
                     <subviews>
-                        <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vco-Jb-jA4" userLabel="ETABannerDividerView">
+                        <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vco-Jb-jA4" userLabel="etaBannerDivider">
                             <rect key="frame" x="187" y="4" width="1" height="22"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -83,7 +96,7 @@
                                 <constraint firstAttribute="width" constant="1" id="nsp-30-8Ys"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STARTING AT $X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBb-ix-ETi">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="STARTING AT $X" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EBb-ix-ETi" userLabel="startingPriceLabel">
                             <rect key="frame" x="8" y="4" width="171" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="qv6-qy-0VH"/>
@@ -92,7 +105,7 @@
                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETA: X-X MIN." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVh-bN-HTZ">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ETA: X-X MIN." textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dVh-bN-HTZ" userLabel="etaLabel">
                             <rect key="frame" x="196" y="4" width="171" height="22"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="22" id="SaW-Cf-XOo"/>
@@ -118,7 +131,7 @@
                         <constraint firstItem="EBb-ix-ETi" firstAttribute="top" secondItem="r1a-cr-Tq5" secondAttribute="top" constant="4" id="oy1-Bq-mD8"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcT-hJ-qY9" userLabel="previewButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcT-hJ-qY9" userLabel="bottomButton">
                     <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                     <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -129,6 +142,9 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="bottomButtonPressed:" destination="-1" eventType="touchUpInside" id="cXZ-jO-g2m"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>

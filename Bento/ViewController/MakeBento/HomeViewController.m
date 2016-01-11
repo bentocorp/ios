@@ -19,6 +19,12 @@
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
+@property (weak, nonatomic) IBOutlet UILabel *startingPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *etaLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *pickerButton;
+@property (weak, nonatomic) IBOutlet UIButton *bottomButton;
+
 @property (nonatomic) CustomViewController *customVC;
 @property (nonatomic) PreviewViewController *previewVC;
 
@@ -49,6 +55,22 @@
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT);
     self.scrollView.pagingEnabled = NO;
     self.scrollView.bounces = NO;
+}
+
+- (IBAction)settingsButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)cartButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)pickerButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)bottomButtonPressed:(id)sender {
+    
 }
 
 @end
