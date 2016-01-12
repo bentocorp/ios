@@ -22,6 +22,7 @@
                 <outlet property="pickerButton" destination="Ype-e7-1l5" id="afI-Av-kmn"/>
                 <outlet property="scrollView" destination="utV-a3-SJd" id="Zue-Up-HPX"/>
                 <outlet property="startingPriceLabel" destination="EBb-ix-ETi" id="FXA-wu-lcJ"/>
+                <outlet property="view" destination="cbY-ge-Ql8" id="pdC-Hz-Dpx"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -29,7 +30,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utV-a3-SJd">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utV-a3-SJd">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </scrollView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Gr-fl-XBQ" userLabel="navBgImageView">
@@ -172,7 +173,7 @@
                 <constraint firstAttribute="trailing" secondItem="vz8-kn-c26" secondAttribute="trailing" constant="14" id="x78-nW-dbc"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <point key="canvasLocation" x="240.5" y="384.5"/>
+            <point key="canvasLocation" x="128.5" y="457.5"/>
         </view>
     </objects>
     <resources>

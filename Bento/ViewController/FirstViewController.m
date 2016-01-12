@@ -24,6 +24,7 @@
 #import "Reachability.h"
 
 #import "CustomBentoViewController.h"
+#import "HomeViewController.h"
 #import "ChooseMainDishViewController.h"
 #import "ChooseSideDishViewController.h"
 
@@ -425,7 +426,9 @@
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
 
-        CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
+//        CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
+        
+        HomeViewController *customBentoViewController = [[HomeViewController alloc] init];
         
         // deep link to Choose Your Main Dish
         if ([mainOrSide isEqualToString:@"main"]) {
