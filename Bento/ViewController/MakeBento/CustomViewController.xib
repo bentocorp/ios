@@ -7,36 +7,16 @@
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomViewController">
             <connections>
-                <outlet property="addMainButton" destination="QPQ-6s-zQD" id="4bK-Ln-QkE"/>
-                <outlet property="addSide1Button" destination="ycq-9B-18e" id="8GZ-P4-mXK"/>
-                <outlet property="addSide2Button" destination="S2w-MY-Wp2" id="PKR-86-vxw"/>
-                <outlet property="addSide3Button" destination="0Fp-9n-rfz" id="5s1-xH-EMo"/>
                 <outlet property="buildButton" destination="Mgx-IB-ucB" id="dCQ-xU-7Ql"/>
                 <outlet property="dishBGView" destination="nMO-Fa-ewf" id="dhl-c8-zyv"/>
-                <outlet property="mainDishImageView" destination="GOc-iy-hSZ" id="NeN-Ga-CBW"/>
-                <outlet property="mainDishLabel" destination="nwD-r3-wje" id="Ks7-ZC-3fG"/>
                 <outlet property="mainDishView" destination="ay4-Pm-U6W" id="7go-w7-q9K"/>
-                <outlet property="sideDish1ImageView" destination="85D-Hp-RMM" id="ljX-vJ-xXd"/>
-                <outlet property="sideDish1Label" destination="oTY-FM-YlE" id="f3U-OG-Nb5"/>
                 <outlet property="sideDish1View" destination="u6b-ZY-Fdi" id="G5V-sk-fYO"/>
-                <outlet property="sideDish2Imageview" destination="byC-NE-9RS" id="ERG-6j-uSb"/>
-                <outlet property="sideDish2Label" destination="D4r-dB-PhO" id="3Si-qd-USC"/>
                 <outlet property="sideDish2View" destination="70R-fy-Jjk" id="YCi-RV-cnM"/>
-                <outlet property="sideDish3ImageView" destination="Vax-tj-caD" id="aLi-MQ-bL9"/>
-                <outlet property="sideDish3Label" destination="qil-DJ-QaM" id="NpW-gj-pMh"/>
                 <outlet property="sideDish3View" destination="QEC-fS-Enw" id="zA2-6M-idc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -46,148 +26,47 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MY8-f4-9Hi" userLabel="customBGView">
-                    <rect key="frame" x="0.0" y="95" width="375" height="527"/>
+                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf" userLabel="dishBGView">
+                    <rect key="frame" x="20" y="133" width="335" height="402"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf" userLabel="dishBGView">
-                            <rect key="frame" x="20" y="30" width="335" height="402"/>
-                            <subviews>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W" userLabel="mainDishView">
-                                    <rect key="frame" x="-1" y="-1" width="167" height="201"/>
-                                    <subviews>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="GOc-iy-hSZ" userLabel="mainDishImageView">
-                                            <rect key="frame" x="2" y="2" width="165" height="199"/>
-                                        </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME OF THE MAIN DISH ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="nwD-r3-wje" userLabel="mainDishLabel">
-                                            <rect key="frame" x="8" y="8" width="151" height="185"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QPQ-6s-zQD" userLabel="addMainButton">
-                                            <rect key="frame" x="2" y="2" width="165" height="198"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                            <state key="normal" title="+ MAIN DISH">
-                                                <color key="titleColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="addMainButtonPressed:" destination="-1" eventType="touchUpInside" id="Hto-VF-lIz"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.85481753508798386" green="0.8719138857897436" blue="0.8719138857897436" alpha="1" colorSpace="calibratedRGB"/>
-                                </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6b-ZY-Fdi" userLabel="sideDish1View">
-                                    <rect key="frame" x="167" y="-1" width="169" height="201"/>
-                                    <subviews>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="85D-Hp-RMM" userLabel="sideDish1ImageView">
-                                            <rect key="frame" x="1" y="2" width="166" height="199"/>
-                                        </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME OF THE SIDE DISH 1 ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="oTY-FM-YlE" userLabel="sideDish1Label">
-                                            <rect key="frame" x="8" y="3" width="152" height="186"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ycq-9B-18e" userLabel="addSide1Button">
-                                            <rect key="frame" x="0.0" y="2" width="168" height="194"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                            <state key="normal" title="+ SIDE">
-                                                <color key="titleColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="addSide1ButtonPressed:" destination="-1" eventType="touchUpInside" id="3M9-3p-xtV"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
-                                </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70R-fy-Jjk" userLabel="sideDish2View">
-                                    <rect key="frame" x="-2" y="201" width="168" height="202"/>
-                                    <subviews>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="byC-NE-9RS" userLabel="sideDish2ImageView">
-                                            <rect key="frame" x="2" y="0.0" width="166" height="200"/>
-                                        </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME OF THE SIDE DISH 2 ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="D4r-dB-PhO" userLabel="sideDishLabel">
-                                            <rect key="frame" x="8" y="8" width="152" height="186"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S2w-MY-Wp2" userLabel="addSide2Button">
-                                            <rect key="frame" x="0.0" y="0.0" width="167" height="202"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                            <state key="normal" title="+ SIDE">
-                                                <color key="titleColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="addSide2ButtonPressed:" destination="-1" eventType="touchUpInside" id="U8L-0I-XlI"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
-                                </view>
-                                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-fS-Enw" userLabel="sideDish3View">
-                                    <rect key="frame" x="167" y="201" width="168" height="202"/>
-                                    <subviews>
-                                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Vax-tj-caD" userLabel="sideDish3ImageView">
-                                            <rect key="frame" x="0.0" y="0.0" width="166" height="200"/>
-                                        </imageView>
-                                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="NAME OF THE SIDE DISH 3 ITEM" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="qil-DJ-QaM" userLabel="sideDish3Label">
-                                            <rect key="frame" x="8" y="8" width="152" height="186"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                            <nil key="highlightedColor"/>
-                                        </label>
-                                        <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Fp-9n-rfz" userLabel="addSide3Button">
-                                            <rect key="frame" x="0.0" y="0.0" width="168" height="202"/>
-                                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                            <state key="normal" title="+ SIDE">
-                                                <color key="titleColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                                            </state>
-                                            <connections>
-                                                <action selector="addSide3ButtonPressed:" destination="-1" eventType="touchUpInside" id="G4T-rM-qpZ"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
-                                </view>
-                            </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W" userLabel="mainDishView">
+                            <rect key="frame" x="1" y="1" width="165" height="200"/>
+                            <color key="backgroundColor" red="0.85481753508798386" green="0.8719138857897436" blue="0.8719138857897436" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB" userLabel="buildButton">
-                            <rect key="frame" x="-1" y="462" width="377" height="45"/>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="70R-fy-Jjk" userLabel="sideDish2View">
+                            <rect key="frame" x="1" y="202" width="165" height="199"/>
                             <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="45" id="Abt-Fd-3iZ"/>
-                            </constraints>
-                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                            <color key="tintColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <state key="normal" title="BUILD YOUR BENTO"/>
-                            <connections>
-                                <action selector="buildButtonPressed:" destination="-1" eventType="touchUpInside" id="9KX-J4-ye1"/>
-                            </connections>
-                        </button>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QEC-fS-Enw" userLabel="sideDish3View">
+                            <rect key="frame" x="167" y="202" width="167" height="199"/>
+                            <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="u6b-ZY-Fdi" userLabel="sideDish1View">
+                            <rect key="frame" x="167" y="1" width="167" height="200"/>
+                            <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
                     </subviews>
-                    <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="trailing" secondItem="nMO-Fa-ewf" secondAttribute="trailing" constant="20" id="7w3-zP-KrI"/>
-                        <constraint firstItem="Mgx-IB-ucB" firstAttribute="leading" secondItem="MY8-f4-9Hi" secondAttribute="leading" constant="-1" id="CCL-Fu-Dw5"/>
-                        <constraint firstItem="nMO-Fa-ewf" firstAttribute="leading" secondItem="MY8-f4-9Hi" secondAttribute="leading" constant="20" id="KdA-SU-AyA"/>
-                        <constraint firstAttribute="bottom" secondItem="Mgx-IB-ucB" secondAttribute="bottom" constant="20" id="V2D-0h-NUW"/>
-                        <constraint firstItem="nMO-Fa-ewf" firstAttribute="top" secondItem="MY8-f4-9Hi" secondAttribute="top" constant="30" id="XC7-Oh-TCl"/>
-                        <constraint firstItem="Mgx-IB-ucB" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="bottom" constant="30" id="ffE-DW-Hls"/>
-                        <constraint firstAttribute="trailing" secondItem="Mgx-IB-ucB" secondAttribute="trailing" constant="-1" id="i3b-iU-7XF"/>
-                        <constraint firstItem="Mgx-IB-ucB" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="bottom" constant="30" id="o79-s2-PqB"/>
-                    </constraints>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB" userLabel="buildButton">
+                    <rect key="frame" x="-1" y="557" width="377" height="45"/>
+                    <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="58l-Pt-xAi"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
+                    <color key="tintColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="BUILD YOUR BENTO"/>
+                    <connections>
+                        <action selector="buildButtonPressed:" destination="-1" eventType="touchUpInside" id="9KX-J4-ye1"/>
+                    </connections>
+                </button>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstItem="MY8-f4-9Hi" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="95" id="g6y-kq-cRL"/>
-                <constraint firstItem="MY8-f4-9Hi" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="kRq-jl-5XG"/>
-                <constraint firstAttribute="bottom" secondItem="MY8-f4-9Hi" secondAttribute="bottom" constant="45" id="lt0-0C-HlM"/>
-                <constraint firstAttribute="trailing" secondItem="MY8-f4-9Hi" secondAttribute="trailing" id="shF-Y0-wcp"/>
+                <constraint firstAttribute="trailing" secondItem="Mgx-IB-ucB" secondAttribute="trailing" constant="-1" id="Phh-HL-SCT"/>
+                <constraint firstItem="Mgx-IB-ucB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="dSK-Fc-t8V"/>
+                <constraint firstAttribute="bottom" secondItem="Mgx-IB-ucB" secondAttribute="bottom" constant="65" id="tBX-1h-M3h"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="208.5" y="390.5"/>

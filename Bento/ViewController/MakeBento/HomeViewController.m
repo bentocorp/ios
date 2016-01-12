@@ -52,7 +52,7 @@
 //    [self.previewVC didMoveToParentViewController:self];
     
     // Scroll View
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT + 20);
 }
 
 - (IBAction)settingsButtonPressed:(id)sender {

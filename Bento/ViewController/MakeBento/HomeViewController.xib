@@ -28,9 +28,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utV-a3-SJd">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                </scrollView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Gr-fl-XBQ" userLabel="navBgImageView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
                     <constraints>
@@ -145,6 +142,9 @@
                         <action selector="bottomButtonPressed:" destination="-1" eventType="touchUpInside" id="cXZ-jO-g2m"/>
                     </connections>
                 </button>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utV-a3-SJd">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                </scrollView>
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
