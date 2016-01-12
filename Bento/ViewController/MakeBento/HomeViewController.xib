@@ -9,9 +9,7 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
-        </mutableArray>
-        <mutableArray key="OpenSans-Semibold.ttf">
-            <string>OpenSans-Semibold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -30,7 +28,7 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utV-a3-SJd">
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="utV-a3-SJd">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                 </scrollView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Gr-fl-XBQ" userLabel="navBgImageView">
@@ -45,8 +43,8 @@
                         <constraint firstAttribute="width" constant="220" id="dEx-XY-rvJ"/>
                         <constraint firstAttribute="height" constant="45" id="ptS-UN-v1W"/>
                     </constraints>
-                    <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
-                    <state key="normal" title="DATE &amp; TIME">
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
+                    <state key="normal" title="Date &amp; Time">
                         <color key="titleColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
