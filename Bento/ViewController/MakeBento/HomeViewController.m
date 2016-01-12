@@ -14,9 +14,30 @@
 #import "MenuPreviewViewController.h"
 #import "SignedInSettingsViewController.h"
 #import "SignedOutSettingsViewController.h"
+#import "AddonsViewController.h"
+#import "AddonList.h"
+#import "MyAlertView.h"
+
+#import "CompleteOrderViewController.h"
+#import "DeliveryLocationViewController.h"
+
+#import "AppDelegate.h"
+
+#import "ChooseMainDishViewController.h"
+#import "ChooseSideDishViewController.h"
+
+#import "SVPlacemark.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
+
+#import <QuartzCore/QuartzCore.h>
+#import "JGProgressHUD.h"
+
+#import "Mixpanel/MPTweakInline.h"
+#import "Mixpanel.h"
 
 #import "BentoShop.h"
 #import "DataManager.h"
+#import "AppStrings.h"
 
 @interface HomeViewController ()
 
@@ -80,7 +101,13 @@
 }
 
 - (IBAction)cartButtonPressed:(id)sender {
-    
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
+        [self showConfirmMsg];
+    }
+    else {
+        [self gotoOrderScreen];
+    }
 }
 
 - (IBAction)pickerButtonPressed:(id)sender {
@@ -89,6 +116,73 @@
 
 - (IBAction)bottomButtonPressed:(id)sender {
     
+}
+
+- (void)showConfirmMsg {
+    NSString *strText = [[AppStrings sharedInstance] getString:ALERT_BNF_TEXT];
+    NSString *strCancel = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CANCEL];
+    NSString *strConfirm = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CONFIRM];
+    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strText delegate:self cancelButtonTitle:strCancel otherButtonTitle:strConfirm];
+    
+    [alertView showInView:self.view];
+    alertView = nil;
+}
+
+- (void)gotoOrderScreen {
+    // instantiate view controllers
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+    
+    // user and place info
+    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
+    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    
+    // logged out
+    if (currentUserInfo == nil) {
+        // no saved address
+        if (placeInfo == nil) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromHomepage"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [self openAccountViewController:[DeliveryLocationViewController class]];
+        }
+        // has saved address
+        else {
+            // check if saved address is inside CURRENT service area
+            CLLocationCoordinate2D location = placeInfo.location.coordinate;
+            
+            // outside service area
+            if (![[BentoShop sharedInstance] checkLocation:location]) {
+                [self openAccountViewController:[DeliveryLocationViewController class]];
+            }
+            // inside service area
+            else {
+                [self openAccountViewController:[CompleteOrderViewController class]];
+            }
+        }
+    }
+    // logged in
+    else {
+        // no saved address
+        if (placeInfo == nil) {
+            [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+        }
+        // has saved address
+        else {
+            // check if saved address is inside CURRENT service area
+            CLLocationCoordinate2D location = placeInfo.location.coordinate;
+            
+            // outside service area
+            if (![[BentoShop sharedInstance] checkLocation:location]) {
+                [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+            }
+            // inisde service area
+            else {
+                [self.navigationController pushViewController:completeOrderViewController animated:YES];
+            }
+        }
+    }
 }
 
 @end
