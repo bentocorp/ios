@@ -12,8 +12,11 @@
 #import "HomeViewController.h"
 #import "CustomViewController.h"
 #import "MenuPreviewViewController.h"
+#import "SignedInSettingsViewController.h"
+#import "SignedOutSettingsViewController.h"
 
 #import "BentoShop.h"
+#import "DataManager.h"
 
 @interface HomeViewController ()
 
@@ -56,7 +59,24 @@
 }
 
 - (IBAction)settingsButtonPressed:(id)sender {
+    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     
+    SignedInSettingsViewController *signedInSettingsViewController = [[SignedInSettingsViewController alloc] init];
+    SignedOutSettingsViewController *signedOutSettingsViewController = [[SignedOutSettingsViewController alloc] init];
+    
+    UINavigationController *navC;
+    
+    // signed in or not?
+    if (currentUserInfo == nil) {
+        navC = [[UINavigationController alloc] initWithRootViewController:signedOutSettingsViewController];
+        navC.navigationBar.hidden = YES;
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+    }
+    else {
+        navC = [[UINavigationController alloc] initWithRootViewController:signedInSettingsViewController];
+        navC.navigationBar.hidden = YES;
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+    }
 }
 
 - (IBAction)cartButtonPressed:(id)sender {
