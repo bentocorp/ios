@@ -20,9 +20,24 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomViewController">
             <connections>
+                <outlet property="addMainButton" destination="5nI-hP-jcm" id="6zQ-Xx-yQk"/>
+                <outlet property="addSide1Button" destination="5gP-DP-7Sh" id="7f9-D6-VgN"/>
+                <outlet property="addSide2Button" destination="ZAF-sX-5hZ" id="07A-ck-KKI"/>
+                <outlet property="addSide3Button" destination="qye-n5-idg" id="lX0-DN-aEy"/>
                 <outlet property="buildButton" destination="Mgx-IB-ucB" id="dCQ-xU-7Ql"/>
                 <outlet property="dishBGView" destination="nMO-Fa-ewf" id="dhl-c8-zyv"/>
+                <outlet property="mainDishImageView" destination="apD-DI-s6F" id="kJ2-8e-dci"/>
+                <outlet property="mainDishLabel" destination="lyX-oF-ZJD" id="sSH-b4-YKf"/>
                 <outlet property="mainDishView" destination="ay4-Pm-U6W" id="7go-w7-q9K"/>
+                <outlet property="sideDish1ImageView" destination="qWm-lu-0vF" id="CQP-ev-4O2"/>
+                <outlet property="sideDish1Label" destination="taL-Dl-E5e" id="aWz-PZ-yw4"/>
+                <outlet property="sideDish1View" destination="5kH-Dd-pyo" id="1hr-dO-RRi"/>
+                <outlet property="sideDish2Imageview" destination="RIr-24-nJ7" id="B3B-vn-K7w"/>
+                <outlet property="sideDish2Label" destination="9uk-LF-eKp" id="eAn-9k-gmM"/>
+                <outlet property="sideDish2View" destination="3td-g7-AxD" id="5Mn-CZ-oOp"/>
+                <outlet property="sideDish3ImageView" destination="BcV-MQ-CI5" id="tCe-vM-yzd"/>
+                <outlet property="sideDish3Label" destination="MAp-Tc-SIx" id="afe-Mc-eAw"/>
+                <outlet property="sideDish3View" destination="FYW-6y-kVi" id="nQo-CG-1Ur"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -52,6 +67,9 @@
                                     <state key="normal" title="+ MAIN">
                                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addMainButtonPressed:" destination="-1" eventType="touchUpInside" id="95m-IK-9YN"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.90751441062714944" green="0.93501484731282059" blue="0.93501484731282059" alpha="1" colorSpace="calibratedRGB"/>
@@ -88,6 +106,9 @@
                                     <state key="normal" title="+ SIDE">
                                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addSide1ButtonPressed:" destination="-1" eventType="touchUpInside" id="XDa-rU-mqQ"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -124,6 +145,9 @@
                                     <state key="normal" title="+ SIDE">
                                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addSide2ButtonPressed:" destination="-1" eventType="touchUpInside" id="M1w-Or-xss"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -145,21 +169,24 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FYW-6y-kVi" userLabel="sideDish3View">
                             <rect key="frame" x="168" y="201" width="166" height="200"/>
                             <subviews>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BcV-MQ-CI5">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="BcV-MQ-CI5" userLabel="sideDish3ImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="200"/>
                                 </imageView>
-                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAp-Tc-SIx">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MAp-Tc-SIx" userLabel="sideDish3Label">
                                     <rect key="frame" x="8" y="8" width="150" height="184"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qye-n5-idg">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qye-n5-idg" userLabel="addSideDish3Button">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="200"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
                                     <state key="normal" title="+ SIDE">
                                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addSide3ButtonPressed:" destination="-1" eventType="touchUpInside" id="UxV-9P-Oad"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
