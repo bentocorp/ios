@@ -7,6 +7,8 @@
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -28,7 +30,39 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W" userLabel="mainDishView">
                             <rect key="frame" x="1" y="1" width="166" height="199"/>
+                            <subviews>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="apD-DI-s6F" userLabel="mainDishImageView">
+                                    <rect key="frame" x="0.0" y="0.0" width="166" height="199"/>
+                                </imageView>
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF THE MAIN DISH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lyX-oF-ZJD" userLabel="mainDishLabel">
+                                    <rect key="frame" x="8" y="8" width="150" height="183"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
+                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nI-hP-jcm">
+                                    <rect key="frame" x="0.0" y="0.0" width="166" height="199"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
+                                    <state key="normal" title="+ MAIN DISH">
+                                        <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                </button>
+                            </subviews>
                             <color key="backgroundColor" red="0.90751441062714944" green="0.93501484731282059" blue="0.93501484731282059" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstItem="lyX-oF-ZJD" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="top" constant="8" id="07Y-IS-mgL"/>
+                                <constraint firstAttribute="trailing" secondItem="5nI-hP-jcm" secondAttribute="trailing" id="5I7-bL-MCJ"/>
+                                <constraint firstAttribute="trailing" secondItem="lyX-oF-ZJD" secondAttribute="trailing" constant="8" id="Fdz-f8-8Q1"/>
+                                <constraint firstAttribute="bottom" secondItem="apD-DI-s6F" secondAttribute="bottom" id="IWp-Ue-LkD"/>
+                                <constraint firstAttribute="bottom" secondItem="5nI-hP-jcm" secondAttribute="bottom" id="Idu-Xk-3nH"/>
+                                <constraint firstItem="apD-DI-s6F" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="top" id="K10-ga-Eaz"/>
+                                <constraint firstItem="5nI-hP-jcm" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="top" id="Su3-za-HJ4"/>
+                                <constraint firstItem="apD-DI-s6F" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="leading" id="TRb-2n-Qv7"/>
+                                <constraint firstItem="lyX-oF-ZJD" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="leading" constant="8" id="nwV-wf-atW"/>
+                                <constraint firstItem="5nI-hP-jcm" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="leading" id="sbn-qx-feA"/>
+                                <constraint firstAttribute="trailing" secondItem="apD-DI-s6F" secondAttribute="trailing" id="tir-Sr-Ozg"/>
+                                <constraint firstAttribute="bottom" secondItem="lyX-oF-ZJD" secondAttribute="bottom" constant="8" id="wYY-qK-AQR"/>
+                            </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kH-Dd-pyo" userLabel="mainDishView">
                             <rect key="frame" x="168" y="1" width="166" height="199"/>
