@@ -11,7 +11,7 @@
 
 #import "HomeViewController.h"
 #import "CustomViewController.h"
-#import "PreviewViewController.h"
+#import "MenuPreviewViewController.h"
 
 #import "BentoShop.h"
 
@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *bottomButton;
 
 @property (nonatomic) CustomViewController *customVC;
-//@property (nonatomic) PreviewViewController *previewVC;
+@property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 
 @end
 
@@ -35,24 +35,24 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Custom View
-    self.customVC = [[CustomViewController alloc] init];
+    // Custom
+    self.customVC = [[CustomViewController alloc] initWithNibName:@"CustomViewController" bundle:nil];
     [self addChildViewController:self.customVC];
     [self.scrollView addSubview:self.customVC.view];
     [self.customVC didMoveToParentViewController:self];
     
-//    // Preview View
-//    self.previewVC = [[PreviewViewController alloc] init];
-//    CGRect frame = self.previewVC.view.frame;
-//    frame.origin.x = SCREEN_WIDTH;
-//    self.previewVC.view.frame = frame;
-//    
-//    [self addChildViewController:self.previewVC];
-//    [self.scrollView addSubview:self.previewVC.view];
-//    [self.previewVC didMoveToParentViewController:self];
+    // Menu Preview
+    self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
+    CGRect frame = self.menuPreviewVC.view.frame;
+    frame.origin.x = SCREEN_WIDTH;
+    self.menuPreviewVC.view.frame = frame;
+    
+    [self addChildViewController:self.menuPreviewVC];
+    [self.scrollView addSubview:self.menuPreviewVC.view];
+    [self.menuPreviewVC didMoveToParentViewController:self];
     
     // Scroll View
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT + 20);
+    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT - 20);
 }
 
 - (IBAction)settingsButtonPressed:(id)sender {

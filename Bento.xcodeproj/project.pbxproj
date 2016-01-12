@@ -318,6 +318,10 @@
 		FC2F06A61BE81F64007B6A82 /* in-transit-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FC2F06A41BE81F64007B6A82 /* in-transit-64.png */; };
 		FC386F0C1BE1F2E700961A17 /* Push.m in Sources */ = {isa = PBXBuildFile; fileRef = FC386F0B1BE1F2E700961A17 /* Push.m */; };
 		FC386F0D1BE1F2E700961A17 /* Push.m in Sources */ = {isa = PBXBuildFile; fileRef = FC386F0B1BE1F2E700961A17 /* Push.m */; };
+		FC3E2D7D1C4588260073A82C /* MenuPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3E2D7B1C4588260073A82C /* MenuPreviewViewController.m */; };
+		FC3E2D7E1C4588260073A82C /* MenuPreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3E2D7B1C4588260073A82C /* MenuPreviewViewController.m */; };
+		FC3E2D7F1C4588260073A82C /* MenuPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC3E2D7C1C4588260073A82C /* MenuPreviewViewController.xib */; };
+		FC3E2D801C4588260073A82C /* MenuPreviewViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC3E2D7C1C4588260073A82C /* MenuPreviewViewController.xib */; };
 		FC4327B41BE2EE8E00E91D9B /* DriverLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */; };
 		FC4327B51BE2EE8E00E91D9B /* DriverLocation.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */; };
 		FC4327B81BE2EF4300E91D9B /* CurrentOrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC4327B71BE2EF4300E91D9B /* CurrentOrdersViewController.m */; };
@@ -775,6 +779,9 @@
 		FC2F06A71BE8227A007B6A82 /* libAdjust.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libAdjust.a; path = "Pods/../build/Debug-iphoneos/libAdjust.a"; sourceTree = "<group>"; };
 		FC386F0A1BE1F2E700961A17 /* Push.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Push.h; sourceTree = "<group>"; };
 		FC386F0B1BE1F2E700961A17 /* Push.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Push.m; sourceTree = "<group>"; };
+		FC3E2D7A1C4588260073A82C /* MenuPreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MenuPreviewViewController.h; sourceTree = "<group>"; };
+		FC3E2D7B1C4588260073A82C /* MenuPreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MenuPreviewViewController.m; sourceTree = "<group>"; };
+		FC3E2D7C1C4588260073A82C /* MenuPreviewViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MenuPreviewViewController.xib; sourceTree = "<group>"; };
 		FC4327B21BE2EE8E00E91D9B /* DriverLocation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DriverLocation.h; sourceTree = "<group>"; };
 		FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DriverLocation.m; sourceTree = "<group>"; };
 		FC4327B61BE2EF4300E91D9B /* CurrentOrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CurrentOrdersViewController.h; sourceTree = "<group>"; };
@@ -1408,6 +1415,9 @@
 				FC8F995E1C408CCC00004DAE /* CustomViewController.h */,
 				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
 				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
+				FC3E2D7A1C4588260073A82C /* MenuPreviewViewController.h */,
+				FC3E2D7B1C4588260073A82C /* MenuPreviewViewController.m */,
+				FC3E2D7C1C4588260073A82C /* MenuPreviewViewController.xib */,
 				FCCD30EA1C44583A00E29A70 /* Choose Dish Item */,
 				FC3C4E801AF97FD7005D7197 /* Old Custom Bento */,
 			);
@@ -2263,6 +2273,7 @@
 				7216B7A01AA64C7C0006FFE9 /* image_checked@2x.png in Resources */,
 				7216B7A11AA64C7C0006FFE9 /* string_addanotherbento@2x.png in Resources */,
 				FC1D615E1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */,
+				FC3E2D801C4588260073A82C /* MenuPreviewViewController.xib in Resources */,
 				FC2F06A61BE81F64007B6A82 /* in-transit-64.png in Resources */,
 				FCD51ED31AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */,
 				7216B7A21AA64C7C0006FFE9 /* OpenSans-Semibold.ttf in Resources */,
@@ -2396,6 +2407,7 @@
 				47AA1C471A6BE52F00064857 /* string_addanotherbento@2x.png in Resources */,
 				FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */,
 				90BED0C91A5BE72F003DC872 /* OpenSans-Semibold.ttf in Resources */,
+				FC3E2D7F1C4588260073A82C /* MenuPreviewViewController.xib in Resources */,
 				FC2F06A51BE81F64007B6A82 /* in-transit-64.png in Resources */,
 				FC72912A1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
 				90BED0E01A5C04DE003DC872 /* mybento_nav_cart_inact@2x.png in Resources */,
@@ -2573,6 +2585,7 @@
 				7216B7281AA64C7C0006FFE9 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				7216B72B1AA64C7C0006FFE9 /* EnterCreditCardViewController.m in Sources */,
 				7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */,
+				FC3E2D7E1C4588260073A82C /* MenuPreviewViewController.m in Sources */,
 				FC9E81ED1BACE4250099DBF5 /* SocketAckEmitter.swift in Sources */,
 				7216B7301AA64C7C0006FFE9 /* SHSPhoneNumberFormatter.m in Sources */,
 				FC11AAB91BFC07900004A83B /* Addon.m in Sources */,
@@ -2689,6 +2702,7 @@
 				722333D31A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */,
 				722333611A6D4058006C2446 /* JGProgressHUDIndicatorView.m in Sources */,
+				FC3E2D7D1C4588260073A82C /* MenuPreviewViewController.m in Sources */,
 				FC9E81EC1BACE4250099DBF5 /* SocketAckEmitter.swift in Sources */,
 				7209E0961A780A1200D18D7A /* SHSPhoneNumberFormatter.m in Sources */,
 				FC11AAB81BFC07900004A83B /* Addon.m in Sources */,

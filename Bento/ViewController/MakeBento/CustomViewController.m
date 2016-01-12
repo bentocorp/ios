@@ -10,7 +10,7 @@
 
 @interface CustomViewController ()
 
-@property (weak, nonatomic) IBOutlet UIView *dishBGView;
+
 
 @property (weak, nonatomic) IBOutlet UIView *mainDishView;
 @property (weak, nonatomic) IBOutlet UIView *sideDish1View;

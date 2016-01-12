@@ -26,8 +26,8 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf" userLabel="dishBGView">
-                    <rect key="frame" x="20" y="133" width="335" height="402"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf" userLabel="dishBGView">
+                    <rect key="frame" x="20" y="105" width="335" height="402"/>
                     <subviews>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W" userLabel="mainDishView">
                             <rect key="frame" x="1" y="1" width="165" height="200"/>
@@ -49,7 +49,7 @@
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB" userLabel="buildButton">
-                    <rect key="frame" x="-1" y="557" width="377" height="45"/>
+                    <rect key="frame" x="-1" y="537" width="377" height="45"/>
                     <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="58l-Pt-xAi"/>
@@ -64,9 +64,13 @@
             </subviews>
             <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstAttribute="trailing" secondItem="nMO-Fa-ewf" secondAttribute="trailing" constant="20" id="3mE-wN-teM"/>
+                <constraint firstItem="nMO-Fa-ewf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="105" id="9Lv-UI-xuc"/>
                 <constraint firstAttribute="trailing" secondItem="Mgx-IB-ucB" secondAttribute="trailing" constant="-1" id="Phh-HL-SCT"/>
+                <constraint firstItem="Mgx-IB-ucB" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="bottom" constant="30" id="XTf-Rt-jWn"/>
                 <constraint firstItem="Mgx-IB-ucB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="dSK-Fc-t8V"/>
-                <constraint firstAttribute="bottom" secondItem="Mgx-IB-ucB" secondAttribute="bottom" constant="65" id="tBX-1h-M3h"/>
+                <constraint firstItem="nMO-Fa-ewf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="fGQ-Ws-S14"/>
+                <constraint firstAttribute="bottom" secondItem="Mgx-IB-ucB" secondAttribute="bottom" constant="85" id="tBX-1h-M3h"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="208.5" y="390.5"/>

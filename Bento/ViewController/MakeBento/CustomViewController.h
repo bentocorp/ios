@@ -11,4 +11,6 @@
 
 @interface CustomViewController : BaseViewController
 
+@property (weak, nonatomic) IBOutlet UIView *dishBGView;
+
 @end
