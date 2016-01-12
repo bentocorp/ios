@@ -79,6 +79,14 @@
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT - 20);
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [self updateUI];
+}
+
+- (void)updateUI {
+    self.etaLabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
+}
+
 - (IBAction)settingsButtonPressed:(id)sender {
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
     
