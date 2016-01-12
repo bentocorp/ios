@@ -24,23 +24,23 @@
 }
 
 - (IBAction)addMainButtonPressed:(id)sender {
-    
+    NSLog(@"add main button pressed");
 }
 
 - (IBAction)addSide1ButtonPressed:(id)sender {
-    
+    NSLog(@"add side 1 button pressed");
 }
 
 - (IBAction)addSide2ButtonPressed:(id)sender {
-    
+    NSLog(@"add side 2 button pressed");
 }
 
 - (IBAction)addSide3ButtonPressed:(id)sender {
-    
+    NSLog(@"add side 3 button pressed");
 }
 
 - (IBAction)buildButtonPressed:(id)sender {
-    
+    NSLog(@"bottom button pressed");
 }
 
 
