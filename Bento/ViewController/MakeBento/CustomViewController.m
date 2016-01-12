@@ -25,22 +25,27 @@
 
 - (IBAction)addMainButtonPressed:(id)sender {
     NSLog(@"add main button pressed");
+    [self.delegate customVCAddMainButtonPressed];
 }
 
 - (IBAction)addSide1ButtonPressed:(id)sender {
     NSLog(@"add side 1 button pressed");
+    [self.delegate customVCAddSideDish1Pressed];
 }
 
 - (IBAction)addSide2ButtonPressed:(id)sender {
     NSLog(@"add side 2 button pressed");
+    [self.delegate customVCAddSideDish2Pressed];
 }
 
 - (IBAction)addSide3ButtonPressed:(id)sender {
     NSLog(@"add side 3 button pressed");
+    [self.delegate customVCAddSideDish3Pressed];
 }
 
 - (IBAction)buildButtonPressed:(id)sender {
     NSLog(@"bottom button pressed");
+    [self.delegate customVCBottomButtonPressed];
 }
 
 

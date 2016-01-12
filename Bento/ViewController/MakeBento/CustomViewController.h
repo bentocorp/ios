@@ -11,11 +11,11 @@
 
 @protocol CustomViewControllerDelegate <NSObject>
 
-- (void)addMainButtonPressed;
-- (void)addSideDish1Pressed;
-- (void)addSideDish2Pressed;
-- (void)addSideDish3Pressed;
-- (void)bottomButtonPressed;
+- (void)customVCAddMainButtonPressed;
+- (void)customVCAddSideDish1Pressed;
+- (void)customVCAddSideDish2Pressed;
+- (void)customVCAddSideDish3Pressed;
+- (void)customVCBottomButtonPressed;
 
 @end
 

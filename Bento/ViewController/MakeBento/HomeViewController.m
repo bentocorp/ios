@@ -53,7 +53,7 @@
 #import "AddonsViewController.h"
 #import "AddonList.h"
 
-@interface HomeViewController ()
+@interface HomeViewController () <CustomViewControllerDelegate, MyAlertViewDelegate>
 
 @property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
 
@@ -1213,6 +1213,27 @@
         
         [self onFinalize];
     }
+}
+
+#pragma mark CustomViewController Delegate Methods
+- (void)customVCAddMainButtonPressed {
+    
+}
+
+- (void)customVCAddSideDish1Pressed {
+    
+}
+
+- (void)customVCAddSideDish2Pressed {
+    
+}
+
+- (void)customVCAddSideDish3Pressed {
+    
+}
+
+- (void)customVCBottomButtonPressed {
+    
 }
 
 @end
