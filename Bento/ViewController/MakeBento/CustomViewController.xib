@@ -27,59 +27,59 @@
                     <rect key="frame" x="20" y="105" width="335" height="402"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W" userLabel="mainDishView">
-                            <rect key="frame" x="0.0" y="0.0" width="167" height="201"/>
-                            <color key="backgroundColor" red="1" green="0.37543009350000001" blue="0.45019074079999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="1" y="1" width="166" height="199"/>
+                            <color key="backgroundColor" red="0.90751441062714944" green="0.93501484731282059" blue="0.93501484731282059" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5kH-Dd-pyo" userLabel="mainDishView">
-                            <rect key="frame" x="168" y="0.0" width="167" height="201"/>
-                            <color key="backgroundColor" red="1" green="0.70906046150000002" blue="0.44331027989999999" alpha="1" colorSpace="calibratedRGB"/>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3td-g7-AxD" userLabel="mainDishView">
-                            <rect key="frame" x="0.0" y="201" width="167" height="201"/>
-                            <color key="backgroundColor" red="0.35239646679999997" green="0.9155273438" blue="0.57054448349999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="168" y="1" width="166" height="199"/>
+                            <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FYW-6y-kVi" userLabel="mainDishView">
-                            <rect key="frame" x="168" y="201" width="167" height="201"/>
-                            <color key="backgroundColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                            <rect key="frame" x="168" y="201" width="166" height="200"/>
+                            <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3td-g7-AxD" userLabel="mainDishView">
+                            <rect key="frame" x="1" y="201" width="166" height="200"/>
+                            <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="FYW-6y-kVi" secondAttribute="trailing" id="2gO-nA-agA"/>
+                        <constraint firstAttribute="trailing" secondItem="FYW-6y-kVi" secondAttribute="trailing" constant="1" id="2gO-nA-agA"/>
                         <constraint firstItem="FYW-6y-kVi" firstAttribute="leading" secondItem="3td-g7-AxD" secondAttribute="trailing" constant="1" id="4ef-70-Oyb"/>
-                        <constraint firstItem="3td-g7-AxD" firstAttribute="height" secondItem="ay4-Pm-U6W" secondAttribute="height" id="6LN-W9-k3Q"/>
+                        <constraint firstItem="3td-g7-AxD" firstAttribute="height" secondItem="ay4-Pm-U6W" secondAttribute="height" constant="1" id="6LN-W9-k3Q"/>
                         <constraint firstItem="5kH-Dd-pyo" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="trailing" constant="1" id="9GH-Q6-Y3E"/>
-                        <constraint firstItem="5kH-Dd-pyo" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="top" id="AWA-vc-JuJ"/>
-                        <constraint firstItem="FYW-6y-kVi" firstAttribute="top" secondItem="5kH-Dd-pyo" secondAttribute="bottom" id="BNI-Aq-tJv"/>
-                        <constraint firstItem="ay4-Pm-U6W" firstAttribute="leading" secondItem="nMO-Fa-ewf" secondAttribute="leading" id="H22-pr-3km"/>
-                        <constraint firstItem="FYW-6y-kVi" firstAttribute="height" secondItem="ay4-Pm-U6W" secondAttribute="height" id="KeR-Pq-EDO"/>
+                        <constraint firstItem="5kH-Dd-pyo" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="top" constant="1" id="AWA-vc-JuJ"/>
+                        <constraint firstItem="FYW-6y-kVi" firstAttribute="top" secondItem="5kH-Dd-pyo" secondAttribute="bottom" constant="1" id="BNI-Aq-tJv"/>
+                        <constraint firstItem="ay4-Pm-U6W" firstAttribute="leading" secondItem="nMO-Fa-ewf" secondAttribute="leading" constant="1" id="H22-pr-3km"/>
+                        <constraint firstItem="FYW-6y-kVi" firstAttribute="height" secondItem="ay4-Pm-U6W" secondAttribute="height" constant="1" id="KeR-Pq-EDO"/>
                         <constraint firstItem="5kH-Dd-pyo" firstAttribute="height" secondItem="ay4-Pm-U6W" secondAttribute="height" id="Q6x-iZ-rCu"/>
-                        <constraint firstAttribute="bottom" secondItem="3td-g7-AxD" secondAttribute="bottom" id="R5y-wb-OjZ"/>
+                        <constraint firstAttribute="bottom" secondItem="3td-g7-AxD" secondAttribute="bottom" constant="1" id="R5y-wb-OjZ"/>
                         <constraint firstItem="3td-g7-AxD" firstAttribute="width" secondItem="ay4-Pm-U6W" secondAttribute="width" id="SZa-FG-aQq"/>
                         <constraint firstItem="5kH-Dd-pyo" firstAttribute="width" secondItem="ay4-Pm-U6W" secondAttribute="width" id="Scn-ht-VHR"/>
-                        <constraint firstAttribute="trailing" secondItem="5kH-Dd-pyo" secondAttribute="trailing" id="UqS-4s-7a8"/>
-                        <constraint firstItem="3td-g7-AxD" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="bottom" id="XYD-re-TY1"/>
-                        <constraint firstItem="ay4-Pm-U6W" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="top" id="bT4-SR-5Ua"/>
-                        <constraint firstItem="3td-g7-AxD" firstAttribute="leading" secondItem="nMO-Fa-ewf" secondAttribute="leading" id="gJS-2N-Hgr"/>
+                        <constraint firstAttribute="trailing" secondItem="5kH-Dd-pyo" secondAttribute="trailing" constant="1" id="UqS-4s-7a8"/>
+                        <constraint firstItem="3td-g7-AxD" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="bottom" constant="1" id="XYD-re-TY1"/>
+                        <constraint firstItem="ay4-Pm-U6W" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="top" constant="1" id="bT4-SR-5Ua"/>
+                        <constraint firstItem="3td-g7-AxD" firstAttribute="leading" secondItem="nMO-Fa-ewf" secondAttribute="leading" constant="1" id="gJS-2N-Hgr"/>
                         <constraint firstItem="FYW-6y-kVi" firstAttribute="width" secondItem="ay4-Pm-U6W" secondAttribute="width" id="lyo-k4-zpK"/>
-                        <constraint firstAttribute="bottom" secondItem="FYW-6y-kVi" secondAttribute="bottom" id="yVH-Hr-GcT"/>
+                        <constraint firstAttribute="bottom" secondItem="FYW-6y-kVi" secondAttribute="bottom" constant="1" id="yVH-Hr-GcT"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB" userLabel="buildButton">
                     <rect key="frame" x="-1" y="537" width="377" height="45"/>
-                    <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="QUq-Oh-mFa"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                    <color key="tintColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="BUILD YOUR BENTO"/>
                     <connections>
                         <action selector="buildButtonPressed:" destination="-1" eventType="touchUpInside" id="9KX-J4-ye1"/>
                     </connections>
                 </button>
             </subviews>
-            <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.89657061449999997" green="0.91450202680000003" blue="0.91450202680000003" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Mgx-IB-ucB" secondAttribute="trailing" constant="-1" id="1xJ-Y5-Qgp"/>
                 <constraint firstAttribute="trailing" secondItem="nMO-Fa-ewf" secondAttribute="trailing" constant="20" id="9i1-Va-8yz"/>

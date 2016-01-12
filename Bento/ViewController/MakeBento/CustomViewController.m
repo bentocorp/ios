@@ -16,6 +16,11 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.dishBGView.layer.cornerRadius = 2;
+    
+    self.buildButton.layer.borderWidth = 1;
+    self.buildButton.layer.borderColor = [UIColor colorWithRed:0.835f green:0.851f blue:0.851f alpha:1.0f].CGColor;
 }
 
 - (IBAction)addMainButtonPressed:(id)sender {
