@@ -9,6 +9,16 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
+@protocol CustomViewControllerDelegate <NSObject>
+
+- (void)addMainButtonPressed;
+- (void)addSideDish1Pressed;
+- (void)addSideDish2Pressed;
+- (void)addSideDish3Pressed;
+- (void)bottomButtonPressed;
+
+@end
+
 @interface CustomViewController : BaseViewController
 
 @property (weak, nonatomic) IBOutlet UIView *dishBGView;
@@ -34,5 +44,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *addSide3Button;
 
 @property (weak, nonatomic) IBOutlet UIButton *buildButton;
+
+@property (nonatomic) id delegate;
 
 @end
