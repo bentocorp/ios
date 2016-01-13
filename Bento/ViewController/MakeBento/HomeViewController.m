@@ -466,77 +466,74 @@
     /*-Side 3-*/
     if (side3DishIndex > 0) {
         
-        ivSideDish3.hidden = NO;
-        lblSideDish3.hidden = NO;
+        self.customVC.sideDish3ImageView.hidden = NO;
+        self.customVC.sideDish3Label.hidden = NO;
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
         if (dishInfo != nil) {
-            lblSideDish3.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            self.customVC.sideDish3Label.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
             if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
                 // if there's no image string from backend
-                ivSideDish3.image = [UIImage imageNamed:@"empty-main"];
+                self.customVC.sideDish3ImageView.image = [UIImage imageNamed:@"empty-main"];
             }
             else {
-                // download image and display activity indicator in process
-                //                [ivSideDish3 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                
-                [ivSideDish3 setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                [self.customVC.sideDish3ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
             if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
-                ivBannerSideDish3.hidden = NO;
+                self.customVC.sideDish3BannerImageView.hidden = NO;
             }
             else {
-                ivBannerSideDish3.hidden = YES;
+                self.customVC.sideDish3BannerImageView.hidden = YES;
             }
         }
     }
     else {
-        ivSideDish3.image = nil;
-        ivSideDish3.hidden = YES;
-        lblSideDish3.hidden = YES;
-        ivBannerSideDish3.hidden = YES;
+        self.customVC.sideDish3ImageView.image = nil;
+        self.customVC.sideDish3ImageView.hidden = YES;
+        self.customVC.sideDish3Label.hidden = YES;
+        self.customVC.sideDish3BannerImageView.hidden = YES;
     }
     
-    /*-Side 4-*/
-    if (side4DishIndex > 0) {
-        
-        ivSideDish4.hidden = NO;
-        lblSideDish4.hidden = NO;
-        
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
-        if (dishInfo != nil) {
-            
-            lblSideDish4.text = [[dishInfo objectForKey:@"name"] uppercaseString];
-            
-            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
-                // if there's no image string from backend
-                ivSideDish4.image = [UIImage imageNamed:@"empty-main"];
-            }
-            else {
-                // download image and display activity indicator in process
-                //                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                
-                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-            }
-            
-            if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
-                ivBannerSideDish4.hidden = NO;
-            }
-            else {
-                ivBannerSideDish4.hidden = YES;
-            }
-        }
-    }
-    else {
-        ivSideDish4.image = nil;
-        ivSideDish4.hidden = YES;
-        lblSideDish4.hidden = YES;
-        ivBannerSideDish4.hidden = YES;
-    }
+//    /*-Side 4-*/
+//    if (side4DishIndex > 0) {
+//        
+//        ivSideDish4.hidden = NO;
+//        lblSideDish4.hidden = NO;
+//        
+//        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
+//        if (dishInfo != nil) {
+//            
+//            lblSideDish4.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+//            
+//            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+//            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+//                // if there's no image string from backend
+//                ivSideDish4.image = [UIImage imageNamed:@"empty-main"];
+//            }
+//            else {
+//                // download image and display activity indicator in process
+//                //                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//                
+//                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+//            }
+//            
+//            if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
+//                ivBannerSideDish4.hidden = NO;
+//            }
+//            else {
+//                ivBannerSideDish4.hidden = YES;
+//            }
+//        }
+//    }
+//    else {
+//        ivSideDish4.image = nil;
+//        ivSideDish4.hidden = YES;
+//        lblSideDish4.hidden = YES;
+//        ivBannerSideDish4.hidden = YES;
+//    }
 }
 
 - (void)onSettings {
@@ -792,22 +789,16 @@
         
         // if exists, show normal
         if (cents == 0) {
-            //            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
-            startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
+            self.startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%.0f", [sortedMainPrices[0] floatValue]];
         }
         // if no cents, just show whole number
         else {
-            //            lblBanner.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
-            startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
+            self.startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
         }
-        
-        lblBanner.hidden = NO;
-        lblBanner.backgroundColor = [UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f];
-        lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
     }
     /*----------------------*/
     
-    ETALabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
+    self.etaLabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
     
     /*----------------------*/
     
@@ -815,29 +806,26 @@
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         
         // show "OR" label and "View Add-ons" button
-        orLabel.hidden = NO;
-        addonsButton.hidden = NO;
+//        addonsButton.hidden = NO;
         //        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45); // short version
         
         
         if ([[BentoShop sharedInstance] is4PodMode]) {
-            btnAddAnotherBento.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH/2-10, 45);
+//            self.customVC.buildButton.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH/2-10, 45);
         }
         else {
-            btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45);
+//            self.customVC.buildButton.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45);
         }
     }
     // 0 bentos in cart
     else {
-        
-        orLabel.hidden = YES;
-        addonsButton.hidden = YES;
+//        addonsButton.hidden = YES;
         
         if ([[BentoShop sharedInstance] is4PodMode]) {
-            btnAddAnotherBento.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH + 2, 45); // long version
+//            self.customVC.buildButton.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH + 2, 45); // long version
         }
         else {
-            btnAddAnotherBento.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH - 60, 45); // long version
+//            self.customVC.buildButton.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH - 60, 45); // long version
         }
     }
     
@@ -861,7 +849,7 @@
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
-        [btnAddAnotherBento setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+        [self.customVC.buildButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     }
     /*----------------------*/
     
@@ -877,33 +865,33 @@
     [self loadSelectedDishes];
     
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        btnCart.enabled = YES;
-        btnCart.selected = YES;
-        [btnCart setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
+        self.cartButton.enabled = YES;
+        self.cartButton.selected = YES;
+        [self.cartButton setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
     }
     else {
-        btnCart.enabled = NO;
-        btnCart.selected = NO;
+        self.cartButton.enabled = NO;
+        self.cartButton.selected = NO;
     }
     
     /*---Finalize Button---*/
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        [btnState setBackgroundColor:[UIColor bentoBrandGreen]];
-        btnState.enabled = YES;
+        [self.bottomButton setBackgroundColor:[UIColor bentoBrandGreen]];
+        self.bottomButton.enabled = YES;
     }
     else {
-        [btnState setBackgroundColor:[UIColor bentoButtonGray]];
-        btnState.enabled = NO;
+        [self.bottomButton setBackgroundColor:[UIColor bentoButtonGray]];
+        self.bottomButton.enabled = NO;
     }
     
     /*---Cart Badge---*/
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        lblBadge.text = [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getCompletedBentoCount] + (long)[[AddonList sharedInstance] getTotalCount]];
-        lblBadge.hidden = NO;
+        self.countBadgeLabel.text = [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getCompletedBentoCount] + (long)[[AddonList sharedInstance] getTotalCount]];
+        self.countBadgeLabel.hidden = NO;
     }
     else {
-        lblBadge.text = @"";
-        lblBadge.hidden = YES;
+        self.countBadgeLabel.text = @"";
+        self.countBadgeLabel.hidden = YES;
     }
 }
 
