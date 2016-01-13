@@ -55,7 +55,7 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nMO-Fa-ewf" userLabel="dishBGView">
-                    <rect key="frame" x="20" y="105" width="335" height="402"/>
+                    <rect key="frame" x="20" y="125" width="335" height="402"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ay4-Pm-U6W" userLabel="mainDishView">
                             <rect key="frame" x="1" y="1" width="166" height="199"/>
@@ -79,7 +79,7 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nI-hP-jcm" userLabel="addMainDishButton">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="199"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                    <state key="normal">
+                                    <state key="normal" title="+ MAIN">
                                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
                                     <connections>
@@ -273,7 +273,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB" userLabel="buildButton">
-                    <rect key="frame" x="-1" y="537" width="377" height="45"/>
+                    <rect key="frame" x="-1" y="557" width="377" height="45"/>
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="QUq-Oh-mFa"/>
@@ -291,10 +291,10 @@
                 <constraint firstAttribute="trailing" secondItem="Mgx-IB-ucB" secondAttribute="trailing" constant="-1" id="1xJ-Y5-Qgp"/>
                 <constraint firstAttribute="trailing" secondItem="nMO-Fa-ewf" secondAttribute="trailing" constant="20" id="9i1-Va-8yz"/>
                 <constraint firstItem="nMO-Fa-ewf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="UyZ-KZ-QzU"/>
-                <constraint firstItem="nMO-Fa-ewf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="105" id="fhp-Qe-oly"/>
+                <constraint firstItem="nMO-Fa-ewf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="125" id="fhp-Qe-oly"/>
                 <constraint firstItem="Mgx-IB-ucB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="hiR-jA-PPQ"/>
                 <constraint firstItem="Mgx-IB-ucB" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="bottom" constant="30" id="jVP-pK-zKj"/>
-                <constraint firstAttribute="bottom" secondItem="Mgx-IB-ucB" secondAttribute="bottom" constant="85" id="kZ8-cn-ZHe"/>
+                <constraint firstAttribute="bottom" secondItem="Mgx-IB-ucB" secondAttribute="bottom" constant="65" id="kZ8-cn-ZHe"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="208.5" y="390.5"/>

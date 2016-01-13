@@ -73,7 +73,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // initialize to yes
     isThereConnection = YES;
     
     /*---Custom---*/
@@ -86,9 +85,15 @@
     
     /*---Menu Preview---*/
     self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
-    [self addChildViewController:self.menuPreviewVC];
+    [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
+//    self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
     [self.bgView addSubview:self.menuPreviewVC.view];
-    [self.menuPreviewVC didMoveToParentViewController:self];
+    [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
+    
+    // toggle on and off accordingly
+    [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
+    [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
+    [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
     
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
@@ -120,7 +125,6 @@
     backgroundLayer.frame = self.customVC.sideDish3ImageView.frame;
     backgroundLayer.opacity = 0.8f;
     [self.customVC.sideDish3ImageView.layer insertSublayer:backgroundLayer atIndex:0];
-    
     
     //    if ([[BentoShop sharedInstance] is4PodMode]) {
     //        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, SCREEN_HEIGHT - 45 -65 - 65, SCREEN_WIDTH/2-10, 45)];
@@ -213,10 +217,28 @@
     }
 }
 
-
-
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        if ([[[BentoShop sharedInstance] getCurrentBento] getMainDish] == 0 &&
+            [[[BentoShop sharedInstance] getCurrentBento] getSideDish1] == 0 &&
+            [[[BentoShop sharedInstance] getCurrentBento] getSideDish2] == 0 &&
+            [[[BentoShop sharedInstance] getCurrentBento] getSideDish3] == 0) {
+            
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:0];
+        }
+        else {
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:-1]; // dummy item for 4-pod
+        }
+    }
+    
+    addonsVC = [[AddonsViewController alloc] init];
+    addonsVC.delegate = self;
+    
+    [self updateUI];
+    
+    [self startTimerOnViewedScreen];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
@@ -228,26 +250,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
-    
-    if ([[BentoShop sharedInstance] is4PodMode]) {
-        if ([[[BentoShop sharedInstance] getCurrentBento] getMainDish] == 0 &&
-            [[[BentoShop sharedInstance] getCurrentBento] getSideDish1] == 0 &&
-            [[[BentoShop sharedInstance] getCurrentBento] getSideDish2] == 0 &&
-            [[[BentoShop sharedInstance] getCurrentBento] getSideDish3] == 0) {
-            
-            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:0];
-        }
-        else {
-            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:-1];
-        }
-    }
-    
-    addonsVC = [[AddonsViewController alloc] init];
-    addonsVC.delegate = self;
-    
-    [self updateUI];
-    
-    [self startTimerOnViewedScreen];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -259,62 +261,7 @@
     [self endTimerOnViewedScreen];
 }
 
-#pragma mark Mixpanel - Screen Duration
-- (void)startTimerOnViewedScreen {
-    [[Mixpanel sharedInstance] timeEvent:@"Viewed Custom Home Screen"];
-}
-
-- (void)endTimerOnViewedScreen {
-    [[Mixpanel sharedInstance] track:@"Viewed Custom Home Screen"];
-}
-
-#pragma mark Connection Handlers
-
-- (void)yesConnection {
-    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
-}
-
-- (void)noConnection {
-    isThereConnection = NO;
-    
-    if (loadingHUD == nil) {
-        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
-        [loadingHUD showInView:self.view];
-    }
-}
-
-- (void)callUpdate {
-    isThereConnection = YES;
-    
-    [loadingHUD dismiss];
-    loadingHUD = nil;
-    [self viewWillAppear:YES];
-}
-
-#pragma mark
-
-- (void)checkCurrentMode {
-    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
-        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-}
-
-- (void)onUpdatedStatus:(NSNotification *)notification {
-    if (isThereConnection) {
-        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
-            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-        }
-        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser]) {
-            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-        }
-        else {
-            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-        }
-    }
-}
+#pragma mark Load Dishes
 
 - (void)loadSelectedDishes {
     NSMutableArray *aryBentos = [[NSMutableArray alloc] init];
@@ -480,43 +427,100 @@
         self.customVC.sideDish3BannerImageView.hidden = YES;
     }
     
-//    /*-Side 4-*/
-//    if (side4DishIndex > 0) {
-//        
-//        ivSideDish4.hidden = NO;
-//        lblSideDish4.hidden = NO;
-//        
-//        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
-//        if (dishInfo != nil) {
-//            
-//            lblSideDish4.text = [[dishInfo objectForKey:@"name"] uppercaseString];
-//            
-//            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-//            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
-//                // if there's no image string from backend
-//                ivSideDish4.image = [UIImage imageNamed:@"empty-main"];
-//            }
-//            else {
-//                // download image and display activity indicator in process
-//                //                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//                
-//                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-//            }
-//            
-//            if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
-//                ivBannerSideDish4.hidden = NO;
-//            }
-//            else {
-//                ivBannerSideDish4.hidden = YES;
-//            }
-//        }
-//    }
-//    else {
-//        ivSideDish4.image = nil;
-//        ivSideDish4.hidden = YES;
-//        lblSideDish4.hidden = YES;
-//        ivBannerSideDish4.hidden = YES;
-//    }
+    //    /*-Side 4-*/
+    //    if (side4DishIndex > 0) {
+    //
+    //        ivSideDish4.hidden = NO;
+    //        lblSideDish4.hidden = NO;
+    //
+    //        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
+    //        if (dishInfo != nil) {
+    //
+    //            lblSideDish4.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+    //
+    //            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+    //            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+    //                // if there's no image string from backend
+    //                ivSideDish4.image = [UIImage imageNamed:@"empty-main"];
+    //            }
+    //            else {
+    //                // download image and display activity indicator in process
+    //                //                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    //
+    //                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    //            }
+    //
+    //            if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
+    //                ivBannerSideDish4.hidden = NO;
+    //            }
+    //            else {
+    //                ivBannerSideDish4.hidden = YES;
+    //            }
+    //        }
+    //    }
+    //    else {
+    //        ivSideDish4.image = nil;
+    //        ivSideDish4.hidden = YES;
+    //        lblSideDish4.hidden = YES;
+    //        ivBannerSideDish4.hidden = YES;
+    //    }
+}
+
+#pragma mark Mixpanel - Screen Duration
+- (void)startTimerOnViewedScreen {
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Custom Home Screen"];
+}
+
+- (void)endTimerOnViewedScreen {
+    [[Mixpanel sharedInstance] track:@"Viewed Custom Home Screen"];
+}
+
+#pragma mark Connection Handlers
+
+- (void)yesConnection {
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+}
+
+- (void)noConnection {
+    isThereConnection = NO;
+    
+    if (loadingHUD == nil) {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)callUpdate {
+    isThereConnection = YES;
+    
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+    [self viewWillAppear:YES];
+}
+
+#pragma mark
+
+- (void)checkCurrentMode {
+    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
+        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
+- (void)onUpdatedStatus:(NSNotification *)notification {
+    if (isThereConnection) {
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
+            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        }
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser]) {
+            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+        }
+        else {
+            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        }
+    }
 }
 
 - (void)onSettings {
@@ -648,26 +652,21 @@
     else if (![currentBento isCompleted]) {
         
         if ([currentBento getMainDish] == 0) {
-            
             [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
         }
         else if ([currentBento getSideDish1] == 0) {
-            
             chooseSideDishViewController.sideDishIndex = 0;
             [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
         }
         else if ([currentBento getSideDish2] == 0) {
-            
             chooseSideDishViewController.sideDishIndex = 1;
             [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
         }
         else if ([currentBento getSideDish3] == 0) {
-            
             chooseSideDishViewController.sideDishIndex = 2;
             [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
         }
         else if ([currentBento getSideDish4] == 0) {
-            
             chooseSideDishViewController.sideDishIndex = 3;
             [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
         }
@@ -695,11 +694,7 @@
 }
 
 - (void)onViewAddons {
-    // TODO: track on mixpanel
-    NSLog(@"Tapped on View Another Bento");
-    
-    [[Mixpanel sharedInstance] track:@"Tapped on View Another Bento"];
-    
+    [[Mixpanel sharedInstance] track:@"Tapped on View Addons"];
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }
 
