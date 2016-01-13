@@ -271,6 +271,7 @@
     if (side1DishIndex > 0) {
         self.customVC.sideDish1ImageView.hidden = NO;
         self.customVC.sideDish1Label.hidden = NO;
+        [self.customVC.addSide1Button setTitle:@"" forState:UIControlStateNormal];
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
         if (dishInfo != nil) {
@@ -299,6 +300,7 @@
         self.customVC.sideDish1ImageView.hidden = YES;
         self.customVC.sideDish1Label.hidden = YES;
         self.customVC.sideDish1BannerImageView.hidden = YES;
+        [self.customVC.addSide1Button setTitle:@"+ SIDE" forState:UIControlStateNormal];
     }
     
     /*---Side 2---*/
@@ -306,6 +308,7 @@
         
         self.customVC.sideDish2Imageview.hidden = NO;
         self.customVC.sideDish2Label.hidden = NO;
+        [self.customVC.addSide2Button setTitle:@"" forState:UIControlStateNormal];
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
         if (dishInfo != nil) {
@@ -334,6 +337,7 @@
         self.customVC.sideDish2Imageview.hidden = YES;
         self.customVC.sideDish2Label.hidden = YES;
         self.customVC.sideDish2BannerImageView.hidden = YES;
+        [self.customVC.addSide2Button setTitle:@"+ SIDE" forState:UIControlStateNormal];
     }
     
     /*-Side 3-*/
@@ -341,6 +345,7 @@
         
         self.customVC.sideDish3ImageView.hidden = NO;
         self.customVC.sideDish3Label.hidden = NO;
+        [self.customVC.addSide3Button setTitle:@"" forState:UIControlStateNormal];
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
         if (dishInfo != nil) {
@@ -368,45 +373,8 @@
         self.customVC.sideDish3ImageView.hidden = YES;
         self.customVC.sideDish3Label.hidden = YES;
         self.customVC.sideDish3BannerImageView.hidden = YES;
+        [self.customVC.addSide3Button setTitle:@"+ SIDE" forState:UIControlStateNormal];
     }
-    
-    //    /*-Side 4-*/
-    //    if (side4DishIndex > 0) {
-    //
-    //        ivSideDish4.hidden = NO;
-    //        lblSideDish4.hidden = NO;
-    //
-    //        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
-    //        if (dishInfo != nil) {
-    //
-    //            lblSideDish4.text = [[dishInfo objectForKey:@"name"] uppercaseString];
-    //
-    //            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
-    //            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
-    //                // if there's no image string from backend
-    //                ivSideDish4.image = [UIImage imageNamed:@"empty-main"];
-    //            }
-    //            else {
-    //                // download image and display activity indicator in process
-    //                //                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    //
-    //                [ivSideDish4 setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-    //            }
-    //
-    //            if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
-    //                ivBannerSideDish4.hidden = NO;
-    //            }
-    //            else {
-    //                ivBannerSideDish4.hidden = YES;
-    //            }
-    //        }
-    //    }
-    //    else {
-    //        ivSideDish4.image = nil;
-    //        ivSideDish4.hidden = YES;
-    //        lblSideDish4.hidden = YES;
-    //        ivBannerSideDish4.hidden = YES;
-    //    }
 }
 
 #pragma mark Update UI
