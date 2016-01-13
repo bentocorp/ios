@@ -264,7 +264,7 @@
         self.customVC.mainDishImageView.hidden = YES;
         self.customVC.mainDishLabel.hidden = YES;
         self.customVC.mainDishBannerImageView.hidden = YES;
-        [self.customVC.addMainDishButton setTitle:@"+ MAIN" forState:UIControlStateNormal];
+        [self.customVC.addMainDishButton setTitle:[[AppStrings sharedInstance] getString:BUILD_MAIN_BUTTON] forState:UIControlStateNormal];
     }
     
     /*---Side 1---*/
@@ -300,7 +300,7 @@
         self.customVC.sideDish1ImageView.hidden = YES;
         self.customVC.sideDish1Label.hidden = YES;
         self.customVC.sideDish1BannerImageView.hidden = YES;
-        [self.customVC.addSide1Button setTitle:@"+ SIDE" forState:UIControlStateNormal];
+        [self.customVC.addSide1Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE1_BUTTON] forState:UIControlStateNormal];
     }
     
     /*---Side 2---*/
@@ -337,7 +337,7 @@
         self.customVC.sideDish2Imageview.hidden = YES;
         self.customVC.sideDish2Label.hidden = YES;
         self.customVC.sideDish2BannerImageView.hidden = YES;
-        [self.customVC.addSide2Button setTitle:@"+ SIDE" forState:UIControlStateNormal];
+        [self.customVC.addSide2Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE2_BUTTON] forState:UIControlStateNormal];
     }
     
     /*-Side 3-*/
@@ -373,7 +373,7 @@
         self.customVC.sideDish3ImageView.hidden = YES;
         self.customVC.sideDish3Label.hidden = YES;
         self.customVC.sideDish3BannerImageView.hidden = YES;
-        [self.customVC.addSide3Button setTitle:@"+ SIDE" forState:UIControlStateNormal];
+        [self.customVC.addSide3Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
     }
 }
 
@@ -620,7 +620,7 @@
 
 #pragma mark CustomViewController Delegate Methods
 - (void)customVCAddMainButtonPressed:(id)sender {
-    NSLog(@"+ main pressed");
+    NSLog(@"+ main pressed, sender = %@", sender);
     [self onAddMainDish];
 }
 
