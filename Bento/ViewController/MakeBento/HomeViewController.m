@@ -55,14 +55,6 @@
 
 @interface HomeViewController () <CustomViewControllerDelegate, MyAlertViewDelegate>
 
-@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
-
-@property (weak, nonatomic) IBOutlet UILabel *startingPriceLabel;
-@property (weak, nonatomic) IBOutlet UILabel *etaLabel;
-
-@property (weak, nonatomic) IBOutlet UIButton *pickerButton;
-@property (weak, nonatomic) IBOutlet UIButton *bottomButton;
-
 @property (nonatomic) CustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 
@@ -146,37 +138,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    btnMainDish.backgroundColor = [UIColor colorWithRed:0.918f green:0.929f blue:0.929f alpha:1.0f];
-    [btnMainDish setTitle:[[AppStrings sharedInstance] getString:BUILD_MAIN_BUTTON] forState:UIControlStateNormal];
-    [btnMainDish setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
-    btnMainDish.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-    [btnMainDish addTarget:self action:@selector(onAddMainDish) forControlEvents:UIControlEventTouchUpInside];
-    [viewMainEntree addSubview:btnMainDish];
-    
-    btnSideDish1 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
-    [btnSideDish1 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE1_BUTTON] forState:UIControlStateNormal];
-    [btnSideDish1 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
-    btnSideDish1.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-    btnSideDish1.tag = 0;
-    [btnSideDish1 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
-    [viewSide1 addSubview:btnSideDish1];
-    
-    btnSideDish2 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 1)];
-    [btnSideDish2 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE2_BUTTON] forState:UIControlStateNormal];
-    [btnSideDish2 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
-    btnSideDish2.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-    btnSideDish2.tag = 1;
-    [btnSideDish2 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
-    [viewSide2 addSubview:btnSideDish2];
-    
-    btnSideDish3 = [[UIButton alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
-    [btnSideDish3 setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
-    [btnSideDish3 setTitleColor:[UIColor colorWithRed:0.533f green:0.686f blue:0.376f alpha:1.0f] forState:UIControlStateNormal];
-    btnSideDish3.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-    btnSideDish3.tag = 2;
-    [btnSideDish3 addTarget:self action:@selector(onAddSideDish:) forControlEvents:UIControlEventTouchUpInside];
-    [viewSide3 addSubview:btnSideDish3];
     
     /*---Image Dishes*---*/
     
@@ -1216,24 +1177,29 @@
 }
 
 #pragma mark CustomViewController Delegate Methods
-- (void)customVCAddMainButtonPressed {
-    
+- (void)customVCAddMainButtonPressed:(id)sender {
+    NSLog(@"+ main pressed");
+    [self onAddMainDish];
 }
 
-- (void)customVCAddSideDish1Pressed {
-    
+- (void)customVCAddSideDish1Pressed:(id)sender {
+    NSLog(@"+ side 1 pressed");
+    [self onAddSideDish:sender];
 }
 
-- (void)customVCAddSideDish2Pressed {
-    
+- (void)customVCAddSideDish2Pressed:(id)sender {
+    NSLog(@"+ side 2 pressed");
+    [self onAddSideDish:sender];
 }
 
-- (void)customVCAddSideDish3Pressed {
-    
+- (void)customVCAddSideDish3Pressed:(id)sender {
+    NSLog(@"+ side 3 pressed");
+    [self onAddSideDish:sender];
 }
 
-- (void)customVCBottomButtonPressed {
-    
+- (void)customVCBottomButtonPressed:(id)sender {
+    NSLog(@"bottom button pressed");
+    [self onFinalize];
 }
 
 @end

@@ -11,4 +11,12 @@
 
 @interface HomeViewController : BaseViewController
 
+@property (weak, nonatomic) IBOutlet UIScrollView *scrollView;
+
+@property (weak, nonatomic) IBOutlet UILabel *startingPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *etaLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *pickerButton;
+@property (weak, nonatomic) IBOutlet UIButton *bottomButton;
+
 @end
