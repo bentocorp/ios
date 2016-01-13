@@ -79,7 +79,8 @@
     // Custom
     self.customVC = [[CustomViewController alloc] initWithNibName:@"CustomViewController" bundle:nil];
     [self addChildViewController:self.customVC];
-    [self.scrollView addSubview:self.customVC.view];
+//    [self.scrollView addSubview:self.customVC.view];
+    [self.view addSubview:self.customVC.view];
     [self.customVC didMoveToParentViewController:self];
     
     self.customVC.delegate = self;
@@ -91,11 +92,11 @@
     self.menuPreviewVC.view.frame = frame;
     
     [self addChildViewController:self.menuPreviewVC];
-    [self.scrollView addSubview:self.menuPreviewVC.view];
+//    [self.scrollView addSubview:self.menuPreviewVC.view];
     [self.menuPreviewVC didMoveToParentViewController:self];
     
     // Scroll View
-    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT - 20);
+//    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT - 20);
     
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
@@ -220,21 +221,7 @@
     }
 }
 
-- (IBAction)settingsButtonPressed:(id)sender {
-    [self onSettings];
-}
 
-- (IBAction)cartButtonPressed:(id)sender {
-    [self onCart];
-}
-
-- (IBAction)pickerButtonPressed:(id)sender {
-    
-}
-
-- (IBAction)bottomButtonPressed:(id)sender {
-    [self onFinalize];
-}
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -949,6 +936,24 @@
 - (void)customVCBuildButtonPressed:(id)sender {
     NSLog(@"build button pressed");
     [self onAddAnotherBento];
+}
+
+#pragma mark HomeViewController Button Handlers
+
+- (IBAction)settingsButtonPressed:(id)sender {
+    [self onSettings];
+}
+
+- (IBAction)cartButtonPressed:(id)sender {
+    [self onCart];
+}
+
+- (IBAction)pickerButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)bottomButtonPressed:(id)sender {
+    [self onFinalize];
 }
 
 @end
