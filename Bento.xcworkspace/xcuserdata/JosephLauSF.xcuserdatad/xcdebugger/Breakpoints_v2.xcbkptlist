@@ -238,12 +238,12 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/SignIn/SignInViewController.m"
-                  timestampString = "474406809.587046"
+                  timestampString = "474412879.719058"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "462"
                   endingLineNumber = "462"
-                  offsetFromSymbolStart = "393">
+                  offsetFromSymbolStart = "444">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -253,12 +253,12 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/SignIn/SignInViewController.m"
-                  timestampString = "474406809.58719"
+                  timestampString = "474412879.719244"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "462"
                   endingLineNumber = "462"
-                  offsetFromSymbolStart = "83">
+                  offsetFromSymbolStart = "72">
                </Location>
             </Locations>
          </BreakpointContent>

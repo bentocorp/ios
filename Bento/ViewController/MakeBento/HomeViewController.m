@@ -158,45 +158,6 @@
     //    [addonsButton addTarget:self action:@selector(onViewAddons) forControlEvents:UIControlEventTouchUpInside];
     //    [scrollView addSubview:addonsButton];
     
-    /*---Build Button---*/
-    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
-    if (strTitle != nil) {
-        
-        // Add Another Bento Button
-        [self.customVC.buildButton setTitle:strTitle forState:UIControlStateNormal];
-        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-        float spacing = 1.0f;
-        [attributedTitle addAttribute:NSKernAttributeName
-                                value:@(spacing)
-                                range:NSMakeRange(0, [strTitle length])];
-        // Anything less than iOS 8.0
-        if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
-            self.customVC.buildButton.titleLabel.text = strTitle;
-        }
-        else {
-            self.customVC.buildButton.titleLabel.attributedText = attributedTitle;
-        }
-        
-        // Continue Button
-        strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
-        [self.customVC.buildButton setTitle:strTitle forState:UIControlStateNormal];
-        if (strTitle != nil) {
-            attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-        }
-        spacing = 1.0f;
-        [attributedTitle addAttribute:NSKernAttributeName
-                                value:@(spacing)
-                                range:NSMakeRange(0, [strTitle length])];
-        // Anything less than iOS 8.0
-        if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
-            self.customVC.buildButton.titleLabel.text = strTitle;
-        }
-        else {
-            self.customVC.buildButton.titleLabel.attributedText = attributedTitle;
-        }
-        attributedTitle = nil;
-    }
-    
     // an empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
         [[BentoShop sharedInstance] addNewBento];
@@ -206,8 +167,7 @@
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
     BentoShop *globalShop = [BentoShop sharedInstance];
-    if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil)
-    {
+    if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil) {
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         
