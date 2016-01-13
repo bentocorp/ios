@@ -431,39 +431,36 @@
     /*---Side 2---*/
     if (side2DishIndex > 0) {
         
-        ivSideDish2.hidden = NO;
-        lblSideDish2.hidden = NO;
+        self.customVC.sideDish2Imageview.hidden = NO;
+        self.customVC.sideDish2Label.hidden = NO;
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
         if (dishInfo != nil) {
             
-            lblSideDish2.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            self.customVC.sideDish2Label.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
             if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
                 // if there's no image string from backend
-                ivSideDish2.image = [UIImage imageNamed:@"empty-main"];
+                self.customVC.sideDish2Imageview.image = [UIImage imageNamed:@"empty-main"];
             }
             else {
-                // download image and display activity indicator in process
-                //                [ivSideDish2 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                
-                [ivSideDish2 setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                [self.customVC.sideDish2Imageview setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
             if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
-                ivBannerSideDish2.hidden = NO;
+                self.customVC.sideDish2BannerImageView.hidden = NO;
             }
             else {
-                ivBannerSideDish2.hidden = YES;
+                self.customVC.sideDish2BannerImageView.hidden = YES;
             }
         }
     }
     else {
-        ivSideDish2.image = nil;
-        ivSideDish2.hidden = YES;
-        lblSideDish2.hidden = YES;
-        ivBannerSideDish2.hidden = YES;
+        self.customVC.sideDish2Imageview.image = nil;
+        self.customVC.sideDish2Imageview.hidden = YES;
+        self.customVC.sideDish2Label.hidden = YES;
+        self.customVC.sideDish2BannerImageView.hidden = YES;
     }
     
     /*-Side 3-*/
