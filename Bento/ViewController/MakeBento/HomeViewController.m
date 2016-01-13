@@ -433,32 +433,7 @@
     
     /*----------------------*/
     
-    // 1 or more bentos in cart
-    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        
-        // show "OR" label and "View Add-ons" button
-        //        addonsButton.hidden = NO;
-        //        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45); // short version
-        
-        
-        if ([[BentoShop sharedInstance] is4PodMode]) {
-            //            self.customVC.buildButton.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH/2-10, 45);
-        }
-        else {
-            //            self.customVC.buildButton.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45);
-        }
-    }
-    // 0 bentos in cart
-    else {
-        //        addonsButton.hidden = YES;
-        
-        if ([[BentoShop sharedInstance] is4PodMode]) {
-            //            self.customVC.buildButton.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH + 2, 45); // long version
-        }
-        else {
-            //            self.customVC.buildButton.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH - 60, 45); // long version
-        }
-    }
+    [self setWidthOfBuildButton];
     
     // current bento is empty
     if ([currentBento isEmpty] == YES || currentBento == nil) {
@@ -535,26 +510,29 @@
 
 #pragma mark Build Button Width
 
-- (void)setShortWidthOfBuildButton {
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
-                                                                  attribute:NSLayoutAttributeWidth
-                                                                  relatedBy:0
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1
-                                                                   constant:SCREEN_WIDTH/2-5];
-    [self.customVC.view addConstraint:constraint];
-}
-
-- (void)setRegularWidthOfBuildButton {
-    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
-                                                                  attribute:NSLayoutAttributeWidth
-                                                                  relatedBy:0
-                                                                     toItem:nil
-                                                                  attribute:NSLayoutAttributeNotAnAttribute
-                                                                 multiplier:1
-                                                                   constant:SCREEN_WIDTH];
-    [self.customVC.view addConstraint:constraint];
+- (void)setWidthOfBuildButton {
+    // 1 or more bentos in cart
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
+                                                                      attribute:NSLayoutAttributeWidth
+                                                                      relatedBy:0
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1
+                                                                       constant:SCREEN_WIDTH/2-5];
+        [self.customVC.view addConstraint:constraint];
+    }
+    // 0 bentos in cart
+    else {
+        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
+                                                                      attribute:NSLayoutAttributeWidth
+                                                                      relatedBy:0
+                                                                         toItem:nil
+                                                                      attribute:NSLayoutAttributeNotAnAttribute
+                                                                     multiplier:1
+                                                                       constant:SCREEN_WIDTH];
+        [self.customVC.view addConstraint:constraint];
+    }
 }
 
 #pragma mark Mixpanel - Screen Duration
