@@ -78,5 +78,4 @@
     [self.delegate customVCViewAddonsButtonPressed:sender];
 }
 
-
 @end

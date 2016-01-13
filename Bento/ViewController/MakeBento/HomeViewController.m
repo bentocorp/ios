@@ -622,28 +622,27 @@
 
 #pragma mark CustomViewController Delegate Methods
 - (void)customVCAddMainButtonPressed:(id)sender {
-    NSLog(@"+ main pressed, sender = %@", sender);
     [self onAddMainDish];
 }
 
 - (void)customVCAddSideDish1Pressed:(id)sender {
-    NSLog(@"+ side 1 pressed, sender = %@", sender);
     [self onAddSideDish:sender];
 }
 
 - (void)customVCAddSideDish2Pressed:(id)sender {
-    NSLog(@"+ side 2 pressed, sender = %@", sender);
     [self onAddSideDish:sender];
 }
 
 - (void)customVCAddSideDish3Pressed:(id)sender {
-    NSLog(@"+ side 3 pressed, sender = %@", sender);
     [self onAddSideDish:sender];
 }
 
 - (void)customVCBuildButtonPressed:(id)sender {
-    NSLog(@"build button pressed, sender = %@", sender);
     [self onAddAnotherBento];
+}
+
+- (void)customVCViewAddonsButtonPressed:(id)sender {
+    [self onViewAddons];
 }
 
 - (void)onAddMainDish {
