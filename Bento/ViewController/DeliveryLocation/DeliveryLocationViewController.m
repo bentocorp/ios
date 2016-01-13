@@ -10,7 +10,7 @@
 
 #import "AppDelegate.h"
 
-#import "CustomBentoViewController.h"
+#import "HomeViewController.h"
 
 #import "CompleteOrderViewController.h"
 #import "OutOfDeliveryAddressViewController.h"
@@ -272,7 +272,7 @@
     for (UIViewController *vc in viewControllers)
     {
         // serving dinner vc || serving lunch vc
-        if ([vc isKindOfClass:[CustomBentoViewController class]])
+        if ([vc isKindOfClass:[HomeViewController class]])
         {
             if (self.isFromOrder)
             {
@@ -288,8 +288,8 @@
         }
     }
     
-    CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
-    [self.navigationController popToViewController:customBentoViewController animated:YES];
+    HomeViewController *homeVC = [[HomeViewController alloc] init];
+    [self.navigationController popToViewController:homeVC animated:YES];
 }
 
 - (void)doConfirmOrder
