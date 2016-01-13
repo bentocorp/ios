@@ -236,7 +236,7 @@
     if (mainDishIndex > 0) {
         self.customVC.mainDishImageView.hidden = NO;
         self.customVC.mainDishLabel.hidden = NO;
-        self.customVC.addMainDishButton.titleLabel.text = @"";
+        [self.customVC.addMainDishButton setTitle:@"" forState:UIControlStateNormal];
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
         if (dishInfo != nil) {
@@ -264,7 +264,7 @@
         self.customVC.mainDishImageView.hidden = YES;
         self.customVC.mainDishLabel.hidden = YES;
         self.customVC.mainDishBannerImageView.hidden = YES;
-        self.customVC.addMainDishButton.titleLabel.text = @"+ MAIN";
+        [self.customVC.addMainDishButton setTitle:@"+ MAIN" forState:UIControlStateNormal];
     }
     
     /*---Side 1---*/
