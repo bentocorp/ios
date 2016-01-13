@@ -533,6 +533,30 @@
     }
 }
 
+#pragma mark Build Button Width
+
+- (void)setShortWidthOfBuildButton {
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
+                                                                  attribute:NSLayoutAttributeWidth
+                                                                  relatedBy:0
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1
+                                                                   constant:SCREEN_WIDTH/2-5];
+    [self.customVC.view addConstraint:constraint];
+}
+
+- (void)setRegularWidthOfBuildButton {
+    NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
+                                                                  attribute:NSLayoutAttributeWidth
+                                                                  relatedBy:0
+                                                                     toItem:nil
+                                                                  attribute:NSLayoutAttributeNotAnAttribute
+                                                                 multiplier:1
+                                                                   constant:SCREEN_WIDTH];
+    [self.customVC.view addConstraint:constraint];
+}
+
 #pragma mark Mixpanel - Screen Duration
 - (void)startTimerOnViewedScreen {
     [[Mixpanel sharedInstance] timeEvent:@"Viewed Custom Home Screen"];
