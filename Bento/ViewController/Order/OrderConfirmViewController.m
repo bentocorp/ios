@@ -11,7 +11,7 @@
 
 #import "OrderConfirmViewController.h"
 
-#import "CustomBentoViewController.h"
+#import "HomeViewController.h"
 
 #import "UIImageView+WebCache.h"
 
@@ -146,28 +146,18 @@
     }
 }
 
-- (IBAction)onAnothorBento:(id)sender
-{
+- (IBAction)onAnothorBento:(id)sender {
     [self gotoAddAnotherBentoScreen];
 }
 
-- (void)gotoAddAnotherBentoScreen
-{
+- (void)gotoAddAnotherBentoScreen {
     NSArray *viewControllers = self.navigationController.viewControllers;
-    
     for (UIViewController *vc in viewControllers) {
-        
-        if ([vc isKindOfClass:[CustomBentoViewController class]]) {
-
-//            [[BentoShop sharedInstance] addNewBento];
+        if ([vc isKindOfClass:[HomeViewController class]]) {
             [self.navigationController popToViewController:vc animated:YES];
-            
             return;
         }
     }
-    
-//    OrderStatusViewController *orderStatusVC = [[OrderStatusViewController alloc] init];
-//    [self.navigationController presentViewController:orderStatusVC animated:YES completion:nil];
 }
 
 - (IBAction)onHelp:(id)sender
