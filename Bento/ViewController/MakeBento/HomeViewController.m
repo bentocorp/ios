@@ -82,6 +82,8 @@
     [self.scrollView addSubview:self.customVC.view];
     [self.customVC didMoveToParentViewController:self];
     
+    self.customVC.delegate = self;
+    
     // Menu Preview
     self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
     CGRect frame = self.menuPreviewVC.view.frame;
