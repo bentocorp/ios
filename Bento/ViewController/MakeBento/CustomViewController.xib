@@ -26,15 +26,19 @@
                 <outlet property="addSide3Button" destination="qye-n5-idg" id="lX0-DN-aEy"/>
                 <outlet property="buildButton" destination="Mgx-IB-ucB" id="dCQ-xU-7Ql"/>
                 <outlet property="dishBGView" destination="nMO-Fa-ewf" id="dhl-c8-zyv"/>
+                <outlet property="mainDishBannerImageView" destination="9bT-3b-54x" id="9M7-gR-x4h"/>
                 <outlet property="mainDishImageView" destination="apD-DI-s6F" id="kJ2-8e-dci"/>
                 <outlet property="mainDishLabel" destination="lyX-oF-ZJD" id="sSH-b4-YKf"/>
                 <outlet property="mainDishView" destination="ay4-Pm-U6W" id="7go-w7-q9K"/>
+                <outlet property="sideDish1BannerImageView" destination="yjC-bk-VkD" id="omD-2K-xVT"/>
                 <outlet property="sideDish1ImageView" destination="qWm-lu-0vF" id="CQP-ev-4O2"/>
                 <outlet property="sideDish1Label" destination="taL-Dl-E5e" id="aWz-PZ-yw4"/>
                 <outlet property="sideDish1View" destination="5kH-Dd-pyo" id="1hr-dO-RRi"/>
+                <outlet property="sideDish2BannerImageView" destination="TKj-jO-jPP" id="tBN-Og-EO4"/>
                 <outlet property="sideDish2Imageview" destination="RIr-24-nJ7" id="B3B-vn-K7w"/>
                 <outlet property="sideDish2Label" destination="9uk-LF-eKp" id="eAn-9k-gmM"/>
                 <outlet property="sideDish2View" destination="3td-g7-AxD" id="5Mn-CZ-oOp"/>
+                <outlet property="sideDish3BannerImageView" destination="TCf-WB-ei8" id="rcM-ND-Cyn"/>
                 <outlet property="sideDish3ImageView" destination="BcV-MQ-CI5" id="tCe-vM-yzd"/>
                 <outlet property="sideDish3Label" destination="MAp-Tc-SIx" id="afe-Mc-eAw"/>
                 <outlet property="sideDish3View" destination="FYW-6y-kVi" id="nQo-CG-1Ur"/>
@@ -61,6 +65,13 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="9bT-3b-54x" userLabel="mainDishBannerImageView">
+                                    <rect key="frame" x="86" y="0.0" width="80" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="Y3u-6F-Qcv"/>
+                                        <constraint firstAttribute="width" constant="80" id="s2l-mn-RA4"/>
+                                    </constraints>
+                                </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5nI-hP-jcm" userLabel="addMainDishButton">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="199"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
@@ -80,9 +91,11 @@
                                 <constraint firstAttribute="bottom" secondItem="apD-DI-s6F" secondAttribute="bottom" id="IWp-Ue-LkD"/>
                                 <constraint firstAttribute="bottom" secondItem="5nI-hP-jcm" secondAttribute="bottom" id="Idu-Xk-3nH"/>
                                 <constraint firstItem="apD-DI-s6F" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="top" id="K10-ga-Eaz"/>
+                                <constraint firstItem="9bT-3b-54x" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="top" id="RTH-ex-eQ0"/>
                                 <constraint firstItem="5nI-hP-jcm" firstAttribute="top" secondItem="ay4-Pm-U6W" secondAttribute="top" id="Su3-za-HJ4"/>
                                 <constraint firstItem="apD-DI-s6F" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="leading" id="TRb-2n-Qv7"/>
                                 <constraint firstItem="lyX-oF-ZJD" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="leading" constant="8" id="nwV-wf-atW"/>
+                                <constraint firstAttribute="trailing" secondItem="9bT-3b-54x" secondAttribute="trailing" id="s5M-5D-fzk"/>
                                 <constraint firstItem="5nI-hP-jcm" firstAttribute="leading" secondItem="ay4-Pm-U6W" secondAttribute="leading" id="sbn-qx-feA"/>
                                 <constraint firstAttribute="trailing" secondItem="apD-DI-s6F" secondAttribute="trailing" id="tir-Sr-Ozg"/>
                                 <constraint firstAttribute="bottom" secondItem="lyX-oF-ZJD" secondAttribute="bottom" constant="8" id="wYY-qK-AQR"/>
@@ -100,6 +113,13 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="yjC-bk-VkD" userLabel="sideDish1BannerImageView">
+                                    <rect key="frame" x="86" y="0.0" width="80" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="80" id="phe-su-h2l"/>
+                                        <constraint firstAttribute="height" constant="80" id="uVz-XB-4bJ"/>
+                                    </constraints>
+                                </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5gP-DP-7Sh" userLabel="addSideDish1Button">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="199"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
@@ -115,6 +135,7 @@
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="qWm-lu-0vF" secondAttribute="bottom" id="53h-Ul-5do"/>
                                 <constraint firstItem="taL-Dl-E5e" firstAttribute="top" secondItem="5kH-Dd-pyo" secondAttribute="top" constant="8" id="7d2-1L-e6c"/>
+                                <constraint firstItem="yjC-bk-VkD" firstAttribute="top" secondItem="5kH-Dd-pyo" secondAttribute="top" id="8xI-oJ-YhP"/>
                                 <constraint firstItem="taL-Dl-E5e" firstAttribute="leading" secondItem="5kH-Dd-pyo" secondAttribute="leading" constant="8" id="Djr-lV-v65"/>
                                 <constraint firstItem="qWm-lu-0vF" firstAttribute="leading" secondItem="5kH-Dd-pyo" secondAttribute="leading" id="Fdg-Rr-TZd"/>
                                 <constraint firstAttribute="trailing" secondItem="taL-Dl-E5e" secondAttribute="trailing" constant="8" id="cf6-zC-JpG"/>
@@ -123,6 +144,7 @@
                                 <constraint firstAttribute="bottom" secondItem="5gP-DP-7Sh" secondAttribute="bottom" id="ggD-xC-HkY"/>
                                 <constraint firstAttribute="trailing" secondItem="5gP-DP-7Sh" secondAttribute="trailing" id="hnl-dt-x2Q"/>
                                 <constraint firstItem="5gP-DP-7Sh" firstAttribute="top" secondItem="5kH-Dd-pyo" secondAttribute="top" id="jQg-8a-Kyc"/>
+                                <constraint firstAttribute="trailing" secondItem="yjC-bk-VkD" secondAttribute="trailing" id="p8X-Ej-u7i"/>
                                 <constraint firstAttribute="bottom" secondItem="taL-Dl-E5e" secondAttribute="bottom" constant="8" id="vG0-fz-vpJ"/>
                                 <constraint firstItem="5gP-DP-7Sh" firstAttribute="leading" secondItem="5kH-Dd-pyo" secondAttribute="leading" id="we7-u3-BII"/>
                             </constraints>
@@ -139,6 +161,13 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="TKj-jO-jPP" userLabel="sideDish2BannerImageview">
+                                    <rect key="frame" x="86" y="0.0" width="80" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="80" id="FBd-0p-gmz"/>
+                                        <constraint firstAttribute="width" constant="80" id="klc-fR-zWL"/>
+                                    </constraints>
+                                </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAF-sX-5hZ" userLabel="addSideDish2Button">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="200"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
@@ -152,6 +181,7 @@
                             </subviews>
                             <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="TKj-jO-jPP" secondAttribute="trailing" id="4p0-WN-ET8"/>
                                 <constraint firstItem="RIr-24-nJ7" firstAttribute="top" secondItem="3td-g7-AxD" secondAttribute="top" id="6Cj-bh-rE6"/>
                                 <constraint firstItem="9uk-LF-eKp" firstAttribute="leading" secondItem="3td-g7-AxD" secondAttribute="leading" constant="8" id="8hL-P8-VtB"/>
                                 <constraint firstAttribute="trailing" secondItem="ZAF-sX-5hZ" secondAttribute="trailing" id="IJ1-Rk-wwo"/>
@@ -162,6 +192,7 @@
                                 <constraint firstAttribute="trailing" secondItem="9uk-LF-eKp" secondAttribute="trailing" constant="8" id="iZY-af-2Ha"/>
                                 <constraint firstItem="RIr-24-nJ7" firstAttribute="leading" secondItem="3td-g7-AxD" secondAttribute="leading" id="s0p-By-aQh"/>
                                 <constraint firstAttribute="bottom" secondItem="9uk-LF-eKp" secondAttribute="bottom" constant="8" id="tJc-Ic-NFc"/>
+                                <constraint firstItem="TKj-jO-jPP" firstAttribute="top" secondItem="3td-g7-AxD" secondAttribute="top" id="tjq-bP-tCK"/>
                                 <constraint firstItem="9uk-LF-eKp" firstAttribute="top" secondItem="3td-g7-AxD" secondAttribute="top" constant="8" id="uxH-mm-Eiv"/>
                                 <constraint firstItem="ZAF-sX-5hZ" firstAttribute="leading" secondItem="3td-g7-AxD" secondAttribute="leading" id="xBd-hf-J1I"/>
                             </constraints>
@@ -178,6 +209,13 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="TCf-WB-ei8" userLabel="sideDish3BannerImageView">
+                                    <rect key="frame" x="86" y="0.0" width="80" height="80"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="80" id="VUn-UZ-GBK"/>
+                                        <constraint firstAttribute="height" constant="80" id="uR0-54-nIf"/>
+                                    </constraints>
+                                </imageView>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qye-n5-idg" userLabel="addSideDish3Button">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="200"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
@@ -195,12 +233,14 @@
                                 <constraint firstItem="BcV-MQ-CI5" firstAttribute="leading" secondItem="FYW-6y-kVi" secondAttribute="leading" id="6sd-e4-FNh"/>
                                 <constraint firstItem="MAp-Tc-SIx" firstAttribute="leading" secondItem="FYW-6y-kVi" secondAttribute="leading" constant="8" id="7s0-1G-Pa0"/>
                                 <constraint firstAttribute="trailing" secondItem="BcV-MQ-CI5" secondAttribute="trailing" id="BsS-QV-sLm"/>
+                                <constraint firstAttribute="trailing" secondItem="TCf-WB-ei8" secondAttribute="trailing" id="Jre-R1-S7W"/>
                                 <constraint firstItem="BcV-MQ-CI5" firstAttribute="top" secondItem="FYW-6y-kVi" secondAttribute="top" id="LOK-OS-LOe"/>
                                 <constraint firstAttribute="trailing" secondItem="MAp-Tc-SIx" secondAttribute="trailing" constant="8" id="Lub-bt-9h0"/>
                                 <constraint firstItem="qye-n5-idg" firstAttribute="leading" secondItem="FYW-6y-kVi" secondAttribute="leading" id="WHO-g8-QBW"/>
                                 <constraint firstItem="MAp-Tc-SIx" firstAttribute="top" secondItem="FYW-6y-kVi" secondAttribute="top" constant="8" id="WYw-yz-Bo0"/>
                                 <constraint firstItem="qye-n5-idg" firstAttribute="top" secondItem="FYW-6y-kVi" secondAttribute="top" id="fcA-b5-wwb"/>
                                 <constraint firstAttribute="bottom" secondItem="qye-n5-idg" secondAttribute="bottom" id="lXu-wh-JWQ"/>
+                                <constraint firstItem="TCf-WB-ei8" firstAttribute="top" secondItem="FYW-6y-kVi" secondAttribute="top" id="mWs-Ez-eNS"/>
                                 <constraint firstAttribute="bottom" secondItem="MAp-Tc-SIx" secondAttribute="bottom" constant="8" id="mtj-E8-zx9"/>
                                 <constraint firstAttribute="trailing" secondItem="qye-n5-idg" secondAttribute="trailing" id="zMm-h7-yzn"/>
                             </constraints>
@@ -261,4 +301,7 @@
             <state key="normal" title="Button"/>
         </button>
     </objects>
+    <resources>
+        <image name="banner_sold_out.png" width="154" height="154"/>
+    </resources>
 </document>

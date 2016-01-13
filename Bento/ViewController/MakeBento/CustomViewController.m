@@ -40,7 +40,7 @@
 }
 
 - (IBAction)buildButtonPressed:(id)sender {
-    [self.delegate customVCBottomButtonPressed:sender];
+    [self.delegate customVCBuildButtonPressed:sender];
 }
 
 @end

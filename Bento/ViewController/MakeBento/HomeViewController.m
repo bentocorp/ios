@@ -64,19 +64,16 @@
 {
     AddonsViewController *addonsVC;
     JGProgressHUD *loadingHUD;
+    
     UILabel *dinnerTitleLabel;
-    UILabel *lblBadge;
+    
+    BOOL isThereConnection;
     
     UIImageView *ivBannerMainDish;
     UIImageView *ivBannerSideDish1;
     UIImageView *ivBannerSideDish2;
     UIImageView *ivBannerSideDish3;
     UIImageView *ivBannerSideDish4;
-    
-    NSInteger hour;
-    int weekday;
-    
-    BOOL isThereConnection;
 }
 
 - (void)viewDidLoad {
@@ -106,18 +103,13 @@
     
     /*---dishView---*/
     
+    
     /*---dishes---*/
     
     
     /*---Count Badge---*/
-    
-    lblBadge = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 45, 25, 17, 17)];
-    lblBadge.textAlignment = NSTextAlignmentCenter;
-    lblBadge.font = [UIFont fontWithName:@"OpenSans-Semibold" size:10];
-    lblBadge.backgroundColor = [UIColor colorWithRed:0.890f green:0.247f blue:0.373f alpha:1.0f];
-    lblBadge.textColor = [UIColor whiteColor];
-    lblBadge.layer.cornerRadius = lblBadge.frame.size.width / 2;
-    lblBadge.clipsToBounds = YES;
+    self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
+    self.countBadgeLabel.clipsToBounds = YES;
 }
 
 - (IBAction)settingsButtonPressed:(id)sender {
@@ -442,16 +434,6 @@
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
     }
-    
-    // Get current hour
-    NSDate *currentDate = [NSDate date];
-    NSCalendar *calendar = [NSCalendar currentCalendar];
-    NSDateComponents *components = [calendar components:NSCalendarUnitHour fromDate:currentDate];
-    
-    hour = [components hour];
-    
-    // Sunday = 1, Saturday = 7
-    weekday = (int)[[calendar components:NSCalendarUnitWeekday fromDate:currentDate] weekday];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -1197,7 +1179,7 @@
     [self onAddSideDish:sender];
 }
 
-- (void)customVCBottomButtonPressed:(id)sender {
+- (void)customVCBottomBuildPressed:(id)sender {
     NSLog(@"bottom button pressed");
     [self onFinalize];
 }

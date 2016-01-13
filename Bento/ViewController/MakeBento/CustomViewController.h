@@ -15,7 +15,7 @@
 - (void)customVCAddSideDish1Pressed:(id)sender;
 - (void)customVCAddSideDish2Pressed:(id)sender;
 - (void)customVCAddSideDish3Pressed:(id)sender;
-- (void)customVCBottomButtonPressed:(id)sender;
+- (void)customVCBuildButtonPressed:(id)sender;
 
 @end
 
@@ -37,6 +37,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *sideDish1Label;
 @property (weak, nonatomic) IBOutlet UILabel *sideDish2Label;
 @property (weak, nonatomic) IBOutlet UILabel *sideDish3Label;
+
+@property (weak, nonatomic) IBOutlet UIImageView *mainDishBannerImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *sideDish1BannerImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *sideDish2BannerImageView;
+@property (weak, nonatomic) IBOutlet UIImageView *sideDish3BannerImageView;
 
 @property (weak, nonatomic) IBOutlet UIButton *addMainButton;
 @property (weak, nonatomic) IBOutlet UIButton *addSide1Button;
