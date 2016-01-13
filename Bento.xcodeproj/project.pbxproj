@@ -286,6 +286,8 @@
 		FC11AAB91BFC07900004A83B /* Addon.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAB71BFC07900004A83B /* Addon.m */; };
 		FC11AABC1BFC07A60004A83B /* AddonList.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AABB1BFC07A60004A83B /* AddonList.m */; };
 		FC11AABD1BFC07A60004A83B /* AddonList.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AABB1BFC07A60004A83B /* AddonList.m */; };
+		FC1372431C47044700C9B251 /* dropdownarrow-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1372421C47044700C9B251 /* dropdownarrow-64.png */; };
+		FC1372441C47044700C9B251 /* dropdownarrow-64.png in Resources */ = {isa = PBXBuildFile; fileRef = FC1372421C47044700C9B251 /* dropdownarrow-64.png */; };
 		FC1809EF1BED3BE3009CE159 /* DishInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809EE1BED3BE3009CE159 /* DishInfo.m */; };
 		FC1809F01BED3BE3009CE159 /* DishInfo.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809EE1BED3BE3009CE159 /* DishInfo.m */; };
 		FC1809F31BED4416009CE159 /* BentoBox.m in Sources */ = {isa = PBXBuildFile; fileRef = FC1809F21BED4416009CE159 /* BentoBox.m */; };
@@ -755,6 +757,7 @@
 		FC11AAB71BFC07900004A83B /* Addon.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Addon.m; sourceTree = "<group>"; };
 		FC11AABA1BFC07A60004A83B /* AddonList.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonList.h; sourceTree = "<group>"; };
 		FC11AABB1BFC07A60004A83B /* AddonList.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AddonList.m; sourceTree = "<group>"; };
+		FC1372421C47044700C9B251 /* dropdownarrow-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "dropdownarrow-64.png"; sourceTree = "<group>"; };
 		FC1809ED1BED3BE3009CE159 /* DishInfo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DishInfo.h; sourceTree = "<group>"; };
 		FC1809EE1BED3BE3009CE159 /* DishInfo.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DishInfo.m; sourceTree = "<group>"; };
 		FC1809F11BED4416009CE159 /* BentoBox.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BentoBox.h; sourceTree = "<group>"; };
@@ -1309,6 +1312,7 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FC1372421C47044700C9B251 /* dropdownarrow-64.png */,
 				FC46977E1C1FC2FA001FC162 /* ETA-50.png */,
 				FC9EED121C1F8B680071828D /* minusgray100.png */,
 				FC9EED131C1F8B680071828D /* plusgray100.png */,
@@ -2201,6 +2205,7 @@
 				FCA72F5F1B806B3D009DD71A /* UpFilled-100.png in Resources */,
 				7216B77F1AA64C7C0006FFE9 /* register_icon_alert.png in Resources */,
 				7216B7801AA64C7C0006FFE9 /* creditcard_btn_clear.png in Resources */,
+				FC1372441C47044700C9B251 /* dropdownarrow-64.png in Resources */,
 				7216B7811AA64C7C0006FFE9 /* soldout_background.png in Resources */,
 				FCC1E22F1B9F7A1B0029C92D /* gradient-placeholder2.png in Resources */,
 				FCDF22231ADC3ADF006B2750 /* Icon-76@2x.png in Resources */,
@@ -2334,6 +2339,7 @@
 				90BED0F01A5C391D003DC872 /* image_gradient.png in Resources */,
 				FCA72F5E1B806B3D009DD71A /* UpFilled-100.png in Resources */,
 				90D8F7B71A5D856200D034CF /* register_icon_alert.png in Resources */,
+				FC1372431C47044700C9B251 /* dropdownarrow-64.png in Resources */,
 				722333FF1A7425CA006C2446 /* creditcard_btn_clear.png in Resources */,
 				90D8F7E31A5E37E300D034CF /* soldout_background.png in Resources */,
 				FCC1E22E1B9F7A1B0029C92D /* gradient-placeholder2.png in Resources */,

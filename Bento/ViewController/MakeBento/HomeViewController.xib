@@ -48,8 +48,8 @@
                         <constraint firstAttribute="height" constant="45" id="ptS-UN-v1W"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
-                    <state key="normal" title="Date &amp; Time">
-                        <color key="titleColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="Date &amp; Time ▼">
+                        <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
                         <action selector="pickerButtonPressed:" destination="-1" eventType="touchUpInside" id="x1J-sa-ieA"/>

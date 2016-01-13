@@ -97,14 +97,18 @@
     NSInteger sideDishIndex = 0;
     if ([[BentoShop sharedInstance] getCurrentBento] != nil)
     {
-        if (self.sideDishIndex == 0)
+        if (self.sideDishIndex == 0) {
             sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish1];
-        else if (self.sideDishIndex == 1)
+        }
+        else if (self.sideDishIndex == 1) {
             sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish2];
-        else if (self.sideDishIndex == 2)
+        }
+        else if (self.sideDishIndex == 2) {
             sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish3];
-        else if (self.sideDishIndex == 3)
+        }
+        else if (self.sideDishIndex == 3) {
             sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish4];
+        }
     }
     
     NSString *lunchOrDinnerString;
