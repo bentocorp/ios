@@ -68,12 +68,6 @@
     UILabel *dinnerTitleLabel;
     
     BOOL isThereConnection;
-    
-    UIImageView *ivBannerMainDish;
-    UIImageView *ivBannerSideDish1;
-    UIImageView *ivBannerSideDish2;
-    UIImageView *ivBannerSideDish3;
-    UIImageView *ivBannerSideDish4;
 }
 
 - (void)viewDidLoad {
@@ -101,283 +95,76 @@
     // Scroll View
     self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT - 20);
     
-    /*---dishView---*/
-    
-    
-    /*---dishes---*/
-    
-    
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
-}
-
-- (IBAction)settingsButtonPressed:(id)sender {
-    [self onSettings];
-}
-
-- (IBAction)cartButtonPressed:(id)sender {
-    [self onCart];
-}
-
-- (IBAction)pickerButtonPressed:(id)sender {
     
-}
-
-- (IBAction)bottomButtonPressed:(id)sender {
-    
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    /*---Image Dishes*---*/
-    
-    if ([[BentoShop sharedInstance] is4PodMode]) {
-        ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
-    }
-    else {
-        ivMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width + 2, everyDishHeight + 2)];
-        
-        ivSideDish4 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
-        [ivSideDish4 setClipsToBounds:YES];
-        ivSideDish4.contentMode = UIViewContentModeScaleAspectFill;
-        [viewSide4 addSubview:ivSideDish4];
-    }
-    [ivMainDish setClipsToBounds:YES];
-    ivMainDish.contentMode = UIViewContentModeScaleAspectFill;
-    [viewMainEntree addSubview:ivMainDish];
-    
-    ivSideDish1 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 1)];
-    ivSideDish1.contentMode = UIViewContentModeScaleAspectFill;
-    [ivSideDish1 setClipsToBounds:YES];
-    [viewSide1 addSubview:ivSideDish1];
-    
-    ivSideDish2 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 1)];
-    [ivSideDish2 setClipsToBounds:YES];
-    ivSideDish2.contentMode = UIViewContentModeScaleAspectFill;
-    [viewSide2 addSubview:ivSideDish2];
-    
-    ivSideDish3 = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 2, everyDishHeight + 2)];
-    [ivSideDish3 setClipsToBounds:YES];
-    ivSideDish3.contentMode = UIViewContentModeScaleAspectFill;
-    [viewSide3 addSubview:ivSideDish3];
+    /*---Dish Images---*/
+    [self.customVC.mainDishImageView setClipsToBounds:YES];
+    [self.customVC.sideDish1ImageView setClipsToBounds:YES];
+    [self.customVC.sideDish2Imageview setClipsToBounds:YES];
+    [self.customVC.sideDish3ImageView setClipsToBounds:YES];
     
     /*---Gradient Layer---*/
-    
     CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = ivMainDish.frame;
+    backgroundLayer.frame = self.customVC.mainDishImageView.frame;
     backgroundLayer.opacity = 0.8f;
-    [ivMainDish.layer insertSublayer:backgroundLayer atIndex:0];
+    [self.customVC.mainDishImageView.layer insertSublayer:backgroundLayer atIndex:0];
     
     backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = ivSideDish1.frame;
+    backgroundLayer.frame = self.customVC.sideDish1ImageView.frame;
     backgroundLayer.opacity = 0.8f;
-    [ivSideDish1.layer insertSublayer:backgroundLayer atIndex:0];
+    [self.customVC.sideDish1ImageView.layer insertSublayer:backgroundLayer atIndex:0];
     
     backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = ivSideDish2.frame;
+    backgroundLayer.frame = self.customVC.sideDish2Imageview.frame;
     backgroundLayer.opacity = 0.8f;
-    [ivSideDish2.layer insertSublayer:backgroundLayer atIndex:0];
+    [self.customVC.sideDish2Imageview.layer insertSublayer:backgroundLayer atIndex:0];
     
     backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = ivSideDish3.frame;
+    backgroundLayer.frame = self.customVC.sideDish3ImageView.frame;
     backgroundLayer.opacity = 0.8f;
-    [ivSideDish3.layer insertSublayer:backgroundLayer atIndex:0];
-    
-    /*---Label Dishes---*/
-    
-    if ([[BentoShop sharedInstance] is4PodMode]) {
-        lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
-    }
-    else {
-        lblMainDish = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width - 10, 40)];
-    }
-    
-    lblMainDish.numberOfLines = 0;
-    lblMainDish.textColor = [UIColor whiteColor];
-    lblMainDish.font = [UIFont fontWithName:@"OpenSans-Bold" size:18.0f];
-    lblMainDish.textAlignment = NSTextAlignmentCenter;
-    lblMainDish.adjustsFontSizeToFitWidth = YES;
-    [viewMainEntree addSubview:lblMainDish];
-    
-    lblSideDish1 = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
-    lblSideDish1.numberOfLines = 0;
-    lblSideDish1.textColor = [UIColor whiteColor];
-    lblSideDish1.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-    lblSideDish1.textAlignment = NSTextAlignmentCenter;
-    lblSideDish1.adjustsFontSizeToFitWidth = YES;
-    [viewSide1 addSubview:lblSideDish1];
-    
-    lblSideDish2 = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
-    lblSideDish2.numberOfLines = 0;
-    lblSideDish2.textColor = [UIColor whiteColor];
-    lblSideDish2.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-    lblSideDish2.textAlignment = NSTextAlignmentCenter;
-    lblSideDish2.adjustsFontSizeToFitWidth = YES;
-    [viewSide2 addSubview:lblSideDish2];
-    
-    lblSideDish3 = [[UILabel alloc] initWithFrame:CGRectMake(5, viewMainEntree.frame.size.height/2 - 20, viewDishs.frame.size.width / 2 - 10, 40)];
-    lblSideDish3.numberOfLines = 0;
-    lblSideDish3.textColor = [UIColor whiteColor];
-    lblSideDish3.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-    lblSideDish3.textAlignment = NSTextAlignmentCenter;
-    lblSideDish3.adjustsFontSizeToFitWidth = YES;
-    [viewSide3 addSubview:lblSideDish3];
-    
-    if (![[BentoShop sharedInstance] is4PodMode]) {
-        
-        backgroundLayer = [CAGradientLayer blackGradientLayer];
-        backgroundLayer.frame = ivSideDish4.frame;
-        backgroundLayer.opacity = 0.8f;
-        [ivSideDish4.layer insertSublayer:backgroundLayer atIndex:0];
-        
-        lblSideDish4 = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, viewDishs.frame.size.width / 2 + 1, everyDishHeight + 2)];
-        lblSideDish4.textColor = [UIColor whiteColor];
-        lblSideDish4.font = [UIFont fontWithName:@"OpenSans-Bold" size:14.0f];
-        lblSideDish4.textAlignment = NSTextAlignmentCenter;
-        lblSideDish4.adjustsFontSizeToFitWidth = YES;
-        [viewSide4 addSubview:lblSideDish4];
-    }
-    
-    /*---Image Banner---*/
-    
-    UIImage *soldOutBannerImage = [UIImage imageNamed:@"banner_sold_out"];
-    
-    ivBannerMainDish = [[UIImageView alloc] initWithFrame:CGRectMake(viewMainEntree.frame.size.width - viewMainEntree.frame.size.height / 2, 0, viewMainEntree.frame.size.height / 2, viewMainEntree.frame.size.height / 2)];
-    ivBannerMainDish.image = soldOutBannerImage;
-    [viewMainEntree addSubview:ivBannerMainDish];
-    
-    ivBannerSideDish1 = [[UIImageView alloc] initWithFrame:CGRectMake(viewSide1.frame.size.width - viewSide1.frame.size.height / 2, 0, viewSide1.frame.size.height / 2, viewSide1.frame.size.height / 2)];
-    ivBannerSideDish1.image = soldOutBannerImage;
-    [viewSide1 addSubview:ivBannerSideDish1];
-    
-    ivBannerSideDish2 = [[UIImageView alloc] initWithFrame: CGRectMake(viewSide2.frame.size.width - viewSide2.frame.size.height / 2, 0, viewSide2.frame.size.height / 2, viewSide2.frame.size.height / 2)];
-    ivBannerSideDish2.image = soldOutBannerImage;
-    [viewSide2 addSubview:ivBannerSideDish2];
-    
-    ivBannerSideDish3 = [[UIImageView alloc] initWithFrame:CGRectMake(viewSide3.frame.size.width - viewSide3.frame.size.height / 2, 0, viewSide3.frame.size.height / 2, viewSide3.frame.size.height / 2)];
-    ivBannerSideDish3.image = soldOutBannerImage;
-    [viewSide3 addSubview:ivBannerSideDish3];
-    
-    ivBannerSideDish4 = [[UIImageView alloc] initWithFrame:CGRectMake(viewSide4.frame.size.width - viewSide4.frame.size.height / 2, 0, viewSide4.frame.size.height / 2, viewSide4.frame.size.height / 2)];
-    ivBannerSideDish4.image = soldOutBannerImage;
-    [viewSide4 addSubview:ivBannerSideDish4];
-    
-    /*---Add Another Bento Button---*///
-    
-    btnAddAnotherBento = [[UIButton alloc] init];
-    btnAddAnotherBento.layer.borderColor = BORDER_COLOR.CGColor;
-    btnAddAnotherBento.layer.borderWidth = 1.0f;
-    [btnAddAnotherBento setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
-    btnAddAnotherBento.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-    [btnAddAnotherBento setTitleEdgeInsets:UIEdgeInsetsMake(0.0, 5.0, 0.0, 5.0)];
-    btnAddAnotherBento.titleLabel.adjustsFontSizeToFitWidth = YES;
-    btnAddAnotherBento.titleLabel.numberOfLines = 0;
-    btnAddAnotherBento.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [btnAddAnotherBento setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
-    [btnAddAnotherBento addTarget:self action:@selector(onAddAnotherBento) forControlEvents:UIControlEventTouchUpInside];
-    [scrollView addSubview:btnAddAnotherBento];
+    [self.customVC.sideDish3ImageView.layer insertSublayer:backgroundLayer atIndex:0];
     
     
-    float btnAddAnotherBentoShortVersionWidth = SCREEN_WIDTH/2 - 15;
+    //    if ([[BentoShop sharedInstance] is4PodMode]) {
+    //        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, SCREEN_HEIGHT - 45 -65 - 65, SCREEN_WIDTH/2-10, 45)];
+    //    }
+    //    else {
+    //        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45)];
+    //    }
+    //    addonsButton.layer.borderColor = BORDER_COLOR.CGColor;
+    //    addonsButton.layer.borderWidth = 1.0f;
+    //    [addonsButton setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
+    //    [addonsButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+    //    addonsButton.hidden = YES;
+    //    addonsButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
+    //
+    //
+    //    NSString *addonsText = @"VIEW ADD-ONS";
+    //    [addonsButton setTitle:addonsText forState:UIControlStateNormal];
+    //    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:addonsText];
+    //    float spacing = 1.0f;
+    //    [attributedTitle addAttribute:NSKernAttributeName
+    //                            value:@(spacing)
+    //                            range:NSMakeRange(0, [addonsText length])];
+    //    // Anything less than iOS 8.0
+    //    if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
+    //        addonsButton.titleLabel.text = addonsText;
+    //    }
+    //    else {
+    //        addonsButton.titleLabel.attributedText = attributedTitle;
+    //    }
+    //
+    //    [addonsButton addTarget:self action:@selector(onViewAddons) forControlEvents:UIControlEventTouchUpInside];
+    //    [scrollView addSubview:addonsButton];
     
-    if ([[BentoShop sharedInstance] is4PodMode]) {
-        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, SCREEN_HEIGHT - 45 -65 - 65, SCREEN_WIDTH/2-10, 45)];
-    }
-    else {
-        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45)];
-    }
-    addonsButton.layer.borderColor = BORDER_COLOR.CGColor;
-    addonsButton.layer.borderWidth = 1.0f;
-    [addonsButton setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
-    [addonsButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
-    addonsButton.hidden = YES;
-    addonsButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-    
-    
-    // Add Another Bento Button
-    NSString *addonsText = @"VIEW ADD-ONS";
-    [addonsButton setTitle:addonsText forState:UIControlStateNormal];
-    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:addonsText];
-    float spacing = 1.0f;
-    [attributedTitle addAttribute:NSKernAttributeName
-                            value:@(spacing)
-                            range:NSMakeRange(0, [addonsText length])];
-    // Anything less than iOS 8.0
-    if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
-        addonsButton.titleLabel.text = addonsText;
-    }
-    else {
-        addonsButton.titleLabel.attributedText = attributedTitle;
-    }
-    
-    [addonsButton addTarget:self action:@selector(onViewAddons) forControlEvents:UIControlEventTouchUpInside];
-    [scrollView addSubview:addonsButton];
-    
-    /*---Button State---*/
-    
-    if ([[BentoShop sharedInstance] is4PodMode]) {
-        btnState = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45-65, SCREEN_WIDTH, 45)];
-    }
-    else {
-        btnState = [[UIButton alloc] initWithFrame:CGRectMake(0, SCREEN_HEIGHT-45-65, SCREEN_WIDTH, 45)];
-    }
-    [btnState setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
-    btnState.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13.0f];
-    [btnState addTarget:self action:@selector(onFinalize) forControlEvents:UIControlEventTouchUpInside];
-    [scrollView addSubview:btnState];
-    
-    /*---Banner---*/
-    
-    lblBanner = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 28)];
-    lblBanner.textAlignment = NSTextAlignmentCenter;
-    lblBanner.textColor = [UIColor whiteColor];
-    
-    if (MPTweakValue(@"Show green banner for regular price", NO)) {
-        // test, show banner
-        lblBanner.hidden = NO;
-    }
-    else {
-        // original, don't show banner
-        lblBanner.hidden = YES;
-    }
-    
-    //    lblBanner.center = CGPointMake(self.view.frame.size.width * 5 / 6, self.view.frame.size.width / 6);
-    //    lblBanner.transform = CGAffineTransformMakeRotation(M_PI / 4);
-    lblBanner.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
-    [scrollView addSubview:lblBanner];
-    
-    startingPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH/2, lblBanner.frame.size.height)];
-    startingPriceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
-    startingPriceLabel.textColor = [UIColor whiteColor];
-    startingPriceLabel.textAlignment = NSTextAlignmentCenter;
-    [lblBanner addSubview:startingPriceLabel];
-    
-    ETALabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2, 0, SCREEN_WIDTH/2, lblBanner.frame.size.height)];
-    ETALabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
-    ETALabel.textColor = [UIColor whiteColor];
-    ETALabel.textAlignment = NSTextAlignmentCenter;
-    [lblBanner addSubview:ETALabel];
-    
-    UIView *bannerDivider = [[UIView alloc] initWithFrame:CGRectMake(SCREEN_WIDTH/2 - 0.25, 5, 0.5, lblBanner.frame.size.height - 8)];
-    bannerDivider.backgroundColor = [UIColor whiteColor];
-    bannerDivider.alpha = 0.5;
-    [lblBanner addSubview:bannerDivider];
-    
-    /*------*/
-    
+    /*---Build Button---*/
     NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON];
-    if (strTitle == nil) {
-        strTitle = @"BUILD YOUR BENTO";
-    }
-    
-    //    NSString *strTitle = @"BUILD YOUR BENTO - $12";
-    
     if (strTitle != nil) {
         
         // Add Another Bento Button
-        [btnAddAnotherBento setTitle:strTitle forState:UIControlStateNormal];
+        [self.customVC.buildButton setTitle:strTitle forState:UIControlStateNormal];
         NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         float spacing = 1.0f;
         [attributedTitle addAttribute:NSKernAttributeName
@@ -385,15 +172,15 @@
                                 range:NSMakeRange(0, [strTitle length])];
         // Anything less than iOS 8.0
         if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
-            btnAddAnotherBento.titleLabel.text = strTitle;
+            self.customVC.buildButton.titleLabel.text = strTitle;
         }
         else {
-            btnAddAnotherBento.titleLabel.attributedText = attributedTitle;
+            self.customVC.buildButton.titleLabel.attributedText = attributedTitle;
         }
         
         // Continue Button
         strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
-        [btnState setTitle:strTitle forState:UIControlStateNormal];
+        [self.customVC.buildButton setTitle:strTitle forState:UIControlStateNormal];
         if (strTitle != nil) {
             attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         }
@@ -403,23 +190,18 @@
                                 range:NSMakeRange(0, [strTitle length])];
         // Anything less than iOS 8.0
         if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
-            btnState.titleLabel.text = strTitle;
+            self.customVC.buildButton.titleLabel.text = strTitle;
         }
         else {
-            btnState.titleLabel.attributedText = attributedTitle;
+            self.customVC.buildButton.titleLabel.attributedText = attributedTitle;
         }
         attributedTitle = nil;
     }
     
-    // an empty empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
+    // an empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
         [[BentoShop sharedInstance] addNewBento];
     }
-    
-    lblBadge.hidden = NO;
-    btnCart.hidden = NO;
-    btnAddAnotherBento.hidden = NO;
-    btnState.hidden = NO;
     
     // If no location set
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -436,11 +218,37 @@
     }
 }
 
+- (IBAction)settingsButtonPressed:(id)sender {
+    [self onSettings];
+}
+
+- (IBAction)cartButtonPressed:(id)sender {
+    [self onCart];
+}
+
+- (IBAction)pickerButtonPressed:(id)sender {
+    
+}
+
+- (IBAction)bottomButtonPressed:(id)sender {
+    [self onFinalize];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"checkModeOrDateChange" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
     if ([[BentoShop sharedInstance] is4PodMode]) {
-        
         if ([[[BentoShop sharedInstance] getCurrentBento] getMainDish] == 0 &&
             [[[BentoShop sharedInstance] getCurrentBento] getSideDish1] == 0 &&
             [[[BentoShop sharedInstance] getCurrentBento] getSideDish2] == 0 &&
@@ -458,19 +266,6 @@
     
     [self updateUI];
     
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"checkModeOrDateChange" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
-    
-    NSLog(@"DISTINCT ID - %@", [[Mixpanel sharedInstance] distinctId]);
-    
     [self startTimerOnViewedScreen];
 }
 
@@ -483,21 +278,19 @@
     [self endTimerOnViewedScreen];
 }
 
-- (void)dealloc {
-    @try {
-        [scrollView removeObserver:pagingTitleView.self forKeyPath:@"contentOffset" context:nil];
-    }@catch(id anException){
-        //do nothing, obviously it wasn't attached because an exception was thrown
-    }
-}
-
-#pragma mark Duration on screen
+#pragma mark Mixpanel - Screen Duration
 - (void)startTimerOnViewedScreen {
     [[Mixpanel sharedInstance] timeEvent:@"Viewed Custom Home Screen"];
 }
 
 - (void)endTimerOnViewedScreen {
     [[Mixpanel sharedInstance] track:@"Viewed Custom Home Screen"];
+}
+
+#pragma mark Connection Handlers
+
+- (void)yesConnection {
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
 }
 
 - (void)noConnection {
@@ -510,10 +303,6 @@
     }
 }
 
-- (void)yesConnection {
-    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
-}
-
 - (void)callUpdate {
     isThereConnection = YES;
     
@@ -522,11 +311,12 @@
     [self viewWillAppear:YES];
 }
 
+#pragma mark
+
 - (void)checkCurrentMode {
     if ([[BentoShop sharedInstance] didModeOrDateChange]) {
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
-        
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
 }
@@ -577,45 +367,42 @@
     /*-Main-*/
     if (mainDishIndex > 0) {
         
-        ivMainDish.hidden = NO;
-        lblMainDish.hidden = NO;
+        self.customVC.mainDishImageView.hidden = NO;
+        self.customVC.mainDishLabel.hidden = NO;
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
         if (dishInfo != nil) {
-            lblMainDish.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            self.customVC.mainDishLabel.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
             if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
                 // if there's no image string from backend
-                ivMainDish.image = [UIImage imageNamed:@"empty-main"];
+                self.customVC.mainDishImageView.image = [UIImage imageNamed:@"empty-main"];
             }
             else {
-                // download image and display activity indicator in process
-                //                [ivMainDish setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                
-                [ivMainDish setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                [self.customVC.mainDishImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
             if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
-                ivBannerMainDish.hidden = NO;
+                self.customVC.mainDishBannerImageView.hidden = NO;
             }
             else {
-                ivBannerMainDish.hidden = YES;
+                self.customVC.mainDishBannerImageView.hidden = YES;
             }
         }
     }
     else {
-        ivMainDish.image = nil;
-        ivMainDish.hidden = YES;
-        lblMainDish.hidden = YES;
-        ivBannerMainDish.hidden = YES;
+        self.customVC.mainDishImageView.image = nil;
+        self.customVC.mainDishImageView.hidden = YES;
+        self.customVC.mainDishLabel.hidden = YES;
+        self.customVC.mainDishBannerImageView.hidden = YES;
     }
     
     /*-Side 1-*/
     if (side1DishIndex > 0) {
         
-        ivSideDish1.hidden = NO;
-        lblSideDish1.hidden = NO;
+        self.customVC.sideDish1ImageView.hidden = NO;
+        self.customVC.sideDish1Label.hidden = NO;
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
         if (dishInfo != nil) {
@@ -1179,9 +966,9 @@
     [self onAddSideDish:sender];
 }
 
-- (void)customVCBottomBuildPressed:(id)sender {
-    NSLog(@"bottom button pressed");
-    [self onFinalize];
+- (void)customVCBuildButtonPressed:(id)sender {
+    NSLog(@"build button pressed");
+    [self onAddAnotherBento];
 }
 
 @end

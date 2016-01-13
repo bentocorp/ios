@@ -65,7 +65,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="9bT-3b-54x" userLabel="mainDishBannerImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="9bT-3b-54x" userLabel="mainDishBannerImageView">
                                     <rect key="frame" x="86" y="0.0" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="80" id="Y3u-6F-Qcv"/>
@@ -113,7 +113,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="yjC-bk-VkD" userLabel="sideDish1BannerImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="yjC-bk-VkD" userLabel="sideDish1BannerImageView">
                                     <rect key="frame" x="86" y="0.0" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="phe-su-h2l"/>
@@ -161,7 +161,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="TKj-jO-jPP" userLabel="sideDish2BannerImageview">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="TKj-jO-jPP" userLabel="sideDish2BannerImageview">
                                     <rect key="frame" x="86" y="0.0" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="80" id="FBd-0p-gmz"/>
@@ -209,7 +209,7 @@
                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="TCf-WB-ei8" userLabel="sideDish3BannerImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="TCf-WB-ei8" userLabel="sideDish3BannerImageView">
                                     <rect key="frame" x="86" y="0.0" width="80" height="80"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="80" id="VUn-UZ-GBK"/>
