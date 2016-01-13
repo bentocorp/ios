@@ -76,27 +76,19 @@
     // initialize to yes
     isThereConnection = YES;
     
-    // Custom
-    self.customVC = [[CustomViewController alloc] initWithNibName:@"CustomViewController" bundle:nil];
+    /*---Custom---*/
+    self.customVC = [[CustomViewController alloc] init];
     [self addChildViewController:self.customVC];
-//    [self.scrollView addSubview:self.customVC.view];
-    [self.view addSubview:self.customVC.view];
+    [self.bgView addSubview:self.customVC.view];
     [self.customVC didMoveToParentViewController:self];
     
     self.customVC.delegate = self;
     
-    // Menu Preview
+    /*---Menu Preview---*/
     self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
-    CGRect frame = self.menuPreviewVC.view.frame;
-    frame.origin.x = SCREEN_WIDTH;
-    self.menuPreviewVC.view.frame = frame;
-    
     [self addChildViewController:self.menuPreviewVC];
-//    [self.scrollView addSubview:self.menuPreviewVC.view];
+    [self.bgView addSubview:self.menuPreviewVC.view];
     [self.menuPreviewVC didMoveToParentViewController:self];
-    
-    // Scroll View
-//    self.scrollView.contentSize = CGSizeMake(SCREEN_WIDTH * 2, SCREEN_HEIGHT - 20);
     
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;

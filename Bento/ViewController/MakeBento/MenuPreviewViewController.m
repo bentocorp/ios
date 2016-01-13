@@ -41,7 +41,7 @@
     [collectionViewFlowLayout setMinimumInteritemSpacing:0];
     [cvDishes setCollectionViewLayout:collectionViewFlowLayout];
     
-    cvDishes = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 74, SCREEN_WIDTH, SCREEN_HEIGHT - 139)
+    cvDishes = [[UICollectionView alloc] initWithFrame:CGRectMake(0, 94, SCREEN_WIDTH, SCREEN_HEIGHT - 139)
                                   collectionViewLayout:collectionViewFlowLayout];
     cvDishes.backgroundColor = [UIColor colorWithRed:0.910f green:0.925f blue:0.925f alpha:1.0f];
     cvDishes.dataSource = self;

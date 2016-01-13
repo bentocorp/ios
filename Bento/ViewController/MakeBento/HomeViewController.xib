@@ -16,6 +16,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
+                <outlet property="bgView" destination="0TV-03-HWo" id="n5s-bo-7Ss"/>
                 <outlet property="bottomButton" destination="kcT-hJ-qY9" id="cQQ-8t-hdG"/>
                 <outlet property="cartButton" destination="vz8-kn-c26" id="Q6X-iF-SXE"/>
                 <outlet property="countBadgeLabel" destination="09H-Zf-5FE" id="qga-7e-M5d"/>
@@ -32,7 +33,7 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0TV-03-HWo" userLabel="bgView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="0Gr-fl-XBQ" userLabel="navBgImageView">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
