@@ -13,8 +13,6 @@
 #import "CustomViewController.h"
 #import "MenuPreviewViewController.h"
 
-#import "BWTitlePagerView.h"
-
 #import "AppDelegate.h"
 
 #import "ChooseMainDishViewController.h"
@@ -26,11 +24,7 @@
 #import "SignedInSettingsViewController.h"
 #import "SignedOutSettingsViewController.h"
 
-#import "PreviewCollectionViewCell.h"
-
 #import "MyAlertView.h"
-
-#import "CAGradientLayer+SJSGradients.h"
 
 #import "UIImageView+WebCache.h"
 #import <UIImageView+UIActivityIndicatorForSDWebImage.h>
@@ -99,33 +93,7 @@
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
     
-    /*---Dish Images---*/
-    [self.customVC.mainDishImageView setClipsToBounds:YES];
-    [self.customVC.sideDish1ImageView setClipsToBounds:YES];
-    [self.customVC.sideDish2Imageview setClipsToBounds:YES];
-    [self.customVC.sideDish3ImageView setClipsToBounds:YES];
-    
-    /*---Gradient Layer---*/
-    CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = self.customVC.mainDishImageView.frame;
-    backgroundLayer.opacity = 0.8f;
-    [self.customVC.mainDishImageView.layer insertSublayer:backgroundLayer atIndex:0];
-    
-    backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = self.customVC.sideDish1ImageView.frame;
-    backgroundLayer.opacity = 0.8f;
-    [self.customVC.sideDish1ImageView.layer insertSublayer:backgroundLayer atIndex:0];
-    
-    backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = self.customVC.sideDish2Imageview.frame;
-    backgroundLayer.opacity = 0.8f;
-    [self.customVC.sideDish2Imageview.layer insertSublayer:backgroundLayer atIndex:0];
-    
-    backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = self.customVC.sideDish3ImageView.frame;
-    backgroundLayer.opacity = 0.8f;
-    [self.customVC.sideDish3ImageView.layer insertSublayer:backgroundLayer atIndex:0];
-    
+    /*---Add-ons---*/
     //    if ([[BentoShop sharedInstance] is4PodMode]) {
     //        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, SCREEN_HEIGHT - 45 -65 - 65, SCREEN_WIDTH/2-10, 45)];
     //    }
@@ -158,12 +126,22 @@
     //    [addonsButton addTarget:self action:@selector(onViewAddons) forControlEvents:UIControlEventTouchUpInside];
     //    [scrollView addSubview:addonsButton];
     
-    // an empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
-    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
-        [[BentoShop sharedInstance] addNewBento];
+    /*---Finalize Button Text---*/
+    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
+    if (strTitle != nil) {
+        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        
+        float spacing = 1.0f;
+        
+        [attributedTitle addAttribute:NSKernAttributeName
+                                value:@(spacing)
+                                range:NSMakeRange(0, [strTitle length])];
+        
+        [self.finalizeButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+        [self.finalizeButton setTintColor:[UIColor whiteColor]];
     }
     
-    // If no location set
+    /*---If No Location Set---*/
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
     BentoShop *globalShop = [BentoShop sharedInstance];
@@ -174,6 +152,11 @@
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
+    }
+    
+    // an empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
+    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
+        [[BentoShop sharedInstance] addNewBento];
     }
 }
 
@@ -531,6 +514,7 @@
                                 range:NSMakeRange(0, [strTitle length])];
         [self.customVC.buildButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     }
+    
     /*----------------------*/
     
     // Bentos
