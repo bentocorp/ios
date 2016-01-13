@@ -38,6 +38,11 @@
 @property (weak, nonatomic) IBOutlet UILabel *sideDish2Label;
 @property (weak, nonatomic) IBOutlet UILabel *sideDish3Label;
 
+@property (weak, nonatomic) IBOutlet UIButton *addMainDishButton;
+@property (weak, nonatomic) IBOutlet UIButton *addSideDish1Button;
+@property (weak, nonatomic) IBOutlet UIButton *addSideDish2Button;
+@property (weak, nonatomic) IBOutlet UIButton *addSideDish3Button;
+
 @property (weak, nonatomic) IBOutlet UIImageView *mainDishBannerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *sideDish1BannerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *sideDish2BannerImageView;

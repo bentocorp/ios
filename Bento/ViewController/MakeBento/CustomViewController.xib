@@ -21,9 +21,13 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="CustomViewController">
             <connections>
                 <outlet property="addMainButton" destination="5nI-hP-jcm" id="6zQ-Xx-yQk"/>
+                <outlet property="addMainDishButton" destination="5nI-hP-jcm" id="lH7-rb-vPL"/>
                 <outlet property="addSide1Button" destination="5gP-DP-7Sh" id="7f9-D6-VgN"/>
                 <outlet property="addSide2Button" destination="ZAF-sX-5hZ" id="07A-ck-KKI"/>
                 <outlet property="addSide3Button" destination="qye-n5-idg" id="lX0-DN-aEy"/>
+                <outlet property="addSideDish1Button" destination="5gP-DP-7Sh" id="Jhb-jh-6Nw"/>
+                <outlet property="addSideDish2Button" destination="ZAF-sX-5hZ" id="jpz-1J-LYW"/>
+                <outlet property="addSideDish3Button" destination="qye-n5-idg" id="hIf-FT-XH4"/>
                 <outlet property="buildButton" destination="Mgx-IB-ucB" id="dCQ-xU-7Ql"/>
                 <outlet property="dishBGView" destination="nMO-Fa-ewf" id="dhl-c8-zyv"/>
                 <outlet property="mainDishBannerImageView" destination="9bT-3b-54x" id="9M7-gR-x4h"/>
