@@ -74,4 +74,9 @@
     [self.delegate customVCBuildButtonPressed:sender];
 }
 
+- (IBAction)viewAddonsButtonPressed:(id)sender {
+    [self.delegate customVCViewAddonsButtonPressed:sender];
+}
+
+
 @end

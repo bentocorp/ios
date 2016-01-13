@@ -15,6 +15,7 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -47,6 +48,7 @@
                 <outlet property="sideDish3Label" destination="MAp-Tc-SIx" id="afe-Mc-eAw"/>
                 <outlet property="sideDish3View" destination="FYW-6y-kVi" id="nQo-CG-1Ur"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewAddonsButton" destination="Yxd-Fq-MUg" id="86y-OE-og3"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -285,11 +287,27 @@
                         <action selector="buildButtonPressed:" destination="-1" eventType="touchUpInside" id="9KX-J4-ye1"/>
                     </connections>
                 </button>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxd-Fq-MUg" userLabel="viewAddonsButton">
+                    <rect key="frame" x="188" y="557" width="188" height="45"/>
+                    <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="188" id="8eX-wc-s7U"/>
+                        <constraint firstAttribute="height" constant="45" id="whQ-lv-dss"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
+                    <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="VIEW ADD-ONS"/>
+                    <connections>
+                        <action selector="viewAddonsButtonPressed:" destination="-1" eventType="touchUpInside" id="DqV-9m-TNm"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Mgx-IB-ucB" secondAttribute="trailing" constant="-1" id="1xJ-Y5-Qgp"/>
                 <constraint firstAttribute="trailing" secondItem="nMO-Fa-ewf" secondAttribute="trailing" constant="20" id="9i1-Va-8yz"/>
+                <constraint firstAttribute="bottom" secondItem="Yxd-Fq-MUg" secondAttribute="bottom" constant="65" id="Rnn-La-tOl"/>
+                <constraint firstAttribute="trailing" secondItem="Yxd-Fq-MUg" secondAttribute="trailing" constant="-1" id="U1C-Rw-aPx"/>
                 <constraint firstItem="nMO-Fa-ewf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="UyZ-KZ-QzU"/>
                 <constraint firstItem="nMO-Fa-ewf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="125" id="fhp-Qe-oly"/>
                 <constraint firstItem="Mgx-IB-ucB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="hiR-jA-PPQ"/>

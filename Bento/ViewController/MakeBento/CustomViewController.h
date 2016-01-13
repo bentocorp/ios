@@ -16,6 +16,7 @@
 - (void)customVCAddSideDish2Pressed:(id)sender;
 - (void)customVCAddSideDish3Pressed:(id)sender;
 - (void)customVCBuildButtonPressed:(id)sender;
+- (void)customVCViewAddonsButtonPressed:(id)sender;
 
 @end
 
@@ -54,6 +55,8 @@
 @property (weak, nonatomic) IBOutlet UIButton *addSide3Button;
 
 @property (weak, nonatomic) IBOutlet UIButton *buildButton;
+@property (weak, nonatomic) IBOutlet UIButton *viewAddonsButton;
+
 
 @property (nonatomic) id delegate;
 
