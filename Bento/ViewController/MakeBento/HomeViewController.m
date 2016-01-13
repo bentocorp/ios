@@ -338,14 +338,12 @@
 - (void)loadSelectedDishes {
     NSMutableArray *aryBentos = [[NSMutableArray alloc] init];
     for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++) {
-        
         Bento *bento = [[BentoShop sharedInstance] getBento:index];
         if ([bento isCompleted]) {
             [aryBentos addObject:bento];
         }
     }
     
-    //    NSLog(@"TOTAL BENTOS: %ld", (long)[[BentoShop sharedInstance] getTotalBentoCount]);
     NSInteger mainDishIndex = 0;
     NSInteger side1DishIndex = 0;
     NSInteger side2DishIndex = 0;
@@ -355,8 +353,7 @@
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
     // Current Bento is not empty
-    if (currentBento != nil)
-    {
+    if (currentBento != nil) {
         mainDishIndex = [currentBento getMainDish];
         side1DishIndex = [currentBento getSideDish1];
         side2DishIndex = [currentBento getSideDish2];
@@ -364,9 +361,8 @@
         side4DishIndex = [currentBento getSideDish4];
     }
     
-    /*-Main-*/
+    /*---Main---*/
     if (mainDishIndex > 0) {
-        
         self.customVC.mainDishImageView.hidden = NO;
         self.customVC.mainDishLabel.hidden = NO;
         
@@ -398,45 +394,41 @@
         self.customVC.mainDishBannerImageView.hidden = YES;
     }
     
-    /*-Side 1-*/
+    /*---Side 1---*/
     if (side1DishIndex > 0) {
-        
         self.customVC.sideDish1ImageView.hidden = NO;
         self.customVC.sideDish1Label.hidden = NO;
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
         if (dishInfo != nil) {
             
-            lblSideDish1.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            self.customVC.sideDish1Label.text = [[dishInfo objectForKey:@"name"] uppercaseString];
             
             NSString *strImageURL = [dishInfo objectForKey:@"image1"];
             if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
                 // if there's no image string from backend
-                ivSideDish1.image = [UIImage imageNamed:@"empty-main"];
+                self.customVC.sideDish1ImageView.image = [UIImage imageNamed:@"empty-main"];
             }
             else {
-                // download image and display activity indicator in process
-                //                [ivSideDish1 setImageWithURL:[NSURL URLWithString:strImageURL] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
-                
-                [ivSideDish1 setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+                [self.customVC.sideDish1ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
             if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
-                ivBannerSideDish1.hidden = NO;
+                self.customVC.sideDish1BannerImageView.hidden = NO;
             }
             else {
-                ivBannerSideDish1.hidden = YES;
+                self.customVC.sideDish1BannerImageView.hidden = YES;
             }
         }
     }
     else {
-        ivSideDish1.image = nil;
-        ivSideDish1.hidden = YES;
-        lblSideDish1.hidden = YES;
-        ivBannerSideDish1.hidden = YES;
+        self.customVC.sideDish1ImageView.image = nil;
+        self.customVC.sideDish1ImageView.hidden = YES;
+        self.customVC.sideDish1Label.hidden = YES;
+        self.customVC.sideDish1BannerImageView.hidden = YES;
     }
     
-    /*-Side 2-*/
+    /*---Side 2---*/
     if (side2DishIndex > 0) {
         
         ivSideDish2.hidden = NO;
@@ -718,7 +710,7 @@
     }
 }
 
-// addons delegate method
+#pragma mark AddonsViewController Delegate Method
 - (void)addonsViewControllerDidTapOnFinalize:(BOOL)didTapOnFinalize {
     if (didTapOnFinalize == YES) {
         [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(onFinalize) userInfo:nil repeats:NO];
@@ -759,7 +751,6 @@
     if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
         return YES;
     }
-    
     return NO;
 }
 
