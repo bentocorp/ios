@@ -466,265 +466,7 @@
     //    }
 }
 
-#pragma mark Mixpanel - Screen Duration
-- (void)startTimerOnViewedScreen {
-    [[Mixpanel sharedInstance] timeEvent:@"Viewed Custom Home Screen"];
-}
-
-- (void)endTimerOnViewedScreen {
-    [[Mixpanel sharedInstance] track:@"Viewed Custom Home Screen"];
-}
-
-#pragma mark Connection Handlers
-
-- (void)yesConnection {
-    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
-}
-
-- (void)noConnection {
-    isThereConnection = NO;
-    
-    if (loadingHUD == nil) {
-        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
-        [loadingHUD showInView:self.view];
-    }
-}
-
-- (void)callUpdate {
-    isThereConnection = YES;
-    
-    [loadingHUD dismiss];
-    loadingHUD = nil;
-    [self viewWillAppear:YES];
-}
-
-#pragma mark
-
-- (void)checkCurrentMode {
-    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
-        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
-}
-
-- (void)onUpdatedStatus:(NSNotification *)notification {
-    if (isThereConnection) {
-        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
-            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-        }
-        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser]) {
-            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-        }
-        else {
-            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
-        }
-    }
-}
-
-- (void)onSettings {
-    // get current user info
-    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
-    
-    SignedInSettingsViewController *signedInSettingsViewController = [[SignedInSettingsViewController alloc] init];
-    SignedOutSettingsViewController *signedOutSettingsViewController = [[SignedOutSettingsViewController alloc] init];
-    UINavigationController *navC;
-    
-    // signed in or not?
-    if (currentUserInfo == nil) {
-        // navigate to signed out settings vc
-        navC = [[UINavigationController alloc] initWithRootViewController:signedOutSettingsViewController];
-        navC.navigationBar.hidden = YES;
-        [self.navigationController presentViewController:navC animated:YES completion:nil];
-    }
-    else {
-        // navigate to signed in settings vc
-        navC = [[UINavigationController alloc] initWithRootViewController:signedInSettingsViewController];
-        navC.navigationBar.hidden = YES;
-        [self.navigationController presentViewController:navC animated:YES completion:nil];
-    }
-}
-
-- (void)onCart {
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
-        [self showConfirmMsg];
-    }
-    else {
-        [self gotoOrderScreen];
-    }
-}
-
-- (void)showConfirmMsg {
-    NSString *strText = [[AppStrings sharedInstance] getString:ALERT_BNF_TEXT];
-    NSString *strCancel = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CANCEL];
-    NSString *strConfirm = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CONFIRM];
-    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strText delegate:self cancelButtonTitle:strCancel otherButtonTitle:strConfirm];
-    
-    [alertView showInView:self.view];
-    alertView = nil;
-}
-
-- (void)gotoOrderScreen {
-    // instantiate view controllers
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
-    
-    // user and place info
-    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
-    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-    
-    // logged out
-    if (currentUserInfo == nil) {
-        // no saved address
-        if (placeInfo == nil) {
-            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromHomepage"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            [self openAccountViewController:[DeliveryLocationViewController class]];
-        }
-        // has saved address
-        else {
-            // check if saved address is inside CURRENT service area
-            CLLocationCoordinate2D location = placeInfo.location.coordinate;
-            
-            // outside service area
-            if (![[BentoShop sharedInstance] checkLocation:location]) {
-                [self openAccountViewController:[DeliveryLocationViewController class]];
-            }
-            // inside service area
-            else {
-                [self openAccountViewController:[CompleteOrderViewController class]];
-            }
-        }
-    }
-    // logged in
-    else {
-        // no saved address
-        if (placeInfo == nil) {
-            [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-        }
-        // has saved address
-        else {
-            // check if saved address is inside CURRENT service area
-            CLLocationCoordinate2D location = placeInfo.location.coordinate;
-            
-            // outside service area
-            if (![[BentoShop sharedInstance] checkLocation:location]) {
-                [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-            }
-            // inisde service area
-            else {
-                [self.navigationController pushViewController:completeOrderViewController animated:YES];
-            }
-        }
-    }
-}
-
-- (void)onAddMainDish {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
-}
-
-- (void)onAddSideDish:(id)sender {
-    UIButton *selectedButton = (UIButton *)sender;
-    
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-    chooseSideDishViewController.sideDishIndex = selectedButton.tag;
-    
-    [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-}
-
-- (void)onAddAnotherBento {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-    
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    
-    if (currentBento == nil || [currentBento isEmpty]) {
-        [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
-    }
-    else if (![currentBento isCompleted]) {
-        
-        if ([currentBento getMainDish] == 0) {
-            [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
-        }
-        else if ([currentBento getSideDish1] == 0) {
-            chooseSideDishViewController.sideDishIndex = 0;
-            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-        }
-        else if ([currentBento getSideDish2] == 0) {
-            chooseSideDishViewController.sideDishIndex = 1;
-            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-        }
-        else if ([currentBento getSideDish3] == 0) {
-            chooseSideDishViewController.sideDishIndex = 2;
-            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-        }
-        else if ([currentBento getSideDish4] == 0) {
-            chooseSideDishViewController.sideDishIndex = 3;
-            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
-        }
-    }
-    else {
-        
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-            [currentBento completeBento:@"todayLunch"];
-        }
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-            [currentBento completeBento:@"todayDinner"];
-        }
-        
-        [[BentoShop sharedInstance] addNewBento];
-        
-        [self updateUI];
-    }
-}
-
-#pragma mark AddonsViewController Delegate Method
-- (void)addonsViewControllerDidTapOnFinalize:(BOOL)didTapOnFinalize {
-    if (didTapOnFinalize == YES) {
-        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(onFinalize) userInfo:nil repeats:NO];
-    }
-}
-
-- (void)onViewAddons {
-    [[Mixpanel sharedInstance] track:@"Tapped on View Addons"];
-    [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
-}
-
-- (void)onFinalize {
-    if ([self isInMiddleOfBuildingBento]) {
-        [self showConfirmMsg];
-    }
-    else {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
-                [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
-            }
-            else {
-                [self gotoOrderScreen];
-            }
-        }
-        else {
-            [self gotoOrderScreen];
-        }
-    }
-}
-
-- (BOOL)isInMiddleOfBuildingBento {
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
-        return YES;
-    }
-    return NO;
-}
+#pragma mark Update UI
 
 - (void)updateUI {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
@@ -784,26 +526,26 @@
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         
         // show "OR" label and "View Add-ons" button
-//        addonsButton.hidden = NO;
+        //        addonsButton.hidden = NO;
         //        btnAddAnotherBento.frame = CGRectMake(-1, viewDishs.frame.size.height + 45, SCREEN_WIDTH/2-15, 45); // short version
         
         
         if ([[BentoShop sharedInstance] is4PodMode]) {
-//            self.customVC.buildButton.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH/2-10, 45);
+            //            self.customVC.buildButton.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH/2-10, 45);
         }
         else {
-//            self.customVC.buildButton.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45);
+            //            self.customVC.buildButton.frame = CGRectMake(-1, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45);
         }
     }
     // 0 bentos in cart
     else {
-//        addonsButton.hidden = YES;
+        //        addonsButton.hidden = YES;
         
         if ([[BentoShop sharedInstance] is4PodMode]) {
-//            self.customVC.buildButton.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH + 2, 45); // long version
+            //            self.customVC.buildButton.frame = CGRectMake(-1, SCREEN_HEIGHT - 45 - 65 - 65, SCREEN_WIDTH + 2, 45); // long version
         }
         else {
-//            self.customVC.buildButton.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH - 60, 45); // long version
+            //            self.customVC.buildButton.frame = CGRectMake(SCREEN_WIDTH / 2 - ((SCREEN_WIDTH - 60) / 2), viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH - 60, 45); // long version
         }
     }
     
@@ -879,6 +621,71 @@
     }
 }
 
+#pragma mark Mixpanel - Screen Duration
+- (void)startTimerOnViewedScreen {
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Custom Home Screen"];
+}
+
+- (void)endTimerOnViewedScreen {
+    [[Mixpanel sharedInstance] track:@"Viewed Custom Home Screen"];
+}
+
+#pragma mark Connection Handlers
+
+- (void)yesConnection {
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+}
+
+- (void)noConnection {
+    isThereConnection = NO;
+    
+    if (loadingHUD == nil) {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)callUpdate {
+    isThereConnection = YES;
+    
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+    [self viewWillAppear:YES];
+}
+
+#pragma mark Check Current Mode
+
+- (void)checkCurrentMode {
+    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
+        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
+        [self dismissViewControllerAnimated:YES completion:nil];
+        [self.navigationController popToRootViewControllerAnimated:YES];
+    }
+}
+
+#pragma mark Updated Status
+- (void)onUpdatedStatus:(NSNotification *)notification {
+    if (isThereConnection) {
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
+            [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+        }
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser]) {
+            [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+        }
+        else {
+            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        }
+    }
+}
+
+#pragma mark AddonsViewController Delegate Method
+- (void)addonsViewControllerDidTapOnFinalize:(BOOL)didTapOnFinalize {
+    if (didTapOnFinalize == YES) {
+        [NSTimer scheduledTimerWithTimeInterval:0.5 target:self selector:@selector(onFinalize) userInfo:nil repeats:NO];
+    }
+}
+
 #pragma mark MyAlertViewDelegate
 
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
@@ -925,6 +732,74 @@
     [self onAddAnotherBento];
 }
 
+- (void)onAddMainDish {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
+}
+
+- (void)onAddSideDish:(id)sender {
+    UIButton *selectedButton = (UIButton *)sender;
+    
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+    chooseSideDishViewController.sideDishIndex = selectedButton.tag;
+    
+    [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+}
+
+- (void)onAddAnotherBento {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+    
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    
+    if (currentBento == nil || [currentBento isEmpty]) {
+        [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
+    }
+    else if (![currentBento isCompleted]) {
+        
+        if ([currentBento getMainDish] == 0) {
+            [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
+        }
+        else if ([currentBento getSideDish1] == 0) {
+            chooseSideDishViewController.sideDishIndex = 0;
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        }
+        else if ([currentBento getSideDish2] == 0) {
+            chooseSideDishViewController.sideDishIndex = 1;
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        }
+        else if ([currentBento getSideDish3] == 0) {
+            chooseSideDishViewController.sideDishIndex = 2;
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        }
+        else if ([currentBento getSideDish4] == 0) {
+            chooseSideDishViewController.sideDishIndex = 3;
+            [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
+        }
+    }
+    else {
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+            [currentBento completeBento:@"todayLunch"];
+        }
+        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+            [currentBento completeBento:@"todayDinner"];
+        }
+        
+        [[BentoShop sharedInstance] addNewBento];
+        
+        [self updateUI];
+    }
+}
+
+- (void)onViewAddons {
+    [[Mixpanel sharedInstance] track:@"Tapped on View Add-ons"];
+    [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+}
+
 #pragma mark HomeViewController Button Handlers
 
 - (IBAction)settingsButtonPressed:(id)sender {
@@ -941,6 +816,134 @@
 
 - (IBAction)bottomButtonPressed:(id)sender {
     [self onFinalize];
+}
+
+- (void)onSettings {
+    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
+    
+    SignedInSettingsViewController *signedInSettingsViewController = [[SignedInSettingsViewController alloc] init];
+    SignedOutSettingsViewController *signedOutSettingsViewController = [[SignedOutSettingsViewController alloc] init];
+    UINavigationController *navC;
+    
+    // signed in or not?
+    if (currentUserInfo == nil) {
+        // navigate to signed out settings vc
+        navC = [[UINavigationController alloc] initWithRootViewController:signedOutSettingsViewController];
+        navC.navigationBar.hidden = YES;
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+    }
+    else {
+        // navigate to signed in settings vc
+        navC = [[UINavigationController alloc] initWithRootViewController:signedInSettingsViewController];
+        navC.navigationBar.hidden = YES;
+        [self.navigationController presentViewController:navC animated:YES completion:nil];
+    }
+}
+
+- (void)onCart {
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
+        [self showConfirmMsg];
+    }
+    else {
+        [self gotoOrderScreen];
+    }
+}
+
+- (void)onFinalize {
+    if ([self isInMiddleOfBuildingBento]) {
+        [self showConfirmMsg];
+    }
+    else {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
+                [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+            }
+            else {
+                [self gotoOrderScreen];
+            }
+        }
+        else {
+            [self gotoOrderScreen];
+        }
+    }
+}
+
+- (BOOL)isInMiddleOfBuildingBento {
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (void)showConfirmMsg {
+    NSString *strText = [[AppStrings sharedInstance] getString:ALERT_BNF_TEXT];
+    NSString *strCancel = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CANCEL];
+    NSString *strConfirm = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CONFIRM];
+    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strText delegate:self cancelButtonTitle:strCancel otherButtonTitle:strConfirm];
+    
+    [alertView showInView:self.view];
+    alertView = nil;
+}
+
+- (void)gotoOrderScreen {
+    // instantiate view controllers
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+    
+    // user and place info
+    NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
+    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    
+    // logged out
+    if (currentUserInfo == nil) {
+        // no saved address
+        if (placeInfo == nil) {
+            [[NSUserDefaults standardUserDefaults] setObject:@"YES" forKey:@"isFromHomepage"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            [self openAccountViewController:[DeliveryLocationViewController class]];
+        }
+        // has saved address
+        else {
+            // check if saved address is inside CURRENT service area
+            CLLocationCoordinate2D location = placeInfo.location.coordinate;
+            
+            // outside service area
+            if (![[BentoShop sharedInstance] checkLocation:location]) {
+                [self openAccountViewController:[DeliveryLocationViewController class]];
+            }
+            // inside service area
+            else {
+                [self openAccountViewController:[CompleteOrderViewController class]];
+            }
+        }
+    }
+    // logged in
+    else {
+        // no saved address
+        if (placeInfo == nil) {
+            [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+        }
+        // has saved address
+        else {
+            // check if saved address is inside CURRENT service area
+            CLLocationCoordinate2D location = placeInfo.location.coordinate;
+            
+            // outside service area
+            if (![[BentoShop sharedInstance] checkLocation:location]) {
+                [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+            }
+            // inisde service area
+            else {
+                [self.navigationController pushViewController:completeOrderViewController animated:YES];
+            }
+        }
+    }
 }
 
 @end
