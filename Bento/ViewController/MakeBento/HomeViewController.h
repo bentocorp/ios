@@ -20,6 +20,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *etaLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *pickerButton;
-@property (weak, nonatomic) IBOutlet UIButton *bottomButton;
+@property (weak, nonatomic) IBOutlet UIButton *finalizeButton;
 
 @end

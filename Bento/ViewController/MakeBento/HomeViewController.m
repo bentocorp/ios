@@ -596,12 +596,12 @@
     
     /*---Finalize Button---*/
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        [self.bottomButton setBackgroundColor:[UIColor bentoBrandGreen]];
-        self.bottomButton.enabled = YES;
+        [self.finalizeButton setBackgroundColor:[UIColor bentoBrandGreen]];
+        self.finalizeButton.enabled = YES;
     }
     else {
-        [self.bottomButton setBackgroundColor:[UIColor bentoButtonGray]];
-        self.bottomButton.enabled = NO;
+        [self.finalizeButton setBackgroundColor:[UIColor bentoButtonGray]];
+        self.finalizeButton.enabled = NO;
     }
     
     /*---Cart Badge---*/
@@ -814,7 +814,7 @@
     
 }
 
-- (IBAction)bottomButtonPressed:(id)sender {
+- (IBAction)finalizeButtonPressed:(id)sender {
     [self onFinalize];
 }
 
@@ -890,7 +890,6 @@
 }
 
 - (void)gotoOrderScreen {
-    // instantiate view controllers
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];

@@ -17,10 +17,10 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
                 <outlet property="bgView" destination="0TV-03-HWo" id="n5s-bo-7Ss"/>
-                <outlet property="bottomButton" destination="kcT-hJ-qY9" id="cQQ-8t-hdG"/>
                 <outlet property="cartButton" destination="vz8-kn-c26" id="Q6X-iF-SXE"/>
                 <outlet property="countBadgeLabel" destination="09H-Zf-5FE" id="qga-7e-M5d"/>
                 <outlet property="etaLabel" destination="dVh-bN-HTZ" id="nUX-1G-Dja"/>
+                <outlet property="finalizeButton" destination="kcT-hJ-qY9" id="czV-6I-Pjh"/>
                 <outlet property="pickerButton" destination="Ype-e7-1l5" id="afI-Av-kmn"/>
                 <outlet property="startingPriceLabel" destination="EBb-ix-ETi" id="FXA-wu-lcJ"/>
                 <outlet property="view" destination="cbY-ge-Ql8" id="pdC-Hz-Dpx"/>
@@ -145,19 +145,19 @@
                         <constraint firstItem="EBb-ix-ETi" firstAttribute="top" secondItem="r1a-cr-Tq5" secondAttribute="top" constant="4" id="oy1-Bq-mD8"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcT-hJ-qY9" userLabel="bottomButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kcT-hJ-qY9" userLabel="finalizeButton">
                     <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                     <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="TYC-pl-ZKx"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                    <state key="normal" title="FINALIZE ORDER / VIEW UPCOMING MENU">
+                    <state key="normal" title="FINALIZE ORDER">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="bottomButtonPressed:" destination="-1" eventType="touchUpInside" id="cXZ-jO-g2m"/>
+                        <action selector="finalizeButtonPressed:" destination="-1" eventType="touchUpInside" id="Or5-5K-4oD"/>
                     </connections>
                 </button>
             </subviews>
