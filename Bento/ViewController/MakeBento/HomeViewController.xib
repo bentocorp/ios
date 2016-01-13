@@ -10,12 +10,15 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="HomeViewController">
             <connections>
                 <outlet property="bottomButton" destination="kcT-hJ-qY9" id="cQQ-8t-hdG"/>
+                <outlet property="cartButton" destination="vz8-kn-c26" id="Q6X-iF-SXE"/>
+                <outlet property="countBadgeLabel" destination="09H-Zf-5FE" id="qga-7e-M5d"/>
                 <outlet property="etaLabel" destination="dVh-bN-HTZ" id="nUX-1G-Dja"/>
                 <outlet property="pickerButton" destination="Ype-e7-1l5" id="afI-Av-kmn"/>
                 <outlet property="scrollView" destination="utV-a3-SJd" id="Zue-Up-HPX"/>
@@ -77,13 +80,24 @@
                         <constraint firstAttribute="width" constant="21" id="0Dp-TS-SwH"/>
                         <constraint firstAttribute="height" constant="22" id="Adc-m5-LFt"/>
                     </constraints>
-                    <state key="normal" image="mybento_nav_cart_act.png">
+                    <state key="normal" image="mybento_nav_cart_inact.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
                         <action selector="cartButtonPressed:" destination="-1" eventType="touchUpInside" id="zJw-Ue-EHf"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09H-Zf-5FE">
+                    <rect key="frame" x="331" y="25" width="17" height="17"/>
+                    <color key="backgroundColor" red="1" green="0.37543009350000001" blue="0.45019074079999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="Rv8-BJ-aIX"/>
+                        <constraint firstAttribute="width" constant="17" id="STU-C2-aNv"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
+                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="r1a-cr-Tq5" userLabel="etaBannerView">
                     <rect key="frame" x="0.0" y="64" width="375" height="30"/>
                     <subviews>
@@ -151,6 +165,7 @@
                 <constraint firstItem="iY9-rh-eVN" firstAttribute="top" secondItem="cbY-ge-Ql8" secondAttribute="top" constant="20" id="62Q-0N-gOg"/>
                 <constraint firstItem="MU3-6F-z6Y" firstAttribute="leading" secondItem="cbY-ge-Ql8" secondAttribute="leading" constant="12" id="67T-H5-zjp"/>
                 <constraint firstItem="utV-a3-SJd" firstAttribute="leading" secondItem="cbY-ge-Ql8" secondAttribute="leading" id="J3c-NF-uya"/>
+                <constraint firstItem="09H-Zf-5FE" firstAttribute="top" secondItem="cbY-ge-Ql8" secondAttribute="top" constant="25" id="JLP-qb-KNk"/>
                 <constraint firstItem="Ype-e7-1l5" firstAttribute="centerX" secondItem="cbY-ge-Ql8" secondAttribute="centerX" id="KVw-b0-Yit"/>
                 <constraint firstAttribute="bottom" secondItem="kcT-hJ-qY9" secondAttribute="bottom" id="LuP-mf-Scb"/>
                 <constraint firstItem="r1a-cr-Tq5" firstAttribute="top" secondItem="Ype-e7-1l5" secondAttribute="bottom" constant="-1" id="Mxa-Gd-5PR"/>
@@ -166,6 +181,7 @@
                 <constraint firstItem="0Gr-fl-XBQ" firstAttribute="top" secondItem="cbY-ge-Ql8" secondAttribute="top" id="rDn-dj-gbR"/>
                 <constraint firstItem="r1a-cr-Tq5" firstAttribute="leading" secondItem="cbY-ge-Ql8" secondAttribute="leading" id="sku-vS-HK9"/>
                 <constraint firstItem="utV-a3-SJd" firstAttribute="top" secondItem="cbY-ge-Ql8" secondAttribute="top" id="t02-C4-qbK"/>
+                <constraint firstAttribute="trailing" secondItem="09H-Zf-5FE" secondAttribute="trailing" constant="27" id="vv2-9R-iQp"/>
                 <constraint firstItem="vz8-kn-c26" firstAttribute="top" secondItem="cbY-ge-Ql8" secondAttribute="top" constant="32" id="wYg-8R-UA5"/>
                 <constraint firstItem="MU3-6F-z6Y" firstAttribute="top" secondItem="cbY-ge-Ql8" secondAttribute="top" constant="30" id="wnI-5Z-FdS"/>
                 <constraint firstAttribute="trailing" secondItem="vz8-kn-c26" secondAttribute="trailing" constant="14" id="x78-nW-dbc"/>
@@ -176,7 +192,7 @@
     </objects>
     <resources>
         <image name="icon-user.png" width="36" height="36"/>
-        <image name="mybento_nav_cart_act.png" width="21" height="21"/>
+        <image name="mybento_nav_cart_inact.png" width="21" height="21"/>
         <image name="nav_background.png" width="642" height="131"/>
     </resources>
 </document>
