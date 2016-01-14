@@ -43,70 +43,6 @@
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-uC-hCd" userLabel="navBgImageView">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="65" id="BiY-fO-87T"/>
-                    </constraints>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAl-ST-thk" userLabel="pickerButton">
-                    <rect key="frame" x="77" y="20" width="220" height="45"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="220" id="0lw-nZ-chg"/>
-                        <constraint firstAttribute="height" constant="45" id="QWM-yT-aeH"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
-                    <state key="normal" title="Date &amp; Time ▾">
-                        <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
-                    </state>
-                    <connections>
-                        <action selector="pickerButtonPressed:" destination="-1" eventType="touchUpInside" id="1dr-76-OVA"/>
-                    </connections>
-                </button>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user.png" translatesAutoresizingMaskIntoConstraints="NO" id="lj8-zc-geg" userLabel="settingsImageView">
-                    <rect key="frame" x="12" y="30" width="25" height="25"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="25" id="EdZ-kX-B0T"/>
-                        <constraint firstAttribute="height" constant="25" id="Sze-ZP-kzn"/>
-                    </constraints>
-                </imageView>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQR-o4-IL4" userLabel="settingsButton">
-                    <rect key="frame" x="0.0" y="20" width="50" height="45"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="50" id="B3y-nD-p7x"/>
-                        <constraint firstAttribute="height" constant="45" id="eZI-bm-y9R"/>
-                    </constraints>
-                    <state key="normal">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="settingsButtonPressed:" destination="-1" eventType="touchUpInside" id="nSb-IX-Iwt"/>
-                    </connections>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAy-Ir-KNc" userLabel="cartButton">
-                    <rect key="frame" x="340" y="32" width="21" height="22"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="21" id="3xs-On-EQG"/>
-                        <constraint firstAttribute="height" constant="22" id="UnM-ap-7Bw"/>
-                    </constraints>
-                    <state key="normal" image="mybento_nav_cart_inact.png">
-                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                    </state>
-                    <connections>
-                        <action selector="cartButtonPressed:" destination="-1" eventType="touchUpInside" id="jSG-At-hV2"/>
-                    </connections>
-                </button>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFj-GJ-P3L">
-                    <rect key="frame" x="331" y="25" width="17" height="17"/>
-                    <color key="backgroundColor" red="1" green="0.37543009350000001" blue="0.45019074079999999" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="17" id="PHx-Sd-bGo"/>
-                        <constraint firstAttribute="width" constant="17" id="VLP-xh-1qH"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
-                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pnq-Up-jie" userLabel="etaBannerView">
                     <rect key="frame" x="0.0" y="64" width="375" height="30"/>
                     <subviews>
@@ -175,10 +111,10 @@
                         <constraint firstAttribute="height" constant="573" id="Bn5-SB-iXm"/>
                     </constraints>
                 </button>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g12-em-tQ5" userLabel="dropDownView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g12-em-tQ5" userLabel="dropDownView">
                     <rect key="frame" x="0.0" y="64" width="375" height="225"/>
                     <subviews>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
                             <rect key="frame" x="0.0" y="2" width="375" height="80"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Today, Lunch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMx-ac-AQE">
@@ -206,7 +142,7 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </view>
-                        <pickerView contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
                             <rect key="frame" x="0.0" y="84" width="375" height="139"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         </pickerView>
@@ -215,7 +151,7 @@
                     <constraints>
                         <constraint firstItem="BTB-UO-EaW" firstAttribute="width" secondItem="ccD-Zy-ERm" secondAttribute="width" id="1S3-PF-Z0T"/>
                         <constraint firstAttribute="trailing" secondItem="BTB-UO-EaW" secondAttribute="trailing" id="60h-iz-0nA"/>
-                        <constraint firstAttribute="height" constant="223" id="Hfy-fV-4xc"/>
+                        <constraint firstAttribute="height" constant="225" id="Hfy-fV-4xc"/>
                         <constraint firstAttribute="trailing" secondItem="ccD-Zy-ERm" secondAttribute="trailing" id="Uji-f3-kUn"/>
                         <constraint firstAttribute="bottom" secondItem="BTB-UO-EaW" secondAttribute="bottom" constant="2" id="YlE-pr-jng"/>
                         <constraint firstItem="BTB-UO-EaW" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="bottom" constant="2" id="gHp-lG-EEp"/>
@@ -225,6 +161,70 @@
                         <constraint firstItem="ccD-Zy-ERm" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="ybL-eP-htK"/>
                     </constraints>
                 </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-uC-hCd" userLabel="navBgImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="BiY-fO-87T"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAl-ST-thk" userLabel="pickerButton">
+                    <rect key="frame" x="77" y="20" width="220" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="220" id="0lw-nZ-chg"/>
+                        <constraint firstAttribute="height" constant="45" id="QWM-yT-aeH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="16"/>
+                    <state key="normal" title="Date &amp; Time ▾">
+                        <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="pickerButtonPressed:" destination="-1" eventType="touchUpInside" id="1dr-76-OVA"/>
+                    </connections>
+                </button>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user.png" translatesAutoresizingMaskIntoConstraints="NO" id="lj8-zc-geg" userLabel="settingsImageView">
+                    <rect key="frame" x="12" y="30" width="25" height="25"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="25" id="EdZ-kX-B0T"/>
+                        <constraint firstAttribute="height" constant="25" id="Sze-ZP-kzn"/>
+                    </constraints>
+                </imageView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MQR-o4-IL4" userLabel="settingsButton">
+                    <rect key="frame" x="0.0" y="20" width="50" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="50" id="B3y-nD-p7x"/>
+                        <constraint firstAttribute="height" constant="45" id="eZI-bm-y9R"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="settingsButtonPressed:" destination="-1" eventType="touchUpInside" id="nSb-IX-Iwt"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAy-Ir-KNc" userLabel="cartButton">
+                    <rect key="frame" x="340" y="32" width="21" height="22"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="21" id="3xs-On-EQG"/>
+                        <constraint firstAttribute="height" constant="22" id="UnM-ap-7Bw"/>
+                    </constraints>
+                    <state key="normal" image="mybento_nav_cart_inact.png">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="cartButtonPressed:" destination="-1" eventType="touchUpInside" id="jSG-At-hV2"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFj-GJ-P3L">
+                    <rect key="frame" x="331" y="25" width="17" height="17"/>
+                    <color key="backgroundColor" red="1" green="0.37543009350000001" blue="0.45019074079999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="PHx-Sd-bGo"/>
+                        <constraint firstAttribute="width" constant="17" id="VLP-xh-1qH"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="10"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>

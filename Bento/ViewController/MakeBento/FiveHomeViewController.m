@@ -786,15 +786,27 @@
 }
 
 - (IBAction)pickerButtonPressed:(id)sender {
-    if (self.dropDownView.hidden) {
+    
+    [self.view layoutIfNeeded];
+    
+    if (self.fadedViewButton.alpha == 0) {
         [UIView animateWithDuration:0.5 animations:^{
-            self.fadedViewButton.alpha = 0.5;
+            self.fadedViewButton.alpha = 0.7;
+            
+            self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y + self.dropDownView.frame.size.height);
+            
+            [self.view layoutIfNeeded];
         }];
     }
     else {
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0;
+            
+            self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height);
+            
+            [self.view layoutIfNeeded];
         }];
+        
     }
 }
 
