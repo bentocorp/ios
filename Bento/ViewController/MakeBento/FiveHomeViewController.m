@@ -794,7 +794,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0.7;
             
-            self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y + self.dropDownView.frame.size.height);
+            self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y + self.dropDownView.frame.size.height + 20);
             
             [self.view layoutIfNeeded];
         }];
@@ -803,7 +803,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0;
             
-            self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height);
+            self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height - 20);
             
             [self.view layoutIfNeeded];
         }];
@@ -816,7 +816,7 @@
     [UIView animateWithDuration:0.5 animations:^{
         self.fadedViewButton.alpha = 0;
         
-        self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height);
+        self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height - 20);
         
         [self.view layoutIfNeeded];
     }];
