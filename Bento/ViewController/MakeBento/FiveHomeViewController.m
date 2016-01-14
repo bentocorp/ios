@@ -330,6 +330,42 @@
         self.customVC.sideDish3BannerImageView.hidden = YES;
         [self.customVC.addSide3Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
     }
+    
+    /*-Side 4-*/
+    if (side4DishIndex > 0) {
+        
+        self.customVC.sideDish4ImageView.hidden = NO;
+        self.customVC.sideDish4Label.hidden = NO;
+        [self.customVC.addSide4Button setTitle:@"" forState:UIControlStateNormal];
+        
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
+        if (dishInfo != nil) {
+            self.customVC.sideDish4Label.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                self.customVC.sideDish4ImageView.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                [self.customVC.sideDish4ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
+                self.customVC.sideDish4BannerImageView.hidden = NO;
+            }
+            else {
+                self.customVC.sideDish4BannerImageView.hidden = YES;
+            }
+        }
+    }
+    else {
+        self.customVC.sideDish4ImageView.image = nil;
+        self.customVC.sideDish4ImageView.hidden = YES;
+        self.customVC.sideDish4Label.hidden = YES;
+        self.customVC.sideDish4BannerImageView.hidden = YES;
+        [self.customVC.addSide4Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE4_BUTTON] forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark Update UI
