@@ -65,6 +65,10 @@
     BOOL isThereConnection;
     
     NSArray *myDatabase;
+    
+    BOOL isDropDownViewActive;
+    NSString *menu;
+    NSString *time;
 }
 
 - (void)viewDidLoad {
@@ -72,9 +76,9 @@
     
     // order ahead mock
     myDatabase = @[
-                            @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Jan 16, Lunch", @"Jan 16, Dinner"],
-                            @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
-                            ];
+                    @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Jan 16, Lunch", @"Jan 16, Dinner"],
+                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
+                    ];
     
     isThereConnection = YES;
     
@@ -139,6 +143,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
+    NSLog(@"dropdownheight - %f", self.dropDownView.center.y);
+    
     addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
     
@@ -165,6 +171,15 @@
     [super viewWillDisappear:animated];
     
     [self endTimerOnViewedScreen];
+    
+    if (isDropDownViewActive) {
+        self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y + self.dropDownView.frame.size.height + 20);
+        [self.view layoutIfNeeded];
+    }
+    else {
+        self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height * 2 - 20);
+        [self.view layoutIfNeeded];
+    }
 }
 
 #pragma mark Load Dishes
@@ -788,9 +803,20 @@
 }
 
 - (IBAction)pickerButtonPressed:(id)sender {
+    [self toggleDropDownPicker];
+}
+
+- (IBAction)fadedViewButtonPressed:(id)sender {
+    [self toggleDropDownPicker];
+}
+
+- (void)toggleDropDownPicker {
     [self.view layoutIfNeeded];
     
     if (self.fadedViewButton.alpha == 0) {
+        
+        isDropDownViewActive = YES;
+        
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0.7;
             
@@ -800,6 +826,8 @@
         }];
     }
     else {
+        isDropDownViewActive = NO;
+        
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0;
             
@@ -808,18 +836,8 @@
             [self.view layoutIfNeeded];
         }];
     }
-}
-
-- (IBAction)fadedViewButtonPressed:(id)sender {
-    [self.view layoutIfNeeded];
     
-    [UIView animateWithDuration:0.5 animations:^{
-        self.fadedViewButton.alpha = 0;
-        
-        self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height - 20);
-        
-        [self.view layoutIfNeeded];
-    }];
+    NSLog(@"dropdownheight - %f", self.dropDownView.center.y);
 }
 
 - (IBAction)finalizeButtonPressed:(id)sender {
@@ -975,6 +993,22 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     return myDatabase[component][row];
+}
+
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+    
+    switch (component) {
+        case 0:
+            menu = myDatabase[component][row];
+            break;
+            
+        default:
+            time = myDatabase[component][row];
+            break;
+    }
+    
+    self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menu, time] forState:UIControlStateNormal];
 }
 
 
