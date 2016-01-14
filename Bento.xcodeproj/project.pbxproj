@@ -1426,8 +1426,7 @@
 			children = (
 				FCE1E5041C47373E00A210DC /* 4-Pod */,
 				FCE1E5051C47374D00A210DC /* 5-Pod */,
-				FC3E2D7A1C4588260073A82C /* MenuPreviewViewController.h */,
-				FC3E2D7B1C4588260073A82C /* MenuPreviewViewController.m */,
+				FCE1E51B1C48183C00A210DC /* View Preview */,
 				FCCD30EA1C44583A00E29A70 /* Choose Dish Item */,
 				FC3C4E801AF97FD7005D7197 /* Old Custom Bento */,
 			);
@@ -2065,6 +2064,15 @@
 				FCE1E5161C4737C500A210DC /* FiveCustomViewController.xib */,
 			);
 			name = "5-Pod";
+			sourceTree = "<group>";
+		};
+		FCE1E51B1C48183C00A210DC /* View Preview */ = {
+			isa = PBXGroup;
+			children = (
+				FC3E2D7A1C4588260073A82C /* MenuPreviewViewController.h */,
+				FC3E2D7B1C4588260073A82C /* MenuPreviewViewController.m */,
+			);
+			name = "View Preview";
 			sourceTree = "<group>";
 		};
 		FCFD79F01AE8880D002AD322 /* Settings */ = {

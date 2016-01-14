@@ -264,7 +264,14 @@
     }
     else if (self.state == DISH_CELL_FOCUS) {
         
-        self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
+        // iphone 4
+        if ([UIScreen mainScreen].bounds.size.height == 480) {
+            self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 20);
+            self.lblDescription.center = CGPointMake(self.lblDescription.center.x, 50);
+        }
+        else {
+            self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
+        }
         
         self.btnAction.backgroundColor = [UIColor clearColor];
         [self.btnAction setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -326,7 +333,14 @@
     }
     else if (self.state == DISH_CELL_SELECTED) {
         
-        self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
+        // iphone 4
+        if ([UIScreen mainScreen].bounds.size.height == 480) {
+            self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 20);
+            self.lblDescription.center = CGPointMake(self.lblDescription.center.x, 50);
+        }
+        else {
+            self.lblTitle.center = CGPointMake(self.lblTitle.center.x, 40);
+        }
         
         self.btnAction.backgroundColor = [UIColor whiteColor];
         [self.btnAction setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
