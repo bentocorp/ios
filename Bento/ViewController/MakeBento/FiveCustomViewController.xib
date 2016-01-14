@@ -88,6 +88,9 @@
                                     <state key="normal">
                                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addMainButtonPressed:" destination="-1" eventType="touchUpInside" id="WCk-jH-SyS"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -133,6 +136,9 @@
                                     <state key="normal">
                                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addSide1ButtonPressed:" destination="-1" eventType="touchUpInside" id="b74-cB-LgA"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -178,6 +184,9 @@
                                     <state key="normal">
                                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addSide2ButtonPressed:" destination="-1" eventType="touchUpInside" id="flf-Yd-TeC"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -220,6 +229,12 @@
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFD-kS-whG" userLabel="addSideDish3Button">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
+                                    <state key="normal">
+                                        <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="addSide3ButtonPressed:" destination="-1" eventType="touchUpInside" id="0uv-S3-XEy"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -265,6 +280,9 @@
                                     <state key="normal">
                                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     </state>
+                                    <connections>
+                                        <action selector="addSide4ButtonPressed:" destination="-1" eventType="touchUpInside" id="Lpe-kX-52c"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -322,6 +340,9 @@
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                     <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="VIEW ADD-ONS"/>
+                    <connections>
+                        <action selector="viewAddonsButtonPressed:" destination="-1" eventType="touchUpInside" id="Tdy-Tx-i7k"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7JK-AO-Po4" userLabel="buildButton">
                     <rect key="frame" x="-1" y="557" width="377" height="45"/>
@@ -335,6 +356,9 @@
                     <state key="normal" title="BUILD YOUR BENTO">
                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="buildButtonPressed:" destination="-1" eventType="touchUpInside" id="vkt-CS-L5A"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
