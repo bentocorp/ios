@@ -36,46 +36,64 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKV-eS-wST" userLabel="mainDishView">
                             <rect key="frame" x="1" y="1" width="333" height="140"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xp7-p8-mRg">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xp7-p8-mRg">
                                     <rect key="frame" x="0.0" y="0.0" width="333" height="140"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF THE MAIN DISH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFZ-Zh-ksK">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF THE MAIN DISH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFZ-Zh-ksK">
                                     <rect key="frame" x="8" y="8" width="317" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                     <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="FnT-d3-gHu">
+                                    <rect key="frame" x="273" y="0.0" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="gzD-Be-Y7o"/>
+                                        <constraint firstAttribute="height" constant="60" id="qlm-u7-spj"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="bottom" secondItem="uFZ-Zh-ksK" secondAttribute="bottom" constant="8" id="5nq-Gi-NHd"/>
                                 <constraint firstItem="uFZ-Zh-ksK" firstAttribute="top" secondItem="CKV-eS-wST" secondAttribute="top" constant="8" id="85R-nQ-pLw"/>
                                 <constraint firstAttribute="bottom" secondItem="xp7-p8-mRg" secondAttribute="bottom" id="Ags-cX-idF"/>
+                                <constraint firstItem="FnT-d3-gHu" firstAttribute="top" secondItem="CKV-eS-wST" secondAttribute="top" id="GAm-RZ-jhC"/>
                                 <constraint firstAttribute="trailing" secondItem="xp7-p8-mRg" secondAttribute="trailing" id="MgA-in-TOn"/>
                                 <constraint firstItem="uFZ-Zh-ksK" firstAttribute="leading" secondItem="CKV-eS-wST" secondAttribute="leading" constant="8" id="YjS-WD-Xua"/>
                                 <constraint firstItem="xp7-p8-mRg" firstAttribute="top" secondItem="CKV-eS-wST" secondAttribute="top" id="eD6-bU-Xgy"/>
                                 <constraint firstItem="xp7-p8-mRg" firstAttribute="leading" secondItem="CKV-eS-wST" secondAttribute="leading" id="odx-om-GhU"/>
                                 <constraint firstAttribute="trailing" secondItem="uFZ-Zh-ksK" secondAttribute="trailing" constant="8" id="r9c-oF-uCV"/>
+                                <constraint firstAttribute="trailing" secondItem="FnT-d3-gHu" secondAttribute="trailing" id="uw7-Xk-fuD"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIP-AR-Uve" userLabel="sideDish1View">
                             <rect key="frame" x="1" y="142" width="166" height="140"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-W7-fTL">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-W7-fTL">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAU-rt-OKD">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAU-rt-OKD">
                                     <rect key="frame" x="8" y="8" width="150" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                     <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="02k-Xe-z3W">
+                                    <rect key="frame" x="106" y="0.0" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="uQ1-Vo-Qx1"/>
+                                        <constraint firstAttribute="width" constant="60" id="x7s-kw-eLt"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="yAU-rt-OKD" firstAttribute="top" secondItem="LIP-AR-Uve" secondAttribute="top" constant="8" id="F8r-LL-kXJ"/>
                                 <constraint firstAttribute="trailing" secondItem="f1j-W7-fTL" secondAttribute="trailing" id="FSc-pF-0fs"/>
                                 <constraint firstItem="f1j-W7-fTL" firstAttribute="leading" secondItem="LIP-AR-Uve" secondAttribute="leading" id="LYY-MU-LKR"/>
+                                <constraint firstAttribute="trailing" secondItem="02k-Xe-z3W" secondAttribute="trailing" id="Wx0-Ra-k3Y"/>
+                                <constraint firstItem="02k-Xe-z3W" firstAttribute="top" secondItem="LIP-AR-Uve" secondAttribute="top" id="eqa-kd-nke"/>
                                 <constraint firstItem="yAU-rt-OKD" firstAttribute="leading" secondItem="LIP-AR-Uve" secondAttribute="leading" constant="8" id="fK5-GI-g8d"/>
                                 <constraint firstAttribute="trailing" secondItem="yAU-rt-OKD" secondAttribute="trailing" constant="8" id="tXU-uI-kWT"/>
                                 <constraint firstItem="f1j-W7-fTL" firstAttribute="top" secondItem="LIP-AR-Uve" secondAttribute="top" id="tz6-YB-0zN"/>
@@ -86,61 +104,90 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYz-XV-4sD" userLabel="sideDish2View">
                             <rect key="frame" x="168" y="142" width="166" height="140"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfm-mK-400">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfm-mK-400">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="THIS IS THE NAME OF SIDE DISH 2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FF1-M2-4dx">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FF1-M2-4dx">
                                     <rect key="frame" x="8" y="8" width="150" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                     <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="diZ-aJ-N7R">
+                                    <rect key="frame" x="106" y="0.0" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="Klm-UH-VH0"/>
+                                        <constraint firstAttribute="width" constant="60" id="s3E-CM-f7h"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstAttribute="trailing" secondItem="FF1-M2-4dx" secondAttribute="trailing" constant="8" id="2M6-wf-LGk"/>
+                                <constraint firstItem="FF1-M2-4dx" firstAttribute="leading" secondItem="DYz-XV-4sD" secondAttribute="leading" constant="8" id="5Ws-vG-YYd"/>
+                                <constraint firstAttribute="trailing" secondItem="diZ-aJ-N7R" secondAttribute="trailing" id="6oE-4B-Vwz"/>
                                 <constraint firstAttribute="bottom" secondItem="wfm-mK-400" secondAttribute="bottom" id="80j-Zm-4Cf"/>
+                                <constraint firstAttribute="bottom" secondItem="FF1-M2-4dx" secondAttribute="bottom" constant="8" id="C6c-dt-uG3"/>
                                 <constraint firstAttribute="trailing" secondItem="wfm-mK-400" secondAttribute="trailing" id="SBP-B4-XV1"/>
                                 <constraint firstItem="wfm-mK-400" firstAttribute="top" secondItem="DYz-XV-4sD" secondAttribute="top" id="fdC-Fw-CuV"/>
+                                <constraint firstItem="FF1-M2-4dx" firstAttribute="top" secondItem="DYz-XV-4sD" secondAttribute="top" constant="8" id="uA2-yt-qVz"/>
+                                <constraint firstItem="diZ-aJ-N7R" firstAttribute="top" secondItem="DYz-XV-4sD" secondAttribute="top" id="uCz-dp-LL9"/>
                                 <constraint firstItem="wfm-mK-400" firstAttribute="leading" secondItem="DYz-XV-4sD" secondAttribute="leading" id="w6x-rM-ag1"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZdE-od-mPZ" userLabel="sideDish3View">
                             <rect key="frame" x="1" y="283" width="166" height="140"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-xm-kfR">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-xm-kfR">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8h-py-D4a">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8h-py-D4a">
                                     <rect key="frame" x="8" y="8" width="150" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                     <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="8GQ-bj-f4Y">
+                                    <rect key="frame" x="106" y="0.0" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="60" id="hMq-el-Mtb"/>
+                                        <constraint firstAttribute="height" constant="60" id="znY-2I-zXR"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="dD2-xm-kfR" firstAttribute="leading" secondItem="ZdE-od-mPZ" secondAttribute="leading" id="DEq-DM-vMT"/>
                                 <constraint firstAttribute="bottom" secondItem="b8h-py-D4a" secondAttribute="bottom" constant="8" id="EUn-gs-5E0"/>
+                                <constraint firstItem="8GQ-bj-f4Y" firstAttribute="top" secondItem="ZdE-od-mPZ" secondAttribute="top" id="HNT-WV-xSl"/>
                                 <constraint firstItem="b8h-py-D4a" firstAttribute="top" secondItem="ZdE-od-mPZ" secondAttribute="top" constant="8" id="JQW-aW-efK"/>
                                 <constraint firstAttribute="trailing" secondItem="dD2-xm-kfR" secondAttribute="trailing" id="P7p-TO-7Cj"/>
                                 <constraint firstItem="dD2-xm-kfR" firstAttribute="top" secondItem="ZdE-od-mPZ" secondAttribute="top" id="RMQ-Lv-mhh"/>
                                 <constraint firstAttribute="bottom" secondItem="dD2-xm-kfR" secondAttribute="bottom" id="bqa-Kj-ufL"/>
                                 <constraint firstItem="b8h-py-D4a" firstAttribute="leading" secondItem="ZdE-od-mPZ" secondAttribute="leading" constant="8" id="cR3-AX-Lwu"/>
+                                <constraint firstAttribute="trailing" secondItem="8GQ-bj-f4Y" secondAttribute="trailing" id="vJx-Qh-yh1"/>
                                 <constraint firstAttribute="trailing" secondItem="b8h-py-D4a" secondAttribute="trailing" constant="8" id="x0E-5t-pOt"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqG-Mq-SHG" userLabel="sideDish4View">
                             <rect key="frame" x="168" y="283" width="166" height="140"/>
                             <subviews>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v1A-WG-o5o">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v1A-WG-o5o">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                 </imageView>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnX-oT-vRZ">
+                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnX-oT-vRZ">
                                     <rect key="frame" x="8" y="8" width="150" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
                                     <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="M3r-SJ-3RX">
+                                    <rect key="frame" x="106" y="0.0" width="60" height="60"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="60" id="bKi-sG-Eyd"/>
+                                        <constraint firstAttribute="width" constant="60" id="jV0-q4-RH9"/>
+                                    </constraints>
+                                </imageView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -148,9 +195,11 @@
                                 <constraint firstAttribute="bottom" secondItem="HnX-oT-vRZ" secondAttribute="bottom" constant="8" id="OOf-9T-8VM"/>
                                 <constraint firstAttribute="trailing" secondItem="v1A-WG-o5o" secondAttribute="trailing" id="Rc9-PB-Ljv"/>
                                 <constraint firstItem="HnX-oT-vRZ" firstAttribute="leading" secondItem="NqG-Mq-SHG" secondAttribute="leading" constant="8" id="Vnk-ZY-Jzf"/>
+                                <constraint firstItem="M3r-SJ-3RX" firstAttribute="top" secondItem="NqG-Mq-SHG" secondAttribute="top" id="cmd-YQ-S3L"/>
                                 <constraint firstAttribute="bottom" secondItem="v1A-WG-o5o" secondAttribute="bottom" id="eGG-TU-AqV"/>
                                 <constraint firstAttribute="trailing" secondItem="HnX-oT-vRZ" secondAttribute="trailing" constant="8" id="hIs-6l-pKd"/>
                                 <constraint firstItem="v1A-WG-o5o" firstAttribute="top" secondItem="NqG-Mq-SHG" secondAttribute="top" id="hnf-k2-X8B"/>
+                                <constraint firstAttribute="trailing" secondItem="M3r-SJ-3RX" secondAttribute="trailing" id="nBQ-ia-WYO"/>
                                 <constraint firstItem="HnX-oT-vRZ" firstAttribute="top" secondItem="NqG-Mq-SHG" secondAttribute="top" constant="8" id="oHp-h8-Dum"/>
                             </constraints>
                         </view>
@@ -220,5 +269,12 @@
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="208.5" y="390.5"/>
         </view>
+        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" id="W6I-my-mTQ">
+            <rect key="frame" x="0.0" y="0.0" width="240" height="128"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+        </imageView>
     </objects>
+    <resources>
+        <image name="banner_sold_out.png" width="154" height="154"/>
+    </resources>
 </document>
