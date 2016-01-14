@@ -23,8 +23,9 @@
 #import "DataManager.h"
 #import "Reachability.h"
 
-#import "CustomBentoViewController.h"
 #import "HomeViewController.h"
+#import "FiveHomeViewController.h"
+
 #import "ChooseMainDishViewController.h"
 #import "ChooseSideDishViewController.h"
 
@@ -425,26 +426,46 @@
     double delayInSeconds = 0.1;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
-
-//        CustomBentoViewController *customBentoViewController = [[CustomBentoViewController alloc] init];
         
-        HomeViewController *customBentoViewController = [[HomeViewController alloc] init];
-        
-        // deep link to Choose Your Main Dish
-        if ([mainOrSide isEqualToString:@"main"]) {
-            ChooseMainDishViewController *chooseMainDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-            [self.navigationController pushViewController:customBentoViewController animated:NO];
-            [self.navigationController pushViewController:chooseMainDishVC animated:YES];
+        if ([[BentoShop sharedInstance] is4PodMode]) {
+            HomeViewController *homeVC = [[HomeViewController alloc] init];
+            
+            // deep link to Choose Your Main Dish
+            if ([mainOrSide isEqualToString:@"main"]) {
+                ChooseMainDishViewController *chooseMainDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+                [self.navigationController pushViewController:homeVC animated:NO];
+                [self.navigationController pushViewController:chooseMainDishVC animated:YES];
+            }
+            // deep link to Choose Your Side Dish
+            else if ([mainOrSide isEqualToString:@"side"]) {
+                ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+                [self.navigationController pushViewController:homeVC animated:NO];
+                [self.navigationController pushViewController:chooseSideDishVC animated:YES];
+            }
+            // regular opening flow of the app. changed for later use then stop
+            else {
+                [self.navigationController pushViewController:homeVC animated:needsAnimation];
+            }
         }
-        // deep link to Choose Your Side Dish
-        else if ([mainOrSide isEqualToString:@"side"]) {
-            ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-            [self.navigationController pushViewController:customBentoViewController animated:NO];
-            [self.navigationController pushViewController:chooseSideDishVC animated:YES];
-        }
-        // regular opening flow of the app. changed for later use then stop
         else {
-            [self.navigationController pushViewController:customBentoViewController animated:needsAnimation];
+            FiveHomeViewController *fiveHomeVC = [[FiveHomeViewController alloc] init];
+            
+            // deep link to Choose Your Main Dish
+            if ([mainOrSide isEqualToString:@"main"]) {
+                ChooseMainDishViewController *chooseMainDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+                [self.navigationController pushViewController:fiveHomeVC animated:NO];
+                [self.navigationController pushViewController:chooseMainDishVC animated:YES];
+            }
+            // deep link to Choose Your Side Dish
+            else if ([mainOrSide isEqualToString:@"side"]) {
+                ChooseSideDishViewController *chooseSideDishVC = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+                [self.navigationController pushViewController:fiveHomeVC animated:NO];
+                [self.navigationController pushViewController:chooseSideDishVC animated:YES];
+            }
+            // regular opening flow of the app. changed for later use then stop
+            else {
+                [self.navigationController pushViewController:fiveHomeVC animated:needsAnimation];
+            }
         }
     });
 }
