@@ -1584,7 +1584,7 @@ static BentoShop *_shareInstance;
 //    return NO;
     
     
-    return YES;
+    return NO;
 }
 
 @end

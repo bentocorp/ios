@@ -1,5 +1,5 @@
 //
-//  5PodCustomViewController.h
+//  FivePodCustomViewController.h
 //  Bento
 //
 //  Created by Joseph Lau on 1/13/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface _PodCustomViewController : UIViewController
+@interface FivePodCustomViewController : UIViewController
 
 @end
