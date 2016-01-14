@@ -55,8 +55,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *addSide3Button;
 
 @property (weak, nonatomic) IBOutlet UIButton *buildButton;
-@property (weak, nonatomic) IBOutlet UIButton *viewAddonsButton;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *buildButtonWidthConstraint;
 
+@property (weak, nonatomic) IBOutlet UIButton *viewAddonsButton;
 
 @property (nonatomic) id delegate;
 

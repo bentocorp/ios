@@ -70,7 +70,7 @@
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
-        [self.buildButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+        [self.viewAddonsButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     }
 }
 

@@ -30,6 +30,7 @@
                 <outlet property="addSideDish2Button" destination="ZAF-sX-5hZ" id="jpz-1J-LYW"/>
                 <outlet property="addSideDish3Button" destination="qye-n5-idg" id="hIf-FT-XH4"/>
                 <outlet property="buildButton" destination="Mgx-IB-ucB" id="dCQ-xU-7Ql"/>
+                <outlet property="buildButtonWidthConstraint" destination="6Zl-w2-6rU" id="jMX-rW-aeJ"/>
                 <outlet property="dishBGView" destination="nMO-Fa-ewf" id="dhl-c8-zyv"/>
                 <outlet property="mainDishBannerImageView" destination="9bT-3b-54x" id="9M7-gR-x4h"/>
                 <outlet property="mainDishImageView" destination="apD-DI-s6F" id="kJ2-8e-dci"/>
@@ -278,6 +279,7 @@
                     <rect key="frame" x="-1" y="557" width="377" height="45"/>
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="width" constant="377" id="6Zl-w2-6rU"/>
                         <constraint firstAttribute="height" constant="45" id="QUq-Oh-mFa"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
@@ -304,7 +306,6 @@
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="Mgx-IB-ucB" secondAttribute="trailing" constant="-1" id="1xJ-Y5-Qgp"/>
                 <constraint firstAttribute="trailing" secondItem="nMO-Fa-ewf" secondAttribute="trailing" constant="20" id="9i1-Va-8yz"/>
                 <constraint firstAttribute="bottom" secondItem="Yxd-Fq-MUg" secondAttribute="bottom" constant="65" id="Rnn-La-tOl"/>
                 <constraint firstAttribute="trailing" secondItem="Yxd-Fq-MUg" secondAttribute="trailing" constant="-1" id="U1C-Rw-aPx"/>

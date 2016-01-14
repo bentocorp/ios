@@ -487,28 +487,16 @@
     
     // 1 or more bentos in cart
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        NSLayoutConstraint *buildButtonWidthConstraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
-                                                                      attribute:NSLayoutAttributeWidth
-                                                                      relatedBy:0
-                                                                         toItem:nil
-                                                                      attribute:NSLayoutAttributeNotAnAttribute
-                                                                     multiplier:1
-                                                                       constant:SCREEN_WIDTH/2-5];
-        [self.customVC.view addConstraint:buildButtonWidthConstraint];
+        
+        self.customVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH / 2 - 5;
         
         // view add-ons button
         self.customVC.viewAddonsButton.hidden = NO;
     }
     // 0 bentos in cart
     else {
-        NSLayoutConstraint *buildButtonWidthConstraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
-                                                                      attribute:NSLayoutAttributeWidth
-                                                                      relatedBy:0
-                                                                         toItem:nil
-                                                                      attribute:NSLayoutAttributeNotAnAttribute
-                                                                     multiplier:1
-                                                                       constant:SCREEN_WIDTH+1];
-        [self.customVC.view addConstraint:buildButtonWidthConstraint];
+        
+        self.customVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH + 1;
         
         // view add-ons button
         self.customVC.viewAddonsButton.hidden = YES;
