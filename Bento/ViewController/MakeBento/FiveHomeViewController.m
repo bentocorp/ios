@@ -68,6 +68,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    // order ahead mock
+    NSArray *myDatabase = @[
+                            @[@"Today", @"Tomorrow", @"Mon, Jan 11", @"Tue, Jan 12", @"Wed, Jan 13"],
+                            @[@"ASAP", @"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
+                            ];
+    
     isThereConnection = YES;
     
     /*---Custom---*/
@@ -780,7 +786,14 @@
 }
 
 - (IBAction)pickerButtonPressed:(id)sender {
-    
+    if (self.dropDownView.hidden) {
+        self.dropDownView.hidden = NO;
+        self.fadedViewButton.hidden = NO;
+    }
+    else {
+        self.dropDownView.hidden = YES;
+        self.fadedViewButton.hidden = YES;
+    }
 }
 
 - (IBAction)finalizeButtonPressed:(id)sender {
