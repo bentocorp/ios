@@ -22,7 +22,7 @@
                 <outlet property="etaLabel" destination="Nxt-M8-sn7" id="BbE-RK-E60"/>
                 <outlet property="finalizeButton" destination="gLT-NR-dmH" id="yZN-OV-TIq"/>
                 <outlet property="pickerButton" destination="ZAl-ST-thk" id="fuc-Mk-9Qp"/>
-                <outlet property="startingPriceLabel" destination="wSb-1H-Dvt" id="tpl-Hz-tED"/>
+                <outlet property="startingPriceLabel" destination="wSb-1H-Dvt" id="bTa-hm-7IN"/>
                 <outlet property="view" destination="00c-cJ-i1r" id="oEG-Ko-GjQ"/>
             </connections>
         </placeholder>

@@ -66,16 +66,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKV-eS-wST" userLabel="mainDishView">
                             <rect key="frame" x="1" y="1" width="333" height="140"/>
                             <subviews>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xp7-p8-mRg" userLabel="mainDishImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xp7-p8-mRg" userLabel="mainDishImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="333" height="140"/>
                                 </imageView>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF THE MAIN DISH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFZ-Zh-ksK" userLabel="mainDishLabel">
                                     <rect key="frame" x="8" y="8" width="317" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="FnT-d3-gHu" userLabel="mainDishBannerImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="FnT-d3-gHu" userLabel="mainDishBannerImageView">
                                     <rect key="frame" x="273" y="0.0" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="60" id="gzD-Be-Y7o"/>
@@ -114,16 +114,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIP-AR-Uve" userLabel="sideDish1View">
                             <rect key="frame" x="1" y="142" width="166" height="140"/>
                             <subviews>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-W7-fTL" userLabel="sideDish1ImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-W7-fTL" userLabel="sideDish1ImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                 </imageView>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAU-rt-OKD" userLabel="sideDish1Label">
                                     <rect key="frame" x="8" y="8" width="150" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="02k-Xe-z3W" userLabel="sideDish1BannerImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="02k-Xe-z3W" userLabel="sideDish1BannerImageView">
                                     <rect key="frame" x="106" y="0.0" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="uQ1-Vo-Qx1"/>
@@ -162,16 +162,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYz-XV-4sD" userLabel="sideDish2View">
                             <rect key="frame" x="168" y="142" width="166" height="140"/>
                             <subviews>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfm-mK-400" userLabel="sideDish2ImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfm-mK-400" userLabel="sideDish2ImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                 </imageView>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FF1-M2-4dx" userLabel="sideDish2Label">
                                     <rect key="frame" x="8" y="8" width="150" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="diZ-aJ-N7R" userLabel="sideDish2BannerImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="diZ-aJ-N7R" userLabel="sideDish2BannerImageView">
                                     <rect key="frame" x="106" y="0.0" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="Klm-UH-VH0"/>
@@ -210,16 +210,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZdE-od-mPZ" userLabel="sideDish3View">
                             <rect key="frame" x="1" y="283" width="166" height="140"/>
                             <subviews>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-xm-kfR" userLabel="sideDish3ImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-xm-kfR" userLabel="sideDish3ImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                 </imageView>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8h-py-D4a" userLabel="sideDish3Label">
                                     <rect key="frame" x="8" y="8" width="150" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="8GQ-bj-f4Y" userLabel="sideDish3BannerImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="8GQ-bj-f4Y" userLabel="sideDish3BannerImageView">
                                     <rect key="frame" x="106" y="0.0" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="width" constant="60" id="hMq-el-Mtb"/>
@@ -258,16 +258,16 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqG-Mq-SHG" userLabel="sideDish4View">
                             <rect key="frame" x="168" y="283" width="166" height="140"/>
                             <subviews>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v1A-WG-o5o" userLabel="sideDish4ImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v1A-WG-o5o" userLabel="sideDish4ImageView">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                 </imageView>
                                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnX-oT-vRZ" userLabel="sideDish4Label">
                                     <rect key="frame" x="8" y="8" width="150" height="124"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="M3r-SJ-3RX" userLabel="sideDish4BannerImageView">
+                                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="banner_sold_out.png" translatesAutoresizingMaskIntoConstraints="NO" id="M3r-SJ-3RX" userLabel="sideDish4BannerImageView">
                                     <rect key="frame" x="106" y="0.0" width="60" height="60"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="60" id="bKi-sG-Eyd"/>
