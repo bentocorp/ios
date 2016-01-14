@@ -8,6 +8,11 @@
         <mutableArray key="OpenSans-Bold.ttf">
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
     </customFonts>
     <objects>
@@ -30,23 +35,124 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKV-eS-wST" userLabel="mainDishView">
                             <rect key="frame" x="1" y="1" width="333" height="140"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xp7-p8-mRg">
+                                    <rect key="frame" x="0.0" y="0.0" width="333" height="140"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF THE MAIN DISH" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uFZ-Zh-ksK">
+                                    <rect key="frame" x="8" y="8" width="317" height="124"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="uFZ-Zh-ksK" secondAttribute="bottom" constant="8" id="5nq-Gi-NHd"/>
+                                <constraint firstItem="uFZ-Zh-ksK" firstAttribute="top" secondItem="CKV-eS-wST" secondAttribute="top" constant="8" id="85R-nQ-pLw"/>
+                                <constraint firstAttribute="bottom" secondItem="xp7-p8-mRg" secondAttribute="bottom" id="Ags-cX-idF"/>
+                                <constraint firstAttribute="trailing" secondItem="xp7-p8-mRg" secondAttribute="trailing" id="MgA-in-TOn"/>
+                                <constraint firstItem="uFZ-Zh-ksK" firstAttribute="leading" secondItem="CKV-eS-wST" secondAttribute="leading" constant="8" id="YjS-WD-Xua"/>
+                                <constraint firstItem="xp7-p8-mRg" firstAttribute="top" secondItem="CKV-eS-wST" secondAttribute="top" id="eD6-bU-Xgy"/>
+                                <constraint firstItem="xp7-p8-mRg" firstAttribute="leading" secondItem="CKV-eS-wST" secondAttribute="leading" id="odx-om-GhU"/>
+                                <constraint firstAttribute="trailing" secondItem="uFZ-Zh-ksK" secondAttribute="trailing" constant="8" id="r9c-oF-uCV"/>
+                            </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIP-AR-Uve" userLabel="sideDish1View">
                             <rect key="frame" x="1" y="142" width="166" height="140"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="f1j-W7-fTL">
+                                    <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 1" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAU-rt-OKD">
+                                    <rect key="frame" x="8" y="8" width="150" height="124"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="yAU-rt-OKD" firstAttribute="top" secondItem="LIP-AR-Uve" secondAttribute="top" constant="8" id="F8r-LL-kXJ"/>
+                                <constraint firstAttribute="trailing" secondItem="f1j-W7-fTL" secondAttribute="trailing" id="FSc-pF-0fs"/>
+                                <constraint firstItem="f1j-W7-fTL" firstAttribute="leading" secondItem="LIP-AR-Uve" secondAttribute="leading" id="LYY-MU-LKR"/>
+                                <constraint firstItem="yAU-rt-OKD" firstAttribute="leading" secondItem="LIP-AR-Uve" secondAttribute="leading" constant="8" id="fK5-GI-g8d"/>
+                                <constraint firstAttribute="trailing" secondItem="yAU-rt-OKD" secondAttribute="trailing" constant="8" id="tXU-uI-kWT"/>
+                                <constraint firstItem="f1j-W7-fTL" firstAttribute="top" secondItem="LIP-AR-Uve" secondAttribute="top" id="tz6-YB-0zN"/>
+                                <constraint firstAttribute="bottom" secondItem="yAU-rt-OKD" secondAttribute="bottom" constant="8" id="vhG-si-OfK"/>
+                                <constraint firstAttribute="bottom" secondItem="f1j-W7-fTL" secondAttribute="bottom" id="zJD-es-qJV"/>
+                            </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYz-XV-4sD" userLabel="sideDish2View">
                             <rect key="frame" x="168" y="142" width="166" height="140"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wfm-mK-400">
+                                    <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="THIS IS THE NAME OF SIDE DISH 2" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FF1-M2-4dx">
+                                    <rect key="frame" x="8" y="8" width="150" height="124"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="wfm-mK-400" secondAttribute="bottom" id="80j-Zm-4Cf"/>
+                                <constraint firstAttribute="trailing" secondItem="wfm-mK-400" secondAttribute="trailing" id="SBP-B4-XV1"/>
+                                <constraint firstItem="wfm-mK-400" firstAttribute="top" secondItem="DYz-XV-4sD" secondAttribute="top" id="fdC-Fw-CuV"/>
+                                <constraint firstItem="wfm-mK-400" firstAttribute="leading" secondItem="DYz-XV-4sD" secondAttribute="leading" id="w6x-rM-ag1"/>
+                            </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZdE-od-mPZ" userLabel="sideDish3View">
                             <rect key="frame" x="1" y="283" width="166" height="140"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dD2-xm-kfR">
+                                    <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 3" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b8h-py-D4a">
+                                    <rect key="frame" x="8" y="8" width="150" height="124"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="dD2-xm-kfR" firstAttribute="leading" secondItem="ZdE-od-mPZ" secondAttribute="leading" id="DEq-DM-vMT"/>
+                                <constraint firstAttribute="bottom" secondItem="b8h-py-D4a" secondAttribute="bottom" constant="8" id="EUn-gs-5E0"/>
+                                <constraint firstItem="b8h-py-D4a" firstAttribute="top" secondItem="ZdE-od-mPZ" secondAttribute="top" constant="8" id="JQW-aW-efK"/>
+                                <constraint firstAttribute="trailing" secondItem="dD2-xm-kfR" secondAttribute="trailing" id="P7p-TO-7Cj"/>
+                                <constraint firstItem="dD2-xm-kfR" firstAttribute="top" secondItem="ZdE-od-mPZ" secondAttribute="top" id="RMQ-Lv-mhh"/>
+                                <constraint firstAttribute="bottom" secondItem="dD2-xm-kfR" secondAttribute="bottom" id="bqa-Kj-ufL"/>
+                                <constraint firstItem="b8h-py-D4a" firstAttribute="leading" secondItem="ZdE-od-mPZ" secondAttribute="leading" constant="8" id="cR3-AX-Lwu"/>
+                                <constraint firstAttribute="trailing" secondItem="b8h-py-D4a" secondAttribute="trailing" constant="8" id="x0E-5t-pOt"/>
+                            </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqG-Mq-SHG" userLabel="sideDish4View">
                             <rect key="frame" x="168" y="283" width="166" height="140"/>
+                            <subviews>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="v1A-WG-o5o">
+                                    <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
+                                </imageView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="THIS IS THE NAME OF SIDE DISH 4" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HnX-oT-vRZ">
+                                    <rect key="frame" x="8" y="8" width="150" height="124"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
+                                    <color key="textColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="v1A-WG-o5o" firstAttribute="leading" secondItem="NqG-Mq-SHG" secondAttribute="leading" id="Iuu-ut-VDH"/>
+                                <constraint firstAttribute="bottom" secondItem="HnX-oT-vRZ" secondAttribute="bottom" constant="8" id="OOf-9T-8VM"/>
+                                <constraint firstAttribute="trailing" secondItem="v1A-WG-o5o" secondAttribute="trailing" id="Rc9-PB-Ljv"/>
+                                <constraint firstItem="HnX-oT-vRZ" firstAttribute="leading" secondItem="NqG-Mq-SHG" secondAttribute="leading" constant="8" id="Vnk-ZY-Jzf"/>
+                                <constraint firstAttribute="bottom" secondItem="v1A-WG-o5o" secondAttribute="bottom" id="eGG-TU-AqV"/>
+                                <constraint firstAttribute="trailing" secondItem="HnX-oT-vRZ" secondAttribute="trailing" constant="8" id="hIs-6l-pKd"/>
+                                <constraint firstItem="v1A-WG-o5o" firstAttribute="top" secondItem="NqG-Mq-SHG" secondAttribute="top" id="hnf-k2-X8B"/>
+                                <constraint firstItem="HnX-oT-vRZ" firstAttribute="top" secondItem="NqG-Mq-SHG" secondAttribute="top" constant="8" id="oHp-h8-Dum"/>
+                            </constraints>
                         </view>
                     </subviews>
                     <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
