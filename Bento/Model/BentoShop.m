@@ -1558,6 +1558,11 @@ static BentoShop *_shareInstance;
         shouldReset = YES;
     }
     
+    // reset auto view add-ons flag
+    if (shouldReset) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoShowAddons"];
+    }
+    
     return shouldReset;
 }
 
@@ -1573,16 +1578,13 @@ static BentoShop *_shareInstance;
 
 - (BOOL)is4PodMode
 {
-//    NSString *podMode = self.dicInit[@"settings"][@"pod_mode"];
-//    
-//    if (podMode != nil || ![podMode isEqualToString:@""]) {
-//        if ([podMode integerValue] == 4) {
-//            return YES;
-//        }
-//    }
-//    
-//    return NO;
+    NSString *podMode = self.dicInit[@"settings"][@"pod_mode"];
     
+    if (podMode != nil || ![podMode isEqualToString:@""]) {
+        if ([podMode integerValue] == 4) {
+            return YES;
+        }
+    }
     
     return NO;
 }

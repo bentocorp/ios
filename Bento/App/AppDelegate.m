@@ -200,14 +200,14 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [Mixpanel sharedInstanceWithToken:MIXPANEL_TOKEN];
 #endif
     
-    if (MPTweakValue(@"Auto show add-ons once per order", NO)) {
-        // test, auto show add-ons
+//    if (MPTweakValue(@"Auto show add-ons once per order", NO)) {
+//        // test, auto show add-ons
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoShowAddons"];
-    }
-    else {
-        // original, don't auto show add-ons
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AutoShowAddons"];
-    }
+//    }
+//    else {
+//        // original, don't auto show add-ons
+//        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"AutoShowAddons"];
+//    }
     
     NSLog(@"DISTINCT ID ON LAUNCH - %@", [[Mixpanel sharedInstance] distinctId]);
     
