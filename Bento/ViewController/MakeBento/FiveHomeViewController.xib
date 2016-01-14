@@ -16,6 +16,13 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FiveHomeViewController">
             <connections>
+                <outlet property="bgView" destination="3lu-ax-SyT" id="u1s-8Y-5EE"/>
+                <outlet property="cartButton" destination="eAy-Ir-KNc" id="ZUq-T6-04l"/>
+                <outlet property="countBadgeLabel" destination="KFj-GJ-P3L" id="hfq-k5-89T"/>
+                <outlet property="etaLabel" destination="Nxt-M8-sn7" id="BbE-RK-E60"/>
+                <outlet property="finalizeButton" destination="gLT-NR-dmH" id="yZN-OV-TIq"/>
+                <outlet property="pickerButton" destination="ZAl-ST-thk" id="fuc-Mk-9Qp"/>
+                <outlet property="startingPriceLabel" destination="wSb-1H-Dvt" id="tpl-Hz-tED"/>
                 <outlet property="view" destination="00c-cJ-i1r" id="oEG-Ko-GjQ"/>
             </connections>
         </placeholder>
@@ -44,6 +51,9 @@
                     <state key="normal" title="Date &amp; Time ▾">
                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
+                    <connections>
+                        <action selector="pickerButtonPressed:" destination="-1" eventType="touchUpInside" id="1dr-76-OVA"/>
+                    </connections>
                 </button>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon-user.png" translatesAutoresizingMaskIntoConstraints="NO" id="lj8-zc-geg" userLabel="settingsImageView">
                     <rect key="frame" x="12" y="30" width="25" height="25"/>
@@ -61,6 +71,9 @@
                     <state key="normal">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="settingsButtonPressed:" destination="-1" eventType="touchUpInside" id="nSb-IX-Iwt"/>
+                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eAy-Ir-KNc" userLabel="cartButton">
                     <rect key="frame" x="340" y="32" width="21" height="22"/>
@@ -71,6 +84,9 @@
                     <state key="normal" image="mybento_nav_cart_inact.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="cartButtonPressed:" destination="-1" eventType="touchUpInside" id="jSG-At-hV2"/>
+                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFj-GJ-P3L">
                     <rect key="frame" x="331" y="25" width="17" height="17"/>
@@ -140,6 +156,9 @@
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
+                    <connections>
+                        <action selector="finalizeButtonPressed:" destination="-1" eventType="touchUpInside" id="smT-1d-xv1"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>

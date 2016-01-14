@@ -7,7 +7,17 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "BaseViewController.h"
 
-@interface FiveHomeViewController : UIViewController
+@interface FiveHomeViewController : BaseViewController
 
-@end
+@property (weak, nonatomic) IBOutlet UIView *bgView;
+
+@property (weak, nonatomic) IBOutlet UIButton *cartButton;
+@property (weak, nonatomic) IBOutlet UILabel *countBadgeLabel;
+
+@property (weak, nonatomic) IBOutlet UILabel *startingPriceLabel;
+@property (weak, nonatomic) IBOutlet UILabel *etaLabel;
+
+@property (weak, nonatomic) IBOutlet UIButton *pickerButton;
+@property (weak, nonatomic) IBOutlet UIButton *finalizeButton;
