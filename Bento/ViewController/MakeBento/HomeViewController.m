@@ -93,39 +93,6 @@
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
     
-    /*---Add-ons---*/
-    //    if ([[BentoShop sharedInstance] is4PodMode]) {
-    //        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, SCREEN_HEIGHT - 45 -65 - 65, SCREEN_WIDTH/2-10, 45)];
-    //    }
-    //    else {
-    //        addonsButton = [[UIButton alloc] initWithFrame:CGRectMake(btnAddAnotherBentoShortVersionWidth + 25, viewDishs.frame.size.height + 45 + 7.5, SCREEN_WIDTH/2-10, 45)];
-    //    }
-    //    addonsButton.layer.borderColor = BORDER_COLOR.CGColor;
-    //    addonsButton.layer.borderWidth = 1.0f;
-    //    [addonsButton setBackgroundColor:[UIColor colorWithRed:238.0f / 255.0f green:241.0f / 255.0f blue:241.0f / 255.0f alpha:1.0f]];
-    //    [addonsButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
-    //    addonsButton.hidden = YES;
-    //    addonsButton.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12.0f];
-    //
-    //
-    //    NSString *addonsText = @"VIEW ADD-ONS";
-    //    [addonsButton setTitle:addonsText forState:UIControlStateNormal];
-    //    NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:addonsText];
-    //    float spacing = 1.0f;
-    //    [attributedTitle addAttribute:NSKernAttributeName
-    //                            value:@(spacing)
-    //                            range:NSMakeRange(0, [addonsText length])];
-    //    // Anything less than iOS 8.0
-    //    if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
-    //        addonsButton.titleLabel.text = addonsText;
-    //    }
-    //    else {
-    //        addonsButton.titleLabel.attributedText = attributedTitle;
-    //    }
-    //
-    //    [addonsButton addTarget:self action:@selector(onViewAddons) forControlEvents:UIControlEventTouchUpInside];
-    //    [scrollView addSubview:addonsButton];
-    
     /*---Finalize Button Text---*/
     NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
     if (strTitle != nil) {
@@ -429,11 +396,13 @@
     }
     /*----------------------*/
     
-    self.etaLabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
+    [self setETA];
     
     /*----------------------*/
     
-    [self setWidthOfBuildButton];
+    [self setBuildButtonConstraint];
+    
+    /*----------------------*/
     
     // current bento is empty
     if ([currentBento isEmpty] == YES || currentBento == nil) {
@@ -508,30 +477,41 @@
     }
 }
 
+- (void)setETA {
+    self.etaLabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
+}
+
 #pragma mark Build Button Width
 
-- (void)setWidthOfBuildButton {
+- (void)setBuildButtonConstraint {
+    
     // 1 or more bentos in cart
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
+        NSLayoutConstraint *buildButtonWidthConstraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
                                                                       attribute:NSLayoutAttributeWidth
                                                                       relatedBy:0
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1
                                                                        constant:SCREEN_WIDTH/2-5];
-        [self.customVC.view addConstraint:constraint];
+        [self.customVC.view addConstraint:buildButtonWidthConstraint];
+        
+        // view add-ons button
+        self.customVC.viewAddonsButton.hidden = NO;
     }
     // 0 bentos in cart
     else {
-        NSLayoutConstraint *constraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
+        NSLayoutConstraint *buildButtonWidthConstraint = [NSLayoutConstraint constraintWithItem:self.customVC.buildButton
                                                                       attribute:NSLayoutAttributeWidth
                                                                       relatedBy:0
                                                                          toItem:nil
                                                                       attribute:NSLayoutAttributeNotAnAttribute
                                                                      multiplier:1
-                                                                       constant:SCREEN_WIDTH];
-        [self.customVC.view addConstraint:constraint];
+                                                                       constant:SCREEN_WIDTH+1];
+        [self.customVC.view addConstraint:buildButtonWidthConstraint];
+        
+        // view add-ons button
+        self.customVC.viewAddonsButton.hidden = YES;
     }
 }
 

@@ -6,6 +6,9 @@
 //  Copyright © 2016 bentonow. All rights reserved.
 //
 
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
+
 #import "CustomViewController.h"
 #import "CAGradientLayer+SJSGradients.h"
 
@@ -49,8 +52,26 @@
     [self.sideDish3ImageView.layer insertSublayer:backgroundLayer atIndex:0];
     
     /*---Build Button---*/
+    UIColor *borderColor = [UIColor colorWithRed:0.835f green:0.851f blue:0.851f alpha:1.0f];
+    
     self.buildButton.layer.borderWidth = 1;
-    self.buildButton.layer.borderColor = [UIColor colorWithRed:0.835f green:0.851f blue:0.851f alpha:1.0f].CGColor;
+    self.buildButton.layer.borderColor = borderColor.CGColor;
+    
+    /*---View Add-ons Button---*/
+    [self setViewAddonsWidthConstraint];
+    self.viewAddonsButton.layer.borderWidth = 1;
+    self.viewAddonsButton.layer.borderColor = borderColor.CGColor;
+    
+    NSString *strTitle = @"VIEW ADD-ONS";
+    if (strTitle != nil) {
+        // Add Another Bento Button
+        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        float spacing = 1.0f;
+        [attributedTitle addAttribute:NSKernAttributeName
+                                value:@(spacing)
+                                range:NSMakeRange(0, [strTitle length])];
+        [self.buildButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark Button Events
@@ -76,6 +97,17 @@
 
 - (IBAction)viewAddonsButtonPressed:(id)sender {
     [self.delegate customVCViewAddonsButtonPressed:sender];
+}
+
+- (void)setViewAddonsWidthConstraint {
+    NSLayoutConstraint *viewAddonsButtonWidthConstraint = [NSLayoutConstraint constraintWithItem:self.viewAddonsButton
+                                                                                       attribute:NSLayoutAttributeWidth
+                                                                                       relatedBy:0
+                                                                                          toItem:nil
+                                                                                       attribute:NSLayoutAttributeNotAnAttribute
+                                                                                      multiplier:1
+                                                                                        constant:SCREEN_WIDTH/2-5];
+    [self.view addConstraint:viewAddonsButtonWidthConstraint];
 }
 
 @end
