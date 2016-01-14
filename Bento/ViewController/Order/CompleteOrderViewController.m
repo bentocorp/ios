@@ -8,7 +8,8 @@
 
 #import "CompleteOrderViewController.h"
 
-#import "CustomBentoViewController.h"
+#import "HomeViewController.h"
+#import "FiveHomeViewController.h"
 
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
@@ -867,21 +868,42 @@
 
 - (void)gotoAddAnotherBentoScreen
 {
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    
-    for (UIViewController *vc in viewControllers) {
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        NSArray *viewControllers = self.navigationController.viewControllers;
         
-        // dinner or lunch vc
-        if ([vc isKindOfClass:[CustomBentoViewController class]])
-        {
-            // if dinner, add new bento
-            if ([vc isKindOfClass:[CustomBentoViewController class]])
-                [[BentoShop sharedInstance] addNewBento];
-           
-            // go back
-            [self.navigationController popToViewController:vc animated:YES];
+        for (UIViewController *vc in viewControllers) {
             
-            return;
+            // dinner or lunch vc
+            if ([vc isKindOfClass:[HomeViewController class]])
+            {
+                // if dinner, add new bento
+                if ([vc isKindOfClass:[HomeViewController class]])
+                    [[BentoShop sharedInstance] addNewBento];
+                
+                // go back
+                [self.navigationController popToViewController:vc animated:YES];
+                
+                return;
+            }
+        }
+    }
+    else {
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        
+        for (UIViewController *vc in viewControllers) {
+            
+            // dinner or lunch vc
+            if ([vc isKindOfClass:[FiveHomeViewController class]])
+            {
+                // if dinner, add new bento
+                if ([vc isKindOfClass:[FiveHomeViewController class]])
+                    [[BentoShop sharedInstance] addNewBento];
+                
+                // go back
+                [self.navigationController popToViewController:vc animated:YES];
+                
+                return;
+            }
         }
     }
 }
@@ -1454,30 +1476,61 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    if (indexPath.section == 0) {
-        Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
-        
-        NSArray *viewControllers = self.navigationController.viewControllers;
-        
-        for (UIViewController *vc in viewControllers) {
-            if ([vc isKindOfClass:[CustomBentoViewController class]]) {
-                if ([vc isKindOfClass:[CustomBentoViewController class]]) {
-                    [[BentoShop sharedInstance] setCurrentBento:curBento];
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        if (indexPath.section == 0) {
+            Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
+            
+            NSArray *viewControllers = self.navigationController.viewControllers;
+            
+            for (UIViewController *vc in viewControllers) {
+                if ([vc isKindOfClass:[HomeViewController class]]) {
+                    if ([vc isKindOfClass:[HomeViewController class]]) {
+                        [[BentoShop sharedInstance] setCurrentBento:curBento];
+                    }
+                    
+                    [self.delegate completeOrderViewControllerDidTapBento:curBento.getBentoName];
+                    [self.navigationController popToViewController:vc animated:YES];
+                    
+                    return;
                 }
-                
-                [self.delegate completeOrderViewControllerDidTapBento:curBento.getBentoName];
-                [self.navigationController popToViewController:vc animated:YES];
-                
-                return;
             }
         }
+        else {
+            AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
+            Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
+            addonsVC.autoScrollId = addon.itemId;
+            
+            [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+        }
+
     }
     else {
-        AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
-        Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
-        addonsVC.autoScrollId = addon.itemId;
-        
-        [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+        if (indexPath.section == 0) {
+            Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
+            
+            NSArray *viewControllers = self.navigationController.viewControllers;
+            
+            for (UIViewController *vc in viewControllers) {
+                if ([vc isKindOfClass:[FiveHomeViewController class]]) {
+                    if ([vc isKindOfClass:[FiveHomeViewController class]]) {
+                        [[BentoShop sharedInstance] setCurrentBento:curBento];
+                    }
+                    
+                    [self.delegate completeOrderViewControllerDidTapBento:curBento.getBentoName];
+                    [self.navigationController popToViewController:vc animated:YES];
+                    
+                    return;
+                }
+            }
+        }
+        else {
+            AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
+            Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
+            addonsVC.autoScrollId = addon.itemId;
+            
+            [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+        }
+
     }
 }
 
