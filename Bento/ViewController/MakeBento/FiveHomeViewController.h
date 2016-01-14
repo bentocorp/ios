@@ -21,3 +21,5 @@
 
 @property (weak, nonatomic) IBOutlet UIButton *pickerButton;
 @property (weak, nonatomic) IBOutlet UIButton *finalizeButton;
+
+@end
