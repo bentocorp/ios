@@ -507,6 +507,10 @@
 		FCE036E41BEABA1B00F7605B /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E21BEABA1B00F7605B /* CustomAnnotationView.m */; };
 		FCE036E71BEAC39000F7605B /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E61BEAC39000F7605B /* CustomAnnotation.m */; };
 		FCE036E81BEAC39000F7605B /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E61BEAC39000F7605B /* CustomAnnotation.m */; };
+		FCE1E4F91C47336F00A210DC /* 5PodCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE1E4F71C47336F00A210DC /* 5PodCustomViewController.m */; };
+		FCE1E4FA1C47336F00A210DC /* 5PodCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE1E4F71C47336F00A210DC /* 5PodCustomViewController.m */; };
+		FCE1E4FB1C47336F00A210DC /* 5PodCustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE1E4F81C47336F00A210DC /* 5PodCustomViewController.xib */; };
+		FCE1E4FC1C47336F00A210DC /* 5PodCustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE1E4F81C47336F00A210DC /* 5PodCustomViewController.xib */; };
 		FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCEFB7691BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
@@ -958,6 +962,9 @@
 		FCE036E21BEABA1B00F7605B /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		FCE036E51BEAC39000F7605B /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
 		FCE036E61BEAC39000F7605B /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
+		FCE1E4F61C47336F00A210DC /* 5PodCustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = 5PodCustomViewController.h; sourceTree = "<group>"; };
+		FCE1E4F71C47336F00A210DC /* 5PodCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = 5PodCustomViewController.m; sourceTree = "<group>"; };
+		FCE1E4F81C47336F00A210DC /* 5PodCustomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = 5PodCustomViewController.xib; sourceTree = "<group>"; };
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
 		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
@@ -1416,6 +1423,9 @@
 				FC8F995E1C408CCC00004DAE /* CustomViewController.h */,
 				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
 				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
+				FCE1E4F61C47336F00A210DC /* 5PodCustomViewController.h */,
+				FCE1E4F71C47336F00A210DC /* 5PodCustomViewController.m */,
+				FCE1E4F81C47336F00A210DC /* 5PodCustomViewController.xib */,
 				FC3E2D7A1C4588260073A82C /* MenuPreviewViewController.h */,
 				FC3E2D7B1C4588260073A82C /* MenuPreviewViewController.m */,
 				FCCD30EA1C44583A00E29A70 /* Choose Dish Item */,
@@ -2204,6 +2214,7 @@
 				7216B77E1AA64C7C0006FFE9 /* image_gradient.png in Resources */,
 				FCA72F5F1B806B3D009DD71A /* UpFilled-100.png in Resources */,
 				7216B77F1AA64C7C0006FFE9 /* register_icon_alert.png in Resources */,
+				FCE1E4FC1C47336F00A210DC /* 5PodCustomViewController.xib in Resources */,
 				7216B7801AA64C7C0006FFE9 /* creditcard_btn_clear.png in Resources */,
 				FC1372441C47044700C9B251 /* dropdownarrow-64.png in Resources */,
 				7216B7811AA64C7C0006FFE9 /* soldout_background.png in Resources */,
@@ -2338,6 +2349,7 @@
 				FCA1C8C21AF1973E004715F1 /* icon-square-user.png in Resources */,
 				90BED0F01A5C391D003DC872 /* image_gradient.png in Resources */,
 				FCA72F5E1B806B3D009DD71A /* UpFilled-100.png in Resources */,
+				FCE1E4FB1C47336F00A210DC /* 5PodCustomViewController.xib in Resources */,
 				90D8F7B71A5D856200D034CF /* register_icon_alert.png in Resources */,
 				FC1372431C47044700C9B251 /* dropdownarrow-64.png in Resources */,
 				722333FF1A7425CA006C2446 /* creditcard_btn_clear.png in Resources */,
@@ -2584,6 +2596,7 @@
 				7216B7271AA64C7C0006FFE9 /* Bento.m in Sources */,
 				7216B7281AA64C7C0006FFE9 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				7216B72B1AA64C7C0006FFE9 /* EnterCreditCardViewController.m in Sources */,
+				FCE1E4FA1C47336F00A210DC /* 5PodCustomViewController.m in Sources */,
 				7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */,
 				FC3E2D7E1C4588260073A82C /* MenuPreviewViewController.m in Sources */,
 				FC9E81ED1BACE4250099DBF5 /* SocketAckEmitter.swift in Sources */,
@@ -2701,6 +2714,7 @@
 				722333681A6D57CB006C2446 /* Bento.m in Sources */,
 				722333D31A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */,
+				FCE1E4F91C47336F00A210DC /* 5PodCustomViewController.m in Sources */,
 				722333611A6D4058006C2446 /* JGProgressHUDIndicatorView.m in Sources */,
 				FC3E2D7D1C4588260073A82C /* MenuPreviewViewController.m in Sources */,
 				FC9E81EC1BACE4250099DBF5 /* SocketAckEmitter.swift in Sources */,
