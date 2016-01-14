@@ -11,7 +11,7 @@
 @implementation UIColor (CustomColors)
 
 + (UIColor *)bentoBrandGreen {
-    return [UIColor colorWithRed:135.0f / 255.0f green:178.0f / 255.0f blue:96.0f / 255.0f alpha:1.0f];
+    return [UIColor colorWithRed:0.463f green:0.643f blue:0.282f alpha:1.0f];
 };
 
 + (UIColor *)bentoTitleGray {

@@ -402,8 +402,6 @@
     
     [self setBuildButtonConstraint];
     
-    /*----------------------*/
-    
     // current bento is empty
     if ([currentBento isEmpty] == YES || currentBento == nil) {
         strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE]; // BUILD YOUR BENTO
@@ -424,6 +422,11 @@
         [attributedTitle addAttribute:NSKernAttributeName
                                 value:@(spacing)
                                 range:NSMakeRange(0, [strTitle length])];
+        
+        [attributedTitle addAttribute:NSForegroundColorAttributeName
+                       value:[UIColor bentoBrandGreen]
+                       range:NSMakeRange(0, [strTitle length])];
+        
         [self.customVC.buildButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     }
     

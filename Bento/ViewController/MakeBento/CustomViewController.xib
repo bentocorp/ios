@@ -275,20 +275,6 @@
                         <constraint firstAttribute="bottom" secondItem="FYW-6y-kVi" secondAttribute="bottom" constant="1" id="yVH-Hr-GcT"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB" userLabel="buildButton">
-                    <rect key="frame" x="-1" y="557" width="377" height="45"/>
-                    <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="377" id="6Zl-w2-6rU"/>
-                        <constraint firstAttribute="height" constant="45" id="QUq-Oh-mFa"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
-                    <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="BUILD YOUR BENTO"/>
-                    <connections>
-                        <action selector="buildButtonPressed:" destination="-1" eventType="touchUpInside" id="9KX-J4-ye1"/>
-                    </connections>
-                </button>
                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxd-Fq-MUg" userLabel="viewAddonsButton">
                     <rect key="frame" x="188" y="557" width="188" height="45"/>
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -301,6 +287,22 @@
                     <state key="normal" title="VIEW ADD-ONS"/>
                     <connections>
                         <action selector="viewAddonsButtonPressed:" destination="-1" eventType="touchUpInside" id="DqV-9m-TNm"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB" userLabel="buildButton">
+                    <rect key="frame" x="-1" y="557" width="377" height="45"/>
+                    <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="377" id="6Zl-w2-6rU"/>
+                        <constraint firstAttribute="height" constant="45" id="QUq-Oh-mFa"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
+                    <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="BUILD YOUR BENTO">
+                        <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
+                    <connections>
+                        <action selector="buildButtonPressed:" destination="-1" eventType="touchUpInside" id="9KX-J4-ye1"/>
                     </connections>
                 </button>
             </subviews>
