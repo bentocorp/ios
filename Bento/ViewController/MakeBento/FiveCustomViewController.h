@@ -44,23 +44,17 @@
 @property (weak, nonatomic) IBOutlet UILabel *sideDish3Label;
 @property (weak, nonatomic) IBOutlet UILabel *sideDish4Label;
 
-@property (weak, nonatomic) IBOutlet UIButton *addMainDishButton;
-@property (weak, nonatomic) IBOutlet UIButton *addSideDish1Button;
-@property (weak, nonatomic) IBOutlet UIButton *addSideDish2Button;
-@property (weak, nonatomic) IBOutlet UIButton *addSideDish3Button;
-@property (weak, nonatomic) IBOutlet UIButton *addSideDish4Button;
-
 @property (weak, nonatomic) IBOutlet UIImageView *mainDishBannerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *sideDish1BannerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *sideDish2BannerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *sideDish3BannerImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *sideDish4BannerImageView;
 
-@property (weak, nonatomic) IBOutlet UIButton *addMainButton;
-@property (weak, nonatomic) IBOutlet UIButton *addSide1Button;
-@property (weak, nonatomic) IBOutlet UIButton *addSide2Button;
-@property (weak, nonatomic) IBOutlet UIButton *addSide3Button;
-@property (weak, nonatomic) IBOutlet UIButton *addSide4Button;
+@property (weak, nonatomic) IBOutlet UIButton *addMainDishButton;
+@property (weak, nonatomic) IBOutlet UIButton *addSideDish1Button;
+@property (weak, nonatomic) IBOutlet UIButton *addSideDish2Button;
+@property (weak, nonatomic) IBOutlet UIButton *addSideDish3Button;
+@property (weak, nonatomic) IBOutlet UIButton *addSideDish4Button;
 
 @property (weak, nonatomic) IBOutlet UIButton *buildButton;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *buildButtonWidthConstraint;

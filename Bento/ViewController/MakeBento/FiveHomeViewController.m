@@ -226,7 +226,7 @@
     if (side1DishIndex > 0) {
         self.customVC.sideDish1ImageView.hidden = NO;
         self.customVC.sideDish1Label.hidden = NO;
-        [self.customVC.addSide1Button setTitle:@"" forState:UIControlStateNormal];
+        [self.customVC.addSideDish1Button setTitle:@"" forState:UIControlStateNormal];
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
         if (dishInfo != nil) {
@@ -255,7 +255,7 @@
         self.customVC.sideDish1ImageView.hidden = YES;
         self.customVC.sideDish1Label.hidden = YES;
         self.customVC.sideDish1BannerImageView.hidden = YES;
-        [self.customVC.addSide1Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE1_BUTTON] forState:UIControlStateNormal];
+        [self.customVC.addSideDish1Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE1_BUTTON] forState:UIControlStateNormal];
     }
     
     /*---Side 2---*/
@@ -263,7 +263,7 @@
         
         self.customVC.sideDish2Imageview.hidden = NO;
         self.customVC.sideDish2Label.hidden = NO;
-        [self.customVC.addSide2Button setTitle:@"" forState:UIControlStateNormal];
+        [self.customVC.addSideDish2Button setTitle:@"" forState:UIControlStateNormal];
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
         if (dishInfo != nil) {
@@ -292,7 +292,7 @@
         self.customVC.sideDish2Imageview.hidden = YES;
         self.customVC.sideDish2Label.hidden = YES;
         self.customVC.sideDish2BannerImageView.hidden = YES;
-        [self.customVC.addSide2Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE2_BUTTON] forState:UIControlStateNormal];
+        [self.customVC.addSideDish2Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE2_BUTTON] forState:UIControlStateNormal];
     }
     
     /*-Side 3-*/
@@ -300,7 +300,7 @@
         
         self.customVC.sideDish3ImageView.hidden = NO;
         self.customVC.sideDish3Label.hidden = NO;
-        [self.customVC.addSide3Button setTitle:@"" forState:UIControlStateNormal];
+        [self.customVC.addSideDish3Button setTitle:@"" forState:UIControlStateNormal];
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
         if (dishInfo != nil) {
@@ -328,7 +328,7 @@
         self.customVC.sideDish3ImageView.hidden = YES;
         self.customVC.sideDish3Label.hidden = YES;
         self.customVC.sideDish3BannerImageView.hidden = YES;
-        [self.customVC.addSide3Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
+        [self.customVC.addSideDish3Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
     }
     
     /*-Side 4-*/
@@ -336,7 +336,7 @@
         
         self.customVC.sideDish4ImageView.hidden = NO;
         self.customVC.sideDish4Label.hidden = NO;
-        [self.customVC.addSide4Button setTitle:@"" forState:UIControlStateNormal];
+        [self.customVC.addSideDish4Button setTitle:@"" forState:UIControlStateNormal];
         
         NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
         if (dishInfo != nil) {
@@ -364,7 +364,7 @@
         self.customVC.sideDish4ImageView.hidden = YES;
         self.customVC.sideDish4Label.hidden = YES;
         self.customVC.sideDish4BannerImageView.hidden = YES;
-        [self.customVC.addSide4Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE4_BUTTON] forState:UIControlStateNormal];
+        [self.customVC.addSideDish4Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE4_BUTTON] forState:UIControlStateNormal];
     }
 }
 
