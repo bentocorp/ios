@@ -34,8 +34,6 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
-@property (nonatomic, weak) IBOutlet UILabel *lblMessage;
-
 @property (nonatomic, weak) IBOutlet UILabel *lblPrice;
 
 @property (nonatomic, weak) IBOutlet UIButton *btnContinue;
@@ -61,7 +59,6 @@
     }
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:CREDITCARD_TITLE];
-    self.lblMessage.text = [[AppStrings sharedInstance] getString:CREDITCARD_TEXT];
     
     NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
     NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
