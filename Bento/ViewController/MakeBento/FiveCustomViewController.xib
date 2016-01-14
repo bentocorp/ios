@@ -13,7 +13,11 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FiveCustomViewController">
             <connections>
+                <outlet property="buildButton" destination="7JK-AO-Po4" id="jhV-3O-fXh"/>
+                <outlet property="buildButtonWidthConstraint" destination="Y9u-Lf-T6g" id="Bz7-uE-83l"/>
+                <outlet property="dishBGView" destination="Dba-to-gkd" id="Ees-Ib-4KP"/>
                 <outlet property="view" destination="uUi-3E-yqm" id="gP6-L1-Ae1"/>
+                <outlet property="viewAddonsButton" destination="IlT-ZD-qEe" id="e1M-Rx-vzY"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -87,7 +91,7 @@
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="GEo-af-EIX"/>
-                        <constraint firstAttribute="width" constant="377" id="uHl-7B-kRW"/>
+                        <constraint firstAttribute="width" constant="377" id="Y9u-Lf-T6g" userLabel="buildButtonConstraint"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                     <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>

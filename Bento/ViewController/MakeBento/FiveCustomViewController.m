@@ -64,7 +64,7 @@
     self.buildButton.layer.borderColor = borderColor.CGColor;
     
     /*---View Add-ons Button---*/
-//    [self setViewAddonsWidthConstraint];
+    [self setViewAddonsWidthConstraint];
     self.viewAddonsButton.layer.borderWidth = 1;
     self.viewAddonsButton.layer.borderColor = borderColor.CGColor;
     
