@@ -11,6 +11,7 @@
 #import "AppDelegate.h"
 
 #import "HomeViewController.h"
+#import "FiveCustomViewController.h"
 
 #import "CompleteOrderViewController.h"
 #import "OutOfDeliveryAddressViewController.h"
@@ -265,31 +266,60 @@
 
 - (void)gotoAddAnotherBentoScreen {
     
-    [self stopSearch];
-    
-    NSArray *viewControllers = self.navigationController.viewControllers;
-    
-    for (UIViewController *vc in viewControllers)
-    {
-        // serving dinner vc || serving lunch vc
-        if ([vc isKindOfClass:[HomeViewController class]])
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        [self stopSearch];
+        
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        
+        for (UIViewController *vc in viewControllers)
         {
-            if (self.isFromOrder)
+            // serving dinner vc || serving lunch vc
+            if ([vc isKindOfClass:[HomeViewController class]])
             {
-                [self.navigationController popToViewController:vc animated:YES];
+                if (self.isFromOrder)
+                {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    
+                    CompleteOrderViewController *completeOrderViewController = [[CompleteOrderViewController alloc] init];
+                    [self.navigationController pushViewController:completeOrderViewController animated:YES];
+                }
+                else
+                    [self.navigationController popToViewController:vc animated:YES];
                 
-                CompleteOrderViewController *completeOrderViewController = [[CompleteOrderViewController alloc] init];
-                [self.navigationController pushViewController:completeOrderViewController animated:YES];
+                return;
             }
-            else
-                [self.navigationController popToViewController:vc animated:YES];
-            
-            return;
         }
+        
+        HomeViewController *homeVC = [[HomeViewController alloc] init];
+        [self.navigationController popToViewController:homeVC animated:YES];
     }
-    
-    HomeViewController *homeVC = [[HomeViewController alloc] init];
-    [self.navigationController popToViewController:homeVC animated:YES];
+    else {
+        [self stopSearch];
+        
+        NSArray *viewControllers = self.navigationController.viewControllers;
+        
+        for (UIViewController *vc in viewControllers)
+        {
+            // serving dinner vc || serving lunch vc
+            if ([vc isKindOfClass:[FiveCustomViewController class]])
+            {
+                if (self.isFromOrder)
+                {
+                    [self.navigationController popToViewController:vc animated:YES];
+                    
+                    CompleteOrderViewController *completeOrderViewController = [[CompleteOrderViewController alloc] init];
+                    [self.navigationController pushViewController:completeOrderViewController animated:YES];
+                }
+                else
+                    [self.navigationController popToViewController:vc animated:YES];
+                
+                return;
+            }
+        }
+        
+        FiveCustomViewController *homeVC = [[FiveCustomViewController alloc] init];
+        [self.navigationController popToViewController:homeVC animated:YES];
+    }
 }
 
 - (void)doConfirmOrder

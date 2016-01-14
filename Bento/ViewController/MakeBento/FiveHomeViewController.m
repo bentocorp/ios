@@ -48,7 +48,7 @@
 #import "AddonsViewController.h"
 #import "AddonList.h"
 
-@interface FiveHomeViewController () <FiveCustomViewControllerDelegate, MyAlertViewDelegate>
+@interface FiveHomeViewController () <FiveCustomViewControllerDelegate, MyAlertViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) FiveCustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
@@ -63,15 +63,17 @@
     UILabel *dinnerTitleLabel;
     
     BOOL isThereConnection;
+    
+    NSArray *myDatabase;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
     // order ahead mock
-    NSArray *myDatabase = @[
-                            @[@"Today", @"Tomorrow", @"Mon, Jan 11", @"Tue, Jan 12", @"Wed, Jan 13"],
-                            @[@"ASAP", @"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
+    myDatabase = @[
+                            @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Jan 16, Lunch", @"Jan 16, Dinner"],
+                            @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
                             ];
     
     isThereConnection = YES;
@@ -786,7 +788,6 @@
 }
 
 - (IBAction)pickerButtonPressed:(id)sender {
-    
     [self.view layoutIfNeeded];
     
     if (self.fadedViewButton.alpha == 0) {
@@ -806,8 +807,19 @@
             
             [self.view layoutIfNeeded];
         }];
-        
     }
+}
+
+- (IBAction)fadedViewButtonPressed:(id)sender {
+    [self.view layoutIfNeeded];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        self.fadedViewButton.alpha = 0;
+        
+        self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height);
+        
+        [self.view layoutIfNeeded];
+    }];
 }
 
 - (IBAction)finalizeButtonPressed:(id)sender {
@@ -940,5 +952,30 @@
         }
     }
 }
+
+#pragma mark Picker View
+
+- (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    UILabel *pickerLabel = [[UILabel alloc] init];
+    pickerLabel.text = myDatabase[component][row];
+    pickerLabel.textColor = [UIColor bentoTitleGray];
+    pickerLabel.textAlignment = NSTextAlignmentCenter;
+    pickerLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13];
+    
+    return pickerLabel;
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return myDatabase.count;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+    return [myDatabase[component] count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    return myDatabase[component][row];
+}
+
 
 @end
