@@ -787,12 +787,14 @@
 
 - (IBAction)pickerButtonPressed:(id)sender {
     if (self.dropDownView.hidden) {
-        self.dropDownView.hidden = NO;
-        self.fadedViewButton.hidden = NO;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.fadedViewButton.alpha = 0.5;
+        }];
     }
     else {
-        self.dropDownView.hidden = YES;
-        self.fadedViewButton.hidden = YES;
+        [UIView animateWithDuration:0.5 animations:^{
+            self.fadedViewButton.alpha = 0;
+        }];
     }
 }
 

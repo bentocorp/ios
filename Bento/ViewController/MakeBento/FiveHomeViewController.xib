@@ -168,9 +168,9 @@
                         <action selector="finalizeButtonPressed:" destination="-1" eventType="touchUpInside" id="smT-1d-xv1"/>
                     </connections>
                 </button>
-                <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjf-nw-JDI" userLabel="fadedViewButton">
+                <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjf-nw-JDI" userLabel="fadedViewButton">
                     <rect key="frame" x="0.0" y="94" width="375" height="573"/>
-                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="573" id="Bn5-SB-iXm"/>
                     </constraints>
