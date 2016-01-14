@@ -632,6 +632,10 @@
     [self onAddSideDish:sender];
 }
 
+- (void)customVCAddSideDish4Pressed:(id)sender {
+    [self onAddSideDish:sender];
+}
+
 - (void)customVCBuildButtonPressed:(id)sender {
     [self onAddAnotherBento];
 }
