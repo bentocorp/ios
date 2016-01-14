@@ -48,7 +48,7 @@
 #import "AddonsViewController.h"
 #import "AddonList.h"
 
-@interface FiveHomeViewController () </*FiveCustomViewControllerDelegate,*/ MyAlertViewDelegate>
+@interface FiveHomeViewController () <FiveCustomViewControllerDelegate, MyAlertViewDelegate>
 
 @property (nonatomic) FiveCustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
@@ -76,7 +76,7 @@
     [self.bgView addSubview:self.customVC.view];
     [self.customVC didMoveToParentViewController:self];
     
-//    self.customVC.delegate = self;
+    self.customVC.delegate = self;
     
     /*---Menu Preview---*/
     self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
@@ -130,19 +130,6 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
-    
-    if ([[BentoShop sharedInstance] is4PodMode]) {
-        if ([[[BentoShop sharedInstance] getCurrentBento] getMainDish] == 0 &&
-            [[[BentoShop sharedInstance] getCurrentBento] getSideDish1] == 0 &&
-            [[[BentoShop sharedInstance] getCurrentBento] getSideDish2] == 0 &&
-            [[[BentoShop sharedInstance] getCurrentBento] getSideDish3] == 0) {
-            
-            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:0];
-        }
-        else {
-            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:-1]; // dummy item for 4-pod
-        }
-    }
     
     addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
