@@ -11,16 +11,16 @@
         </mutableArray>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FiveCustomViewController"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FiveCustomViewController">
+            <connections>
+                <outlet property="view" destination="uUi-3E-yqm" id="gP6-L1-Ae1"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="uUi-3E-yqm">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dba-to-gkd" userLabel="dishBGView">
-                    <rect key="frame" x="20" y="125" width="335" height="402"/>
-                    <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7JK-AO-Po4" userLabel="buildButton">
                     <rect key="frame" x="-1" y="557" width="377" height="45"/>
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -45,6 +45,32 @@
                     <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                     <state key="normal" title="VIEW ADD-ONS"/>
                 </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dba-to-gkd" userLabel="dishBGView">
+                    <rect key="frame" x="20" y="115" width="335" height="424"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKV-eS-wST" userLabel="mainDishView">
+                            <rect key="frame" x="1" y="1" width="333" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIP-AR-Uve" userLabel="sideDish1View">
+                            <rect key="frame" x="1" y="142" width="166" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DYz-XV-4sD" userLabel="sideDish2View">
+                            <rect key="frame" x="168" y="142" width="166" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZdE-od-mPZ" userLabel="sideDish3View">
+                            <rect key="frame" x="1" y="283" width="166" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NqG-Mq-SHG" userLabel="sideDish4View">
+                            <rect key="frame" x="168" y="283" width="166" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
@@ -54,8 +80,8 @@
                 <constraint firstAttribute="bottom" secondItem="7JK-AO-Po4" secondAttribute="bottom" constant="65" id="IQw-LL-a9Q"/>
                 <constraint firstAttribute="trailing" secondItem="IlT-ZD-qEe" secondAttribute="trailing" constant="-1" id="Ocf-RV-PPU"/>
                 <constraint firstItem="Dba-to-gkd" firstAttribute="leading" secondItem="uUi-3E-yqm" secondAttribute="leading" constant="20" id="QQY-bt-rLs"/>
-                <constraint firstItem="Dba-to-gkd" firstAttribute="top" secondItem="uUi-3E-yqm" secondAttribute="top" constant="125" id="aGp-HD-wRO"/>
-                <constraint firstItem="7JK-AO-Po4" firstAttribute="top" secondItem="Dba-to-gkd" secondAttribute="bottom" constant="30" id="dBZ-4L-8S5"/>
+                <constraint firstItem="Dba-to-gkd" firstAttribute="top" secondItem="uUi-3E-yqm" secondAttribute="top" constant="115" id="aGp-HD-wRO"/>
+                <constraint firstItem="7JK-AO-Po4" firstAttribute="top" secondItem="Dba-to-gkd" secondAttribute="bottom" constant="18" id="dBZ-4L-8S5"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="208.5" y="390.5"/>
