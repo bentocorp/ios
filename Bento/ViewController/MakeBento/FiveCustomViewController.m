@@ -1,18 +1,18 @@
 //
-//  FivePodCustomViewController.m
+//  FiveCustomViewController.m
 //  Bento
 //
 //  Created by Joseph Lau on 1/13/16.
 //  Copyright © 2016 bentonow. All rights reserved.
 //
 
-#import "FivePodCustomViewController.h"
+#import "FiveCustomViewController.h"
 
-@interface FivePodCustomViewController ()
+@interface FiveCustomViewController ()
 
 @end
 
-@implementation FivePodCustomViewController
+@implementation FiveCustomViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];

@@ -507,10 +507,14 @@
 		FCE036E41BEABA1B00F7605B /* CustomAnnotationView.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E21BEABA1B00F7605B /* CustomAnnotationView.m */; };
 		FCE036E71BEAC39000F7605B /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E61BEAC39000F7605B /* CustomAnnotation.m */; };
 		FCE036E81BEAC39000F7605B /* CustomAnnotation.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE036E61BEAC39000F7605B /* CustomAnnotation.m */; };
-		FCE1E5001C47350200A210DC /* FivePodCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE1E4FE1C47350200A210DC /* FivePodCustomViewController.m */; };
-		FCE1E5011C47350200A210DC /* FivePodCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE1E4FE1C47350200A210DC /* FivePodCustomViewController.m */; };
-		FCE1E5021C47350200A210DC /* FivePodCustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE1E4FF1C47350200A210DC /* FivePodCustomViewController.xib */; };
-		FCE1E5031C47350200A210DC /* FivePodCustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE1E4FF1C47350200A210DC /* FivePodCustomViewController.xib */; };
+		FCE1E5101C4737AF00A210DC /* FiveHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE1E50E1C4737AF00A210DC /* FiveHomeViewController.m */; };
+		FCE1E5111C4737AF00A210DC /* FiveHomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE1E50E1C4737AF00A210DC /* FiveHomeViewController.m */; };
+		FCE1E5121C4737AF00A210DC /* FiveHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE1E50F1C4737AF00A210DC /* FiveHomeViewController.xib */; };
+		FCE1E5131C4737AF00A210DC /* FiveHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE1E50F1C4737AF00A210DC /* FiveHomeViewController.xib */; };
+		FCE1E5171C4737C500A210DC /* FiveCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE1E5151C4737C500A210DC /* FiveCustomViewController.m */; };
+		FCE1E5181C4737C500A210DC /* FiveCustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE1E5151C4737C500A210DC /* FiveCustomViewController.m */; };
+		FCE1E5191C4737C500A210DC /* FiveCustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE1E5161C4737C500A210DC /* FiveCustomViewController.xib */; };
+		FCE1E51A1C4737C500A210DC /* FiveCustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCE1E5161C4737C500A210DC /* FiveCustomViewController.xib */; };
 		FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCEFB7691BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
@@ -962,9 +966,12 @@
 		FCE036E21BEABA1B00F7605B /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		FCE036E51BEAC39000F7605B /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
 		FCE036E61BEAC39000F7605B /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
-		FCE1E4FD1C47350200A210DC /* FivePodCustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FivePodCustomViewController.h; sourceTree = "<group>"; };
-		FCE1E4FE1C47350200A210DC /* FivePodCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FivePodCustomViewController.m; sourceTree = "<group>"; };
-		FCE1E4FF1C47350200A210DC /* FivePodCustomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FivePodCustomViewController.xib; sourceTree = "<group>"; };
+		FCE1E50D1C4737AF00A210DC /* FiveHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveHomeViewController.h; sourceTree = "<group>"; };
+		FCE1E50E1C4737AF00A210DC /* FiveHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveHomeViewController.m; sourceTree = "<group>"; };
+		FCE1E50F1C4737AF00A210DC /* FiveHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FiveHomeViewController.xib; sourceTree = "<group>"; };
+		FCE1E5141C4737C500A210DC /* FiveCustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveCustomViewController.h; sourceTree = "<group>"; };
+		FCE1E5151C4737C500A210DC /* FiveCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveCustomViewController.m; sourceTree = "<group>"; };
+		FCE1E5161C4737C500A210DC /* FiveCustomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FiveCustomViewController.xib; sourceTree = "<group>"; };
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
 		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
@@ -1417,15 +1424,8 @@
 		90BED0A51A5BD05C003DC872 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
-				FC8F996C1C408DDF00004DAE /* HomeViewController.h */,
-				FC8F996D1C408DDF00004DAE /* HomeViewController.m */,
-				FC8F996E1C408DDF00004DAE /* HomeViewController.xib */,
-				FC8F995E1C408CCC00004DAE /* CustomViewController.h */,
-				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
-				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
-				FCE1E4FD1C47350200A210DC /* FivePodCustomViewController.h */,
-				FCE1E4FE1C47350200A210DC /* FivePodCustomViewController.m */,
-				FCE1E4FF1C47350200A210DC /* FivePodCustomViewController.xib */,
+				FCE1E5041C47373E00A210DC /* 4-Pod */,
+				FCE1E5051C47374D00A210DC /* 5-Pod */,
 				FC3E2D7A1C4588260073A82C /* MenuPreviewViewController.h */,
 				FC3E2D7B1C4588260073A82C /* MenuPreviewViewController.m */,
 				FCCD30EA1C44583A00E29A70 /* Choose Dish Item */,
@@ -2041,6 +2041,32 @@
 			name = "View Controller";
 			sourceTree = "<group>";
 		};
+		FCE1E5041C47373E00A210DC /* 4-Pod */ = {
+			isa = PBXGroup;
+			children = (
+				FC8F996C1C408DDF00004DAE /* HomeViewController.h */,
+				FC8F996D1C408DDF00004DAE /* HomeViewController.m */,
+				FC8F996E1C408DDF00004DAE /* HomeViewController.xib */,
+				FC8F995E1C408CCC00004DAE /* CustomViewController.h */,
+				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
+				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
+			);
+			name = "4-Pod";
+			sourceTree = "<group>";
+		};
+		FCE1E5051C47374D00A210DC /* 5-Pod */ = {
+			isa = PBXGroup;
+			children = (
+				FCE1E50D1C4737AF00A210DC /* FiveHomeViewController.h */,
+				FCE1E50E1C4737AF00A210DC /* FiveHomeViewController.m */,
+				FCE1E50F1C4737AF00A210DC /* FiveHomeViewController.xib */,
+				FCE1E5141C4737C500A210DC /* FiveCustomViewController.h */,
+				FCE1E5151C4737C500A210DC /* FiveCustomViewController.m */,
+				FCE1E5161C4737C500A210DC /* FiveCustomViewController.xib */,
+			);
+			name = "5-Pod";
+			sourceTree = "<group>";
+		};
 		FCFD79F01AE8880D002AD322 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
@@ -2199,6 +2225,7 @@
 				FCE036E01BEAB06800F7605B /* location-64.png in Resources */,
 				7216B7761AA64C7C0006FFE9 /* orderconfirm_image_remove@2x.png in Resources */,
 				7216B7771AA64C7C0006FFE9 /* BentoTableViewCell.xib in Resources */,
+				FCE1E51A1C4737C500A210DC /* FiveCustomViewController.xib in Resources */,
 				FC8DB73F1AF18674003045A3 /* icon-circle-twitter.png in Resources */,
 				FC8DB7431AF18674003045A3 /* icon-square-creditcard.png in Resources */,
 				7216B7791AA64C7C0006FFE9 /* OpenSans-Italic.ttf in Resources */,
@@ -2276,6 +2303,7 @@
 				FC1D61551BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */,
 				FC7EACB31B8D0C2700B15FC8 /* empty-main.png in Resources */,
 				FC72912B1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
+				FCE1E5131C4737AF00A210DC /* FiveHomeViewController.xib in Resources */,
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
 				FCB35C521BFE7B0300A590EC /* Expand Arrow-64.png in Resources */,
 				FCDF22211ADC3ADF006B2750 /* Icon-76.png in Resources */,
@@ -2302,7 +2330,6 @@
 				FC8F99721C408DDF00004DAE /* HomeViewController.xib in Resources */,
 				FCB35C401BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
 				FC7291271BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */,
-				FCE1E5031C47350200A210DC /* FivePodCustomViewController.xib in Resources */,
 				7216B7AB1AA64C7C0006FFE9 /* Images.xcassets in Resources */,
 				7216B7AC1AA64C7C0006FFE9 /* register_icon_email.png in Resources */,
 				FCF5E0A31B8BDC28002E823C /* placeholder.png in Resources */,
@@ -2334,6 +2361,7 @@
 				FCE036DF1BEAB06800F7605B /* location-64.png in Resources */,
 				90BED0EE1A5C38DA003DC872 /* sample.png in Resources */,
 				90359C271A5EC49700AAD5D2 /* orderconfirm_image_remove@2x.png in Resources */,
+				FCE1E5191C4737C500A210DC /* FiveCustomViewController.xib in Resources */,
 				FC1D61571BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */,
 				47C5B0151A8B8038008FA7DA /* BentoTableViewCell.xib in Resources */,
 				FC8DB73E1AF18674003045A3 /* icon-circle-twitter.png in Resources */,
@@ -2411,6 +2439,7 @@
 				90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */,
 				FC7EACB21B8D0C2700B15FC8 /* empty-main.png in Resources */,
 				FC94E3411BB3529500E2104E /* Settings.bundle in Resources */,
+				FCE1E5121C4737AF00A210DC /* FiveHomeViewController.xib in Resources */,
 				90D8F7B31A5D84B800D034CF /* register_icon_phone.png in Resources */,
 				FCB35C511BFE7B0300A590EC /* Expand Arrow-64.png in Resources */,
 				FCDF22201ADC3ADF006B2750 /* Icon-76.png in Resources */,
@@ -2437,7 +2466,6 @@
 				FC8F99711C408DDF00004DAE /* HomeViewController.xib in Resources */,
 				FCB35C3F1BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
 				90BED07F1A5BCC04003DC872 /* Images.xcassets in Resources */,
-				FCE1E5021C47350200A210DC /* FivePodCustomViewController.xib in Resources */,
 				90D8F7B01A5D84B800D034CF /* register_icon_email.png in Resources */,
 				FCF5E0A21B8BDC28002E823C /* placeholder.png in Resources */,
 				90BED0E11A5C04DE003DC872 /* mybento_nav_help@2x.png in Resources */,
@@ -2594,6 +2622,7 @@
 				FC9E82081BACE4250099DBF5 /* SocketLogger.swift in Sources */,
 				7216B7261AA64C7C0006FFE9 /* ChooseMainDishViewController.m in Sources */,
 				7216B7271AA64C7C0006FFE9 /* Bento.m in Sources */,
+				FCE1E5181C4737C500A210DC /* FiveCustomViewController.m in Sources */,
 				7216B7281AA64C7C0006FFE9 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				7216B72B1AA64C7C0006FFE9 /* EnterCreditCardViewController.m in Sources */,
 				7216B72C1AA64C7C0006FFE9 /* JGProgressHUDIndicatorView.m in Sources */,
@@ -2639,7 +2668,6 @@
 				FC9E82111BACE4250099DBF5 /* SocketStringReader.swift in Sources */,
 				FC99D4F41AFC161300BEE40B /* PreviewViewController.m in Sources */,
 				FCAA47A31AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */,
-				FCE1E5011C47350200A210DC /* FivePodCustomViewController.m in Sources */,
 				7216B7521AA64C7C0006FFE9 /* JGProgressHUDFadeAnimation.m in Sources */,
 				FC9E820E1BACE4250099DBF5 /* SocketParser.swift in Sources */,
 				7216B7531AA64C7C0006FFE9 /* NSData+MKBase64.m in Sources */,
@@ -2650,6 +2678,7 @@
 				FC386F0D1BE1F2E700961A17 /* Push.m in Sources */,
 				7216B7561AA64C7C0006FFE9 /* SHSPhoneTextField.m in Sources */,
 				FC9E82171BACE4250099DBF5 /* SwiftRegex.swift in Sources */,
+				FCE1E5111C4737AF00A210DC /* FiveHomeViewController.m in Sources */,
 				7216B7581AA64C7C0006FFE9 /* OutOfDeliveryAddressViewController.m in Sources */,
 				FC11AAAD1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */,
 				FC9E820B1BACE4250099DBF5 /* SocketPacket.swift in Sources */,
@@ -2712,6 +2741,7 @@
 				FC9E82071BACE4250099DBF5 /* SocketLogger.swift in Sources */,
 				90BED0D61A5BF2F4003DC872 /* ChooseMainDishViewController.m in Sources */,
 				722333681A6D57CB006C2446 /* Bento.m in Sources */,
+				FCE1E5171C4737C500A210DC /* FiveCustomViewController.m in Sources */,
 				722333D31A6F46DF006C2446 /* UIAlertView+MKNetworkKitAdditions.m in Sources */,
 				90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */,
 				722333611A6D4058006C2446 /* JGProgressHUDIndicatorView.m in Sources */,
@@ -2757,7 +2787,6 @@
 				FC9E82101BACE4250099DBF5 /* SocketStringReader.swift in Sources */,
 				FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */,
 				FCAA47A21AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */,
-				FCE1E5001C47350200A210DC /* FivePodCustomViewController.m in Sources */,
 				7223335E1A6D4058006C2446 /* JGProgressHUDFadeAnimation.m in Sources */,
 				FC9E820D1BACE4250099DBF5 /* SocketParser.swift in Sources */,
 				722333CF1A6F46DF006C2446 /* NSData+MKBase64.m in Sources */,
@@ -2768,6 +2797,7 @@
 				FC386F0C1BE1F2E700961A17 /* Push.m in Sources */,
 				7209E0971A780A1200D18D7A /* SHSPhoneTextField.m in Sources */,
 				FC9E82161BACE4250099DBF5 /* SwiftRegex.swift in Sources */,
+				FCE1E5101C4737AF00A210DC /* FiveHomeViewController.m in Sources */,
 				90D8F7CD1A5E252800D034CF /* OutOfDeliveryAddressViewController.m in Sources */,
 				FC11AAAC1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */,
 				FC9E820A1BACE4250099DBF5 /* SocketPacket.swift in Sources */,

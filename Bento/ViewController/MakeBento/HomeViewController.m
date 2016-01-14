@@ -12,7 +12,6 @@
 #import "HomeViewController.h"
 
 #import "CustomViewController.h"
-#import "FivePodCustomViewController.h"
 #import "MenuPreviewViewController.h"
 
 #import "AppDelegate.h"
@@ -52,7 +51,6 @@
 @interface HomeViewController () <CustomViewControllerDelegate, MyAlertViewDelegate>
 
 @property (nonatomic) CustomViewController *customVC;
-@property (nonatomic) FivePodCustomViewController *fivePodCustomVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 
 @end
@@ -73,22 +71,12 @@
     isThereConnection = YES;
     
     /*---Custom---*/
-    if ([[BentoShop sharedInstance] is4PodMode]) {
-        self.customVC = [[CustomViewController alloc] init];
-        [self addChildViewController:self.customVC];
-        [self.bgView addSubview:self.customVC.view];
-        [self.customVC didMoveToParentViewController:self];
-        
-        self.customVC.delegate = self;
-    }
-    else {
-        self.fivePodCustomVC = [[FivePodCustomViewController alloc] init];
-        [self addChildViewController:self.fivePodCustomVC];
-        [self.bgView addSubview:self.fivePodCustomVC.view];
-        [self.fivePodCustomVC didMoveToParentViewController:self];
-        
-//        self.5PodCustomVC.delegate = self;
-    }
+    self.customVC = [[CustomViewController alloc] init];
+    [self addChildViewController:self.customVC];
+    [self.bgView addSubview:self.customVC.view];
+    [self.customVC didMoveToParentViewController:self];
+    
+    self.customVC.delegate = self;
     
     /*---Menu Preview---*/
     self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
