@@ -424,7 +424,7 @@
     
     /*----------------------*/
     
-    [self setBuildButtonConstraint];
+//    [self setBuildButtonConstraint];
     
     // current bento is empty
     if ([currentBento isEmpty] == YES || currentBento == nil) {

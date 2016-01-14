@@ -21,6 +21,67 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dba-to-gkd" userLabel="dishBGView">
+                    <rect key="frame" x="20" y="115" width="335" height="424"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CKV-eS-wST" userLabel="mainDishView">
+                            <rect key="frame" x="1" y="1" width="333" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LIP-AR-Uve" userLabel="sideDish1View">
+                            <rect key="frame" x="1" y="142" width="166" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DYz-XV-4sD" userLabel="sideDish2View">
+                            <rect key="frame" x="168" y="142" width="166" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZdE-od-mPZ" userLabel="sideDish3View">
+                            <rect key="frame" x="1" y="283" width="166" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NqG-Mq-SHG" userLabel="sideDish4View">
+                            <rect key="frame" x="168" y="283" width="166" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="DYz-XV-4sD" firstAttribute="leading" secondItem="LIP-AR-Uve" secondAttribute="trailing" constant="1" id="1hS-Ox-Elg"/>
+                        <constraint firstAttribute="trailing" secondItem="NqG-Mq-SHG" secondAttribute="trailing" constant="1" id="3X5-3z-gC3"/>
+                        <constraint firstItem="DYz-XV-4sD" firstAttribute="height" secondItem="CKV-eS-wST" secondAttribute="height" id="9Bc-tV-dDi"/>
+                        <constraint firstItem="LIP-AR-Uve" firstAttribute="top" secondItem="CKV-eS-wST" secondAttribute="bottom" constant="1" id="BL1-Pw-qlb"/>
+                        <constraint firstItem="LIP-AR-Uve" firstAttribute="height" secondItem="CKV-eS-wST" secondAttribute="height" id="GSi-XZ-noF"/>
+                        <constraint firstItem="CKV-eS-wST" firstAttribute="leading" secondItem="Dba-to-gkd" secondAttribute="leading" constant="1" id="HnW-kw-g0I"/>
+                        <constraint firstItem="NqG-Mq-SHG" firstAttribute="height" secondItem="CKV-eS-wST" secondAttribute="height" id="JL0-Ts-zMD"/>
+                        <constraint firstItem="NqG-Mq-SHG" firstAttribute="leading" secondItem="ZdE-od-mPZ" secondAttribute="trailing" constant="1" id="JzY-6A-D7A"/>
+                        <constraint firstAttribute="bottom" secondItem="ZdE-od-mPZ" secondAttribute="bottom" constant="1" id="Kyh-eB-2yQ"/>
+                        <constraint firstItem="NqG-Mq-SHG" firstAttribute="top" secondItem="DYz-XV-4sD" secondAttribute="bottom" constant="1" id="M7O-Sx-5HA"/>
+                        <constraint firstAttribute="trailing" secondItem="DYz-XV-4sD" secondAttribute="trailing" constant="1" id="NOR-dD-Qf8"/>
+                        <constraint firstItem="NqG-Mq-SHG" firstAttribute="width" secondItem="LIP-AR-Uve" secondAttribute="width" id="b4t-N4-cAC"/>
+                        <constraint firstItem="DYz-XV-4sD" firstAttribute="top" secondItem="CKV-eS-wST" secondAttribute="bottom" constant="1" id="drZ-pK-ZD8"/>
+                        <constraint firstItem="ZdE-od-mPZ" firstAttribute="width" secondItem="LIP-AR-Uve" secondAttribute="width" id="h2J-NH-W6J"/>
+                        <constraint firstItem="DYz-XV-4sD" firstAttribute="width" secondItem="LIP-AR-Uve" secondAttribute="width" id="mCD-Ul-dvp"/>
+                        <constraint firstAttribute="trailing" secondItem="CKV-eS-wST" secondAttribute="trailing" constant="1" id="mn8-6j-hVv"/>
+                        <constraint firstItem="ZdE-od-mPZ" firstAttribute="top" secondItem="LIP-AR-Uve" secondAttribute="bottom" constant="1" id="ntc-o4-Xeq"/>
+                        <constraint firstAttribute="bottom" secondItem="NqG-Mq-SHG" secondAttribute="bottom" constant="1" id="ta8-CS-hgV"/>
+                        <constraint firstItem="LIP-AR-Uve" firstAttribute="leading" secondItem="Dba-to-gkd" secondAttribute="leading" constant="1" id="vMB-2b-uqh"/>
+                        <constraint firstItem="ZdE-od-mPZ" firstAttribute="leading" secondItem="Dba-to-gkd" secondAttribute="leading" constant="1" id="xCd-0U-ymV"/>
+                        <constraint firstItem="CKV-eS-wST" firstAttribute="top" secondItem="Dba-to-gkd" secondAttribute="top" constant="1" id="yXP-KN-0Iw"/>
+                        <constraint firstItem="ZdE-od-mPZ" firstAttribute="height" secondItem="CKV-eS-wST" secondAttribute="height" id="zUr-M5-Ztf"/>
+                    </constraints>
+                </view>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlT-ZD-qEe" userLabel="viewAddonsButton">
+                    <rect key="frame" x="188" y="557" width="188" height="45"/>
+                    <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="PNc-WW-x2s"/>
+                        <constraint firstAttribute="width" constant="188" id="lVH-bf-NCe"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
+                    <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <state key="normal" title="VIEW ADD-ONS"/>
+                </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7JK-AO-Po4" userLabel="buildButton">
                     <rect key="frame" x="-1" y="557" width="377" height="45"/>
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
@@ -34,43 +95,6 @@
                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlT-ZD-qEe" userLabel="viewAddonsButton">
-                    <rect key="frame" x="188" y="557" width="188" height="45"/>
-                    <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="45" id="PNc-WW-x2s"/>
-                        <constraint firstAttribute="width" constant="188" id="lVH-bf-NCe"/>
-                    </constraints>
-                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
-                    <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="VIEW ADD-ONS"/>
-                </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Dba-to-gkd" userLabel="dishBGView">
-                    <rect key="frame" x="20" y="115" width="335" height="424"/>
-                    <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CKV-eS-wST" userLabel="mainDishView">
-                            <rect key="frame" x="1" y="1" width="333" height="140"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LIP-AR-Uve" userLabel="sideDish1View">
-                            <rect key="frame" x="1" y="142" width="166" height="140"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="DYz-XV-4sD" userLabel="sideDish2View">
-                            <rect key="frame" x="168" y="142" width="166" height="140"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ZdE-od-mPZ" userLabel="sideDish3View">
-                            <rect key="frame" x="1" y="283" width="166" height="140"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NqG-Mq-SHG" userLabel="sideDish4View">
-                            <rect key="frame" x="168" y="283" width="166" height="140"/>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        </view>
-                    </subviews>
-                    <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
