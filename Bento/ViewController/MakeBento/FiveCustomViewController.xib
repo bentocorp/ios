@@ -178,7 +178,7 @@
                                         <constraint firstAttribute="width" constant="60" id="s3E-CM-f7h"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="328-wh-SCh" userLabel="addSideDish2Button">
+                                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="328-wh-SCh" userLabel="addSideDish2Button">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                                     <state key="normal">
@@ -226,7 +226,7 @@
                                         <constraint firstAttribute="height" constant="60" id="znY-2I-zXR"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFD-kS-whG" userLabel="addSideDish3Button">
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LFD-kS-whG" userLabel="addSideDish3Button">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                                     <state key="normal">
@@ -274,7 +274,7 @@
                                         <constraint firstAttribute="width" constant="60" id="jV0-q4-RH9"/>
                                     </constraints>
                                 </imageView>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qf5-Kh-tB7" userLabel="addSideDish4Button">
+                                <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Qf5-Kh-tB7" userLabel="addSideDish4Button">
                                     <rect key="frame" x="0.0" y="0.0" width="166" height="140"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                                     <state key="normal">
@@ -349,7 +349,7 @@
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="GEo-af-EIX"/>
-                        <constraint firstAttribute="width" constant="377" id="Y9u-Lf-T6g" userLabel="buildButtonConstraint"/>
+                        <constraint firstAttribute="width" constant="377" id="Y9u-Lf-T6g" userLabel="buildButtonWidthConstraint"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                     <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
