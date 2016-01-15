@@ -31,6 +31,6 @@
 @property (weak, nonatomic) IBOutlet UILabel *asapMenuLabel;
 @property (weak, nonatomic) IBOutlet UILabel *asapTimeLabel;
 @property (weak, nonatomic) IBOutlet UILabel *asapDescriptionLabel;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *asapDescriptionViewHeightConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *asapViewHeightConstraint;
 
 @end
