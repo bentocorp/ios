@@ -193,6 +193,10 @@
                                 <outlet property="delegate" destination="-1" id="kn8-PN-UgF"/>
                             </connections>
                         </pickerView>
+                        <button opaque="NO" alpha="0.5" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="q6H-4i-OPX">
+                            <rect key="frame" x="0.0" y="82" width="375" height="140"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
