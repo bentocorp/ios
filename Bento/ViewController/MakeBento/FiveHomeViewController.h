@@ -33,4 +33,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *asapDescriptionLabel;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *asapViewHeightConstraint;
 
+@property (weak, nonatomic) IBOutlet UIButton *enabledOnDemandButton;
+@property (weak, nonatomic) IBOutlet UIButton *enabledOrderAheadButton;
+
 @end
