@@ -82,11 +82,12 @@
     // order ahead mock
     myDatabase = @[
                     @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Jan 16, Lunch", @"Jan 16, Dinner"],
-                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
+                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out) (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
                     ];
     
     // mock
-    [self enableOnDemand];
+//    [self enableOnDemand];
+    [self enableOrderAhead];
     
     isThereConnection = YES;
     
@@ -112,6 +113,7 @@
     
     /*---Finalize Button Text---*/
     NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
+//    NSString *strTitle = @"FINALIZE ORDER - TIME REMAINING 2:45";
     if (strTitle != nil) {
         NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
         
@@ -1041,7 +1043,16 @@
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel *pickerLabel = [[UILabel alloc] init];
     pickerLabel.text = myDatabase[component][row];
-    pickerLabel.textColor = [UIColor bentoTitleGray];
+    
+    // if time range is sold-out
+    if ([pickerLabel.text containsString:@"sold-out"]) {
+        pickerLabel.textColor = [UIColor bentoErrorTextOrange];
+    }
+    else {
+        pickerLabel.textColor = [UIColor bentoTitleGray];
+    }
+    
+    pickerLabel.adjustsFontSizeToFitWidth = YES;
     pickerLabel.textAlignment = NSTextAlignmentCenter;
     pickerLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13];
     
