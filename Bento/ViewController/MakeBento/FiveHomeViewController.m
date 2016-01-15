@@ -66,7 +66,6 @@
     
     NSArray *myDatabase;
     
-    BOOL isDropDownViewActive;
     NSString *menu;
     NSString *time;
 }
@@ -180,14 +179,7 @@
     
     [self endTimerOnViewedScreen];
     
-    if (isDropDownViewActive) {
-        self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y + self.dropDownView.frame.size.height + 20);
-        [self.view layoutIfNeeded];
-    }
-    else {
-        self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height * 2 - 20);
-        [self.view layoutIfNeeded];
-    }
+    NSLog(@"dropdownheight - %f", self.dropDownView.center.y);
 }
 
 #pragma mark Load Dishes
@@ -822,9 +814,6 @@
     [self.view layoutIfNeeded];
     
     if (self.fadedViewButton.alpha == 0) {
-        
-        isDropDownViewActive = YES;
-        
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0.8;
             
@@ -834,8 +823,6 @@
         }];
     }
     else {
-        isDropDownViewActive = NO;
-        
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0;
             
