@@ -106,7 +106,7 @@
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     /*---ASAP---*/
-    self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping; // do i really need this?
     [self.asapDescriptionLabel sizeToFit];
     self.asapDescriptionViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + (8 * 2); // (8 * 2 is the margin)
     

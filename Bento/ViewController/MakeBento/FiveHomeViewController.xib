@@ -181,7 +181,7 @@
                                 <constraint firstItem="MhJ-bO-18h" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" id="xQL-yQ-iNZ"/>
                             </constraints>
                         </view>
-                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
                             <rect key="frame" x="0.0" y="82" width="375" height="140"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
