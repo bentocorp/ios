@@ -79,6 +79,9 @@
                     @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
                     ];
     
+    // mock
+    [self enableOnDemand];
+    
     isThereConnection = YES;
     
     /*---Custom---*/
@@ -793,7 +796,7 @@
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }
 
-#pragma mark HomeViewController Button Handlers
+#pragma mark Button Handlers
 
 - (IBAction)settingsButtonPressed:(id)sender {
     [self onSettings];
@@ -810,6 +813,20 @@
 - (IBAction)fadedViewButtonPressed:(id)sender {
     [self toggleDropDownPicker];
 }
+
+- (IBAction)enableOnDemandButtonPressed:(id)sender {
+    [self enableOnDemand];
+}
+
+- (IBAction)enableOrderAheadButtonPressed:(id)sender {
+    [self enableOrderAhead];
+}
+
+- (IBAction)finalizeButtonPressed:(id)sender {
+    [self onFinalize];
+}
+
+#pragma mark Button Events
 
 - (void)toggleDropDownPicker {
     [self.view layoutIfNeeded];
@@ -834,10 +851,6 @@
     }
     
     NSLog(@"dropdownheight - %f", self.dropDownView.center.y);
-}
-
-- (IBAction)finalizeButtonPressed:(id)sender {
-    [self onFinalize];
 }
 
 - (void)onSettings {
@@ -870,35 +883,6 @@
     else {
         [self gotoOrderScreen];
     }
-}
-
-- (void)onFinalize {
-    if ([self isInMiddleOfBuildingBento]) {
-        [self showConfirmMsg];
-    }
-    else {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
-                [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
-            }
-            else {
-                [self gotoOrderScreen];
-            }
-        }
-        else {
-            [self gotoOrderScreen];
-        }
-    }
-}
-
-- (BOOL)isInMiddleOfBuildingBento {
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
-        return YES;
-    }
-    
-    return NO;
 }
 
 - (void)showConfirmMsg {
@@ -967,7 +951,7 @@
     }
 }
 
-- (IBAction)enableOnDemandButtonPressed:(id)sender {
+- (void)enableOnDemand {
     self.onDemandGreenView1.hidden = NO;
     self.onDemandGreenView2.hidden = NO;
     
@@ -978,7 +962,7 @@
     self.enabledOrderAheadButton.hidden = NO;
 }
 
-- (IBAction)enableOrderAheadButtonPressed:(id)sender {
+- (void)enableOrderAhead {
     self.onDemandGreenView1.hidden = YES;
     self.onDemandGreenView2.hidden = YES;
     
@@ -987,6 +971,35 @@
     
     self.enabledOnDemandButton.hidden = NO;
     self.enabledOrderAheadButton.hidden = YES;
+}
+
+- (void)onFinalize {
+    if ([self isInMiddleOfBuildingBento]) {
+        [self showConfirmMsg];
+    }
+    else {
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
+                [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+            }
+            else {
+                [self gotoOrderScreen];
+            }
+        }
+        else {
+            [self gotoOrderScreen];
+        }
+    }
+}
+
+- (BOOL)isInMiddleOfBuildingBento {
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 #pragma mark Picker View
