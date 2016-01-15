@@ -139,11 +139,10 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBo-MK-SWJ">
                                             <rect key="frame" x="20" y="8" width="335" height="24"/>
-                                            <color key="backgroundColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="nC5-Oz-Y9E"/>
                                             </constraints>
-                                            <mutableString key="text">Opening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceself.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;</mutableString>
+                                            <string key="text">Opening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceself.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode =</string>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                             <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>

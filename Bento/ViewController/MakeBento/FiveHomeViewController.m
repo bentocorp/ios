@@ -106,6 +106,7 @@
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     /*---ASAP---*/
+    self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [self.asapDescriptionLabel sizeToFit];
     self.asapDescriptionViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height;
     
