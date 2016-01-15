@@ -152,27 +152,13 @@
 }
 
 - (void)gotoAddAnotherBentoScreen {
-    
-    if ([[BentoShop sharedInstance] is4PodMode]) {
-        NSArray *viewControllers = self.navigationController.viewControllers;
-        for (UIViewController *vc in viewControllers) {
-            if ([vc isKindOfClass:[HomeViewController class]]) {
-                [self.navigationController popToViewController:vc animated:YES];
-                return;
-            }
+    NSArray *viewControllers = self.navigationController.viewControllers;
+    for (UIViewController *vc in viewControllers) {
+        if ([vc isKindOfClass:[FiveHomeViewController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            return;
         }
     }
-    else {
-        NSArray *viewControllers = self.navigationController.viewControllers;
-        for (UIViewController *vc in viewControllers) {
-            if ([vc isKindOfClass:[FiveHomeViewController class]]) {
-                [self.navigationController popToViewController:vc animated:YES];
-                return;
-            }
-        }
-    }
-    
-    
 }
 
 - (IBAction)onHelp:(id)sender

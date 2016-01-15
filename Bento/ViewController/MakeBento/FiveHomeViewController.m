@@ -12,6 +12,7 @@
 #import "FiveHomeViewController.h"
 
 #import "FiveCustomViewController.h"
+#import "CustomViewController.h"
 #import "MenuPreviewViewController.h"
 
 #import "AppDelegate.h"
@@ -48,8 +49,9 @@
 #import "AddonsViewController.h"
 #import "AddonList.h"
 
-@interface FiveHomeViewController () <FiveCustomViewControllerDelegate, MyAlertViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
+@interface FiveHomeViewController () <CustomViewControllerDelegate, FiveCustomViewControllerDelegate, MyAlertViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
+@property (nonatomic) CustomViewController *fourCustomVC;
 @property (nonatomic) FiveCustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 @property (nonatomic) OrderMode orderMode;
@@ -92,12 +94,20 @@
     isThereConnection = YES;
     
     /*---Custom---*/
-    self.customVC = [[FiveCustomViewController alloc] init];
-    [self addChildViewController:self.customVC];
-    [self.bgView addSubview:self.customVC.view];
-    [self.customVC didMoveToParentViewController:self];
-    
-    self.customVC.delegate = self;
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        self.fourCustomVC = [[CustomViewController alloc] init];
+        [self addChildViewController:self.fourCustomVC];
+        [self.bgView addSubview:self.fourCustomVC.view];
+        [self.fourCustomVC didMoveToParentViewController:self];
+        self.fourCustomVC.delegate = self;
+    }
+    else {
+        self.customVC = [[FiveCustomViewController alloc] init];
+        [self addChildViewController:self.customVC];
+        [self.bgView addSubview:self.customVC.view];
+        [self.customVC didMoveToParentViewController:self];
+        self.customVC.delegate = self;
+    }
     
     /*---Picker View---*/
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -149,7 +159,18 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    NSLog(@"dropdownheight - %f", self.dropDownView.center.y);
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        if ([[[BentoShop sharedInstance] getCurrentBento] getMainDish] == 0 &&
+            [[[BentoShop sharedInstance] getCurrentBento] getSideDish1] == 0 &&
+            [[[BentoShop sharedInstance] getCurrentBento] getSideDish2] == 0 &&
+            [[[BentoShop sharedInstance] getCurrentBento] getSideDish3] == 0) {
+            
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:0];
+        }
+        else {
+            [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:-1]; // dummy item for 4-pod
+        }
+    }
     
     addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
@@ -205,6 +226,231 @@
 #pragma mark Load Dishes
 
 - (void)loadSelectedDishes {
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        [self loadSelectedDishes4];
+    }
+    else {
+        [self loadSelectedDishes5];
+    }
+}
+
+- (void)loadSelectedDishes4 {
+    NSMutableArray *aryBentos = [[NSMutableArray alloc] init];
+    for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++) {
+        Bento *bento = [[BentoShop sharedInstance] getBento:index];
+        if ([bento isCompleted]) {
+            [aryBentos addObject:bento];
+        }
+    }
+    
+    NSInteger mainDishIndex = 0;
+    NSInteger side1DishIndex = 0;
+    NSInteger side2DishIndex = 0;
+    NSInteger side3DishIndex = 0;
+    NSInteger side4DishIndex = 0;
+    
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    
+    // Current Bento is not empty
+    if (currentBento != nil) {
+        mainDishIndex = [currentBento getMainDish];
+        side1DishIndex = [currentBento getSideDish1];
+        side2DishIndex = [currentBento getSideDish2];
+        side3DishIndex = [currentBento getSideDish3];
+        side4DishIndex = [currentBento getSideDish4];
+    }
+    
+    /*---Main---*/
+    if (mainDishIndex > 0) {
+        
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
+        if (dishInfo != nil) {
+            
+            self.fourCustomVC.mainDishImageView.hidden = NO;
+            self.fourCustomVC.mainDishLabel.hidden = NO;
+            [self.fourCustomVC.addMainDishButton setTitle:@"" forState:UIControlStateNormal];
+            
+            self.fourCustomVC.mainDishLabel.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                self.fourCustomVC.mainDishImageView.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                [self.fourCustomVC.mainDishImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
+                self.fourCustomVC.mainDishBannerImageView.hidden = NO;
+            }
+            else {
+                self.fourCustomVC.mainDishBannerImageView.hidden = YES;
+            }
+        }
+        // if dish info is nil, remove item from bento
+        else {
+            [currentBento setMainDish:0];
+            
+            self.fourCustomVC.mainDishImageView.image = nil;
+            self.fourCustomVC.mainDishImageView.hidden = YES;
+            self.fourCustomVC.mainDishLabel.hidden = YES;
+            self.fourCustomVC.mainDishBannerImageView.hidden = YES;
+            [self.fourCustomVC.addMainDishButton setTitle:[[AppStrings sharedInstance] getString:BUILD_MAIN_BUTTON] forState:UIControlStateNormal];
+        }
+    }
+    else {
+        self.fourCustomVC.mainDishImageView.image = nil;
+        self.fourCustomVC.mainDishImageView.hidden = YES;
+        self.fourCustomVC.mainDishLabel.hidden = YES;
+        self.fourCustomVC.mainDishBannerImageView.hidden = YES;
+        [self.fourCustomVC.addMainDishButton setTitle:[[AppStrings sharedInstance] getString:BUILD_MAIN_BUTTON] forState:UIControlStateNormal];
+    }
+    
+    /*---Side 1---*/
+    if (side1DishIndex > 0) {
+        
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
+        if (dishInfo != nil) {
+            
+            self.fourCustomVC.sideDish1ImageView.hidden = NO;
+            self.fourCustomVC.sideDish1Label.hidden = NO;
+            [self.fourCustomVC.addSideDish1Button setTitle:@"" forState:UIControlStateNormal];
+            
+            self.fourCustomVC.sideDish1Label.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                self.fourCustomVC.sideDish1ImageView.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                [self.fourCustomVC.sideDish1ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
+                self.fourCustomVC.sideDish1BannerImageView.hidden = NO;
+            }
+            else {
+                self.fourCustomVC.sideDish1BannerImageView.hidden = YES;
+            }
+        }
+        // if dish info is nil, remove item from bento
+        else {
+            [currentBento setSideDish1:0];
+            
+            self.fourCustomVC.sideDish1ImageView.image = nil;
+            self.fourCustomVC.sideDish1ImageView.hidden = YES;
+            self.fourCustomVC.sideDish1Label.hidden = YES;
+            self.fourCustomVC.sideDish1BannerImageView.hidden = YES;
+            [self.fourCustomVC.addSideDish1Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE1_BUTTON] forState:UIControlStateNormal];
+        }
+    }
+    else {
+        self.fourCustomVC.sideDish1ImageView.image = nil;
+        self.fourCustomVC.sideDish1ImageView.hidden = YES;
+        self.fourCustomVC.sideDish1Label.hidden = YES;
+        self.fourCustomVC.sideDish1BannerImageView.hidden = YES;
+        [self.fourCustomVC.addSideDish1Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE1_BUTTON] forState:UIControlStateNormal];
+    }
+    
+    /*---Side 2---*/
+    if (side2DishIndex > 0) {
+        
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
+        if (dishInfo != nil) {
+            
+            self.fourCustomVC.sideDish2Imageview.hidden = NO;
+            self.fourCustomVC.sideDish2Label.hidden = NO;
+            [self.fourCustomVC.addSideDish2Button setTitle:@"" forState:UIControlStateNormal];
+            
+            self.fourCustomVC.sideDish2Label.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                self.fourCustomVC.sideDish2Imageview.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                [self.fourCustomVC.sideDish2Imageview setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
+                self.fourCustomVC.sideDish2BannerImageView.hidden = NO;
+            }
+            else {
+                self.fourCustomVC.sideDish2BannerImageView.hidden = YES;
+            }
+        }
+        // if dish info is nil, remove item from bento
+        else {
+            [currentBento setSideDish2:0];
+            
+            // this block of code is same as below
+            self.fourCustomVC.sideDish2Imageview.image = nil;
+            self.fourCustomVC.sideDish2Imageview.hidden = YES;
+            self.fourCustomVC.sideDish2Label.hidden = YES;
+            self.fourCustomVC.sideDish2BannerImageView.hidden = YES;
+            [self.fourCustomVC.addSideDish2Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE2_BUTTON] forState:UIControlStateNormal];
+        }
+    }
+    else {
+        self.fourCustomVC.sideDish2Imageview.image = nil;
+        self.fourCustomVC.sideDish2Imageview.hidden = YES;
+        self.fourCustomVC.sideDish2Label.hidden = YES;
+        self.fourCustomVC.sideDish2BannerImageView.hidden = YES;
+        [self.fourCustomVC.addSideDish2Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE2_BUTTON] forState:UIControlStateNormal];
+    }
+    
+    /*-Side 3-*/
+    if (side3DishIndex > 0) {
+        
+        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
+        if (dishInfo != nil) {
+            self.fourCustomVC.sideDish3ImageView.hidden = NO;
+            self.fourCustomVC.sideDish3Label.hidden = NO;
+            [self.fourCustomVC.addSideDish3Button setTitle:@"" forState:UIControlStateNormal];
+            
+            self.fourCustomVC.sideDish3Label.text = [[dishInfo objectForKey:@"name"] uppercaseString];
+            
+            NSString *strImageURL = [dishInfo objectForKey:@"image1"];
+            if (strImageURL == nil || [strImageURL isEqualToString:@""]) {
+                // if there's no image string from backend
+                self.fourCustomVC.sideDish3ImageView.image = [UIImage imageNamed:@"empty-main"];
+            }
+            else {
+                [self.fourCustomVC.sideDish3ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+            }
+            
+            if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
+                self.fourCustomVC.sideDish3BannerImageView.hidden = NO;
+            }
+            else {
+                self.fourCustomVC.sideDish3BannerImageView.hidden = YES;
+            }
+        }
+        // if dish info is nil, remove item from bento
+        else {
+            [currentBento setSideDish3:0];
+            
+            // this block of code is same as below
+            self.fourCustomVC.sideDish3ImageView.image = nil;
+            self.fourCustomVC.sideDish3ImageView.hidden = YES;
+            self.fourCustomVC.sideDish3Label.hidden = YES;
+            self.fourCustomVC.sideDish3BannerImageView.hidden = YES;
+            [self.fourCustomVC.addSideDish3Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
+        }
+    }
+    else {
+        self.fourCustomVC.sideDish3ImageView.image = nil;
+        self.fourCustomVC.sideDish3ImageView.hidden = YES;
+        self.fourCustomVC.sideDish3Label.hidden = YES;
+        self.fourCustomVC.sideDish3BannerImageView.hidden = YES;
+        [self.fourCustomVC.addSideDish3Button setTitle:[[AppStrings sharedInstance] getString:BUILD_SIDE3_BUTTON] forState:UIControlStateNormal];
+    }
+}
+
+- (void)loadSelectedDishes5 {
     NSMutableArray *aryBentos = [[NSMutableArray alloc] init];
     for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++) {
         Bento *bento = [[BentoShop sharedInstance] getBento:index];
@@ -552,7 +798,12 @@
                                 value:[UIColor bentoBrandGreen]
                                 range:NSMakeRange(0, [strTitle length])];
         
-        [self.customVC.buildButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+        if ([[BentoShop sharedInstance] is4PodMode]) {
+            [self.fourCustomVC.buildButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+        }
+        else {
+            [self.customVC.buildButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+        }
     }
     
     /*----------------------*/
@@ -613,21 +864,41 @@
 
 - (void)setBuildButtonConstraint {
     
-    // 1 or more bentos in cart
-    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        
-        self.customVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH / 2 - 5;
-        
-        // view add-ons button
-        self.customVC.viewAddonsButton.hidden = NO;
+    if ([[BentoShop sharedInstance] is4PodMode]) {
+        // 1 or more bentos in cart
+        if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+            
+            self.fourCustomVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH / 2 - 5;
+            
+            // view add-ons button
+            self.fourCustomVC.viewAddonsButton.hidden = NO;
+        }
+        // 0 bentos in cart
+        else {
+            
+            self.fourCustomVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH + 1;
+            
+            // view add-ons button
+            self.fourCustomVC.viewAddonsButton.hidden = YES;
+        }
     }
-    // 0 bentos in cart
     else {
-        
-        self.customVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH + 1;
-        
-        // view add-ons button
-        self.customVC.viewAddonsButton.hidden = YES;
+        // 1 or more bentos in cart
+        if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+            
+            self.customVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH / 2 - 5;
+            
+            // view add-ons button
+            self.customVC.viewAddonsButton.hidden = NO;
+        }
+        // 0 bentos in cart
+        else {
+            
+            self.customVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH + 1;
+            
+            // view add-ons button
+            self.customVC.viewAddonsButton.hidden = YES;
+        }
     }
 }
 

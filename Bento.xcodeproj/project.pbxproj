@@ -1424,6 +1424,9 @@
 		90BED0A51A5BD05C003DC872 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
+				FCE1E50D1C4737AF00A210DC /* FiveHomeViewController.h */,
+				FCE1E50E1C4737AF00A210DC /* FiveHomeViewController.m */,
+				FCE1E50F1C4737AF00A210DC /* FiveHomeViewController.xib */,
 				FCE1E5041C47373E00A210DC /* 4-Pod */,
 				FCE1E5051C47374D00A210DC /* 5-Pod */,
 				FCE1E51B1C48183C00A210DC /* View Preview */,
@@ -1720,6 +1723,9 @@
 		FC3C4E801AF97FD7005D7197 /* Old Custom Bento */ = {
 			isa = PBXGroup;
 			children = (
+				FC8F996C1C408DDF00004DAE /* HomeViewController.h */,
+				FC8F996D1C408DDF00004DAE /* HomeViewController.m */,
+				FC8F996E1C408DDF00004DAE /* HomeViewController.xib */,
 				FC08AB221AF713DD00CFB44D /* CustomBentoViewController.h */,
 				FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */,
 			);
@@ -2043,9 +2049,6 @@
 		FCE1E5041C47373E00A210DC /* 4-Pod */ = {
 			isa = PBXGroup;
 			children = (
-				FC8F996C1C408DDF00004DAE /* HomeViewController.h */,
-				FC8F996D1C408DDF00004DAE /* HomeViewController.m */,
-				FC8F996E1C408DDF00004DAE /* HomeViewController.xib */,
 				FC8F995E1C408CCC00004DAE /* CustomViewController.h */,
 				FC8F995F1C408CCC00004DAE /* CustomViewController.m */,
 				FC8F99601C408CCC00004DAE /* CustomViewController.xib */,
@@ -2056,9 +2059,6 @@
 		FCE1E5051C47374D00A210DC /* 5-Pod */ = {
 			isa = PBXGroup;
 			children = (
-				FCE1E50D1C4737AF00A210DC /* FiveHomeViewController.h */,
-				FCE1E50E1C4737AF00A210DC /* FiveHomeViewController.m */,
-				FCE1E50F1C4737AF00A210DC /* FiveHomeViewController.xib */,
 				FCE1E5141C4737C500A210DC /* FiveCustomViewController.h */,
 				FCE1E5151C4737C500A210DC /* FiveCustomViewController.m */,
 				FCE1E5161C4737C500A210DC /* FiveCustomViewController.xib */,
