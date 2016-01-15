@@ -71,7 +71,9 @@
     NSString *menuOrderAhead;
     NSString *timeOrderAhead;
     
+    // might make these into methods
     BOOL isThereOrderAhead;
+    BOOL isThereOnDemand;
 }
 
 - (void)viewDidLoad {
@@ -95,18 +97,6 @@
     [self.customVC didMoveToParentViewController:self];
     
     self.customVC.delegate = self;
-    
-    /*---Menu Preview---*/
-    self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
-    [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
-    //    self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
-    [self.bgView addSubview:self.menuPreviewVC.view];
-    [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
-    
-    // toggle on and off accordingly
-    [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
-    [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
-    [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
     
     /*---Picker View---*/
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
@@ -187,6 +177,27 @@
     [self endTimerOnViewedScreen];
     
     NSLog(@"dropdownheight - %f", self.dropDownView.center.y);
+}
+
+#pragma mark Order Mode Check
+- (void)checkOrderMode {
+    /*---Menu Preview---*/
+    if (self.orderMode == OnDemand) { // MOCK
+        self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
+        [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
+        self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
+        [self.bgView addSubview:self.menuPreviewVC.view];
+        [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
+        
+        self.finalizeButton.hidden = YES;
+    }
+    else {
+        [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
+        [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
+        [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
+        
+        self.finalizeButton.hidden = NO;
+    }
 }
 
 #pragma mark Load Dishes
@@ -972,6 +983,7 @@
     timeOnDemand = self.asapTimeLabel.text;
     
     [self updatePickerButtonTitle];
+    [self checkOrderMode];
 }
 
 - (void)enableOrderAhead {
@@ -986,7 +998,13 @@
     self.enabledOnDemandButton.hidden = NO;
     self.enabledOrderAheadButton.hidden = YES;
     
+    if (menuOrderAhead == nil || timeOrderAhead == nil) {
+        menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
+        timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:1];
+    }
+    
     [self updatePickerButtonTitle];
+    [self checkOrderMode];
 }
 
 - (void)onFinalize {
