@@ -102,6 +102,9 @@
     [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
     [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
     
+    /*---Picker View---*/
+    self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
@@ -1007,7 +1010,6 @@
             break;
     }
     
-    self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menu, time] forState:UIControlStateNormal];
 }
 
