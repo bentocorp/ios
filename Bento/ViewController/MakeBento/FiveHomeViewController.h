@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
 
+typedef NS_ENUM(NSUInteger) {
+    OnDemand,
+    OrderAhead
+} OrderMode;
+
 @interface FiveHomeViewController : BaseViewController
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;

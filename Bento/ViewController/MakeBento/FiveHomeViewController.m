@@ -52,6 +52,7 @@
 
 @property (nonatomic) FiveCustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
+@property (nonatomic) OrderMode orderMode;
 
 @end
 
@@ -65,9 +66,12 @@
     BOOL isThereConnection;
     
     NSArray *myDatabase;
+    NSString *menuOnDemand;
+    NSString *timeOnDemand;
+    NSString *menuOrderAhead;
+    NSString *timeOrderAhead;
     
-    NSString *menu;
-    NSString *time;
+    BOOL isThereOrderAhead;
 }
 
 - (void)viewDidLoad {
@@ -952,6 +956,8 @@
 }
 
 - (void)enableOnDemand {
+    self.orderMode = OnDemand;
+    
     self.onDemandGreenView1.hidden = NO;
     self.onDemandGreenView2.hidden = NO;
     
@@ -960,9 +966,17 @@
     
     self.enabledOnDemandButton.hidden = YES;
     self.enabledOrderAheadButton.hidden = NO;
+    
+    // on demand mennu and time are set on tap
+    menuOnDemand = self.asapMenuLabel.text;
+    timeOnDemand = self.asapTimeLabel.text;
+    
+    [self updatePickerButtonTitle];
 }
 
 - (void)enableOrderAhead {
+    self.orderMode = OrderAhead;
+    
     self.onDemandGreenView1.hidden = YES;
     self.onDemandGreenView2.hidden = YES;
     
@@ -971,6 +985,8 @@
     
     self.enabledOnDemandButton.hidden = NO;
     self.enabledOrderAheadButton.hidden = YES;
+    
+    [self updatePickerButtonTitle];
 }
 
 - (void)onFinalize {
@@ -1027,18 +1043,26 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    
     switch (component) {
         case 0:
-            menu = myDatabase[component][row];
+            menuOrderAhead = myDatabase[component][row];
             break;
             
         default:
-            time = myDatabase[component][row];
+            timeOrderAhead = myDatabase[component][row];
             break;
     }
     
-    [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menu, time] forState:UIControlStateNormal];
+    [self updatePickerButtonTitle];
+}
+
+- (void)updatePickerButtonTitle {
+    if (self.orderMode == OnDemand) {
+        [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOnDemand, timeOnDemand] forState:UIControlStateNormal];
+    }
+    else if (self.orderMode == OrderAhead) {
+        [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOrderAhead, timeOrderAhead] forState:UIControlStateNormal];
+    }
 }
 
 
