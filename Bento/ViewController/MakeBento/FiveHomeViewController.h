@@ -28,4 +28,9 @@
 @property (weak, nonatomic) IBOutlet UIButton *fadedViewButton;
 @property (weak, nonatomic) IBOutlet UIPickerView *orderAheadPickerView;
 
+@property (weak, nonatomic) IBOutlet UILabel *asapMenuLabel;
+@property (weak, nonatomic) IBOutlet UILabel *asapTimeLabel;
+@property (weak, nonatomic) IBOutlet UILabel *asapDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UIView *asapDescriptionView;
+
 @end

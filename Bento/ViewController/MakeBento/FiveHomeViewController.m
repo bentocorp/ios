@@ -105,6 +105,10 @@
     /*---Picker View---*/
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
+    /*---ASAP---*/
+    [self.asapDescriptionLabel sizeToFit];
+    self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
