@@ -22,7 +22,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FiveHomeViewController">
             <connections>
                 <outlet property="asapDescriptionLabel" destination="jBo-MK-SWJ" id="zXV-y0-FXI"/>
-                <outlet property="asapDescriptionView" destination="MhJ-bO-18h" id="CzH-eC-6dh"/>
+                <outlet property="asapDescriptionViewHeightConstraint" destination="2cJ-o1-y3s" id="TTC-XM-vcK"/>
                 <outlet property="asapMenuLabel" destination="cMx-ac-AQE" id="WIG-4S-kKR"/>
                 <outlet property="asapTimeLabel" destination="gLZ-Q3-5W7" id="3Df-w9-cBY"/>
                 <outlet property="bgView" destination="3lu-ax-SyT" id="u1s-8Y-5EE"/>
@@ -118,7 +118,7 @@
                         <action selector="fadedViewButtonPressed:" destination="-1" eventType="touchUpInside" id="ZUj-vI-MhS"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g12-em-tQ5" userLabel="dropDownView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g12-em-tQ5" userLabel="dropDownView">
                     <rect key="frame" x="0.0" y="64" width="375" height="221"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
@@ -143,7 +143,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="24" id="nC5-Oz-Y9E"/>
                                             </constraints>
-                                            <string key="text">Opening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand service</string>
+                                            <mutableString key="text">Opening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceOpening at 11am for on-demand serviceself.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;</mutableString>
                                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                             <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                             <nil key="highlightedColor"/>
@@ -151,6 +151,7 @@
                                     </subviews>
                                     <color key="backgroundColor" red="0.85481753510000003" green="0.87191388579999995" blue="0.87191388579999995" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="2cJ-o1-y3s"/>
                                         <constraint firstItem="jBo-MK-SWJ" firstAttribute="top" secondItem="MhJ-bO-18h" secondAttribute="top" constant="8" id="Lo5-GY-ka4"/>
                                         <constraint firstAttribute="trailing" secondItem="jBo-MK-SWJ" secondAttribute="trailing" constant="20" id="Tff-wg-ER1"/>
                                         <constraint firstItem="jBo-MK-SWJ" firstAttribute="leading" secondItem="MhJ-bO-18h" secondAttribute="leading" constant="20" id="hB5-LH-Jrk"/>
@@ -182,7 +183,7 @@
                                 <constraint firstItem="MhJ-bO-18h" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" id="xQL-yQ-iNZ"/>
                             </constraints>
                         </view>
-                        <pickerView hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
+                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
                             <rect key="frame" x="0.0" y="81" width="375" height="140"/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -198,7 +199,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="BTB-UO-EaW" secondAttribute="trailing" id="60h-iz-0nA"/>
                         <constraint firstAttribute="trailing" secondItem="ccD-Zy-ERm" secondAttribute="trailing" id="Uji-f3-kUn"/>
-                        <constraint firstAttribute="bottom" secondItem="BTB-UO-EaW" secondAttribute="bottom" constant="1" id="YlE-pr-jng"/>
+                        <constraint firstAttribute="bottom" secondItem="BTB-UO-EaW" secondAttribute="bottom" id="YlE-pr-jng"/>
                         <constraint firstItem="BTB-UO-EaW" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="bottom" constant="1" id="gHp-lG-EEp"/>
                         <constraint firstItem="BTB-UO-EaW" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="gdA-j2-bxb"/>
                         <constraint firstItem="ccD-Zy-ERm" firstAttribute="top" secondItem="g12-em-tQ5" secondAttribute="top" id="mgq-eG-VrW"/>

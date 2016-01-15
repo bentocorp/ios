@@ -107,7 +107,7 @@
     
     /*---ASAP---*/
     [self.asapDescriptionLabel sizeToFit];
-    self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+    self.asapDescriptionViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height;
     
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
