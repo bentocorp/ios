@@ -35,6 +35,10 @@
                 <outlet property="etaLabel" destination="Nxt-M8-sn7" id="BbE-RK-E60"/>
                 <outlet property="fadedViewButton" destination="fjf-nw-JDI" id="xNy-Yk-Upi"/>
                 <outlet property="finalizeButton" destination="gLT-NR-dmH" id="yZN-OV-TIq"/>
+                <outlet property="onDemandGreenView1" destination="tY8-eh-98R" id="4Na-0h-9Ss"/>
+                <outlet property="onDemandGreenView2" destination="Dp3-Xj-uIF" id="UkY-o4-Xfa"/>
+                <outlet property="orderAheadGreenView1" destination="eOK-9S-dq9" id="iVW-Ev-fZ6"/>
+                <outlet property="orderAheadGreenView2" destination="uPS-N0-UvZ" id="Bk1-sF-C7H"/>
                 <outlet property="orderAheadPickerView" destination="BTB-UO-EaW" id="3fJ-OZ-AE3"/>
                 <outlet property="pickerButton" destination="ZAl-ST-thk" id="fuc-Mk-9Qp"/>
                 <outlet property="startingPriceLabel" destination="wSb-1H-Dvt" id="bTa-hm-7IN"/>
@@ -165,8 +169,12 @@
                                         <constraint firstAttribute="width" constant="5" id="uro-VL-UzH"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gt8-dY-uNs" userLabel="enableOnDemandButton">
+                                <button opaque="NO" alpha="0.050000000000000003" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gt8-dY-uNs" userLabel="enableOnDemandButton">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="enableOnDemandButtonPressed:" destination="-1" eventType="touchUpInside" id="V4i-Su-feb"/>
+                                    </connections>
                                 </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -220,8 +228,12 @@
                                 <constraint firstAttribute="width" constant="5" id="zQJ-o3-G5W"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1d-b1-WWR" userLabel="enableOrderAheadButton">
+                        <button opaque="NO" alpha="0.10000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1d-b1-WWR" userLabel="enableOrderAheadButton">
                             <rect key="frame" x="0.0" y="60" width="375" height="140"/>
+                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="enableOrderAheadButtonPressed:" destination="-1" eventType="touchUpInside" id="cWY-Ca-3ER"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>

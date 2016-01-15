@@ -967,6 +967,28 @@
     }
 }
 
+- (IBAction)enableOnDemandButtonPressed:(id)sender {
+    self.onDemandGreenView1.hidden = NO;
+    self.onDemandGreenView2.hidden = NO;
+    
+    self.orderAheadGreenView1.hidden = YES;
+    self.orderAheadGreenView2.hidden = YES;
+    
+    self.enabledOnDemandButton.hidden = YES;
+    self.enabledOrderAheadButton.hidden = NO;
+}
+
+- (IBAction)enableOrderAheadButtonPressed:(id)sender {
+    self.onDemandGreenView1.hidden = YES;
+    self.onDemandGreenView2.hidden = YES;
+    
+    self.orderAheadGreenView1.hidden = NO;
+    self.orderAheadGreenView2.hidden = NO;
+    
+    self.enabledOnDemandButton.hidden = NO;
+    self.enabledOrderAheadButton.hidden = YES;
+}
+
 #pragma mark Picker View
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
