@@ -108,7 +108,7 @@
     /*---ASAP---*/
     self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
     [self.asapDescriptionLabel sizeToFit];
-    self.asapDescriptionViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height;
+    self.asapDescriptionViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + (8 * 2); // (8 * 2 is the margin)
     
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
@@ -826,7 +826,7 @@
         isDropDownViewActive = YES;
         
         [UIView animateWithDuration:0.5 animations:^{
-            self.fadedViewButton.alpha = 0.7;
+            self.fadedViewButton.alpha = 0.8;
             
             self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y + self.dropDownView.frame.size.height + 20);
             
