@@ -451,6 +451,7 @@
 #pragma mark Update UI
 
 - (void)updateUI {
+    
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     NSString *strTitle;
     
@@ -817,7 +818,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0.8;
             
-            self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y + self.dropDownView.frame.size.height + 20);
+            self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y + self.dropDownView.frame.size.height + 20;
             
             [self.view layoutIfNeeded];
         }];
@@ -826,7 +827,7 @@
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0;
             
-            self.dropDownView.center = CGPointMake(self.dropDownView.center.x, self.dropDownView.center.y - self.dropDownView.frame.size.height - 20);
+            self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y - self.dropDownView.frame.size.height - 20;
             
             [self.view layoutIfNeeded];
         }];

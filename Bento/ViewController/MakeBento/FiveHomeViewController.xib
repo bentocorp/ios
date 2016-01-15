@@ -29,6 +29,7 @@
                 <outlet property="cartButton" destination="eAy-Ir-KNc" id="ZUq-T6-04l"/>
                 <outlet property="countBadgeLabel" destination="KFj-GJ-P3L" id="hfq-k5-89T"/>
                 <outlet property="dropDownView" destination="g12-em-tQ5" id="US4-Yq-jKL"/>
+                <outlet property="dropDownViewTopConstraint" destination="ubh-ap-j5S" id="O8P-EO-3ty"/>
                 <outlet property="etaLabel" destination="Nxt-M8-sn7" id="BbE-RK-E60"/>
                 <outlet property="fadedViewButton" destination="fjf-nw-JDI" id="xNy-Yk-Upi"/>
                 <outlet property="finalizeButton" destination="gLT-NR-dmH" id="yZN-OV-TIq"/>
@@ -211,7 +212,7 @@
                     </constraints>
                 </imageView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ZAl-ST-thk" userLabel="pickerButton">
-                    <rect key="frame" x="77" y="20" width="220" height="45"/>
+                    <rect key="frame" x="78" y="20" width="220" height="45"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="220" id="0lw-nZ-chg"/>
                         <constraint firstAttribute="height" constant="45" id="QWM-yT-aeH"/>

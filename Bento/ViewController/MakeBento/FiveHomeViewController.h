@@ -23,7 +23,7 @@
 @property (weak, nonatomic) IBOutlet UIButton *finalizeButton;
 
 @property (weak, nonatomic) IBOutlet UIView *dropDownView;
-
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *dropDownViewTopConstraint;
 
 @property (weak, nonatomic) IBOutlet UIButton *fadedViewButton;
 @property (weak, nonatomic) IBOutlet UIPickerView *orderAheadPickerView;
