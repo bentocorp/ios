@@ -1,8 +1,16 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15D9c" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <mutableArray key="OpenSans-Bold.ttf">
+            <string>OpenSans-Bold</string>
+            <string>OpenSans-Bold</string>
+        </mutableArray>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -12,7 +20,35 @@
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
                 <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                 <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tomorrow, Lunch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAZ-mw-LHa">
+                        <rect key="frame" x="8" y="11" width="150" height="21"/>
+                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                        <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:00 - 11:30 AM" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gN-3j-dI1">
+                        <rect key="frame" x="162" y="11" width="150" height="21"/>
+                        <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
+                        <color key="textColor" red="0.30588235289999999" green="0.34509803919999998" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottomMargin" secondItem="5gN-3j-dI1" secondAttribute="bottom" constant="3" id="1SL-9P-F9N"/>
+                    <constraint firstItem="5gN-3j-dI1" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="3mb-2V-a3c"/>
+                    <constraint firstItem="jAZ-mw-LHa" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="4Xf-De-Yil"/>
+                    <constraint firstItem="5gN-3j-dI1" firstAttribute="width" secondItem="jAZ-mw-LHa" secondAttribute="width" id="8lX-ch-xzk"/>
+                    <constraint firstItem="jAZ-mw-LHa" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="CEZ-D8-ocy"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="jAZ-mw-LHa" secondAttribute="bottom" constant="3" id="clg-WS-99h"/>
+                    <constraint firstItem="5gN-3j-dI1" firstAttribute="leading" secondItem="jAZ-mw-LHa" secondAttribute="trailing" constant="4" id="lWK-c1-N5b"/>
+                    <constraint firstItem="5gN-3j-dI1" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="3" id="q7H-xD-OJJ"/>
+                </constraints>
             </tableViewCellContentView>
+            <connections>
+                <outlet property="menuLabel" destination="jAZ-mw-LHa" id="Rfk-4V-39U"/>
+                <outlet property="timeLabel" destination="5gN-3j-dI1" id="ykO-zd-b4d"/>
+            </connections>
         </tableViewCell>
     </objects>
 </document>

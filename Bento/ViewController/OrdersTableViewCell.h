@@ -10,4 +10,7 @@
 
 @interface OrdersTableViewCell : UITableViewCell
 
+@property (weak, nonatomic) IBOutlet UILabel *menuLabel;
+@property (weak, nonatomic) IBOutlet UILabel *timeLabel;
+
 @end
