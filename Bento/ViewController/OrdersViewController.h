@@ -10,4 +10,7 @@
 
 @interface OrdersViewController : UIViewController
 
+@property (weak, nonatomic) IBOutlet UIButton *backButton;
+@property (weak, nonatomic) IBOutlet UITableView *ordersTableView;
+
 @end
