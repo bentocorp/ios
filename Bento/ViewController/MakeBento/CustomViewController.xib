@@ -30,7 +30,6 @@
                 <outlet property="addSideDish2Button" destination="ZAF-sX-5hZ" id="jpz-1J-LYW"/>
                 <outlet property="addSideDish3Button" destination="qye-n5-idg" id="hIf-FT-XH4"/>
                 <outlet property="buildButton" destination="Mgx-IB-ucB" id="dCQ-xU-7Ql"/>
-                <outlet property="buildButtonWidthConstraint" destination="6Zl-w2-6rU" id="jMX-rW-aeJ"/>
                 <outlet property="dishBGView" destination="nMO-Fa-ewf" id="dhl-c8-zyv"/>
                 <outlet property="mainDishBannerImageView" destination="9bT-3b-54x" id="9M7-gR-x4h"/>
                 <outlet property="mainDishImageView" destination="apD-DI-s6F" id="kJ2-8e-dci"/>
@@ -276,11 +275,10 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Mgx-IB-ucB" userLabel="buildButton">
-                    <rect key="frame" x="-1" y="557" width="377" height="45"/>
+                    <rect key="frame" x="-1" y="557" width="180" height="45"/>
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="377" id="6Zl-w2-6rU"/>
-                        <constraint firstAttribute="height" constant="45" id="QUq-Oh-mFa"/>
+                        <constraint firstAttribute="height" constant="45" id="KVo-et-mX4"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                     <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -291,12 +289,11 @@
                         <action selector="buildButtonPressed:" destination="-1" eventType="touchUpInside" id="9KX-J4-ye1"/>
                     </connections>
                 </button>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxd-Fq-MUg" userLabel="viewAddonsButton">
-                    <rect key="frame" x="188" y="557" width="188" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yxd-Fq-MUg" userLabel="viewAddonsButton">
+                    <rect key="frame" x="196" y="557" width="180" height="45"/>
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="width" constant="188" id="8eX-wc-s7U"/>
-                        <constraint firstAttribute="height" constant="45" id="whQ-lv-dss"/>
+                        <constraint firstAttribute="height" constant="45" id="NqP-Rj-wpm"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                     <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -309,13 +306,16 @@
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="nMO-Fa-ewf" secondAttribute="trailing" constant="20" id="9i1-Va-8yz"/>
-                <constraint firstAttribute="bottom" secondItem="Yxd-Fq-MUg" secondAttribute="bottom" constant="65" id="Rnn-La-tOl"/>
-                <constraint firstAttribute="trailing" secondItem="Yxd-Fq-MUg" secondAttribute="trailing" constant="-1" id="U1C-Rw-aPx"/>
+                <constraint firstItem="Mgx-IB-ucB" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="bottom" constant="30" id="L3G-Az-2ck"/>
+                <constraint firstItem="Yxd-Fq-MUg" firstAttribute="width" secondItem="Mgx-IB-ucB" secondAttribute="width" id="L5T-bs-WWR"/>
+                <constraint firstItem="Mgx-IB-ucB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="UgM-XR-jjh"/>
                 <constraint firstItem="nMO-Fa-ewf" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="UyZ-KZ-QzU"/>
+                <constraint firstItem="Yxd-Fq-MUg" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="bottom" constant="30" id="XZe-wW-pQp"/>
+                <constraint firstAttribute="trailing" secondItem="Yxd-Fq-MUg" secondAttribute="trailing" constant="-1" id="YPj-r3-6ey"/>
+                <constraint firstAttribute="bottom" secondItem="Mgx-IB-ucB" secondAttribute="bottom" constant="65" id="ZMK-IM-vUF"/>
                 <constraint firstItem="nMO-Fa-ewf" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="125" id="fhp-Qe-oly"/>
-                <constraint firstItem="Mgx-IB-ucB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="hiR-jA-PPQ"/>
-                <constraint firstItem="Mgx-IB-ucB" firstAttribute="top" secondItem="nMO-Fa-ewf" secondAttribute="bottom" constant="30" id="jVP-pK-zKj"/>
-                <constraint firstAttribute="bottom" secondItem="Mgx-IB-ucB" secondAttribute="bottom" constant="65" id="kZ8-cn-ZHe"/>
+                <constraint firstItem="Yxd-Fq-MUg" firstAttribute="leading" secondItem="Mgx-IB-ucB" secondAttribute="trailing" constant="17" id="jAk-TX-EKz"/>
+                <constraint firstAttribute="bottom" secondItem="Yxd-Fq-MUg" secondAttribute="bottom" constant="65" id="koj-IA-CQX"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="208.5" y="390.5"/>

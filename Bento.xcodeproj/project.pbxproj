@@ -274,8 +274,6 @@
 		90D8F7E51A5E39A500D034CF /* logo_title.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E41A5E39A500D034CF /* logo_title.png */; };
 		90D8F7E81A5E3F7500D034CF /* EnterCreditCardViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */; };
 		90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */ = {isa = PBXBuildFile; fileRef = 90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */; };
-		FC08AB241AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
-		FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */; };
 		FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */; };
 		FC11AAAC1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC11AAAB1BFBF8860004A83B /* AddonsTableViewCell.m */; };
@@ -375,10 +373,6 @@
 		FC8F99621C408CCC00004DAE /* CustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F995F1C408CCC00004DAE /* CustomViewController.m */; };
 		FC8F99631C408CCC00004DAE /* CustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99601C408CCC00004DAE /* CustomViewController.xib */; };
 		FC8F99641C408CCC00004DAE /* CustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99601C408CCC00004DAE /* CustomViewController.xib */; };
-		FC8F996F1C408DDF00004DAE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F996D1C408DDF00004DAE /* HomeViewController.m */; };
-		FC8F99701C408DDF00004DAE /* HomeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F996D1C408DDF00004DAE /* HomeViewController.m */; };
-		FC8F99711C408DDF00004DAE /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F996E1C408DDF00004DAE /* HomeViewController.xib */; };
-		FC8F99721C408DDF00004DAE /* HomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F996E1C408DDF00004DAE /* HomeViewController.xib */; };
 		FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; };
 		FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; };
 		FC94E3411BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; };
@@ -685,7 +679,7 @@
 		90BED0981A5BCC7B003DC872 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = App/AppDelegate.h; sourceTree = "<group>"; };
 		90BED0991A5BCC7B003DC872 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = App/AppDelegate.m; sourceTree = "<group>"; };
 		90BED0A31A5BD05C003DC872 /* FirstViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FirstViewController.h; sourceTree = "<group>"; };
-		90BED0A41A5BD05C003DC872 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FirstViewController.m; sourceTree = "<group>"; };
+		90BED0A41A5BD05C003DC872 /* FirstViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FirstViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		90BED0AE1A5BE22E003DC872 /* first_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = first_background.png; sourceTree = "<group>"; };
 		90BED0AF1A5BE22E003DC872 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		90BED0B61A5BE72F003DC872 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
@@ -742,9 +736,9 @@
 		90D8F7D21A5E2C4C00D034CF /* image_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_checked@2x.png"; sourceTree = "<group>"; };
 		90D8F7D31A5E2C4C00D034CF /* image_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_unchecked@2x.png"; sourceTree = "<group>"; };
 		90D8F7D61A5E2FE900D034CF /* CompleteOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteOrderViewController.h; sourceTree = "<group>"; };
-		90D8F7D71A5E2FE900D034CF /* CompleteOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CompleteOrderViewController.m; sourceTree = "<group>"; };
+		90D8F7D71A5E2FE900D034CF /* CompleteOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CompleteOrderViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		90D8F7D91A5E304D00D034CF /* OrderConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderConfirmViewController.h; sourceTree = "<group>"; };
-		90D8F7DA1A5E304D00D034CF /* OrderConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderConfirmViewController.m; sourceTree = "<group>"; };
+		90D8F7DA1A5E304D00D034CF /* OrderConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OrderConfirmViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		90D8F7DC1A5E30AD00D034CF /* SoldOutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SoldOutViewController.h; path = Order/SoldOutViewController.h; sourceTree = "<group>"; };
 		90D8F7DD1A5E30AD00D034CF /* SoldOutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SoldOutViewController.m; path = Order/SoldOutViewController.m; sourceTree = "<group>"; };
 		90D8F7E21A5E37E300D034CF /* soldout_background.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = soldout_background.png; sourceTree = "<group>"; };
@@ -753,8 +747,6 @@
 		90D8F7E71A5E3F7500D034CF /* EnterCreditCardViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = EnterCreditCardViewController.m; sourceTree = "<group>"; };
 		90D8F7E91A5E448800D034CF /* orderconfirm_image_car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = orderconfirm_image_car.png; sourceTree = "<group>"; };
 		FC05FB0B1B86809F0021B7D2 /* BentoTests copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "BentoTests copy-Info.plist"; path = "/Users/JosephLauSF/_github/Bento/BentoTests copy-Info.plist"; sourceTree = "<absolute>"; };
-		FC08AB221AF713DD00CFB44D /* CustomBentoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomBentoViewController.h; sourceTree = "<group>"; };
-		FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomBentoViewController.m; sourceTree = "<group>"; };
 		FC08AB271AF7143500CFB44D /* BWTitlePagerView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BWTitlePagerView.h; sourceTree = "<group>"; };
 		FC08AB281AF7143500CFB44D /* BWTitlePagerView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BWTitlePagerView.m; sourceTree = "<group>"; };
 		FC11AAAA1BFBF8860004A83B /* AddonsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AddonsTableViewCell.h; sourceTree = "<group>"; };
@@ -883,9 +875,6 @@
 		FC8F995E1C408CCC00004DAE /* CustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomViewController.h; sourceTree = "<group>"; };
 		FC8F995F1C408CCC00004DAE /* CustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomViewController.m; sourceTree = "<group>"; };
 		FC8F99601C408CCC00004DAE /* CustomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomViewController.xib; sourceTree = "<group>"; };
-		FC8F996C1C408DDF00004DAE /* HomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeViewController.h; sourceTree = "<group>"; };
-		FC8F996D1C408DDF00004DAE /* HomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = HomeViewController.m; sourceTree = "<group>"; };
-		FC8F996E1C408DDF00004DAE /* HomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeViewController.xib; sourceTree = "<group>"; };
 		FC92E1B11B7E5C890073C5D7 /* Bento copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bento copy-Info.plist"; path = "/Users/JosephLauSF/_github/Bento/Bento copy-Info.plist"; sourceTree = "<absolute>"; };
 		FC92E1B21B7E5D500073C5D7 /* calabash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = calabash.framework; sourceTree = "<group>"; };
 		FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -966,8 +955,8 @@
 		FCE036E21BEABA1B00F7605B /* CustomAnnotationView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotationView.m; sourceTree = "<group>"; };
 		FCE036E51BEAC39000F7605B /* CustomAnnotation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CustomAnnotation.h; sourceTree = "<group>"; };
 		FCE036E61BEAC39000F7605B /* CustomAnnotation.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CustomAnnotation.m; sourceTree = "<group>"; };
-		FCE1E50D1C4737AF00A210DC /* FiveHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveHomeViewController.h; sourceTree = "<group>"; };
-		FCE1E50E1C4737AF00A210DC /* FiveHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveHomeViewController.m; sourceTree = "<group>"; };
+		FCE1E50D1C4737AF00A210DC /* FiveHomeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; lineEnding = 0; path = FiveHomeViewController.h; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objcpp; };
+		FCE1E50E1C4737AF00A210DC /* FiveHomeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = FiveHomeViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		FCE1E50F1C4737AF00A210DC /* FiveHomeViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FiveHomeViewController.xib; sourceTree = "<group>"; };
 		FCE1E5141C4737C500A210DC /* FiveCustomViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FiveCustomViewController.h; sourceTree = "<group>"; };
 		FCE1E5151C4737C500A210DC /* FiveCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveCustomViewController.m; sourceTree = "<group>"; };
@@ -1431,7 +1420,6 @@
 				FCE1E5051C47374D00A210DC /* 5-Pod */,
 				FCE1E51B1C48183C00A210DC /* View Preview */,
 				FCCD30EA1C44583A00E29A70 /* Choose Dish Item */,
-				FC3C4E801AF97FD7005D7197 /* Old Custom Bento */,
 			);
 			name = Homepage;
 			path = MakeBento;
@@ -1718,18 +1706,6 @@
 			);
 			name = "Driver Tracking";
 			path = Model;
-			sourceTree = "<group>";
-		};
-		FC3C4E801AF97FD7005D7197 /* Old Custom Bento */ = {
-			isa = PBXGroup;
-			children = (
-				FC8F996C1C408DDF00004DAE /* HomeViewController.h */,
-				FC8F996D1C408DDF00004DAE /* HomeViewController.m */,
-				FC8F996E1C408DDF00004DAE /* HomeViewController.xib */,
-				FC08AB221AF713DD00CFB44D /* CustomBentoViewController.h */,
-				FC08AB231AF713DD00CFB44D /* CustomBentoViewController.m */,
-			);
-			name = "Old Custom Bento";
 			sourceTree = "<group>";
 		};
 		FC599F561B0FEDB600989E1B /* Bento Tests */ = {
@@ -2335,7 +2311,6 @@
 				FCB35C4A1BFE74EC00A590EC /* Plus Math-64.png in Resources */,
 				7216B7A91AA64C7C0006FFE9 /* orderconfirm_image_plus@2x.png in Resources */,
 				7216B7AA1AA64C7C0006FFE9 /* register_image_or.png in Resources */,
-				FC8F99721C408DDF00004DAE /* HomeViewController.xib in Resources */,
 				FCB35C401BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
 				FC7291271BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */,
 				7216B7AB1AA64C7C0006FFE9 /* Images.xcassets in Resources */,
@@ -2471,7 +2446,6 @@
 				FCB35C491BFE74EC00A590EC /* Plus Math-64.png in Resources */,
 				90359C261A5EC49700AAD5D2 /* orderconfirm_image_plus@2x.png in Resources */,
 				90D8F7B51A5D84B800D034CF /* register_image_or.png in Resources */,
-				FC8F99711C408DDF00004DAE /* HomeViewController.xib in Resources */,
 				FCB35C3F1BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
 				90BED07F1A5BCC04003DC872 /* Images.xcassets in Resources */,
 				90D8F7B01A5D84B800D034CF /* register_icon_email.png in Resources */,
@@ -2618,7 +2592,6 @@
 				7216B71D1AA64C7C0006FFE9 /* SignInViewController.m in Sources */,
 				FCE036E41BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
 				FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
-				FC8F99701C408DDF00004DAE /* HomeViewController.m in Sources */,
 				7216B71E1AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FCE036E81BEAC39000F7605B /* CustomAnnotation.m in Sources */,
 				7216B7201AA64C7C0006FFE9 /* MKNetworkEngine.m in Sources */,
@@ -2671,7 +2644,6 @@
 				7216B74F1AA64C7C0006FFE9 /* STPTestAddressStore.m in Sources */,
 				FC7291241BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				7216B7501AA64C7C0006FFE9 /* DeliveryLocationViewController.m in Sources */,
-				FC08AB251AF713DD00CFB44D /* CustomBentoViewController.m in Sources */,
 				FC08AB2A1AF7143500CFB44D /* BWTitlePagerView.m in Sources */,
 				FC9E82111BACE4250099DBF5 /* SocketStringReader.swift in Sources */,
 				FC99D4F41AFC161300BEE40B /* PreviewViewController.m in Sources */,
@@ -2737,7 +2709,6 @@
 				90D8F7BA1A5D963300D034CF /* SignInViewController.m in Sources */,
 				FCE036E31BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
 				FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
-				FC8F996F1C408DDF00004DAE /* HomeViewController.m in Sources */,
 				722333FB1A72C133006C2446 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FCE036E71BEAC39000F7605B /* CustomAnnotation.m in Sources */,
 				722333D51A6F46DF006C2446 /* MKNetworkEngine.m in Sources */,
@@ -2790,7 +2761,6 @@
 				722333F71A72C133006C2446 /* STPTestAddressStore.m in Sources */,
 				FC7291231BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				90D8F7CA1A5E24B900D034CF /* DeliveryLocationViewController.m in Sources */,
-				FC08AB241AF713DD00CFB44D /* CustomBentoViewController.m in Sources */,
 				FC08AB291AF7143500CFB44D /* BWTitlePagerView.m in Sources */,
 				FC9E82101BACE4250099DBF5 /* SocketStringReader.swift in Sources */,
 				FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */,

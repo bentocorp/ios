@@ -26,6 +26,7 @@
                 <outlet property="asapTimeLabel" destination="gLZ-Q3-5W7" id="3Df-w9-cBY"/>
                 <outlet property="asapViewHeightConstraint" destination="MaI-a9-LYt" id="uCk-3w-S6O"/>
                 <outlet property="bgView" destination="3lu-ax-SyT" id="u1s-8Y-5EE"/>
+                <outlet property="bottomButton" destination="gLT-NR-dmH" id="cWz-k1-lKD"/>
                 <outlet property="cartButton" destination="eAy-Ir-KNc" id="ZUq-T6-04l"/>
                 <outlet property="countBadgeLabel" destination="KFj-GJ-P3L" id="hfq-k5-89T"/>
                 <outlet property="dropDownView" destination="g12-em-tQ5" id="US4-Yq-jKL"/>
@@ -34,7 +35,6 @@
                 <outlet property="enabledOrderAheadButton" destination="J1d-b1-WWR" id="OPd-3h-nqz"/>
                 <outlet property="etaLabel" destination="Nxt-M8-sn7" id="BbE-RK-E60"/>
                 <outlet property="fadedViewButton" destination="fjf-nw-JDI" id="xNy-Yk-Upi"/>
-                <outlet property="finalizeButton" destination="gLT-NR-dmH" id="yZN-OV-TIq"/>
                 <outlet property="onDemandGreenView1" destination="tY8-eh-98R" id="4Na-0h-9Ss"/>
                 <outlet property="onDemandGreenView2" destination="Dp3-Xj-uIF" id="UkY-o4-Xfa"/>
                 <outlet property="orderAheadGreenView1" destination="eOK-9S-dq9" id="iVW-Ev-fZ6"/>
@@ -100,19 +100,19 @@
                         <constraint firstAttribute="bottom" secondItem="ydX-pe-8fn" secondAttribute="bottom" constant="4" id="zkN-mz-ZTx"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLT-NR-dmH" userLabel="finalizeButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLT-NR-dmH" userLabel="bottomButton">
                     <rect key="frame" x="0.0" y="622" width="375" height="45"/>
                     <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="45" id="BY2-16-f1V"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                    <state key="normal" title="FINALIZE ORDER">
+                    <state key="normal" title="BOTTOM BUTTON">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
                     <connections>
-                        <action selector="finalizeButtonPressed:" destination="-1" eventType="touchUpInside" id="smT-1d-xv1"/>
+                        <action selector="bottomButtonPressed:" destination="-1" eventType="touchUpInside" id="bPh-u8-MIZ"/>
                     </connections>
                 </button>
                 <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjf-nw-JDI" userLabel="fadedViewButton">

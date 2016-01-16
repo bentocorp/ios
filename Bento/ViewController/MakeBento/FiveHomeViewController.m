@@ -121,22 +121,6 @@
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
     
-    /*---Finalize Button Text---*/
-    NSString *strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
-//    NSString *strTitle = @"FINALIZE ORDER - TIME REMAINING 2:45";
-    if (strTitle != nil) {
-        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
-        
-        float spacing = 1.0f;
-        
-        [attributedTitle addAttribute:NSKernAttributeName
-                                value:@(spacing)
-                                range:NSMakeRange(0, [strTitle length])];
-        
-        [self.finalizeButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
-        [self.finalizeButton setTintColor:[UIColor whiteColor]];
-    }
-    
     /*---If No Location Set---*/
     AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D location = [delegate getCurrentLocation];
@@ -212,14 +196,14 @@
         [self.bgView addSubview:self.menuPreviewVC.view];
         [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
         
-        self.finalizeButton.hidden = YES;
+        self.bottomButton.hidden = YES;
     }
     else {
         [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
         [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
         [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
         
-        self.finalizeButton.hidden = NO;
+        self.bottomButton.hidden = NO;
     }
 }
 
@@ -771,7 +755,7 @@
     
     /*----------------------*/
     
-    [self setBuildButtonConstraint];
+    [self showOrHideAddAnotherBentoAndViewAddons];
     
     // current bento is empty
     if ([currentBento isEmpty] == YES || currentBento == nil) {
@@ -830,14 +814,7 @@
     }
     
     /*---Finalize Button---*/
-    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-        [self.finalizeButton setBackgroundColor:[UIColor bentoBrandGreen]];
-        self.finalizeButton.enabled = YES;
-    }
-    else {
-        [self.finalizeButton setBackgroundColor:[UIColor bentoButtonGray]];
-        self.finalizeButton.enabled = NO;
-    }
+    [self updateBottomButton];
     
     /*---Cart Badge---*/
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
@@ -860,43 +837,28 @@
     self.etaLabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
 }
 
-#pragma mark Build Button Width
+#pragma mark Show or Hide AddAnotherBento & View Add-ons
 
-- (void)setBuildButtonConstraint {
-    
+- (void)showOrHideAddAnotherBentoAndViewAddons {
     if ([[BentoShop sharedInstance] is4PodMode]) {
         // 1 or more bentos in cart
         if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-            
-            self.fourCustomVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH / 2 - 5;
-            
-            // view add-ons button
+            self.fourCustomVC.buildButton.hidden = NO;
             self.fourCustomVC.viewAddonsButton.hidden = NO;
         }
-        // 0 bentos in cart
         else {
-            
-            self.fourCustomVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH + 1;
-            
-            // view add-ons button
+            self.fourCustomVC.buildButton.hidden = YES;
             self.fourCustomVC.viewAddonsButton.hidden = YES;
         }
     }
     else {
         // 1 or more bentos in cart
         if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
-            
-            self.customVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH / 2 - 5;
-            
-            // view add-ons button
+            self.customVC.buildButton.hidden = NO;
             self.customVC.viewAddonsButton.hidden = NO;
         }
-        // 0 bentos in cart
         else {
-            
-            self.customVC.buildButtonWidthConstraint.constant = SCREEN_WIDTH + 1;
-            
-            // view add-ons button
+            self.customVC.buildButton.hidden = YES;
             self.customVC.viewAddonsButton.hidden = YES;
         }
     }
@@ -1065,7 +1027,6 @@
         }
     }
     else {
-        
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
             [currentBento completeBento:@"todayLunch"];
         }
@@ -1110,8 +1071,57 @@
     [self enableOrderAhead];
 }
 
-- (IBAction)finalizeButtonPressed:(id)sender {
-    [self onFinalize];
+- (IBAction)bottomButtonPressed:(id)sender {
+    // 1 or more bentos in cart
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        [self onFinalize];
+    }
+    else {
+        [self onAddAnotherBento];
+    }
+}
+
+- (void)updateBottomButton {
+    NSString *strTitle;
+    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        strTitle = [[AppStrings sharedInstance] getString:BUILD_COMPLETE_BUTTON];
+        
+        [self.bottomButton setBackgroundColor:[UIColor bentoBrandGreen]];
+    }
+    else {
+        Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+        
+        // current bento is empty
+        if ([currentBento isEmpty] == YES || currentBento == nil) {
+            strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE]; // BUILD YOUR BENTO
+        }
+        // current bento has at least 1 item
+        else if ([currentBento isCompleted] == NO) {
+            strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON]; // CONTINUE
+        }
+        // current bento is complete
+        else if ([currentBento isCompleted]) {
+            strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON]; // ADD ANOTHER BENTO
+        }
+        
+        [self.bottomButton setBackgroundColor:[UIColor bentoButtonGray]];
+    }
+    
+    if (strTitle != nil) {
+        NSMutableAttributedString *attributedTitle = [[NSMutableAttributedString alloc] initWithString:strTitle];
+        
+        float spacing = 1.0f;
+        
+        [attributedTitle addAttribute:NSKernAttributeName
+                                value:@(spacing)
+                                range:NSMakeRange(0, [strTitle length])];
+        
+        [attributedTitle addAttribute:NSForegroundColorAttributeName
+                                value:[UIColor whiteColor]
+                                range:NSMakeRange(0, [strTitle length])];
+        
+        [self.bottomButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
+    }
 }
 
 #pragma mark Button Events

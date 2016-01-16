@@ -25,7 +25,7 @@ typedef NS_ENUM(NSUInteger) {
 @property (weak, nonatomic) IBOutlet UILabel *etaLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *pickerButton;
-@property (weak, nonatomic) IBOutlet UIButton *finalizeButton;
+@property (weak, nonatomic) IBOutlet UIButton *bottomButton;
 
 @property (weak, nonatomic) IBOutlet UIView *dropDownView;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dropDownViewTopConstraint;

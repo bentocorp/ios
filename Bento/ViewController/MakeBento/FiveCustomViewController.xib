@@ -29,7 +29,6 @@
                 <outlet property="addSideDish3Button" destination="LFD-kS-whG" id="PTH-V0-eZF"/>
                 <outlet property="addSideDish4Button" destination="Qf5-Kh-tB7" id="TYo-hW-bt0"/>
                 <outlet property="buildButton" destination="7JK-AO-Po4" id="jhV-3O-fXh"/>
-                <outlet property="buildButtonWidthConstraint" destination="Y9u-Lf-T6g" id="Bz7-uE-83l"/>
                 <outlet property="dishBGView" destination="Dba-to-gkd" id="Ees-Ib-4KP"/>
                 <outlet property="mainDishBannerImageView" destination="FnT-d3-gHu" id="4ky-Mb-Mi0"/>
                 <outlet property="mainDishImageView" destination="xp7-p8-mRg" id="DnA-wo-tXg"/>
@@ -330,12 +329,11 @@
                         <constraint firstItem="ZdE-od-mPZ" firstAttribute="height" secondItem="CKV-eS-wST" secondAttribute="height" id="zUr-M5-Ztf"/>
                     </constraints>
                 </view>
-                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlT-ZD-qEe" userLabel="viewAddonsButton">
-                    <rect key="frame" x="188" y="557" width="188" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IlT-ZD-qEe" userLabel="viewAddonsButton">
+                    <rect key="frame" x="196" y="557" width="180" height="45"/>
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="45" id="PNc-WW-x2s"/>
-                        <constraint firstAttribute="width" constant="188" id="lVH-bf-NCe"/>
+                        <constraint firstAttribute="height" constant="45" id="6Vq-KN-Ysa"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                     <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
@@ -345,15 +343,14 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7JK-AO-Po4" userLabel="buildButton">
-                    <rect key="frame" x="-1" y="557" width="377" height="45"/>
+                    <rect key="frame" x="-1" y="557" width="180" height="45"/>
                     <color key="backgroundColor" red="0.90751441060000004" green="0.93501484729999995" blue="0.93501484729999995" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="45" id="GEo-af-EIX"/>
-                        <constraint firstAttribute="width" constant="377" id="Y9u-Lf-T6g" userLabel="buildButtonWidthConstraint"/>
+                        <constraint firstAttribute="height" constant="45" id="HjP-gy-aAa"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="11"/>
                     <color key="tintColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
-                    <state key="normal" title="BUILD YOUR BENTO">
+                    <state key="normal" title="ADD ANOTHER BENTO">
                         <color key="titleColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                     </state>
                     <connections>
@@ -364,13 +361,16 @@
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="Dba-to-gkd" secondAttribute="trailing" constant="20" id="3Ib-Kt-sks"/>
-                <constraint firstAttribute="bottom" secondItem="IlT-ZD-qEe" secondAttribute="bottom" constant="65" id="6wv-Vr-SdS"/>
-                <constraint firstItem="7JK-AO-Po4" firstAttribute="leading" secondItem="uUi-3E-yqm" secondAttribute="leading" constant="-1" id="9Wg-aP-dUU"/>
-                <constraint firstAttribute="bottom" secondItem="7JK-AO-Po4" secondAttribute="bottom" constant="65" id="IQw-LL-a9Q"/>
-                <constraint firstAttribute="trailing" secondItem="IlT-ZD-qEe" secondAttribute="trailing" constant="-1" id="Ocf-RV-PPU"/>
+                <constraint firstAttribute="bottom" secondItem="IlT-ZD-qEe" secondAttribute="bottom" constant="65" id="BQB-yZ-zxZ"/>
+                <constraint firstAttribute="trailing" secondItem="IlT-ZD-qEe" secondAttribute="trailing" constant="-1" id="JKD-pk-N24"/>
+                <constraint firstItem="IlT-ZD-qEe" firstAttribute="leading" secondItem="7JK-AO-Po4" secondAttribute="trailing" constant="17" id="L2G-cQ-1Bg"/>
                 <constraint firstItem="Dba-to-gkd" firstAttribute="leading" secondItem="uUi-3E-yqm" secondAttribute="leading" constant="20" id="QQY-bt-rLs"/>
                 <constraint firstItem="Dba-to-gkd" firstAttribute="top" secondItem="uUi-3E-yqm" secondAttribute="top" constant="115" id="aGp-HD-wRO"/>
-                <constraint firstItem="7JK-AO-Po4" firstAttribute="top" secondItem="Dba-to-gkd" secondAttribute="bottom" constant="18" id="dBZ-4L-8S5"/>
+                <constraint firstAttribute="bottom" secondItem="7JK-AO-Po4" secondAttribute="bottom" constant="65" id="hqI-de-bYv"/>
+                <constraint firstItem="7JK-AO-Po4" firstAttribute="top" secondItem="Dba-to-gkd" secondAttribute="bottom" constant="18" id="ilA-pl-xmL"/>
+                <constraint firstItem="IlT-ZD-qEe" firstAttribute="top" secondItem="Dba-to-gkd" secondAttribute="bottom" constant="18" id="nNH-Rh-A82"/>
+                <constraint firstItem="IlT-ZD-qEe" firstAttribute="width" secondItem="7JK-AO-Po4" secondAttribute="width" id="xXt-xO-ypM"/>
+                <constraint firstItem="7JK-AO-Po4" firstAttribute="leading" secondItem="uUi-3E-yqm" secondAttribute="leading" constant="-1" id="xfD-K1-byp"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
             <point key="canvasLocation" x="208.5" y="390.5"/>
