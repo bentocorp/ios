@@ -32,6 +32,7 @@ typedef NS_ENUM(NSUInteger) {
 
 @property (weak, nonatomic) IBOutlet UIButton *fadedViewButton;
 @property (weak, nonatomic) IBOutlet UIPickerView *orderAheadPickerView;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *orderAheadPickerViewLeadingConstraint;
 
 @property (weak, nonatomic) IBOutlet UILabel *asapMenuLabel;
 @property (weak, nonatomic) IBOutlet UILabel *asapTimeLabel;
@@ -39,9 +40,10 @@ typedef NS_ENUM(NSUInteger) {
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *asapViewHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet UIView *onDemandGreenView1;
-@property (weak, nonatomic) IBOutlet UIView *onDemandGreenView2;
 @property (weak, nonatomic) IBOutlet UIView *orderAheadGreenView1;
-@property (weak, nonatomic) IBOutlet UIView *orderAheadGreenView2;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *onDemandGreenViewWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *orderAheadGreenViewWidthConstraint;
+
 
 @property (weak, nonatomic) IBOutlet UIButton *enabledOnDemandButton;
 @property (weak, nonatomic) IBOutlet UIButton *enabledOrderAheadButton;
