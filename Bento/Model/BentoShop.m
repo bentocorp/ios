@@ -374,7 +374,7 @@ static BentoShop *_shareInstance;
 
 - (void)getInit {
     // API call
-    NSString *strRequest2 = [NSString stringWithFormat:@"%@/init", SERVER_URL];
+    NSString *strRequest2 = [NSString stringWithFormat:@"%@/init2", SERVER_URL];
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest2]];
     NSURLResponse *response = nil;
     NSError *error2 = nil;

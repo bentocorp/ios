@@ -115,7 +115,7 @@
     /*---ASAP---*/
     self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping; // do i really need this?
     [self.asapDescriptionLabel sizeToFit];
-    self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 50; //
+    self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60; //
     
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
@@ -1258,8 +1258,6 @@
     self.orderAheadGreenView1.alpha = 0.5;
     self.orderAheadGreenViewWidthConstraint.constant = 5;
     
-    self.orderAheadPickerViewLeadingConstraint.constant = 5;
-    
     self.enabledOnDemandButton.hidden = YES;
     self.enabledOrderAheadButton.hidden = NO;
     
@@ -1280,7 +1278,6 @@
     self.orderAheadGreenView1.alpha = 1.0;
     self.orderAheadGreenViewWidthConstraint.constant = 10;
     
-    self.orderAheadPickerViewLeadingConstraint.constant = 10;
     
     self.enabledOnDemandButton.hidden = NO;
     self.enabledOrderAheadButton.hidden = YES;
