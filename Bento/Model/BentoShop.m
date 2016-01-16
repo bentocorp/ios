@@ -25,9 +25,10 @@
 
 #import "AddonList.h"
 
+#import <AFNetworking/AFNetworking.h>
+
 @interface BentoShop ()
-
-
+ 
 @property (nonatomic) NSDictionary *dicInit;
 @property (nonatomic) NSDictionary *dicStatus;
 @property (nonatomic) NSDictionary *menuToday;
@@ -64,27 +65,23 @@
 
 static BentoShop *_shareInstance;
 
-+ (BentoShop *)sharedInstance
-{
-    @synchronized(self)
-    {
-        if (_shareInstance == nil)
++ (BentoShop *)sharedInstance {
+    @synchronized(self) {
+        if (_shareInstance == nil) {
             _shareInstance = [[BentoShop alloc] init];
+        }
     }
     
     return _shareInstance;
 }
 
-+ (void)releaseInstance
-{
++ (void)releaseInstance {
     if (_shareInstance != nil)
         _shareInstance = nil;
 }
 
-- (id)init
-{
-    if ( (self = [super init]) )
-    {
+- (id)init {
+    if ( (self = [super init]) ) {
         defaults = [NSUserDefaults standardUserDefaults];
         
         self.prevClosed = NO;
@@ -103,8 +100,9 @@ static BentoShop *_shareInstance;
         
         [self loadBentoArray];
         
-        if (self.aryBentos == nil)
+        if (self.aryBentos == nil) {
             self.aryBentos = [[NSMutableArray alloc] init];
+        }
     }
     
     // set original status to empty string when app launches the first time!!
@@ -113,36 +111,31 @@ static BentoShop *_shareInstance;
     return self;
 }
 
-- (id)sendRequest:(NSString *)strRequest statusCode:(NSInteger *)statusCode error:(NSError **)error
-{
-    // filter out empty stringRequest
-    if (strRequest == nil || strRequest.length == 0)
-        return nil;
+
+- (NSDictionary *)sendRequest:(NSString *)strRequest statusCode:(NSInteger *)statusCode error:(NSError **)error {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
-    // create URL request using stringRequest
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest]];
-    NSURLResponse *response = nil;
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/init2?date=2015-10-22&copy=0&gatekeeper=1&lat=37.76637243960176&long=-122.41473197937012", SERVER_URL]];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
-    // filter out nil error
-    if (error != nil)
-        *error = nil;
+    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error) {
+            NSLog(@"Error: %@", error);
+        }
+        else {
+            NSLog(@"init - %@", responseObject);
+            self.dicInit = responseObject;
+        }
+    }];
     
-    // get data from URL
-    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:error];
+    [dataTask resume];
+}
+
+- (void)getInit {
     
-    if (data == nil)
-        return nil;
     
-    if (statusCode != nil && [response isKindOfClass:[NSHTTPURLResponse class]])
-        *statusCode = [(NSHTTPURLResponse *)response statusCode];
-    
-    if (*error != nil)
-        return nil;
-    
-    if (statusCode != nil && *statusCode != 200)
-        return nil;
-    
-    return [NSJSONSerialization JSONObjectWithData:data options:0 error:error];
+   
 }
 
 - (void)getStatus
@@ -173,8 +166,6 @@ static BentoShop *_shareInstance;
     
     BOOL isClosed = [self isClosed];
     BOOL isSoldOut = [self isSoldOut];
-    
-//    NSLog(@"isClosed - %id, isSoldOut - %id", isClosed, isSoldOut);
     
     [self getNextMenus];
 
@@ -369,41 +360,6 @@ static BentoShop *_shareInstance;
     // bummer... no menu today.. return next date string
     else
         return [self getNextMenuWeekdayString];
-}
-
-
-- (void)getInit {
-    // API call
-    NSString *strRequest2 = [NSString stringWithFormat:@"%@/init2", SERVER_URL];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest2]];
-    NSURLResponse *response = nil;
-    NSError *error2 = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error2];
-    
-    if (data == nil) {
-        return;
-    }
-    
-    NSInteger statusCode = 0;
-    if ([response isKindOfClass:[NSHTTPURLResponse class]]) {
-        statusCode = [(NSHTTPURLResponse *)response statusCode];
-    }
-    
-    if (error2 != nil || statusCode != 200) {
-        return;
-    }
-    
-    // parse json
-    NSError *parseError = nil;
-    NSDictionary *dic = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-    if (dic == nil) {
-        return;
-    }
-    
-    // set init results to dictionary
-    self.dicInit = [dic copy];
-    
-    NSLog(@"dicInit: %@", self.dicInit);
 }
 
 #pragma mark Times, Version Numbers, iOS Min Version

@@ -13,6 +13,7 @@ pod 'PureLayout'
 pod 'UIActivityIndicator-for-SDWebImage'
 pod 'FDKeychain'
 pod 'SIOSocket', '~> 0.2.0'
+pod 'AFNetworking'
 
 #pod 'Mapbox-iOS-SDK'
 ## disable bitcode in every sub-target
