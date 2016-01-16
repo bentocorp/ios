@@ -345,6 +345,10 @@
 		FC7E83621C49CD4F00CFEFCC /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7E835F1C49CD4F00CFEFCC /* OrdersViewController.m */; };
 		FC7E83631C49CD4F00CFEFCC /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7E83601C49CD4F00CFEFCC /* OrdersViewController.xib */; };
 		FC7E83641C49CD4F00CFEFCC /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7E83601C49CD4F00CFEFCC /* OrdersViewController.xib */; };
+		FC7E83681C49D01600CFEFCC /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7E83661C49D01600CFEFCC /* OrdersTableViewCell.m */; };
+		FC7E83691C49D01600CFEFCC /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7E83661C49D01600CFEFCC /* OrdersTableViewCell.m */; };
+		FC7E836A1C49D01600CFEFCC /* OrdersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7E83671C49D01600CFEFCC /* OrdersTableViewCell.xib */; };
+		FC7E836B1C49D01600CFEFCC /* OrdersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7E83671C49D01600CFEFCC /* OrdersTableViewCell.xib */; };
 		FC7EACB21B8D0C2700B15FC8 /* empty-main.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7EACB01B8D0C2700B15FC8 /* empty-main.png */; };
 		FC7EACB31B8D0C2700B15FC8 /* empty-main.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7EACB01B8D0C2700B15FC8 /* empty-main.png */; };
 		FC7EACB51B8D0C2700B15FC8 /* empty-side.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7EACB11B8D0C2700B15FC8 /* empty-side.png */; };
@@ -807,6 +811,9 @@
 		FC7E835E1C49CD4F00CFEFCC /* OrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersViewController.h; sourceTree = "<group>"; };
 		FC7E835F1C49CD4F00CFEFCC /* OrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersViewController.m; sourceTree = "<group>"; };
 		FC7E83601C49CD4F00CFEFCC /* OrdersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersViewController.xib; sourceTree = "<group>"; };
+		FC7E83651C49D01600CFEFCC /* OrdersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersTableViewCell.h; sourceTree = "<group>"; };
+		FC7E83661C49D01600CFEFCC /* OrdersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersTableViewCell.m; sourceTree = "<group>"; };
+		FC7E83671C49D01600CFEFCC /* OrdersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersTableViewCell.xib; sourceTree = "<group>"; };
 		FC7EACB01B8D0C2700B15FC8 /* empty-main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty-main.png"; sourceTree = "<group>"; };
 		FC7EACB11B8D0C2700B15FC8 /* empty-side.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty-side.png"; sourceTree = "<group>"; };
 		FC8285C61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
@@ -1740,6 +1747,9 @@
 				FC7E835E1C49CD4F00CFEFCC /* OrdersViewController.h */,
 				FC7E835F1C49CD4F00CFEFCC /* OrdersViewController.m */,
 				FC7E83601C49CD4F00CFEFCC /* OrdersViewController.xib */,
+				FC7E83651C49D01600CFEFCC /* OrdersTableViewCell.h */,
+				FC7E83661C49D01600CFEFCC /* OrdersTableViewCell.m */,
+				FC7E83671C49D01600CFEFCC /* OrdersTableViewCell.xib */,
 			);
 			name = Orders;
 			sourceTree = "<group>";
@@ -2211,6 +2221,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC7E836B1C49D01600CFEFCC /* OrdersTableViewCell.xib in Resources */,
 				FC4A375A1B4C863500020F8C /* Main.storyboard in Resources */,
 				FCB35C2E1BFE616300A590EC /* green-gradient.png in Resources */,
 				7216B7701AA64C7C0006FFE9 /* deliverylocation_icon_search@2x.png in Resources */,
@@ -2347,6 +2358,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FC7E836A1C49D01600CFEFCC /* OrdersTableViewCell.xib in Resources */,
 				FC4A37591B4C862B00020F8C /* Main.storyboard in Resources */,
 				FCB35C2D1BFE616300A590EC /* green-gradient.png in Resources */,
 				90D8F7D11A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png in Resources */,
@@ -2681,6 +2693,7 @@
 				FC9E82171BACE4250099DBF5 /* SwiftRegex.swift in Sources */,
 				FCE1E5111C4737AF00A210DC /* FiveHomeViewController.m in Sources */,
 				7216B7581AA64C7C0006FFE9 /* OutOfDeliveryAddressViewController.m in Sources */,
+				FC7E83691C49D01600CFEFCC /* OrdersTableViewCell.m in Sources */,
 				FC11AAAD1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */,
 				FC9E820B1BACE4250099DBF5 /* SocketPacket.swift in Sources */,
 				7216B7591AA64C7C0006FFE9 /* IntroViewController.m in Sources */,
@@ -2799,6 +2812,7 @@
 				FC9E82161BACE4250099DBF5 /* SwiftRegex.swift in Sources */,
 				FCE1E5101C4737AF00A210DC /* FiveHomeViewController.m in Sources */,
 				90D8F7CD1A5E252800D034CF /* OutOfDeliveryAddressViewController.m in Sources */,
+				FC7E83681C49D01600CFEFCC /* OrdersTableViewCell.m in Sources */,
 				FC11AAAC1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */,
 				FC9E820A1BACE4250099DBF5 /* SocketPacket.swift in Sources */,
 				7223336E1A6D66E8006C2446 /* IntroViewController.m in Sources */,

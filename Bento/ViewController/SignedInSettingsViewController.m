@@ -14,6 +14,8 @@
 #import <MessageUI/MessageUI.h>
 #import "CreditCardInfoViewController.h"
 
+#import "OrdersViewController.h"
+
 #import "MyAlertView.h"
 #import "JGProgressHUD.h"
 #import "WebManager.h"
@@ -409,13 +411,15 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *destVC;
     
-    //    CreditCardInfoViewController *creditCardInfoViewController = [[CreditCardInfoViewController alloc] init];
+    OrdersViewController *ordersVC = [[OrdersViewController alloc] init];
     
     NSArray *toEmailRecipentsArray;
     MFMailComposeViewController *mailComposeViewController;
     
     switch (indexPath.row) {
         case 0:
+            // go to orders
+            [self.navigationController pushViewController:ordersVC animated:YES];
             break;
         case 1:
         {
