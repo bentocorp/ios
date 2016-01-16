@@ -31,7 +31,6 @@
 
 //#import "OrderStatusViewController.h"
 
-
 //#import <FBSDKShareKit/FBSDKShareKit.h>
 
 @interface SignedInSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, EditPhoneNumberDelegate>
@@ -185,7 +184,7 @@
     /*-----------------------------------------------------------*/
     
     // table view
-    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 170, SCREEN_WIDTH, 135)];
+    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 170, SCREEN_WIDTH, 180)];
     settingsTableView.alwaysBounceVertical = NO;
     [settingsTableView setSeparatorInset:UIEdgeInsetsMake(0, 60, 0, 0)];
     settingsTableView.delegate = self;
@@ -193,7 +192,7 @@
     [scrollView addSubview:settingsTableView];
     
     // line separator at bottom of table view
-    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 304, SCREEN_WIDTH, 2)];
+    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 349, SCREEN_WIDTH, 2)];
     longLineSepartor2.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [scrollView addSubview:longLineSepartor2];
     
@@ -351,10 +350,8 @@
     loadingHUD = nil;
 }
 
-- (void)checkCurrentMode
-{
-    if ([[BentoShop sharedInstance] didModeOrDateChange])
-    {
+- (void)checkCurrentMode {
+    if ([[BentoShop sharedInstance] didModeOrDateChange]) {
         [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
         [self dismissViewControllerAnimated:YES completion:nil];
         
@@ -362,14 +359,12 @@
     }
 }
 
--(CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 45;
 }
 
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return 3;
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return 4;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -383,19 +378,19 @@
     //    settingsTableViewCell.iconImageView.backgroundColor = [UIColor colorWithRed:0.694f green:0.702f blue:0.729f alpha:1.0f];
     
     switch (indexPath.row) {
-            //        case 0:
-            //            settingsTableViewCell.settingsLabel.text = @"Credit Card";
-            //            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
-            //            break;
         case 0:
+            settingsTableViewCell.settingsLabel.text = @"Orders";
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
+            break;
+        case 1:
             settingsTableViewCell.settingsLabel.text = @"FAQ";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-help"];
             break;
-        case 1:
+        case 2:
             settingsTableViewCell.settingsLabel.text = @"Email Support";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-email"];
             break;
-        case 2:
+        case 3:
             settingsTableViewCell.settingsLabel.text = @"Phone Support";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-phone"];
             break;
@@ -420,14 +415,9 @@
     MFMailComposeViewController *mailComposeViewController;
     
     switch (indexPath.row) {
-            //        case 0:
-            //
-            //            // go to credit card
-            //            [self.navigationController pushViewController:creditCardInfoViewController animated:YES];
-            //
-            //            break;
-            //
         case 0:
+            break;
+        case 1:
         {
             // go to faq
             destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
@@ -435,8 +425,7 @@
             
             break;
         }
-        case 1:
-            
+        case 2:
             // email
             if ([MFMailComposeViewController canSendMail]) {
                 toEmailRecipentsArray = @[@"help@bentonow.com"];
@@ -447,11 +436,9 @@
                 // Present mail view controller on screen
                 [self presentViewController:mailComposeViewController animated:YES completion:NULL];
             }
-            
             break;
             
-        case 2:
-            
+        case 3:
             // show call alert
             callAlertView.tag = 2;
             [callAlertView showInView:self.view];
@@ -601,32 +588,27 @@
 
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
 {
-    if (alertView.tag == 1)
-    {
+    if (alertView.tag == 1) {
         if (buttonIndex == 1) {
-            
             [[Mixpanel sharedInstance] track:@"Logged Out"];
             
             [self processLogout];
         }
     }
-    else if (alertView.tag == 2)
-    {
+    else if (alertView.tag == 2) {
         if (buttonIndex == 1) {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:1-415-300-1332"]];
         }
     }
 }
 
-- (void)onEditPhoneNumber
-{
+- (void)onEditPhoneNumber {
     [UIView animateWithDuration:0.3f animations:^{
         editPhoneNumberView.alpha = 1.0f;
     }];
 }
 
-- (void)postToTwitter
-{
+- (void)postToTwitter {
     if ([SLComposeViewController isAvailableForServiceType:SLServiceTypeTwitter]) {
         SLComposeViewController *tweetSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeTwitter];
         
