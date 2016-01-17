@@ -49,6 +49,7 @@
 - (void)getStatus;
 - (void)setStatus:(NSArray *)menuStatus;
 - (void)getMenus;
+- (void)getNextMenus;
 - (void)getServiceArea;
 
 - (void)setBranchParams:(NSDictionary *)params;
@@ -67,7 +68,7 @@
 - (BOOL)isThereLunchNextMenu;
 - (BOOL)isThereDinnerNextMenu;
 
-- (void)getInit;
+- (void)getInit2;
 - (void)getiOSMinAndCurrentVersions;
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers;
 - (NSNumber *)getCurrentTime;

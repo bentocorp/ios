@@ -196,11 +196,12 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
         if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
-            [[BentoShop sharedInstance] getInit];
+            [[BentoShop sharedInstance] getInit2];
             [[BentoShop sharedInstance] getiOSMinAndCurrentVersions];
             [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [[AppStrings sharedInstance] getAppStrings];
             [[BentoShop sharedInstance] getMenus];
+            [[BentoShop sharedInstance] getNextMenus];
             [[BentoShop sharedInstance] getStatus];
             [[BentoShop sharedInstance] getServiceArea];
         }

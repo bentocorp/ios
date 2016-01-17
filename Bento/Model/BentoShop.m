@@ -28,7 +28,7 @@
 #import <AFNetworking/AFNetworking.h>
 
 @interface BentoShop ()
- 
+
 @property (nonatomic) NSDictionary *dicInit2;
 @property (nonatomic) NSDictionary *dictInit2WithGateKeeper;
 @property (nonatomic) NSDictionary *dicStatus;
@@ -148,39 +148,40 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 }
 
 - (void)getStatus {
-    self.dicStatus = self.dicInit2[@"/status/all"];
-    self.menuStatus = self.dicInit2[@"/status/menu"];
-    
-    if (originalStatus.length == 0) {
-        originalStatus = self.dicStatus[@"overall"][@"value"];
-    }
-    
-    NSString *newStatus = self.dicStatus[@"overall"][@"value"];
-    
-    if (![originalStatus isEqualToString:newStatus])
-    {
-        [[AppStrings sharedInstance] getAppStrings];
+    [self sendRequest:@"/status/all" completion:^(id responseDic) {
+        self.dicStatus = (NSDictionary *)responseDic;
         
-        originalStatus = @"";
+        if (originalStatus.length == 0) {
+            originalStatus = self.dicStatus[@"overall"][@"value"];
+        }
         
-        NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
-    }
+        NSString *newStatus = self.dicStatus[@"overall"][@"value"];
+        
+        if (![originalStatus isEqualToString:newStatus])
+        {
+            [[AppStrings sharedInstance] getAppStrings];
+            
+            originalStatus = @"";
+            
+            NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
+        }
+        
+        self.prevClosed = [self isClosed];
+        self.prevSoldOut = [self isSoldOut];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    }];
     
-    BOOL isClosed = [self isClosed];
-    BOOL isSoldOut = [self isSoldOut];
-    
-    [self getNextMenus];
-
-    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    
-    self.prevClosed = isClosed;
-    self.prevSoldOut = isSoldOut;
+    [self sendRequest:@"/status/menu" completion:^(id responseDic) {
+        self.menuStatus = (NSArray *)responseDic;
+    }];
 }
 
 - (void)setStatus:(NSArray *)menuStatus
 {
-    if (menuStatus == nil)
+    if (menuStatus == nil) {
         return;
+    }
     
     self.menuStatus = [menuStatus copy];
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
@@ -284,10 +285,9 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 {
     NSString *strDate = [self getDateString];
     
-    NSString *strRequest = [NSString stringWithFormat:@"%@/menu/%@", SERVER_URL, strDate];
-    
-    NSError *error = nil;
-    self.menuToday = [self sendRequest:strRequest statusCode:nil error:&error][@"menus"];
+    [self sendRequest:[NSString stringWithFormat:@"/menu/%@", strDate] completion:^(id responseDic) {
+        self.menuToday = (NSDictionary *)responseDic[@"menus"];
+    }];
     
     // set menuInfo and menuItems to persistent storage
     [defaults setObject:self.menuToday[@"lunch"][@"Menu"] forKey:@"lunchMenuInfo"];
@@ -315,28 +315,11 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 
 - (void)getNextMenus
 {
-    NSDate* currentDate = [NSDate date];
+    NSString *strDate = [self getDateString];
     
-#ifdef DEBUG
-    NSTimeZone* currentTimeZone = [NSTimeZone timeZoneWithAbbreviation:@"GMT-08:00"];
-    NSTimeZone* nowTimeZone = [NSTimeZone systemTimeZone];
-    
-    NSInteger currentGMTOffset = [currentTimeZone secondsFromGMTForDate:currentDate];
-    NSInteger nowGMTOffset = [nowTimeZone secondsFromGMTForDate:currentDate];
-    
-    NSTimeInterval interval = currentGMTOffset - nowGMTOffset;
-    currentDate = [[NSDate alloc] initWithTimeInterval:interval sinceDate:currentDate];
-#endif
-    
-    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"yyyyMMdd"];
-    NSString *strDate = [formatter stringFromDate:currentDate];
-    
-    NSString *strRequest = [NSString stringWithFormat:@"%@/menu/next/%@", SERVER_URL, strDate];
-    
-    NSError *error = nil;
-    NSInteger statusCode = 0;
-    self.menuNext = [self sendRequest:strRequest statusCode:&statusCode error:&error][@"menus"];
+    [self sendRequest:[NSString stringWithFormat:@"/menu/next/%@", strDate] completion:^(id responseDic) {
+        self.menuNext = (NSDictionary *)responseDic[@"menus"];
+    }];
 
     // set menuInfo and menuItems to persistent storage
     [defaults setObject:self.menuNext[@"lunch"][@"Menu"] forKey:@"nextLunchMenuInfo"];
@@ -369,8 +352,8 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers
 {
     // Get time strings from /init call
-    NSString *lunchTimeString = self.dicInit[@"meals"][@"2"][@"startTime"];
-    NSString *dinnerTimeString = self.dicInit[@"meals"][@"3"][@"startTime"];
+    NSString *lunchTimeString = self.dicInit2[@"meals"][@"2"][@"startTime"];
+    NSString *dinnerTimeString = self.dicInit2[@"meals"][@"3"][@"startTime"];
     
     // set date format
     NSDateFormatter* formatter = [[NSDateFormatter alloc] init];
@@ -389,7 +372,7 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
     dinnerTime = (float)[componentsDinner hour] + ((float)[componentsDinner minute] / 60);
     
     // Buffer Time
-    NSString *bufferString = self.dicInit[@"settings"][@"buffer_minutes"];
+    NSString *bufferString = self.dicInit2[@"settings"][@"buffer_minutes"];
     bufferTime = [bufferString floatValue] / 60;
     
     // Current Time
@@ -399,8 +382,8 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 
 - (NSInteger)getETAMin
 {
-    if (self.dicInit[@"eta"] != nil && ![self.dicInit isEqual:[NSNull null]]) {
-        return [self.dicInit[@"eta"][@"eta_min"] integerValue];
+    if (self.dicInit2[@"eta"] != nil && ![self.dicInit2 isEqual:[NSNull null]]) {
+        return [self.dicInit2[@"eta"][@"eta_min"] integerValue];
     }
     
     return 0;
@@ -408,8 +391,8 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 
 - (NSInteger)getETAMax
 {
-    if (self.dicInit[@"eta"] != nil && ![self.dicInit isEqual:[NSNull null]]) {
-        return [self.dicInit[@"eta"][@"eta_max"] integerValue];
+    if (self.dicInit2[@"eta"] != nil && ![self.dicInit2 isEqual:[NSNull null]]) {
+        return [self.dicInit2[@"eta"][@"eta_max"] integerValue];
     }
     
     return 0;
@@ -417,7 +400,7 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 
 - (void)getiOSMinAndCurrentVersions {
     /*------------------for forced update---------------*/
-    self.iosMinVersion = (CGFloat)[self.dicInit[@"settings"][@"ios_min_version"] floatValue];
+    self.iosMinVersion = (CGFloat)[self.dicInit2[@"settings"][@"ios_min_version"] floatValue];
     self.iosCurrentVersion = (CGFloat)[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
 }
 
@@ -573,13 +556,13 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 
 - (void)getServiceAreaMapURLs {
     /*----------------- for service area URL's-------------------*/
-    lunchMapURLString = self.dicInit[@"settings"][@"serviceArea_lunch_map"];
-    dinnerMapURLString = self.dicInit[@"settings"][@"serviceArea_dinner_map"];
+    lunchMapURLString = self.dicInit2[@"settings"][@"serviceArea_lunch_map"];
+    dinnerMapURLString = self.dicInit2[@"settings"][@"serviceArea_dinner_map"];
 }
 
 - (void)setGeofenceRadius {
     /*------------------set geofence------------------*/
-    [self setGeofenceRadius:self.dicInit];
+    [self setGeofenceRadius:self.dicInit2];
 }
 
 - (void)setGeofenceRadius: (NSDictionary *)initDict
@@ -597,100 +580,101 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
     [self getServiceAreaMapURLs];
     [self setGeofenceRadius];
     
-    NSString *strRequest = [NSString stringWithFormat:@"%@/servicearea", SERVER_URL];
-    
-    NSError *error = nil;
-    NSDictionary *kmlValues = [self sendRequest:strRequest statusCode:nil error:&error];
-    if (kmlValues == nil || error != nil)
-        return;
-    
-    // Service Area
-    NSString *strPoints;
-    
-    if ([self isAllDay])
-    {
-        // lunch exists
-        if ([self isThereLunchMenu])
-        {
-            strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-            NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
-        }
-        // if no lunch, dinner exists
-        else if ([self isThereDinnerMenu])
-        {
-            strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-            NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+    [self sendRequest:@"/servicearea" completion:^(id responseDic) {
+        NSDictionary *kmlValues = (NSDictionary *)responseDic;
+        
+        if (kmlValues == nil) {
+            return;
         }
         
-        /* The below 2 cases are probably unecessary...I was hardcoding the value for isAllDay to YES when there was no menu, so the app hanged */
+        // Service Area
+        NSString *strPoints;
         
-        // 12:00am - dinner opening (ie. 16.5)
-        else if (currentTime >= 0 && currentTime < dinnerTime)
+        if ([self isAllDay])
         {
-            strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-            NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+            // lunch exists
+            if ([self isThereLunchMenu])
+            {
+                strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+                NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+            }
+            // if no lunch, dinner exists
+            else if ([self isThereDinnerMenu])
+            {
+                strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+                NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+            }
+            
+            /* The below 2 cases are probably unecessary...I was hardcoding the value for isAllDay to YES when there was no menu, so the app hanged */
+            
+            // 12:00am - dinner opening (ie. 16.5)
+            else if (currentTime >= 0 && currentTime < dinnerTime)
+            {
+                strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+                NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+            }
+            // dinner opening - 11:59pm
+            else if (currentTime >= dinnerTime && currentTime < 24)
+            {
+                strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+                NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+            }
         }
-        // dinner opening - 11:59pm
-        else if (currentTime >= dinnerTime && currentTime < 24)
+        else
         {
-            strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-            NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+            // 12:00am - dinner opening (ie. 16.5)
+            if (currentTime >= 0 && currentTime < dinnerTime)
+            {
+                strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+                NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+            }
+            // dinner opening - 11:59pm
+            else if (currentTime >= dinnerTime && currentTime < 24)
+            {
+                strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+                NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+            }
         }
-    }
-    else
-    {
-        // 12:00am - dinner opening (ie. 16.5)
-        if (currentTime >= 0 && currentTime < dinnerTime)
-        {
-            strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-            NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
-        }
-        // dinner opening - 11:59pm
-        else if (currentTime >= dinnerTime && currentTime < 24)
-        {
-            strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-            NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
-        }
-    }
-    
-    if (strPoints == nil) {
-        NSLog(@"WARNING!!! SERVICE AREA strPoints == nil");
-    }
-    
-    NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
-    
-    // Parse String and Separate Latitude and Longitude.
-    CLLocationCoordinate2D *locations = (CLLocationCoordinate2D *)malloc(sizeof(CLLocationCoordinate2D) * (subStrings.count - 1));
-    
-    NSInteger posCount = 0;
-    for (NSInteger posIndex = 0; posIndex < subStrings.count - 1; posIndex++)
-    {
-        NSString *strPoint = [subStrings objectAtIndex:posIndex];
-        NSArray *subComponents = [strPoint componentsSeparatedByString:@","];
         
-        double latitude = 0, longitude = 0;
-        for (NSInteger index = 0; index < subComponents.count; index++)
-        {
-            NSString *strComponent = [subComponents objectAtIndex:index];
-            if (index == 0)
-                longitude = [strComponent doubleValue];
-            else if (index == 1)
-                latitude = [strComponent doubleValue];
+        if (strPoints == nil) {
+            NSLog(@"WARNING!!! SERVICE AREA strPoints == nil");
         }
-
-        if (latitude == 0 && longitude == 0)
-            continue;
         
-        posCount ++;
-        locations[posIndex] = CLLocationCoordinate2DMake(latitude, longitude);
-    }
-
-    if (posCount > 0)
-        self.serviceArea = [MKPolygon polygonWithCoordinates:locations count:subStrings.count - 1];
-    
-    free(locations);
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_AREA object:nil];
+        NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
+        
+        // Parse String and Separate Latitude and Longitude.
+        CLLocationCoordinate2D *locations = (CLLocationCoordinate2D *)malloc(sizeof(CLLocationCoordinate2D) * (subStrings.count - 1));
+        
+        NSInteger posCount = 0;
+        for (NSInteger posIndex = 0; posIndex < subStrings.count - 1; posIndex++)
+        {
+            NSString *strPoint = [subStrings objectAtIndex:posIndex];
+            NSArray *subComponents = [strPoint componentsSeparatedByString:@","];
+            
+            double latitude = 0, longitude = 0;
+            for (NSInteger index = 0; index < subComponents.count; index++)
+            {
+                NSString *strComponent = [subComponents objectAtIndex:index];
+                if (index == 0)
+                    longitude = [strComponent doubleValue];
+                else if (index == 1)
+                    latitude = [strComponent doubleValue];
+            }
+            
+            if (latitude == 0 && longitude == 0)
+                continue;
+            
+            posCount ++;
+            locations[posIndex] = CLLocationCoordinate2DMake(latitude, longitude);
+        }
+        
+        if (posCount > 0)
+            self.serviceArea = [MKPolygon polygonWithCoordinates:locations count:subStrings.count - 1];
+        
+        free(locations);
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_AREA object:nil];
+    }];
 }
 
 // returns bg image
@@ -756,11 +740,11 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
     }
     
     // original
-    return self.dicInit[@"settings"][@"price"];
+    return self.dicInit2[@"settings"][@"price"];
 }
 
 - (NSString *)getSalePrice {
-    return self.dicInit[@"settings"][@"sale_price"];
+    return self.dicInit2[@"settings"][@"sale_price"];
 }
 
 - (float)getDeliveryPrice {
@@ -774,11 +758,11 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
         return testValue;
     }
     
-    return [self.dicInit[@"settings"][@"delivery_price"] floatValue];
+    return [self.dicInit2[@"settings"][@"delivery_price"] floatValue];
 }
 
 - (NSString *)getTaxPercent {
-    return self.dicInit[@"settings"][@"tax_percent"];
+    return self.dicInit2[@"settings"][@"tax_percent"];
 }
 
 - (NSString *)getNextMenuWeekdayString
@@ -1006,12 +990,13 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
             // check version first
             if (self.iosCurrentVersion >= self.iosMinVersion) {
                 
-                [self getInit];
+                [self getInit2];
                 [self getiOSMinAndCurrentVersions];
                 [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
                 [self setLunchOrDinnerModeByTimes];
                 [self checkIfBentoArrayNeedsToBeReset];
                 [self getMenus];
+                [self getNextMenus];
                 [self getStatus];
                 [self getServiceArea];
             }
