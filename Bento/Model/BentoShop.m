@@ -113,7 +113,10 @@ static BentoShop *_shareInstance;
         // set original status to empty string when app launches the first time!!
         originalStatus = @"";
         
-        
+        locationManager = [[CLLocationManager alloc] init];
+        locationManager.delegate = self;
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest;
+        locationManager.distanceFilter = 500;
     }
     
     return self;
@@ -151,10 +154,14 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 // get gatekeeper if location available
 // if no gps, use saved address
 - (void)getInit2WithGateKeeper {
+    [locationManager startUpdatingLocation];
+}
+
+- (void)getGateKeeperWithLocation {
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     
     if (placeInfo != nil) {
-         NSString *strDate = [self getDateString];
+        NSString *strDate = [self getDateString];
         float lat = placeInfo.location.coordinate.latitude;
         float lng = placeInfo.location.coordinate.longitude;
         
@@ -162,6 +169,16 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
             self.dictInit2WithGateKeeper = (NSDictionary *)responseDic;
         }];
     }
+}
+
+#pragma Location Services
+- (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    [self getGateKeeperWithLocation];
+    [locationManager stopUpdatingLocation];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    [self getGateKeeperWithLocation];
 }
 
 - (void)getStatus {
@@ -1009,7 +1026,8 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
                 
                 if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
                     [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
-                    [[BentoShop sharedInstance] getInit2WithGateKeeper];
+                    
+                    [self getInit2WithGateKeeper];
                 }
                 else {
                     [[BentoShop sharedInstance] getInit2];
