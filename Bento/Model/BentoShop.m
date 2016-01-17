@@ -27,7 +27,9 @@
 
 #import <AFNetworking/AFNetworking.h>
 
-@interface BentoShop ()
+#import "SVPlacemark.h"
+
+@interface BentoShop () <CLLocationManagerDelegate>
 
 @property (nonatomic) NSDictionary *dicInit2;
 @property (nonatomic) NSDictionary *dictInit2WithGateKeeper;
@@ -62,6 +64,9 @@
     float bufferTime;
     
     BOOL signedIn;
+    
+    CLLocationManager *locationManager;
+    CLLocationCoordinate2D coordinate;
 }
 
 static BentoShop *_shareInstance;
@@ -104,10 +109,12 @@ static BentoShop *_shareInstance;
         if (self.aryBentos == nil) {
             self.aryBentos = [[NSMutableArray alloc] init];
         }
+        
+        // set original status to empty string when app launches the first time!!
+        originalStatus = @"";
+        
+        
     }
-    
-    // set original status to empty string when app launches the first time!!
-    originalStatus = @"";
     
     return self;
 }
@@ -134,17 +141,27 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
     [dataTask resume];
 }
 
+// get init2 if intro not processed and no saved address
 - (void)getInit2 {
     [self sendRequest:@"/init2" completion:^(id responseDic) {
         self.dicInit2 = (NSDictionary *)responseDic;
     }];
 }
 
+// get gatekeeper if location available
+// if no gps, use saved address
 - (void)getInit2WithGateKeeper {
-    // date, lat, lng
-    [self sendRequest:@"/init2?date=%@&copy=1&gatekeeper=1&lat=%@&long=%@" completion:^(id responseDic) {
-        self.dictInit2WithGateKeeper = (NSDictionary *)responseDic;
-    }];
+    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    
+    if (placeInfo != nil) {
+         NSString *strDate = [self getDateString];
+        float lat = placeInfo.location.coordinate.latitude;
+        float lng = placeInfo.location.coordinate.longitude;
+        
+        [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic) {
+            self.dictInit2WithGateKeeper = (NSDictionary *)responseDic;
+        }];
+    }
 }
 
 - (void)getStatus {
@@ -990,7 +1007,14 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
             // check version first
             if (self.iosCurrentVersion >= self.iosMinVersion) {
                 
-                [self getInit2];
+                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
+                    [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
+                    [[BentoShop sharedInstance] getInit2WithGateKeeper];
+                }
+                else {
+                    [[BentoShop sharedInstance] getInit2];
+                }
+                
                 [self getiOSMinAndCurrentVersions];
                 [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
                 [self setLunchOrDinnerModeByTimes];

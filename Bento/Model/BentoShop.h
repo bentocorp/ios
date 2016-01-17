@@ -69,6 +69,8 @@
 - (BOOL)isThereDinnerNextMenu;
 
 - (void)getInit2;
+- (void)getInit2WithGateKeeper;
+
 - (void)getiOSMinAndCurrentVersions;
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers;
 - (NSNumber *)getCurrentTime;

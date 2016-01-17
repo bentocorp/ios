@@ -46,6 +46,7 @@
 #define ADJUST_TOKEN @"ltd8yvnhnkrw"
 
 #import "SocketHandler.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
 
 NSString * const StripePublishableTestKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
 NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
@@ -228,7 +229,14 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        [globalShop getInit2];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
+            [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
+            [[BentoShop sharedInstance] getInit2WithGateKeeper];
+        }
+        else {
+            [[BentoShop sharedInstance] getInit2];
+        }
+        
         [globalShop getiOSMinAndCurrentVersions];
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         [globalShop getMenus];
@@ -340,7 +348,14 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
-        [globalShop getInit2];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
+            [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
+            [[BentoShop sharedInstance] getInit2WithGateKeeper];
+        }
+        else {
+            [[BentoShop sharedInstance] getInit2];
+        }
+        
         [globalShop getiOSMinAndCurrentVersions];
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         [globalShop getStatus];
@@ -574,7 +589,14 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        [globalShop getInit2];
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
+            [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
+            [[BentoShop sharedInstance] getInit2WithGateKeeper];
+        }
+        else {
+            [[BentoShop sharedInstance] getInit2];
+        }
+        
         [globalShop getiOSMinAndCurrentVersions];
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         [globalShop getStatus];

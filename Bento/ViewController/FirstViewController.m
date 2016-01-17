@@ -35,6 +35,8 @@
 
 #import "UIColor+CustomColors.h"
 
+#import "NSUserDefaults+RMSaveCustomObject.h"
+
 @interface FirstViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
@@ -196,7 +198,15 @@
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
         if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
-            [[BentoShop sharedInstance] getInit2];
+
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
+                [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
+                [[BentoShop sharedInstance] getInit2WithGateKeeper];
+            }
+            else {
+                [[BentoShop sharedInstance] getInit2];
+            }
+            
             [[BentoShop sharedInstance] getiOSMinAndCurrentVersions];
             [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [[AppStrings sharedInstance] getAppStrings];
