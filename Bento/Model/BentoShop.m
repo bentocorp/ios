@@ -29,7 +29,8 @@
 
 @interface BentoShop ()
  
-@property (nonatomic) NSDictionary *dicInit;
+@property (nonatomic) NSDictionary *dicInit2;
+@property (nonatomic) NSDictionary *dictInit2WithGateKeeper;
 @property (nonatomic) NSDictionary *dicStatus;
 @property (nonatomic) NSDictionary *menuToday;
 @property (nonatomic) NSDictionary *menuNext;
@@ -133,14 +134,19 @@ typedef void (^SendRequestCompletionBlock)(NSDictionary *responseDic);
     [dataTask resume];
 }
 
-- (void)getInit {
-    [self sendRequest:@"/init" completion:^(id responseDic) {
-        self.dicInit = (NSDictionary *)responseDic;
+- (void)getInit2 {
+    [self sendRequest:@"/init2" completion:^(id responseDic) {
+        self.dicInit2 = (NSDictionary *)responseDic;
     }];
 }
 
-- (void)getStatus
-{
+- (void)getInit2WithGateKeeper {
+    [self sendRequest:@"/init2" completion:^(NSDictionary *responseDic) {
+        self.dictInit2WithGateKeeper = (NSDictionary *)responseDic;
+    }];
+}
+
+- (void)getStatus {
     NSString *strRequest = [NSString stringWithFormat:@"%@/status/all", SERVER_URL];
     
     NSError *error = nil;
