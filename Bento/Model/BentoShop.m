@@ -112,7 +112,7 @@ static BentoShop *_shareInstance;
     return self;
 }
 
-typedef void (^SendRequestCompletionBlock)(NSDictionary *responseDic);
+typedef void (^SendRequestCompletionBlock)(id responseDic);
 
 - (void)sendRequest:(NSString *)strRequest completion:(SendRequestCompletionBlock)completion {
     
@@ -141,16 +141,15 @@ typedef void (^SendRequestCompletionBlock)(NSDictionary *responseDic);
 }
 
 - (void)getInit2WithGateKeeper {
-    [self sendRequest:@"/init2" completion:^(NSDictionary *responseDic) {
+    // date, lat, lng
+    [self sendRequest:@"/init2?date=%@&copy=1&gatekeeper=1&lat=%@&long=%@" completion:^(id responseDic) {
         self.dictInit2WithGateKeeper = (NSDictionary *)responseDic;
     }];
 }
 
 - (void)getStatus {
-    NSString *strRequest = [NSString stringWithFormat:@"%@/status/all", SERVER_URL];
-    
-    NSError *error = nil;
-    self.dicStatus = [self sendRequest:strRequest statusCode:nil error:&error];
+    self.dicStatus = self.dicInit2[@"/status/all"];
+    self.menuStatus = self.dicInit2[@"/status/menu"];
     
     if (originalStatus.length == 0) {
         originalStatus = self.dicStatus[@"overall"][@"value"];
@@ -166,10 +165,6 @@ typedef void (^SendRequestCompletionBlock)(NSDictionary *responseDic);
         
         NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
     }
-    
-    strRequest = [NSString stringWithFormat:@"%@/status/menu", SERVER_URL];
-    
-    self.menuStatus = [self sendRequest:strRequest statusCode:nil error:&error];
     
     BOOL isClosed = [self isClosed];
     BOOL isSoldOut = [self isSoldOut];
