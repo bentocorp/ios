@@ -66,7 +66,7 @@
     BOOL signedIn;
     
     CLLocationManager *locationManager;
-    CLLocationCoordinate2D coordinate;
+    CLLocationCoordinate2D gpsCoordinateForGateKeeper;
 }
 
 static BentoShop *_shareInstance;
@@ -158,26 +158,36 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 }
 
 - (void)getGateKeeperWithLocation {
-    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-    
-    if (placeInfo != nil) {
-        NSString *strDate = [self getDateString];
-        float lat = placeInfo.location.coordinate.latitude;
-        float lng = placeInfo.location.coordinate.longitude;
-        
-        [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic) {
-            self.dictInit2WithGateKeeper = (NSDictionary *)responseDic;
-        }];
+    if (CLLocationCoordinate2DIsValid(gpsCoordinateForGateKeeper)) {
+        [self requestGateKeeper:gpsCoordinateForGateKeeper.latitude lng:gpsCoordinateForGateKeeper.longitude];
     }
+    else {
+        SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+        if (placeInfo != nil) {
+            [self requestGateKeeper:placeInfo.location.coordinate.latitude lng:placeInfo.location.coordinate.longitude];
+        }
+    }
+}
+
+- (void)requestGateKeeper:(float)lat lng:(float)lng {
+    NSString *strDate = [self getDateString];
+    
+    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic) {
+        self.dictInit2WithGateKeeper = (NSDictionary *)responseDic;
+    }];
 }
 
 #pragma Location Services
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray<CLLocation *> *)locations {
+    CLLocation *location = locations[0];
+    gpsCoordinateForGateKeeper = location.coordinate;
+    
     [self getGateKeeperWithLocation];
     [locationManager stopUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+    gpsCoordinateForGateKeeper = kCLLocationCoordinate2DInvalid;
     [self getGateKeeperWithLocation];
 }
 
