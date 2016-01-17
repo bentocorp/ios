@@ -32,7 +32,8 @@
 @interface BentoShop () <CLLocationManagerDelegate>
 
 @property (nonatomic) NSDictionary *dicInit2;
-@property (nonatomic) NSDictionary *dictInit2WithGateKeeper;
+@property (nonatomic) NSDictionary *dicInit2WithGateKeeper;
+@property (nonatomic) NSDictionary *dicGateKeeper;
 @property (nonatomic) NSDictionary *dicStatus;
 @property (nonatomic) NSDictionary *menuToday;
 @property (nonatomic) NSDictionary *menuNext;
@@ -116,7 +117,7 @@ static BentoShop *_shareInstance;
         locationManager = [[CLLocationManager alloc] init];
         locationManager.delegate = self;
         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
-        locationManager.distanceFilter = 500;
+        locationManager.distanceFilter = 999;
     }
     
     return self;
@@ -154,7 +155,9 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 // get gatekeeper if location available
 // if no gps, use saved address
 - (void)getInit2WithGateKeeper {
-    [locationManager startUpdatingLocation];
+    dispatch_sync(dispatch_get_main_queue(), ^{
+        [locationManager startUpdatingLocation];
+    });
 }
 
 - (void)getGateKeeperWithLocation {
@@ -173,8 +176,15 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
     NSString *strDate = [self getDateString];
     
     [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic) {
-        self.dictInit2WithGateKeeper = (NSDictionary *)responseDic;
+        self.dicInit2WithGateKeeper = (NSDictionary *)responseDic;
+        self.dicGateKeeper = self.dicInit2WithGateKeeper[@"/gatekeeper/here/{lat}/{long}"];
+        [self getAppState];
     }];
+}
+
+- (NSString *)getAppState {
+    NSLog(@"appState - %@", self.dicGateKeeper[@"appState"]);
+    return self.dicGateKeeper[@"appState"];
 }
 
 #pragma Location Services
