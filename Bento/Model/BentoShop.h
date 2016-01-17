@@ -130,4 +130,6 @@
 
 - (BOOL)is4PodMode;
 
+- (NSString *)getAppState;
+
 @end

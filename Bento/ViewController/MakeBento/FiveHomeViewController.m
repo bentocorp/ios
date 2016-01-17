@@ -140,6 +140,23 @@
     }
 }
 
+- (void)checkAppState {
+    NSString *appState = [[BentoShop sharedInstance] getAppState];
+    
+    if ([appState isEqualToString:@"map,no_service_wall"]) {
+        NSLog(@"SHOW MAP");
+    }
+    else if ([appState isEqualToString:@"closed_wall"]) {
+        NSLog(@"SHOW CLOSED WALL");
+    }
+    else if ([appState isEqualToString:@"soldout_wall"]) {
+        NSLog(@"SHOW SOLD-OUT WALL");
+    }
+    else if ([appState isEqualToString:@"build"]) {
+        NSLog(@"SHOW BUILD");
+    }
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
