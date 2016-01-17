@@ -111,12 +111,14 @@ static BentoShop *_shareInstance;
     return self;
 }
 
+typedef void (^SendRequestCompletionBlock)(NSDictionary *responseDic);
 
-- (NSDictionary *)sendRequest:(NSString *)strRequest statusCode:(NSInteger *)statusCode error:(NSError **)error {
+- (void)sendRequest:(NSString *)strRequest completion:(SendRequestCompletionBlock)completion {
+    
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
-    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@/init2?date=2015-10-22&copy=0&gatekeeper=1&lat=37.76637243960176&long=-122.41473197937012", SERVER_URL]];
+    NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, strRequest]];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
@@ -124,8 +126,7 @@ static BentoShop *_shareInstance;
             NSLog(@"Error: %@", error);
         }
         else {
-            NSLog(@"init - %@", responseObject);
-            self.dicInit = responseObject;
+            completion(responseObject);
         }
     }];
     
@@ -133,9 +134,9 @@ static BentoShop *_shareInstance;
 }
 
 - (void)getInit {
-    
-    
-   
+    [self sendRequest:@"/init" completion:^(id responseDic) {
+        self.dicInit = (NSDictionary *)responseDic;
+    }];
 }
 
 - (void)getStatus
