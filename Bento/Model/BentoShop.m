@@ -212,6 +212,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
         }
         else {
             NSLog(@"init2 gatekeeper error: %@", error);
+            completion(NO); // for some reason, some coordinates outofzone are producing an error. return NO for now
         }
     }];
 }
