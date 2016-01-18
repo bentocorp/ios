@@ -120,7 +120,7 @@ static BentoShop *_shareInstance;
     return self;
 }
 
-typedef void (^SendRequestCompletionBlock)(id responseDic);
+typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 
 - (void)sendRequest:(NSString *)strRequest completion:(SendRequestCompletionBlock)completion {
     
@@ -131,12 +131,7 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error) {
-            NSLog(@"Error: %@", error);
-        }
-        else {
-            completion(responseObject);
-        }
+        completion(responseObject, error);
     }];
     
     [dataTask resume];
@@ -144,8 +139,13 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 
 // get init2 if intro not processed and no saved address
 - (void)getInit2 {
-    [self sendRequest:@"/init2" completion:^(id responseDic) {
-        self.dicInit2 = (NSDictionary *)responseDic;
+    [self sendRequest:@"/init2" completion:^(id responseDic, NSError *error) {
+        if (error == nil) {
+            self.dicInit2 = (NSDictionary *)responseDic;
+        }
+        else {
+            NSLog(@"getInit2 error: %@", error);
+        }
     }];
 }
 
@@ -170,12 +170,18 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 }
 
 - (void)requestGateKeeper:(float)lat lng:(float)lng {
-    NSString *strDate = [self getDateString];
+    NSString *strDate = [self getDateStringWithDashes];
     
-    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic) {
-        self.dicInit2 = (NSDictionary *)responseDic;
+    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic, NSError *error) {
         
-        [self getAppState];
+        if (error == nil) {
+            self.dicInit2 = (NSDictionary *)responseDic;
+            
+            [self getAppState];
+        }
+        else {
+            NSLog(@"init2 gatekeeper error: %@", error);
+        }
     }];
 }
 
@@ -190,19 +196,37 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 
 typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
 - (void)checkIfSelectedLocationIsInAnyZone:(float)lat lng:(float)lng completion:(SelectedLocationCheckBlock)completion {
-    NSString *strDate = [self getDateString];
+    NSString *strDate = [self getDateStringWithDashes];
 
-    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic) {
+    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic, NSError *error) {
         
-        NSDictionary *init2 = (NSDictionary *)responseDic;
-        
-        if ((BOOL)init2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"] == YES) {
-            completion(YES);
+        if (error == nil) {
+            NSDictionary *init2 = (NSDictionary *)responseDic;
+            
+            if ((BOOL)init2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"] == YES) {
+                completion(YES);
+            }
+            else {
+                completion(NO);
+            }
         }
         else {
-            completion(NO);
+            NSLog(@"init2 gatekeeper error: %@", error);
         }
     }];
+}
+
+- (NSString *)getDateStringWithDashes {
+    NSDate* currentDate = [NSDate date];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd"];
+    
+    NSString *strDate = [formatter stringFromDate:currentDate];
+    currentDate = nil;
+    formatter = nil;
+    
+    return strDate;
 }
 
 #pragma Location Services
@@ -220,32 +244,45 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
 }
 
 - (void)getStatus {
-    [self sendRequest:@"/status/all" completion:^(id responseDic) {
-        self.dicStatus = (NSDictionary *)responseDic;
+    [self sendRequest:@"/status/all" completion:^(id responseDic, NSError *error) {
         
-        if (originalStatus.length == 0) {
-            originalStatus = self.dicStatus[@"overall"][@"value"];
-        }
-        
-        NSString *newStatus = self.dicStatus[@"overall"][@"value"];
-        
-        if (![originalStatus isEqualToString:newStatus])
-        {
-            [[AppStrings sharedInstance] getAppStrings];
+        if (error == nil) {
+            self.dicStatus = (NSDictionary *)responseDic;
             
-            originalStatus = @"";
+            if (originalStatus.length == 0) {
+                originalStatus = self.dicStatus[@"overall"][@"value"];
+            }
             
-            NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
+            NSString *newStatus = self.dicStatus[@"overall"][@"value"];
+            
+            if (![originalStatus isEqualToString:newStatus])
+            {
+                [[AppStrings sharedInstance] getAppStrings];
+                
+                originalStatus = @"";
+                
+                NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
+            }
+            
+            self.prevClosed = [self isClosed];
+            self.prevSoldOut = [self isSoldOut];
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
         }
-        
-        self.prevClosed = [self isClosed];
-        self.prevSoldOut = [self isSoldOut];
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+        else {
+            NSLog(@"/status/all error: %@", error);
+        }
     }];
     
-    [self sendRequest:@"/status/menu" completion:^(id responseDic) {
-        self.menuStatus = (NSArray *)responseDic;
+    [self sendRequest:@"/status/menu" completion:^(id responseDic, NSError *error) {
+        
+        if (error == nil) {
+            self.menuStatus = (NSArray *)responseDic;
+        }
+        else {
+            NSLog(@"/status/menu error: %@", error);
+        }
+        
     }];
 }
 
@@ -357,8 +394,13 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
 {
     NSString *strDate = [self getDateString];
     
-    [self sendRequest:[NSString stringWithFormat:@"/menu/%@", strDate] completion:^(id responseDic) {
-        self.menuToday = (NSDictionary *)responseDic[@"menus"];
+    [self sendRequest:[NSString stringWithFormat:@"/menu/%@", strDate] completion:^(id responseDic, NSError *error) {
+        if (error == nil) {
+            self.menuToday = (NSDictionary *)responseDic[@"menus"];
+        }
+        else {
+            NSLog(@"/menu/date error: %@", error);
+        }
     }];
     
     // set menuInfo and menuItems to persistent storage
@@ -389,8 +431,13 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
 {
     NSString *strDate = [self getDateString];
     
-    [self sendRequest:[NSString stringWithFormat:@"/menu/next/%@", strDate] completion:^(id responseDic) {
-        self.menuNext = (NSDictionary *)responseDic[@"menus"];
+    [self sendRequest:[NSString stringWithFormat:@"/menu/next/%@", strDate] completion:^(id responseDic, NSError *error) {
+        if (error == nil) {
+            self.menuNext = (NSDictionary *)responseDic[@"menus"];
+        }
+        else {
+            NSLog(@"/menu/next/date error: %@", error);
+        }
     }];
 
     // set menuInfo and menuItems to persistent storage
@@ -640,100 +687,106 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
 {
     [self getServiceAreaMapURLs];
     
-    [self sendRequest:@"/servicearea" completion:^(id responseDic) {
-        NSDictionary *kmlValues = (NSDictionary *)responseDic;
+    [self sendRequest:@"/servicearea" completion:^(id responseDic, NSError *error) {
         
-        if (kmlValues == nil) {
-            return;
-        }
-        
-        // Service Area
-        NSString *strPoints;
-        
-        if ([self isAllDay])
-        {
-            // lunch exists
-            if ([self isThereLunchMenu])
-            {
-                strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-                NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
-            }
-            // if no lunch, dinner exists
-            else if ([self isThereDinnerMenu])
-            {
-                strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-                NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+        if (error == nil) {
+            NSDictionary *kmlValues = (NSDictionary *)responseDic;
+            
+            if (kmlValues == nil) {
+                return;
             }
             
-            /* The below 2 cases are probably unecessary...I was hardcoding the value for isAllDay to YES when there was no menu, so the app hanged */
+            // Service Area
+            NSString *strPoints;
             
-            // 12:00am - dinner opening (ie. 16.5)
-            else if (currentTime >= 0 && currentTime < dinnerTime)
+            if ([self isAllDay])
             {
-                strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-                NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+                // lunch exists
+                if ([self isThereLunchMenu])
+                {
+                    strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+                    NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+                }
+                // if no lunch, dinner exists
+                else if ([self isThereDinnerMenu])
+                {
+                    strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+                    NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+                }
+                
+                /* The below 2 cases are probably unecessary...I was hardcoding the value for isAllDay to YES when there was no menu, so the app hanged */
+                
+                // 12:00am - dinner opening (ie. 16.5)
+                else if (currentTime >= 0 && currentTime < dinnerTime)
+                {
+                    strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+                    NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+                }
+                // dinner opening - 11:59pm
+                else if (currentTime >= dinnerTime && currentTime < 24)
+                {
+                    strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+                    NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+                }
             }
-            // dinner opening - 11:59pm
-            else if (currentTime >= dinnerTime && currentTime < 24)
+            else
             {
-                strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-                NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
-            }
-        }
-        else
-        {
-            // 12:00am - dinner opening (ie. 16.5)
-            if (currentTime >= 0 && currentTime < dinnerTime)
-            {
-                strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-                NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
-            }
-            // dinner opening - 11:59pm
-            else if (currentTime >= dinnerTime && currentTime < 24)
-            {
-                strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-                NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
-            }
-        }
-        
-        if (strPoints == nil) {
-            NSLog(@"WARNING!!! SERVICE AREA strPoints == nil");
-        }
-        
-        NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
-        
-        // Parse String and Separate Latitude and Longitude.
-        CLLocationCoordinate2D *locations = (CLLocationCoordinate2D *)malloc(sizeof(CLLocationCoordinate2D) * (subStrings.count - 1));
-        
-        NSInteger posCount = 0;
-        for (NSInteger posIndex = 0; posIndex < subStrings.count - 1; posIndex++)
-        {
-            NSString *strPoint = [subStrings objectAtIndex:posIndex];
-            NSArray *subComponents = [strPoint componentsSeparatedByString:@","];
-            
-            double latitude = 0, longitude = 0;
-            for (NSInteger index = 0; index < subComponents.count; index++)
-            {
-                NSString *strComponent = [subComponents objectAtIndex:index];
-                if (index == 0)
-                    longitude = [strComponent doubleValue];
-                else if (index == 1)
-                    latitude = [strComponent doubleValue];
+                // 12:00am - dinner opening (ie. 16.5)
+                if (currentTime >= 0 && currentTime < dinnerTime)
+                {
+                    strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
+                    NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
+                }
+                // dinner opening - 11:59pm
+                else if (currentTime >= dinnerTime && currentTime < 24)
+                {
+                    strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
+                    NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
+                }
             }
             
-            if (latitude == 0 && longitude == 0)
-                continue;
+            if (strPoints == nil) {
+                NSLog(@"WARNING!!! SERVICE AREA strPoints == nil");
+            }
             
-            posCount ++;
-            locations[posIndex] = CLLocationCoordinate2DMake(latitude, longitude);
+            NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
+            
+            // Parse String and Separate Latitude and Longitude.
+            CLLocationCoordinate2D *locations = (CLLocationCoordinate2D *)malloc(sizeof(CLLocationCoordinate2D) * (subStrings.count - 1));
+            
+            NSInteger posCount = 0;
+            for (NSInteger posIndex = 0; posIndex < subStrings.count - 1; posIndex++)
+            {
+                NSString *strPoint = [subStrings objectAtIndex:posIndex];
+                NSArray *subComponents = [strPoint componentsSeparatedByString:@","];
+                
+                double latitude = 0, longitude = 0;
+                for (NSInteger index = 0; index < subComponents.count; index++)
+                {
+                    NSString *strComponent = [subComponents objectAtIndex:index];
+                    if (index == 0)
+                        longitude = [strComponent doubleValue];
+                    else if (index == 1)
+                        latitude = [strComponent doubleValue];
+                }
+                
+                if (latitude == 0 && longitude == 0)
+                    continue;
+                
+                posCount ++;
+                locations[posIndex] = CLLocationCoordinate2DMake(latitude, longitude);
+            }
+            
+            if (posCount > 0)
+                self.serviceArea = [MKPolygon polygonWithCoordinates:locations count:subStrings.count - 1];
+            
+            free(locations);
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_AREA object:nil];
         }
-        
-        if (posCount > 0)
-            self.serviceArea = [MKPolygon polygonWithCoordinates:locations count:subStrings.count - 1];
-        
-        free(locations);
-        
-        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_AREA object:nil];
+        else {
+            NSLog(@"/servicearea error: %@", error);
+        }
     }];
 }
 

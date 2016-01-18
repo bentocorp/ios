@@ -485,7 +485,6 @@
             }
             // outside zone
             else {
-                NSLog(@"leilomei!!!");
                 [self gotoNoneDeliveryAreaScreen];
             }
         }];
