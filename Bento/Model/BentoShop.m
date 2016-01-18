@@ -922,13 +922,10 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
         return NO;
     }
     
-    if (self.dicStatus == nil)
+    if ([[self getAppState] containsString:@"closed_wall"]) {
         return YES;
+    }
     
-    NSString *strOverallStatus = self.dicStatus[@"overall"][@"value"];
-    if ([strOverallStatus isEqualToString:@"closed"])
-        return YES;
-
     return NO;
 }
 
@@ -939,12 +936,9 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
         return NO;
     }
     
-    if (self.dicStatus == nil)
+    if ([[self getAppState] containsString:@"soldout_wall"]) {
         return YES;
-    
-    NSString *strOverallStatus = self.dicStatus[@"overall"][@"value"];
-    if ([strOverallStatus isEqualToString:@"sold out"])
-        return YES;
+    }
     
     return NO;
 }
