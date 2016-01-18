@@ -32,8 +32,6 @@
 @interface BentoShop () <CLLocationManagerDelegate>
 
 @property (nonatomic) NSDictionary *dicInit2;
-@property (nonatomic) NSDictionary *dicInit2WithGateKeeper;
-@property (nonatomic) NSDictionary *dicGateKeeper;
 @property (nonatomic) NSDictionary *dicStatus;
 @property (nonatomic) NSDictionary *menuToday;
 @property (nonatomic) NSDictionary *menuNext;
@@ -175,36 +173,36 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
     NSString *strDate = [self getDateString];
     
     [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic) {
-        self.dicInit2WithGateKeeper = (NSDictionary *)responseDic;
-        self.dicGateKeeper = self.dicInit2WithGateKeeper[@"/gatekeeper/here/{lat}/{long}"];
+        self.dicInit2 = (NSDictionary *)responseDic;
         
         [self getAppState];
     }];
 }
 
+#pragma GateKeeper Data
 - (NSString *)getAppState {
-    NSLog(@"appState - %@", self.dicGateKeeper[@"appState"]);
-    return self.dicGateKeeper[@"appState"];
+    return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"appState"];
 }
 
-typedef void (^SavedLocationCheckBlock)(BOOL isSavedLocationInZone);
-- (void)checkIfSavedLocationIsInAnyZone:(SavedLocationCheckBlock)completion {
-    NSString *strDate = [self getDateString];
-    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+- (BOOL)isInAnyZone {
+    return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"];
+}
 
-    if (placeInfo != nil) {
-        [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, placeInfo.location.coordinate.latitude, placeInfo.location.coordinate.longitude] completion:^(id responseDic) {
-            
-            NSDictionary *init2 = (NSDictionary *)responseDic;
-            
-            if ((BOOL)init2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"] == YES) {
-                completion(YES);
-            }
-            else {
-                completion(NO);
-            }
-        }];
-    }
+typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
+- (void)checkIfSelectedLocationIsInAnyZone:(float)lat lng:(float)lng completion:(SelectedLocationCheckBlock)completion {
+    NSString *strDate = [self getDateString];
+
+    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic) {
+        
+        NSDictionary *init2 = (NSDictionary *)responseDic;
+        
+        if ((BOOL)init2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"] == YES) {
+            completion(YES);
+        }
+        else {
+            completion(NO);
+        }
+    }];
 }
 
 #pragma Location Services
@@ -1382,10 +1380,6 @@ typedef void (^SavedLocationCheckBlock)(BOOL isSavedLocationInZone);
 //    
 //    return pointIsInPolygon;
 //}
-
-- (BOOL)isInAnyZone {
-    return self.dicGateKeeper[@"isInAnyZone"];
-}
 
 - (NSInteger)getTotalBentoCount
 {
