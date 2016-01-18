@@ -187,20 +187,11 @@
 
 - (void)checkAppState {
     NSString *appState = [[BentoShop sharedInstance] getAppState];
-    
-    if ([appState isEqualToString:@"map,no_service_wall"]) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-        [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-    }
-    else if ([appState isEqualToString:@"closed_wall"]) {
+    if ([appState isEqualToString:@"closed_wall"]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
     }
     else if ([appState isEqualToString:@"soldout_wall"]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-    }
-    else if ([appState isEqualToString:@"build"]) {
-        
     }
 }
 
@@ -235,6 +226,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkAppState) name:@"checkAppState" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkAppState) name:@"enteredForeground" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
