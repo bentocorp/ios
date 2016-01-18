@@ -132,14 +132,14 @@
 - (void)checkLocationOnLoad {
     /* Logic
      
-    On launching homepage...
+    On loading build screen for first time on launch...
     
-    - yes gps -> use gps to check location
-        - out of zone -> show map
+    - yes gps -> use gps coordinate to check location
+        - gps coordinate is out of zone -> show map
     
     - no gps
-        - if yes saved location
-            - out of zone -> show map
+        - if saved location exists
+            - saved location is out of zone -> show map
     
         - if no saved location -> show map
     */

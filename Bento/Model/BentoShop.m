@@ -211,7 +211,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
         if (error == nil) {
             NSDictionary *init2 = (NSDictionary *)responseDic;
             
-            BOOL isInAnyZone = (BOOL)init2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"];
+            NSNumber *isInAnyZoneNumber = (NSNumber *)init2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"];
+            BOOL isInAnyZone = [isInAnyZoneNumber boolValue];
             
             if (isInAnyZone) {
                 completion(YES);
