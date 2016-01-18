@@ -177,13 +177,29 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
     [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic) {
         self.dicInit2WithGateKeeper = (NSDictionary *)responseDic;
         self.dicGateKeeper = self.dicInit2WithGateKeeper[@"/gatekeeper/here/{lat}/{long}"];
-        [self getAppState];
+//        [self getAppState];
     }];
 }
 
 - (NSString *)getAppState {
     NSLog(@"appState - %@", self.dicGateKeeper[@"appState"]);
     return self.dicGateKeeper[@"appState"];
+}
+
+typedef void (^SavedLocationBlock)(BOOL success);
+- (void)isSavedLocationInZone:(SavedLocationBlock)success {
+    
+//    if (placeInfo != nil) {
+//        [self requestGateKeeper:placeInfo.location.coordinate.latitude lng:placeInfo.location.coordinate.longitude];
+//    }
+    
+    NSString *strDate = [self getDateString];
+    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    
+    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, placeInfo.location.coordinate.latitude, placeInfo.location.coordinate.longitude] completion:^(id responseDic) {
+        self.dicInit2WithGateKeeper = (NSDictionary *)responseDic;
+        self.dicGateKeeper = self.dicInit2WithGateKeeper[@"/gatekeeper/here/{lat}/{long}"];
+    }];
 }
 
 #pragma Location Services
