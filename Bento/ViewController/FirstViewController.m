@@ -413,6 +413,7 @@
 - (void)gotoMyBentoScreen {
     
     BOOL needsAnimation = YES;
+    
     if (![[BentoShop sharedInstance] isInAnyZone] && [[DataManager shareDataManager] getUserInfo] == nil) {
         needsAnimation = NO;
     }

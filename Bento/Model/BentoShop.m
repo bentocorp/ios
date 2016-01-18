@@ -199,7 +199,7 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 }
 
 - (BOOL)isInAnyZone {
-    return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"];
+    return (BOOL)self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"];
 }
 
 typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
@@ -211,7 +211,9 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
         if (error == nil) {
             NSDictionary *init2 = (NSDictionary *)responseDic;
             
-            if ((BOOL)init2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"] == YES) {
+            BOOL isInAnyZone = (BOOL)init2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"];
+            
+            if (isInAnyZone) {
                 completion(YES);
             }
             else {
