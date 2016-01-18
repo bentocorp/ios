@@ -312,7 +312,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         [globalShop getStatus];
         [globalShop getMenus];
         [globalShop getNextMenus];
-        [[AppStrings sharedInstance] getAppStrings];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
     

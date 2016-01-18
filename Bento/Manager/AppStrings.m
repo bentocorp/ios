@@ -46,31 +46,6 @@ static AppStrings *_shareInstance;
     return self;
 }
 
-- (void)getAppStrings
-{
-    NSString *strRequest = [NSString stringWithFormat:@"%@/ioscopy", SERVER_URL];
-    NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:strRequest]];
-    NSURLResponse *response = nil;
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:urlRequest returningResponse:&response error:&error];
-    if (data == nil)
-        return;
-    
-    NSInteger statusCode = 0;
-    if ([response isKindOfClass:[NSHTTPURLResponse class]])
-        statusCode = [(NSHTTPURLResponse *)response statusCode];
-    
-    if (error != nil || statusCode != 200)
-        return;
-    
-    NSError *parseError = nil;
-    NSArray *aryRet = [NSJSONSerialization JSONObjectWithData:data options:0 error:&parseError];
-    if (aryRet == nil)
-        return;
-    
-    self.appStrings = [aryRet copy];
-}
-
 - (NSURL *)getURL:(NSString *)strKey
 {
     if (self.appStrings == nil)

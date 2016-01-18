@@ -145,7 +145,7 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
             
             [self getiOSMinAndCurrentVersions];
             [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-            [self setLunchOrDinnerModeByTimes];
+            [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
         }
         else {
             NSLog(@"getInit2 error: %@", error);
@@ -176,13 +176,14 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 - (void)requestGateKeeper:(CLLocationCoordinate2D)coordinate {
     NSString *strDate = [self getDateStringWithDashes];
     
-    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude] completion:^(id responseDic, NSError *error) {
+    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=1&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude] completion:^(id responseDic, NSError *error) {
         
         if (error == nil) {
             self.dicInit2 = (NSDictionary *)responseDic;
             
             [self getiOSMinAndCurrentVersions];
             [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+            [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
             
             [self getAppState];
         }
@@ -264,9 +265,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
             NSString *newStatus = self.dicStatus[@"overall"][@"value"];
             
             if (![originalStatus isEqualToString:newStatus])
-            {
-                [[AppStrings sharedInstance] getAppStrings];
-                
+            {   
                 originalStatus = @"";
                 
                 NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");

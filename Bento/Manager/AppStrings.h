@@ -220,7 +220,6 @@
 + (AppStrings *)sharedInstance;
 + (void)releaseInstance;
 
-- (void)getAppStrings;
 - (NSURL *)getURL:(NSString *)strKey;
 - (NSString *)getString:(NSString *)strKey;
 - (NSInteger)getInteger:(NSString *)strKey;

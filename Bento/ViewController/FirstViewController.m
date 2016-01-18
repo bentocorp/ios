@@ -154,8 +154,6 @@
     [self.activityIndicator startAnimating];
     [[NSRunLoop currentRunLoop] runUntilDate:[NSDate dateWithTimeIntervalSinceNow:0.1f]];
     
-    [[AppStrings sharedInstance] getAppStrings];
-    
     NSURL *urlBack = [[BentoShop sharedInstance] getMenuImageURL];
     [self.ivBackground sd_setImageWithURL:urlBack placeholderImage:[UIImage imageNamed:@"first_background"]];
     
@@ -208,7 +206,6 @@
             }
             
             [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-            [[AppStrings sharedInstance] getAppStrings];
             [[BentoShop sharedInstance] getMenus];
             [[BentoShop sharedInstance] getNextMenus];
             [[BentoShop sharedInstance] getStatus];

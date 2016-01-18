@@ -121,8 +121,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
 - (void)saveBentoArray;
 - (void)resetBentoArray;
 
-- (void)checkIfBentoArrayNeedsToBeReset;
-- (void)setLunchOrDinnerModeByTimes;
+//- (void)checkIfBentoArrayNeedsToBeReset;
 
 - (NSString *)getUnitPrice;
 - (NSString *)getSalePrice;
