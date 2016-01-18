@@ -26,9 +26,7 @@
 #import "NSUserDefaults+RMSaveCustomObject.h"
 #import "SVPlacemark.h"
 
-@interface OutOfDeliveryAddressViewController () <UIWebViewDelegate>
-
-@property (nonatomic, weak) IBOutlet MKMapView *mapView;
+@interface OutOfDeliveryAddressViewController () /*<UIWebViewDelegate>*/
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
@@ -44,7 +42,7 @@
 
 @property (nonatomic, weak) IBOutlet UIButton *btnSend;
 
-@property (nonatomic, weak) IBOutlet UIWebView *webView;
+//@property (nonatomic, weak) IBOutlet UIWebView *webView;
 
 @end
 
@@ -115,13 +113,13 @@
     self.txtEmail.placeholder = [[AppStrings sharedInstance] getString:OUTOFAREA_PLACEHOLDER_EMAIL];
     [self.btnSend setTitle:[[AppStrings sharedInstance] getString:OUTOFAREA_BUTTON_RECEIVE_COUPON] forState:UIControlStateNormal];
     
-    MKPolygon *polygon = [[BentoShop sharedInstance] getPolygon];
-    [self.mapView addOverlay:polygon];
-    
-    MKMapRect curRect = [polygon boundingMapRect];
-    UIEdgeInsets insets = UIEdgeInsetsMake(50, 50, 50, 50);
-    MKMapRect newRect = [self.mapView mapRectThatFits:curRect edgePadding:insets];
-    [self.mapView setRegion:MKCoordinateRegionForMapRect(newRect)];
+//    MKPolygon *polygon = [[BentoShop sharedInstance] getPolygon];
+//    [self.mapView addOverlay:polygon];
+//    
+//    MKMapRect curRect = [polygon boundingMapRect];
+//    UIEdgeInsets insets = UIEdgeInsetsMake(50, 50, 50, 50);
+//    MKMapRect newRect = [self.mapView mapRectThatFits:curRect edgePadding:insets];
+//    [self.mapView setRegion:MKCoordinateRegionForMapRect(newRect)];
     
     [self.lblAddress setText:self.strAddress];
     
@@ -155,15 +153,15 @@
             url = [NSURL URLWithString:[[BentoShop sharedInstance] getDinnerMapURL]];
     }
     
-    NSURLRequest *request = [NSURLRequest requestWithURL:url];
-    [self.webView loadRequest:request];
+//    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+//    [self.webView loadRequest:request];
+//    
+//    viewActivity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(self.webView.frame.size.width/2-10, self.webView.frame.size.width/2-40, 20, 20)];
+//    viewActivity.color = [UIColor grayColor];
+//    [self.webView addSubview:viewActivity];
     
-    viewActivity = [[UIActivityIndicatorView alloc] initWithFrame:CGRectMake(self.webView.frame.size.width/2-10, self.webView.frame.size.width/2-40, 20, 20)];
-    viewActivity.color = [UIColor grayColor];
-    [self.webView addSubview:viewActivity];
-    
-    viewActivity.hidden = NO;
-    [viewActivity startAnimating];
+//    viewActivity.hidden = NO;
+//    [viewActivity startAnimating];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -367,38 +365,38 @@
     return YES;
 }
 
-#pragma mark MKMapViewDelegate
-
-- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay
-{
-    MKPolygonRenderer *polygonView = [[MKPolygonRenderer alloc] initWithOverlay:overlay];
-    polygonView.alpha = 0.3f;
-    polygonView.lineWidth = 1.0;
-    polygonView.strokeColor = [UIColor redColor];
-    polygonView.fillColor = [UIColor greenColor];
-    return polygonView;
-}
-
-#pragma mark UIWebViewDelegate
-
-- (void)hideActivityView
-{
-    [viewActivity stopAnimating];
-    viewActivity.hidden = YES;
-}
-
-- (void)webViewDidFinishLoad:(UIWebView *)webView
-{
-    [self hideActivityView];
-}
-
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
-    [self hideActivityView];
-    
-    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
-    [alertView showInView:self.view];
-    alertView = nil;
-}
+//#pragma mark MKMapViewDelegate
+//
+//- (MKOverlayRenderer *)mapView:(MKMapView *)mapView rendererForOverlay:(id <MKOverlay>)overlay
+//{
+//    MKPolygonRenderer *polygonView = [[MKPolygonRenderer alloc] initWithOverlay:overlay];
+//    polygonView.alpha = 0.3f;
+//    polygonView.lineWidth = 1.0;
+//    polygonView.strokeColor = [UIColor redColor];
+//    polygonView.fillColor = [UIColor greenColor];
+//    return polygonView;
+//}
+//
+//#pragma mark UIWebViewDelegate
+//
+//- (void)hideActivityView
+//{
+//    [viewActivity stopAnimating];
+//    viewActivity.hidden = YES;
+//}
+//
+//- (void)webViewDidFinishLoad:(UIWebView *)webView
+//{
+//    [self hideActivityView];
+//}
+//
+//- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
+//{
+//    [self hideActivityView];
+//    
+//    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:error.description delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+//    [alertView showInView:self.view];
+//    alertView = nil;
+//}
 
 @end
