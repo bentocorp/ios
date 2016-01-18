@@ -142,11 +142,11 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/SignIn/SignInViewController.m"
-                  timestampString = "474767114.34078"
+                  timestampString = "474775804.193185"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "462"
-                  endingLineNumber = "462"
+                  startingLineNumber = "449"
+                  endingLineNumber = "449"
                   offsetFromSymbolStart = "354">
                </Location>
                <Location
@@ -157,11 +157,11 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/SignIn/SignInViewController.m"
-                  timestampString = "474767114.34094"
+                  timestampString = "474775804.193326"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "462"
-                  endingLineNumber = "462"
+                  startingLineNumber = "449"
+                  endingLineNumber = "449"
                   offsetFromSymbolStart = "70">
                </Location>
             </Locations>
@@ -386,22 +386,6 @@
             startingLineNumber = "210"
             endingLineNumber = "210"
             landmarkName = "-checkOrderMode"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bento/Model/BentoShop.m"
-            timestampString = "474767114.255881"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "186"
-            endingLineNumber = "186"
-            landmarkName = "-getAppState"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

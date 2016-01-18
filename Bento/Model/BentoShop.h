@@ -50,7 +50,7 @@
 - (void)setStatus:(NSArray *)menuStatus;
 - (void)getMenus;
 - (void)getNextMenus;
-- (void)getServiceArea;
+//- (void)getServiceArea;
 
 - (void)setBranchParams:(NSDictionary *)params;
 - (NSDictionary *)getBranchParams;

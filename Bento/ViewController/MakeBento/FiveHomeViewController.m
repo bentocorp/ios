@@ -121,19 +121,6 @@
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
     
-    /*---If No Location Set Yet---*/
-    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    CLLocationCoordinate2D location = [delegate getCurrentLocation];
-    BentoShop *globalShop = [BentoShop sharedInstance];
-    if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil) {
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-    }
-    
     // an empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
         [[BentoShop sharedInstance] addNewBento];
@@ -147,6 +134,18 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+        
+        // not logged in and out of zone
+        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+        CLLocationCoordinate2D location = [delegate getCurrentLocation];
+        if (![[BentoShop sharedInstance] checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil) {
+            
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+        }
+        
+        
     }
     else if ([appState isEqualToString:@"closed_wall"]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
