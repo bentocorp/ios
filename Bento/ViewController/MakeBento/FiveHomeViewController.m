@@ -1238,17 +1238,14 @@
         }
         // has saved address
         else {
-            // check if saved address is inside CURRENT service area
-            CLLocationCoordinate2D location = placeInfo.location.coordinate;
-            
-            // outside service area
-            if (![[BentoShop sharedInstance] checkLocation:location]) {
-                [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-            }
-            // inisde service area
-            else {
-                [self.navigationController pushViewController:completeOrderViewController animated:YES];
-            }
+            [[BentoShop sharedInstance] checkIfSavedLocationIsInAnyZone:^(BOOL isSavedLocationInZone) {
+                if (isSavedLocationInZone) {
+                    [self.navigationController pushViewController:completeOrderViewController animated:YES];
+                }
+                else {
+                    [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+                }
+            }];
         }
     }
 }

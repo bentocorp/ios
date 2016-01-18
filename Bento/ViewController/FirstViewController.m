@@ -213,7 +213,7 @@
             [[BentoShop sharedInstance] getMenus];
             [[BentoShop sharedInstance] getNextMenus];
             [[BentoShop sharedInstance] getStatus];
-//            [[BentoShop sharedInstance] getServiceArea];
+            [[BentoShop sharedInstance] getServiceArea];
         }
     
         dispatch_async(dispatch_get_main_queue(), ^{

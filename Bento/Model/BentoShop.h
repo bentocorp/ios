@@ -50,7 +50,7 @@
 - (void)setStatus:(NSArray *)menuStatus;
 - (void)getMenus;
 - (void)getNextMenus;
-//- (void)getServiceArea;
+- (void)getServiceArea;
 
 - (void)setBranchParams:(NSDictionary *)params;
 - (NSDictionary *)getBranchParams;
@@ -100,9 +100,11 @@
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID;
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID;
 
-//- (MKPolygon *)getPolygon;
+- (MKPolygon *)getPolygon;
 //- (BOOL)checkLocation:(CLLocationCoordinate2D)location;
 - (BOOL)isInAnyZone;
+typedef void (^SavedLocationCheckBlock)(BOOL isSavedLocationInZone);
+- (void)checkIfSavedLocationIsInAnyZone:(SavedLocationCheckBlock)completion;
 
 - (NSInteger)getTotalBentoCount;
 - (NSInteger)getCompletedBentoCount;
