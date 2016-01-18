@@ -269,49 +269,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             
 /*--------------------------------------------------------------------*/
             
-            // Date Change, reset
-            NSLog(@"ORIGINAL DATE STRING ON LAUNCH: %@", [[BentoShop sharedInstance] getMenuDateString]);
-            [[NSUserDefaults standardUserDefaults] setObject:[[BentoShop sharedInstance] getMenuDateString] forKey:@"OriginalDateString"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            /*-------*/
-            
-            // Lunch/Dinner Times Changed, reset
-            float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-            float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
-
-            // 12:00am - dinner opening
-            if (currentTime >= 0 && currentTime < dinnerTime)
-            {
-                // this is only set once in the lifetime of the app because subsequent changes to original will be made in didModeOrDateChange
-                if (![[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]) {
-                    [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"OriginalLunchOrDinnerMode"];
-                }
-                
-                [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
-            }
-            // dinner opening - 11:59pm
-            else if (currentTime >= dinnerTime && currentTime < 24)
-            {
-                // this is only set once in the lifetime of the app because subsequent changes to original will be made in didModeOrDateChange
-                if (![[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]) {
-                    [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"OriginalLunchOrDinnerMode"];
-                }
-                
-                [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
-            }
-            
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            NSLog(@"ORIGNAL LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"]);
-            NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
-            
-            /*-------*/
-            
-            [globalShop didModeOrDateChange];
-            
-            /*-----------------------*/
-            
             [[BentoShop sharedInstance] setLunchOrDinnerModeByTimes];
         });
     });

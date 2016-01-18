@@ -91,8 +91,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"checkModeOrDateChange" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCurrentMode) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
@@ -133,17 +131,6 @@
 {
     [loadingHUD dismiss];
     loadingHUD = nil;
-}
-
-- (void)checkCurrentMode
-{
-    if ([[BentoShop sharedInstance] didModeOrDateChange])
-    {
-        [(UINavigationController *)self.presentingViewController popToRootViewControllerAnimated:NO];
-        [self dismissViewControllerAnimated:YES completion:nil];
-        
-        [self.navigationController popToRootViewControllerAnimated:YES];
-    }
 }
 
 - (IBAction)onAnothorBento:(id)sender {

@@ -121,8 +121,6 @@
 - (void)checkIfBentoArrayNeedsToBeReset;
 - (void)setLunchOrDinnerModeByTimes;
 
-- (BOOL)didModeOrDateChange;
-
 - (NSString *)getUnitPrice;
 - (NSString *)getSalePrice;
 - (float)getDeliveryPrice;

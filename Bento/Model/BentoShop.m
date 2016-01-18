@@ -1063,8 +1063,6 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
                 [self getServiceArea];
             }
         });
-        
-        [self checkModeOrDateChange];
     }
     
     _isCallingApi = NO;
@@ -1501,74 +1499,6 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
             [[AddonList sharedInstance] emptyList];
         }
     });
-}
-
-#pragma mark Response to State Change
-
-- (void)checkModeOrDateChange
-{
-    // lunch/dinner times changed, reset
-    // set currentMode
-    
-    // 12:00am - dinner opening (ie. 16.5)
-    if (currentTime >= 0 && currentTime < dinnerTime) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
-    }
-    // dinner opening - 11:59pm
-    else if (currentTime >= dinnerTime && currentTime < 24) {
-        [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
-    }
-    
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"checkModeOrDateChange" object:nil];
-}
-
-- (BOOL)didModeOrDateChange
-{
-    NSString *originalDateString = [[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalDateString"];
-    NSString *newDateString = [self getMenuDateString];
-    
-    NSLog(@"orig - %@, new - %@", originalDateString, newDateString);
-    
-    BOOL shouldReset = NO;
-    
-    // if nothing changed, most likely because there's no menu for today, date string returns nil
-    if (originalDateString == nil && newDateString == nil) {
-        [[NSUserDefaults standardUserDefaults] setObject:newDateString forKey:@"OriginalDateString"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        // should not reset
-    }
-    // if date changed - or if mode changes to/from nil menu (meaning app could not get the date string from nil menu)
-    else if (![originalDateString isEqualToString:newDateString]) {
-        [[NSUserDefaults standardUserDefaults] setObject:newDateString forKey:@"OriginalDateString"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    
-        [self resetBentoArray];
-    
-        shouldReset = YES;
-    }
-    
-    // if mode changed, and is not all-day
-    if (![[[NSUserDefaults standardUserDefaults] objectForKey:@"OriginalLunchOrDinnerMode"] isEqualToString:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]] && [[BentoShop sharedInstance] isAllDay] == NO) {
-        
-        // reset originalLunchOrDinnerMode with newLunchOrDinnerMode
-        [[NSUserDefaults standardUserDefaults] setObject:[[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]
-                                                  forKey:@"OriginalLunchOrDinnerMode"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        [self resetBentoArray];
-        
-        shouldReset = YES;
-    }
-    
-    // reset auto view add-ons flag
-    if (shouldReset) {
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"AutoShowAddons"];
-    }
-    
-    return shouldReset;
 }
 
 - (void)setSignInStatus:(BOOL)status
