@@ -374,17 +374,6 @@
     return @(nD*1000);
 }
 
-// getter
-- (CLLocationCoordinate2D )getCurrentLocation
-{
-#if (TARGET_IPHONE_SIMULATOR)
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:33.571895f longitude:-117.7379837036132f];
-    return location.coordinate;
-#endif
-    
-    return coordinate;
-}
-
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
 }

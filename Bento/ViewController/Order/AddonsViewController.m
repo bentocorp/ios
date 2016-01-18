@@ -172,18 +172,6 @@
     attributedTitle = nil;
     
     [self.view addSubview:btnState];
-    
-    /*-----*/
-    
-    if (![[BentoShop sharedInstance] isInAnyZone] && [[DataManager shareDataManager] getUserInfo] == nil) {
-        
-        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-        
-        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-        DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-        [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
-    }
 }
 
 - (void)didReceiveMemoryWarning {

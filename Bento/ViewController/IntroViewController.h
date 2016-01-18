@@ -9,9 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CoreLocation/CoreLocation.h>
 
-@interface IntroViewController : UIViewController <CLLocationManagerDelegate>
-
-// Get my current location using CLLocationManager
-- (CLLocationCoordinate2D )getCurrentLocation;
+@interface IntroViewController : UIViewController
 
 @end

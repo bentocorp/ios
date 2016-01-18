@@ -588,21 +588,16 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     [manager stopUpdatingLocation];
     
-    /*---Mixpanel tracking Opened App Outside of Service Area---*/
-    if ([[BentoShop sharedInstance] isInAnyZone] == NO) {
-        [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
-    }
-    
-    [self trackAppLaunch: YES];
+    [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:coordinate.latitude lng:coordinate.longitude completion:^(BOOL isSelectedLocationInZone) {
+        if (isSelectedLocationInZone == NO) {
+            [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
+        }
+        
+        [self trackAppLaunch: YES];
+    }];
 }
 
-- (CLLocationCoordinate2D )getCurrentLocation
-{
-#if (TARGET_IPHONE_SIMULATOR)
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:33.571895f longitude:-117.7379837036132f];
-    return location.coordinate;
-#endif
-    
+- (CLLocationCoordinate2D)getGPSLocation {
     return coordinate;
 }
 

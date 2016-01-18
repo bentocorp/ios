@@ -131,7 +131,10 @@
         // Move to current location and zoom enough
         MKCoordinateRegion mapRegion;
         AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-        CLLocationCoordinate2D curLocation = [appDelegate getCurrentLocation];
+        
+        CLLocationCoordinate2D curLocation = [appDelegate getGPSLocation];
+        
+        // gps coordinate wasn't set
         if (curLocation.latitude == 0 && curLocation.longitude == 0) {
             // Move to delivery location
             MKMapRect curRect = [polygon boundingMapRect];
@@ -139,6 +142,7 @@
             MKMapRect newRect = [self.mapView mapRectThatFits:curRect edgePadding:insets];
             [self.mapView setRegion:MKCoordinateRegionForMapRect(newRect)];
         }
+        // gps coordinate is set
         else {
             mapRegion.center = curLocation;
             mapRegion.span.latitudeDelta = 0.005;
@@ -298,30 +302,33 @@
     [self stopSearch];
     
     if (self.placeInfo == nil) {
-        
         [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController popViewControllerAnimated:YES];
         
-    } else {
-        if (![[BentoShop sharedInstance] isInAnyZone]) {
-            [self gotoNoneDeliveryAreaScreen];
-        } else {
-            [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            
-            [self.navigationController popViewControllerAnimated:YES];
-            
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isFromHomepage"] isEqualToString:@"YES"])
-            {
-                UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-                CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
-                [self.navigationController pushViewController:completeOrderViewController animated:YES];
-                
-                [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isFromHomepage"];
-                [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    else {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate.latitude lng:self.placeInfo.location.coordinate.longitude completion:^(BOOL isSelectedLocationInZone) {
+            if (isSelectedLocationInZone == NO) {
+                [self gotoNoneDeliveryAreaScreen];
             }
-        }
+            else {
+                [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
+                [[NSUserDefaults standardUserDefaults] synchronize];
+                
+                [self.navigationController popViewControllerAnimated:YES];
+                
+                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"isFromHomepage"] isEqualToString:@"YES"])
+                {
+                    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+                    CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+                    [self.navigationController pushViewController:completeOrderViewController animated:YES];
+                    
+                    [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isFromHomepage"];
+                    [[NSUserDefaults standardUserDefaults] synchronize];
+                }
+            }
+        }];
     }
 }
 
@@ -466,19 +473,22 @@
             return;
         }
         
-        // outside delivery zone
-        if (![[BentoShop sharedInstance] isInAnyZone]) {
-            [self gotoNoneDeliveryAreaScreen];
-        }
-        // inside delivery zone
-        else {
-            [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
-            [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude] forKey:@"savedLongitude"];
-            [NSUserDefaults standardUserDefaults];
-            
-            [self gotoAddAnotherBentoScreen];
-        }
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate.latitude lng:self.placeInfo.location.coordinate.longitude completion:^(BOOL isSelectedLocationInZone) {
+            // inside zone
+            if (isSelectedLocationInZone) {
+                [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
+                [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude] forKey:@"savedLongitude"];
+                [NSUserDefaults standardUserDefaults];
+                
+                [self gotoAddAnotherBentoScreen];
+            }
+            // outside zone
+            else {
+                NSLog(@"leilomei!!!");
+                [self gotoNoneDeliveryAreaScreen];
+            }
+        }];
     }
     else {
         [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
@@ -490,7 +500,6 @@
 }
 
 - (void)gotoNoneDeliveryAreaScreen {
-    
     [self stopSearch];
     [self performSegueWithIdentifier:@"OutOfDelivery" sender:self.placeInfo.formattedAddress];
 }

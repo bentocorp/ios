@@ -125,6 +125,64 @@
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
         [[BentoShop sharedInstance] addNewBento];
     }
+    
+    [self checkLocationOnLoad];
+}
+
+- (void)checkLocationOnLoad {
+    /* Logic
+     
+    On launching homepage...
+    
+    - yes gps -> use gps to check location
+        - out of zone -> show map
+    
+    - no gps
+        - if yes saved location
+            - out of zone -> show map
+    
+        - if no saved location -> show map
+    */
+    
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    CLLocationCoordinate2D gpsLocation = [appDelegate getGPSLocation];
+    
+    // no gps
+    if (gpsLocation.latitude == 0 && gpsLocation.longitude == 0) {
+        // yes saved location
+        SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+        if (placemark != nil) {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate.latitude lng:placemark.location.coordinate.longitude completion:^(BOOL isSelectedLocationInZone) {
+                if (isSelectedLocationInZone == NO) {
+                    [self nextToBuildShowMap];
+                }
+            }];
+        }
+        // no saved location
+        else {
+            [self nextToBuildShowMap];
+        }
+    }
+    // yes gps
+    else {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation.latitude lng:gpsLocation.longitude completion:^(BOOL isSelectedLocationInZone) {
+            if (isSelectedLocationInZone == NO) {
+                [self nextToBuildShowMap];
+            }
+        }];
+    }
+    
+//    [[DataManager shareDataManager] getUserInfo] == nil
+}
+
+- (void)nextToBuildShowMap {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
 }
 
 - (void)checkAppState {
@@ -134,16 +192,6 @@
         UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
         DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
         [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-        
-        // not logged in and out of zone
-        if (![[BentoShop sharedInstance] isInAnyZone] && [[DataManager shareDataManager] getUserInfo] == nil) {
-            
-            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
-            [[NSUserDefaults standardUserDefaults] synchronize];
-            [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
-        }
-        
-        
     }
     else if ([appState isEqualToString:@"closed_wall"]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
@@ -1219,14 +1267,16 @@
         else {
             // check if saved address is inside CURRENT service area
             
-            [[BentoShop sharedInstance] checkIfSavedLocationIsInAnyZone:^(BOOL isSavedLocationInZone) {
-                if (isSavedLocationInZone) {
-                    [self openAccountViewController:[CompleteOrderViewController class]];
-                }
-                else {
-                    [self openAccountViewController:[DeliveryLocationViewController class]];
-                }
-            }];
+            
+            
+//            [[BentoShop sharedInstance] checkIfSavedLocationIsInAnyZone:^(BOOL isSavedLocationInZone) {
+//                if (isSavedLocationInZone) {
+//                    [self openAccountViewController:[CompleteOrderViewController class]];
+//                }
+//                else {
+//                    [self openAccountViewController:[DeliveryLocationViewController class]];
+//                }
+//            }];
         }
     }
     // logged in
@@ -1237,14 +1287,14 @@
         }
         // has saved address
         else {
-            [[BentoShop sharedInstance] checkIfSavedLocationIsInAnyZone:^(BOOL isSavedLocationInZone) {
-                if (isSavedLocationInZone) {
-                    [self.navigationController pushViewController:completeOrderViewController animated:YES];
-                }
-                else {
-                    [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-                }
-            }];
+//            [[BentoShop sharedInstance] checkIfSavedLocationIsInAnyZone:^(BOOL isSavedLocationInZone) {
+//                if (isSavedLocationInZone) {
+//                    [self.navigationController pushViewController:completeOrderViewController animated:YES];
+//                }
+//                else {
+//                    [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+//                }
+//            }];
         }
     }
 }

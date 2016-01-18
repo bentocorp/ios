@@ -14,7 +14,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 
-// Get my current location using CLLocationManager
-- (CLLocationCoordinate2D )getCurrentLocation;
+- (CLLocationCoordinate2D )getGPSLocation;
 
 @end
