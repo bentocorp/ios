@@ -176,6 +176,9 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 - (void)requestGateKeeper:(CLLocationCoordinate2D)coordinate {
     NSString *strDate = [self getDateStringWithDashes];
     
+    NSLog(@"%f", coordinate.longitude);
+    NSLog(@"%f", coordinate.latitude);
+    
     [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=1&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude] completion:^(id responseDic, NSError *error) {
         
         if (error == nil) {
@@ -184,8 +187,6 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
             [self getiOSMinAndCurrentVersions];
             [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
-            
-            [self getAppState];
         }
         else {
             NSLog(@"init2 gatekeeper error: %@", error);
