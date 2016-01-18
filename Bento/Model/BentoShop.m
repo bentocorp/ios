@@ -1329,6 +1329,7 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 //    return self.serviceArea;
 //}
 //
+
 //- (BOOL)checkLocation:(CLLocationCoordinate2D)location
 //{
 //    if (self.serviceArea == nil) {
@@ -1361,6 +1362,10 @@ typedef void (^SendRequestCompletionBlock)(id responseDic);
 //    
 //    return pointIsInPolygon;
 //}
+
+- (BOOL)isInAnyZone {
+    return self.dicGateKeeper[@"isInAnyZone"];
+}
 
 - (NSInteger)getTotalBentoCount
 {

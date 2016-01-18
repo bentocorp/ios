@@ -100,8 +100,8 @@
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID;
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID;
 
-- (MKPolygon *)getPolygon;
-- (BOOL)checkLocation:(CLLocationCoordinate2D)location;
+//- (MKPolygon *)getPolygon;
+//- (BOOL)checkLocation:(CLLocationCoordinate2D)location;
 
 - (NSInteger)getTotalBentoCount;
 - (NSInteger)getCompletedBentoCount;
