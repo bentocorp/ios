@@ -131,7 +131,7 @@
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
         [[NSUserDefaults standardUserDefaults] synchronize];
-        [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
+        [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
     }
     
     // an empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
@@ -144,16 +144,18 @@
     NSString *appState = [[BentoShop sharedInstance] getAppState];
     
     if ([appState isEqualToString:@"map,no_service_wall"]) {
-        NSLog(@"SHOW MAP");
+        UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+        DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+        [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
     }
     else if ([appState isEqualToString:@"closed_wall"]) {
-        NSLog(@"SHOW CLOSED WALL");
+        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
     }
     else if ([appState isEqualToString:@"soldout_wall"]) {
-        NSLog(@"SHOW SOLD-OUT WALL");
+        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     }
     else if ([appState isEqualToString:@"build"]) {
-        NSLog(@"SHOW BUILD");
+        
     }
 }
 
