@@ -207,7 +207,6 @@
                 [[BentoShop sharedInstance] getInit2];
             }
             
-            [[BentoShop sharedInstance] getiOSMinAndCurrentVersions];
             [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [[AppStrings sharedInstance] getAppStrings];
             [[BentoShop sharedInstance] getMenus];
@@ -420,8 +419,6 @@
     if (![[BentoShop sharedInstance] isInAnyZone] && [[DataManager shareDataManager] getUserInfo] == nil) {
         needsAnimation = NO;
     }
-    
-    [[BentoShop sharedInstance] setLunchOrDinnerModeByTimes]; // putting this here for when entering app without network connection, otherwise it wont be up to date
     
     NSDictionary *branchParams = [[BentoShop sharedInstance] getBranchParams];
     NSString *mainOrSide = branchParams[@"choose"];

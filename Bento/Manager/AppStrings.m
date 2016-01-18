@@ -69,8 +69,6 @@ static AppStrings *_shareInstance;
         return;
     
     self.appStrings = [aryRet copy];
-    
-    NSLog(@"app strings - %@", self.appStrings);
 }
 
 - (NSURL *)getURL:(NSString *)strKey

@@ -142,6 +142,10 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
     [self sendRequest:@"/init2" completion:^(id responseDic, NSError *error) {
         if (error == nil) {
             self.dicInit2 = (NSDictionary *)responseDic;
+            
+            [self getiOSMinAndCurrentVersions];
+            [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+            [self setLunchOrDinnerModeByTimes];
         }
         else {
             NSLog(@"getInit2 error: %@", error);
@@ -176,6 +180,9 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
         
         if (error == nil) {
             self.dicInit2 = (NSDictionary *)responseDic;
+            
+            [self getiOSMinAndCurrentVersions];
+            [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             
             [self getAppState];
         }
@@ -398,34 +405,24 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
     [self sendRequest:[NSString stringWithFormat:@"/menu/%@", strDate] completion:^(id responseDic, NSError *error) {
         if (error == nil) {
             self.menuToday = (NSDictionary *)responseDic[@"menus"];
+            
+            [self prefetchImages:self.menuToday];
+            
+            // if today date is not same as date from backend
+            if (![strDate isEqualToString:self.strToday])
+            {
+                [self resetBentoArray];
+                
+                self.strToday = strDate;
+                [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_MENU object:nil];
+                
+                NSLog(@"Menu - %@", self.menuToday[@"lunch"][@"MenuItems"]);
+            }
         }
         else {
             NSLog(@"/menu/date error: %@", error);
         }
     }];
-    
-    // set menuInfo and menuItems to persistent storage
-    [defaults setObject:self.menuToday[@"lunch"][@"Menu"] forKey:@"lunchMenuInfo"];
-    [defaults setObject:self.menuToday[@"dinner"][@"Menu"] forKey:@"dinnerMenuInfo"];
-    
-    NSData *dataLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuToday[@"lunch"][@"MenuItems"]];
-    NSData *dataDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuToday[@"dinner"][@"MenuItems"]];
-    [defaults setObject:dataLunch forKey:@"lunchMenuItems"];
-    [defaults setObject:dataDinner forKey:@"dinnerMenuItems"];
-    [defaults synchronize];
-    
-    [self prefetchImages:self.menuToday];
-    
-    // if today date is not same as date from backend
-    if (![strDate isEqualToString:self.strToday])
-    {
-        [self resetBentoArray];
-
-        self.strToday = strDate;
-        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_MENU object:nil];
-    }
-    
-    NSLog(@"Menu - %@", self.menuToday[@"lunch"][@"MenuItems"]);
 }
 
 - (void)getNextMenus
@@ -440,18 +437,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
             NSLog(@"/menu/next/date error: %@", error);
         }
     }];
-
-    // set menuInfo and menuItems to persistent storage
-    [defaults setObject:self.menuNext[@"lunch"][@"Menu"] forKey:@"nextLunchMenuInfo"];
-    [defaults setObject:self.menuNext[@"dinner"][@"Menu"] forKey:@"nextDinnerMenuInfo"];
-    
-    /* archive array before setting into defaults - because there may be null values for unset inventory count */
-    NSData *dataNextLunch = [NSKeyedArchiver archivedDataWithRootObject:self.menuNext[@"lunch"][@"MenuItems"]];
-    NSData *dataNextDinner = [NSKeyedArchiver archivedDataWithRootObject:self.menuNext[@"dinner"][@"MenuItems"]];
-    [defaults setObject:dataNextLunch forKey:@"nextLunchMenuItems"];
-    [defaults setObject:dataNextDinner forKey:@"nextDinnerMenuItems"];
-    
-    [defaults synchronize];
     
     [self prefetchImages:self.menuNext];
     [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
@@ -498,6 +483,24 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
     // Current Time
     NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
+    
+    /*---*/
+    
+    // Set Lunch Mode
+    if (currentTime >= 0 && currentTime < dinnerTime)
+    {
+        [defaults setObject:@"Lunch" forKey:@"LunchOrDinner"];
+        currentMode = @"Lunch";
+    }
+    else if (currentTime >= dinnerTime && currentTime < 24)
+    {
+        [defaults setObject:@"Dinner" forKey:@"LunchOrDinner"];
+        currentMode = @"Dinner";
+    }
+    
+    [defaults synchronize];
+    
+    NSLog(@"Current Mode - %@, Saved Mode - %@", currentMode, [defaults objectForKey:@"LunchOrDinner"]);
 }
 
 - (NSInteger)getETAMin
@@ -519,7 +522,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
 }
 
 - (void)getiOSMinAndCurrentVersions {
-    /*------------------for forced update---------------*/
     self.iosMinVersion = (CGFloat)[self.dicInit2[@"settings"][@"ios_min_version"] floatValue];
     self.iosCurrentVersion = (CGFloat)[[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] floatValue];
 }
@@ -556,25 +558,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
 - (NSString*)getDinnerMapURL
 {
     return dinnerMapURLString;
-}
-
-- (void)setLunchOrDinnerModeByTimes
-{
-    // Set Lunch Mode
-    if (currentTime >= 0 && currentTime < dinnerTime)
-    {
-        [defaults setObject:@"Lunch" forKey:@"LunchOrDinner"];
-        currentMode = @"Lunch";
-    }
-    else if (currentTime >= dinnerTime && currentTime < 24)
-    {
-        [defaults setObject:@"Dinner" forKey:@"LunchOrDinner"];
-        currentMode = @"Dinner";
-    }
-    
-    [defaults synchronize];
-    
-    NSLog(@"Current Mode - %@, Saved Mode - %@", currentMode, [defaults objectForKey:@"LunchOrDinner"]);
 }
 
 - (void)checkIfBentoArrayNeedsToBeReset
@@ -641,14 +624,12 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
         // lunch exists
         if ([self isThereLunchMenu])
         {
-            NSData *data = [defaults objectForKey:@"lunchMenuItems"];
-            menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            menuItems = self.menuToday[@"lunch"][@"MenuItems"];
         }
         // no lunch, dinner exists
         else if ([self isThereDinnerMenu])
         {
-            NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
-            menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            menuItems = self.menuToday[@"dinner"][@"MenuItems"];
         }
     }
     else
@@ -656,15 +637,13 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
         // 12:00am - dinner opening (ie. 16.5)
         if (currentTime >= 0 && currentTime < dinnerTime)
         {
-            NSData *data = [defaults objectForKey:@"lunchMenuItems"];
-            menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            menuItems = self.menuToday[@"lunch"][@"MenuItems"];
 
         // dinner opening - 11:59pm
         }
         else if (currentTime >= dinnerTime && currentTime < 24)
         {
-            NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
-            menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            menuItems = self.menuToday[@"dinner"][@"MenuItems"];
         }
     }
     
@@ -1113,10 +1092,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
                     [[BentoShop sharedInstance] getInit2];
                 }
                 
-                [self getiOSMinAndCurrentVersions];
-                [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-                [self setLunchOrDinnerModeByTimes];
-                [self checkIfBentoArrayNeedsToBeReset];
+//                [self checkIfBentoArrayNeedsToBeReset];
                 [self getMenus];
                 [self getNextMenus];
                 [self getStatus];
@@ -1198,13 +1174,11 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
     
     if ([whatNeedsMain isEqualToString:@"todayLunch"])
     {
-        NSData *data = [defaults objectForKey:@"lunchMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuToday[@"lunch"][@"MenuItems"];
     }
     else if ([whatNeedsMain isEqualToString:@"todayDinner"])
-    {   
-        NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    {
+        menuItems = self.menuToday[@"dinner"][@"MenuItems"];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
@@ -1227,13 +1201,11 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
     
     if ([whatNeedsSides isEqualToString:@"todayLunch"])
     {
-        NSData *data = [defaults objectForKey:@"lunchMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuToday[@"lunch"][@"MenuItems"];
     }
     else if ([whatNeedsSides isEqualToString:@"todayDinner"])
     {
-        NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuToday[@"dinner"][@"MenuItems"];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
@@ -1256,12 +1228,10 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
     NSDictionary *menuItems;
     
     if ([whatNeedsAddons isEqualToString:@"todayLunch"]) {
-        NSData *data = [defaults objectForKey:@"lunchMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuToday[@"lunch"][@"MenuItems"];
     }
     else if ([whatNeedsAddons isEqualToString:@"todayDinner"]) {
-        NSData *data = [defaults objectForKey:@"dinnerMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuToday[@"dinner"][@"MenuItems"];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
@@ -1284,13 +1254,11 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
     
     if ([whatNeedsMain isEqualToString:@"nextLunchPreview"])
     {
-        NSData *data = [defaults objectForKey:@"nextLunchMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuNext[@"lunch"][@"MenuItems"];
     }
     else if ([whatNeedsMain isEqualToString:@"nextDinnerPreview"])
     {
-        NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuNext[@"dinner"][@"MenuItems"];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
@@ -1313,13 +1281,11 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
     
     if ([whatNeedsSides isEqualToString:@"nextLunchPreview"])
     {
-        NSData *data = [defaults objectForKey:@"nextLunchMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuNext[@"lunch"][@"MenuItems"];
     }
     else if ([whatNeedsSides isEqualToString:@"nextDinnerPreview"])
     {
-        NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuNext[@"dinner"][@"MenuItems"];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
@@ -1342,12 +1308,10 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
     NSDictionary *menuItems;
     
     if ([whatNeedsAddons isEqualToString:@"nextLunchPreview"]) {
-        NSData *data = [defaults objectForKey:@"nextLunchMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuNext[@"lunch"][@"MenuItems"];
     }
     else if ([whatNeedsAddons isEqualToString:@"nextDinnerPreview"]) {
-        NSData *data = [defaults objectForKey:@"nextDinnerMenuItems"];
-        menuItems = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+        menuItems = self.menuNext[@"dinner"][@"MenuItems"];
     }
     
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
