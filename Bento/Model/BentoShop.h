@@ -104,7 +104,7 @@
 //- (BOOL)checkLocation:(CLLocationCoordinate2D)location;
 - (BOOL)isInAnyZone;
 typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
-- (void)checkIfSelectedLocationIsInAnyZone:(float)lat lng:(float)lng completion:(SelectedLocationCheckBlock)completion;
+- (void)checkIfSelectedLocationIsInAnyZone:(CLLocationCoordinate2D)coordinate completion:(SelectedLocationCheckBlock)completion;
 
 - (NSInteger)getTotalBentoCount;
 - (NSInteger)getCompletedBentoCount;

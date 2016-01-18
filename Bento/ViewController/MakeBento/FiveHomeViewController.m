@@ -152,7 +152,7 @@
         // yes saved location
         SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
         if (placemark != nil) {
-            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate.latitude lng:placemark.location.coordinate.longitude completion:^(BOOL isSelectedLocationInZone) {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
                 if (isSelectedLocationInZone == NO) {
                     [self nextToBuildShowMap];
                 }
@@ -165,7 +165,7 @@
     }
     // yes gps
     else {
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation.latitude lng:gpsLocation.longitude completion:^(BOOL isSelectedLocationInZone) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation completion:^(BOOL isSelectedLocationInZone) {
             if (isSelectedLocationInZone == NO) {
                 [self nextToBuildShowMap];
             }
@@ -1266,17 +1266,14 @@
         // has saved address
         else {
             // check if saved address is inside CURRENT service area
-            
-            
-            
-//            [[BentoShop sharedInstance] checkIfSavedLocationIsInAnyZone:^(BOOL isSavedLocationInZone) {
-//                if (isSavedLocationInZone) {
-//                    [self openAccountViewController:[CompleteOrderViewController class]];
-//                }
-//                else {
-//                    [self openAccountViewController:[DeliveryLocationViewController class]];
-//                }
-//            }];
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
+                if (isSelectedLocationInZone) {
+                    [self openAccountViewController:[CompleteOrderViewController class]];
+                }
+                else {
+                    [self openAccountViewController:[DeliveryLocationViewController class]];
+                }
+            }];
         }
     }
     // logged in
@@ -1287,14 +1284,14 @@
         }
         // has saved address
         else {
-//            [[BentoShop sharedInstance] checkIfSavedLocationIsInAnyZone:^(BOOL isSavedLocationInZone) {
-//                if (isSavedLocationInZone) {
-//                    [self.navigationController pushViewController:completeOrderViewController animated:YES];
-//                }
-//                else {
-//                    [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
-//                }
-//            }];
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
+                if (isSelectedLocationInZone) {
+                    [self.navigationController pushViewController:completeOrderViewController animated:YES];
+                }
+                else {
+                    [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+                }
+            }];
         }
     }
 }

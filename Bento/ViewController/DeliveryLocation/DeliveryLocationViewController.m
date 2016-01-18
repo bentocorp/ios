@@ -10,7 +10,7 @@
 
 #import "AppDelegate.h"
 
-#import "FiveCustomViewController.h"
+#import "FiveHomeViewController.h"
 
 #import "CompleteOrderViewController.h"
 #import "OutOfDeliveryAddressViewController.h"
@@ -262,7 +262,7 @@
     for (UIViewController *vc in viewControllers)
     {
         // serving dinner vc || serving lunch vc
-        if ([vc isKindOfClass:[FiveCustomViewController class]])
+        if ([vc isKindOfClass:[FiveHomeViewController class]])
         {
             if (self.isFromOrder)
             {
@@ -278,7 +278,7 @@
         }
     }
     
-    FiveCustomViewController *homeVC = [[FiveCustomViewController alloc] init];
+    FiveHomeViewController *homeVC = [[FiveHomeViewController alloc] init];
     [self.navigationController popToViewController:homeVC animated:YES];
 }
 
@@ -305,10 +305,9 @@
         [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         [self.navigationController popViewControllerAnimated:YES];
-        
     }
     else {
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate.latitude lng:self.placeInfo.location.coordinate.longitude completion:^(BOOL isSelectedLocationInZone) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
             if (isSelectedLocationInZone == NO) {
                 [self gotoNoneDeliveryAreaScreen];
             }
@@ -473,7 +472,7 @@
             return;
         }
         
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate.latitude lng:self.placeInfo.location.coordinate.longitude completion:^(BOOL isSelectedLocationInZone) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
             // inside zone
             if (isSelectedLocationInZone) {
                 [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];

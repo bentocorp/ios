@@ -159,20 +159,20 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 
 - (void)getGateKeeperWithLocation {
     if (CLLocationCoordinate2DIsValid(gpsCoordinateForGateKeeper)) {
-        [self requestGateKeeper:gpsCoordinateForGateKeeper.latitude lng:gpsCoordinateForGateKeeper.longitude];
+        [self requestGateKeeper:gpsCoordinateForGateKeeper];
     }
     else {
         SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
         if (placeInfo != nil) {
-            [self requestGateKeeper:placeInfo.location.coordinate.latitude lng:placeInfo.location.coordinate.longitude];
+            [self requestGateKeeper:placeInfo.location.coordinate];
         }
     }
 }
 
-- (void)requestGateKeeper:(float)lat lng:(float)lng {
+- (void)requestGateKeeper:(CLLocationCoordinate2D)coordinate {
     NSString *strDate = [self getDateStringWithDashes];
     
-    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic, NSError *error) {
+    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude] completion:^(id responseDic, NSError *error) {
         
         if (error == nil) {
             self.dicInit2 = (NSDictionary *)responseDic;
@@ -195,10 +195,10 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 }
 
 typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
-- (void)checkIfSelectedLocationIsInAnyZone:(float)lat lng:(float)lng completion:(SelectedLocationCheckBlock)completion {
+- (void)checkIfSelectedLocationIsInAnyZone:(CLLocationCoordinate2D)coordinate completion:(SelectedLocationCheckBlock)completion {
     NSString *strDate = [self getDateStringWithDashes];
 
-    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, lat, lng] completion:^(id responseDic, NSError *error) {
+    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude] completion:^(id responseDic, NSError *error) {
         
         if (error == nil) {
             NSDictionary *init2 = (NSDictionary *)responseDic;
