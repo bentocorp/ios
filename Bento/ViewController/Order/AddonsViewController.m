@@ -175,11 +175,7 @@
     
     /*-----*/
     
-    //
-    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    CLLocationCoordinate2D location = [delegate getCurrentLocation];
-    BentoShop *globalShop = [BentoShop sharedInstance];
-    if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil) {
+    if (![[BentoShop sharedInstance] isInAnyZone] && [[DataManager shareDataManager] getUserInfo] == nil) {
         
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
         [[NSUserDefaults standardUserDefaults] synchronize];

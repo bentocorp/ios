@@ -589,7 +589,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [manager stopUpdatingLocation];
     
     /*---Mixpanel tracking Opened App Outside of Service Area---*/
-    if ([[BentoShop sharedInstance] checkLocation:coordinate] == NO) {
+    if ([[BentoShop sharedInstance] isInAnyZone] == NO) {
         [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
     }
     

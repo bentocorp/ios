@@ -416,16 +416,12 @@
 
 - (void)gotoMyBentoScreen {
     
-    AppDelegate *delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    CLLocationCoordinate2D location = [delegate getCurrentLocation];
-    BentoShop *globalShop = [BentoShop sharedInstance];
-    
     BOOL needsAnimation = YES;
-    if (![globalShop checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil) {
+    if (![[BentoShop sharedInstance] isInAnyZone] && [[DataManager shareDataManager] getUserInfo] == nil) {
         needsAnimation = NO;
     }
     
-    [globalShop setLunchOrDinnerModeByTimes]; // putting this here for when entering app without network connection, otherwise it wont be up to date
+    [[BentoShop sharedInstance] setLunchOrDinnerModeByTimes]; // putting this here for when entering app without network connection, otherwise it wont be up to date
     
     NSDictionary *branchParams = [[BentoShop sharedInstance] getBranchParams];
     NSString *mainOrSide = branchParams[@"choose"];

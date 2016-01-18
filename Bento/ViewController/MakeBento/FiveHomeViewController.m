@@ -136,13 +136,11 @@
         [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
         
         // not logged in and out of zone
-        AppDelegate *delegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-        CLLocationCoordinate2D location = [delegate getCurrentLocation];
-        if (![[BentoShop sharedInstance] checkLocation:location] && [[DataManager shareDataManager] getUserInfo] == nil) {
+        if (![[BentoShop sharedInstance] isInAnyZone] && [[DataManager shareDataManager] getUserInfo] == nil) {
             
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
             [[NSUserDefaults standardUserDefaults] synchronize];
-            [self.navigationController pushViewController:deliveryLocationViewController animated:YES];
+            [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
         }
         
         
@@ -1223,7 +1221,7 @@
             CLLocationCoordinate2D location = placeInfo.location.coordinate;
             
             // outside service area
-            if (![[BentoShop sharedInstance] checkLocation:location]) {
+            if (![[BentoShop sharedInstance] isInAnyZone]) {
                 [self openAccountViewController:[DeliveryLocationViewController class]];
             }
             // inside service area

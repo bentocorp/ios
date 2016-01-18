@@ -102,6 +102,7 @@
 
 //- (MKPolygon *)getPolygon;
 //- (BOOL)checkLocation:(CLLocationCoordinate2D)location;
+- (BOOL)isInAnyZone;
 
 - (NSInteger)getTotalBentoCount;
 - (NSInteger)getCompletedBentoCount;

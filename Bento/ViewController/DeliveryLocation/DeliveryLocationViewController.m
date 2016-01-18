@@ -304,8 +304,7 @@
         [self.navigationController popViewControllerAnimated:YES];
         
     } else {
-        CLLocationCoordinate2D location = self.placeInfo.location.coordinate;
-        if (![[BentoShop sharedInstance] checkLocation:location]) {
+        if (![[BentoShop sharedInstance] isInAnyZone]) {
             [self gotoNoneDeliveryAreaScreen];
         } else {
             [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
@@ -466,11 +465,9 @@
         if (self.placeInfo == nil) {
             return;
         }
-
-        CLLocationCoordinate2D location = self.placeInfo.location.coordinate;
         
         // outside delivery zone
-        if (![[BentoShop sharedInstance] checkLocation:location]) {
+        if (![[BentoShop sharedInstance] isInAnyZone]) {
             [self gotoNoneDeliveryAreaScreen];
         }
         // inside delivery zone
