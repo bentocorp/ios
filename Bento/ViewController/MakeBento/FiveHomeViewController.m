@@ -1188,6 +1188,29 @@
 - (void)toggleDropDownPicker {
     [self.view layoutIfNeeded];
     
+    // on demand only
+    if () {
+        [self showOnDemandOnly];
+    }
+    // order-ahead only
+    else if () {
+        [self showOrderAheadOnly];
+    }
+    // both
+    else {
+        [self showBoth];
+    }
+}
+
+- (void)showOnDemandOnly {
+    
+}
+
+- (void)showOrderAheadOnly {
+    
+}
+
+- (void)showBoth {
     if (self.fadedViewButton.alpha == 0) {
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0.8;
@@ -1206,8 +1229,6 @@
             [self.view layoutIfNeeded];
         }];
     }
-    
-    NSLog(@"dropdownheight - %f", self.dropDownView.center.y);
 }
 
 - (void)onSettings {
@@ -1343,14 +1364,6 @@
     
     [self updatePickerButtonTitle];
 //    [self checkOrderMode];
-}
-
-- (void)showOrderAheadOnly {
-    
-}
-
-- (void)showOnDemandOnly {
-    
 }
 
 - (void)onFinalize {
