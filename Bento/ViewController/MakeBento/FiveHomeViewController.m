@@ -1145,23 +1145,30 @@
                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
                    ];
 
-    // show both
+    [self toggleOffDropDownOnLaunch];
+    
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
         [self toggleBoth];
     }
-    // only on-demand
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
         [self toggleOnDemandOnly];
     }
-    // only order-ahead
     else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         [self toggleOrderAheadOnly];
     }
 }
 
+- (void)toggleOffDropDownOnLaunch {
+    if (self.fadedViewButton.alpha != 0) {
+        self.fadedViewButton.alpha = 0;
+        self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y - self.dropDownView.frame.size.height - 20;
+    }
+}
+
 - (void)toggleOnDemandOnly {
-    
     [self setUpWidget];
+    
+    [self.view layoutIfNeeded];
     
     self.orderAheadPickerView.hidden = YES;
     self.orderAheadGreenView1.hidden = YES;
@@ -1189,6 +1196,7 @@
 }
 
 - (void)toggleOrderAheadOnly {
+    [self.view layoutIfNeeded];
     
     if (self.fadedViewButton.alpha == 0) {
         [UIView animateWithDuration:0.5 animations:^{
@@ -1211,8 +1219,9 @@
 }
 
 - (void)toggleBoth {
-    
     [self setUpWidget];
+    
+    [self.view layoutIfNeeded];
     
     if (self.fadedViewButton.alpha == 0) {
         [UIView animateWithDuration:0.5 animations:^{
