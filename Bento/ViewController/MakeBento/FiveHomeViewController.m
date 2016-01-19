@@ -1183,26 +1183,6 @@
         else {
             [self enableOrderAhead];
         }
-        
-        // if OnDemand is selected
-        if (self.orderMode == OnDemand && [self.widget[@"state"] isEqualToString:@"open"]) {
-            // open, no preview
-            [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
-            [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
-            [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
-            
-            self.bottomButton.hidden = NO;
-        }
-        else {
-            // closed/soldout, set preview
-            self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
-            [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
-            self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
-            [self.bgView addSubview:self.menuPreviewVC.view];
-            [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
-            
-            self.bottomButton.hidden = YES;
-        }
     }
 }
 
@@ -1266,6 +1246,36 @@
 #pragma mark Update Menu
 - (void)updateMenu {
     
+}
+
+#pragma mark Show / Hide Preview
+- (void)showOrHidePreview {
+    if (self.orderMode == OnDemand && [self.widget[@"state"] isEqualToString:@"open"]) {
+        [self showPreview];
+    }
+    else {
+        [self hidePreview];
+    }
+}
+
+- (void)showPreview {
+    // open, no preview
+    [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
+    [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
+    [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
+    
+    self.bottomButton.hidden = NO;
+}
+
+- (void)hidePreview {
+    // closed/soldout, set preview
+    self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
+    [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
+    self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
+    [self.bgView addSubview:self.menuPreviewVC.view];
+    [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
+    
+    self.bottomButton.hidden = YES;
 }
 
 #pragma mark Other Button Methods
