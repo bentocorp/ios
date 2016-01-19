@@ -56,6 +56,8 @@
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 @property (nonatomic) OrderMode orderMode;
 
+@property (nonatomic) NSDictionary *widget;
+
 @end
 
 @implementation FiveHomeViewController
@@ -77,15 +79,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // order ahead mock
-    myDatabase = @[
-                    @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Jan 16, Lunch", @"Jan 16, Dinner"],
-                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
-                    ];
+    self.widget = [[BentoShop sharedInstance] getOnDemandWidget];
     
-    // mock
-//    [self enableOnDemand];
-    [self enableOrderAhead];
+    [self startScreenLogic];
     
     isThereConnection = YES;
     
@@ -123,46 +119,6 @@
     }
     
     [self checkLocationOnLoad];
-    
-    [self setUpWidget];
-}
-
-- (void)setUpWidget {
-    NSDictionary *widget = [[BentoShop sharedInstance] getOnDemandWidget];
-    self.asapMenuLabel.text = widget[@"title"];
-    self.asapDescriptionLabel.text = widget[@"text"];
-    
-    NSNumber *isSelectedNum = (NSNumber *)widget[@"selected"];
-    BOOL isSelected = [isSelectedNum boolValue];
-    
-    if (isSelected) {
-        // default to on-demand
-        [self enableOnDemand];
-    }
-    else {
-        // default to first order-ahead
-        [self enableOrderAhead];
-    }
-    
-    // if OnDemand is selected
-    if (self.orderMode == OnDemand && [widget[@"state"] isEqualToString:@"open"]) {
-        // open, no preview
-        [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
-        [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
-        [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
-        
-        self.bottomButton.hidden = NO;
-    }
-    else {
-        // closed/soldout, set preview
-        self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
-        [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
-        self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
-        [self.bgView addSubview:self.menuPreviewVC.view];
-        [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
-        
-        self.bottomButton.hidden = YES;
-    }
 }
 
 - (void)checkLocationOnLoad {
@@ -1115,11 +1071,11 @@
 }
 
 - (IBAction)pickerButtonPressed:(id)sender {
-    [self toggleDropDownPicker];
+    [self checkAvailabilityBeforeToggling];
 }
 
 - (IBAction)fadedViewButtonPressed:(id)sender {
-    [self toggleDropDownPicker];
+    [self checkAvailabilityBeforeToggling];
 }
 
 - (IBAction)enableOnDemandButtonPressed:(id)sender {
@@ -1185,32 +1141,135 @@
 
 #pragma mark Button Events
 
-- (void)toggleDropDownPicker {
+- (BOOL)isThereWidget {
+    if (self.widget != nil && [self.widget isEqual:[NSNull null]] == NO) {
+        return YES;
+    }
+    return NO;
+}
+
+- (void)setUpWidget {
+    if ([self isThereWidget]) {
+        self.asapMenuLabel.text = widget[@"title"];
+        self.asapDescriptionLabel.text = widget[@"text"];
+        
+        NSNumber *isSelectedNum = (NSNumber *)widget[@"selected"];
+        BOOL isSelected = [isSelectedNum boolValue];
+        
+        if (isSelected) {
+            // default to on-demand
+            [self enableOnDemand];
+        }
+        else {
+            // default to first order-ahead
+            [self enableOrderAhead];
+        }
+        
+        // if OnDemand is selected
+        if (self.orderMode == OnDemand && [widget[@"state"] isEqualToString:@"open"]) {
+            // open, no preview
+            [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
+            [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
+            [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
+            
+            self.bottomButton.hidden = NO;
+        }
+        else {
+            // closed/soldout, set preview
+            self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
+            [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
+            self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
+            [self.bgView addSubview:self.menuPreviewVC.view];
+            [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
+            
+            self.bottomButton.hidden = YES;
+        }
+    }
+}
+
+- (void)startScreenLogic {
+    // order ahead mock
+    myDatabase = @[
+                   @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Jan 16, Lunch", @"Jan 16, Dinner"],
+                   @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
+                   ];
+
+    [self checkAvailabilityBeforeToggling];
+}
+
+- (void)checkAvailabilityBeforeToggling {
     [self.view layoutIfNeeded];
     
+    
+    
     // on demand only
-    if () {
-        [self showOnDemandOnly];
+    if (NSDictionary *widget = [[BentoShop sharedInstance] getOnDemandWidget]) {
+        [self enableOnDemand];
     }
     // order-ahead only
     else if () {
-        [self showOrderAheadOnly];
+        [self enableOrderAhead];
     }
     // both
     else {
-        [self showBoth];
+        [self enableOnDemand];
+        [self enableOrderAhead];
     }
 }
 
-- (void)showOnDemandOnly {
+- (void)toggleOnDemandOnly {
     
+    [self setUpWidget];
+    
+    self.orderAheadPickerView.hidden = YES;
+    self.orderAheadGreenView1.hidden = YES;
+    
+    self.orderAheadPickerViewHeightConstraint.constant = 0;
+    self.orderAheadGreenViewHeightConstraint.constant = 0;
+    
+    if (self.fadedViewButton.alpha == 0) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.fadedViewButton.alpha = 0.8;
+            
+            
+            [self.view layoutIfNeeded];
+        }];
+    }
+    else {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.fadedViewButton.alpha = 0;
+            
+            
+            
+            [self.view layoutIfNeeded];
+        }];
+    }
 }
 
-- (void)showOrderAheadOnly {
-    
+- (void)toggleOrderAheadOnly {
+    if (self.fadedViewButton.alpha == 0) {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.fadedViewButton.alpha = 0.8;
+            
+            
+            
+            [self.view layoutIfNeeded];
+        }];
+    }
+    else {
+        [UIView animateWithDuration:0.5 animations:^{
+            self.fadedViewButton.alpha = 0;
+            
+            
+            
+            [self.view layoutIfNeeded];
+        }];
+    }
 }
 
-- (void)showBoth {
+- (void)toggleBoth {
+    [self setUpWidget];
+    
     if (self.fadedViewButton.alpha == 0) {
         [UIView animateWithDuration:0.5 animations:^{
             self.fadedViewButton.alpha = 0.8;

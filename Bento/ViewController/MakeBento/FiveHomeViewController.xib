@@ -38,8 +38,10 @@
                 <outlet property="onDemandGreenView1" destination="tY8-eh-98R" id="4Na-0h-9Ss"/>
                 <outlet property="onDemandGreenViewWidthConstraint" destination="qB5-hY-6kV" id="MKo-gt-0fF"/>
                 <outlet property="orderAheadGreenView1" destination="eOK-9S-dq9" id="iVW-Ev-fZ6"/>
+                <outlet property="orderAheadGreenViewHeightConstraint" destination="RqL-aE-hNF" id="IiT-Cu-Whp"/>
                 <outlet property="orderAheadGreenViewWidthConstraint" destination="FlO-o5-yii" id="Zmk-4j-BtD"/>
                 <outlet property="orderAheadPickerView" destination="BTB-UO-EaW" id="3fJ-OZ-AE3"/>
+                <outlet property="orderAheadPickerViewHeightConstraint" destination="t71-4t-yOl" id="qZN-mO-ZyB"/>
                 <outlet property="pickerButton" destination="ZAl-ST-thk" id="fuc-Mk-9Qp"/>
                 <outlet property="startingPriceLabel" destination="wSb-1H-Dvt" id="bTa-hm-7IN"/>
                 <outlet property="view" destination="00c-cJ-i1r" id="oEG-Ko-GjQ"/>
@@ -204,11 +206,12 @@
                                 <outlet property="delegate" destination="-1" id="kn8-PN-UgF"/>
                             </connections>
                         </pickerView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOK-9S-dq9" userLabel="orderAheadGreenView1">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOK-9S-dq9" userLabel="orderAheadGreenView">
                             <rect key="frame" x="0.0" y="60" width="10" height="140"/>
                             <color key="backgroundColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="10" id="FlO-o5-yii"/>
+                                <constraint firstAttribute="height" constant="140" id="RqL-aE-hNF"/>
                             </constraints>
                         </view>
                         <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1d-b1-WWR" userLabel="enableOrderAheadButton">
