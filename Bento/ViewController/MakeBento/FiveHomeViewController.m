@@ -1146,7 +1146,7 @@
                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
                    ];
 
-    [self toggleOffDropDownOnLaunch];
+    
     
 //    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
 //        [self installOnDemand];
@@ -1155,12 +1155,12 @@
 //    }
 //    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
 //        [self removeOrderAhead];
-        [self installOnDemand];
-        [self updateWidget];
+//        [self installOnDemand];
+//        [self updateWidget];
 //    }
 //    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-//        [self removeOnDemand];
-//        [self installOrderAhead];
+        [self removeOnDemand];
+        [self installOrderAhead];
 //    }
     
     [self toggleDropDown];
@@ -1196,38 +1196,31 @@
 
 #pragma mark Toggle
 
-- (void)toggleOffDropDownOnLaunch {
-    if (self.fadedViewButton.alpha != 0) {
-        self.fadedViewButton.alpha = 0;
-        self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y - self.dropDownView.frame.size.height - 20;
-    }
-}
-
 - (void)toggleDropDown {
     [self.view layoutIfNeeded];
     
     if (self.fadedViewButton.alpha == 0) {
         [UIView animateWithDuration:0.5 animations:^{
-            self.fadedViewButton.alpha = 0.8;
-            
-            self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y + self.dropDownView.frame.size.height + 20;
-            
-            [self.view layoutIfNeeded];
+            [self toggleOn];
         }];
     }
     else {
         [UIView animateWithDuration:0.5 animations:^{
-            self.fadedViewButton.alpha = 0;
-            
-            self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y - self.dropDownView.frame.size.height - 20;
-            
-            [self.view layoutIfNeeded];
+            [self toggleOff];
         }];
     }
-    
-    NSLog(@"dropDownView.frame.origin.y - %f", self.dropDownView.frame.origin.y);
-    NSLog(@"dropDownViewTopConstraint - %f", self.dropDownViewTopConstraint.constant);
-    NSLog(@"dropDownHeight - %f", self.dropDownView.frame.size.height);
+}
+
+- (void)toggleOn {
+    self.fadedViewButton.alpha = 0.8;
+    self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y + self.dropDownView.frame.size.height + 20;
+    [self.view layoutIfNeeded];
+}
+
+- (void)toggleOff {
+    self.fadedViewButton.alpha = 0;
+    self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y - self.dropDownView.frame.size.height - 20;
+    [self.view layoutIfNeeded];
 }
 
 - (void)updateWidget {
@@ -1273,6 +1266,11 @@
             self.bottomButton.hidden = YES;
         }
     }
+}
+
+#pragma mark Update Menu
+- (void)updateMenu {
+    
 }
 
 #pragma mark Other Button Methods
