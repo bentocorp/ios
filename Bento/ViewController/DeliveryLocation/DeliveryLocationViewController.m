@@ -308,10 +308,8 @@
     }
     else {
         [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
-            if (isSelectedLocationInZone == NO) {
-                [self gotoNoneDeliveryAreaScreen];
-            }
-            else {
+            
+            if (isSelectedLocationInZone == YES && [[[BentoShop sharedInstance] getAppState] isEqualToString:@"build"]) {
                 [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
@@ -326,6 +324,9 @@
                     [[NSUserDefaults standardUserDefaults] setObject:@"NO" forKey:@"isFromHomepage"];
                     [[NSUserDefaults standardUserDefaults] synchronize];
                 }
+            }
+            else {
+                [self gotoNoneDeliveryAreaScreen];
             }
         }];
     }
@@ -474,7 +475,7 @@
         
         [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
             // inside zone
-            if (isSelectedLocationInZone) {
+            if (isSelectedLocationInZone && [[[BentoShop sharedInstance] getAppState] isEqualToString:@"build"]) {
                 [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude] forKey:@"savedLongitude"];

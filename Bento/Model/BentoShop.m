@@ -206,8 +206,10 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
 - (void)checkIfSelectedLocationIsInAnyZone:(CLLocationCoordinate2D)coordinate completion:(SelectedLocationCheckBlock)completion {
     NSString *strDate = [self getDateStringWithDashes];
+    
+    NSString *strRequest = [NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude];
 
-    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude] completion:^(id responseDic, NSError *error) {
+    [self sendRequest:strRequest completion:^(id responseDic, NSError *error) {
         
         if (error == nil) {
             NSDictionary *init2 = (NSDictionary *)responseDic;

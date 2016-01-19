@@ -156,6 +156,9 @@
                 if (isSelectedLocationInZone == NO) {
                     [self nextToBuildShowMap];
                 }
+                else {
+                    [self checkIfInZoneButNoMenuAndNotClosed];
+                }
             }];
         }
         // no saved location
@@ -169,10 +172,19 @@
             if (isSelectedLocationInZone == NO) {
                 [self nextToBuildShowMap];
             }
+            else {
+                [self checkIfInZoneButNoMenuAndNotClosed];
+            }
         }];
     }
     
 //    [[DataManager shareDataManager] getUserInfo] == nil
+}
+
+- (void)checkIfInZoneButNoMenuAndNotClosed {
+    if ([[[BentoShop sharedInstance] getAppState] isEqualToString:@"map,no_service_wall"]) {
+        [self nextToBuildShowMap];
+    }
 }
 
 - (void)nextToBuildShowMap {
