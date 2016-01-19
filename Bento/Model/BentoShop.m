@@ -334,6 +334,12 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return strDate;
 }
 
+#pragma mark On-Demand Widget
+
+- (NSDictionary *)getOnDemandWidget {
+    return self.dicInit2[@"appOnDemandWidget"];
+}
+
 #pragma mark Branch Params
 
 - (void)setBranchParams:(NSDictionary *)params

@@ -131,5 +131,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (BOOL)is4PodMode;
 
 - (NSString *)getAppState;
+- (NSDictionary *)getOnDemandWidget;
 
 @end
