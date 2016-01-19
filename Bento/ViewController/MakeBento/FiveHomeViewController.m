@@ -79,8 +79,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.widget = [[BentoShop sharedInstance] getOnDemandWidget];
-    
     [self startScreenLogic];
     
     isThereConnection = YES;
@@ -1139,51 +1137,66 @@
     }
 }
 
-#pragma mark Button Events
 
-- (BOOL)isThereWidget {
+#pragma mark UI Logic
+- (BOOL)isThereOnDemand {
+    // check widget to see if there's on-demand
+    self.widget = [[BentoShop sharedInstance] getOnDemandWidget];
+    
     if (self.widget != nil && [self.widget isEqual:[NSNull null]] == NO) {
         return YES;
     }
     return NO;
 }
 
+- (BOOL)isThereOrderAhead {
+    //
+    if () {
+        
+    }
+    else {
+        
+    }
+}
+
+#pragma mark Button Events
+
+
+
 - (void)setUpWidget {
-    if ([self isThereWidget]) {
-        self.asapMenuLabel.text = widget[@"title"];
-        self.asapDescriptionLabel.text = widget[@"text"];
+    self.asapMenuLabel.text = self.widget[@"title"];
+    self.asapDescriptionLabel.text = self.widget[@"text"];
+    
+    NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
+    BOOL isSelected = [isSelectedNum boolValue];
+    
+    if (isSelected) {
+        // default to on-demand
+        [self enableOnDemand];
+    }
+    else {
+        // default to first order-ahead
+        [self enableOrderAhead];
+    }
+    
+    // if OnDemand is selected
+    if (self.orderMode == OnDemand && [self.widget[@"state"] isEqualToString:@"open"]) {
+        // open, no preview
+        [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
+        [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
+        [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
         
-        NSNumber *isSelectedNum = (NSNumber *)widget[@"selected"];
-        BOOL isSelected = [isSelectedNum boolValue];
+        self.bottomButton.hidden = NO;
+    }
+    else {
+        // closed/soldout, set preview
+        self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
+        [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
+        self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
+        [self.bgView addSubview:self.menuPreviewVC.view];
+        [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
         
-        if (isSelected) {
-            // default to on-demand
-            [self enableOnDemand];
-        }
-        else {
-            // default to first order-ahead
-            [self enableOrderAhead];
-        }
-        
-        // if OnDemand is selected
-        if (self.orderMode == OnDemand && [widget[@"state"] isEqualToString:@"open"]) {
-            // open, no preview
-            [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
-            [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
-            [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
-            
-            self.bottomButton.hidden = NO;
-        }
-        else {
-            // closed/soldout, set preview
-            self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
-            [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
-            self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
-            [self.bgView addSubview:self.menuPreviewVC.view];
-            [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
-            
-            self.bottomButton.hidden = YES;
-        }
+        self.bottomButton.hidden = YES;
     }
 }
 

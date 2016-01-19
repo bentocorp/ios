@@ -132,5 +132,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 
 - (NSString *)getAppState;
 - (NSDictionary *)getOnDemandWidget;
+- (BOOL)isThereWidget;
+- (BOOL)isThereOnDemand;
+- (BOOL)isThereOrderAhead;
 
 @end

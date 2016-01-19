@@ -341,6 +341,30 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"appOnDemandWidget"];
 }
 
+- (BOOL)isThereWidget {
+    NSDictionary *widget = [self getOnDemandWidget];
+    if (widget != nil && [widget isEqual:[NSNull null]] == NO) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+- (BOOL)isThereOnDemand {
+    NSNumber *boolNum = self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OnDemand"];
+    return [boolNum boolValue];
+}
+
+#pragma mark Order-Ahead
+
+- (BOOL)isThereOrderAhead {
+    if (self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"]) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 #pragma mark Branch Params
 
 - (void)setBranchParams:(NSDictionary *)params
