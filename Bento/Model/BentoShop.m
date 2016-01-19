@@ -200,7 +200,8 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 }
 
 - (BOOL)isInAnyZone {
-    return (BOOL)self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"];
+    NSNumber *isInAnyZoneNumber = (NSNumber *)self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"];
+    return [isInAnyZoneNumber boolValue];
 }
 
 typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSString *appState);

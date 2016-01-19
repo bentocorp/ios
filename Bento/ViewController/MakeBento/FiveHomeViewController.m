@@ -72,10 +72,6 @@
     NSString *timeOnDemand;
     NSString *menuOrderAhead;
     NSString *timeOrderAhead;
-    
-    // might make these into methods
-    BOOL isThereOrderAhead;
-    BOOL isThereOnDemand;
 }
 
 - (void)viewDidLoad {
@@ -129,21 +125,27 @@
     [self checkLocationOnLoad];
 }
 
+- (void)setUpWidget {
+    NSDictionary *widget = [[BentoShop sharedInstance] getOnDemandWidget];
+    self.asapMenuLabel.text = widget[@"title"];
+    self.asapDescriptionLabel.text = widget[@"text"];
+    
+    NSNumber *isSelectedNum = (NSNumber *)widget[@"selected"];
+    BOOL isSelected = [isSelectedNum boolValue];
+    
+    if (isSelected) {
+        // default to on-demand
+    }
+    else {
+        // default to first order-ahead
+    }
+}
+
+// check meal mode
+
+// on demand
+
 - (void)checkLocationOnLoad {
-    /* Logic
-     
-    On loading build screen for first time on launch...
-    
-    - yes gps -> use gps coordinate to check location
-        - gps coordinate is out of zone -> show map
-    
-    - no gps
-        - if saved location exists
-            - saved location is out of zone -> show map
-    
-        - if no saved location -> show map
-    */
-    
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D gpsLocation = [appDelegate getGPSLocation];
     
