@@ -1146,24 +1146,64 @@
                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
                    ];
 
-    
-    
-//    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
-//        [self installOnDemand];
-//        [self installOrderAhead];
-//        [self updateWidget];
-//    }
-//    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
-//        [self removeOrderAhead];
-//        [self installOnDemand];
-//        [self updateWidget];
-//    }
-//    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
+        [self installOnDemand];
+        [self installOrderAhead];
+        [self updateWidget];
+    }
+    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
+        [self removeOrderAhead];
+        [self installOnDemand];
+        [self updateWidget];
+    }
+    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         [self removeOnDemand];
         [self installOrderAhead];
-//    }
+        [self enableOrderAhead];
+    }
+}
+
+- (void)updateWidget {
+    if ([[BentoShop sharedInstance] isThereWidget]) {
     
-    [self toggleDropDown];
+        /*---ASAP---*/
+        self.asapMenuLabel.text = self.widget[@"title"];
+        self.asapDescriptionLabel.text = self.widget[@"text"];
+        
+        // resize to make room for text
+        self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        [self.asapDescriptionLabel sizeToFit];
+        self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
+        
+        // default to OD or OA?
+        NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
+        if ([isSelectedNum boolValue]) {
+            [self enableOnDemand];
+        }
+        else {
+            [self enableOrderAhead];
+        }
+        
+        // if OnDemand is selected
+        if (self.orderMode == OnDemand && [self.widget[@"state"] isEqualToString:@"open"]) {
+            // open, no preview
+            [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
+            [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
+            [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
+            
+            self.bottomButton.hidden = NO;
+        }
+        else {
+            // closed/soldout, set preview
+            self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
+            [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
+            self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
+            [self.bgView addSubview:self.menuPreviewVC.view];
+            [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
+            
+            self.bottomButton.hidden = YES;
+        }
+    }
 }
 
 #pragma mark Install / Remove
@@ -1221,51 +1261,6 @@
     self.fadedViewButton.alpha = 0;
     self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y - self.dropDownView.frame.size.height - 20;
     [self.view layoutIfNeeded];
-}
-
-- (void)updateWidget {
-    if ([[BentoShop sharedInstance] isThereWidget]) {
-        
-        /*---ASAP---*/
-        self.asapMenuLabel.text = self.widget[@"title"];
-        self.asapDescriptionLabel.text = self.widget[@"text"];
-        
-        // resize to make room for text
-        self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        [self.asapDescriptionLabel sizeToFit];
-        self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
-        
-        // default to OD or OA?
-        NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
-        if ([isSelectedNum boolValue]) {
-            // default to on-demand
-            [self enableOnDemand];
-        }
-        else {
-            // default to order-ahead
-            [self enableOrderAhead];
-        }
-        
-        // if OnDemand is selected
-        if (self.orderMode == OnDemand && [self.widget[@"state"] isEqualToString:@"open"]) {
-            // open, no preview
-            [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
-            [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
-            [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
-            
-            self.bottomButton.hidden = NO;
-        }
-        else {
-            // closed/soldout, set preview
-            self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
-            [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
-            self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
-            [self.bgView addSubview:self.menuPreviewVC.view];
-            [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
-            
-            self.bottomButton.hidden = YES;
-        }
-    }
 }
 
 #pragma mark Update Menu
