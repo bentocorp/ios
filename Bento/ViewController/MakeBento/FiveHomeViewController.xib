@@ -37,6 +37,8 @@
                 <outlet property="fadedViewButton" destination="fjf-nw-JDI" id="xNy-Yk-Upi"/>
                 <outlet property="onDemandGreenView1" destination="tY8-eh-98R" id="4Na-0h-9Ss"/>
                 <outlet property="onDemandGreenViewWidthConstraint" destination="qB5-hY-6kV" id="MKo-gt-0fF"/>
+                <outlet property="onDemandView" destination="ccD-Zy-ERm" id="7po-2N-4eq"/>
+                <outlet property="onDemandViewHeightConstraint" destination="MaI-a9-LYt" id="FIh-Xj-fS3"/>
                 <outlet property="orderAheadGreenView1" destination="eOK-9S-dq9" id="iVW-Ev-fZ6"/>
                 <outlet property="orderAheadGreenViewHeightConstraint" destination="RqL-aE-hNF" id="IiT-Cu-Whp"/>
                 <outlet property="orderAheadGreenViewWidthConstraint" destination="FlO-o5-yii" id="Zmk-4j-BtD"/>
@@ -133,7 +135,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="59"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today, Lunch" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMx-ac-AQE">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="date, lunch/dinner" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMx-ac-AQE">
                                     <rect key="frame" x="20" y="8" width="165" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="QZb-Tp-aKi"/>
@@ -151,7 +153,7 @@
                                     <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opening at 11am for on-demand service. (TAP TO PREVIEW MENU)" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBo-MK-SWJ">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="description" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jBo-MK-SWJ">
                                     <rect key="frame" x="20" y="34" width="335" height="17"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                     <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>

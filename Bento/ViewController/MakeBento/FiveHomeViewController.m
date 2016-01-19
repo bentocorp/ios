@@ -79,8 +79,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self startScreenLogic];
-    
     isThereConnection = YES;
     
     /*---Custom---*/
@@ -102,11 +100,6 @@
     /*---Picker View---*/
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
-    /*---ASAP---*/
-    self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping; // do i really need this?
-    [self.asapDescriptionLabel sizeToFit];
-    self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60; //
-    
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
@@ -117,70 +110,8 @@
     }
     
     [self checkLocationOnLoad];
-}
-
-- (void)checkLocationOnLoad {
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
-    CLLocationCoordinate2D gpsLocation = [appDelegate getGPSLocation];
     
-    // no gps
-    if (gpsLocation.latitude == 0 && gpsLocation.longitude == 0) {
-        // yes saved location
-        SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-        if (placemark != nil) {
-            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
-                if (isSelectedLocationInZone == NO) {
-                    [self nextToBuildShowMap];
-                }
-                else {
-                    [self checkIfInZoneButNoMenuAndNotClosed:appState];
-                }
-            }];
-        }
-        // no saved location
-        else {
-            [self nextToBuildShowMap];
-        }
-    }
-    // yes gps
-    else {
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
-            if (isSelectedLocationInZone == NO) {
-                [self nextToBuildShowMap];
-            }
-            else {
-                [self checkIfInZoneButNoMenuAndNotClosed:appState];
-            }
-        }];
-    }
-    
-//    [[DataManager shareDataManager] getUserInfo] == nil
-}
-
-- (void)checkIfInZoneButNoMenuAndNotClosed:(NSString *)appState {
-    if ([appState isEqualToString:@"map,no_service_wall"]) {
-        [self nextToBuildShowMap];
-    }
-}
-
-- (void)nextToBuildShowMap {
-    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
-    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-    
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
-    
-    [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
-}
-
-- (void)checkAppState {
-    NSString *appState = [[BentoShop sharedInstance] getAppState];
-    if ([appState isEqualToString:@"closed_wall"]) {
-        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-    }
-    else if ([appState isEqualToString:@"soldout_wall"]) {
-        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-    }
+    [self refreshState];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -228,6 +159,72 @@
     [self endTimerOnViewedScreen];
     
     NSLog(@"dropdownheight - %f", self.dropDownView.center.y);
+}
+
+#pragma  mark Check Location
+- (void)checkLocationOnLoad {
+    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    CLLocationCoordinate2D gpsLocation = [appDelegate getGPSLocation];
+    
+    // no gps
+    if (gpsLocation.latitude == 0 && gpsLocation.longitude == 0) {
+        // yes saved location
+        SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+        if (placemark != nil) {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+                if (isSelectedLocationInZone == NO) {
+                    [self nextToBuildShowMap];
+                }
+                else {
+                    [self checkIfInZoneButNoMenuAndNotClosed:appState];
+                }
+            }];
+        }
+        // no saved location
+        else {
+            [self nextToBuildShowMap];
+        }
+    }
+    // yes gps
+    else {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+            if (isSelectedLocationInZone == NO) {
+                [self nextToBuildShowMap];
+            }
+            else {
+                [self checkIfInZoneButNoMenuAndNotClosed:appState];
+            }
+        }];
+    }
+    
+    //    [[DataManager shareDataManager] getUserInfo] == nil
+}
+
+- (void)checkIfInZoneButNoMenuAndNotClosed:(NSString *)appState {
+    if ([appState isEqualToString:@"map,no_service_wall"]) {
+        [self nextToBuildShowMap];
+    }
+}
+
+- (void)nextToBuildShowMap {
+    UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
+    
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
+}
+
+#pragma mark Closed / Sold-out
+- (void)checkAppState {
+    NSString *appState = [[BentoShop sharedInstance] getAppState];
+    if ([appState isEqualToString:@"closed_wall"]) {
+        [self showSoldoutScreen:[NSNumber numberWithInt:0]];
+    }
+    else if ([appState isEqualToString:@"soldout_wall"]) {
+        [self showSoldoutScreen:[NSNumber numberWithInt:1]];
+    }
 }
 
 #pragma mark Load Dishes
@@ -774,6 +771,10 @@
     }
     /*----------------------*/
     
+    [self updateWidget];
+    
+    /*----------------------*/
+    
     [self setETA];
     
     /*----------------------*/
@@ -1069,11 +1070,11 @@
 }
 
 - (IBAction)pickerButtonPressed:(id)sender {
-    [self checkAvailabilityBeforeToggling];
+    [self toggleDropDown];
 }
 
 - (IBAction)fadedViewButtonPressed:(id)sender {
-    [self checkAvailabilityBeforeToggling];
+    [self toggleDropDown];
 }
 
 - (IBAction)enableOnDemandButtonPressed:(id)sender {
@@ -1147,16 +1148,53 @@
 
     [self toggleOffDropDownOnLaunch];
     
-    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
-        [self toggleBoth];
-    }
-    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
-        [self toggleOnDemandOnly];
-    }
-    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-        [self toggleOrderAheadOnly];
-    }
+//    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
+//        [self installOnDemand];
+//        [self installOrderAhead];
+//        [self updateWidget];
+//    }
+//    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
+//        [self removeOrderAhead];
+        [self installOnDemand];
+        [self updateWidget];
+//    }
+//    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+//        [self removeOnDemand];
+//        [self installOrderAhead];
+//    }
+    
+    [self toggleDropDown];
 }
+
+#pragma mark Install / Remove
+
+- (void)removeOnDemand {
+    self.onDemandView.hidden = YES;
+    self.onDemandViewHeightConstraint.constant = 0;
+}
+
+- (void)installOnDemand {
+    self.onDemandView.hidden = NO;
+    self.onDemandViewHeightConstraint.constant = 59;
+}
+
+- (void)removeOrderAhead {
+    self.orderAheadPickerView.hidden = YES;
+    self.orderAheadGreenView1.hidden = YES;
+    
+    self.orderAheadPickerViewHeightConstraint.constant = 0;
+    self.orderAheadGreenViewHeightConstraint.constant = 0;
+}
+
+- (void)installOrderAhead {
+    self.orderAheadPickerView.hidden = NO;
+    self.orderAheadGreenView1.hidden = NO;
+    
+    self.orderAheadPickerViewHeightConstraint.constant = 140;
+    self.orderAheadGreenViewHeightConstraint.constant = 140;
+}
+
+#pragma mark Toggle
 
 - (void)toggleOffDropDownOnLaunch {
     if (self.fadedViewButton.alpha != 0) {
@@ -1165,62 +1203,7 @@
     }
 }
 
-- (void)toggleOnDemandOnly {
-    [self setUpWidget];
-    
-    [self.view layoutIfNeeded];
-    
-    self.orderAheadPickerView.hidden = YES;
-    self.orderAheadGreenView1.hidden = YES;
-    
-    self.orderAheadPickerViewHeightConstraint.constant = 0;
-    self.orderAheadGreenViewHeightConstraint.constant = 0;
-    
-    if (self.fadedViewButton.alpha == 0) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.fadedViewButton.alpha = 0.8;
-            
-            
-            [self.view layoutIfNeeded];
-        }];
-    }
-    else {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.fadedViewButton.alpha = 0;
-            
-            
-            
-            [self.view layoutIfNeeded];
-        }];
-    }
-}
-
-- (void)toggleOrderAheadOnly {
-    [self.view layoutIfNeeded];
-    
-    if (self.fadedViewButton.alpha == 0) {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.fadedViewButton.alpha = 0.8;
-            
-            
-            
-            [self.view layoutIfNeeded];
-        }];
-    }
-    else {
-        [UIView animateWithDuration:0.5 animations:^{
-            self.fadedViewButton.alpha = 0;
-            
-            
-            
-            [self.view layoutIfNeeded];
-        }];
-    }
-}
-
-- (void)toggleBoth {
-    [self setUpWidget];
-    
+- (void)toggleDropDown {
     [self.view layoutIfNeeded];
     
     if (self.fadedViewButton.alpha == 0) {
@@ -1241,12 +1224,23 @@
             [self.view layoutIfNeeded];
         }];
     }
+    
+    NSLog(@"dropDownView.frame.origin.y - %f", self.dropDownView.frame.origin.y);
+    NSLog(@"dropDownViewTopConstraint - %f", self.dropDownViewTopConstraint.constant);
+    NSLog(@"dropDownHeight - %f", self.dropDownView.frame.size.height);
 }
 
-- (void)setUpWidget {
+- (void)updateWidget {
     if ([[BentoShop sharedInstance] isThereWidget]) {
+        
+        /*---ASAP---*/
         self.asapMenuLabel.text = self.widget[@"title"];
         self.asapDescriptionLabel.text = self.widget[@"text"];
+        
+        // resize to make room for text
+        self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        [self.asapDescriptionLabel sizeToFit];
+        self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
         
         // default to OD or OA?
         NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
