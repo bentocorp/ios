@@ -123,6 +123,8 @@
     }
     
     [self checkLocationOnLoad];
+    
+    [self setUpWidget];
 }
 
 - (void)setUpWidget {
@@ -135,15 +137,33 @@
     
     if (isSelected) {
         // default to on-demand
+        [self enableOnDemand];
     }
     else {
         // default to first order-ahead
+        [self enableOrderAhead];
+    }
+    
+    // if OnDemand is selected
+    if (self.orderMode == OnDemand && [widget[@"state"] isEqualToString:@"open"]) {
+        // open, no preview
+        [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
+        [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
+        [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
+        
+        self.bottomButton.hidden = NO;
+    }
+    else {
+        // closed/soldout, set preview
+        self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
+        [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
+        self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
+        [self.bgView addSubview:self.menuPreviewVC.view];
+        [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
+        
+        self.bottomButton.hidden = YES;
     }
 }
-
-// check meal mode
-
-// on demand
 
 - (void)checkLocationOnLoad {
     AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
@@ -254,27 +274,6 @@
     [self endTimerOnViewedScreen];
     
     NSLog(@"dropdownheight - %f", self.dropDownView.center.y);
-}
-
-#pragma mark Order Mode Check
-- (void)checkOrderMode {
-    /*---Menu Preview---*/
-    if (self.orderMode == OnDemand) { // MOCK
-        self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
-        [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
-        self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
-        [self.bgView addSubview:self.menuPreviewVC.view];
-        [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
-        
-        self.bottomButton.hidden = YES;
-    }
-    else {
-        [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
-        [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
-        [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
-        
-        self.bottomButton.hidden = NO;
-    }
 }
 
 #pragma mark Load Dishes
@@ -1321,7 +1320,7 @@
     timeOnDemand = self.asapTimeLabel.text;
     
     [self updatePickerButtonTitle];
-    [self checkOrderMode];
+//    [self checkOrderMode];
 }
 
 - (void)enableOrderAhead {
@@ -1343,7 +1342,15 @@
     }
     
     [self updatePickerButtonTitle];
-    [self checkOrderMode];
+//    [self checkOrderMode];
+}
+
+- (void)showOrderAheadOnly {
+    
+}
+
+- (void)showOnDemandOnly {
+    
 }
 
 - (void)onFinalize {

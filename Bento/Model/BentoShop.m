@@ -338,7 +338,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 #pragma mark On-Demand Widget
 
 - (NSDictionary *)getOnDemandWidget {
-    return self.dicInit2[@"appOnDemandWidget"];
+    return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"appOnDemandWidget"];
 }
 
 #pragma mark Branch Params

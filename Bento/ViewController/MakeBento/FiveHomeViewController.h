@@ -43,8 +43,11 @@ typedef NS_ENUM(NSUInteger) {
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *onDemandGreenViewWidthConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *orderAheadGreenViewWidthConstraint;
 
-
 @property (weak, nonatomic) IBOutlet UIButton *enabledOnDemandButton;
 @property (weak, nonatomic) IBOutlet UIButton *enabledOrderAheadButton;
+
+// either menu from menu/date or selected menu from order-ahead menu
+// logic for finding the right menu to use will be set in implementation file
+@property (nonatomic) NSDictionary *selectedMenu;
 
 @end
