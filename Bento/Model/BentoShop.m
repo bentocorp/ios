@@ -351,8 +351,11 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 }
 
 - (BOOL)isThereOnDemand {
-    NSNumber *boolNum = self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OnDemand"];
-    return [boolNum boolValue];
+    if (self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OnDemand"]) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 #pragma mark Order-Ahead
