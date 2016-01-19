@@ -103,7 +103,7 @@
 - (MKPolygon *)getPolygon;
 //- (BOOL)checkLocation:(CLLocationCoordinate2D)location;
 - (BOOL)isInAnyZone;
-typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
+typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSString *appState);
 - (void)checkIfSelectedLocationIsInAnyZone:(CLLocationCoordinate2D)coordinate completion:(SelectedLocationCheckBlock)completion;
 
 - (NSInteger)getTotalBentoCount;

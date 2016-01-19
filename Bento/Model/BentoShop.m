@@ -203,7 +203,7 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
     return (BOOL)self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"isInAnyZone"];
 }
 
-typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
+typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSString *appState);
 - (void)checkIfSelectedLocationIsInAnyZone:(CLLocationCoordinate2D)coordinate completion:(SelectedLocationCheckBlock)completion {
     NSString *strDate = [self getDateStringWithDashes];
     
@@ -218,15 +218,15 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone);
             BOOL isInAnyZone = [isInAnyZoneNumber boolValue];
             
             if (isInAnyZone) {
-                completion(YES);
+                completion(YES, init2[@"/gatekeeper/here/{lat}/{long}"][@"appState"]);
             }
             else {
-                completion(NO);
+                completion(NO, init2[@"/gatekeeper/here/{lat}/{long}"][@"appState"]);
             }
         }
         else {
             NSLog(@"init2 gatekeeper error: %@", error);
-            completion(NO); // for some reason, some coordinates outofzone are producing an error. return NO for now
+//            completion(NO); // for some reason, some coordinates outofzone are producing an error. return NO for now
         }
     }];
 }

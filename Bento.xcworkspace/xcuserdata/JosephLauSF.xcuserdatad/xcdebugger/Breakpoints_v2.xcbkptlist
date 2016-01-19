@@ -142,12 +142,12 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/SignIn/SignInViewController.m"
-                  timestampString = "474854382.088763"
+                  timestampString = "474862996.797208"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "449"
                   endingLineNumber = "449"
-                  offsetFromSymbolStart = "393">
+                  offsetFromSymbolStart = "354">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -157,12 +157,12 @@
                   moduleName = "Bento Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/JosephLauSF/_github/Bento/Bento/ViewController/SignIn/SignInViewController.m"
-                  timestampString = "474854382.088915"
+                  timestampString = "474862996.797341"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "449"
                   endingLineNumber = "449"
-                  offsetFromSymbolStart = "83">
+                  offsetFromSymbolStart = "70">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -546,6 +546,38 @@
             startingLineNumber = "311"
             endingLineNumber = "311"
             landmarkName = "-doConfirmOrder"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "474862439.873393"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "221"
+            endingLineNumber = "221"
+            landmarkName = "-checkIfSelectedLocationIsInAnyZone:completion:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/BentoShop.m"
+            timestampString = "474862441.023985"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "224"
+            endingLineNumber = "224"
+            landmarkName = "-checkIfSelectedLocationIsInAnyZone:completion:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

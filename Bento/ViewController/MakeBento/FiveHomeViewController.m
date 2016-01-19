@@ -152,12 +152,12 @@
         // yes saved location
         SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
         if (placemark != nil) {
-            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
                 if (isSelectedLocationInZone == NO) {
                     [self nextToBuildShowMap];
                 }
                 else {
-                    [self checkIfInZoneButNoMenuAndNotClosed];
+                    [self checkIfInZoneButNoMenuAndNotClosed:appState];
                 }
             }];
         }
@@ -168,12 +168,12 @@
     }
     // yes gps
     else {
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation completion:^(BOOL isSelectedLocationInZone) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
             if (isSelectedLocationInZone == NO) {
                 [self nextToBuildShowMap];
             }
             else {
-                [self checkIfInZoneButNoMenuAndNotClosed];
+                [self checkIfInZoneButNoMenuAndNotClosed:appState];
             }
         }];
     }
@@ -181,8 +181,8 @@
 //    [[DataManager shareDataManager] getUserInfo] == nil
 }
 
-- (void)checkIfInZoneButNoMenuAndNotClosed {
-    if ([[[BentoShop sharedInstance] getAppState] isEqualToString:@"map,no_service_wall"]) {
+- (void)checkIfInZoneButNoMenuAndNotClosed:(NSString *)appState {
+    if ([appState isEqualToString:@"map,no_service_wall"]) {
         [self nextToBuildShowMap];
     }
 }
@@ -1272,7 +1272,7 @@
         // has saved address
         else {
             // check if saved address is inside CURRENT service area
-            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
                 if (isSelectedLocationInZone) {
                     [self openAccountViewController:[CompleteOrderViewController class]];
                 }
@@ -1290,7 +1290,7 @@
         }
         // has saved address
         else {
-            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
                 if (isSelectedLocationInZone) {
                     [self.navigationController pushViewController:completeOrderViewController animated:YES];
                 }

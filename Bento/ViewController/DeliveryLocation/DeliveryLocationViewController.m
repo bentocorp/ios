@@ -307,9 +307,9 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     else {
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
             
-            if (isSelectedLocationInZone == YES && [[[BentoShop sharedInstance] getAppState] isEqualToString:@"build"]) {
+            if (isSelectedLocationInZone == YES && [appState isEqualToString:@"build"]) {
                 [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
                 [[NSUserDefaults standardUserDefaults] synchronize];
                 
@@ -473,9 +473,9 @@
             return;
         }
         
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
             // inside zone
-            if (isSelectedLocationInZone && [[[BentoShop sharedInstance] getAppState] isEqualToString:@"build"]) {
+            if (isSelectedLocationInZone && [appState isEqualToString:@"build"]) {
                 [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude] forKey:@"savedLongitude"];
