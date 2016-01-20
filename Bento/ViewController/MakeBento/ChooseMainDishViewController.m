@@ -19,6 +19,8 @@
 
 #import "Mixpanel.h"
 
+#import "OrderAheadMenu.h"
+
 @interface ChooseMainDishViewController () <DishCollectionViewCellDelegate>
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
@@ -98,33 +100,41 @@
     // clear items first
     [self.aryDishes removeAllObjects];
     
-//    NSString *lunchOrDinnerString;
+    NSArray *mainDishesFromMode;
     
-//    /* IS ALL-DAY */
-//    if ([[BentoShop sharedInstance] isAllDay])
-//    {
-//        if ([[BentoShop sharedInstance] isThereLunchMenu])
-//            lunchOrDinnerString = @"todayLunch";
-//        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-//            lunchOrDinnerString = @"todayDinner";
-//    }
-//    
-//    /* IS NOT ALL-DAY */
-//    else
-//    {
-//        // 00:00 - 16:29
-//        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-//            lunchOrDinnerString = @"todayLunch";
-//        
-//        // 16:30 - 23:59
-//        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-//            lunchOrDinnerString = @"todayDinner";
-//    }
+    if (self.orderMode == OnDemand) {
+        NSString *lunchOrDinnerString;
+    
+        /* IS ALL-DAY */
+        if ([[BentoShop sharedInstance] isAllDay])
+        {
+            if ([[BentoShop sharedInstance] isThereLunchMenu])
+                lunchOrDinnerString = @"todayLunch";
+            else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                lunchOrDinnerString = @"todayDinner";
+        }
+    
+        /* IS NOT ALL-DAY */
+        else
+        {
+            // 00:00 - 16:29
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+                lunchOrDinnerString = @"todayLunch";
+    
+            // 16:30 - 23:59
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+                lunchOrDinnerString = @"todayDinner";
+        }
+        
+        mainDishesFromMode = [[BentoShop sharedInstance] getMainDishes:lunchOrDinnerString];
+    }
+    else if (self.orderMode == OrderAhead) {
+        mainDishesFromMode = self.orderAheadMenu.mainDishes;
+    }
     
     NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
     
-//    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:lunchOrDinnerString])
-    for (NSDictionary * dishInfo in self.mainDishes)
+    for (NSDictionary * dishInfo in mainDishesFromMode)
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         
@@ -369,6 +379,17 @@
 
     if (_selectedItemState == DISH_CELL_SELECTED) {
         [self.navigationController popViewControllerAnimated:YES];
+    }
+}
+
+#pragma mark OrderAhead Update Menu
+- (void)updateOrderAheadMenu {
+    if (self.orderMode == OrderAhead) {
+        for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+            if ([self.orderAheadMenu.name isEqualToString:orderAheadMenu.name]) {
+                self.orderAheadMenu = orderAheadMenu;
+            }
+        }
     }
 }
 

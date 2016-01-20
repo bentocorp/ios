@@ -1007,7 +1007,8 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    chooseMainDishViewController.mainDishes = self.orderAheadMenu.mainDishes;
+    chooseMainDishViewController.orderAheadMenu = self.orderAheadMenu;
+    chooseMainDishViewController.orderMode = self.orderMode;
     
     [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
 }
@@ -1029,7 +1030,8 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    chooseMainDishViewController.mainDishes = self.orderAheadMenu.mainDishes;
+    chooseMainDishViewController.orderAheadMenu = self.orderAheadMenu;
+    chooseMainDishViewController.orderMode = self.orderMode;
     
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     chooseSideDishViewController.sideDishes = self.orderAheadMenu.sideDishes;
