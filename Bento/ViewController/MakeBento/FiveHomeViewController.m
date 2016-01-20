@@ -278,7 +278,15 @@
     /*---Main---*/
     if (mainDishIndex > 0) {
         
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
+        NSDictionary *dishInfo;
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
+        }
+        else if (self.orderMode == OrderAhead) {
+            dishInfo = [self.orderAheadMenu getMainDish:mainDishIndex];
+        }
+        
         if (dishInfo != nil) {
             
             self.fourCustomVC.mainDishImageView.hidden = NO;
@@ -325,7 +333,15 @@
     /*---Side 1---*/
     if (side1DishIndex > 0) {
         
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
+        NSDictionary *dishInfo;
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
+        }
+        else if (self.orderMode == OrderAhead) {
+            dishInfo = [self.orderAheadMenu getSideDish:side1DishIndex];
+        }
+        
         if (dishInfo != nil) {
             
             self.fourCustomVC.sideDish1ImageView.hidden = NO;

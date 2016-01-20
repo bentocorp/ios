@@ -186,18 +186,6 @@
     return NO;
 }
 
-- (NSDictionary *)getSideDish:(NSInteger)sideDishID {
-    for (NSDictionary *dishInfo in self.sideDishes) {
-        NSString *strType = dishInfo[@"type"];
-        NSInteger menuIndex = [dishInfo[@"itemId"] integerValue];
-        if ([strType isEqualToString:@"side"] && menuIndex == sideDishID) {
-            return dishInfo;
-        }
-    }
-    
-    return nil;
-}
-
 - (BOOL)isDishSoldOut:(NSInteger)menuID
 {
     if ([[[BentoShop sharedInstance] getAppState] isEqualToString:@"soldout_wall"]) {
@@ -230,6 +218,33 @@
     }
 
     return NO;
+}
+
+- (NSDictionary *)getMainDish:(NSInteger)mainDishID {
+    for (NSDictionary *dishInfo in self.mainDishes) {
+        
+        NSInteger menuIndex = [dishInfo[@"itemId"] integerValue];
+        
+        if (menuIndex == mainDishID) {
+            return dishInfo;
+        }
+    }
+    
+    return nil;
+}
+
+- (NSDictionary *)getSideDish:(NSInteger)sideDishID {
+    
+    for (NSDictionary *dishInfo in self.sideDishes) {
+        
+        NSInteger menuIndex = [dishInfo[@"itemId"] integerValue];
+        
+        if (menuIndex == sideDishID) {
+            return dishInfo;
+        }
+    }
+    
+    return nil;
 }
 
 @end

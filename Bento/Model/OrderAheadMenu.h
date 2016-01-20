@@ -12,15 +12,19 @@
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSArray *times;
-
 @property (nonatomic) NSArray *allMenuItems;
 @property (nonatomic) NSArray *mainDishes;
 @property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSArray *addons;
 
 - (id)initWithDictionary:(NSDictionary *)menu;
+
 - (BOOL)isDishSoldOut:(NSInteger)menuID;
-- (BOOL)canAddSideDish:(NSInteger)sideDishID;
+
 - (BOOL)canAddDish:(NSInteger)dishID;
+- (BOOL)canAddSideDish:(NSInteger)sideDishID;
+
+- (NSDictionary *)getMainDish:(NSInteger)mainDishID;
+- (NSDictionary *)getSideDish:(NSInteger)sideDishID;
 
 @end

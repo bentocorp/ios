@@ -40,24 +40,14 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // initialize to YES
     isThereConnection = YES;
-    
-    NSLog(@"viewdidload");
     
     // Set Nib to Collection View
     UINib *cellNib = [UINib nibWithNibName:@"DishCollectionViewCell" bundle:nil];
     [self.cvSideDishes registerNib:cellNib forCellWithReuseIdentifier:@"cell"];
     
     // Set Dish Title Label
-    if (self.sideDishIndex == 0)
-        [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_1_TITLE]];
-    else if (self.sideDishIndex == 1)
-        [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_2_TITLE]];
-    else if (self.sideDishIndex == 2)
-        [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_3_TITLE]];
-    else if (self.sideDishIndex == 3)
-        [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_4_TITLE]];
+    [self setDishTitleLabel];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -87,14 +77,36 @@
     [self startTimerOnViewedScreen];
 }
 
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
+}
+
+- (void)setDishTitleLabel {
+    if (self.sideDishIndex == 0) {
+        [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_1_TITLE]];
+    }
+    else if (self.sideDishIndex == 1) {
+        [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_2_TITLE]];
+    }
+    else if (self.sideDishIndex == 2) {
+        [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_3_TITLE]];
+    }
+    else if (self.sideDishIndex == 3) {
+        [self.lblTitle setText:[[AppStrings sharedInstance] getString:SIDEDISH_4_TITLE]];
+    }
+}
+
 - (void)sortAryDishes {
     
     [self.aryDishes removeAllObjects];
     
     // Get Side Dish
     NSInteger sideDishIndex = 0;
-    if ([[BentoShop sharedInstance] getCurrentBento] != nil)
-    {
+    if ([[BentoShop sharedInstance] getCurrentBento] != nil) {
         if (self.sideDishIndex == 0) {
             sideDishIndex = [[[BentoShop sharedInstance] getCurrentBento] getSideDish1];
         }
@@ -113,7 +125,7 @@
     
     if (self.orderMode == OnDemand) {
         NSString *lunchOrDinnerString;
-    
+        
         /* IS ALL-DAY */
         if ([[BentoShop sharedInstance] isAllDay])
         {
@@ -122,14 +134,14 @@
             else if ([[BentoShop sharedInstance] isThereDinnerMenu])
                 lunchOrDinnerString = @"todayDinner";
         }
-    
+        
         /* IS NOT ALL-DAY */
         else
         {
             // 00:00 - 16:29
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
                 lunchOrDinnerString = @"todayLunch";
-    
+            
             // 16:30 - 23:59
             else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
                 lunchOrDinnerString = @"todayDinner";
@@ -140,11 +152,10 @@
     else if (self.orderMode == OrderAhead) {
         sideDishesFromMode = self.orderAheadMenu.sideDishes;
     }
-
+    
     NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
     
-    for (NSDictionary * dishInfo in sideDishesFromMode)
-    {
+    for (NSDictionary * dishInfo in sideDishesFromMode) {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         
         if (self.orderMode == OnDemand) {
@@ -162,7 +173,7 @@
             }
         }
         else if (self.orderMode == OrderAhead) {
-            if ([[BentoShop sharedInstance] canAddDish:dishID] && ([self.orderAheadMenu canAddSideDish:dishID] || dishID == sideDishIndex)) {
+            if ([self.orderAheadMenu canAddDish:dishID] && ([self.orderAheadMenu canAddSideDish:dishID] || dishID == sideDishIndex)) {
                 
                 // 1) add to self.aryDishes only if it's not sold out
                 if ([self.orderAheadMenu isDishSoldOut:dishID] == NO) {
@@ -180,13 +191,10 @@
     // 3) append sold out dishes to self.aryDishes
     self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
     
-    if (sideDishIndex != 0)
-    {
-        for (NSInteger index = 0; index < self.aryDishes.count; index++)
-        {
+    if (sideDishIndex != 0) {
+        for (NSInteger index = 0; index < self.aryDishes.count; index++) {
             NSDictionary *dishInfo = [self.aryDishes objectAtIndex:index];
-            if ([[dishInfo objectForKey:@"itemId"] integerValue] == sideDishIndex)
-            {
+            if ([dishInfo[@"itemId"] integerValue] == sideDishIndex) {
                 _originalDishIndex = index;
                 _selectedIndex = index;
                 _selectedItemState = DISH_CELL_SELECTED;
@@ -195,44 +203,30 @@
     }
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [super viewWillDisappear:animated];
-    
-    [self endTimerOnViewedScreen];
-}
-
 #pragma mark Duration on screen
-- (void)startTimerOnViewedScreen
-{
+- (void)startTimerOnViewedScreen {
     [[Mixpanel sharedInstance] timeEvent:@"Viewed Choose Your Side Dish Screen"];
 }
 
-- (void)endTimerOnViewedScreen
-{
+- (void)endTimerOnViewedScreen {
     [[Mixpanel sharedInstance] track:@"Viewed Choose Your Side Dish Screen"];
 }
 
-- (void)noConnection
-{
+- (void)noConnection {
     isThereConnection = NO;
     
-    if (loadingHUD == nil)
-    {
+    if (loadingHUD == nil) {
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
         [loadingHUD showInView:self.view];
     }
 }
 
-- (void)yesConnection
-{
+- (void)yesConnection {
     [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
 }
 
-- (void)callUpdate
-{
+- (void)callUpdate {
     isThereConnection = YES;
     
     [loadingHUD dismiss];
@@ -240,26 +234,25 @@
     [self viewWillAppear:YES];
 }
 
-- (void)onUpdatedStatus:(NSNotification *)notification
-{
-    if (isThereConnection)
-    {
-        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+- (void)onUpdatedStatus:(NSNotification *)notification {
+    if (isThereConnection) {
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
             [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+        }
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser]) {
             [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-        else
+        }
+        else {
             [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        }
     }
 }
 
-- (IBAction)onBack:(id)sender
-{
+- (IBAction)onBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)updateUI
-{
+- (void)updateUI {
     [self updateOrderAheadMenu];
     
     [self sortAryDishes];
@@ -267,16 +260,15 @@
     [self.cvSideDishes reloadData];
 }
 
-- (BOOL)isCompletedToMakeMyBento
-{
-    if ([[BentoShop sharedInstance] getCurrentBento] == nil)
-        return NO;
-    
-    return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
-}
+//- (BOOL)isCompletedToMakeMyBento {
+//    if ([[BentoShop sharedInstance] getCurrentBento] == nil) {
+//        return NO;
+//    }
+//    
+//    return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
+//}
 
-- (void)showSoldoutScreen:(NSNumber *)identifier
-{
+- (void)showSoldoutScreen:(NSNumber *)identifier {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
     SoldOutViewController *vcSoldOut = (SoldOutViewController *)nav.topViewController;
@@ -287,45 +279,48 @@
 
 #pragma mark - UICollectionViewDatasource Methods
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    if (self.aryDishes == nil)
+- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+    if (self.aryDishes == nil) {
         return 0;
+    }
     
     return self.aryDishes.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
+- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     DishCollectionViewCell *cell = (DishCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"cell" forIndexPath:indexPath];
     cell.delegate = self;
     
     [cell setSmallDishCell];
     
     // Anything less than iOS 8.0
-    if ([[UIDevice currentDevice].systemVersion intValue] < 8)
-    {
-        // Anything less than iOS 8.0
+    if ([[UIDevice currentDevice].systemVersion intValue] < 8) {
+
         NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         
-        BOOL canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID];
-        canBeAdded = canBeAdded && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
+        BOOL canBeAdded;
         
-        // if main dish, set isMain to true
-        if ([dishInfo[@"type"] isEqualToString:@"main"]) {
-            [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+        if (self.orderMode == OnDemand) {
+            canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID] && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
         }
-        else {
+        else if (self.orderMode == OrderAhead) {
+            canBeAdded = [self.orderAheadMenu canAddDish:dishID] && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
+        }
+        
+        // if side dish, set isMain to NO
+        if ([dishInfo[@"type"] isEqualToString:@"main"] == NO) {
             [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
         }
         
         [cell setSmallDishCell];
         
-        if (_selectedIndex == indexPath.item)
+        if (_selectedIndex == indexPath.item) {
             [cell setCellState:_selectedItemState index:indexPath.item];
-        else
+        }
+        else {
             [cell setCellState:DISH_CELL_NORMAL index:indexPath.item];
+        }
     }
     
     return cell;
@@ -338,23 +333,28 @@
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
     NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
     
-    BOOL canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID];
-    canBeAdded = canBeAdded && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
+    BOOL canBeAdded;
     
-    // if main dish, set isMain to true
-    if ([dishInfo[@"type"] isEqualToString:@"main"]) {
-        [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+    if (self.orderMode == OnDemand) {
+        canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID] && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
     }
-    else {
+    else if (self.orderMode == OrderAhead) {
+        canBeAdded = [self.orderAheadMenu canAddDish:dishID] && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
+    }
+
+    // if side dish, set isMain to NO
+    if ([dishInfo[@"type"] isEqualToString:@"main"] == NO) {
         [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
     }
     
     [myCell setSmallDishCell];
     
-    if (_selectedIndex == indexPath.item)
+    if (_selectedIndex == indexPath.item) {
         [myCell setCellState:_selectedItemState index:indexPath.item];
-    else
+    }
+    else {
         [myCell setCellState:DISH_CELL_NORMAL index:indexPath.item];
+    }
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath
@@ -399,8 +399,9 @@
 {
     NSDictionary *dishInfo = [self.aryDishes objectAtIndex:_selectedIndex];
     
-    if (dishInfo == nil)
+    if (dishInfo == nil) {
         return;
+    }
     
     NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
     
