@@ -82,6 +82,7 @@
     NSString *menuOrderAhead;
     NSString *timeOrderAhead;
     
+    int selected;
     NSMutableArray *menuNames; // [date, date, date]
     NSMutableArray *menuTimes; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
 }
@@ -1486,14 +1487,8 @@
         return menuNames.count;
     }
     else {
-        for (int i = 0; i < menuTimes.count; i++) {
-            if (<#condition#>) {
-                <#statements#>
-            }
-        }
+        return [menuTimes[selected] count];
     }
-    
-    return [namesAndTimesArray[component] count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
@@ -1532,7 +1527,7 @@
     pickerLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13];
     
     return pickerLabel;
-}t
+}
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 
