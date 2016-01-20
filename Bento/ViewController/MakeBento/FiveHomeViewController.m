@@ -59,6 +59,8 @@
 @property (nonatomic) FiveCustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 @property (nonatomic) OrderMode orderMode;
+
+@property (nonatomic) BOOL onDemandVSOrAhead;
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
 @property (nonatomic) NSDictionary *widget;
@@ -79,6 +81,10 @@
     NSString *timeOnDemand;
     NSString *menuOrderAhead;
     NSString *timeOrderAhead;
+    
+    NSMutableArray *menuNames; // [date, date, date]
+    NSMutableArray *menuTimes; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
+    NSMutableArray *namesAndTimesArray;
 }
 
 - (void)viewDidLoad {
@@ -822,7 +828,7 @@
     /*----------------------*/
     
     // Bentos
-    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {// no bento
+    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) { // no bento
         [[BentoShop sharedInstance] addNewBento]; // add an empty one
     }
     else if ([[BentoShop sharedInstance] getCurrentBento] == nil) {
@@ -1157,9 +1163,10 @@
     // OrderAhead Database
     
     
+    
     myDatabase = @[
                    @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Wednesday January 20th, Lunch", @"Jan 16, Dinner"],
-                   @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
+                   
                    ];
 
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
@@ -1466,6 +1473,18 @@
 
 #pragma mark Picker View
 
+- (void)setUpPickerData {
+    menuNames = [@[] mutableCopy]; // [date, date, date]
+    menuTimes = [@[] mutableCopy]; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
+    
+    for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+        [menuNames addObject: orderAheadMenu.name];
+        [menuTimes addObject: orderAheadMenu.times];
+    }
+    
+    namesAndTimesArray = [@[menuNames, menuTimes] mutableCopy];
+}
+
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel *pickerLabel = [[UILabel alloc] init];
     pickerLabel.text = myDatabase[component][row];
@@ -1486,11 +1505,20 @@
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return myDatabase.count;
+    // | name column | times column |
+    return namesAndTimesArray.count;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [myDatabase[component] count];
+    
+    // name count
+    if (component == 0) {
+        return [namesAndTimesArray[component] count];
+    }
+
+    
+    // time
+    return [namesAndTimesArray[component] count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
