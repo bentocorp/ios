@@ -732,15 +732,17 @@
 #pragma mark Update UI
 
 - (void)updateUI {
-    [self updateWidget];
-    [self setETA];
-    [self setStartingPrice];
-    [self showOrHideAddAnotherBentoAndViewAddons];
-    [self setBuildButtonText];
-    [self checkBentoCount];
-    [self loadSelectedDishes];
-    [self setCart];
-    [self updateBottomButton];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self updateWidget];
+        [self setETA];
+        [self setStartingPrice];
+        [self showOrHideAddAnotherBentoAndViewAddons];
+        [self setBuildButtonText];
+        [self checkBentoCount];
+        [self loadSelectedDishes];
+        [self setCart];
+        [self updateBottomButton];
+    });
 }
 
 - (void)setStartingPrice {
