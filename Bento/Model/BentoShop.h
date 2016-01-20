@@ -136,5 +136,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (BOOL)isThereOnDemand;
 - (BOOL)isThereOrderAhead;
 - (BOOL)isThereOnDemandPreview;
+- (NSString *)setDateFormat:(NSString *)dateString;
 
 @end

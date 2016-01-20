@@ -369,9 +369,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 #pragma mark Order-Ahead
 
 - (BOOL)isThereOrderAhead {
-    
-    [self setDateFormat];
-    
     if (self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"]) {
         return YES;
     }
@@ -381,19 +378,27 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 
 #pragma mark Order Ahead Menus
 
-// get selected menu based on day_text2
+//
+//- (NSArray *)getOrderAheadMenus {
+//    NSArray *menus = self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"][@"availableMenus"][@"menus"];
+//    if (menus) {
+//        for (NSDictionary *menu in menus) {
+//            menu[]
+//        }
+//    }
+//}
 
-- (void)setDateFormat:(NSString *)dateString {
-//    NSString *strDate = @"2016-01-19";
-    
+- (NSString *)setDateFormat:(NSString *)dateString {
+    // turn this format...2016-01-19
     NSDateFormatter *df = [[NSDateFormatter alloc] init];
     [df setDateFormat:@"yyyy-MM-dd"];
     
+    // into this format...Tue 1/19
     NSDate *targetDate = [df dateFromString:dateString];
     [df setDateFormat:@"EE M/d"];
     NSString *s = [df stringFromDate:targetDate];
     
-    NSLog(@"Date: %@", s);
+    return s;
 }
 
 #pragma mark Branch Params
