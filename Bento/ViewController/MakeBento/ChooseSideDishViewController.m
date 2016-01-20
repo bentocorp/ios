@@ -165,7 +165,7 @@
             if ([[BentoShop sharedInstance] canAddDish:dishID] && ([self.orderAheadMenu canAddSideDish:dishID] || dishID == sideDishIndex)) {
                 
                 // 1) add to self.aryDishes only if it's not sold out
-                if ([[BentoShop sharedInstance] isDishSoldOut:dishID] == NO) {
+                if ([self.orderAheadMenu isDishSoldOut:dishID] == NO) {
                     
                     [self.aryDishes addObject:dishInfo];
                 }

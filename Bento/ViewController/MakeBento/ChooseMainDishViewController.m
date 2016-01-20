@@ -70,6 +70,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
     self.aryDishes = [[NSMutableArray alloc] init];
+    
     [self sortAryDishes];
     
     _originalDishIndex = NSNotFound;
@@ -93,6 +94,15 @@
     }
     
     [self updateUI];
+}
+
+- (void)viewWillDisappear:(BOOL)animated
+{
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
 }
 
 - (void)sortAryDishes {
@@ -156,45 +166,30 @@
     self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    
-    [super viewWillDisappear:animated];
-    
-    [self endTimerOnViewedScreen];
-}
-
 #pragma mark Duration on screen
-- (void)startTimerOnViewedScreen
-{
+- (void)startTimerOnViewedScreen {
     [[Mixpanel sharedInstance] timeEvent:@"Viewed Choose Your Main Dish Screen"];
 }
 
-- (void)endTimerOnViewedScreen
-{
+- (void)endTimerOnViewedScreen {
     [[Mixpanel sharedInstance] track:@"Viewed Choose Your Main Dish Screen"];
 }
 
-- (void)noConnection
-{
+- (void)noConnection {
     isThereConnection = NO;
     
-    if (loadingHUD == nil)
-    {
+    if (loadingHUD == nil) {
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
         [loadingHUD showInView:self.view];
     }
 }
 
-- (void)yesConnection
-{
+- (void)yesConnection {
     [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
 }
 
-- (void)callUpdate
-{
+- (void)callUpdate {
     isThereConnection = YES;
     
     [loadingHUD dismiss];
@@ -202,26 +197,25 @@
     [self viewWillAppear:YES];
 }
 
-- (void)onUpdatedStatus:(NSNotification *)notification
-{
-    if (isThereConnection)
-    {
-        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
+- (void)onUpdatedStatus:(NSNotification *)notification {
+    if (isThereConnection) {
+        if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser]) {
             [self showSoldoutScreen:[NSNumber numberWithInt:0]];
-        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser])
+        }
+        else if ([[BentoShop sharedInstance] isSoldOut] && ![[DataManager shareDataManager] isAdminUser]) {
             [self showSoldoutScreen:[NSNumber numberWithInt:1]];
-        else
+        }
+        else {
             [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+        }
     }
 }
 
-- (IBAction)onBack:(id)sender
-{
+- (IBAction)onBack:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)updateUI
-{
+- (void)updateUI {
     [self updateOrderAheadMenu];
     
     [self sortAryDishes];
@@ -237,8 +231,7 @@
 //    return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
 //}
 
-- (void)showSoldoutScreen:(NSNumber *)identifier
-{
+- (void)showSoldoutScreen:(NSNumber *)identifier {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UINavigationController *nav = [storyboard instantiateViewControllerWithIdentifier:@"SoldOut"];
     SoldOutViewController *vcSoldOut = (SoldOutViewController *)nav.topViewController;
@@ -266,12 +259,20 @@
     // Anything less than iOS 8.0
     if ([[UIDevice currentDevice].systemVersion intValue] < 8)
     {
-        NSDictionary *dishInfo = [self.aryDishes objectAtIndex:indexPath.row];
-        NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
+        NSDictionary *dishInfo = self.aryDishes[indexPath.row];
+        NSInteger dishID = [dishInfo[@"itemId"] integerValue];
         
-        // if main dish, set isMain to true
-        if ([dishInfo[@"type"] isEqualToString:@"main"]) {
-            [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+        if (self.orderMode == OnDemand) {
+            // if main dish, set isMain to true
+            if ([dishInfo[@"type"] isEqualToString:@"main"]) {
+                [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+            }
+        }
+        else if (self.orderMode == OrderAhead) {
+            // if main dish, set isMain to true
+            if ([dishInfo[@"type"] isEqualToString:@"main"]) {
+                [cell setDishInfo:dishInfo isSoldOut:[self.orderAheadMenu isDishSoldOut:dishID] canBeAdded:[self.orderAheadMenu canAddDish:dishID] isMain:YES];
+            }
         }
         
         if (_selectedIndex == indexPath.item) {
@@ -294,7 +295,13 @@
     
     // if main dish, set isMain to true
     if ([dishInfo[@"type"] isEqualToString:@"main"]) {
-        [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+        
+        if (self.orderMode == OnDemand) {
+            [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+        }
+        else if (self.orderMode == OrderAhead) {
+            [myCell setDishInfo:dishInfo isSoldOut:[self.orderAheadMenu isDishSoldOut:dishID] canBeAdded:[self.orderAheadMenu canAddDish:dishID] isMain:YES];
+        }
     }
     
     if (_selectedIndex == indexPath.item) {

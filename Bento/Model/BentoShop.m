@@ -39,7 +39,7 @@
 @property (nonatomic) NSDictionary *menuNext;
 @property (nonatomic) NSArray *menuStatus;
 @property (nonatomic) MKPolygon *serviceArea;
-@property (nonatomic) NSMutableArray *aryBentos;
+
 @property (nonatomic) NSString *strToday;
 @property (nonatomic) BOOL prevClosed;
 @property (nonatomic) BOOL prevSoldOut;

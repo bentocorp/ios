@@ -103,8 +103,8 @@
         return NO;
     }
     
-    id object = [dishInfo objectForKey:@"max_per_order"];
-    if (object == [NSNull null]) {
+    id object = dishInfo[@"max_per_order"];
+    if ([object isEqual: [NSNull null]]) {
         return YES;
     }
     
@@ -131,6 +131,59 @@
     }
     
     return YES;
+}
+
+- (BOOL)canAddDish:(NSInteger)dishID {
+    NSInteger quantity = 0;
+    
+    for (NSDictionary *menuItem in self.allMenuItems) {
+        NSInteger itemID;
+        
+        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]]) {
+            itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+        }
+        
+        if (itemID == dishID) {
+            if (![[menuItem objectForKey:@"qty"] isEqual:[NSNull null]])
+                quantity = [[menuItem objectForKey:@"qty"] integerValue];
+            break;
+        }
+    }
+    
+    if (quantity == 0) {
+        return YES;
+    }
+    
+    // check how many of the dish already exists in cart
+    NSInteger currentAmount = 0;
+    
+    for (Bento *bento in [BentoShop sharedInstance].aryBentos) {
+        if ([bento getMainDish] == dishID) {
+            currentAmount ++;
+        }
+        
+        if ([bento getSideDish1] == dishID) {
+            currentAmount ++;
+        }
+        
+        if ([bento getSideDish2] == dishID) {
+            currentAmount ++;
+        }
+        
+        if ([bento getSideDish3] == dishID) {
+            currentAmount ++;
+        }
+        
+        if ([bento getSideDish4] == dishID) {
+            currentAmount ++;
+        }
+    }
+    
+    if (currentAmount < quantity) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID {
