@@ -1160,14 +1160,6 @@
 
 #pragma mark Refresh State / Start Screen Logic
 - (void)refreshState {
-    // OrderAhead Database
-    
-    
-    
-    myDatabase = @[
-                   @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Wednesday January 20th, Lunch", @"Jan 16, Dinner"],
-                   
-                   ];
 
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
         [self installOnDemand];
@@ -1184,6 +1176,8 @@
         [self installOrderAhead];
         [self enableOrderAhead];
     }
+    
+    [self setUpPickerData];
 }
 
 #pragma mark Install / Remove
@@ -1475,7 +1469,7 @@
 
 - (void)setUpPickerData {
     menuNames = [@[] mutableCopy]; // [date, date, date]
-    menuTimes = [@[] mutableCopy]; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
+    menuTimes = [@[] mutableCopy]; // [[time range, time range], [time range, time range], [time range, time range]]
     
     for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
         [menuNames addObject: orderAheadMenu.name];
@@ -1487,7 +1481,7 @@
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
     UILabel *pickerLabel = [[UILabel alloc] init];
-    pickerLabel.text = myDatabase[component][row];
+    pickerLabel.text = namesAndTimesArray[component][row];
     
     // if time range is sold-out
     if ([pickerLabel.text containsString:@"sold-out"]) {
@@ -1505,40 +1499,31 @@
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    // | name column | times column |
     return namesAndTimesArray.count;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
-    // name count
-    if (component == 0) {
-        return [namesAndTimesArray[component] count];
-    }
-
-    
-    // time
     return [namesAndTimesArray[component] count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return myDatabase[component][row];
+    return namesAndTimesArray[component][row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
     switch (component) {
         case 0:
-            menuOrderAhead = myDatabase[component][row];
+            menuOrderAhead = namesAndTimesArray[component][row];
             break;
             
         default:
             // if time range is sold-out
-            if ([myDatabase[component][row] containsString:@"sold-out"]) {
+            if ([namesAndTimesArray[component][row] containsString:@"sold-out"]) {
                 [pickerView selectRow:row+1 inComponent:component animated:YES];
-                timeOrderAhead = myDatabase[component][row+1];
+                timeOrderAhead = namesAndTimesArray[component][row+1];
             }
             else {
-                timeOrderAhead = myDatabase[component][row];
+                timeOrderAhead = namesAndTimesArray[component][row];
             }
             
             break;
