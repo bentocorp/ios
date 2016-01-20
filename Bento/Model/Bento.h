@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "NSObject+RMArchivable.h"
 #import "OrderAheadMenu.h"
+#import "FiveHomeViewController.h"
 
 @interface Bento : NSObject
 
@@ -17,6 +18,8 @@
 @property (nonatomic) NSInteger indexSideDish2;
 @property (nonatomic) NSInteger indexSideDish3;
 @property (nonatomic) NSInteger indexSideDish4;
+
+@property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
 // Testing
 - (NSInteger)getMainDish;
@@ -38,7 +41,7 @@
 - (BOOL)isEmpty;
 - (BOOL)isCompleted;
 
-- (void)completeBentoWith:(OrderAheadMenu *)orderAheadMenu;
+- (void)completeBentoWithOrderAheadMenu;
 - (void)completeBento:(NSString *)whatNeedsThis;
 
 - (BOOL)canAddSideDish:(NSInteger)sideDishID;

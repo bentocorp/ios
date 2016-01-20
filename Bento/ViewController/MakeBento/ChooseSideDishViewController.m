@@ -447,6 +447,10 @@
         else if (self.sideDishIndex == 3)
             [[[BentoShop sharedInstance] getCurrentBento] setSideDish4:dishIndex];
         
+        if (self.orderMode == OrderAhead) {
+            [[BentoShop sharedInstance] getCurrentBento].orderAheadMenu = self.orderAheadMenu;
+        }
+        
         _originalDishIndex = index;
     }
     

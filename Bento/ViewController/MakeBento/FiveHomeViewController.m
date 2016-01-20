@@ -1137,7 +1137,7 @@
                 }
             }
             else if (self.orderMode == OrderAhead) {
-                [currentBento completeBentoWith:self.orderAheadMenu];
+                [currentBento completeBentoWithOrderAheadMenu];
             }
         }
         
@@ -1245,7 +1245,7 @@
             }
         }
         else if (self.orderMode == OrderAhead) {
-            [currentBento completeBentoWith:self.orderAheadMenu];
+            [currentBento completeBentoWithOrderAheadMenu];
         }
         
         [[BentoShop sharedInstance] addNewBento];

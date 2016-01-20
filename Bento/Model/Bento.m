@@ -14,10 +14,6 @@
 @end
 
 @implementation Bento
-{
-    // this would only be set on completing a bento
-    OrderAheadMenu *OAMenu;
-}
 
 - (id)init
 {
@@ -37,7 +33,15 @@
     if (self.indexMainDish == 0)
         return @"";
     
-    NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:self.indexMainDish];
+    NSDictionary *dishInfo;
+    
+    // is on demand
+    if (self.orderAheadMenu == nil) {
+        dishInfo = [[BentoShop sharedInstance] getMainDish:self.indexMainDish];
+    }
+    else {
+        dishInfo = [self.orderAheadMenu getMainDish:self.indexMainDish];
+    }
     
     if (dishInfo == nil) {
         return @"";
@@ -50,7 +54,16 @@
     if (self.indexMainDish == 0)
         return 0;
     
-    NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:self.indexMainDish];
+    NSDictionary *dishInfo;
+    
+    // is on demand
+    if (self.orderAheadMenu == nil) {
+        dishInfo = [[BentoShop sharedInstance] getMainDish:self.indexMainDish];
+    }
+    else {
+        dishInfo = [self.orderAheadMenu getMainDish:self.indexMainDish];
+    }
+    
     if (dishInfo == nil) {
         return 0;
     }
@@ -242,20 +255,18 @@
 }
 
 // completeBento, but order ahead version
-- (void)completeBentoWith:(OrderAheadMenu *)orderAheadMenu
+- (void)completeBentoWithOrderAheadMenu
 {
-    OAMenu = orderAheadMenu;
-    
     if (self.indexMainDish == 0)
     {
-        for (NSDictionary *dishInfo in orderAheadMenu.mainDishes)
+        for (NSDictionary *dishInfo in self.orderAheadMenu.mainDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([orderAheadMenu isDishSoldOut:dishIndex]) {
+            if ([self.orderAheadMenu isDishSoldOut:dishIndex]) {
                 continue;
             }
             
-            if (![orderAheadMenu canAddDish:dishIndex]) {
+            if (![self.orderAheadMenu canAddDish:dishIndex]) {
                 continue;
             }
             
@@ -266,13 +277,13 @@
     
     if (self.indexSideDish1 == 0)
     {
-        for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
+        for (NSDictionary *dishInfo in self.orderAheadMenu.sideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([orderAheadMenu isDishSoldOut:dishIndex])
+            if ([self.orderAheadMenu isDishSoldOut:dishIndex])
                 continue;
             
-            if (![orderAheadMenu canAddDish:dishIndex])
+            if (![self.orderAheadMenu canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])
@@ -285,13 +296,13 @@
     
     if (self.indexSideDish2 == 0)
     {
-        for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
+        for (NSDictionary *dishInfo in self.orderAheadMenu.sideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([orderAheadMenu isDishSoldOut:dishIndex])
+            if ([self.orderAheadMenu isDishSoldOut:dishIndex])
                 continue;
             
-            if (![orderAheadMenu canAddDish:dishIndex])
+            if (![self.orderAheadMenu canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])
@@ -304,13 +315,13 @@
     
     if (self.indexSideDish3 == 0)
     {
-        for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
+        for (NSDictionary *dishInfo in self.orderAheadMenu.sideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([orderAheadMenu isDishSoldOut:dishIndex])
+            if ([self.orderAheadMenu isDishSoldOut:dishIndex])
                 continue;
             
-            if (![orderAheadMenu canAddDish:dishIndex])
+            if (![self.orderAheadMenu canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])
@@ -323,13 +334,13 @@
     
     if (self.indexSideDish4 == 0)
     {
-        for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
+        for (NSDictionary *dishInfo in self.orderAheadMenu.sideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([orderAheadMenu isDishSoldOut:dishIndex])
+            if ([self.orderAheadMenu isDishSoldOut:dishIndex])
                 continue;
             
-            if (![orderAheadMenu canAddDish:dishIndex])
+            if (![self.orderAheadMenu canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])
