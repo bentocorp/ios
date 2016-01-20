@@ -226,9 +226,7 @@
 - (void)nextToBuildShowMap {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
-    
-    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"nextToBuild"];
-    [[NSUserDefaults standardUserDefaults] synchronize];
+    deliveryLocationViewController.nextToBuild = YES;
     
     [self.navigationController pushViewController:deliveryLocationViewController animated:NO];
 }

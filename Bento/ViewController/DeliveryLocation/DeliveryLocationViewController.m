@@ -36,7 +36,6 @@
 
 @interface DeliveryLocationViewController () <MKMapViewDelegate, MyAlertViewDelegate>
 {
-    BOOL _nextToBuild;
     BOOL _showedLocationTableView;
     
     JGProgressHUD *loadingHUD;
@@ -151,16 +150,7 @@
         }
     }
     
-    _nextToBuild = NO;
-    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"nextToBuild"]) {
-        
-        _nextToBuild = YES;
-        
-        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"nextToBuild"];
-        [[NSUserDefaults standardUserDefaults] synchronize];
-    }
-    
-    if (_nextToBuild) {
+    if (self.nextToBuild) {
         self.btnBack.hidden = YES;
     }
     else {
@@ -221,7 +211,6 @@
 }
 
 - (void)noConnection {
-    
     if (loadingHUD == nil) {
         
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
@@ -231,7 +220,6 @@
 }
 
 - (void)yesConnection {
-    
     [loadingHUD dismiss];
     loadingHUD = nil;
 }
@@ -466,7 +454,7 @@
         return;
     }
     
-    if (_nextToBuild) {
+    if (self.nextToBuild) {
         [self stopSearch];
         
         if (self.placeInfo == nil) {
@@ -476,6 +464,13 @@
         [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
             // inside zone
             if (isSelectedLocationInZone && [appState isEqualToString:@"build"]) {
+                
+                if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] == nil) {
+                    [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    return;
+                }
+                
                 [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude] forKey:@"savedLatitude"];
                 [[NSUserDefaults standardUserDefaults] setObject:[NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude] forKey:@"savedLongitude"];
@@ -591,7 +586,7 @@
     }
     else {
         
-        if (self.placeInfo != nil && self.btnMeetMyDrive.selected && _nextToBuild) {
+        if (self.placeInfo != nil && self.btnMeetMyDrive.selected && self.nextToBuild) {
             
             NSString *strTitle = @"CONFIRM ADDRESS";
             

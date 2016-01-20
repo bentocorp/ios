@@ -13,5 +13,6 @@
 @interface DeliveryLocationViewController : BaseViewController
 
 @property (nonatomic) BOOL isFromOrder;
+@property (nonatomic) BOOL nextToBuild;
 
 @end
