@@ -7,6 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "OrderAheadMenu.h"
+#import "FiveHomeViewController.h"
 
 @interface AddonsTableViewCell : UITableViewCell
 
@@ -23,6 +25,9 @@
 @property (nonatomic) UILabel *priceLabel;
 @property (nonatomic) UILabel *quantityLabel;
 @property (nonatomic) UILabel *descriptionLabel;
+
+@property (nonatomic) OrderMode orderMode;
+@property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
 - (void)addDishInfo:(NSDictionary *)dishInfo;

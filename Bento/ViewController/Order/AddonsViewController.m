@@ -345,6 +345,9 @@
         addonsCell.tag = indexPath.row;
     }
     
+    addonsCell.orderMode = self.orderMode;
+    addonsCell.orderAheadMenu = self.orderAheadMenu;
+    
     /*---Set dishInfo---*/
     [addonsCell addDishInfo:dishInfo];
     

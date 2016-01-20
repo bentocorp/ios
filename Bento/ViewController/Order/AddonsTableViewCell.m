@@ -167,23 +167,46 @@
     
     // SOLD OUT
     NSInteger mainDishId = [[self.dishInfo objectForKey:@"itemId"] integerValue];
-    if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
-        self.ivBannerAddon.hidden = NO;
-        
-        [self.subtractButton setImage:[UIImage imageNamed:@"minusgray100"] forState:UIControlStateNormal];
-        self.subtractButton.enabled = NO;
-        
-        [self.addButton setImage:[UIImage imageNamed:@"plusgray100"] forState:UIControlStateNormal];
-        self.addButton.enabled = NO;
+    
+    if (self.orderMode == OnDemand) {
+        if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
+            self.ivBannerAddon.hidden = NO;
+            
+            [self.subtractButton setImage:[UIImage imageNamed:@"minusgray100"] forState:UIControlStateNormal];
+            self.subtractButton.enabled = NO;
+            
+            [self.addButton setImage:[UIImage imageNamed:@"plusgray100"] forState:UIControlStateNormal];
+            self.addButton.enabled = NO;
+        }
+        else {
+            self.ivBannerAddon.hidden = YES;
+            
+            [self.subtractButton setImage:[UIImage imageNamed:@"minus-green-100"] forState:UIControlStateNormal];
+            self.subtractButton.enabled = YES;
+            
+            [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
+            self.addButton.enabled = YES;
+        }
     }
-    else {
-        self.ivBannerAddon.hidden = YES;
-        
-        [self.subtractButton setImage:[UIImage imageNamed:@"minus-green-100"] forState:UIControlStateNormal];
-        self.subtractButton.enabled = YES;
-        
-        [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
-        self.addButton.enabled = YES;
+    else if (self.orderMode == OrderAhead) {
+        if ([self.orderAheadMenu isDishSoldOut:mainDishId]) {
+            self.ivBannerAddon.hidden = NO;
+            
+            [self.subtractButton setImage:[UIImage imageNamed:@"minusgray100"] forState:UIControlStateNormal];
+            self.subtractButton.enabled = NO;
+            
+            [self.addButton setImage:[UIImage imageNamed:@"plusgray100"] forState:UIControlStateNormal];
+            self.addButton.enabled = NO;
+        }
+        else {
+            self.ivBannerAddon.hidden = YES;
+            
+            [self.subtractButton setImage:[UIImage imageNamed:@"minus-green-100"] forState:UIControlStateNormal];
+            self.subtractButton.enabled = YES;
+            
+            [self.addButton setImage:[UIImage imageNamed:@"plus-green-100"] forState:UIControlStateNormal];
+            self.addButton.enabled = YES;
+        }
     }
     
     // PRICE
@@ -207,13 +230,23 @@
         
         // sold out
         NSInteger mainDishId = [[self.dishInfo objectForKey:@"itemId"] integerValue];
-        if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
-            self.ivBannerAddon.hidden = NO;
+        
+        if (self.orderMode == OnDemand) {
+            if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
+                self.ivBannerAddon.hidden = NO;
+            }
+            else {
+                self.ivBannerAddon.hidden = YES;
+            }
         }
-        else {
-            self.ivBannerAddon.hidden = YES;
+        else if (self.orderMode == OrderAhead) {
+            if ([self.orderAheadMenu isDishSoldOut:mainDishId]) {
+                self.ivBannerAddon.hidden = NO;
+            }
+            else {
+                self.ivBannerAddon.hidden = YES;
+            }
         }
-
     }
     else {
         self.descriptionLabel.hidden = NO;
