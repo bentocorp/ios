@@ -14,6 +14,12 @@ typedef NS_ENUM(NSUInteger) {
     OrderAhead
 } OrderMode;
 
+typedef NS_ENUM(NSUInteger) {
+    OnDemandOnly,
+    OrderAheadOnly,
+    Both
+} PickerState;
+
 @interface FiveHomeViewController : BaseViewController
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;

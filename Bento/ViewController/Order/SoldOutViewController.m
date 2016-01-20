@@ -305,17 +305,12 @@
 
 - (void)onUpdatedStatus
 {
-    if (isThereConnection)
-    {
-        if (self.type == 0) // Closed
-        {
-            if (![[BentoShop sharedInstance] isClosed])
-                [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
+    if (isThereConnection) {
+        if (self.type == 0 && ![[BentoShop sharedInstance] isClosed]) {
+            [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
         }
-        else if (self.type == 1) // Sold Out
-        {
-            if (![[BentoShop sharedInstance] isSoldOut])
-                [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
+        else if (self.type == 1 && ![[BentoShop sharedInstance] isSoldOut]) {
+            [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
         }
     }
 }

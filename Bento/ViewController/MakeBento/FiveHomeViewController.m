@@ -58,7 +58,9 @@
 @property (nonatomic) CustomViewController *fourCustomVC;
 @property (nonatomic) FiveCustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
+
 @property (nonatomic) OrderMode orderMode;
+@property (nonatomic) PickerState pickerState;
 
 @property (nonatomic) BOOL onDemandVSOrAhead;
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
@@ -152,6 +154,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
@@ -899,7 +902,8 @@
 
 - (void)updateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self updateWidget];
+//        [self updateWidget];
+//        [self refreshState];
         [self setETA];
         [self setStartingPrice];
         [self showOrHideAddAnotherBentoAndViewAddons];
@@ -908,6 +912,7 @@
         [self loadSelectedDishes];
         [self setCart];
         [self updateBottomButton];
+        
     });
 }
 
@@ -1025,13 +1030,9 @@
     }
 }
 
-- (void)checkForCutOff {
-    // if cut off, refresh
-//    poptoroot on cut off
-}
-
 - (void)onUpdatedMenu:(NSNotification *)notification {
     if (isThereConnection) {
+        [self refreshState];
         [self updateUI];
     }
 }
@@ -1352,21 +1353,47 @@
     }
     
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
+        self.pickerState = Both;
         [self installOnDemand];
         [self installOrderAhead];
         [self updateWidget];
         [self defaultToOnDemandOrOrderAhead];
     }
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
+        self.pickerState = OnDemandOnly;
         [self removeOrderAhead];
         [self installOnDemand];
         [self updateWidget];
         [self enableOnDemand];
     }
     else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+        self.pickerState = OrderAheadOnly;
         [self removeOnDemand];
         [self installOrderAhead];
         [self enableOrderAhead];
+    }
+}
+
+- (void)checkPickerState {
+    PickerState newState;
+    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
+        newState = Both;
+    }
+    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
+        newState = OnDemandOnly;
+    }
+    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+        newState = OrderAheadOnly;
+    }
+
+    // state did not change
+    if (newState == self.pickerState) {
+        
+    }
+    // state changed
+    else {
+        self.pickerState = newState;
+        
     }
 }
 
