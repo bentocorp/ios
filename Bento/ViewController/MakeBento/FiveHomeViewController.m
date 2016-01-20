@@ -1019,6 +1019,7 @@
     
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     chooseSideDishViewController.sideDishes = self.orderAheadMenu.sideDishes;
+    chooseSideDishViewController.orderMode = self.orderMode;
     chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
     [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
@@ -1032,6 +1033,7 @@
     
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     chooseSideDishViewController.sideDishes = self.orderAheadMenu.sideDishes;
+    chooseSideDishViewController.orderMode = self.orderMode;
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
@@ -1242,7 +1244,13 @@
 
 #pragma mark Update Menu
 - (void)updateMenu {
-    
+    if (self.orderMode == OrderAhead) {
+        for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+            if ([menuOrderAhead isEqualToString:orderAheadMenu.name]) {
+                self.orderAheadMenu = orderAheadMenu;
+            }
+        }
+    }
 }
 
 #pragma mark Widget
@@ -1543,6 +1551,7 @@
     }
     
     [self updatePickerButtonTitle];
+    [self updateMenu];
 }
 
 - (void)updatePickerButtonTitle {

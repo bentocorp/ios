@@ -9,10 +9,12 @@
 #import <UIKit/UIKit.h>
 
 #import "Bento.h"
+#import "FiveHomeViewController.h"
 
 @interface ChooseSideDishViewController : UIViewController
 
 @property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSInteger sideDishIndex;
+@property (nonatomic) OrderMode orderMode;
 
 @end

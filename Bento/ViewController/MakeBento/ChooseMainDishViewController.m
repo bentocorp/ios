@@ -98,32 +98,33 @@
     // clear items first
     [self.aryDishes removeAllObjects];
     
-    NSString *lunchOrDinnerString;
+//    NSString *lunchOrDinnerString;
     
-    /* IS ALL-DAY */
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-            lunchOrDinnerString = @"todayLunch";
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-            lunchOrDinnerString = @"todayDinner";
-    }
-    
-    /* IS NOT ALL-DAY */
-    else
-    {
-        // 00:00 - 16:29
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-            lunchOrDinnerString = @"todayLunch";
-        
-        // 16:30 - 23:59
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-            lunchOrDinnerString = @"todayDinner";
-    }
+//    /* IS ALL-DAY */
+//    if ([[BentoShop sharedInstance] isAllDay])
+//    {
+//        if ([[BentoShop sharedInstance] isThereLunchMenu])
+//            lunchOrDinnerString = @"todayLunch";
+//        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+//            lunchOrDinnerString = @"todayDinner";
+//    }
+//    
+//    /* IS NOT ALL-DAY */
+//    else
+//    {
+//        // 00:00 - 16:29
+//        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+//            lunchOrDinnerString = @"todayLunch";
+//        
+//        // 16:30 - 23:59
+//        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+//            lunchOrDinnerString = @"todayDinner";
+//    }
     
     NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
     
-    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:lunchOrDinnerString])
+//    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getMainDishes:lunchOrDinnerString])
+    for (NSDictionary * dishInfo in self.mainDishes)
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         
