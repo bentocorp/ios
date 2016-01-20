@@ -198,7 +198,8 @@
     }
     // yes gps
     else {
-        if ([[DataManager shareDataManager] getUserInfo] == nil) {
+        // never saved an address before
+        if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] == nil) {
             [self nextToBuildShowMap];
         }
         else {
@@ -212,6 +213,8 @@
             }];
         }
     }
+    
+//    [[DataManager shareDataManager] getUserInfo] == nil
 }
 
 - (void)checkIfInZoneButNoMenuAndNotClosed:(NSString *)appState {
