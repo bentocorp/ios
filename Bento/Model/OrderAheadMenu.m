@@ -16,8 +16,10 @@
     if (self = [super init]) {
 
         NSString *mealType = dictionary[@"Menu"][@"meal_name"];
+        
         NSString *formattedDate = [[BentoShop sharedInstance] setDateFormat:dictionary[@"Menu"][@"for_date"]];
-        self.name = [NSString stringWithFormat:@"%@, %@", formattedDate, mealType];
+        
+        self.name = [NSString stringWithFormat:@"%@, %@", formattedDate, [NSString stringWithFormat:@"%@%@",[[mealType substringToIndex:1] uppercaseString], [mealType substringFromIndex:1]]];
         
         [self getMainDishes:dictionary];
         [self getSideDishes:dictionary];
