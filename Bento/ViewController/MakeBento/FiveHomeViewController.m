@@ -732,21 +732,18 @@
 #pragma mark Update UI
 
 - (void)updateUI {
-    
-    /*----------------------*/
-    
     [self updateWidget];
-    
-    /*----------------------*/
-    
     [self setETA];
-    
-    /*----------------------*/
-    
-    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    NSString *strTitle;
-    
-    // current mains
+    [self setStartingPrice];
+    [self showOrHideAddAnotherBentoAndViewAddons];
+    [self setBuildButtonText];
+    [self checkBentoCount];
+    [self loadSelectedDishes];
+    [self setCart];
+    [self updateBottomButton];
+}
+
+- (void)setStartingPrice {
     NSMutableArray *mainDishesArray;
     
     if (self.orderMode == OnDemand) {
@@ -761,7 +758,6 @@
         mainDishesArray = [self.orderAheadMenu.mainDishes mutableCopy];
     }
     
-    /*----------------------*/
     // get main prices
     NSMutableArray *mainPrices = [@[] mutableCopy];
     for (int i = 0; i < mainDishesArray.count; i++) {
@@ -796,18 +792,28 @@
             self.startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
         }
     }
+}
+
+- (void)checkBentoCount {
+    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) { // no bento
+        [[BentoShop sharedInstance] addNewBento]; // add an empty one
+    }
+    else if ([[BentoShop sharedInstance] getCurrentBento] == nil) {
+        [[BentoShop sharedInstance] setCurrentBento:[[BentoShop sharedInstance] getLastBento]]; // set current with current one in array
+    }
+}
+
+- (void)setBuildButtonText {
     
-    [self showOrHideAddAnotherBentoAndViewAddons];
+    Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
+    NSString *strTitle;
     
-    // current bento is empty
     if ([currentBento isEmpty] == YES || currentBento == nil) {
         strTitle = [[AppStrings sharedInstance] getString:BUILD_TITLE]; // BUILD YOUR BENTO
     }
-    // current bento has at least 1 item
     else if ([currentBento isCompleted] == NO) {
         strTitle = [[AppStrings sharedInstance] getString:BUILD_CONTINUE_BUTTON]; // CONTINUE
     }
-    // current bento is complete
     else if ([currentBento isCompleted]) {
         strTitle = [[AppStrings sharedInstance] getString:BUILD_ADD_BUTTON]; // ADD ANOTHER BENTO
     }
@@ -831,44 +837,29 @@
             [self.customVC.buildButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
         }
     }
-    
-    /*----------------------*/
-    
-    // Bentos
-    if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) { // no bento
-        [[BentoShop sharedInstance] addNewBento]; // add an empty one
-    }
-    else if ([[BentoShop sharedInstance] getCurrentBento] == nil) {
-        [[BentoShop sharedInstance] setCurrentBento:[[BentoShop sharedInstance] getLastBento]]; // set current with current one in array
-    }
-    
-    /*---Load Bento---*/
-    [self loadSelectedDishes];
-    
+}
+
+- (void)setCart {
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         self.cartButton.enabled = YES;
         self.cartButton.selected = YES;
         [self.cartButton setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
-    }
-    else {
-        self.cartButton.enabled = NO;
-        self.cartButton.selected = NO;
-    }
-    
-    /*---Finalize Button---*/
-    [self updateBottomButton];
-    
-    /*---Cart Badge---*/
-    if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
+        
         self.countBadgeLabel.text = [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getCompletedBentoCount] + (long)[[AddonList sharedInstance] getTotalCount]];
         self.countBadgeLabel.hidden = NO;
     }
     else {
+        self.cartButton.enabled = NO;
+        self.cartButton.selected = NO;
+        
         self.countBadgeLabel.text = @"";
         self.countBadgeLabel.hidden = YES;
     }
-    
-    [self refreshState];
+}
+
+- (void)checkForCutOff {
+    // if cut off, refresh
+//    poptoroot on cut off
 }
 
 - (void)onUpdatedMenu:(NSNotification *)notification {
@@ -1423,10 +1414,7 @@
     self.orderAheadGreenViewWidthConstraint.constant = 5;
     
     self.enabledOnDemandButton.hidden = YES;
-    self.enabledOnDemandButton.alpha = 0;
-    
     self.enabledOrderAheadButton.hidden = NO;
-    self.enabledOrderAheadButton.alpha = 0.2;
     
     [self setDefaultOnDemandTitle];
     
@@ -1445,10 +1433,7 @@
     self.orderAheadGreenViewWidthConstraint.constant = 10;
     
     self.enabledOnDemandButton.hidden = NO;
-    self.enabledOnDemandButton.alpha = 0.2;
-    
     self.enabledOrderAheadButton.hidden = YES;
-    self.enabledOrderAheadButton.alpha = 0;
     
     [self updatePickerButtonTitle];
     
