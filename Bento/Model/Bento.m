@@ -14,6 +14,10 @@
 @end
 
 @implementation Bento
+{
+    // this would only be set on completing a bento
+    OrderAheadMenu *OAMenu;
+}
 
 - (id)init
 {
@@ -34,6 +38,7 @@
         return @"";
     
     NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:self.indexMainDish];
+    
     if (dishInfo == nil) {
         return @"";
     }
@@ -239,6 +244,8 @@
 // completeBento, but order ahead version
 - (void)completeBentoWith:(OrderAheadMenu *)orderAheadMenu
 {
+    OAMenu = orderAheadMenu;
+    
     if (self.indexMainDish == 0)
     {
         for (NSDictionary *dishInfo in orderAheadMenu.mainDishes)

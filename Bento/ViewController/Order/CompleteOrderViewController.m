@@ -388,6 +388,7 @@
     self.aryBentos = [[NSMutableArray alloc] init];
     for (NSInteger index = 0; index < [[BentoShop sharedInstance] getTotalBentoCount]; index++) {
         Bento *bento = [[BentoShop sharedInstance] getBento:index];
+
         if ([bento isCompleted]) {
             [self.aryBentos addObject:bento];
         }
