@@ -15,7 +15,7 @@
 @property (nonatomic) NSArray *allMenuItems;
 @property (nonatomic) NSArray *mainDishes;
 @property (nonatomic) NSArray *sideDishes;
-@property (nonatomic) NSArray *addons;
+@property (nonatomic) NSMutableArray *addons;
 
 - (id)initWithDictionary:(NSDictionary *)menu;
 

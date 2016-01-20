@@ -64,7 +64,7 @@
         }
     }
     
-    self.addons = (NSArray *)arrayDishes;
+    self.addons = [(NSArray *)arrayDishes mutableCopy];
 }
 
 - (void)setUpTimes:(NSArray *)times {

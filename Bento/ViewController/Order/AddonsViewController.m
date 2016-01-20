@@ -14,7 +14,6 @@
 #import "UIColor+CustomColors.h"
 #import "BentoShop.h"
 #import "AppStrings.h"
-#import "MyAlertView.h"
 #import "DataManager.h"
 #import "AppDelegate.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
@@ -269,22 +268,27 @@
     
     NSMutableArray *aryAddons;
     
-    if ([[BentoShop sharedInstance] isAllDay]) {
-        
-        if ([[BentoShop sharedInstance] isThereLunchMenu]) {
-            aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayLunch"] mutableCopy];
+    if (self.orderMode == OnDemand) {
+        if ([[BentoShop sharedInstance] isAllDay]) {
+            
+            if ([[BentoShop sharedInstance] isThereLunchMenu]) {
+                aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayLunch"] mutableCopy];
+            }
+            else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
+                aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayDinner"] mutableCopy];
+            }
         }
-        else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
-            aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayDinner"] mutableCopy];
+        else {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+                aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayLunch"] mutableCopy];
+            }
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+                aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayDinner"] mutableCopy];
+            }
         }
     }
-    else {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-            aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayLunch"] mutableCopy];
-        }
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-            aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayDinner"] mutableCopy];
-        }
+    else if (self.orderMode == OrderAhead) {
+        aryAddons = self.orderAheadMenu.addons;
     }
     
     NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
@@ -293,16 +297,32 @@
         
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         
-        if ([[BentoShop sharedInstance] canAddDish:dishID]) {
-            
-            // 1) add to self.aryDishes only if it's not sold out
-            if ([[BentoShop sharedInstance] isDishSoldOut:dishID] == NO) {
+        if (self.orderMode == OnDemand) {
+            if ([[BentoShop sharedInstance] canAddDish:dishID]) {
                 
-                [self.aryDishes addObject:dishInfo];
+                // 1) add to self.aryDishes only if it's not sold out
+                if ([[BentoShop sharedInstance] isDishSoldOut:dishID] == NO) {
+                    
+                    [self.aryDishes addObject:dishInfo];
+                }
+                else {
+                    // 2) add all sold out dishes to soldOutDishesArray
+                    [soldOutDishesArray addObject:dishInfo];
+                }
             }
-            else {
-                // 2) add all sold out dishes to soldOutDishesArray
-                [soldOutDishesArray addObject:dishInfo];
+        }
+        else if (self.orderMode == OrderAhead) {
+            if ([self.orderAheadMenu canAddDish:dishID]) {
+                
+                // 1) add to self.aryDishes only if it's not sold out
+                if ([self.orderAheadMenu isDishSoldOut:dishID] == NO) {
+                    
+                    [self.aryDishes addObject:dishInfo];
+                }
+                else {
+                    // 2) add all sold out dishes to soldOutDishesArray
+                    [soldOutDishesArray addObject:dishInfo];
+                }
             }
         }
     }
@@ -547,16 +567,6 @@
     }
 }
 
-- (void)showConfirmMsg {
-    NSString *strText = [[AppStrings sharedInstance] getString:ALERT_BNF_TEXT];
-    NSString *strCancel = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CANCEL];
-    NSString *strConfirm = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CONFIRM];
-    MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strText delegate:self cancelButtonTitle:strCancel otherButtonTitle:strConfirm];
-    
-    [alertView showInView:self.view];
-    alertView = nil;
-}
-
 - (void)onFinalize {
     [self gotoOrderScreen];
 }
@@ -568,32 +578,6 @@
     }
     
     return [currentBento isCompleted];
-}
-
-- (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
-        Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-        if (currentBento != nil && ![currentBento isCompleted]) {
-            if ([[BentoShop sharedInstance] isAllDay]) {
-                if ([[BentoShop sharedInstance] isThereLunchMenu]) {
-                    [currentBento completeBento:@"todayLunch"];
-                }
-                else if ([[BentoShop sharedInstance] isThereDinnerMenu]) {
-                    [currentBento completeBento:@"todayDinner"];
-                }
-            }
-            else {
-                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-                    [currentBento completeBento:@"todayLunch"];
-                }
-                else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-                    [currentBento completeBento:@"todayDinner"];
-                }
-            }
-        }
-        
-        [self gotoOrderScreen];
-    }
 }
 
 - (void)onUpdatedMenu:(NSNotification *)notification {

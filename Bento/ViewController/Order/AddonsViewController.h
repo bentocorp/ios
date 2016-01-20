@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 #import "BaseViewController.h"
+#import "OrderAheadMenu.h"
+#import "FiveHomeViewController.h"
 
 @protocol AddonsViewControllerDelegate <NSObject>
 
@@ -21,5 +23,8 @@
 @property (nonatomic) id delegate;
 
 @property (nonatomic) NSInteger autoScrollId;
+
+@property (nonatomic) OrderMode orderMode;
+@property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
 @end

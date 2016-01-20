@@ -1256,6 +1256,12 @@
 
 - (void)onViewAddons {
     [[Mixpanel sharedInstance] track:@"Tapped on View Add-ons"];
+    [self presentAddOns];
+}
+
+- (void)presentAddOns {
+    addonsVC.orderMode = self.orderMode;
+    addonsVC.orderAheadMenu = self.orderAheadMenu;
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }
 
@@ -1641,7 +1647,7 @@
         if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
             if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
                 [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
-                [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
+                [self presentAddOns];
             }
             else {
                 [self gotoOrderScreen];
