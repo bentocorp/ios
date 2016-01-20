@@ -10,6 +10,9 @@
 
 #import "Bento.h"
 
+
 @interface ChooseMainDishViewController : UIViewController
+
+@property (nonatomic) NSArray *mainDishes;
 
 @end

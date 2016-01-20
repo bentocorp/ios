@@ -12,6 +12,7 @@
 
 @interface ChooseSideDishViewController : UIViewController
 
+@property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSInteger sideDishIndex;
 
 @end

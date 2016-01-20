@@ -999,7 +999,10 @@
 
 - (void)onAddMainDish {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    chooseMainDishViewController.mainDishes = self.orderAheadMenu.mainDishes;
+    
     [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
 }
 
@@ -1007,7 +1010,9 @@
     UIButton *selectedButton = (UIButton *)sender;
     
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+    chooseSideDishViewController.sideDishes = self.orderAheadMenu.sideDishes;
     chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
     [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
@@ -1015,8 +1020,12 @@
 
 - (void)onAddAnotherBento {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
+    chooseMainDishViewController.mainDishes = self.orderAheadMenu.mainDishes;
+    
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
+    chooseSideDishViewController.sideDishes = self.orderAheadMenu.sideDishes;
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
@@ -1147,6 +1156,7 @@
 - (void)refreshState {
     // OrderAhead Database
     
+    
     myDatabase = @[
                    @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Wednesday January 20th, Lunch", @"Jan 16, Dinner"],
                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
@@ -1262,7 +1272,6 @@
         [self hidePreview];
     }
     else {
-        
         [self showPreview];
     }
 }
