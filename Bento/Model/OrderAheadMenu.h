@@ -13,9 +13,10 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @property (nonatomic) NSString *name;
+@property (nonatomic) NSArray *times;
+
 @property (nonatomic) NSArray *mainDishes;
 @property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSArray *addons;
-@property (nonatomic) NSArray *times;
 
 @end
