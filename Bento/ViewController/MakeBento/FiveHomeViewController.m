@@ -1406,11 +1406,7 @@
     self.enabledOnDemandButton.hidden = YES;
     self.enabledOrderAheadButton.hidden = NO;
     
-    // on demand mennu and time are set on tap
-    menuOnDemand = self.asapMenuLabel.text;
-    timeOnDemand = self.asapTimeLabel.text;
-    
-    [self updatePickerButtonTitle];
+    [self setDefaultOnDemandTitle];
     
     [self showOrHidePreview];
 }
@@ -1424,19 +1420,18 @@
     self.orderAheadGreenView1.alpha = 1.0;
     self.orderAheadGreenViewWidthConstraint.constant = 10;
     
-    
     self.enabledOnDemandButton.hidden = NO;
     self.enabledOrderAheadButton.hidden = YES;
-    
-    // default value
-    if (menuOrderAhead == nil || timeOrderAhead == nil) {
-        menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
-        timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:0];
-    }
     
     [self updatePickerButtonTitle];
     
     [self hidePreview];
+}
+
+- (void)setDefaultOnDemandTitle {
+    menuOnDemand = self.asapMenuLabel.text;
+    timeOnDemand = self.asapTimeLabel.text;
+    [self updatePickerButtonTitle];
 }
 
 - (void)onFinalize {
@@ -1495,7 +1490,7 @@
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (component == 0) {
-        return menuTimes[row];
+        return menuNames[row];
     }
     else {
         return menuTimes[selected][row];
@@ -1529,16 +1524,15 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-
     if (component == 0) {
         menuOrderAhead = menuNames[row];
-        
         selected = row;
+        [pickerView reloadComponent:1];
     }
     else {
         // if time range is sold-out
         if ([menuTimes[selected][row] containsString:@"sold-out"]) {
-            [pickerView selectRow:row+1 inComponent:component animated:YES];
+            [pickerView selectRow:row + 1 inComponent:component animated:YES];
             timeOrderAhead = menuTimes[selected][row + 1];
         }
         else {
@@ -1547,10 +1541,14 @@
     }
     
     [self updatePickerButtonTitle];
-    [pickerView reloadComponent:1];
 }
 
 - (void)updatePickerButtonTitle {
+    if (menuOrderAhead == nil || timeOrderAhead == nil) {
+        menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
+        timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:1];
+    }
+    
     if (self.orderMode == OnDemand) {
         [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOnDemand, timeOnDemand] forState:UIControlStateNormal];
     }
