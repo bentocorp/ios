@@ -132,16 +132,16 @@
     return YES;
 }
 
-//- (NSDictionary *)getSideDish:(NSInteger)sideDishID {
-//    for (NSDictionary *dishInfo in self.sideDishes) {
-//        NSString *strType = dishInfo[@"type"];
-//        NSInteger menuIndex = [dishInfo[@"itemId"] integerValue];
-//        if ([strType isEqualToString:@"side"] && menuIndex == sideDishID) {
-//            return dishInfo;
-//        }
-//    }
-//    
-//    return nil;
-//}
+- (NSDictionary *)getSideDish:(NSInteger)sideDishID {
+    for (NSDictionary *dishInfo in self.sideDishes) {
+        NSString *strType = dishInfo[@"type"];
+        NSInteger menuIndex = [dishInfo[@"itemId"] integerValue];
+        if ([strType isEqualToString:@"side"] && menuIndex == sideDishID) {
+            return dishInfo;
+        }
+    }
+    
+    return nil;
+}
 
 @end

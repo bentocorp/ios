@@ -20,6 +20,5 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 - (BOOL)isDishSoldOut:(NSInteger)menuID;
 - (BOOL)canAddSideDish:(NSInteger)sideDishID;
-//- (NSDictionary *)getSideDish:(NSInteger)sideDishID;
 
 @end
