@@ -8,7 +8,6 @@
 
 #import "Bento.h"
 #import "BentoShop.h"
-#import "OrderAheadMenu.h"
 
 @interface Bento()
 
@@ -237,6 +236,7 @@
     [[BentoShop sharedInstance] saveBentoArray];
 }
 
+// completeBento, but order ahead version
 - (void)completeBentoWith:(OrderAheadMenu *)orderAheadMenu
 {
     if (self.indexMainDish == 0)
@@ -244,11 +244,11 @@
         for (NSDictionary *dishInfo in orderAheadMenu.mainDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex]) {
+            if ([orderAheadMenu isDishSoldOut:dishIndex]) {
                 continue;
             }
             
-            if (![[BentoShop sharedInstance] canAddDish:dishIndex]) {
+            if (![orderAheadMenu canAddDish:dishIndex]) {
                 continue;
             }
             
@@ -262,10 +262,10 @@
         for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+            if ([orderAheadMenu isDishSoldOut:dishIndex])
                 continue;
             
-            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+            if (![orderAheadMenu canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])
@@ -281,10 +281,10 @@
         for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+            if ([orderAheadMenu isDishSoldOut:dishIndex])
                 continue;
             
-            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+            if (![orderAheadMenu canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])
@@ -300,10 +300,10 @@
         for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+            if ([orderAheadMenu isDishSoldOut:dishIndex])
                 continue;
             
-            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+            if (![orderAheadMenu canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])
@@ -319,10 +319,10 @@
         for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
         {
             NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
-            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+            if ([orderAheadMenu isDishSoldOut:dishIndex])
                 continue;
             
-            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+            if (![orderAheadMenu canAddDish:dishIndex])
                 continue;
             
             if (![self canAddSideDish:dishIndex])

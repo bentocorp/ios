@@ -8,6 +8,7 @@
 
 #import <Foundation/Foundation.h>
 #import "NSObject+RMArchivable.h"
+#import "OrderAheadMenu.h"
 
 @interface Bento : NSObject
 
@@ -31,16 +32,15 @@
 - (void)setSideDish3:(NSInteger)indexSideDish;
 - (void)setSideDish4:(NSInteger)indexSideDish;
 
-// Not Testing
 - (NSString *)getBentoName;
 - (float)getUnitPrice;
 
-// Testing
 - (BOOL)isEmpty;
 - (BOOL)isCompleted;
+
+- (void)completeBentoWith:(OrderAheadMenu *)orderAheadMenu;
 - (void)completeBento:(NSString *)whatNeedsThis;
 
-// Testing
 - (BOOL)canAddSideDish:(NSInteger)sideDishID;
 
 - (BOOL)checkIfItemIsSoldOut:(NSMutableArray *)itemIds;

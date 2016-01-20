@@ -198,17 +198,20 @@
     }
     // yes gps
     else {
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
-            if (isSelectedLocationInZone == NO) {
-                [self nextToBuildShowMap];
-            }
-            else {
-                [self checkIfInZoneButNoMenuAndNotClosed:appState];
-            }
-        }];
+        if ([[DataManager shareDataManager] getUserInfo] == nil) {
+            [self nextToBuildShowMap];
+        }
+        else {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+                if (isSelectedLocationInZone == NO) {
+                    [self nextToBuildShowMap];
+                }
+                else {
+                    [self checkIfInZoneButNoMenuAndNotClosed:appState];
+                }
+            }];
+        }
     }
-    
-    //    [[DataManager shareDataManager] getUserInfo] == nil
 }
 
 - (void)checkIfInZoneButNoMenuAndNotClosed:(NSString *)appState {
@@ -1124,13 +1127,16 @@
     if (buttonIndex == 1) {
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted]) {
-            // 00:00 - 16:29
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-                [currentBento completeBento:@"todayLunch"];
+            if (self.orderMode == OnDemand) {
+                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+                    [currentBento completeBento:@"todayLunch"];
+                }
+                else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+                    [currentBento completeBento:@"todayDinner"];
+                }
             }
-            // 16:30 - 23:59
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-                [currentBento completeBento:@"todayDinner"];
+            else if (self.orderMode == OrderAhead) {
+                [currentBento completeBentoWith:self.orderAheadMenu];
             }
         }
         
@@ -1238,7 +1244,7 @@
             }
         }
         else if (self.orderMode == OrderAhead) {
-            [currentBento completeBento:<#(NSString *)#>]
+            [currentBento completeBentoWith:self.orderAheadMenu];
         }
         
         [[BentoShop sharedInstance] addNewBento];
