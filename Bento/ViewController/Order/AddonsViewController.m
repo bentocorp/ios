@@ -131,7 +131,7 @@
     lblBadge = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, 17, 17)];
     lblBadge.textAlignment = NSTextAlignmentCenter;
     lblBadge.font = [UIFont fontWithName:@"OpenSans-Semibold" size:10];
-    lblBadge.backgroundColor = [UIColor colorWithRed:0.890f green:0.247f blue:0.373f alpha:1.0f];
+    lblBadge.backgroundColor = [UIColor colorWithRed:0.988f green:0.275f blue:0.376f alpha:1.0f];
     lblBadge.textColor = [UIColor whiteColor];
     lblBadge.layer.cornerRadius = lblBadge.frame.size.width / 2;
     lblBadge.clipsToBounds = YES;
