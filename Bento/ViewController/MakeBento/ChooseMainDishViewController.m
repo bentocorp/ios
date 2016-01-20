@@ -229,13 +229,13 @@
     [self.cvMainDishes reloadData];
 }
 
-- (BOOL)isCompletedToMakeMyBento
-{
-    if ([[BentoShop sharedInstance] getCurrentBento] == nil)
-        return NO;
-    
-    return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
-}
+//- (BOOL)isCompletedToMakeMyBento
+//{
+//    if ([[BentoShop sharedInstance] getCurrentBento] == nil)
+//        return NO;
+//    
+//    return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
+//}
 
 - (void)showSoldoutScreen:(NSNumber *)identifier
 {

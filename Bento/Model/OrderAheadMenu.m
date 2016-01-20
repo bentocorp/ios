@@ -90,4 +90,58 @@
     self.times = timeRanges;
 }
 
+- (BOOL)canAddSideDish:(NSInteger)sideDishID
+{
+    if (self.sideDishes == nil ) {
+        return NO;
+    }
+    
+    NSDictionary *dishInfo = [self getSideDish:sideDishID];
+    
+    if (dishInfo == nil) {
+        return NO;
+    }
+    
+    id object = [dishInfo objectForKey:@"max_per_order"];
+    if (object == [NSNull null]) {
+        return YES;
+    }
+    
+    Bento *bento = [[BentoShop sharedInstance] getCurrentBento];
+    NSInteger maxPerOrder = [object integerValue];
+    if (bento.indexSideDish1 == sideDishID) {
+        maxPerOrder --;
+    }
+    
+    if (bento.indexSideDish2 == sideDishID) {
+        maxPerOrder --;
+    }
+    
+    if (bento.indexSideDish3 == sideDishID) {
+        maxPerOrder --;
+    }
+    
+    if (bento.indexSideDish4 == sideDishID) {
+        maxPerOrder --;
+    }
+    
+    if (maxPerOrder <= 0) {
+        return NO;
+    }
+    
+    return YES;
+}
+
+//- (NSDictionary *)getSideDish:(NSInteger)sideDishID {
+//    for (NSDictionary *dishInfo in self.sideDishes) {
+//        NSString *strType = dishInfo[@"type"];
+//        NSInteger menuIndex = [dishInfo[@"itemId"] integerValue];
+//        if ([strType isEqualToString:@"side"] && menuIndex == sideDishID) {
+//            return dishInfo;
+//        }
+//    }
+//    
+//    return nil;
+//}
+
 @end
