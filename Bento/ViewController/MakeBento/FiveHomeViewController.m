@@ -304,11 +304,21 @@
                 [self.fourCustomVC.mainDishImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
-                self.fourCustomVC.mainDishBannerImageView.hidden = NO;
+            if (self.orderMode == OnDemand) {
+                if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
+                    self.fourCustomVC.mainDishBannerImageView.hidden = NO;
+                }
+                else {
+                    self.fourCustomVC.mainDishBannerImageView.hidden = YES;
+                }
             }
-            else {
-                self.fourCustomVC.mainDishBannerImageView.hidden = YES;
+            else if (self.orderMode == OrderAhead) {
+                if ([self.orderAheadMenu isDishSoldOut:mainDishIndex]) {
+                    self.fourCustomVC.mainDishBannerImageView.hidden = NO;
+                }
+                else {
+                    self.fourCustomVC.mainDishBannerImageView.hidden = YES;
+                }
             }
         }
         // if dish info is nil, remove item from bento
@@ -359,11 +369,21 @@
                 [self.fourCustomVC.sideDish1ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
-                self.fourCustomVC.sideDish1BannerImageView.hidden = NO;
+            if (self.orderMode == OnDemand) {
+                if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
+                    self.fourCustomVC.sideDish1BannerImageView.hidden = NO;
+                }
+                else {
+                    self.fourCustomVC.sideDish1BannerImageView.hidden = YES;
+                }
             }
-            else {
-                self.fourCustomVC.sideDish1BannerImageView.hidden = YES;
+            else if (self.orderMode == OrderAhead) {
+                if ([self.orderAheadMenu isDishSoldOut:side1DishIndex]) {
+                    self.fourCustomVC.sideDish1BannerImageView.hidden = NO;
+                }
+                else {
+                    self.fourCustomVC.sideDish1BannerImageView.hidden = YES;
+                }
             }
         }
         // if dish info is nil, remove item from bento
@@ -414,11 +434,21 @@
                 [self.fourCustomVC.sideDish2Imageview setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
-                self.fourCustomVC.sideDish2BannerImageView.hidden = NO;
+            if (self.orderMode == OnDemand) {
+                if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
+                    self.fourCustomVC.sideDish2BannerImageView.hidden = NO;
+                }
+                else {
+                    self.fourCustomVC.sideDish2BannerImageView.hidden = YES;
+                }
             }
-            else {
-                self.fourCustomVC.sideDish2BannerImageView.hidden = YES;
+            else if (self.orderMode == OrderAhead) {
+                if ([self.orderAheadMenu isDishSoldOut:side2DishIndex]) {
+                    self.fourCustomVC.sideDish2BannerImageView.hidden = NO;
+                }
+                else {
+                    self.fourCustomVC.sideDish2BannerImageView.hidden = YES;
+                }
             }
         }
         // if dish info is nil, remove item from bento
@@ -469,11 +499,21 @@
                 [self.fourCustomVC.sideDish3ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
-                self.fourCustomVC.sideDish3BannerImageView.hidden = NO;
+            if (self.orderMode == OnDemand) {
+                if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
+                    self.fourCustomVC.sideDish3BannerImageView.hidden = NO;
+                }
+                else {
+                    self.fourCustomVC.sideDish3BannerImageView.hidden = YES;
+                }
             }
-            else {
-                self.fourCustomVC.sideDish3BannerImageView.hidden = YES;
+            else if (self.orderMode == OrderAhead) {
+                if ([self.orderAheadMenu isDishSoldOut:side3DishIndex]) {
+                    self.fourCustomVC.sideDish3BannerImageView.hidden = NO;
+                }
+                else {
+                    self.fourCustomVC.sideDish3BannerImageView.hidden = YES;
+                }
             }
         }
         // if dish info is nil, remove item from bento
@@ -552,11 +592,21 @@
                 [self.customVC.mainDishImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
-                self.customVC.mainDishBannerImageView.hidden = NO;
+            if (self.orderMode == OnDemand) {
+                if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
+                    self.customVC.mainDishBannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.mainDishBannerImageView.hidden = YES;
+                }
             }
-            else {
-                self.customVC.mainDishBannerImageView.hidden = YES;
+            else if (self.orderMode == OrderAhead) {
+                if ([self.orderAheadMenu isDishSoldOut:mainDishIndex]) {
+                    self.customVC.mainDishBannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.mainDishBannerImageView.hidden = YES;
+                }
             }
         }
         // if dish info is nil, remove item from bento
@@ -607,11 +657,21 @@
                 [self.customVC.sideDish1ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
-                self.customVC.sideDish1BannerImageView.hidden = NO;
+            if (self.orderMode == OnDemand) {
+                if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
+                    self.customVC.sideDish1BannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.sideDish1BannerImageView.hidden = YES;
+                }
             }
-            else {
-                self.customVC.sideDish1BannerImageView.hidden = YES;
+            else if (self.orderMode == OrderAhead) {
+                if ([self.orderAheadMenu isDishSoldOut:side1DishIndex]) {
+                    self.customVC.sideDish1BannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.sideDish1BannerImageView.hidden = YES;
+                }
             }
         }
         // if dish info is nil, remove item from bento
@@ -662,11 +722,21 @@
                 [self.customVC.sideDish2Imageview setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
-                self.customVC.sideDish2BannerImageView.hidden = NO;
+            if (self.orderMode == OnDemand) {
+                if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
+                    self.customVC.sideDish2BannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.sideDish2BannerImageView.hidden = YES;
+                }
             }
-            else {
-                self.customVC.sideDish2BannerImageView.hidden = YES;
+            else if (self.orderMode == OrderAhead) {
+                if ([self.orderAheadMenu isDishSoldOut:side2DishIndex]) {
+                    self.customVC.sideDish2BannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.sideDish2BannerImageView.hidden = YES;
+                }
             }
         }
         // if dish info is nil, remove item from bento
@@ -717,11 +787,21 @@
                 [self.customVC.sideDish3ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
-                self.customVC.sideDish3BannerImageView.hidden = NO;
+            if (self.orderMode == OnDemand) {
+                if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
+                    self.customVC.sideDish3BannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.sideDish3BannerImageView.hidden = YES;
+                }
             }
-            else {
-                self.customVC.sideDish3BannerImageView.hidden = YES;
+            else if (self.orderMode == OrderAhead) {
+                if ([self.orderAheadMenu isDishSoldOut:side3DishIndex]) {
+                    self.customVC.sideDish3BannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.sideDish3BannerImageView.hidden = YES;
+                }
             }
         }
         // if dish info is nil, remove item from bento
@@ -773,11 +853,21 @@
                 [self.customVC.sideDish4ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
-                self.customVC.sideDish4BannerImageView.hidden = NO;
+            if (self.orderMode == OnDemand) {
+                if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
+                    self.customVC.sideDish4BannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.sideDish4BannerImageView.hidden = YES;
+                }
             }
-            else {
-                self.customVC.sideDish4BannerImageView.hidden = YES;
+            else if (self.orderMode == OrderAhead) {
+                if ([self.orderAheadMenu isDishSoldOut:side4DishIndex]) {
+                    self.customVC.sideDish4BannerImageView.hidden = NO;
+                }
+                else {
+                    self.customVC.sideDish4BannerImageView.hidden = YES;
+                }
             }
         }
         // if dish info is nil, remove item from bento
