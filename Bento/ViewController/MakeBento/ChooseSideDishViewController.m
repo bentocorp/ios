@@ -109,33 +109,41 @@
         }
     }
     
-//    NSString *lunchOrDinnerString;
-//    
-//    /* IS ALL-DAY */
-//    if ([[BentoShop sharedInstance] isAllDay])
-//    {
-//        if ([[BentoShop sharedInstance] isThereLunchMenu])
-//            lunchOrDinnerString = @"todayLunch";
-//        else if ([[BentoShop sharedInstance] isThereDinnerMenu])
-//            lunchOrDinnerString = @"todayDinner";
-//    }
-//    
-//    /* IS NOT ALL-DAY */
-//    else
-//    {
-//        // 00:00 - 16:29
-//        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
-//            lunchOrDinnerString = @"todayLunch";
-//        
-//        // 16:30 - 23:59
-//        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
-//            lunchOrDinnerString = @"todayDinner";
-//    }
+    NSArray *sideDishesFromMode;
     
+    if (self.orderMode == OnDemand) {
+        NSString *lunchOrDinnerString;
+    
+        /* IS ALL-DAY */
+        if ([[BentoShop sharedInstance] isAllDay])
+        {
+            if ([[BentoShop sharedInstance] isThereLunchMenu])
+                lunchOrDinnerString = @"todayLunch";
+            else if ([[BentoShop sharedInstance] isThereDinnerMenu])
+                lunchOrDinnerString = @"todayDinner";
+        }
+    
+        /* IS NOT ALL-DAY */
+        else
+        {
+            // 00:00 - 16:29
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+                lunchOrDinnerString = @"todayLunch";
+    
+            // 16:30 - 23:59
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+                lunchOrDinnerString = @"todayDinner";
+        }
+        
+        sideDishesFromMode = [[BentoShop sharedInstance] getSideDishes:lunchOrDinnerString];
+    }
+    else if (self.orderMode == OrderAhead) {
+        sideDishesFromMode = self.orderAheadMenu.sideDishes;
+    }
+
     NSMutableArray *soldOutDishesArray = [@[] mutableCopy];
     
-//    for (NSDictionary * dishInfo in [[BentoShop sharedInstance] getSideDishes:lunchOrDinnerString])
-    for (NSDictionary * dishInfo in self.sideDishes)
+    for (NSDictionary * dishInfo in sideDishesFromMode)
     {
         NSInteger dishID = [[dishInfo objectForKey:@"itemId"] integerValue];
         
@@ -227,7 +235,7 @@
 }
 
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID {
-    for (NSDictionary *dishInfo in self.sideDishes) {
+    for (NSDictionary *dishInfo in self.orderAheadMenu.sideDishes) {
         NSString *strType = dishInfo[@"type"];
         NSInteger menuIndex = [dishInfo[@"itemId"] integerValue];
         if ([strType isEqualToString:@"side"] && menuIndex == sideDishID) {
@@ -304,6 +312,8 @@
 
 - (void)updateUI
 {
+    [self updateOrderAheadMenu];
+    
     [self sortAryDishes];
     
     [self.cvSideDishes reloadData];
@@ -485,6 +495,17 @@
 
     if (_selectedItemState == DISH_CELL_SELECTED)
         [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark OrderAhead Update Menu
+- (void)updateOrderAheadMenu {
+    if (self.orderMode == OrderAhead) {
+        for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+            if ([self.orderAheadMenu.name isEqualToString:orderAheadMenu.name]) {
+                self.orderAheadMenu = orderAheadMenu;
+            }
+        }
+    }
 }
 
 @end

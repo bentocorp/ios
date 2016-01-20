@@ -222,6 +222,8 @@
 
 - (void)updateUI
 {
+    [self updateOrderAheadMenu];
+    
     [self sortAryDishes];
     
     [self.cvMainDishes reloadData];

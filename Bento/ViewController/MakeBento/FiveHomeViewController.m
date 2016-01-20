@@ -1019,7 +1019,7 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-    chooseSideDishViewController.sideDishes = self.orderAheadMenu.sideDishes;
+    chooseSideDishViewController.orderAheadMenu = self.orderAheadMenu;
     chooseSideDishViewController.orderMode = self.orderMode;
     chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
@@ -1034,7 +1034,7 @@
     chooseMainDishViewController.orderMode = self.orderMode;
     
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-    chooseSideDishViewController.sideDishes = self.orderAheadMenu.sideDishes;
+    chooseSideDishViewController.orderAheadMenu = self.orderAheadMenu;
     chooseSideDishViewController.orderMode = self.orderMode;
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];

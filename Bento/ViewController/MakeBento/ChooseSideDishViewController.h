@@ -9,12 +9,13 @@
 #import <UIKit/UIKit.h>
 
 #import "Bento.h"
+#import "OrderAheadMenu.h"
 #import "FiveHomeViewController.h"
 
 @interface ChooseSideDishViewController : UIViewController
 
-@property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSInteger sideDishIndex;
+@property (nonatomic) OrderAheadMenu *orderAheadMenu;
 @property (nonatomic) OrderMode orderMode;
 
 @end
