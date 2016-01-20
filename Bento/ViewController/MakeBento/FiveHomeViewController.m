@@ -49,6 +49,8 @@
 #import "AddonsViewController.h"
 #import "AddonList.h"
 
+#import "WebManager.h"
+
 @interface FiveHomeViewController () <CustomViewControllerDelegate, FiveCustomViewControllerDelegate, MyAlertViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) CustomViewController *fourCustomVC;
@@ -1141,6 +1143,8 @@
 #pragma mark Refresh State / Start Screen Logic
 - (void)refreshState {
     // order ahead mock
+    
+    
     myDatabase = @[
                    @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Jan 16, Lunch", @"Jan 16, Dinner"],
                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
@@ -1160,29 +1164,6 @@
         [self removeOnDemand];
         [self installOrderAhead];
         [self enableOrderAhead];
-    }
-}
-
-- (void)updateWidget {
-    if ([[BentoShop sharedInstance] isThereWidget]) {
-    
-        /*---ASAP---*/
-        self.asapMenuLabel.text = self.widget[@"title"];
-        self.asapDescriptionLabel.text = self.widget[@"text"];
-        
-        // resize to make room for text
-        self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        [self.asapDescriptionLabel sizeToFit];
-        self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
-        
-        // default to OD or OA?
-        NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
-        if ([isSelectedNum boolValue]) {
-            [self enableOnDemand];
-        }
-        else {
-            [self enableOrderAhead];
-        }
     }
 }
 
@@ -1248,26 +1229,43 @@
     
 }
 
-#pragma mark Show / Hide Preview
+#pragma mark Widget
+- (void)updateWidget {
+    if ([[BentoShop sharedInstance] isThereWidget]) {
+        
+        self.widget = [[BentoShop sharedInstance] getOnDemandWidget];
+        
+        /*---ASAP---*/
+        self.asapMenuLabel.text = self.widget[@"title"];
+        self.asapDescriptionLabel.text = self.widget[@"text"];
+        
+        // resize to make room for text
+        self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        [self.asapDescriptionLabel sizeToFit];
+        self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
+        
+        // default to OD or OA?
+        NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
+        if ([isSelectedNum boolValue]) {
+            [self enableOnDemand];
+        }
+        else {
+            [self enableOrderAhead];
+        }
+    }
+}
+
 - (void)showOrHidePreview {
     if (self.orderMode == OnDemand && [self.widget[@"state"] isEqualToString:@"open"]) {
-        [self showPreview];
+        [self hidePreview];
     }
     else {
-        [self hidePreview];
+        
+        [self showPreview];
     }
 }
 
 - (void)showPreview {
-    // open, no preview
-    [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
-    [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
-    [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
-    
-    self.bottomButton.hidden = NO;
-}
-
-- (void)hidePreview {
     // closed/soldout, set preview
     self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
     [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
@@ -1276,6 +1274,15 @@
     [self.menuPreviewVC didMoveToParentViewController:self]; // tell the child VC of its new parent
     
     self.bottomButton.hidden = YES;
+}
+
+- (void)hidePreview {
+    // store is open, no preview
+    [self.menuPreviewVC willMoveToParentViewController:nil]; // 1. let the child VC know that it will be removed
+    [self.menuPreviewVC.view removeFromSuperview]; // 2. remove the child VC's view
+    [self.menuPreviewVC removeFromParentViewController]; // 3. remove the child VC
+    
+    self.bottomButton.hidden = NO;
 }
 
 #pragma mark Other Button Methods
@@ -1390,7 +1397,8 @@
     timeOnDemand = self.asapTimeLabel.text;
     
     [self updatePickerButtonTitle];
-//    [self checkOrderMode];
+    
+    [self showOrHidePreview];
 }
 
 - (void)enableOrderAhead {
@@ -1412,7 +1420,8 @@
     }
     
     [self updatePickerButtonTitle];
-//    [self checkOrderMode];
+    
+    [self hidePreview];
 }
 
 - (void)onFinalize {

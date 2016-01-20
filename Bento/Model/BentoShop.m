@@ -358,6 +358,14 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return NO;
 }
 
+- (BOOL)isThereOnDemandPreview {
+    if ([self getOnDemandWidget][@"menuPreview"] != nil && [[self getOnDemandWidget] isEqual:[NSNull null]] == NO) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 #pragma mark Order-Ahead
 
 - (BOOL)isThereOrderAhead {

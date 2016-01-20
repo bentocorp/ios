@@ -33,6 +33,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSDictionary *widget = [[BentoShop sharedInstance] getOnDemandWidget];
+    if (widget) {
+        <#statements#>
+    }
+    
     /*---Collection View---*/
     
     // this sets the layout of the cells
