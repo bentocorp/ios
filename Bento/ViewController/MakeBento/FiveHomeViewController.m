@@ -84,7 +84,6 @@
     
     NSMutableArray *menuNames; // [date, date, date]
     NSMutableArray *menuTimes; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
-    NSMutableArray *namesAndTimesArray;
 }
 
 - (void)viewDidLoad {
@@ -1475,13 +1474,50 @@
         [menuNames addObject: orderAheadMenu.name];
         [menuTimes addObject: orderAheadMenu.times];
     }
+}
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+    return 2;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     
-    namesAndTimesArray = [@[menuNames, menuTimes] mutableCopy];
+    if (component == 0) {
+        return menuNames.count;
+    }
+    else {
+        for (int i = 0; i < menuTimes.count; i++) {
+            if (<#condition#>) {
+                <#statements#>
+            }
+        }
+    }
+    
+    return [namesAndTimesArray[component] count];
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+    
+    if (component == 0) {
+        return namesAndTimesArray[component][row];
+    }
+    
+    // component 1
+    return namesAndTimesArray[component][row];
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
+    
     UILabel *pickerLabel = [[UILabel alloc] init];
-    pickerLabel.text = namesAndTimesArray[component][row];
+    
+    if (component == 0) {
+        pickerLabel.text = menuNames[row];
+    }
+    else {
+        pickerLabel.text = menuTimes[ro];
+    }
+    
+    
     
     // if time range is sold-out
     if ([pickerLabel.text containsString:@"sold-out"]) {
@@ -1496,50 +1532,26 @@
     pickerLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13];
     
     return pickerLabel;
-}
-
-- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
-    return namesAndTimesArray.count;
-}
-
-- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
-    if (component == 0) {
-        return [namesAndTimesArray[component] count];
-    }
-
-    return [namesAndTimesArray[component][component] count];
-}
-
-- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    
-    if (component == 0) {
-        return namesAndTimesArray[component][row]; // return date string
-    }
-    
-    return namesAndTimesArray[component][row]; // return
-}
+}t
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-    switch (component) {
-        case 0:
-            menuOrderAhead = namesAndTimesArray[component][row];
-            break;
-            
-        default:
-            // if time range is sold-out
-            if ([namesAndTimesArray[component][row] containsString:@"sold-out"]) {
-                [pickerView selectRow:row+1 inComponent:component animated:YES];
-                timeOrderAhead = namesAndTimesArray[component][row+1];
-            }
-            else {
-                timeOrderAhead = namesAndTimesArray[component][row];
-            }
-            
-            break;
+
+    if (component == 0) {
+        menuOrderAhead = namesAndTimesArray[component][row];
+    }
+    else {
+        // if time range is sold-out
+        if ([namesAndTimesArray[component][row] containsString:@"sold-out"]) {
+            [pickerView selectRow:row+1 inComponent:component animated:YES];
+            timeOrderAhead = namesAndTimesArray[component][row+1];
+        }
+        else {
+            timeOrderAhead = namesAndTimesArray[component][row];
+        }
     }
     
     [self updatePickerButtonTitle];
+    [pickerView reloadComponent:1];
 }
 
 - (void)updatePickerButtonTitle {
