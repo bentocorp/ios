@@ -135,5 +135,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (BOOL)isThereWidget;
 - (BOOL)isThereOnDemand;
 - (BOOL)isThereOrderAhead;
+- (BOOL)isThereOnDemandPreview;
 
 @end
