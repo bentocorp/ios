@@ -388,7 +388,15 @@
     /*---Side 2---*/
     if (side2DishIndex > 0) {
         
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
+        NSDictionary *dishInfo;
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
+        }
+        else if (self.orderMode == OrderAhead) {
+            dishInfo = [self.orderAheadMenu getSideDish:side2DishIndex];
+        }
+        
         if (dishInfo != nil) {
             
             self.fourCustomVC.sideDish2Imageview.hidden = NO;
@@ -436,7 +444,15 @@
     /*-Side 3-*/
     if (side3DishIndex > 0) {
         
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
+        NSDictionary *dishInfo;
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
+        }
+        else if (self.orderMode == OrderAhead) {
+            dishInfo = [self.orderAheadMenu getSideDish:side3DishIndex];
+        }
+        
         if (dishInfo != nil) {
             self.fourCustomVC.sideDish3ImageView.hidden = NO;
             self.fourCustomVC.sideDish3Label.hidden = NO;
@@ -510,7 +526,15 @@
     /*---Main---*/
     if (mainDishIndex > 0) {
         
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
+        NSDictionary *dishInfo;
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
+        }
+        else if (self.orderMode == OrderAhead) {
+            dishInfo = [self.orderAheadMenu getMainDish:mainDishIndex];
+        }
+        
         if (dishInfo != nil) {
             
             self.customVC.mainDishImageView.hidden = NO;
@@ -557,7 +581,15 @@
     /*---Side 1---*/
     if (side1DishIndex > 0) {
         
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
+        NSDictionary *dishInfo;
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
+        }
+        else if (self.orderMode == OrderAhead) {
+            dishInfo = [self.orderAheadMenu getSideDish:side1DishIndex];
+        }
+        
         if (dishInfo != nil) {
             
             self.customVC.sideDish1ImageView.hidden = NO;
@@ -604,7 +636,15 @@
     /*---Side 2---*/
     if (side2DishIndex > 0) {
         
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
+        NSDictionary *dishInfo;
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
+        }
+        else if (self.orderMode == OrderAhead) {
+            dishInfo = [self.orderAheadMenu getSideDish:side2DishIndex];
+        }
+        
         if (dishInfo != nil) {
             
             self.customVC.sideDish2Imageview.hidden = NO;
@@ -652,7 +692,15 @@
     /*-Side 3-*/
     if (side3DishIndex > 0) {
         
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
+        NSDictionary *dishInfo;
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
+        }
+        else if (self.orderMode == OrderAhead) {
+            dishInfo = [self.orderAheadMenu getSideDish:side3DishIndex];
+        }
+        
         if (dishInfo != nil) {
             self.customVC.sideDish3ImageView.hidden = NO;
             self.customVC.sideDish3Label.hidden = NO;
@@ -699,7 +747,15 @@
     /*-Side 4-*/
     if (side4DishIndex > 0) {
         
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
+        NSDictionary *dishInfo;
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
+        }
+        else if (self.orderMode == OrderAhead) {
+            dishInfo = [self.orderAheadMenu getSideDish:side4DishIndex];
+        }
+        
         if (dishInfo != nil) {
             
             self.customVC.sideDish4ImageView.hidden = NO;
