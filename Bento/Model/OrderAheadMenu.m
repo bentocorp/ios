@@ -24,8 +24,7 @@
         [self getMainDishes:dictionary];
         [self getSideDishes:dictionary];
         [self getAddons:dictionary];
-        
-        self.times = dictionary[@"Times"];
+        [self setUpTimes:dictionary[@"Times"]];
     }
     
     return self;
@@ -65,6 +64,30 @@
     }
     
     self.addons = (NSArray *)arrayDishes;
+}
+
+- (void)setUpTimes:(NSArray *)times {
+    NSMutableArray *timeRanges = [@[] mutableCopy];
+    
+    for (NSDictionary *timeRange in times) {
+        
+        NSString *startTime = [[BentoShop sharedInstance] convert24To12HoursWithoutAMPM: timeRange[@"start"]];
+        NSString *endTime = [[BentoShop sharedInstance] convert24To12HoursWithAMPM: timeRange[@"end"]];
+        
+        NSString *formattedTimeRange;
+        
+        NSNumber *availableNum = (NSNumber *)timeRange[@"available"];
+        if ([availableNum boolValue]) {
+            formattedTimeRange = [NSString stringWithFormat:@"%@-%@", startTime, endTime];
+        }
+        else {
+            formattedTimeRange = [NSString stringWithFormat:@"%@-%@ (sold-out)", startTime, endTime];
+        }
+        
+        [timeRanges addObject: formattedTimeRange];
+    }
+    
+    self.times = timeRanges;
 }
 
 @end

@@ -412,9 +412,9 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (NSString *)convert24To12HoursWithoutAMPM:(NSString *)time {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"HH:mm";
-    NSDate *date = [dateFormatter dateFromString:@"15:15"];
+    NSDate *date = [dateFormatter dateFromString:time];
     
-    dateFormatter.dateFormat = @"hh:mm";
+    dateFormatter.dateFormat = @"h:mm";
     
     return [dateFormatter stringFromDate:date];
 }
@@ -422,9 +422,9 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (NSString *)convert24To12HoursWithAMPM:(NSString *)time {
     NSDateFormatter *dateFormatter = [[NSDateFormatter alloc] init];
     dateFormatter.dateFormat = @"HH:mm";
-    NSDate *date = [dateFormatter dateFromString:@"15:15"];
+    NSDate *date = [dateFormatter dateFromString:time];
     
-    dateFormatter.dateFormat = @"hh:mm a";
+    dateFormatter.dateFormat = @"h:mm a";
     return [dateFormatter stringFromDate:date];
 }
 

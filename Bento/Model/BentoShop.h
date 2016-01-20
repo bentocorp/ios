@@ -138,5 +138,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (BOOL)isThereOnDemandPreview;
 - (NSArray *)getOrderAheadMenus;
 - (NSString *)setDateFormat:(NSString *)dateString;
+- (NSString *)convert24To12HoursWithoutAMPM:(NSString *)time;
+- (NSString *)convert24To12HoursWithAMPM:(NSString *)time;
 
 @end

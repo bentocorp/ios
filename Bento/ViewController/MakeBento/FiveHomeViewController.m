@@ -1147,29 +1147,7 @@
 - (void)refreshState {
     // OrderAhead Database
     
-    NSMutableArray *timeRanges = [@[] mutableCopy];
-    for (NSDictionary *timeRange in self.orderAheadMenu.times) {
-        
-
-        
-        // need to format these times
-        NSString *startTime = timeRange[@"start"];
-        
-        // format this one with am/pm
-        NSString *endTime = timeRange[@"end"];
-        
-        NSString *formattedTimeRange;
-        
-        NSNumber *availableNum = (NSNumber *)timeRange[@"available"];
-        if ([availableNum boolValue]) {
-            formattedTimeRange = [NSString stringWithFormat:@"%@-%@", startTime, endTime];
-        }
-        else {
-            formattedTimeRange = [NSString stringWithFormat:@"%@-%@ (sold-out)", startTime, endTime];
-        }
-        
-        [timeRanges addObject: formattedTimeRange];
-    }
+    
     
     myDatabase = @[
                    @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Wednesday January 20th, Lunch", @"Jan 16, Dinner"],
