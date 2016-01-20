@@ -16,5 +16,5 @@
 @property (nonatomic) NSArray *mainDishes;
 @property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSArray *addons;
-
+@property (nonatomic) NSArray *times;
 @end

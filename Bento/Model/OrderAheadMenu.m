@@ -16,10 +16,14 @@
     if (self = [super init]) {
 
         NSString *mealType = dictionary[@"Menu"][@"meal_name"];
-        NSString *formattedDate = [[BentoShop sharedInstance] setDateFormat:dictionary[@"for_date"]];
+        NSString *formattedDate = [[BentoShop sharedInstance] setDateFormat:dictionary[@"Menu"][@"for_date"]];
         self.name = [NSString stringWithFormat:@"%@, %@", formattedDate, mealType];
         
         [self getMainDishes:dictionary];
+        [self getSideDishes:dictionary];
+        [self getAddons:dictionary];
+        
+        self.times = dictionary[@"Times"];
     }
     
     return self;

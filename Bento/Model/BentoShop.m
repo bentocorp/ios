@@ -371,6 +371,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 #pragma mark Order-Ahead
 
 - (BOOL)isThereOrderAhead {
+    [self getOrderAheadMenus];
+    
     if (self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"]) {
         return YES;
     }
