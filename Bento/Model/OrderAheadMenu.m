@@ -11,20 +11,21 @@
 
 @implementation OrderAheadMenu
 
-- (id)initWithDictionary:(NSDictionary *)dictionary {
+- (id)initWithDictionary:(NSDictionary *)menu {
     
     if (self = [super init]) {
 
-        NSString *mealType = dictionary[@"Menu"][@"meal_name"];
+        NSString *mealType = menu[@"Menu"][@"meal_name"];
         
-        NSString *formattedDate = [[BentoShop sharedInstance] setDateFormat:dictionary[@"Menu"][@"for_date"]];
+        NSString *formattedDate = [[BentoShop sharedInstance] setDateFormat:menu[@"Menu"][@"for_date"]];
         
         self.name = [NSString stringWithFormat:@"%@, %@", formattedDate, [NSString stringWithFormat:@"%@%@",[[mealType substringToIndex:1] uppercaseString], [mealType substringFromIndex:1]]];
         
-        [self getMainDishes:dictionary];
-        [self getSideDishes:dictionary];
-        [self getAddons:dictionary];
-        [self setUpTimes:dictionary[@"Times"]];
+        self.allMenuItems = menu[@"MenuItems"];
+        [self getMainDishes:menu];
+        [self getSideDishes:menu];
+        [self getAddons:menu];
+        [self setUpTimes:menu[@"Times"]];
     }
     
     return self;
@@ -32,7 +33,7 @@
 
 - (void)getMainDishes:(NSDictionary *)menu {
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary *dishInfo in menu[@"MenuItems"]) {
+    for (NSDictionary *dishInfo in self.allMenuItems) {
         NSString *strType = [dishInfo objectForKey:@"type"];
         if ([strType isEqualToString:@"main"]) {
             [arrayDishes addObject:dishInfo];
@@ -44,7 +45,7 @@
 
 - (void)getSideDishes:(NSDictionary *)menu {
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary *dishInfo in menu[@"MenuItems"]) {
+    for (NSDictionary *dishInfo in self.allMenuItems) {
         NSString *strType = [dishInfo objectForKey:@"type"];
         if ([strType isEqualToString:@"side"]) {
             [arrayDishes addObject:dishInfo];
@@ -56,7 +57,7 @@
 
 - (void)getAddons:(NSDictionary *)menu {
     NSMutableArray *arrayDishes = [[NSMutableArray alloc] init];
-    for (NSDictionary *dishInfo in menu[@"MenuItems"]) {
+    for (NSDictionary *dishInfo in self.allMenuItems) {
         NSString *strType = [dishInfo objectForKey:@"type"];
         if ([strType isEqualToString:@"addon"]) {
             [arrayDishes addObject:dishInfo];
@@ -142,6 +143,40 @@
     }
     
     return nil;
+}
+
+- (BOOL)isDishSoldOut:(NSInteger)menuID
+{
+    if ([[[BentoShop sharedInstance] getAppState] isEqualToString:@"soldout_wall"]) {
+        return YES;
+    }
+
+    NSInteger quantity;
+    
+    for (NSDictionary *menuItem in self.allMenuItems) {
+        
+        NSInteger itemID;
+        
+        if (![menuItem[@"itemId"] isEqual:[NSNull null]]) {
+            itemID = [menuItem[@"itemId"] integerValue];
+        }
+        
+        if (itemID == menuID) {
+            
+            if (![menuItem[@"qty"] isEqual:[NSNull null]]) {
+                quantity = [menuItem[@"qty"] integerValue];
+            }
+            
+            if (quantity > 0) {
+                return NO;
+            }
+            else {
+                return YES;
+            }
+        }
+    }
+
+    return NO;
 }
 
 @end
