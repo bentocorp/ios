@@ -303,14 +303,19 @@
         
         if (self.orderMode == OnDemand) {
             canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID] && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
+            
+            // if side dish, set isMain to NO
+            if ([dishInfo[@"type"] isEqualToString:@"main"] == NO) {
+                [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
+            }
         }
         else if (self.orderMode == OrderAhead) {
             canBeAdded = [self.orderAheadMenu canAddDish:dishID] && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
-        }
-        
-        // if side dish, set isMain to NO
-        if ([dishInfo[@"type"] isEqualToString:@"main"] == NO) {
-            [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
+            
+            // if side dish, set isMain to NO
+            if ([dishInfo[@"type"] isEqualToString:@"main"] == NO) {
+                [cell setDishInfo:dishInfo isSoldOut:[self.orderAheadMenu isDishSoldOut:dishID] canBeAdded:[self.orderAheadMenu canAddDish:dishID] isMain:NO];
+            }
         }
         
         [cell setSmallDishCell];
@@ -337,14 +342,19 @@
     
     if (self.orderMode == OnDemand) {
         canBeAdded = [[BentoShop sharedInstance] canAddDish:dishID] && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
+        
+        // if side dish, set isMain to NO
+        if ([dishInfo[@"type"] isEqualToString:@"main"] == NO) {
+            [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
+        }
     }
     else if (self.orderMode == OrderAhead) {
         canBeAdded = [self.orderAheadMenu canAddDish:dishID] && [[[BentoShop sharedInstance] getCurrentBento] canAddSideDish:dishID];
-    }
-
-    // if side dish, set isMain to NO
-    if ([dishInfo[@"type"] isEqualToString:@"main"] == NO) {
-        [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:NO];
+        
+        // if side dish, set isMain to NO
+        if ([dishInfo[@"type"] isEqualToString:@"main"] == NO) {
+            [myCell setDishInfo:dishInfo isSoldOut:[self.orderAheadMenu isDishSoldOut:dishID] canBeAdded:[self.orderAheadMenu canAddDish:dishID] isMain:NO];
+        }
     }
     
     [myCell setSmallDishCell];
