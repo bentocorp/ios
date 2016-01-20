@@ -1173,15 +1173,28 @@
         [self installOnDemand];
         [self installOrderAhead];
         [self updateWidget];
+        [self defaultToOnDemandOrOrderAhead];
     }
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
         [self removeOrderAhead];
         [self installOnDemand];
         [self updateWidget];
+        [self enableOnDemand];
     }
     else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         [self removeOnDemand];
         [self installOrderAhead];
+        [self enableOrderAhead];
+    }
+}
+
+- (void)defaultToOnDemandOrOrderAhead {
+    // default to OD or OA?
+    NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
+    if ([isSelectedNum boolValue]) {
+        [self enableOnDemand];
+    }
+    else {
         [self enableOrderAhead];
     }
 }
@@ -1268,15 +1281,6 @@
         self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self.asapDescriptionLabel sizeToFit];
         self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
-        
-        // default to OD or OA?
-        NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
-        if ([isSelectedNum boolValue]) {
-            [self enableOnDemand];
-        }
-        else {
-            [self enableOrderAhead];
-        }
     }
 }
 
@@ -1405,6 +1409,8 @@
 }
 
 - (void)enableOnDemand {
+    [self.view layoutIfNeeded];
+    
     self.orderMode = OnDemand;
     
     self.onDemandGreenView1.alpha = 1.0;
@@ -1416,7 +1422,7 @@
     self.enabledOnDemandButton.hidden = YES;
     self.enabledOrderAheadButton.hidden = NO;
     
-    [self setDefaultOnDemandTitle];
+    [self setOnDemandTitle];
     
     [self showOrHidePreview];
     
@@ -1424,6 +1430,8 @@
 }
 
 - (void)enableOrderAhead {
+    [self.view layoutIfNeeded];
+    
     self.orderMode = OrderAhead;
     
     self.onDemandGreenView1.alpha = 0.5;
@@ -1442,7 +1450,7 @@
     [self.view layoutIfNeeded];
 }
 
-- (void)setDefaultOnDemandTitle {
+- (void)setOnDemandTitle {
     menuOnDemand = self.asapMenuLabel.text;
     timeOnDemand = self.asapTimeLabel.text;
     [self updatePickerButtonTitle];
