@@ -82,7 +82,7 @@
     NSString *menuOrderAhead;
     NSString *timeOrderAhead;
     
-    NSInteger selected;
+    NSInteger selectedOrderAheadIndex;
     NSMutableArray *menuNames; // [date, date, date]
     NSMutableArray *menuTimes; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
 }
@@ -1162,7 +1162,7 @@
 - (void)refreshState {
 
     if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-        selected = 0; // for oa
+        selectedOrderAheadIndex = 0;
         [self setUpPickerData];
     }
     
@@ -1485,7 +1485,7 @@
         return menuNames.count;
     }
     else {
-        return [menuTimes[selected] count];
+        return [menuTimes[selectedOrderAheadIndex] count];
     }
 }
 
@@ -1494,7 +1494,7 @@
         return menuNames[row];
     }
     else {
-        return menuTimes[selected][row];
+        return menuTimes[selectedOrderAheadIndex][row];
     }
 }
 
@@ -1506,7 +1506,7 @@
         pickerLabel.text = menuNames[row];
     }
     else {
-        pickerLabel.text = menuTimes[selected][row];
+        pickerLabel.text = menuTimes[selectedOrderAheadIndex][row];
     }
     
     // if time range is sold-out
@@ -1528,17 +1528,17 @@
 
     if (component == 0) {
         menuOrderAhead = menuNames[row];
-        selected = row;
+        selectedOrderAheadIndex = row;
         [pickerView reloadComponent:1];
     }
     else {
         // if time range is sold-out
-        if ([menuTimes[selected][row] containsString:@"sold-out"]) {
+        if ([menuTimes[selectedOrderAheadIndex][row] containsString:@"sold-out"]) {
             [pickerView selectRow:row + 1 inComponent:component animated:YES];
-            timeOrderAhead = menuTimes[selected][row + 1];
+            timeOrderAhead = menuTimes[selectedOrderAheadIndex][row + 1];
         }
         else {
-            timeOrderAhead = menuTimes[selected][row];
+            timeOrderAhead = menuTimes[selectedOrderAheadIndex][row];
         }
     }
     
@@ -1546,10 +1546,8 @@
 }
 
 - (void)updatePickerButtonTitle {
-    if (menuOrderAhead == nil || timeOrderAhead == nil) {
-        menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
-        timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:1];
-    }
+    menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
+    timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
     
     if (self.orderMode == OnDemand) {
         [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOnDemand, timeOnDemand] forState:UIControlStateNormal];
