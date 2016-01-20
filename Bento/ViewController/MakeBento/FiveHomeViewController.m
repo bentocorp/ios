@@ -1161,7 +1161,10 @@
 #pragma mark Refresh State / Start Screen Logic
 - (void)refreshState {
 
-    selected = 0;
+    if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+        selected = 0; // for oa
+        [self setUpPickerData];
+    }
     
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
         [self installOnDemand];
@@ -1178,8 +1181,6 @@
         [self installOrderAhead];
         [self enableOrderAhead];
     }
-    
-    [self setUpPickerData];
 }
 
 #pragma mark Install / Remove
@@ -1524,6 +1525,7 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+
     if (component == 0) {
         menuOrderAhead = menuNames[row];
         selected = row;
