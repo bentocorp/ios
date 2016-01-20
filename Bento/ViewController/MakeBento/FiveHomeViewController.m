@@ -733,16 +733,32 @@
 
 - (void)updateUI {
     
+    /*----------------------*/
+    
+    [self updateWidget];
+    
+    /*----------------------*/
+    
+    [self setETA];
+    
+    /*----------------------*/
+    
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     NSString *strTitle;
     
     // current mains
     NSMutableArray *mainDishesArray;
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-        mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
+    
+    if (self.orderMode == OnDemand) {
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+            mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
+        }
+        else {
+            mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+        }
     }
-    else {
-        mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
+    else if (self.orderMode == OrderAhead) {
+        mainDishesArray = [self.orderAheadMenu.mainDishes mutableCopy];
     }
     
     /*----------------------*/
@@ -780,15 +796,6 @@
             self.startingPriceLabel.text = [NSString stringWithFormat:@"STARTING AT $%@", sortedMainPrices[0]];
         }
     }
-    /*----------------------*/
-    
-    [self updateWidget];
-    
-    /*----------------------*/
-    
-    [self setETA];
-    
-    /*----------------------*/
     
     [self showOrHideAddAnotherBentoAndViewAddons];
     
@@ -860,6 +867,8 @@
         self.countBadgeLabel.text = @"";
         self.countBadgeLabel.hidden = YES;
     }
+    
+    [self refreshState];
 }
 
 - (void)onUpdatedMenu:(NSNotification *)notification {
@@ -1164,7 +1173,6 @@
 
 #pragma mark Refresh State / Start Screen Logic
 - (void)refreshState {
-
     if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         selectedOrderAheadIndex = 0;
         [self setUpPickerData];
@@ -1415,11 +1423,16 @@
     self.orderAheadGreenViewWidthConstraint.constant = 5;
     
     self.enabledOnDemandButton.hidden = YES;
+    self.enabledOnDemandButton.alpha = 0;
+    
     self.enabledOrderAheadButton.hidden = NO;
+    self.enabledOrderAheadButton.alpha = 0.2;
     
     [self setDefaultOnDemandTitle];
     
     [self showOrHidePreview];
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)enableOrderAhead {
@@ -1432,11 +1445,16 @@
     self.orderAheadGreenViewWidthConstraint.constant = 10;
     
     self.enabledOnDemandButton.hidden = NO;
+    self.enabledOnDemandButton.alpha = 0.2;
+    
     self.enabledOrderAheadButton.hidden = YES;
+    self.enabledOrderAheadButton.alpha = 0;
     
     [self updatePickerButtonTitle];
     
     [self hidePreview];
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)setDefaultOnDemandTitle {
@@ -1553,7 +1571,6 @@
     }
     
     [self updatePickerButtonTitle];
-    [self updateMenu];
 }
 
 - (void)updatePickerButtonTitle {
@@ -1566,6 +1583,8 @@
     else if (self.orderMode == OrderAhead) {
         [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOrderAhead, timeOrderAhead] forState:UIControlStateNormal];
     }
+    
+    [self updateMenu];
 }
 
 
