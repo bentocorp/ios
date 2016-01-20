@@ -1482,7 +1482,6 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    
     if (component == 0) {
         return menuNames.count;
     }
@@ -1492,13 +1491,12 @@
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    
     if (component == 0) {
-        return namesAndTimesArray[component][row];
+        return menuTimes[row];
     }
-    
-    // component 1
-    return namesAndTimesArray[component][row];
+    else {
+        return menuTimes[selected][row];
+    }
 }
 
 - (UIView *)pickerView:(UIPickerView *)pickerView viewForRow:(NSInteger)row forComponent:(NSInteger)component reusingView:(UIView *)view {
