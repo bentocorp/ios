@@ -82,7 +82,7 @@
     NSString *menuOrderAhead;
     NSString *timeOrderAhead;
     
-    int selected;
+    NSInteger selected;
     NSMutableArray *menuNames; // [date, date, date]
     NSMutableArray *menuTimes; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
 }
@@ -1431,7 +1431,7 @@
     // default value
     if (menuOrderAhead == nil || timeOrderAhead == nil) {
         menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
-        timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
+        timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:0];
     }
     
     [self updatePickerButtonTitle];
@@ -1532,6 +1532,8 @@
 
     if (component == 0) {
         menuOrderAhead = menuNames[row];
+        
+        selected = row;
     }
     else {
         // if time range is sold-out
