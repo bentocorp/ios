@@ -1229,11 +1229,16 @@
         }
     }
     else {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
-            [currentBento completeBento:@"todayLunch"];
+        if (self.orderMode == OnDemand) {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+                [currentBento completeBento:@"todayLunch"];
+            }
+            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+                [currentBento completeBento:@"todayDinner"];
+            }
         }
-        else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
-            [currentBento completeBento:@"todayDinner"];
+        else if (self.orderMode == OrderAhead) {
+            [currentBento completeBento:<#(NSString *)#>]
         }
         
         [[BentoShop sharedInstance] addNewBento];

@@ -260,13 +260,13 @@
     [self.cvSideDishes reloadData];
 }
 
-//- (BOOL)isCompletedToMakeMyBento {
-//    if ([[BentoShop sharedInstance] getCurrentBento] == nil) {
-//        return NO;
-//    }
-//    
-//    return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
-//}
+- (BOOL)isCompletedToMakeMyBento {
+    if ([[BentoShop sharedInstance] getCurrentBento] == nil) {
+        return NO;
+    }
+    
+    return [[[BentoShop sharedInstance] getCurrentBento] isCompleted];
+}
 
 - (void)showSoldoutScreen:(NSNumber *)identifier {
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];

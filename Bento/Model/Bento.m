@@ -8,6 +8,7 @@
 
 #import "Bento.h"
 #import "BentoShop.h"
+#import "OrderAheadMenu.h"
 
 @interface Bento()
 
@@ -130,6 +131,7 @@
             self.indexSideDish4 != 0);
 }
 
+// for on demand
 - (void)completeBento:(NSString *)whatNeedsThis
 {
     if (self.indexMainDish == 0)
@@ -232,6 +234,105 @@
         }
     }
 
+    [[BentoShop sharedInstance] saveBentoArray];
+}
+
+- (void)completeBentoWith:(OrderAheadMenu *)orderAheadMenu
+{
+    if (self.indexMainDish == 0)
+    {
+        for (NSDictionary *dishInfo in orderAheadMenu.mainDishes)
+        {
+            NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
+            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex]) {
+                continue;
+            }
+            
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex]) {
+                continue;
+            }
+            
+            self.indexMainDish = dishIndex;
+            break;
+        }
+    }
+    
+    if (self.indexSideDish1 == 0)
+    {
+        for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
+        {
+            NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
+            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+                continue;
+            
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+                continue;
+            
+            if (![self canAddSideDish:dishIndex])
+                continue;
+            
+            self.indexSideDish1 = dishIndex;
+            break;
+        }
+    }
+    
+    if (self.indexSideDish2 == 0)
+    {
+        for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
+        {
+            NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
+            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+                continue;
+            
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+                continue;
+            
+            if (![self canAddSideDish:dishIndex])
+                continue;
+            
+            self.indexSideDish2 = dishIndex;
+            break;
+        }
+    }
+    
+    if (self.indexSideDish3 == 0)
+    {
+        for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
+        {
+            NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
+            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+                continue;
+            
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+                continue;
+            
+            if (![self canAddSideDish:dishIndex])
+                continue;
+            
+            self.indexSideDish3 = dishIndex;
+            break;
+        }
+    }
+    
+    if (self.indexSideDish4 == 0)
+    {
+        for (NSDictionary *dishInfo in orderAheadMenu.sideDishes)
+        {
+            NSInteger dishIndex = [[dishInfo objectForKey:@"itemId"] integerValue];
+            if ([[BentoShop sharedInstance] isDishSoldOut:dishIndex])
+                continue;
+            
+            if (![[BentoShop sharedInstance] canAddDish:dishIndex])
+                continue;
+            
+            if (![self canAddSideDish:dishIndex])
+                continue;
+            
+            self.indexSideDish4 = dishIndex;
+            break;
+        }
+    }
+    
     [[BentoShop sharedInstance] saveBentoArray];
 }
 
