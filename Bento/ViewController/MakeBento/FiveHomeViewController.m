@@ -1336,6 +1336,7 @@
         for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
             if ([menuOrderAhead isEqualToString:orderAheadMenu.name]) {
                 self.orderAheadMenu = orderAheadMenu;
+                [self updateUI];
             }
         }
     }
