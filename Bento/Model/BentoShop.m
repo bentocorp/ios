@@ -29,6 +29,8 @@
 
 #import "SVPlacemark.h"
 
+#import "OrderAheadMenu.h"
+
 @interface BentoShop () <CLLocationManagerDelegate>
 
 @property (nonatomic) NSDictionary *dicInit2;
@@ -378,15 +380,19 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 
 #pragma mark Order Ahead Menus
 
-//
-//- (NSArray *)getOrderAheadMenus {
-//    NSArray *menus = self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"][@"availableMenus"][@"menus"];
-//    if (menus) {
-//        for (NSDictionary *menu in menus) {
-//            menu[]
-//        }
-//    }
-//}
+- (NSArray *)getOrderAheadMenus {
+    NSMutableArray *modeledMenus = [@[] mutableCopy];
+    
+    NSArray *menus = self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"][@"availableMenus"][@"menus"];
+    if (menus) {
+        for (NSDictionary *menu in menus) {
+            OrderAheadMenu *orderAheadMenu = [[OrderAheadMenu alloc] initWithDictionary:menu];
+            [modeledMenus addObject:orderAheadMenu];
+        }
+    }
+    
+    return modeledMenus;
+}
 
 - (NSString *)setDateFormat:(NSString *)dateString {
     // turn this format...2016-01-19

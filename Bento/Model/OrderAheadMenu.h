@@ -10,6 +10,8 @@
 
 @interface OrderAheadMenu : NSObject
 
+- (id)initWithDictionary:(NSDictionary *)dictionary;
+
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSArray *mainDishes;
 @property (nonatomic) NSArray *sideDishes;
