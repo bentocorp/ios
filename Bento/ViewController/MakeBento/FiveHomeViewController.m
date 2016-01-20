@@ -51,12 +51,15 @@
 
 #import "WebManager.h"
 
+#import "OrderAheadMenu.h"
+
 @interface FiveHomeViewController () <CustomViewControllerDelegate, FiveCustomViewControllerDelegate, MyAlertViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) CustomViewController *fourCustomVC;
 @property (nonatomic) FiveCustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 @property (nonatomic) OrderMode orderMode;
+@property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
 @property (nonatomic) NSDictionary *widget;
 
@@ -1142,7 +1145,32 @@
 
 #pragma mark Refresh State / Start Screen Logic
 - (void)refreshState {
-    // order ahead mock
+    // OrderAhead Database
+    
+    NSMutableArray *timeRanges = [@[] mutableCopy];
+    for (NSDictionary *timeRange in self.orderAheadMenu.times) {
+        
+
+        
+        // need to format these times
+        NSString *startTime = timeRange[@"start"];
+        
+        // format this one with am/pm
+        NSString *endTime = timeRange[@"end"];
+        
+        NSString *formattedTimeRange;
+        
+        NSNumber *availableNum = (NSNumber *)timeRange[@"available"];
+        if ([availableNum boolValue]) {
+            formattedTimeRange = [NSString stringWithFormat:@"%@-%@", startTime, endTime];
+        }
+        else {
+            formattedTimeRange = [NSString stringWithFormat:@"%@-%@ (sold-out)", startTime, endTime];
+        }
+        
+        [timeRanges addObject: formattedTimeRange];
+    }
+    
     myDatabase = @[
                    @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Wednesday January 20th, Lunch", @"Jan 16, Dinner"],
                    @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
