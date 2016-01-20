@@ -1507,10 +1507,8 @@
         pickerLabel.text = menuNames[row];
     }
     else {
-        pickerLabel.text = menuTimes[ro];
+        pickerLabel.text = menuTimes[selected][row];
     }
-    
-    
     
     // if time range is sold-out
     if ([pickerLabel.text containsString:@"sold-out"]) {
@@ -1530,16 +1528,16 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 
     if (component == 0) {
-        menuOrderAhead = namesAndTimesArray[component][row];
+        menuOrderAhead = menuNames[row];
     }
     else {
         // if time range is sold-out
-        if ([namesAndTimesArray[component][row] containsString:@"sold-out"]) {
+        if ([menuTimes[selected][row] containsString:@"sold-out"]) {
             [pickerView selectRow:row+1 inComponent:component animated:YES];
-            timeOrderAhead = namesAndTimesArray[component][row+1];
+            timeOrderAhead = menuTimes[selected][row + 1];
         }
         else {
-            timeOrderAhead = namesAndTimesArray[component][row];
+            timeOrderAhead = menuTimes[selected][row];
         }
     }
     
