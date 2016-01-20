@@ -1161,6 +1161,8 @@
 #pragma mark Refresh State / Start Screen Logic
 - (void)refreshState {
 
+    selected = 0;
+    
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
         [self installOnDemand];
         [self installOrderAhead];
@@ -1426,9 +1428,10 @@
     self.enabledOnDemandButton.hidden = NO;
     self.enabledOrderAheadButton.hidden = YES;
     
+    // default value
     if (menuOrderAhead == nil || timeOrderAhead == nil) {
         menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
-        timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:1];
+        timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
     }
     
     [self updatePickerButtonTitle];
