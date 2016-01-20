@@ -1503,11 +1503,21 @@
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-    return [namesAndTimesArray[component] count];
+    
+    if (component == 0) {
+        return [namesAndTimesArray[component] count];
+    }
+
+    return [namesAndTimesArray[component][component] count];
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
-    return namesAndTimesArray[component][row];
+    
+    if (component == 0) {
+        return namesAndTimesArray[component][row]; // return date string
+    }
+    
+    return namesAndTimesArray[component][row]; // return
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
