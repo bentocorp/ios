@@ -1391,7 +1391,7 @@
 
 #pragma mark Cart Status
 - (BOOL)isCartEmpty {
-    return [[BentoShop sharedInstance] getTotalBentoCount] == 0 || ([[BentoShop sharedInstance] getTotalBentoCount] == 1 && [[[BentoShop sharedInstance] getLastBento] isEmpty]);
+    return [[BentoShop sharedInstance] getTotalBentoCount] == 0 || ([[BentoShop sharedInstance] getTotalBentoCount] == 1 && [[[BentoShop sharedInstance] getLastBento] isEmpty] && [AddonList sharedInstance].addonList.count == 0);
 }
 
 - (void)clearCart {
