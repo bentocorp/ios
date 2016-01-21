@@ -119,7 +119,7 @@
                         <action selector="bottomButtonPressed:" destination="-1" eventType="touchUpInside" id="bPh-u8-MIZ"/>
                     </connections>
                 </button>
-                <button opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjf-nw-JDI" userLabel="fadedViewButton">
+                <button opaque="NO" alpha="0.59999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fjf-nw-JDI" userLabel="fadedViewButton">
                     <rect key="frame" x="0.0" y="94" width="375" height="573"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>

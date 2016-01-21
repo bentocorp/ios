@@ -62,7 +62,7 @@
 @property (nonatomic) OrderMode orderMode;
 @property (nonatomic) PickerState pickerState;
 
-@property (nonatomic) BOOL onDemandVSOrAhead;
+@property (nonatomic) BOOL isToggledOn;
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
 @property (nonatomic) NSDictionary *widget;
@@ -124,7 +124,7 @@
     
     [self checkLocationOnLoad];
     
-    [self refreshState];
+    [self refreshStateOnLaunch];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -153,7 +153,7 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
@@ -902,8 +902,6 @@
 
 - (void)updateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
-//        [self updateWidget];
-//        [self refreshState];
         [self setETA];
         [self setStartingPrice];
         [self showOrHideAddAnotherBentoAndViewAddons];
@@ -912,7 +910,7 @@
         [self loadSelectedDishes];
         [self setCart];
         [self updateBottomButton];
-        
+        [self refreshState];
     });
 }
 
@@ -1030,12 +1028,12 @@
     }
 }
 
-- (void)onUpdatedMenu:(NSNotification *)notification {
-    if (isThereConnection) {
-        [self refreshState];
-        [self updateUI];
-    }
-}
+//- (void)onUpdatedMenu:(NSNotification *)notification {
+//    if (isThereConnection) {
+//        [self refreshState];
+//        [self updateUI];
+//    }
+//}
 
 - (void)setETA {
     self.etaLabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
@@ -1111,7 +1109,7 @@
             [self showSoldoutScreen:[NSNumber numberWithInt:1]];
         }
         else {
-            [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+            [self updateUI];
         }
     }
 }
@@ -1345,8 +1343,9 @@
     }
 }
 
-#pragma mark Refresh State / Start Screen Logic
-- (void)refreshState {
+#pragma mark Refresh State
+
+- (void)refreshStateOnLaunch {
     if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         selectedOrderAheadIndex = 0;
         [self setUpPickerData];
@@ -1374,28 +1373,57 @@
     }
 }
 
-- (void)checkPickerState {
-    PickerState newState;
+- (void)refreshState {
+    if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+        selectedOrderAheadIndex = 0;
+        [self setUpPickerData];
+    }
+    
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
-        newState = Both;
+        self.pickerState = Both;
+        [self installOnDemand];
+        [self installOrderAhead];
+        [self updateWidget];
     }
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
-        newState = OnDemandOnly;
+        self.pickerState = OnDemandOnly;
+        [self removeOrderAhead];
+        [self installOnDemand];
+        [self updateWidget];
+        [self enableOnDemand];
     }
     else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-        newState = OrderAheadOnly;
+        self.pickerState = OrderAheadOnly;
+        [self removeOnDemand];
+        [self installOrderAhead];
+        [self enableOrderAhead];
     }
-
-    // state did not change
-    if (newState == self.pickerState) {
-        
-    }
-    // state changed
-    else {
-        self.pickerState = newState;
-        
-    }
+    
+    
 }
+
+//- (void)checkPickerState {
+//    PickerState newState;
+//    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
+//        newState = Both;
+//    }
+//    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
+//        newState = OnDemandOnly;
+//    }
+//    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+//        newState = OrderAheadOnly;
+//    }
+//
+//    // state did not change
+//    if (newState == self.pickerState) {
+//        
+//    }
+//    // state changed
+//    else {
+//        self.pickerState = newState;
+//        
+//    }
+//}
 
 - (void)defaultToOnDemandOrOrderAhead {
     // default to OD or OA?
@@ -1411,29 +1439,37 @@
 #pragma mark Install / Remove
 
 - (void)removeOnDemand {
-    self.onDemandView.hidden = YES;
-    self.onDemandViewHeightConstraint.constant = 0;
+    if (self.onDemandView.hidden == NO) {
+        self.onDemandView.hidden = YES;
+        self.onDemandViewHeightConstraint.constant = 0;
+    }
 }
 
 - (void)installOnDemand {
-    self.onDemandView.hidden = NO;
-    self.onDemandViewHeightConstraint.constant = 59;
+    if (self.onDemandView.hidden == YES) {
+        self.onDemandView.hidden = NO;
+        self.onDemandViewHeightConstraint.constant = 59;
+    }
 }
 
 - (void)removeOrderAhead {
-    self.orderAheadPickerView.hidden = YES;
-    self.orderAheadGreenView1.hidden = YES;
+    if (self.orderAheadPickerView.hidden == NO) {
+        self.orderAheadPickerView.hidden = YES;
+        self.orderAheadGreenView1.hidden = YES;
+    }
     
     self.orderAheadPickerViewHeightConstraint.constant = 0;
     self.orderAheadGreenViewHeightConstraint.constant = 0;
 }
 
 - (void)installOrderAhead {
-    self.orderAheadPickerView.hidden = NO;
-    self.orderAheadGreenView1.hidden = NO;
-    
-    self.orderAheadPickerViewHeightConstraint.constant = 140;
-    self.orderAheadGreenViewHeightConstraint.constant = 140;
+    if (self.orderAheadPickerView.hidden == YES) {
+        self.orderAheadPickerView.hidden = NO;
+        self.orderAheadGreenView1.hidden = NO;
+        
+        self.orderAheadPickerViewHeightConstraint.constant = 140;
+        self.orderAheadGreenViewHeightConstraint.constant = 140;
+    }
 }
 
 #pragma mark Toggle
@@ -1451,17 +1487,23 @@
             [self toggleOff];
         }];
     }
+    
+    NSLog(@"picker view top constraint - %f", self.dropDownViewTopConstraint.constant);
 }
 
 - (void)toggleOn {
-    self.fadedViewButton.alpha = 0.8;
+    self.fadedViewButton.alpha = 0.6;
+    
     self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y + self.dropDownView.frame.size.height + 20;
+    
     [self.view layoutIfNeeded];
 }
 
 - (void)toggleOff {
     self.fadedViewButton.alpha = 0;
+    
     self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y - self.dropDownView.frame.size.height - 20;
+    
     [self.view layoutIfNeeded];
 }
 
@@ -1471,7 +1513,6 @@
         for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
             if ([menuOrderAhead isEqualToString:orderAheadMenu.name]) {
                 self.orderAheadMenu = orderAheadMenu;
-                [self updateUI];
             }
         }
     }
@@ -1491,6 +1532,9 @@
         self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self.asapDescriptionLabel sizeToFit];
         self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
+    }
+    else {
+        
     }
 }
 
