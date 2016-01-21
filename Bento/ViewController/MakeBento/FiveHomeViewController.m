@@ -1712,6 +1712,15 @@
     [self.view layoutIfNeeded];
 }
 
+- (void)showOrHideETA {
+    if (self.orderMode == OnDemand) {
+        self.etaLabel.hidden = NO;
+    }
+    else if (self.orderMode == OrderAhead) {
+        self.etaLabel.hidden = YES;
+    }
+}
+
 - (void)setOnDemandTitle {
     menuOnDemand = self.asapMenuLabel.text;
     timeOnDemand = self.asapTimeLabel.text;
