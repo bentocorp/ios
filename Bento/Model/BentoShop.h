@@ -143,4 +143,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (NSString *)convert24To12HoursWithoutAMPM:(NSString *)time;
 - (NSString *)convert24To12HoursWithAMPM:(NSString *)time;
 
+- (NSString *)getLunchCutOffTime;
+- (NSString *)getDinnerCutOffTime;
+- (NSString *)getCountDownMinutes;
+
 @end

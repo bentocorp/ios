@@ -428,6 +428,19 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return [dateFormatter stringFromDate:date];
 }
 
+#pragma mark Cut-off and countdown mins
+- (NSString *)getLunchCutOffTime {
+    return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"MealTypes"][@"hash"][@"2"][@"oa_cutoff"];
+}
+
+- (NSString *)getDinnerCutOffTime {
+    return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"MealTypes"][@"hash"][@"3"][@"oa_cutoff"];
+}
+
+- (NSString *)getCountDownMinutes {
+    return self.dicInit2[@"settings"][@"oa_countdown_remaining_mins"];
+}
+
 #pragma mark Branch Params
 
 - (void)setBranchParams:(NSDictionary *)params

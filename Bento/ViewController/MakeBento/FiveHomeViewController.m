@@ -53,6 +53,8 @@
 
 #import "OrderAheadMenu.h"
 
+#import "CountdownTimer.h"
+
 @interface FiveHomeViewController () <CustomViewControllerDelegate, FiveCustomViewControllerDelegate, MyAlertViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) CustomViewController *fourCustomVC;
@@ -94,6 +96,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [CountdownTimer sharedInstance];
     
     isThereConnection = YES;
     
