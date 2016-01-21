@@ -1393,6 +1393,10 @@
             if (![[CountdownTimer sharedInstance].finalCountDownTimerValue isEqualToString:@"0:00"]) {
                 strTitle = [NSString stringWithFormat:@"%@ - TIME REMAINING %@", strTitle, [CountdownTimer sharedInstance].finalCountDownTimerValue];
             }
+            else {
+                [self clearCart];
+                [self updateUI];
+            }
         }
     }
     
