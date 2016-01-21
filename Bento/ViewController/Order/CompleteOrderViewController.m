@@ -2113,6 +2113,7 @@
         }
         else if (buttonIndex == 1) {
             [self removeBento];
+            [[AddonList sharedInstance].addonList removeAllObjects];
             [self.navigationController popViewControllerAnimated:YES];
         }
     }
