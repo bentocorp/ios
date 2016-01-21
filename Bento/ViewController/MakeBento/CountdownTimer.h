@@ -17,6 +17,8 @@
 - (void)refreshResume;
 - (void)refreshStop;
 
+- (BOOL)shouldShowCountDown;
+
 @property (nonatomic) BOOL isPaused;
 @property (nonatomic) NSTimer *timer;
 @property (nonatomic) NSString *finalCountDownTimerValue;

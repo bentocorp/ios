@@ -1437,11 +1437,11 @@
 		90BED0A51A5BD05C003DC872 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
+				FCB6120B1C517F7F00DB26CE /* CountdownTimer.h */,
+				FCB6120C1C517F7F00DB26CE /* CountdownTimer.m */,
 				FCE1E50D1C4737AF00A210DC /* FiveHomeViewController.h */,
 				FCE1E50E1C4737AF00A210DC /* FiveHomeViewController.m */,
 				FCE1E50F1C4737AF00A210DC /* FiveHomeViewController.xib */,
-				FCB6120B1C517F7F00DB26CE /* CountdownTimer.h */,
-				FCB6120C1C517F7F00DB26CE /* CountdownTimer.m */,
 				FCE1E5041C47373E00A210DC /* 4-Pod */,
 				FCE1E5051C47374D00A210DC /* 5-Pod */,
 				FCE1E51B1C48183C00A210DC /* View Preview */,

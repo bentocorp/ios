@@ -176,6 +176,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkAppState) name:@"checkAppState" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkAppState) name:@"enteredForeground" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBottomButton) name:@"showCountDownTimer" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated
@@ -1382,6 +1384,15 @@
         }
         
         [self.bottomButton setBackgroundColor:[UIColor bentoButtonGray]];
+    }
+    
+    if (self.orderMode == OrderAhead && selectedOrderAheadIndex == 0) {
+        if ([[CountdownTimer sharedInstance] shouldShowCountDown]) {
+            
+            if (![[CountdownTimer sharedInstance].finalCountDownTimerValue isEqualToString:@"0:00"]) {
+                strTitle = [NSString stringWithFormat:@"%@ - TIME REMAINING %@", strTitle, [CountdownTimer sharedInstance].finalCountDownTimerValue];
+            }
+        }
     }
     
     if (strTitle != nil) {

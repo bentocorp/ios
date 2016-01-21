@@ -92,7 +92,7 @@
 - (NSString *)convertSecondsToMMSSString:(NSTimeInterval)seconds {
     NSDate *date = [NSDate dateWithTimeIntervalSince1970:seconds];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
-    [formatter setDateFormat:@"mm:ss"];
+    [formatter setDateFormat:@"m:ss"];
     return [formatter stringFromDate:date];
 }
 
@@ -113,7 +113,7 @@
         NSLog(@"Checking Lunch cut-off time!");
         
         if (currentTime >= (lunchCutOffTime-countDownRemainingTime) && currentTime < lunchCutOffTime) {
-            self.finalCountDownTimerValue = [NSString stringWithFormat:@"Time Remaining %@", [self convertSecondsToMMSSString:(lunchCutOffTime - currentTime)]];
+            self.finalCountDownTimerValue = [NSString stringWithFormat:@"%@", [self convertSecondsToMMSSString:(lunchCutOffTime - currentTime)]];
             
             NSLog(@"Currently counting down to Lunch cut-off time! - %@", self.finalCountDownTimerValue);
             
@@ -125,7 +125,7 @@
         NSLog(@"Checking Dinner cut-off time!");
         
         if (currentTime >= (dinnerCutOffTime-countDownRemainingTime) && currentTime < dinnerCutOffTime) {
-            self.finalCountDownTimerValue = [NSString stringWithFormat:@"Time Remaining %@", [self convertSecondsToMMSSString:(dinnerCutOffTime - currentTime)]];
+            self.finalCountDownTimerValue = [NSString stringWithFormat:@"%@", [self convertSecondsToMMSSString:(dinnerCutOffTime - currentTime)]];
             
             NSLog(@"Currently counting down to Dinner cut-off time! - %@", self.finalCountDownTimerValue);
             
