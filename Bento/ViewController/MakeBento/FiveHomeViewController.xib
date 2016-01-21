@@ -33,6 +33,8 @@
                 <outlet property="dropDownViewTopConstraint" destination="46Z-Cu-t5v" id="340-LO-Yhm"/>
                 <outlet property="enabledOnDemandButton" destination="Gt8-dY-uNs" id="E8a-tc-ldC"/>
                 <outlet property="enabledOrderAheadButton" destination="J1d-b1-WWR" id="OPd-3h-nqz"/>
+                <outlet property="etaBannerDivider" destination="ydX-pe-8fn" id="eYk-tp-QUZ"/>
+                <outlet property="etaBannerView" destination="Pnq-Up-jie" id="KBU-3q-47x"/>
                 <outlet property="etaLabel" destination="Nxt-M8-sn7" id="BbE-RK-E60"/>
                 <outlet property="fadedViewButton" destination="fjf-nw-JDI" id="xNy-Yk-Upi"/>
                 <outlet property="onDemandGreenView1" destination="tY8-eh-98R" id="4Na-0h-9Ss"/>
@@ -341,11 +343,6 @@
                 <constraint firstAttribute="bottom" secondItem="3lu-ax-SyT" secondAttribute="bottom" id="zfU-yR-YTW"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="g12-em-tQ5"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="128.5" y="457.5"/>
         </view>
     </objects>

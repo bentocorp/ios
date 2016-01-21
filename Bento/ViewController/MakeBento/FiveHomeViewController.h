@@ -27,7 +27,9 @@ typedef NS_ENUM(NSUInteger) {
 @property (weak, nonatomic) IBOutlet UIButton *cartButton;
 @property (weak, nonatomic) IBOutlet UILabel *countBadgeLabel;
 
+@property (weak, nonatomic) IBOutlet UIView *etaBannerView;
 @property (weak, nonatomic) IBOutlet UILabel *startingPriceLabel;
+@property (weak, nonatomic) IBOutlet UIView *etaBannerDivider;
 @property (weak, nonatomic) IBOutlet UILabel *etaLabel;
 
 @property (weak, nonatomic) IBOutlet UIButton *pickerButton;

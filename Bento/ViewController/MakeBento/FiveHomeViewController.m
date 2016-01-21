@@ -67,6 +67,8 @@
 
 @property (nonatomic) NSDictionary *widget;
 
+@property (nonatomic) NSLayoutConstraint *xCenterConstraintForStartingPriceLabel;
+
 @end
 
 @implementation FiveHomeViewController
@@ -116,6 +118,9 @@
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
+    
+    /*---Starting Price Label---*/
+    self.xCenterConstraintForStartingPriceLabel = [NSLayoutConstraint constraintWithItem:self.startingPriceLabel attribute:NSLayoutAttributeCenterX relatedBy:NSLayoutRelationEqual toItem:self.etaBannerView attribute:NSLayoutAttributeCenterX multiplier:1.0 constant:0];
     
     // an empty is created the FIRST time app is launched - there will always be at least one empty bento in defaults
     if ([[BentoShop sharedInstance] getTotalBentoCount] == 0) {
@@ -1688,6 +1693,8 @@
     
     [self showOrHidePreview];
     
+    [self showOrHideETA];
+    
     [self.view layoutIfNeeded];
 }
 
@@ -1709,16 +1716,26 @@
     
     [self hidePreview];
     
+    [self showOrHideETA];
+    
     [self.view layoutIfNeeded];
 }
 
 - (void)showOrHideETA {
     if (self.orderMode == OnDemand) {
         self.etaLabel.hidden = NO;
+        self.etaBannerDivider.hidden = NO;
+        
+        [self.view removeConstraint:self.xCenterConstraintForStartingPriceLabel];
     }
     else if (self.orderMode == OrderAhead) {
         self.etaLabel.hidden = YES;
+        self.etaBannerDivider.hidden = YES;
+        
+        [self.view addConstraint:self.xCenterConstraintForStartingPriceLabel];
     }
+    
+    [self.view layoutIfNeeded];
 }
 
 - (void)setOnDemandTitle {
