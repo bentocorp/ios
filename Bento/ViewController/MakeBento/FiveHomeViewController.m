@@ -1906,7 +1906,7 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 
     if (component == 0) {
-        if ([self isCartEmpty] && selectedOrderAheadIndex != row) {
+        if ([self isCartEmpty] && selectedOrderAheadIndex == row) {
             menuOrderAhead = menuNames[row];
             selectedOrderAheadIndex = row;
             [pickerView reloadComponent:1];
