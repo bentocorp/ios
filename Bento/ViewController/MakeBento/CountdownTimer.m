@@ -26,6 +26,14 @@
     return _sharedInstance;
 }
 
+- (id)init {
+    if (self = [super init]) {
+        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkTime) userInfo:nil repeats:YES];
+    }
+    
+    return self;
+}
+
 - (NSString *)getCurrentDateString {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -77,6 +85,12 @@
     }
     
     return NO;
+}
+
+- (void)checkTime {
+    if ([self shouldShowCountDown]) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"countDownTimer" object:nil];
+    }
 }
 
 
