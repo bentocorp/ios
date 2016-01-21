@@ -1160,12 +1160,6 @@
     }
 }
 
-#pragma mark Clear Cart
-- (void)clearCart {
-    [[BentoShop sharedInstance] resetBentoArray];
-    [[AddonList sharedInstance].addonList removeAllObjects];
-}
-
 #pragma mark CustomViewController Delegate Methods
 - (void)customVCAddMainButtonPressed:(id)sender {
     [self onAddMainDish];
@@ -1305,11 +1299,15 @@
 }
 
 - (IBAction)enableOnDemandButtonPressed:(id)sender {
-    if ([[BentoShop sharedInstance] getTotalBentoCount] < 1 && [[[BentoShop sharedInstance] getLastBento] isEmpty] == NO) {
+    if ([self isCartEmpty]) {
         [self enableOnDemand];
     }
     else {
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart" message:@"Clear cart to switch menus?" delegate:self cancelButtonTitle:@"NO" otherButtonTitle:@"YES"];
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
+                                                            message:@"Clear cart to switch menus?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"NO"
+                                                   otherButtonTitle:@"YES"];
         alertView.tag = 2017;
         [alertView showInView:self.view];
         alertView = nil;
@@ -1317,7 +1315,19 @@
 }
 
 - (IBAction)enableOrderAheadButtonPressed:(id)sender {
-    [self enableOrderAhead];
+    if ([self isCartEmpty]) {
+        [self enableOrderAhead];
+    }
+    else {
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
+                                                            message:@"Clear cart to switch menus?"
+                                                           delegate:self
+                                                  cancelButtonTitle:@"NO"
+                                                   otherButtonTitle:@"YES"];
+        alertView.tag = 2018;
+        [alertView showInView:self.view];
+        alertView = nil;
+    }
 }
 
 - (IBAction)bottomButtonPressed:(id)sender {
@@ -1371,6 +1381,16 @@
         
         [self.bottomButton setAttributedTitle:attributedTitle forState:UIControlStateNormal];
     }
+}
+
+#pragma mark Cart Status
+- (BOOL)isCartEmpty {
+    return [[BentoShop sharedInstance] getTotalBentoCount] == 0 || ([[BentoShop sharedInstance] getTotalBentoCount] == 1 && [[[BentoShop sharedInstance] getLastBento] isEmpty]);
+}
+
+- (void)clearCart {
+    [[BentoShop sharedInstance] resetBentoArray];
+    [[AddonList sharedInstance].addonList removeAllObjects];
 }
 
 #pragma mark Refresh State
