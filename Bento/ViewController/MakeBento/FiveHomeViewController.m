@@ -115,6 +115,10 @@
     /*---Picker View---*/
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
+    // picker data
+    menuNames = [@[] mutableCopy]; // [date, date, date]
+    menuTimes = [@[] mutableCopy]; // [[time range, time range], [time range, time range], [time range, time range]]
+    
     /*---Count Badge---*/
     self.countBadgeLabel.layer.cornerRadius = self.countBadgeLabel.frame.size.width / 2;
     self.countBadgeLabel.clipsToBounds = YES;
@@ -916,6 +920,8 @@
         [self setCart];
         [self updateBottomButton];
         [self checkPickerState];
+        
+        [self setUpPickerData];
     });
 }
 
@@ -1825,13 +1831,21 @@
 #pragma mark Picker View
 
 - (void)setUpPickerData {
-    menuNames = [@[] mutableCopy]; // [date, date, date]
-    menuTimes = [@[] mutableCopy]; // [[time range, time range], [time range, time range], [time range, time range]]
+    [menuNames removeAllObjects];
+    [menuTimes removeAllObjects];
     
     for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
         [menuNames addObject: orderAheadMenu.name];
         [menuTimes addObject: orderAheadMenu.times];
     }
+    
+    // if selectedOrderAheadIndex was say for example at 3 (4 menus), but one OA was remove and now there's only 3 menus. then menuNames[3] would not work because there's no more index 3.
+    // in this case, push selectedOrderAheadIndex back 1
+    if ((menuNames.count - 1) < selectedOrderAheadIndex) {
+        selectedOrderAheadIndex = menuNames.count - 1;
+    }
+    
+    [self.orderAheadPickerView reloadAllComponents];
 }
 
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
@@ -1888,6 +1902,7 @@
         menuOrderAhead = menuNames[row];
         selectedOrderAheadIndex = row;
         [pickerView reloadComponent:1];
+        [pickerView selectRow:0 inComponent:1 animated:YES];
     }
     else {
         // if time range is sold-out
