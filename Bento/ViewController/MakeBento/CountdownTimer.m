@@ -26,20 +26,6 @@
     return _sharedInstance;
 }
 
-- (id)init {
-    if (self = [super init]) {
-        self.lunchCutOffTimeString = [[BentoShop sharedInstance] getLunchCutOffTime];
-        self.dinnerCutOffTimeString = [[BentoShop sharedInstance] getDinnerCutOffTime];
-        self.countDownRemainingMinutesFromServer = [[BentoShop sharedInstance] getCountDownMinutes];
-        
-        if (self.lunchCutOffTimeString != nil && self.dinnerCutOffTimeString != nil) {
-            [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkTimeRemaining) userInfo:nil repeats:YES];
-        }
-    }
-    
-    return self;
-}
-
 - (NSString *)getCurrentDateString {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setDateFormat:@"yyyy-MM-dd"];
@@ -56,20 +42,42 @@
     return [formatter dateFromString:dateAndTimeString];
 }
 
-- (void)check {
-    [self convertDateAndTimeStringToNSDate:[self combineDate:[self getCurrentDateString] withTime:self.lunchCutOffTimeString]];
-    [self convertDateAndTimeStringToNSDate:[self combineDate:[self getCurrentDateString] withTime:self.dinnerCutOffTimeString]];
-    
-    //    NSDate *currentTime = [NSDate date];
-    //    NSDate *newTime = [currentTime dateByAddingTimeInterval:300];
-    //
-    //    NSLog(@"newTime - %f", [newTime timeIntervalSince1970]);
-    
-    // 700 (current)
-    // 1000 (new) = 700 (current) + 300 seconds (min)
-    // if 1000 (new) is greater or equal to 900 (cut-off) time, begin countdown timer
+- (NSString *)convertSecondsToMMSSString:(NSTimeInterval)seconds {
+    NSDate *date = [NSDate dateWithTimeIntervalSince1970:seconds];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"mm:ss"];
+    return [formatter stringFromDate:date];
 }
 
+- (BOOL)shouldShowCountDown {
+    // current time
+    NSTimeInterval currentTime = [[NSDate date]  timeIntervalSince1970];
+    
+    // cut off time
+    NSTimeInterval lunchCutOffTime = [[self convertDateAndTimeStringToNSDate:[self combineDate:[self getCurrentDateString] withTime:[[BentoShop sharedInstance] getLunchCutOffTime]]] timeIntervalSince1970];
+    
+    NSTimeInterval dinnerCutOffTime = [[self convertDateAndTimeStringToNSDate:[self combineDate:[self getCurrentDateString] withTime:[[BentoShop sharedInstance] getDinnerCutOffTime]]] timeIntervalSince1970];
+    
+    // countdown remaining time
+    NSTimeInterval countDownRemainingTime = [[[BentoShop sharedInstance] getCountDownMinutes] integerValue] * 60;
+    
+    // Lunch Mode
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+        if (currentTime >= (lunchCutOffTime-countDownRemainingTime) && currentTime < lunchCutOffTime) {
+            self.finalCountDownTimerValue = [NSString stringWithFormat:@"Time Remaining %@", [self convertSecondsToMMSSString:(lunchCutOffTime - currentTime)]];
+            return YES;
+        }
+    }
+    // Dinner Mode
+    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+        if (currentTime >= (dinnerCutOffTime-countDownRemainingTime) && currentTime < dinnerCutOffTime) {
+            self.finalCountDownTimerValue = [NSString stringWithFormat:@"Time Remaining %@", [self convertSecondsToMMSSString:(dinnerCutOffTime - currentTime)]];
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 
 
 @end

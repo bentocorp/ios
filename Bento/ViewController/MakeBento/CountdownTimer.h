@@ -12,9 +12,6 @@
 
 + (CountdownTimer *)sharedInstance;
 
-@property (nonatomic) NSString *lunchCutOffTimeString;
-@property (nonatomic) NSString *dinnerCutOffTimeString;
-@property (nonatomic) NSString *countDownRemainingMinutesFromServer;
-@property (nonatomic) NSString *countDownRemainingMinutesCalculated;
+@property (nonatomic) NSString *finalCountDownTimerValue;
 
 @end
