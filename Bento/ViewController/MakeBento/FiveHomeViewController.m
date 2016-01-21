@@ -1161,8 +1161,15 @@
         [self enableOrderAhead];
         [self clearCart];
     }
-    else if (alertView.tag == 2019 && buttonIndex == 1) {
-        [self clearCart];
+    else if (alertView.tag == 2019) {
+        if (buttonIndex == 0){
+            [self.orderAheadPickerView selectRow:selectedOrderAheadIndex inComponent:0 animated:YES];
+        }
+        else if (buttonIndex == 1) {
+            [self clearCart];
+            [self updateUI];
+            [self.orderAheadPickerView selectRow:0 inComponent:1 animated:YES];
+        }
     }
 }
 
@@ -1899,10 +1906,22 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 
     if (component == 0) {
-        menuOrderAhead = menuNames[row];
-        selectedOrderAheadIndex = row;
-        [pickerView reloadComponent:1];
-        [pickerView selectRow:0 inComponent:1 animated:YES];
+        if ([self isCartEmpty] && selectedOrderAheadIndex != row) {
+            menuOrderAhead = menuNames[row];
+            selectedOrderAheadIndex = row;
+            [pickerView reloadComponent:1];
+            [pickerView selectRow:0 inComponent:1 animated:YES];
+        }
+        else {
+            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
+                                                                message:@"Clear cart to switch menus?"
+                                                               delegate:self
+                                                      cancelButtonTitle:@"NO"
+                                                       otherButtonTitle:@"YES"];
+            alertView.tag = 2019;
+            [alertView showInView:self.view];
+            alertView = nil;
+        }
     }
     else {
         // if time range is sold-out
