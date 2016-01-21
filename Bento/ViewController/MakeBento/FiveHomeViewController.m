@@ -910,7 +910,7 @@
         [self loadSelectedDishes];
         [self setCart];
         [self updateBottomButton];
-        [self refreshState];
+        [self checkPickerState];
     });
 }
 
@@ -1416,14 +1416,11 @@
     if (newState == self.pickerState) {
         
     }
-    // state changed
+    // state changed!
     else {
         self.pickerState = newState;
         
-        if (self.isToggledOn == NO) {
-            self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height - 20;
-            [self.view layoutIfNeeded];
-        }
+        
     }
 }
 
@@ -1477,6 +1474,8 @@
 #pragma mark Toggle
 
 - (void)toggleDropDown {
+    [self refreshState];
+    
     [self.view layoutIfNeeded];
     
     if (self.fadedViewButton.alpha == 0) {
@@ -1489,6 +1488,8 @@
             [self toggleOff];
         }];
     }
+    
+    NSLog(@"origin y - %f, height - %f, top - %f", self.dropDownView.frame.origin.y, self.dropDownView.frame.size.height, self.dropDownViewTopConstraint.constant);
 }
 
 - (void)toggleOn {
@@ -1496,7 +1497,9 @@
     
     self.fadedViewButton.alpha = 0.6;
     
-    self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y + self.dropDownView.frame.size.height + 20;
+//    self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y + self.dropDownView.frame.size.height + 20;
+    
+    self.dropDownViewTopConstraint.constant = 64;
     
     [self.view layoutIfNeeded];
 }
@@ -1506,7 +1509,7 @@
     
     self.fadedViewButton.alpha = 0;
     
-    self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y - self.dropDownView.frame.size.height - 20;
+    self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height;
     
     [self.view layoutIfNeeded];
 }
