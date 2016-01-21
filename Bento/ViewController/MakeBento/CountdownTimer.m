@@ -89,7 +89,7 @@
 
 - (void)checkTime {
     if ([self shouldShowCountDown]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"countDownTimer" object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"showCountDownTimer" object:nil];
     }
 }
 

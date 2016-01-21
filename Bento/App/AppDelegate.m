@@ -15,6 +15,7 @@
 #import "BentoShop.h"
 #import "AppStrings.h"
 #import "DataManager.h"
+#import "CountdownTimer.h"
 
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
@@ -218,12 +219,16 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #else
     [Stripe setDefaultPublishableKey:StripePublishableLiveKey];
 #endif
+/*---------------------------------------------------------------------*/
     
     // App Strings
     globalStrings = [AppStrings sharedInstance];
     
     // Bento Shop
     globalShop = [BentoShop sharedInstance];
+    
+    // CountDown Timer
+    [CountdownTimer sharedInstance];
     
 /*---------------------------------------------------------------------*/
     
