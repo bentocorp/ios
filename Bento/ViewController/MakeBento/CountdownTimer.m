@@ -50,11 +50,24 @@
     return [NSString stringWithFormat:@"%@ %@", date , time];
 }
 
-- (void)checkTimeRemaining {
-    NSString *lunchCutOffDateAndtimeString = [self combineDate:[self getCurrentDateString] withTime:self.lunchCutOffTimeString];
-    NSString * dinnerCutOffDateAndTimeString = [self combineDate:[self getCurrentDateString] withTime:self.dinnerCutOffTimeString];
+- (NSDate *)convertDateAndTimeStringToNSDate:(NSString *)dateAndTimeString {
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    [formatter setDateFormat:@"yyyy-MM-dd HH:mm:ss"];
+    return [formatter dateFromString:dateAndTimeString];
+}
+
+- (void)check {
+    [self convertDateAndTimeStringToNSDate:[self combineDate:[self getCurrentDateString] withTime:self.lunchCutOffTimeString]];
+    [self convertDateAndTimeStringToNSDate:[self combineDate:[self getCurrentDateString] withTime:self.dinnerCutOffTimeString]];
     
+    //    NSDate *currentTime = [NSDate date];
+    //    NSDate *newTime = [currentTime dateByAddingTimeInterval:300];
+    //
+    //    NSLog(@"newTime - %f", [newTime timeIntervalSince1970]);
     
+    // 700 (current)
+    // 1000 (new) = 700 (current) + 300 seconds (min)
+    // if 1000 (new) is greater or equal to 900 (cut-off) time, begin countdown timer
 }
 
 
