@@ -2113,17 +2113,17 @@
         }
         else if (buttonIndex == 1) {
             [self removeBento];
-            [[AddonList sharedInstance].addonList removeAllObjects];
             [self.navigationController popViewControllerAnimated:YES];
+            
+            [[AddonList sharedInstance].addonList removeAllObjects];
+            [self.tvBentos reloadData];
         }
     }
-    
     // Empty Order Response
     else if (alertView.tag == 2) {
         [[BentoShop sharedInstance] resetBentoArray];
         [self.navigationController popToRootViewControllerAnimated:YES];
     }
-    
     // User selected Keep when confirming address
     else if (alertView.tag == 911) {
         if (buttonIndex == 0) {
@@ -2144,7 +2144,6 @@
             [self onChangeAddress:nil];
         }
     }
-    
     // Remove promo
     else if (alertView.tag == 333) {
         if (buttonIndex == 1) {
@@ -2161,7 +2160,6 @@
             [self updateUI];
         }
     }
-    
     // reload tableview if sold out item exists
     else if (alertView.tag == 888) {
         [self.tvBentos reloadData];
