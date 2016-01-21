@@ -87,6 +87,7 @@
     NSString *timeOrderAhead;
     
     NSInteger selectedOrderAheadIndex;
+    NSInteger selectedOrderAheadIndexForConfirm;
     NSMutableArray *menuNames; // [date, date, date]
     NSMutableArray *menuTimes; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
 }
@@ -1167,8 +1168,8 @@
         }
         else if (buttonIndex == 1) {
             [self clearCart];
+            selectedOrderAheadIndex = selectedOrderAheadIndexForConfirm;
             [self updateUI];
-            [self.orderAheadPickerView selectRow:0 inComponent:1 animated:YES];
         }
     }
 }
@@ -1921,6 +1922,8 @@
             alertView.tag = 2019;
             [alertView showInView:self.view];
             alertView = nil;
+            
+            selectedOrderAheadIndexForConfirm = row;
         }
     }
     else {
