@@ -1129,7 +1129,7 @@
 #pragma mark MyAlertViewDelegate
 
 - (void)alertView:(MyAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
-    if (buttonIndex == 1) {
+    if (alertView.tag == 2016 && buttonIndex == 1) {
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted]) {
             if (self.orderMode == OnDemand) {
@@ -1147,6 +1147,23 @@
         
         [self onFinalize];
     }
+    else if (alertView.tag == 2017 && buttonIndex == 1) {
+        [self enableOnDemand];
+        [self clearCart];
+    }
+    else if (alertView.tag == 2018 && buttonIndex == 1) {
+        [self enableOrderAhead];
+        [self clearCart];
+    }
+    else if (alertView.tag == 2019 && buttonIndex == 1) {
+        [self clearCart];
+    }
+}
+
+#pragma mark Clear Cart
+- (void)clearCart {
+    [[BentoShop sharedInstance] resetBentoArray];
+    [[AddonList sharedInstance].addonList removeAllObjects];
 }
 
 #pragma mark CustomViewController Delegate Methods
@@ -1288,7 +1305,15 @@
 }
 
 - (IBAction)enableOnDemandButtonPressed:(id)sender {
-    [self enableOnDemand];
+    if ([[BentoShop sharedInstance] getTotalBentoCount] < 1 && [[[BentoShop sharedInstance] getLastBento] isEmpty] == NO) {
+        [self enableOnDemand];
+    }
+    else {
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart" message:@"Clear cart to switch menus?" delegate:self cancelButtonTitle:@"NO" otherButtonTitle:@"YES"];
+        alertView.tag = 2017;
+        [alertView showInView:self.view];
+        alertView = nil;
+    }
 }
 
 - (IBAction)enableOrderAheadButtonPressed:(id)sender {
@@ -1619,7 +1644,7 @@
     NSString *strCancel = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CANCEL];
     NSString *strConfirm = [[AppStrings sharedInstance] getString:ALERT_BNF_BUTTON_CONFIRM];
     MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strText delegate:self cancelButtonTitle:strCancel otherButtonTitle:strConfirm];
-    
+    alertView.tag = 2016;
     [alertView showInView:self.view];
     alertView = nil;
 }
@@ -1695,6 +1720,8 @@
     
     [self showOrHideETA];
     
+    [self updateUI];
+    
     [self.view layoutIfNeeded];
 }
 
@@ -1717,6 +1744,8 @@
     [self hidePreview];
     
     [self showOrHideETA];
+    
+    [self updateUI];
     
     [self.view layoutIfNeeded];
 }
