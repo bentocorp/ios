@@ -1906,13 +1906,13 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 
     if (component == 0) {
-        if ([self isCartEmpty] && selectedOrderAheadIndex == row) {
+        if ([self isCartEmpty]) {
             menuOrderAhead = menuNames[row];
             selectedOrderAheadIndex = row;
             [pickerView reloadComponent:1];
             [pickerView selectRow:0 inComponent:1 animated:YES];
         }
-        else {
+        else if (selectedOrderAheadIndex != row) {
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
                                                                 message:@"Clear cart to switch menus?"
                                                                delegate:self
