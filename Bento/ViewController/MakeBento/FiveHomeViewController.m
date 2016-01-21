@@ -1398,32 +1398,34 @@
         [self installOrderAhead];
         [self enableOrderAhead];
     }
-    
-    
 }
 
-//- (void)checkPickerState {
-//    PickerState newState;
-//    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
-//        newState = Both;
-//    }
-//    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
-//        newState = OnDemandOnly;
-//    }
-//    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-//        newState = OrderAheadOnly;
-//    }
-//
-//    // state did not change
-//    if (newState == self.pickerState) {
-//        
-//    }
-//    // state changed
-//    else {
-//        self.pickerState = newState;
-//        
-//    }
-//}
+- (void)checkPickerState {
+    PickerState newState;
+    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
+        newState = Both;
+    }
+    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
+        newState = OnDemandOnly;
+    }
+    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+        newState = OrderAheadOnly;
+    }
+
+    // state did not change
+    if (newState == self.pickerState) {
+        
+    }
+    // state changed
+    else {
+        self.pickerState = newState;
+        
+        if (self.isToggledOn == NO) {
+            self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height - 20;
+            [self.view layoutIfNeeded];
+        }
+    }
+}
 
 - (void)defaultToOnDemandOrOrderAhead {
     // default to OD or OA?
@@ -1487,11 +1489,11 @@
             [self toggleOff];
         }];
     }
-    
-    NSLog(@"picker view top constraint - %f", self.dropDownViewTopConstraint.constant);
 }
 
 - (void)toggleOn {
+    self.isToggledOn = YES;
+    
     self.fadedViewButton.alpha = 0.6;
     
     self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y + self.dropDownView.frame.size.height + 20;
@@ -1500,6 +1502,8 @@
 }
 
 - (void)toggleOff {
+    self.isToggledOn = NO;
+    
     self.fadedViewButton.alpha = 0;
     
     self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y - self.dropDownView.frame.size.height - 20;
