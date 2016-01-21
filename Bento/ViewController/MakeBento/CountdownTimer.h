@@ -12,6 +12,13 @@
 
 + (CountdownTimer *)sharedInstance;
 
+- (void)refreshStart;
+- (void)refreshPause;
+- (void)refreshResume;
+- (void)refreshStop;
+
+@property (nonatomic) BOOL isPaused;
+@property (nonatomic) NSTimer *timer;
 @property (nonatomic) NSString *finalCountDownTimerValue;
 
 @end

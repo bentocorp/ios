@@ -37,6 +37,8 @@
 
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
+#import "CountdownTimer.h"
+
 @interface FirstViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
@@ -215,6 +217,7 @@
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [[BentoShop sharedInstance] refreshStart];
+            [[CountdownTimer sharedInstance] refreshStart];
             
             if (!_hasInit) {
                 

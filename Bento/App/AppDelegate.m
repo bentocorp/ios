@@ -286,6 +286,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Global Data Manager
     [globalShop refreshPause];
+    [[CountdownTimer sharedInstance] refreshPause];
     
     [[NSNotificationCenter defaultCenter] postNotificationName:@"enteringBackground" object:nil];
 }
@@ -297,6 +298,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Global Data Manager
     [globalShop refreshPause];
+    [[CountdownTimer sharedInstance] refreshPause];
 }
 
 - (void)applicationWillEnterForeground:(UIApplication *)application
@@ -348,6 +350,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             
             // Global Data Manager
             [globalShop refreshPause];
+            [[CountdownTimer sharedInstance] refreshPause];
             
             // Perform check for new version of your app
             if (globalShop.iosCurrentVersion < globalShop.iosMinVersion) {
@@ -385,6 +388,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             });
 
             [globalShop refreshResume];
+            [[CountdownTimer sharedInstance] refreshResume];
         }
     }
   
@@ -408,6 +412,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [googleReach stopNotifier];
     
     [globalShop refreshStop];
+    [[CountdownTimer sharedInstance] refreshStop];
 }
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
@@ -530,6 +535,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             [connectionTimer invalidate]; // prevent posting "networkConnected"
             
             [globalShop refreshPause];
+            [[CountdownTimer sharedInstance] refreshPause];
             
             [[NSNotificationCenter defaultCenter] postNotificationName:@"networkError" object:nil];
         }
@@ -559,6 +565,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         dispatch_async(dispatch_get_main_queue(), ^{
             
             [globalShop refreshResume];
+            [[CountdownTimer sharedInstance] refreshResume];
             
             if ([self connected]) {
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"networkConnected" object:nil];

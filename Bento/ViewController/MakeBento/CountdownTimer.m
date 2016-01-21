@@ -28,11 +28,50 @@
 
 - (id)init {
     if (self = [super init]) {
-        [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkTime) userInfo:nil repeats:YES];
+        _isPaused = NO;
     }
     
     return self;
 }
+
+#pragma mark Refresh Logic
+- (void)refreshStart {
+    if (_timer != nil) {
+        return;
+    }
+    
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkTime) userInfo:nil repeats:YES];
+}
+
+- (void)refreshPause {
+    if (_isPaused) {
+        return;
+    }
+    
+    _isPaused = YES;
+    [_timer invalidate];
+    _timer = nil;
+}
+
+- (void)refreshResume {
+    if (!_isPaused) {
+        return;
+    }
+    
+    _isPaused = NO;
+    _timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(checkTime) userInfo:nil repeats:YES];
+}
+
+- (void)refreshStop {
+    if (_timer == nil) {
+        return;
+    }
+    
+    [_timer invalidate];
+    _timer = nil;
+}
+
+#pragma mark
 
 - (NSString *)getCurrentDateString {
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -88,8 +127,10 @@
 }
 
 - (void)checkTime {
-    if ([self shouldShowCountDown]) {
-        [[NSNotificationCenter defaultCenter] postNotificationName:@"showCountDownTimer" object:nil];
+    if (_isPaused) {
+        if ([self shouldShowCountDown]) {
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"showCountDownTimer" object:nil];
+        }
     }
 }
 
