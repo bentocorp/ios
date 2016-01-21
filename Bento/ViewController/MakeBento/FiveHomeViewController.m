@@ -1412,15 +1412,22 @@
         newState = OrderAheadOnly;
     }
 
-    // state did not change
-    if (newState == self.pickerState) {
-        
-    }
     // state changed!
-    else {
+    if (newState != self.pickerState) {
+    
         self.pickerState = newState;
         
+        [self.view layoutIfNeeded];
         
+        [UIView animateWithDuration:0.5 animations:^{
+            [self refreshState];
+            
+            if (self.isToggledOn == NO) {
+                [self toggleOn];
+            }
+            
+            [self.view layoutIfNeeded];
+        }];
     }
 }
 
@@ -1474,8 +1481,6 @@
 #pragma mark Toggle
 
 - (void)toggleDropDown {
-    [self refreshState];
-    
     [self.view layoutIfNeeded];
     
     if (self.fadedViewButton.alpha == 0) {
@@ -1488,16 +1493,12 @@
             [self toggleOff];
         }];
     }
-    
-    NSLog(@"origin y - %f, height - %f, top - %f", self.dropDownView.frame.origin.y, self.dropDownView.frame.size.height, self.dropDownViewTopConstraint.constant);
 }
 
 - (void)toggleOn {
     self.isToggledOn = YES;
     
     self.fadedViewButton.alpha = 0.6;
-    
-//    self.dropDownViewTopConstraint.constant = self.dropDownView.frame.origin.y + self.dropDownView.frame.size.height + 20;
     
     self.dropDownViewTopConstraint.constant = 64;
     
