@@ -108,17 +108,27 @@
     // countdown remaining time
     NSTimeInterval countDownRemainingTime = [[[BentoShop sharedInstance] getCountDownMinutes] integerValue] * 60;
     
-    // Lunch Mode
-    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+    // from 12AM -> Lunch Cut-off (10AM)
+    if (currentTime < lunchCutOffTime) {
+        NSLog(@"Checking Lunch cut-off time!");
+        
         if (currentTime >= (lunchCutOffTime-countDownRemainingTime) && currentTime < lunchCutOffTime) {
             self.finalCountDownTimerValue = [NSString stringWithFormat:@"Time Remaining %@", [self convertSecondsToMMSSString:(lunchCutOffTime - currentTime)]];
+            
+            NSLog(@"Currently counting down to Lunch cut-off time! - %@", self.finalCountDownTimerValue);
+            
             return YES;
         }
     }
-    // Dinner Mode
-    else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+    // from Lunch Cut-off (10AM) -> Dinner Cut-ff (3PM)
+    else if (currentTime < dinnerCutOffTime) {
+        NSLog(@"Checking Dinner cut-off time!");
+        
         if (currentTime >= (dinnerCutOffTime-countDownRemainingTime) && currentTime < dinnerCutOffTime) {
             self.finalCountDownTimerValue = [NSString stringWithFormat:@"Time Remaining %@", [self convertSecondsToMMSSString:(dinnerCutOffTime - currentTime)]];
+            
+            NSLog(@"Currently counting down to Dinner cut-off time! - %@", self.finalCountDownTimerValue);
+            
             return YES;
         }
     }
@@ -127,7 +137,7 @@
 }
 
 - (void)checkTime {
-    if (_isPaused) {
+    if (_isPaused == NO) {
         if ([self shouldShowCountDown]) {
             [[NSNotificationCenter defaultCenter] postNotificationName:@"showCountDownTimer" object:nil];
         }
