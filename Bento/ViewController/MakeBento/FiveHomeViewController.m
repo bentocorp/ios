@@ -1901,6 +1901,8 @@
     pickerLabel.textAlignment = NSTextAlignmentCenter;
     pickerLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13];
     
+    [self updatePickerButtonTitle];
+    
     return pickerLabel;
 }
 
@@ -1936,8 +1938,6 @@
             timeOrderAhead = menuTimes[selectedOrderAheadIndex][row];
         }
     }
-    
-    [self updatePickerButtonTitle];
 }
 
 - (void)updatePickerButtonTitle {
