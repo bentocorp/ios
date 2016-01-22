@@ -1553,7 +1553,14 @@
         NSMutableArray *dishArray = [[NSMutableArray alloc] init];
         
         NSInteger dishIndex = [bento getMainDish];
-        NSDictionary *dishInfo = [[BentoShop sharedInstance] getMainDish:dishIndex];
+        NSDictionary *dishInfo;
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getMainDish:dishIndex];
+        }
+        else {
+            dishInfo = [self.orderAheadMenu getMainDish:dishIndex];
+        }
+        
         NSString *strDishName = [dishInfo objectForKey:@"name"];
         if (strDishName != nil) {
             [currentBentoDishes setObject:strDishName forKey:@"main"]; // for mixpanel
@@ -1562,7 +1569,14 @@
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish1];
-        dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        }
+        else {
+            dishInfo = [self.orderAheadMenu getSideDish:dishIndex];
+        }
+        
         strDishName = [dishInfo objectForKey:@"name"];
         if (strDishName != nil) {
             [currentBentoDishes setObject:strDishName forKey:@"side1"]; // for mixpanel
@@ -1571,7 +1585,14 @@
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish2];
-        dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        }
+        else {
+            dishInfo = [self.orderAheadMenu getSideDish:dishIndex];
+        }
+        
         strDishName = [dishInfo objectForKey:@"name"];
         if (strDishName != nil) {
             [currentBentoDishes setObject:strDishName forKey:@"side2"];
@@ -1580,7 +1601,14 @@
         [dishArray addObject:dicDish];
         
         dishIndex = [bento getSideDish3];
-        dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        
+        if (self.orderMode == OnDemand) {
+            dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+        }
+        else {
+            dishInfo = [self.orderAheadMenu getSideDish:dishIndex];
+        }
+        
         strDishName = [dishInfo objectForKey:@"name"];
         if (strDishName != nil) {
             [currentBentoDishes setObject:strDishName forKey:@"side3"];
@@ -1590,7 +1618,14 @@
         
         if (![[BentoShop sharedInstance] is4PodMode]) {
             dishIndex = [bento getSideDish4];
-            dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+            
+            if (self.orderMode == OnDemand) {
+                dishInfo = [[BentoShop sharedInstance] getSideDish:dishIndex];
+            }
+            else {
+                dishInfo = [self.orderAheadMenu getSideDish:dishIndex];
+            }
+            
             strDishName = [dishInfo objectForKey:@"name"];
             if (strDishName != nil) {
                 [currentBentoDishes setObject:strDishName forKey:@"side4"];

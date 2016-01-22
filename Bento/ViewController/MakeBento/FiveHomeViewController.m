@@ -1705,8 +1705,12 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+    self.orderAheadMenu.deliveryPrice = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"delivery_price"];
+    self.orderAheadMenu.scheduledWindowStartTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"start"];
+    self.orderAheadMenu.scheduledWindowEndTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"end"];
     completeOrderViewController.orderAheadMenu = self.orderAheadMenu;
     completeOrderViewController.orderMode = self.orderMode;
+    
     
     // user and place info
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
@@ -1985,10 +1989,6 @@
     }
     else if (self.orderMode == OrderAhead) {
         [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOrderAhead, timeOrderAhead] forState:UIControlStateNormal];
-        
-        self.orderAheadMenu.deliveryPrice = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"delivery_price"];
-        self.orderAheadMenu.scheduledWindowStartTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"start"];
-        self.orderAheadMenu.scheduledWindowEndTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"end"];
     }
     
     [self updateMenu];
