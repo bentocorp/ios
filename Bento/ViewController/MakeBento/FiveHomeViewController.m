@@ -141,7 +141,6 @@
     }
     
     [self checkLocationOnLoad];
-    
     [self refreshStateOnLaunch];
 }
 
@@ -257,10 +256,10 @@
 #pragma mark Closed / Sold-out
 - (void)checkAppState {
     NSString *appState = [[BentoShop sharedInstance] getAppState];
-    if ([appState isEqualToString:@"closed_wall"]) {
+    if ([appState containsString:@"closed_wall"]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
     }
-    else if ([appState isEqualToString:@"soldout_wall"]) {
+    else if ([appState containsString:@"soldout_wall"]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     }
 }
@@ -922,6 +921,7 @@
 
 - (void)updateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
+        [self checkAppState];
         [self setETA];
         [self setStartingPrice];
         [self showOrHideAddAnotherBentoAndViewAddons];

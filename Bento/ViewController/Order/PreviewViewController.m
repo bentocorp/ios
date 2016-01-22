@@ -685,6 +685,9 @@
     if (titleRight == nil)
         titleRight = @"No Available Menu";
     
+#pragma mark I'm hardcoding this in for now to never show right side. we may not ever really need it anymore...
+//    shouldShowOneMenu = YES;
+    
     [self setPageAndScrollView:shouldShowOneMenu left:titleLeft right:titleRight];
 }
 

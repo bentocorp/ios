@@ -478,6 +478,14 @@
                 
                 [self gotoAddAnotherBentoScreen];
             }
+            // inside zone, but appState is not "build" because no menus available
+            else if (isSelectedLocationInZone) {
+                if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] == nil) {
+                    [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
+                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    return;
+                }
+            }
             // outside zone
             else {
                 [self gotoNoneDeliveryAreaScreen];
