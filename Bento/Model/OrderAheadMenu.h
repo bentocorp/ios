@@ -19,6 +19,8 @@
 @property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSMutableArray *addons;
 
+
+@property (nonatomic) NSString *orderType; // hardcode to 2 for order ahead
 @property (nonatomic) NSString *mealType;
 @property (nonatomic) NSString *kitchen;
 @property (nonatomic) NSString *zone;

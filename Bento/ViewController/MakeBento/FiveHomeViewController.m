@@ -1980,15 +1980,15 @@
     menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
     timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
     
-    self.orderAheadMenu.deliveryPrice = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"delivery_price"];
-    self.orderAheadMenu.scheduledWindowStartTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"start"];
-    self.orderAheadMenu.scheduledWindowStartTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"end"];
-    
     if (self.orderMode == OnDemand) {
         [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOnDemand, timeOnDemand] forState:UIControlStateNormal];
     }
     else if (self.orderMode == OrderAhead) {
         [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOrderAhead, timeOrderAhead] forState:UIControlStateNormal];
+        
+        self.orderAheadMenu.deliveryPrice = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"delivery_price"];
+        self.orderAheadMenu.scheduledWindowStartTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"start"];
+        self.orderAheadMenu.scheduledWindowEndTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"end"];
     }
     
     [self updateMenu];

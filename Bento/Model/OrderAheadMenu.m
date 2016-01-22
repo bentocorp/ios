@@ -27,6 +27,7 @@
         [self getAddons:menu];
         [self setUpTimes:menu[@"Times"]];
         
+        self.orderType = @"2";
         self.mealType = menu[@"Menu"][@"meal_type"];
         self.kitchen = [[BentoShop sharedInstance] getKitchen];
         self.zone = [[BentoShop sharedInstance] getOAZone];

@@ -1738,6 +1738,17 @@
     // App Version
     [request setObject:[[[NSBundle mainBundle] infoDictionary] objectForKey:@"CFBundleShortVersionString"] forKey:@"AppVersion"];
     
+    // ORDER AHEAD ONLY
+    if (self.orderMode == OrderAhead) {
+        [request setObject:self.orderAheadMenu.orderType forKey:@"order_type"];
+        [request setObject:self.orderAheadMenu.kitchen forKey:@"kitchen"];
+        [request setObject:self.orderAheadMenu.zone forKey:@"OrderAheadZone"];
+        [request setObject:self.orderAheadMenu.forDate forKey:@"for_date"];
+        [request setObject:self.orderAheadMenu.scheduledWindowStartTime forKey:@"scheduled_window_start"];
+        [request setObject:self.orderAheadMenu.scheduledWindowEndTime forKey:@"scheduled_window_end"];
+        [request setObject:self.orderAheadMenu.menuId forKey:@"MenuId"];
+    }
+    
     NSLog(@"BUILD REQUEST - %@", request);
     
     return request;
