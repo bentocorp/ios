@@ -10,9 +10,10 @@
 
 @interface OrderAheadMenu : NSObject
 
+@property (nonatomic) NSArray *rawTimeRangesArray;
+
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSArray *times;
-@property (nonatomic) NSArray *deliveryPrices;
 @property (nonatomic) NSArray *allMenuItems;
 @property (nonatomic) NSArray *mainDishes;
 @property (nonatomic) NSArray *sideDishes;
@@ -26,8 +27,7 @@
 
 @property (nonatomic) NSString *scheduledWindowStartTime;
 @property (nonatomic) NSString *scheduledWindowEndTime;
-
-@property (nonatomic) NSString *deliveryPriceString;
+@property (nonatomic) NSString *deliveryPrice;
 
 - (id)initWithDictionary:(NSDictionary *)menu;
 

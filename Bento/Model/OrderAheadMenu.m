@@ -26,13 +26,14 @@
         [self getSideDishes:menu];
         [self getAddons:menu];
         [self setUpTimes:menu[@"Times"]];
-        [self setUpDeliveryPrices: menu[@"Times"]];
         
         self.mealType = menu[@"Menu"][@"meal_type"];
         self.kitchen = [[BentoShop sharedInstance] getKitchen];
         self.zone = [[BentoShop sharedInstance] getOAZone];
         self.forDate = menu[@"Menu"][@"for_date"];
         self.menuId = menu[@"Menu"][@"menu_id"];
+        
+        self.rawTimeRangesArray = menu[@"Times"];
     }
     
     return self;
@@ -96,16 +97,6 @@
     }
     
     self.times = timeRanges;
-}
-
-- (void)setUpDeliveryPrices:(NSArray *)times {
-    NSMutableArray *deliveryPrices = [@[] mutableCopy];
-    
-    for (NSDictionary *time in times) {
-        [deliveryPrices addObject:time[@"delivery_price"]];
-    }
-    
-    self.deliveryPrices = deliveryPrices;
 }
 
 - (BOOL)canAddSideDish:(NSInteger)sideDishID

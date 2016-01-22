@@ -669,7 +669,7 @@
         return [self getTotalPriceByMain] + [[BentoShop sharedInstance] getDeliveryPrice];
     }
     
-    return [self getTotalPriceByMain] + [self.orderAheadMenu.deliveryPriceString floatValue];
+    return [self getTotalPriceByMain] + [self.orderAheadMenu.deliveryPrice floatValue];
 }
 
 - (float)getTips {
@@ -735,7 +735,7 @@
         self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [[BentoShop sharedInstance] getDeliveryPrice]];
     }
     else if (self.orderMode == OrderAhead) {
-        self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [self.orderAheadMenu.deliveryPriceString floatValue]];
+        self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [self.orderAheadMenu.deliveryPrice floatValue]];
     }
     
     // if no promo added
@@ -1688,7 +1688,7 @@
         [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [[BentoShop sharedInstance] getDeliveryPrice]] forKey:@"delivery_price"];
     }
     else if (self.orderMode == OrderAhead) {
-        [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self.orderAheadMenu.deliveryPriceString floatValue]] forKey:@"delivery_price"];
+        [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self.orderAheadMenu.deliveryPrice floatValue]] forKey:@"delivery_price"];
     }
 
     [request setObject:detailInfo forKey:@"OrderDetails"];

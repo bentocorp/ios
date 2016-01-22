@@ -364,11 +364,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/Model/BentoShop.m"
-            timestampString = "475105616.635395"
+            timestampString = "475123390.204605"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "880"
-            endingLineNumber = "880"
+            startingLineNumber = "896"
+            endingLineNumber = "896"
             landmarkName = "-getServiceArea"
             landmarkType = "5">
          </BreakpointContent>
