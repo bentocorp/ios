@@ -1739,8 +1739,16 @@
         }
         // has saved address
         else {
+            if (loadingHUD == nil) {
+                loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+                [loadingHUD showInView:self.view];
+            }
+            
             // check if saved address is inside CURRENT service area
             [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+                [loadingHUD dismiss];
+                loadingHUD = nil;
+                
                 if (isSelectedLocationInZone) {
                     [self openAccountViewController:[CompleteOrderViewController class]];
 //                    [self openAccountViewController:completeOrderViewController];
@@ -1759,7 +1767,15 @@
         }
         // has saved address
         else {
+            if (loadingHUD == nil) {
+                loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+                [loadingHUD showInView:self.view];
+            }
+            
             [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+                [loadingHUD dismiss];
+                loadingHUD = nil;
+                
                 if (isSelectedLocationInZone) {
                     [self.navigationController pushViewController:completeOrderViewController animated:YES];
                 }
