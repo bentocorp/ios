@@ -8,6 +8,7 @@
 
 #import "OrderAheadMenu.h"
 #import "BentoShop.h"
+#import "AddonList.h"
 
 @implementation OrderAheadMenu
 
