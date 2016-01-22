@@ -928,8 +928,8 @@
         [self setCart];
         [self updateBottomButton];
         [self checkPickerState];
-        
         [self setUpPickerData];
+        [self updateWidget];
     });
 }
 
@@ -1626,24 +1626,29 @@
         self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self.asapDescriptionLabel sizeToFit];
         self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
-    }
-    else {
         
+        [self showOrHidePreview];
     }
 }
 
 - (void)showOrHidePreview {
-    if (self.orderMode == OnDemand && [self.widget[@"state"] isEqualToString:@"open"]) {
-        [self hidePreview];
+    if (self.orderMode == OnDemand) {
+        if ([self.widget[@"state"] isEqualToString:@"open"]) {
+            [self hidePreview];
+        }
+        else if (self.orderMode == OnDemand) {
+            [self showPreview];
+        }
     }
     else {
-        [self showPreview];
+        [self hidePreview];
     }
 }
 
 - (void)showPreview {
-    // closed/soldout, set preview
-    self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
+    if (self.menuPreviewVC == nil) {
+        self.menuPreviewVC = [[MenuPreviewViewController alloc] init];
+    }
     [self addChildViewController:self.menuPreviewVC]; // 1. notify the prent VC that a child is being added
     self.bgView.frame = self.menuPreviewVC.view.bounds; // 2. before adding the child's view to its view hierarchy, the parent VC sets the child's size and position
     [self.bgView addSubview:self.menuPreviewVC.view];
@@ -1779,11 +1784,11 @@
     
     [self setOnDemandTitle];
     
-    [self showOrHidePreview];
-    
     [self showOrHideETA];
     
     [self updateUI];
+    
+    [self showOrHidePreview];
     
     [self.view layoutIfNeeded];
 }
@@ -1804,11 +1809,11 @@
     
     [self updatePickerButtonTitle];
     
-    [self hidePreview];
-    
     [self showOrHideETA];
     
     [self updateUI];
+    
+    [self hidePreview];
     
     [self.view layoutIfNeeded];
 }
