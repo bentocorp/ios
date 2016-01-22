@@ -44,8 +44,9 @@
                 <outlet property="orderAheadGreenView1" destination="eOK-9S-dq9" id="iVW-Ev-fZ6"/>
                 <outlet property="orderAheadGreenViewHeightConstraint" destination="RqL-aE-hNF" id="IiT-Cu-Whp"/>
                 <outlet property="orderAheadGreenViewWidthConstraint" destination="FlO-o5-yii" id="Zmk-4j-BtD"/>
+                <outlet property="orderAheadHeightConstraint" destination="z3T-KQ-y4d" id="6r1-Ww-rup"/>
                 <outlet property="orderAheadPickerView" destination="BTB-UO-EaW" id="3fJ-OZ-AE3"/>
-                <outlet property="orderAheadPickerViewHeightConstraint" destination="t71-4t-yOl" id="qZN-mO-ZyB"/>
+                <outlet property="orderAheadView" destination="YkJ-Yy-DbD" id="lwN-dx-bSe"/>
                 <outlet property="pickerButton" destination="ZAl-ST-thk" id="fuc-Mk-9Qp"/>
                 <outlet property="startingPriceLabel" destination="wSb-1H-Dvt" id="bTa-hm-7IN"/>
                 <outlet property="view" destination="00c-cJ-i1r" id="oEG-Ko-GjQ"/>
@@ -199,49 +200,59 @@
                                 <constraint firstItem="gLZ-Q3-5W7" firstAttribute="height" secondItem="cMx-ac-AQE" secondAttribute="height" id="yw9-Bg-TSl"/>
                             </constraints>
                         </view>
-                        <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
-                            <rect key="frame" x="0.0" y="60" width="375" height="140"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkJ-Yy-DbD" userLabel="orderAheadView">
+                            <rect key="frame" x="-1" y="60" width="377" height="140"/>
+                            <subviews>
+                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
+                                    <rect key="frame" x="0.0" y="0.0" width="377" height="140"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="vBy-zq-TNb"/>
+                                        <outlet property="delegate" destination="-1" id="kn8-PN-UgF"/>
+                                    </connections>
+                                </pickerView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOK-9S-dq9" userLabel="orderAheadGreenView">
+                                    <rect key="frame" x="1" y="0.0" width="10" height="140"/>
+                                    <color key="backgroundColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="10" id="FlO-o5-yii"/>
+                                        <constraint firstAttribute="height" constant="140" id="RqL-aE-hNF"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1d-b1-WWR" userLabel="enableOrderAheadButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="377" height="140"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="enableOrderAheadButtonPressed:" destination="-1" eventType="touchUpInside" id="cWY-Ca-3ER"/>
+                                    </connections>
+                                </button>
+                            </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="140" id="t71-4t-yOl"/>
-                            </constraints>
-                            <connections>
-                                <outlet property="dataSource" destination="-1" id="vBy-zq-TNb"/>
-                                <outlet property="delegate" destination="-1" id="kn8-PN-UgF"/>
-                            </connections>
-                        </pickerView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOK-9S-dq9" userLabel="orderAheadGreenView">
-                            <rect key="frame" x="0.0" y="60" width="10" height="140"/>
-                            <color key="backgroundColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="width" constant="10" id="FlO-o5-yii"/>
-                                <constraint firstAttribute="height" constant="140" id="RqL-aE-hNF"/>
+                                <constraint firstItem="J1d-b1-WWR" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" id="3zi-rT-1Dd"/>
+                                <constraint firstAttribute="trailing" secondItem="J1d-b1-WWR" secondAttribute="trailing" id="E6L-BK-Izj"/>
+                                <constraint firstAttribute="bottom" secondItem="eOK-9S-dq9" secondAttribute="bottom" id="KaK-Ny-Hnp"/>
+                                <constraint firstAttribute="bottom" secondItem="BTB-UO-EaW" secondAttribute="bottom" id="NBo-KI-eMB"/>
+                                <constraint firstItem="eOK-9S-dq9" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" constant="1" id="RWR-E0-ZvP"/>
+                                <constraint firstItem="eOK-9S-dq9" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" id="Yh0-uc-4Lf"/>
+                                <constraint firstItem="BTB-UO-EaW" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" id="fxY-W2-pnH"/>
+                                <constraint firstAttribute="trailing" secondItem="BTB-UO-EaW" secondAttribute="trailing" id="kRM-PO-OJf"/>
+                                <constraint firstItem="BTB-UO-EaW" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" id="ntG-fQ-gWD"/>
+                                <constraint firstItem="J1d-b1-WWR" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" id="pPj-jN-Dhb"/>
+                                <constraint firstAttribute="bottom" secondItem="J1d-b1-WWR" secondAttribute="bottom" id="x2J-D8-E1Q"/>
+                                <constraint firstAttribute="height" constant="140" id="z3T-KQ-y4d"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1d-b1-WWR" userLabel="enableOrderAheadButton">
-                            <rect key="frame" x="0.0" y="60" width="375" height="140"/>
-                            <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                            <connections>
-                                <action selector="enableOrderAheadButtonPressed:" destination="-1" eventType="touchUpInside" id="cWY-Ca-3ER"/>
-                            </connections>
-                        </button>
                     </subviews>
-                    <color key="backgroundColor" red="1" green="0.37543009350000001" blue="0.45019074079999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="backgroundColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
-                        <constraint firstAttribute="bottom" secondItem="BTB-UO-EaW" secondAttribute="bottom" constant="2" id="23Z-te-AgT"/>
-                        <constraint firstItem="eOK-9S-dq9" firstAttribute="bottom" secondItem="BTB-UO-EaW" secondAttribute="bottom" id="3JR-MS-C2X"/>
-                        <constraint firstItem="BTB-UO-EaW" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="bottom" constant="1" id="3d9-qw-ijo"/>
                         <constraint firstItem="ccD-Zy-ERm" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="AhR-d9-BJP"/>
                         <constraint firstAttribute="trailing" secondItem="ccD-Zy-ERm" secondAttribute="trailing" id="ICr-YP-IRc"/>
                         <constraint firstItem="ccD-Zy-ERm" firstAttribute="top" secondItem="g12-em-tQ5" secondAttribute="top" id="L5R-Yj-QqW"/>
-                        <constraint firstItem="eOK-9S-dq9" firstAttribute="leading" secondItem="BTB-UO-EaW" secondAttribute="leading" id="Lub-Tf-gAb"/>
-                        <constraint firstItem="J1d-b1-WWR" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="Ubx-pM-QHC"/>
-                        <constraint firstItem="J1d-b1-WWR" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="bottom" constant="1" id="bmW-32-1bm"/>
-                        <constraint firstItem="eOK-9S-dq9" firstAttribute="top" secondItem="BTB-UO-EaW" secondAttribute="top" id="g0Q-bF-5rC"/>
-                        <constraint firstAttribute="trailing" secondItem="BTB-UO-EaW" secondAttribute="trailing" id="jYP-EN-8FS"/>
-                        <constraint firstItem="BTB-UO-EaW" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="ngK-wF-SyF"/>
-                        <constraint firstAttribute="bottom" secondItem="J1d-b1-WWR" secondAttribute="bottom" constant="2" id="r4E-u6-fIH"/>
-                        <constraint firstAttribute="trailing" secondItem="J1d-b1-WWR" secondAttribute="trailing" id="zDa-P7-YDK"/>
+                        <constraint firstAttribute="bottom" secondItem="YkJ-Yy-DbD" secondAttribute="bottom" constant="2" id="M4l-uy-M9G"/>
+                        <constraint firstAttribute="trailing" secondItem="YkJ-Yy-DbD" secondAttribute="trailing" constant="-1" id="PVD-L4-y1i"/>
+                        <constraint firstItem="YkJ-Yy-DbD" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" constant="-1" id="RbC-TR-wH8"/>
+                        <constraint firstItem="YkJ-Yy-DbD" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="bottom" constant="1" id="yHR-CZ-ksF"/>
                     </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-uC-hCd" userLabel="navBgImageView">

@@ -98,8 +98,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.dropDownView.backgroundColor = [UIColor redColor];
-    
     [CountdownTimer sharedInstance];
     
     isThereConnection = YES;
@@ -122,6 +120,9 @@
     
     /*---Picker View---*/
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
+    /*---Order Ahead View Menu---*/
+    self.orderAheadView.clipsToBounds = YES; // to avoid subviews from coming out of bounds
     
     // picker data
     menuNames = [@[] mutableCopy]; // [date, date, date]
@@ -1547,22 +1548,22 @@
 }
 
 - (void)removeOrderAhead {
-    if (self.orderAheadPickerView.hidden == NO) {
-        self.orderAheadPickerView.hidden = YES;
-        self.orderAheadGreenView1.hidden = YES;
+    if (self.orderAheadView.hidden == NO) {
+        self.orderAheadView.hidden = YES;
+        self.orderAheadView.hidden = YES;
     }
     
-    self.orderAheadPickerViewHeightConstraint.constant = 0;
-    self.orderAheadGreenViewHeightConstraint.constant = 0;
+    self.orderAheadHeightConstraint.constant = 0;
+    self.orderAheadHeightConstraint.constant = 0;
 }
 
 - (void)installOrderAhead {
-    if (self.orderAheadPickerView.hidden == YES) {
-        self.orderAheadPickerView.hidden = NO;
-        self.orderAheadGreenView1.hidden = NO;
+    if (self.orderAheadView.hidden == YES) {
+        self.orderAheadView.hidden = NO;
+        self.orderAheadView.hidden = NO;
         
-        self.orderAheadPickerViewHeightConstraint.constant = 140;
-        self.orderAheadGreenViewHeightConstraint.constant = 140;
+        self.orderAheadHeightConstraint.constant = 140;
+        self.orderAheadHeightConstraint.constant = 140;
     }
 }
 
