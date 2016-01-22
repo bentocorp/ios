@@ -353,7 +353,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 }
 
 - (BOOL)isThereOnDemand {
-    if (self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OnDemand"]) {
+    if (self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][0] != nil) {
         return YES;
     }
     
