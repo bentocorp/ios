@@ -177,8 +177,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkAppState) name:@"checkAppState" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkAppState) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:@"enteredForeground" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBottomButton) name:@"showCountDownTimer" object:nil];
 }
@@ -255,11 +254,10 @@
 
 #pragma mark Closed / Sold-out
 - (void)checkAppState {
-    NSString *appState = [[BentoShop sharedInstance] getAppState];
-    if ([appState containsString:@"closed_wall"]) {
+    if ([[BentoShop sharedInstance] isClosed]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
     }
-    else if ([appState containsString:@"soldout_wall"]) {
+    else if ([[BentoShop sharedInstance] isSoldOut]) {
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     }
 }
