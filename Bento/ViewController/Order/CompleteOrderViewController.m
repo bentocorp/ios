@@ -665,7 +665,11 @@
 }
 
 - (float)getTotalPriceByMainPlusDeliveryFee {
-    return [self getTotalPriceByMain] + [[BentoShop sharedInstance] getDeliveryPrice];
+    if (self.orderMode == OnDemand) {
+        return [self getTotalPriceByMain] + [[BentoShop sharedInstance] getDeliveryPrice];
+    }
+    
+    return [self getTotalPriceByMain] + [self.orderAheadMenu.deliveryPriceString floatValue];
 }
 
 - (float)getTips {
@@ -1680,7 +1684,12 @@
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)([self getTotalPrice] * 100)] forKey:@"total_cents"];
     
     // - Delivery Price
-    [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [[BentoShop sharedInstance] getDeliveryPrice]] forKey:@"delivery_price"];
+    if (self.orderMode == OnDemand) {
+        [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [[BentoShop sharedInstance] getDeliveryPrice]] forKey:@"delivery_price"];
+    }
+    else if (self.orderMode == OrderAhead) {
+        [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self.orderAheadMenu.deliveryPriceString floatValue]] forKey:@"delivery_price"];
+    }
 
     [request setObject:detailInfo forKey:@"OrderDetails"];
     
