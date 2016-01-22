@@ -1266,7 +1266,10 @@
 }
 
 - (void)goToAddAnotherAddOnScreen {
-    [self presentViewController:[[AddonsViewController alloc] init] animated:YES completion:nil];
+    AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
+    addonsVC.orderAheadMenu = self.orderAheadMenu;
+    addonsVC.orderMode = self.orderMode;
+    [self presentViewController:addonsVC animated:YES completion:nil];
 }
 
 #pragma mark UITableViewDelegate
@@ -1459,6 +1462,8 @@
     }
     else {
         AddonsViewController *addonsVC = [[AddonsViewController alloc] init];
+        addonsVC.orderMode = self.orderMode;
+        addonsVC.orderAheadMenu = self.orderAheadMenu;
         Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
         addonsVC.autoScrollId = addon.itemId;
         
