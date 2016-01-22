@@ -90,6 +90,7 @@
     
     NSInteger selectedOrderAheadIndex;
     NSInteger selectedOrderAheadIndexForConfirm;
+    
     NSMutableArray *menuNames; // [date, date, date]
     NSMutableArray *menuTimes; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
 }
@@ -1960,9 +1961,12 @@
         if ([menuTimes[selectedOrderAheadIndex][row] containsString:@"sold-out"]) {
             [pickerView selectRow:row + 1 inComponent:component animated:YES];
             timeOrderAhead = menuTimes[selectedOrderAheadIndex][row + 1];
+            self.selectedOrderAheadTimeRangeIndex = row + 1;
         }
         else {
             timeOrderAhead = menuTimes[selectedOrderAheadIndex][row];
+            
+            self.selectedOrderAheadTimeRangeIndex = row;
         }
     }
 }

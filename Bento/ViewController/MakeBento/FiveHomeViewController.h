@@ -64,4 +64,6 @@ typedef NS_ENUM(NSUInteger) {
 // logic for finding the right menu to use will be set in implementation file
 @property (nonatomic) NSDictionary *selectedMenu;
 
+@property (nonatomic) NSInteger selectedOrderAheadTimeRangeIndex;
+
 @end
