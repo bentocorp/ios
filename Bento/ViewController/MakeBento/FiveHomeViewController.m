@@ -1396,7 +1396,8 @@
             }
             else {
                 [self clearCart];
-                [self updateUI];
+//                [self updateUI];
+                [self.navigationController popToRootViewControllerAnimated:YES];
             }
         }
     }
@@ -1720,6 +1721,7 @@
     self.orderAheadMenu.scheduledWindowEndTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"end"];
     completeOrderViewController.orderAheadMenu = self.orderAheadMenu;
     completeOrderViewController.orderMode = self.orderMode;
+    completeOrderViewController.selectedOrderAheadIndex = selectedOrderAheadIndex;
     
     
     // user and place info
@@ -1740,8 +1742,8 @@
             // check if saved address is inside CURRENT service area
             [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
                 if (isSelectedLocationInZone) {
-//                    [self openAccountViewController:[CompleteOrderViewController class]];
-                    [self openAccountViewController:completeOrderViewController];
+                    [self openAccountViewController:[CompleteOrderViewController class]];
+//                    [self openAccountViewController:completeOrderViewController];
                 }
                 else {
                     [self openAccountViewController:[DeliveryLocationViewController class]];

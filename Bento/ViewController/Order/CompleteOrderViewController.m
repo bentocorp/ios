@@ -11,6 +11,8 @@
 #import "EnterCreditCardViewController.h"
 #import "DeliveryLocationViewController.h"
 
+#import "CountdownTimer.h"
+
 #import "BentoTableViewCell.h"
 
 #import "PromoCodeView.h"
@@ -162,8 +164,6 @@
     self.lblTitleTax.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TAX];
     self.lblTitleTip.text = [[AppStrings sharedInstance] getString:COMPLETE_TEXT_TIP];
     self.lblTitleDelivery.text = [[AppStrings sharedInstance] getString:DELIVERY_LABEL_TEXT];
-    
-    [self.btnGetItNow setTitle:[[AppStrings sharedInstance] getString:COMPLETE_BUTTON_FINISH] forState:UIControlStateNormal];
     
     _isEditingBentos = NO;
     _isEditingAddons = NO;
@@ -401,6 +401,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUI) name:@"showCountDownTimer" object:nil];
     
     // ADDRESS
     self.lblAddress.text = @"";
@@ -783,6 +785,28 @@
     else {
         [self.btnGetItNow setBackgroundColor:[UIColor bentoButtonGray]];
     }
+    
+    NSString *strTitle = [[AppStrings sharedInstance] getString:COMPLETE_BUTTON_FINISH];
+    
+    if (self.orderMode == OrderAhead && self.selectedOrderAheadIndex == 0) {
+        if ([[CountdownTimer sharedInstance] shouldShowCountDown]) {
+            
+            if (![[CountdownTimer sharedInstance].finalCountDownTimerValue isEqualToString:@"0:00"]) {
+                strTitle = [NSString stringWithFormat:@"%@ - TIME REMAINING %@", strTitle, [CountdownTimer sharedInstance].finalCountDownTimerValue];
+            }
+            else {
+                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self clearCart];
+            }
+        }
+    }
+    
+    [self.btnGetItNow setTitle:strTitle forState:UIControlStateNormal];
+}
+
+- (void)clearCart {
+    [[BentoShop sharedInstance] resetBentoArray];
+    [[AddonList sharedInstance].addonList removeAllObjects];
 }
 
 - (void) onUpdatedStatus:(NSNotification *)notification
