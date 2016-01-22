@@ -27,4 +27,6 @@
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID;
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID;
 
+- (float)getSelectedTimeRange:(NSInteger)selectedMenuTimesIndex;
+
 @end

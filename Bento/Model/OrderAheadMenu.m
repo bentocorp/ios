@@ -247,4 +247,8 @@
     return nil;
 }
 
+- (float)getSelectedTimeRange:(NSInteger)selectedMenuTimesIndex {
+    return [self.times[selectedMenuTimesIndex][@"delivery_price"] floatValue];
+}
+
 @end
