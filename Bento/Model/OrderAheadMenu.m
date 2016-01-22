@@ -26,6 +26,7 @@
         [self getSideDishes:menu];
         [self getAddons:menu];
         [self setUpTimes:menu[@"Times"]];
+        [self setUpDeliveryPrices: menu[@"Times"]];
     }
     
     return self;
@@ -89,6 +90,16 @@
     }
     
     self.times = timeRanges;
+}
+
+- (void)setUpDeliveryPrices:(NSArray *)times {
+    NSMutableArray *deliveryPrices = [@[] mutableCopy];
+    
+    for (NSDictionary *time in times) {
+        [deliveryPrices addObject:time[@"delivery_price"]];
+    }
+    
+    self.deliveryPrices = deliveryPrices;
 }
 
 - (BOOL)canAddSideDish:(NSInteger)sideDishID
@@ -245,10 +256,6 @@
     }
     
     return nil;
-}
-
-- (float)getSelectedTimeRange:(NSInteger)selectedMenuTimesIndex {
-    return [self.times[selectedMenuTimesIndex][@"delivery_price"] floatValue];
 }
 
 @end

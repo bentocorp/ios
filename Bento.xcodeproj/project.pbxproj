@@ -1401,7 +1401,6 @@
 				FC7291201BA8BC9F00BCBDE7 /* EditPhoneNumberView.h */,
 				FC7291211BA8BC9F00BCBDE7 /* EditPhoneNumberView.m */,
 				FC7291221BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib */,
-				90BED0E71A5C3333003DC872 /* Cell */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -1409,6 +1408,7 @@
 		90BED09D1A5BCC7B003DC872 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				90BED0E71A5C3333003DC872 /* Cell */,
 				FC99D4F61AFC325100BEE40B /* At Launch */,
 				FC99D4F51AFC323700BEE40B /* Closed/Sold-out */,
 				FCFD79F01AE8880D002AD322 /* Settings */,

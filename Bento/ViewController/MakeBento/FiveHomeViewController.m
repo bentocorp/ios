@@ -1428,6 +1428,7 @@
 - (void)refreshStateOnLaunch {
     if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         selectedOrderAheadIndex = 0;
+        self.selectedOrderAheadTimeRangeIndex = 0;
         [self setUpPickerData];
     }
     
@@ -1456,6 +1457,7 @@
 - (void)refreshState {
     if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         selectedOrderAheadIndex = 0;
+        self.selectedOrderAheadTimeRangeIndex = 0;
         [self setUpPickerData];
     }
     
@@ -1703,6 +1705,9 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
+    completeOrderViewController.orderAheadMenu = self.orderAheadMenu;
+    completeOrderViewController.orderMode = self.orderMode;
+    completeOrderViewController.orderAheadMenu.deliveryPriceString = self.orderAheadMenu.deliveryPrices[self.selectedOrderAheadTimeRangeIndex];
     
     // user and place info
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
@@ -1722,7 +1727,8 @@
             // check if saved address is inside CURRENT service area
             [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
                 if (isSelectedLocationInZone) {
-                    [self openAccountViewController:[CompleteOrderViewController class]];
+//                    [self openAccountViewController:[CompleteOrderViewController class]];
+                    [self openAccountViewController:completeOrderViewController];
                 }
                 else {
                     [self openAccountViewController:[DeliveryLocationViewController class]];

@@ -12,10 +12,13 @@
 
 @property (nonatomic) NSString *name;
 @property (nonatomic) NSArray *times;
+@property (nonatomic) NSArray *deliveryPrices;
 @property (nonatomic) NSArray *allMenuItems;
 @property (nonatomic) NSArray *mainDishes;
 @property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSMutableArray *addons;
+
+@property (nonatomic) NSString *deliveryPriceString;
 
 - (id)initWithDictionary:(NSDictionary *)menu;
 
@@ -26,7 +29,5 @@
 
 - (NSDictionary *)getMainDish:(NSInteger)mainDishID;
 - (NSDictionary *)getSideDish:(NSInteger)sideDishID;
-
-- (float)getSelectedTimeRangeWith:(NSInteger)selectedMenuTimesIndex;
 
 @end

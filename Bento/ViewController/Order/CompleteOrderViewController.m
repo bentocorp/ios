@@ -726,7 +726,13 @@
     self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
-    self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [[BentoShop sharedInstance] getDeliveryPrice]];
+    
+    if (self.orderMode == OnDemand) {
+        self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [[BentoShop sharedInstance] getDeliveryPrice]];
+    }
+    else if (self.orderMode == OrderAhead) {
+        self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [self.orderAheadMenu.deliveryPriceString floatValue]];
+    }
     
     // if no promo added
     if (_promoDiscount <= 0) {
