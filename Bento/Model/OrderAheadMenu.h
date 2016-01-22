@@ -17,7 +17,15 @@
 @property (nonatomic) NSArray *mainDishes;
 @property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSMutableArray *addons;
+
 @property (nonatomic) NSString *mealType;
+@property (nonatomic) NSString *kitchen;
+@property (nonatomic) NSString *zone;
+@property (nonatomic) NSString *forDate;
+@property (nonatomic) NSString *menuId;
+
+@property (nonatomic) NSString *scheduledWindowStartTime;
+@property (nonatomic) NSString *scheduledWindowEndTime;
 
 @property (nonatomic) NSString *deliveryPriceString;
 

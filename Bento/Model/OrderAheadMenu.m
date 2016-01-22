@@ -29,6 +29,7 @@
         [self setUpDeliveryPrices: menu[@"Times"]];
         
         self.mealType = menu[@"Menu"][@"meal_type"];
+        self.kitchen = 
     }
     
     return self;

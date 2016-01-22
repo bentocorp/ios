@@ -147,4 +147,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (NSString *)getDinnerCutOffTime;
 - (NSString *)getCountDownMinutes;
 
+- (NSString *)getKitchen;
+- (NSString *)getOAZone;
+
 @end

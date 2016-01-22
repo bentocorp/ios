@@ -380,6 +380,22 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return NO;
 }
 
+- (NSString *)getKitchen {
+    if (self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"][@"kitchen"]) {
+        return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"][@"kitchen"];
+    }
+    
+    return nil;
+}
+
+- (NSString *)getOAZone {
+    if (self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"][@"zone"]) {
+        return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"][@"zone"];
+    }
+    
+    return nil;
+}
+
 #pragma mark Order Ahead Menus
 
 - (NSArray *)getOrderAheadMenus {
