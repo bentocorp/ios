@@ -29,7 +29,10 @@
         [self setUpDeliveryPrices: menu[@"Times"]];
         
         self.mealType = menu[@"Menu"][@"meal_type"];
-        self.kitchen = 
+        self.kitchen = [[BentoShop sharedInstance] getKitchen];
+        self.zone = [[BentoShop sharedInstance] getOAZone];
+        self.forDate = menu[@"Menu"][@"for_date"];
+        self.menuId = menu[@"Menu"][@"menu_id"];
     }
     
     return self;
