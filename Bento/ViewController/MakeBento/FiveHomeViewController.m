@@ -98,6 +98,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.dropDownView.backgroundColor = [UIColor redColor];
+    
     [CountdownTimer sharedInstance];
     
     isThereConnection = YES;

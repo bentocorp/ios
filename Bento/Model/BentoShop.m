@@ -212,6 +212,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     
     NSString *strRequest = [NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude];
 
+    NSLog(@"Selected Coordinates - %f, %f", coordinate.latitude, coordinate.longitude);
+    
     [self sendRequest:strRequest completion:^(id responseDic, NSError *error) {
         
         if (error == nil) {
