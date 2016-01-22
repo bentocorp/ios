@@ -12,6 +12,10 @@
 #import "DataManager.h"
 #import "BaseViewController.h"
 
+#import "OrderAheadMenu.h"
+#import "FiveHomeViewController.h"
+
+
 @protocol CompleteOrderViewControllerDelegate <NSObject>
 
 @optional
@@ -22,5 +26,8 @@
 @interface CompleteOrderViewController : BaseViewController
 
 @property (nonatomic) id delegate;
+
+@property (nonatomic) OrderAheadMenu *orderAheadMenu;
+@property (nonatomic) OrderMode orderMode;
 
 @end
