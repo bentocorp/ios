@@ -461,7 +461,16 @@
             return;
         }
         
+        if (loadingHUD == nil) {
+            loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+            [loadingHUD showInView:self.view];
+        }
+        
         [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+            [loadingHUD dismiss];
+            loadingHUD = nil;
+            
+            
             // inside zone
             if (isSelectedLocationInZone && [appState isEqualToString:@"build"]) {
                 
