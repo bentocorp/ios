@@ -27,6 +27,8 @@
         [self getAddons:menu];
         [self setUpTimes:menu[@"Times"]];
         [self setUpDeliveryPrices: menu[@"Times"]];
+        
+        self.mealType = menu[@"Menu"][@"meal_type"];
     }
     
     return self;

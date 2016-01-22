@@ -17,6 +17,7 @@
 @property (nonatomic) NSArray *mainDishes;
 @property (nonatomic) NSArray *sideDishes;
 @property (nonatomic) NSMutableArray *addons;
+@property (nonatomic) NSString *mealType;
 
 @property (nonatomic) NSString *deliveryPriceString;
 
