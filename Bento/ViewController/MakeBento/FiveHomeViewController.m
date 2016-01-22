@@ -1877,18 +1877,30 @@
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
     if (component == 0) {
+        if (menuNames.count == 0) {
+            return 0;
+        }
         return menuNames.count;
     }
     else {
+        if (menuTimes.count == 0) {
+            return 0;
+        }
         return [menuTimes[selectedOrderAheadIndex] count];
     }
 }
 
 - (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
     if (component == 0) {
+        if (menuNames.count == 0) {
+            return nil;
+        }
         return menuNames[row];
     }
     else {
+        if (menuTimes.count == 0) {
+            return nil;
+        }
         return menuTimes[selectedOrderAheadIndex][row];
     }
 }
