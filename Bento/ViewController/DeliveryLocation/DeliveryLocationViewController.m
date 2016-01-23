@@ -295,7 +295,15 @@
         [self.navigationController popViewControllerAnimated:YES];
     }
     else {
+        if (loadingHUD == nil) {
+            loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+            [loadingHUD showInView:self.view];
+        }
+        
         [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+            
+            [loadingHUD dismiss];
+            loadingHUD = nil;
             
             if (isSelectedLocationInZone == YES && [appState isEqualToString:@"build"]) {
                 [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
