@@ -142,7 +142,14 @@
     
     [self checkLocationOnLoad];
     
-    [self refreshStateOnLaunch];
+    SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    if (placemark != nil) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+            if (isSelectedLocationInZone) {
+                [self refreshStateOnLaunch];
+            }
+        }];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
