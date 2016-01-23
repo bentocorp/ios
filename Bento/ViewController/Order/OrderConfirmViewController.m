@@ -27,6 +27,8 @@
 
 #import "OrderStatusViewController.h"
 
+#import "OrdersViewController.h"
+
 @interface OrderConfirmViewController () <MyAlertViewDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivTitle;
@@ -46,6 +48,8 @@
 @property (weak, nonatomic) IBOutlet UIView *pushPlatform;
 
 - (IBAction)onHelp:(id)sender;
+
+@property (weak, nonatomic) IBOutlet UIButton *viewAllOrdersButton;
 
 @end
 
@@ -84,6 +88,9 @@
 
 #pragma mark - Navigation
 
+- (IBAction)viewAllOrdersButtonPressed:(id)sender {
+    [self.navigationController pushViewController:[[OrdersViewController alloc] init] animated:YES];
+}
 
 - (void)viewWillAppear:(BOOL)animated
 {

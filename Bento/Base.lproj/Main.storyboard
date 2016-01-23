@@ -1707,6 +1707,9 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="viewAllOrdersButtonPressed:" destination="utt-Mq-JP9" eventType="touchUpInside" id="ubx-yP-hbD"/>
+                                </connections>
                             </button>
                             <view contentMode="scaleToFill" id="Ola-bI-RE7">
                                 <rect key="frame" x="0.0" y="110" width="320" height="200"/>
@@ -1784,6 +1787,7 @@
                         <outlet property="lblCompletedText" destination="gqW-wd-92A" id="829-dX-sR8"/>
                         <outlet property="lblCompletedTitle" destination="R4d-b6-xQx" id="dKe-vL-T16"/>
                         <outlet property="pushPlatform" destination="nLf-OL-lWy" id="lCa-ot-Mzg"/>
+                        <outlet property="viewAllOrdersButton" destination="0x8-0d-023" id="d12-AH-zaX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zZa-6b-62c" userLabel="First Responder" sceneMemberID="firstResponder"/>
