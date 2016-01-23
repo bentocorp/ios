@@ -1152,6 +1152,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
         // check if item exists in status/menu
         if (itemID == menuID) {
             dishExistInStatusMenu = YES;
+            break;
         }
     }
     

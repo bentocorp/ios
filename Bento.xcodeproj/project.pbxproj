@@ -1414,6 +1414,7 @@
 				FC99D4F61AFC325100BEE40B /* At Launch */,
 				FC99D4F51AFC323700BEE40B /* Closed/Sold-out */,
 				FCFD79F01AE8880D002AD322 /* Settings */,
+				FC7E835D1C49CD2E00CFEFCC /* Orders */,
 				90BED0A71A5BD05C003DC872 /* Signin/Register */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
 				90BED0A51A5BD05C003DC872 /* Homepage */,
@@ -2125,7 +2126,6 @@
 				FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */,
 				FCAA47981AE9E03B00CA1743 /* SignedInSettingsViewController.h */,
 				FCAA47991AE9E03B00CA1743 /* SignedInSettingsViewController.m */,
-				FC7E835D1C49CD2E00CFEFCC /* Orders */,
 				FC4327B61BE2EF4300E91D9B /* CurrentOrdersViewController.h */,
 				FC4327B71BE2EF4300E91D9B /* CurrentOrdersViewController.m */,
 				FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */,
@@ -2996,7 +2996,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
 				PROVISIONING_PROFILE = "9d179825-df98-4228-873b-91b083d3dffa";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -3080,7 +3080,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
 				PROVISIONING_PROFILE = "9d179825-df98-4228-873b-91b083d3dffa";
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
