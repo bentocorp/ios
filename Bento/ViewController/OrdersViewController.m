@@ -78,7 +78,7 @@
 
     // back button
     UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 50, 45)];
-    [closeButton setImage:[UIImage imageNamed:@"nav_btn_close"] forState:UIControlStateNormal];
+    [closeButton setImage:[UIImage imageNamed:@"nav_btn_back"] forState:UIControlStateNormal];
     [closeButton addTarget:self action:@selector(closeButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
 
@@ -104,25 +104,30 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    if ([tableView.dataSource tableView:tableView numberOfRowsInSection:section] == 0) {
+        return 0;
+    }
     return 45;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
 {
     UIView *bgView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, tableView.frame.size.width, 45)];
-    bgView.backgroundColor = [UIColor bentoButtonGray];
+    bgView.backgroundColor = [UIColor colorWithRed:0.275f green:0.306f blue:0.361f alpha:1.0f];
     
     UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, tableView.frame.size.width, 1)];
     lineView.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
     [bgView addSubview:lineView];
     
-    UILabel *add
+    OrderHistorySection *orderHistorySection = self.orderHistoryArray[section];
     
-    [addAnotherButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
-    [addAnotherButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:14]];
-    addAnotherButton.contentEdgeInsets = UIEdgeInsetsMake(15, 0, 12, 0);
-    addAnotherButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
-    [bgView addSubview:addAnotherButton];
+    UILabel *sectionTitleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 0, SCREEN_WIDTH-40, 45)];
+    sectionTitleLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
+    sectionTitleLabel.textColor = [UIColor whiteColor];
+    sectionTitleLabel.textAlignment = NSTextAlignmentCenter;
+    sectionTitleLabel.text = orderHistorySection.sectionTitle;
+    
+    [bgView addSubview:sectionTitleLabel];
     
     return bgView;
 }
