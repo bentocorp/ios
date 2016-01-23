@@ -18,6 +18,7 @@
 @interface OrdersViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) UITableView *myTableView;
+@property (nonatomic) NSDictionary *dicOrderHistory;
 
 @end
 
@@ -61,7 +62,9 @@
 - (void)viewWillAppear:(BOOL)animated {
     NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
     [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
-        
+        if (error == nil) {
+            self.dicOrderHistory = (NSDictionary *)responseDic;
+        }
     }];
 }
 
