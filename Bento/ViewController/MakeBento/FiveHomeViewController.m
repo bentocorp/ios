@@ -1429,6 +1429,7 @@
 - (void)clearCart {
     [[BentoShop sharedInstance] resetBentoArray];
     [[AddonList sharedInstance] emptyList];
+    [self updateUI];
 }
 
 #pragma mark Refresh State
