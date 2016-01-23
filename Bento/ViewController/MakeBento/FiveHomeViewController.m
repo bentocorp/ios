@@ -1770,6 +1770,9 @@
         [self showConfirmMsg];
     }
     else {
+        if ([self isToggledOn]) {
+            [self toggleOff];
+        }
         [self gotoOrderScreen];
     }
 }
