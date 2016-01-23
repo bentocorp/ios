@@ -806,7 +806,7 @@
 
 - (void)clearCart {
     [[BentoShop sharedInstance] resetBentoArray];
-    [[AddonList sharedInstance].addonList removeAllObjects];
+    [[AddonList sharedInstance] emptyList];
 }
 
 - (void) onUpdatedStatus:(NSNotification *)notification

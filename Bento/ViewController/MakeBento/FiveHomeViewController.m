@@ -1426,7 +1426,7 @@
 
 - (void)clearCart {
     [[BentoShop sharedInstance] resetBentoArray];
-    [[AddonList sharedInstance].addonList removeAllObjects];
+    [[AddonList sharedInstance] emptyList];
 }
 
 #pragma mark Refresh State
@@ -1484,7 +1484,10 @@
         [self installOnDemand];
         [self installOrderAhead];
         [self updateWidget];
-//        [self defaultToOnDemandOrOrderAhead];
+        
+        if ([self isCartEmpty] == YES) {
+            [self defaultToOnDemandOrOrderAhead];
+        }
     }
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
         self.pickerState = OnDemandOnly;
@@ -1557,7 +1560,6 @@
             
             if (self.isToggledOn == NO) {
                 [self toggleOn];
-
             }
             
 //            [self.view layoutIfNeeded];
