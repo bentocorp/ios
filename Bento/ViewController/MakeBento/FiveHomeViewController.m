@@ -931,6 +931,8 @@
         [self checkPickerState];
         [self setUpPickerData];
         [self updateWidget];
+        
+        [[NSUserDefaults standardUserDefaults] rm_setCustomObject:[NSString stringWithFormat:@"%ld", self.orderMode] forKey:@"savedOrderMode0Or1"];
     });
 }
 
@@ -1433,49 +1435,69 @@
 
 - (void)refreshStateOnLaunch {
     
+//    NSDictionary *savedOrderAheadMenuIdAndName = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"savedOrderAheadMenu"];
+//    
+//    if (savedOrderAheadMenuIdAndName != nil) {
+//        
+//        // if mode was on demand
+//        if ([[[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"savedOrderMode0Or1"] isEqualToString:@"0"]) {
+//            
+//            [self enableOnDemand];
+//        }
+//        else {
+//            if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+//                
+//                [self setUpPickerData];
+//                BOOL exists = NO;
+//                
+//                for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+//                        
+//                    // does menu_id still exist?
+//                    if (savedOrderAheadMenuIdAndName[@"menuId"] == orderAheadMenu.menuId) {
+//                        
+//                        // yes menuId exists, set UI to the selection of the saved menu
+//                        exists = YES;
+//                        
+//                        for (int i = 0; i < menuNames.count; i++) {
+//                            // match saved menu with the list of available order ahead menus
+//                            if ([menuNames[i] isEqualToString:savedOrderAheadMenuIdAndName[@"name"]]) {
+//                                [self enableOrderAhead];
+//                                selectedOrderAheadIndex = i;
+//                                [self.orderAheadPickerView selectRow:i inComponent:0 animated:YES];
+//                                [self updatePickerButtonTitle];
+//                            }
+//                        }
+//                    }
+//                }
+//                
+//                if (exists == NO) {
+//                    [self clearCart];
+//                    NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
+//                    if ([isSelectedNum boolValue]) {
+//                        [self enableOnDemand];
+//                    }
+//                    else {
+//                        [self enableOrderAhead];
+//                    }
+//                    
+//                    selectedOrderAheadIndex = 0;
+//                }
+//                
+//                self.selectedOrderAheadTimeRangeIndex = 0;
+//            }
+//        }
+//    }
+//    else {
+//        if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+//            selectedOrderAheadIndex = 0;
+//            self.selectedOrderAheadTimeRangeIndex = 0;
+//        }
+//    }
+    
+    [self clearCart];
+    
     if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-        
-        [self setUpPickerData];
-        BOOL exists = NO;
-        
-        for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
-            
-            NSDictionary *savedOrderAheadMenuIdAndName = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"savedOrderAheadMenu"];
-            if (savedOrderAheadMenuIdAndName != nil) {
-                
-                // does menu_id still exist?
-                if (savedOrderAheadMenuIdAndName[@"menuId"] == orderAheadMenu.menuId) {
-                    
-                    // yes menuId exists, set UI to the selection of the saved menu
-                    exists = YES;
-                    
-                    for (int i = 0; i < menuNames.count; i++) {
-                        // match saved menu with the list of available order ahead menus
-                        if ([menuNames[i] isEqualToString:savedOrderAheadMenuIdAndName[@"name"]]) {
-                            [self enableOrderAhead];
-                            selectedOrderAheadIndex = i;
-                            [self.orderAheadPickerView selectRow:i inComponent:0 animated:YES];
-                            [self updatePickerButtonTitle];
-                        }
-                    }
-                }
-            }
-        }
-        
-        if (exists == NO) {
-            [self clearCart];
-            NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
-            if ([isSelectedNum boolValue]) {
-                [self enableOnDemand];
-            }
-            else {
-                [self enableOrderAhead];
-            }
-            
-            selectedOrderAheadIndex = 0;
-        }
-        
-        
+        selectedOrderAheadIndex = 0;
         self.selectedOrderAheadTimeRangeIndex = 0;
     }
     
@@ -1484,10 +1506,7 @@
         [self installOnDemand];
         [self installOrderAhead];
         [self updateWidget];
-        
-        if ([self isCartEmpty] == YES) {
-            [self defaultToOnDemandOrOrderAhead];
-        }
+        [self defaultToOnDemandOrOrderAhead];
     }
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
         self.pickerState = OnDemandOnly;
@@ -1495,16 +1514,12 @@
         [self installOnDemand];
         [self updateWidget];
         [self enableOnDemand];
-        
-        // if it is on demand only -> clear any orderahead
     }
     else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         self.pickerState = OrderAheadOnly;
         [self removeOnDemand];
         [self installOrderAhead];
         [self enableOrderAhead];
-        
-        // if it is order ahead only -> clear any on demand
     }
 }
 
@@ -1661,11 +1676,11 @@
             if ([menuOrderAhead isEqualToString:orderAheadMenu.name]) {
                 self.orderAheadMenu = orderAheadMenu;
                 
-                [[NSUserDefaults standardUserDefaults] rm_setCustomObject:@{
-                                                                            @"menuId": self.orderAheadMenu.menuId,
-                                                                            @"name": self.orderAheadMenu.name
-                                                                            }
-                                                                   forKey:@"savedOrderAheadMenu"];
+//                [[NSUserDefaults standardUserDefaults] rm_setCustomObject:@{
+//                                                                            @"menuId": self.orderAheadMenu.menuId,
+//                                                                            @"name": self.orderAheadMenu.name,
+//                                                                            }
+//                                                                   forKey:@"savedOrderAheadMenu"];
             }
         }
     }
