@@ -484,7 +484,7 @@
                 
                 if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] == nil) {
                     [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
-                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    [self.navigationController popViewControllerAnimated:YES];
                     return;
                 }
                 

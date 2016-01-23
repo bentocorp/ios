@@ -195,7 +195,7 @@
 
 #pragma  mark Check Location
 - (void)checkLocationOnLoad {
-    AppDelegate *appDelegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
     CLLocationCoordinate2D gpsLocation = [appDelegate getGPSLocation];
     
     // no gps

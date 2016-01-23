@@ -1699,7 +1699,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="0x8-0d-023">
-                                <rect key="frame" x="0.0" y="476" width="320" height="45"/>
+                                <rect key="frame" x="0.0" y="468" width="320" height="45"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
