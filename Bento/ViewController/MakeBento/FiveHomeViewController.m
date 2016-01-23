@@ -1656,7 +1656,7 @@
     
     self.dropDownViewTopConstraint.constant = 64;
     
-//    [self.view layoutIfNeeded];
+    [self.view layoutIfNeeded];
 }
 
 - (void)toggleOff {
