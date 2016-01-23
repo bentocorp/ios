@@ -14,25 +14,42 @@
 #import <AFNetworking/AFNetworking.h>
 #import "BentoShop.h"
 #import "DataManager.h"
+#import "JGProgressHUD.h"
+#import "OrderHistorySection.h"
 
 @interface OrdersViewController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic) UITableView *myTableView;
-@property (nonatomic) NSDictionary *dicOrderHistory;
+@property (nonatomic) NSMutableArray *orderHistoryArray;
 
 @end
 
 @implementation OrdersViewController
+{
+    JGProgressHUD *loadingHUD;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    [loadingHUD showInView:self.view];
     
-    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
-    self.myTableView.dataSource = self;
-    self.myTableView.delegate = self;
-    [self.view addSubview:self.myTableView];
+    NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
+    [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
+        [loadingHUD dismiss];
+        
+        if (error == nil) {
+            for (NSDictionary *json in responseDic) {
+                [self.orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
+            }
+        }
+        else {
+            // error
+        }
+    }];
+    
+    self.view.backgroundColor = [UIColor whiteColor];
     
     // navigation bar color
     UIView *navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
@@ -57,15 +74,13 @@
     UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 1)];
     longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [self.view addSubview:longLineSepartor1];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-    NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
-    [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
-        if (error == nil) {
-            self.dicOrderHistory = (NSDictionary *)responseDic;
-        }
-    }];
+    
+    // Table View
+    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    self.myTableView.backgroundColor = [UIColor bentoBackgroundGray];
+    self.myTableView.dataSource = self;
+    self.myTableView.delegate = self;
+    [self.view addSubview:self.myTableView];
 }
 
 - (void)closeButtonPressed {
@@ -73,11 +88,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 45;
+    return self.orderHistoryArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 2;
+    return self.orderHistoryArray[section]
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -89,7 +104,8 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    cell.textLabel.text = @"hello im joseph";
+    cell.textLabel.text = @"hehe";
+//    cell.textLabel.text = [NSString stringWithFormat:@"%@", sectionItems[indexPath.row][@"title"]];
     
     return cell;
 }

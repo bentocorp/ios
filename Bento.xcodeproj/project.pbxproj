@@ -459,6 +459,10 @@
 		FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
 		FCC5D2151C532274009C3D7A /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D2141C532274009C3D7A /* OrdersViewController.m */; };
 		FCC5D2161C532274009C3D7A /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D2141C532274009C3D7A /* OrdersViewController.m */; };
+		FCC5D21D1C5368A0009C3D7A /* OrderHistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D21C1C5368A0009C3D7A /* OrderHistoryItem.m */; };
+		FCC5D21E1C5368A0009C3D7A /* OrderHistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D21C1C5368A0009C3D7A /* OrderHistoryItem.m */; };
+		FCC5D2211C536937009C3D7A /* OrderHistorySection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D2201C536937009C3D7A /* OrderHistorySection.m */; };
+		FCC5D2221C536937009C3D7A /* OrderHistorySection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D2201C536937009C3D7A /* OrderHistorySection.m */; };
 		FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED11AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
@@ -939,6 +943,10 @@
 		FCC529CA1B8FAD4A00B49F34 /* Bento-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bento-Prefix.pch"; sourceTree = "<group>"; };
 		FCC5D2131C532274009C3D7A /* OrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersViewController.h; sourceTree = "<group>"; };
 		FCC5D2141C532274009C3D7A /* OrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersViewController.m; sourceTree = "<group>"; };
+		FCC5D21B1C5368A0009C3D7A /* OrderHistoryItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistoryItem.h; sourceTree = "<group>"; };
+		FCC5D21C1C5368A0009C3D7A /* OrderHistoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryItem.m; sourceTree = "<group>"; };
+		FCC5D21F1C536937009C3D7A /* OrderHistorySection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistorySection.h; sourceTree = "<group>"; };
+		FCC5D2201C536937009C3D7A /* OrderHistorySection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistorySection.m; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
 		FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCollectionViewCell.m; sourceTree = "<group>"; };
 		FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1746,8 +1754,8 @@
 		FC7E835D1C49CD2E00CFEFCC /* Orders */ = {
 			isa = PBXGroup;
 			children = (
-				FCC5D2131C532274009C3D7A /* OrdersViewController.h */,
-				FCC5D2141C532274009C3D7A /* OrdersViewController.m */,
+				FCC5D2231C536946009C3D7A /* Model */,
+				FCC5D2241C536953009C3D7A /* Controller */,
 			);
 			name = Orders;
 			sourceTree = "<group>";
@@ -1988,6 +1996,26 @@
 			);
 			name = Extensions;
 			path = ThirdParty;
+			sourceTree = "<group>";
+		};
+		FCC5D2231C536946009C3D7A /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5D21F1C536937009C3D7A /* OrderHistorySection.h */,
+				FCC5D2201C536937009C3D7A /* OrderHistorySection.m */,
+				FCC5D21B1C5368A0009C3D7A /* OrderHistoryItem.h */,
+				FCC5D21C1C5368A0009C3D7A /* OrderHistoryItem.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		FCC5D2241C536953009C3D7A /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5D2131C532274009C3D7A /* OrdersViewController.h */,
+				FCC5D2141C532274009C3D7A /* OrdersViewController.m */,
+			);
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		FCCD30EA1C44583A00E29A70 /* Choose Dish Item */ = {
@@ -2606,8 +2634,10 @@
 				FC11AAB11BFBF8BC0004A83B /* AddonsViewController.m in Sources */,
 				FCAA47A11AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				7216B7121AA64C7C0006FFE9 /* ChooseSideDishViewController.m in Sources */,
+				FCC5D2221C536937009C3D7A /* OrderHistorySection.m in Sources */,
 				FCB906141AEC7FBF003041F7 /* FaqViewController.m in Sources */,
 				FC9E81FF1BACE4250099DBF5 /* SocketFixUTF8.swift in Sources */,
+				FCC5D21E1C5368A0009C3D7A /* OrderHistoryItem.m in Sources */,
 				7216B7131AA64C7C0006FFE9 /* NSDate+RFC1123.m in Sources */,
 				7216B7171AA64C7C0006FFE9 /* JGProgressHUDAnimation.m in Sources */,
 				7216B7181AA64C7C0006FFE9 /* AppDelegate.m in Sources */,
@@ -2726,8 +2756,10 @@
 				FC11AAB01BFBF8BC0004A83B /* AddonsViewController.m in Sources */,
 				FCAA47A01AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */,
 				90BED0D91A5BF301003DC872 /* ChooseSideDishViewController.m in Sources */,
+				FCC5D2211C536937009C3D7A /* OrderHistorySection.m in Sources */,
 				FCB906131AEC7FBF003041F7 /* FaqViewController.m in Sources */,
 				FC9E81FE1BACE4250099DBF5 /* SocketFixUTF8.swift in Sources */,
+				FCC5D21D1C5368A0009C3D7A /* OrderHistoryItem.m in Sources */,
 				722333D01A6F46DF006C2446 /* NSDate+RFC1123.m in Sources */,
 				7223335C1A6D4058006C2446 /* JGProgressHUDAnimation.m in Sources */,
 				90BED0A01A5BCC7B003DC872 /* AppDelegate.m in Sources */,
