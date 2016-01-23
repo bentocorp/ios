@@ -16,6 +16,7 @@
 #import "DataManager.h"
 #import "JGProgressHUD.h"
 #import "OrderHistorySection.h"
+#import "OrderHistoryItem.h"
 
 @interface OrdersViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -32,6 +33,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.orderHistoryArray = [[NSMutableArray alloc] init];
+    
     loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
     [loadingHUD showInView:self.view];
     
@@ -43,6 +46,13 @@
             for (NSDictionary *json in responseDic) {
                 [self.orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
             }
+            
+            // Table View
+            self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+            self.myTableView.backgroundColor = [UIColor bentoBackgroundGray];
+            self.myTableView.dataSource = self;
+            self.myTableView.delegate = self;
+            [self.view addSubview:self.myTableView];
         }
         else {
             // error
@@ -74,13 +84,6 @@
     UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 1)];
     longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [self.view addSubview:longLineSepartor1];
-    
-    // Table View
-    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
-    self.myTableView.backgroundColor = [UIColor bentoBackgroundGray];
-    self.myTableView.dataSource = self;
-    self.myTableView.delegate = self;
-    [self.view addSubview:self.myTableView];
 }
 
 - (void)closeButtonPressed {
@@ -88,11 +91,17 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 45;
+}
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.orderHistoryArray.count;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.orderHistoryArray[section]
+    OrderHistorySection *orderHistorySection = self.orderHistoryArray[section];
+    
+    return orderHistorySection.items.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -104,8 +113,9 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    cell.textLabel.text = @"hehe";
-//    cell.textLabel.text = [NSString stringWithFormat:@"%@", sectionItems[indexPath.row][@"title"]];
+    OrderHistorySection *orderHistorySection = self.orderHistoryArray[indexPath.section];
+    OrderHistoryItem *orderHistoryItem = orderHistorySection.items[indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", orderHistoryItem.title, orderHistoryItem.price];
     
     return cell;
 }

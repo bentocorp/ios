@@ -15,6 +15,8 @@
     if (self = [super init]) {
         self.sectionTitle = dictionary[@"sectionTitle"];
         
+        self.items = [[NSMutableArray alloc] init];
+        
         for (NSDictionary *item in dictionary[@"items"]) {
             [self.items addObject:[[OrderHistoryItem alloc] initWithDictionary:item]];
         }
