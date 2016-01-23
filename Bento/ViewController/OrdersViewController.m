@@ -17,6 +17,7 @@
 #import "JGProgressHUD.h"
 #import "OrderHistorySection.h"
 #import "OrderHistoryItem.h"
+#import "OrdersTableViewCell.h"
 
 @interface OrdersViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -52,6 +53,7 @@
             self.myTableView.backgroundColor = [UIColor bentoBackgroundGray];
             self.myTableView.dataSource = self;
             self.myTableView.delegate = self;
+            self.myTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
             [self.view addSubview:self.myTableView];
         }
         else {
@@ -94,6 +96,37 @@
     return 45;
 }
 
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    
+    OrderHistorySection *orderHistorySection = self.orderHistoryArray[section];
+
+    return orderHistorySection.sectionTitle;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 45;
+}
+
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
+{
+    UIView *bgView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, tableView.frame.size.width, 45)];
+    bgView.backgroundColor = [UIColor bentoButtonGray];
+    
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, tableView.frame.size.width, 1)];
+    lineView.backgroundColor = [UIColor colorWithRed:0.804f green:0.816f blue:0.816f alpha:1.0f];
+    [bgView addSubview:lineView];
+    
+    UILabel *add
+    
+    [addAnotherButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
+    [addAnotherButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:14]];
+    addAnotherButton.contentEdgeInsets = UIEdgeInsetsMake(15, 0, 12, 0);
+    addAnotherButton.contentHorizontalAlignment = UIControlContentHorizontalAlignmentLeft;
+    [bgView addSubview:addAnotherButton];
+    
+    return bgView;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return self.orderHistoryArray.count;
 }
@@ -106,16 +139,18 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *cellId = @"cell";
-    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
+    static NSString *cellId = @"Cell";
+    OrdersTableViewCell *cell = (OrdersTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
+        cell = [[OrdersTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
     OrderHistorySection *orderHistorySection = self.orderHistoryArray[indexPath.section];
     OrderHistoryItem *orderHistoryItem = orderHistorySection.items[indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@, %@", orderHistoryItem.title, orderHistoryItem.price];
+    
+    cell.titleLabel.text = orderHistoryItem.title;
+    cell.priceLabel.text = orderHistoryItem.price;
     
     return cell;
 }

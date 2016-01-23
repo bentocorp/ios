@@ -463,6 +463,8 @@
 		FCC5D21E1C5368A0009C3D7A /* OrderHistoryItem.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D21C1C5368A0009C3D7A /* OrderHistoryItem.m */; };
 		FCC5D2211C536937009C3D7A /* OrderHistorySection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D2201C536937009C3D7A /* OrderHistorySection.m */; };
 		FCC5D2221C536937009C3D7A /* OrderHistorySection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D2201C536937009C3D7A /* OrderHistorySection.m */; };
+		FCC5D22B1C537F64009C3D7A /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D22A1C537F64009C3D7A /* OrdersTableViewCell.m */; };
+		FCC5D22C1C537F64009C3D7A /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D22A1C537F64009C3D7A /* OrdersTableViewCell.m */; };
 		FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED11AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
@@ -947,6 +949,8 @@
 		FCC5D21C1C5368A0009C3D7A /* OrderHistoryItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistoryItem.m; sourceTree = "<group>"; };
 		FCC5D21F1C536937009C3D7A /* OrderHistorySection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderHistorySection.h; sourceTree = "<group>"; };
 		FCC5D2201C536937009C3D7A /* OrderHistorySection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistorySection.m; sourceTree = "<group>"; };
+		FCC5D2291C537F64009C3D7A /* OrdersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersTableViewCell.h; sourceTree = "<group>"; };
+		FCC5D22A1C537F64009C3D7A /* OrdersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersTableViewCell.m; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
 		FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCollectionViewCell.m; sourceTree = "<group>"; };
 		FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1755,6 +1759,7 @@
 			isa = PBXGroup;
 			children = (
 				FCC5D2231C536946009C3D7A /* Model */,
+				FCC5D22D1C537F6B009C3D7A /* View */,
 				FCC5D2241C536953009C3D7A /* Controller */,
 			);
 			name = Orders;
@@ -2016,6 +2021,15 @@
 				FCC5D2141C532274009C3D7A /* OrdersViewController.m */,
 			);
 			name = Controller;
+			sourceTree = "<group>";
+		};
+		FCC5D22D1C537F6B009C3D7A /* View */ = {
+			isa = PBXGroup;
+			children = (
+				FCC5D2291C537F64009C3D7A /* OrdersTableViewCell.h */,
+				FCC5D22A1C537F64009C3D7A /* OrdersTableViewCell.m */,
+			);
+			name = View;
 			sourceTree = "<group>";
 		};
 		FCCD30EA1C44583A00E29A70 /* Choose Dish Item */ = {
@@ -2623,6 +2637,7 @@
 				FCAA479D1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */,
 				7216B70A1AA64C7C0006FFE9 /* RegisterViewController.m in Sources */,
 				7216B70B1AA64C7C0006FFE9 /* STPTestDataTableViewController.m in Sources */,
+				FCC5D22C1C537F64009C3D7A /* OrdersTableViewCell.m in Sources */,
 				7216B70C1AA64C7C0006FFE9 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
@@ -2745,6 +2760,7 @@
 				FCAA479C1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */,
 				90D8F7A91A5D81C300D034CF /* RegisterViewController.m in Sources */,
 				722333F91A72C133006C2446 /* STPTestDataTableViewController.m in Sources */,
+				FCC5D22B1C537F64009C3D7A /* OrdersTableViewCell.m in Sources */,
 				722333631A6D4058006C2446 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				7286EB4E1A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
