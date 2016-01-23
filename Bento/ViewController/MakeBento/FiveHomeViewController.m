@@ -1520,13 +1520,38 @@
 }
 
 - (void)defaultToOnDemandOrOrderAhead {
-    // default to OD or OA?
-    NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
-    if ([isSelectedNum boolValue]) {
-        [self enableOnDemand];
+    
+    // saveMenuName and saveMenuId
+    
+    if ([self doesSavedMenuExist]) {
+        // get orderAheadMenus and loop through them
+        // check the menuID of each and compare it with the saved menuId
+        // once found {
+            // loop through names of menuNames and compare menuName
+        if (self.orderMode == OrderAhead) {
+            for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+                if ([menuOrderAhead isEqualToString:orderAheadMenu.name]) {
+                    
+                    [pickerView selectRow:0 inComponent:1 animated:YES];
+                    [updatepickerbuttonmenu]
+                    
+                }
+            }
+        }
+        // }
+    }
+    
+    if ([self isCartEmpty]) {
+        NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
+        if ([isSelectedNum boolValue]) {
+            [self enableOnDemand];
+        }
+        else {
+            [self enableOrderAhead];
+        }
     }
     else {
-        [self enableOrderAhead];
+        // if cart is not empty, check if
     }
 }
 
@@ -1609,6 +1634,12 @@
         for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
             if ([menuOrderAhead isEqualToString:orderAheadMenu.name]) {
                 self.orderAheadMenu = orderAheadMenu;
+                
+                [[NSUserDefaults standardUserDefaults] rm_setCustomObject:@{
+                                                                            @"menuId": self.orderAheadMenu.menuId,
+                                                                            @"name": self.orderAheadMenu.name
+                                                                            }
+                                                                   forKey:@"savedOrderAheadMenu"];
             }
         }
     }
