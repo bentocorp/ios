@@ -932,7 +932,7 @@
         [self setUpPickerData];
         [self updateWidget];
         
-        [[NSUserDefaults standardUserDefaults] rm_setCustomObject:[NSString stringWithFormat:@"%ld", self.orderMode] forKey:@"savedOrderMode0Or1"];
+//        [[NSUserDefaults standardUserDefaults] rm_setCustomObject:[NSString stringWithFormat:@"%ld", self.orderMode] forKey:@"savedOrderMode0Or1"];
     });
 }
 
