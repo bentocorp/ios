@@ -484,7 +484,21 @@
                 
                 if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] == nil) {
                     [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
-                    [self.navigationController popViewControllerAnimated:YES];
+                    
+                    if (loadingHUD == nil) {
+                        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+                        [loadingHUD showInView:self.view];
+                    }
+                    
+                    [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+                        [loadingHUD dismiss];
+                        loadingHUD = nil;
+                        
+                        if (isSelectedLocationInZone) {
+                            [self.navigationController popToRootViewControllerAnimated:YES];
+                        }
+                    }];
+                    
                     return;
                 }
                 

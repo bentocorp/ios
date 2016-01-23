@@ -141,6 +141,7 @@
     }
     
     [self checkLocationOnLoad];
+    
     [self refreshStateOnLaunch];
 }
 
@@ -1553,20 +1554,22 @@
 }
 
 - (void)checkPickerState {
-    PickerState newState;
+    NSInteger newState;
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
-        newState = Both;
+        newState = 3;
     }
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
-        newState = OnDemandOnly;
+        newState = 0;
     }
     else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-        newState = OrderAheadOnly;
+        newState = 1;
     }
 
     // state changed!
     if (newState != self.pickerState) {
-    
+        
+        NSLog(@"original picker state: %ld vs new state %ld", self.pickerState, newState);
+        
         self.pickerState = newState;
         
         [self.view layoutIfNeeded];
