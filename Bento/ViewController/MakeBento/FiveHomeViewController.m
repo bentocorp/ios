@@ -1432,10 +1432,53 @@
 #pragma mark Refresh State
 
 - (void)refreshStateOnLaunch {
+    
     if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+        
+        [self setUpPickerData];
+        
+        if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+            for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+                
+                NSDictionary *savedOrderAheadMenuIdAndName = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"savedOrderAheadMenu"];
+                if (savedOrderAheadMenuIdAndName != nil) {
+                    
+                    // does menu_id still exist?
+                    if (savedOrderAheadMenuIdAndName[@"menuId"] == orderAheadMenu.menuId) {
+                        
+                        // yes menuId exists, set UI to the selection of the saved menu
+                        NSInteger count;
+                        for (NSString *menuName in menuNames) {
+                            count++;
+                            
+                            // match saved menu with the list of available order ahead menus
+                            if ([menuName isEqualToString:savedOrderAheadMenuIdAndName[@"name"]]) {
+                                [self enableOrderAhead];
+                                selectedOrderAheadIndex = count;
+                                [self.orderAheadPickerView selectRow:count inComponent:0 animated:YES];
+                                [self updatePickerButtonTitle];
+                            }
+                        }
+                    }
+                    else {
+                        [self clearCart];
+                        NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
+                        if ([isSelectedNum boolValue]) {
+                            [self enableOnDemand];
+                        }
+                        else {
+                            [self enableOrderAhead];
+                        }
+                    }
+                }
+                else {
+                    
+                }
+            }
+        }
+        
         selectedOrderAheadIndex = 0;
         self.selectedOrderAheadTimeRangeIndex = 0;
-        [self setUpPickerData];
     }
     
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
@@ -1443,7 +1486,7 @@
         [self installOnDemand];
         [self installOrderAhead];
         [self updateWidget];
-        [self defaultToOnDemandOrOrderAhead];
+//        [self defaultToOnDemandOrOrderAhead];
     }
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
         self.pickerState = OnDemandOnly;
@@ -1451,12 +1494,16 @@
         [self installOnDemand];
         [self updateWidget];
         [self enableOnDemand];
+        
+        // if it is on demand only -> clear any orderahead
     }
     else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         self.pickerState = OrderAheadOnly;
         [self removeOnDemand];
         [self installOrderAhead];
         [self enableOrderAhead];
+        
+        // if it is order ahead only -> clear any on demand
     }
 }
 
@@ -1512,36 +1559,56 @@
             
             if (self.isToggledOn == NO) {
                 [self toggleOn];
+
             }
             
-            [self.view layoutIfNeeded];
+//            [self.view layoutIfNeeded];
         }];
     }
 }
 
+- (void)viewDidLayoutSubviews {
+    [self.view layoutIfNeeded];
+}
+
 - (void)defaultToOnDemandOrOrderAhead {
     
-    // saveMenuName and saveMenuId
-    
-    if ([self doesSavedMenuExist]) {
-        // get orderAheadMenus and loop through them
-        // check the menuID of each and compare it with the saved menuId
-        // once found {
-            // loop through names of menuNames and compare menuName
-        if (self.orderMode == OrderAhead) {
-            for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
-                if ([menuOrderAhead isEqualToString:orderAheadMenu.name]) {
-                    
-                    [pickerView selectRow:0 inComponent:1 animated:YES];
-                    [updatepickerbuttonmenu]
-                    
-                }
-            }
-        }
-        // }
-    }
-    
-    if ([self isCartEmpty]) {
+//    if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+//        for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+//
+//            NSDictionary *savedOrderAheadMenuIdAndName = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"savedOrderAheadMenu"];
+//            if (savedOrderAheadMenuIdAndName != nil) {
+//                
+//                // does menu_id still exist?
+//                if ([savedOrderAheadMenuIdAndName[@"menuId"] isEqualToString:orderAheadMenu.name]) {
+//
+//                    // yes, set UI to select saved menu
+//                    NSInteger count;
+//                    for (NSString *menuName in menuNames) {
+//                        count++;
+//                        
+//                        // match saved menu with the list of available order ahead menus
+//                        if ([menuName isEqualToString:savedOrderAheadMenuIdAndName[@"name"]]) {
+//                            [self.orderAheadPickerView selectRow:count inComponent:0 animated:YES];
+//                            [self updatePickerButtonTitle];
+//                        }
+//                    }
+//                }
+//                else {
+//                    [self clearCart];
+//                    NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
+//                    if ([isSelectedNum boolValue]) {
+//                        [self enableOnDemand];
+//                    }
+//                    else {
+//                        [self enableOrderAhead];
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    // No order-ahead
+//    else {
         NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
         if ([isSelectedNum boolValue]) {
             [self enableOnDemand];
@@ -1549,10 +1616,7 @@
         else {
             [self enableOrderAhead];
         }
-    }
-    else {
-        // if cart is not empty, check if
-    }
+//    }
 }
 
 #pragma mark Install / Remove
@@ -1615,7 +1679,7 @@
     
     self.dropDownViewTopConstraint.constant = 64;
     
-    [self.view layoutIfNeeded];
+//    [self.view layoutIfNeeded];
 }
 
 - (void)toggleOff {
