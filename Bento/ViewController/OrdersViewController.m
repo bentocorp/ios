@@ -54,6 +54,7 @@
             self.myTableView.dataSource = self;
             self.myTableView.delegate = self;
             self.myTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+            self.myTableView.allowsSelection = NO;
             [self.view addSubview:self.myTableView];
         }
         else {
