@@ -341,14 +341,6 @@
 		FC72912B1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7291291BA8BD6B00BCBDE7 /* pencil-bento.png */; };
 		FC7B609F1B0FF11300A00467 /* BentoModelTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B609E1B0FF11300A00467 /* BentoModelTests.m */; };
 		FC7B60A11B10045D00A00467 /* BentoShopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7B60A01B10045D00A00467 /* BentoShopTests.m */; };
-		FC7E83611C49CD4F00CFEFCC /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7E835F1C49CD4F00CFEFCC /* OrdersViewController.m */; };
-		FC7E83621C49CD4F00CFEFCC /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7E835F1C49CD4F00CFEFCC /* OrdersViewController.m */; };
-		FC7E83631C49CD4F00CFEFCC /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7E83601C49CD4F00CFEFCC /* OrdersViewController.xib */; };
-		FC7E83641C49CD4F00CFEFCC /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7E83601C49CD4F00CFEFCC /* OrdersViewController.xib */; };
-		FC7E83681C49D01600CFEFCC /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7E83661C49D01600CFEFCC /* OrdersTableViewCell.m */; };
-		FC7E83691C49D01600CFEFCC /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7E83661C49D01600CFEFCC /* OrdersTableViewCell.m */; };
-		FC7E836A1C49D01600CFEFCC /* OrdersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7E83671C49D01600CFEFCC /* OrdersTableViewCell.xib */; };
-		FC7E836B1C49D01600CFEFCC /* OrdersTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC7E83671C49D01600CFEFCC /* OrdersTableViewCell.xib */; };
 		FC7EACB21B8D0C2700B15FC8 /* empty-main.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7EACB01B8D0C2700B15FC8 /* empty-main.png */; };
 		FC7EACB31B8D0C2700B15FC8 /* empty-main.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7EACB01B8D0C2700B15FC8 /* empty-main.png */; };
 		FC7EACB51B8D0C2700B15FC8 /* empty-side.png in Resources */ = {isa = PBXBuildFile; fileRef = FC7EACB11B8D0C2700B15FC8 /* empty-side.png */; };
@@ -465,6 +457,8 @@
 		FCC1E22F1B9F7A1B0029C92D /* gradient-placeholder2.png in Resources */ = {isa = PBXBuildFile; fileRef = FCC1E22D1B9F7A1B0029C92D /* gradient-placeholder2.png */; };
 		FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
 		FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */; };
+		FCC5D2151C532274009C3D7A /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D2141C532274009C3D7A /* OrdersViewController.m */; };
+		FCC5D2161C532274009C3D7A /* OrdersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D2141C532274009C3D7A /* OrdersViewController.m */; };
 		FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED11AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
@@ -812,12 +806,6 @@
 		FC7291291BA8BD6B00BCBDE7 /* pencil-bento.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "pencil-bento.png"; sourceTree = "<group>"; };
 		FC7B609E1B0FF11300A00467 /* BentoModelTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BentoModelTests.m; sourceTree = "<group>"; };
 		FC7B60A01B10045D00A00467 /* BentoShopTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BentoShopTests.m; path = ../Bento/Model/BentoShopTests.m; sourceTree = "<group>"; };
-		FC7E835E1C49CD4F00CFEFCC /* OrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersViewController.h; sourceTree = "<group>"; };
-		FC7E835F1C49CD4F00CFEFCC /* OrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersViewController.m; sourceTree = "<group>"; };
-		FC7E83601C49CD4F00CFEFCC /* OrdersViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersViewController.xib; sourceTree = "<group>"; };
-		FC7E83651C49D01600CFEFCC /* OrdersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersTableViewCell.h; sourceTree = "<group>"; };
-		FC7E83661C49D01600CFEFCC /* OrdersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersTableViewCell.m; sourceTree = "<group>"; };
-		FC7E83671C49D01600CFEFCC /* OrdersTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrdersTableViewCell.xib; sourceTree = "<group>"; };
 		FC7EACB01B8D0C2700B15FC8 /* empty-main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty-main.png"; sourceTree = "<group>"; };
 		FC7EACB11B8D0C2700B15FC8 /* empty-side.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty-side.png"; sourceTree = "<group>"; };
 		FC8285C61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
@@ -949,6 +937,8 @@
 		FCC529C41B8F889000B49F34 /* UIColor+CustomColors.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIColor+CustomColors.h"; path = "../UIColor+CustomColors.h"; sourceTree = "<group>"; };
 		FCC529C51B8F889000B49F34 /* UIColor+CustomColors.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIColor+CustomColors.m"; path = "../UIColor+CustomColors.m"; sourceTree = "<group>"; };
 		FCC529CA1B8FAD4A00B49F34 /* Bento-Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bento-Prefix.pch"; sourceTree = "<group>"; };
+		FCC5D2131C532274009C3D7A /* OrdersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersViewController.h; sourceTree = "<group>"; };
+		FCC5D2141C532274009C3D7A /* OrdersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersViewController.m; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
 		FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCollectionViewCell.m; sourceTree = "<group>"; };
 		FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1756,12 +1746,8 @@
 		FC7E835D1C49CD2E00CFEFCC /* Orders */ = {
 			isa = PBXGroup;
 			children = (
-				FC7E835E1C49CD4F00CFEFCC /* OrdersViewController.h */,
-				FC7E835F1C49CD4F00CFEFCC /* OrdersViewController.m */,
-				FC7E83601C49CD4F00CFEFCC /* OrdersViewController.xib */,
-				FC7E83651C49D01600CFEFCC /* OrdersTableViewCell.h */,
-				FC7E83661C49D01600CFEFCC /* OrdersTableViewCell.m */,
-				FC7E83671C49D01600CFEFCC /* OrdersTableViewCell.xib */,
+				FCC5D2131C532274009C3D7A /* OrdersViewController.h */,
+				FCC5D2141C532274009C3D7A /* OrdersViewController.m */,
 			);
 			name = Orders;
 			sourceTree = "<group>";
@@ -2233,7 +2219,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC7E836B1C49D01600CFEFCC /* OrdersTableViewCell.xib in Resources */,
 				FC4A375A1B4C863500020F8C /* Main.storyboard in Resources */,
 				FCB35C2E1BFE616300A590EC /* green-gradient.png in Resources */,
 				7216B7701AA64C7C0006FFE9 /* deliverylocation_icon_search@2x.png in Resources */,
@@ -2361,7 +2346,6 @@
 				FCDF222D1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				7216B7AE1AA64C7C0006FFE9 /* register_icon_password.png in Resources */,
 				FCDF221D1ADC3ADF006B2750 /* Icon-72.png in Resources */,
-				FC7E83641C49CD4F00CFEFCC /* OrdersViewController.xib in Resources */,
 				FCDF22311ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2370,7 +2354,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FC7E836A1C49D01600CFEFCC /* OrdersTableViewCell.xib in Resources */,
 				FC4A37591B4C862B00020F8C /* Main.storyboard in Resources */,
 				FCB35C2D1BFE616300A590EC /* green-gradient.png in Resources */,
 				90D8F7D11A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png in Resources */,
@@ -2498,7 +2481,6 @@
 				90D8F7B21A5D84B800D034CF /* register_icon_password.png in Resources */,
 				FCDF221C1ADC3ADF006B2750 /* Icon-72.png in Resources */,
 				FC1D61541BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */,
-				FC7E83631C49CD4F00CFEFCC /* OrdersViewController.xib in Resources */,
 				FCDF22301ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2636,6 +2618,7 @@
 				7216B71C1AA64C7C0006FFE9 /* PhoneNumberViewController.m in Sources */,
 				7216B71D1AA64C7C0006FFE9 /* SignInViewController.m in Sources */,
 				FCE036E41BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
+				FCC5D2161C532274009C3D7A /* OrdersViewController.m in Sources */,
 				FCC529C71B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
 				7216B71E1AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FCE036E81BEAC39000F7605B /* CustomAnnotation.m in Sources */,
@@ -2693,7 +2676,6 @@
 				FC9E82111BACE4250099DBF5 /* SocketStringReader.swift in Sources */,
 				FC99D4F41AFC161300BEE40B /* PreviewViewController.m in Sources */,
 				FCAA47A31AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */,
-				FC7E83621C49CD4F00CFEFCC /* OrdersViewController.m in Sources */,
 				7216B7521AA64C7C0006FFE9 /* JGProgressHUDFadeAnimation.m in Sources */,
 				FC9E820E1BACE4250099DBF5 /* SocketParser.swift in Sources */,
 				7216B7531AA64C7C0006FFE9 /* NSData+MKBase64.m in Sources */,
@@ -2707,7 +2689,6 @@
 				FCE8E5FF1C4F10EC00742AEE /* OrderAheadMenu.m in Sources */,
 				FCE1E5111C4737AF00A210DC /* FiveHomeViewController.m in Sources */,
 				7216B7581AA64C7C0006FFE9 /* OutOfDeliveryAddressViewController.m in Sources */,
-				FC7E83691C49D01600CFEFCC /* OrdersTableViewCell.m in Sources */,
 				FC11AAAD1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */,
 				FC9E820B1BACE4250099DBF5 /* SocketPacket.swift in Sources */,
 				7216B7591AA64C7C0006FFE9 /* IntroViewController.m in Sources */,
@@ -2757,6 +2738,7 @@
 				90D8F7BD1A5D990800D034CF /* PhoneNumberViewController.m in Sources */,
 				90D8F7BA1A5D963300D034CF /* SignInViewController.m in Sources */,
 				FCE036E31BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
+				FCC5D2151C532274009C3D7A /* OrdersViewController.m in Sources */,
 				FCC529C61B8F889000B49F34 /* UIColor+CustomColors.m in Sources */,
 				722333FB1A72C133006C2446 /* STPTestPaymentSummaryViewController.m in Sources */,
 				FCE036E71BEAC39000F7605B /* CustomAnnotation.m in Sources */,
@@ -2814,7 +2796,6 @@
 				FC9E82101BACE4250099DBF5 /* SocketStringReader.swift in Sources */,
 				FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */,
 				FCAA47A21AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */,
-				FC7E83611C49CD4F00CFEFCC /* OrdersViewController.m in Sources */,
 				7223335E1A6D4058006C2446 /* JGProgressHUDFadeAnimation.m in Sources */,
 				FC9E820D1BACE4250099DBF5 /* SocketParser.swift in Sources */,
 				722333CF1A6F46DF006C2446 /* NSData+MKBase64.m in Sources */,
@@ -2828,7 +2809,6 @@
 				FCE8E5FE1C4F10EC00742AEE /* OrderAheadMenu.m in Sources */,
 				FCE1E5101C4737AF00A210DC /* FiveHomeViewController.m in Sources */,
 				90D8F7CD1A5E252800D034CF /* OutOfDeliveryAddressViewController.m in Sources */,
-				FC7E83681C49D01600CFEFCC /* OrdersTableViewCell.m in Sources */,
 				FC11AAAC1BFBF8860004A83B /* AddonsTableViewCell.m in Sources */,
 				FC9E820A1BACE4250099DBF5 /* SocketPacket.swift in Sources */,
 				7223336E1A6D66E8006C2446 /* IntroViewController.m in Sources */,

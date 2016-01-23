@@ -122,8 +122,6 @@ static BentoShop *_shareInstance;
     return self;
 }
 
-typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
-
 - (void)sendRequest:(NSString *)strRequest completion:(SendRequestCompletionBlock)completion {
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];

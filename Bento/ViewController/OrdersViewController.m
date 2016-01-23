@@ -2,62 +2,91 @@
 //  OrdersViewController.m
 //  Bento
 //
-//  Created by Joseph Lau on 1/15/16.
+//  Created by Joseph Lau on 1/22/16.
 //  Copyright © 2016 bentonow. All rights reserved.
 //
 
-#import "OrdersViewController.h"
-#import "OrdersTableViewCell.h"
+#define SCREEN_WIDTH [UIScreen mainScreen].bounds.size.width
+#define SCREEN_HEIGHT [UIScreen mainScreen].bounds.size.height
 
-@interface OrdersViewController () <UITableViewDelegate, UITableViewDataSource>
+#import "OrdersViewController.h"
+#import "UIColor+CustomColors.h"
+#import <AFNetworking/AFNetworking.h>
+#import "BentoShop.h"
+#import "DataManager.h"
+
+@interface OrdersViewController () <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic) UITableView *myTableView;
 
 @end
 
 @implementation OrdersViewController
-{
-    NSArray *myDatabase;
-}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    myDatabase = @[
-                   @[@"Today, Dinner", @"Tomorrow, Lunch", @"Tomorrow, Dinner", @"Jan 16, Lunch", @"Jan 16, Dinner"],
-                   @[@"11:00-11:30 AM", @"11:30-12:00 PM", @"12:00-12:30 PM", @"12:30-1:00 PM (sold-out)", @"1:00-1:30 PM", @"1:30-2:00 PM", @"5:00-5:30 PM", @"5:30-6:00 PM"]
-                   ];
+    self.view.backgroundColor = [UIColor whiteColor];
+    
+    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    self.myTableView.dataSource = self;
+    self.myTableView.delegate = self;
+    [self.view addSubview:self.myTableView];
+    
+    // navigation bar color
+    UIView *navigationBarView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, SCREEN_WIDTH, 65)];
+    navigationBarView.backgroundColor = [UIColor whiteColor];
+    [self.view addSubview:navigationBarView];
+
+    // title label
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH / 2 - 110, 20, 220, 45)];
+    titleLabel.textAlignment = NSTextAlignmentCenter;
+    titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
+    titleLabel.textColor = [UIColor bentoTitleGray];
+    titleLabel.text = @"Orders";
+    [self.view addSubview:titleLabel];
+
+    // back button
+    UIButton *closeButton = [[UIButton alloc] initWithFrame:CGRectMake(0, 20, 50, 45)];
+    [closeButton setImage:[UIImage imageNamed:@"nav_btn_close"] forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(closeButtonPressed) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:closeButton];
+
+    // line separator under nav bar
+    UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 1)];
+    longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
+    [self.view addSubview:longLineSepartor1];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
+    [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
+        
+    }];
+}
+
+- (void)closeButtonPressed {
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 45;
 }
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return myDatabase.count;
-}
-
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [myDatabase[section] count];
+    return 2;
 }
 
--(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    static NSString *CellId = @"Cell";
-    
-    OrdersTableViewCell *cell = (OrdersTableViewCell *)[tableView dequeueReusableCellWithIdentifier:CellId];
+    static NSString *cellId = @"cell";
+    UITableViewCell *cell = (UITableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (cell == nil) {
-        cell = [[OrdersTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellId];
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellId];
     }
     
-    switch (indexPath.section) {
-        case 0:
-            cell.menuLabel.text = myDatabase[indexPath.section][indexPath.row];
-            break;
-            
-        default:
-            cell.timeLabel.text = myDatabase[indexPath.section][indexPath.row];
-            break;
-    }
+    cell.textLabel.text = @"hello im joseph";
     
     return cell;
 }

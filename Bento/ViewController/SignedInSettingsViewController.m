@@ -186,7 +186,7 @@
     /*-----------------------------------------------------------*/
     
     // table view
-    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 170, SCREEN_WIDTH, 180-45)];
+    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 170, SCREEN_WIDTH, 180)];
     settingsTableView.alwaysBounceVertical = NO;
     [settingsTableView setSeparatorInset:UIEdgeInsetsMake(0, 60, 0, 0)];
     settingsTableView.delegate = self;
@@ -194,7 +194,7 @@
     [scrollView addSubview:settingsTableView];
     
     // line separator at bottom of table view
-    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 304, SCREEN_WIDTH, 2)];
+    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 304 + 45, SCREEN_WIDTH, 2)];
     longLineSepartor2.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [scrollView addSubview:longLineSepartor2];
     
@@ -355,7 +355,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 3;
+    return 4;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -369,19 +369,19 @@
     //    settingsTableViewCell.iconImageView.backgroundColor = [UIColor colorWithRed:0.694f green:0.702f blue:0.729f alpha:1.0f];
     
     switch (indexPath.row) {
-//        case 0:
-//            settingsTableViewCell.settingsLabel.text = @"Orders";
-//            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
-//            break;
         case 0:
+            settingsTableViewCell.settingsLabel.text = @"Orders";
+            settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
+            break;
+        case 1:
             settingsTableViewCell.settingsLabel.text = @"FAQ";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-help"];
             break;
-        case 1:
+        case 2:
             settingsTableViewCell.settingsLabel.text = @"Email Support";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-email"];
             break;
-        case 2:
+        case 3:
             settingsTableViewCell.settingsLabel.text = @"Phone Support";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-phone"];
             break;
@@ -400,17 +400,17 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     UIViewController *destVC;
     
-//    OrdersViewController *ordersVC = [[OrdersViewController alloc] init];
+    OrdersViewController *ordersVC = [[OrdersViewController alloc] init];
     
     NSArray *toEmailRecipentsArray;
     MFMailComposeViewController *mailComposeViewController;
     
     switch (indexPath.row) {
-//        case 0:
-            // go to orders
-//            [self.navigationController pushViewController:ordersVC animated:YES];
-            break;
         case 0:
+             // go to orders
+            [self.navigationController pushViewController:ordersVC animated:YES];
+            break;
+        case 1:
         {
             // go to faq
             destVC = [storyboard instantiateViewControllerWithIdentifier:@"FAQID"];
@@ -418,7 +418,7 @@
             
             break;
         }
-        case 1:
+        case 2:
             // email
             if ([MFMailComposeViewController canSendMail]) {
                 toEmailRecipentsArray = @[@"help@bentonow.com"];
@@ -431,7 +431,7 @@
             }
             break;
             
-        case 2:
+        case 3:
             // show call alert
             callAlertView.tag = 2;
             [callAlertView showInView:self.view];
