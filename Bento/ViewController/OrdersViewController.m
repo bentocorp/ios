@@ -30,10 +30,14 @@
 @implementation OrdersViewController
 {
     JGProgressHUD *loadingHUD;
+    UILabel *noOrdersLabel;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    [loadingHUD showInView:self.view];
     
     self.orderHistoryArray = [[NSMutableArray alloc] init];
     
@@ -73,7 +77,13 @@
     [self.view addSubview:self.myTableView];
     
     // No Orders
-    UILabel *noOrdersLabel = [];
+    noOrdersLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-100, SCREEN_HEIGHT-22.5, 200, 45)];
+    noOrdersLabel.text = @"NO ORDERS";
+    noOrdersLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+    noOrdersLabel.textColor = [UIColor whiteColor];
+    noOrdersLabel.textAlignment = NSTextAlignmentCenter;
+    noOrdersLabel.hidden = YES;
+    [self.view addSubview:noOrdersLabel];
     
     [self getData];
 }
@@ -125,27 +135,39 @@
 }
 
 - (void)getData {
-    if (loadingHUD == nil) {
-        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-        [loadingHUD showInView:self.view];
-    }
-    
     NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
     [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
-        [loadingHUD dismiss];
-        loadingHUD = nil;
+        if (loadingHUD != nil) {
+            [loadingHUD dismiss];
+            loadingHUD = nil;
+        }
         
         if (error == nil) {
             [self.orderHistoryArray removeAllObjects];
             
             for (NSDictionary *json in responseDic) {
-//                [self.orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
+                [self.orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
+            }
+            
+            BOOL doesAnySectionContainItems = NO;
+            for (OrderHistorySection *section in self.orderHistoryArray) {
+                if (section.items.count > 0) {
+                    doesAnySectionContainItems = YES;
+                }
+            }
+            
+            if (doesAnySectionContainItems == YES) {
+                noOrdersLabel.hidden = YES;
+            }
+            else {
+                noOrdersLabel.hidden = NO;
             }
             
             [self.myTableView reloadData];
         }
         else {
             // error
+            noOrdersLabel.hidden = NO;
         }
     }];
 }
