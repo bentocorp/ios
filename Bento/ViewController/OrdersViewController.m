@@ -18,6 +18,7 @@
 #import "OrderHistorySection.h"
 #import "OrderHistoryItem.h"
 #import "OrdersTableViewCell.h"
+#import "Mixpanel.h"
 
 @interface OrdersViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -35,32 +36,6 @@
     [super viewDidLoad];
     
     self.orderHistoryArray = [[NSMutableArray alloc] init];
-    
-    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    [loadingHUD showInView:self.view];
-    
-    NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
-    [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
-        [loadingHUD dismiss];
-        
-        if (error == nil) {
-            for (NSDictionary *json in responseDic) {
-                [self.orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
-            }
-            
-            // Table View
-            self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
-            self.myTableView.backgroundColor = [UIColor bentoBackgroundGray];
-            self.myTableView.dataSource = self;
-            self.myTableView.delegate = self;
-            self.myTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
-            self.myTableView.allowsSelection = NO;
-            [self.view addSubview:self.myTableView];
-        }
-        else {
-            // error
-        }
-    }];
     
     self.view.backgroundColor = [UIColor whiteColor];
     
@@ -87,6 +62,92 @@
     UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 1)];
     longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [self.view addSubview:longLineSepartor1];
+    
+    // Table View
+    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    self.myTableView.backgroundColor = [UIColor bentoBackgroundGray];
+    self.myTableView.dataSource = self;
+    self.myTableView.delegate = self;
+    self.myTableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
+    self.myTableView.allowsSelection = NO;
+    [self.view addSubview:self.myTableView];
+    
+    // No Orders
+    UILabel *noOrdersLabel = [];
+    
+    [self getData];
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:@"enteredForeground" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [super viewWillDisappear:animated];
+    
+    [self endTimerOnViewedScreen];
+}
+
+#pragma mark Duration on screen
+- (void)startTimerOnViewedScreen {
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Orders Screen"];
+}
+
+- (void)endTimerOnViewedScreen {
+    [[Mixpanel sharedInstance] track:@"Viewed Orders Screen"];
+}
+
+- (void)noConnection {
+    if (loadingHUD == nil) {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+        [loadingHUD showInView:self.view];
+    }
+}
+
+- (void)yesConnection {
+    [loadingHUD dismiss];
+    loadingHUD = nil;
+}
+
+- (void)getData {
+    if (loadingHUD == nil) {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        [loadingHUD showInView:self.view];
+    }
+    
+    NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
+    [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
+        [loadingHUD dismiss];
+        loadingHUD = nil;
+        
+        if (error == nil) {
+            [self.orderHistoryArray removeAllObjects];
+            
+            for (NSDictionary *json in responseDic) {
+//                [self.orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
+            }
+            
+            [self.myTableView reloadData];
+        }
+        else {
+            // error
+        }
+    }];
 }
 
 - (void)closeButtonPressed {
