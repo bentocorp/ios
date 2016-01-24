@@ -201,43 +201,53 @@
 
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
                 [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
-                [[BentoShop sharedInstance] getInit2WithGateKeeper];
+                [globalShop getInit2WithGateKeeper];
+                
+                [self afterViewWillAppear];
             }
             else {
-                [[BentoShop sharedInstance] getInit2];
+                [globalShop getInit2:^(BOOL succeeded, NSError *error) {
+                    [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+                    [globalShop getMenus];
+                    [globalShop getNextMenus];
+                    [globalShop getStatus];
+                    [globalShop getServiceArea];
+                    
+                    [self afterViewWillAppear];
+                }];
             }
             
-            [[BentoShop sharedInstance] getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-            [[BentoShop sharedInstance] getMenus];
-            [[BentoShop sharedInstance] getNextMenus];
-            [[BentoShop sharedInstance] getStatus];
-            [[BentoShop sharedInstance] getServiceArea];
+            
         }
     
-        dispatch_async(dispatch_get_main_queue(), ^{
+        
+    });
+}
+
+- (void)afterViewWillAppear {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        
+        [[BentoShop sharedInstance] refreshStart];
+        [[CountdownTimer sharedInstance] refreshStart];
+        
+        if (!_hasInit) {
             
-            [[BentoShop sharedInstance] refreshStart];
-            [[CountdownTimer sharedInstance] refreshStart];
+            // current VC has init once before
+            _hasInit = YES;
             
-            if (!_hasInit) {
-                
-                // current VC has init once before
-                _hasInit = YES;
-                
-                [self performSelector:@selector(initProcedure) withObject:nil afterDelay:0.01f];
-            }
-            else {
-                // go to which screen next?
-                [self processAfterLogin];
-            }
-            
-            // reset if closed
-            if ([globalShop isClosed]) {
-                [globalShop resetBentoArray];
-            }
-            
-            [self.activityIndicator stopAnimating];
-        });
+            [self performSelector:@selector(initProcedure) withObject:nil afterDelay:0.01f];
+        }
+        else {
+            // go to which screen next?
+            [self processAfterLogin];
+        }
+        
+        // reset if closed
+        if ([[BentoShop sharedInstance] isClosed]) {
+            [[BentoShop sharedInstance] resetBentoArray];
+        }
+        
+        [self.activityIndicator stopAnimating];
     });
 }
 

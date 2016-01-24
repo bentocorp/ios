@@ -239,7 +239,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             [[BentoShop sharedInstance] getInit2WithGateKeeper];
         }
         else {
-            [[BentoShop sharedInstance] getInit2];
+            [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
+                
+            }];
         }
         
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
@@ -312,7 +314,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             [[BentoShop sharedInstance] getInit2WithGateKeeper];
         }
         else {
-            [[BentoShop sharedInstance] getInit2];
+            [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
+                
+            }];
         }
         
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
@@ -553,7 +557,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             [[BentoShop sharedInstance] getInit2WithGateKeeper];
         }
         else {
-            [[BentoShop sharedInstance] getInit2];
+            [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
+                
+            }];
         }
         
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];

@@ -138,7 +138,7 @@ static BentoShop *_shareInstance;
 }
 
 // get init2 if intro not processed and no saved address
-- (void)getInit2 {
+- (void)getInit2:(GetInit2Block)completion {
     [self sendRequest:@"/init2" completion:^(id responseDic, NSError *error) {
         if (error == nil) {
             self.dicInit2 = (NSDictionary *)responseDic;
@@ -146,9 +146,12 @@ static BentoShop *_shareInstance;
             [self getiOSMinAndCurrentVersions];
             [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
+            
+            completion(YES, error);
         }
         else {
             NSLog(@"getInit2 error: %@", error);
+            completion(NO, error);
         }
     }];
 }
@@ -1212,7 +1215,9 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
                     [self getInit2WithGateKeeper];
                 }
                 else {
-                    [[BentoShop sharedInstance] getInit2];
+                    [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
+                        
+                    }];
                 }
                 
 //                [self checkIfBentoArrayNeedsToBeReset];

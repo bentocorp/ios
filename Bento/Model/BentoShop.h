@@ -70,7 +70,10 @@
 - (BOOL)isThereLunchNextMenu;
 - (BOOL)isThereDinnerNextMenu;
 
-- (void)getInit2;
+typedef void (^GetInit2Block)(BOOL succeeded, NSError *error);
+- (void)getInit2:(GetInit2Block)completion;
+
+//typedef void (^GetInit2GateKeeperBlock)(BOOL succeeded, NSError *error);
 - (void)getInit2WithGateKeeper;
 
 - (void)getiOSMinAndCurrentVersions;
