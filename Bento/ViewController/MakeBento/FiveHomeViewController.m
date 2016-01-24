@@ -62,7 +62,6 @@
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 
 @property (nonatomic) OrderMode orderMode;
-@property (nonatomic) PickerState pickerState;
 
 @property (nonatomic) BOOL isToggledOn;
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
@@ -936,7 +935,7 @@
         [self loadSelectedDishes];
         [self setCart];
         [self updateBottomButton];
-        [self checkPickerState];
+//        [self checkPickerState];
         [self setUpPickerData];
         [self updateWidget];
         
@@ -1511,21 +1510,18 @@
     }
     
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
-        self.pickerState = Both;
         [self installOnDemand];
         [self installOrderAhead];
         [self updateWidget];
         [self defaultToOnDemandOrOrderAhead];
     }
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
-        self.pickerState = OnDemandOnly;
         [self removeOrderAhead];
         [self installOnDemand];
         [self updateWidget];
         [self enableOnDemand];
     }
     else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-        self.pickerState = OrderAheadOnly;
         [self removeOnDemand];
         [self installOrderAhead];
         [self enableOrderAhead];
@@ -1540,56 +1536,20 @@
     }
     
     if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
-        self.pickerState = Both;
         [self installOnDemand];
         [self installOrderAhead];
         [self updateWidget];
     }
     else if ([[BentoShop sharedInstance] isThereOnDemand]) {
-        self.pickerState = OnDemandOnly;
         [self removeOrderAhead];
         [self installOnDemand];
         [self updateWidget];
         [self enableOnDemand];
     }
     else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-        self.pickerState = OrderAheadOnly;
         [self removeOnDemand];
         [self installOrderAhead];
         [self enableOrderAhead];
-    }
-}
-
-- (void)checkPickerState {
-    NSInteger newState;
-    if ([[BentoShop sharedInstance] isThereOnDemand] && [[BentoShop sharedInstance] isThereOrderAhead]) {
-        newState = 3;
-    }
-    else if ([[BentoShop sharedInstance] isThereOnDemand]) {
-        newState = 0;
-    }
-    else if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-        newState = 1;
-    }
-
-    // state changed!
-    if (newState != self.pickerState) {
-        
-        NSLog(@"original picker state: %ld vs new state %ld", self.pickerState, newState);
-        
-        self.pickerState = newState;
-        
-        [self.view layoutIfNeeded];
-        
-        [UIView animateWithDuration:0.5 animations:^{
-            [self refreshState];
-            
-            if (self.isToggledOn == NO) {
-                [self toggleOn];
-            }
-            
-//            [self.view layoutIfNeeded];
-        }];
     }
 }
 
