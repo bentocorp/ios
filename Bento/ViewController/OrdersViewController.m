@@ -31,10 +31,14 @@
 {
     JGProgressHUD *loadingHUD;
     UILabel *noOrdersLabel;
+    
+    BOOL isFirstTimeLoad;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    isFirstTimeLoad = YES;
     
     self.orderHistoryArray = [[NSMutableArray alloc] init];
     
@@ -132,8 +136,12 @@
 }
 
 - (void)getData {
-    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    [loadingHUD showInView:self.view];
+    
+    if (isFirstTimeLoad == YES) {
+        isFirstTimeLoad = NO;
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        [loadingHUD showInView:self.view];
+    }
     
     NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
     [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
