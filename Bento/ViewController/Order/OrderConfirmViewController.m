@@ -96,7 +96,7 @@
     for (UIViewController *vc in viewControllers) {
         if ([vc isKindOfClass:[FiveHomeViewController class]]) {
             [self.navigationController popToViewController:vc animated:YES];
-            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"didPopBackFromViewAllOrdersButton" object:nil];
             return;
         }
     }

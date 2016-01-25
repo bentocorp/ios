@@ -8,12 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
-@protocol OrderConfirmationViewControllerDelegate <NSObject>
-
-
-
-@end
-
 @interface OrderConfirmViewController : UIViewController
+
+@property (nonatomic) id delegate;
 
 @end
