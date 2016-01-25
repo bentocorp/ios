@@ -232,9 +232,8 @@
 }
 
 - (void)presentSignedInVCThenPushToOrdersVC {
-    [self presentViewController:[[SignedInSettingsViewController alloc] init] animated:YES completion:^{
-        [self.navigationController pushViewController:[[OrdersViewController alloc] init] animated:NO];
-    }];
+    [self.delegate didComeFromViewAllsOrdersButton];
+    [self presentViewController:[[SignedInSettingsViewController alloc] init] animated:YES completion:nil];
 }
 
 #pragma  mark Check Location

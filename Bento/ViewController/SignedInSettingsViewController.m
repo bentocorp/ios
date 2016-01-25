@@ -31,11 +31,13 @@
 
 #import "EditPhoneNumberView.h"
 
+#import "FiveHomeViewController.h"
+
 //#import "OrderStatusViewController.h"
 
 //#import <FBSDKShareKit/FBSDKShareKit.h>
 
-@interface SignedInSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, EditPhoneNumberDelegate>
+@interface SignedInSettingsViewController () <UITableViewDataSource, UITableViewDelegate, MFMailComposeViewControllerDelegate, MFMessageComposeViewControllerDelegate, EditPhoneNumberDelegate, FiveHomeViewControllerDelegate>
 
 @end
 
@@ -57,6 +59,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    FiveHomeViewController *homeVC = [[FiveHomeViewController alloc] init];
+    homeVC.delegate = self;
     
     // get current user info
     currentUserInfo = [[DataManager shareDataManager] getUserInfo];
@@ -309,6 +314,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(pushToOrdersVC) name:@"didPopBackFromViewAllOrdersButtonFollowUp" object:nil];
     
     [self startTimerOnViewedScreen];
 }
@@ -715,6 +721,10 @@
     ivPencil.frame = CGRectMake(25 + phoneNumberLabel.frame.size.width + 5, 105, 15, 15);
     
     btnPencil.frame = CGRectMake(25 + phoneNumberLabel.frame.size.width, 100, 25, 25);
+}
+
+- (void)didComeFromViewAllsOrdersButton {
+    [self.navigationController pushViewController:[[OrdersViewController alloc] init] animated:NO];
 }
 
 @end
