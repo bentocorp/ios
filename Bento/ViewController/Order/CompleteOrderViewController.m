@@ -439,7 +439,12 @@
 //        [self.btnChangeAddr setTitle:[[AppStrings sharedInstance] getString:COMPLETE_TEXT_ENTER_ADDRESS] forState:UIControlStateNormal];
     }
     
-    self.ETARangeLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
+    if (self.orderMode == OnDemand) {
+        self.ETARangeLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
+    }
+    else if (self.orderMode == OrderAhead) {
+        self.ETARangeLabel.hidden = YES;
+    }
     
     [self updateUI];
     

@@ -80,8 +80,7 @@
     
     // check if iphone 4 screen height
     if (SCREEN_HEIGHT <= 480) {
-        scrollViewContentSizeHeight = SCREEN_HEIGHT + 41;
-        NSLog(@"This is an iPhone 4.");
+        scrollViewContentSizeHeight = SCREEN_HEIGHT + 50;
     } else {
         scrollViewContentSizeHeight = SCREEN_HEIGHT;
     }
