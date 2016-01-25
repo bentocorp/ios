@@ -67,7 +67,7 @@
     backgroundLayer.frame = self.ivImage.frame;
     [self.ivImage.layer insertSublayer:backgroundLayer atIndex:0];
     self.gradientLayer = backgroundLayer;
-    self.gradientLayer.opacity = 0.8f;
+    self.gradientLayer.opacity = 0.6f;
     
     self.ivMask.hidden = YES;
 }
