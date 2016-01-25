@@ -82,6 +82,7 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
@@ -1275,6 +1276,13 @@
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Thu, Jan 1/31" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="fqg-0q-aSo">
+                                        <rect key="frame" x="195" y="0.0" width="117" height="58"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="13"/>
+                                        <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="iiJ-Jj-yAJ">
                                         <rect key="frame" x="0.0" y="0.0" width="180" height="58"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" heightSizable="YES"/>
@@ -1545,6 +1553,7 @@
                         <outlet property="btnChangeMethod" destination="cOo-Wx-ePj" id="chj-se-Wk3"/>
                         <outlet property="btnGetItNow" destination="2Gh-RT-7qO" id="XyJ-pl-SdZ"/>
                         <outlet property="clockImageView" destination="72H-rG-xhR" id="RdS-8p-tM6"/>
+                        <outlet property="dateAndTimeLabel" destination="fqg-0q-aSo" id="hu6-iJ-zXB"/>
                         <outlet property="ivCardType" destination="cls-zz-h40" id="irU-AI-WhK"/>
                         <outlet property="lblAddress" destination="LX8-ou-bJ7" id="xdF-aw-kJV"/>
                         <outlet property="lblDeliveryPrice" destination="jf1-R6-9fd" id="rrc-dl-lQq"/>

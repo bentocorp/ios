@@ -1823,7 +1823,9 @@
         menuInfo = @{
                      @"orderAheadMenu": self.orderAheadMenu,
                      @"orderMode": [NSString stringWithFormat:@"%ld", (long)self.orderMode],
-                     @"selectedOrderAheadIndex": [NSString stringWithFormat:@"%ld", (long)selectedOrderAheadIndex]
+                     @"selectedOrderAheadIndex": [NSString stringWithFormat:@"%ld", (long)selectedOrderAheadIndex],
+                     @"menuName": [NSString stringWithFormat:@"%@", menuOrderAhead],
+                     @"menuTime": [NSString stringWithFormat:@"%@", timeOrderAhead]
                      };
     }
     
