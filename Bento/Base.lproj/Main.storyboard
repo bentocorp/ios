@@ -1544,6 +1544,7 @@
                         <outlet property="btnAddPromo" destination="fxD-Rl-wWD" id="vaf-Hc-Jxj"/>
                         <outlet property="btnChangeMethod" destination="cOo-Wx-ePj" id="chj-se-Wk3"/>
                         <outlet property="btnGetItNow" destination="2Gh-RT-7qO" id="XyJ-pl-SdZ"/>
+                        <outlet property="clockImageView" destination="72H-rG-xhR" id="RdS-8p-tM6"/>
                         <outlet property="ivCardType" destination="cls-zz-h40" id="irU-AI-WhK"/>
                         <outlet property="lblAddress" destination="LX8-ou-bJ7" id="xdF-aw-kJV"/>
                         <outlet property="lblDeliveryPrice" destination="jf1-R6-9fd" id="rrc-dl-lQq"/>
@@ -1559,6 +1560,7 @@
                         <outlet property="lblTitleTotal" destination="R8F-6H-yJt" id="kiy-gj-n2K"/>
                         <outlet property="lblTotal" destination="G2i-DY-dBo" id="qUl-hw-fuk"/>
                         <outlet property="lblTotalPrevious" destination="WeE-11-Aef" id="ayO-7A-9vx"/>
+                        <outlet property="minutesLabel" destination="Fbe-aA-8kc" id="lQe-cm-EOX"/>
                         <outlet property="tvBentos" destination="Lth-bX-9L2" id="sEt-iJ-Lnf"/>
                         <outlet property="viewList" destination="hVC-th-zts" id="HUh-JG-6eS"/>
                         <outlet property="viewPromo" destination="tfC-0t-xL2" id="7kF-tZ-iG9"/>

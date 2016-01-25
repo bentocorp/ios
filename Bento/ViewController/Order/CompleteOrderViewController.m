@@ -83,6 +83,8 @@
 @property (weak, nonatomic) IBOutlet UILabel *lblTotalPrevious;
 @property (weak, nonatomic) IBOutlet UILabel *lblTitleDelivery;
 @property (weak, nonatomic) IBOutlet UILabel *ETARangeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *clockImageView;
+@property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
 
 @property (nonatomic, weak) IBOutlet UITableView *tvBentos;
 
@@ -444,6 +446,8 @@
     }
     else if (self.orderMode == OrderAhead) {
         self.ETARangeLabel.hidden = YES;
+        self.clockImageView.hidden = YES;
+        self.minutesLabel.hidden = YES;
     }
     
     [self updateUI];
