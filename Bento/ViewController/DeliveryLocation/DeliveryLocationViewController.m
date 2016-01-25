@@ -259,15 +259,20 @@
                 CompleteOrderViewController *completeOrderViewController = [[CompleteOrderViewController alloc] init];
                 [self.navigationController pushViewController:completeOrderViewController animated:YES];
             }
-            else
-                [self.navigationController popToViewController:vc animated:YES];
+            else {
+//                [self.navigationController popToViewController:vc animated:YES];
+//                [self.navigationController popToRootViewControllerAnimated:YES];
+                [self performSelector:@selector(nextToBuildPop) withObject:nil afterDelay:3];
+            }
             
             return;
         }
     }
     
-    FiveHomeViewController *homeVC = [[FiveHomeViewController alloc] init];
-    [self.navigationController popToViewController:homeVC animated:YES];
+//    FiveHomeViewController *homeVC = [[FiveHomeViewController alloc] init];
+//    [self.navigationController popToViewController:homeVC animated:YES];
+//    [self.navigationController popToRootViewControllerAnimated:YES];
+    [self performSelector:@selector(nextToBuildPop) withObject:nil afterDelay:3];
 }
 
 - (void)doConfirmOrder
@@ -513,7 +518,9 @@
             else if (isSelectedLocationInZone) {
                 if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] == nil) {
                     [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
-                    [self.navigationController popToRootViewControllerAnimated:YES];
+//                    [self.navigationController popToRootViewControllerAnimated:YES];
+                    
+                    [self performSelector:@selector(nextToBuildPop) withObject:nil afterDelay:3];
                     return;
                 }
             }
@@ -530,6 +537,10 @@
         
         [self doConfirmOrder];
     }
+}
+
+- (void)nextToBuildPop {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 - (void)gotoNoneDeliveryAreaScreen {

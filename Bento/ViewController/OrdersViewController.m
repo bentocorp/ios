@@ -36,9 +36,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
-    [loadingHUD showInView:self.view];
-    
     self.orderHistoryArray = [[NSMutableArray alloc] init];
     
     self.view.backgroundColor = [UIColor whiteColor];
@@ -68,7 +65,7 @@
     [self.view addSubview:longLineSepartor1];
     
     // Table View
-    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 64, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
+    self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
     self.myTableView.backgroundColor = [UIColor bentoBackgroundGray];
     self.myTableView.dataSource = self;
     self.myTableView.delegate = self;
@@ -135,6 +132,9 @@
 }
 
 - (void)getData {
+    loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+    [loadingHUD showInView:self.view];
+    
     NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
     [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
         if (loadingHUD != nil) {

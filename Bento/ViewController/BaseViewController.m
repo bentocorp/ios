@@ -12,6 +12,7 @@
 #import "SoldOutViewController.h"
 #import "SignInViewController.h"
 #import "AddonsViewController.h"
+#import "CompleteOrderViewController.h"
 
 @interface BaseViewController ()
 

@@ -203,6 +203,12 @@
                 [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
                 [globalShop getInit2WithGateKeeper];
                 
+                [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+                [globalShop getMenus];
+                [globalShop getNextMenus];
+                [globalShop getStatus];
+                [globalShop getServiceArea];
+                
                 [self afterViewWillAppear];
             }
             else {
@@ -437,7 +443,8 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     // prevent unbalanced call to vc error
-    double delayInSeconds = 0.1;
+//    double delayInSeconds = 0.1;
+    double delayInSeconds = 0.3;
     dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, delayInSeconds * NSEC_PER_SEC);
     dispatch_after(popTime, dispatch_get_main_queue(), ^(void) {
         

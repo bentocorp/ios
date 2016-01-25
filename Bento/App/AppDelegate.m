@@ -17,6 +17,8 @@
 #import "DataManager.h"
 #import "CountdownTimer.h"
 
+#import "AddonList.h"
+
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
@@ -88,12 +90,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
-    // testing socket handler
-    
-    
-//    [SocketHandler sharedSocket] connectAndAuthenticate:<#(NSString *)#> password:<#(NSString *)#>];
-    
-    
+    [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"checkedForLocationOnLaunch"];
     
     /*------------------------------------REGISTER NOTIFICATIONS-------------------------------------*/
     
@@ -596,13 +593,15 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     [manager stopUpdatingLocation];
     
-    [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
-        if (isSelectedLocationInZone == NO) {
-            [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
-        }
-        
-        [self trackAppLaunch: YES];
-    }];
+//    [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+//        if (isSelectedLocationInZone == NO) {
+//            [[Mixpanel sharedInstance] track:@"Opened App Outside of Service Area"];
+//        }
+//        
+//        
+//    }];
+    
+    [self trackAppLaunch: YES];
 }
 
 - (CLLocationCoordinate2D)getGPSLocation {

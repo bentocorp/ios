@@ -24,14 +24,15 @@
     if (self) {
         self.backgroundColor = [UIColor clearColor];
         
-        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 200, 21)];
+        self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 220, 21)];
         self.titleLabel.textColor = [UIColor bentoBrandGreen];
-        self.titleLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
+        self.titleLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:12];
+        self.titleLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:self.titleLabel];
         
         self.priceLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 100, 12, 80, 21)];
         self.priceLabel.textColor = [UIColor bentoCorrectTextGray];
-        self.priceLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
+        self.priceLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:12];
         self.priceLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:self.priceLabel];
     }

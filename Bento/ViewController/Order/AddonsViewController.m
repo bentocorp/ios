@@ -71,6 +71,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
+    
     _selectedPath = -1;
     
     /*---Navigation View---*/

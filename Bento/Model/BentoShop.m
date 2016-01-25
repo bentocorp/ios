@@ -159,22 +159,27 @@ static BentoShop *_shareInstance;
 // get gatekeeper if location available
 // if no gps, use saved address
 - (void)getInit2WithGateKeeper {
-    dispatch_sync(dispatch_get_main_queue(), ^{
-        [locationManager startUpdatingLocation];
-    });
+//    dispatch_sync(dispatch_get_main_queue(), ^{
+//        [locationManager startUpdatingLocation];
+//    });
+    
+    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    if (placeInfo != nil) {
+        [self requestGateKeeper:placeInfo.location.coordinate];
+    }
 }
 
-- (void)getGateKeeperWithLocation {
-    if (CLLocationCoordinate2DIsValid(gpsCoordinateForGateKeeper)) {
-        [self requestGateKeeper:gpsCoordinateForGateKeeper];
-    }
-    else {
-        SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
-        if (placeInfo != nil) {
-            [self requestGateKeeper:placeInfo.location.coordinate];
-        }
-    }
-}
+//- (void)getGateKeeperWithLocation {
+//    if (CLLocationCoordinate2DIsValid(gpsCoordinateForGateKeeper)) {
+//        [self requestGateKeeper:gpsCoordinateForGateKeeper];
+//    }
+//    else {
+//        SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+//        if (placeInfo != nil) {
+//            [self requestGateKeeper:placeInfo.location.coordinate];
+//        }
+//    }
+//}
 
 - (void)requestGateKeeper:(CLLocationCoordinate2D)coordinate {
     NSString *strDate = [self getDateStringWithDashes];
@@ -255,13 +260,13 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     CLLocation *location = locations[0];
     gpsCoordinateForGateKeeper = location.coordinate;
     
-    [self getGateKeeperWithLocation];
+//    [self getGateKeeperWithLocation];
     [locationManager stopUpdatingLocation];
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     gpsCoordinateForGateKeeper = kCLLocationCoordinate2DInvalid;
-    [self getGateKeeperWithLocation];
+//    [self getGateKeeperWithLocation];
 }
 
 - (void)getStatus {

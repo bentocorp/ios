@@ -97,6 +97,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    [[BentoShop sharedInstance] resetBentoArray];
+    [[AddonList sharedInstance] emptyList];
+    
     [CountdownTimer sharedInstance];
     
     isThereConnection = YES;
@@ -139,16 +142,32 @@
         [[BentoShop sharedInstance] addNewBento];
     }
     
-    [self checkLocationOnLoad];
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"checkedForLocationOnLaunch"] == NO) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"checkedForLocationOnLaunch"];
+        [self checkLocationOnLoad];
+    }
     
+    if (loadingHUD == nil) {
+        loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        [loadingHUD showInView:self.view];
+    }
+    
+    self.asapTimeLabel.hidden = YES;
     SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     if (placemark != nil) {
         [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
-            if (isSelectedLocationInZone) {
-                [self refreshStateOnLaunch];
-            }
+            
+            [self refreshStateOnLaunch];
+            self.asapTimeLabel.hidden = NO;
+            
+            [self performSelector:@selector(finishedLoadingData) withObject:nil afterDelay:1];
         }];
     }
+}
+
+- (void)finishedLoadingData {
+    [loadingHUD dismiss];
+    loadingHUD = nil;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -170,14 +189,24 @@
     addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
     
-    [self updateUI];
+//    [self updateUI];
+    [self checkBentoCount];
+    [self loadSelectedDishes];
+    [self setCart];
+    [self checkAppState];
+    [self setETA];
+    [self setStartingPrice];
+    [self showOrHideAddAnotherBentoAndViewAddons];
+    [self setBuildButtonText];
+    [self updateBottomButton];
     
+    ////
     [self startTimerOnViewedScreen];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_NEXTMENU object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedMenu:) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
@@ -202,11 +231,11 @@
 
 #pragma  mark Check Location
 - (void)checkLocationOnLoad {
-    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
-    CLLocationCoordinate2D gpsLocation = [appDelegate getGPSLocation];
+//    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+//    CLLocationCoordinate2D gpsLocation = [appDelegate getGPSLocation];
     
-    // no gps
-    if (gpsLocation.latitude == 0 && gpsLocation.longitude == 0) {
+//     no gps
+//    if (gpsLocation.latitude == 0 && gpsLocation.longitude == 0) {
         // yes saved location
         SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
         if (placemark != nil) {
@@ -223,25 +252,25 @@
         else {
             [self nextToBuildShowMap];
         }
-    }
-    // yes gps
-    else {
-        // never saved an address before
-        if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] == nil) {
-            [self nextToBuildShowMap];
-        }
-        else {
-            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
-                if (isSelectedLocationInZone == NO) {
-                    [self nextToBuildShowMap];
-                }
-                else {
-                    [self checkIfInZoneButNoMenuAndNotClosed:appState];
-                }
-            }];
-        }
-    }
-    
+//    }
+//    // yes gps
+//    else {
+//        // never saved an address before
+//        if ([[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] == nil) {
+//            [self nextToBuildShowMap];
+//        }
+//        else {
+//            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:gpsLocation completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+//                if (isSelectedLocationInZone == NO) {
+//                    [self nextToBuildShowMap];
+//                }
+//                else {
+//                    [self checkIfInZoneButNoMenuAndNotClosed:appState];
+//                }
+//            }];
+//        }
+//    }
+
 //    [[DataManager shareDataManager] getUserInfo] == nil
 }
 
@@ -926,20 +955,26 @@
 
 - (void)updateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self checkAppState];
-        [self setETA];
-        [self setStartingPrice];
-        [self showOrHideAddAnotherBentoAndViewAddons];
-        [self setBuildButtonText];
         [self checkBentoCount];
         [self loadSelectedDishes];
         [self setCart];
+        
+        [self checkAppState];
+        
+        [self setETA];
+        [self setStartingPrice];
+        
+        [self showOrHideAddAnotherBentoAndViewAddons];
+        [self setBuildButtonText];
+        
+        
         [self updateBottomButton];
-//        [self checkPickerState];
         [self setUpPickerData];
         [self updateWidget];
         
-//        [[NSUserDefaults standardUserDefaults] rm_setCustomObject:[NSString stringWithFormat:@"%ld", self.orderMode] forKey:@"savedOrderMode0Or1"];
+        [self updatePickerButtonTitle];
+        
+//        [self refreshState];
     });
 }
 
@@ -1057,13 +1092,6 @@
     }
 }
 
-//- (void)onUpdatedMenu:(NSNotification *)notification {
-//    if (isThereConnection) {
-//        [self refreshState];
-//        [self updateUI];
-//    }
-//}
-
 - (void)setETA {
     self.etaLabel.text = [NSString stringWithFormat:@"ETA: %ld-%ld MIN.", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
 }
@@ -1138,6 +1166,7 @@
             [self showSoldoutScreen:[NSNumber numberWithInt:1]];
         }
         else {
+//            [self refreshState];
             [self updateUI];
         }
     }
@@ -1502,8 +1531,6 @@
 //        }
 //    }
     
-    [self clearCart];
-    
     if ([[BentoShop sharedInstance] isThereOrderAhead]) {
         selectedOrderAheadIndex = 0;
         self.selectedOrderAheadTimeRangeIndex = 0;
@@ -1526,6 +1553,8 @@
         [self installOrderAhead];
         [self enableOrderAhead];
     }
+    
+    [self updateUI];
 }
 
 - (void)refreshState {
@@ -1559,7 +1588,7 @@
 
 - (void)defaultToOnDemandOrOrderAhead {
     NSNumber *isSelectedNum = (NSNumber *)self.widget[@"selected"];
-    if ([isSelectedNum boolValue]) {
+    if ([isSelectedNum boolValue] == YES) {
         [self enableOnDemand];
     }
     else {
@@ -1672,7 +1701,9 @@
         [self.asapDescriptionLabel sizeToFit];
         self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
         
-        [self showOrHidePreview];
+        if (self.orderMode == OnDemand) {
+            [self showOrHidePreview];
+        }
     }
 }
 
@@ -1762,12 +1793,20 @@
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
-    self.orderAheadMenu.deliveryPrice = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"delivery_price"];
-    self.orderAheadMenu.scheduledWindowStartTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"start"];
-    self.orderAheadMenu.scheduledWindowEndTime = self.orderAheadMenu.rawTimeRangesArray[selectedOrderAheadIndex][@"end"];
-    completeOrderViewController.orderAheadMenu = self.orderAheadMenu;
-    completeOrderViewController.orderMode = self.orderMode;
-    completeOrderViewController.selectedOrderAheadIndex = selectedOrderAheadIndex;
+    self.orderAheadMenu.deliveryPrice = self.orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"delivery_price"];
+    self.orderAheadMenu.scheduledWindowStartTime = self.orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"start"];
+    self.orderAheadMenu.scheduledWindowEndTime = self.orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"end"];
+//    completeOrderViewController.orderAheadMenu = self.orderAheadMenu;
+//    completeOrderViewController.orderMode = self.orderMode;
+//    completeOrderViewController.selectedOrderAheadIndex = selectedOrderAheadIndex;
+    
+    NSDictionary *menuInfo = @{
+                               @"orderAheadMenu": self.orderAheadMenu,
+                               @"orderMode": [NSString stringWithFormat:@"%ld", (long)self.orderMode],
+                               @"selectedOrderAheadIndex": [NSString stringWithFormat:@"%ld", (long)selectedOrderAheadIndex]
+                               };
+    
+    [[NSUserDefaults standardUserDefaults] rm_setCustomObject:menuInfo forKey:@"menuInfo"];
     
     
     // user and place info
@@ -1911,14 +1950,9 @@
         [self showConfirmMsg];
     }
     else {
-        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"AutoShowAddons"] == YES) {
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
-                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
-                [self presentAddOns];
-            }
-            else {
-                [self gotoOrderScreen];
-            }
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"didAutoShowAddons"] != YES) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"didAutoShowAddons"];
+            [self presentAddOns];
         }
         else {
             [self gotoOrderScreen];
@@ -2059,10 +2093,14 @@
     timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
     
     if (self.orderMode == OnDemand) {
-        [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOnDemand, timeOnDemand] forState:UIControlStateNormal];
+        if (menuOnDemand != nil && timeOnDemand != nil) {
+            [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOnDemand, timeOnDemand] forState:UIControlStateNormal];
+        }
     }
     else if (self.orderMode == OrderAhead) {
-        [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOrderAhead, timeOrderAhead] forState:UIControlStateNormal];
+        if (menuOrderAhead != nil && timeOrderAhead != nil) {
+            [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOrderAhead, timeOrderAhead] forState:UIControlStateNormal];
+        }
     }
     
     [self updateMenu];

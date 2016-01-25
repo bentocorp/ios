@@ -148,6 +148,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSDictionary *menuInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"menuInfo"];
+    
+    self.orderMode = [menuInfo[@"orderMode"] integerValue];
+    self.orderAheadMenu = menuInfo[@"orderAheadMenu"];
+    self.selectedOrderAheadIndex = [menuInfo[@"selectedOrderAheadIndex"] integerValue];
+    
     allowCommitOnKeep = YES;
     
     // Mixpanel track for Placed An Order

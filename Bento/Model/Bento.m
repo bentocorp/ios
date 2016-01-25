@@ -286,7 +286,7 @@
             if (![self.orderAheadMenu canAddDish:dishIndex])
                 continue;
             
-            if (![self canAddSideDish:dishIndex])
+            if (![self.orderAheadMenu canAddSideDish:dishIndex])
                 continue;
             
             self.indexSideDish1 = dishIndex;
@@ -305,7 +305,7 @@
             if (![self.orderAheadMenu canAddDish:dishIndex])
                 continue;
             
-            if (![self canAddSideDish:dishIndex])
+            if (![self.orderAheadMenu canAddSideDish:dishIndex])
                 continue;
             
             self.indexSideDish2 = dishIndex;
@@ -324,7 +324,7 @@
             if (![self.orderAheadMenu canAddDish:dishIndex])
                 continue;
             
-            if (![self canAddSideDish:dishIndex])
+            if (![self.orderAheadMenu canAddSideDish:dishIndex])
                 continue;
             
             self.indexSideDish3 = dishIndex;
@@ -343,7 +343,7 @@
             if (![self.orderAheadMenu canAddDish:dishIndex])
                 continue;
             
-            if (![self canAddSideDish:dishIndex])
+            if (![self.orderAheadMenu canAddSideDish:dishIndex])
                 continue;
             
             self.indexSideDish4 = dishIndex;
