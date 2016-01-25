@@ -25,7 +25,7 @@
         self.backgroundColor = [UIColor clearColor];
         
         self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, 12, 220, 21)];
-        self.titleLabel.textColor = [UIColor bentoBrandGreen];
+        self.titleLabel.textColor = [UIColor bentoCorrectTextGray];
         self.titleLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:12];
         self.titleLabel.adjustsFontSizeToFitWidth = YES;
         [self addSubview:self.titleLabel];
