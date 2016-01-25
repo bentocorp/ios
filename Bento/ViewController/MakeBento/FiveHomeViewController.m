@@ -1800,15 +1800,22 @@
 //    completeOrderViewController.orderMode = self.orderMode;
 //    completeOrderViewController.selectedOrderAheadIndex = selectedOrderAheadIndex;
     
-    if (self.orderMode == OrderAhead) {
-        NSDictionary *menuInfo = @{
-                   @"orderAheadMenu": self.orderAheadMenu,
-                   @"orderMode": [NSString stringWithFormat:@"%ld", (long)self.orderMode],
-                   @"selectedOrderAheadIndex": [NSString stringWithFormat:@"%ld", (long)selectedOrderAheadIndex]
-                   };
-        
-        [[NSUserDefaults standardUserDefaults] rm_setCustomObject:menuInfo forKey:@"menuInfo"];
+    NSDictionary *menuInfo;
+    
+    if (self.orderMode == OnDemand) {
+        menuInfo = @{
+                     @"orderMode": [NSString stringWithFormat:@"%ld", (long)self.orderMode],
+                     };
     }
+    else if (self.orderMode == OrderAhead) {
+        menuInfo = @{
+                     @"orderAheadMenu": self.orderAheadMenu,
+                     @"orderMode": [NSString stringWithFormat:@"%ld", (long)self.orderMode],
+                     @"selectedOrderAheadIndex": [NSString stringWithFormat:@"%ld", (long)selectedOrderAheadIndex]
+                     };
+    }
+    
+    [[NSUserDefaults standardUserDefaults] rm_setCustomObject:menuInfo forKey:@"menuInfo"];
     
     // user and place info
     NSDictionary *currentUserInfo = [[DataManager shareDataManager] getUserInfo];
