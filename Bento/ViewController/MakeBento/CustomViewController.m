@@ -31,25 +31,52 @@
     [self.sideDish3ImageView setClipsToBounds:YES];
     
     /*---Gradient Layer---*/
-    CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = self.mainDishImageView.frame;
-    backgroundLayer.opacity = 0.8f;
-    [self.mainDishImageView.layer insertSublayer:backgroundLayer atIndex:0];
     
-    backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = self.sideDish1ImageView.frame;
-    backgroundLayer.opacity = 0.8f;
-    [self.sideDish1ImageView.layer insertSublayer:backgroundLayer atIndex:0];
-    
-    backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = self.sideDish2Imageview.frame;
-    backgroundLayer.opacity = 0.8f;
-    [self.sideDish2Imageview.layer insertSublayer:backgroundLayer atIndex:0];
-    
-    backgroundLayer = [CAGradientLayer blackGradientLayer];
-    backgroundLayer.frame = self.sideDish3ImageView.frame;
-    backgroundLayer.opacity = 0.8f;
-    [self.sideDish3ImageView.layer insertSublayer:backgroundLayer atIndex:0];
+    // gradient layer is not resizing properly to uiimageview.frame in iphone 6+
+    if (([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPhone &&
+         MAX([UIScreen mainScreen].bounds.size.height,[UIScreen mainScreen].bounds.size.width) == 736))
+    {
+        CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH - 10, 235); // hardcoding frame size
+        backgroundLayer.opacity = 0.6f;
+        [self.mainDishImageView.layer insertSublayer:backgroundLayer atIndex:0];
+        
+        backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH - 10, 235); // hardcoding frame size
+        backgroundLayer.opacity = 0.6f;
+        [self.sideDish1ImageView.layer insertSublayer:backgroundLayer atIndex:0];
+        
+        backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH - 10, 235); // hardcoding frame size
+        backgroundLayer.opacity = 0.6f;
+        [self.sideDish2Imageview.layer insertSublayer:backgroundLayer atIndex:0];
+        
+        backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = CGRectMake(0, 0, SCREEN_WIDTH - 10, 235); // hardcoding frame size
+        backgroundLayer.opacity = 0.6f;
+        [self.sideDish3ImageView.layer insertSublayer:backgroundLayer atIndex:0];
+    }
+    else {
+        CAGradientLayer *backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = self.mainDishImageView.frame;
+        backgroundLayer.opacity = 0.6f;
+        [self.mainDishImageView.layer insertSublayer:backgroundLayer atIndex:0];
+        
+        backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = self.sideDish1ImageView.frame;
+        backgroundLayer.opacity = 0.6f;
+        [self.sideDish1ImageView.layer insertSublayer:backgroundLayer atIndex:0];
+        
+        backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = self.sideDish2Imageview.frame;
+        backgroundLayer.opacity = 0.6f;
+        [self.sideDish2Imageview.layer insertSublayer:backgroundLayer atIndex:0];
+        
+        backgroundLayer = [CAGradientLayer blackGradientLayer];
+        backgroundLayer.frame = self.sideDish3ImageView.frame;
+        backgroundLayer.opacity = 0.6f;
+        [self.sideDish3ImageView.layer insertSublayer:backgroundLayer atIndex:0];
+    }
     
     /*---Build Button---*/
     UIColor *borderColor = [UIColor colorWithRed:0.835f green:0.851f blue:0.851f alpha:1.0f];
