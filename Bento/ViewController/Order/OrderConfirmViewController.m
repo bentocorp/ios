@@ -28,6 +28,9 @@
 #import "OrderStatusViewController.h"
 
 #import "OrdersViewController.h"
+#import "DataManager.h"
+#import "SignedInSettingsViewController.h"
+
 
 @interface OrderConfirmViewController () <MyAlertViewDelegate>
 
@@ -89,6 +92,15 @@
 #pragma mark - Navigation
 
 - (IBAction)viewAllOrdersButtonPressed:(id)sender {
+    NSArray *viewControllers = self.navigationController.viewControllers;
+    for (UIViewController *vc in viewControllers) {
+        if ([vc isKindOfClass:[FiveHomeViewController class]]) {
+            [self.navigationController popToViewController:vc animated:YES];
+            
+            return;
+        }
+    }
+    
     [self.navigationController pushViewController:[[OrdersViewController alloc] init] animated:YES];
 }
 
@@ -111,6 +123,15 @@
     [super viewWillDisappear:animated];
     
     [self endTimerOnViewedScreen];
+}
+
+- (IBAction)settingsButtonPressed:(id)sender {
+    SignedInSettingsViewController *signedInSettingsViewController = [[SignedInSettingsViewController alloc] init];
+
+    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:signedInSettingsViewController];
+    
+    navC.navigationBar.hidden = YES;
+    [self.navigationController presentViewController:navC animated:YES completion:nil];
 }
 
 #pragma mark Duration on screen

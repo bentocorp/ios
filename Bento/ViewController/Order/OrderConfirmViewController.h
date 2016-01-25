@@ -8,6 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+@protocol OrderConfirmationViewControllerDelegate <NSObject>
+
+
+
+@end
+
 @interface OrderConfirmViewController : UIViewController
 
 @end
