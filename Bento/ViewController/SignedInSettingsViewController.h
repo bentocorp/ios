@@ -10,4 +10,6 @@
 
 @interface SignedInSettingsViewController : UIViewController
 
+@property (nonatomic) BOOL didComeFromViewAllOrdersButton;
+
 @end

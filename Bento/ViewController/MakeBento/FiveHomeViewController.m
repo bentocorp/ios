@@ -232,8 +232,13 @@
 }
 
 - (void)presentSignedInVCThenPushToOrdersVC {
-    [self.delegate didComeFromViewAllsOrdersButton];
-    [self presentViewController:[[SignedInSettingsViewController alloc] init] animated:YES completion:nil];
+    SignedInSettingsViewController *signedInVC = [[SignedInSettingsViewController alloc] init];
+    signedInVC.didComeFromViewAllOrdersButton = YES;
+    
+    UINavigationController *navC = [[UINavigationController alloc] initWithRootViewController:signedInVC];
+    navC.navigationBar.hidden = YES;
+    
+    [self.navigationController presentViewController:navC animated:YES completion:nil];
 }
 
 #pragma  mark Check Location
@@ -1373,8 +1378,8 @@
         MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
                                                             message:@"Clear cart to switch menus?"
                                                            delegate:self
-                                                  cancelButtonTitle:@"NO"
-                                                   otherButtonTitle:@"YES"];
+                                                  cancelButtonTitle:@"No"
+                                                   otherButtonTitle:@"Yes"];
         alertView.tag = 2017;
         [alertView showInView:self.view];
         alertView = nil;
@@ -1389,8 +1394,8 @@
         MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
                                                             message:@"Clear cart to switch menus?"
                                                            delegate:self
-                                                  cancelButtonTitle:@"NO"
-                                                   otherButtonTitle:@"YES"];
+                                                  cancelButtonTitle:@"No"
+                                                   otherButtonTitle:@"Yes"];
         alertView.tag = 2018;
         [alertView showInView:self.view];
         alertView = nil;
@@ -2079,8 +2084,8 @@
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
                                                                 message:@"Clear cart to switch menus?"
                                                                delegate:self
-                                                      cancelButtonTitle:@"NO"
-                                                       otherButtonTitle:@"YES"];
+                                                      cancelButtonTitle:@"No"
+                                                       otherButtonTitle:@"Yes"];
             alertView.tag = 2019;
             [alertView showInView:self.view];
             alertView = nil;

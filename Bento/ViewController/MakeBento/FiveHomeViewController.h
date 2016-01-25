@@ -14,16 +14,7 @@ typedef NS_ENUM(NSUInteger) {
     OrderAhead
 } OrderMode;
 
-@protocol FiveHomeViewControllerDelegate <NSObject>
-
-@optional
-- (void)didComeFromViewAllsOrdersButton;
-
-@end
-
 @interface FiveHomeViewController : BaseViewController
-
-@property (nonatomic) id delegate;
 
 @property (weak, nonatomic) IBOutlet UIView *bgView;
 
