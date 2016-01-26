@@ -1890,12 +1890,6 @@ static OrderMode orderMode;
     
     orderMode = OnDemand;
     
-    self.onDemandGreenView1.alpha = 1.0;
-    self.onDemandGreenViewWidthConstraint.constant = 10;
-    
-    self.orderAheadGreenView1.alpha = 0.5;
-    self.orderAheadGreenViewWidthConstraint.constant = 5;
-    
     self.enabledOnDemandButton.hidden = YES;
     self.enabledOrderAheadButton.hidden = NO;
     
@@ -1914,12 +1908,6 @@ static OrderMode orderMode;
     [self.view layoutIfNeeded];
     
     orderMode = OrderAhead;
-    
-    self.onDemandGreenView1.alpha = 0.5;
-    self.onDemandGreenViewWidthConstraint.constant = 5;
-    
-    self.orderAheadGreenView1.alpha = 1.0;
-    self.orderAheadGreenViewWidthConstraint.constant = 10;
     
     self.enabledOnDemandButton.hidden = NO;
     self.enabledOrderAheadButton.hidden = YES;

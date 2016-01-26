@@ -37,13 +37,8 @@
                 <outlet property="etaBannerView" destination="Pnq-Up-jie" id="KBU-3q-47x"/>
                 <outlet property="etaLabel" destination="Nxt-M8-sn7" id="BbE-RK-E60"/>
                 <outlet property="fadedViewButton" destination="fjf-nw-JDI" id="xNy-Yk-Upi"/>
-                <outlet property="onDemandGreenView1" destination="tY8-eh-98R" id="4Na-0h-9Ss"/>
-                <outlet property="onDemandGreenViewWidthConstraint" destination="qB5-hY-6kV" id="MKo-gt-0fF"/>
                 <outlet property="onDemandView" destination="ccD-Zy-ERm" id="7po-2N-4eq"/>
                 <outlet property="onDemandViewHeightConstraint" destination="MaI-a9-LYt" id="FIh-Xj-fS3"/>
-                <outlet property="orderAheadGreenView1" destination="eOK-9S-dq9" id="iVW-Ev-fZ6"/>
-                <outlet property="orderAheadGreenViewHeightConstraint" destination="RqL-aE-hNF" id="IiT-Cu-Whp"/>
-                <outlet property="orderAheadGreenViewWidthConstraint" destination="FlO-o5-yii" id="Zmk-4j-BtD"/>
                 <outlet property="orderAheadHeightConstraint" destination="z3T-KQ-y4d" id="6r1-Ww-rup"/>
                 <outlet property="orderAheadPickerView" destination="BTB-UO-EaW" id="3fJ-OZ-AE3"/>
                 <outlet property="orderAheadView" destination="YkJ-Yy-DbD" id="lwN-dx-bSe"/>
@@ -162,13 +157,6 @@
                                     <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tY8-eh-98R" userLabel="onDemandGreenView1">
-                                    <rect key="frame" x="0.0" y="0.0" width="10" height="42"/>
-                                    <color key="backgroundColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="10" id="qB5-hY-6kV"/>
-                                    </constraints>
-                                </view>
                                 <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gt8-dY-uNs" userLabel="enableOnDemandButton">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -179,10 +167,8 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstItem="tY8-eh-98R" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" id="0zz-vW-Kbz"/>
                                 <constraint firstItem="Gt8-dY-uNs" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" id="4Iz-rM-6xG"/>
                                 <constraint firstItem="cMx-ac-AQE" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" constant="8" id="4aV-PR-zvl"/>
-                                <constraint firstItem="tY8-eh-98R" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" id="86c-3V-il3"/>
                                 <constraint firstItem="jBo-MK-SWJ" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" constant="34" id="8gS-PD-u3E"/>
                                 <constraint firstAttribute="trailing" secondItem="jBo-MK-SWJ" secondAttribute="trailing" constant="20" id="Bjq-0v-WHq"/>
                                 <constraint firstAttribute="bottom" secondItem="Gt8-dY-uNs" secondAttribute="bottom" id="JR0-NR-Tiy"/>
@@ -196,7 +182,6 @@
                                 <constraint firstItem="cMx-ac-AQE" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" constant="20" id="hcC-tV-gML"/>
                                 <constraint firstAttribute="trailing" secondItem="Gt8-dY-uNs" secondAttribute="trailing" id="m3k-xO-ZQr"/>
                                 <constraint firstItem="Gt8-dY-uNs" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" id="qkn-Wy-3j7"/>
-                                <constraint firstAttribute="bottom" secondItem="tY8-eh-98R" secondAttribute="bottom" id="v71-8U-Fg3"/>
                                 <constraint firstItem="gLZ-Q3-5W7" firstAttribute="height" secondItem="cMx-ac-AQE" secondAttribute="height" id="yw9-Bg-TSl"/>
                             </constraints>
                         </view>
@@ -211,14 +196,6 @@
                                         <outlet property="delegate" destination="-1" id="kn8-PN-UgF"/>
                                     </connections>
                                 </pickerView>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eOK-9S-dq9" userLabel="orderAheadGreenView">
-                                    <rect key="frame" x="1" y="0.0" width="10" height="140"/>
-                                    <color key="backgroundColor" red="0.46274509800000002" green="0.64313725489999995" blue="0.28235294119999998" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="10" id="FlO-o5-yii"/>
-                                        <constraint firstAttribute="height" constant="140" id="RqL-aE-hNF"/>
-                                    </constraints>
-                                </view>
                                 <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1d-b1-WWR" userLabel="enableOrderAheadButton">
                                     <rect key="frame" x="0.0" y="0.0" width="377" height="140"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -231,10 +208,7 @@
                             <constraints>
                                 <constraint firstItem="J1d-b1-WWR" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" id="3zi-rT-1Dd"/>
                                 <constraint firstAttribute="trailing" secondItem="J1d-b1-WWR" secondAttribute="trailing" id="E6L-BK-Izj"/>
-                                <constraint firstAttribute="bottom" secondItem="eOK-9S-dq9" secondAttribute="bottom" id="KaK-Ny-Hnp"/>
                                 <constraint firstAttribute="bottom" secondItem="BTB-UO-EaW" secondAttribute="bottom" id="NBo-KI-eMB"/>
-                                <constraint firstItem="eOK-9S-dq9" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" constant="1" id="RWR-E0-ZvP"/>
-                                <constraint firstItem="eOK-9S-dq9" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" id="Yh0-uc-4Lf"/>
                                 <constraint firstItem="BTB-UO-EaW" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" id="fxY-W2-pnH"/>
                                 <constraint firstAttribute="trailing" secondItem="BTB-UO-EaW" secondAttribute="trailing" id="kRM-PO-OJf"/>
                                 <constraint firstItem="BTB-UO-EaW" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" id="ntG-fQ-gWD"/>
