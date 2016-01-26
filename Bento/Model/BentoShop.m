@@ -696,23 +696,23 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return dinnerMapURLString;
 }
 
-- (void)checkIfBentoArrayNeedsToBeReset
-{
-    NSString *strDate = [self getDateString];
-    
-    NSString *savedMode = [defaults objectForKey:@"LunchOrDinner"];
-    
-    // today's date doesn't match saved date && current mode doesn't match saved mode
-    if (![strDate isEqualToString:self.strToday] && ![currentMode isEqualToString:savedMode])
-    {
-        [self resetBentoArray];
-        
-        NSLog(@"Today's Date - %@, Saved Date - %@", strDate, self.strToday);
-        
-        self.strToday = strDate;
-        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_MENU object:nil];
-    }
-}
+//- (void)checkIfBentoArrayNeedsToBeReset
+//{
+//    NSString *strDate = [self getDateString];
+//    
+//    NSString *savedMode = [defaults objectForKey:@"LunchOrDinner"];
+//    
+//    // today's date doesn't match saved date && current mode doesn't match saved mode
+//    if (![strDate isEqualToString:self.strToday] && ![currentMode isEqualToString:savedMode])
+//    {
+//        [self resetBentoArray];
+//        
+//        NSLog(@"Today's Date - %@, Saved Date - %@", strDate, self.strToday);
+//        
+//        self.strToday = strDate;
+//        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_MENU object:nil];
+//    }
+//}
 
 - (NSDictionary *)getMenuInfo
 {

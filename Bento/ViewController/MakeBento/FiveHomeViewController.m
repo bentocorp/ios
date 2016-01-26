@@ -212,15 +212,17 @@
     addonsVC.delegate = self;
     
 //    [self updateUI];
-    [self checkBentoCount];
-    [self loadSelectedDishes];
-    [self setCart];
+    
     [self checkAppState];
     [self setETA];
     [self setStartingPrice];
     [self showOrHideAddAnotherBentoAndViewAddons];
     [self setBuildButtonText];
     [self updateBottomButton];
+    
+    [self checkBentoCount];
+    [self loadSelectedDishes];
+    [self setCart];
     
     ////
     [self startTimerOnViewedScreen];
@@ -972,10 +974,6 @@
 
 - (void)updateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
-        [self checkBentoCount];
-        [self loadSelectedDishes];
-        [self setCart];
-        
         [self checkAppState];
         
         [self setETA];
@@ -990,6 +988,10 @@
         [self updateWidget];
         
         [self updatePickerButtonTitle];
+        
+        [self checkBentoCount];
+        [self loadSelectedDishes];
+        [self setCart];
         
 //        [self refreshState];
     });
