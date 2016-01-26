@@ -71,6 +71,9 @@
 
 @property (nonatomic) NSLayoutConstraint *xCenterConstraintForStartingPriceLabel;
 
+@property (nonatomic) NSInteger selectedOrderAheadIndex;
+@property (nonatomic) NSInteger selectedOrderAheadIndexForConfirm;
+
 @end
 
 static OrderMode orderMode;
@@ -89,11 +92,12 @@ static OrderMode orderMode;
     NSString *menuOrderAhead;
     NSString *timeOrderAhead;
     
-    NSInteger selectedOrderAheadIndex;
-    NSInteger selectedOrderAheadIndexForConfirm;
-    
     NSMutableArray *menuNames; // [date, date, date]
     NSMutableArray *menuTimes; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
+    
+    OrderMode *tempOrderMode;
+    NSInteger tempSelectedOrderAheadIndex;
+    NSInteger tempSelectedOrderAheadTimeRangeIndex;
 }
 
 - (void)viewDidLoad {
@@ -1255,11 +1259,11 @@ static OrderMode orderMode;
     }
     else if (alertView.tag == 2019) {
         if (buttonIndex == 0){
-            [self.orderAheadPickerView selectRow:selectedOrderAheadIndex inComponent:0 animated:YES];
+            [self.orderAheadPickerView selectRow:self.selectedOrderAheadIndex inComponent:0 animated:YES];
         }
         else if (buttonIndex == 1) {
             [self clearCart];
-            selectedOrderAheadIndex = selectedOrderAheadIndexForConfirm;
+            self.selectedOrderAheadIndex = self.selectedOrderAheadIndexForConfirm;
             [self updateUI];
         }
     }
@@ -1402,6 +1406,11 @@ static OrderMode orderMode;
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
+    
+//    self.selectedOrderAheadTimeRangeIndex = ;
+//    selectedOrderAheadIndex = ;
+//    orderMode = ;
+    
     [self toggleDropDown];
 }
 
@@ -1477,7 +1486,7 @@ static OrderMode orderMode;
         [self.bottomButton setBackgroundColor:[UIColor bentoButtonGray]];
     }
     
-    if (orderMode == OrderAhead && selectedOrderAheadIndex == 0) {
+    if (orderMode == OrderAhead && self.selectedOrderAheadIndex == 0) {
         if ([[CountdownTimer sharedInstance] shouldShowCountDown]) {
             
             // count-down has not ended yet
@@ -1583,7 +1592,7 @@ static OrderMode orderMode;
 //    }
     
     if ([[BentoShop sharedInstance] isThereOrderAhead]) {
-        selectedOrderAheadIndex = 0;
+        self.selectedOrderAheadIndex = 0;
         self.selectedOrderAheadTimeRangeIndex = 0;
     }
     
@@ -1625,37 +1634,37 @@ static OrderMode orderMode;
 #pragma mark Install / Remove
 
 - (void)removeOnDemand {
-//    if (self.onDemandView.hidden == NO) {
-//        self.onDemandView.hidden = YES;
-//        self.onDemandViewHeightConstraint.constant = 0;
-//    }
+    if (self.onDemandView.hidden == NO) {
+        self.onDemandView.hidden = YES;
+        self.onDemandViewHeightConstraint.constant = 0;
+    }
 }
 
 - (void)installOnDemand {
-//    if (self.onDemandView.hidden == YES) {
-//        self.onDemandView.hidden = NO;
-//        self.onDemandViewHeightConstraint.constant = 59;
-//    }
+    if (self.onDemandView.hidden == YES) {
+        self.onDemandView.hidden = NO;
+        self.onDemandViewHeightConstraint.constant = 59;
+    }
 }
 
 - (void)removeOrderAhead {
-//    if (self.orderAheadView.hidden == NO) {
-//        self.orderAheadView.hidden = YES;
-//        self.orderAheadView.hidden = YES;
-//    }
-//    
-//    self.orderAheadHeightConstraint.constant = 0;
-//    self.orderAheadHeightConstraint.constant = 0;
+    if (self.orderAheadView.hidden == NO) {
+        self.orderAheadView.hidden = YES;
+        self.orderAheadView.hidden = YES;
+    }
+    
+    self.orderAheadPickerContainerViewHeightConstraint.constant = 0;
+    self.orderAheadPickerView.hidden = YES;
 }
 
 - (void)installOrderAhead {
-//    if (self.orderAheadView.hidden == YES) {
-//        self.orderAheadView.hidden = NO;
-//        self.orderAheadView.hidden = NO;
-//        
-//        self.orderAheadHeightConstraint.constant = 140;
-//        self.orderAheadHeightConstraint.constant = 140;
-//    }
+    if (self.orderAheadView.hidden == YES) {
+        self.orderAheadView.hidden = NO;
+        self.orderAheadView.hidden = NO;
+        
+        self.orderAheadPickerContainerViewHeightConstraint.constant = 150;
+        self.orderAheadPickerView.hidden = NO;
+    }
 }
 
 #pragma mark Toggle
@@ -1847,7 +1856,7 @@ static OrderMode orderMode;
         menuInfo = @{
                      @"orderAheadMenu": self.orderAheadMenu,
                      @"orderMode": [NSString stringWithFormat:@"%ld", (long)orderMode],
-                     @"selectedOrderAheadIndex": [NSString stringWithFormat:@"%ld", (long)selectedOrderAheadIndex],
+                     @"selectedOrderAheadIndex": [NSString stringWithFormat:@"%ld", (long)self.selectedOrderAheadIndex],
                      @"menuName": [NSString stringWithFormat:@"%@", menuOrderAhead],
                      @"menuTime": [NSString stringWithFormat:@"%@", timeOrderAhead]
                      };
@@ -1960,12 +1969,12 @@ static OrderMode orderMode;
     [self.view layoutIfNeeded];
 }
 
-- (void)enableOnDemandConfirm {
-    
+- (void)tempSelectedOnDemand {
+
 }
 
-- (void)enableOrderAheadConfirm {
-    
+- (void)tempSelectedOrderAhead {
+
 }
 
 - (void)showOrHideETA {
@@ -2027,8 +2036,8 @@ static OrderMode orderMode;
     
     // if selectedOrderAheadIndex was say for example at 3 (4 menus), but one OA was remove and now there's only 3 menus. then menuNames[3] would not work because there's no more index 3.
     // in this case, push selectedOrderAheadIndex back 1
-    if ((menuNames.count - 1) < selectedOrderAheadIndex) {
-        selectedOrderAheadIndex = menuNames.count - 1;
+    if ((menuNames.count - 1) < self.selectedOrderAheadIndex) {
+        self.selectedOrderAheadIndex = menuNames.count - 1;
     }
     
     [self.orderAheadPickerView reloadAllComponents];
@@ -2049,7 +2058,7 @@ static OrderMode orderMode;
         if (menuTimes.count == 0) {
             return 0;
         }
-        return [menuTimes[selectedOrderAheadIndex] count];
+        return [menuTimes[self.selectedOrderAheadIndex] count];
     }
 }
 
@@ -2064,7 +2073,7 @@ static OrderMode orderMode;
         if (menuTimes.count == 0) {
             return nil;
         }
-        return menuTimes[selectedOrderAheadIndex][row];
+        return menuTimes[self.selectedOrderAheadIndex][row];
     }
 }
 
@@ -2076,7 +2085,7 @@ static OrderMode orderMode;
         pickerLabel.text = menuNames[row];
     }
     else {
-        pickerLabel.text = menuTimes[selectedOrderAheadIndex][row];
+        pickerLabel.text = menuTimes[self.selectedOrderAheadIndex][row];
     }
     
     // if time range is sold-out
@@ -2091,7 +2100,7 @@ static OrderMode orderMode;
     pickerLabel.textAlignment = NSTextAlignmentCenter;
     pickerLabel.font = [UIFont fontWithName:@"OpenSans-Regular" size:14];
     
-//    [self updatePickerButtonTitle];
+    [self updatePickerButtonTitle];
     
     return pickerLabel;
 }
@@ -2101,11 +2110,11 @@ static OrderMode orderMode;
     if (component == 0) {
         if ([self isCartEmpty]) {
             menuOrderAhead = menuNames[row];
-            selectedOrderAheadIndex = row;
+            self.selectedOrderAheadIndex = row;
             [pickerView reloadComponent:1];
             [pickerView selectRow:0 inComponent:1 animated:YES];
         }
-        else if (selectedOrderAheadIndex != row) {
+        else if (self.selectedOrderAheadIndex != row) {
             MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
                                                                 message:@"Clear cart to switch menus?"
                                                                delegate:self
@@ -2115,26 +2124,26 @@ static OrderMode orderMode;
             [alertView showInView:self.view];
             alertView = nil;
             
-            selectedOrderAheadIndexForConfirm = row;
+            self.selectedOrderAheadIndexForConfirm = row;
         }
     }
     else {
         // if time range is sold-out and is last on the list, push back instead of forward so array wont go out of bounds
-        NSInteger lastRow = [menuTimes[selectedOrderAheadIndex] count] - 1;
+        NSInteger lastRow = [menuTimes[self.selectedOrderAheadIndex] count] - 1;
 
-        if ([menuTimes[selectedOrderAheadIndex][row] containsString:@"sold-out"] && row == lastRow) {
+        if ([menuTimes[self.selectedOrderAheadIndex][row] containsString:@"sold-out"] && row == lastRow) {
             [pickerView selectRow:row - 1 inComponent:component animated:YES];
-            timeOrderAhead = menuTimes[selectedOrderAheadIndex][row - 1];
+            timeOrderAhead = menuTimes[self.selectedOrderAheadIndex][row - 1];
             self.selectedOrderAheadTimeRangeIndex = row - 1;
         }
         // if time range is sold-out and not the last on the list, then push forward
-        else if ([menuTimes[selectedOrderAheadIndex][row] containsString:@"sold-out"]) {
+        else if ([menuTimes[self.selectedOrderAheadIndex][row] containsString:@"sold-out"]) {
             [pickerView selectRow:row + 1 inComponent:component animated:YES];
-            timeOrderAhead = menuTimes[selectedOrderAheadIndex][row + 1];
+            timeOrderAhead = menuTimes[self.selectedOrderAheadIndex][row + 1];
             self.selectedOrderAheadTimeRangeIndex = row + 1;
         }
         else {
-            timeOrderAhead = menuTimes[selectedOrderAheadIndex][row];
+            timeOrderAhead = menuTimes[self.selectedOrderAheadIndex][row];
             
             self.selectedOrderAheadTimeRangeIndex = row;
         }

@@ -268,7 +268,7 @@
                             </connections>
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7u2-Oj-pag" userLabel="cancelButton">
-                            <rect key="frame" x="0.0" y="269" width="187" height="45"/>
+                            <rect key="frame" x="0.0" y="269" width="188" height="45"/>
                             <color key="backgroundColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="45" id="4jS-7Q-ZbK"/>
@@ -294,12 +294,12 @@
                         <constraint firstAttribute="trailing" secondItem="YkJ-Yy-DbD" secondAttribute="trailing" id="GLV-7H-Xqp"/>
                         <constraint firstAttribute="trailing" secondItem="ccD-Zy-ERm" secondAttribute="trailing" id="Nqc-Nf-JSG"/>
                         <constraint firstItem="YkJ-Yy-DbD" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="OPB-o8-YIg"/>
-                        <constraint firstItem="ILa-gG-NWX" firstAttribute="leading" secondItem="7u2-Oj-pag" secondAttribute="trailing" constant="1" id="blR-wG-Q3r"/>
+                        <constraint firstItem="ILa-gG-NWX" firstAttribute="leading" secondItem="7u2-Oj-pag" secondAttribute="trailing" id="blR-wG-Q3r"/>
                         <constraint firstAttribute="trailing" secondItem="ILa-gG-NWX" secondAttribute="trailing" id="cAj-HC-AGb"/>
                         <constraint firstAttribute="trailing" secondItem="9Cq-Hy-PNZ" secondAttribute="trailing" id="dHN-Au-Z78"/>
                         <constraint firstItem="9Cq-Hy-PNZ" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="bottom" constant="1" id="dME-Im-BMa"/>
                         <constraint firstItem="9Cq-Hy-PNZ" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="eTo-9d-IoG"/>
-                        <constraint firstItem="ILa-gG-NWX" firstAttribute="width" secondItem="7u2-Oj-pag" secondAttribute="width" id="i1b-TH-eJr"/>
+                        <constraint firstItem="ILa-gG-NWX" firstAttribute="width" secondItem="7u2-Oj-pag" secondAttribute="width" constant="-1" id="i1b-TH-eJr"/>
                         <constraint firstItem="7u2-Oj-pag" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="oBd-E7-hDE"/>
                         <constraint firstItem="ccD-Zy-ERm" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="pAq-Fg-2vJ"/>
                     </constraints>
