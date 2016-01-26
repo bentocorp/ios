@@ -1889,7 +1889,8 @@ static OrderMode orderMode;
     
     self.enabledOnDemandButton.hidden = YES;
     self.enabledOrderAheadButton.hidden = NO;
-
+    self.orderAheadCheckMarkImageView.hidden = YES;
+    self.onDemandCheckMarkImageView.hidden = NO;
     
     [self setOnDemandTitle];
     
@@ -1909,6 +1910,8 @@ static OrderMode orderMode;
     
     self.enabledOnDemandButton.hidden = NO;
     self.enabledOrderAheadButton.hidden = YES;
+    self.onDemandCheckMarkImageView.hidden = YES;
+    self.orderAheadCheckMarkImageView.hidden = NO;
     
     [self updatePickerButtonTitle];
     
