@@ -43,7 +43,6 @@ typedef NS_ENUM(NSUInteger) {
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dropDownViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *onDemandViewHeightConstraint;
-@property (weak, nonatomic) IBOutlet NSLayoutConstraint *asapViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *orderAheadViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *orderAheadPickerContainerViewHeightConstraint;
 

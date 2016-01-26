@@ -1702,7 +1702,7 @@ static OrderMode orderMode;
         // resize to make room for text
         self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self.asapDescriptionLabel sizeToFit];
-        self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
+        self.onDemandViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 37;
         
         if (orderMode == OnDemand) {
             [self showOrHidePreview];

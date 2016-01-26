@@ -24,7 +24,6 @@
             <connections>
                 <outlet property="asapDescriptionLabel" destination="jBo-MK-SWJ" id="zXV-y0-FXI"/>
                 <outlet property="asapMenuLabel" destination="cMx-ac-AQE" id="WIG-4S-kKR"/>
-                <outlet property="asapViewHeightConstraint" destination="20d-aj-Lb2" id="JXc-kn-sOQ"/>
                 <outlet property="bgView" destination="3lu-ax-SyT" id="u1s-8Y-5EE"/>
                 <outlet property="bottomButton" destination="gLT-NR-dmH" id="cWz-k1-lKD"/>
                 <outlet property="cartButton" destination="eAy-Ir-KNc" id="ZUq-T6-04l"/>
@@ -237,11 +236,10 @@
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="cMx-ac-AQE" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" constant="8" id="2Uj-Kg-QWP"/>
-                                <constraint firstAttribute="bottom" secondItem="Jgl-mI-EmV" secondAttribute="bottom" constant="19" id="4Nh-5p-IiU"/>
                                 <constraint firstItem="Jgl-mI-EmV" firstAttribute="leading" secondItem="cMx-ac-AQE" secondAttribute="trailing" constant="8" id="5ox-6v-UtT"/>
                                 <constraint firstItem="jBo-MK-SWJ" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" constant="20" id="8YG-4H-FNI"/>
                                 <constraint firstItem="Gt8-dY-uNs" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" id="BzQ-Rl-Qp1"/>
-                                <constraint firstItem="Jgl-mI-EmV" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" constant="19" id="KuT-Lw-WdK"/>
+                                <constraint firstItem="Jgl-mI-EmV" firstAttribute="centerY" secondItem="ccD-Zy-ERm" secondAttribute="centerY" id="DaJ-1G-JXM"/>
                                 <constraint firstAttribute="bottom" secondItem="Gt8-dY-uNs" secondAttribute="bottom" id="Nl5-0A-802"/>
                                 <constraint firstAttribute="bottom" secondItem="jBo-MK-SWJ" secondAttribute="bottom" constant="7" id="OlE-qX-1wB"/>
                                 <constraint firstItem="Gt8-dY-uNs" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" id="UT1-bP-KFh"/>
