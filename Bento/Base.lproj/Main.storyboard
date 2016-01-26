@@ -1556,6 +1556,7 @@
                         <outlet property="btnAddPromo" destination="fxD-Rl-wWD" id="vaf-Hc-Jxj"/>
                         <outlet property="btnChangeMethod" destination="cOo-Wx-ePj" id="chj-se-Wk3"/>
                         <outlet property="btnGetItNow" destination="2Gh-RT-7qO" id="XyJ-pl-SdZ"/>
+                        <outlet property="calendarImageView" destination="qyS-JG-S73" id="7vK-Wk-zJ6"/>
                         <outlet property="clockImageView" destination="72H-rG-xhR" id="RdS-8p-tM6"/>
                         <outlet property="dateAndTimeLabel" destination="fqg-0q-aSo" id="hu6-iJ-zXB"/>
                         <outlet property="ivCardType" destination="cls-zz-h40" id="irU-AI-WhK"/>

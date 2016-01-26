@@ -86,6 +86,7 @@
 @property (weak, nonatomic) IBOutlet UIImageView *clockImageView;
 @property (weak, nonatomic) IBOutlet UILabel *minutesLabel;
 @property (weak, nonatomic) IBOutlet UILabel *dateAndTimeLabel;
+@property (weak, nonatomic) IBOutlet UIImageView *calendarImageView;
 
 @property (nonatomic, weak) IBOutlet UITableView *tvBentos;
 
@@ -446,6 +447,7 @@
         self.ETARangeLabel.text = [NSString stringWithFormat:@"%ld-%ld", (long)[[BentoShop sharedInstance] getETAMin], (long)[[BentoShop sharedInstance] getETAMax]];
         
         self.dateAndTimeLabel.hidden = YES;
+        self.calendarImageView.hidden = YES;
     }
     else if (self.orderMode == OrderAhead) {
         self.ETARangeLabel.hidden = YES;
