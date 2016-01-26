@@ -64,7 +64,6 @@
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 
 @property (nonatomic) OrderMode orderMode;
-@property (nonatomic) NSInteger orderModeUseThisForLoadSelectedDishesOnly;
 
 @property (nonatomic) BOOL isToggledOn;
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
@@ -225,16 +224,21 @@
     addonsVC = [[AddonsViewController alloc] init];
     addonsVC.delegate = self;
     
-//    [self checkAppState];
-//    [self setETA];
-//    [self setStartingPrice];
-//    [self showOrHideAddAnotherBentoAndViewAddons];
-//    [self setBuildButtonText];
-//    [self updateBottomButton];
-//    
-//    [self checkBentoCount];
-//    [self loadSelectedDishes];
-//    [self setCart];
+
+    
+    // don't run updateUI when loading for first time
+    if (loadingHUD == nil) {
+        [self checkAppState];
+        [self setETA];
+        [self setStartingPrice];
+        [self showOrHideAddAnotherBentoAndViewAddons];
+        [self setBuildButtonText];
+        [self updateBottomButton];
+
+        [self checkBentoCount];
+        [self loadSelectedDishes];
+        [self setCart];
+    }
     
     [self startTimerOnViewedScreen];
 }
@@ -370,7 +374,7 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderModeUseThisForLoadSelectedDishesOnly == 0) {
+        if (self.orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
         }
         else {
@@ -394,7 +398,7 @@
                 [self.fourCustomVC.mainDishImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderModeUseThisForLoadSelectedDishesOnly == 0) {
+            if (self.orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
                     self.fourCustomVC.mainDishBannerImageView.hidden = NO;
                 }
@@ -435,7 +439,7 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderModeUseThisForLoadSelectedDishesOnly == 0) {
+        if (self.orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
         }
         else {
@@ -459,7 +463,7 @@
                 [self.fourCustomVC.sideDish1ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderModeUseThisForLoadSelectedDishesOnly == 0) {
+            if (self.orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
                     self.fourCustomVC.sideDish1BannerImageView.hidden = NO;
                 }
@@ -500,7 +504,7 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderModeUseThisForLoadSelectedDishesOnly == 0) {
+        if (self.orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
         }
         else {
@@ -524,7 +528,7 @@
                 [self.fourCustomVC.sideDish2Imageview setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderModeUseThisForLoadSelectedDishesOnly == 0) {
+            if (self.orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
                     self.fourCustomVC.sideDish2BannerImageView.hidden = NO;
                 }
@@ -566,7 +570,7 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderModeUseThisForLoadSelectedDishesOnly == 0) {
+        if (self.orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
         }
         else {
@@ -589,7 +593,7 @@
                 [self.fourCustomVC.sideDish3ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderModeUseThisForLoadSelectedDishesOnly == 0) {
+            if (self.orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
                     self.fourCustomVC.sideDish3BannerImageView.hidden = NO;
                 }
@@ -1890,7 +1894,6 @@
     [self.view layoutIfNeeded];
     
     self.orderMode = OnDemand;
-    self.orderModeUseThisForLoadSelectedDishesOnly = 0;
     
     self.onDemandGreenView1.alpha = 1.0;
     self.onDemandGreenViewWidthConstraint.constant = 10;
@@ -1916,7 +1919,6 @@
     [self.view layoutIfNeeded];
     
     self.orderMode = OrderAhead;
-    self.orderModeUseThisForLoadSelectedDishesOnly = 1;
     
     self.onDemandGreenView1.alpha = 0.5;
     self.onDemandGreenViewWidthConstraint.constant = 5;
