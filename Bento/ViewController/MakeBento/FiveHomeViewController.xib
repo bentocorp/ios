@@ -162,7 +162,6 @@
                                 </imageView>
                                 <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1d-b1-WWR" userLabel="enableOrderAheadButton">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="enableOrderAheadButtonPressed:" destination="-1" eventType="touchUpInside" id="cWY-Ca-3ER"/>
                                     </connections>
