@@ -187,13 +187,12 @@
                                 <constraint firstItem="J1d-b1-WWR" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" id="2fT-6L-A0a"/>
                                 <constraint firstItem="0LH-6V-Otz" firstAttribute="leading" secondItem="fCS-3f-uyb" secondAttribute="trailing" constant="9" id="4dA-j6-KDr"/>
                                 <constraint firstAttribute="height" constant="58" id="AVt-Kr-s4q"/>
-                                <constraint firstAttribute="bottom" secondItem="0LH-6V-Otz" secondAttribute="bottom" constant="19" id="J8x-UW-isc"/>
                                 <constraint firstAttribute="bottom" secondItem="fCS-3f-uyb" secondAttribute="bottom" constant="19" id="LnJ-dQ-Zrq"/>
                                 <constraint firstAttribute="trailing" secondItem="0LH-6V-Otz" secondAttribute="trailing" constant="15" id="OuX-Pv-wbx"/>
                                 <constraint firstItem="fCS-3f-uyb" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" constant="19" id="RKF-Wt-6Oh"/>
                                 <constraint firstAttribute="bottom" secondItem="J1d-b1-WWR" secondAttribute="bottom" id="Sm3-xt-9Jq"/>
-                                <constraint firstItem="0LH-6V-Otz" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" constant="19" id="U98-jy-44Q"/>
                                 <constraint firstItem="J1d-b1-WWR" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" id="W08-YB-1hf"/>
+                                <constraint firstItem="0LH-6V-Otz" firstAttribute="centerY" secondItem="YkJ-Yy-DbD" secondAttribute="centerY" id="Yx0-Bu-Xd5"/>
                                 <constraint firstItem="fCS-3f-uyb" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" constant="18" id="dhi-lG-uV4"/>
                                 <constraint firstAttribute="trailing" secondItem="J1d-b1-WWR" secondAttribute="trailing" id="uAr-c3-HfA"/>
                             </constraints>
