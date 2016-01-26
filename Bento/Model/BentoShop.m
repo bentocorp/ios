@@ -122,6 +122,7 @@ static BentoShop *_shareInstance;
     return self;
 }
 
+
 - (void)sendRequest:(NSString *)strRequest completion:(SendRequestCompletionBlock)completion {
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
@@ -131,6 +132,7 @@ static BentoShop *_shareInstance;
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        
         completion(responseObject, error);
     }];
     

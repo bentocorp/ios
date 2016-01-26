@@ -1802,9 +1802,6 @@ static OrderMode orderMode;
     self.orderAheadMenu.deliveryPrice = self.orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"delivery_price"];
     self.orderAheadMenu.scheduledWindowStartTime = self.orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"start"];
     self.orderAheadMenu.scheduledWindowEndTime = self.orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"end"];
-//    completeOrderViewController.orderAheadMenu = self.orderAheadMenu;
-//    completeOrderViewController.orderMode = self.orderMode;
-//    completeOrderViewController.selectedOrderAheadIndex = selectedOrderAheadIndex;
     
     NSDictionary *menuInfo;
     
