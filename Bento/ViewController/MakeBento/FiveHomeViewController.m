@@ -63,6 +63,7 @@
 @property (nonatomic) FiveCustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 
+@property (nonatomic) BOOL isFirstSelection;
 @property (nonatomic) BOOL isToggledOn;
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
@@ -140,6 +141,10 @@ static OrderMode orderMode;
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
     self.isToggledOn = YES;
+    
+    self.cancelButton.hidden = YES;
+    
+    self.isFirstSelection = YES;
     
     /*---Order Ahead View Menu---*/
     self.orderAheadView.clipsToBounds = YES; // to avoid subviews from coming out of bounds
@@ -1664,6 +1669,11 @@ static OrderMode orderMode;
     else {
         [UIView animateWithDuration:0.5 animations:^{
             [self toggleOff];
+        } completion:^(BOOL finished) {
+            if (self.isFirstSelection) {
+                self.isFirstSelection = NO;
+                self.cancelButton.hidden = NO;
+            }
         }];
     }
 }
