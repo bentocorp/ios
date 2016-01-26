@@ -63,8 +63,6 @@
 @property (nonatomic) FiveCustomViewController *customVC;
 @property (nonatomic) MenuPreviewViewController *menuPreviewVC;
 
-@property (nonatomic) OrderMode orderMode;
-
 @property (nonatomic) BOOL isToggledOn;
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
@@ -73,6 +71,8 @@
 @property (nonatomic) NSLayoutConstraint *xCenterConstraintForStartingPriceLabel;
 
 @end
+
+static OrderMode orderMode;
 
 @implementation FiveHomeViewController
 {
@@ -374,7 +374,7 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
         }
         else {
@@ -398,7 +398,7 @@
                 [self.fourCustomVC.mainDishImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
                     self.fourCustomVC.mainDishBannerImageView.hidden = NO;
                 }
@@ -439,7 +439,7 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
         }
         else {
@@ -463,7 +463,7 @@
                 [self.fourCustomVC.sideDish1ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
                     self.fourCustomVC.sideDish1BannerImageView.hidden = NO;
                 }
@@ -504,7 +504,7 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
         }
         else {
@@ -528,7 +528,7 @@
                 [self.fourCustomVC.sideDish2Imageview setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
                     self.fourCustomVC.sideDish2BannerImageView.hidden = NO;
                 }
@@ -570,7 +570,7 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
         }
         else {
@@ -593,7 +593,7 @@
                 [self.fourCustomVC.sideDish3ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
                     self.fourCustomVC.sideDish3BannerImageView.hidden = NO;
                 }
@@ -662,10 +662,10 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
         }
-        else if (self.orderMode == OrderAhead) {
+        else if (orderMode == OrderAhead) {
             dishInfo = [self.orderAheadMenu getMainDish:mainDishIndex];
         }
         
@@ -686,7 +686,7 @@
                 [self.customVC.mainDishImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:mainDishIndex]) {
                     self.customVC.mainDishBannerImageView.hidden = NO;
                 }
@@ -694,7 +694,7 @@
                     self.customVC.mainDishBannerImageView.hidden = YES;
                 }
             }
-            else if (self.orderMode == OrderAhead) {
+            else if (orderMode == OrderAhead) {
                 if ([self.orderAheadMenu isDishSoldOut:mainDishIndex]) {
                     self.customVC.mainDishBannerImageView.hidden = NO;
                 }
@@ -727,10 +727,10 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
         }
-        else if (self.orderMode == OrderAhead) {
+        else if (orderMode == OrderAhead) {
             dishInfo = [self.orderAheadMenu getSideDish:side1DishIndex];
         }
         
@@ -751,7 +751,7 @@
                 [self.customVC.sideDish1ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side1DishIndex]) {
                     self.customVC.sideDish1BannerImageView.hidden = NO;
                 }
@@ -759,7 +759,7 @@
                     self.customVC.sideDish1BannerImageView.hidden = YES;
                 }
             }
-            else if (self.orderMode == OrderAhead) {
+            else if (orderMode == OrderAhead) {
                 if ([self.orderAheadMenu isDishSoldOut:side1DishIndex]) {
                     self.customVC.sideDish1BannerImageView.hidden = NO;
                 }
@@ -792,10 +792,10 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
         }
-        else if (self.orderMode == OrderAhead) {
+        else if (orderMode == OrderAhead) {
             dishInfo = [self.orderAheadMenu getSideDish:side2DishIndex];
         }
         
@@ -816,7 +816,7 @@
                 [self.customVC.sideDish2Imageview setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side2DishIndex]) {
                     self.customVC.sideDish2BannerImageView.hidden = NO;
                 }
@@ -824,7 +824,7 @@
                     self.customVC.sideDish2BannerImageView.hidden = YES;
                 }
             }
-            else if (self.orderMode == OrderAhead) {
+            else if (orderMode == OrderAhead) {
                 if ([self.orderAheadMenu isDishSoldOut:side2DishIndex]) {
                     self.customVC.sideDish2BannerImageView.hidden = NO;
                 }
@@ -858,10 +858,10 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
         }
-        else if (self.orderMode == OrderAhead) {
+        else if (orderMode == OrderAhead) {
             dishInfo = [self.orderAheadMenu getSideDish:side3DishIndex];
         }
         
@@ -881,7 +881,7 @@
                 [self.customVC.sideDish3ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side3DishIndex]) {
                     self.customVC.sideDish3BannerImageView.hidden = NO;
                 }
@@ -889,7 +889,7 @@
                     self.customVC.sideDish3BannerImageView.hidden = YES;
                 }
             }
-            else if (self.orderMode == OrderAhead) {
+            else if (orderMode == OrderAhead) {
                 if ([self.orderAheadMenu isDishSoldOut:side3DishIndex]) {
                     self.customVC.sideDish3BannerImageView.hidden = NO;
                 }
@@ -923,10 +923,10 @@
         
         NSDictionary *dishInfo;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
         }
-        else if (self.orderMode == OrderAhead) {
+        else if (orderMode == OrderAhead) {
             dishInfo = [self.orderAheadMenu getSideDish:side4DishIndex];
         }
         
@@ -947,7 +947,7 @@
                 [self.customVC.sideDish4ImageView setImageWithURL:[NSURL URLWithString:strImageURL] placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"] usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
             }
             
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[BentoShop sharedInstance] isDishSoldOut:side4DishIndex]) {
                     self.customVC.sideDish4BannerImageView.hidden = NO;
                 }
@@ -955,7 +955,7 @@
                     self.customVC.sideDish4BannerImageView.hidden = YES;
                 }
             }
-            else if (self.orderMode == OrderAhead) {
+            else if (orderMode == OrderAhead) {
                 if ([self.orderAheadMenu isDishSoldOut:side4DishIndex]) {
                     self.customVC.sideDish4BannerImageView.hidden = NO;
                 }
@@ -988,8 +988,7 @@
 #pragma mark Update UI
 
 - (void)updateUI {
-//    dispatch_async(dispatch_get_main_queue(), ^{
-    
+    dispatch_async(dispatch_get_main_queue(), ^{
         [self checkAppState];
     
         [self checkBentoCount];
@@ -1006,15 +1005,15 @@
         [self updateBottomButton];
         [self setUpPickerData];
         [self updateWidget];
-        
+        NSLog(@"Order Mode - %ld", (unsigned long)orderMode);
         [self updatePickerButtonTitle];
-//    });
+    });
 }
 
 - (void)setStartingPrice {
     NSMutableArray *mainDishesArray;
     
-    if (self.orderMode == OnDemand) {
+    if (orderMode == OnDemand) {
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
             mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
         }
@@ -1022,7 +1021,7 @@
             mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
         }
     }
-    else if (self.orderMode == OrderAhead) {
+    else if (orderMode == OrderAhead) {
         mainDishesArray = [self.orderAheadMenu.mainDishes mutableCopy];
     }
     
@@ -1200,7 +1199,6 @@
         }
         else {
             [self updateUI];
-            NSLog(@"diu lei");
         }
     }
 }
@@ -1218,7 +1216,7 @@
     if (alertView.tag == 2016 && buttonIndex == 1) {
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted]) {
-            if (self.orderMode == OnDemand) {
+            if (orderMode == OnDemand) {
                 if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
                     [currentBento completeBento:@"todayLunch"];
                 }
@@ -1226,7 +1224,7 @@
                     [currentBento completeBento:@"todayDinner"];
                 }
             }
-            else if (self.orderMode == OrderAhead) {
+            else if (orderMode == OrderAhead) {
                 [currentBento completeBentoWithOrderAheadMenu];
             }
         }
@@ -1287,7 +1285,7 @@
     
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
     chooseMainDishViewController.orderAheadMenu = self.orderAheadMenu;
-    chooseMainDishViewController.orderMode = self.orderMode;
+    chooseMainDishViewController.orderMode = orderMode;
     
     [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
 }
@@ -1299,7 +1297,7 @@
     
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     chooseSideDishViewController.orderAheadMenu = self.orderAheadMenu;
-    chooseSideDishViewController.orderMode = self.orderMode;
+    chooseSideDishViewController.orderMode = orderMode;
     chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
     [self.navigationController pushViewController:chooseSideDishViewController animated:YES];
@@ -1310,11 +1308,11 @@
     
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
     chooseMainDishViewController.orderAheadMenu = self.orderAheadMenu;
-    chooseMainDishViewController.orderMode = self.orderMode;
+    chooseMainDishViewController.orderMode = orderMode;
     
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     chooseSideDishViewController.orderAheadMenu = self.orderAheadMenu;
-    chooseSideDishViewController.orderMode = self.orderMode;
+    chooseSideDishViewController.orderMode = orderMode;
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
     
@@ -1344,7 +1342,7 @@
         }
     }
     else {
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
                 [currentBento completeBento:@"todayLunch"];
             }
@@ -1352,7 +1350,7 @@
                 [currentBento completeBento:@"todayDinner"];
             }
         }
-        else if (self.orderMode == OrderAhead) {
+        else if (orderMode == OrderAhead) {
             [currentBento completeBentoWithOrderAheadMenu];
         }
         
@@ -1368,7 +1366,7 @@
 }
 
 - (void)presentAddOns {
-    addonsVC.orderMode = self.orderMode;
+    addonsVC.orderMode = orderMode;
     addonsVC.orderAheadMenu = self.orderAheadMenu;
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }
@@ -1459,7 +1457,7 @@
         [self.bottomButton setBackgroundColor:[UIColor bentoButtonGray]];
     }
     
-    if (self.orderMode == OrderAhead && selectedOrderAheadIndex == 0) {
+    if (orderMode == OrderAhead && selectedOrderAheadIndex == 0) {
         if ([[CountdownTimer sharedInstance] shouldShowCountDown]) {
             
             if (![[CountdownTimer sharedInstance].finalCountDownTimerValue isEqualToString:@"0:00"]) {
@@ -1679,7 +1677,7 @@
 
 #pragma mark Update Menu
 - (void)updateMenu {
-    if (self.orderMode == OrderAhead) {
+    if (orderMode == OrderAhead) {
         for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
             if ([menuOrderAhead isEqualToString:orderAheadMenu.name]) {
                 self.orderAheadMenu = orderAheadMenu;
@@ -1709,18 +1707,18 @@
         [self.asapDescriptionLabel sizeToFit];
         self.asapViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 60;
         
-        if (self.orderMode == OnDemand) {
+        if (orderMode == OnDemand) {
             [self showOrHidePreview];
         }
     }
 }
 
 - (void)showOrHidePreview {
-    if (self.orderMode == OnDemand) {
+    if (orderMode == OnDemand) {
         if ([self.widget[@"state"] isEqualToString:@"open"]) {
             [self hidePreview];
         }
-        else if (self.orderMode == OnDemand) {
+        else if (orderMode == OnDemand) {
             [self showPreview];
         }
     }
@@ -1810,15 +1808,15 @@
     
     NSDictionary *menuInfo;
     
-    if (self.orderMode == OnDemand) {
+    if (orderMode == OnDemand) {
         menuInfo = @{
-                     @"orderMode": [NSString stringWithFormat:@"%ld", (long)self.orderMode],
+                     @"orderMode": [NSString stringWithFormat:@"%ld", (long)orderMode],
                      };
     }
-    else if (self.orderMode == OrderAhead) {
+    else if (orderMode == OrderAhead) {
         menuInfo = @{
                      @"orderAheadMenu": self.orderAheadMenu,
-                     @"orderMode": [NSString stringWithFormat:@"%ld", (long)self.orderMode],
+                     @"orderMode": [NSString stringWithFormat:@"%ld", (long)orderMode],
                      @"selectedOrderAheadIndex": [NSString stringWithFormat:@"%ld", (long)selectedOrderAheadIndex],
                      @"menuName": [NSString stringWithFormat:@"%@", menuOrderAhead],
                      @"menuTime": [NSString stringWithFormat:@"%@", timeOrderAhead]
@@ -1893,7 +1891,7 @@
 - (void)enableOnDemand {
     [self.view layoutIfNeeded];
     
-    self.orderMode = OnDemand;
+    orderMode = OnDemand;
     
     self.onDemandGreenView1.alpha = 1.0;
     self.onDemandGreenViewWidthConstraint.constant = 10;
@@ -1918,7 +1916,7 @@
 - (void)enableOrderAhead {
     [self.view layoutIfNeeded];
     
-    self.orderMode = OrderAhead;
+    orderMode = OrderAhead;
     
     self.onDemandGreenView1.alpha = 0.5;
     self.onDemandGreenViewWidthConstraint.constant = 5;
@@ -1941,13 +1939,13 @@
 }
 
 - (void)showOrHideETA {
-    if (self.orderMode == OnDemand) {
+    if (orderMode == OnDemand) {
         self.etaLabel.hidden = NO;
         self.etaBannerDivider.hidden = NO;
         
         [self.view removeConstraint:self.xCenterConstraintForStartingPriceLabel];
     }
-    else if (self.orderMode == OrderAhead) {
+    else if (orderMode == OrderAhead) {
         self.etaLabel.hidden = YES;
         self.etaBannerDivider.hidden = YES;
         
@@ -2110,12 +2108,12 @@
     menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
     timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
     
-    if (self.orderMode == OnDemand) {
+    if (orderMode == OnDemand) {
         if (menuOnDemand != nil && timeOnDemand != nil) {
             [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOnDemand, timeOnDemand] forState:UIControlStateNormal];
         }
     }
-    else if (self.orderMode == OrderAhead) {
+    else if (orderMode == OrderAhead) {
         if (menuOrderAhead != nil && timeOrderAhead != nil) {
             [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOrderAhead, timeOrderAhead] forState:UIControlStateNormal];
         }
