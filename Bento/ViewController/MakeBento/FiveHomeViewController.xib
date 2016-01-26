@@ -12,7 +12,6 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
-            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
@@ -23,7 +22,6 @@
             <connections>
                 <outlet property="asapDescriptionLabel" destination="jBo-MK-SWJ" id="zXV-y0-FXI"/>
                 <outlet property="asapMenuLabel" destination="cMx-ac-AQE" id="WIG-4S-kKR"/>
-                <outlet property="asapTimeLabel" destination="gLZ-Q3-5W7" id="3Df-w9-cBY"/>
                 <outlet property="asapViewHeightConstraint" destination="MaI-a9-LYt" id="uCk-3w-S6O"/>
                 <outlet property="bgView" destination="3lu-ax-SyT" id="u1s-8Y-5EE"/>
                 <outlet property="bottomButton" destination="gLT-NR-dmH" id="cWz-k1-lKD"/>
@@ -123,18 +121,21 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="573" id="Bn5-SB-iXm"/>
                     </constraints>
+                    <state key="normal">
+                        <color key="titleColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
+                    </state>
                     <connections>
                         <action selector="fadedViewButtonPressed:" destination="-1" eventType="touchUpInside" id="ZUj-vI-MhS"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g12-em-tQ5" userLabel="dropDownView">
-                    <rect key="frame" x="0.0" y="64" width="375" height="185"/>
+                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g12-em-tQ5" userLabel="dropDownView">
+                    <rect key="frame" x="0.0" y="64" width="375" height="307"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMx-ac-AQE">
-                                    <rect key="frame" x="20" y="8" width="165" height="21"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="test" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMx-ac-AQE">
+                                    <rect key="frame" x="20" y="8" width="300" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="QZb-Tp-aKi"/>
                                     </constraints>
@@ -142,21 +143,15 @@
                                     <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ASAP" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gLZ-Q3-5W7">
-                                    <rect key="frame" x="190" y="8" width="165" height="21"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="21" id="Br3-8b-DXf"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                                    <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="jBo-MK-SWJ">
-                                    <rect key="frame" x="20" y="34" width="335" height="0.0"/>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="jBo-MK-SWJ">
+                                    <rect key="frame" x="20" y="34" width="300" height="0.0"/>
                                     <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="10"/>
                                     <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Jgl-mI-EmV">
+                                    <rect key="frame" x="342" y="9" width="25" height="25"/>
+                                </imageView>
                                 <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gt8-dY-uNs" userLabel="enableOnDemandButton">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -173,29 +168,21 @@
                                 <constraint firstAttribute="trailing" secondItem="jBo-MK-SWJ" secondAttribute="trailing" constant="20" id="Bjq-0v-WHq"/>
                                 <constraint firstAttribute="bottom" secondItem="Gt8-dY-uNs" secondAttribute="bottom" id="JR0-NR-Tiy"/>
                                 <constraint firstAttribute="height" priority="1" constant="59" id="MaI-a9-LYt"/>
-                                <constraint firstAttribute="trailing" secondItem="gLZ-Q3-5W7" secondAttribute="trailing" constant="20" id="SaY-Ef-kbq"/>
-                                <constraint firstItem="gLZ-Q3-5W7" firstAttribute="width" secondItem="cMx-ac-AQE" secondAttribute="width" id="YWC-0l-U9H"/>
                                 <constraint firstAttribute="bottom" secondItem="jBo-MK-SWJ" secondAttribute="bottom" constant="8" id="Ynf-uJ-wuW"/>
-                                <constraint firstItem="gLZ-Q3-5W7" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" constant="8" id="d9P-iT-NPC"/>
                                 <constraint firstItem="jBo-MK-SWJ" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" constant="20" id="ekX-2H-PYK"/>
-                                <constraint firstItem="gLZ-Q3-5W7" firstAttribute="leading" secondItem="cMx-ac-AQE" secondAttribute="trailing" constant="5" id="g91-P5-qhq"/>
                                 <constraint firstItem="cMx-ac-AQE" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" constant="20" id="hcC-tV-gML"/>
                                 <constraint firstAttribute="trailing" secondItem="Gt8-dY-uNs" secondAttribute="trailing" id="m3k-xO-ZQr"/>
                                 <constraint firstItem="Gt8-dY-uNs" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" id="qkn-Wy-3j7"/>
-                                <constraint firstItem="gLZ-Q3-5W7" firstAttribute="height" secondItem="cMx-ac-AQE" secondAttribute="height" id="yw9-Bg-TSl"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="Gt8-dY-uNs"/>
+                                </mask>
+                            </variation>
                         </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YkJ-Yy-DbD" userLabel="orderAheadView">
-                            <rect key="frame" x="-1" y="43" width="377" height="140"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YkJ-Yy-DbD" userLabel="orderAheadView">
+                            <rect key="frame" x="-1" y="43" width="377" height="42"/>
                             <subviews>
-                                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
-                                    <rect key="frame" x="0.0" y="0.0" width="377" height="140"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="-1" id="vBy-zq-TNb"/>
-                                        <outlet property="delegate" destination="-1" id="kn8-PN-UgF"/>
-                                    </connections>
-                                </pickerView>
                                 <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1d-b1-WWR" userLabel="enableOrderAheadButton">
                                     <rect key="frame" x="0.0" y="0.0" width="377" height="140"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -208,15 +195,24 @@
                             <constraints>
                                 <constraint firstItem="J1d-b1-WWR" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" id="3zi-rT-1Dd"/>
                                 <constraint firstAttribute="trailing" secondItem="J1d-b1-WWR" secondAttribute="trailing" id="E6L-BK-Izj"/>
-                                <constraint firstAttribute="bottom" secondItem="BTB-UO-EaW" secondAttribute="bottom" id="NBo-KI-eMB"/>
-                                <constraint firstItem="BTB-UO-EaW" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" id="fxY-W2-pnH"/>
-                                <constraint firstAttribute="trailing" secondItem="BTB-UO-EaW" secondAttribute="trailing" id="kRM-PO-OJf"/>
-                                <constraint firstItem="BTB-UO-EaW" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" id="ntG-fQ-gWD"/>
                                 <constraint firstItem="J1d-b1-WWR" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" id="pPj-jN-Dhb"/>
                                 <constraint firstAttribute="bottom" secondItem="J1d-b1-WWR" secondAttribute="bottom" id="x2J-D8-E1Q"/>
                                 <constraint firstAttribute="height" constant="140" id="z3T-KQ-y4d"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="subviews">
+                                    <exclude reference="J1d-b1-WWR"/>
+                                </mask>
+                            </variation>
                         </view>
+                        <pickerView contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="BTB-UO-EaW" userLabel="orderAheadPickerView">
+                            <rect key="frame" x="0.0" y="191" width="377" height="140"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="vBy-zq-TNb"/>
+                                <outlet property="delegate" destination="-1" id="kn8-PN-UgF"/>
+                            </connections>
+                        </pickerView>
                     </subviews>
                     <color key="backgroundColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
