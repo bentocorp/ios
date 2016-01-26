@@ -270,9 +270,8 @@
 {
     NSString *identifier = @"Saved Address";
     
-    CLLocationDegrees latitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLatitude"] doubleValue];
-    CLLocationDegrees longitude = [[[NSUserDefaults standardUserDefaults] objectForKey:@"savedLongitude"] doubleValue];
-    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(latitude, longitude);
+    SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
+    CLLocationCoordinate2D centerCoordinate = CLLocationCoordinate2DMake(placeInfo.location.coordinate.latitude, placeInfo.location.coordinate.longitude);
     
     CLLocationDistance regionRadius;
     NSString *geofenceOrderRadiusMeters = [[BentoShop sharedInstance] getGeofenceRadius];
