@@ -1460,12 +1460,12 @@ static OrderMode orderMode;
     if (orderMode == OrderAhead && selectedOrderAheadIndex == 0) {
         if ([[CountdownTimer sharedInstance] shouldShowCountDown]) {
             
+            // count-down has not ended yet
             if (![[CountdownTimer sharedInstance].finalCountDownTimerValue isEqualToString:@"0:00"]) {
                 strTitle = [NSString stringWithFormat:@"%@ - TIME REMAINING %@", strTitle, [CountdownTimer sharedInstance].finalCountDownTimerValue];
             }
             else {
                 [self clearCart];
-//                [self updateUI];
                 [self.navigationController popToRootViewControllerAnimated:YES];
             }
         }

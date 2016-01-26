@@ -126,7 +126,7 @@
                         <action selector="fadedViewButtonPressed:" destination="-1" eventType="touchUpInside" id="ZUj-vI-MhS"/>
                     </connections>
                 </button>
-                <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g12-em-tQ5" userLabel="dropDownView">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g12-em-tQ5" userLabel="dropDownView">
                     <rect key="frame" x="0.0" y="64" width="375" height="314"/>
                     <subviews>
                         <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
@@ -287,6 +287,8 @@
             <constraints>
                 <constraint firstItem="ZAl-ST-thk" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" constant="20" id="1m1-qa-FYe"/>
                 <constraint firstItem="MQR-o4-IL4" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" id="3Ft-Xk-1E8"/>
+                <constraint firstAttribute="trailing" secondItem="g12-em-tQ5" secondAttribute="trailing" id="48C-sr-eHC"/>
+                <constraint firstAttribute="bottom" secondItem="g12-em-tQ5" secondAttribute="bottom" constant="289" id="5gV-3z-Z3c"/>
                 <constraint firstAttribute="bottom" secondItem="fjf-nw-JDI" secondAttribute="bottom" id="8GF-im-GmW"/>
                 <constraint firstItem="3lu-ax-SyT" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" id="ADn-cr-res"/>
                 <constraint firstItem="eAy-Ir-KNc" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" constant="32" id="Ajh-ZJ-e6G"/>
@@ -307,7 +309,9 @@
                 <constraint firstAttribute="bottom" secondItem="gLT-NR-dmH" secondAttribute="bottom" id="lWL-bz-8WY"/>
                 <constraint firstItem="fjf-nw-JDI" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" id="pRr-FC-7i8"/>
                 <constraint firstAttribute="trailing" secondItem="3lu-ax-SyT" secondAttribute="trailing" id="qPb-6A-NXz"/>
+                <constraint firstItem="g12-em-tQ5" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" id="rKV-X9-hZN"/>
                 <constraint firstAttribute="trailing" secondItem="eAy-Ir-KNc" secondAttribute="trailing" constant="14" id="tZr-Cq-svq"/>
+                <constraint firstItem="g12-em-tQ5" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" constant="64" id="uwZ-tj-L3L"/>
                 <constraint firstItem="lj8-zc-geg" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" constant="12" id="wJj-F4-Ube"/>
                 <constraint firstItem="Pnq-Up-jie" firstAttribute="top" secondItem="ZAl-ST-thk" secondAttribute="bottom" constant="-1" id="yGT-vj-j2v"/>
                 <constraint firstAttribute="trailing" secondItem="KFj-GJ-P3L" secondAttribute="trailing" constant="27" id="ybM-DM-Xvf"/>
