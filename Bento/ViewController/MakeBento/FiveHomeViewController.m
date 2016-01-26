@@ -85,7 +85,6 @@ static OrderMode orderMode;
     
     NSArray *myDatabase;
     NSString *menuOnDemand;
-    NSString *timeOnDemand;
     NSString *menuOrderAhead;
     NSString *timeOrderAhead;
     
@@ -1942,7 +1941,6 @@ static OrderMode orderMode;
 
 - (void)setOnDemandTitle {
     menuOnDemand = self.asapMenuLabel.text;
-    timeOnDemand = self.asapTimeLabel.text;
     [self updatePickerButtonTitle];
 }
 
@@ -2094,8 +2092,8 @@ static OrderMode orderMode;
     timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
     
     if (orderMode == OnDemand) {
-        if (menuOnDemand != nil && timeOnDemand != nil) {
-            [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOnDemand, timeOnDemand] forState:UIControlStateNormal];
+        if (menuOnDemand != nil) {
+            [self.pickerButton setTitle:[NSString stringWithFormat:@"%@ ▾", menuOnDemand] forState:UIControlStateNormal];
         }
     }
     else if (orderMode == OrderAhead) {
