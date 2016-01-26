@@ -419,6 +419,8 @@
 		FCA1C8C31AF1973E004715F1 /* icon-square-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA1C8C11AF1973E004715F1 /* icon-square-user.png */; };
 		FCA72F5E1B806B3D009DD71A /* UpFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */; };
 		FCA72F5F1B806B3D009DD71A /* UpFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */; };
+		FCA8ABC41C56EC4000B971D3 /* Calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */; };
+		FCA8ABC51C56EC4000B971D3 /* Calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */; };
 		FCAA479C1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */; };
 		FCAA479D1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */; };
 		FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */; };
@@ -915,6 +917,7 @@
 		FC9EED131C1F8B680071828D /* plusgray100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plusgray100.png; sourceTree = "<group>"; };
 		FCA1C8C11AF1973E004715F1 /* icon-square-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-user.png"; sourceTree = "<group>"; };
 		FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UpFilled-100.png"; path = "../UpFilled-100.png"; sourceTree = "<group>"; };
+		FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar-50.png"; sourceTree = "<group>"; };
 		FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardInfoViewController.h; sourceTree = "<group>"; };
 		FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardInfoViewController.m; sourceTree = "<group>"; };
 		FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SettingsTableViewCell.h; path = ../ViewController/SettingsTableViewCell.h; sourceTree = "<group>"; };
@@ -1341,6 +1344,7 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */,
 				FC1372421C47044700C9B251 /* dropdownarrow-64.png */,
 				FC46977E1C1FC2FA001FC162 /* ETA-50.png */,
 				FC9EED121C1F8B680071828D /* minusgray100.png */,
@@ -2358,6 +2362,7 @@
 				FCE1E5131C4737AF00A210DC /* FiveHomeViewController.xib in Resources */,
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
 				FCB35C521BFE7B0300A590EC /* Expand Arrow-64.png in Resources */,
+				FCA8ABC51C56EC4000B971D3 /* Calendar-50.png in Resources */,
 				FCDF22211ADC3ADF006B2750 /* Icon-76.png in Resources */,
 				FCEFB76D1BBCEBF500C3E34D /* MoPub.bundle in Resources */,
 				7216B79F1AA64C7C0006FFE9 /* nav_background.png in Resources */,
@@ -2493,6 +2498,7 @@
 				FCE1E5121C4737AF00A210DC /* FiveHomeViewController.xib in Resources */,
 				90D8F7B31A5D84B800D034CF /* register_icon_phone.png in Resources */,
 				FCB35C511BFE7B0300A590EC /* Expand Arrow-64.png in Resources */,
+				FCA8ABC41C56EC4000B971D3 /* Calendar-50.png in Resources */,
 				FCDF22201ADC3ADF006B2750 /* Icon-76.png in Resources */,
 				90BED0DB1A5C0320003DC872 /* nav_background.png in Resources */,
 				90D8F7D41A5E2C4C00D034CF /* image_checked@2x.png in Resources */,

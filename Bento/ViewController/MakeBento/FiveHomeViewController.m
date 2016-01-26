@@ -164,12 +164,17 @@
         [self checkLocationOnLoad];
     }
     
+    self.asapTimeLabel.hidden = YES;
+
+    [self beginLoadingData];
+}
+
+- (void)beginLoadingData {
     if (loadingHUD == nil) {
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         [loadingHUD showInView:self.view];
     }
     
-    self.asapTimeLabel.hidden = YES;
     SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     if (placemark != nil) {
         [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
