@@ -41,6 +41,8 @@ typedef NS_ENUM(NSUInteger) {
 @property (weak, nonatomic) IBOutlet UIPickerView *orderAheadPickerView;
 @property (weak, nonatomic) IBOutlet UIImageView *orderAheadCheckMarkImageView;
 @property (weak, nonatomic) IBOutlet UIImageView *onDemandCheckMarkImageView;
+@property (weak, nonatomic) IBOutlet UIButton *doneButton;
+@property (weak, nonatomic) IBOutlet UIButton *cancelButton;
 
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *dropDownViewTopConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *onDemandViewHeightConstraint;

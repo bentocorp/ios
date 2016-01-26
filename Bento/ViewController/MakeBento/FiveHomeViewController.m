@@ -139,6 +139,8 @@ static OrderMode orderMode;
     /*---Picker View---*/
     self.pickerButton.titleLabel.adjustsFontSizeToFitWidth = YES;
     
+    self.isToggledOn = YES;
+    
     /*---Order Ahead View Menu---*/
     self.orderAheadView.clipsToBounds = YES; // to avoid subviews from coming out of bounds
     
@@ -1387,10 +1389,16 @@ static OrderMode orderMode;
 }
 
 - (IBAction)pickerButtonPressed:(id)sender {
+    if (self.isToggledOn == NO) {
+        [self toggleDropDown];
+    }
+}
+
+- (IBAction)doneButtonPressed:(id)sender {
     [self toggleDropDown];
 }
 
-- (IBAction)fadedViewButtonPressed:(id)sender {
+- (IBAction)cancelButtonPressed:(id)sender {
     [self toggleDropDown];
 }
 
@@ -1675,7 +1683,7 @@ static OrderMode orderMode;
     
     self.fadedViewButton.alpha = 0;
     
-    self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height;
+    self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height - 1;
     
     [self.view layoutIfNeeded];
 }
@@ -1905,6 +1913,7 @@ static OrderMode orderMode;
     self.orderAheadCheckMarkImageView.hidden = YES;
     self.onDemandCheckMarkImageView.hidden = NO;
     self.orderAheadPickerContainerViewHeightConstraint.constant = 0;
+    self.orderAheadPickerView.hidden = YES;
     
     [self setOnDemandTitle];
     
@@ -1925,6 +1934,7 @@ static OrderMode orderMode;
     self.onDemandCheckMarkImageView.hidden = YES;
     self.orderAheadCheckMarkImageView.hidden = NO;
     self.orderAheadPickerContainerViewHeightConstraint.constant = 150;
+    self.orderAheadPickerView.hidden = NO;
     
     [self updatePickerButtonTitle];
     
@@ -1935,6 +1945,14 @@ static OrderMode orderMode;
     [self hidePreview];
     
     [self.view layoutIfNeeded];
+}
+
+- (void)enableOnDemandConfirm {
+    
+}
+
+- (void)enableOrderAheadConfirm {
+    
 }
 
 - (void)showOrHideETA {
@@ -2060,7 +2078,7 @@ static OrderMode orderMode;
     pickerLabel.textAlignment = NSTextAlignmentCenter;
     pickerLabel.font = [UIFont fontWithName:@"OpenSans-Regular" size:14];
     
-    [self updatePickerButtonTitle];
+//    [self updatePickerButtonTitle];
     
     return pickerLabel;
 }
