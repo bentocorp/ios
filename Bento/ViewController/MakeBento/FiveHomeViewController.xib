@@ -161,7 +161,7 @@
                                     </constraints>
                                 </imageView>
                                 <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J1d-b1-WWR" userLabel="enableOrderAheadButton">
-                                    <rect key="frame" x="0.0" y="0.0" width="377" height="140"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <connections>
                                         <action selector="enableOrderAheadButtonPressed:" destination="-1" eventType="touchUpInside" id="cWY-Ca-3ER"/>
@@ -179,20 +179,19 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="J1d-b1-WWR" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" id="2fT-6L-A0a"/>
                                 <constraint firstItem="0LH-6V-Otz" firstAttribute="leading" secondItem="fCS-3f-uyb" secondAttribute="trailing" constant="9" id="4dA-j6-KDr"/>
                                 <constraint firstAttribute="height" constant="58" id="AVt-Kr-s4q"/>
                                 <constraint firstAttribute="bottom" secondItem="0LH-6V-Otz" secondAttribute="bottom" constant="19" id="J8x-UW-isc"/>
                                 <constraint firstAttribute="bottom" secondItem="fCS-3f-uyb" secondAttribute="bottom" constant="19" id="LnJ-dQ-Zrq"/>
                                 <constraint firstAttribute="trailing" secondItem="0LH-6V-Otz" secondAttribute="trailing" constant="15" id="OuX-Pv-wbx"/>
                                 <constraint firstItem="fCS-3f-uyb" firstAttribute="leading" secondItem="YkJ-Yy-DbD" secondAttribute="leading" constant="19" id="RKF-Wt-6Oh"/>
+                                <constraint firstAttribute="bottom" secondItem="J1d-b1-WWR" secondAttribute="bottom" id="Sm3-xt-9Jq"/>
                                 <constraint firstItem="0LH-6V-Otz" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" constant="19" id="U98-jy-44Q"/>
+                                <constraint firstItem="J1d-b1-WWR" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" id="W08-YB-1hf"/>
                                 <constraint firstItem="fCS-3f-uyb" firstAttribute="top" secondItem="YkJ-Yy-DbD" secondAttribute="top" constant="18" id="dhi-lG-uV4"/>
+                                <constraint firstAttribute="trailing" secondItem="J1d-b1-WWR" secondAttribute="trailing" id="uAr-c3-HfA"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="subviews">
-                                    <exclude reference="J1d-b1-WWR"/>
-                                </mask>
-                            </variation>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
@@ -206,20 +205,6 @@
                                     <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark Filled-50.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jgl-mI-EmV">
-                                    <rect key="frame" x="340" y="19" width="20" height="20"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="20" id="FS7-XS-Phv"/>
-                                        <constraint firstAttribute="height" constant="20" id="ugj-s9-AfZ"/>
-                                    </constraints>
-                                </imageView>
-                                <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gt8-dY-uNs" userLabel="enableOnDemandButton">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="42"/>
-                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                    <connections>
-                                        <action selector="enableOnDemandButtonPressed:" destination="-1" eventType="touchUpInside" id="V4i-Su-feb"/>
-                                    </connections>
-                                </button>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Opening at 11:00am for on-demand service." lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" preferredMaxLayoutWidth="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="jBo-MK-SWJ">
                                     <rect key="frame" x="20" y="30" width="312" height="21"/>
                                     <constraints>
@@ -229,6 +214,20 @@
                                     <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Checkmark Filled-50.png" translatesAutoresizingMaskIntoConstraints="NO" id="Jgl-mI-EmV">
+                                    <rect key="frame" x="340" y="19" width="20" height="20"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="FS7-XS-Phv"/>
+                                        <constraint firstAttribute="height" constant="20" id="ugj-s9-AfZ"/>
+                                    </constraints>
+                                </imageView>
+                                <button opaque="NO" alpha="0.20000000000000001" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Gt8-dY-uNs" userLabel="enableOnDemandButton">
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
+                                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <connections>
+                                        <action selector="enableOnDemandButtonPressed:" destination="-1" eventType="touchUpInside" id="V4i-Su-feb"/>
+                                    </connections>
+                                </button>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
@@ -236,19 +235,18 @@
                                 <constraint firstAttribute="bottom" secondItem="Jgl-mI-EmV" secondAttribute="bottom" constant="19" id="4Nh-5p-IiU"/>
                                 <constraint firstItem="Jgl-mI-EmV" firstAttribute="leading" secondItem="cMx-ac-AQE" secondAttribute="trailing" constant="8" id="5ox-6v-UtT"/>
                                 <constraint firstItem="jBo-MK-SWJ" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" constant="20" id="8YG-4H-FNI"/>
+                                <constraint firstItem="Gt8-dY-uNs" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" id="BzQ-Rl-Qp1"/>
                                 <constraint firstItem="Jgl-mI-EmV" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" constant="19" id="KuT-Lw-WdK"/>
+                                <constraint firstAttribute="bottom" secondItem="Gt8-dY-uNs" secondAttribute="bottom" id="Nl5-0A-802"/>
                                 <constraint firstAttribute="bottom" secondItem="jBo-MK-SWJ" secondAttribute="bottom" constant="7" id="OlE-qX-1wB"/>
+                                <constraint firstItem="Gt8-dY-uNs" firstAttribute="top" secondItem="ccD-Zy-ERm" secondAttribute="top" id="UT1-bP-KFh"/>
                                 <constraint firstItem="cMx-ac-AQE" firstAttribute="leading" secondItem="ccD-Zy-ERm" secondAttribute="leading" constant="20" id="WhH-EV-8uM"/>
                                 <constraint firstAttribute="height" constant="58" id="XQA-4X-2cX"/>
                                 <constraint firstItem="Jgl-mI-EmV" firstAttribute="leading" secondItem="jBo-MK-SWJ" secondAttribute="trailing" constant="8" id="jLs-CP-ZMt"/>
+                                <constraint firstAttribute="trailing" secondItem="Gt8-dY-uNs" secondAttribute="trailing" id="n9M-fW-232"/>
                                 <constraint firstAttribute="trailing" secondItem="Jgl-mI-EmV" secondAttribute="trailing" constant="15" id="xNd-y5-mg6"/>
                                 <constraint firstItem="jBo-MK-SWJ" firstAttribute="top" secondItem="cMx-ac-AQE" secondAttribute="bottom" constant="1" id="xh7-S8-nuc"/>
                             </constraints>
-                            <variation key="default">
-                                <mask key="subviews">
-                                    <exclude reference="Gt8-dY-uNs"/>
-                                </mask>
-                            </variation>
                         </view>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ILa-gG-NWX" userLabel="doneButton">
                             <rect key="frame" x="0.0" y="269" width="375" height="45"/>
