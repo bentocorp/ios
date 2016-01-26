@@ -94,7 +94,7 @@
         else {
             formattedTimeRange = [NSString stringWithFormat:@"%@-%@ (sold-out)", startTime, endTime];
         }
-        
+    
         [timeRanges addObject: formattedTimeRange];
     }
     

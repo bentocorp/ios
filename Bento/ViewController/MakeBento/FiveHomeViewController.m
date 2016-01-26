@@ -163,7 +163,6 @@ static OrderMode orderMode;
         [self checkLocationOnLoad];
     }
     
-    self.asapTimeLabel.hidden = YES;
     self.fourCustomVC.buildButton.hidden = YES;
     self.fourCustomVC.viewAddonsButton.hidden = YES;
 
@@ -181,7 +180,6 @@ static OrderMode orderMode;
         [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
             
             [self refreshStateOnLaunch];
-            self.asapTimeLabel.hidden = NO;
             
             [self checkAppState];
             [self setETA];
@@ -1604,37 +1602,37 @@ static OrderMode orderMode;
 #pragma mark Install / Remove
 
 - (void)removeOnDemand {
-    if (self.onDemandView.hidden == NO) {
-        self.onDemandView.hidden = YES;
-        self.onDemandViewHeightConstraint.constant = 0;
-    }
+//    if (self.onDemandView.hidden == NO) {
+//        self.onDemandView.hidden = YES;
+//        self.onDemandViewHeightConstraint.constant = 0;
+//    }
 }
 
 - (void)installOnDemand {
-    if (self.onDemandView.hidden == YES) {
-        self.onDemandView.hidden = NO;
-        self.onDemandViewHeightConstraint.constant = 59;
-    }
+//    if (self.onDemandView.hidden == YES) {
+//        self.onDemandView.hidden = NO;
+//        self.onDemandViewHeightConstraint.constant = 59;
+//    }
 }
 
 - (void)removeOrderAhead {
-    if (self.orderAheadView.hidden == NO) {
-        self.orderAheadView.hidden = YES;
-        self.orderAheadView.hidden = YES;
-    }
-    
-    self.orderAheadHeightConstraint.constant = 0;
-    self.orderAheadHeightConstraint.constant = 0;
+//    if (self.orderAheadView.hidden == NO) {
+//        self.orderAheadView.hidden = YES;
+//        self.orderAheadView.hidden = YES;
+//    }
+//    
+//    self.orderAheadHeightConstraint.constant = 0;
+//    self.orderAheadHeightConstraint.constant = 0;
 }
 
 - (void)installOrderAhead {
-    if (self.orderAheadView.hidden == YES) {
-        self.orderAheadView.hidden = NO;
-        self.orderAheadView.hidden = NO;
-        
-        self.orderAheadHeightConstraint.constant = 140;
-        self.orderAheadHeightConstraint.constant = 140;
-    }
+//    if (self.orderAheadView.hidden == YES) {
+//        self.orderAheadView.hidden = NO;
+//        self.orderAheadView.hidden = NO;
+//        
+//        self.orderAheadHeightConstraint.constant = 140;
+//        self.orderAheadHeightConstraint.constant = 140;
+//    }
 }
 
 #pragma mark Toggle
@@ -1891,6 +1889,7 @@ static OrderMode orderMode;
     
     self.enabledOnDemandButton.hidden = YES;
     self.enabledOrderAheadButton.hidden = NO;
+
     
     [self setOnDemandTitle];
     
@@ -2043,7 +2042,7 @@ static OrderMode orderMode;
     
     pickerLabel.adjustsFontSizeToFitWidth = YES;
     pickerLabel.textAlignment = NSTextAlignmentCenter;
-    pickerLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:13];
+    pickerLabel.font = [UIFont fontWithName:@"OpenSans-Regular" size:14];
     
     [self updatePickerButtonTitle];
     
@@ -2073,8 +2072,16 @@ static OrderMode orderMode;
         }
     }
     else {
-        // if time range is sold-out
-        if ([menuTimes[selectedOrderAheadIndex][row] containsString:@"sold-out"]) {
+        // if time range is sold-out and is last on the list, push back instead of forward so array wont go out of bounds
+        NSInteger lastRow = [menuTimes[selectedOrderAheadIndex] count] - 1;
+
+        if ([menuTimes[selectedOrderAheadIndex][row] containsString:@"sold-out"] && row == lastRow) {
+            [pickerView selectRow:row - 1 inComponent:component animated:YES];
+            timeOrderAhead = menuTimes[selectedOrderAheadIndex][row - 1];
+            self.selectedOrderAheadTimeRangeIndex = row - 1;
+        }
+        // if time range is sold-out and not the last on the list, then push forward
+        else if ([menuTimes[selectedOrderAheadIndex][row] containsString:@"sold-out"]) {
             [pickerView selectRow:row + 1 inComponent:component animated:YES];
             timeOrderAhead = menuTimes[selectedOrderAheadIndex][row + 1];
             self.selectedOrderAheadTimeRangeIndex = row + 1;
