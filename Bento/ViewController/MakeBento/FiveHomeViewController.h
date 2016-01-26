@@ -34,6 +34,7 @@ typedef NS_ENUM(NSUInteger) {
 
 @property (weak, nonatomic) IBOutlet UILabel *asapMenuLabel;
 @property (weak, nonatomic) IBOutlet UILabel *asapDescriptionLabel;
+@property (weak, nonatomic) IBOutlet UILabel *orderAheadTitleLabel;
 
 @property (weak, nonatomic) IBOutlet UIView *onDemandView;
 @property (weak, nonatomic) IBOutlet UIView *orderAheadView;

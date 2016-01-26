@@ -165,6 +165,10 @@ static OrderMode orderMode;
     
     self.fourCustomVC.buildButton.hidden = YES;
     self.fourCustomVC.viewAddonsButton.hidden = YES;
+    self.asapMenuLabel.hidden = YES;
+    self.asapDescriptionLabel.hidden = YES;
+    self.orderAheadTitleLabel.hidden = YES;
+    self.asapMenuLabel.adjustsFontSizeToFitWidth = YES;
 
     [self beginLoadingData];
 }
@@ -178,6 +182,10 @@ static OrderMode orderMode;
     SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     if (placemark != nil) {
         [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+            
+            self.asapMenuLabel.hidden = NO;
+            self.asapDescriptionLabel.hidden = NO;
+            self.orderAheadTitleLabel.hidden = NO;
             
             [self refreshStateOnLaunch];
             
@@ -1722,6 +1730,13 @@ static OrderMode orderMode;
     else {
         [self hidePreview];
     }
+    
+//    if ([self.widget[@"state"] isEqualToString:@"open"]) {
+//        self.enabledOnDemandButton.alpha = 0; // transparent
+//    }
+//    else {
+//        self.enabledOnDemandButton.alpha = 0.2; // gray
+//    }
 }
 
 - (void)showPreview {
@@ -1887,10 +1902,9 @@ static OrderMode orderMode;
     
     orderMode = OnDemand;
     
-    self.enabledOnDemandButton.hidden = YES;
-    self.enabledOrderAheadButton.hidden = NO;
     self.orderAheadCheckMarkImageView.hidden = YES;
     self.onDemandCheckMarkImageView.hidden = NO;
+    self.orderAheadPickerContainerViewHeightConstraint.constant = 0;
     
     [self setOnDemandTitle];
     
@@ -1907,11 +1921,10 @@ static OrderMode orderMode;
     [self.view layoutIfNeeded];
     
     orderMode = OrderAhead;
-    
-    self.enabledOnDemandButton.hidden = NO;
-    self.enabledOrderAheadButton.hidden = YES;
+
     self.onDemandCheckMarkImageView.hidden = YES;
     self.orderAheadCheckMarkImageView.hidden = NO;
+    self.orderAheadPickerContainerViewHeightConstraint.constant = 150;
     
     [self updatePickerButtonTitle];
     

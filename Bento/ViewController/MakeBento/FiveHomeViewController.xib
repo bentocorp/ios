@@ -42,6 +42,7 @@
                 <outlet property="orderAheadCheckMarkImageView" destination="0LH-6V-Otz" id="wQz-RV-pF9"/>
                 <outlet property="orderAheadPickerContainerViewHeightConstraint" destination="jmd-FG-cjt" id="Tfe-F2-jyd"/>
                 <outlet property="orderAheadPickerView" destination="BTB-UO-EaW" id="3fJ-OZ-AE3"/>
+                <outlet property="orderAheadTitleLabel" destination="fCS-3f-uyb" id="kMa-nH-GY8"/>
                 <outlet property="orderAheadView" destination="YkJ-Yy-DbD" id="lwN-dx-bSe"/>
                 <outlet property="orderAheadViewHeightConstraint" destination="AVt-Kr-s4q" id="NLZ-Oz-o3S"/>
                 <outlet property="pickerButton" destination="ZAl-ST-thk" id="fuc-Mk-9Qp"/>
@@ -172,7 +173,7 @@
                                         <action selector="enableOrderAheadButtonPressed:" destination="-1" eventType="touchUpInside" id="cWY-Ca-3ER"/>
                                     </connections>
                                 </button>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule for delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCS-3f-uyb">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Schedule later for delivery" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fCS-3f-uyb">
                                     <rect key="frame" x="19" y="18" width="312" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="7wU-QA-pwv"/>
@@ -200,7 +201,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Today, Dinner as soon as possible" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMx-ac-AQE">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Deliver today's dinner as soon as possible" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMx-ac-AQE">
                                     <rect key="frame" x="20" y="8" width="312" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="Ob3-IG-v4O"/>
