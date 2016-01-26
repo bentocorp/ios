@@ -129,7 +129,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g12-em-tQ5" userLabel="dropDownView">
                     <rect key="frame" x="0.0" y="64" width="375" height="314"/>
                     <subviews>
-                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ccD-Zy-ERm" userLabel="onDemandView">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="58"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Today, Dinner as soon as possible" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cMx-ac-AQE">
@@ -156,6 +156,9 @@
                                 </label>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="58" id="XQA-4X-2cX"/>
+                            </constraints>
                             <variation key="default">
                                 <mask key="subviews">
                                     <exclude reference="Gt8-dY-uNs"/>
@@ -217,6 +220,11 @@
                         </button>
                     </subviews>
                     <color key="backgroundColor" red="0.83921568629999999" green="0.85098039219999999" blue="0.85098039219999999" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstItem="ccD-Zy-ERm" firstAttribute="top" secondItem="g12-em-tQ5" secondAttribute="top" id="BUe-t4-MeC"/>
+                        <constraint firstAttribute="trailing" secondItem="ccD-Zy-ERm" secondAttribute="trailing" id="Nqc-Nf-JSG"/>
+                        <constraint firstItem="ccD-Zy-ERm" firstAttribute="leading" secondItem="g12-em-tQ5" secondAttribute="leading" id="pAq-Fg-2vJ"/>
+                    </constraints>
                 </view>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="uLd-uC-hCd" userLabel="navBgImageView">
                     <rect key="frame" x="-1" y="0.0" width="377" height="65"/>
