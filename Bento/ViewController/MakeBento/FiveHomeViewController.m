@@ -146,6 +146,8 @@ static OrderMode orderMode;
     
     self.isFirstSelection = YES;
     
+    self.doneButtonWidthConstraint.constant = SCREEN_WIDTH;
+    
     /*---Order Ahead View Menu---*/
     self.orderAheadView.clipsToBounds = YES; // to avoid subviews from coming out of bounds
     
@@ -1673,6 +1675,7 @@ static OrderMode orderMode;
             if (self.isFirstSelection) {
                 self.isFirstSelection = NO;
                 self.cancelButton.hidden = NO;
+                self.doneButtonWidthConstraint.constant -= SCREEN_WIDTH;
             }
         }];
     }

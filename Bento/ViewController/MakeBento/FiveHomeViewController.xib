@@ -31,6 +31,7 @@
                 <outlet property="cartButton" destination="eAy-Ir-KNc" id="ZUq-T6-04l"/>
                 <outlet property="countBadgeLabel" destination="KFj-GJ-P3L" id="hfq-k5-89T"/>
                 <outlet property="doneButton" destination="ILa-gG-NWX" id="XYb-2k-zjD"/>
+                <outlet property="doneButtonWidthConstraint" destination="i1b-TH-eJr" id="KrT-5M-TSI"/>
                 <outlet property="dropDownView" destination="g12-em-tQ5" id="US4-Yq-jKL"/>
                 <outlet property="dropDownViewTopConstraint" destination="uwZ-tj-L3L" id="lzz-6y-E0o"/>
                 <outlet property="enabledOnDemandButton" destination="Gt8-dY-uNs" id="E8a-tc-ldC"/>
