@@ -152,6 +152,8 @@ static OrderAheadMenu *orderAheadMenu;
     
     self.doneButtonWidthConstraint.constant = SCREEN_WIDTH;
     
+    self.doneButton.hidden = YES;
+    
     self.onDemandCheckMarkImageView.hidden = YES;
     self.orderAheadCheckMarkImageView.hidden = YES;
     
@@ -211,6 +213,7 @@ static OrderAheadMenu *orderAheadMenu;
             self.orderAheadTitleLabel.text = [[BentoShop sharedInstance] getOrderAheadTitleString];
             
             [self.doneButton setTitle:[[[AppStrings sharedInstance] getString:DONE_BUTTON_TEXT] uppercaseString] forState:UIControlStateNormal];
+            self.doneButton.hidden = NO;
             
             [self refreshStateOnLaunch];
             
