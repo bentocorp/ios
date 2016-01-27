@@ -1462,7 +1462,7 @@
         Addon *addon = [AddonList sharedInstance].addonList[indexPath.row];
         
         cell.lblBentoName.text = [NSString stringWithFormat:@"(%ldx) %@", (long)addon.qty, addon.name];
-        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%.2f", addon.unitPrice];
+        cell.lblBentoPrice.text = [NSString stringWithFormat:@"$%.2f", addon.unitPrice * addon.qty];
         
         // if there is sold out item
         if (arySoldOutItems.count > 0) {
