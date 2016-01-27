@@ -207,7 +207,7 @@ static OrderMode orderMode;
             self.orderAheadTitleLabel.hidden = NO;
             self.orderAheadTitleLabel.text = [[BentoShop sharedInstance] getOrderAheadTitleString];
             
-            [self.doneButton setTitle:[[AppStrings sharedInstance] getString:DONE_BUTTON_TEXT] forState:UIControlStateNormal];
+            [self.doneButton setTitle:[[[AppStrings sharedInstance] getString:DONE_BUTTON_TEXT] uppercaseString] forState:UIControlStateNormal];
             
             [self refreshStateOnLaunch];
             
@@ -1555,7 +1555,7 @@ static OrderMode orderMode;
             
             // count-down has not ended yet
             if (![[CountdownTimer sharedInstance].finalCountDownTimerValue isEqualToString:@"0:00"]) {
-                strTitle = [NSString stringWithFormat:@"%@ - %@ %@", strTitle, [[AppStrings sharedInstance] getString:TIME_REMAINING], [CountdownTimer sharedInstance].finalCountDownTimerValue];
+                strTitle = [NSString stringWithFormat:@"%@ - %@ %@", strTitle, [[[AppStrings sharedInstance] getString:TIME_REMAINING] uppercaseString], [CountdownTimer sharedInstance].finalCountDownTimerValue];
             }
             else {
                 [self clearCart];
