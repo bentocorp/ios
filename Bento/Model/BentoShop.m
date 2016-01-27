@@ -637,8 +637,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 //    }
 //    
 //    [defaults synchronize];
-    
-    NSLog(@"Current Mode - %@, Saved Mode - %@", currentMode, [defaults objectForKey:@"LunchOrDinner"]);
 }
 
 - (NSString *)getOnDemandMealMode {

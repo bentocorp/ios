@@ -139,11 +139,11 @@
         else
         {
             // 00:00 - 16:29
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"])
+            if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"lunch"])
                 lunchOrDinnerString = @"todayLunch";
             
             // 16:30 - 23:59
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"])
+            else if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"dinner"])
                 lunchOrDinnerString = @"todayDinner";
         }
         

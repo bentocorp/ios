@@ -1038,10 +1038,10 @@ static OrderMode orderMode;
     NSMutableArray *mainDishesArray;
     
     if (orderMode == OnDemand) {
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+        if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"lunch"]) {
             mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayLunch"] mutableCopy];
         }
-        else {
+        else if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"dinner"]) {
             mainDishesArray = [[[BentoShop sharedInstance] getMainDishes:@"todayDinner"] mutableCopy];
         }
     }
@@ -1241,10 +1241,10 @@ static OrderMode orderMode;
         Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
         if (currentBento != nil && ![currentBento isCompleted]) {
             if (orderMode == OnDemand) {
-                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+                if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"lunch"]) {
                     [currentBento completeBento:@"todayLunch"];
                 }
-                else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+                else if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"dinner"]) {
                     [currentBento completeBento:@"todayDinner"];
                 }
             }
@@ -1367,10 +1367,10 @@ static OrderMode orderMode;
     }
     else {
         if (orderMode == OnDemand) {
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+            if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"lunch"]) {
                 [currentBento completeBento:@"todayLunch"];
             }
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+            else if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"dinner"]) {
                 [currentBento completeBento:@"todayDinner"];
             }
         }

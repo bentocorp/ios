@@ -281,10 +281,10 @@
             }
         }
         else {
-            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Lunch"]) {
+            if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"lunch"]) {
                 aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayLunch"] mutableCopy];
             }
-            else if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"LunchOrDinner"] isEqualToString:@"Dinner"]) {
+            else if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"dinner"]) {
                 aryAddons = [[[BentoShop sharedInstance] getAddons:@"todayDinner"] mutableCopy];
             }
         }
