@@ -28,6 +28,7 @@
 
 #import "Addon.h"
 #import "AddonList.h"
+#import "CountdownTimer.h"
 
 @interface AddonsViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -196,6 +197,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCountDown) name:@"showCountDownTimer" object:nil];
     
     [self startTimerOnViewedScreen];
 }
@@ -590,6 +592,22 @@
     if ([self connected] && ![BentoShop sharedInstance]._isPaused) {
         [self updateUI];
     }
+}
+
+- (void)checkCountDown {
+    if (self.orderMode == OrderAhead && self.selectedOrderAheadIndex == 0) {
+        if ([[CountdownTimer sharedInstance] shouldShowCountDown]) {
+            if ([[CountdownTimer sharedInstance].finalCountDownTimerValue isEqualToString:@"0:00"]) {
+                [self clearCart];
+                [self.navigationController popToRootViewControllerAnimated:YES];
+            }
+        }
+    }
+}
+
+- (void)clearCart {
+    [[BentoShop sharedInstance] resetBentoArray];
+    [[AddonList sharedInstance] emptyList];
 }
 
 @end

@@ -17,5 +17,6 @@
 @property (nonatomic) NSInteger sideDishIndex;
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
 @property (nonatomic) OrderMode orderMode;
+@property (nonatomic) NSInteger selectedOrderAheadIndex;
 
 @end

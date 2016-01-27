@@ -1313,6 +1313,7 @@ static OrderAheadMenu *orderAheadMenu;
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
     chooseMainDishViewController.orderAheadMenu = orderAheadMenu;
     chooseMainDishViewController.orderMode = orderMode;
+    chooseMainDishViewController.selectedOrderAheadIndex = self.selectedOrderAheadIndex;
     
     [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
 }
@@ -1325,6 +1326,7 @@ static OrderAheadMenu *orderAheadMenu;
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
     chooseSideDishViewController.orderAheadMenu = orderAheadMenu;
     chooseSideDishViewController.orderMode = orderMode;
+    chooseSideDishViewController.selectedOrderAheadIndex = self.selectedOrderAheadIndex;
     chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
     [self.navigationController pushViewController:chooseSideDishViewController animated:YES];

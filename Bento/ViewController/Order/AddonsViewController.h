@@ -26,5 +26,6 @@
 
 @property (nonatomic) OrderMode orderMode;
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
+@property (nonatomic) NSInteger selectedOrderAheadIndex;
 
 @end
