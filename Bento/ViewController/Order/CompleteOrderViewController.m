@@ -98,6 +98,7 @@
 
 @property (nonatomic, weak) IBOutlet UIView *viewList;
 @property (nonatomic, weak) IBOutlet UIView *viewPromo;
+@property (weak, nonatomic) IBOutlet UIButton *editPaymentButton;
 
 @property (nonatomic) NSMutableArray *aryBentos;
 @property (nonatomic) SVPlacemark *placeInfo;
