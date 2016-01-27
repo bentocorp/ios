@@ -247,28 +247,28 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         dispatch_sync(dispatch_get_main_queue(), ^{
             
-/*---------------------------FORCED UPDATE----------------------------*/
-#ifdef DEV_MODE
-            {
-                aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", globalShop.iosCurrentVersion, globalShop.iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-                
-                NSLog(@"This is dev version...run update check anyway!");
-            }
-#else
-            {
-                aV = [[UIAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update", nil];
-                aV.tag = 007;
-                NSLog(@"This is production version...run update check!");
-            }
-#endif
-            {
-                NSLog(@"ios minimum version - %f", globalShop.iosMinVersion);
-                NSLog(@"current ios version - %f", globalShop.iosCurrentVersion);
-                
-                // Perform check for new version of your app
-                if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
-                    [aV show];
-            }
+///*---------------------------FORCED UPDATE----------------------------*/
+//#ifdef DEV_MODE
+//            {
+//                aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", globalShop.iosCurrentVersion, globalShop.iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+//                
+//                NSLog(@"This is dev version...run update check anyway!");
+//            }
+//#else
+//            {
+//                aV = [[UIAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update", nil];
+//                aV.tag = 007;
+//                NSLog(@"This is production version...run update check!");
+//            }
+//#endif
+//            {
+//                NSLog(@"ios minimum version - %f", globalShop.iosMinVersion);
+//                NSLog(@"current ios version - %f", globalShop.iosCurrentVersion);
+//                
+//                // Perform check for new version of your app
+//                if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
+//                    [aV show];
+//            }
         });
     });
     
@@ -438,13 +438,13 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     return YES;
 }
 
-#pragma mark MyAlertViewDelegate
-- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
-{
-    if (alertView.tag == 007) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
-    }
-}
+//#pragma mark MyAlertViewDelegate
+//- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+//{
+//    if (alertView.tag == 007) {
+//        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
+//    }
+//}
 
 
 #pragma mark Remote Notifications

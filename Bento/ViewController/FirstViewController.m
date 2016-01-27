@@ -58,6 +58,8 @@
     
     CLLocationManager *locationManager;
     NSString *currentAddress;
+    
+    UIAlertView *aV;
 }
 
 - (void)viewDidLoad {
@@ -222,11 +224,7 @@
                     [self afterViewWillAppear];
                 }];
             }
-            
-            
         }
-    
-        
     });
 }
 
@@ -254,6 +252,31 @@
         }
         
         [self.activityIndicator stopAnimating];
+        
+        /*---------------------------FORCED UPDATE----------------------------*/
+#ifdef DEV_MODE
+        {
+            aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", [BentoShop sharedInstance].iosCurrentVersion, [BentoShop sharedInstance].iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+            
+            NSLog(@"This is dev version...run update check anyway!");
+        }
+#else
+        {
+            aV = [[UIAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update", nil];
+            aV.tag = 007;
+            NSLog(@"This is production version...run update check!");
+        }
+#endif
+        {
+            NSLog(@"ios minimum version - %f", [BentoShop sharedInstance].iosMinVersion);
+            NSLog(@"current ios version - %f", [BentoShop sharedInstance].iosCurrentVersion);
+            
+            // Perform check for new version of your app
+            if ([BentoShop sharedInstance].iosCurrentVersion < [BentoShop sharedInstance].iosMinVersion) {
+                aV.tag = 2021;
+                [aV show];
+            }
+        }
     });
 }
 
@@ -493,6 +516,14 @@
 {
     NetworkErrorViewController *networkErrorViewController = [[NetworkErrorViewController alloc] init];
     [self.navigationController presentViewController:networkErrorViewController animated:YES completion:nil];
+}
+
+#pragma mark MyAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex
+{
+    if (alertView.tag == 2021) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
+    }
 }
 
 @end
