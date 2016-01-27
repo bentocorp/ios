@@ -65,7 +65,6 @@
 
 @property (nonatomic) BOOL isFirstSelection;
 @property (nonatomic) BOOL isToggledOn;
-@property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
 @property (nonatomic) NSDictionary *widget;
 
@@ -77,6 +76,7 @@
 @end
 
 static OrderMode orderMode;
+static OrderAheadMenu *orderAheadMenu;
 
 @implementation FiveHomeViewController
 {
@@ -405,7 +405,7 @@ static OrderMode orderMode;
             dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
         }
         else {
-            dishInfo = [self.orderAheadMenu getMainDish:mainDishIndex];
+            dishInfo = [orderAheadMenu getMainDish:mainDishIndex];
         }
         
         if (dishInfo != nil) {
@@ -434,7 +434,7 @@ static OrderMode orderMode;
                 }
             }
             else {
-                if ([self.orderAheadMenu isDishSoldOut:mainDishIndex]) {
+                if ([orderAheadMenu isDishSoldOut:mainDishIndex]) {
                     self.fourCustomVC.mainDishBannerImageView.hidden = NO;
                 }
                 else {
@@ -470,7 +470,7 @@ static OrderMode orderMode;
             dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
         }
         else {
-            dishInfo = [self.orderAheadMenu getSideDish:side1DishIndex];
+            dishInfo = [orderAheadMenu getSideDish:side1DishIndex];
         }
         
         if (dishInfo != nil) {
@@ -499,7 +499,7 @@ static OrderMode orderMode;
                 }
             }
             else {
-                if ([self.orderAheadMenu isDishSoldOut:side1DishIndex]) {
+                if ([orderAheadMenu isDishSoldOut:side1DishIndex]) {
                     self.fourCustomVC.sideDish1BannerImageView.hidden = NO;
                 }
                 else {
@@ -535,7 +535,7 @@ static OrderMode orderMode;
             dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
         }
         else {
-            dishInfo = [self.orderAheadMenu getSideDish:side2DishIndex];
+            dishInfo = [orderAheadMenu getSideDish:side2DishIndex];
         }
         
         if (dishInfo != nil) {
@@ -564,7 +564,7 @@ static OrderMode orderMode;
                 }
             }
             else {
-                if ([self.orderAheadMenu isDishSoldOut:side2DishIndex]) {
+                if ([orderAheadMenu isDishSoldOut:side2DishIndex]) {
                     self.fourCustomVC.sideDish2BannerImageView.hidden = NO;
                 }
                 else {
@@ -601,7 +601,7 @@ static OrderMode orderMode;
             dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
         }
         else {
-            dishInfo = [self.orderAheadMenu getSideDish:side3DishIndex];
+            dishInfo = [orderAheadMenu getSideDish:side3DishIndex];
         }
         
         if (dishInfo != nil) {
@@ -629,7 +629,7 @@ static OrderMode orderMode;
                 }
             }
             else {
-                if ([self.orderAheadMenu isDishSoldOut:side3DishIndex]) {
+                if ([orderAheadMenu isDishSoldOut:side3DishIndex]) {
                     self.fourCustomVC.sideDish3BannerImageView.hidden = NO;
                 }
                 else {
@@ -693,7 +693,7 @@ static OrderMode orderMode;
             dishInfo = [[BentoShop sharedInstance] getMainDish:mainDishIndex];
         }
         else if (orderMode == OrderAhead) {
-            dishInfo = [self.orderAheadMenu getMainDish:mainDishIndex];
+            dishInfo = [orderAheadMenu getMainDish:mainDishIndex];
         }
         
         if (dishInfo != nil) {
@@ -722,7 +722,7 @@ static OrderMode orderMode;
                 }
             }
             else if (orderMode == OrderAhead) {
-                if ([self.orderAheadMenu isDishSoldOut:mainDishIndex]) {
+                if ([orderAheadMenu isDishSoldOut:mainDishIndex]) {
                     self.customVC.mainDishBannerImageView.hidden = NO;
                 }
                 else {
@@ -758,7 +758,7 @@ static OrderMode orderMode;
             dishInfo = [[BentoShop sharedInstance] getSideDish:side1DishIndex];
         }
         else if (orderMode == OrderAhead) {
-            dishInfo = [self.orderAheadMenu getSideDish:side1DishIndex];
+            dishInfo = [orderAheadMenu getSideDish:side1DishIndex];
         }
         
         if (dishInfo != nil) {
@@ -787,7 +787,7 @@ static OrderMode orderMode;
                 }
             }
             else if (orderMode == OrderAhead) {
-                if ([self.orderAheadMenu isDishSoldOut:side1DishIndex]) {
+                if ([orderAheadMenu isDishSoldOut:side1DishIndex]) {
                     self.customVC.sideDish1BannerImageView.hidden = NO;
                 }
                 else {
@@ -823,7 +823,7 @@ static OrderMode orderMode;
             dishInfo = [[BentoShop sharedInstance] getSideDish:side2DishIndex];
         }
         else if (orderMode == OrderAhead) {
-            dishInfo = [self.orderAheadMenu getSideDish:side2DishIndex];
+            dishInfo = [orderAheadMenu getSideDish:side2DishIndex];
         }
         
         if (dishInfo != nil) {
@@ -852,7 +852,7 @@ static OrderMode orderMode;
                 }
             }
             else if (orderMode == OrderAhead) {
-                if ([self.orderAheadMenu isDishSoldOut:side2DishIndex]) {
+                if ([orderAheadMenu isDishSoldOut:side2DishIndex]) {
                     self.customVC.sideDish2BannerImageView.hidden = NO;
                 }
                 else {
@@ -889,7 +889,7 @@ static OrderMode orderMode;
             dishInfo = [[BentoShop sharedInstance] getSideDish:side3DishIndex];
         }
         else if (orderMode == OrderAhead) {
-            dishInfo = [self.orderAheadMenu getSideDish:side3DishIndex];
+            dishInfo = [orderAheadMenu getSideDish:side3DishIndex];
         }
         
         if (dishInfo != nil) {
@@ -917,7 +917,7 @@ static OrderMode orderMode;
                 }
             }
             else if (orderMode == OrderAhead) {
-                if ([self.orderAheadMenu isDishSoldOut:side3DishIndex]) {
+                if ([orderAheadMenu isDishSoldOut:side3DishIndex]) {
                     self.customVC.sideDish3BannerImageView.hidden = NO;
                 }
                 else {
@@ -954,7 +954,7 @@ static OrderMode orderMode;
             dishInfo = [[BentoShop sharedInstance] getSideDish:side4DishIndex];
         }
         else if (orderMode == OrderAhead) {
-            dishInfo = [self.orderAheadMenu getSideDish:side4DishIndex];
+            dishInfo = [orderAheadMenu getSideDish:side4DishIndex];
         }
         
         if (dishInfo != nil) {
@@ -983,7 +983,7 @@ static OrderMode orderMode;
                 }
             }
             else if (orderMode == OrderAhead) {
-                if ([self.orderAheadMenu isDishSoldOut:side4DishIndex]) {
+                if ([orderAheadMenu isDishSoldOut:side4DishIndex]) {
                     self.customVC.sideDish4BannerImageView.hidden = NO;
                 }
                 else {
@@ -1049,7 +1049,7 @@ static OrderMode orderMode;
         }
     }
     else if (orderMode == OrderAhead) {
-        mainDishesArray = [self.orderAheadMenu.mainDishes mutableCopy];
+        mainDishesArray = [orderAheadMenu.mainDishes mutableCopy];
     }
     
     // get main prices
@@ -1308,7 +1308,7 @@ static OrderMode orderMode;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    chooseMainDishViewController.orderAheadMenu = self.orderAheadMenu;
+    chooseMainDishViewController.orderAheadMenu = orderAheadMenu;
     chooseMainDishViewController.orderMode = orderMode;
     
     [self.navigationController pushViewController:chooseMainDishViewController animated:YES];
@@ -1320,7 +1320,7 @@ static OrderMode orderMode;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-    chooseSideDishViewController.orderAheadMenu = self.orderAheadMenu;
+    chooseSideDishViewController.orderAheadMenu = orderAheadMenu;
     chooseSideDishViewController.orderMode = orderMode;
     chooseSideDishViewController.sideDishIndex = selectedButton.tag;
     
@@ -1331,11 +1331,11 @@ static OrderMode orderMode;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     
     ChooseMainDishViewController *chooseMainDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseMainDishViewController"];
-    chooseMainDishViewController.orderAheadMenu = self.orderAheadMenu;
+    chooseMainDishViewController.orderAheadMenu = orderAheadMenu;
     chooseMainDishViewController.orderMode = orderMode;
     
     ChooseSideDishViewController *chooseSideDishViewController = [storyboard instantiateViewControllerWithIdentifier:@"ChooseSideDishViewController"];
-    chooseSideDishViewController.orderAheadMenu = self.orderAheadMenu;
+    chooseSideDishViewController.orderAheadMenu = orderAheadMenu;
     chooseSideDishViewController.orderMode = orderMode;
     
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
@@ -1391,7 +1391,7 @@ static OrderMode orderMode;
 
 - (void)presentAddOns {
     addonsVC.orderMode = orderMode;
-    addonsVC.orderAheadMenu = self.orderAheadMenu;
+    addonsVC.orderAheadMenu = orderAheadMenu;
     [self.navigationController presentViewController:addonsVC animated:YES completion:nil];
 }
 
@@ -1779,9 +1779,9 @@ static OrderMode orderMode;
 #pragma mark Update Menu
 - (void)updateMenu {
     if (orderMode == OrderAhead) {
-        for (OrderAheadMenu *orderAheadMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
-            if ([menuOrderAhead isEqualToString:orderAheadMenu.name]) {
-                self.orderAheadMenu = orderAheadMenu;
+        for (OrderAheadMenu *oaMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+            if ([menuOrderAhead isEqualToString:oaMenu.name]) {
+                orderAheadMenu = oaMenu;
                 
 //                [[NSUserDefaults standardUserDefaults] rm_setCustomObject:@{
 //                                                                            @"menuId": self.orderAheadMenu.menuId,
@@ -1920,9 +1920,9 @@ static OrderMode orderMode;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
-    self.orderAheadMenu.deliveryPrice = self.orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"delivery_price"];
-    self.orderAheadMenu.scheduledWindowStartTime = self.orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"start"];
-    self.orderAheadMenu.scheduledWindowEndTime = self.orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"end"];
+    orderAheadMenu.deliveryPrice = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"delivery_price"];
+    orderAheadMenu.scheduledWindowStartTime = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"start"];
+    orderAheadMenu.scheduledWindowEndTime = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"end"];
     
     NSDictionary *menuInfo;
     
@@ -1933,7 +1933,7 @@ static OrderMode orderMode;
     }
     else if (orderMode == OrderAhead) {
         menuInfo = @{
-                     @"orderAheadMenu": self.orderAheadMenu,
+                     @"orderAheadMenu": orderAheadMenu,
                      @"orderMode": [NSString stringWithFormat:@"%ld", (long)orderMode],
                      @"selectedOrderAheadIndex": [NSString stringWithFormat:@"%ld", (long)self.selectedOrderAheadIndex],
                      @"menuName": [NSString stringWithFormat:@"%@", menuOrderAhead],
