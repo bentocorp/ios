@@ -1028,6 +1028,7 @@ static OrderMode orderMode;
         [self updateBottomButton];
         [self setUpPickerData];
         [self updateWidget];
+        [self updateOrderAheadWidget];
         NSLog(@"Order Mode - %ld", (unsigned long)orderMode);
         [self updatePickerButtonTitle];
     });
@@ -1811,6 +1812,15 @@ static OrderMode orderMode;
     }
     else {
         [self removeOnDemand];
+    }
+}
+
+- (void)updateOrderAheadWidget {
+    if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+        [self installOrderAhead];
+    }
+    else {
+        [self removeOrderAhead];
     }
 }
 
