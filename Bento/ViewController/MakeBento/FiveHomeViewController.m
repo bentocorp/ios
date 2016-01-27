@@ -2205,21 +2205,21 @@ static OrderAheadMenu *orderAheadMenu;
     }
     else {
         // if time range is sold-out and is last on the list, push back instead of forward so array wont go out of bounds
-        NSInteger lastRow = [menuTimes[self.selectedOrderAheadIndex] count] - 1;
+        NSInteger lastRow = [menuTimes[tempSelectedOrderAheadIndex] count] - 1;
 
-        if ([menuTimes[self.selectedOrderAheadIndex][row] containsString:@"sold-out"] && row == lastRow) {
+        if ([menuTimes[tempSelectedOrderAheadIndex][row] containsString:@"sold-out"] && row == lastRow) {
             [pickerView selectRow:row - 1 inComponent:component animated:YES];
-            timeOrderAhead = menuTimes[self.selectedOrderAheadIndex][row - 1];
+            timeOrderAhead = menuTimes[tempSelectedOrderAheadIndex][row - 1];
             tempSelectedOrderAheadTimeRangeIndex = row - 1;
         }
         // if time range is sold-out and not the last on the list, then push forward
-        else if ([menuTimes[self.selectedOrderAheadIndex][row] containsString:@"sold-out"]) {
+        else if ([menuTimes[tempSelectedOrderAheadIndex][row] containsString:@"sold-out"]) {
             [pickerView selectRow:row + 1 inComponent:component animated:YES];
-            timeOrderAhead = menuTimes[self.selectedOrderAheadIndex][row + 1];
+            timeOrderAhead = menuTimes[tempSelectedOrderAheadIndex][row + 1];
             tempSelectedOrderAheadTimeRangeIndex = row + 1;
         }
         else {
-            timeOrderAhead = menuTimes[self.selectedOrderAheadIndex][row];
+            timeOrderAhead = menuTimes[tempSelectedOrderAheadIndex][row];
             tempSelectedOrderAheadTimeRangeIndex = row;
         }
     }
