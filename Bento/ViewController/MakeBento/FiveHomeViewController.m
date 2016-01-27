@@ -1714,6 +1714,7 @@ static OrderMode orderMode;
     }
     
     self.orderAheadPickerContainerViewHeightConstraint.constant = 0;
+    self.orderAheadViewHeightConstraint.constant = 0;
     self.orderAheadPickerView.hidden = YES;
 }
 
@@ -1723,6 +1724,7 @@ static OrderMode orderMode;
         self.orderAheadView.hidden = NO;
         
         self.orderAheadPickerContainerViewHeightConstraint.constant = 150;
+        self.orderAheadViewHeightConstraint.constant = 59;
         self.orderAheadPickerView.hidden = NO;
     }
 }
@@ -1800,17 +1802,15 @@ static OrderMode orderMode;
         // resize to make room for text
         self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
         [self.asapDescriptionLabel sizeToFit];
-        self.onDemandViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 37;
         
-        self.onDemandView.hidden = NO;
+        [self installOnDemand];
         
         if (orderMode == OnDemand) {
             [self showOrHidePreview];
         }
     }
     else {
-        self.onDemandViewHeightConstraint.constant = 0;
-        self.onDemandView.hidden = YES;
+        [self removeOnDemand];
     }
 }
 
