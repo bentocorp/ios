@@ -162,6 +162,9 @@ static OrderAheadMenu *orderAheadMenu;
     self.asapMenuLabel.adjustsFontSizeToFitWidth = YES;
     self.orderAheadTitleLabel.adjustsFontSizeToFitWidth = YES;
     
+    [self removeOrderAhead];
+    [self removeOnDemand];
+    
     /*---Order Ahead View Menu---*/
     self.orderAheadView.clipsToBounds = YES; // to avoid subviews from coming out of bounds
     
