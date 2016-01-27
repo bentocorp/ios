@@ -642,7 +642,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (NSString *)getOnDemandMealMode {
     NSDictionary *widget = [self getOnDemandWidget];
     
-    if (widget == nil) {
+    if (widget == nil || [widget isEqual:[NSNull null]]) {
         return nil;
     }
     else {
@@ -1681,17 +1681,15 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 
 - (BOOL)is4PodMode
 {
-//    NSString *podMode = self.dicInit2[@"settings"][@"pod_mode"];
-//    
-//    if (podMode != nil || ![podMode isEqualToString:@""]) {
-//        if ([podMode integerValue] == 4) {
-//            return YES;
-//        }
-//    }
-//    
-//    return NO;
+    NSString *podMode = self.dicInit2[@"settings"][@"pod_mode"];
     
-    return YES;
+    if (podMode != nil || ![podMode isEqualToString:@""]) {
+        if ([podMode integerValue] == 4) {
+            return YES;
+        }
+    }
+    
+    return NO;
 }
 
 @end
