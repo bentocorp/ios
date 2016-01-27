@@ -207,6 +207,15 @@
 //
 #define DELIVERY_LABEL_TEXT                     @"delivery_label"
 
+
+//
+#define DONE_BUTTON_TEXT                        @"oa-done-btn"
+#define ORDER_HISTORY_TITLE                     @"pane-title-orders"
+#define VIEW_ALL_ORDERS                         @"btn-view-all-orders"
+#define TIME_REMAINING                          @"oa-countdown-label"
+#define CHANGE_WARNING_TITLE                    @"oa-change-warning-title"
+#define CHANGE_WARNING_TEXT                     @"oa-change-warning-text"
+
 // getting from to settings instead of ioscopy
 //#define ABOUT_PRICE                             @"price"
 //#define SALE_PRICE                              @"sale_price"

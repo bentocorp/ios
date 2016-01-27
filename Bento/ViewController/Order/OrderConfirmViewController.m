@@ -83,6 +83,8 @@
         self.confirmationPlatform.center = self.view.center;
         self.pushPlatform.hidden = YES;
     }
+    
+    [self.viewAllOrdersButton setTitle:[[AppStrings sharedInstance] getString:VIEW_ALL_ORDERS] forState:UIControlStateNormal];
 }
 
 - (void)didReceiveMemoryWarning {

@@ -376,7 +376,7 @@
     
     switch (indexPath.row) {
         case 0:
-            settingsTableViewCell.settingsLabel.text = @"Orders";
+            settingsTableViewCell.settingsLabel.text = [[AppStrings sharedInstance] getString:ORDER_HISTORY_TITLE];
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-creditcard"];
             break;
         case 1:

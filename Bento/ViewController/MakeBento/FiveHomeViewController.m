@@ -205,6 +205,9 @@ static OrderMode orderMode;
             self.asapMenuLabel.hidden = NO;
             self.asapDescriptionLabel.hidden = NO;
             self.orderAheadTitleLabel.hidden = NO;
+            self.orderAheadTitleLabel.text = [[BentoShop sharedInstance] getOrderAheadTitleString];
+            
+            [self.doneButton setTitle:[[AppStrings sharedInstance] getString:DONE_BUTTON_TEXT] forState:UIControlStateNormal];
             
             [self refreshStateOnLaunch];
             
@@ -1447,8 +1450,8 @@ static OrderMode orderMode;
     if ([self isCartEmpty] == NO && (self.selectedOrderAheadIndex != tempSelectedOrderAheadIndex || orderMode != tempOrderMode))
     {
         
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
-                                                            message:@"Clear cart to switch menus?"
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:[[AppStrings sharedInstance] getString:CHANGE_WARNING_TITLE]
+                                                            message:[[AppStrings sharedInstance] getString:CHANGE_WARNING_TEXT]
                                                            delegate:self
                                                   cancelButtonTitle:@"No"
                                                    otherButtonTitle:@"Yes"];
@@ -1552,7 +1555,7 @@ static OrderMode orderMode;
             
             // count-down has not ended yet
             if (![[CountdownTimer sharedInstance].finalCountDownTimerValue isEqualToString:@"0:00"]) {
-                strTitle = [NSString stringWithFormat:@"%@ - TIME REMAINING %@", strTitle, [CountdownTimer sharedInstance].finalCountDownTimerValue];
+                strTitle = [NSString stringWithFormat:@"%@ - %@ %@", strTitle, [[AppStrings sharedInstance] getString:TIME_REMAINING], [CountdownTimer sharedInstance].finalCountDownTimerValue];
             }
             else {
                 [self clearCart];

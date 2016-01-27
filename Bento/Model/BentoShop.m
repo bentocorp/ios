@@ -406,6 +406,14 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return nil;
 }
 
+- (NSString *)getOrderAheadTitleString {
+    if (self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"][@"title"]) {
+        return self.dicInit2[@"/gatekeeper/here/{lat}/{long}"][@"AvailableServices"][@"OrderAhead"][@"title"];
+    }
+    
+    return nil;
+}
+
 #pragma mark Order Ahead Menus
 
 - (NSArray *)getOrderAheadMenus {

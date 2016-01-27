@@ -19,6 +19,7 @@
 #import "OrderHistoryItem.h"
 #import "OrdersTableViewCell.h"
 #import "Mixpanel.h"
+#import "AppStrings.h"
 
 @interface OrdersViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -54,7 +55,7 @@
     titleLabel.textAlignment = NSTextAlignmentCenter;
     titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:16.0f];
     titleLabel.textColor = [UIColor bentoTitleGray];
-    titleLabel.text = @"Orders";
+    titleLabel.text = [[AppStrings sharedInstance] getString:ORDER_HISTORY_TITLE];
     [self.view addSubview:titleLabel];
 
     // back button
