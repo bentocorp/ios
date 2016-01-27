@@ -624,21 +624,32 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     
     /*---*/
     
-    // Set Lunch Mode
-    if (currentTime >= 0 && currentTime < dinnerTime)
-    {
-        [defaults setObject:@"Lunch" forKey:@"LunchOrDinner"];
-        currentMode = @"Lunch";
-    }
-    else if (currentTime >= dinnerTime && currentTime < 24)
-    {
-        [defaults setObject:@"Dinner" forKey:@"LunchOrDinner"];
-        currentMode = @"Dinner";
-    }
-    
-    [defaults synchronize];
+//    // Set Lunch Mode
+//    if (currentTime >= 0 && currentTime < dinnerTime)
+//    {
+//        [defaults setObject:@"Lunch" forKey:@"LunchOrDinner"];
+//        currentMode = @"Lunch";
+//    }
+//    else if (currentTime >= dinnerTime && currentTime < 24)
+//    {
+//        [defaults setObject:@"Dinner" forKey:@"LunchOrDinner"];
+//        currentMode = @"Dinner";
+//    }
+//    
+//    [defaults synchronize];
     
     NSLog(@"Current Mode - %@, Saved Mode - %@", currentMode, [defaults objectForKey:@"LunchOrDinner"]);
+}
+
+- (NSString *)getOnDemandMealMode {
+    NSDictionary *widget = [self getOnDemandWidget];
+    
+    if (widget == nil) {
+        return nil;
+    }
+    else {
+        return widget[@"mealMode"];
+    }
 }
 
 - (NSInteger)getETAMin

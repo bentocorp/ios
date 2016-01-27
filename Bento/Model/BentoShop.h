@@ -157,4 +157,6 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 - (NSString *)getKitchen;
 - (NSString *)getOAZone;
 
+- (NSString *)getOnDemandMealMode;
+
 @end

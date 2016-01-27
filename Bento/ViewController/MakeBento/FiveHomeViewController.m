@@ -95,7 +95,7 @@ static OrderMode orderMode;
     NSMutableArray *menuNames; // [date, date, date]
     NSMutableArray *menuTimes; // [[time range, time ranges, time ranges], [time range, time ranges, time ranges], [time range, time ranges, time ranges]]
     
-    OrderMode *tempOrderMode;
+    OrderMode tempOrderMode;
     NSInteger tempSelectedOrderAheadIndex;
     NSInteger tempSelectedOrderAheadTimeRangeIndex;
 }
@@ -146,11 +146,21 @@ static OrderMode orderMode;
     
     self.isToggledOn = YES;
     
-    self.cancelButton.hidden = YES;
-    
     self.isFirstSelection = YES;
     
+    self.cancelButton.hidden = YES;
+    
     self.doneButtonWidthConstraint.constant = SCREEN_WIDTH;
+    
+    self.onDemandCheckMarkImageView.hidden = YES;
+    self.orderAheadCheckMarkImageView.hidden = YES;
+    
+    self.asapMenuLabel.hidden = YES;
+    self.asapDescriptionLabel.hidden = YES;
+    self.orderAheadTitleLabel.hidden = YES;
+    
+    self.asapMenuLabel.adjustsFontSizeToFitWidth = YES;
+    self.orderAheadTitleLabel.adjustsFontSizeToFitWidth = YES;
     
     /*---Order Ahead View Menu---*/
     self.orderAheadView.clipsToBounds = YES; // to avoid subviews from coming out of bounds
@@ -178,10 +188,6 @@ static OrderMode orderMode;
     
     self.fourCustomVC.buildButton.hidden = YES;
     self.fourCustomVC.viewAddonsButton.hidden = YES;
-    self.asapMenuLabel.hidden = YES;
-    self.asapDescriptionLabel.hidden = YES;
-    self.orderAheadTitleLabel.hidden = YES;
-    self.asapMenuLabel.adjustsFontSizeToFitWidth = YES;
 
     [self beginLoadingData];
 }
@@ -1401,53 +1407,108 @@ static OrderMode orderMode;
 
 - (IBAction)pickerButtonPressed:(id)sender {
     if (self.isToggledOn == NO) {
+        
+        if (orderMode == OnDemand) {
+            [self.view layoutIfNeeded];
+            
+            tempOrderMode = OnDemand;
+            
+            self.orderAheadCheckMarkImageView.hidden = YES;
+            self.onDemandCheckMarkImageView.hidden = NO;
+            self.orderAheadPickerContainerViewHeightConstraint.constant = 0;
+            self.orderAheadPickerView.hidden = YES;
+            
+//            [self setOnDemandTitle];
+            
+            [self.view layoutIfNeeded];
+        }
+        else {
+            [self.view layoutIfNeeded];
+            
+            tempOrderMode = OrderAhead;
+            
+            self.onDemandCheckMarkImageView.hidden = YES;
+            self.orderAheadCheckMarkImageView.hidden = NO;
+            self.orderAheadPickerContainerViewHeightConstraint.constant = 150;
+            self.orderAheadPickerView.hidden = NO;
+            
+//            [self updatePickerButtonTitle];
+            
+            [self.view layoutIfNeeded];
+            
+            [self.orderAheadPickerView selectRow:self.selectedOrderAheadIndex inComponent:0 animated:YES];
+            [self.orderAheadPickerView selectRow:self.selectedOrderAheadTimeRangeIndex inComponent:1 animated:YES];
+        }
+        
         [self toggleDropDown];
     }
 }
 
 - (IBAction)doneButtonPressed:(id)sender {
     
-//    self.selectedOrderAheadTimeRangeIndex = ;
-//    selectedOrderAheadIndex = ;
-//    orderMode = ;
+//    // items in cart + different menu selected
+//    if ([self isCartEmpty] != NO && (orderMode != tempOrderMode || self.selectedOrderAheadIndex != tempSelectedOrderAheadIndex)) {
+//        
+//        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
+//                                                            message:@"Clear cart to switch menus?"
+//                                                           delegate:self
+//                                                  cancelButtonTitle:@"No"
+//                                                   otherButtonTitle:@"Yes"];
+//        alertView.tag = 2017;
+//        [alertView showInView:self.view];
+//        alertView = nil;
+//    }
+//    else {
+        // set selected flags
+        orderMode = tempOrderMode;
+        self.selectedOrderAheadIndex = tempSelectedOrderAheadIndex;
+        self.selectedOrderAheadTimeRangeIndex = tempSelectedOrderAheadTimeRangeIndex;
     
-    [self toggleDropDown];
+        [self showOrHideETA];
+        [self showOrHidePreview];
+    
+        [self updateMenu];
+        [self toggleDropDown];
+//    }
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
+    tempOrderMode = orderMode;
+    [self.orderAheadPickerView selectRow:self.selectedOrderAheadIndex inComponent:0 animated:YES];
+    [self.orderAheadPickerView selectRow:self.selectedOrderAheadTimeRangeIndex inComponent:1 animated:YES];
+    
+    [self updatePickerButtonTitle];
     [self toggleDropDown];
 }
 
 - (IBAction)enableOnDemandButtonPressed:(id)sender {
-    if ([self isCartEmpty]) {
-        [self enableOnDemand];
-    }
-    else {
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
-                                                            message:@"Clear cart to switch menus?"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"No"
-                                                   otherButtonTitle:@"Yes"];
-        alertView.tag = 2017;
-        [alertView showInView:self.view];
-        alertView = nil;
-    }
+    [self.view layoutIfNeeded];
+    
+    tempOrderMode = OnDemand;
+    
+    self.orderAheadCheckMarkImageView.hidden = YES;
+    self.onDemandCheckMarkImageView.hidden = NO;
+    self.orderAheadPickerContainerViewHeightConstraint.constant = 0;
+    self.orderAheadPickerView.hidden = YES;
+    
+    [self setOnDemandTitle];
+    
+    [self.view layoutIfNeeded];
 }
 
 - (IBAction)enableOrderAheadButtonPressed:(id)sender {
-    if ([self isCartEmpty]) {
-        [self enableOrderAhead];
-    }
-    else {
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
-                                                            message:@"Clear cart to switch menus?"
-                                                           delegate:self
-                                                  cancelButtonTitle:@"No"
-                                                   otherButtonTitle:@"Yes"];
-        alertView.tag = 2018;
-        [alertView showInView:self.view];
-        alertView = nil;
-    }
+    [self.view layoutIfNeeded];
+    
+    tempOrderMode = OrderAhead;
+    
+    self.onDemandCheckMarkImageView.hidden = YES;
+    self.orderAheadCheckMarkImageView.hidden = NO;
+    self.orderAheadPickerContainerViewHeightConstraint.constant = 150;
+    self.orderAheadPickerView.hidden = NO;
+    
+    [self updatePickerButtonTitle];
+    
+    [self.view layoutIfNeeded];
 }
 
 - (IBAction)bottomButtonPressed:(id)sender {
@@ -1891,7 +1952,6 @@ static OrderMode orderMode;
                 
                 if (isSelectedLocationInZone) {
                     [self openAccountViewController:[CompleteOrderViewController class]];
-//                    [self openAccountViewController:completeOrderViewController];
                 }
                 else {
                     [self openAccountViewController:[DeliveryLocationViewController class]];
@@ -1957,6 +2017,10 @@ static OrderMode orderMode;
     self.orderAheadCheckMarkImageView.hidden = NO;
     self.orderAheadPickerContainerViewHeightConstraint.constant = 150;
     self.orderAheadPickerView.hidden = NO;
+    
+    tempOrderMode = orderMode;
+    tempSelectedOrderAheadIndex = self.selectedOrderAheadIndex;
+    tempSelectedOrderAheadTimeRangeIndex = self.selectedOrderAheadTimeRangeIndex;
     
     [self updatePickerButtonTitle];
     
@@ -2058,7 +2122,7 @@ static OrderMode orderMode;
         if (menuTimes.count == 0) {
             return 0;
         }
-        return [menuTimes[self.selectedOrderAheadIndex] count];
+        return [menuTimes[tempSelectedOrderAheadIndex] count];
     }
 }
 
@@ -2073,7 +2137,7 @@ static OrderMode orderMode;
         if (menuTimes.count == 0) {
             return nil;
         }
-        return menuTimes[self.selectedOrderAheadIndex][row];
+        return menuTimes[tempSelectedOrderAheadIndex][row];
     }
 }
 
@@ -2085,7 +2149,7 @@ static OrderMode orderMode;
         pickerLabel.text = menuNames[row];
     }
     else {
-        pickerLabel.text = menuTimes[self.selectedOrderAheadIndex][row];
+        pickerLabel.text = menuTimes[tempSelectedOrderAheadIndex][row];
     }
     
     // if time range is sold-out
@@ -2110,22 +2174,23 @@ static OrderMode orderMode;
     if (component == 0) {
         if ([self isCartEmpty]) {
             menuOrderAhead = menuNames[row];
-            self.selectedOrderAheadIndex = row;
+//            self.selectedOrderAheadIndex = row;
+            tempSelectedOrderAheadIndex = row;
             [pickerView reloadComponent:1];
             [pickerView selectRow:0 inComponent:1 animated:YES];
         }
-        else if (self.selectedOrderAheadIndex != row) {
-            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
-                                                                message:@"Clear cart to switch menus?"
-                                                               delegate:self
-                                                      cancelButtonTitle:@"No"
-                                                       otherButtonTitle:@"Yes"];
-            alertView.tag = 2019;
-            [alertView showInView:self.view];
-            alertView = nil;
-            
-            self.selectedOrderAheadIndexForConfirm = row;
-        }
+//        else if (self.selectedOrderAheadIndex != row) {
+//            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Items In Cart"
+//                                                                message:@"Clear cart to switch menus?"
+//                                                               delegate:self
+//                                                      cancelButtonTitle:@"No"
+//                                                       otherButtonTitle:@"Yes"];
+//            alertView.tag = 2019;
+//            [alertView showInView:self.view];
+//            alertView = nil;
+//            
+//            self.selectedOrderAheadIndexForConfirm = row;
+//        }
     }
     else {
         // if time range is sold-out and is last on the list, push back instead of forward so array wont go out of bounds
@@ -2134,18 +2199,21 @@ static OrderMode orderMode;
         if ([menuTimes[self.selectedOrderAheadIndex][row] containsString:@"sold-out"] && row == lastRow) {
             [pickerView selectRow:row - 1 inComponent:component animated:YES];
             timeOrderAhead = menuTimes[self.selectedOrderAheadIndex][row - 1];
-            self.selectedOrderAheadTimeRangeIndex = row - 1;
+//            self.selectedOrderAheadTimeRangeIndex = row - 1;
+            tempSelectedOrderAheadTimeRangeIndex = row - 1;
         }
         // if time range is sold-out and not the last on the list, then push forward
         else if ([menuTimes[self.selectedOrderAheadIndex][row] containsString:@"sold-out"]) {
             [pickerView selectRow:row + 1 inComponent:component animated:YES];
             timeOrderAhead = menuTimes[self.selectedOrderAheadIndex][row + 1];
-            self.selectedOrderAheadTimeRangeIndex = row + 1;
+//            self.selectedOrderAheadTimeRangeIndex = row + 1;
+            tempSelectedOrderAheadTimeRangeIndex = row + 1;
         }
         else {
             timeOrderAhead = menuTimes[self.selectedOrderAheadIndex][row];
             
-            self.selectedOrderAheadTimeRangeIndex = row;
+//            self.selectedOrderAheadTimeRangeIndex = row;
+            tempSelectedOrderAheadTimeRangeIndex = row;
         }
     }
 }
@@ -2154,18 +2222,18 @@ static OrderMode orderMode;
     menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
     timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
     
-    if (orderMode == OnDemand) {
+    if (tempOrderMode == OnDemand) {
         if (menuOnDemand != nil) {
             [self.pickerButton setTitle:[NSString stringWithFormat:@"%@ ▾", menuOnDemand] forState:UIControlStateNormal];
         }
     }
-    else if (orderMode == OrderAhead) {
+    else if (tempOrderMode == OrderAhead) {
         if (menuOrderAhead != nil && timeOrderAhead != nil) {
             [self.pickerButton setTitle:[NSString stringWithFormat:@"%@, %@ ▾", menuOrderAhead, timeOrderAhead] forState:UIControlStateNormal];
         }
     }
     
-    [self updateMenu];
+//    [self updateMenu];
 }
 
 
