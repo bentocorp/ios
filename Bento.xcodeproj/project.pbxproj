@@ -751,7 +751,7 @@
 		90D8F7CF1A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "deliverylocation_icon_search@2x.png"; sourceTree = "<group>"; };
 		90D8F7D21A5E2C4C00D034CF /* image_checked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_checked@2x.png"; sourceTree = "<group>"; };
 		90D8F7D31A5E2C4C00D034CF /* image_unchecked@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "image_unchecked@2x.png"; sourceTree = "<group>"; };
-		90D8F7D61A5E2FE900D034CF /* CompleteOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CompleteOrderViewController.h; sourceTree = "<group>"; };
+		90D8F7D61A5E2FE900D034CF /* CompleteOrderViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CompleteOrderViewController.h; path = ../Order/CompleteOrderViewController.h; sourceTree = "<group>"; };
 		90D8F7D71A5E2FE900D034CF /* CompleteOrderViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CompleteOrderViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		90D8F7D91A5E304D00D034CF /* OrderConfirmViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderConfirmViewController.h; sourceTree = "<group>"; };
 		90D8F7DA1A5E304D00D034CF /* OrderConfirmViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = OrderConfirmViewController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
@@ -1421,7 +1421,6 @@
 				90BED0E71A5C3333003DC872 /* Cell */,
 				FC99D4F61AFC325100BEE40B /* At Launch */,
 				FC99D4F51AFC323700BEE40B /* Closed/Sold-out */,
-				FCFD79F01AE8880D002AD322 /* Settings */,
 				FC7E835D1C49CD2E00CFEFCC /* Orders */,
 				90BED0A71A5BD05C003DC872 /* Signin/Register */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
@@ -1455,7 +1454,6 @@
 				FCE1E50F1C4737AF00A210DC /* FiveHomeViewController.xib */,
 				FCE1E5041C47373E00A210DC /* 4-Pod */,
 				FCE1E5051C47374D00A210DC /* 5-Pod */,
-				FCE1E51B1C48183C00A210DC /* View Preview */,
 				FCCD30EA1C44583A00E29A70 /* Choose Dish Item */,
 			);
 			name = Homepage;
@@ -1465,7 +1463,7 @@
 		90BED0A61A5BD05C003DC872 /* Finalize Order */ = {
 			isa = PBXGroup;
 			children = (
-				90D8F7D61A5E2FE900D034CF /* CompleteOrderViewController.h */,
+				FCE1E51B1C48183C00A210DC /* View Preview */,
 				90D8F7D71A5E2FE900D034CF /* CompleteOrderViewController.m */,
 				90D8F7D91A5E304D00D034CF /* OrderConfirmViewController.h */,
 				90D8F7DA1A5E304D00D034CF /* OrderConfirmViewController.m */,
@@ -1767,6 +1765,7 @@
 		FC7E835D1C49CD2E00CFEFCC /* Orders */ = {
 			isa = PBXGroup;
 			children = (
+				FCFD79F01AE8880D002AD322 /* Settings */,
 				FCC5D2231C536946009C3D7A /* Model */,
 				FCC5D22D1C537F6B009C3D7A /* View */,
 				FCC5D2241C536953009C3D7A /* Controller */,
@@ -2121,10 +2120,12 @@
 		FCE1E51B1C48183C00A210DC /* View Preview */ = {
 			isa = PBXGroup;
 			children = (
+				90D8F7D61A5E2FE900D034CF /* CompleteOrderViewController.h */,
 				FC3E2D7A1C4588260073A82C /* MenuPreviewViewController.h */,
 				FC3E2D7B1C4588260073A82C /* MenuPreviewViewController.m */,
 			);
 			name = "View Preview";
+			path = ../MakeBento;
 			sourceTree = "<group>";
 		};
 		FCFD79F01AE8880D002AD322 /* Settings */ = {

@@ -138,6 +138,8 @@
     BOOL allowCommitOnKeep;
     
     NSMutableArray *arySoldOutItems;
+    
+    NSDictionary *menuInfo;
 }
 
 - (BOOL)applePayEnabled
@@ -152,12 +154,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    NSDictionary *menuInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"menuInfo"];
-    
-    self.orderMode = [menuInfo[@"orderMode"] integerValue];
-    self.orderAheadMenu = menuInfo[@"orderAheadMenu"];
-    self.selectedOrderAheadIndex = [menuInfo[@"selectedOrderAheadIndex"] integerValue];
     
     allowCommitOnKeep = YES;
     
@@ -390,6 +386,12 @@
 {
     [super viewWillAppear:animated];
     
+    // get menu info from homeVC
+    menuInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"menuInfo"];
+    self.orderMode = [menuInfo[@"orderMode"] integerValue];
+    self.orderAheadMenu = menuInfo[@"orderAheadMenu"];
+    self.selectedOrderAheadIndex = [menuInfo[@"selectedOrderAheadIndex"] integerValue];
+    
     uuid = [[NSUUID UUID] UUIDString];
     NSLog(@"UUID = %@", uuid);
     
@@ -454,7 +456,7 @@
         self.clockImageView.hidden = YES;
         self.minutesLabel.hidden = YES;
         
-        NSDictionary *menuInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"menuInfo"];
+//        NSDictionary *menuInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"menuInfo"];
         self.dateAndTimeLabel.text = [NSString stringWithFormat:@"%@\n%@", menuInfo[@"menuName"], menuInfo[@"menuTime"]];
     }
     

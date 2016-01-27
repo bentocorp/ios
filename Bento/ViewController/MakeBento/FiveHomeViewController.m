@@ -1469,15 +1469,17 @@ static OrderAheadMenu *orderAheadMenu;
         orderMode = tempOrderMode;
         self.selectedOrderAheadIndex = tempSelectedOrderAheadIndex;
         self.selectedOrderAheadTimeRangeIndex = tempSelectedOrderAheadTimeRangeIndex;
-    
+        
+        [self updateMenu];
+        
         [self showOrHideETA];
         [self showOrHidePreview];
     
-        [self updateMenu];
         [self toggleDropDown];
-        
         [self updateUI];
     }
+    
+    NSLog(@"startTime - %@, endTime - %@", orderAheadMenu.scheduledWindowStartTime, orderAheadMenu.scheduledWindowEndTime);
 }
 
 - (IBAction)cancelButtonPressed:(id)sender {
@@ -1787,6 +1789,9 @@ static OrderAheadMenu *orderAheadMenu;
         for (OrderAheadMenu *oaMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
             if ([menuOrderAhead isEqualToString:oaMenu.name]) {
                 orderAheadMenu = oaMenu;
+                orderAheadMenu.deliveryPrice = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"delivery_price"];
+                orderAheadMenu.scheduledWindowStartTime = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"start"];
+                orderAheadMenu.scheduledWindowEndTime = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"end"];
                 
 //                [[NSUserDefaults standardUserDefaults] rm_setCustomObject:@{
 //                                                                            @"menuId": self.orderAheadMenu.menuId,
@@ -1925,9 +1930,6 @@ static OrderAheadMenu *orderAheadMenu;
     UIStoryboard *storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
     DeliveryLocationViewController *deliveryLocationViewController = [storyboard instantiateViewControllerWithIdentifier:@"DeliveryLocationViewController"];
     CompleteOrderViewController *completeOrderViewController = [storyboard instantiateViewControllerWithIdentifier:@"CompleteOrderViewController"];
-    orderAheadMenu.deliveryPrice = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"delivery_price"];
-    orderAheadMenu.scheduledWindowStartTime = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"start"];
-    orderAheadMenu.scheduledWindowEndTime = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"end"];
     
     NSDictionary *menuInfo;
     
@@ -2228,6 +2230,9 @@ static OrderAheadMenu *orderAheadMenu;
 - (void)updatePickerButtonTitle {
     menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
     timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
+    
+    tempSelectedOrderAheadIndex = [self.orderAheadPickerView selectedRowInComponent:0];
+    tempSelectedOrderAheadTimeRangeIndex = [self.orderAheadPickerView selectedRowInComponent:1];
     
     if (tempOrderMode == OnDemand) {
         if (menuOnDemand != nil) {

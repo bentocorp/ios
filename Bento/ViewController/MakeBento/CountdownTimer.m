@@ -110,7 +110,7 @@
     
     // from 12AM -> Lunch Cut-off (10AM)
     if (currentTime < lunchCutOffTime) {
-        NSLog(@"Checking Lunch cut-off time!");
+//        NSLog(@"Checking Lunch cut-off time!");
         
         if (currentTime >= (lunchCutOffTime-countDownRemainingTime) && currentTime < lunchCutOffTime) {
             self.finalCountDownTimerValue = [NSString stringWithFormat:@"%@", [self convertSecondsToMMSSString:(lunchCutOffTime - currentTime)]];
@@ -122,7 +122,7 @@
     }
     // from Lunch Cut-off (10AM) -> Dinner Cut-ff (3PM)
     else if (currentTime < dinnerCutOffTime) {
-        NSLog(@"Checking Dinner cut-off time!");
+//        NSLog(@"Checking Dinner cut-off time!");
         
         if (currentTime >= (dinnerCutOffTime-countDownRemainingTime) && currentTime < dinnerCutOffTime) {
             self.finalCountDownTimerValue = [NSString stringWithFormat:@"%@", [self convertSecondsToMMSSString:(dinnerCutOffTime - currentTime)]];
