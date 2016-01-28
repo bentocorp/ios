@@ -529,9 +529,6 @@
         }];
     }
     else {
-        [[NSUserDefaults standardUserDefaults] rm_setCustomObject:self.placeInfo forKey:@"delivery_location"];
-        [NSUserDefaults standardUserDefaults];
-        
         [self doConfirmOrder];
     }
 }
