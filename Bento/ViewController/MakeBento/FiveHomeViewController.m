@@ -1040,6 +1040,8 @@ static OrderAheadMenu *orderAheadMenu;
         [self updateOrderAheadWidget];
         NSLog(@"Order Mode - %ld", (unsigned long)orderMode);
         [self updatePickerButtonTitle];
+        
+        [self checkVersions];
     });
 }
 
@@ -1278,6 +1280,9 @@ static OrderAheadMenu *orderAheadMenu;
         
         [self updateMenu];
         [self toggleDropDown];
+    }
+    else if (alertView.tag == 2021) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
     }
 }
 
@@ -2207,7 +2212,7 @@ static OrderAheadMenu *orderAheadMenu;
         menuOrderAhead = menuNames[row];
         tempSelectedOrderAheadIndex = row;
         [pickerView reloadComponent:1];
-        [pickerView selectRow:0 inComponent:1 animated:YES];
+//        [pickerView selectRow:0 inComponent:1 animated:YES];
     }
     else {
         // if time range is sold-out and is last on the list, push back instead of forward so array wont go out of bounds
@@ -2250,6 +2255,35 @@ static OrderAheadMenu *orderAheadMenu;
     }
     
 //    [self updateMenu];
+}
+
+- (void)checkVersions {
+    
+    MyAlertView *forcedUpdateAlertView;
+    
+#ifdef DEV_MODE
+    {
+        forcedUpdateAlertView = [[MyAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", [BentoShop sharedInstance].iosCurrentVersion, [BentoShop sharedInstance].iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitle:nil];
+        
+        NSLog(@"This is dev version...run update check anyway!");
+    }
+#else
+    {
+        forcedUpdateAlertView = [[MyAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitle:@"Update"];
+        forcedUpdateAlertView.tag = 2021;
+        NSLog(@"This is production version...run update check!");
+    }
+#endif
+    {
+        NSLog(@"ios minimum version - %f", [BentoShop sharedInstance].iosMinVersion);
+        NSLog(@"current ios version - %f", [BentoShop sharedInstance].iosCurrentVersion);
+        
+        // Perform check for new version of your app
+        if ([BentoShop sharedInstance].iosCurrentVersion < [BentoShop sharedInstance].iosMinVersion) {
+            forcedUpdateAlertView.tag = 2021;
+            [forcedUpdateAlertView showInView:self.view];
+        }
+    }
 }
 
 

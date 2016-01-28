@@ -64,6 +64,8 @@
     BOOL isThereConnection;
     
     BOOL areThereAnyMenus;
+    
+    BOOL isShowingForcedUpdateAlert;
 }
 
 - (NSString *)getClosedText
@@ -168,6 +170,8 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkVersions) name:@"enteredForeground" object:nil];
     
     [self startTimerOnViewedScreen];
 }
@@ -306,6 +310,12 @@
 - (void)onUpdatedStatus
 {
     if (isThereConnection) {
+        
+        if (isShowingForcedUpdateAlert == NO) {
+            isShowingForcedUpdateAlert = YES;
+            [self checkVersions];
+        }
+        
         if (self.type == 0 && ![[BentoShop sharedInstance] isClosed]) {
             [self performSelectorOnMainThread:@selector(onBack) withObject:nil waitUntilDone:NO];
         }
@@ -517,5 +527,43 @@
     
     return YES;
 }
+
+#pragma mark forced update
+- (void)checkVersions {
+    
+    UIAlertView *forcedUpdateAlertView;
+    
+#ifdef DEV_MODE
+    {
+        forcedUpdateAlertView = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", [BentoShop sharedInstance].iosCurrentVersion, [BentoShop sharedInstance].iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
+        
+        NSLog(@"This is dev version...run update check anyway!");
+    }
+#else
+    {
+        forcedUpdateAlertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle: nil otherButtonTitles:@"Update", nil];
+        forcedUpdateAlertView.tag = 2021;
+        NSLog(@"This is production version...run update check!");
+    }
+#endif
+    {
+        NSLog(@"ios minimum version - %f", [BentoShop sharedInstance].iosMinVersion);
+        NSLog(@"current ios version - %f", [BentoShop sharedInstance].iosCurrentVersion);
+        
+        // Perform check for new version of your app
+        if ([BentoShop sharedInstance].iosCurrentVersion < [BentoShop sharedInstance].iosMinVersion) {
+            forcedUpdateAlertView.tag = 2021;
+            [forcedUpdateAlertView show];
+        }
+    }
+}
+
+#pragma mark MyAlertViewDelegate
+- (void)alertView:(UIAlertView *)alertView clickedButtonAtIndex:(NSInteger)buttonIndex {
+    if (alertView.tag == 2021) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
+    }
+}
+
 
 @end
