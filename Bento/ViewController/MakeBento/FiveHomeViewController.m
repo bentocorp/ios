@@ -1928,7 +1928,7 @@ static OrderAheadMenu *orderAheadMenu;
     if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
         [self showConfirmMsg];
     }
-    else {
+    else if (currentBento != nil && [currentBento isCompleted]) {
         [self gotoOrderScreen];
     }
 }
