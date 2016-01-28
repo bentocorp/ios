@@ -432,16 +432,6 @@
             enabled = YES;
         }
     }
-    else {
-        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-        
-        if (types & UIRemoteNotificationTypeAlert) {
-            enabled = YES;
-        }
-        else {
-            enabled = NO;
-        }
-    }
     
     return enabled;
 }
@@ -580,16 +570,11 @@
     }
 }
 
-- (void)requestPush
-{
+- (void)requestPush {
     // iOS 8 and up
     if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    // iOS 7 and below
-    else {
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
 }
 

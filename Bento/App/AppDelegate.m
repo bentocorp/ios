@@ -95,17 +95,11 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     /*------------------------------------REGISTER NOTIFICATIONS-------------------------------------*/
     
     if ([self isPushEnabled]) {
-        
         if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
-#ifdef __IPHONE_8_0
             UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
                                                                                                  | UIUserNotificationTypeBadge
                                                                                                  | UIUserNotificationTypeSound) categories:nil];
             [application registerUserNotificationSettings:settings];
-#endif
-        } else {
-            UIRemoteNotificationType myTypes = UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound;
-            [application registerForRemoteNotificationTypes:myTypes];
         }
     }
 
@@ -485,27 +479,20 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     NSLog(@"Received remote notification");
 }
 
-- (BOOL)isPushEnabled
-{
+- (BOOL)isPushEnabled {
+    
     BOOL enabled;
     
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)])
-    {
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]) {
+        
         UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
         
-        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
             enabled = NO;
-        else
+        }
+        else {
             enabled = YES;
-    }
-    else
-    {
-        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-        
-        if (types & UIRemoteNotificationTypeAlert)
-            enabled = YES;
-        else
-            enabled = NO;
+        }
     }
     
     return enabled;

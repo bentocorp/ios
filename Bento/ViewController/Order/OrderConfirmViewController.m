@@ -190,23 +190,16 @@
 {
     BOOL enabled;
     
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)])
-    {
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]) {
+        
         UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
         
-        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone))
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
             enabled = NO;
-        else
+        }
+        else {
             enabled = YES;
-    }
-    else
-    {
-        UIRemoteNotificationType types = [[UIApplication sharedApplication] enabledRemoteNotificationTypes];
-        
-        if (types & UIRemoteNotificationTypeAlert)
-            enabled = YES;
-        else
-            enabled = NO;
+        }
     }
     
     return enabled;
@@ -219,11 +212,6 @@
         
         [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
         [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-    // iOS 7 and below
-    else {
-        
-        [[UIApplication sharedApplication] registerForRemoteNotificationTypes: (UIRemoteNotificationTypeNewsstandContentAvailability| UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeSound | UIRemoteNotificationTypeAlert)];
     }
 }
 
