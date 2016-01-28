@@ -1798,7 +1798,7 @@ static OrderAheadMenu *orderAheadMenu;
     
     self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height - 1;
     
-    self.cartButton.enabled = YES;
+    [self setCart];
     
     [self.view layoutIfNeeded];
 }
@@ -1925,10 +1925,10 @@ static OrderAheadMenu *orderAheadMenu;
 
 - (void)onCart {
     Bento *currentBento = [[BentoShop sharedInstance] getCurrentBento];
-    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted]) {
+    if (currentBento != nil && ![currentBento isEmpty] && ![currentBento isCompleted] && [[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         [self showConfirmMsg];
     }
-    else if (currentBento != nil && [currentBento isCompleted]) {
+    else if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         [self gotoOrderScreen];
     }
 }
