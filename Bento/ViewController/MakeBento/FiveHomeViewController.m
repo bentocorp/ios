@@ -98,6 +98,8 @@ static OrderAheadMenu *orderAheadMenu;
     OrderMode tempOrderMode;
     NSInteger tempSelectedOrderAheadIndex;
     NSInteger tempSelectedOrderAheadTimeRangeIndex;
+    
+    BOOL isShowingForcedUpdateAlert;
 }
 
 - (void)viewDidLoad {
@@ -117,6 +119,8 @@ static OrderAheadMenu *orderAheadMenu;
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateBottomButton) name:@"showCountDownTimer" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(presentSignedInVCThenPushToOrdersVC) name:@"didPopBackFromViewAllOrdersButton" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkVersions) name:@"enteredForeground" object:nil];
     
     [[BentoShop sharedInstance] resetBentoArray];
     [[AddonList sharedInstance] emptyList];
@@ -1022,6 +1026,12 @@ static OrderAheadMenu *orderAheadMenu;
 
 - (void)updateUI {
     dispatch_async(dispatch_get_main_queue(), ^{
+        
+        if (isShowingForcedUpdateAlert == NO) {
+            isShowingForcedUpdateAlert = YES;
+            [self checkVersions];
+        }
+        
         [self checkAppState];
     
         [self checkBentoCount];
@@ -1040,8 +1050,6 @@ static OrderAheadMenu *orderAheadMenu;
         [self updateOrderAheadWidget];
         NSLog(@"Order Mode - %ld", (unsigned long)orderMode);
         [self updatePickerButtonTitle];
-        
-        [self checkVersions];
     });
 }
 
@@ -2259,17 +2267,17 @@ static OrderAheadMenu *orderAheadMenu;
 
 - (void)checkVersions {
     
-    MyAlertView *forcedUpdateAlertView;
+    UIAlertView *forcedUpdateAlertView;
     
 #ifdef DEV_MODE
     {
-        forcedUpdateAlertView = [[MyAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", [BentoShop sharedInstance].iosCurrentVersion, [BentoShop sharedInstance].iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitle:nil];
+        forcedUpdateAlertView = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", [BentoShop sharedInstance].iosCurrentVersion, [BentoShop sharedInstance].iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
         
         NSLog(@"This is dev version...run update check anyway!");
     }
 #else
     {
-        forcedUpdateAlertView = [[MyAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitle:@"Update"];
+        forcedUpdateAlertView = [[UIAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update", nil];
         forcedUpdateAlertView.tag = 2021;
         NSLog(@"This is production version...run update check!");
     }
@@ -2281,7 +2289,7 @@ static OrderAheadMenu *orderAheadMenu;
         // Perform check for new version of your app
         if ([BentoShop sharedInstance].iosCurrentVersion < [BentoShop sharedInstance].iosMinVersion) {
             forcedUpdateAlertView.tag = 2021;
-            [forcedUpdateAlertView showInView:self.view];
+            [forcedUpdateAlertView show];
         }
     }
 }
