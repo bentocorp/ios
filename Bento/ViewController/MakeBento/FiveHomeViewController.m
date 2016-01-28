@@ -1773,6 +1773,8 @@ static OrderAheadMenu *orderAheadMenu;
     
     self.dropDownViewTopConstraint.constant = 64;
     
+    self.cartButton.enabled = NO;
+    
     [self.view layoutIfNeeded];
 }
 
@@ -1782,6 +1784,8 @@ static OrderAheadMenu *orderAheadMenu;
     self.fadedViewButton.alpha = 0;
     
     self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height - 1;
+    
+    self.cartButton.enabled = YES;
     
     [self.view layoutIfNeeded];
 }
@@ -1912,9 +1916,6 @@ static OrderAheadMenu *orderAheadMenu;
         [self showConfirmMsg];
     }
     else {
-        if ([self isToggledOn]) {
-            [self toggleOff];
-        }
         [self gotoOrderScreen];
     }
 }
