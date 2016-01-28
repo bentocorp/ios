@@ -168,6 +168,8 @@ static OrderAheadMenu *orderAheadMenu;
     self.asapMenuLabel.adjustsFontSizeToFitWidth = YES;
     self.orderAheadTitleLabel.adjustsFontSizeToFitWidth = YES;
     
+    [self.pickerButton setTitleColor:[UIColor bentoTitleGray] forState:UIControlStateNormal];
+    
     [self removeOrderAhead];
     [self removeOnDemand];
     
@@ -1788,6 +1790,8 @@ static OrderAheadMenu *orderAheadMenu;
     
     self.cartButton.enabled = NO;
     
+    [self.pickerButton setTitleColor:[UIColor bentoTitleGray] forState:UIControlStateNormal];
+    
     [self.view layoutIfNeeded];
 }
 
@@ -1799,6 +1803,8 @@ static OrderAheadMenu *orderAheadMenu;
     self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height - 1;
     
     [self setCart];
+    
+    [self.pickerButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     
     [self.view layoutIfNeeded];
 }
