@@ -1290,7 +1290,7 @@ static OrderAheadMenu *orderAheadMenu;
         self.selectedOrderAheadIndex = tempSelectedOrderAheadIndex;
         self.selectedOrderAheadTimeRangeIndex = tempSelectedOrderAheadTimeRangeIndex;
         
-        [self showOrHideETA];
+//        [self showOrHideETA];
         [self showOrHidePreview];
         
         [self updateMenu];
@@ -1495,7 +1495,7 @@ static OrderAheadMenu *orderAheadMenu;
         
         [self updateMenu];
         
-        [self showOrHideETA];
+//        [self showOrHideETA];
         [self showOrHidePreview];
     
         [self toggleDropDown];
@@ -2056,7 +2056,7 @@ static OrderAheadMenu *orderAheadMenu;
     
 //    [self setOnDemandTitle];
     
-    [self showOrHideETA];
+//    [self showOrHideETA];
     
     [self updateUI];
     
@@ -2084,7 +2084,7 @@ static OrderAheadMenu *orderAheadMenu;
     
     [self updatePickerButtonTitle];
     
-    [self showOrHideETA];
+//    [self showOrHideETA];
     
     [self updateUI];
     
@@ -2095,7 +2095,6 @@ static OrderAheadMenu *orderAheadMenu;
 
 - (void)showOrHideETA {
     if (orderMode == OnDemand) {
-        
         // store is either closed/sold-out
         if ([self.widget[@"state"] isEqualToString:@"open"] == NO) {
             self.etaLabel.hidden = YES;
@@ -2289,7 +2288,7 @@ static OrderAheadMenu *orderAheadMenu;
         }
     }
     
-//    [self updateMenu];
+    [self showOrHideETA];
 }
 
 - (void)checkVersions {
