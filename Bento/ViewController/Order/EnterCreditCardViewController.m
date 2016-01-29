@@ -61,6 +61,8 @@
     self.paymentTextField.delegate = self;
     [self.viewInput addSubview:self.paymentTextField];
     
+    [self.paymentTextField becomeFirstResponder];
+    
     creditCard = nil;
 }
 
@@ -176,9 +178,6 @@
 
 - (void)hideKeyboard {
     [self.paymentTextField resignFirstResponder];
-//    [self.paymentView.cardNumberField resignFirstResponder];
-//    [self.paymentView.cardExpiryField resignFirstResponder];
-//    [self.paymentView.cardCVCField resignFirstResponder];
 }
 
 #pragma mark STPPaymentCardTextFieldDelegate
