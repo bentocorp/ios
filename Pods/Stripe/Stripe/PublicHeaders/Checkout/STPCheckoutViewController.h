@@ -6,7 +6,7 @@
 //
 
 #import <Foundation/Foundation.h>
-
+#import "TargetConditionals.h"
 #if TARGET_OS_IPHONE
 #import <UIKit/UIKit.h>
 #else
@@ -14,8 +14,8 @@
 #endif
 
 typedef NS_ENUM(NSInteger, STPPaymentStatus) {
-    STPPaymentStatusSuccess,      // The transaction was a success.
-    STPPaymentStatusError,        // The transaction failed.
+    STPPaymentStatusSuccess,       // The transaction was a success.
+    STPPaymentStatusError,         // The transaction failed.
     STPPaymentStatusUserCancelled, // The user Cancelled the payment sheet.
 };
 
@@ -23,12 +23,15 @@ typedef NS_ENUM(NSInteger, STPPaymentStatus) {
 @protocol STPCheckoutViewControllerDelegate;
 
 /**
- Controls a UIWebView that loads an iOS-optimized version of Stripe Checkout that you can present modally. Note
- that if you're using an STPPaymentPresenter to collect your user's payment details (highly recommended), you do not have to use this class directly.
+ Controls a UIWebView that loads an iOS-optimized version of Stripe Checkout that you can present modally. Note that this functionality is considered in beta
+ and may change.
+ @deprecated this functionality is now deprecated. You should build your own UI to collect your user's credit card details.
  */
 #if TARGET_OS_IPHONE
+__attribute__((deprecated("We've deprecated Checkout for iOS. You should build your own credit card form. See also: https://github.com/stripe/PaymentKit")))
 @interface STPCheckoutViewController : UINavigationController
 #else
+__attribute__((deprecated("We've deprecated Checkout for OSX. You should build your own credit card form.")))
 @interface STPCheckoutViewController : NSViewController
 #endif
 
@@ -39,13 +42,12 @@ typedef NS_ENUM(NSInteger, STPPaymentStatus) {
  *  @param options A configuration object that describes how to display Stripe Checkout.
  *
  */
-- (instancetype)initWithOptions:(STPCheckoutOptions *)options NS_DESIGNATED_INITIALIZER;
-@property (nonatomic, readonly, copy) STPCheckoutOptions *options;
-
+- (nonnull instancetype)initWithOptions:(nonnull STPCheckoutOptions *)options NS_DESIGNATED_INITIALIZER;
+@property (nonatomic, readonly, copy, nonnull) STPCheckoutOptions *options;
 /**
  *  Note: you must set a delegate before showing an STPViewController.
  */
-@property (nonatomic, weak) id<STPCheckoutViewControllerDelegate> checkoutDelegate;
+@property (nonatomic, weak, nullable) id<STPCheckoutViewControllerDelegate> checkoutDelegate;
 
 @end
 
@@ -60,7 +62,10 @@ typedef NS_ENUM(NSInteger, STPPaymentStatus) {
  *state, for example.
  *  @param error      the returned error, if it exists. Can be nil.
  */
-- (void)checkoutController:(STPCheckoutViewController *)controller didFinishWithStatus:(STPPaymentStatus)status error:(NSError *)error;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+- (void)checkoutController:(nonnull STPCheckoutViewController *)controller didFinishWithStatus:(STPPaymentStatus)status error:(nullable NSError *)error;
+#pragma clang diagnostic pop
 
 /**
  *  Use these options to inform Stripe Checkout of the success or failure of your backend charge.
@@ -70,7 +75,7 @@ typedef NS_ENUM(NSInteger, STPBackendChargeResult) {
     STPBackendChargeResultFailure, // Passing this value will display an "error" animation in the payment button.
 };
 
-typedef void (^STPTokenSubmissionHandler)(STPBackendChargeResult status, NSError *error);
+typedef void (^STPTokenSubmissionHandler)(STPBackendChargeResult status, NSError * __nullable error);
 
 /**
  *  After the user has provided valid credit card information and pressed the "pay" button, Checkout will communicate with Stripe and obtain a tokenized version
@@ -84,6 +89,11 @@ typedef void (^STPTokenSubmissionHandler)(STPBackendChargeResult status, NSError
  *  @param token      a Stripe token
  *  @param completion call this function with STPBackendChargeResultSuccess/Failure when you're done charging your user
  */
-- (void)checkoutController:(STPCheckoutViewController *)controller didCreateToken:(STPToken *)token completion:(STPTokenSubmissionHandler)completion;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+- (void)checkoutController:(nonnull STPCheckoutViewController *)controller
+            didCreateToken:(nonnull STPToken *)token
+                completion:(nonnull STPTokenSubmissionHandler)completion;
+#pragma clang diagnostic pop
 
 @end

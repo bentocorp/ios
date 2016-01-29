@@ -8,16 +8,15 @@
 
 #import <Foundation/Foundation.h>
 
-@class STPBankAccount, STPCard;
+@class STPCardParams, STPBankAccountParams;
+@protocol STPFormEncodable;
 
 @interface STPFormEncoder : NSObject
 
-+ (NSData *)formEncodedDataForBankAccount:(STPBankAccount *)bankAccount;
++ (nonnull NSData *)formEncodedDataForObject:(nonnull NSObject<STPFormEncodable> *)object;
 
-+ (NSData *)formEncodedDataForCard:(STPCard *)card;
++ (nonnull NSString *)stringByURLEncoding:(nonnull NSString *)string;
 
-+ (NSString *)stringByURLEncoding:(NSString *)string;
-
-+ (NSString *)stringByReplacingSnakeCaseWithCamelCase:(NSString *)input;
++ (nonnull NSString *)stringByReplacingSnakeCaseWithCamelCase:(nonnull NSString *)input;
 
 @end

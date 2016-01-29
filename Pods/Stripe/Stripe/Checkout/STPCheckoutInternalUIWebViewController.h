@@ -6,30 +6,25 @@
 //  Copyright (c) 2015 Stripe, Inc. All rights reserved.
 //
 
-#import <Foundation/Foundation.h>
-
 #if TARGET_OS_IPHONE
 
+#import <Foundation/Foundation.h>
 #import <UIKit/UIKit.h>
+
 #import "STPCheckoutDelegate.h"
 #import "STPCheckoutViewController.h"
 
-@interface STPCheckoutInternalUIWebViewController : UIViewController<STPCheckoutDelegate>
 
-- (instancetype)initWithCheckoutViewController:(STPCheckoutViewController *)checkoutViewController;
-
-@property (weak, nonatomic, readonly) STPCheckoutViewController *checkoutController;
-@property (weak, nonatomic) UIView *webView;
-@property (nonatomic) id<STPCheckoutWebViewAdapter> adapter;
-@property (weak, nonatomic) UIActivityIndicatorView *activityIndicator;
-@property (weak, nonatomic) UIView *headerBackground;
-@property (nonatomic) STPCheckoutOptions *options;
-@property (nonatomic) NSURL *logoURL;
-@property (nonatomic) NSURL *url;
-@property (nonatomic, weak) id<STPCheckoutViewControllerDelegate> delegate;
-@property (nonatomic) BOOL backendChargeSuccessful;
-@property (nonatomic) NSError *backendChargeError;
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
+@interface STPCheckoutInternalUIWebViewController : UIViewController<STPCheckoutDelegate, UIScrollViewDelegate>
+- (nonnull instancetype)initWithCheckoutViewController:(nonnull STPCheckoutViewController *)checkoutViewController;
+@property (weak, nonatomic, readonly, nullable) STPCheckoutViewController *checkoutController;
+@property (weak, nonatomic, readonly, nullable) UIView *webView;
+@property (nonatomic, nonnull) STPCheckoutOptions *options;
+@property (nonatomic, weak, nullable) id<STPCheckoutViewControllerDelegate> delegate;
 
 @end
+#pragma clang diagnostic pop
 
 #endif

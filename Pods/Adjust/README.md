@@ -18,8 +18,27 @@ If you're using [CocoaPods][cocoapods] for `iOs` or `tvOS`, you can add the foll
 `Podfile` and continue with [step 4](#step4):
 
 ```ruby
-pod 'Adjust', :git => 'git://github.com/adjust/ios_sdk.git', :tag => 'v4.4.1'
+pod 'Adjust', :git => 'git://github.com/adjust/ios_sdk.git', :tag => 'v4.5.1'
 ```
+
+If you're using [Carthage][carthage], you can add following line to your `Cartfile`
+and continue with [step 3](#step3):
+
+```ruby
+github "adjust/ios_sdk"
+```
+
+You can also choose to integrate the adjust SDK by adding it to your project as a framework.
+On the [releases page][releases] you can find two archives:
+
+* `AdjustSdkStatic.framework.zip`
+* `AdjustSdkDynamic.framework.zip`
+
+Since the release of iOS 8, Apple has introduced dynamic frameworks (also known as embedded frameworks). 
+If your app is targeting iOS 8 or higher, you can use the adjust SDK dynamic framework. 
+Choose which framework you want to use – static or dynamic – and add it to your project
+before continuing with [step 3](#step3).
+
 
 ### 1. Get the SDK
 
@@ -40,7 +59,7 @@ groups`.
 
 ![][add]
 
-### 3. Add the AdSupport and iAd framework
+### <a id="step3"></a>3. Add the AdSupport and iAd framework
 
 Select your project in the Project Navigator. In the left hand side of the main
 view, select your target. In the tab `Build Phases`, expand the group `Link
@@ -53,7 +72,23 @@ steps to add the `iAd.framework`, unless you are using tvOS. Change the `Status`
 
 ### <a id="step4"></a>4. Integrate Adjust into your app
 
-To start with, we'll set up basic session tracking.
+#### Import statement
+
+If you added the adjust SDK from the source or via a Pod repository, you should 
+use following import statement:
+
+```objc
+#import "Adjust.h"
+```
+
+If you added the adjust SDK as a framework or via Carthage, you should use
+following import statement:
+
+```objc
+#import <AdjustSdk/Adjust.h>
+```
+
+To begin, we'll set up basic session tracking.
 
 #### Basic Setup
 
@@ -64,6 +99,7 @@ method of your app delegate:
 
 ```objc
 #import "Adjust.h"
+// or #import <AdjustSdk/Adjust.h>
 // ...
 NSString *yourAppToken = @"{YourAppToken}";
 NSString *environment = ADJEnvironmentSandbox;
@@ -261,16 +297,78 @@ In the Project Navigator open the source file your Application Delegate. Find
 or add the method `openURL` and add the following call to adjust:
 
 ```objc
-- (BOOL)  application:(UIApplication *)application openURL:(NSURL *)url
-    sourceApplication:(NSString *)sourceApplication annotation:(id)annotation
-{
+- (BOOL)application:(UIApplication *)application openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication annotation:(id)annotation {
     [Adjust appWillOpenUrl:url];
     
     // Your code goes here
-    Bool canHandle = [self someLogic:url];
+    BOOL canHandle = [self someLogic:url];
     return canHandle;
 }
 ```
+
+#### Universal Links
+
+If you want to support [universal links][universal-links], then follow these next steps.
+
+##### Enable universal links in the dashboard
+
+In order to enable universal links for your app, go to the adjust dashboard and turn the
+Universal Linking switch to `ON`.
+
+![][universal-links-dashboard]
+
+You will need to fill in your `iOS Bundle ID` and `iOS Team ID`. You can find your iOS Team ID
+in the `Apple Developer Center`.
+
+![][adc-ios-team-id]
+
+After you entered these two values, a universal link for your app will be generated and will
+look like this:
+
+```
+applinks:[hash].ulink.adjust.com
+```
+
+##### Enable your iOS app to handle Universal Links
+
+In Apple Developer Center, you should enable `Associated Domains` for your app.
+
+![][adc-associated-domains]
+
+Once you have done this, you should enable `Associated Domains` in your app's XCode project settings, and copy the generated universal link from the dashboard into the `Domains` section.
+
+![][xcode-associated-domains]
+
+Next, find or add the method `application:continueUserActivity:restorationHandler:` in your Application Delegate. In that method, add the following call to adjust:
+
+``` objc
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity 
+ restorationHandler:(void (^)(NSArray *restorableObjects))restorationHandler {
+    if ([[userActivity activityType] isEqualToString:NSUserActivityTypeBrowsingWeb]) {
+        [Adjust appWillOpenUrl:[userActivity webpageURL]];
+    }
+
+    // Your code goes here
+    BOOL canHandle = [self someLogic:[userActivity webpageURL]];
+    return canHandle;
+}
+```
+
+For example, if you were setting your `deep_link` parameter like this:
+
+```
+example://path/?key=foo&value=bar
+```
+
+the adjust backend will convert it to a universal link, which looks like this:
+
+```
+https://[hash].ulink.adjust.com/ulink/path/?key=foo&value=bar
+```
+
+You can read more about implementing universal links in our
+[guide to universal links][universal-links-guide].
 
 ### 8. Enable event buffering
 
@@ -297,6 +395,7 @@ policies.][attribution-data]
 
     ```objc
     #import "Adjust.h"
+    // or #import <AdjustSdk/Adjust.h>
 
     @interface AppDelegate : UIResponder <UIApplicationDelegate, AdjustDelegate>
     ```
@@ -384,6 +483,7 @@ You can read more about special partners and these integrations in our
 
 [adjust.com]: http://adjust.com
 [cocoapods]: http://cocoapods.org
+[carthage]: https://github.com/Carthage/Carthage
 [dashboard]: http://adjust.com
 [examples]: http://github.com/adjust/ios_sdk/tree/master/examples
 [example-ios]: http://github.com/adjust/ios_sdk/tree/master/examples/AdjustExample-iOS
@@ -392,6 +492,10 @@ You can read more about special partners and these integrations in our
 [arc]: http://en.wikipedia.org/wiki/Automatic_Reference_Counting
 [transition]: http://developer.apple.com/library/mac/#releasenotes/ObjectiveC/RN-TransitioningToARC/Introduction/Introduction.html
 [drag]: https://raw.github.com/adjust/sdks/master/Resources/ios/drag4.png
+[universal-links-dashboard]: https://raw.github.com/adjust/sdks/master/Resources/ios/universal-links-dashboard.png
+[adc-ios-team-id]: https://raw.github.com/adjust/sdks/master/Resources/ios/adc-ios-team-id.png
+[adc-associated-domains]: https://raw.github.com/adjust/sdks/master/Resources/ios/adc-associated-domains.png
+[xcode-associated-domains]: https://raw.github.com/adjust/sdks/master/Resources/ios/xcode-associated-domains.png
 [add]: https://raw.github.com/adjust/sdks/master/Resources/ios/add3.png
 [framework]: https://raw.github.com/adjust/sdks/master/Resources/ios/framework4.png
 [delegate]: https://raw.github.com/adjust/sdks/master/Resources/ios/delegate4.png
@@ -402,12 +506,14 @@ You can read more about special partners and these integrations in our
 [event-tracking]: https://docs.adjust.com/en/event-tracking
 [special-partners]: https://docs.adjust.com/en/special-partners
 [currency-conversion]: https://docs.adjust.com/en/event-tracking/#tracking-purchases-in-different-currencies
+[universal-links-guide]: https://docs.adjust.com/en/universal-links/
+[universal-links]: https://developer.apple.com/library/ios/documentation/General/Conceptual/AppSearch/UniversalLinks.html
 
 ## License
 
-The adjust-SDK is licensed under the MIT License.
+The adjust SDK is licensed under the MIT License.
 
-Copyright (c) 2012-2015 adjust GmbH,
+Copyright (c) 2012-2016 adjust GmbH,
 http://www.adjust.com
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of

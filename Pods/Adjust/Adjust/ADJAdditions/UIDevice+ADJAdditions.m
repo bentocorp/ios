@@ -9,20 +9,18 @@
 #import "UIDevice+ADJAdditions.h"
 #import "NSString+ADJAdditions.h"
 
-#import <sys/socket.h>
 #import <sys/sysctl.h>
-#import <net/if.h>
-#import <net/if_dl.h>
 
 #if !ADJUST_NO_IDFA
 #import <AdSupport/ASIdentifierManager.h>
 #endif
 
-#ifdef asdfg
-#endif
-#if !ADJUST_NO_IAD && !defined(TARGET_OS_TV)
+#if !ADJUST_NO_IAD && !TARGET_OS_TV
 #import <iAd/iAd.h>
 #endif
+
+#import "ADJAdjustFactory.h"
+
 @implementation UIDevice(ADJAdditions)
 
 - (BOOL)adjTrackingEnabled {
@@ -110,53 +108,6 @@
 #endif
 }
 
-- (NSString *)adjMacAddress {
-    int                 mib[6];
-    size_t              len;
-    char                *buf;
-    unsigned char       *ptr;
-    struct if_msghdr    *ifm;
-    struct sockaddr_dl  *sdl;
-
-    mib[0] = CTL_NET;
-    mib[1] = AF_ROUTE;
-    mib[2] = 0;
-    mib[3] = AF_LINK;
-    mib[4] = NET_RT_IFLIST;
-
-    if ((mib[5] = if_nametoindex("en0")) == 0) {
-        printf("Error: if_nametoindex error\n");
-        return NULL;
-    }
-
-    if (sysctl(mib, 6, NULL, &len, NULL, 0) < 0) {
-        printf("Error: sysctl, take 1\n");
-        return NULL;
-    }
-
-    if ((buf = malloc(len)) == NULL) {
-        printf("Could not allocate memory. error!\n");
-        return NULL;
-    }
-
-    if (sysctl(mib, 6, buf, &len, NULL, 0) < 0) {
-        printf("Error: sysctl, take 2");
-        free(buf);
-        return NULL;
-    }
-
-    ifm = (struct if_msghdr *)buf;
-    sdl = (struct sockaddr_dl *)(ifm + 1);
-    ptr = (unsigned char *)LLADDR(sdl);
-
-    NSString *macAddress = [NSString stringWithFormat:@"%02X:%02X:%02X:%02X:%02X:%02X",
-                            *ptr, *(ptr+1), *(ptr+2), *(ptr+3), *(ptr+4), *(ptr+5)];
-
-    free(buf);
-
-    return macAddress;
-}
-
 - (NSString *)adjDeviceType {
     NSString *type = [self.model stringByReplacingOccurrencesOfString:@" " withString:@""];
     return type;
@@ -188,37 +139,90 @@
     return @"";
 }
 
-- (void) adjSetIad:(ADJActivityHandler *) activityHandler{
-#if ADJUST_NO_IAD || defined (TARGET_OS_TV)
+- (void) adjSetIad:(ADJActivityHandler *) activityHandler
+       triesV3Left:(int)triesV3Left
+{
+    id<ADJLogger> logger = [ADJAdjustFactory logger];
+    [logger debug:@"iAd with %d tries to read v3", triesV3Left];
+
+#if ADJUST_NO_IAD || TARGET_OS_TV
+    [logger debug:@"ADJUST_NO_IAD or TARGET_OS_TV set"];
     return;
 #else
+    [logger debug:@"ADJUST_NO_IAD or TARGET_OS_TV not set"];
 
-    // [[ADClient sharedClient] lookupAdConversionDetails:...]
+    // [[ADClient sharedClient] ...]
     Class ADClientClass = NSClassFromString(@"ADClient");
     if (ADClientClass == nil) {
         return;
     }
-
 #pragma clang diagnostic push
 #pragma clang diagnostic ignored "-Warc-performSelector-leaks"
-
     SEL sharedClientSelector = NSSelectorFromString(@"sharedClient");
     if (![ADClientClass respondsToSelector:sharedClientSelector]) {
         return;
     }
     id ADClientSharedClientInstance = [ADClientClass performSelector:sharedClientSelector];
 
-    SEL iadDateSelector = NSSelectorFromString(@"lookupAdConversionDetails:");
-    if (![ADClientSharedClientInstance respondsToSelector:iadDateSelector]) {
+    if (ADClientSharedClientInstance == nil) {
         return;
     }
 
+    // if no tries for iad v3 left -> iad v2
+    if (triesV3Left == 0) {
+        [self adjSetIadWithDates:activityHandler ADClientSharedClientInstance:ADClientSharedClientInstance];
+        return;
+    }
+
+    BOOL isIadV3Avaliable = [self adjSetIadWithDetails:activityHandler
+                     ADClientSharedClientInstance:ADClientSharedClientInstance
+                                      retriesLeft:(triesV3Left - 1)];
+
+    // if no tries for iad v3 left -> iad v2
+    if (!isIadV3Avaliable) {
+        [self adjSetIadWithDates:activityHandler ADClientSharedClientInstance:ADClientSharedClientInstance];
+    }
+#pragma clang diagnostic pop
+#endif
+}
+
+- (BOOL)adjSetIadWithDetails:(ADJActivityHandler *)activityHandler
+ADClientSharedClientInstance:(id)ADClientSharedClientInstance
+                 retriesLeft:(int)retriesLeft
+{
+    SEL iadDetailsSelector = NSSelectorFromString(@"requestAttributionDetailsWithBlock:");
+
+    if (![ADClientSharedClientInstance respondsToSelector:iadDetailsSelector]) {
+        return NO;
+    }
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
+    [ADClientSharedClientInstance performSelector:iadDetailsSelector
+                                       withObject:^(NSDictionary *attributionDetails, NSError *error) {
+                                           [activityHandler setIadDetails:attributionDetails error:error retriesLeft:retriesLeft];
+                                       }];
+#pragma clang diagnostic pop
+
+    return YES;
+}
+
+- (BOOL)adjSetIadWithDates:(ADJActivityHandler *)activityHandler
+ADClientSharedClientInstance:(id)ADClientSharedClientInstance
+{
+    SEL iadDateSelector = NSSelectorFromString(@"lookupAdConversionDetails:");
+
+    if (![ADClientSharedClientInstance respondsToSelector:iadDateSelector]) {
+        return NO;
+    }
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Warc-performSelector-leaks"
     [ADClientSharedClientInstance performSelector:iadDateSelector
                                        withObject:^(NSDate *appPurchaseDate, NSDate *iAdImpressionDate) {
                                            [activityHandler setIadDate:iAdImpressionDate withPurchaseDate:appPurchaseDate];
                                        }];
 
 #pragma clang diagnostic pop
-#endif
+    return YES;
 }
 @end

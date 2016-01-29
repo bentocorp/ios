@@ -17,11 +17,15 @@
 #import "UIDevice+ADJAdditions.h"
 #import "ADJAdjustFactory.h"
 #import "ADJAttributionHandler.h"
+#import "NSString+ADJAdditions.h"
 
 static NSString   * const kActivityStateFilename = @"AdjustIoActivityState";
 static NSString   * const kAttributionFilename   = @"AdjustIoAttribution";
 static NSString   * const kAdjustPrefix          = @"adjust_";
 static const char * const kInternalQueueName     = "io.adjust.ActivityQueue";
+// number of tries
+static const int kTryIadV3                       = 2;
+static const uint64_t kDelayRetryIad   =  2 * NSEC_PER_SEC; // 1 second
 
 #pragma mark -
 @interface ADJActivityHandler()
@@ -42,6 +46,12 @@ static const char * const kInternalQueueName     = "io.adjust.ActivityQueue";
 @property (nonatomic, copy) ADJDeviceInfo* deviceInfo;
 
 @end
+
+// copy from ADClientError
+typedef NS_ENUM(NSInteger, AdjADClientError) {
+    AdjADClientErrorUnknown = 0,
+    AdjADClientErrorLimitAdTracking = 1,
+};
 
 #pragma mark -
 @implementation ADJActivityHandler
@@ -220,6 +230,53 @@ remainsPausedMessage:(NSString *)remainsPausedMessage
 
 - (void)setIadDate:(NSDate *)iAdImpressionDate withPurchaseDate:(NSDate *)appPurchaseDate {
     if (iAdImpressionDate == nil) {
+        [self.logger verbose:@"iAdImpressionDate not received"];
+        return;
+    }
+
+    [self.logger verbose:@"iAdImpressionDate received: %@", iAdImpressionDate];
+
+
+    double now = [NSDate.date timeIntervalSince1970];
+    ADJPackageBuilder *clickBuilder = [[ADJPackageBuilder alloc]
+                                       initWithDeviceInfo:self.deviceInfo
+                                       activityState:self.activityState
+                                       config:self.adjustConfig
+                                       createdAt:now];
+
+    clickBuilder.purchaseTime = appPurchaseDate;
+    clickBuilder.clickTime = iAdImpressionDate;
+
+    ADJActivityPackage *clickPackage = [clickBuilder buildClickPackage:@"iad"];
+    [self.packageHandler addPackage:clickPackage];
+}
+
+- (void)setIadDetails:(NSDictionary *)attributionDetails
+                error:(NSError *)error
+          retriesLeft:(int)retriesLeft
+{
+    if (![ADJUtil isNull:error]) {
+        [self.logger warn:@"Unable to read iAd details"];
+
+        if (retriesLeft < 0) {
+            [self.logger error:@"Reached limit number of retry for iAd"];
+            return;
+        }
+
+        if (retriesLeft == 0) {
+            [self.logger error:@"Reached limit number of retry for iAd, trying iAd v2"];
+        }
+
+        if (error.code == AdjADClientErrorUnknown) {
+            dispatch_time_t retryTime = dispatch_time(DISPATCH_TIME_NOW, kDelayRetryIad);
+            dispatch_after(retryTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+                [[UIDevice currentDevice] adjSetIad:self triesV3Left:retriesLeft];
+            });
+        }
+        return;
+    }
+
+    if ([ADJUtil isNull:attributionDetails]) {
         return;
     }
 
@@ -230,9 +287,9 @@ remainsPausedMessage:(NSString *)remainsPausedMessage
                                        config:self.adjustConfig
                                        createdAt:now];
 
-    [clickBuilder setPurchaseTime:appPurchaseDate];
+    clickBuilder.iadDetails = attributionDetails;
 
-    ADJActivityPackage *clickPackage = [clickBuilder buildClickPackage:@"iad" clickTime:iAdImpressionDate];
+    ADJActivityPackage *clickPackage = [clickBuilder buildClickPackage:@"iad3"];
     [self.packageHandler addPackage:clickPackage];
 }
 
@@ -283,10 +340,6 @@ remainsPausedMessage:(NSString *)remainsPausedMessage
         [self.logger setLogLevel:self.adjustConfig.logLevel];
     }
 
-    if (!self.adjustConfig.macMd5TrackingEnabled) {
-        [self.logger info:@"Tracking of macMd5 is disabled"];
-    }
-
     if (self.adjustConfig.eventBufferingEnabled)  {
         [self.logger info:@"Event buffering is enabled"];
     }
@@ -317,8 +370,7 @@ remainsPausedMessage:(NSString *)remainsPausedMessage
                                     queue:self.internalQueue
                                 startTime:ADJAdjustFactory.timerStart
                              intervalTime:ADJAdjustFactory.timerInterval];
-
-    [[UIDevice currentDevice] adjSetIad:self];
+    [[UIDevice currentDevice] adjSetIad:self triesV3Left:kTryIadV3];
 
     [self startInternal];
 }
@@ -469,8 +521,9 @@ remainsPausedMessage:(NSString *)remainsPausedMessage
                                        createdAt:now];
     clickBuilder.deeplinkParameters = adjustDeepLinks;
     clickBuilder.attribution = deeplinkAttribution;
+    clickBuilder.clickTime = [NSDate date];
 
-    ADJActivityPackage *clickPackage = [clickBuilder buildClickPackage:@"deeplink" clickTime:[NSDate date]];
+    ADJActivityPackage *clickPackage = [clickBuilder buildClickPackage:@"deeplink"];
     [self.packageHandler addPackage:clickPackage];
 }
 
@@ -484,14 +537,18 @@ remainsPausedMessage:(NSString *)remainsPausedMessage
     NSString* key = [pairComponents objectAtIndex:0];
     if (![key hasPrefix:kAdjustPrefix]) return NO;
 
+    NSString* keyDecoded = [key adjUrlDecode];
+
     NSString* value = [pairComponents objectAtIndex:1];
     if (value.length == 0) return NO;
 
-    NSString* keyWOutPrefix = [key substringFromIndex:kAdjustPrefix.length];
+    NSString* valueDecoded = [value adjUrlDecode];
+
+    NSString* keyWOutPrefix = [keyDecoded substringFromIndex:kAdjustPrefix.length];
     if (keyWOutPrefix.length == 0) return NO;
 
-    if (![self trySetAttributionDeeplink:deeplinkAttribution withKey:keyWOutPrefix withValue:value]) {
-        [adjustDeepLinks setObject:value forKey:keyWOutPrefix];
+    if (![self trySetAttributionDeeplink:deeplinkAttribution withKey:keyWOutPrefix withValue:valueDecoded]) {
+        [adjustDeepLinks setObject:valueDecoded forKey:keyWOutPrefix];
     }
 
     return YES;

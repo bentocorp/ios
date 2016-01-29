@@ -1,7 +1,7 @@
 PODS:
-  - Adjust (4.4.1):
-    - Adjust/Core (= 4.4.1)
-  - Adjust/Core (4.4.1)
+  - Adjust (4.5.1):
+    - Adjust/Core (= 4.5.1)
+  - Adjust/Core (4.5.1)
   - AFNetworking (3.0.4):
     - AFNetworking/NSURLSession (= 3.0.4)
     - AFNetworking/Reachability (= 3.0.4)
@@ -17,25 +17,22 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
-  - Branch (0.11.6)
+  - Branch (0.11.14)
   - Canvas (0.1.2)
-  - FCUUID (1.1.4):
+  - FCUUID (1.1.5):
     - UICKeyChainStore (~> 1.0.5)
   - FDKeychain (1.2.2)
-  - Mixpanel (2.8.3):
-    - Mixpanel/Mixpanel (= 2.8.3)
-  - Mixpanel/Mixpanel (2.8.3)
-  - PaymentKit (1.1.1)
+  - Mixpanel (2.9.1):
+    - Mixpanel/Mixpanel (= 2.9.1)
+  - Mixpanel/Mixpanel (2.9.1)
   - PureLayout (3.0.1)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
+  - SDWebImage (3.7.5):
+    - SDWebImage/Core (= 3.7.5)
+  - SDWebImage/Core (3.7.5)
   - SIOSocket (0.2.0)
-  - Stripe (3.1.0):
-    - Stripe/Core (= 3.1.0)
-  - Stripe/ApplePay (3.1.0):
-    - Stripe/Core
-  - Stripe/Core (3.1.0)
+  - Stripe (6.1.0):
+    - Stripe/Core (= 6.1.0)
+  - Stripe/Core (6.1.0)
   - UIActivityIndicator-for-SDWebImage (1.2):
     - SDWebImage (~> 3.7)
   - UICKeyChainStore (1.0.5)
@@ -48,26 +45,23 @@ DEPENDENCIES:
   - FCUUID
   - FDKeychain
   - Mixpanel
-  - PaymentKit
   - PureLayout
   - SIOSocket (~> 0.2.0)
   - Stripe
-  - Stripe/ApplePay
   - UIActivityIndicator-for-SDWebImage
 
 SPEC CHECKSUMS:
-  Adjust: e81e2cbe1df388fb181adfc27d6a1f4ddf71b339
+  Adjust: 522f5f9bb29cf02e84197ecb154d3634b97b86f6
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
-  Branch: 30126fc6fbb24a912e52cf2c5ca12d2433abdb3d
+  Branch: 8f76ea498816981768f318f74624250a41620f54
   Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
-  FCUUID: 178c3d7907b1399137f1093f9c04ce4825755292
+  FCUUID: a9108673d64a4585a4bb89ea5d4c69b002edadb3
   FDKeychain: ce0d5e4fac972c28e921e893ffe982832695d17b
-  Mixpanel: fd52e097ae0d27295d0595b2261c60b94d191fda
-  PaymentKit: 323c25233af5060880daa0c31366d4b688c34487
+  Mixpanel: 5ca24b2a05f4c77fe9bcfe7671d681d0f3f8d76f
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SIOSocket: 2facc0bd02ae72d98c223634a46dd8ebdf9be321
-  Stripe: 8a456332f4db97bd0b8457fc8cce1e1a69ac0cd1
+  Stripe: bee87bf3459953211b9a3709fb3b90a90a62b060
   UIActivityIndicator-for-SDWebImage: 7bf7ebbf0ed1747dedc0d6e949c4603a6d0f9e0c
   UICKeyChainStore: e81dc3b58d56ffaed61ab6669eb97071e53fc377
 

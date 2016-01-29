@@ -12,7 +12,7 @@
 
 @protocol EnterCreditCardViewControllerDelegate
 
-- (void) setCardInfo:(STPCard *)cardInfo;
+- (void) setCardInfo:(STPCardParams *)cardInfo;
 
 @end
 

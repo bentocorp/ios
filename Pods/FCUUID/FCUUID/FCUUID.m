@@ -1,8 +1,8 @@
 //
-//  FCUUID
+//  FCUUID.m
 //
 //  Created by Fabio Caccamo on 26/06/14.
-//  Copyright (c) 2014 Fabio Caccamo - http://www.fabiocaccamo.com/ - All rights reserved.
+//  Copyright © 2014-2015 Fabio Caccamo. All rights reserved.
 //
 
 #import "FCUUID.h"
@@ -325,10 +325,44 @@ NSString *const _uuidsOfUserDevicesToggleKey = @"fc_uuidsOfUserDevicesToggle";
 }
 
 
+-(NSArray *)uuidsOfUserDevicesExcludingCurrentDevice
+{
+    NSMutableArray *uuids = [NSMutableArray arrayWithArray:[self uuidsOfUserDevices]];
+    [uuids removeObject:[self uuidForDevice]];
+    return [NSArray arrayWithArray:uuids];
+}
+
+
 -(BOOL)uuidValueIsValid:(NSString *)uuidValue
 {
-    //TODO validation using Regular Expression
-    return (uuidValue != nil && (uuidValue.length == 32 || uuidValue.length == 36));
+    if(uuidValue != nil)// && (uuidValue.length == 32 || uuidValue.length == 36))
+    {
+        NSString *uuidPattern = @"^[0-9a-f]{32}|[0-9a-f]{8}-([0-9a-f]{4}-){3}[0-9a-f]{12}$";
+        NSRegularExpression *uuidRegExp = [NSRegularExpression regularExpressionWithPattern:uuidPattern options:NSRegularExpressionCaseInsensitive error:nil];
+        
+        NSRange uuidValueRange = NSMakeRange(0, [uuidValue length]);
+        NSRange uuidMatchRange = [uuidRegExp rangeOfFirstMatchInString:uuidValue options:0 range:uuidValueRange];
+        NSString *uuidMatchValue;
+        
+        if(!NSEqualRanges(uuidMatchRange, NSMakeRange(NSNotFound, 0)))
+        {
+            uuidMatchValue = [uuidValue substringWithRange:uuidMatchRange];
+            
+            if([uuidMatchValue isEqualToString:uuidValue])
+            {
+                return YES;
+            }
+            else {
+                return NO;
+            }
+        }
+        else {
+            return NO;
+        }
+    }
+    else {
+        return NO;
+    }
 }
 
 
@@ -389,6 +423,12 @@ NSString *const _uuidsOfUserDevicesToggleKey = @"fc_uuidsOfUserDevicesToggle";
 +(NSArray *)uuidsOfUserDevices
 {
     return [[self sharedInstance] uuidsOfUserDevices];
+}
+
+
++(NSArray *)uuidsOfUserDevicesExcludingCurrentDevice
+{
+    return [[self sharedInstance] uuidsOfUserDevicesExcludingCurrentDevice];
 }
 
 

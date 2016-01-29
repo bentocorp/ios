@@ -46,8 +46,6 @@
 #import "Stripe+ApplePay.h"
 #import <PassKit/PassKit.h>
 
-#import "PTKCardType.h"
-#import "PTKCardNumber.h"
 #import "PKPayment+STPTestKeys.h"
 
 #ifdef DEBUG
@@ -601,9 +599,8 @@
     }
     else if (curPaymentMethod == Payment_CreditCard)
     {
-        STPCard *cardInfo = [[DataManager shareDataManager] getCreditCard];
-        PTKCardNumber *cardNumber = [PTKCardNumber cardNumberWithString:cardInfo.number];
-        PTKCardType cardType = [cardNumber cardType];
+        STPCardParams *cardInfo = [[DataManager shareDataManager] getCreditCard];
+        STPcard cardType = [cardInfo.number cardType];
         
         switch (cardType) {
             case PTKCardTypeAmex:
@@ -1291,25 +1288,27 @@
     return strAdd;
 }
 
-- (void)saveCardInfo:(STPCard *)cardInfo isApplePay:(BOOL)isApplePay
+- (void)saveCardInfo:(STPCardParams *)cardInfo isApplePay:(BOOL)isApplePay
 {
     NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
-    if (userInfo == nil)
+    if (userInfo == nil) {
         return;
+    }
 
     NSString *strEmail = [userInfo objectForKey:@"email"];
-    if (strEmail == nil || strEmail.length == 0)
+    if (strEmail == nil || strEmail.length == 0) {
         return;
+    }
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:strEmail forKey:@"user_email"];
-//    [userDefaults setObject:[cardInfo type] forKey:@"card_brand"];
-//    [userDefaults setObject:[cardInfo last4] forKey:@"card_last4"];
     
-    if (isApplePay)
+    if (isApplePay) {
         [userDefaults setObject:@"1" forKey:@"is_applepay"];
-    else
+    }
+    else {
         [userDefaults setObject:@"0" forKey:@"is_applepay"];
+    }
     
     [userDefaults synchronize];
 }
@@ -1323,17 +1322,11 @@
 
 #pragma mark UITableViewDelegate
 
-- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
-{
-//    if ([AddonList sharedInstance].addonList.count == 0 || [AddonList sharedInstance].addonList == nil) {
-//        return 1;
-//    }
-    
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 2;
 }
 
-- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section
-{
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 45;
 }
 
@@ -2054,7 +2047,7 @@
 }
 
 /* Send card info to Stripe. Stripe returns a one-time token. */
-- (void)handlePaymentAuthorizationWithCard:(STPCard *)card completion:(void (^)(PKPaymentAuthorizationStatus))completion
+- (void)handlePaymentAuthorizationWithCard:(STPCardParams *)card completion:(void (^)(PKPaymentAuthorizationStatus))completion
 {
     [[STPAPIClient sharedClient] createTokenWithCard:card completion:^(STPToken *token, NSError *error) {
         if (error)
@@ -2172,7 +2165,7 @@
 #ifdef DEBUG
     if (payment.stp_testCardNumber)
     {
-        STPCard *card = [STPCard new];
+        STPCardParams *card = [STPCard new];
         card.number = payment.stp_testCardNumber;
         card.expMonth = 12;
         card.expYear = 2020;
@@ -2194,7 +2187,7 @@
 
 #pragma mark EnterCreditCardViewControllerDelegate
 
-- (void)setCardInfo:(STPCard *)cardInfo
+- (void)setCardInfo:(STPCardParams *)cardInfo
 {
     [[DataManager shareDataManager] setCreditCard:cardInfo];
 

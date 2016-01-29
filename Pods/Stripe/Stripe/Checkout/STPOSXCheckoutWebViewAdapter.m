@@ -15,6 +15,11 @@
 #import "STPCheckoutWebViewAdapter.h"
 #import "STPCheckoutDelegate.h"
 
+#ifdef MAC_OS_X_VERSION_10_11
+@interface STPOSXCheckoutWebViewAdapter()<WebFrameLoadDelegate, WebPolicyDelegate, WebResourceLoadDelegate>
+@end
+#endif
+
 @implementation STPOSXCheckoutWebViewAdapter
 
 @synthesize delegate;
@@ -43,8 +48,8 @@
     [self.webView.mainFrame loadRequest:request];
 }
 
-- (void)evaluateJavaScript:(NSString *)js {
-    [self.webView.windowScriptObject evaluateWebScript:js];
+- (NSString *)evaluateJavaScript:(NSString *)js {
+    return [self.webView.windowScriptObject evaluateWebScript:js];
 }
 
 - (void)cleanup {
@@ -68,7 +73,9 @@
 
 - (void)webView:(__unused WebView *)sender resource:(id)identifier didFailLoadingWithError:(NSError *)error fromDataSource:(WebDataSource *)dataSource {
     if ([identifier isEqual:dataSource.initialRequest.URL]) {
-        [self.delegate checkoutAdapter:self didError:error];
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [self.delegate checkoutAdapter:self didError:error];
+        });
     }
 }
 
@@ -102,11 +109,13 @@ decisionListener:(id<WebPolicyDecisionListener>)listener {
             if ([url.scheme isEqualToString:checkoutRPCScheme]) {
                 NSString *event = url.host;
                 NSString *path = [url.path componentsSeparatedByString:@"/"][1];
-                NSDictionary *payload = nil;
+                NSDictionary *payload = @{};
                 if (path != nil) {
                     payload = [NSJSONSerialization JSONObjectWithData:[path dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil];
                 }
-                [self.delegate checkoutAdapter:self didTriggerEvent:event withPayload:payload];
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self.delegate checkoutAdapter:self didTriggerEvent:event withPayload:payload];
+                });
                 [listener ignore];
                 return;
             }
@@ -122,15 +131,22 @@ decisionListener:(id<WebPolicyDecisionListener>)listener {
 
 #pragma mark - WebFrameLoadDelegate
 - (void)webView:(__unused WebView *)sender didStartProvisionalLoadForFrame:(__unused WebFrame *)frame {
-    [self.delegate checkoutAdapterDidStartLoad:self];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate checkoutAdapterDidStartLoad:self];
+    });
 }
 
-- (void)webView:(__unused WebView *)sender didFailLoadWithError:(NSError *)error forFrame:(__unused WebFrame *)frame {
-    [self.delegate checkoutAdapter:self didError:error];
+- (void)webView:(__unused WebView *)sender didFailLoadWithError:(NSError *)error
+       forFrame:(__unused WebFrame *)frame {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate checkoutAdapter:self didError:error];
+    });
 }
 
 - (void)webView:(__unused WebView *)sender didFinishLoadForFrame:(__unused WebFrame *)frame {
-    [self.delegate checkoutAdapterDidFinishLoad:self];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.delegate checkoutAdapterDidFinishLoad:self];
+    });
 }
 
 @end

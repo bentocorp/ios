@@ -11,14 +11,18 @@
 
 @implementation STPCheckoutOptions
 
-- (instancetype)init {
+- (instancetype)initWithPublishableKey:(NSString *)publishableKey {
     self = [super init];
     if (self) {
-        _publishableKey = [Stripe defaultPublishableKey];
+        _publishableKey = publishableKey;
         _companyName = [[NSBundle mainBundle] infoDictionary][@"CFBundleDisplayName"];
         _purchaseCurrency = @"USD";
     }
     return self;
+}
+
+- (instancetype)init {
+    return [self initWithPublishableKey:[Stripe defaultPublishableKey]];
 }
 
 - (NSString *)stringifiedJSONRepresentation {
@@ -63,12 +67,32 @@
     return [[NSString alloc] initWithData:[NSJSONSerialization dataWithJSONObject:values options:0 error:nil] encoding:NSUTF8StringEncoding];
 }
 
+- (void)setLogoImage:(STP_IMAGE_CLASS * __nullable)logoImage {
+    _logoImage = logoImage;
+    NSString *base64;
+#if TARGET_OS_IPHONE
+    NSData *pngRepresentation = UIImagePNGRepresentation(logoImage);
+    if ([pngRepresentation respondsToSelector:@selector(base64EncodedStringWithOptions:)]) {
+        base64 = [pngRepresentation base64EncodedStringWithOptions:0];
+    }
+#else
+    NSData *imageData = [logoImage TIFFRepresentation];
+    NSBitmapImageRep *imageRep = [NSBitmapImageRep imageRepWithData:imageData];
+    imageData = [imageRep representationUsingType:NSPNGFileType
+                                       properties:@{NSImageCompressionFactor: @1.0}];
+    base64 = [imageData base64EncodedStringWithOptions:0];
+#endif
+    if (base64) {
+        NSString *dataURLString = [NSString stringWithFormat:@"data:png;base64,%@", base64];
+        self.logoURL = [NSURL URLWithString:dataURLString];
+    }
+}
+
 #pragma mark - NSCopying
 
 - (id)copyWithZone:(__unused NSZone *)zone {
     STPCheckoutOptions *options = [[[self class] alloc] init];
     options.publishableKey = self.publishableKey;
-    options.appleMerchantId = self.appleMerchantId;
     options.logoURL = self.logoURL;
     options.logoImage = self.logoImage;
     options.logoColor = self.logoColor;

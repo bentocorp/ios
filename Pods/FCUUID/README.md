@@ -1,4 +1,4 @@
-FCUUID [![Pod version](https://badge.fury.io/co/FCUUID.svg)](http://badge.fury.io/co/FCUUID)
+FCUUID ![Pod version](http://img.shields.io/cocoapods/v/FCUUID.svg) ![Pod platforms](http://img.shields.io/cocoapods/p/FCUUID.svg) ![Pod license](http://img.shields.io/cocoapods/l/FCUUID.svg)
 ===================
 iOS **UUID** library as alternative to the old good **UDID** and **identifierForVendor**.  
 This library provides the simplest API to obtain **universally unique identifiers with different persistency levels**.  
@@ -11,7 +11,7 @@ It's possible to retrieve the **UUIDs created for all devices of the same user**
 - Key-value storage enabled *(target / Capabilities / iCloud / Key-value storage)*
 - Security.framework
 - [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore)
-- ***(optional)*** - KeyChain sharing enabled (entitlements and provisioning profile) if you need to **share** the same `uuidForDevice` / `uuidsOfUserDevices` values **accross multiple apps with the same bundle seed**.
+- ***(optional)*** - KeyChain sharing enabled (entitlements and provisioning profile) if you need to **share** the same `uuidForDevice` / `uuidsOfUserDevices` values **across multiple apps with the same bundle seed**.
 
 ##Installation
 
@@ -19,7 +19,7 @@ It's possible to retrieve the **UUIDs created for all devices of the same user**
 `pod 'FCUUID'`
 
 ####Manual install:
-- Copy `FCUUID.h` and `FCUUID.m` to your project.
+- Copy `FCUUID` folder to your project.
 - Manual install [UICKeyChainStore](https://github.com/kishikawakatsumi/UICKeyChainStore)
 
 ##Usage setup
@@ -49,6 +49,9 @@ It is recommended to do the setup in `applicationDidFinishLaunchingWithOptions` 
 
 //changes only on system reset, this is the best replacement to the good old udid (persistent to device)
 +(NSString *)uuidForDevice;
+//or
+#import "UIDevice+FCUUID.h"
+[[UIDevice currentDevice] uuid];
 ```
 **Get the list of UUIDs of user devices**
 ```objective-c
@@ -69,4 +72,32 @@ After the migration, any future call to `uuidForDevice` will return the migrated
 ```objective-c
 +(BOOL)uuidValueIsValid:(NSString *)uuidValue;
 ```
-Enjoy :)
+
+##Donate
+Do you want to support me?
+
+[![Donate](https://www.paypalobjects.com/webstatic/en_US/btn/btn_donate_pp_142x27.png "Buy me a beer! - C.R.E.A.M.")](https://www.paypal.com/cgi-bin/webscr?cmd=_donations&business=fabio%2ecaccamo%40gmail%2ecom&lc=IT&item_name=Fabio%20Caccamo%20%2d%20Open%20Source%20Projects&item_number=FCUUID&currency_code=EUR&bn=PP%2dDonationsBF%3abtn_donate_LG%2egif%3aNonHosted "Buy me a beer! - C.R.E.A.M.")
+
+##License
+The MIT License (MIT)
+
+Copyright (c) 2015 Fabio Caccamo - fabio.caccamo@gmail.com
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in
+all copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
+THE SOFTWARE.
+

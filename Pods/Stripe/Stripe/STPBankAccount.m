@@ -7,6 +7,7 @@
 //
 
 #import "STPBankAccount.h"
+#import "NSDictionary+Stripe.h"
 
 @interface STPBankAccount ()
 
@@ -14,24 +15,20 @@
 @property (nonatomic, readwrite) NSString *last4;
 @property (nonatomic, readwrite) NSString *bankName;
 @property (nonatomic, readwrite) NSString *fingerprint;
-@property (nonatomic, readwrite) NSString *currency;
-@property (nonatomic, readwrite) BOOL validated;
-@property (nonatomic, readwrite) BOOL disabled;
+@property (nonatomic) STPBankAccountStatus status;
 
 @end
 
 @implementation STPBankAccount
 
-#pragma mark - Getters
+@synthesize routingNumber, country, currency;
+
+- (void)setAccountNumber:(NSString *)accountNumber {
+    [super setAccountNumber:accountNumber];
+}
 
 - (NSString *)last4 {
-    if (_last4) {
-        return _last4;
-    } else if (self.accountNumber && self.accountNumber.length >= 4) {
-        return [self.accountNumber substringFromIndex:(self.accountNumber.length - 4)];
-    } else {
-        return nil;
-    }
+    return _last4 ?: [super last4];
 }
 
 #pragma mark - Equality
@@ -41,7 +38,7 @@
 }
 
 - (NSUInteger)hash {
-    return [self.fingerprint hash];
+    return [self.bankAccountId hash];
 }
 
 - (BOOL)isEqualToBankAccount:(STPBankAccount *)bankAccount {
@@ -52,38 +49,48 @@
     if (!bankAccount || ![bankAccount isKindOfClass:self.class]) {
         return NO;
     }
-
-    return [self.accountNumber ?: @"" isEqualToString:bankAccount.accountNumber ?: @""] &&
-           [self.routingNumber ?: @"" isEqualToString:bankAccount.routingNumber ?: @""] &&
-           [self.country ?: @"" isEqualToString:bankAccount.country ?: @""] && [self.last4 ?: @"" isEqualToString:bankAccount.last4 ?: @""] &&
-           [self.bankName ?: @"" isEqualToString:bankAccount.bankName ?: @""] && [self.currency ?: @"" isEqualToString:bankAccount.currency ?: @""];
+    
+    return [self.bankAccountId isEqualToString:bankAccount.bankAccountId];
 }
 
-@end
+- (BOOL)validated {
+    return self.status == STPBankAccountStatusValidated;
+}
 
-@implementation STPBankAccount (PrivateMethods)
+- (BOOL)disabled {
+    return self.status == STPBankAccountStatusErrored;
+}
 
-- (instancetype)initWithAttributeDictionary:(NSDictionary *)attributeDictionary {
-    self = [self init];
-    if (self) {
-        // sanitize NSNull
-        NSMutableDictionary *dictionary = [NSMutableDictionary dictionary];
-        [attributeDictionary enumerateKeysAndObjectsUsingBlock:^(id key, id obj, __unused BOOL *stop) {
-            if (obj != [NSNull null]) {
-                dictionary[key] = obj;
-            }
-        }];
+#pragma mark STPAPIResponseDecodable
 
-        _bankAccountId = dictionary[@"id"];
-        _last4 = dictionary[@"last4"];
-        _bankName = dictionary[@"bank_name"];
-        _country = dictionary[@"country"];
-        _fingerprint = dictionary[@"fingerprint"];
-        _currency = dictionary[@"currency"];
-        _validated = [dictionary[@"validated"] boolValue];
-        _disabled = [dictionary[@"disabled"] boolValue];
++ (NSArray *)requiredFields {
+    return @[@"id", @"last4", @"bank_name", @"country", @"currency", @"status"];
+}
+
++ (instancetype)decodedObjectFromAPIResponse:(NSDictionary *)response {
+    NSDictionary *dict = [response stp_dictionaryByRemovingNullsValidatingRequiredFields:[self requiredFields]];
+    if (!dict) {
+        return nil;
     }
-    return self;
+    
+    STPBankAccount *bankAccount = [self new];
+    bankAccount.bankAccountId = dict[@"id"];
+    bankAccount.last4 = dict[@"last4"];
+    bankAccount.bankName = dict[@"bank_name"];
+    bankAccount.country = dict[@"country"];
+    bankAccount.fingerprint = dict[@"fingerprint"];
+    bankAccount.currency = dict[@"currency"];
+    NSString *status = dict[@"status"];
+    if ([status isEqual: @"new"]) {
+        bankAccount.status = STPBankAccountStatusNew;
+    } else if ([status isEqual: @"validated"]) {
+        bankAccount.status = STPBankAccountStatusValidated;
+    } else if ([status isEqual: @"verified"]) {
+        bankAccount.status = STPBankAccountStatusVerified;
+    } else if ([status isEqual: @"errored"]) {
+        bankAccount.status = STPBankAccountStatusErrored;
+    }
+    return bankAccount;
 }
 
 @end

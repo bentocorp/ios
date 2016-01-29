@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0710"
+   LastUpgradeVersion = "0720"
    version = "1.7">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "F95FFC251A77BB0DA41E4AEA1F767CC0"
+               BlueprintIdentifier = "2A6A7DFA9E9EFAC6C59C7E3BAE92A277"
                BuildableName = "libAdjust.a"
                BlueprintName = "Adjust"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "65585F0885D975E327A44FD4C449BA99"
+               BlueprintIdentifier = "C544EEB7D00128D58696AE2BBF23513E"
                BuildableName = "libBranch.a"
                BlueprintName = "Branch"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "CC3FADE9EC7E03137FA26E90F81B576D"
+               BlueprintIdentifier = "44563471FEC2BC682AC554560C5A542B"
                BuildableName = "libCanvas.a"
                BlueprintName = "Canvas"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -56,7 +56,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4C119F7506B8A67E6D6DE5105B631BF3"
+               BlueprintIdentifier = "E81C3F75A8C27C377B24F35158870800"
                BuildableName = "libFCUUID.a"
                BlueprintName = "FCUUID"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -70,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "07AE85EF976CC1D2D2925B89F1B48C39"
+               BlueprintIdentifier = "FC29F27B1E7935F2E065C2F9E84FDB53"
                BuildableName = "libFDKeychain.a"
                BlueprintName = "FDKeychain"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -112,7 +112,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "113DBC1D020C68312E472090EC17D5ED"
+               BlueprintIdentifier = "79F489E9EB8AB16B0618FAC380553265"
                BuildableName = "libMixpanel.a"
                BlueprintName = "Mixpanel"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -126,7 +126,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "3DFAFC899A9AC24853EEE7E961236CA5"
+               BlueprintIdentifier = "44372B5E7BEB5D7F9211FB4DDD781579"
                BuildableName = "libPaymentKit.a"
                BlueprintName = "PaymentKit"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -140,7 +140,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "D50244253CF9D1986B6A9F303EAB85AF"
+               BlueprintIdentifier = "BFC47085AE8D350805C447BC66876D56"
                BuildableName = "libPods.a"
                BlueprintName = "Pods"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -168,7 +168,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4FAF6BABBA54229C883F2723F91BE6DC"
+               BlueprintIdentifier = "C254079D13477A4D17A8DF19BD7E9234"
                BuildableName = "libSDWebImage.a"
                BlueprintName = "SDWebImage"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -196,7 +196,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "7815AAE309AA7E56AD33131B20AD112C"
+               BlueprintIdentifier = "93020C2A2DA63C4793AD97B39784FAAD"
                BuildableName = "libStripe.a"
                BlueprintName = "Stripe"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

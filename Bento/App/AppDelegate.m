@@ -51,6 +51,7 @@
 #import "SocketHandler.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
 
+// Stripe API Keys
 NSString * const StripePublishableTestKey = @"pk_test_hFtlMiWcGFn9TvcyrLDI4Y6P";
 NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
@@ -178,7 +179,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
 /*---------------------------------------ADJUST-----------------------------------------*/
     
-    // Adjust Tracking (so far, onyl tracking organic installs)
+    // Adjust Tracking (so far, only tracking organic installs)
     NSString *yourAppToken = ADJUST_TOKEN;
     NSString *environment = ADJEnvironmentProduction; // or ADJEnvironmentSandbox, ADJEnvironmentProduction
     
@@ -212,16 +213,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 #endif
 /*---------------------------------------------------------------------*/
     
-    // App Strings
     globalStrings = [AppStrings sharedInstance];
-    
-    // Bento Shop
     globalShop = [BentoShop sharedInstance];
-    
-    // CountDown Timer
     [CountdownTimer sharedInstance];
-    
-/*---------------------------------------------------------------------*/
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
@@ -238,38 +232,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         [globalShop getMenus];
         [globalShop getNextMenus];
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-            
-///*---------------------------FORCED UPDATE----------------------------*/
-//#ifdef DEV_MODE
-//            {
-//                aV = [[UIAlertView alloc] initWithTitle:@"Dev Build" message:[NSString stringWithFormat:@"Current_Version: %f\niOS_Min_Verson: %f", globalShop.iosCurrentVersion, globalShop.iosMinVersion] delegate:self cancelButtonTitle:nil otherButtonTitles:nil];
-//                
-//                NSLog(@"This is dev version...run update check anyway!");
-//            }
-//#else
-//            {
-//                aV = [[UIAlertView alloc] initWithTitle:@"Update Available" message:@"Please update to the new version now." delegate:self cancelButtonTitle:nil otherButtonTitles:@"Update", nil];
-//                aV.tag = 007;
-//                NSLog(@"This is production version...run update check!");
-//            }
-//#endif
-//            {
-//                NSLog(@"ios minimum version - %f", globalShop.iosMinVersion);
-//                NSLog(@"current ios version - %f", globalShop.iosCurrentVersion);
-//                
-//                // Perform check for new version of your app
-//                if (globalShop.iosCurrentVersion < globalShop.iosMinVersion)
-//                    [aV show];
-//            }
-        });
     });
     
-    return [[FBSDKApplicationDelegate sharedInstance] application:application
-                                    didFinishLaunchingWithOptions:launchOptions];
-    
-//    return YES;
+    return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

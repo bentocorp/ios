@@ -16,6 +16,9 @@
 
 #define FAUXPAS_IGNORED_IN_METHOD(...)
 
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-implementations"
+
 #if TARGET_OS_IPHONE
 #pragma mark - iOS
 
@@ -34,6 +37,7 @@
     webViewController.options = options;
     self = [super initWithRootViewController:webViewController];
     if (self) {
+        self.navigationBar.translucent = NO;
         _webViewController = webViewController;
         _previousStyle = [[UIApplication sharedApplication] statusBarStyle];
         if ([[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
@@ -85,11 +89,11 @@
 @implementation STPCheckoutViewController
 
 - (instancetype)initWithNibName:(__unused NSString *)nibNameOrNil bundle:(__unused NSBundle *)nibBundleOrNil {
-    return [self initWithOptions:nil];
+    return [self initWithOptions:[[STPCheckoutOptions alloc] init]];
 }
 
 - (instancetype)initWithCoder:(__unused NSCoder *)coder {
-    return [self initWithOptions:nil];
+    return [self initWithOptions:[[STPCheckoutOptions alloc] init]];
 }
 
 - (instancetype)initWithOptions:(STPCheckoutOptions *)options {
@@ -137,16 +141,16 @@
     } else if ([event isEqualToString:STPCheckoutEventTokenize]) {
         STPToken *token = nil;
         if (payload != nil && payload[@"token"] != nil) {
-            token = [[STPToken alloc] initWithAttributeDictionary:payload[@"token"]];
+            token = [STPToken decodedObjectFromAPIResponse:payload[@"token"]];
         }
         [self.checkoutDelegate checkoutController:self
                                    didCreateToken:token
                                        completion:^(STPBackendChargeResult status, NSError *error) {
+                                           self.backendChargeSuccessful = (status == STPBackendChargeResultSuccess);
+                                           self.backendChargeError = error;
                                            if (status == STPBackendChargeResultSuccess) {
                                                [adapter evaluateJavaScript:payload[@"success"]];
                                            } else {
-                                               self.backendChargeSuccessful = (status == STPBackendChargeResultSuccess);
-                                               self.backendChargeError = error;
                                                NSString *encodedError = @"";
                                                if (error.localizedDescription) {
                                                    encodedError = [[NSString alloc]
@@ -183,3 +187,5 @@
 @end
 
 #endif
+
+#pragma clang diagnostic pop

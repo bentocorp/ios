@@ -13,8 +13,7 @@
 #import "AppStrings.h"
 
 #import "Stripe.h"
-#import "PTKView.h"
-#import "PTKTextField.h"
+#import "STPPaymentCardTextField.h"
 
 #import <PassKit/PassKit.h>
 
@@ -26,21 +25,19 @@
 
 #import "UIColor+CustomColors.h"
 
-@interface EnterCreditCardViewController () <PTKViewDelegate>
+@interface EnterCreditCardViewController () <STPPaymentCardTextFieldDelegate>
 {
-    STPCard *_creditCard;
+    STPCardParams *_creditCard;
     JGProgressHUD *loadingHUD;
 }
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
-@property (nonatomic, weak) IBOutlet UILabel *lblPrice;
-
 @property (nonatomic, weak) IBOutlet UIButton *btnContinue;
 
 @property (nonatomic, weak) IBOutlet UIView *viewInput;
 
-@property (nonatomic) PTKView *paymentView;
+@property (nonatomic) STPPaymentCardTextField *paymentView;
 
 @end
 
@@ -50,8 +47,8 @@
     [super viewDidLoad];
     
     // Mixpanel: Viewed Credit Card Screen For First Time
-    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Credit Card Screen For First Time"] == nil)
-    {
+    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Credit Card Screen For First Time"] == nil) {
+        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Viewed Credit Card Screen For First Time"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -60,19 +57,11 @@
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:CREDITCARD_TITLE];
     
-    NSInteger salePrice = [[[BentoShop sharedInstance] getSalePrice] integerValue];
-    NSInteger unitPrice = [[[BentoShop sharedInstance] getUnitPrice] integerValue];
-    
-    if (salePrice != 0 && salePrice < unitPrice)
-        self.lblPrice.text = [NSString stringWithFormat:@"$%ld", (long)salePrice];
-    else
-        self.lblPrice.text = [NSString stringWithFormat:@"$%ld", (long)unitPrice];
-    
     // make this dynamic, Save or Continue To Summary- [[AppStrings sharedInstance] getString:CREDITCARD_BUTTON_CONTINUE]
     [self.btnContinue setTitle:@"SAVE CREDIT CARD" forState:UIControlStateNormal];
     
     // Credit Card View
-    PTKView *view = [[PTKView alloc] initWithFrame:self.viewInput.frame];
+    STPPaymentCardTextField *view = [[STPPaymentCardTextField alloc] initWithFrame:self.viewInput.frame];
     view.center = CGPointMake(self.viewInput.frame.size.width / 2, self.viewInput.frame.size.height / 2);
     self.paymentView = view;
     self.paymentView.delegate = self;
@@ -204,7 +193,6 @@
     {
         [self.delegate setCardInfo:_creditCard];
         
-        // Mixpanel: "Saved Credit Card For First Time"
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Saved Credit Card For First Time"] == nil)
         {
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Saved Credit Card For First Time"];
@@ -221,30 +209,26 @@
 - (void)hideKeyboard
 {
     [self.paymentView resignFirstResponder];
-    [self.paymentView.cardNumberField resignFirstResponder];
-    [self.paymentView.cardExpiryField resignFirstResponder];
-    [self.paymentView.cardCVCField resignFirstResponder];
+//    [self.paymentView.cardNumberField resignFirstResponder];
+//    [self.paymentView.cardExpiryField resignFirstResponder];
+//    [self.paymentView.cardCVCField resignFirstResponder];
 }
 
-#pragma mark PTKViewDelegate
+#pragma mark STPPaymentCardTextFieldDelegate
 
-- (void)paymentView:(PTKView *)view withCard:(PTKCard *)card isValid:(BOOL)valid
-{
-    // Toggle navigation, for example
-    if (valid)
-    {
-        STPCard *stpCard = [[STPCard alloc] init];
-        stpCard.number = card.number;
-        stpCard.expMonth = card.expMonth;
-        stpCard.expYear = card.expYear;
-        stpCard.cvc = card.cvc;
-        _creditCard = stpCard;
+- (void)paymentCardTextFieldDidChange:(STPPaymentCardTextField *)textField {
+    if (textField.isValid) {
+        STPCardParams *card = [[STPCard alloc] init];
+        card.number = textField.cardNumber;
+        card.expMonth = textField.expirationMonth;
+        card.expYear = textField.expirationYear;
+        card.cvc = textField.cvc;
+        _creditCard = card;
         
         self.btnContinue.enabled = YES;
         [self.btnContinue setBackgroundColor:[UIColor bentoBrandGreen]];
     }
-    else
-    {
+    else {
         _creditCard = nil;
         self.btnContinue.enabled = NO;
         [self.btnContinue setBackgroundColor:[UIColor bentoButtonGray]];

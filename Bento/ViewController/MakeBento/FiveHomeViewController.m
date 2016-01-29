@@ -200,12 +200,8 @@ static OrderAheadMenu *orderAheadMenu;
     
     self.fourCustomVC.buildButton.hidden = YES;
     self.fourCustomVC.viewAddonsButton.hidden = YES;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
     
-    [self beginLoadingData];
+    [self performSelector:@selector(beginLoadingData) withObject:nil afterDelay:1];
 }
 
 #pragma mark Loading Data

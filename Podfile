@@ -2,8 +2,6 @@
 platform :ios, '7.0'
 
 pod 'Stripe'
-pod 'Stripe/ApplePay'
-pod 'PaymentKit'
 pod 'Mixpanel'
 pod 'Canvas'
 pod 'Adjust'

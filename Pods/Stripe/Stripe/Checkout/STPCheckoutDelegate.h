@@ -10,8 +10,10 @@
 
 @protocol STPCheckoutWebViewAdapter;
 @protocol STPCheckoutDelegate<NSObject>
-- (void)checkoutAdapterDidStartLoad:(id<STPCheckoutWebViewAdapter>)adapter;
-- (void)checkoutAdapterDidFinishLoad:(id<STPCheckoutWebViewAdapter>)adapter;
-- (void)checkoutAdapter:(id<STPCheckoutWebViewAdapter>)adapter didTriggerEvent:(NSString *)event withPayload:(NSDictionary *)payload;
-- (void)checkoutAdapter:(id<STPCheckoutWebViewAdapter>)adapter didError:(NSError *)error;
+- (void)checkoutAdapterDidStartLoad:(nonnull id<STPCheckoutWebViewAdapter>)adapter;
+- (void)checkoutAdapterDidFinishLoad:(nonnull id<STPCheckoutWebViewAdapter>)adapter;
+- (void)checkoutAdapter:(nonnull id<STPCheckoutWebViewAdapter>)adapter
+        didTriggerEvent:(nonnull NSString *)event
+            withPayload:(nonnull NSDictionary *)payload;
+- (void)checkoutAdapter:(nonnull id<STPCheckoutWebViewAdapter>)adapter didError:(nonnull NSError *)error;
 @end

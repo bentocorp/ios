@@ -19,14 +19,33 @@
 #import "StripeError.h"
 #import "STPToken.h"
 #import "STPColorUtils.h"
+#import "STPAPIResponseDecodable.h"
+
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated"
 
 #define FAUXPAS_IGNORED_IN_METHOD(...)
+
+@interface STPCheckoutInternalUIWebViewController ()
+@property (nonatomic) BOOL statusBarHidden;
+@property (weak, nonatomic, nullable) UIView *webView;
+@property (nonatomic, nullable) STPIOSCheckoutWebViewAdapter *adapter;
+@property (nonatomic, nonnull) NSURL *url;
+@property (weak, nonatomic, nullable) UIActivityIndicatorView *activityIndicator;
+@property (nonatomic) BOOL backendChargeSuccessful;
+@property (nonatomic, nullable) NSError *backendChargeError;
+@end
 
 @implementation STPCheckoutInternalUIWebViewController
 
 - (instancetype)initWithCheckoutViewController:(STPCheckoutViewController *)checkoutViewController {
     self = [super initWithNibName:nil bundle:nil];
     if (self) {
+        if ([self respondsToSelector:@selector(setEdgesForExtendedLayout:)]) {
+            self.edgesForExtendedLayout = UIRectEdgeNone;
+        }
+        _options = checkoutViewController.options;
+        _url = [NSURL URLWithString:checkoutURLString];
         UIBarButtonItem *cancelItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel target:self action:@selector(cancel:)];
         self.navigationItem.leftBarButtonItem = cancelItem;
         _checkoutController = checkoutViewController;
@@ -45,23 +64,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-
-    self.url = [NSURL URLWithString:checkoutURLString];
-
-    if (self.options.logoImage && !self.options.logoURL) {
-        NSURL *url = [NSURL fileURLWithPath:[NSTemporaryDirectory() stringByAppendingPathComponent:[[NSUUID UUID] UUIDString]]];
-        BOOL success = [UIImagePNGRepresentation(self.options.logoImage) writeToURL:url options:0 error:nil];
-        if (success) {
-            self.logoURL = self.options.logoURL = url;
-        }
-    }
-
     self.adapter = [[STPIOSCheckoutWebViewAdapter alloc] init];
     self.adapter.delegate = self;
-    UIView *webView = self.adapter.webView;
+    UIWebView *webView = self.adapter.webView;
+    webView.scrollView.delegate = self;
     [self.view addSubview:webView];
 
-    webView.backgroundColor = [UIColor whiteColor];
     if (self.options.logoColor && [[UIDevice currentDevice] userInterfaceIdiom] == UIUserInterfaceIdiomPad) {
         self.view.backgroundColor = self.options.logoColor;
         webView.backgroundColor = self.options.logoColor;
@@ -81,39 +89,12 @@
     [self.adapter loadRequest:[NSURLRequest requestWithURL:self.url]];
     self.webView = webView;
 
-    UIView *headerBackground = [[UIView alloc] initWithFrame:self.view.bounds];
-    self.headerBackground = headerBackground;
-    [self.webView insertSubview:headerBackground atIndex:0];
-    headerBackground.translatesAutoresizingMaskIntoConstraints = NO;
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|-0-[headerBackground]-0-|"
-                                                                      options:NSLayoutFormatDirectionLeadingToTrailing
-                                                                      metrics:nil
-                                                                        views:NSDictionaryOfVariableBindings(headerBackground)]];
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:headerBackground
-                                                          attribute:NSLayoutAttributeTop
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeTop
-                                                         multiplier:1
-                                                           constant:0]];
-    CGFloat bottomMargin = -150;
-    if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad) {
-        bottomMargin = 0;
-    }
-    [self.view addConstraint:[NSLayoutConstraint constraintWithItem:headerBackground
-                                                          attribute:NSLayoutAttributeHeight
-                                                          relatedBy:NSLayoutRelationEqual
-                                                             toItem:self.view
-                                                          attribute:NSLayoutAttributeHeight
-                                                         multiplier:1
-                                                           constant:bottomMargin]];
-
     UIActivityIndicatorViewStyle style = UIActivityIndicatorViewStyleGray;
     if ([UIDevice currentDevice].userInterfaceIdiom == UIUserInterfaceIdiomPad && self.options.logoColor &&
         ![STPColorUtils colorIsLight:self.options.logoColor]) {
         style = UIActivityIndicatorViewStyleWhiteLarge;
     }
-    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
+    UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:style];
     activityIndicator.hidesWhenStopped = YES;
     activityIndicator.translatesAutoresizingMaskIntoConstraints = NO;
     [self.view addSubview:activityIndicator];
@@ -141,9 +122,6 @@
 
 - (void)cleanup {
     [self.adapter cleanup];
-    if (self.logoURL) {
-        [[NSFileManager defaultManager] removeItemAtURL:self.logoURL error:nil];
-    }
 }
 
 - (UIStatusBarStyle)preferredStatusBarStyle {
@@ -156,7 +134,6 @@
 
 - (void)setLogoColor:(STP_COLOR_CLASS *)color {
     self.options.logoColor = color;
-    self.headerBackground.backgroundColor = color;
     if ([self.checkoutController respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
         FAUXPAS_IGNORED_IN_METHOD(APIAvailability);
         [[UIApplication sharedApplication] setStatusBarStyle:[self preferredStatusBarStyle] animated:YES];
@@ -180,7 +157,7 @@
     } else if ([event isEqualToString:STPCheckoutEventTokenize]) {
         STPToken *token = nil;
         if (payload != nil && payload[@"token"] != nil) {
-            token = [[STPToken alloc] initWithAttributeDictionary:payload[@"token"]];
+            token = [STPToken decodedObjectFromAPIResponse:payload[@"token"]];
         }
         [self.delegate checkoutController:self.checkoutController
                            didCreateToken:token
@@ -234,6 +211,31 @@
     [self cleanup];
 }
 
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    NSDictionary *options = [self checkoutDisplayOptionsForScrollViewOffset:scrollView.contentOffset];
+    BOOL statusBarHidden = [options[@"statusBarHidden"] boolValue];
+    NSString *backgroundColorHex = options[@"backgroundColor"];
+    UIColor *color = backgroundColorHex ? [STPColorUtils colorForHexCode:backgroundColorHex] : [UIColor whiteColor];
+    if ([self respondsToSelector:@selector(setNeedsStatusBarAppearanceUpdate)]) {
+        self.statusBarHidden = statusBarHidden;
+        [UIView animateWithDuration:0.1 animations:^{ [self setNeedsStatusBarAppearanceUpdate]; }];
+        [[UIApplication sharedApplication] setStatusBarHidden:[self prefersStatusBarHidden] withAnimation:UIStatusBarAnimationSlide];
+    }
+    self.webView.backgroundColor = color;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return self.statusBarHidden;
+}
+
+- (NSDictionary *)checkoutDisplayOptionsForScrollViewOffset:(CGPoint)offset {
+    NSString *javascript = [NSString stringWithFormat:@"try { window.StripeCheckoutDidScroll(%@, %@) } catch(e){ null };", @(offset.x), @(offset.y)];
+    NSString *output = [self.adapter evaluateJavaScript:javascript];
+    return [NSJSONSerialization JSONObjectWithData:[output dataUsingEncoding:NSUTF8StringEncoding] options:0 error:nil] ?: @{};
+}
+
 @end
+
+#pragma clang diagnostic pop
 
 #endif
