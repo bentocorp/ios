@@ -12,8 +12,7 @@
 
 #import "AppStrings.h"
 
-#import "Stripe.h"
-#import "STPPaymentCardTextField.h"
+#import <Stripe/Stripe.h>
 
 #import <PassKit/PassKit.h>
 
@@ -37,7 +36,7 @@
 
 @property (nonatomic, weak) IBOutlet UIView *viewInput;
 
-@property (nonatomic) STPPaymentCardTextField *paymentView;
+@property (nonatomic) STPPaymentCardTextField *paymentTextField;
 
 @end
 
@@ -46,9 +45,7 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    // Mixpanel: Viewed Credit Card Screen For First Time
     if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Viewed Credit Card Screen For First Time"] == nil) {
-        
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Viewed Credit Card Screen For First Time"];
         [[NSUserDefaults standardUserDefaults] synchronize];
         
@@ -56,22 +53,20 @@
     }
     
     self.lblTitle.text = [[AppStrings sharedInstance] getString:CREDITCARD_TITLE];
-    
-    // make this dynamic, Save or Continue To Summary- [[AppStrings sharedInstance] getString:CREDITCARD_BUTTON_CONTINUE]
-    [self.btnContinue setTitle:@"SAVE CREDIT CARD" forState:UIControlStateNormal];
+    [self.btnContinue setTitle:[[AppStrings sharedInstance] getString:CREDITCARD_BUTTON_CONTINUE] forState:UIControlStateNormal];
     
     // Credit Card View
-    STPPaymentCardTextField *view = [[STPPaymentCardTextField alloc] initWithFrame:self.viewInput.frame];
-    view.center = CGPointMake(self.viewInput.frame.size.width / 2, self.viewInput.frame.size.height / 2);
-    self.paymentView = view;
-    self.paymentView.delegate = self;
-    [self.viewInput addSubview:self.paymentView];
+    self.paymentTextField = [[STPPaymentCardTextField alloc] initWithFrame:self.viewInput.frame];
+    self.paymentTextField.center = CGPointMake(self.viewInput.frame.size.width / 2, self.viewInput.frame.size.height / 2);
+    self.paymentTextField.layer.borderWidth = 0;
+    self.paymentTextField.delegate = self;
+    [self.viewInput addSubview:self.paymentTextField];
     
-    NSArray *subviews = self.paymentView.subviews;
-    for (UIView *subview in subviews) {
-        if([subview isKindOfClass:[UIImageView class]] && subview != self.paymentView.placeholderView)
-            subview.hidden = YES;
-    }
+//    NSArray *subviews = self.paymentView.subviews;
+//    for (UIView *subview in subviews) {
+//        if([subview isKindOfClass:[UIImageView class]] && subview != self.paymentView.placeholderView)
+//            subview.hidden = YES;
+//    }
     
     _creditCard = nil;
 }
@@ -80,8 +75,7 @@
     [super didReceiveMemoryWarning];
 }
 
-- (void)viewWillAppear:(BOOL)animated
-{
+- (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(willShowKeyboard:) name:UIKeyboardWillShowNotification object:nil];
@@ -98,8 +92,7 @@
     [self startTimerOnViewedScreen];
 }
 
-- (void)viewWillDisappear:(BOOL)animated
-{
+- (void)viewWillDisappear:(BOOL)animated {
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [super viewWillDisappear:animated];
@@ -108,34 +101,28 @@
 }
 
 #pragma mark Duration on screen
-- (void)startTimerOnViewedScreen
-{
+- (void)startTimerOnViewedScreen {
     [[Mixpanel sharedInstance] timeEvent:@"Viewed Credit Card Screen"];
 }
 
-- (void)endTimerOnViewedScreen
-{
+- (void)endTimerOnViewedScreen {
     [[Mixpanel sharedInstance] track:@"Viewed Credit Card Screen"];
 }
 
-- (void)noConnection
-{
-    if (loadingHUD == nil)
-    {
+- (void)noConnection {
+    if (loadingHUD == nil) {
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
         loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
         [loadingHUD showInView:self.view];
     }
 }
 
-- (void)yesConnection
-{
+- (void)yesConnection {
     [loadingHUD dismiss];
     loadingHUD = nil;
 }
 
-- (void) willShowKeyboard:(NSNotification*)notification
-{
+- (void)willShowKeyboard:(NSNotification*)notification {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameEndUserInfoKey];
     CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
@@ -143,8 +130,7 @@
     [self moveContinueButtonWithKeyboardHeight:keyboardFrameBeginRect.size.height];
 }
 
-- (void) willChangeKeyboardFrame:(NSNotification *)notification
-{
+- (void)willChangeKeyboardFrame:(NSNotification *)notification {
     NSDictionary* keyboardInfo = [notification userInfo];
     NSValue* keyboardFrameBegin = [keyboardInfo valueForKey:UIKeyboardFrameBeginUserInfoKey];
     CGRect keyboardFrameBeginRect = [keyboardFrameBegin CGRectValue];
@@ -152,49 +138,42 @@
     [self moveContinueButtonWithKeyboardHeight:keyboardFrameBeginRect.size.height];
 }
 
-- (void) willHideKeyboard:(NSNotification *)notification
-{
+- (void)willHideKeyboard:(NSNotification *)notification {
     [self moveContinueButtonWithKeyboardHeight:0];
 }
 
-- (void) moveContinueButtonWithKeyboardHeight:(float) height
-{
+- (void)moveContinueButtonWithKeyboardHeight:(float) height {
     [UIView animateWithDuration:0.3f animations:^{
         
         CGFloat yCenter = self.view.frame.size.height - (self.btnContinue.frame.size.height / 2 + 40 + height);
-        if (yCenter < 64 + self.viewInput.frame.origin.y + self.viewInput.frame.size.height + self.btnContinue.frame.size.height / 2)
+        if (yCenter < 64 + self.viewInput.frame.origin.y + self.viewInput.frame.size.height + self.btnContinue.frame.size.height / 2) {
             yCenter = 64 + self.viewInput.frame.origin.y + self.viewInput.frame.size.height + self.btnContinue.frame.size.height / 2;
+        }
         
         self.btnContinue.center = CGPointMake(self.btnContinue.center.x, yCenter);
-        
-    } completion:^(BOOL finished) {
-        
     }];
 }
 
-- (IBAction)onClose:(id)sender
-{
+- (IBAction)onClose:(id)sender {
     [self hideKeyboard];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (IBAction)onClear:(id)sender
-{
-    ((UITextField *)self.paymentView.cardNumberField).text = @"";
-    ((UITextField *)self.paymentView.cardExpiryField).text = @"";
-    ((UITextField *)self.paymentView.cardCVCField).text = @"";
-    
-    self.paymentView.placeholderView.image = [UIImage imageNamed:@"placeholder"];
+- (IBAction)onClear:(id)sender {
+//    ((UITextField *)self.paymentView.cardNumberField).text = @"";
+//    ((UITextField *)self.paymentView.cardExpiryField).text = @"";
+//    ((UITextField *)self.paymentView.cardCVCField).text = @"";
+//    
+//    self.paymentView.placeholderView.image = [UIImage imageNamed:@"placeholder"];
 }
 
-- (IBAction)onContinueToPayment:(id)sender
-{
-    if (self.delegate != nil)
-    {
+- (IBAction)onContinueToPayment:(id)sender {
+    
+    if (self.delegate != nil) {
+        
         [self.delegate setCardInfo:_creditCard];
         
-        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Saved Credit Card For First Time"] == nil)
-        {
+        if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Saved Credit Card For First Time"] == nil) {
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Saved Credit Card For First Time"];
             [[NSUserDefaults standardUserDefaults] synchronize];
             
@@ -206,9 +185,8 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
-- (void)hideKeyboard
-{
-    [self.paymentView resignFirstResponder];
+- (void)hideKeyboard {
+    [self.paymentTextField resignFirstResponder];
 //    [self.paymentView.cardNumberField resignFirstResponder];
 //    [self.paymentView.cardExpiryField resignFirstResponder];
 //    [self.paymentView.cardCVCField resignFirstResponder];

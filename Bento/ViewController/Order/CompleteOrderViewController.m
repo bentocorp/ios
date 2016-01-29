@@ -599,34 +599,34 @@
     }
     else if (curPaymentMethod == Payment_CreditCard)
     {
-        STPCardParams *cardInfo = [[DataManager shareDataManager] getCreditCard];
-        STPcard cardType = [cardInfo.number cardType];
+//        STPCardParams *cardInfo = [[DataManager shareDataManager] getCreditCard];
+//        STPcard cardType = [cardInfo.number cardType];
+//        
+//        switch (cardType) {
+//            case PTKCardTypeAmex:
+//                [self updatePaymentInfo:@"amex" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+//                break;
+//            case PTKCardTypeDinersClub:
+//                [self updatePaymentInfo:@"diners" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+//                break;
+//            case PTKCardTypeDiscover:
+//                [self updatePaymentInfo:@"discover" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+//                break;
+//            case PTKCardTypeJCB:
+//                [self updatePaymentInfo:@"jcb" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+//                break;
+//            case PTKCardTypeMasterCard:
+//                [self updatePaymentInfo:@"mastercard" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+//                break;
+//            case PTKCardTypeVisa:
+//                [self updatePaymentInfo:@"visa" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
+//                break;
+//            default:
+//                [self updatePaymentInfo:@"" cardNumber:@"" paymentMethod:curPaymentMethod];
+//                break;
+//        }
         
-        switch (cardType) {
-            case PTKCardTypeAmex:
-                [self updatePaymentInfo:@"amex" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-                break;
-            case PTKCardTypeDinersClub:
-                [self updatePaymentInfo:@"diners" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-                break;
-            case PTKCardTypeDiscover:
-                [self updatePaymentInfo:@"discover" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-                break;
-            case PTKCardTypeJCB:
-                [self updatePaymentInfo:@"jcb" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-                break;
-            case PTKCardTypeMasterCard:
-                [self updatePaymentInfo:@"mastercard" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-                break;
-            case PTKCardTypeVisa:
-                [self updatePaymentInfo:@"visa" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-                break;
-            default:
-                [self updatePaymentInfo:@"" cardNumber:@"" paymentMethod:curPaymentMethod];
-                break;
-        }
-        
-        NSLog(@"card number - %@", cardInfo.last4);
+//        NSLog(@"card number - %@", cardInfo.last4);
         
     }
     else if (curPaymentMethod == Payment_None)
