@@ -25,10 +25,6 @@
 #import "UIColor+CustomColors.h"
 
 @interface EnterCreditCardViewController () <STPPaymentCardTextFieldDelegate>
-{
-    STPCardParams *creditCard;
-    JGProgressHUD *loadingHUD;
-}
 
 @property (nonatomic, weak) IBOutlet UILabel *lblTitle;
 
@@ -41,6 +37,10 @@
 @end
 
 @implementation EnterCreditCardViewController
+{
+    STPCardParams *creditCard;
+    JGProgressHUD *loadingHUD;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
