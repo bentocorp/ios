@@ -1524,7 +1524,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.orderAheadPickerContainerViewHeightConstraint.constant = 0;
     self.orderAheadPickerView.hidden = YES;
     
-    [self setOnDemandTitle];
+//    [self setOnDemandTitle];
     
     [self.view layoutIfNeeded];
 }
@@ -2054,7 +2054,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.orderAheadPickerContainerViewHeightConstraint.constant = 0;
     self.orderAheadPickerView.hidden = YES;
     
-    [self setOnDemandTitle];
+//    [self setOnDemandTitle];
     
     [self showOrHideETA];
     
@@ -2093,14 +2093,6 @@ static OrderAheadMenu *orderAheadMenu;
     [self.view layoutIfNeeded];
 }
 
-- (void)tempSelectedOnDemand {
-
-}
-
-- (void)tempSelectedOrderAhead {
-
-}
-
 - (void)showOrHideETA {
     if (orderMode == OnDemand) {
         
@@ -2108,12 +2100,14 @@ static OrderAheadMenu *orderAheadMenu;
         if ([self.widget[@"state"] isEqualToString:@"open"] == NO) {
             self.etaLabel.hidden = YES;
             self.etaBannerDivider.hidden = YES;
+            self.startingPriceLabel.hidden = YES;
             self.previewLabel.hidden = NO;
         }
         // store is open
         else {
             self.etaLabel.hidden = NO;
             self.etaBannerDivider.hidden = NO;
+            self.startingPriceLabel.hidden = NO;
             self.previewLabel.hidden = YES;
             
             [self.view removeConstraint:self.xCenterConstraintForStartingPriceLabel];
@@ -2122,6 +2116,7 @@ static OrderAheadMenu *orderAheadMenu;
     else if (orderMode == OrderAhead) {
         self.etaLabel.hidden = YES;
         self.etaBannerDivider.hidden = YES;
+        self.startingPriceLabel.hidden = NO;
         self.previewLabel.hidden = YES;
         
         [self.view addConstraint:self.xCenterConstraintForStartingPriceLabel];
@@ -2130,10 +2125,10 @@ static OrderAheadMenu *orderAheadMenu;
     [self.view layoutIfNeeded];
 }
 
-- (void)setOnDemandTitle {
-    menuOnDemand = self.asapMenuLabel.text;
-    [self updatePickerButtonTitle];
-}
+//- (void)setOnDemandTitle {
+//    menuOnDemand = self.asapMenuLabel.text;
+//    [self updatePickerButtonTitle];
+//}
 
 - (void)onFinalize {
     if ([self isInMiddleOfBuildingBento]) {
@@ -2274,6 +2269,9 @@ static OrderAheadMenu *orderAheadMenu;
 }
 
 - (void)updatePickerButtonTitle {
+    
+    menuOnDemand = self.asapMenuLabel.text;
+    
     menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
     timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
     

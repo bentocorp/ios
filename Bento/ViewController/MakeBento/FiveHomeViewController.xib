@@ -415,11 +415,6 @@
                 <constraint firstAttribute="bottom" secondItem="3lu-ax-SyT" secondAttribute="bottom" id="zfU-yR-YTW"/>
             </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-            <variation key="default">
-                <mask key="subviews">
-                    <exclude reference="g12-em-tQ5"/>
-                </mask>
-            </variation>
             <point key="canvasLocation" x="128.5" y="457.5"/>
         </view>
     </objects>
