@@ -13,9 +13,7 @@
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
             <string>OpenSans-Bold</string>
-        </mutableArray>
-        <mutableArray key="OpenSans-Regular.ttf">
-            <string>OpenSans</string>
+            <string>OpenSans-Bold</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
@@ -53,6 +51,7 @@
                 <outlet property="orderAheadView" destination="YkJ-Yy-DbD" id="lwN-dx-bSe"/>
                 <outlet property="orderAheadViewHeightConstraint" destination="AVt-Kr-s4q" id="NLZ-Oz-o3S"/>
                 <outlet property="pickerButton" destination="ZAl-ST-thk" id="fuc-Mk-9Qp"/>
+                <outlet property="previewLabel" destination="eyY-2Z-OMb" id="2g9-es-EF1"/>
                 <outlet property="startingPriceLabel" destination="wSb-1H-Dvt" id="bTa-hm-7IN"/>
                 <outlet property="view" destination="00c-cJ-i1r" id="oEG-Ko-GjQ"/>
             </connections>
@@ -69,9 +68,9 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pnq-Up-jie" userLabel="etaBannerView">
                     <rect key="frame" x="0.0" y="64" width="375" height="30"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="PREVIEW" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyY-2Z-OMb">
-                            <rect key="frame" x="166" y="5" width="42" height="21"/>
-                            <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="17"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MENU PREVIEW" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eyY-2Z-OMb" userLabel="previewLabel">
+                            <rect key="frame" x="8" y="5" width="359" height="21"/>
+                            <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="14"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -104,9 +103,12 @@
                     </subviews>
                     <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstItem="eyY-2Z-OMb" firstAttribute="top" secondItem="Pnq-Up-jie" secondAttribute="top" constant="5" id="7fT-HB-P1P"/>
                         <constraint firstItem="Nxt-M8-sn7" firstAttribute="leading" secondItem="ydX-pe-8fn" secondAttribute="trailing" constant="8" id="8UW-6S-020"/>
                         <constraint firstItem="Nxt-M8-sn7" firstAttribute="top" secondItem="Pnq-Up-jie" secondAttribute="top" constant="4" id="NKA-Z6-iP6"/>
                         <constraint firstAttribute="bottom" secondItem="Nxt-M8-sn7" secondAttribute="bottom" constant="4" id="O0i-VU-VMu"/>
+                        <constraint firstAttribute="bottom" secondItem="eyY-2Z-OMb" secondAttribute="bottom" constant="4" id="Sr6-3N-a0F"/>
+                        <constraint firstAttribute="trailing" secondItem="eyY-2Z-OMb" secondAttribute="trailing" constant="8" id="WZN-pa-oKd"/>
                         <constraint firstItem="wSb-1H-Dvt" firstAttribute="top" secondItem="Pnq-Up-jie" secondAttribute="top" constant="4" id="bml-sx-bGW"/>
                         <constraint firstAttribute="trailing" secondItem="Nxt-M8-sn7" secondAttribute="trailing" constant="8" id="gqH-0J-YFm"/>
                         <constraint firstItem="ydX-pe-8fn" firstAttribute="leading" secondItem="wSb-1H-Dvt" secondAttribute="trailing" constant="8" id="hHg-fa-I66"/>
@@ -114,6 +116,7 @@
                         <constraint firstAttribute="height" constant="30" id="hnO-Ib-jmJ"/>
                         <constraint firstItem="ydX-pe-8fn" firstAttribute="centerX" secondItem="Pnq-Up-jie" secondAttribute="centerX" id="m5Z-89-8Sm"/>
                         <constraint firstAttribute="bottom" secondItem="wSb-1H-Dvt" secondAttribute="bottom" constant="4" id="uxh-Jb-KhK"/>
+                        <constraint firstItem="eyY-2Z-OMb" firstAttribute="leading" secondItem="Pnq-Up-jie" secondAttribute="leading" constant="8" id="uzJ-tM-aZR"/>
                         <constraint firstItem="wSb-1H-Dvt" firstAttribute="leading" secondItem="Pnq-Up-jie" secondAttribute="leading" constant="8" id="ylT-vh-iRq"/>
                         <constraint firstAttribute="bottom" secondItem="ydX-pe-8fn" secondAttribute="bottom" constant="4" id="zkN-mz-ZTx"/>
                     </constraints>
