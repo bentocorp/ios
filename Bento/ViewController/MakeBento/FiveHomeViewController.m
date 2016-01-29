@@ -2103,13 +2103,18 @@ static OrderAheadMenu *orderAheadMenu;
 
 - (void)showOrHideETA {
     if (orderMode == OnDemand) {
-        if () {
+        
+        // store is either closed/sold-out
+        if ([self.widget[@"state"] isEqualToString:@"open"] == NO) {
             self.etaLabel.hidden = YES;
             self.etaBannerDivider.hidden = YES;
+            self.previewLabel.hidden = NO;
         }
+        // store is open
         else {
             self.etaLabel.hidden = NO;
             self.etaBannerDivider.hidden = NO;
+            self.previewLabel.hidden = YES;
             
             [self.view removeConstraint:self.xCenterConstraintForStartingPriceLabel];
         }
@@ -2117,6 +2122,7 @@ static OrderAheadMenu *orderAheadMenu;
     else if (orderMode == OrderAhead) {
         self.etaLabel.hidden = YES;
         self.etaBannerDivider.hidden = YES;
+        self.previewLabel.hidden = YES;
         
         [self.view addConstraint:self.xCenterConstraintForStartingPriceLabel];
     }
