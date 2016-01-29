@@ -272,33 +272,33 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 }
 
 - (void)getStatus {
-    [self sendRequest:@"/status/all" completion:^(id responseDic, NSError *error) {
-        
-        if (error == nil) {
-            self.dicStatus = (NSDictionary *)responseDic;
-            
-            if (originalStatus.length == 0) {
-                originalStatus = self.dicStatus[@"overall"][@"value"];
-            }
-            
-            NSString *newStatus = self.dicStatus[@"overall"][@"value"];
-            
-            if (![originalStatus isEqualToString:newStatus])
-            {   
-                originalStatus = @"";
-                
-                NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
-            }
-            
-            self.prevClosed = [self isClosed];
-            self.prevSoldOut = [self isSoldOut];
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-        }
-        else {
-            NSLog(@"/status/all error: %@", error);
-        }
-    }];
+//    [self sendRequest:@"/status/all" completion:^(id responseDic, NSError *error) {
+//        
+//        if (error == nil) {
+//            self.dicStatus = (NSDictionary *)responseDic;
+//            
+//            if (originalStatus.length == 0) {
+//                originalStatus = self.dicStatus[@"overall"][@"value"];
+//            }
+//            
+//            NSString *newStatus = self.dicStatus[@"overall"][@"value"];
+//            
+//            if (![originalStatus isEqualToString:newStatus])
+//            {   
+//                originalStatus = @"";
+//                
+//                NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
+//            }
+//            
+//            self.prevClosed = [self isClosed];
+//            self.prevSoldOut = [self isSoldOut];
+//            
+//            [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+//        }
+//        else {
+//            NSLog(@"/status/all error: %@", error);
+//        }
+//    }];
     
     [self sendRequest:@"/status/menu" completion:^(id responseDic, NSError *error) {
         
@@ -308,12 +308,12 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
         else {
             NSLog(@"/status/menu error: %@", error);
         }
-        
     }];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
 }
 
-- (void)setStatus:(NSArray *)menuStatus
-{
+- (void)setStatus:(NSArray *)menuStatus {
     if (menuStatus == nil) {
         return;
     }

@@ -2257,6 +2257,8 @@ static OrderAheadMenu *orderAheadMenu;
             tempSelectedOrderAheadTimeRangeIndex = row;
         }
     }
+    
+    [pickerView reloadAllComponents];
 }
 
 - (void)updatePickerButtonTitle {
