@@ -200,10 +200,15 @@ static OrderAheadMenu *orderAheadMenu;
     
     self.fourCustomVC.buildButton.hidden = YES;
     self.fourCustomVC.viewAddonsButton.hidden = YES;
+}
 
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
     [self beginLoadingData];
 }
 
+#pragma mark Loading Data
 - (void)beginLoadingData {
     if (loadingHUD == nil) {
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
