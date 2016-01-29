@@ -2103,10 +2103,16 @@ static OrderAheadMenu *orderAheadMenu;
 
 - (void)showOrHideETA {
     if (orderMode == OnDemand) {
-        self.etaLabel.hidden = NO;
-        self.etaBannerDivider.hidden = NO;
-        
-        [self.view removeConstraint:self.xCenterConstraintForStartingPriceLabel];
+        if () {
+            self.etaLabel.hidden = YES;
+            self.etaBannerDivider.hidden = YES;
+        }
+        else {
+            self.etaLabel.hidden = NO;
+            self.etaBannerDivider.hidden = NO;
+            
+            [self.view removeConstraint:self.xCenterConstraintForStartingPriceLabel];
+        }
     }
     else if (orderMode == OrderAhead) {
         self.etaLabel.hidden = YES;
