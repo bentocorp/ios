@@ -100,6 +100,7 @@ static OrderAheadMenu *orderAheadMenu;
     NSInteger tempSelectedOrderAheadTimeRangeIndex;
     
     BOOL isShowingForcedUpdateAlert;
+    BOOL hasAutoToggledOnceOnClosedOrSoldout;
 }
 
 - (void)viewDidLoad {
@@ -1866,22 +1867,26 @@ static OrderAheadMenu *orderAheadMenu;
 - (void)showOrHidePreview {
     if (orderMode == OnDemand) {
         if ([self.widget[@"state"] isEqualToString:@"open"]) {
+            hasAutoToggledOnceOnClosedOrSoldout = NO;
             [self hidePreview];
         }
-        else if (orderMode == OnDemand) {
+        // closed or sold-out
+        else {
+            if ([self isToggledOn] == NO && hasAutoToggledOnceOnClosedOrSoldout == NO) {
+                hasAutoToggledOnceOnClosedOrSoldout = YES;
+                [self toggleDropDown];
+            }
+            else if ([self isToggledOn]) {
+                hasAutoToggledOnceOnClosedOrSoldout = YES;
+            }
+            
             [self showPreview];
         }
     }
+    // OA
     else {
         [self hidePreview];
     }
-    
-//    if ([self.widget[@"state"] isEqualToString:@"open"]) {
-//        self.enabledOnDemandButton.alpha = 0; // transparent
-//    }
-//    else {
-//        self.enabledOnDemandButton.alpha = 0.2; // gray
-//    }
 }
 
 - (void)showPreview {
