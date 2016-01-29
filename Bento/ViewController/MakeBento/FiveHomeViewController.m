@@ -1038,7 +1038,11 @@ static OrderAheadMenu *orderAheadMenu;
         [self checkAppState];
     
         [self checkBentoCount];
-        [self setCart];
+        
+        if ([self isToggledOn] == NO) {
+            [self setCart];
+        }
+        
         [self loadSelectedDishes];
     
         [self setETA];
