@@ -26,7 +26,7 @@
 
 @interface EnterCreditCardViewController () <STPPaymentCardTextFieldDelegate>
 {
-    STPCardParams *_creditCard;
+    STPCardParams *creditCard;
     JGProgressHUD *loadingHUD;
 }
 
@@ -56,19 +56,12 @@
     [self.btnContinue setTitle:[[AppStrings sharedInstance] getString:CREDITCARD_BUTTON_CONTINUE] forState:UIControlStateNormal];
     
     // Credit Card View
-    self.paymentTextField = [[STPPaymentCardTextField alloc] initWithFrame:self.viewInput.frame];
-    self.paymentTextField.center = CGPointMake(self.viewInput.frame.size.width / 2, self.viewInput.frame.size.height / 2);
+    self.paymentTextField = [[STPPaymentCardTextField alloc] initWithFrame:CGRectMake(20, 0, self.viewInput.frame.size.width - 40, self.viewInput.frame.size.height)];
     self.paymentTextField.layer.borderWidth = 0;
     self.paymentTextField.delegate = self;
     [self.viewInput addSubview:self.paymentTextField];
     
-//    NSArray *subviews = self.paymentView.subviews;
-//    for (UIView *subview in subviews) {
-//        if([subview isKindOfClass:[UIImageView class]] && subview != self.paymentView.placeholderView)
-//            subview.hidden = YES;
-//    }
-    
-    _creditCard = nil;
+    creditCard = nil;
 }
 
 - (void)didReceiveMemoryWarning {
@@ -160,18 +153,14 @@
 }
 
 - (IBAction)onClear:(id)sender {
-//    ((UITextField *)self.paymentView.cardNumberField).text = @"";
-//    ((UITextField *)self.paymentView.cardExpiryField).text = @"";
-//    ((UITextField *)self.paymentView.cardCVCField).text = @"";
-//    
-//    self.paymentView.placeholderView.image = [UIImage imageNamed:@"placeholder"];
+    [self.paymentTextField clear];
 }
 
 - (IBAction)onContinueToPayment:(id)sender {
     
     if (self.delegate != nil) {
         
-        [self.delegate setCardInfo:_creditCard];
+        [self.delegate setCardInfo:creditCard];
         
         if ([[NSUserDefaults standardUserDefaults] objectForKey:@"Saved Credit Card For First Time"] == nil) {
             [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"Saved Credit Card For First Time"];
@@ -201,13 +190,13 @@
         card.expMonth = textField.expirationMonth;
         card.expYear = textField.expirationYear;
         card.cvc = textField.cvc;
-        _creditCard = card;
+        creditCard = card;
         
         self.btnContinue.enabled = YES;
         [self.btnContinue setBackgroundColor:[UIColor bentoBrandGreen]];
     }
     else {
-        _creditCard = nil;
+        creditCard = nil;
         self.btnContinue.enabled = NO;
         [self.btnContinue setBackgroundColor:[UIColor bentoButtonGray]];
     }
