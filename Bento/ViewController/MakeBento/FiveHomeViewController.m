@@ -1742,7 +1742,7 @@ static OrderAheadMenu *orderAheadMenu;
 - (void)installOnDemand {
     if (self.onDemandView.hidden == YES) {
         self.onDemandView.hidden = NO;
-        self.onDemandViewHeightConstraint.constant = 59;
+        self.onDemandViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 37;
     }
 }
 
@@ -1851,7 +1851,14 @@ static OrderAheadMenu *orderAheadMenu;
         
         // resize to make room for text
         self.asapDescriptionLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        [self.asapDescriptionLabel sizeToFit];
+        
+        // before was using sizeToFit, but i didn't want to make the width conform to size of text, only height
+        CGSize size = [self.asapDescriptionLabel sizeThatFits:CGSizeMake(self.asapDescriptionLabel.frame.size.width, CGFLOAT_MAX)];
+        CGRect frame = self.asapDescriptionLabel.frame;
+        frame.size.height = size.height;
+        self.asapDescriptionLabel.frame = frame;
+        
+        self.onDemandViewHeightConstraint.constant = self.asapDescriptionLabel.frame.size.height + 37;
         
         [self installOnDemand];
         
