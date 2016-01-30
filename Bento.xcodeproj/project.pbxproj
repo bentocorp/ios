@@ -419,6 +419,42 @@
 		FCA1C8C31AF1973E004715F1 /* icon-square-user.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA1C8C11AF1973E004715F1 /* icon-square-user.png */; };
 		FCA28AAD1C57F10500E9A521 /* Checkmark Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA28AAC1C57F10500E9A521 /* Checkmark Filled-50.png */; };
 		FCA28AAE1C57F10500E9A521 /* Checkmark Filled-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA28AAC1C57F10500E9A521 /* Checkmark Filled-50.png */; };
+		FCA652DF1C5C42B600B8E11E /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652CD1C5C42B600B8E11E /* amex.png */; };
+		FCA652E01C5C42B600B8E11E /* amex.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652CD1C5C42B600B8E11E /* amex.png */; };
+		FCA652E11C5C42B600B8E11E /* amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652CE1C5C42B600B8E11E /* amex@2x.png */; };
+		FCA652E21C5C42B600B8E11E /* amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652CE1C5C42B600B8E11E /* amex@2x.png */; };
+		FCA652E31C5C42B600B8E11E /* cvc-amex.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652CF1C5C42B600B8E11E /* cvc-amex.png */; };
+		FCA652E41C5C42B600B8E11E /* cvc-amex.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652CF1C5C42B600B8E11E /* cvc-amex.png */; };
+		FCA652E51C5C42B600B8E11E /* cvc-amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D01C5C42B600B8E11E /* cvc-amex@2x.png */; };
+		FCA652E61C5C42B600B8E11E /* cvc-amex@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D01C5C42B600B8E11E /* cvc-amex@2x.png */; };
+		FCA652E71C5C42B600B8E11E /* cvc.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D11C5C42B600B8E11E /* cvc.png */; };
+		FCA652E81C5C42B600B8E11E /* cvc.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D11C5C42B600B8E11E /* cvc.png */; };
+		FCA652E91C5C42B600B8E11E /* cvc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D21C5C42B600B8E11E /* cvc@2x.png */; };
+		FCA652EA1C5C42B600B8E11E /* cvc@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D21C5C42B600B8E11E /* cvc@2x.png */; };
+		FCA652EB1C5C42B600B8E11E /* diners.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D31C5C42B600B8E11E /* diners.png */; };
+		FCA652EC1C5C42B600B8E11E /* diners.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D31C5C42B600B8E11E /* diners.png */; };
+		FCA652ED1C5C42B600B8E11E /* diners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D41C5C42B600B8E11E /* diners@2x.png */; };
+		FCA652EE1C5C42B600B8E11E /* diners@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D41C5C42B600B8E11E /* diners@2x.png */; };
+		FCA652EF1C5C42B600B8E11E /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D51C5C42B600B8E11E /* discover.png */; };
+		FCA652F01C5C42B600B8E11E /* discover.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D51C5C42B600B8E11E /* discover.png */; };
+		FCA652F11C5C42B600B8E11E /* discover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D61C5C42B600B8E11E /* discover@2x.png */; };
+		FCA652F21C5C42B600B8E11E /* discover@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D61C5C42B600B8E11E /* discover@2x.png */; };
+		FCA652F31C5C42B600B8E11E /* jcb.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D71C5C42B600B8E11E /* jcb.png */; };
+		FCA652F41C5C42B600B8E11E /* jcb.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D71C5C42B600B8E11E /* jcb.png */; };
+		FCA652F51C5C42B600B8E11E /* jcb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D81C5C42B600B8E11E /* jcb@2x.png */; };
+		FCA652F61C5C42B600B8E11E /* jcb@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D81C5C42B600B8E11E /* jcb@2x.png */; };
+		FCA652F71C5C42B600B8E11E /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D91C5C42B600B8E11E /* mastercard.png */; };
+		FCA652F81C5C42B600B8E11E /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D91C5C42B600B8E11E /* mastercard.png */; };
+		FCA652F91C5C42B600B8E11E /* mastercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DA1C5C42B600B8E11E /* mastercard@2x.png */; };
+		FCA652FA1C5C42B600B8E11E /* mastercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DA1C5C42B600B8E11E /* mastercard@2x.png */; };
+		FCA652FB1C5C42B600B8E11E /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DB1C5C42B600B8E11E /* placeholder.png */; };
+		FCA652FC1C5C42B600B8E11E /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DB1C5C42B600B8E11E /* placeholder.png */; };
+		FCA652FD1C5C42B600B8E11E /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DC1C5C42B600B8E11E /* placeholder@2x.png */; };
+		FCA652FE1C5C42B600B8E11E /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DC1C5C42B600B8E11E /* placeholder@2x.png */; };
+		FCA652FF1C5C42B600B8E11E /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DD1C5C42B600B8E11E /* visa.png */; };
+		FCA653001C5C42B600B8E11E /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DD1C5C42B600B8E11E /* visa.png */; };
+		FCA653011C5C42B600B8E11E /* visa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DE1C5C42B600B8E11E /* visa@2x.png */; };
+		FCA653021C5C42B600B8E11E /* visa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DE1C5C42B600B8E11E /* visa@2x.png */; };
 		FCA72F5E1B806B3D009DD71A /* UpFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */; };
 		FCA72F5F1B806B3D009DD71A /* UpFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */; };
 		FCA8ABC41C56EC4000B971D3 /* Calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */; };
@@ -818,63 +854,6 @@
 		FC7B60A01B10045D00A00467 /* BentoShopTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BentoShopTests.m; path = ../Bento/Model/BentoShopTests.m; sourceTree = "<group>"; };
 		FC7EACB01B8D0C2700B15FC8 /* empty-main.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty-main.png"; sourceTree = "<group>"; };
 		FC7EACB11B8D0C2700B15FC8 /* empty-side.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "empty-side.png"; sourceTree = "<group>"; };
-		FC8285C61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
-		FC8285C71AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
-		FC8285C81AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
-		FC8285C91AEEED1B009D073D /* ss-air.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-air.otf"; sourceTree = "<group>"; };
-		FC8285CB1AEEED1B009D073D /* ss-air.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "ss-air.css"; sourceTree = "<group>"; };
-		FC8285CC1AEEED1B009D073D /* ss-air.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-air.eot"; sourceTree = "<group>"; };
-		FC8285CD1AEEED1B009D073D /* ss-air.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "ss-air.js"; sourceTree = "<group>"; };
-		FC8285CE1AEEED1B009D073D /* ss-air.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ss-air.svg"; sourceTree = "<group>"; };
-		FC8285CF1AEEED1B009D073D /* ss-air.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-air.ttf"; sourceTree = "<group>"; };
-		FC8285D01AEEED1B009D073D /* ss-air.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-air.woff"; sourceTree = "<group>"; };
-		FC8285D31AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
-		FC8285D41AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
-		FC8285D61AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
-		FC8285D71AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
-		FC8285D81AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
-		FC8285D91AEEED1B009D073D /* ss-social-circle.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-circle.otf"; sourceTree = "<group>"; };
-		FC8285DA1AEEED1B009D073D /* ss-social-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.otf"; sourceTree = "<group>"; };
-		FC8285DB1AEEED1B009D073D /* ss-social.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = "ss-social.zip"; sourceTree = "<group>"; };
-		FC8285DD1AEEED1B009D073D /* ss-social-circle.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-circle.eot"; sourceTree = "<group>"; };
-		FC8285DE1AEEED1B009D073D /* ss-social-circle.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ss-social-circle.svg"; sourceTree = "<group>"; };
-		FC8285DF1AEEED1B009D073D /* ss-social-circle.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-circle.ttf"; sourceTree = "<group>"; };
-		FC8285E01AEEED1B009D073D /* ss-social-circle.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-circle.woff"; sourceTree = "<group>"; };
-		FC8285E11AEEED1B009D073D /* ss-social-regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.eot"; sourceTree = "<group>"; };
-		FC8285E21AEEED1B009D073D /* ss-social-regular.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ss-social-regular.svg"; sourceTree = "<group>"; };
-		FC8285E31AEEED1B009D073D /* ss-social-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.ttf"; sourceTree = "<group>"; };
-		FC8285E41AEEED1B009D073D /* ss-social-regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.woff"; sourceTree = "<group>"; };
-		FC8285E51AEEED1B009D073D /* ss-social.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "ss-social.css"; sourceTree = "<group>"; };
-		FC8285E61AEEED1B009D073D /* ss-social.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "ss-social.js"; sourceTree = "<group>"; };
-		FC8285E71AEEED1B009D073D /* Old.zip */ = {isa = PBXFileReference; lastKnownFileType = archive.zip; path = Old.zip; sourceTree = "<group>"; };
-		FC8285E81AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
-		FC8285E91AEEED1B009D073D /* ss-social-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.otf"; sourceTree = "<group>"; };
-		FC8285EB1AEEED1B009D073D /* ss-social-regular.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "ss-social-regular.css"; sourceTree = "<group>"; };
-		FC8285EC1AEEED1B009D073D /* ss-social-regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.eot"; sourceTree = "<group>"; };
-		FC8285ED1AEEED1B009D073D /* ss-social-regular.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ss-social-regular.svg"; sourceTree = "<group>"; };
-		FC8285EE1AEEED1B009D073D /* ss-social-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.ttf"; sourceTree = "<group>"; };
-		FC8285EF1AEEED1B009D073D /* ss-social-regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.woff"; sourceTree = "<group>"; };
-		FC8285F01AEEED1B009D073D /* ss-social.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "ss-social.js"; sourceTree = "<group>"; };
-		FC8285F21AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
-		FC8285F31AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
-		FC8285F41AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
-		FC8285F51AEEED1B009D073D /* ss-social-regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.otf"; sourceTree = "<group>"; };
-		FC8285F71AEEED1B009D073D /* ss-social-regular.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "ss-social-regular.css"; sourceTree = "<group>"; };
-		FC8285F81AEEED1B009D073D /* ss-social-regular.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.eot"; sourceTree = "<group>"; };
-		FC8285F91AEEED1B009D073D /* ss-social-regular.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ss-social-regular.svg"; sourceTree = "<group>"; };
-		FC8285FA1AEEED1B009D073D /* ss-social-regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.ttf"; sourceTree = "<group>"; };
-		FC8285FB1AEEED1B009D073D /* ss-social-regular.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-social-regular.woff"; sourceTree = "<group>"; };
-		FC8285FC1AEEED1B009D073D /* ss-social.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "ss-social.js"; sourceTree = "<group>"; };
-		FC8285FE1AEEED1B009D073D /* documentation.html */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.html; path = documentation.html; sourceTree = "<group>"; };
-		FC8285FF1AEEED1B009D073D /* license.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
-		FC8286001AEEED1B009D073D /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
-		FC8286011AEEED1B009D073D /* ss-standard.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-standard.otf"; sourceTree = "<group>"; };
-		FC8286031AEEED1B009D073D /* ss-standard.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = "ss-standard.css"; sourceTree = "<group>"; };
-		FC8286041AEEED1B009D073D /* ss-standard.eot */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-standard.eot"; sourceTree = "<group>"; };
-		FC8286051AEEED1B009D073D /* ss-standard.js */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.javascript; path = "ss-standard.js"; sourceTree = "<group>"; };
-		FC8286061AEEED1B009D073D /* ss-standard.svg */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "ss-standard.svg"; sourceTree = "<group>"; };
-		FC8286071AEEED1B009D073D /* ss-standard.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-standard.ttf"; sourceTree = "<group>"; };
-		FC8286081AEEED1B009D073D /* ss-standard.woff */ = {isa = PBXFileReference; lastKnownFileType = file; path = "ss-standard.woff"; sourceTree = "<group>"; };
 		FC842A5F1BF552E400054AAD /* down-arrow-64.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "down-arrow-64.png"; sourceTree = "<group>"; };
 		FC89D5D21B6029B400D8D310 /* iAd.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = iAd.framework; path = System/Library/Frameworks/iAd.framework; sourceTree = SDKROOT; };
 		FC89D5D41B6029B900D8D310 /* AdSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AdSupport.framework; path = System/Library/Frameworks/AdSupport.framework; sourceTree = SDKROOT; };
@@ -919,6 +898,24 @@
 		FC9EED131C1F8B680071828D /* plusgray100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = plusgray100.png; sourceTree = "<group>"; };
 		FCA1C8C11AF1973E004715F1 /* icon-square-user.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "icon-square-user.png"; sourceTree = "<group>"; };
 		FCA28AAC1C57F10500E9A521 /* Checkmark Filled-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Checkmark Filled-50.png"; sourceTree = "<group>"; };
+		FCA652CD1C5C42B600B8E11E /* amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = amex.png; sourceTree = "<group>"; };
+		FCA652CE1C5C42B600B8E11E /* amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "amex@2x.png"; sourceTree = "<group>"; };
+		FCA652CF1C5C42B600B8E11E /* cvc-amex.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cvc-amex.png"; sourceTree = "<group>"; };
+		FCA652D01C5C42B600B8E11E /* cvc-amex@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cvc-amex@2x.png"; sourceTree = "<group>"; };
+		FCA652D11C5C42B600B8E11E /* cvc.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cvc.png; sourceTree = "<group>"; };
+		FCA652D21C5C42B600B8E11E /* cvc@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "cvc@2x.png"; sourceTree = "<group>"; };
+		FCA652D31C5C42B600B8E11E /* diners.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = diners.png; sourceTree = "<group>"; };
+		FCA652D41C5C42B600B8E11E /* diners@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "diners@2x.png"; sourceTree = "<group>"; };
+		FCA652D51C5C42B600B8E11E /* discover.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = discover.png; sourceTree = "<group>"; };
+		FCA652D61C5C42B600B8E11E /* discover@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "discover@2x.png"; sourceTree = "<group>"; };
+		FCA652D71C5C42B600B8E11E /* jcb.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = jcb.png; sourceTree = "<group>"; };
+		FCA652D81C5C42B600B8E11E /* jcb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jcb@2x.png"; sourceTree = "<group>"; };
+		FCA652D91C5C42B600B8E11E /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mastercard.png; sourceTree = "<group>"; };
+		FCA652DA1C5C42B600B8E11E /* mastercard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mastercard@2x.png"; sourceTree = "<group>"; };
+		FCA652DB1C5C42B600B8E11E /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
+		FCA652DC1C5C42B600B8E11E /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
+		FCA652DD1C5C42B600B8E11E /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visa.png; sourceTree = "<group>"; };
+		FCA652DE1C5C42B600B8E11E /* visa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "visa@2x.png"; sourceTree = "<group>"; };
 		FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UpFilled-100.png"; path = "../UpFilled-100.png"; sourceTree = "<group>"; };
 		FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar-50.png"; sourceTree = "<group>"; };
 		FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardInfoViewController.h; sourceTree = "<group>"; };
@@ -1347,6 +1344,7 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FCA652CC1C5C42B600B8E11E /* Cards */,
 				FCA28AAC1C57F10500E9A521 /* Checkmark Filled-50.png */,
 				FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */,
 				FC1372421C47044700C9B251 /* dropdownarrow-64.png */,
@@ -1369,7 +1367,6 @@
 				FCE036DE1BEAB06800F7605B /* location-64.png */,
 				FC2F06A41BE81F64007B6A82 /* in-transit-64.png */,
 				FC7291291BA8BD6B00BCBDE7 /* pencil-bento.png */,
-				FC82867B1AEEF3D2009D073D /* Settings Icons */,
 				FC8DB72D1AF18674003045A3 /* Images */,
 				FCDF22031ADC3ADF006B2750 /* Squared Icons */,
 				7209E0831A77715000D18D7A /* Launch */,
@@ -1774,167 +1771,6 @@
 			name = Orders;
 			sourceTree = "<group>";
 		};
-		FC8285C41AEEED1B009D073D /* Icons */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285C51AEEED1B009D073D /* Symbolset Air */,
-				FC8285D11AEEED1B009D073D /* Symbolset Social */,
-				FC8285FD1AEEED1B009D073D /* Symbolset Standard */,
-			);
-			name = Icons;
-			path = ../Icons;
-			sourceTree = "<group>";
-		};
-		FC8285C51AEEED1B009D073D /* Symbolset Air */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285C61AEEED1B009D073D /* documentation.html */,
-				FC8285C71AEEED1B009D073D /* license.txt */,
-				FC8285C81AEEED1B009D073D /* readme.txt */,
-				FC8285C91AEEED1B009D073D /* ss-air.otf */,
-				FC8285CA1AEEED1B009D073D /* webfonts */,
-			);
-			path = "Symbolset Air";
-			sourceTree = "<group>";
-		};
-		FC8285CA1AEEED1B009D073D /* webfonts */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285CB1AEEED1B009D073D /* ss-air.css */,
-				FC8285CC1AEEED1B009D073D /* ss-air.eot */,
-				FC8285CD1AEEED1B009D073D /* ss-air.js */,
-				FC8285CE1AEEED1B009D073D /* ss-air.svg */,
-				FC8285CF1AEEED1B009D073D /* ss-air.ttf */,
-				FC8285D01AEEED1B009D073D /* ss-air.woff */,
-			);
-			path = webfonts;
-			sourceTree = "<group>";
-		};
-		FC8285D11AEEED1B009D073D /* Symbolset Social */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285D21AEEED1B009D073D /* Original */,
-				FC8285F11AEEED1B009D073D /* Updated */,
-			);
-			path = "Symbolset Social";
-			sourceTree = "<group>";
-		};
-		FC8285D21AEEED1B009D073D /* Original */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285D31AEEED1B009D073D /* documentation.html */,
-				FC8285D41AEEED1B009D073D /* license.txt */,
-				FC8285D51AEEED1B009D073D /* Old */,
-				FC8285E71AEEED1B009D073D /* Old.zip */,
-				FC8285E81AEEED1B009D073D /* readme.txt */,
-				FC8285E91AEEED1B009D073D /* ss-social-regular.otf */,
-				FC8285EA1AEEED1B009D073D /* webfonts */,
-			);
-			path = Original;
-			sourceTree = "<group>";
-		};
-		FC8285D51AEEED1B009D073D /* Old */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285D61AEEED1B009D073D /* documentation.html */,
-				FC8285D71AEEED1B009D073D /* license.txt */,
-				FC8285D81AEEED1B009D073D /* readme.txt */,
-				FC8285D91AEEED1B009D073D /* ss-social-circle.otf */,
-				FC8285DA1AEEED1B009D073D /* ss-social-regular.otf */,
-				FC8285DB1AEEED1B009D073D /* ss-social.zip */,
-				FC8285DC1AEEED1B009D073D /* webfonts */,
-			);
-			path = Old;
-			sourceTree = "<group>";
-		};
-		FC8285DC1AEEED1B009D073D /* webfonts */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285DD1AEEED1B009D073D /* ss-social-circle.eot */,
-				FC8285DE1AEEED1B009D073D /* ss-social-circle.svg */,
-				FC8285DF1AEEED1B009D073D /* ss-social-circle.ttf */,
-				FC8285E01AEEED1B009D073D /* ss-social-circle.woff */,
-				FC8285E11AEEED1B009D073D /* ss-social-regular.eot */,
-				FC8285E21AEEED1B009D073D /* ss-social-regular.svg */,
-				FC8285E31AEEED1B009D073D /* ss-social-regular.ttf */,
-				FC8285E41AEEED1B009D073D /* ss-social-regular.woff */,
-				FC8285E51AEEED1B009D073D /* ss-social.css */,
-				FC8285E61AEEED1B009D073D /* ss-social.js */,
-			);
-			path = webfonts;
-			sourceTree = "<group>";
-		};
-		FC8285EA1AEEED1B009D073D /* webfonts */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285EB1AEEED1B009D073D /* ss-social-regular.css */,
-				FC8285EC1AEEED1B009D073D /* ss-social-regular.eot */,
-				FC8285ED1AEEED1B009D073D /* ss-social-regular.svg */,
-				FC8285EE1AEEED1B009D073D /* ss-social-regular.ttf */,
-				FC8285EF1AEEED1B009D073D /* ss-social-regular.woff */,
-				FC8285F01AEEED1B009D073D /* ss-social.js */,
-			);
-			path = webfonts;
-			sourceTree = "<group>";
-		};
-		FC8285F11AEEED1B009D073D /* Updated */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285F21AEEED1B009D073D /* documentation.html */,
-				FC8285F31AEEED1B009D073D /* license.txt */,
-				FC8285F41AEEED1B009D073D /* readme.txt */,
-				FC8285F51AEEED1B009D073D /* ss-social-regular.otf */,
-				FC8285F61AEEED1B009D073D /* webfonts */,
-			);
-			path = Updated;
-			sourceTree = "<group>";
-		};
-		FC8285F61AEEED1B009D073D /* webfonts */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285F71AEEED1B009D073D /* ss-social-regular.css */,
-				FC8285F81AEEED1B009D073D /* ss-social-regular.eot */,
-				FC8285F91AEEED1B009D073D /* ss-social-regular.svg */,
-				FC8285FA1AEEED1B009D073D /* ss-social-regular.ttf */,
-				FC8285FB1AEEED1B009D073D /* ss-social-regular.woff */,
-				FC8285FC1AEEED1B009D073D /* ss-social.js */,
-			);
-			path = webfonts;
-			sourceTree = "<group>";
-		};
-		FC8285FD1AEEED1B009D073D /* Symbolset Standard */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285FE1AEEED1B009D073D /* documentation.html */,
-				FC8285FF1AEEED1B009D073D /* license.txt */,
-				FC8286001AEEED1B009D073D /* readme.txt */,
-				FC8286011AEEED1B009D073D /* ss-standard.otf */,
-				FC8286021AEEED1B009D073D /* webfonts */,
-			);
-			path = "Symbolset Standard";
-			sourceTree = "<group>";
-		};
-		FC8286021AEEED1B009D073D /* webfonts */ = {
-			isa = PBXGroup;
-			children = (
-				FC8286031AEEED1B009D073D /* ss-standard.css */,
-				FC8286041AEEED1B009D073D /* ss-standard.eot */,
-				FC8286051AEEED1B009D073D /* ss-standard.js */,
-				FC8286061AEEED1B009D073D /* ss-standard.svg */,
-				FC8286071AEEED1B009D073D /* ss-standard.ttf */,
-				FC8286081AEEED1B009D073D /* ss-standard.woff */,
-			);
-			path = webfonts;
-			sourceTree = "<group>";
-		};
-		FC82867B1AEEF3D2009D073D /* Settings Icons */ = {
-			isa = PBXGroup;
-			children = (
-				FC8285C41AEEED1B009D073D /* Icons */,
-			);
-			path = "Settings Icons";
-			sourceTree = "<group>";
-		};
 		FC8DB72D1AF18674003045A3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
@@ -2000,6 +1836,31 @@
 				FC9E81EB1BACE4250099DBF5 /* WebSocket.swift */,
 			);
 			path = SocketIOClientSwift;
+			sourceTree = "<group>";
+		};
+		FCA652CC1C5C42B600B8E11E /* Cards */ = {
+			isa = PBXGroup;
+			children = (
+				FCA652CD1C5C42B600B8E11E /* amex.png */,
+				FCA652CE1C5C42B600B8E11E /* amex@2x.png */,
+				FCA652CF1C5C42B600B8E11E /* cvc-amex.png */,
+				FCA652D01C5C42B600B8E11E /* cvc-amex@2x.png */,
+				FCA652D11C5C42B600B8E11E /* cvc.png */,
+				FCA652D21C5C42B600B8E11E /* cvc@2x.png */,
+				FCA652D31C5C42B600B8E11E /* diners.png */,
+				FCA652D41C5C42B600B8E11E /* diners@2x.png */,
+				FCA652D51C5C42B600B8E11E /* discover.png */,
+				FCA652D61C5C42B600B8E11E /* discover@2x.png */,
+				FCA652D71C5C42B600B8E11E /* jcb.png */,
+				FCA652D81C5C42B600B8E11E /* jcb@2x.png */,
+				FCA652D91C5C42B600B8E11E /* mastercard.png */,
+				FCA652DA1C5C42B600B8E11E /* mastercard@2x.png */,
+				FCA652DB1C5C42B600B8E11E /* placeholder.png */,
+				FCA652DC1C5C42B600B8E11E /* placeholder@2x.png */,
+				FCA652DD1C5C42B600B8E11E /* visa.png */,
+				FCA652DE1C5C42B600B8E11E /* visa@2x.png */,
+			);
+			path = Cards;
 			sourceTree = "<group>";
 		};
 		FCC529C91B8FA38700B49F34 /* Extensions */ = {
@@ -2320,10 +2181,12 @@
 				7216B7861AA64C7C0006FFE9 /* register_icon_facebook.png in Resources */,
 				7216B7871AA64C7C0006FFE9 /* register_icon_username.png in Resources */,
 				7216B7881AA64C7C0006FFE9 /* logo_title.png in Resources */,
+				FCA652E61C5C42B600B8E11E /* cvc-amex@2x.png in Resources */,
 				FC1D61581BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */,
 				7216B7891AA64C7C0006FFE9 /* mybento_image_bottom.png in Resources */,
 				FCDF22171ADC3ADF006B2750 /* Icon-60.png in Resources */,
 				FC1D615B1BBA0C0B0012FFB3 /* FacebookSDK-4_6-for-iOS.docset in Resources */,
+				FCA652F01C5C42B600B8E11E /* discover.png in Resources */,
 				FC1D61611BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */,
 				FCB35C311BFE624700A590EC /* drop-shadow.png in Resources */,
 				7216B78A1AA64C7C0006FFE9 /* mybento_nav_cart_act@2x.png in Resources */,
@@ -2347,24 +2210,31 @@
 				FCB35C431BFE6A3600A590EC /* Chocolate.png in Resources */,
 				7216B7961AA64C7C0006FFE9 /* DishCollectionViewCell.xib in Resources */,
 				FCB35C501BFE7B0300A590EC /* Collapse Arrow-64.png in Resources */,
+				FCA652E41C5C42B600B8E11E /* cvc-amex.png in Resources */,
 				7216B7971AA64C7C0006FFE9 /* orderconfirm_image_countpanel.png in Resources */,
 				FCDF22191ADC3ADF006B2750 /* Icon-60@2x.png in Resources */,
 				7216B7991AA64C7C0006FFE9 /* OpenSans-Light.ttf in Resources */,
 				FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */,
+				FCA652F81C5C42B600B8E11E /* mastercard.png in Resources */,
 				FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */,
 				FCDF222F1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				FCF872231BFFD12B0091A206 /* plus-green-100.png in Resources */,
+				FCA652FC1C5C42B600B8E11E /* placeholder.png in Resources */,
 				FC9EED171C1F8B680071828D /* plusgray100.png in Resources */,
 				7216B79A1AA64C7C0006FFE9 /* banner_sold_out.png in Resources */,
 				7216B79B1AA64C7C0006FFE9 /* register_icon_username_err.png in Resources */,
 				FCDF22271ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				FC8DB74B1AF18674003045A3 /* icon-user.png in Resources */,
 				FC7EACB61B8D0C2700B15FC8 /* empty-side.png in Resources */,
+				FCA652EC1C5C42B600B8E11E /* diners.png in Resources */,
 				7216B79C1AA64C7C0006FFE9 /* first_background.png in Resources */,
+				FCA652E21C5C42B600B8E11E /* amex@2x.png in Resources */,
+				FCA652F41C5C42B600B8E11E /* jcb.png in Resources */,
 				7216B79D1AA64C7C0006FFE9 /* orderconfirm_image_car.png in Resources */,
 				FC1D61551BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */,
 				FC7EACB31B8D0C2700B15FC8 /* empty-main.png in Resources */,
 				FC72912B1BA8BD6B00BCBDE7 /* pencil-bento.png in Resources */,
+				FCA652EE1C5C42B600B8E11E /* diners@2x.png in Resources */,
 				FCE1E5131C4737AF00A210DC /* FiveHomeViewController.xib in Resources */,
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
 				FCB35C521BFE7B0300A590EC /* Expand Arrow-64.png in Resources */,
@@ -2383,15 +2253,24 @@
 				7216B7A41AA64C7C0006FFE9 /* completeorder_cell_btn_minute@2x.png in Resources */,
 				7216B7A51AA64C7C0006FFE9 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				7216B7A61AA64C7C0006FFE9 /* OpenSans-Regular.ttf in Resources */,
+				FCA653001C5C42B600B8E11E /* visa.png in Resources */,
 				FCDF22291ADC3ADF006B2750 /* Icon-Small-40@3x.png in Resources */,
 				FCDF22331ADC3ADF006B2750 /* Icon-Small@3x.png in Resources */,
 				7216B7A71AA64C7C0006FFE9 /* OpenSans-BoldItalic.ttf in Resources */,
 				7216B7A81AA64C7C0006FFE9 /* OpenSans-LightItalic.ttf in Resources */,
+				FCA652E81C5C42B600B8E11E /* cvc.png in Resources */,
 				FCB35C4A1BFE74EC00A590EC /* Plus Math-64.png in Resources */,
+				FCA652F61C5C42B600B8E11E /* jcb@2x.png in Resources */,
 				7216B7A91AA64C7C0006FFE9 /* orderconfirm_image_plus@2x.png in Resources */,
+				FCA652EA1C5C42B600B8E11E /* cvc@2x.png in Resources */,
 				7216B7AA1AA64C7C0006FFE9 /* register_image_or.png in Resources */,
+				FCA652FE1C5C42B600B8E11E /* placeholder@2x.png in Resources */,
 				FCB35C401BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
+				FCA652FA1C5C42B600B8E11E /* mastercard@2x.png in Resources */,
+				FCA652E01C5C42B600B8E11E /* amex.png in Resources */,
 				FC7291271BA8BC9F00BCBDE7 /* EditPhoneNumberView.xib in Resources */,
+				FCA652F21C5C42B600B8E11E /* discover@2x.png in Resources */,
+				FCA653021C5C42B600B8E11E /* visa@2x.png in Resources */,
 				7216B7AB1AA64C7C0006FFE9 /* Images.xcassets in Resources */,
 				7216B7AC1AA64C7C0006FFE9 /* register_icon_email.png in Resources */,
 				FCF5E0A31B8BDC28002E823C /* placeholder.png in Resources */,
@@ -2457,10 +2336,12 @@
 				90BED0E31A5C1E70003DC872 /* nav_btn_back@2x.png in Resources */,
 				FCDF221E1ADC3ADF006B2750 /* Icon-72@2x.png in Resources */,
 				90D8F7B11A5D84B800D034CF /* register_icon_facebook.png in Resources */,
+				FCA652E51C5C42B600B8E11E /* cvc-amex@2x.png in Resources */,
 				90D8F7B41A5D84B800D034CF /* register_icon_username.png in Resources */,
 				90D8F7E51A5E39A500D034CF /* logo_title.png in Resources */,
 				90D8F7A61A5D7F7100D034CF /* mybento_image_bottom.png in Resources */,
 				FCDF22161ADC3ADF006B2750 /* Icon-60.png in Resources */,
+				FCA652EF1C5C42B600B8E11E /* discover.png in Resources */,
 				90BED0DF1A5C04DE003DC872 /* mybento_nav_cart_act@2x.png in Resources */,
 				FCB35C301BFE624700A590EC /* drop-shadow.png in Resources */,
 				90359C251A5EC49700AAD5D2 /* orderconfirm_image_minute@2x.png in Resources */,
@@ -2484,24 +2365,31 @@
 				FCB35C421BFE6A3600A590EC /* Chocolate.png in Resources */,
 				90BED0EC1A5C3346003DC872 /* DishCollectionViewCell.xib in Resources */,
 				FCB35C4F1BFE7B0300A590EC /* Collapse Arrow-64.png in Resources */,
+				FCA652E31C5C42B600B8E11E /* cvc-amex.png in Resources */,
 				90359C231A5EC49700AAD5D2 /* orderconfirm_image_countpanel.png in Resources */,
 				FCDF22181ADC3ADF006B2750 /* Icon-60@2x.png in Resources */,
 				90BED0C61A5BE72F003DC872 /* OpenSans-Light.ttf in Resources */,
 				FCDF22381ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */,
+				FCA652F71C5C42B600B8E11E /* mastercard.png in Resources */,
 				FCDF22361ADC3ADF006B2750 /* Icon@2x.png in Resources */,
 				FCDF222E1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				FCF872221BFFD12B0091A206 /* plus-green-100.png in Resources */,
+				FCA652FB1C5C42B600B8E11E /* placeholder.png in Resources */,
 				FC9EED161C1F8B680071828D /* plusgray100.png in Resources */,
 				722333E11A6FF9C5006C2446 /* banner_sold_out.png in Resources */,
 				90D8F7C71A5E126C00D034CF /* register_icon_username_err.png in Resources */,
 				FCDF22261ADC3ADF006B2750 /* Icon-Small-40@2x.png in Resources */,
 				FC8DB74A1AF18674003045A3 /* icon-user.png in Resources */,
 				FC7EACB51B8D0C2700B15FC8 /* empty-side.png in Resources */,
+				FCA652EB1C5C42B600B8E11E /* diners.png in Resources */,
 				FC1D615D1BBA0C0B0012FFB3 /* install_docsets.sh in Resources */,
+				FCA652E11C5C42B600B8E11E /* amex@2x.png in Resources */,
+				FCA652F31C5C42B600B8E11E /* jcb.png in Resources */,
 				90BED0B11A5BE22E003DC872 /* first_background.png in Resources */,
 				90D8F7EA1A5E448900D034CF /* orderconfirm_image_car.png in Resources */,
 				FC7EACB21B8D0C2700B15FC8 /* empty-main.png in Resources */,
 				FC94E3411BB3529500E2104E /* Settings.bundle in Resources */,
+				FCA652ED1C5C42B600B8E11E /* diners@2x.png in Resources */,
 				FCE1E5121C4737AF00A210DC /* FiveHomeViewController.xib in Resources */,
 				90D8F7B31A5D84B800D034CF /* register_icon_phone.png in Resources */,
 				FCB35C511BFE7B0300A590EC /* Expand Arrow-64.png in Resources */,
@@ -2520,15 +2408,24 @@
 				47C5B0181A8B82BD008FA7DA /* completeorder_cell_btn_minute@2x.png in Resources */,
 				90BED0C41A5BE72F003DC872 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
 				90BED0C81A5BE72F003DC872 /* OpenSans-Regular.ttf in Resources */,
+				FCA652FF1C5C42B600B8E11E /* visa.png in Resources */,
 				FCDF22281ADC3ADF006B2750 /* Icon-Small-40@3x.png in Resources */,
 				FCDF22321ADC3ADF006B2750 /* Icon-Small@3x.png in Resources */,
 				90BED0C21A5BE72F003DC872 /* OpenSans-BoldItalic.ttf in Resources */,
 				90BED0C71A5BE72F003DC872 /* OpenSans-LightItalic.ttf in Resources */,
+				FCA652E71C5C42B600B8E11E /* cvc.png in Resources */,
 				FCB35C491BFE74EC00A590EC /* Plus Math-64.png in Resources */,
+				FCA652F51C5C42B600B8E11E /* jcb@2x.png in Resources */,
 				90359C261A5EC49700AAD5D2 /* orderconfirm_image_plus@2x.png in Resources */,
+				FCA652E91C5C42B600B8E11E /* cvc@2x.png in Resources */,
 				90D8F7B51A5D84B800D034CF /* register_image_or.png in Resources */,
+				FCA652FD1C5C42B600B8E11E /* placeholder@2x.png in Resources */,
 				FCB35C3F1BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
+				FCA652F91C5C42B600B8E11E /* mastercard@2x.png in Resources */,
+				FCA652DF1C5C42B600B8E11E /* amex.png in Resources */,
 				90BED07F1A5BCC04003DC872 /* Images.xcassets in Resources */,
+				FCA652F11C5C42B600B8E11E /* discover@2x.png in Resources */,
+				FCA653011C5C42B600B8E11E /* visa@2x.png in Resources */,
 				90D8F7B01A5D84B800D034CF /* register_icon_email.png in Resources */,
 				FCF5E0A21B8BDC28002E823C /* placeholder.png in Resources */,
 				90BED0E11A5C04DE003DC872 /* mybento_nav_help@2x.png in Resources */,
