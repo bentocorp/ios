@@ -741,27 +741,27 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     {
         // check if lunch exists
         if ([self isThereLunchMenu])
-            menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
+            menuInfo = self.menuToday[@"lunch"][@"Menu"];
         
         // if no lunch, get dinner
         else if ([self isThereDinnerMenu])
-            menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
+            menuInfo = self.menuToday[@"dinner"][@"Menu"];
     }
     
     // if not all_day
     else
     {
         // 12:00am - dinner opening (ie. 16.5) && lunch menu exists
-        if (currentTime >= 0 && currentTime < dinnerTime && [defaults objectForKey:@"lunchMenuInfo"] != nil)
-            menuInfo = [defaults objectForKey:@"lunchMenuInfo"];
+        if (currentTime >= 0 && currentTime < dinnerTime && self.menuToday[@"lunch"][@"Menu"] != nil)
+            menuInfo = self.menuToday[@"lunch"][@"Menu"];
         
         // if no lunch menu, SHOW DINNER
         else
-            menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
+            menuInfo = self.menuToday[@"dinner"][@"Menu"];
             
         // dinner opening - 11:59pm && dinner menu exists
-        if (currentTime >= dinnerTime && currentTime < 24 && [defaults objectForKey:@"dinnerMenuInfo"] != nil)
-            menuInfo = [defaults objectForKey:@"dinnerMenuInfo"];
+        if (currentTime >= dinnerTime && currentTime < 24 && self.menuToday[@"dinner"][@"Menu"] != nil)
+            menuInfo = self.menuToday[@"dinner"][@"Menu"];
     }
     
     if (menuInfo == nil)
@@ -1021,10 +1021,10 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     NSDictionary *menuInfo;
     
     // doesn't matter lunch or dinner, just used to get next date
-    if ([defaults objectForKey:@"nextLunchMenuInfo"] != nil) // if no lunch, get dinner info
-        menuInfo = [defaults objectForKey:@"nextLunchMenuInfo"];
+    if (self.menuNext[@"lunch"][@"Menu"] != nil) // if no lunch, get dinner info
+        menuInfo = self.menuNext[@"lunch"][@"Menu"];
     else
-        menuInfo = [defaults objectForKey:@"nextDinnerMenuInfo"];
+        menuInfo = self.menuNext[@"dinner"][@"Menu"];
     
     NSString *strDate = menuInfo[@"for_date"];
     NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
@@ -1039,7 +1039,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 
 - (BOOL)isThereLunchMenu
 {
-    if ([defaults objectForKey:@"lunchMenuInfo"] != nil)
+    if (self.menuToday[@"lunch"][@"Menu"] != nil)
         return YES;
     else
         return NO;
@@ -1047,7 +1047,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 
 - (BOOL)isThereDinnerMenu
 {
-    if ([defaults objectForKey:@"dinnerMenuInfo"] != nil)
+    if (self.menuToday[@"dinner"][@"Menu"] != nil)
         return YES;
     else
         return NO;
@@ -1055,7 +1055,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 
 - (BOOL)isThereLunchNextMenu
 {
-    if ([defaults objectForKey:@"nextLunchMenuInfo"] != nil)
+    if (self.menuNext[@"lunch"][@"Menu"] != nil)
         return YES;
     else
         return NO;
@@ -1063,7 +1063,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 
 - (BOOL)isThereDinnerNextMenu
 {
-    if ([defaults objectForKey:@"nextDinnerMenuInfo"] != nil)
+    if (self.menuNext[@"dinner"][@"Menu"] != nil)
         return YES;
     else
         return NO;
