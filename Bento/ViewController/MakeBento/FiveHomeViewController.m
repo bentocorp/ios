@@ -106,6 +106,10 @@ static OrderAheadMenu *orderAheadMenu;
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    if ([self isCartEmpty] == NO) {
+        [self clearCart];
+    }
+    
     // Observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
@@ -158,6 +162,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.doneButtonWidthConstraint.constant = SCREEN_WIDTH;
     
     self.doneButton.hidden = YES;
+    self.doneButtonHeightConstraint.constant = 0;
     
     self.onDemandCheckMarkImageView.hidden = YES;
     self.orderAheadCheckMarkImageView.hidden = YES;
@@ -170,6 +175,11 @@ static OrderAheadMenu *orderAheadMenu;
     self.orderAheadTitleLabel.adjustsFontSizeToFitWidth = YES;
     
     [self.pickerButton setTitleColor:[UIColor bentoTitleGray] forState:UIControlStateNormal];
+    
+    self.startingPriceLabel.hidden = YES;
+    self.etaLabel.hidden = YES;
+    self.etaBannerDivider.hidden = YES;
+    self.previewLabel.hidden = YES;
     
     [self removeOrderAhead];
     [self removeOnDemand];
@@ -222,6 +232,7 @@ static OrderAheadMenu *orderAheadMenu;
             
             [self.doneButton setTitle:[[[AppStrings sharedInstance] getString:DONE_BUTTON_TEXT] uppercaseString] forState:UIControlStateNormal];
             self.doneButton.hidden = NO;
+            self.doneButtonHeightConstraint.constant = 45;
             
             [self refreshStateOnLaunch];
             

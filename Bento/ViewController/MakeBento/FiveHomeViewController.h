@@ -50,6 +50,7 @@ typedef NS_ENUM(NSUInteger) {
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *orderAheadViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *orderAheadPickerContainerViewHeightConstraint;
 @property (weak, nonatomic) IBOutlet NSLayoutConstraint *doneButtonWidthConstraint;
+@property (weak, nonatomic) IBOutlet NSLayoutConstraint *doneButtonHeightConstraint;
 
 @property (weak, nonatomic) IBOutlet UIButton *enabledOnDemandButton;
 @property (weak, nonatomic) IBOutlet UIButton *enabledOrderAheadButton;
