@@ -560,7 +560,7 @@
     else if ([strCardType isEqualToString:@"visa"])
     {
         strImageName = @"visa";
-        strPaymentMethod= strCardNumber;
+        strPaymentMethod = strCardNumber;
     }
     
     self.lblPaymentMethod.text = strPaymentMethod;
@@ -599,35 +599,31 @@
     }
     else if (curPaymentMethod == Payment_CreditCard)
     {
-//        STPCardParams *cardInfo = [[DataManager shareDataManager] getCreditCard];
-//        STPcard cardType = [cardInfo.number cardType];
-//        
-//        switch (cardType) {
-//            case PTKCardTypeAmex:
-//                [self updatePaymentInfo:@"amex" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-//                break;
-//            case PTKCardTypeDinersClub:
-//                [self updatePaymentInfo:@"diners" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-//                break;
-//            case PTKCardTypeDiscover:
-//                [self updatePaymentInfo:@"discover" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-//                break;
-//            case PTKCardTypeJCB:
-//                [self updatePaymentInfo:@"jcb" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-//                break;
-//            case PTKCardTypeMasterCard:
-//                [self updatePaymentInfo:@"mastercard" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-//                break;
-//            case PTKCardTypeVisa:
-//                [self updatePaymentInfo:@"visa" cardNumber:cardNumber.last4 paymentMethod:curPaymentMethod];
-//                break;
-//            default:
-//                [self updatePaymentInfo:@"" cardNumber:@"" paymentMethod:curPaymentMethod];
-//                break;
-//        }
+        STPCardParams *cardInfo = [[DataManager shareDataManager] getCreditCard];
         
-//        NSLog(@"card number - %@", cardInfo.last4);
-        
+        switch ([STPCardValidator brandForNumber:cardInfo.number]) {
+            case STPCardBrandAmex:
+                [self updatePaymentInfo:@"amex" cardNumber:cardInfo.last4 paymentMethod:curPaymentMethod];
+                break;
+            case STPCardBrandDinersClub:
+                [self updatePaymentInfo:@"diners" cardNumber:cardInfo.last4 paymentMethod:curPaymentMethod];
+                break;
+            case STPCardBrandDiscover:
+                [self updatePaymentInfo:@"discover" cardNumber:cardInfo.last4 paymentMethod:curPaymentMethod];
+                break;
+            case STPCardBrandJCB:
+                [self updatePaymentInfo:@"jcb" cardNumber:cardInfo.last4 paymentMethod:curPaymentMethod];
+                break;
+            case STPCardBrandMasterCard:
+                [self updatePaymentInfo:@"mastercard" cardNumber:cardInfo.last4 paymentMethod:curPaymentMethod];
+                break;
+            case STPCardBrandVisa:
+                [self updatePaymentInfo:@"visa" cardNumber:cardInfo.last4 paymentMethod:curPaymentMethod];
+                break;
+            default:
+                [self updatePaymentInfo:@"" cardNumber:@"" paymentMethod:curPaymentMethod];
+                break;
+        }
     }
     else if (curPaymentMethod == Payment_None)
     {

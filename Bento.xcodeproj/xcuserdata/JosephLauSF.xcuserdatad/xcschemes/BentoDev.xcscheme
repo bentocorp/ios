@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2A6A7DFA9E9EFAC6C59C7E3BAE92A277"
+               BlueprintIdentifier = "9A8FE3C1C7B198209BBAC449E55CC044"
                BuildableName = "libAdjust.a"
                BlueprintName = "Adjust"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -28,7 +28,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C544EEB7D00128D58696AE2BBF23513E"
+               BlueprintIdentifier = "857958C09C781F356955867F64F1B71F"
                BuildableName = "libBranch.a"
                BlueprintName = "Branch"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -42,7 +42,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "44563471FEC2BC682AC554560C5A542B"
+               BlueprintIdentifier = "4FA17CF11B30E7585183B6685A713C3A"
                BuildableName = "libCanvas.a"
                BlueprintName = "Canvas"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -56,7 +56,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "E81C3F75A8C27C377B24F35158870800"
+               BlueprintIdentifier = "9604EF1D529B09D3E8A065AC90212420"
                BuildableName = "libFCUUID.a"
                BlueprintName = "FCUUID"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -70,7 +70,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "FC29F27B1E7935F2E065C2F9E84FDB53"
+               BlueprintIdentifier = "FA6F3F12F794D91ADBF5E028DB8895EC"
                BuildableName = "libFDKeychain.a"
                BlueprintName = "FDKeychain"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -112,7 +112,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "79F489E9EB8AB16B0618FAC380553265"
+               BlueprintIdentifier = "EA277E8AB5D17DADAA590D8DD15F9856"
                BuildableName = "libMixpanel.a"
                BlueprintName = "Mixpanel"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -126,7 +126,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "44372B5E7BEB5D7F9211FB4DDD781579"
+               BlueprintIdentifier = "84C8D5E7C8072249F7671ACC97BAF031"
                BuildableName = "libPaymentKit.a"
                BlueprintName = "PaymentKit"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">
@@ -168,7 +168,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "C254079D13477A4D17A8DF19BD7E9234"
+               BlueprintIdentifier = "72B995EAE5445F1035CF24C39E5FB856"
                BuildableName = "libSDWebImage.a"
                BlueprintName = "SDWebImage"
                ReferencedContainer = "container:Pods/Pods.xcodeproj">

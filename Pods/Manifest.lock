@@ -25,6 +25,7 @@ PODS:
   - Mixpanel (2.9.1):
     - Mixpanel/Mixpanel (= 2.9.1)
   - Mixpanel/Mixpanel (2.9.1)
+  - PaymentKit (1.2)
   - PureLayout (3.0.1)
   - SDWebImage (3.7.5):
     - SDWebImage/Core (= 3.7.5)
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - FCUUID
   - FDKeychain
   - Mixpanel
+  - PaymentKit
   - PureLayout
   - SIOSocket (~> 0.2.0)
   - Stripe
@@ -58,6 +60,7 @@ SPEC CHECKSUMS:
   FCUUID: a9108673d64a4585a4bb89ea5d4c69b002edadb3
   FDKeychain: ce0d5e4fac972c28e921e893ffe982832695d17b
   Mixpanel: 5ca24b2a05f4c77fe9bcfe7671d681d0f3f8d76f
+  PaymentKit: 9bf248ab9a7343ccc65523890428e23678d1bde9
   PureLayout: f35f5384c9c4e4479df041dbe33ad7577b71ddfb
   SDWebImage: 69c6303e3348fba97e03f65d65d4fbc26740f461
   SIOSocket: 2facc0bd02ae72d98c223634a46dd8ebdf9be321

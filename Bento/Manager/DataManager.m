@@ -22,7 +22,7 @@
 @interface DataManager ()
 
 @property (nonatomic) NSDictionary *currentUserInfo;
-@property (nonatomic) STPCard *creditCardInfo;
+@property (nonatomic) STPCardParams *creditCardInfo;
 @property (nonatomic) PaymentMethod curPaymentMethod;
 
 @end
@@ -160,12 +160,12 @@ static DataManager *_shareDataManager;
     return [[self.currentUserInfo objectForKey:@"is_admin"] boolValue];
 }
 
-- (STPCard *)getCreditCard
+- (STPCardParams *)getCreditCard
 {
     return self.creditCardInfo;
 }
 
-- (void)setCreditCard:(STPCard *)creditCardInfo
+- (void)setCreditCard:(STPCardParams *)creditCardInfo
 {
     self.creditCardInfo = creditCardInfo;
     

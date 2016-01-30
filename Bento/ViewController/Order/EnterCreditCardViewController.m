@@ -39,6 +39,7 @@
 @implementation EnterCreditCardViewController
 {
     STPCardParams *creditCard;
+    UIImage *cardBrandImage;
     JGProgressHUD *loadingHUD;
 }
 
@@ -184,12 +185,14 @@
 
 - (void)paymentCardTextFieldDidChange:(STPPaymentCardTextField *)textField {
     if (textField.isValid) {
-        STPCardParams *card = [[STPCard alloc] init];
-        card.number = textField.cardNumber;
-        card.expMonth = textField.expirationMonth;
-        card.expYear = textField.expirationYear;
-        card.cvc = textField.cvc;
-        creditCard = card;
+        creditCard = textField.cardParams;
+        
+//        STPCard *card = [[STPCard alloc] init];
+//        card.number = textField.cardNumber;
+//        card.expMonth = textField.expirationMonth;
+//        card.expYear = textField.expirationYear;
+//        card.cvc = textField.cvc;
+//        creditCard = card;
         
         self.btnContinue.enabled = YES;
         [self.btnContinue setBackgroundColor:[UIColor bentoBrandGreen]];

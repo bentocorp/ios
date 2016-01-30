@@ -67,7 +67,7 @@ typedef enum : NSUInteger {
 - (BOOL)isAdminUser;
 
 - (STPCard *)getCreditCard;
-- (void)setCreditCard:(STPCard *)card;
+- (void)setCreditCard:(STPCardParams *)card;
 
 - (PaymentMethod)getPaymentMethod;
 - (void)setPaymentMethod:(PaymentMethod)newPaymentMethod;

@@ -12,6 +12,7 @@ pod 'UIActivityIndicator-for-SDWebImage'
 pod 'FDKeychain'
 pod 'SIOSocket', '~> 0.2.0'
 pod 'AFNetworking'
+pod 'PaymentKit' #this is deprecated in favor of Stripe, but i need it for the card brand image files
 
 #pod 'Mapbox-iOS-SDK'
 ## disable bitcode in every sub-target
