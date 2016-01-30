@@ -19,6 +19,9 @@ PODS:
     - AFNetworking/NSURLSession
   - Branch (0.11.14)
   - Canvas (0.1.2)
+  - Crashlytics (3.6.0):
+    - Fabric (~> 1.6.3)
+  - Fabric (1.6.4)
   - FCUUID (1.1.5):
     - UICKeyChainStore (~> 1.0.5)
   - FDKeychain (1.2.2)
@@ -42,6 +45,8 @@ DEPENDENCIES:
   - AFNetworking
   - Branch
   - Canvas
+  - Crashlytics
+  - Fabric
   - FCUUID
   - FDKeychain
   - Mixpanel
@@ -55,6 +60,8 @@ SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   Branch: 8f76ea498816981768f318f74624250a41620f54
   Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
+  Crashlytics: e4e8d02914f2608fbc7bf42b1a7af838b0db67a2
+  Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750
   FCUUID: a9108673d64a4585a4bb89ea5d4c69b002edadb3
   FDKeychain: ce0d5e4fac972c28e921e893ffe982832695d17b
   Mixpanel: 5ca24b2a05f4c77fe9bcfe7671d681d0f3f8d76f

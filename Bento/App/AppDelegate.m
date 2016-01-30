@@ -22,7 +22,6 @@
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
 
-// Crashlytics, and Twitter conversion tracking
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>
 
@@ -170,7 +169,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 
 /*---------------------------------CRASHLYTICS---------------------------------------*/
     
-    [Fabric with:@[CrashlyticsKit]];
+    [Fabric with:@[[MoPub class], [Crashlytics class], [STPAPIClient class]]];
     
 /*--------------------------------------TWITTER-----------------------------------------*/
     

@@ -23,6 +23,7 @@
 
 #import "CountdownTimer.h"
 #import "AddonList.h"
+#import <Crashlytics/Crashlytics.h>
 
 @interface ChooseMainDishViewController () <DishCollectionViewCellDelegate>
 
@@ -44,6 +45,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [[Crashlytics sharedInstance] crash];
     
     // initialize to YES
     isThereConnection = YES;

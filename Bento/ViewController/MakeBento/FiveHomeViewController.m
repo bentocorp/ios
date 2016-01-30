@@ -57,6 +57,8 @@
 
 #import "OrdersViewController.h"
 
+#import <Crashlytics/Crashlytics.h>
+
 @interface FiveHomeViewController () <CustomViewControllerDelegate, FiveCustomViewControllerDelegate, MyAlertViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource>
 
 @property (nonatomic) CustomViewController *fourCustomVC;
@@ -103,8 +105,18 @@ static OrderAheadMenu *orderAheadMenu;
     BOOL hasAutoToggledOnceOnClosedOrSoldout;
 }
 
+- (void)crashButtonTapped{
+    [[Crashlytics sharedInstance] crash];
+}
+
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
+    button.frame = CGRectMake(20, 50, 100, 30);
+    [button setTitle:@"Crash" forState:UIControlStateNormal];
+    [button addTarget:self action:@selector(crashButtonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:button];
     
     // Observers
     [[NSNotificationCenter defaultCenter] removeObserver:self];
@@ -201,7 +213,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.fourCustomVC.buildButton.hidden = YES;
     self.fourCustomVC.viewAddonsButton.hidden = YES;
     
-    [self performSelector:@selector(beginLoadingData) withObject:nil afterDelay:1];
+    [self performSelector:@selector(beginLoadingData) withObject:nil afterDelay:0.5];
 }
 
 #pragma mark Loading Data

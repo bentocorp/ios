@@ -567,8 +567,6 @@
 		FCEFB76A1BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
 		FCEFB76C1BBCEBF500C3E34D /* MoPub.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */; };
 		FCEFB76D1BBCEBF500C3E34D /* MoPub.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */; };
-		FCF2787C1B26370700130F7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
-		FCF2787D1B264C0100130F7A /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCF2787B1B26370700130F7A /* Crashlytics.framework */; };
 		FCF5E0A21B8BDC28002E823C /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A11B8BDC28002E823C /* placeholder.png */; };
 		FCF5E0A31B8BDC28002E823C /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A11B8BDC28002E823C /* placeholder.png */; };
 		FCF5E0A61B8BE3CF002E823C /* placeholder-gray.JPG in Resources */ = {isa = PBXBuildFile; fileRef = FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */; };
@@ -991,7 +989,6 @@
 		FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderAheadMenu.m; sourceTree = "<group>"; };
 		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
 		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
-		FCF2787B1B26370700130F7A /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Crashlytics.framework; path = ../Crashlytics.framework; sourceTree = "<group>"; };
 		FCF5E0A11B8BDC28002E823C /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../placeholder.png; sourceTree = "<group>"; };
 		FCF5E0A51B8BE3CF002E823C /* placeholder-gray.JPG */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "placeholder-gray.JPG"; sourceTree = "<group>"; };
 		FCF8721E1BFFD12B0091A206 /* minus-green-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "minus-green-100.png"; sourceTree = "<group>"; };
@@ -1008,7 +1005,6 @@
 				FC1D616A1BBA0C0B0012FFB3 /* FBSDKLoginKit.framework in Frameworks */,
 				FC1D616D1BBA0C0B0012FFB3 /* FBSDKMessengerShareKit.framework in Frameworks */,
 				FC1D61671BBA0C0B0012FFB3 /* FBSDKCoreKit.framework in Frameworks */,
-				FCF2787D1B264C0100130F7A /* Crashlytics.framework in Frameworks */,
 				7216B7611AA64C7C0006FFE9 /* CoreLocation.framework in Frameworks */,
 				7216B7621AA64C7C0006FFE9 /* CoreData.framework in Frameworks */,
 				7216B7641AA64C7C0006FFE9 /* ImageIO.framework in Frameworks */,
@@ -1034,7 +1030,6 @@
 				FC89D5D31B6029B400D8D310 /* iAd.framework in Frameworks */,
 				FC1D61691BBA0C0B0012FFB3 /* FBSDKLoginKit.framework in Frameworks */,
 				FCE3B9421B14176300301353 /* SystemConfiguration.framework in Frameworks */,
-				FCF2787C1B26370700130F7A /* Crashlytics.framework in Frameworks */,
 				7209E0821A76BD3500D18D7A /* CoreLocation.framework in Frameworks */,
 				FC1D616F1BBA0C0B0012FFB3 /* FBSDKShareKit.framework in Frameworks */,
 				722333831A6E55B6006C2446 /* CoreData.framework in Frameworks */,
@@ -1385,7 +1380,6 @@
 			children = (
 				FC1D605D1BBA0C0A0012FFB3 /* FacebookSDKs */,
 				FC9E81DB1BACE4250099DBF5 /* SocketIOClientSwift */,
-				FCF2787B1B26370700130F7A /* Crashlytics.framework */,
 				FCEFB7671BBCEBF500C3E34D /* MoPub.framework */,
 				FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */,
 				722333791A6E5387006C2446 /* GoogleMapsSDK */,
@@ -2018,7 +2012,7 @@
 				7216B7601AA64C7C0006FFE9 /* Frameworks */,
 				7216B76F1AA64C7C0006FFE9 /* Resources */,
 				7216B7AF1AA64C7C0006FFE9 /* Copy Pods Resources */,
-				7216B7B01AA64C7C0006FFE9 /* Run Script */,
+				FCA653031C5C4E4500B8E11E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2038,7 +2032,7 @@
 				90BED06B1A5BCC04003DC872 /* Frameworks */,
 				90BED06C1A5BCC04003DC872 /* Resources */,
 				C07A5F3A95D40E43E3B7069A /* Copy Pods Resources */,
-				725BA0321A84ED60005C18D3 /* ShellScript */,
+				FCA653041C5C4F8200B8E11E /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -2477,33 +2471,6 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7216B7B01AA64C7C0006FFE9 /* Run Script */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Script";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "./Fabric.framework/run e416b51207b62057016bf1d61606566656652d9a 94f22fb1715a37a11893e5911e99464e0721aa230defd6059edcf2392a850bbf";
-			shellScript = "";
-		};
-		725BA0321A84ED60005C18D3 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = "./Fabric.framework/run e416b51207b62057016bf1d61606566656652d9a 94f22fb1715a37a11893e5911e99464e0721aa230defd6059edcf2392a850bbf";
-			shellScript = "";
-		};
 		C07A5F3A95D40E43E3B7069A /* Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -2533,6 +2500,32 @@
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
+		};
+		FCA653031C5C4E4500B8E11E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e416b51207b62057016bf1d61606566656652d9a 94f22fb1715a37a11893e5911e99464e0721aa230defd6059edcf2392a850bbf";
+		};
+		FCA653041C5C4F8200B8E11E /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" e416b51207b62057016bf1d61606566656652d9a 94f22fb1715a37a11893e5911e99464e0721aa230defd6059edcf2392a850bbf";
 		};
 /* End PBXShellScriptBuildPhase section */
 

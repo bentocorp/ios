@@ -16,7 +16,6 @@
 #import "UIColor+CustomColors.h"
 #import "SHSPhoneTextField.h"
 
-
 @interface EditPhoneNumberView() <UITextFieldDelegate>
 
 @property (weak, nonatomic) IBOutlet UIView *viewEnterPhoneNumber;
