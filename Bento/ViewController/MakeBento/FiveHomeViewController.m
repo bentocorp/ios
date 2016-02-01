@@ -1804,7 +1804,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.dropDownViewTopConstraint.constant = 64;
     
     self.cartButton.enabled = NO;
-    self.overlayedCartButton.enabled = NO;
+    self.overlaidCartButton.enabled = NO;
     
     [self.pickerButton setTitleColor:[UIColor bentoTitleGray] forState:UIControlStateNormal];
     
@@ -1819,7 +1819,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height - 1;
     
     [self setCart];
-    self.overlayedCartButton.enabled = YES;
+    self.overlaidCartButton.enabled = YES;
     
     [self.pickerButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     

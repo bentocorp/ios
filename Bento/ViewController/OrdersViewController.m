@@ -64,11 +64,6 @@
     [closeButton addTarget:self action:@selector(closeButtonPressed) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:closeButton];
 
-    // line separator under nav bar
-    UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 1)];
-    longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
-    [self.view addSubview:longLineSepartor1];
-    
     // Table View
     self.myTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, SCREEN_HEIGHT-64) style:UITableViewStylePlain];
     self.myTableView.backgroundColor = [UIColor bentoBackgroundGray];
@@ -78,12 +73,18 @@
     self.myTableView.allowsSelection = NO;
     [self.view addSubview:self.myTableView];
     
+    // line separator under nav bar
+    UIView *longLineSepartor1 = [[UIView alloc] initWithFrame:CGRectMake(0, 65, SCREEN_WIDTH, 1)];
+    longLineSepartor1.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
+    [self.view addSubview:longLineSepartor1];
+    
     // No Orders
-    noOrdersLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-100, SCREEN_HEIGHT-22.5, 200, 45)];
+    noOrdersLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, SCREEN_HEIGHT/2 - 150, SCREEN_WIDTH - 40, 300)];
     noOrdersLabel.text = @"NO ORDERS";
-    noOrdersLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
-    noOrdersLabel.textColor = [UIColor whiteColor];
+    noOrdersLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
+    noOrdersLabel.textColor = [UIColor bentoCorrectTextGray];
     noOrdersLabel.textAlignment = NSTextAlignmentCenter;
+    noOrdersLabel.numberOfLines = 0;
     noOrdersLabel.hidden = YES;
     [self.view addSubview:noOrdersLabel];
     

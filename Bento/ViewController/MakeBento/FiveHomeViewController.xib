@@ -51,7 +51,7 @@
                 <outlet property="orderAheadTitleLabel" destination="fCS-3f-uyb" id="kMa-nH-GY8"/>
                 <outlet property="orderAheadView" destination="YkJ-Yy-DbD" id="lwN-dx-bSe"/>
                 <outlet property="orderAheadViewHeightConstraint" destination="AVt-Kr-s4q" id="NLZ-Oz-o3S"/>
-                <outlet property="overlayedCartButton" destination="wju-zk-kPc" id="jL7-UX-uHT"/>
+                <outlet property="overlaidCartButton" destination="wju-zk-kPc" id="wYB-TJ-zgK"/>
                 <outlet property="pickerButton" destination="ZAl-ST-thk" id="fuc-Mk-9Qp"/>
                 <outlet property="previewLabel" destination="eyY-2Z-OMb" id="2g9-es-EF1"/>
                 <outlet property="startingPriceLabel" destination="wSb-1H-Dvt" id="bTa-hm-7IN"/>
@@ -379,7 +379,7 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wju-zk-kPc" userLabel="overlayedCartButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wju-zk-kPc" userLabel="overlaidCartButton">
                     <rect key="frame" x="299" y="20" width="76" height="43"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="43" id="xJN-AZ-yAC"/>
