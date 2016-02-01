@@ -130,7 +130,7 @@
                         <constraint firstAttribute="height" constant="45" id="BY2-16-f1V"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="13"/>
-                    <state key="normal" title="BOTTOM BUTTON">
+                    <state key="normal">
                         <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
