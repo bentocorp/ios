@@ -211,7 +211,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.fourCustomVC.buildButton.hidden = YES;
     self.fourCustomVC.viewAddonsButton.hidden = YES;
     
-    [self performSelector:@selector(beginLoadingData) withObject:nil afterDelay:0.5];
+    [self performSelector:@selector(beginLoadingData) withObject:nil afterDelay:0.25];
 }
 
 #pragma mark Loading Data
@@ -1171,7 +1171,6 @@ static OrderAheadMenu *orderAheadMenu;
 - (void)setCart {
     if ([[BentoShop sharedInstance] getCompletedBentoCount] > 0) {
         self.cartButton.enabled = YES;
-        self.cartButton.selected = YES;
         [self.cartButton setImage:[UIImage imageNamed:@"mybento_nav_cart_act"] forState:UIControlStateNormal];
         
         self.countBadgeLabel.text = [NSString stringWithFormat:@"%ld", (long)[[BentoShop sharedInstance] getCompletedBentoCount] + (long)[[AddonList sharedInstance] getTotalCount]];
@@ -1179,7 +1178,6 @@ static OrderAheadMenu *orderAheadMenu;
     }
     else {
         self.cartButton.enabled = NO;
-        self.cartButton.selected = NO;
         
         self.countBadgeLabel.text = @"";
         self.countBadgeLabel.hidden = YES;
@@ -1806,6 +1804,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.dropDownViewTopConstraint.constant = 64;
     
     self.cartButton.enabled = NO;
+    self.overlayedCartButton.enabled = NO;
     
     [self.pickerButton setTitleColor:[UIColor bentoTitleGray] forState:UIControlStateNormal];
     
@@ -1820,6 +1819,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.dropDownViewTopConstraint.constant = 64 - self.dropDownView.frame.size.height - 1;
     
     [self setCart];
+    self.overlayedCartButton.enabled = YES;
     
     [self.pickerButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     

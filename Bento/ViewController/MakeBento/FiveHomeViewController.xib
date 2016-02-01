@@ -51,6 +51,7 @@
                 <outlet property="orderAheadTitleLabel" destination="fCS-3f-uyb" id="kMa-nH-GY8"/>
                 <outlet property="orderAheadView" destination="YkJ-Yy-DbD" id="lwN-dx-bSe"/>
                 <outlet property="orderAheadViewHeightConstraint" destination="AVt-Kr-s4q" id="NLZ-Oz-o3S"/>
+                <outlet property="overlayedCartButton" destination="wju-zk-kPc" id="jL7-UX-uHT"/>
                 <outlet property="pickerButton" destination="ZAl-ST-thk" id="fuc-Mk-9Qp"/>
                 <outlet property="previewLabel" destination="eyY-2Z-OMb" id="2g9-es-EF1"/>
                 <outlet property="startingPriceLabel" destination="wSb-1H-Dvt" id="bTa-hm-7IN"/>
@@ -366,9 +367,6 @@
                     <state key="normal" image="mybento_nav_cart_act.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
-                    <connections>
-                        <action selector="cartButtonPressed:" destination="-1" eventType="touchUpInside" id="jSG-At-hV2"/>
-                    </connections>
                 </button>
                 <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="99" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KFj-GJ-P3L">
                     <rect key="frame" x="331" y="25" width="17" height="17"/>
@@ -381,11 +379,22 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wju-zk-kPc" userLabel="overlayedCartButton">
+                    <rect key="frame" x="299" y="20" width="76" height="43"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="43" id="xJN-AZ-yAC"/>
+                    </constraints>
+                    <connections>
+                        <action selector="cartButtonPressed:" destination="-1" eventType="touchUpInside" id="79M-bM-ClU"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
+                <constraint firstItem="wju-zk-kPc" firstAttribute="leading" secondItem="ZAl-ST-thk" secondAttribute="trailing" constant="1" id="0ji-nR-xHy"/>
                 <constraint firstItem="ZAl-ST-thk" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" constant="20" id="1m1-qa-FYe"/>
                 <constraint firstItem="MQR-o4-IL4" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" id="3Ft-Xk-1E8"/>
+                <constraint firstAttribute="trailing" secondItem="wju-zk-kPc" secondAttribute="trailing" id="3xg-xM-XuL"/>
                 <constraint firstAttribute="trailing" secondItem="g12-em-tQ5" secondAttribute="trailing" id="48C-sr-eHC"/>
                 <constraint firstAttribute="bottom" secondItem="fjf-nw-JDI" secondAttribute="bottom" id="8GF-im-GmW"/>
                 <constraint firstItem="3lu-ax-SyT" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" id="ADn-cr-res"/>
@@ -398,9 +407,9 @@
                 <constraint firstAttribute="trailing" secondItem="Pnq-Up-jie" secondAttribute="trailing" id="Q08-k5-4TI"/>
                 <constraint firstAttribute="trailing" secondItem="gLT-NR-dmH" secondAttribute="trailing" id="SnX-cH-avA"/>
                 <constraint firstItem="Pnq-Up-jie" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" id="WoX-Lf-UPo"/>
+                <constraint firstItem="ZAl-ST-thk" firstAttribute="centerX" secondItem="00c-cJ-i1r" secondAttribute="centerX" id="Y7i-zE-Tvb"/>
                 <constraint firstItem="uLd-uC-hCd" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" id="a7P-tC-Hy0"/>
                 <constraint firstItem="MQR-o4-IL4" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" constant="20" id="aKZ-uo-ydn"/>
-                <constraint firstItem="ZAl-ST-thk" firstAttribute="centerX" secondItem="00c-cJ-i1r" secondAttribute="centerX" id="akD-ni-1iQ"/>
                 <constraint firstItem="lj8-zc-geg" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" constant="30" id="bnk-PU-jme"/>
                 <constraint firstItem="3lu-ax-SyT" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" id="iol-pR-k12"/>
                 <constraint firstItem="gLT-NR-dmH" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" id="l2P-V3-QHB"/>
@@ -408,6 +417,7 @@
                 <constraint firstItem="fjf-nw-JDI" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" id="pRr-FC-7i8"/>
                 <constraint firstAttribute="trailing" secondItem="3lu-ax-SyT" secondAttribute="trailing" id="qPb-6A-NXz"/>
                 <constraint firstItem="g12-em-tQ5" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" id="rKV-X9-hZN"/>
+                <constraint firstItem="wju-zk-kPc" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" constant="20" id="tDv-m1-gjj"/>
                 <constraint firstAttribute="trailing" secondItem="eAy-Ir-KNc" secondAttribute="trailing" constant="14" id="tZr-Cq-svq"/>
                 <constraint firstItem="g12-em-tQ5" firstAttribute="top" secondItem="00c-cJ-i1r" secondAttribute="top" constant="64" id="uwZ-tj-L3L"/>
                 <constraint firstItem="lj8-zc-geg" firstAttribute="leading" secondItem="00c-cJ-i1r" secondAttribute="leading" constant="12" id="wJj-F4-Ube"/>
