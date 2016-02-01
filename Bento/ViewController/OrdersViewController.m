@@ -80,7 +80,7 @@
     
     // No Orders
     noOrdersLabel = [[UILabel alloc] initWithFrame:CGRectMake(20, SCREEN_HEIGHT/2 - 150, SCREEN_WIDTH - 40, 300)];
-    noOrdersLabel.text = [[[AppStrings sharedInstance] getString:NO_ORDERS_TEXT] capitalizedString];
+    noOrdersLabel.text = [[AppStrings sharedInstance] getString:NO_ORDERS_TEXT];
     noOrdersLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
     noOrdersLabel.textColor = [UIColor bentoCorrectTextGray];
     noOrdersLabel.textAlignment = NSTextAlignmentCenter;
