@@ -216,6 +216,8 @@
 #define CHANGE_WARNING_TITLE                    @"oa-change-warning-title"
 #define CHANGE_WARNING_TEXT                     @"oa-change-warning-text"
 
+#define NO_ORDERS_TEXT                          @"pane-emptymsg-orders"
+
 // getting from to settings instead of ioscopy
 //#define ABOUT_PRICE                             @"price"
 //#define SALE_PRICE                              @"sale_price"
