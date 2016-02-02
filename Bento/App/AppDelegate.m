@@ -21,6 +21,7 @@
 
 #import "Reachability.h"
 #import <SystemConfiguration/SystemConfiguration.h>
+#import "AFNetworkReachabilityManager.h"
 
 #import <Fabric/Fabric.h>
 #import <Crashlytics/Crashlytics.h>

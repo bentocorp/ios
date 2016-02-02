@@ -133,7 +133,22 @@ static BentoShop *_shareInstance;
     
     NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         
-        completion(responseObject, error);
+        if (error) {
+            NSLog(@"dataTaskWithRequest error: %@", error);
+            
+//            UIAlertController *alertController = [[UIAlertController alloc] init];
+//            
+//            [alertController addAction:[UIAlertAction actionWithTitle:@"Connectivity Error" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
+//                
+//            }]];
+//            
+//            [alertController presentViewController:alertController animated:YES completion:nil];
+            
+            return;
+        }
+        else {
+            completion(responseObject, error);
+        }
     }];
     
     [dataTask resume];
