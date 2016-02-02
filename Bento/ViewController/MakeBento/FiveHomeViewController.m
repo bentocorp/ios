@@ -223,7 +223,7 @@ static OrderAheadMenu *orderAheadMenu;
     
     SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     if (placemark != nil) {
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState, NSError *error) {
             
             self.asapMenuLabel.hidden = NO;
             self.asapDescriptionLabel.hidden = NO;
@@ -325,7 +325,7 @@ static OrderAheadMenu *orderAheadMenu;
         // yes saved location
         SVPlacemark *placemark = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
         if (placemark != nil) {
-            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placemark.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState, NSError *error) {
                 if (isSelectedLocationInZone == NO) {
                     [self nextToBuildShowMap];
                 }
@@ -2022,7 +2022,7 @@ static OrderAheadMenu *orderAheadMenu;
             }
             
             // check if saved address is inside CURRENT service area
-            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState, NSError *error) {
                 [loadingHUD dismiss];
                 loadingHUD = nil;
                 
@@ -2048,7 +2048,7 @@ static OrderAheadMenu *orderAheadMenu;
                 [loadingHUD showInView:self.view];
             }
             
-            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+            [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState, NSError *error) {
                 [loadingHUD dismiss];
                 loadingHUD = nil;
                 

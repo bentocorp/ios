@@ -305,7 +305,7 @@
             [loadingHUD showInView:self.view];
         }
         
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState, NSError *error) {
             
             [loadingHUD dismiss];
             loadingHUD = nil;
@@ -479,7 +479,7 @@
             [loadingHUD showInView:self.view];
         }
         
-        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+        [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState, NSError *error) {
             [loadingHUD dismiss];
             loadingHUD = nil;
             
@@ -495,7 +495,7 @@
                         [loadingHUD showInView:self.view];
                     }
                     
-                    [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState) {
+                    [[BentoShop sharedInstance] checkIfSelectedLocationIsInAnyZone:self.placeInfo.location.coordinate completion:^(BOOL isSelectedLocationInZone, NSString *appState, NSError *error) {
                         [loadingHUD dismiss];
                         loadingHUD = nil;
                         
