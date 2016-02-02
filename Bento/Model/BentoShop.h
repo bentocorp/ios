@@ -109,7 +109,7 @@ typedef void (^GetInit2Block)(BOOL succeeded, NSError *error);
 //- (BOOL)checkLocation:(CLLocationCoordinate2D)location;
 - (BOOL)isInAnyZone;
 
-typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSString *appState);
+typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSString *appState, NSError *error);
 - (void)checkIfSelectedLocationIsInAnyZone:(CLLocationCoordinate2D)coordinate completion:(SelectedLocationCheckBlock)completion;
 
 typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);

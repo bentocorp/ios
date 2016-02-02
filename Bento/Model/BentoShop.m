@@ -214,7 +214,7 @@ static BentoShop *_shareInstance;
     return [isInAnyZoneNumber boolValue];
 }
 
-typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSString *appState);
+typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSString *appState, NSError *error);
 - (void)checkIfSelectedLocationIsInAnyZone:(CLLocationCoordinate2D)coordinate completion:(SelectedLocationCheckBlock)completion {
     NSString *strDate = [self getDateStringWithDashes];
     
@@ -231,14 +231,15 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
             BOOL isInAnyZone = [isInAnyZoneNumber boolValue];
             
             if (isInAnyZone) {
-                completion(YES, init2[@"/gatekeeper/here/{lat}/{long}"][@"appState"]);
+                completion(YES, init2[@"/gatekeeper/here/{lat}/{long}"][@"appState"], error);
             }
             else {
-                completion(NO, init2[@"/gatekeeper/here/{lat}/{long}"][@"appState"]);
+                completion(NO, init2[@"/gatekeeper/here/{lat}/{long}"][@"appState"], error);
             }
         }
         else {
             NSLog(@"init2 gatekeeper error: %@", error);
+             completion(NO, nil, error);
 //            completion(NO); // for some reason, some coordinates outofzone are producing an error. return NO for now
         }
     }];
