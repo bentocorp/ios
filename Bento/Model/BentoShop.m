@@ -546,8 +546,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
         [[SDWebImagePrefetcher sharedImagePrefetcher] prefetchURLs:urls];
 }
 
-- (void)getMenus
-{
+- (void)getMenus {
+    
     NSString *strDate = [self getDateString];
     
     [self sendRequest:[NSString stringWithFormat:@"/menu/%@", strDate] completion:^(id responseDic, NSError *error) {
@@ -557,8 +557,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
             [self prefetchImages:self.menuToday];
             
             // if today date is not same as date from backend
-            if (![strDate isEqualToString:self.strToday])
-            {
+            if (![strDate isEqualToString:self.strToday]) {
+                
                 [self resetBentoArray];
                 
                 self.strToday = strDate;
@@ -573,8 +573,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     }];
 }
 
-- (void)getNextMenus
-{
+- (void)getNextMenus {
+    
     NSString *strDate = [self getDateString];
     
     [self sendRequest:[NSString stringWithFormat:@"/menu/next/%@", strDate] completion:^(id responseDic, NSError *error) {
@@ -1167,15 +1167,12 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
                     [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
                     
                     [self getInit2WithGateKeeper];
+                    [self getMenus];
+                    [self getNextMenus];
                 }
                 else {
-                    [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
-                        
-                    }];
+                    [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {}];
                 }
-                
-                [self getMenus];
-                [self getNextMenus];
             }
         });
     }

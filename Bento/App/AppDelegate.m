@@ -230,8 +230,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         }
         
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-        [globalShop getMenus];
-        [globalShop getNextMenus];
     });
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
@@ -276,8 +274,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         }
         
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-        [globalShop getMenus];
-        [globalShop getNextMenus];
         
         dispatch_sync(dispatch_get_main_queue(), ^{
     
@@ -326,8 +322,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     if ([self connected]) {
         if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-                [globalShop getMenus];
-                [globalShop getNextMenus];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // If IntroVC has already been completely processed once, startUpdatingLocation
@@ -509,8 +503,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         }
         
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-        [globalShop getMenus];
-        [globalShop getNextMenus];
         
         dispatch_async(dispatch_get_main_queue(), ^{
             

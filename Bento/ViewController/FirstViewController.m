@@ -206,16 +206,12 @@
                 [globalShop getInit2WithGateKeeper];
                 
                 [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-                [globalShop getMenus];
-                [globalShop getNextMenus];
                 
                 [self afterViewWillAppear];
             }
             else {
                 [globalShop getInit2:^(BOOL succeeded, NSError *error) {
                     [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-                    [globalShop getMenus];
-                    [globalShop getNextMenus];
                     
                     [self afterViewWillAppear];
                 }];

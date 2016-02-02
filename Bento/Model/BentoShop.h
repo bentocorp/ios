@@ -34,7 +34,6 @@
 + (BentoShop *)sharedInstance;
 + (void)releaseInstance;
 
-
 - (BOOL)isAllDay;
 - (BOOL)nextIsAllDay;
 
@@ -48,8 +47,6 @@
 - (BOOL)isDishSoldOut:(NSInteger)menuID;
 
 - (void)setStatus:(NSArray *)menuStatus;
-- (void)getMenus;
-- (void)getNextMenus;
 
 - (void)setBranchParams:(NSDictionary *)params;
 - (NSDictionary *)getBranchParams;
