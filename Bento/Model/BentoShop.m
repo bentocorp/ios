@@ -164,12 +164,18 @@ static BentoShop *_shareInstance;
             [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
             
-            // service area (used for setting default mapview display area)
+            /*---service area---*/ 
             if (self.dicInit2[@"settings"][@"serviceArea_lunch"] && self.dicInit2[@"settings"][@"serviceArea_dinner"]) {
                 NSString *lunchKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_lunch"];
                 NSString *dinnerKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_dinner"];
                 NSDictionary *kmlValues = @{@"lunchKMLValue": lunchKMLValue, @"dinnerKMLValue": dinnerKMLValue};
                 [self getServiceArea:kmlValues];
+            }
+            
+            /*---status menu---*/
+            if (self.dicInit2[@"/status/all"][@"menu"]) {
+                self.menuStatus = (NSArray *)self.dicInit2[@"/status/all"][@"menu"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
             }
             
             completion(YES, error);
@@ -220,6 +226,20 @@ static BentoShop *_shareInstance;
             [self getiOSMinAndCurrentVersions];
             [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
+            
+            /*---service area---*/
+            if (self.dicInit2[@"settings"][@"serviceArea_lunch"] && self.dicInit2[@"settings"][@"serviceArea_dinner"]) {
+                NSString *lunchKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_lunch"];
+                NSString *dinnerKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_dinner"];
+                NSDictionary *kmlValues = @{@"lunchKMLValue": lunchKMLValue, @"dinnerKMLValue": dinnerKMLValue};
+                [self getServiceArea:kmlValues];
+            }
+            
+            /*---status menu---*/
+            if (self.dicInit2[@"/status/all"][@"menu"]) {
+                self.menuStatus = (NSArray *)self.dicInit2[@"/status/all"][@"menu"];
+                [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+            }
         }
         else {
             NSLog(@"init2 gatekeeper error: %@", error);
@@ -293,48 +313,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
     gpsCoordinateForGateKeeper = kCLLocationCoordinate2DInvalid;
 //    [self getGateKeeperWithLocation];
-}
-
-- (void)getStatus {
-//    [self sendRequest:@"/status/all" completion:^(id responseDic, NSError *error) {
-//        
-//        if (error == nil) {
-//            self.dicStatus = (NSDictionary *)responseDic;
-//            
-//            if (originalStatus.length == 0) {
-//                originalStatus = self.dicStatus[@"overall"][@"value"];
-//            }
-//            
-//            NSString *newStatus = self.dicStatus[@"overall"][@"value"];
-//            
-//            if (![originalStatus isEqualToString:newStatus])
-//            {   
-//                originalStatus = @"";
-//                
-//                NSLog(@"STATUS CHANGED!!! GET APP STRINGS!!!");
-//            }
-//            
-//            self.prevClosed = [self isClosed];
-//            self.prevSoldOut = [self isSoldOut];
-//            
-//            [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-//        }
-//        else {
-//            NSLog(@"/status/all error: %@", error);
-//        }
-//    }];
-    
-    [self sendRequest:@"/status/menu" completion:^(id responseDic, NSError *error) {
-        
-        if (error == nil) {
-            self.menuStatus = (NSArray *)responseDic;
-        }
-        else {
-            NSLog(@"/status/menu error: %@", error);
-        }
-    }];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
 }
 
 - (void)setStatus:(NSArray *)menuStatus {
@@ -712,34 +690,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     NSLog(@"Get Buffer Time - %@", [NSNumber numberWithFloat:bufferTime]);
     return [NSNumber numberWithFloat:bufferTime];
 }
-
-- (NSString *)getLunchMapURL
-{
-    return lunchMapURLString;
-}
-
-- (NSString*)getDinnerMapURL
-{
-    return dinnerMapURLString;
-}
-
-//- (void)checkIfBentoArrayNeedsToBeReset
-//{
-//    NSString *strDate = [self getDateString];
-//    
-//    NSString *savedMode = [defaults objectForKey:@"LunchOrDinner"];
-//    
-//    // today's date doesn't match saved date && current mode doesn't match saved mode
-//    if (![strDate isEqualToString:self.strToday] && ![currentMode isEqualToString:savedMode])
-//    {
-//        [self resetBentoArray];
-//        
-//        NSLog(@"Today's Date - %@, Saved Date - %@", strDate, self.strToday);
-//        
-//        self.strToday = strDate;
-//        [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_MENU object:nil];
-//    }
-//}
 
 - (NSDictionary *)getMenuInfo
 {
@@ -1224,7 +1174,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
                     }];
                 }
                 
-//                [self checkIfBentoArrayNeedsToBeReset];
                 [self getMenus];
                 [self getNextMenus];
                 [self getStatus];

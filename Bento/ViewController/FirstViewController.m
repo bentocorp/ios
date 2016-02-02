@@ -208,7 +208,6 @@
                 [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
                 [globalShop getMenus];
                 [globalShop getNextMenus];
-                [globalShop getStatus];
                 
                 [self afterViewWillAppear];
             }
@@ -217,7 +216,6 @@
                     [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
                     [globalShop getMenus];
                     [globalShop getNextMenus];
-                    [globalShop getStatus];
                     
                     [self afterViewWillAppear];
                 }];

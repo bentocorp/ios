@@ -276,7 +276,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         }
         
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-        [globalShop getStatus];
         [globalShop getMenus];
         [globalShop getNextMenus];
         
@@ -329,7 +328,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
             dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
                 [globalShop getMenus];
                 [globalShop getNextMenus];
-                [globalShop getStatus];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // If IntroVC has already been completely processed once, startUpdatingLocation
@@ -511,7 +509,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         }
         
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-        [globalShop getStatus];
         [globalShop getMenus];
         [globalShop getNextMenus];
         
