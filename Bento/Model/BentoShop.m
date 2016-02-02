@@ -126,6 +126,7 @@ static BentoShop *_shareInstance;
 - (void)sendRequest:(NSString *)strRequest completion:(SendRequestCompletionBlock)completion {
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.timeoutIntervalForRequest = 30;
     
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
@@ -135,14 +136,6 @@ static BentoShop *_shareInstance;
     [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         
         completion(responseObject, error);
-        
-//        if (error == nil) {
-//            completion(responseObject, error);
-//        }
-//        else {
-//            NSLog(@"dataTaskWithRequest error: %@", error);
-//            completion(responseObject, error);
-//        }
     }] resume];
 }
 

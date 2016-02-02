@@ -39,6 +39,8 @@
 
 #import "CountdownTimer.h"
 
+#import "JGProgressHUD.h"
+
 @interface FirstViewController () <CLLocationManagerDelegate>
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBackground;
@@ -60,6 +62,8 @@
     NSString *currentAddress;
     
     UIAlertView *aV;
+    
+    JGProgressHUD *loadingHUD;
 }
 
 - (void)viewDidLoad {
@@ -199,12 +203,27 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
-//        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
+        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
 
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
                 [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
                 [globalShop getInit2WithGateKeeper:^(BOOL succeeded, NSError *error) {
-                    
+                    if (succeeded == NO && error != nil) {
+                        
+                        [self.activityIndicator stopAnimating];
+                        
+                        if (loadingHUD == nil) {
+                            loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+                            loadingHUD.textLabel.text = @"Waiting for internet connectivity...";
+                            [loadingHUD showInView:self.view];
+                        }
+                    }
+                    else {
+                        if (loadingHUD != nil) {
+                            [loadingHUD dismiss];
+                            loadingHUD = nil;
+                        }
+                    }
                 }];
                 
                 [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
@@ -218,7 +237,7 @@
                     [self afterViewWillAppear];
                 }];
             }
-//        }
+        }
     });
 }
 
