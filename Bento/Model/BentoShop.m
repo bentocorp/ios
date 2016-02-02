@@ -1176,7 +1176,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
                 
                 [self getMenus];
                 [self getNextMenus];
-                [self getStatus];
             }
         });
     }

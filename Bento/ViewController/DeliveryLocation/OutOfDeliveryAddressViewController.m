@@ -130,28 +130,28 @@
     
     NSLog(@"SELECTED ADDRESS: %@", self.strAddress);
     
-// set map view
-    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
-    
-    NSURL *url;
-    
-    if ([[BentoShop sharedInstance] isAllDay])
-    {
-        if ([[BentoShop sharedInstance] isThereLunchMenu])
-            url = [NSURL URLWithString:[[BentoShop sharedInstance] getLunchMapURL]];
-        else // todayDinner is available
-            url = [NSURL URLWithString:[[BentoShop sharedInstance] getDinnerMapURL]];
-    }
-    else // not all day
-    {
-        // 12:00am - dinner opening (ie. 16.5)
-        if (currentTime >= 0 && currentTime < dinnerTime)
-            url = [NSURL URLWithString:[[BentoShop sharedInstance] getLunchMapURL]];
-        // dinner opening - 11:59pm
-        else if (currentTime >= dinnerTime && currentTime < 24)
-            url = [NSURL URLWithString:[[BentoShop sharedInstance] getDinnerMapURL]];
-    }
+//// set map view
+//    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+//    float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];
+//    
+//    NSURL *url;
+//    
+//    if ([[BentoShop sharedInstance] isAllDay])
+//    {
+//        if ([[BentoShop sharedInstance] isThereLunchMenu])
+//            url = [NSURL URLWithString:[[BentoShop sharedInstance] getLunchMapURL]];
+//        else // todayDinner is available
+//            url = [NSURL URLWithString:[[BentoShop sharedInstance] getDinnerMapURL]];
+//    }
+//    else // not all day
+//    {
+//        // 12:00am - dinner opening (ie. 16.5)
+//        if (currentTime >= 0 && currentTime < dinnerTime)
+//            url = [NSURL URLWithString:[[BentoShop sharedInstance] getLunchMapURL]];
+//        // dinner opening - 11:59pm
+//        else if (currentTime >= dinnerTime && currentTime < 24)
+//            url = [NSURL URLWithString:[[BentoShop sharedInstance] getDinnerMapURL]];
+//    }
     
 //    NSURLRequest *request = [NSURLRequest requestWithURL:url];
 //    [self.webView loadRequest:request];

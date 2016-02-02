@@ -15,7 +15,6 @@
 
 @interface BentoShop : NSObject
 {
-//    BOOL _isPaused;
     BOOL _isCallingApi;
     
     NSTimer *_timer;
@@ -48,7 +47,6 @@
 - (BOOL)canAddDish:(NSInteger)dishID;
 - (BOOL)isDishSoldOut:(NSInteger)menuID;
 
-- (void)getStatus;
 - (void)setStatus:(NSArray *)menuStatus;
 - (void)getMenus;
 - (void)getNextMenus;
@@ -81,8 +79,6 @@ typedef void (^GetInit2Block)(BOOL succeeded, NSError *error);
 - (NSNumber *)getLunchTime;
 - (NSNumber *)getDinnerTime;
 - (NSNumber *)getBufferTime;
-- (NSString *)getLunchMapURL;
-- (NSString *)getDinnerMapURL;
 - (NSString *)getGeofenceRadius;
 
 - (NSInteger)getETAMin;
@@ -128,8 +124,6 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 - (void)loadBentoArray;
 - (void)saveBentoArray;
 - (void)resetBentoArray;
-
-//- (void)checkIfBentoArrayNeedsToBeReset;
 
 - (NSString *)getUnitPrice;
 - (NSString *)getSalePrice;
