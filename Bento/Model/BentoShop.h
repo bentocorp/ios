@@ -67,8 +67,8 @@
 typedef void (^GetInit2Block)(BOOL succeeded, NSError *error);
 - (void)getInit2:(GetInit2Block)completion;
 
-//typedef void (^GetInit2GateKeeperBlock)(BOOL succeeded, NSError *error);
-- (void)getInit2WithGateKeeper;
+typedef void (^GetInit2GateKeeperBlock)(BOOL succeeded, NSError *error);
+- (void)getInit2WithGateKeeper:(GetInit2GateKeeperBlock)completion;
 
 - (void)getiOSMinAndCurrentVersions;
 - (void)getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers;

@@ -221,7 +221,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
             [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
-            [[BentoShop sharedInstance] getInit2WithGateKeeper];
+            [[BentoShop sharedInstance] getInit2WithGateKeeper:^(BOOL succeeded, NSError *error) {
+                
+            }];
         }
         else {
             [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
@@ -265,7 +267,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
             [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
-            [[BentoShop sharedInstance] getInit2WithGateKeeper];
+            [[BentoShop sharedInstance] getInit2WithGateKeeper:^(BOOL succeeded, NSError *error) {
+                
+            }];
         }
         else {
             [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
@@ -494,7 +498,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
             [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
-            [[BentoShop sharedInstance] getInit2WithGateKeeper];
+            [[BentoShop sharedInstance] getInit2WithGateKeeper:^(BOOL succeeded, NSError *error) {
+                
+            }];
         }
         else {
             [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {

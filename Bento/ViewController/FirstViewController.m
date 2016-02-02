@@ -199,11 +199,13 @@
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
-        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
+//        if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
 
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
                 [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
-                [globalShop getInit2WithGateKeeper];
+                [globalShop getInit2WithGateKeeper:^(BOOL succeeded, NSError *error) {
+                    
+                }];
                 
                 [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
                 
@@ -216,7 +218,7 @@
                     [self afterViewWillAppear];
                 }];
             }
-        }
+//        }
     });
 }
 

@@ -126,32 +126,24 @@ static BentoShop *_shareInstance;
 - (void)sendRequest:(NSString *)strRequest completion:(SendRequestCompletionBlock)completion {
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    
     AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
     
     NSURL *URL = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", SERVER_URL, strRequest]];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
-    NSURLSessionDataTask *dataTask = [manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         
-        if (error) {
-            NSLog(@"dataTaskWithRequest error: %@", error);
-            
-//            UIAlertController *alertController = [[UIAlertController alloc] init];
-//            
-//            [alertController addAction:[UIAlertAction actionWithTitle:@"Connectivity Error" style:UIAlertActionStyleCancel handler:^(UIAlertAction *action) {
-//                
-//            }]];
-//            
-//            [alertController presentViewController:alertController animated:YES completion:nil];
-            
-            return;
-        }
-        else {
-            completion(responseObject, error);
-        }
-    }];
-    
-    [dataTask resume];
+        completion(responseObject, error);
+        
+//        if (error == nil) {
+//            completion(responseObject, error);
+//        }
+//        else {
+//            NSLog(@"dataTaskWithRequest error: %@", error);
+//            completion(responseObject, error);
+//        }
+    }] resume];
 }
 
 // get init2 if intro not processed and no saved address
@@ -189,14 +181,50 @@ static BentoShop *_shareInstance;
 
 // get gatekeeper if location available
 // if no gps, use saved address
-- (void)getInit2WithGateKeeper {
+- (void)getInit2WithGateKeeper:(GetInit2GateKeeperBlock)completion {
 //    dispatch_sync(dispatch_get_main_queue(), ^{
 //        [locationManager startUpdatingLocation];
 //    });
     
     SVPlacemark *placeInfo = [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"];
     if (placeInfo != nil) {
-        [self requestGateKeeper:placeInfo.location.coordinate];
+//        [self requestGateKeeper:placeInfo.location.coordinate];
+        
+        NSString *strDate = [self getDateStringWithDashes];
+        
+        [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=1&gatekeeper=1&lat=%f&long=%f", strDate, placeInfo.location.coordinate.latitude, placeInfo.location.coordinate.longitude] completion:^(id responseDic, NSError *error) {
+            
+            if (error == nil) {
+                self.dicInit2 = (NSDictionary *)responseDic;
+                
+                [self getiOSMinAndCurrentVersions];
+                [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+                [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
+                
+                /*---service area---*/
+                if (self.dicInit2[@"settings"][@"serviceArea_lunch"] && self.dicInit2[@"settings"][@"serviceArea_dinner"]) {
+                    NSString *lunchKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_lunch"];
+                    NSString *dinnerKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_dinner"];
+                    NSDictionary *kmlValues = @{@"lunchKMLValue": lunchKMLValue, @"dinnerKMLValue": dinnerKMLValue};
+                    [self getServiceArea:kmlValues];
+                }
+                
+                /*---status menu---*/
+                if (self.dicInit2[@"/status/all"][@"menu"]) {
+                    self.menuStatus = (NSArray *)self.dicInit2[@"/status/all"][@"menu"];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+                }
+                
+                [self getMenus];
+                [self getNextMenus];
+                
+                completion(YES, error);
+            }
+            else {
+                completion(NO, error);
+                NSLog(@"init2 gatekeeper error: %@", error);
+            }
+        }];
     }
 }
 
@@ -213,38 +241,41 @@ static BentoShop *_shareInstance;
 //}
 
 - (void)requestGateKeeper:(CLLocationCoordinate2D)coordinate {
-    NSString *strDate = [self getDateStringWithDashes];
-    
-    NSLog(@"%f", coordinate.longitude);
-    NSLog(@"%f", coordinate.latitude);
-    
-    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=1&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude] completion:^(id responseDic, NSError *error) {
-        
-        if (error == nil) {
-            self.dicInit2 = (NSDictionary *)responseDic;
-            
-            [self getiOSMinAndCurrentVersions];
-            [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-            [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
-            
-            /*---service area---*/
-            if (self.dicInit2[@"settings"][@"serviceArea_lunch"] && self.dicInit2[@"settings"][@"serviceArea_dinner"]) {
-                NSString *lunchKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_lunch"];
-                NSString *dinnerKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_dinner"];
-                NSDictionary *kmlValues = @{@"lunchKMLValue": lunchKMLValue, @"dinnerKMLValue": dinnerKMLValue};
-                [self getServiceArea:kmlValues];
-            }
-            
-            /*---status menu---*/
-            if (self.dicInit2[@"/status/all"][@"menu"]) {
-                self.menuStatus = (NSArray *)self.dicInit2[@"/status/all"][@"menu"];
-                [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-            }
-        }
-        else {
-            NSLog(@"init2 gatekeeper error: %@", error);
-        }
-    }];
+//    NSString *strDate = [self getDateStringWithDashes];
+//    
+//    NSLog(@"%f", coordinate.longitude);
+//    NSLog(@"%f", coordinate.latitude);
+//    
+//    [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=1&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude] completion:^(id responseDic, NSError *error) {
+//        
+//        if (error == nil) {
+//            self.dicInit2 = (NSDictionary *)responseDic;
+//            
+//            [self getiOSMinAndCurrentVersions];
+//            [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+//            [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
+//            
+//            /*---service area---*/
+//            if (self.dicInit2[@"settings"][@"serviceArea_lunch"] && self.dicInit2[@"settings"][@"serviceArea_dinner"]) {
+//                NSString *lunchKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_lunch"];
+//                NSString *dinnerKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_dinner"];
+//                NSDictionary *kmlValues = @{@"lunchKMLValue": lunchKMLValue, @"dinnerKMLValue": dinnerKMLValue};
+//                [self getServiceArea:kmlValues];
+//            }
+//            
+//            /*---status menu---*/
+//            if (self.dicInit2[@"/status/all"][@"menu"]) {
+//                self.menuStatus = (NSArray *)self.dicInit2[@"/status/all"][@"menu"];
+//                [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+//            }
+//        }
+//        else {
+//            NSLog(@"init2 gatekeeper error: %@", error);
+//        }
+//    }];
+//    
+//    [self getMenus];
+//    [self getNextMenus];
 }
 
 #pragma GateKeeper Data
@@ -1149,30 +1180,27 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return NO;
 }
 
-- (void)updateProc
-{
-    if (self._isPaused || _isCallingApi)
+- (void)updateProc {
+    if (self._isPaused || _isCallingApi) {
         return;
+    }
     
     _isCallingApi = YES;
     
-    if ([self connected])
-    {
+    if ([self connected]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
-            
-            // check version first
-            if (self.iosCurrentVersion >= self.iosMinVersion) {
                 
-                if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
-                    [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
+            if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
+                [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
+                
+                [self getInit2WithGateKeeper:^(BOOL succeeded, NSError *error) {
                     
-                    [self getInit2WithGateKeeper];
-                    [self getMenus];
-                    [self getNextMenus];
-                }
-                else {
-                    [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {}];
-                }
+                }];
+            }
+            else {
+                [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
+                
+                }];
             }
         });
     }
@@ -1180,8 +1208,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     _isCallingApi = NO;
 }
 
-- (BOOL)connected
-{
+- (BOOL)connected {
     Reachability *reachability = [Reachability reachabilityForInternetConnection];
     NetworkStatus networkStatus = [reachability currentReachabilityStatus];
     return networkStatus != NotReachable;
