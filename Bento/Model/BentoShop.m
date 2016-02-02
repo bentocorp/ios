@@ -164,6 +164,14 @@ static BentoShop *_shareInstance;
             [self getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
             [AppStrings sharedInstance].appStrings = (NSArray *)self.dicInit2[@"/ioscopy"];
             
+            // service area (used for setting default mapview display area)
+            if (self.dicInit2[@"settings"][@"serviceArea_lunch"] && self.dicInit2[@"settings"][@"serviceArea_dinner"]) {
+                NSString *lunchKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_lunch"];
+                NSString *dinnerKMLValue = (NSString *)self.dicInit2[@"settings"][@"serviceArea_dinner"];
+                NSDictionary *kmlValues = @{@"lunchKMLValue": lunchKMLValue, @"dinnerKMLValue": dinnerKMLValue};
+                [self getServiceArea:kmlValues];
+            }
+            
             completion(YES, error);
         }
         else {
@@ -645,22 +653,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     // Current Time
     NSDateComponents *componentsCurrent = [[NSCalendar currentCalendar] components:(NSCalendarUnitHour | NSCalendarUnitMinute) fromDate:[NSDate date]];
     currentTime = (float)[componentsCurrent hour] + ((float)[componentsCurrent minute] / 60);
-    
-    /*---*/
-    
-//    // Set Lunch Mode
-//    if (currentTime >= 0 && currentTime < dinnerTime)
-//    {
-//        [defaults setObject:@"Lunch" forKey:@"LunchOrDinner"];
-//        currentMode = @"Lunch";
-//    }
-//    else if (currentTime >= dinnerTime && currentTime < 24)
-//    {
-//        [defaults setObject:@"Dinner" forKey:@"LunchOrDinner"];
-//        currentMode = @"Dinner";
-//    }
-//    
-//    [defaults synchronize];
 }
 
 - (NSString *)getOnDemandMealMode {
@@ -824,121 +816,93 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return menuItems;
 }
 
-- (void)getServiceAreaMapURLs {
-    /*----------------- for service area URL's-------------------*/
-    lunchMapURLString = self.dicInit2[@"settings"][@"serviceArea_lunch_map"];
-    dinnerMapURLString = self.dicInit2[@"settings"][@"serviceArea_dinner_map"];
-}
-
 - (NSString *)getGeofenceRadius {
     return self.dicInit2[@"settings"][@"geofence_order_radius_meters"];
 }
 
-- (void)getServiceArea
-{
-    [self getServiceAreaMapURLs];
+- (void)getServiceArea:(NSDictionary *)serviceAreaDictionary {
     
-    [self sendRequest:@"/servicearea" completion:^(id responseDic, NSError *error) {
+    NSDictionary *kmlValues = (NSDictionary *)serviceAreaDictionary;
+    
+    if (kmlValues == nil) {
+        return;
+    }
+    
+    // Service Area
+    NSString *strPoints;
+    
+    if ([self isAllDay]) {
+        if ([self isThereLunchMenu]) {
+            strPoints = kmlValues[@"lunchKMLValue"];
+        }
+        // if no lunch, dinner exists
+        else if ([self isThereDinnerMenu]) {
+            strPoints = kmlValues[@"dinnerKMLValue"];
+        }
         
-        if (error == nil) {
-            NSDictionary *kmlValues = (NSDictionary *)responseDic;
-            
-            if (kmlValues == nil) {
-                return;
-            }
-            
-            // Service Area
-            NSString *strPoints;
-            
-            if ([self isAllDay])
-            {
-                // lunch exists
-                if ([self isThereLunchMenu])
-                {
-                    strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-                    NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
-                }
-                // if no lunch, dinner exists
-                else if ([self isThereDinnerMenu])
-                {
-                    strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-                    NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
-                }
-                
-                /* The below 2 cases are probably unecessary...I was hardcoding the value for isAllDay to YES when there was no menu, so the app hanged */
-                
-                // 12:00am - dinner opening (ie. 16.5)
-                else if (currentTime >= 0 && currentTime < dinnerTime)
-                {
-                    strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-                    NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
-                }
-                // dinner opening - 11:59pm
-                else if (currentTime >= dinnerTime && currentTime < 24)
-                {
-                    strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-                    NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
-                }
-            }
-            else
-            {
-                // 12:00am - dinner opening (ie. 16.5)
-                if (currentTime >= 0 && currentTime < dinnerTime)
-                {
-                    strPoints = kmlValues[@"serviceArea_lunch"][@"value"];
-                    NSLog(@"current time is: %f ...use lunch service area - %@", currentTime, strPoints);
-                }
-                // dinner opening - 11:59pm
-                else if (currentTime >= dinnerTime && currentTime < 24)
-                {
-                    strPoints = kmlValues[@"serviceArea_dinner"][@"value"];
-                    NSLog(@"current time is: %f ...use dinner service area - %@", currentTime, strPoints);
-                }
-            }
-            
-            if (strPoints == nil) {
-                NSLog(@"WARNING!!! SERVICE AREA strPoints == nil");
-            }
-            
-            NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
-            
-            // Parse String and Separate Latitude and Longitude.
-            CLLocationCoordinate2D *locations = (CLLocationCoordinate2D *)malloc(sizeof(CLLocationCoordinate2D) * (subStrings.count - 1));
-            
-            NSInteger posCount = 0;
-            for (NSInteger posIndex = 0; posIndex < subStrings.count - 1; posIndex++)
-            {
-                NSString *strPoint = [subStrings objectAtIndex:posIndex];
-                NSArray *subComponents = [strPoint componentsSeparatedByString:@","];
-                
-                double latitude = 0, longitude = 0;
-                for (NSInteger index = 0; index < subComponents.count; index++)
-                {
-                    NSString *strComponent = [subComponents objectAtIndex:index];
-                    if (index == 0)
-                        longitude = [strComponent doubleValue];
-                    else if (index == 1)
-                        latitude = [strComponent doubleValue];
-                }
-                
-                if (latitude == 0 && longitude == 0)
-                    continue;
-                
-                posCount ++;
-                locations[posIndex] = CLLocationCoordinate2DMake(latitude, longitude);
-            }
-            
-            if (posCount > 0)
-                self.serviceArea = [MKPolygon polygonWithCoordinates:locations count:subStrings.count - 1];
-            
-            free(locations);
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_AREA object:nil];
+        /* The below 2 cases are probably unecessary...I was hardcoding the value for isAllDay to YES when there was no menu, so the app hanged */
+        
+        // 12:00am - dinner opening (ie. 16.5)
+        else if (currentTime >= 0 && currentTime < dinnerTime) {
+            strPoints = kmlValues[@"lunchKMLValue"];
         }
-        else {
-            NSLog(@"/servicearea error: %@", error);
+        // dinner opening - 11:59pm
+        else if (currentTime >= dinnerTime && currentTime < 24) {
+            strPoints = kmlValues[@"dinnerKMLValue"];
         }
-    }];
+    }
+    else {
+        // 12:00am - dinner opening (ie. 16.5)
+        if (currentTime >= 0 && currentTime < dinnerTime) {
+            strPoints = kmlValues[@"lunchKMLValue"];
+        }
+        // dinner opening - 11:59pm
+        else if (currentTime >= dinnerTime && currentTime < 24) {
+            strPoints = kmlValues[@"dinnerKMLValue"];
+        }
+    }
+    
+    if (strPoints == nil) {
+        NSLog(@"WARNING!!! SERVICE AREA strPoints == nil");
+        return;
+    }
+    
+    NSArray *subStrings = [strPoints componentsSeparatedByString:@" "];
+    
+    // Parse String and Separate Latitude and Longitude.
+    CLLocationCoordinate2D *locations = (CLLocationCoordinate2D *)malloc(sizeof(CLLocationCoordinate2D) * (subStrings.count - 1));
+    
+    NSInteger posCount = 0;
+    for (NSInteger posIndex = 0; posIndex < subStrings.count - 1; posIndex++) {
+
+        NSString *strPoint = [subStrings objectAtIndex:posIndex];
+        NSArray *subComponents = [strPoint componentsSeparatedByString:@","];
+        
+        double latitude = 0, longitude = 0;
+        for (NSInteger index = 0; index < subComponents.count; index++) {
+            
+            NSString *strComponent = [subComponents objectAtIndex:index];
+            if (index == 0) {
+                longitude = [strComponent doubleValue];
+            }
+            else if (index == 1) {
+                latitude = [strComponent doubleValue];
+            }
+        }
+        
+        if (latitude == 0 && longitude == 0) {
+            continue;
+        }
+        
+        posCount ++;
+        locations[posIndex] = CLLocationCoordinate2DMake(latitude, longitude);
+    }
+    
+    if (posCount > 0) {
+        self.serviceArea = [MKPolygon polygonWithCoordinates:locations count:subStrings.count - 1];
+    }
+    
+    free(locations);
 }
 
 // returns bg image
@@ -1264,7 +1228,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
                 [self getMenus];
                 [self getNextMenus];
                 [self getStatus];
-                [self getServiceArea];
             }
         });
     }

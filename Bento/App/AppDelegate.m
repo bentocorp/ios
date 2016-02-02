@@ -330,7 +330,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                 [globalShop getMenus];
                 [globalShop getNextMenus];
                 [globalShop getStatus];
-                [globalShop getServiceArea];
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
                     // If IntroVC has already been completely processed once, startUpdatingLocation
@@ -513,7 +512,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
         [globalShop getStatus];
-        [globalShop getServiceArea];
         [globalShop getMenus];
         [globalShop getNextMenus];
         

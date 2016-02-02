@@ -209,7 +209,6 @@
                 [globalShop getMenus];
                 [globalShop getNextMenus];
                 [globalShop getStatus];
-                [globalShop getServiceArea];
                 
                 [self afterViewWillAppear];
             }
@@ -219,7 +218,6 @@
                     [globalShop getMenus];
                     [globalShop getNextMenus];
                     [globalShop getStatus];
-                    [globalShop getServiceArea];
                     
                     [self afterViewWillAppear];
                 }];
