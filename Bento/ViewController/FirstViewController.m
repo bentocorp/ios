@@ -221,7 +221,7 @@
                         [loadingHUD showInView:self.view];
                     }
                     
-                    [self retryLoadData];
+                    [self loadData];
                 }
                 else {
                     if (loadingHUD != nil) {
@@ -247,7 +247,7 @@
                         [loadingHUD showInView:self.view];
                     }
                     
-                    [self retryLoadData];
+                    [self loadData];
                 }
                 else {
                     if (loadingHUD != nil) {
@@ -262,10 +262,6 @@
             }];
         }
     });
-}
-
-- (void)retryLoadData {
-    [self performSelector:@selector(loadData) withObject:nil afterDelay:1];
 }
 
 - (void)afterViewWillAppear {

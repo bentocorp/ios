@@ -629,12 +629,6 @@
     if([SLComposeViewController isAvailableForServiceType:SLServiceTypeFacebook]) {
         SLComposeViewController *faceSheet = [SLComposeViewController composeViewControllerForServiceType:SLServiceTypeFacebook];
         
-        // this is against FB's new policy now - does not work
-        //        [faceSheet setInitialText:sharePrecomposedMessageNew];
-        
-        //        FBSDKShareLinkContent *content = [[FBSDKShareLinkContent alloc] init];
-        //        content.contentURL = [NSURL URLWithString:@"https://developers.facebook.com"];
-        
         [self presentViewController:faceSheet animated:YES completion:Nil];
     } else {
         UIAlertView *warningAlert = [[UIAlertView alloc] initWithTitle:@"Not Logged In"
