@@ -21,9 +21,8 @@
     NSInteger _currentIndex;
 }
 
-#define USER_NOTIFICATION_UPDATED_MENU      @"user_notification_updated_menu"
 #define USER_NOTIFICATION_UPDATED_STATUS    @"user_notification_updated_status"
-#define USER_NOTIFICATION_UPDATED_AREA      @"user_notification_updated_area"
+#define USER_NOTIFICATION_UPDATED_MENU      @"user_notification_updated_menu"
 #define USER_NOTIFICATION_UPDATED_NEXTMENU  @"user_notification_updated_nextmenu"
 
 @property (nonatomic) NSMutableArray *aryBentos;
