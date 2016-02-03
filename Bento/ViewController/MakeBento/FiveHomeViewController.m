@@ -157,6 +157,7 @@ static OrderAheadMenu *orderAheadMenu;
     
     self.isFirstSelection = YES;
     
+    [self.cancelButton setTitle:[[[AppStrings sharedInstance] getString:CANCEL_BUTTON_TEXT] uppercaseString] forState:UIControlStateNormal];
     self.cancelButton.hidden = YES;
     
     self.doneButtonWidthConstraint.constant = SCREEN_WIDTH;
@@ -179,6 +180,8 @@ static OrderAheadMenu *orderAheadMenu;
     self.startingPriceLabel.hidden = YES;
     self.etaLabel.hidden = YES;
     self.etaBannerDivider.hidden = YES;
+    
+    self.previewLabel.text = [[AppStrings sharedInstance] getString:PREVIEW_TITLE];
     self.previewLabel.hidden = YES;
     
     [self removeOrderAhead];

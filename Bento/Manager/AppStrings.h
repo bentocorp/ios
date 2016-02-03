@@ -218,6 +218,9 @@
 
 #define NO_ORDERS_TEXT                          @"pane-emptymsg-orders"
 
+#define PREVIEW_TITLE                           @"oa-preview-title"
+#define CANCEL_BUTTON_TEXT                      @"oa-cancel-btn"
+
 // getting from to settings instead of ioscopy
 //#define ABOUT_PRICE                             @"price"
 //#define SALE_PRICE                              @"sale_price"
