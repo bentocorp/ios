@@ -578,13 +578,13 @@
         
         // unauthorized
         if (error.code == 401) {
-            strMessage = @"Failed to authenticate user, logged out...";
+            strMessage = @"Failed to authenticate user, logging out...";
         }
         else if (strMessage == nil) {
             strMessage = error.localizedDescription;
         }
         
-        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:strMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
         alertView.tag = 3;
         [alertView showInView:self.view];
         alertView = nil;
