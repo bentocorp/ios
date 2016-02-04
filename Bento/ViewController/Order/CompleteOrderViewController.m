@@ -2032,7 +2032,7 @@
         
         NSString *strMessage;
         if (error.code == 401) {
-            strMessage = @"User session has expired. Try logging in again.";
+            strMessage = [[AppStrings sharedInstance] getString:ERROR_LOGIN_AGAIN];
         }
         else {
             strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];

@@ -578,7 +578,7 @@
         
         // unauthorized
         if (error.code == 401) {
-            strMessage = @"User session has expired. Try logging in again.";
+            strMessage = [[AppStrings sharedInstance] getString:ERROR_LOGIN_AGAIN];
         }
         else if (strMessage == nil) {
             strMessage = error.localizedDescription;

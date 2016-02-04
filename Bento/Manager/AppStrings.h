@@ -221,6 +221,8 @@
 #define PREVIEW_TITLE                           @"oa-preview-title"
 #define CANCEL_BUTTON_TEXT                      @"oa-cancel-btn"
 
+#define ERROR_LOGIN_AGAIN                       @"error-login-again"
+
 // getting from to settings instead of ioscopy
 //#define ABOUT_PRICE                             @"price"
 //#define SALE_PRICE                              @"sale_price"
