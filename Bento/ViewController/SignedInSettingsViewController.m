@@ -575,10 +575,17 @@
         [loadingHUD dismiss];
         
         NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-        if (strMessage == nil)
+        
+        // unauthorized
+        if (error.code == 401) {
+            strMessage = @"Failed to authenticate user, logged out...";
+        }
+        else if (strMessage == nil) {
             strMessage = error.localizedDescription;
+        }
         
         MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"Error" message:strMessage delegate:nil cancelButtonTitle:@"OK" otherButtonTitle:nil];
+        alertView.tag = 3;
         [alertView showInView:self.view];
         alertView = nil;
         
@@ -599,6 +606,47 @@
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"tel:1-415-300-1332"]];
         }
     }
+    else if (alertView.tag == 3) {
+        [self forceLogout];
+    }
+}
+
+- (void)forceLogout {
+    [[DataManager shareDataManager] setUserInfo:nil];
+    [[DataManager shareDataManager] setCreditCard:nil];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"apiName"];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"loginRequest"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[BentoShop sharedInstance] setSignInStatus:NO];
+    
+    /*------CLEAR MIXPANEL ID AND PROPERTIES ON LOGOUT------*/
+    
+    NSString *UUID;
+    
+    // logged in by registering new account
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"registeredLogin"] isEqualToString:@"YES"]) {
+        UUID = [[NSUUID UUID] UUIDString];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:UUID forKey:@"UUID String"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    // looged in normally
+    else {
+        // reset distinctId with preexisting UUID, so mixpanel profile doesn't break
+        UUID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UUID String"];
+    }
+    
+    [[Mixpanel sharedInstance] identify:UUID];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"registeredLogin"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    /*------------------------------------------------------*/
+    
+    // dismiss view
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void)onEditPhoneNumber {
