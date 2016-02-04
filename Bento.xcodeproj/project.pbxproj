@@ -509,8 +509,6 @@
 		FCD51ED11AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
 		FCD51ED31AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
-		FCDEDFB01C6298F600C61DC9 /* CompleteOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCDEDFAF1C6298F600C61DC9 /* CompleteOrderViewController.xib */; };
-		FCDEDFB11C6298F600C61DC9 /* CompleteOrderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCDEDFAF1C6298F600C61DC9 /* CompleteOrderViewController.xib */; };
 		FCDF22161ADC3ADF006B2750 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22041ADC3ADF006B2750 /* Icon-60.png */; };
 		FCDF22171ADC3ADF006B2750 /* Icon-60.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22041ADC3ADF006B2750 /* Icon-60.png */; };
 		FCDF22181ADC3ADF006B2750 /* Icon-60@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */; };
@@ -957,7 +955,6 @@
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
 		FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCollectionViewCell.m; sourceTree = "<group>"; };
 		FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCollectionViewCell.xib; sourceTree = "<group>"; };
-		FCDEDFAF1C6298F600C61DC9 /* CompleteOrderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CompleteOrderViewController.xib; sourceTree = "<group>"; };
 		FCDF22041ADC3ADF006B2750 /* Icon-60.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60.png"; sourceTree = "<group>"; };
 		FCDF22051ADC3ADF006B2750 /* Icon-60@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@2x.png"; sourceTree = "<group>"; };
 		FCDF22061ADC3ADF006B2750 /* Icon-60@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-60@3x.png"; sourceTree = "<group>"; };
@@ -1460,7 +1457,6 @@
 				FCE1E51B1C48183C00A210DC /* View Preview */,
 				90D8F7D61A5E2FE900D034CF /* CompleteOrderViewController.h */,
 				90D8F7D71A5E2FE900D034CF /* CompleteOrderViewController.m */,
-				FCDEDFAF1C6298F600C61DC9 /* CompleteOrderViewController.xib */,
 				90D8F7D91A5E304D00D034CF /* OrderConfirmViewController.h */,
 				90D8F7DA1A5E304D00D034CF /* OrderConfirmViewController.m */,
 				90D8F7E61A5E3F7500D034CF /* EnterCreditCardViewController.h */,
@@ -2171,7 +2167,6 @@
 				FCDF22351ADC3ADF006B2750 /* Icon.png in Resources */,
 				FC8DB7411AF18674003045A3 /* icon-navigateright.png in Resources */,
 				FCB35C481BFE74EC00A590EC /* Minus Math -64.png in Resources */,
-				FCDEDFB11C6298F600C61DC9 /* CompleteOrderViewController.xib in Resources */,
 				7216B7831AA64C7C0006FFE9 /* JGProgressHUD Resources.bundle in Resources */,
 				7216B7841AA64C7C0006FFE9 /* polygon_service_area.png in Resources */,
 				FCDF222B1ADC3ADF006B2750 /* Icon-Small-50.png in Resources */,
@@ -2327,7 +2322,6 @@
 				90D8F7D51A5E2C4C00D034CF /* image_unchecked@2x.png in Resources */,
 				FCDF22341ADC3ADF006B2750 /* Icon.png in Resources */,
 				FCB35C471BFE74EC00A590EC /* Minus Math -64.png in Resources */,
-				FCDEDFB01C6298F600C61DC9 /* CompleteOrderViewController.xib in Resources */,
 				FC8DB7401AF18674003045A3 /* icon-navigateright.png in Resources */,
 				7223335A1A6D4058006C2446 /* JGProgressHUD Resources.bundle in Resources */,
 				726A92061A8CBA4900E04EFE /* polygon_service_area.png in Resources */,

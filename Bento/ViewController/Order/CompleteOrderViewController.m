@@ -1323,7 +1323,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
-    return 45;
+    return 35;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 35;
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section
@@ -1334,10 +1338,10 @@
     UIColor *editColor = [UIColor bentoBrandGreen];
     UIColor *doneColor = [UIColor colorWithRed:230.0f / 255.0f green:102.0f / 255.0f blue:53.0f / 255.0f alpha:1.0f]; // orange
     
-    UIView *bgView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, tableView.frame.size.width, 45)];
+    UIView *bgView = [[UIView alloc] initWithFrame: CGRectMake(0, 0, tableView.frame.size.width, 35)];
     bgView.backgroundColor = [UIColor colorWithRed:0.882f green:0.914f blue:0.914f alpha:1.0f];
     
-    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 44, tableView.frame.size.width, 1)];
+    UIView *lineView = [[UIView alloc] initWithFrame:CGRectMake(0, 34, tableView.frame.size.width, 1)];
     UIButton *addAnotherButton = [[UIButton alloc] init];
     UIButton *deleteButton = [[UIButton alloc] init];
     
@@ -1414,9 +1418,9 @@
 {
     cell.accessoryType = UITableViewCellAccessoryNone;
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
-    cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 44);
+    cell.viewMain.frame = CGRectMake(0, 0, self.tvBentos.frame.size.width, 34);
     cell.lblBentoName.textColor = [UIColor bentoBrandGreen];
-    cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans" size:14];
+    cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans" size:12];
     
     if (indexPath.section == 0) {
         Bento *curBento = [self.aryBentos objectAtIndex:indexPath.row];
@@ -1427,7 +1431,7 @@
         if (arySoldOutItems.count > 0) {
             if ([curBento checkIfItemIsSoldOut:arySoldOutItems]) {
                 cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
-                cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+                cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
             }
         }
         
@@ -1459,7 +1463,7 @@
         if (arySoldOutItems.count > 0) {
             if ([addon checkIfItemIsSoldOut:arySoldOutItems]) {
                 cell.lblBentoName.textColor = [UIColor bentoErrorTextOrange];
-                cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
+                cell.lblBentoName.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
             }
         }
         
