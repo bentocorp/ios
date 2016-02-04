@@ -160,10 +160,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
-    // For test only
 #ifdef DEBUG
-//    self.txtEmail.text = @"ridev@bentonow.com";
-//    self.txtPassword.text = @"12345678";
     self.txtEmail.text = @"joseph@bentonow.com";
     self.txtPassword.text = @"123456";
 #endif

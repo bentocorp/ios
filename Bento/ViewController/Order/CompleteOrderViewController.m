@@ -2022,15 +2022,23 @@
                 /*----------------------------------------------------------------------------------------*/
             }
         }
-        
         // server error?
-        if (error.code == 500) {
+        else if (error.code == 500) {
             [self updateUI];
         }
+        else if (error.code == 401) {
+            
+        }
         
-        NSString *strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
-        if (strMessage == nil) {
-            strMessage = error.localizedDescription;
+        NSString *strMessage;
+        if (error.code == 401) {
+            strMessage = @"User session has expired. Try logging in again.";
+        }
+        else {
+            strMessage = [[DataManager shareDataManager] getErrorMessage:errorOp.responseJSON];
+            if (strMessage == nil) {
+                strMessage = error.localizedDescription;
+            }
         }
         
         // append name of sold out item to error message
@@ -2039,7 +2047,12 @@
         }
         
         MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@"" message:strMessage delegate:self cancelButtonTitle:@"OK" otherButtonTitle:nil];
-        alertView.tag = 888;
+        if (error.code == 401) {
+            alertView.tag = 401;
+        }
+        else {
+            alertView.tag = 888;
+        }
         [alertView showInView:self.view];
         alertView = nil;
         
@@ -2270,6 +2283,48 @@
     else if (alertView.tag == 888) {
         [self.tvBentos reloadData];
     }
+    // 401 unauthorized
+    else if (alertView.tag == 401) {
+        [self forceLogout];
+    }
+}
+
+- (void)forceLogout {
+    [[DataManager shareDataManager] setUserInfo:nil];
+    [[DataManager shareDataManager] setCreditCard:nil];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"apiName"];
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"loginRequest"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    [[BentoShop sharedInstance] setSignInStatus:NO];
+    
+    /*------CLEAR MIXPANEL ID AND PROPERTIES ON LOGOUT------*/
+    
+    NSString *UUID;
+    
+    // logged in by registering new account
+    if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"registeredLogin"] isEqualToString:@"YES"]) {
+        UUID = [[NSUUID UUID] UUIDString];
+        
+        [[NSUserDefaults standardUserDefaults] setObject:UUID forKey:@"UUID String"];
+        [[NSUserDefaults standardUserDefaults] synchronize];
+    }
+    // looged in normally
+    else {
+        // reset distinctId with preexisting UUID, so mixpanel profile doesn't break
+        UUID = [[NSUserDefaults standardUserDefaults] objectForKey:@"UUID String"];
+    }
+    
+    [[Mixpanel sharedInstance] identify:UUID];
+    
+    [[NSUserDefaults standardUserDefaults] setObject:nil forKey:@"registeredLogin"];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+    
+    /*------------------------------------------------------*/
+    
+    // dismiss view
+    [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)updateAllowCommitOnKeep

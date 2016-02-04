@@ -379,9 +379,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     // Facebook
 #ifndef DEV_MODE
-    if ([[url scheme] isEqualToString:@"fb791688527544905"])
+    if ([[url scheme] isEqualToString:@"fb791688527544905"]) // prod
 #else
-    if ([[url scheme] isEqualToString:@"fb823525551027869"])
+    if ([[url scheme] isEqualToString:@"fb823525551027869"]) // dev
 #endif
     {
         return [[FBSDKApplicationDelegate sharedInstance] application:application
