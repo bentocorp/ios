@@ -169,7 +169,7 @@
     if ([segue.identifier isEqualToString:@"OutOfDelivery"]) {
         
         OutOfDeliveryAddressViewController *vcOutOfZone = segue.destinationViewController;
-        vcOutOfZone.strAddress = (NSString *)sender;
+        vcOutOfZone.placeInfo = (SVPlacemark *)sender;
     }
 }
 
@@ -539,7 +539,7 @@
 
 - (void)gotoNoneDeliveryAreaScreen {
     [self stopSearch];
-    [self performSegueWithIdentifier:@"OutOfDelivery" sender:self.placeInfo.formattedAddress];
+    [self performSegueWithIdentifier:@"OutOfDelivery" sender:self.placeInfo];
 }
 
 - (void)startSearch {

@@ -121,14 +121,14 @@
 //    MKMapRect newRect = [self.mapView mapRectThatFits:curRect edgePadding:insets];
 //    [self.mapView setRegion:MKCoordinateRegionForMapRect(newRect)];
     
-    [self.lblAddress setText:self.strAddress];
+    [self.lblAddress setText:self.placeInfo.formattedAddress];
     
     Mixpanel *mixpanel = [Mixpanel sharedInstance];
     [mixpanel track:@"Selected Address Outside of Service Area" properties:@{
-                                                                             @"Address": self.strAddress
+                                                                             @"Address": self.placeInfo.formattedAddress
                                                                             }];
     
-    NSLog(@"SELECTED ADDRESS: %@", self.strAddress);
+    NSLog(@"SELECTED ADDRESS: %@", self.placeInfo.formattedAddress);
     
 //// set map view
 //    float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
@@ -306,7 +306,8 @@
                      @"email"       : strEmail,
                      @"reason"      : strReason,
                      @"api_token"   : strToken,
-                     @"address"     : self.strAddress
+                     @"address"     : self.placeInfo.formattedAddress,
+                     @"coordinate"  : [NSString stringWithFormat:@"%f, %f", self.placeInfo.location.coordinate.latitude, self.placeInfo.location.coordinate.longitude]
                      };
     }
     else
@@ -314,7 +315,8 @@
         postInfo = @{
                      @"email"   : strEmail,
                      @"reason"  : strReason,
-                     @"address" : self.strAddress
+                     @"address" : self.placeInfo.formattedAddress,
+                     @"coordinate"  : [NSString stringWithFormat:@"%f, %f", self.placeInfo.location.coordinate.latitude ,self.placeInfo.location.coordinate.longitude]
                      };
     }
     

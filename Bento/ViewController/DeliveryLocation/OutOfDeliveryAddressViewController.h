@@ -10,9 +10,11 @@
 
 #import "DataManager.h"
 
+#import "SVPlacemark.h"
+
 @interface OutOfDeliveryAddressViewController : UIViewController
 
-@property (nonatomic) NSString *strAddress;
+@property (nonatomic) SVPlacemark *placeInfo;
 
 @property (nonatomic) BOOL cameFromCompleteOrderVC;
 
