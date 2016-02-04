@@ -2262,7 +2262,7 @@ static OrderAheadMenu *orderAheadMenu;
     if (component == 0) {
         menuOrderAhead = menuNames[row];
         tempSelectedOrderAheadIndex = row;
-        [pickerView reloadComponent:1];
+//        [pickerView reloadComponent:1];
 //        [pickerView selectRow:0 inComponent:1 animated:YES];
     }
     else {
@@ -2296,7 +2296,7 @@ static OrderAheadMenu *orderAheadMenu;
     menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
     timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
     
-    tempSelectedOrderAheadIndex = [self.orderAheadPickerView selectedRowInComponent:0];
+//    tempSelectedOrderAheadIndex = [self.orderAheadPickerView selectedRowInComponent:0];
     tempSelectedOrderAheadTimeRangeIndex = [self.orderAheadPickerView selectedRowInComponent:1];
     
     if (tempOrderMode == OnDemand) {
