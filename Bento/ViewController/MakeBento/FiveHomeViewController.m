@@ -1071,7 +1071,7 @@ static OrderAheadMenu *orderAheadMenu;
         [self updateWidget];
         [self updateOrderAheadWidget];
         NSLog(@"Order Mode - %ld", (unsigned long)orderMode);
-        [self updatePickerButtonTitle];
+        [self updatePickerButtonTitle: NO];
     });
 }
 
@@ -1523,7 +1523,7 @@ static OrderAheadMenu *orderAheadMenu;
     [self.orderAheadPickerView selectRow:self.selectedOrderAheadIndex inComponent:0 animated:YES];
     [self.orderAheadPickerView selectRow:self.selectedOrderAheadTimeRangeIndex inComponent:1 animated:YES];
     
-    [self updatePickerButtonTitle];
+    [self updatePickerButtonTitle: NO];
     [self toggleDropDown];
 }
 
@@ -1552,7 +1552,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.orderAheadPickerContainerViewHeightConstraint.constant = 150;
     self.orderAheadPickerView.hidden = NO;
     
-    [self updatePickerButtonTitle];
+    [self updatePickerButtonTitle: NO];
     
     [self.view layoutIfNeeded];
 }
@@ -2104,7 +2104,7 @@ static OrderAheadMenu *orderAheadMenu;
     self.orderAheadPickerContainerViewHeightConstraint.constant = 150;
     self.orderAheadPickerView.hidden = NO;
     
-    [self updatePickerButtonTitle];
+    [self updatePickerButtonTitle: NO];
     
 //    [self showOrHideETA];
     
@@ -2252,7 +2252,7 @@ static OrderAheadMenu *orderAheadMenu;
     pickerLabel.textAlignment = NSTextAlignmentCenter;
     pickerLabel.font = [UIFont fontWithName:@"OpenSans-Regular" size:14];
     
-    [self updatePickerButtonTitle];
+    [self updatePickerButtonTitle: YES];
     
     return pickerLabel;
 }
@@ -2289,15 +2289,18 @@ static OrderAheadMenu *orderAheadMenu;
     [pickerView reloadAllComponents];
 }
 
-- (void)updatePickerButtonTitle {
+- (void)updatePickerButtonTitle:(BOOL)calledFromPicker {
     
     menuOnDemand = self.asapMenuLabel.text;
     
     menuOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:0] forComponent:0];
     timeOrderAhead = [self pickerView:self.orderAheadPickerView titleForRow:[self.orderAheadPickerView selectedRowInComponent:1] forComponent:1];
     
-//    tempSelectedOrderAheadIndex = [self.orderAheadPickerView selectedRowInComponent:0];
-    tempSelectedOrderAheadTimeRangeIndex = [self.orderAheadPickerView selectedRowInComponent:1];
+    // don't update this from here if called from picker, or it will cause multi component scroll crash. already being updated in delegate
+    if (calledFromPicker == NO) {
+        tempSelectedOrderAheadIndex = [self.orderAheadPickerView selectedRowInComponent:0];
+        tempSelectedOrderAheadTimeRangeIndex = [self.orderAheadPickerView selectedRowInComponent:1];
+    }
     
     if (tempOrderMode == OnDemand) {
         if (menuOnDemand != nil) {
