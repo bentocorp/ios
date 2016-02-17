@@ -138,7 +138,6 @@
 }
 
 - (void)getData {
-    
     if (isFirstTimeLoad == YES) {
         isFirstTimeLoad = NO;
         loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
@@ -239,6 +238,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
     static NSString *cellId = @"Cell";
+    
     OrdersTableViewCell *cell = (OrdersTableViewCell *)[tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (cell == nil) {
@@ -251,7 +251,19 @@
     cell.titleLabel.text = orderHistoryItem.title;
     cell.priceLabel.text = orderHistoryItem.price;
     
+    if ([orderHistorySection.sectionTitle isEqualToString:@"In Progress"]) {
+        cell.titleLabel.textColor = [UIColor bentoBrandGreen];
+        cell.priceLabel.textColor = [UIColor bentoBrandGreen];
+        
+        cell.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
+        cell.priceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
+        
+        [cell.titleLabel.text uppercaseString];
+    }
+    
     return cell;
 }
+
+
 
 @end
