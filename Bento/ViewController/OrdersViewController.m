@@ -257,7 +257,7 @@
         
         cell.priceLabel.textColor = [UIColor bentoBrandGreen];
         cell.priceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
-        cell.priceLabel.frame = CGRectMake(cell.priceLabel.frame.origin.x - 20, cell.priceLabel.frame.origin.y, cell.priceLabel.frame.size.width, cell.priceLabel.frame.size.height);
+        cell.priceLabel.frame = CGRectMake(SCREEN_WIDTH - 120, cell.priceLabel.frame.origin.y, cell.priceLabel.frame.size.width, cell.priceLabel.frame.size.height);
         
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
