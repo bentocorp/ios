@@ -251,19 +251,42 @@
     cell.titleLabel.text = orderHistoryItem.title;
     cell.priceLabel.text = orderHistoryItem.price;
     
-    if ([orderHistorySection.sectionTitle isEqualToString:@"In Progress"]) {
+    if ([self isSectionInProgress: self.orderHistoryArray[indexPath.section]]) {
         cell.titleLabel.textColor = [UIColor bentoBrandGreen];
-        cell.priceLabel.textColor = [UIColor bentoBrandGreen];
-        
         cell.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
-        cell.priceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
         
-        [cell.titleLabel.text uppercaseString];
+        cell.priceLabel.textColor = [UIColor bentoBrandGreen];
+        cell.priceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
+        cell.priceLabel.frame = CGRectMake(cell.priceLabel.frame.origin.x - 20, cell.priceLabel.frame.origin.y, cell.priceLabel.frame.size.width, cell.priceLabel.frame.size.height);
+        
+        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+    }
+    else {
+        cell.titleLabel.textColor = [UIColor bentoTitleGray];
+        cell.titleLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:12];
+        
+        cell.priceLabel.textColor = [UIColor bentoTitleGray];
+        cell.priceLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:12];
+        cell.priceLabel.frame = CGRectMake(SCREEN_WIDTH - 100, cell.priceLabel.frame.origin.y, cell.priceLabel.frame.size.width, cell.priceLabel.frame.size.height);
+        
+        cell.accessoryType = UITableViewCellAccessoryNone;
     }
     
     return cell;
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self isSectionInProgress: self.orderHistoryArray[indexPath.section]]) {
+        NSLog(@"hi guy");
+    }
+}
 
+- (BOOL)isSectionInProgress:(OrderHistorySection *)section {
+    if ([section.sectionTitle isEqualToString:@"In Progress"]) {
+        return YES;
+    }
+    
+    return NO;
+}
 
 @end
