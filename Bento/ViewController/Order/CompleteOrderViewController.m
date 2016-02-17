@@ -240,16 +240,17 @@
     
     if(![CLLocationManager locationServicesEnabled]) {
         // You need to enable Location Services
+        NSLog(@"diu");
     }
     
     if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]]) {
         // Region monitoring is not available for this Class
+        NSLog(@"lei");
     }
     
     if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
         // You need to authorize Location Services for the APP
-        
-        [[Mixpanel sharedInstance] track:@"Tapped On Let's Eat"];
+        NSLog(@"lomo");
         
         [self commitOnGetItNow]; // disallowed location services
         

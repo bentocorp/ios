@@ -2897,7 +2897,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "cdce9168-b03b-44c2-a6a9-5991ca065a45";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -2980,7 +2980,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "cdce9168-b03b-44c2-a6a9-5991ca065a45";
+				PROVISIONING_PROFILE = "";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -3106,7 +3106,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "10961a31-8b0f-4e35-9b18-717be7ea508b";
+				PROVISIONING_PROFILE = "0ab05ea6-0617-4490-ad16-c987d303d126";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -3142,7 +3142,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bento;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "10961a31-8b0f-4e35-9b18-717be7ea508b";
+				PROVISIONING_PROFILE = "0ab05ea6-0617-4490-ad16-c987d303d126";
 				SUPPORTED_PLATFORMS = "iphonesimulator iphoneos";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
