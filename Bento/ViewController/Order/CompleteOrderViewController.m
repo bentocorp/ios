@@ -1950,6 +1950,13 @@
         [userDefaults setInteger:0 forKey:KEY_PROMO_DISCOUNT];
         [userDefaults setObject:nil forKey:@"arySoldOutItems"]; // clear out arySoldOutItems
         
+        if (self.orderMode == OnDemand) {
+            [[Mixpanel sharedInstance] track:@"Ordered On-demand"];
+        }
+        else if (self.orderMode == OrderAhead) {
+            [[Mixpanel sharedInstance] track:@"Ordered Order-ahead"];
+        }
+        
         [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
