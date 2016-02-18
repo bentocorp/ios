@@ -67,6 +67,10 @@
     
     CLLocationManager *locationManager;
     CLLocationCoordinate2D gpsCoordinateForGateKeeper;
+    
+    NSMutableArray *OAOnlyItemsMains;
+    NSMutableArray *OAOnlyItemsSides;
+    NSMutableArray *OAOnlyItemsAddons;
 }
 
 static BentoShop *_shareInstance;
@@ -210,6 +214,7 @@ static BentoShop *_shareInstance;
                 
                 [self getMenus];
                 [self getNextMenus];
+                [self getOAOnlyItems];
                 
                 completion(YES, error);
             }
@@ -595,6 +600,83 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
             NSLog(@"/menu/date error: %@", error);
         }
     }];
+}
+
+- (void)getOAOnlyItems
+{
+    NSDictionary *menuItems;
+    
+    if ([self isAllDay])
+    {
+        // lunch exists
+        if ([self isThereLunchMenu])
+        {
+            menuItems = self.menuToday[@"lunch"][@"OAOnlyItems"];
+        }
+        // no lunch, dinner exists
+        else if ([self isThereDinnerMenu])
+        {
+            menuItems = self.menuToday[@"dinner"][@"OAOnlyItems"];
+        }
+    }
+    else
+    {
+        // 12:00am - dinner opening (ie. 16.5)
+        if (currentTime >= 0 && currentTime < dinnerTime)
+        {
+            menuItems = self.menuToday[@"lunch"][@"OAOnlyItems"];
+            
+            // dinner opening - 11:59pm
+        }
+        else if (currentTime >= dinnerTime && currentTime < 24)
+        {
+            menuItems = self.menuToday[@"dinner"][@"OAOnlyItems"];
+        }
+    }
+    
+    if (menuItems != nil) {
+        // Mains
+        NSMutableArray *arrayDishesMains = [[NSMutableArray alloc] init];
+        for (NSDictionary *dishInfo in menuItems) {
+            NSString *strType = [dishInfo objectForKey:@"type"];
+            if ([strType isEqualToString:@"main"]) {
+                [arrayDishesMains addObject:dishInfo];
+            }
+        }
+        OAOnlyItemsMains = arrayDishesMains;
+        
+        // Sides
+        NSMutableArray *arrayDishesSides = [[NSMutableArray alloc] init];
+        for (NSDictionary *dishInfo in menuItems) {
+            NSString *strType = [dishInfo objectForKey:@"type"];
+            if ([strType isEqualToString:@"side"]) {
+                [arrayDishesSides addObject:dishInfo];
+            }
+        }
+        OAOnlyItemsSides = arrayDishesSides;
+        
+        // Addons
+        NSMutableArray *arrayDishesAddons = [[NSMutableArray alloc] init];
+        for (NSDictionary *dishInfo in menuItems) {
+            NSString *strType = [dishInfo objectForKey:@"type"];
+            if ([strType isEqualToString:@"addon"]) {
+                [arrayDishesAddons addObject:dishInfo];
+            }
+        }
+        OAOnlyItemsAddons = arrayDishesAddons;
+    }
+}
+
+- (NSMutableArray *)getOAOnlyItemsMains {
+    return OAOnlyItemsMains;
+}
+
+- (NSMutableArray *)getOAOnlyItemsSides {
+    return OAOnlyItemsSides;
+}
+
+- (NSMutableArray *)getOAOnlyItemsAddons {
+    return OAOnlyItemsAddons;
 }
 
 - (void)getNextMenus {

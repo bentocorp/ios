@@ -149,4 +149,8 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 - (NSString *)getOnDemandMealMode;
 - (NSString *)getOrderAheadTitleString;
 
+- (NSMutableArray *)getOAOnlyItemsMains;
+- (NSMutableArray *)getOAOnlyItemsSides;
+- (NSMutableArray *)getOAOnlyItemsAddons;
+
 @end
