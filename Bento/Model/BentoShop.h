@@ -44,6 +44,7 @@
 
 - (BOOL)canAddDish:(NSInteger)dishID;
 - (BOOL)isDishSoldOut:(NSInteger)menuID;
+- (BOOL)isDishOAOnly:(NSInteger)menuID OAOnlyItems:(NSMutableArray *)OAOnlyItems;
 
 - (void)setStatus:(NSArray *)menuStatus;
 

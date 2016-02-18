@@ -19,6 +19,8 @@
 
 #import "Mixpanel.h"
 
+#import "UIColor+CustomColors.h"
+
 @interface DishCollectionViewCell()
 {
     BOOL _isOAOnlyItem;
@@ -57,6 +59,9 @@
 @end
 
 @implementation DishCollectionViewCell
+{
+    UILabel *OAOnlyLabel;
+}
 
 - (void)awakeFromNib
 {
@@ -102,7 +107,7 @@
 {
     _isSideDishCell = YES;
     
-    if (_isSoldOut) {
+    if (_isSoldOut && _isOAOnlyItem == NO) {
         [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
     }
     else if (!_canBeAdded) {
@@ -202,6 +207,7 @@
             self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: MAINDISH_ADD_BUTTON_NORMAL];
             [self.btnAction addSubview:self.addToBentoLabel];
             
+            
             // PRICE LABEL
             self.unitPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, priceSpacingWidth, self.btnAction.frame.size.height)];
             self.unitPriceLabel.textAlignment = NSTextAlignmentCenter;
@@ -257,7 +263,7 @@
          
         self.ivMask.hidden = YES;
         
-        if (_isSoldOut) {
+        if (_isSoldOut && _isOAOnlyItem == NO) {
             self.ivBanner.hidden = NO;
         }
         else {
@@ -299,7 +305,7 @@
         self.btnAction.hidden = NO;
         self.ivBanner.hidden = YES;
         
-        if (_isSoldOut) {
+        if (_isSoldOut && _isOAOnlyItem == false) {
             if (self.isMain == YES) {
                 self.addToBentoLabel.text = @"Sold Out";
                 [self.btnAction setTitle:@"" forState:UIControlStateNormal];

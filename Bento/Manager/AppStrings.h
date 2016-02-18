@@ -223,6 +223,8 @@
 
 #define ERROR_LOGIN_AGAIN                       @"error-login-again"
 
+#define OA_ONLY_TEXT                            @"oa-only-od-btn"
+
 // getting from to settings instead of ioscopy
 //#define ABOUT_PRICE                             @"price"
 //#define SALE_PRICE                              @"sale_price"

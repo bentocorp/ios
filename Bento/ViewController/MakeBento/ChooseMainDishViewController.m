@@ -281,13 +281,13 @@
         if (self.orderMode == OnDemand) {
             // if main dish, set isMain to true
             if ([dishInfo[@"type"] isEqualToString:@"main"]) {
-                [cell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+                [cell setDishInfo:dishInfo isOAOnlyItem:[[BentoShop sharedInstance] isDishOAOnly:dishID OAOnlyItems:OAOnlyItemsMains] isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
             }
         }
         else if (self.orderMode == OrderAhead) {
             // if main dish, set isMain to true
             if ([dishInfo[@"type"] isEqualToString:@"main"]) {
-                [cell setDishInfo:dishInfo isSoldOut:[self.orderAheadMenu isDishSoldOut:dishID] canBeAdded:[self.orderAheadMenu canAddDish:dishID] isMain:YES];
+                [cell setDishInfo:dishInfo isOAOnlyItem:[[BentoShop sharedInstance] isDishOAOnly:dishID OAOnlyItems:OAOnlyItemsMains] isSoldOut:[self.orderAheadMenu isDishSoldOut:dishID] canBeAdded:[self.orderAheadMenu canAddDish:dishID] isMain:YES];
             }
         }
         
@@ -313,10 +313,10 @@
     if ([dishInfo[@"type"] isEqualToString:@"main"]) {
         
         if (self.orderMode == OnDemand) {
-            [myCell setDishInfo:dishInfo isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
+            [myCell setDishInfo:dishInfo isOAOnlyItem:[[BentoShop sharedInstance] isDishOAOnly:dishID OAOnlyItems:OAOnlyItemsMains] isSoldOut:[[BentoShop sharedInstance] isDishSoldOut:dishID] canBeAdded:[[BentoShop sharedInstance] canAddDish:dishID] isMain:YES];
         }
         else if (self.orderMode == OrderAhead) {
-            [myCell setDishInfo:dishInfo isSoldOut:[self.orderAheadMenu isDishSoldOut:dishID] canBeAdded:[self.orderAheadMenu canAddDish:dishID] isMain:YES];
+            [myCell setDishInfo:dishInfo isOAOnlyItem:[[BentoShop sharedInstance] isDishOAOnly:dishID OAOnlyItems:OAOnlyItemsMains] isSoldOut:[self.orderAheadMenu isDishSoldOut:dishID] canBeAdded:[self.orderAheadMenu canAddDish:dishID] isMain:YES];
         }
     }
     
