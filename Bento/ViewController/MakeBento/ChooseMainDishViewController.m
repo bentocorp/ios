@@ -110,6 +110,19 @@
     [self endTimerOnViewedScreen];
 }
 
+//- (NSArray *)getExclusiveItems {
+//    
+//    NSMutableArray *exclusiveItems = [[NSMutableArray alloc] init];
+//    
+//    for (NSDictionary *dishInfo in self.orderAheadMenu.mainDishes) {
+//        if ([self.aryDishes containsObject:dishInfo]) {
+//            [exclusiveItems addObject:dishInfo];
+//        }
+//    }
+//    
+//    return exclusiveItems;
+//}
+
 - (void)sortAryDishes {
     
     // clear items first
@@ -166,6 +179,14 @@
             }
         }
     }
+    
+    //    // 4) append exclusive dishes to self.arydishes
+    //    if (self.orderMode == OnDemand) {
+    //        if ([[BentoShop sharedInstance] isThereOrderAhead]) {
+    //            self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:[self getExclusiveItems]] mutableCopy];
+    //        }
+    //    }
+
     
     // 3) append sold out dishes to self.aryDishes
     self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];

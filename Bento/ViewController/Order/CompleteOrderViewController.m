@@ -359,9 +359,9 @@
              }
              // Within radius
              else {
-                 [[Mixpanel sharedInstance] track:@"Geofence - Inside"];
-                 
                  [self commitOnGetItNow];
+                 
+                 [[Mixpanel sharedInstance] track:@"Geofence - Inside"];
              }
          }];
     

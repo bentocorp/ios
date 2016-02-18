@@ -598,7 +598,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
 }
 
 - (void)getNextMenus {
-    
     NSString *strDate = [self getDateString];
     
     [self sendRequest:[NSString stringWithFormat:@"/menu/next/%@", strDate] completion:^(id responseDic, NSError *error) {

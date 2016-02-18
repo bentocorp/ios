@@ -985,8 +985,8 @@
 		FCE1E5151C4737C500A210DC /* FiveCustomViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FiveCustomViewController.m; sourceTree = "<group>"; };
 		FCE1E5161C4737C500A210DC /* FiveCustomViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FiveCustomViewController.xib; sourceTree = "<group>"; };
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
-		FCE8E5FC1C4F10EC00742AEE /* OrderAheadMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrderAheadMenu.h; sourceTree = "<group>"; };
-		FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderAheadMenu.m; sourceTree = "<group>"; };
+		FCE8E5FC1C4F10EC00742AEE /* OrderAheadMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderAheadMenu.h; path = ../../Model/OrderAheadMenu.h; sourceTree = "<group>"; };
+		FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderAheadMenu.m; path = ../../Model/OrderAheadMenu.m; sourceTree = "<group>"; };
 		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
 		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
 		FCF5E0A11B8BDC28002E823C /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../placeholder.png; sourceTree = "<group>"; };
@@ -1153,8 +1153,6 @@
 				722333671A6D57CB006C2446 /* Bento.m */,
 				722333691A6D5847006C2446 /* BentoShop.h */,
 				7223336A1A6D5847006C2446 /* BentoShop.m */,
-				FCE8E5FC1C4F10EC00742AEE /* OrderAheadMenu.h */,
-				FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */,
 				7279E5DE1A6B5F3A00591CB2 /* Manager */,
 			);
 			path = Model;
@@ -1439,6 +1437,8 @@
 		90BED0A51A5BD05C003DC872 /* Homepage */ = {
 			isa = PBXGroup;
 			children = (
+				FCE8E5FC1C4F10EC00742AEE /* OrderAheadMenu.h */,
+				FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */,
 				FCB6120B1C517F7F00DB26CE /* CountdownTimer.h */,
 				FCB6120C1C517F7F00DB26CE /* CountdownTimer.m */,
 				FCE1E50D1C4737AF00A210DC /* FiveHomeViewController.h */,
