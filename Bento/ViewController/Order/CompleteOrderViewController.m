@@ -232,6 +232,8 @@
 
 - (void)initiateRegionMonitoring
 {
+    [[Mixpanel sharedInstance] track:@"initiateRegionMonitoring"];
+    
     // Initialize location manager.
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -240,17 +242,20 @@
     
     if(![CLLocationManager locationServicesEnabled]) {
         // You need to enable Location Services
-        NSLog(@"diu");
+        
+        [[Mixpanel sharedInstance] track:@"locationServicesEnabled == false"];
     }
     
     if(![CLLocationManager isMonitoringAvailableForClass:[CLRegion class]]) {
         // Region monitoring is not available for this Class
-        NSLog(@"lei");
+        
+        [[Mixpanel sharedInstance] track:@"isMonitoringAvailableForClass == false"];
     }
     
     if([CLLocationManager authorizationStatus] == kCLAuthorizationStatusDenied || [CLLocationManager authorizationStatus] == kCLAuthorizationStatusRestricted) {
         // You need to authorize Location Services for the APP
-        NSLog(@"lomo");
+        
+        [[Mixpanel sharedInstance] track:@"kCLAuthorizationStatusDenied/kCLAuthorizationStatusRestricted == true"];
         
         [self commitOnGetItNow]; // disallowed location services
         
@@ -316,6 +321,8 @@
 
 - (void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations
 {
+    [[Mixpanel sharedInstance] track:@"didUpdateLocations"];
+    
     CLLocation *location = locations[0];
     coordinate = location.coordinate;
     
@@ -352,14 +359,19 @@
              }
              // Within radius
              else {
-                 [self commitOnGetItNow];
                  [[Mixpanel sharedInstance] track:@"Geofence - Inside"];
+                 
+                 [self commitOnGetItNow];
              }
          }];
     
         // Stop Location Updation, we dont need it now.
         [locationManager stopUpdatingLocation];
         locationManager = nil;
+    }
+    else {
+        [self commitOnGetItNow];
+        [[Mixpanel sharedInstance] track:@"monitoredRegions == nil"];
     }
 }
 
