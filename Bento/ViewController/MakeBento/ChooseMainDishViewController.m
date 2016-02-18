@@ -40,6 +40,8 @@
     
     JGProgressHUD *loadingHUD;
     BOOL isThereConnection;
+    
+    NSMutableArray *OAOnlyItemsMains;
 }
 
 - (void)viewDidLoad {
@@ -73,6 +75,10 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkCountDown) name:@"showCountDownTimer" object:nil];
+    
+    if (self.orderMode == OnDemand) {
+        OAOnlyItemsMains = [[BentoShop sharedInstance] getOAOnlyItemsMains];
+    }
     
     self.aryDishes = [[NSMutableArray alloc] init];
     
@@ -169,9 +175,8 @@
     
     // ) append exclusive dishes to self.arydishes
     if (self.orderMode == OnDemand) {
-        self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:[[BentoShop sharedInstance] getOAOnlyItems]] mutableCopy];
+        self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:OAOnlyItemsMains] mutableCopy];
     }
-
     
     // 3) append sold out dishes to self.aryDishes
     self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:soldOutDishesArray] mutableCopy];

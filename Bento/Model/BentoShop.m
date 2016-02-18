@@ -1185,6 +1185,28 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return NO;
 }
 
+- (BOOL)isDishOAOnly:(NSInteger)menuID OAOnlyItems:(NSMutableArray *)OAOnlyItems {
+    
+    BOOL isOAOnly = NO;
+    
+    // loops through OAOnlyItems
+    for (NSDictionary *menuItem in OAOnlyItems) {
+        
+        // get item ID of OAOnlyItem
+        NSInteger itemID;
+        if (![[menuItem objectForKey:@"itemId"] isEqual:[NSNull null]]) {
+            itemID = [[menuItem objectForKey:@"itemId"] integerValue];
+        }
+        
+        // compare item IDs
+        if (menuID == itemID) {
+            isOAOnly = YES;
+        }
+    }
+    
+    return isOAOnly;
+}
+
 - (BOOL)isDishSoldOut:(NSInteger)menuID
 {
     // no menu

@@ -21,6 +21,7 @@
 
 @interface DishCollectionViewCell()
 {
+    BOOL _isOAOnlyItem;
     BOOL _isSoldOut;
     BOOL _canBeAdded;
     BOOL _isSideDishCell;
@@ -113,12 +114,13 @@
 }
 
 #pragma mark Cell Info
-- (void)setDishInfo:(NSDictionary *)dishInfo isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded isMain:(BOOL)isMain
+- (void)setDishInfo:(NSDictionary *)dishInfo isOAOnlyItem:(BOOL)isOAOnlyItem isSoldOut:(BOOL)isSoldOut canBeAdded:(BOOL)canBeAdded isMain:(BOOL)isMain
 {
     if (dishInfo == nil) {
         return;
     }
     
+    _isOAOnlyItem = isOAOnlyItem;
     _isSoldOut = isSoldOut;
     _canBeAdded = canBeAdded;
     
