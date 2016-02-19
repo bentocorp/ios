@@ -364,7 +364,7 @@
     addonsCell.orderAheadMenu = self.orderAheadMenu;
     
     /*---Set dishInfo---*/
-    [addonsCell addDishInfo:dishInfo];
+    [addonsCell addDishInfo:dishInfo isOAOnly: [[BentoShop sharedInstance] isDishOAOnly:[dishInfo[@"itemId"] integerValue] OAOnlyItems:OAOnlyItemsAddons]];
     
     /*---Set State---*/
     if (_selectedPath == indexPath.row) {

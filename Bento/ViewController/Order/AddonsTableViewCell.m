@@ -16,6 +16,7 @@
 #import "UIColor+CustomColors.h"
 #import "BentoShop.h"
 #import "CAGradientLayer+SJSGradients.h"
+#import "AppStrings.h"
 
 @interface AddonsTableViewCell()
 
@@ -26,6 +27,11 @@
 @end
 
 @implementation AddonsTableViewCell
+{
+    BOOL isOAOnlyItem;
+    UIView *OAOnlyView;
+    UILabel *OAOnlyLabel;
+}
 
 - (void)awakeFromNib {
     // Initialization code
@@ -138,13 +144,40 @@
         self.priceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:14];
         self.priceLabel.textAlignment = NSTextAlignmentCenter;
         [self.viewDish addSubview:self.priceLabel];
+        
+        
+        // OA Only
+        OAOnlyView = [[UIView alloc] initWithFrame:CGRectMake(0, self.ivAddon.frame.size.height - 30, self.ivAddon.frame.size.width, 30)];
+        OAOnlyView.backgroundColor = [UIColor bentoErrorTextOrange];
+        OAOnlyView.alpha = .4;
+        [self.ivAddon addSubview:OAOnlyView];
+        
+        OAOnlyLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, self.ivAddon.frame.size.height - 30, self.ivAddon.frame.size.width - 10, 30)];
+        OAOnlyLabel.textColor = [UIColor whiteColor];
+        OAOnlyLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
+        OAOnlyLabel.text = [[[AppStrings sharedInstance] getString: OA_ONLY_TEXT] uppercaseString];
+        OAOnlyLabel.textAlignment = NSTextAlignmentCenter;
+        [self.ivAddon addSubview:OAOnlyLabel];
+        
+        OAOnlyView.hidden = YES;
     }
     
     return self;
 }
 
-- (void)addDishInfo:(NSDictionary *)dishInfo
+- (void)addDishInfo:(NSDictionary *)dishInfo isOAOnly:(BOOL)isOAOnly
 {
+    isOAOnlyItem = isOAOnly;
+    
+    if (isOAOnly) {
+        OAOnlyView.hidden = NO;
+        OAOnlyLabel.hidden = NO;
+    }
+    else {
+        OAOnlyView.hidden = YES;
+        OAOnlyLabel.hidden = YES;
+    }
+    
     self.dishInfo = [dishInfo mutableCopy];
     
     // NAME
@@ -169,8 +202,14 @@
     NSInteger mainDishId = [[self.dishInfo objectForKey:@"itemId"] integerValue];
     
     if (self.orderMode == OnDemand) {
-        if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
-            self.ivBannerAddon.hidden = NO;
+        if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId] || isOAOnly) {
+            
+            if (isOAOnly == false) {
+                self.ivBannerAddon.hidden = NO;
+            }
+            else {
+                self.ivBannerAddon.hidden = YES;
+            }
             
             [self.subtractButton setImage:[UIImage imageNamed:@"minusgray100"] forState:UIControlStateNormal];
             self.subtractButton.enabled = NO;
@@ -232,11 +271,22 @@
         NSInteger mainDishId = [[self.dishInfo objectForKey:@"itemId"] integerValue];
         
         if (self.orderMode == OnDemand) {
-            if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId]) {
-                self.ivBannerAddon.hidden = NO;
+            if ([[BentoShop sharedInstance] isDishSoldOut:mainDishId] || isOAOnlyItem) {
+                if (isOAOnlyItem == false) {
+                    self.ivBannerAddon.hidden = NO;
+                }
+                else {
+                    self.ivBannerAddon.hidden = YES;
+                    OAOnlyView.hidden = NO;
+                    OAOnlyLabel.hidden = NO;
+                }
             }
             else {
                 self.ivBannerAddon.hidden = YES;
+                if (isOAOnlyItem) {
+                    OAOnlyView.hidden = NO;
+                    OAOnlyLabel.hidden = NO;
+                }
             }
         }
         else if (self.orderMode == OrderAhead) {
@@ -252,6 +302,8 @@
         self.descriptionLabel.hidden = NO;
         self.maskView.hidden = NO;
         self.ivBannerAddon.hidden = YES;
+        OAOnlyView.hidden = YES;
+        OAOnlyLabel.hidden = YES;
     }
 }
 

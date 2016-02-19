@@ -30,7 +30,7 @@
 @property (nonatomic) OrderAheadMenu *orderAheadMenu;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier;
-- (void)addDishInfo:(NSDictionary *)dishInfo;
+- (void)addDishInfo:(NSDictionary *)dishInfo isOAOnly:(BOOL)isOAOnly;
 - (void)setCellState:(BOOL)isSelected;
 
 @end
