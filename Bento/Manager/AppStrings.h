@@ -224,6 +224,7 @@
 #define ERROR_LOGIN_AGAIN                       @"error-login-again"
 
 #define OA_ONLY_TEXT                            @"oa-only-od-btn"
+#define OA_ONLY_TEXT_BANNER                     @"oa-only-od-banner"
 
 // getting from to settings instead of ioscopy
 //#define ABOUT_PRICE                             @"price"

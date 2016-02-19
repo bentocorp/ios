@@ -155,7 +155,7 @@
         OAOnlyLabel = [[UILabel alloc] initWithFrame:CGRectMake(5, self.ivAddon.frame.size.height - 30, self.ivAddon.frame.size.width - 10, 30)];
         OAOnlyLabel.textColor = [UIColor whiteColor];
         OAOnlyLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
-        OAOnlyLabel.text = [[[AppStrings sharedInstance] getString: OA_ONLY_TEXT] uppercaseString];
+        OAOnlyLabel.text = [[[AppStrings sharedInstance] getString: OA_ONLY_TEXT_BANNER] uppercaseString];
         OAOnlyLabel.textAlignment = NSTextAlignmentCenter;
         [self.ivAddon addSubview:OAOnlyLabel];
         

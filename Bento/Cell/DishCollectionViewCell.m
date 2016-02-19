@@ -84,7 +84,7 @@
     
     // oa only label
     self.OAOnlyLabel.adjustsFontSizeToFitWidth = YES;
-    self.OAOnlyLabel.text = [[[AppStrings sharedInstance] getString:OA_ONLY_TEXT] uppercaseString];
+    self.OAOnlyLabel.text = [[[AppStrings sharedInstance] getString:OA_ONLY_TEXT_BANNER] uppercaseString];
 }
 
 - (IBAction)onAction:(id)sender
