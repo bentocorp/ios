@@ -131,7 +131,13 @@
     
     // Name
     NSString *strName = dishInfo[@"name"];
-    self.lblTitle.text = [strName uppercaseString];
+    
+    if (isOAOnlyItem) {
+        self.lblTitle.text = [[NSString stringWithFormat:@"%@ (%@)", strName, [[AppStrings sharedInstance] getString: OA_ONLY_TEXT]] uppercaseString];
+    }
+    else {
+        self.lblTitle.text = [strName uppercaseString];
+    }
     
     // Description
     NSString *strDescription = dishInfo[@"description"];
