@@ -204,9 +204,15 @@
             self.addToBentoLabel.textAlignment = NSTextAlignmentCenter;
             self.addToBentoLabel.backgroundColor = [UIColor clearColor];
             self.addToBentoLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:14];
-            self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: MAINDISH_ADD_BUTTON_NORMAL];
-            [self.btnAction addSubview:self.addToBentoLabel];
             
+            if (_isOAOnlyItem) {
+                self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: OA_ONLY_TEXT];
+            }
+            else {
+                self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: MAINDISH_ADD_BUTTON_NORMAL];
+            }
+            
+            [self.btnAction addSubview:self.addToBentoLabel];
             
             // PRICE LABEL
             self.unitPriceLabel = [[UILabel alloc] initWithFrame:CGRectMake(self.btnAction.frame.size.width * 0.75, 0, priceSpacingWidth, self.btnAction.frame.size.height)];
@@ -294,7 +300,13 @@
             self.lineDivider.hidden = NO;
             self.addToBentoLabel.hidden = NO;
             
-            self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: MAINDISH_ADD_BUTTON_NORMAL];
+            if (_isOAOnlyItem) {
+                self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: OA_ONLY_TEXT];
+            }
+            else {
+                self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: MAINDISH_ADD_BUTTON_NORMAL];
+            }
+            
             self.btnAction.userInteractionEnabled = YES;
             
             // price tag label for normal state only
