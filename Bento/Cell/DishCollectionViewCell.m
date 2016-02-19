@@ -47,6 +47,7 @@
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBanner;
 @property (weak, nonatomic) IBOutlet UILabel *OAOnlyLabel;
+@property (weak, nonatomic) IBOutlet UIView *OAOnlyOrangeView;
 
 @property (nonatomic) NSInteger state;
 @property (nonatomic) NSInteger index;
@@ -76,10 +77,13 @@
     
     self.btnAction.titleLabel.adjustsFontSizeToFitWidth = YES;
     
+    // orange banner
+    self.OAOnlyOrangeView.backgroundColor = [UIColor bentoErrorTextOrange];
+    self.OAOnlyOrangeView.alpha = 0.4;
+    
+    // oa only label
     self.OAOnlyLabel.adjustsFontSizeToFitWidth = YES;
     self.OAOnlyLabel.text = [[[AppStrings sharedInstance] getString:OA_ONLY_TEXT] uppercaseString];
-    self.OAOnlyLabel.backgroundColor = [UIColor bentoErrorTextOrange];
-    self.OAOnlyLabel.hidden = YES;
 }
 
 - (IBAction)onAction:(id)sender
@@ -287,9 +291,11 @@
         // OA only
         if (_isOAOnlyItem) {
             self.OAOnlyLabel.hidden = NO;
+            self.OAOnlyOrangeView.hidden = NO;
         }
         else {
             self.OAOnlyLabel.hidden = YES;
+            self.OAOnlyOrangeView.hidden = YES;
         }
     }
     else if (self.state == DISH_CELL_FOCUS) {
@@ -333,6 +339,7 @@
         self.btnAction.hidden = NO;
         self.ivBanner.hidden = YES;
         self.OAOnlyLabel.hidden = YES;
+        self.OAOnlyOrangeView.hidden = YES;
         
         if (_isSoldOut && _isOAOnlyItem == false) {
             if (self.isMain == YES) {
@@ -407,6 +414,7 @@
         
         self.ivBanner.hidden = YES;
         self.OAOnlyLabel.hidden = YES;
+        self.OAOnlyOrangeView.hidden = YES;
         self.lblDescription.hidden = NO;
         self.btnAction.hidden = NO;
         
