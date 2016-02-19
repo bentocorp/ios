@@ -76,6 +76,8 @@
     self.gradientLayer.opacity = 0.6f;
     
     self.ivMask.hidden = YES;
+    
+    self.btnAction.titleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (IBAction)onAction:(id)sender
@@ -348,7 +350,12 @@
             [UIView setAnimationsEnabled:NO];
             
             if (_isSideDishCell) {
-                [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
+                if (_isOAOnlyItem) {
+                    self.addToBentoLabel.text = [[AppStrings sharedInstance] getString: OA_ONLY_TEXT];
+                }
+                else {
+                    [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
+                }
             }
             // main
             else {
