@@ -466,12 +466,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
-            timestampString = "477612402.140892"
+            timestampString = "477617380.66686"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "159"
-            endingLineNumber = "159"
-            landmarkName = "-viewDidLoad"
+            startingLineNumber = "1882"
+            endingLineNumber = "1882"
+            landmarkName = "-buildRequest:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

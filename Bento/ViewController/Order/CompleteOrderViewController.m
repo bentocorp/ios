@@ -154,9 +154,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
-    NSLog(@"user info - %i", [userInfo[@"has_oa_subscription"] boolValue]);
-    
     allowCommitOnKeep = YES;
     
     // Mixpanel track for Placed An Order
@@ -673,6 +670,15 @@
 
 #pragma mark Calculations
 
+- (BOOL)isSubscribedToOA {
+    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
+    if (userInfo[@"has_oa_subscription"] == nil) {
+        return NO;
+    }
+    
+    return [userInfo[@"has_oa_subscription"] boolValue];
+}
+
 // works for x.xxxxxxxx
 - (float)roundToNearestHundredth:(float)originalNumber {
     originalNumber += 0.005;
@@ -705,6 +711,12 @@
 - (float)getTotalPriceByMainPlusDeliveryFee {
     if (self.orderMode == OnDemand) {
         return [self getTotalPriceByMain] + [[BentoShop sharedInstance] getDeliveryPrice];
+    }
+    
+    // OA
+    
+    if ([self isSubscribedToOA]) {
+        return [self getTotalPriceByMain] + 0;
     }
     
     return [self getTotalPriceByMain] + [self.orderAheadMenu.deliveryPrice floatValue];
@@ -773,7 +785,12 @@
         self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [[BentoShop sharedInstance] getDeliveryPrice]];
     }
     else if (self.orderMode == OrderAhead) {
-        self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [self.orderAheadMenu.deliveryPrice floatValue]];
+        if ([self isSubscribedToOA]) {
+            self.lblDeliveryPrice.text = @"$0";
+        }
+        else {
+            self.lblDeliveryPrice.text = [NSString stringWithFormat:@"$%.2f", [self.orderAheadMenu.deliveryPrice floatValue]];
+        }
     }
     
     // if no promo added
@@ -838,6 +855,23 @@
     }
     
     [self.btnGetItNow setTitle:strTitle forState:UIControlStateNormal];
+    
+    // subscribed
+    if (self.orderMode == OrderAhead) {
+        if (self.orderAheadMenu.deliveryPrice != nil) {
+            NSMutableAttributedString *titleString = [[NSMutableAttributedString alloc] initWithString:[NSString stringWithFormat:@"$%.2f", [self.orderAheadMenu.deliveryPrice floatValue]]];
+            
+            [titleString addAttribute:NSStrikethroughStyleAttributeName
+                                value:[NSNumber numberWithInteger:NSUnderlineStyleSingle]
+                                range:NSMakeRange(0, [titleString length])];
+            
+            self.lblDeliveryPricePrevious.attributedText = titleString;
+        }
+        
+        if ([self isSubscribedToOA]) {
+            self.lblDeliveryPricePrevious.hidden = NO;
+        }
+    }
 }
 
 - (void)clearCart {
@@ -1788,7 +1822,14 @@
         [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [[BentoShop sharedInstance] getDeliveryPrice]] forKey:@"delivery_price"];
     }
     else if (self.orderMode == OrderAhead) {
-        [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self.orderAheadMenu.deliveryPrice floatValue]] forKey:@"delivery_price"];
+        
+        if ([self isSubscribedToOA]) {
+            [detailInfo setObject:@"0" forKey:@"delivery_price"];
+        }
+        else {
+            [detailInfo setObject:[NSString stringWithFormat:@"%.2f", [self.orderAheadMenu.deliveryPrice floatValue]] forKey:@"delivery_price"];
+        }
+
     }
 
     [request setObject:detailInfo forKey:@"OrderDetails"];
