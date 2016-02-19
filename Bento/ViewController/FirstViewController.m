@@ -293,16 +293,14 @@
 
 - (void)processAutoLogin
 {
-//    NSString *strAPIName = [[NSUserDefaults standardUserDefaults] objectForKey:@"apiName"];
-    
-    NSString *strRequest = [NSString stringWithFormat:@"%@/user/login", SERVER_URL];
+    NSString *strAPIName = [[NSUserDefaults standardUserDefaults] objectForKey:@"apiName"];
     NSDictionary *dicRequest = [[NSUserDefaults standardUserDefaults] objectForKey:@"loginRequest"];
     
     NSLog(@"auto login dicRequest - %@", dicRequest);
     
     WebManager *webManager = [[WebManager alloc] init];
     
-    [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation)
+    [webManager AsyncProcess:strAPIName method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation)
     {
         [self.activityIndicator stopAnimating];
         

@@ -75,6 +75,7 @@
 
 @property (nonatomic, weak) IBOutlet UILabel *lblPromoDiscount;
 @property (nonatomic, weak) IBOutlet UILabel *lblTax;
+@property (weak, nonatomic) IBOutlet UILabel *lblDeliveryPricePrevious;
 @property (weak, nonatomic) IBOutlet UILabel *lblDeliveryPrice;
 @property (nonatomic, weak) IBOutlet UILabel *lblDeliveryTip;
 @property (nonatomic, weak) IBOutlet UILabel *lblTotal;
@@ -153,6 +154,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
+    NSLog(@"user info - %i", [userInfo[@"has_oa_subscription"] boolValue]);
+    
     allowCommitOnKeep = YES;
     
     // Mixpanel track for Placed An Order
@@ -174,6 +178,7 @@
     _isEditingAddons = NO;
     
     self.lblTotalPrevious.hidden = YES;
+    self.lblDeliveryPricePrevious.hidden = YES;
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     _strPromoCode = [userDefaults objectForKey:KEY_PROMO_CODE];
