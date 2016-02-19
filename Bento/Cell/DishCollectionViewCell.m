@@ -46,6 +46,7 @@
 @property (nonatomic, weak) IBOutlet UIImageView *ivMask;
 
 @property (nonatomic, weak) IBOutlet UIImageView *ivBanner;
+@property (weak, nonatomic) IBOutlet UILabel *OAOnlyLabel;
 
 @property (nonatomic) NSInteger state;
 @property (nonatomic) NSInteger index;
@@ -55,13 +56,9 @@
 @property (nonatomic) UILabel *unitPriceLabel;
 @property (nonatomic) UILabel *priceTagLabel;
 
-
 @end
 
 @implementation DishCollectionViewCell
-{
-    UILabel *OAOnlyLabel;
-}
 
 - (void)awakeFromNib
 {
@@ -78,6 +75,10 @@
     self.ivMask.hidden = YES;
     
     self.btnAction.titleLabel.adjustsFontSizeToFitWidth = YES;
+    
+    self.OAOnlyLabel.adjustsFontSizeToFitWidth = YES;
+    self.OAOnlyLabel.text = [[[AppStrings sharedInstance] getString:OA_ONLY_TEXT] uppercaseString];
+    self.OAOnlyLabel.backgroundColor = [UIColor bentoErrorTextOrange];
 }
 
 - (IBAction)onAction:(id)sender
@@ -137,12 +138,7 @@
     // Name
     NSString *strName = dishInfo[@"name"];
     
-    if (isOAOnlyItem) {
-        self.lblTitle.text = [[NSString stringWithFormat:@"%@ (%@)", strName, [[AppStrings sharedInstance] getString: OA_ONLY_TEXT]] uppercaseString];
-    }
-    else {
-        self.lblTitle.text = [strName uppercaseString];
-    }
+    self.lblTitle.text = [strName uppercaseString];
     
     // Description
     NSString *strDescription = dishInfo[@"description"];
@@ -185,6 +181,14 @@
         [self.ivImage setImageWithURL:[NSURL URLWithString:strImageURL]
                      placeholderImage:[UIImage imageNamed:@"gradient-placeholder2"]
           usingActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    }
+    
+    // OA only
+    if (isOAOnlyItem) {
+        self.OAOnlyLabel.hidden = NO;
+    }
+    else {
+        self.OAOnlyLabel.hidden = YES;
     }
 }
 
