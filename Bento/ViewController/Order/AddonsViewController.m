@@ -67,6 +67,8 @@
     NSMutableArray *savedArray;
     
     NSInteger _selectedPath;
+    
+    NSMutableArray *OAOnlyItemsAddons;
 }
 
 - (void)viewDidLoad {
@@ -182,6 +184,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    if (self.orderMode == OnDemand) {
+        OAOnlyItemsAddons = [[BentoShop sharedInstance] getOAOnlyItemsAddons];
+    }
     
     // set aryDishes array
     self.aryDishes = [[NSMutableArray alloc] init];
@@ -329,6 +335,11 @@
                 }
             }
         }
+    }
+    
+    // ) append exclusive dishes to self.arydishes
+    if (self.orderMode == OnDemand) {
+        self.aryDishes = [[self.aryDishes arrayByAddingObjectsFromArray:OAOnlyItemsAddons] mutableCopy];
     }
     
     // 3) append sold out dishes to self.aryDishes

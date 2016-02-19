@@ -76,6 +76,7 @@
     self.ivMask.hidden = YES;
     
     self.btnAction.titleLabel.adjustsFontSizeToFitWidth = YES;
+    self.btnAction.titleLabel.textAlignment = NSTextAlignmentCenter;
     
     // orange banner
     self.OAOnlyOrangeView.backgroundColor = [UIColor bentoErrorTextOrange];
