@@ -80,7 +80,7 @@
 
 - (IBAction)onAction:(id)sender
 {
-    if ((_isSoldOut && self.state != DISH_CELL_SELECTED) || (!_canBeAdded && self.state == DISH_CELL_FOCUS)) {
+    if ((_isSoldOut && self.state != DISH_CELL_SELECTED) || (!_canBeAdded && self.state == DISH_CELL_FOCUS) || (_isOAOnlyItem && self.state == DISH_CELL_FOCUS)) {
         return;
     }
     
@@ -110,11 +110,14 @@
     if (_isSoldOut && _isOAOnlyItem == NO) {
         [self.btnAction setTitle:@"Sold Out" forState:UIControlStateNormal];
     }
-    else if (!_canBeAdded) {
+    else if (!_canBeAdded && _isOAOnlyItem == NO) {
         [self.btnAction setTitle:@"Reached to max" forState:UIControlStateNormal];
     }
+    else if (_isOAOnlyItem) {
+        [self.btnAction setTitle:[[AppStrings sharedInstance] getString: OA_ONLY_TEXT] forState:UIControlStateNormal];
+    }
     else {
-        [self.btnAction setTitle:[[AppStrings sharedInstance] getString:SIDEDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
+        [self.btnAction setTitle:[[AppStrings sharedInstance] getString: SIDEDISH_ADD_BUTTON_NORMAL] forState:UIControlStateNormal];
     }
 }
 
