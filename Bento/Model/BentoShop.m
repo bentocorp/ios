@@ -621,15 +621,10 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     }
     else
     {
-        // 12:00am - dinner opening (ie. 16.5)
-        if (currentTime >= 0 && currentTime < dinnerTime)
-        {
+        if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"lunch"]) {
             menuItems = self.menuToday[@"lunch"][@"OAOnlyItems"];
-            
-            // dinner opening - 11:59pm
         }
-        else if (currentTime >= dinnerTime && currentTime < 24)
-        {
+        else if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"dinner"]) {
             menuItems = self.menuToday[@"dinner"][@"OAOnlyItems"];
         }
     }
@@ -852,15 +847,22 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     }
     else
     {
-        // 12:00am - dinner opening (ie. 16.5)
-        if (currentTime >= 0 && currentTime < dinnerTime)
-        {
+//        // 12:00am - dinner opening (ie. 16.5)
+//        if (currentTime >= 0 && currentTime < dinnerTime)
+//        {
+//            menuItems = self.menuToday[@"lunch"][@"MenuItems"];
+//
+//        // dinner opening - 11:59pm
+//        }
+//        else if (currentTime >= dinnerTime && currentTime < 24)
+//        {
+//            menuItems = self.menuToday[@"dinner"][@"MenuItems"];
+//        }
+        
+        if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"lunch"]) {
             menuItems = self.menuToday[@"lunch"][@"MenuItems"];
-
-        // dinner opening - 11:59pm
         }
-        else if (currentTime >= dinnerTime && currentTime < 24)
-        {
+        else if ([[[BentoShop sharedInstance] getOnDemandMealMode] isEqualToString:@"dinner"]) {
             menuItems = self.menuToday[@"dinner"][@"MenuItems"];
         }
     }
