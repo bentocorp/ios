@@ -1310,7 +1310,6 @@
 				90BED0991A5BCC7B003DC872 /* AppDelegate.m */,
 				722333051A6C12FC006C2446 /* Modules */,
 				90BED09B1A5BCC7B003DC872 /* ThirdParty */,
-				FC386F0E1BE1F48900961A17 /* Driver Tracking */,
 				722333651A6D57AD006C2446 /* Model */,
 				FCC529C91B8FA38700B49F34 /* Extensions */,
 				90BED09C1A5BCC7B003DC872 /* View */,
@@ -1412,6 +1411,7 @@
 				FC99D4F51AFC323700BEE40B /* Closed/Sold-out */,
 				FCFD79F01AE8880D002AD322 /* Settings */,
 				FC7E835D1C49CD2E00CFEFCC /* Orders */,
+				FC386F0E1BE1F48900961A17 /* Driver Tracking */,
 				90BED0A71A5BD05C003DC872 /* Signin/Register */,
 				90BED0A21A5BD05C003DC872 /* DeliveryLocation */,
 				90BED0A51A5BD05C003DC872 /* Homepage */,
@@ -1733,7 +1733,7 @@
 				FC2AB1671BE9829A00223B8A /* Model */,
 			);
 			name = "Driver Tracking";
-			path = Model;
+			path = ../Model;
 			sourceTree = "<group>";
 		};
 		FC599F561B0FEDB600989E1B /* Bento Tests */ = {
