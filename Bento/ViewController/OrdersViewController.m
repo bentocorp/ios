@@ -20,6 +20,7 @@
 #import "OrdersTableViewCell.h"
 #import "Mixpanel.h"
 #import "AppStrings.h"
+#import "OrderStatusViewController.h"
 
 @interface OrdersViewController () <UITableViewDataSource, UITableViewDelegate>
 
@@ -277,10 +278,9 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    NSLog(@"hi guy");
+    [self.navigationController pushViewController:[[OrderStatusViewController alloc] init] animated:YES];
 }
 
 - (BOOL)isSectionInProgress:(OrderHistorySection *)section {

@@ -505,6 +505,10 @@
 		FCC5D2221C536937009C3D7A /* OrderHistorySection.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D2201C536937009C3D7A /* OrderHistorySection.m */; };
 		FCC5D22B1C537F64009C3D7A /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D22A1C537F64009C3D7A /* OrdersTableViewCell.m */; };
 		FCC5D22C1C537F64009C3D7A /* OrdersTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCC5D22A1C537F64009C3D7A /* OrdersTableViewCell.m */; };
+		FCD266561C7D13C200FC1821 /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD266541C7D13C200FC1821 /* StatusViewController.m */; };
+		FCD266571C7D13C200FC1821 /* StatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD266541C7D13C200FC1821 /* StatusViewController.m */; };
+		FCD266581C7D13C200FC1821 /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD266551C7D13C200FC1821 /* StatusViewController.xib */; };
+		FCD266591C7D13C200FC1821 /* StatusViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD266551C7D13C200FC1821 /* StatusViewController.xib */; };
 		FCD51ED01AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED11AFB4B98009D75BB /* PreviewCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */; };
 		FCD51ED21AFB4B98009D75BB /* PreviewCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */; };
@@ -952,6 +956,9 @@
 		FCC5D2201C536937009C3D7A /* OrderHistorySection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrderHistorySection.m; sourceTree = "<group>"; };
 		FCC5D2291C537F64009C3D7A /* OrdersTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = OrdersTableViewCell.h; sourceTree = "<group>"; };
 		FCC5D22A1C537F64009C3D7A /* OrdersTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = OrdersTableViewCell.m; sourceTree = "<group>"; };
+		FCD266531C7D13C200FC1821 /* StatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StatusViewController.h; sourceTree = "<group>"; };
+		FCD266541C7D13C200FC1821 /* StatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StatusViewController.m; sourceTree = "<group>"; };
+		FCD266551C7D13C200FC1821 /* StatusViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StatusViewController.xib; sourceTree = "<group>"; };
 		FCD51ECD1AFB4B98009D75BB /* PreviewCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PreviewCollectionViewCell.h; sourceTree = "<group>"; };
 		FCD51ECE1AFB4B98009D75BB /* PreviewCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PreviewCollectionViewCell.m; sourceTree = "<group>"; };
 		FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreviewCollectionViewCell.xib; sourceTree = "<group>"; };
@@ -1949,6 +1956,9 @@
 			children = (
 				FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */,
 				FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */,
+				FCD266531C7D13C200FC1821 /* StatusViewController.h */,
+				FCD266541C7D13C200FC1821 /* StatusViewController.m */,
+				FCD266551C7D13C200FC1821 /* StatusViewController.xib */,
 			);
 			name = "View Controller";
 			sourceTree = "<group>";
@@ -2210,6 +2220,7 @@
 				7216B7991AA64C7C0006FFE9 /* OpenSans-Light.ttf in Resources */,
 				FCDF22391ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */,
 				FCA652F81C5C42B600B8E11E /* mastercard.png in Resources */,
+				FCD266591C7D13C200FC1821 /* StatusViewController.xib in Resources */,
 				FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */,
 				FCDF222F1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				FCF872231BFFD12B0091A206 /* plus-green-100.png in Resources */,
@@ -2365,6 +2376,7 @@
 				90BED0C61A5BE72F003DC872 /* OpenSans-Light.ttf in Resources */,
 				FCDF22381ADC3ADF006B2750 /* iTunesArtwork@2x.png in Resources */,
 				FCA652F71C5C42B600B8E11E /* mastercard.png in Resources */,
+				FCD266581C7D13C200FC1821 /* StatusViewController.xib in Resources */,
 				FCDF22361ADC3ADF006B2750 /* Icon@2x.png in Resources */,
 				FCDF222E1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				FCF872221BFFD12B0091A206 /* plus-green-100.png in Resources */,
@@ -2547,6 +2559,7 @@
 				FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */,
 				FC4327B51BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
+				FCD266571C7D13C200FC1821 /* StatusViewController.m in Sources */,
 				FC9E82021BACE4250099DBF5 /* SocketIOClient.swift in Sources */,
 				FCBF06FB1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
 				FC11AAB11BFBF8BC0004A83B /* AddonsViewController.m in Sources */,
@@ -2670,6 +2683,7 @@
 				FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */,
 				FC4327B41BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
+				FCD266561C7D13C200FC1821 /* StatusViewController.m in Sources */,
 				FC9E82011BACE4250099DBF5 /* SocketIOClient.swift in Sources */,
 				FCBF06FA1B1522C800EEC177 /* NetworkErrorViewController.m in Sources */,
 				FC11AAB01BFBF8BC0004A83B /* AddonsViewController.m in Sources */,
