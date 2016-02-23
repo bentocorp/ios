@@ -307,7 +307,8 @@
                      @"reason"      : strReason,
                      @"api_token"   : strToken,
                      @"address"     : self.placeInfo.formattedAddress,
-                     @"coordinate"  : [NSString stringWithFormat:@"%f, %f", self.placeInfo.location.coordinate.latitude, self.placeInfo.location.coordinate.longitude]
+                     @"lat"         : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude],
+                     @"long"        : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude]
                      };
     }
     else
@@ -316,9 +317,12 @@
                      @"email"   : strEmail,
                      @"reason"  : strReason,
                      @"address" : self.placeInfo.formattedAddress,
-                     @"coordinate"  : [NSString stringWithFormat:@"%f, %f", self.placeInfo.location.coordinate.latitude ,self.placeInfo.location.coordinate.longitude]
+                     @"lat"     : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude],
+                     @"long"    : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude]
                      };
     }
+    
+    NSLog(@"postinfo - %@", postInfo);
     
     NSDictionary *dicRequest = @{@"data" : [postInfo jsonEncodedKeyValueString]};
     WebManager *webManager = [[WebManager alloc] init];
