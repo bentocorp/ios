@@ -179,7 +179,7 @@
     
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     _strPromoCode = [userDefaults objectForKey:KEY_PROMO_CODE];
-    _promoDiscount = [userDefaults integerForKey:KEY_PROMO_DISCOUNT];
+    _promoDiscount = [userDefaults floatForKey:KEY_PROMO_DISCOUNT];
     
     _deliveryTipPercent = 15;
     _taxPercent = [[[BentoShop sharedInstance] getTaxPercent] floatValue];
@@ -777,7 +777,7 @@
 
 - (void)updatePriceLabels
 {
-    self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%ld", (long)_promoDiscount];
+    self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%2f", _promoDiscount];
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
     
@@ -1801,7 +1801,7 @@
     [detailInfo setObject:[NSString stringWithFormat:@"%.ld", (long)(([self getTotalPriceByMainPlusDeliveryFee] + [self roundToNearestHundredth:(([self getTotalPriceByMainPlusDeliveryFee]) * _taxPercent) / 100.f] + [self getTips]) * 100)] forKey:@"total_cents_without_coupon"];
     
     // Coupon Discount (cents)
-    float couponDiscount = (int)_promoDiscount * 100;
+    float couponDiscount = _promoDiscount * 100;
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)couponDiscount] forKey:@"coupon_discount_cents"];
     
     // - Tax
