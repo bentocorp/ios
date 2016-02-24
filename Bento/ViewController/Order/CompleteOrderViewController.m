@@ -777,7 +777,7 @@
 
 - (void)updatePriceLabels
 {
-    self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%2f", _promoDiscount];
+    self.lblPromoDiscount.text = [NSString stringWithFormat:@"$%.2f", _promoDiscount];
     self.lblDeliveryTip.text = [NSString stringWithFormat:@"%ld%%", (long)_deliveryTipPercent];
     self.lblTotal.text = [NSString stringWithFormat:@"$%.2f", [self getTotalPrice]];
     
