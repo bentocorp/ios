@@ -308,17 +308,19 @@
                      @"api_token"   : strToken,
                      @"address"     : self.placeInfo.formattedAddress,
                      @"lat"         : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude],
-                     @"long"        : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude]
+                     @"long"        : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude],
+                     @"platform"    : @"iOS"
                      };
     }
     else
     {
         postInfo = @{
-                     @"email"   : strEmail,
-                     @"reason"  : strReason,
-                     @"address" : self.placeInfo.formattedAddress,
-                     @"lat"     : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude],
-                     @"long"    : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude]
+                     @"email"       : strEmail,
+                     @"reason"      : strReason,
+                     @"address"     : self.placeInfo.formattedAddress,
+                     @"lat"         : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.latitude],
+                     @"long"        : [NSString stringWithFormat:@"%f", self.placeInfo.location.coordinate.longitude],
+                     @"platform"    : @"iOS"
                      };
     }
     
