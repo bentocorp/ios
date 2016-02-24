@@ -418,11 +418,43 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/View/PromoCodeView.m"
-            timestampString = "478031958.894501"
+            timestampString = "478032284.600073"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "82"
-            endingLineNumber = "82"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
+            landmarkName = "-process"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/ViewController/Order/CompleteOrderViewController.m"
+            timestampString = "478032240.722141"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "2283"
+            endingLineNumber = "2283"
+            landmarkName = "-setDiscound:strCouponCode:"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/View/PromoCodeView.m"
+            timestampString = "478032288.262905"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "119"
+            endingLineNumber = "119"
             landmarkName = "-process"
             landmarkType = "5">
          </BreakpointContent>
