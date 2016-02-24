@@ -1815,7 +1815,7 @@
     [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)([self getTips] * 100)] forKey:@"tip_cents"];
     
     // - Total
-    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)([self getTotalPrice] * 100)] forKey:@"total_cents"];
+    [detailInfo setObject:[NSString stringWithFormat:@"%ld", (long)[self roundToNearestHundredth:[self getTotalPrice] * 100]] forKey:@"total_cents"];
     
     // - Delivery Price
     if (self.orderMode == OnDemand) {
