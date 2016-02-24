@@ -2334,7 +2334,6 @@ static OrderAheadMenu *orderAheadMenu;
 }
 
 - (void)checkVersions {
-    
     UIAlertView *forcedUpdateAlertView;
     
 #ifdef DEV_MODE
