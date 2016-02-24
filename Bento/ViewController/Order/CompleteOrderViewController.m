@@ -119,7 +119,7 @@
     NSInteger _clickedMinuteButtonIndexForAddons;
     
     NSString *_strPromoCode;
-    NSInteger _promoDiscount;
+    float _promoDiscount;
     NSString *cutText;
     
     JGProgressHUD *loadingHUD;
@@ -2275,11 +2275,11 @@
 
 #pragma mark PromoCodeViewDelegate
 
-- (void)setDiscound:(NSInteger)priceDiscount strCouponCode:(NSString *)strCouponCode
+- (void)setDiscound:(float)priceDiscount strCouponCode:(NSString *)strCouponCode
 {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
     [userDefaults setObject:strCouponCode forKey:KEY_PROMO_CODE];
-    [userDefaults setInteger:priceDiscount forKey:KEY_PROMO_DISCOUNT];
+    [userDefaults setFloat:priceDiscount forKey:KEY_PROMO_DISCOUNT];
     
     _strPromoCode = strCouponCode;
     _promoDiscount = priceDiscount;

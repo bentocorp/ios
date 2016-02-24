@@ -33,8 +33,11 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z5o-QU-fnC" userLabel="navBgImageView">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="Z5o-QU-fnC" userLabel="navBgImageView">
                     <rect key="frame" x="-1" y="0.0" width="377" height="65"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="65" id="rrH-Zr-lng"/>
+                    </constraints>
                 </imageView>
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="nav_background.png" translatesAutoresizingMaskIntoConstraints="NO" id="pim-V7-GzW" userLabel="navBgImageView">
                     <rect key="frame" x="-1" y="65" width="377" height="65"/>
@@ -45,8 +48,12 @@
                     <color key="textColor" red="0.3411764706" green="0.37647058820000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FbU-RG-Zwh" userLabel="settingsButton">
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FbU-RG-Zwh" userLabel="settingsButton">
                     <rect key="frame" x="-1" y="20" width="50" height="45"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="45" id="NA5-6g-mjf"/>
+                        <constraint firstAttribute="width" constant="50" id="m2T-82-oPW"/>
+                    </constraints>
                     <state key="normal" image="nav_btn_back.png">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                     </state>
@@ -180,6 +187,13 @@
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="FbU-RG-Zwh" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="0VW-00-9u1"/>
+                <constraint firstItem="Z5o-QU-fnC" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="4AC-sQ-2kR"/>
+                <constraint firstAttribute="trailing" secondItem="Z5o-QU-fnC" secondAttribute="trailing" constant="-1" id="NIv-Dp-q0z"/>
+                <constraint firstItem="Z5o-QU-fnC" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="q9M-Ha-nbv"/>
+                <constraint firstItem="FbU-RG-Zwh" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="-1" id="x2p-W0-4eC"/>
+            </constraints>
             <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
         </view>
     </objects>

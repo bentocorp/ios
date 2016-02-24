@@ -10,7 +10,7 @@
 
 @protocol PromoCodeViewDelegate <NSObject>
 
-- (void)setDiscound:(NSInteger)priceDiscount strCouponCode:(NSString *)strCouponCode;
+- (void)setDiscound:(float)priceDiscount strCouponCode:(NSString *)strCouponCode;
 
 @end
 

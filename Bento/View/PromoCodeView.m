@@ -79,7 +79,7 @@
         id amountOff = [response objectForKey:@"amountOff"];
         if (response != nil && amountOff != nil && [amountOff isKindOfClass:[NSString class]])
         {
-            NSInteger discount = [[response objectForKey:@"amountOff"] integerValue];
+            NSInteger discount = [[response objectForKey:@"amountOff"] floatValue];
             if (self.delegate != nil)
                 [self.delegate setDiscound:discount strCouponCode:strPromoCode];
             
@@ -116,7 +116,7 @@
         
     } isJSON:NO];
 #else
-    NSInteger discount = 5; // promo discount - hardcoded for testing
+    NSInteger discount = 5.75; // promo discount - hardcoded for testing
     if (self.delegate != nil) {
         [self.delegate setDiscound:discount strCouponCode:@"ridev"];
     }
