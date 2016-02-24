@@ -427,6 +427,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(onUpdatedStatus:) name:@"enteredForeground" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(updateUI) name:@"showCountDownTimer" object:nil];
     
     // ADDRESS
@@ -879,7 +881,7 @@
     [[AddonList sharedInstance] emptyList];
 }
 
-- (void) onUpdatedStatus:(NSNotification *)notification
+- (void)onUpdatedStatus:(NSNotification *)notification
 {
     if ([[BentoShop sharedInstance] isClosed] && ![[DataManager shareDataManager] isAdminUser])
         [self showSoldoutScreen:[NSNumber numberWithInt:0]];
@@ -887,6 +889,22 @@
         [self showSoldoutScreen:[NSNumber numberWithInt:1]];
     else
         [self performSelectorOnMainThread:@selector(updateUI) withObject:nil waitUntilDone:NO];
+    
+    [self checkIfCurrentMenuExists];
+}
+
+- (void)checkIfCurrentMenuExists {
+    if (self.orderMode == OrderAhead) {
+        NSMutableArray *menuIds = [[NSMutableArray alloc] init];
+        
+        for (OrderAheadMenu *oaMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+            [menuIds addObject:oaMenu.menuId];
+        }
+        
+        if ([menuIds containsObject: self.orderAheadMenu.menuId] == false) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    }
 }
 
 - (void) gotoCreditScreen

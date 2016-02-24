@@ -189,7 +189,9 @@ static BentoShop *_shareInstance;
         
         NSString *strDate = [self getDateStringWithDashes];
         
-        [self sendRequest:[NSString stringWithFormat:@"/init2?date=%@&copy=1&gatekeeper=1&lat=%f&long=%f", strDate, placeInfo.location.coordinate.latitude, placeInfo.location.coordinate.longitude] completion:^(id responseDic, NSError *error) {
+        NSString *strRequest = [NSString stringWithFormat:@"/init2?date=%@&copy=1&gatekeeper=1&lat=%f&long=%f", strDate, placeInfo.location.coordinate.latitude, placeInfo.location.coordinate.longitude];
+        
+        [self sendRequest:strRequest completion:^(id responseDic, NSError *error) {
             
             if (error == nil) {
                 self.dicInit2 = (NSDictionary *)responseDic;

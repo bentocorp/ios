@@ -1263,6 +1263,23 @@ static OrderAheadMenu *orderAheadMenu;
         else {
             [self updateUI];
         }
+        
+        /*---*/
+        [self checkIfCurrentMenuExists];
+    }
+}
+
+- (void)checkIfCurrentMenuExists {
+    if (orderMode == OrderAhead) {
+        NSMutableArray *menuIds = [[NSMutableArray alloc] init];
+        
+        for (OrderAheadMenu *oaMenu in [[BentoShop sharedInstance] getOrderAheadMenus]) {
+            [menuIds addObject:oaMenu.menuId];
+        }
+        
+        if ([menuIds containsObject: orderAheadMenu.menuId] == false) {
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
     }
 }
 
