@@ -212,16 +212,17 @@
     [scrollView addSubview:promoGrayBackgroundView];
     
     // promo message label
-    UILabel *promoMessageLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 12.5, SCREEN_WIDTH - 20, 21)];
+    UILabel *promoMessageLabel = [[UILabel alloc] initWithFrame:CGRectMake(10, 5, SCREEN_WIDTH - 20, 42)];
     promoMessageLabel.textColor = [UIColor whiteColor];
     promoMessageLabel.font = [UIFont fontWithName:@"OpenSans" size:12];
     promoMessageLabel.textAlignment = NSTextAlignmentCenter;
     promoMessageLabel.text = [[AppStrings sharedInstance] getString:SHARE_PROMO_MESSAGE];
+    promoMessageLabel.numberOfLines = 0;
     [promoGrayBackgroundView addSubview:promoMessageLabel];
     
     // promo code button
-    UIButton *promoCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 42.5, SCREEN_WIDTH - 20, 21)];
-    [promoCodeButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    UIButton *promoCodeButton = [[UIButton alloc] initWithFrame:CGRectMake(10, 47, SCREEN_WIDTH - 20, 21)];
+    [promoCodeButton setTitleColor:[UIColor bentoBrandGreen] forState:UIControlStateNormal];
     [promoCodeButton.titleLabel setFont:[UIFont fontWithName:@"OpenSans-Bold" size:17]];
     
     [promoCodeButton setTitle:couponCodeString forState:UIControlStateNormal];
