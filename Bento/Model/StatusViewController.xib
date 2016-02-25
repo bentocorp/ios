@@ -165,32 +165,57 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Xx-nP-XMp">
                     <rect key="frame" x="0.0" y="130" width="375" height="494"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lCa-Ux-ZXT">
-                            <rect key="frame" x="127" y="93" width="120" height="120"/>
-                        </imageView>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Your Bento is here!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T84-iS-vXx">
-                            <rect key="frame" x="19" y="228" width="336" height="38"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Bento is here!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T84-iS-vXx">
+                            <rect key="frame" x="19" y="251" width="336" height="31"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="31" id="abE-8W-Joe"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="21"/>
                             <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Please meet your driver at the curbside to pick up your order." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsx-Vu-pXE">
-                            <rect key="frame" x="19" y="274" width="336" height="48"/>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please meet your driver at the curbside to pick up your order." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsx-Vu-pXE">
+                            <rect key="frame" x="19" y="290" width="336" height="60"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="60" id="l9B-G3-KtB"/>
+                            </constraints>
                             <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="15"/>
                             <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-fS-ayY">
+                        <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-fS-ayY">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="494"/>
                         </mapView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lCa-Ux-ZXT">
+                            <rect key="frame" x="137" y="119" width="100" height="100"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="100" id="Ek4-D9-NDL"/>
+                                <constraint firstAttribute="width" constant="100" id="ZIu-lJ-RZK"/>
+                            </constraints>
+                        </imageView>
                     </subviews>
                     <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
+                        <constraint firstAttribute="trailing" secondItem="T84-iS-vXx" secondAttribute="trailing" constant="20" id="3nL-MI-0cF"/>
+                        <constraint firstAttribute="trailing" secondItem="Wsx-Vu-pXE" secondAttribute="trailing" constant="20" id="8Rk-h0-v4T"/>
+                        <constraint firstItem="T84-iS-vXx" firstAttribute="centerX" secondItem="4Xx-nP-XMp" secondAttribute="centerX" id="9JW-s5-bII"/>
+                        <constraint firstItem="T84-iS-vXx" firstAttribute="centerY" secondItem="4Xx-nP-XMp" secondAttribute="centerY" constant="19.5" id="BIw-ao-EkA"/>
                         <constraint firstAttribute="bottom" secondItem="7d8-fS-ayY" secondAttribute="bottom" id="Cqh-xC-l6x"/>
                         <constraint firstAttribute="trailing" secondItem="7d8-fS-ayY" secondAttribute="trailing" id="J4H-BG-ATj"/>
+                        <constraint firstItem="T84-iS-vXx" firstAttribute="leading" secondItem="4Xx-nP-XMp" secondAttribute="leading" constant="19" id="MtA-Up-xBM"/>
+                        <constraint firstItem="Wsx-Vu-pXE" firstAttribute="centerX" secondItem="lCa-Ux-ZXT" secondAttribute="centerX" id="Ouf-G7-hhZ"/>
                         <constraint firstItem="7d8-fS-ayY" firstAttribute="leading" secondItem="4Xx-nP-XMp" secondAttribute="leading" id="hpH-L0-KMS"/>
+                        <constraint firstItem="T84-iS-vXx" firstAttribute="top" secondItem="lCa-Ux-ZXT" secondAttribute="bottom" constant="32" id="iQ0-nr-Qfr"/>
+                        <constraint firstItem="T84-iS-vXx" firstAttribute="centerX" secondItem="lCa-Ux-ZXT" secondAttribute="centerX" id="m38-lL-NvB"/>
                         <constraint firstItem="7d8-fS-ayY" firstAttribute="top" secondItem="4Xx-nP-XMp" secondAttribute="top" id="mXk-R6-3aT"/>
+                        <constraint firstItem="Wsx-Vu-pXE" firstAttribute="top" secondItem="T84-iS-vXx" secondAttribute="bottom" constant="8" id="nXI-d3-3NJ"/>
+                        <constraint firstItem="Wsx-Vu-pXE" firstAttribute="leading" secondItem="4Xx-nP-XMp" secondAttribute="leading" constant="19" id="qHW-Eo-Kz7"/>
                     </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="7d8-fS-ayY"/>
+                        </mask>
+                    </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3em-3M-7g4" userLabel="bottomButton">
                     <rect key="frame" x="0.0" y="622" width="375" height="45"/>
