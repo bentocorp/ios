@@ -49,20 +49,39 @@
 - (void)connectUser {
     
     #ifdef DEV_MODE
-        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.dev.bentonow.com:8443" opts: @[]];
+        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.dev.bentonow.com:8443" opts: @{@"ReconnectWait": @1}];
     #else
         self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.bentonow.com:8443" opts: nil];
     #endif
     
-    [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
-        
-        NSLog(@"socket connected");
-        
-        [self authenticateUser:email token:token];
-    }];
+    [self configureHandlers];
     
     [self.socket connectWithTimeoutAfter:10 withTimeoutHandler:^{
         // handle connection error
+    }];
+}
+
+- (void)configureHandlers {
+    [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSLog(@"connect triggered");
+        
+        [self authenticateUser:self.email token:self.token];
+    }];
+    
+    [self.socket on:@"disconnect" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSLog(@"disconnect triggered");
+    }];
+    
+    [self.socket on:@"error" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSLog(@"error triggered");
+    }];
+    
+    [self.socket on:@"reconnect" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSLog(@"reconnect triggered");
+    }];
+    
+    [self.socket on:@"reconnectAttempt" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSLog(@"reconnectAttempt triggered");
     }];
 }
 
