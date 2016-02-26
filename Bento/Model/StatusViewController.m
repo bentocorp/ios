@@ -16,6 +16,9 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.dotView.layer.cornerRadius = 3;
+    self.dotView.layer.masksToBounds = YES;
 }
 
 @end

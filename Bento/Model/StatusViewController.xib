@@ -27,6 +27,23 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StatusViewController">
             <connections>
+                <outlet property="assemblyLabel" destination="Lti-V3-Eqh" id="BS9-dO-dMR"/>
+                <outlet property="backButton" destination="FbU-RG-Zwh" id="jb3-Lr-Hgg"/>
+                <outlet property="buildAnotherBentoButton" destination="3em-3M-7g4" id="x3e-Gm-U52"/>
+                <outlet property="deliveryLabel" destination="yhS-Mb-fcW" id="rhV-Ta-JTs"/>
+                <outlet property="descriptionLabel" destination="Wsx-Vu-pXE" id="xA6-QS-b2C"/>
+                <outlet property="descriptionTitleLabel" destination="T84-iS-vXx" id="HHW-mc-YSI"/>
+                <outlet property="dotView" destination="h55-JO-QLf" id="aEy-fc-nSs"/>
+                <outlet property="headerLabel" destination="nyv-uk-h1O" id="ft6-ku-Kdu"/>
+                <outlet property="num1Label" destination="QUY-9U-BG5" id="IcI-eo-X2Q"/>
+                <outlet property="num1View" destination="QUY-9U-BG5" id="3la-Ib-t4a"/>
+                <outlet property="num2Label" destination="NuS-WX-tKx" id="UE2-jq-D0B"/>
+                <outlet property="num3Label" destination="Iz3-KB-U0T" id="Gip-0h-AeO"/>
+                <outlet property="num4Labek" destination="6Ys-wr-ugY" id="s1t-92-I1v"/>
+                <outlet property="num4Label" destination="6Ys-wr-ugY" id="zOG-i9-GTx"/>
+                <outlet property="pickupLabel" destination="baA-6c-uad" id="709-9L-VgU"/>
+                <outlet property="prepLabel" destination="DrR-lG-mGp" id="k6i-V3-Yic"/>
+                <outlet property="statusIconImageView" destination="lCa-Ux-ZXT" id="OSA-X8-Cwj"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -172,7 +189,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vYs-o5-WE4" userLabel="prepView">
                             <rect key="frame" x="282" y="0.0" width="93" height="63"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PREP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baA-6c-uad" userLabel="prepLabel">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PICKUP" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="baA-6c-uad" userLabel="prepLabel">
                                     <rect key="frame" x="5" y="35" width="80" height="21"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="21" id="G6Z-z6-Km4"/>
@@ -230,7 +247,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hid-yw-X9R">
                                     <rect key="frame" x="30" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9g3-RV-zvL">
+                                        <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9g3-RV-zvL">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -248,7 +265,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3A-C0-VIX">
                                     <rect key="frame" x="45" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0w-eU-hM6">
+                                        <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0w-eU-hM6">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -300,7 +317,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="15" height="20"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqw-40-TkX">
+                                <view tag="3" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qqw-40-TkX">
                                     <rect key="frame" x="15" y="0.0" width="15" height="20"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R84-4q-jFY">
@@ -321,7 +338,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bog-aY-7Ki">
                                     <rect key="frame" x="30" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giK-A9-zWH">
+                                        <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giK-A9-zWH">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -336,7 +353,7 @@
                                         <constraint firstItem="giK-A9-zWH" firstAttribute="centerX" secondItem="bog-aY-7Ki" secondAttribute="centerX" id="hZn-aX-r76"/>
                                     </constraints>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AKq-zH-tfh">
+                                <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AKq-zH-tfh">
                                     <rect key="frame" x="45" y="0.0" width="15" height="20"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="paT-kj-Jf8">
@@ -394,7 +411,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjL-aC-9EO">
                                     <rect key="frame" x="15" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-Gr-uy6">
+                                        <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-Gr-uy6">
                                             <rect key="frame" x="5" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -412,7 +429,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDs-2a-af1">
                                     <rect key="frame" x="30" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L2K-tB-q7D">
+                                        <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L2K-tB-q7D">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -430,7 +447,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h55-JO-QLf">
                                     <rect key="frame" x="45" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3U-5v-QJD">
+                                        <view tag="8" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3U-5v-QJD">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
