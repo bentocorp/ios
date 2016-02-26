@@ -21,8 +21,6 @@
         sharedSocket = [[SocketHandler alloc] init];
         // Do any other initialization stuff here...
         
-        // Socket URL
-        
         // dev http://54.191.141.101:8081 ?
         // prod http://52.32.68.149:8081 ?
         

@@ -7,12 +7,22 @@
 //
 
 #import "StatusViewController.h"
+#import "CustomAnnotation.h"
+#import "CustomAnnotationView.h"
+#import "SVGeocoder.h"
+#import "NSUserDefaults+RMSaveCustomObject.h"
+
 
 @interface StatusViewController () <MKMapViewDelegate>
 
 @end
 
 @implementation StatusViewController
+{
+    float diu;
+    float diulei;
+    CustomAnnotation *driverAnnotation;
+}
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -55,7 +65,86 @@
     
     self.dotView9.layer.cornerRadius = 3;
     self.dotView9.layer.masksToBounds = YES;
+    
+    /*---*/
+    
+    // MAP VIEW
+    self.mapView.delegate = self;
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.zoomEnabled = YES;
+    self.mapView.scrollEnabled = YES;
+    
+    // should probably nil check
+    
+    // Annotations Array
+    NSMutableArray *allAnnotations = [[NSMutableArray alloc] init];
+    CustomAnnotation *customerAnnotation;
+    
+    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
+    NSMutableArray *placeInfoArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+    for (int i = 0; i < placeInfoArray.count; i ++) {
+        
+        SVPlacemark *placeInfo = placeInfoArray[i];
+        
+        customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
+                                                            subtitle:placeInfo.formattedAddress
+                                                          coordinate:placeInfo.location.coordinate
+                                                                type:@"customer"];
+        [allAnnotations addObject:customerAnnotation];
+    }
+    
+    driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Driver"
+                                                      subtitle:@""
+                                                    coordinate:CLLocationCoordinate2DMake(37.7545193, -122.440437)
+                                                          type:@"driver"];
+    [allAnnotations addObject:driverAnnotation];
+    
+    // Add annotations to map view
+    [self.mapView showAnnotations:allAnnotations animated:YES];
+    [self.mapView addAnnotations:allAnnotations];
+    
+    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
 }
+
+- (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
+    
+    // set reuse identifier
+    NSString *annotationIdentifier = @"CustomViewAnnotation";
+    
+    // not reusing because 1) there's not going to be many annotations to begin with, 2) it's causing the annotations to switch with each other
+    //    CustomAnnotationView *customAnnotationView = (CustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
+    
+    CustomAnnotationView *customAnnotationView;
+    
+    CustomAnnotation *customAnnotation = (CustomAnnotation *)annotation;
+    if ([customAnnotation.type isEqualToString:@"customer"]) {
+        
+        if (customAnnotationView == nil) {
+            customAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
+                                                                             reuseIdentifier:annotationIdentifier
+                                                                         annotationViewImage:[UIImage imageNamed:@"location-64"]];
+        }
+    }
+    else if ([customAnnotation.type isEqualToString:@"driver"]) {
+        
+        if (customAnnotationView == nil) {
+            customAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
+                                                                             reuseIdentifier:annotationIdentifier
+                                                                         annotationViewImage:[UIImage imageNamed:@"in-transit-64"]];
+        }
+    }
+    
+    customAnnotationView.canShowCallout = YES;
+    
+    return customAnnotationView;
+}
+
+- (void)updateDriver {
+    diulei += diu;
+    driverAnnotation.coordinate = CLLocationCoordinate2DMake(37.7545193, diulei);
+}
+
+// there will be a delegate method here from sockethandler didRecieveCoordianates
 
 - (IBAction)backButtonPressed:(id)sender {
     [self.navigationController popViewControllerAnimated:YES];
