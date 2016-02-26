@@ -49,9 +49,9 @@
 - (void)connectUser {
     
     #ifdef DEV_MODE
-    
+        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.dev.bentonow.com:8443" opts: @[]];
     #else
-    
+        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.bentonow.com:8443" opts: nil];
     #endif
     
     [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
