@@ -11,7 +11,8 @@
 #import "CustomAnnotationView.h"
 #import "SVGeocoder.h"
 #import "NSUserDefaults+RMSaveCustomObject.h"
-
+#import "SocketHandler.h"
+#import "DataManager.h"
 
 @interface StatusViewController () <MKMapViewDelegate>
 
@@ -26,6 +27,12 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
+    NSString *emailString = userInfo[@"email"];
+    NSString *tokenString = [[DataManager shareDataManager] getAPIToken];
+    
+    [[SocketHandler sharedSocket] connectAndAuthenticate:emailString token: tokenString];
     
     self.num1Label.layer.cornerRadius = 10;
     self.num1Label.layer.masksToBounds = YES;
@@ -67,6 +74,9 @@
     self.dotView9.layer.masksToBounds = YES;
     
     /*---*/
+    
+    //
+    self.mapView.hidden = YES;
     
     // MAP VIEW
     self.mapView.delegate = self;

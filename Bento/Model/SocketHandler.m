@@ -20,23 +20,24 @@
     dispatch_once(&onceToken, ^{
         sharedSocket = [[SocketHandler alloc] init];
         // Do any other initialization stuff here...
-        
-        // dev http://54.191.141.101:8081 ?
-        // prod http://52.32.68.149:8081 ?
-        
-        // dev http://houston.dev.bentonow.com/api
-        // prod http://houston.bentonow.com/api
-        
-        
-        
         sharedSocket.socket = [[SocketIOClient alloc] initWithSocketURL:@"http://54.191.141.101:8081" opts: nil];
     });
     return sharedSocket;
 }
 
+#pragma mark HOUSTON API
+- (NSString *)getHoustonAPI {
+
+#ifdef DEV_MODE
+    return @"https://houston.dev.bentonow.com:8443";
+#else
+    return @"https://houston.bentonow.com:8443";
+#endif
+}
+
 - (void)connectAndAuthenticate:(NSString*)email token:(NSString *)token {
     NSLog(@"'connectAndAuthenticate' called");
-
+    
     [self connectAndAuthenticate:email token:token];
 }
 
