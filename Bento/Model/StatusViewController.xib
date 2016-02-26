@@ -43,6 +43,7 @@
                 <outlet property="dotView8" destination="L2K-tB-q7D" id="Mgc-IB-ErP"/>
                 <outlet property="dotView9" destination="U3U-5v-QJD" id="9iT-lj-UbA"/>
                 <outlet property="headerLabel" destination="nyv-uk-h1O" id="ft6-ku-Kdu"/>
+                <outlet property="mapView" destination="7d8-fS-ayY" id="rzj-1B-gEG"/>
                 <outlet property="num1Label" destination="QUY-9U-BG5" id="IcI-eo-X2Q"/>
                 <outlet property="num2Label" destination="NuS-WX-tKx" id="UE2-jq-D0B"/>
                 <outlet property="num3Label" destination="Iz3-KB-U0T" id="Gip-0h-AeO"/>
@@ -553,7 +554,7 @@
                             <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-fS-ayY">
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-fS-ayY">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="494"/>
                         </mapView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lCa-Ux-ZXT">

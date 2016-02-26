@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <MapKit/MapKit.h>
 
 @interface StatusViewController : UIViewController
 
@@ -16,6 +17,7 @@
 @property (weak, nonatomic) IBOutlet UILabel *descriptionTitleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *descriptionLabel;
 @property (weak, nonatomic) IBOutlet UIButton *buildAnotherBentoButton;
+@property (weak, nonatomic) IBOutlet MKMapView *mapView;
 
 @property (weak, nonatomic) IBOutlet UILabel *num1Label;
 @property (weak, nonatomic) IBOutlet UILabel *num2Label;
