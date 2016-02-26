@@ -57,4 +57,13 @@
     self.dotView9.layer.masksToBounds = YES;
 }
 
+- (IBAction)backButtonPressed:(id)sender {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+- (IBAction)buildAnotherBentoButtonPressed:(id)sender {
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+
 @end
