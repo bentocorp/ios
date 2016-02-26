@@ -8,7 +8,7 @@
 
 #import "StatusViewController.h"
 
-@interface StatusViewController ()
+@interface StatusViewController () <MKMapViewDelegate>
 
 @end
 
