@@ -337,6 +337,29 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
                         locationManager.desiredAccuracy = kCLLocationAccuracyBest;
                         locationManager.distanceFilter = 500;
                         
+                        switch ([CLLocationManager authorizationStatus]) {
+                                
+                            // if they reset location and privacy settings
+                            case kCLAuthorizationStatusNotDetermined:
+                                [locationManager requestWhenInUseAuthorization];
+                                break;
+                                
+                            case kCLAuthorizationStatusRestricted:
+                                break;
+                                
+                            case kCLAuthorizationStatusDenied:
+                                break;
+                                
+                            case kCLAuthorizationStatusAuthorizedAlways:
+                                break;
+                                
+                            case kCLAuthorizationStatusAuthorizedWhenInUse:
+                                break;
+                                
+                            default:
+                                break;
+                        }
+                        
                         [locationManager startUpdatingLocation];
                     }
                 });

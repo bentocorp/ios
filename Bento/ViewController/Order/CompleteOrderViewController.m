@@ -242,9 +242,11 @@
     locationManager.desiredAccuracy = kCLLocationAccuracyBest;
     locationManager.distanceFilter = 999999;
     
-    if(![CLLocationManager locationServicesEnabled]) {
-        // You need to enable Location Services
-        
+    // location services in whole system
+    if([CLLocationManager locationServicesEnabled]) {
+        [[Mixpanel sharedInstance] track:@"locationServicesEnabled == true"];
+    }
+    else {
         [[Mixpanel sharedInstance] track:@"locationServicesEnabled == false"];
     }
     

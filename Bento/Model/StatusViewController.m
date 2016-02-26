@@ -17,17 +17,17 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.prepLabel.layer.cornerRadius = 10;
-    self.prepLabel.layer.masksToBounds = YES;
+    self.num1Label.layer.cornerRadius = 10;
+    self.num1Label.layer.masksToBounds = YES;
     
-    self.deliveryLabel.layer.cornerRadius = 10;
-    self.deliveryLabel.layer.masksToBounds = YES;
+    self.num2Label.layer.cornerRadius = 10;
+    self.num2Label.layer.masksToBounds = YES;
     
-    self.assemblyLabel.layer.cornerRadius = 10;
-    self.assemblyLabel.layer.masksToBounds = YES;
+    self.num3Label.layer.cornerRadius = 10;
+    self.num3Label.layer.masksToBounds = YES;
     
-    self.pickupLabel.layer.cornerRadius = 10;
-    self.pickupLabel.layer.masksToBounds = YES;
+    self.num4Label.layer.cornerRadius = 10;
+    self.num4Label.layer.masksToBounds = YES;
     
     self.dotView1.layer.cornerRadius = 3;
     self.dotView1.layer.masksToBounds = YES;

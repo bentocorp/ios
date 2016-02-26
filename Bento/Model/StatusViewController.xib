@@ -226,7 +226,7 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qgf-Jr-1vL">
-                            <rect key="frame" x="55" y="10" width="75" height="20"/>
+                            <rect key="frame" x="56" y="10" width="75" height="20"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XKO-P8-Tb3">
                                     <rect key="frame" x="0.0" y="0.0" width="15" height="20"/>
@@ -513,10 +513,10 @@
                         <constraint firstItem="hI0-nZ-odL" firstAttribute="width" secondItem="CxB-iZ-nAa" secondAttribute="width" id="KnG-ee-wsH"/>
                         <constraint firstAttribute="bottom" secondItem="hI0-nZ-odL" secondAttribute="bottom" id="Kni-B8-k5r"/>
                         <constraint firstItem="6Ys-wr-ugY" firstAttribute="leading" secondItem="N56-Cj-xGz" secondAttribute="trailing" id="LEp-QR-TiK"/>
-                        <constraint firstItem="NuS-WX-tKx" firstAttribute="leading" secondItem="qgf-Jr-1vL" secondAttribute="trailing" id="LMR-Ec-J6e"/>
+                        <constraint firstItem="NuS-WX-tKx" firstAttribute="leading" secondItem="qgf-Jr-1vL" secondAttribute="trailing" constant="-1" id="LMR-Ec-J6e"/>
                         <constraint firstAttribute="bottom" secondItem="4Ef-62-DSO" secondAttribute="bottom" id="Lx7-Ci-nmW"/>
                         <constraint firstItem="CxB-iZ-nAa" firstAttribute="leading" secondItem="QHp-hK-glq" secondAttribute="leading" id="OtZ-dh-dik"/>
-                        <constraint firstItem="qgf-Jr-1vL" firstAttribute="leading" secondItem="QUY-9U-BG5" secondAttribute="trailing" constant="-1" id="WGH-3d-84b"/>
+                        <constraint firstItem="qgf-Jr-1vL" firstAttribute="leading" secondItem="QUY-9U-BG5" secondAttribute="trailing" id="WGH-3d-84b"/>
                         <constraint firstItem="vYs-o5-WE4" firstAttribute="width" secondItem="CxB-iZ-nAa" secondAttribute="width" id="Xk2-pX-CNC"/>
                         <constraint firstItem="DSN-w6-jcI" firstAttribute="leading" secondItem="NuS-WX-tKx" secondAttribute="trailing" id="Y1F-l2-oQh"/>
                         <constraint firstItem="4Ef-62-DSO" firstAttribute="leading" secondItem="CxB-iZ-nAa" secondAttribute="trailing" constant="1" id="YFz-NG-vG5"/>
