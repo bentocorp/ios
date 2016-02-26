@@ -8,8 +8,6 @@
 
 #import "SocketHandler.h"
 
-
-
 @implementation SocketHandler
 
 + (instancetype)sharedSocket {
@@ -31,9 +29,10 @@
     #endif
 }
 
-- (void)connectAndAuthenticate:(NSString *)token {
+- (void)connectAndAuthenticate:(NSString *)username token:(NSString *)token {
     NSLog(@"connectAndAuthenticate called");
     
+    self.username = username;
     self.token = token;
     
     [self connectUser];
@@ -81,7 +80,7 @@
 
 #pragma mark Authenticate
 - (void)authenticateUser {
-    NSString *apiString = [NSString stringWithFormat:@"/api/authenticate?token=%@", self.token];
+    NSString *apiString = [NSString stringWithFormat:@"/api/authenticate?username=%@&token=%@", self.username, self.token];
     [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
         NSLog(@"socket did authenticate");
         
@@ -100,20 +99,15 @@
 - (void)listenToChannels {
     
     // Ex. { rid: rst_7#5y, from: "houston", to: "c-5", subject: "Test", body: "Hi!" }
-//    [self.socket on:@"push" callback:^(NSArray *data, SocketAckEmitter *ack) {
-//        NSLog(@"push data - %@", data);
-//        
-//        // if driver has accepted my order, node will pass me his clientId
-//        // then i take that i call request to track
-//        if () {
-//            [self requestToTrackDriver:];
-//        }
-//    }];
-    
-    // Ex. { clientId: d-8, status: "connected" } note: not really needed for customer app
-//    [self.socket on:@"stat" callback:^(NSArray * data, SocketAckEmitter * ack) {
-//        NSLog(@"stat data - %@", data);
-//    }];
+    [self.socket on:@"push" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSLog(@"push data - %@", data);
+        
+        // if driver has accepted my order, node will pass me his clientId
+        // then i take that i call request to track
+        if () {
+            [self requestToTrackDriver:];
+        }
+    }];
     
     /* 
     Ex.
@@ -123,13 +117,13 @@
      lng: 90.123
     }
     */
-//    [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
-//        NSLog(@"loc data - %@", data);
-//        
-//        // once request to track driver has been made, node will send me location coordinates/driver info
-//        // this is where i call delegate method to maybe prompt an alert
-//        // which routes to Settings -> Current Orders -> Current Order
-//    }];
+    [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
+        NSLog(@"loc data - %@", data);
+        
+        // once request to track driver has been made, node will send me location coordinates/driver info
+        // this is where i call delegate method to maybe prompt an alert
+        // which routes to Settings -> Current Orders -> Current Order
+    }];
 }
 
 #pragma mark Request To Track Driver
