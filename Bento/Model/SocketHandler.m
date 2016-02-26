@@ -11,10 +11,6 @@
 
 
 @implementation SocketHandler
-{
-    __block NSString *userID;
-    __block NSString *authtoken;
-}
 
 + (instancetype)sharedSocket {
     static SocketHandler *sharedSocket = nil;
@@ -28,18 +24,16 @@
 
 #pragma mark HOUSTON API
 - (NSString *)getHoustonAPI {
-
-#ifdef DEV_MODE
-    return @"https://houston.dev.bentonow.com:8443";
-#else
-    return @"https://houston.bentonow.com:8443";
-#endif
+    #ifdef DEV_MODE
+        return @"https://houston.dev.bentonow.com:8443";
+    #else
+        return @"https://houston.bentonow.com:8443";
+    #endif
 }
 
-- (void)connectAndAuthenticate:(NSString*)email token:(NSString *)token {
-    NSLog(@"'connectAndAuthenticate' called");
+- (void)connectAndAuthenticate:(NSString *)token {
+    NSLog(@"connectAndAuthenticate called");
     
-    self.email = email;
     self.token = token;
     
     [self connectUser];
@@ -47,25 +41,25 @@
 
 #pragma mark Connect
 - (void)connectUser {
-    
     #ifdef DEV_MODE
         self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.dev.bentonow.com:8443" opts: @{@"ReconnectWait": @1}];
     #else
-        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.bentonow.com:8443" opts: nil];
+        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.bentonow.com:8443" opts: @{@"ReconnectWait": @1}];
     #endif
     
     [self configureHandlers];
     
     [self.socket connectWithTimeoutAfter:10 withTimeoutHandler:^{
-        // handle connection error
+        NSLog(@"connect timed out");
     }];
 }
 
+#pragma mark Register Listeners
 - (void)configureHandlers {
     [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"connect triggered");
         
-        [self authenticateUser:self.email token:self.token];
+        [self authenticateUser];
     }];
     
     [self.socket on:@"disconnect" callback:^(NSArray *data, SocketAckEmitter *ack) {
@@ -86,28 +80,18 @@
 }
 
 #pragma mark Authenticate
-- (void)authenticateUser:(NSString*)email token:(NSString *)token {
-
-    [self.socket emitWithAck:@"get" withItems:@[@"/api/authenticate?username=%@&token=%@&type=c"]](0, ^(NSArray *data) {
-    
-        NSLog(@"socket authenticated");
+- (void)authenticateUser {
+    NSString *apiString = [NSString stringWithFormat:@"/api/authenticate?token=%@", self.token];
+    [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
+        NSLog(@"socket did authenticate");
         
         NSString *jsonString = data[0];
         NSError *jsonError;
         NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData
-                                                             options:NSJSONReadingMutableContainers
-                                                               error:&jsonError];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&jsonError];
         
         NSLog(@"json - %@", json);
-        
-        NSDictionary *ret = json[@"ret"];
-        userID = ret[@"uid"]; // ?
-        authtoken = ret[@"token"];
-        
-        // once authetnciated socket,
-        
-        
+
         [self listenToChannels];
     });
 }
@@ -139,13 +123,13 @@
      lng: 90.123
     }
     */
-    [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
-        NSLog(@"loc data - %@", data);
-        
-        // once request to track driver has been made, node will send me location coordinates/driver info
-        // this is where i call delegate method to maybe prompt an alert
-        // which routes to Settings -> Current Orders -> Current Order
-    }];
+//    [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
+//        NSLog(@"loc data - %@", data);
+//        
+//        // once request to track driver has been made, node will send me location coordinates/driver info
+//        // this is where i call delegate method to maybe prompt an alert
+//        // which routes to Settings -> Current Orders -> Current Order
+//    }];
 }
 
 #pragma mark Request To Track Driver

@@ -51,7 +51,7 @@ DEPENDENCIES:
   - FDKeychain
   - Mixpanel
   - PureLayout
-  - SIOSocket (~> 0.2.0)
+  - SIOSocket
   - Stripe
   - UIActivityIndicator-for-SDWebImage
 
