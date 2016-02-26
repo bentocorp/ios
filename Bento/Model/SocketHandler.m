@@ -8,6 +8,8 @@
 
 #import "SocketHandler.h"
 
+
+
 @implementation SocketHandler
 {
     __block NSString *userID;
@@ -20,7 +22,6 @@
     dispatch_once(&onceToken, ^{
         sharedSocket = [[SocketHandler alloc] init];
         // Do any other initialization stuff here...
-        sharedSocket.socket = [[SocketIOClient alloc] initWithSocketURL:@"http://54.191.141.101:8081" opts: nil];
     });
     return sharedSocket;
 }
@@ -38,11 +39,20 @@
 - (void)connectAndAuthenticate:(NSString*)email token:(NSString *)token {
     NSLog(@"'connectAndAuthenticate' called");
     
-    [self connectAndAuthenticate:email token:token];
+    self.email = email;
+    self.token = token;
+    
+    [self connectUser];
 }
 
 #pragma mark Connect
-- (void)connectUser:(NSString*)email token:(NSString *)token {
+- (void)connectUser {
+    
+    #ifdef DEV_MODE
+    
+    #else
+    
+    #endif
     
     [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
         
