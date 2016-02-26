@@ -27,6 +27,14 @@
 @property (weak, nonatomic) IBOutlet UILabel *assemblyLabel;
 @property (weak, nonatomic) IBOutlet UILabel *pickupLabel;
 
-@property (weak, nonatomic) IBOutlet UIView *dotView;
+@property (weak, nonatomic) IBOutlet UIView *dotView1;
+@property (weak, nonatomic) IBOutlet UIView *dotView2;
+@property (weak, nonatomic) IBOutlet UIView *dotView3;
+@property (weak, nonatomic) IBOutlet UIView *dotView4;
+@property (weak, nonatomic) IBOutlet UIView *dotView5;
+@property (weak, nonatomic) IBOutlet UIView *dotView6;
+@property (weak, nonatomic) IBOutlet UIView *dotView7;
+@property (weak, nonatomic) IBOutlet UIView *dotView8;
+@property (weak, nonatomic) IBOutlet UIView *dotView9;
 
 @end

@@ -33,13 +33,19 @@
                 <outlet property="deliveryLabel" destination="yhS-Mb-fcW" id="rhV-Ta-JTs"/>
                 <outlet property="descriptionLabel" destination="Wsx-Vu-pXE" id="xA6-QS-b2C"/>
                 <outlet property="descriptionTitleLabel" destination="T84-iS-vXx" id="HHW-mc-YSI"/>
-                <outlet property="dotView" destination="h55-JO-QLf" id="aEy-fc-nSs"/>
+                <outlet property="dotView1" destination="qxV-CC-TAV" id="vLh-YR-4Db"/>
+                <outlet property="dotView2" destination="9g3-RV-zvL" id="tDL-iZ-wtc"/>
+                <outlet property="dotView3" destination="g0w-eU-hM6" id="c4C-M8-PoE"/>
+                <outlet property="dotView4" destination="R84-4q-jFY" id="qV3-b2-5OY"/>
+                <outlet property="dotView5" destination="giK-A9-zWH" id="xtQ-bd-SSy"/>
+                <outlet property="dotView6" destination="paT-kj-Jf8" id="V7V-qZ-Fd6"/>
+                <outlet property="dotView7" destination="bVD-Gr-uy6" id="e4E-py-sPE"/>
+                <outlet property="dotView8" destination="L2K-tB-q7D" id="Mgc-IB-ErP"/>
+                <outlet property="dotView9" destination="U3U-5v-QJD" id="9iT-lj-UbA"/>
                 <outlet property="headerLabel" destination="nyv-uk-h1O" id="ft6-ku-Kdu"/>
                 <outlet property="num1Label" destination="QUY-9U-BG5" id="IcI-eo-X2Q"/>
-                <outlet property="num1View" destination="QUY-9U-BG5" id="3la-Ib-t4a"/>
                 <outlet property="num2Label" destination="NuS-WX-tKx" id="UE2-jq-D0B"/>
                 <outlet property="num3Label" destination="Iz3-KB-U0T" id="Gip-0h-AeO"/>
-                <outlet property="num4Labek" destination="6Ys-wr-ugY" id="s1t-92-I1v"/>
                 <outlet property="num4Label" destination="6Ys-wr-ugY" id="zOG-i9-GTx"/>
                 <outlet property="pickupLabel" destination="baA-6c-uad" id="709-9L-VgU"/>
                 <outlet property="prepLabel" destination="DrR-lG-mGp" id="k6i-V3-Yic"/>
@@ -247,7 +253,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hid-yw-X9R">
                                     <rect key="frame" x="30" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9g3-RV-zvL">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9g3-RV-zvL">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -265,7 +271,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i3A-C0-VIX">
                                     <rect key="frame" x="45" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0w-eU-hM6">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g0w-eU-hM6">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -338,7 +344,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bog-aY-7Ki">
                                     <rect key="frame" x="30" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view tag="4" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giK-A9-zWH">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="giK-A9-zWH">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -353,7 +359,7 @@
                                         <constraint firstItem="giK-A9-zWH" firstAttribute="centerX" secondItem="bog-aY-7Ki" secondAttribute="centerX" id="hZn-aX-r76"/>
                                     </constraints>
                                 </view>
-                                <view tag="5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AKq-zH-tfh">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AKq-zH-tfh">
                                     <rect key="frame" x="45" y="0.0" width="15" height="20"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="paT-kj-Jf8">
@@ -411,7 +417,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DjL-aC-9EO">
                                     <rect key="frame" x="15" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view tag="6" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-Gr-uy6">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bVD-Gr-uy6">
                                             <rect key="frame" x="5" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -429,7 +435,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UDs-2a-af1">
                                     <rect key="frame" x="30" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view tag="7" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L2K-tB-q7D">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="L2K-tB-q7D">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -447,7 +453,7 @@
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h55-JO-QLf">
                                     <rect key="frame" x="45" y="0.0" width="15" height="20"/>
                                     <subviews>
-                                        <view tag="8" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3U-5v-QJD">
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="U3U-5v-QJD">
                                             <rect key="frame" x="4" y="7" width="6" height="6"/>
                                             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
@@ -572,11 +578,6 @@
                         <constraint firstItem="Wsx-Vu-pXE" firstAttribute="top" secondItem="T84-iS-vXx" secondAttribute="bottom" constant="8" id="nXI-d3-3NJ"/>
                         <constraint firstItem="Wsx-Vu-pXE" firstAttribute="leading" secondItem="4Xx-nP-XMp" secondAttribute="leading" constant="19" id="qHW-Eo-Kz7"/>
                     </constraints>
-                    <variation key="default">
-                        <mask key="subviews">
-                            <exclude reference="7d8-fS-ayY"/>
-                        </mask>
-                    </variation>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3em-3M-7g4" userLabel="bottomButton">
                     <rect key="frame" x="0.0" y="622" width="375" height="45"/>
