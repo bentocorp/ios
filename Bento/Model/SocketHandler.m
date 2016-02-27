@@ -112,23 +112,20 @@
     [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"loc data - %@", data);
         
-        // once request to track driver has been made, node will send me location coordinates/driver info
-        // this is where i call delegate method to maybe prompt an alert
-        // which routes to Settings -> Current Orders -> Current Order
+        // once request to track driver has been made successful, node will send me location coordinates/driver info
+        // call delegate method to update coordinates
     }];
 }
 
 #pragma mark Request To Track Driver
-- (void)requestToTrackDriver:(NSString *)driverId
-{
-    [self.socket emitWithAck:@"get" withItems:@[@"/api/track?client_id=d-10"]](0, ^(NSArray *data) {
+- (void)requestToTrackDriver {
+    NSString *apiString = [NSString stringWithFormat:@"/api/track?client_id=%@", self.driverId];
+    [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
         
         NSString *jsonString = data[0];
         NSError *jsonError;
         NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
-        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData
-                                                             options:NSJSONReadingMutableContainers
-                                                               error:&jsonError];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&jsonError];
         
         NSLog(@"json2 - %@", json);
     });
