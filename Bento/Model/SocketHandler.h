@@ -12,11 +12,13 @@
 @interface SocketHandler : NSObject
 
 @property (nonatomic, strong) SocketIOClient *socket;
+
 @property (nonatomic) NSString *username;
 @property (nonatomic) NSString *token;
+@property (nonatomic) NSString *driverId;
 
 + (instancetype)sharedSocket;
 
-- (void)connectAndAuthenticate:(NSString*)username token:(NSString *)token;
+- (void)connectAndAuthenticate:(NSString*)username token:(NSString *)token driverId:(NSString *)driverId;
 
 @end

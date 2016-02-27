@@ -29,11 +29,12 @@
     #endif
 }
 
-- (void)connectAndAuthenticate:(NSString *)username token:(NSString *)token {
+- (void)connectAndAuthenticate:(NSString *)username token:(NSString *)token driverId:(NSString *)driverId {
     NSLog(@"connectAndAuthenticate called");
     
     self.username = username;
     self.token = token;
+    self.driverId = driverId;
     
     [self connectUser];
 }
@@ -102,21 +103,12 @@
     [self.socket on:@"push" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"push data - %@", data);
         
-        // if driver has accepted my order, node will pass me his clientId
-        // then i take that i call request to track
-        if () {
-            [self requestToTrackDriver:];
-        }
+        // if driver has accepted my order, node will pass me his clientId, then i take that i call request to track
+//        if () {
+//            [self requestToTrackDriver:];
+//        }
     }];
-    
-    /* 
-    Ex.
-    {
-     clientId: d-10,
-     lat: 127.901,
-     lng: 90.123
-    }
-    */
+
     [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"loc data - %@", data);
         
@@ -127,7 +119,7 @@
 }
 
 #pragma mark Request To Track Driver
-- (void)requestToTrackDriver: (NSString *)driverId
+- (void)requestToTrackDriver:(NSString *)driverId
 {
     [self.socket emitWithAck:@"get" withItems:@[@"/api/track?client_id=d-10"]](0, ^(NSArray *data) {
         
