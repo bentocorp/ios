@@ -28,8 +28,12 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
+    NSString *username = userInfo[@"email"];
+    
     NSString *tokenString = [[DataManager shareDataManager] getAPIToken];
-    [[SocketHandler sharedSocket] connectAndAuthenticate: tokenString];
+    
+    [[SocketHandler sharedSocket] connectAndAuthenticate:username token:tokenString driverId:self.driverId];
     
     self.num1Label.layer.cornerRadius = 10;
     self.num1Label.layer.masksToBounds = YES;
