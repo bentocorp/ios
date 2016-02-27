@@ -281,7 +281,15 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     [tableView deselectRowAtIndexPath:indexPath animated:YES];
     
-    [self.navigationController pushViewController:[[StatusViewController alloc] init] animated:YES];
+    // get driverID
+    OrderHistorySection *orderHistorySection = self.orderHistoryArray[indexPath.section];
+    OrderHistoryItem *orderHistoryItem = orderHistorySection.items[indexPath.row];
+    
+    // set driverID to statusVC
+    StatusViewController *statusVC = [[StatusViewController alloc] init];
+    statusVC.driverId = orderHistoryItem.driverId;
+    
+    [self.navigationController pushViewController:statusVC animated:YES];
 }
 
 - (BOOL)isSectionInProgress:(OrderHistorySection *)section {
