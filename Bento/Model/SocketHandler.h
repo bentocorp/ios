@@ -20,5 +20,6 @@
 + (instancetype)sharedSocket;
 
 - (void)connectAndAuthenticate:(NSString*)username token:(NSString *)token driverId:(NSString *)driverId;
+- (void)closeSocket;
 
 @end

@@ -158,10 +158,12 @@
 // there will be a delegate method here from sockethandler didRecieveCoordianates
 
 - (IBAction)backButtonPressed:(id)sender {
+    [[SocketHandler sharedSocket] closeSocket];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)buildAnotherBentoButtonPressed:(id)sender {
+    [[SocketHandler sharedSocket] closeSocket];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
