@@ -14,6 +14,7 @@
     if (self = [super init]) {
         self.title = dictionary[@"title"];
         self.price = dictionary[@"price"];
+        self.driverId = dictionary[@"driverId"];
     }
     
     return self;

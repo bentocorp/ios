@@ -12,6 +12,7 @@
 
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *price;
+@property (nonatomic) NSString *driverId;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
