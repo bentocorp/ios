@@ -290,7 +290,8 @@
     // set driverID to statusVC
     StatusViewController *statusVC = [[StatusViewController alloc] init];
     statusVC.driverId = orderHistoryItem.driverId;
-    statusVC
+    statusVC.lat = orderHistoryItem.lat;
+    statusVC.lng = orderHistoryItem.lng;
     
     [self.navigationController pushViewController:statusVC animated:YES];
 }
