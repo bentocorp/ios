@@ -10,6 +10,8 @@
 
 @interface CustomAnnotationView : MKAnnotationView
 
+@property (nonatomic) UIImageView *imageView;
+
 - (id)initWithAnnotationWithImage:(id<MKAnnotation>)annotation
                   reuseIdentifier:(NSString *)reuseIdentifier
               annotationViewImage:(UIImage *)image;

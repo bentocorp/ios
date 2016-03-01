@@ -17,12 +17,12 @@
     self = [super initWithAnnotation:annotation reuseIdentifier:reuseIdentifier];
     
     CGRect viewRect = CGRectMake(-20, -20, 40, 40);
-    UIImageView* imageView = [[UIImageView alloc] initWithFrame:viewRect];
-    imageView.contentMode = UIViewContentModeScaleAspectFit;
-    imageView = imageView;
-    [self addSubview:imageView];
+    self.imageView = [[UIImageView alloc] initWithFrame:viewRect];
+    self.imageView.contentMode = UIViewContentModeScaleAspectFit;
+//    imageView = imageView;
+    [self addSubview:self.imageView];
     
-    self.image = image;
+    self.imageView.image = image;
     
     return self;
 }

@@ -13,6 +13,10 @@
 #import "NSUserDefaults+RMSaveCustomObject.h"
 #import "SocketHandler.h"
 #import "DataManager.h"
+#import "CLLocation+Direction.h"
+#import "CLLocation+Bearing.h"
+
+#define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
 @interface StatusViewController () <MKMapViewDelegate>
 
@@ -22,6 +26,7 @@
 {
     float diu;
     float diulei;
+    float lomei;
     CustomAnnotation *driverAnnotation;
 }
 
@@ -77,7 +82,7 @@
     /*---*/
     
     //
-    self.mapView.hidden = YES;
+    self.mapView.hidden = NO;
     
     // MAP VIEW
     self.mapView.delegate = self;
@@ -91,18 +96,24 @@
     NSMutableArray *allAnnotations = [[NSMutableArray alloc] init];
     CustomAnnotation *customerAnnotation;
     
-    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
-    NSMutableArray *placeInfoArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-    for (int i = 0; i < placeInfoArray.count; i ++) {
-        
-        SVPlacemark *placeInfo = placeInfoArray[i];
-        
-        customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
-                                                            subtitle:placeInfo.formattedAddress
-                                                          coordinate:placeInfo.location.coordinate
-                                                                type:@"customer"];
-        [allAnnotations addObject:customerAnnotation];
-    }
+//    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
+//    NSMutableArray *placeInfoArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+//    for (int i = 0; i < placeInfoArray.count; i ++) {
+//        
+//        SVPlacemark *placeInfo = placeInfoArray[i];
+//    
+//        customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
+//                                                            subtitle:placeInfo.formattedAddress
+//                                                          coordinate:placeInfo.location.coordinate
+//                                                                type:@"customer"];
+//        [allAnnotations addObject:customerAnnotation];
+//    }
+    
+    customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
+                                                        subtitle:@"Hello im a customer"
+                                                      coordinate:CLLocationCoordinate2DMake(37.779594, -122.429226)
+                                                            type:@"customer"];
+    [allAnnotations addObject:customerAnnotation];
     
     driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Driver"
                                                       subtitle:@""
@@ -114,7 +125,12 @@
     [self.mapView showAnnotations:allAnnotations animated:YES];
     [self.mapView addAnnotations:allAnnotations];
     
-    [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
+    
+    diu = 0.001;
+    lomei = 37.7545193;
+    diulei = -122.440437;
+    
+    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -141,18 +157,36 @@
         if (customAnnotationView == nil) {
             customAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
                                                                              reuseIdentifier:annotationIdentifier
-                                                                         annotationViewImage:[UIImage imageNamed:@"in-transit-64"]];
+                                                                         annotationViewImage:[UIImage imageNamed:@"car"]];
         }
     }
-    
+
     customAnnotationView.canShowCallout = YES;
     
     return customAnnotationView;
 }
 
 - (void)updateDriver {
+    lomei += diu;
     diulei += diu;
-    driverAnnotation.coordinate = CLLocationCoordinate2DMake(37.7545193, diulei);
+    
+    CLLocation *location = [[CLLocation alloc] initWithLatitude:driverAnnotation.coordinate.latitude longitude:driverAnnotation.coordinate.longitude];
+    CLLocationDirection direction = [location directionFromLocation:driverAnnotation.coordinate];
+    CGFloat radians = -direction / 180.0 * M_PI;
+    
+    //For Rotate Niddle
+    CGFloat angle = RadiansToDegrees(radians);
+    [self setLatLonForDistanceAndAngle];
+    [self rotateArrowView:arrowView degrees:(angle + fltAngle)];
+    
+    [UIView animateWithDuration:5 animations:^{
+        driverAnnotation.coordinate = CLLocationCoordinate2DMake(lomei, diulei);
+    }];
+}
+
+- (void)rotateArrowView:(UIView *)view degrees:(CGFloat)degrees {
+    CGAffineTransform transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(degrees));
+    view.transform = transform;
 }
 
 // there will be a delegate method here from sockethandler didRecieveCoordianates

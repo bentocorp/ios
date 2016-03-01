@@ -94,16 +94,16 @@
     [self.socket on:@"push" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"push data - %@", data);
         
-        // if driver has accepted my order, node will pass me his clientId, then i take that i call request to track
-        if (data.subject == "OrderAccepted") { // delivery
-            [self requestToTrackDriver];
-        }
-        else if (data.subject == "OrderArrived") { // assembly pickup
-            // remove map, show text
-        }
-        else if (data.subject == "OrderComplete") { // terminate
-            // pop view controller
-        }
+//        // if driver has accepted my order, node will pass me his clientId, then i take that i call request to track
+//        if (data.subject == "OrderAccepted") { // delivery
+//            [self requestToTrackDriver];
+//        }
+//        else if (data.subject == "OrderArrived") { // assembly pickup
+//            // remove map, show text
+//        }
+//        else if (data.subject == "OrderComplete") { // terminate
+//            // pop view controller
+//        }
     }];
 
     [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
@@ -112,11 +112,11 @@
         // once request to track driver has been made successful, node will send me location coordinates/driver info
         // call delegate method to update coordinates
         
-        clientId
-        lat
-        long
-        
-        -> call delegate method in
+//        clientId
+//        lat
+//        long
+//        
+//        -> call delegate method in
     }];
 }
 

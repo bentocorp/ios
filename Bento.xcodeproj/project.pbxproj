@@ -330,7 +330,17 @@
 		FC46DE8E1BE14AEA00E9A7B1 /* SocketHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */; };
 		FC4A37591B4C862B00020F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
 		FC4A375A1B4C863500020F8C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 90BED07B1A5BCC04003DC872 /* Main.storyboard */; };
+		FC5411141C84F6AC004F99BC /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5411111C84F6AC004F99BC /* face.png */; };
+		FC5411151C84F6AC004F99BC /* face.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5411111C84F6AC004F99BC /* face.png */; };
+		FC5411161C84F6AC004F99BC /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5411121C84F6AC004F99BC /* car.png */; };
+		FC5411171C84F6AC004F99BC /* car.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5411121C84F6AC004F99BC /* car.png */; };
+		FC5411181C84F6AC004F99BC /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5411131C84F6AC004F99BC /* pin.png */; };
+		FC5411191C84F6AC004F99BC /* pin.png in Resources */ = {isa = PBXBuildFile; fileRef = FC5411131C84F6AC004F99BC /* pin.png */; };
 		FC599F5A1B0FEDB600989E1B /* Bento_Tests.m in Sources */ = {isa = PBXBuildFile; fileRef = FC599F591B0FEDB600989E1B /* Bento_Tests.m */; };
+		FC7102DC1C851CD000F226E7 /* CLLocation+Direction.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7102D91C851CD000F226E7 /* CLLocation+Direction.m */; };
+		FC7102DD1C851CD000F226E7 /* CLLocation+Direction.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7102D91C851CD000F226E7 /* CLLocation+Direction.m */; };
+		FC7102E41C85213700F226E7 /* CLLocation+Bearing.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7102E31C85213700F226E7 /* CLLocation+Bearing.m */; };
+		FC7102E51C85213700F226E7 /* CLLocation+Bearing.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7102E31C85213700F226E7 /* CLLocation+Bearing.m */; };
 		FC72297B1B16905700C9A9AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
 		FC72297C1B16905700C9A9AF /* Reachability.m in Sources */ = {isa = PBXBuildFile; fileRef = FC72297A1B16905700C9A9AF /* Reachability.m */; };
 		FC7291231BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC7291211BA8BC9F00BCBDE7 /* EditPhoneNumberView.m */; };
@@ -373,8 +383,6 @@
 		FC8F99621C408CCC00004DAE /* CustomViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC8F995F1C408CCC00004DAE /* CustomViewController.m */; };
 		FC8F99631C408CCC00004DAE /* CustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99601C408CCC00004DAE /* CustomViewController.xib */; };
 		FC8F99641C408CCC00004DAE /* CustomViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = FC8F99601C408CCC00004DAE /* CustomViewController.xib */; };
-		FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; };
-		FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */; };
 		FC94E3411BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; };
 		FC94E3421BB3529500E2104E /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FC94E3401BB3529500E2104E /* Settings.bundle */; };
 		FC99D4F31AFC161300BEE40B /* PreviewViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FC99D4F21AFC161300BEE40B /* PreviewViewController.m */; };
@@ -843,9 +851,16 @@
 		FC46977E1C1FC2FA001FC162 /* ETA-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "ETA-50.png"; sourceTree = "<group>"; };
 		FC46DE8B1BE14AEA00E9A7B1 /* SocketHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SocketHandler.h; sourceTree = "<group>"; };
 		FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SocketHandler.m; sourceTree = "<group>"; };
+		FC5411111C84F6AC004F99BC /* face.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = face.png; sourceTree = "<group>"; };
+		FC5411121C84F6AC004F99BC /* car.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = car.png; sourceTree = "<group>"; };
+		FC5411131C84F6AC004F99BC /* pin.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pin.png; sourceTree = "<group>"; };
 		FC599F551B0FEDB600989E1B /* BentoTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BentoTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FC599F581B0FEDB600989E1B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FC599F591B0FEDB600989E1B /* Bento_Tests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = Bento_Tests.m; sourceTree = "<group>"; };
+		FC7102D81C851CD000F226E7 /* CLLocation+Direction.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "CLLocation+Direction.h"; sourceTree = "<group>"; };
+		FC7102D91C851CD000F226E7 /* CLLocation+Direction.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "CLLocation+Direction.m"; sourceTree = "<group>"; };
+		FC7102E21C85213700F226E7 /* CLLocation+Bearing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "CLLocation+Bearing.h"; path = "../CLLocation+Bearing.h"; sourceTree = "<group>"; };
+		FC7102E31C85213700F226E7 /* CLLocation+Bearing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "CLLocation+Bearing.m"; path = "../CLLocation+Bearing.m"; sourceTree = "<group>"; };
 		FC7229791B16905700C9A9AF /* Reachability.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Reachability.h; path = Bento/Modules/WebManager/Reachability.h; sourceTree = SOURCE_ROOT; };
 		FC72297A1B16905700C9A9AF /* Reachability.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Reachability.m; path = Bento/Modules/WebManager/Reachability.m; sourceTree = SOURCE_ROOT; };
 		FC7291201BA8BC9F00BCBDE7 /* EditPhoneNumberView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = EditPhoneNumberView.h; sourceTree = "<group>"; };
@@ -875,8 +890,6 @@
 		FC92E1B11B7E5C890073C5D7 /* Bento copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Bento copy-Info.plist"; path = "/Users/JosephLauSF/_github/Bento/Bento copy-Info.plist"; sourceTree = "<absolute>"; };
 		FC92E1B21B7E5D500073C5D7 /* calabash.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = calabash.framework; sourceTree = "<group>"; };
 		FC92E1B41B7E5D830073C5D7 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
-		FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderStatusViewController.h; path = ../ViewController/Order/OrderStatusViewController.h; sourceTree = "<group>"; };
-		FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderStatusViewController.m; path = ../ViewController/Order/OrderStatusViewController.m; sourceTree = "<group>"; };
 		FC94E3401BB3529500E2104E /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		FC99D4F11AFC161300BEE40B /* PreviewViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreviewViewController.h; path = Order/PreviewViewController.h; sourceTree = "<group>"; };
 		FC99D4F21AFC161300BEE40B /* PreviewViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreviewViewController.m; path = Order/PreviewViewController.m; sourceTree = "<group>"; };
@@ -1343,6 +1356,9 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FC5411111C84F6AC004F99BC /* face.png */,
+				FC5411121C84F6AC004F99BC /* car.png */,
+				FC5411131C84F6AC004F99BC /* pin.png */,
 				FCA652CC1C5C42B600B8E11E /* Cards */,
 				FCA28AAC1C57F10500E9A521 /* Checkmark Filled-50.png */,
 				FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */,
@@ -1762,6 +1778,18 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		FC7102D71C851CD000F226E7 /* CLLocation Categories */ = {
+			isa = PBXGroup;
+			children = (
+				FC7102D81C851CD000F226E7 /* CLLocation+Direction.h */,
+				FC7102D91C851CD000F226E7 /* CLLocation+Direction.m */,
+				FC7102E21C85213700F226E7 /* CLLocation+Bearing.h */,
+				FC7102E31C85213700F226E7 /* CLLocation+Bearing.m */,
+			);
+			name = "CLLocation Categories";
+			path = "CLLocation-Direction-master";
+			sourceTree = "<group>";
+		};
 		FC7E835D1C49CD2E00CFEFCC /* Orders */ = {
 			isa = PBXGroup;
 			children = (
@@ -1954,8 +1982,7 @@
 		FCE036DD1BEAAE7C00F7605B /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FC94E33B1BB34C5800E2104E /* OrderStatusViewController.h */,
-				FC94E33C1BB34C5800E2104E /* OrderStatusViewController.m */,
+				FC7102D71C851CD000F226E7 /* CLLocation Categories */,
 				FCD266531C7D13C200FC1821 /* StatusViewController.h */,
 				FCD266541C7D13C200FC1821 /* StatusViewController.m */,
 				FCD266551C7D13C200FC1821 /* StatusViewController.xib */,
@@ -2139,6 +2166,7 @@
 				FCB35C2E1BFE616300A590EC /* green-gradient.png in Resources */,
 				7216B7701AA64C7C0006FFE9 /* deliverylocation_icon_search@2x.png in Resources */,
 				7216B7711AA64C7C0006FFE9 /* register_icon_email_err.png in Resources */,
+				FC5411171C84F6AC004F99BC /* car.png in Resources */,
 				7216B7721AA64C7C0006FFE9 /* completeorder_cell_btn_remove@2x.png in Resources */,
 				FCA28AAE1C57F10500E9A521 /* Checkmark Filled-50.png in Resources */,
 				7216B7731AA64C7C0006FFE9 /* STPTestPaymentSummaryViewController.xib in Resources */,
@@ -2191,6 +2219,7 @@
 				FCDF22171ADC3ADF006B2750 /* Icon-60.png in Resources */,
 				FC1D615B1BBA0C0B0012FFB3 /* FacebookSDK-4_6-for-iOS.docset in Resources */,
 				FCA652F01C5C42B600B8E11E /* discover.png in Resources */,
+				FC5411191C84F6AC004F99BC /* pin.png in Resources */,
 				FC1D61611BBA0C0B0012FFB3 /* FacebookSDKStrings.bundle in Resources */,
 				FCB35C311BFE624700A590EC /* drop-shadow.png in Resources */,
 				7216B78A1AA64C7C0006FFE9 /* mybento_nav_cart_act@2x.png in Resources */,
@@ -2281,6 +2310,7 @@
 				FCF5E0A31B8BDC28002E823C /* placeholder.png in Resources */,
 				7216B7AD1AA64C7C0006FFE9 /* mybento_nav_help@2x.png in Resources */,
 				FCDF222D1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
+				FC5411151C84F6AC004F99BC /* face.png in Resources */,
 				7216B7AE1AA64C7C0006FFE9 /* register_icon_password.png in Resources */,
 				FCDF221D1ADC3ADF006B2750 /* Icon-72.png in Resources */,
 				FCDF22311ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */,
@@ -2295,6 +2325,7 @@
 				FCB35C2D1BFE616300A590EC /* green-gradient.png in Resources */,
 				90D8F7D11A5E2B3B00D034CF /* deliverylocation_icon_search@2x.png in Resources */,
 				90D8F7C41A5E126C00D034CF /* register_icon_email_err.png in Resources */,
+				FC5411161C84F6AC004F99BC /* car.png in Resources */,
 				FCEFB76C1BBCEBF500C3E34D /* MoPub.bundle in Resources */,
 				FCA28AAD1C57F10500E9A521 /* Checkmark Filled-50.png in Resources */,
 				47C5B0191A8B82BD008FA7DA /* completeorder_cell_btn_remove@2x.png in Resources */,
@@ -2347,6 +2378,7 @@
 				90D8F7A61A5D7F7100D034CF /* mybento_image_bottom.png in Resources */,
 				FCDF22161ADC3ADF006B2750 /* Icon-60.png in Resources */,
 				FCA652EF1C5C42B600B8E11E /* discover.png in Resources */,
+				FC5411181C84F6AC004F99BC /* pin.png in Resources */,
 				90BED0DF1A5C04DE003DC872 /* mybento_nav_cart_act@2x.png in Resources */,
 				FCB35C301BFE624700A590EC /* drop-shadow.png in Resources */,
 				90359C251A5EC49700AAD5D2 /* orderconfirm_image_minute@2x.png in Resources */,
@@ -2437,6 +2469,7 @@
 				90BED0E11A5C04DE003DC872 /* mybento_nav_help@2x.png in Resources */,
 				FCDF222C1ADC3ADF006B2750 /* Icon-Small-50@2x.png in Resources */,
 				90D8F7B21A5D84B800D034CF /* register_icon_password.png in Resources */,
+				FC5411141C84F6AC004F99BC /* face.png in Resources */,
 				FCDF221C1ADC3ADF006B2750 /* Icon-72.png in Resources */,
 				FC1D61541BBA0C0B0012FFB3 /* FacebookAudienceNetworkSDK-4_6-for-iOS.docset in Resources */,
 				FCDF22301ADC3ADF006B2750 /* Icon-Small@2x.png in Resources */,
@@ -2556,7 +2589,6 @@
 				7216B70C1AA64C7C0006FFE9 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				7216B70E1AA64C7C0006FFE9 /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7216B70F1AA64C7C0006FFE9 /* JGProgressHUDErrorIndicatorView.m in Sources */,
-				FC94E33E1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				7216B7101AA64C7C0006FFE9 /* FXBlurView.m in Sources */,
 				FC4327B51BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
 				FCD266571C7D13C200FC1821 /* StatusViewController.m in Sources */,
@@ -2572,6 +2604,7 @@
 				7216B7131AA64C7C0006FFE9 /* NSDate+RFC1123.m in Sources */,
 				7216B7171AA64C7C0006FFE9 /* JGProgressHUDAnimation.m in Sources */,
 				7216B7181AA64C7C0006FFE9 /* AppDelegate.m in Sources */,
+				FC7102E51C85213700F226E7 /* CLLocation+Bearing.m in Sources */,
 				7216B7191AA64C7C0006FFE9 /* PromoCodeView.m in Sources */,
 				FC4327B91BE2EF4300E91D9B /* CurrentOrdersViewController.m in Sources */,
 				7216B71B1AA64C7C0006FFE9 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
@@ -2603,6 +2636,7 @@
 				7216B7311AA64C7C0006FFE9 /* DataManager.m in Sources */,
 				FC9E81F31BACE4250099DBF5 /* SocketAnyEvent.swift in Sources */,
 				7216B7321AA64C7C0006FFE9 /* SHSPhoneLogic.m in Sources */,
+				FC7102DD1C851CD000F226E7 /* CLLocation+Direction.m in Sources */,
 				7216B7331AA64C7C0006FFE9 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				FC9E81F61BACE4250099DBF5 /* SocketEngine.swift in Sources */,
 				7216B7351AA64C7C0006FFE9 /* MyAlertView.m in Sources */,
@@ -2680,7 +2714,6 @@
 				722333631A6D4058006C2446 /* JGProgressHUDRingIndicatorView.m in Sources */,
 				7286EB4E1A7D8BE800D03DCE /* NSUserDefaults+RMSaveCustomObject.m in Sources */,
 				7223335D1A6D4058006C2446 /* JGProgressHUDErrorIndicatorView.m in Sources */,
-				FC94E33D1BB34C5800E2104E /* OrderStatusViewController.m in Sources */,
 				723BD40D1A8DD831000AD4F1 /* FXBlurView.m in Sources */,
 				FC4327B41BE2EE8E00E91D9B /* DriverLocation.m in Sources */,
 				FCD266561C7D13C200FC1821 /* StatusViewController.m in Sources */,
@@ -2696,6 +2729,7 @@
 				722333D01A6F46DF006C2446 /* NSDate+RFC1123.m in Sources */,
 				7223335C1A6D4058006C2446 /* JGProgressHUDAnimation.m in Sources */,
 				90BED0A01A5BCC7B003DC872 /* AppDelegate.m in Sources */,
+				FC7102E41C85213700F226E7 /* CLLocation+Bearing.m in Sources */,
 				90A553E21A60035D001F9DA7 /* PromoCodeView.m in Sources */,
 				FC4327B81BE2EF4300E91D9B /* CurrentOrdersViewController.m in Sources */,
 				722333601A6D4058006C2446 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
@@ -2727,6 +2761,7 @@
 				7279E5E11A6B5F3B00591CB2 /* DataManager.m in Sources */,
 				FC9E81F21BACE4250099DBF5 /* SocketAnyEvent.swift in Sources */,
 				7209E0941A780A1200D18D7A /* SHSPhoneLogic.m in Sources */,
+				FC7102DC1C851CD000F226E7 /* CLLocation+Direction.m in Sources */,
 				722333D41A6F46DF006C2446 /* UIImageView+MKNetworkKitAdditions.m in Sources */,
 				FC9E81F51BACE4250099DBF5 /* SocketEngine.swift in Sources */,
 				90D8F7A41A5D6B6E00D034CF /* MyAlertView.m in Sources */,

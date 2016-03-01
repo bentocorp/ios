@@ -554,16 +554,16 @@
                             <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-fS-ayY">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="494"/>
-                        </mapView>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="lCa-Ux-ZXT">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face.png" translatesAutoresizingMaskIntoConstraints="NO" id="lCa-Ux-ZXT">
                             <rect key="frame" x="137" y="119" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="Ek4-D9-NDL"/>
                                 <constraint firstAttribute="width" constant="100" id="ZIu-lJ-RZK"/>
                             </constraints>
                         </imageView>
+                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-fS-ayY">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="494"/>
+                        </mapView>
                     </subviews>
                     <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -626,6 +626,7 @@
         </view>
     </objects>
     <resources>
+        <image name="face.png" width="278" height="278"/>
         <image name="nav_background.png" width="642" height="131"/>
         <image name="nav_btn_back.png" width="10" height="16"/>
     </resources>
