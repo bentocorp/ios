@@ -25,16 +25,43 @@
 
 @implementation StatusViewController
 {
-    float diu;
-    float diulei;
-    float lomei;
     CustomAnnotation *driverAnnotation;
-    
     CustomAnnotationView *driverAnnotationView;
+    
+    int count;
+    NSArray *lat;
+    NSArray *lng;
+    
+    NSMutableArray *allAnnotations;
+    NSTimer *timer;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    lat = @[
+            @"37.769002",
+            @"37.767569",
+            @"37.767232",
+            @"37.767071",
+            @"37.767003",
+            @"37.766812",
+            @"37.766675",
+            @"37.766425",
+            @"37.764781"
+            ];
+    
+    lng = @[
+            @"-122.413448",
+            @"-122.413330",
+            @"-122.413287",
+            @"-122.413336",
+            @"-122.414473",
+            @"-122.417718",
+            @"-122.419709",
+            @"-122.419822",
+            @"-122.419688"
+            ];
     
     NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
     NSString *username = userInfo[@"email"];
@@ -96,7 +123,7 @@
     // should probably nil check
     
     // Annotations Array
-    NSMutableArray *allAnnotations = [[NSMutableArray alloc] init];
+    allAnnotations = [[NSMutableArray alloc] init];
     CustomAnnotation *customerAnnotation;
     
 //    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
@@ -114,13 +141,13 @@
     
     customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
                                                         subtitle:@"Hello im a customer"
-                                                      coordinate:CLLocationCoordinate2DMake(37.779594, -122.429226)
+                                                      coordinate:CLLocationCoordinate2DMake([lat[lat.count-1] doubleValue], [lng[lng.count-1] doubleValue])
                                                             type:@"customer"];
     [allAnnotations addObject:customerAnnotation];
     
     driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Driver"
                                                       subtitle:@""
-                                                    coordinate:CLLocationCoordinate2DMake(37.7545193, -122.440437)
+                                                    coordinate:CLLocationCoordinate2DMake([lat[0] doubleValue], [lng[0] doubleValue])
                                                           type:@"driver"];
     [allAnnotations addObject:driverAnnotation];
     
@@ -128,12 +155,9 @@
     [self.mapView showAnnotations:allAnnotations animated:YES];
     [self.mapView addAnnotations:allAnnotations];
     
+    timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
     
-    diu = 0.001;
-    lomei = 37.7545193;
-    diulei = -122.440437;
-    
-    [NSTimer scheduledTimerWithTimeInterval:5 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
+    count = 0;
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -178,17 +202,24 @@
 }
 
 - (void)updateDriver {
-    lomei += diu;
-    diulei += diu;
     
-    [UIView animateWithDuration:5 animations:^{
+    count++;
+    
+    if (count == lat.count) {
+        [timer invalidate];
+    }
+    
+    [UIView animateWithDuration:1 animations:^{
         CLLocation *start = [[CLLocation alloc] initWithLatitude:driverAnnotation.coordinate.latitude longitude:driverAnnotation.coordinate.longitude];
-        CLLocation *end = [[CLLocation alloc] initWithLatitude:lomei longitude:diulei];
+        CLLocation *end = [[CLLocation alloc] initWithLatitude:[lat[count] doubleValue] longitude:[lng[count] doubleValue]];
         double bearing = [start bearingToLocation:end];
         
         driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
-        
-        driverAnnotation.coordinate = CLLocationCoordinate2DMake(lomei, diulei);
+    }];
+    
+    [UIView animateWithDuration:2 animations:^{
+        driverAnnotation.coordinate = CLLocationCoordinate2DMake([lat[count] doubleValue], [lng[count] doubleValue]);
+        [self.mapView showAnnotations:allAnnotations animated:YES];
     }];
 }
 

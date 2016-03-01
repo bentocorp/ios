@@ -145,6 +145,9 @@
     }
     
     NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
+
+    NSLog(@"/orderhistory strRequest - %@", strRequest);
+    
     [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
         if (loadingHUD != nil) {
             [loadingHUD dismiss];
