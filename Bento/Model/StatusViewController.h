@@ -40,5 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIView *dotView9;
 
 @property (nonatomic) NSString *driverId;
+@property (nonatomic) float lat;
+@property (nonatomic) float lng;
 
 @end

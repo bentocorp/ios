@@ -15,8 +15,8 @@
         self.title = dictionary[@"title"];
         self.price = dictionary[@"price"];
         self.driverId = dictionary[@"driverId"];
-        self.lat = [dictionary[@"lat"] doubleValue];
-        self.lng = [dictionary[@"long"] doubleValue];
+        self.lat = [dictionary[@"lat"] floatValue];
+        self.lng = [dictionary[@"long"] floatValue];
     }
     
     return self;
