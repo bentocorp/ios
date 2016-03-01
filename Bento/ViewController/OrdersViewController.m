@@ -20,7 +20,6 @@
 #import "OrdersTableViewCell.h"
 #import "Mixpanel.h"
 #import "AppStrings.h"
-#import "OrderStatusViewController.h"
 #import "StatusViewController.h"
 
 @interface OrdersViewController () <UITableViewDataSource, UITableViewDelegate>

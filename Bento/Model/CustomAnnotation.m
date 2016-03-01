@@ -7,6 +7,7 @@
 //
 
 #import "CustomAnnotation.h"
+#import "CLLocation+Bearing.h"
 
 @implementation CustomAnnotation
 

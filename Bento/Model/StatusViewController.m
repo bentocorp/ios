@@ -15,6 +15,7 @@
 #import "DataManager.h"
 #import "CLLocation+Direction.h"
 #import "CLLocation+Bearing.h"
+#import "UIImage+RotationMethods.h"
 
 #define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
@@ -28,6 +29,8 @@
     float diulei;
     float lomei;
     CustomAnnotation *driverAnnotation;
+    
+    CustomAnnotationView *driverAnnotationView;
 }
 
 - (void)viewDidLoad {
@@ -141,52 +144,52 @@
     // not reusing because 1) there's not going to be many annotations to begin with, 2) it's causing the annotations to switch with each other
     //    CustomAnnotationView *customAnnotationView = (CustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
     
-    CustomAnnotationView *customAnnotationView;
+    CustomAnnotationView *customerAnnotationView;
     
     CustomAnnotation *customAnnotation = (CustomAnnotation *)annotation;
     if ([customAnnotation.type isEqualToString:@"customer"]) {
         
-        if (customAnnotationView == nil) {
-            customAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
+        if (customerAnnotationView == nil) {
+            customerAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
                                                                              reuseIdentifier:annotationIdentifier
                                                                          annotationViewImage:[UIImage imageNamed:@"location-64"]];
         }
+        
+        customerAnnotationView.canShowCallout = YES;
+        
+        return customerAnnotationView;
     }
     else if ([customAnnotation.type isEqualToString:@"driver"]) {
         
-        if (customAnnotationView == nil) {
-            customAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
+        if (driverAnnotationView == nil) {
+            driverAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
                                                                              reuseIdentifier:annotationIdentifier
                                                                          annotationViewImage:[UIImage imageNamed:@"car"]];
+            
+            
         }
+        
+        driverAnnotationView.canShowCallout = YES;
+        
+        return driverAnnotationView;
     }
-
-    customAnnotationView.canShowCallout = YES;
     
-    return customAnnotationView;
+    return nil;
 }
 
 - (void)updateDriver {
     lomei += diu;
     diulei += diu;
     
-    CLLocation *location = [[CLLocation alloc] initWithLatitude:driverAnnotation.coordinate.latitude longitude:driverAnnotation.coordinate.longitude];
-    CLLocationDirection direction = [location directionFromLocation:driverAnnotation.coordinate];
-    CGFloat radians = -direction / 180.0 * M_PI;
-    
-    //For Rotate Niddle
-    CGFloat angle = RadiansToDegrees(radians);
-    [self setLatLonForDistanceAndAngle];
-    [self rotateArrowView:arrowView degrees:(angle + fltAngle)];
-    
     [UIView animateWithDuration:5 animations:^{
+        CLLocation *start = [[CLLocation alloc] initWithLatitude:driverAnnotation.coordinate.latitude longitude:driverAnnotation.coordinate.longitude];
+        CLLocation *end = [[CLLocation alloc] initWithLatitude:lomei longitude:diulei];
+        double bearing = [start bearingToLocation:end];
+        
+        driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
+        
         driverAnnotation.coordinate = CLLocationCoordinate2DMake(lomei, diulei);
     }];
-}
-
-- (void)rotateArrowView:(UIView *)view degrees:(CGFloat)degrees {
-    CGAffineTransform transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(degrees));
-    view.transform = transform;
 }
 
 // there will be a delegate method here from sockethandler didRecieveCoordianates
