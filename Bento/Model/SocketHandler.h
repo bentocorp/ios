@@ -9,9 +9,17 @@
 #import <Foundation/Foundation.h>
 #import "Bento-Swift.h"
 
+@protocol SocketHandlerDelegate <NSObject>
+
+@optional
+- (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng;
+
+@end
+
 @interface SocketHandler : NSObject
 
 @property (nonatomic, strong) SocketIOClient *socket;
+@property (nonatomic) id delegate;
 
 @property (nonatomic) NSString *username;
 @property (nonatomic) NSString *token;

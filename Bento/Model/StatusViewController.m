@@ -13,13 +13,14 @@
 #import "NSUserDefaults+RMSaveCustomObject.h"
 #import "SocketHandler.h"
 #import "DataManager.h"
-#import "CLLocation+Direction.h"
 #import "CLLocation+Bearing.h"
-#import "UIImage+RotationMethods.h"
+#import "SVGeocoder.h"
 
 #define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
 @interface StatusViewController () <MKMapViewDelegate>
+
+@property (nonatomic) SVPlacemark *placeInfo;
 
 @end
 
@@ -29,8 +30,8 @@
     CustomAnnotationView *driverAnnotationView;
     
     int count;
-    NSArray *lat;
-    NSArray *lng;
+    NSArray *lat2;
+    NSArray *lng2;
     
     NSMutableArray *allAnnotations;
     NSTimer *timer;
@@ -39,37 +40,83 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    lat = @[
-            @"37.769002",
-            @"37.767569",
-            @"37.767232",
-            @"37.767071",
-            @"37.767003",
-            @"37.766812",
-            @"37.766675",
-            @"37.766425",
-            @"37.764781"
-            ];
+    lat2 = @[
+             @"37.769002",
+             @"37.767569",
+             @"37.767232",
+             @"37.767071",
+             @"37.767003",
+             @"37.766812",
+             @"37.766675",
+             @"37.766674",
+             @"37.766425",
+             @"37.764781"
+             ];
     
-    lng = @[
-            @"-122.413448",
-            @"-122.413330",
-            @"-122.413287",
-            @"-122.413336",
-            @"-122.414473",
-            @"-122.417718",
-            @"-122.419709",
-            @"-122.419822",
-            @"-122.419688"
-            ];
+    lng2 = @[
+             @"-122.413448",
+             @"-122.413330",
+             @"-122.413287",
+             @"-122.413336",
+             @"-122.414473",
+             @"-122.417718",
+             @"-122.419709",
+             @"-122.419845",
+             @"-122.419822",
+             @"-122.419688"
+             ];
     
-    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
-    NSString *username = userInfo[@"email"];
+    [self connectToNode];
     
-    NSString *tokenString = [[DataManager shareDataManager] getAPIToken];
+    [self setupViews];
     
-    [[SocketHandler sharedSocket] connectAndAuthenticate:username token:tokenString driverId:self.driverId];
+    timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
+    count = 0;
     
+    [SVGeocoder reverseGeocode:CLLocationCoordinate2DMake(self.lat, self.lng) completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error == nil && placemarks.count > 0) {
+            self.placeInfo = [placemarks firstObject];
+            NSLog(@"placeinfo - %@", self.placeInfo);
+            
+            // Annotations Array
+            allAnnotations = [[NSMutableArray alloc] init];
+            CustomAnnotation *customerAnnotation;
+            
+            //    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
+            //    NSMutableArray *placeInfoArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
+            //    for (int i = 0; i < placeInfoArray.count; i ++) {
+            //
+            //        SVPlacemark *placeInfo = placeInfoArray[i];
+            //
+            //        customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
+            //                                                            subtitle:placeInfo.formattedAddress
+            //                                                          coordinate:placeInfo.location.coordinate
+            //                                                                type:@"customer"];
+            //        [allAnnotations addObject:customerAnnotation];
+            //    }
+            
+            customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
+                                                                subtitle:[NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare]
+                                                              coordinate:CLLocationCoordinate2DMake(self.lat, self.lng)
+                                                                    type:@"customer"];
+            [allAnnotations addObject:customerAnnotation];
+            
+            driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Server"
+                                                              subtitle:@""
+                                                            coordinate:CLLocationCoordinate2DMake([lat2[0] doubleValue], [lng2[0] doubleValue])
+                                                                  type:@"driver"];
+            [allAnnotations addObject:driverAnnotation];
+            
+            [self.mapView addAnnotations:allAnnotations];
+            [self.mapView showAnnotations:allAnnotations animated:NO];
+        }
+        else {
+            
+        }
+    }];
+}
+
+- (void)setupViews {
     self.num1Label.layer.cornerRadius = 10;
     self.num1Label.layer.masksToBounds = YES;
     
@@ -108,56 +155,13 @@
     
     self.dotView9.layer.cornerRadius = 3;
     self.dotView9.layer.masksToBounds = YES;
-    
-    /*---*/
-    
-    //
-    self.mapView.hidden = NO;
-    
-    // MAP VIEW
-    self.mapView.delegate = self;
-    self.mapView.mapType = MKMapTypeStandard;
-    self.mapView.zoomEnabled = YES;
-    self.mapView.scrollEnabled = YES;
-    
-    // should probably nil check
-    
-    // Annotations Array
-    allAnnotations = [[NSMutableArray alloc] init];
-    CustomAnnotation *customerAnnotation;
-    
-//    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
-//    NSMutableArray *placeInfoArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-//    for (int i = 0; i < placeInfoArray.count; i ++) {
-//        
-//        SVPlacemark *placeInfo = placeInfoArray[i];
-//    
-//        customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
-//                                                            subtitle:placeInfo.formattedAddress
-//                                                          coordinate:placeInfo.location.coordinate
-//                                                                type:@"customer"];
-//        [allAnnotations addObject:customerAnnotation];
-//    }
-    
-    customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
-                                                        subtitle:@"Hello im a customer"
-                                                      coordinate:CLLocationCoordinate2DMake([lat[lat.count-1] doubleValue], [lng[lng.count-1] doubleValue])
-                                                            type:@"customer"];
-    [allAnnotations addObject:customerAnnotation];
-    
-    driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Driver"
-                                                      subtitle:@""
-                                                    coordinate:CLLocationCoordinate2DMake([lat[0] doubleValue], [lng[0] doubleValue])
-                                                          type:@"driver"];
-    [allAnnotations addObject:driverAnnotation];
-    
-    // Add annotations to map view
-    [self.mapView showAnnotations:allAnnotations animated:YES];
-    [self.mapView addAnnotations:allAnnotations];
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
-    
-    count = 0;
+}
+
+- (void)connectToNode {
+    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
+    NSString *username = userInfo[@"email"];
+    NSString *tokenString = [[DataManager shareDataManager] getAPIToken];
+    [[SocketHandler sharedSocket] connectAndAuthenticate:username token:tokenString driverId:self.driverId];
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -205,25 +209,23 @@
     
     count++;
     
-    if (count == lat.count) {
+    if (count == lat2.count-1) {
         [timer invalidate];
     }
     
     [UIView animateWithDuration:1 animations:^{
         CLLocation *start = [[CLLocation alloc] initWithLatitude:driverAnnotation.coordinate.latitude longitude:driverAnnotation.coordinate.longitude];
-        CLLocation *end = [[CLLocation alloc] initWithLatitude:[lat[count] doubleValue] longitude:[lng[count] doubleValue]];
+        CLLocation *end = [[CLLocation alloc] initWithLatitude:[lat2[count] doubleValue] longitude:[lng2[count] doubleValue]];
         double bearing = [start bearingToLocation:end];
         
         driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
     }];
     
     [UIView animateWithDuration:2 animations:^{
-        driverAnnotation.coordinate = CLLocationCoordinate2DMake([lat[count] doubleValue], [lng[count] doubleValue]);
+        driverAnnotation.coordinate = CLLocationCoordinate2DMake([lat2[count] doubleValue], [lng2[count] doubleValue]);
         [self.mapView showAnnotations:allAnnotations animated:YES];
     }];
 }
-
-// there will be a delegate method here from sockethandler didRecieveCoordianates
 
 - (IBAction)backButtonPressed:(id)sender {
     [[SocketHandler sharedSocket] closeSocket];

@@ -94,6 +94,14 @@
     [self.socket on:@"push" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"push data - %@", data);
         
+//        NSString *jsonString = [data[0][@"ret"] stringValue];
+//        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:false];
+//
+//        NSError *error;
+//        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData
+//                                                             options:kNilOptions
+//                                                               error:&error];
+        
 //        // if driver has accepted my order, node will pass me his clientId, then i take that i call request to track
 //        if (data.subject == "OrderAccepted") { // delivery
 //            [self requestToTrackDriver];
@@ -106,17 +114,19 @@
 //        }
     }];
 
+    // Listen to Location
     [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"loc data - %@", data);
         
-        // once request to track driver has been made successful, node will send me location coordinates/driver info
-        // call delegate method to update coordinates
-        
-//        clientId
-//        lat
-//        long
+//        NSString *jsonString = [data[0][@"ret"] stringValue];
+//        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:false];
 //        
-//        -> call delegate method in
+//        NSError *error;
+//        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData
+//                                                             options:kNilOptions
+//                                                               error:&error];
+//        
+//        [self.delegate socketHandlerDidUpdateLocationWith:[json[@"lat"] floatValue] and:[json[@"long"] floatValue]];
     }];
 }
 

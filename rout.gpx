@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<gpx creator="GPS Visualizer http://www.gpsvisualizer.com/" version="1.1" xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+<wpt lat="37.7713361" lon="-122.4086504">
+  <name>37.7713361,-122.4086504</name>
+  <desc>498 9th St, San Francisco, CA 94103, USA</desc>
+</wpt>
+<wpt lat="37.7648199" lon="-122.4193735">
+  <name>2017 Mission St, San Francisco, CA 94110</name>
+</wpt>
+<trk>
+  <name>498 9th St - 2017 Mission St, San Francisco, CA 94110</name>
+  <desc>1.0 mi, 0:06</desc>
+  <trkseg>
+    <trkpt lat="37.77136" lon="-122.40862"></trkpt>
+    <trkpt lat="37.77175" lon="-122.40911"></trkpt>
+    <trkpt lat="37.77254" lon="-122.4101"></trkpt>
+    <trkpt lat="37.77254" lon="-122.4101"></trkpt>
+    <trkpt lat="37.77206" lon="-122.4107"></trkpt>
+    <trkpt lat="37.77159" lon="-122.41129"></trkpt>
+    <trkpt lat="37.77134" lon="-122.4116"></trkpt>
+    <trkpt lat="37.77094" lon="-122.41211"></trkpt>
+    <trkpt lat="37.77064" lon="-122.4125"></trkpt>
+    <trkpt lat="37.77054" lon="-122.41263"></trkpt>
+    <trkpt lat="37.7704" lon="-122.41279"></trkpt>
+    <trkpt lat="37.77026" lon="-122.41293"></trkpt>
+    <trkpt lat="37.77007" lon="-122.41308"></trkpt>
+    <trkpt lat="37.76999" lon="-122.41314"></trkpt>
+    <trkpt lat="37.76994" lon="-122.41317"></trkpt>
+    <trkpt lat="37.7699" lon="-122.41319"></trkpt>
+    <trkpt lat="37.7698" lon="-122.41326"></trkpt>
+    <trkpt lat="37.76971" lon="-122.4133"></trkpt>
+    <trkpt lat="37.76963" lon="-122.41333"></trkpt>
+    <trkpt lat="37.76947" lon="-122.4134"></trkpt>
+    <trkpt lat="37.7694" lon="-122.41342"></trkpt>
+    <trkpt lat="37.76933" lon="-122.41343"></trkpt>
+    <trkpt lat="37.76917" lon="-122.41346"></trkpt>
+    <trkpt lat="37.7691" lon="-122.41347"></trkpt>
+    <trkpt lat="37.769" lon="-122.41347"></trkpt>
+    <trkpt lat="37.7689" lon="-122.41347"></trkpt>
+    <trkpt lat="37.76881" lon="-122.41346"></trkpt>
+    <trkpt lat="37.76869" lon="-122.41345"></trkpt>
+    <trkpt lat="37.7686" lon="-122.41344"></trkpt>
+    <trkpt lat="37.76803" lon="-122.41337"></trkpt>
+    <trkpt lat="37.76772" lon="-122.41334"></trkpt>
+    <trkpt lat="37.76707" lon="-122.41328"></trkpt>
+    <trkpt lat="37.76673" lon="-122.41324"></trkpt>
+    <trkpt lat="37.7659" lon="-122.41318"></trkpt>
+    <trkpt lat="37.76546" lon="-122.41314"></trkpt>
+    <trkpt lat="37.76546" lon="-122.41314"></trkpt>
+    <trkpt lat="37.76544" lon="-122.41352"></trkpt>
+    <trkpt lat="37.76533" lon="-122.41535"></trkpt>
+    <trkpt lat="37.76527" lon="-122.41643"></trkpt>
+    <trkpt lat="37.7652" lon="-122.41753"></trkpt>
+    <trkpt lat="37.76513" lon="-122.41861"></trkpt>
+    <trkpt lat="37.76512" lon="-122.41874"></trkpt>
+    <trkpt lat="37.76508" lon="-122.4194"></trkpt>
+  </trkseg>
+</trk>
+</gpx>
