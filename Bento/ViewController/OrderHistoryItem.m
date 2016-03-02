@@ -17,6 +17,7 @@
         self.driverId = dictionary[@"driverId"];
         self.lat = [dictionary[@"lat"] floatValue];
         self.lng = [dictionary[@"long"] floatValue];
+        self.orderId = dictionary[@"orderId"];
     }
     
     return self;

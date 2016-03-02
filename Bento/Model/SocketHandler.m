@@ -7,6 +7,10 @@
 //
 
 #import "SocketHandler.h"
+#import "DataManager.h"
+#import "BentoShop.h"
+#import "OrderHistoryItem.h"
+#import "OrderHistorySection.h"
 
 @implementation SocketHandler
 
@@ -49,6 +53,31 @@
 - (void)configureHandlers {
     [self.socket on:@"connect" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"connect triggered - %@", data);
+        
+        NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
+        
+        NSLog(@"/orderhistory strRequest - %@", strRequest);
+        
+        [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
+            
+            if (error == nil) {
+                
+                NSMutableArray *orderHistoryArray = [[NSMutableArray alloc] init];
+                
+                for (NSDictionary *json in responseDic) {
+                    [orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
+                }
+                
+                for (OrderHistorySection *section in orderHistoryArray) {
+                    for (OrderHistoryItem *item in section.items) {
+                        
+                    }
+                }
+            }
+            else {
+                // handle error
+            }
+        }];
         
         [self authenticateUser];
     }];

@@ -87,8 +87,6 @@
     noOrdersLabel.numberOfLines = 0;
     noOrdersLabel.hidden = YES;
     [self.view addSubview:noOrdersLabel];
-    
-    [self getData];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -105,6 +103,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
     [self startTimerOnViewedScreen];
+    
+    [self getData];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {

@@ -15,10 +15,11 @@
 #import "DataManager.h"
 #import "CLLocation+Bearing.h"
 #import "SVGeocoder.h"
+#import "BentoShop.h"
 
 #define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
-@interface StatusViewController () <MKMapViewDelegate>
+@interface StatusViewController () <MKMapViewDelegate, SocketHandlerDelegate>
 
 @property (nonatomic) SVPlacemark *placeInfo;
 @property (nonatomic) CustomAnnotation *customerAnnotation;
@@ -75,6 +76,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:@"enteredForeground" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToNode) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSocket) name:@"enteringBackground" object:nil];
@@ -168,6 +173,7 @@
     NSString *username = userInfo[@"email"];
     NSString *tokenString = [[DataManager shareDataManager] getAPIToken];
     [[SocketHandler sharedSocket] connectAndAuthenticate:username token:tokenString driverId:self.driverId];
+    [SocketHandler sharedSocket].delegate = self;
 }
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
@@ -247,5 +253,12 @@
     [[SocketHandler sharedSocket] closeSocket];
 }
 
+- (void)socketHandlerDidAuthenticate {
+    
+}
+
+- (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
+    
+}
 
 @end

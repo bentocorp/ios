@@ -15,6 +15,7 @@
 @property (nonatomic) NSString *driverId;
 @property (nonatomic) float lat;
 @property (nonatomic) float lng;
+@property (nonatomic) NSString *orderId;
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
