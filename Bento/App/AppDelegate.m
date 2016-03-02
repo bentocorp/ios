@@ -261,66 +261,12 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (void)applicationWillEnterForeground:(UIApplication *)application
 {
     // Called as part of the transition from the background to the inactive state; here you can undo many of the changes made on entering the background.
-    
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    
-        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
-            [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
-            [[BentoShop sharedInstance] getInit2WithGateKeeper:^(BOOL succeeded, NSError *error) {
-                
-            }];
-        }
-        else {
-            [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
-                
-            }];
-        }
-        
-        [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
-        
-        dispatch_sync(dispatch_get_main_queue(), ^{
-    
-            /*--------------------*/
-    
-            // lunch/dinner times changed, reset
-            // set currentMode
-            float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
-            float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
-            
-            // 12:00am - dinner opening (ie. 16.5)
-            if (currentTime >= 0 && currentTime < dinnerTime) {
-                [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
-            }
-            // dinner opening - 11:59pm
-            else if (currentTime >= dinnerTime && currentTime < 24) {
-                [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
-            }
-            
-            [[NSUserDefaults standardUserDefaults] synchronize];
-    
-            NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
-
-            /*--------------------*/
-    
-            // Notifications
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"enteredForeground" object:nil];
-            [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
-            
-            // Global Data Manager
-            [globalShop refreshPause];
-            [[CountdownTimer sharedInstance] refreshPause];
-            
-            // Perform check for new version of your app
-            if (globalShop.iosCurrentVersion < globalShop.iosMinVersion) {
-                [aV show];
-            }
-        });
-    });
 }
 
 - (void)applicationDidBecomeActive:(UIApplication *)application
 {
     // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+    
     
     if ([self connected]) {
         if (globalShop.iosCurrentVersion >= globalShop.iosMinVersion) {
@@ -381,6 +327,62 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         NSLog(@"facebook key - %@", facebookKey);
     }
+    
+    // the following transferred from didenterforeground
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
+            [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
+            [[BentoShop sharedInstance] getInit2WithGateKeeper:^(BOOL succeeded, NSError *error) {
+                
+            }];
+        }
+        else {
+            [[BentoShop sharedInstance] getInit2:^(BOOL succeeded, NSError *error) {
+                
+            }];
+        }
+        
+        [globalShop getCurrentLunchDinnerBufferTimesInNumbersAndVersionNumbers];
+        
+        dispatch_sync(dispatch_get_main_queue(), ^{
+            
+            /*--------------------*/
+            
+            // lunch/dinner times changed, reset
+            // set currentMode
+            float currentTime = [[[BentoShop sharedInstance] getCurrentTime] floatValue];
+            float dinnerTime = [[[BentoShop sharedInstance] getDinnerTime] floatValue];;
+            
+            // 12:00am - dinner opening (ie. 16.5)
+            if (currentTime >= 0 && currentTime < dinnerTime) {
+                [[NSUserDefaults standardUserDefaults] setObject:@"LunchMode" forKey:@"NewLunchOrDinnerMode"];
+            }
+            // dinner opening - 11:59pm
+            else if (currentTime >= dinnerTime && currentTime < 24) {
+                [[NSUserDefaults standardUserDefaults] setObject:@"DinnerMode" forKey:@"NewLunchOrDinnerMode"];
+            }
+            
+            [[NSUserDefaults standardUserDefaults] synchronize];
+            
+            NSLog(@"NEW LUNCH OR DINNER MODE: %@", [[NSUserDefaults standardUserDefaults] objectForKey:@"NewLunchOrDinnerMode"]);
+            
+            /*--------------------*/
+            
+            // Notifications
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"enteredForeground" object:nil];
+            [[NSNotificationCenter defaultCenter] postNotificationName:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+            
+            // Global Data Manager
+            [globalShop refreshPause];
+            [[CountdownTimer sharedInstance] refreshPause];
+            
+            // Perform check for new version of your app
+            if (globalShop.iosCurrentVersion < globalShop.iosMinVersion) {
+                [aV show];
+            }
+        });
+    });
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
