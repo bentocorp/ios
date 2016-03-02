@@ -42,4 +42,8 @@
     return [UIColor colorWithRed:125.f/255.f green:170.f/255.f blue:82.f/255.f alpha:0.8f];
 }
 
++ (UIColor *)bentoOrderStatusGray {
+    return [UIColor colorWithRed:0.604f green:0.604f blue:0.604f alpha:1.0f];
+}
+
 @end

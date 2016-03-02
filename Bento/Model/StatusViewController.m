@@ -18,6 +18,7 @@
 #import "BentoShop.h"
 #import "OrderHistorySection.h"
 #import "OrderHistoryItem.h"
+#import "UIColor+CustomColors.h"
 
 #define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
@@ -280,7 +281,7 @@
         
         if (error == nil) {
             
-            if ([self shouldRemoveOrder:responseDic] == YES) {
+            if ([self shouldRemoveOrder:responseDic]) {
                 [self goBack];
             }
         }
@@ -307,10 +308,17 @@
         if (item.orderId == self.orderId) {
             switch (self.orderStatus) {
                 case Assigned:
+                    // handle assigned
+                    
+                    
                     return NO;
                 case Enroute:
+                    // handle enroute
+                    
                     return NO;
                 case Arrived:
+                    // handle arrived
+                    
                     return NO;
                 default:
                     return YES; // order is rejected
@@ -319,6 +327,23 @@
     }
     
     return YES; // order does not exist
+}
+
+- (void)prepState {
+    // turn off
+    self.deliveryLabel.backgroundColor = [UIColor bento];
+    
+    // turn on
+    self.prepLabel.backgroundColor = [UIColor bentoBrandGreen];
+    self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
+}
+
+- (void)deliveryState {
+    
+}
+
+- (void)pickupState {
+    
 }
 
 @end
