@@ -33,7 +33,7 @@
 #pragma mark Connect
 - (void)connectUser {
     #ifdef DEV_MODE
-        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.dev.bentonow.com:8443" opts: @{@"ReconnectWait": @"1"}];
+        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.dev.bentonow.com:8443" opts: @{@"ReconnectWait": @1}];
     #else
         self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.bentonow.com:8443" opts: @{@"ReconnectWait": @1}];
     #endif
@@ -81,9 +81,24 @@
         NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&jsonError];
         
-        NSLog(@"json - %@", json);
-
-        [self listenToChannels];
+        int code = [json[@"code"] intValue];
+        NSString *msg = json[@"msg"];
+        NSDictionary *ret = json[@"ret"];
+        
+        NSLog(@"code - %i", code);
+        NSLog(@"msg - %@", msg);
+        NSLog(@"ret - %@", ret);
+        
+        if (code == 0) {
+            if (ret != nil) {
+                [self.delegate socketHandlerDidAuthenticate];
+                [self listenToChannels];
+            }
+        }
+        else {
+            // handle error
+            NSLog(@"socket did fail to authenticate");
+        }
     });
 }
 

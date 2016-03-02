@@ -12,6 +12,7 @@
 @protocol SocketHandlerDelegate <NSObject>
 
 @optional
+- (void)socketHandlerDidAuthenticate;
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng;
 
 @end

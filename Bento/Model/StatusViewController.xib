@@ -106,12 +106,12 @@
                                         <constraint firstAttribute="height" constant="21" id="CiW-lQ-y6v"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="OpenSans-Bold" family="Open Sans" pointSize="12"/>
-                                    <color key="textColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QUY-9U-BG5" userLabel="num1Label">
                                     <rect key="frame" x="36" y="10" width="20" height="20"/>
-                                    <color key="backgroundColor" red="0.52941176469999995" green="0.69019607839999997" blue="0.37254901959999998" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="Lga-W9-L7e"/>
                                         <constraint firstAttribute="width" constant="20" id="y9w-QM-ayn"/>
@@ -536,7 +536,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Xx-nP-XMp">
                     <rect key="frame" x="0.0" y="130" width="375" height="494"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Bento is here!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T84-iS-vXx">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Bento is here!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T84-iS-vXx">
                             <rect key="frame" x="19" y="251" width="336" height="31"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="31" id="abE-8W-Joe"/>
@@ -545,7 +545,7 @@
                             <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please meet your driver at the curbside to pick up your order." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsx-Vu-pXE">
+                        <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please meet your driver at the curbside to pick up your order." textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wsx-Vu-pXE">
                             <rect key="frame" x="19" y="290" width="336" height="60"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="60" id="l9B-G3-KtB"/>
@@ -554,14 +554,14 @@
                             <color key="textColor" red="0.4039215686" green="0.44705882349999998" blue="0.50196078430000002" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face.png" translatesAutoresizingMaskIntoConstraints="NO" id="lCa-Ux-ZXT">
+                        <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="face.png" translatesAutoresizingMaskIntoConstraints="NO" id="lCa-Ux-ZXT">
                             <rect key="frame" x="137" y="119" width="100" height="100"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="100" id="Ek4-D9-NDL"/>
                                 <constraint firstAttribute="width" constant="100" id="ZIu-lJ-RZK"/>
                             </constraints>
                         </imageView>
-                        <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-fS-ayY">
+                        <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-fS-ayY">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="494"/>
                         </mapView>
                     </subviews>

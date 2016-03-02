@@ -21,24 +21,26 @@
 @interface StatusViewController () <MKMapViewDelegate>
 
 @property (nonatomic) SVPlacemark *placeInfo;
+@property (nonatomic) CustomAnnotation *customerAnnotation;
+@property (nonatomic) CustomAnnotation *driverAnnotation;
+@property (nonatomic) CustomAnnotationView *driverAnnotationView;
+@property (nonatomic) NSMutableArray *allAnnotations;
 
 @end
 
 @implementation StatusViewController
 {
-    CustomAnnotation *driverAnnotation;
-    CustomAnnotationView *driverAnnotationView;
-    
     int count;
     NSArray *lat2;
     NSArray *lng2;
-    
-    NSMutableArray *allAnnotations;
     NSTimer *timer;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self connectToNode];
+    [self setupViews];
     
     lat2 = @[
              @"37.769002",
@@ -66,54 +68,9 @@
              @"-122.419688"
              ];
     
-    [self connectToNode];
-    
-    [self setupViews];
     
     timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
     count = 0;
-    
-    [SVGeocoder reverseGeocode:CLLocationCoordinate2DMake(self.lat, self.lng) completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error == nil && placemarks.count > 0) {
-            self.placeInfo = [placemarks firstObject];
-            NSLog(@"placeinfo - %@", self.placeInfo);
-            
-            // Annotations Array
-            allAnnotations = [[NSMutableArray alloc] init];
-            CustomAnnotation *customerAnnotation;
-            
-            //    NSData *data = [[NSUserDefaults standardUserDefaults] objectForKey:@"placeInfoData"];
-            //    NSMutableArray *placeInfoArray = [NSKeyedUnarchiver unarchiveObjectWithData:data];
-            //    for (int i = 0; i < placeInfoArray.count; i ++) {
-            //
-            //        SVPlacemark *placeInfo = placeInfoArray[i];
-            //
-            //        customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Customer"
-            //                                                            subtitle:placeInfo.formattedAddress
-            //                                                          coordinate:placeInfo.location.coordinate
-            //                                                                type:@"customer"];
-            //        [allAnnotations addObject:customerAnnotation];
-            //    }
-            
-            customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
-                                                                subtitle:[NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare]
-                                                              coordinate:CLLocationCoordinate2DMake(self.lat, self.lng)
-                                                                    type:@"customer"];
-            [allAnnotations addObject:customerAnnotation];
-            
-            driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Server"
-                                                              subtitle:@""
-                                                            coordinate:CLLocationCoordinate2DMake([lat2[0] doubleValue], [lng2[0] doubleValue])
-                                                                  type:@"driver"];
-            [allAnnotations addObject:driverAnnotation];
-            
-            [self.mapView addAnnotations:allAnnotations];
-            [self.mapView showAnnotations:allAnnotations animated:NO];
-        }
-        else {
-            
-        }
-    }];
 }
 
 - (void)setupViews {
@@ -155,6 +112,42 @@
     
     self.dotView9.layer.cornerRadius = 3;
     self.dotView9.layer.masksToBounds = YES;
+    
+    [self setupMap];
+}
+
+- (void)setupMap {
+    self.mapView.delegate = self;
+    self.mapView.mapType = MKMapTypeStandard;
+    self.mapView.zoomEnabled = YES;
+    self.mapView.scrollEnabled = YES;
+    
+    [SVGeocoder reverseGeocode:CLLocationCoordinate2DMake(self.lat, self.lng) completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error == nil && placemarks.count > 0) {
+            self.placeInfo = [placemarks firstObject];
+            NSLog(@"placeinfo - %@", self.placeInfo);
+            
+            self.allAnnotations = [[NSMutableArray alloc] init];
+            
+            self.customerAnnotation= [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
+                                                                    subtitle:[NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare]
+                                                                  coordinate:CLLocationCoordinate2DMake(self.lat, self.lng)
+                                                                        type:@"customer"];
+            [self.allAnnotations addObject:self.customerAnnotation];
+            
+            self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Server"
+                                                                   subtitle:@""
+                                                                 coordinate:CLLocationCoordinate2DMake([lat2[0] doubleValue], [lng2[0] doubleValue])
+                                                                       type:@"driver"];
+            [self.allAnnotations addObject:self.driverAnnotation];
+            
+            [self.mapView addAnnotations:self.allAnnotations];
+            [self.mapView showAnnotations:self.allAnnotations animated:NO];
+        }
+        else {
+            // handler error
+        }
+    }];
 }
 
 - (void)connectToNode {
@@ -189,17 +182,17 @@
     }
     else if ([customAnnotation.type isEqualToString:@"driver"]) {
         
-        if (driverAnnotationView == nil) {
-            driverAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
+        if (self.driverAnnotationView == nil) {
+            self.driverAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
                                                                              reuseIdentifier:annotationIdentifier
                                                                          annotationViewImage:[UIImage imageNamed:@"car"]];
             
             
         }
         
-        driverAnnotationView.canShowCallout = YES;
+        self.driverAnnotationView.canShowCallout = YES;
         
-        return driverAnnotationView;
+        return self.driverAnnotationView;
     }
     
     return nil;
@@ -214,16 +207,16 @@
     }
     
     [UIView animateWithDuration:1 animations:^{
-        CLLocation *start = [[CLLocation alloc] initWithLatitude:driverAnnotation.coordinate.latitude longitude:driverAnnotation.coordinate.longitude];
+        CLLocation *start = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
         CLLocation *end = [[CLLocation alloc] initWithLatitude:[lat2[count] doubleValue] longitude:[lng2[count] doubleValue]];
         double bearing = [start bearingToLocation:end];
         
-        driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
+        self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
     }];
     
     [UIView animateWithDuration:2 animations:^{
-        driverAnnotation.coordinate = CLLocationCoordinate2DMake([lat2[count] doubleValue], [lng2[count] doubleValue]);
-        [self.mapView showAnnotations:allAnnotations animated:YES];
+        self.driverAnnotation.coordinate = CLLocationCoordinate2DMake([lat2[count] doubleValue], [lng2[count] doubleValue]);
+        [self.mapView showAnnotations:self.allAnnotations animated:YES];
     }];
 }
 
