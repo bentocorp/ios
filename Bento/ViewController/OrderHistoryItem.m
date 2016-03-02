@@ -14,10 +14,10 @@
     if (self = [super init]) {
         self.title = dictionary[@"title"];
         self.price = dictionary[@"price"];
+        self.orderId = dictionary[@"orderId"];
         self.driverId = dictionary[@"driverId"];
         self.lat = [dictionary[@"lat"] floatValue];
         self.lng = [dictionary[@"long"] floatValue];
-        self.orderId = dictionary[@"orderId"];
     }
     
     return self;

@@ -289,6 +289,7 @@
     
     // set driverID to statusVC
     StatusViewController *statusVC = [[StatusViewController alloc] init];
+    statusVC.orderId = orderHistoryItem.orderId;
     statusVC.driverId = orderHistoryItem.driverId;
     statusVC.lat = orderHistoryItem.lat;
     statusVC.lng = orderHistoryItem.lng;
