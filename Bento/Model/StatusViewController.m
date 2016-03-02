@@ -73,6 +73,19 @@
     count = 0;
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToNode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSocket) name:@"enteringBackground" object:nil];
+}
+
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)setupViews {
     self.num1Label.layer.cornerRadius = 10;
     self.num1Label.layer.masksToBounds = YES;
@@ -221,13 +234,17 @@
 }
 
 - (IBAction)backButtonPressed:(id)sender {
-    [[SocketHandler sharedSocket] closeSocket];
+    [self closeSocket];
     [self.navigationController popViewControllerAnimated:YES];
 }
 
 - (IBAction)buildAnotherBentoButtonPressed:(id)sender {
-    [[SocketHandler sharedSocket] closeSocket];
+    [self closeSocket];
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)closeSocket {
+    [[SocketHandler sharedSocket] closeSocket];
 }
 
 

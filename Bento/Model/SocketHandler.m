@@ -33,9 +33,9 @@
 #pragma mark Connect
 - (void)connectUser {
     #ifdef DEV_MODE
-        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.dev.bentonow.com:8443" opts: @{@"ReconnectWait": @1}];
+        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.dev.bentonow.com:8443" opts: nil];
     #else
-        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.bentonow.com:8443" opts: @{@"ReconnectWait": @1}];
+        self.socket = [[SocketIOClient alloc] initWithSocketURL:@"https://node.bentonow.com:8443" opts: nil];
     #endif
     
     [self configureHandlers];
@@ -163,6 +163,7 @@
 
 #pragma mark Disconnect
 - (void)closeSocket {
+    NSLog(@"close socket");
     [self.socket removeAllHandlers];
     [self.socket disconnect];
 }
