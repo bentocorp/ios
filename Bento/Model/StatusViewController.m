@@ -171,13 +171,7 @@
     }];
 }
 
-- (void)connectToNode {
-    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
-    NSString *username = userInfo[@"email"];
-    NSString *tokenString = [[DataManager shareDataManager] getAPIToken];
-    [[SocketHandler sharedSocket] connectAndAuthenticate:username token:tokenString driverId:self.driverId];
-    [SocketHandler sharedSocket].delegate = self;
-}
+#pragma mark MKMapViewDelegate
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
@@ -242,6 +236,8 @@
     }];
 }
 
+#pragma mark Navigation
+
 - (IBAction)backButtonPressed:(id)sender {
     [self closeSocket];
     [self goBack];
@@ -256,8 +252,14 @@
     [self.navigationController popViewControllerAnimated:YES];
 }
 
-- (void)closeSocket {
-    [[SocketHandler sharedSocket] closeSocket];
+#pragma mark SocketHandlerDelegate
+
+- (void)connectToNode {
+    NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
+    NSString *username = userInfo[@"email"];
+    NSString *tokenString = [[DataManager shareDataManager] getAPIToken];
+    [[SocketHandler sharedSocket] connectAndAuthenticate:username token:tokenString driverId:self.driverId];
+    [SocketHandler sharedSocket].delegate = self;
 }
 
 - (void)socketHandlerDidConnect {
@@ -271,6 +273,12 @@
 - (void)socketHandlerDidUpdateLocationWithLatitude:(float)lat andLongitude:(float)lng {
     
 }
+
+- (void)closeSocket {
+    [[SocketHandler sharedSocket] closeSocket];
+}
+
+#pragma mark Order History
 
 - (void)getOrderHistory {
     NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
@@ -308,17 +316,13 @@
         if (item.orderId == self.orderId) {
             switch (self.orderStatus) {
                 case Assigned:
-                    // handle assigned
-                    
-                    
+                    [self prepState];
                     return NO;
                 case Enroute:
-                    // handle enroute
-                    
+                    [self deliveryState];
                     return NO;
                 case Arrived:
-                    // handle arrived
-                    
+                    [self pickupState];
                     return NO;
                 default:
                     return YES; // order is rejected
@@ -329,10 +333,16 @@
     return YES; // order does not exist
 }
 
+#pragma mark State Transitions
+
 - (void)prepState {
     // turn on
     self.prepLabel.backgroundColor = [UIColor bentoBrandGreen];
     self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
+    
+    self.statusIconImageView.hidden = NO;
+    self.descriptionTitleLabel.hidden = NO;
+    self.descriptionLabel.hidden = NO;
     
     // turn off
     self.deliveryLabel.backgroundColor = [UIColor bentoOrderStatusGray];
@@ -352,6 +362,8 @@
     self.dotView7.backgroundColor = [UIColor bentoOrderStatusGray];
     self.dotView8.backgroundColor = [UIColor bentoOrderStatusGray];
     self.dotView9.backgroundColor = [UIColor bentoOrderStatusGray];
+    
+    self.mapView.hidden = YES;
 }
 
 - (void)deliveryState {
@@ -361,6 +373,8 @@
     self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
     self.num2Label.backgroundColor = [UIColor bentoBrandGreen];
     self.num3Label.backgroundColor = [UIColor bentoBrandGreen];
+    
+    self.mapView.hidden = NO;
     
     // turn off
     self.assemblyLabel.backgroundColor = [UIColor bentoOrderStatusGray];
@@ -379,6 +393,10 @@
     self.dotView7.backgroundColor = [UIColor bentoOrderStatusGray];
     self.dotView8.backgroundColor = [UIColor bentoOrderStatusGray];
     self.dotView9.backgroundColor = [UIColor bentoOrderStatusGray];
+    
+    self.statusIconImageView.hidden = YES;
+    self.descriptionTitleLabel.hidden = YES;
+    self.descriptionLabel.hidden = YES;
 }
 
 - (void)pickupState {
@@ -402,6 +420,13 @@
     self.dotView7.backgroundColor = [UIColor bentoBrandGreen];
     self.dotView8.backgroundColor = [UIColor bentoBrandGreen];
     self.dotView9.backgroundColor = [UIColor bentoBrandGreen];
+    
+    self.statusIconImageView.hidden = NO;
+    self.descriptionTitleLabel.hidden = NO;
+    self.descriptionLabel.hidden = NO;
+    
+    // turn off
+    self.mapView.hidden = YES;
 }
 
 @end
