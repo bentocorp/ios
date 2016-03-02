@@ -16,6 +16,8 @@
 #import "CLLocation+Bearing.h"
 #import "SVGeocoder.h"
 #import "BentoShop.h"
+#import "OrderHistorySection.h"
+#import "OrderHistoryItem.h"
 
 #define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
@@ -241,7 +243,7 @@
 
 - (IBAction)backButtonPressed:(id)sender {
     [self closeSocket];
-    [self.navigationController popViewControllerAnimated:YES];
+    [self goBack];
 }
 
 - (IBAction)buildAnotherBentoButtonPressed:(id)sender {
@@ -249,16 +251,63 @@
     [self dismissViewControllerAnimated:YES completion:nil];
 }
 
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
 - (void)closeSocket {
     [[SocketHandler sharedSocket] closeSocket];
+}
+
+- (void)socketHandlerDidConnect {
+    [self getOrderHistory];
 }
 
 - (void)socketHandlerDidAuthenticate {
     
 }
 
-- (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
+- (void)socketHandlerDidUpdateLocationWithLatitude:(float)lat andLongitude:(float)lng {
     
+}
+
+- (void)getOrderHistory {
+    NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
+    
+    NSLog(@"/orderhistory strRequest - %@", strRequest);
+    
+    [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
+        
+        if (error == nil) {
+            
+            if ([self doesOrderExist: responseDic] == NO) {
+                [self goBack];
+            }
+        }
+        else {
+            // handle error
+        }
+    }];
+}
+
+- (BOOL)doesOrderExist:(id)responseDic {
+    NSMutableArray *orderHistoryArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *json in responseDic) {
+        [orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
+    }
+    
+    NSMutableArray *orderIds = [[NSMutableArray alloc] init];
+    for (OrderHistorySection *section in orderHistoryArray) {
+        for (OrderHistoryItem *item in section.items) {
+            [orderIds addObject:item.orderId];
+        }
+    }
+    
+    if ([orderIds containsObject:self.orderId]) {
+        return YES;
+    }
+    
+    return NO;
 }
 
 @end
