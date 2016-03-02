@@ -303,18 +303,22 @@
         }
     }
     
-    BOOL doesItemExist = NO;
     for (OrderHistoryItem *item in orderItems) {
         if (item.orderId == self.orderId) {
-            doesItemExist = YES;
-            
-            if (item.orderStatus isEqualToString:<#(nonnull NSString *)#>) {
-                <#statements#>
+            switch (self.orderStatus) {
+                case Assigned:
+                    return NO;
+                case Enroute:
+                    return NO;
+                case Arrived:
+                    return NO;
+                default:
+                    return YES; // order is rejected
             }
         }
     }
     
-    return doesItemExist;
+    return YES; // order does not exist
 }
 
 @end

@@ -40,7 +40,7 @@
 @property (weak, nonatomic) IBOutlet UIView *dotView9;
 
 @property (nonatomic) NSString *orderId;
-@property (nonatomic) NSString *orderStatus;
+@property (nonatomic) OrderStatus orderStatus;
 @property (nonatomic) NSString *driverId;
 @property (nonatomic) float lat;
 @property (nonatomic) float lng;
