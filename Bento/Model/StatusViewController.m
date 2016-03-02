@@ -280,7 +280,7 @@
         
         if (error == nil) {
             
-            if ([self doesOrderExist: responseDic] == NO) {
+            if ([self shouldRemoveOrder:responseDic] == YES) {
                 [self goBack];
             }
         }
@@ -290,24 +290,31 @@
     }];
 }
 
-- (BOOL)doesOrderExist:(id)responseDic {
+- (BOOL)shouldRemoveOrder:(id)responseDic {
     NSMutableArray *orderHistoryArray = [[NSMutableArray alloc] init];
     for (NSDictionary *json in responseDic) {
         [orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
     }
     
-    NSMutableArray *orderIds = [[NSMutableArray alloc] init];
+    NSMutableArray *orderItems = [[NSMutableArray alloc] init];
     for (OrderHistorySection *section in orderHistoryArray) {
         for (OrderHistoryItem *item in section.items) {
-            [orderIds addObject:item.orderId];
+            [orderItems addObject:item];
         }
     }
     
-    if ([orderIds containsObject:self.orderId]) {
-        return YES;
+    BOOL doesItemExist = NO;
+    for (OrderHistoryItem *item in orderItems) {
+        if (item.orderId == self.orderId) {
+            doesItemExist = YES;
+            
+            if (item.) {
+                <#statements#>
+            }
+        }
     }
     
-    return NO;
+    return doesItemExist;
 }
 
 @end

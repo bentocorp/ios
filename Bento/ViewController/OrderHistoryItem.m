@@ -15,6 +15,7 @@
         self.title = dictionary[@"title"];
         self.price = dictionary[@"price"];
         self.orderId = dictionary[@"orderId"];
+        self.orderStatus = dictionary[@"order_status"];
         self.driverId = dictionary[@"driverId"];
         self.lat = [dictionary[@"lat"] floatValue];
         self.lng = [dictionary[@"long"] floatValue];

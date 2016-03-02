@@ -13,9 +13,11 @@
 @property (nonatomic) NSString *title;
 @property (nonatomic) NSString *price;
 @property (nonatomic) NSString *orderId;
+@property (nonatomic) NSString *orderStatus;
 @property (nonatomic) NSString *driverId;
 @property (nonatomic) float lat;
 @property (nonatomic) float lng;
+
 
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
