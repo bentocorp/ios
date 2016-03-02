@@ -15,13 +15,33 @@
         self.title = dictionary[@"title"];
         self.price = dictionary[@"price"];
         self.orderId = dictionary[@"orderId"];
-        self.orderStatus = dictionary[@"order_status"];
+        self.orderStatus = [self setEnumStatus:dictionary[@"order_status"]];
         self.driverId = dictionary[@"driverId"];
         self.lat = [dictionary[@"lat"] floatValue];
         self.lng = [dictionary[@"long"] floatValue];
     }
     
     return self;
+}
+
+- (OrderStatus)setEnumStatus: (NSString *)statusString {
+    
+    NSString *lowerCaseTypeString = [statusString lowercaseString];
+    
+    NSArray *statuses = @[@"assigned", @"en_route", @"arrived", @"rejected"];
+    
+    NSInteger status = [statuses indexOfObject:lowerCaseTypeString];
+    
+    switch (status) {
+        case 0:
+            return Assigned;
+        case 1:
+            return Enroute;
+        case 2:
+            return Arrived;
+        default:
+            return Rejected;
+    }
 }
 
 @end

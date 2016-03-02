@@ -308,7 +308,7 @@
         if (item.orderId == self.orderId) {
             doesItemExist = YES;
             
-            if (item.) {
+            if (item.orderStatus isEqualToString:<#(nonnull NSString *)#>) {
                 <#statements#>
             }
         }
