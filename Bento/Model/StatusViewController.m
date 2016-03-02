@@ -330,20 +330,78 @@
 }
 
 - (void)prepState {
-    // turn off
-    self.deliveryLabel.backgroundColor = [UIColor bento];
-    
     // turn on
     self.prepLabel.backgroundColor = [UIColor bentoBrandGreen];
     self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
+    
+    // turn off
+    self.deliveryLabel.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.assemblyLabel.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.pickupLabel.backgroundColor = [UIColor bentoOrderStatusGray];
+    
+    self.num2Label.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.num3Label.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.num4Label.backgroundColor = [UIColor bentoOrderStatusGray];
+    
+    self.dotView1.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView2.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView3.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView4.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView5.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView6.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView7.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView8.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView9.backgroundColor = [UIColor bentoOrderStatusGray];
 }
 
 - (void)deliveryState {
+    // turn on
+    self.prepLabel.backgroundColor = [UIColor bentoBrandGreen];
+    self.deliveryLabel.backgroundColor = [UIColor bentoBrandGreen];
+    self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
+    self.num2Label.backgroundColor = [UIColor bentoBrandGreen];
+    self.num3Label.backgroundColor = [UIColor bentoBrandGreen];
     
+    // turn off
+    self.assemblyLabel.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.pickupLabel.backgroundColor = [UIColor bentoOrderStatusGray];
+    
+    self.num2Label.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.num3Label.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.num4Label.backgroundColor = [UIColor bentoOrderStatusGray];
+    
+    self.dotView1.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView2.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView3.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView4.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView5.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView6.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView7.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView8.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.dotView9.backgroundColor = [UIColor bentoOrderStatusGray];
 }
 
 - (void)pickupState {
+    // turn on
+    self.prepLabel.backgroundColor = [UIColor bentoBrandGreen];
+    self.deliveryLabel.backgroundColor = [UIColor bentoBrandGreen];
+    self.assemblyLabel.backgroundColor = [UIColor bentoBrandGreen];
+    self.pickupLabel.backgroundColor = [UIColor bentoBrandGreen];
     
+    self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
+    self.num2Label.backgroundColor = [UIColor bentoBrandGreen];
+    self.num3Label.backgroundColor = [UIColor bentoBrandGreen];
+    self.num4Label.backgroundColor = [UIColor bentoBrandGreen];
+    
+    self.dotView1.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView2.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView3.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView4.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView5.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView6.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView7.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView8.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView9.backgroundColor = [UIColor bentoBrandGreen];
 }
 
 @end

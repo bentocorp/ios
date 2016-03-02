@@ -24,4 +24,6 @@
 + (UIColor *)bentoGradient1;
 + (UIColor *)bentoGradient2;
 
++ (UIColor *)bentoOrderStatusGray;
+
 @end
