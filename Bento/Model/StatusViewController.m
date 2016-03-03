@@ -20,6 +20,9 @@
 #import "OrderHistoryItem.h"
 #import "UIColor+CustomColors.h"
 #import "AppStrings.h"
+#import <AFNetworking/AFNetworking.h>
+#import "AFHTTPSessionManager.h"
+#import "Step.h"
 
 #define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
@@ -30,52 +33,70 @@
 @property (nonatomic) CustomAnnotation *driverAnnotation;
 @property (nonatomic) CustomAnnotationView *driverAnnotationView;
 @property (nonatomic) NSMutableArray *allAnnotations;
+@property (nonatomic) NSMutableArray *steps;
 
 @end
 
 @implementation StatusViewController
 {
     int count;
-    NSArray *lat2;
-    NSArray *lng2;
     NSTimer *timer;
+    NSMutableArray *path;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self connectToNode];
+    // uncomment this later
+//    [self connectToNode];
     [self setupViews];
     
-    lat2 = @[
-             @"37.769002",
-             @"37.767569",
-             @"37.767232",
-             @"37.767071",
-             @"37.767003",
-             @"37.766812",
-             @"37.766675",
-             @"37.766674",
-             @"37.766425",
-             @"37.764781"
-             ];
-    
-    lng2 = @[
-             @"-122.413448",
-             @"-122.413330",
-             @"-122.413287",
-             @"-122.413336",
-             @"-122.414473",
-             @"-122.417718",
-             @"-122.419709",
-             @"-122.419845",
-             @"-122.419822",
-             @"-122.419688"
-             ];
-    
-    
-    timer = [NSTimer scheduledTimerWithTimeInterval:2 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
+    self.steps = [[NSMutableArray alloc] init];
+    path = [@[] mutableCopy];
+    timer = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(updateDriver) userInfo:nil repeats:YES];
     count = 0;
+}
+
+- (void)getRouteFromLastLocation {
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.timeoutIntervalForRequest = 20;
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    // pass in last location
+    NSString *api = @"https://maps.googleapis.com/maps/api/directions/";
+    NSString *start = [NSString stringWithFormat:@"%f,%f", 37.774864, -122.396184];
+    NSString *end = [NSString stringWithFormat:@"%f,%f", 37.763120, -122.388800];
+    NSString *requestString = [NSString stringWithFormat:@"%@json?origin=%@&destination=%@&key=%@", api, start, end, GOOGLE_API_KEY];
+    
+    NSURL *URL = [NSURL URLWithString: requestString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error == nil) {
+            [self parseResponse:responseObject];
+        }
+        else {
+            // handle error
+            NSLog(@"error - %@", error.debugDescription);
+        }
+    }] resume];
+}
+
+- (void)parseResponse:(NSDictionary *)response {
+    NSArray *routes = response[@"routes"];
+    NSDictionary *route = [routes lastObject];
+    
+    NSArray *legs = route[@"legs"];
+    NSDictionary *leg = [legs lastObject];
+    
+    NSArray *steps = leg[@"steps"];
+    
+    for (NSDictionary *stepDic in steps) {
+        if (stepDic) {
+            Step *step = [[Step alloc] initWithDictionary:stepDic];
+            [self.steps addObject:step];
+        }
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -136,6 +157,7 @@
     self.dotView9.layer.masksToBounds = YES;
     
     [self setupMap];
+    self.mapView.hidden = NO; // delete later
 }
 
 - (void)setupMap {
@@ -151,15 +173,18 @@
             
             self.allAnnotations = [[NSMutableArray alloc] init];
             
+            CLLocation *destination = path[path.count-1];
+            CLLocation *pathLocation = path[0];
+            
             self.customerAnnotation= [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
                                                                     subtitle:[NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare]
-                                                                  coordinate:CLLocationCoordinate2DMake(self.lat, self.lng)
+                                                                  coordinate:destination.coordinate
                                                                         type:@"customer"];
             [self.allAnnotations addObject:self.customerAnnotation];
             
             self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Server"
                                                                    subtitle:@""
-                                                                 coordinate:CLLocationCoordinate2DMake([lat2[0] doubleValue], [lng2[0] doubleValue])
+                                                                 coordinate:pathLocation.coordinate
                                                                        type:@"driver"];
             [self.allAnnotations addObject:self.driverAnnotation];
             
@@ -219,20 +244,22 @@
     
     count++;
     
-    if (count == lat2.count-1) {
+     CLLocation *pathLocation = path[count];
+    
+    if (count == path.count-1) {
         [timer invalidate];
     }
     
     [UIView animateWithDuration:1 animations:^{
         CLLocation *start = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
-        CLLocation *end = [[CLLocation alloc] initWithLatitude:[lat2[count] doubleValue] longitude:[lng2[count] doubleValue]];
+        CLLocation *end = [[CLLocation alloc] initWithLatitude:pathLocation.coordinate.latitude longitude:pathLocation.coordinate.longitude];
         double bearing = [start bearingToLocation:end];
         
         self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
     }];
     
     [UIView animateWithDuration:2 animations:^{
-        self.driverAnnotation.coordinate = CLLocationCoordinate2DMake([lat2[count] doubleValue], [lng2[count] doubleValue]);
+        self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(pathLocation.coordinate.latitude, pathLocation.coordinate.longitude);
         [self.mapView showAnnotations:self.allAnnotations animated:YES];
     }];
 }
@@ -289,10 +316,11 @@
     [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
         
         if (error == nil) {
-            
-            if ([self shouldRemoveOrder:responseDic]) {
-                [self goBack];
-            }
+
+            // uncomment this later
+//            if ([self shouldRemoveOrder:responseDic]) {
+//                [self goBack];
+//            }
         }
         else {
             // handle error

@@ -477,6 +477,8 @@
 		FCAA47A11AE9E03B00CA1743 /* SignedInSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47991AE9E03B00CA1743 /* SignedInSettingsViewController.m */; };
 		FCAA47A21AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */; };
 		FCAA47A31AE9E03B00CA1743 /* SignedOutSettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */; };
+		FCAB03FA1C88F26B004D2ED2 /* Step.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAB03F91C88F26B004D2ED2 /* Step.m */; };
+		FCAB03FB1C88F26B004D2ED2 /* Step.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAB03F91C88F26B004D2ED2 /* Step.m */; };
 		FCB35C2D1BFE616300A590EC /* green-gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB35C2A1BFE616300A590EC /* green-gradient.png */; };
 		FCB35C2E1BFE616300A590EC /* green-gradient.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB35C2A1BFE616300A590EC /* green-gradient.png */; };
 		FCB35C301BFE624700A590EC /* drop-shadow.png in Resources */ = {isa = PBXBuildFile; fileRef = FCB35C2F1BFE624700A590EC /* drop-shadow.png */; };
@@ -945,6 +947,8 @@
 		FCAA47991AE9E03B00CA1743 /* SignedInSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedInSettingsViewController.m; sourceTree = "<group>"; };
 		FCAA479A1AE9E03B00CA1743 /* SignedOutSettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SignedOutSettingsViewController.h; sourceTree = "<group>"; };
 		FCAA479B1AE9E03B00CA1743 /* SignedOutSettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignedOutSettingsViewController.m; sourceTree = "<group>"; };
+		FCAB03F81C88F26B004D2ED2 /* Step.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Step.h; sourceTree = "<group>"; };
+		FCAB03F91C88F26B004D2ED2 /* Step.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Step.m; sourceTree = "<group>"; };
 		FCB35C2A1BFE616300A590EC /* green-gradient.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "green-gradient.png"; sourceTree = "<group>"; };
 		FCB35C2F1BFE624700A590EC /* drop-shadow.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "drop-shadow.png"; sourceTree = "<group>"; };
 		FCB35C321BFE62D300A590EC /* grapefruit-soda.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "grapefruit-soda.png"; sourceTree = "<group>"; };
@@ -1980,6 +1984,8 @@
 		FCE036DD1BEAAE7C00F7605B /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
+				FCAB03F81C88F26B004D2ED2 /* Step.h */,
+				FCAB03F91C88F26B004D2ED2 /* Step.m */,
 				FCD266531C7D13C200FC1821 /* StatusViewController.h */,
 				FCD266541C7D13C200FC1821 /* StatusViewController.m */,
 				FCD266551C7D13C200FC1821 /* StatusViewController.xib */,
@@ -2661,6 +2667,7 @@
 				7216B74B1AA64C7C0006FFE9 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				7216B74C1AA64C7C0006FFE9 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				7216B74D1AA64C7C0006FFE9 /* STPTestCardStore.m in Sources */,
+				FCAB03FB1C88F26B004D2ED2 /* Step.m in Sources */,
 				7216B74F1AA64C7C0006FFE9 /* STPTestAddressStore.m in Sources */,
 				FC7291241BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				7216B7501AA64C7C0006FFE9 /* DeliveryLocationViewController.m in Sources */,
@@ -2787,6 +2794,7 @@
 				722333621A6D4058006C2446 /* JGProgressHUDPieIndicatorView.m in Sources */,
 				722333D21A6F46DF006C2446 /* NSString+MKNetworkKitAdditions.m in Sources */,
 				722333F81A72C133006C2446 /* STPTestCardStore.m in Sources */,
+				FCAB03FA1C88F26B004D2ED2 /* Step.m in Sources */,
 				722333F71A72C133006C2446 /* STPTestAddressStore.m in Sources */,
 				FC7291231BA8BC9F00BCBDE7 /* EditPhoneNumberView.m in Sources */,
 				90D8F7CA1A5E24B900D034CF /* DeliveryLocationViewController.m in Sources */,

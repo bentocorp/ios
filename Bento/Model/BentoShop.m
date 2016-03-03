@@ -138,7 +138,6 @@ static BentoShop *_shareInstance;
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
     
     [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        
         completion(responseObject, error);
     }] resume];
 }
