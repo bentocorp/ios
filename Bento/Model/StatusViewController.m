@@ -264,11 +264,11 @@
 }
 
 - (void)socketHandlerDidConnect {
-    [self getOrderHistory];
+    
 }
 
 - (void)socketHandlerDidAuthenticate {
-    
+    [self getOrderHistory];
 }
 
 - (void)socketHandlerDidUpdateLocationWithLatitude:(float)lat andLongitude:(float)lng {

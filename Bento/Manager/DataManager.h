@@ -19,8 +19,8 @@
     NSString *jump;
 #endif
 
-//#define GOOGLE_API_KEY @"AIzaSyCv7nwsR9ppbEWPwCKnZ9f6nf3UTli-ZLk" // ri
-#define GOOGLE_API_KEY @"AIzaSyBqkoIGixhOfd8Sz3Sz9oG_nsQhg3zQQqg" // vincent
+//#define GOOGLE_API_KEY @"AIzaSyCv7nwsR9ppbEWPwCKnZ9f6nf3UTli-ZLk" // ri, old key
+#define GOOGLE_API_KEY @"AIzaSyBqkoIGixhOfd8Sz3Sz9oG_nsQhg3zQQqg" // vincent's new key
 
 
 typedef enum : NSUInteger {

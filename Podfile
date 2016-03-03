@@ -14,6 +14,7 @@ pod 'SIOSocket'
 pod 'AFNetworking'
 pod 'Fabric'
 pod 'Crashlytics'
+pod 'Polyline'
 
 #pod 'Mapbox-iOS-SDK'
 ## disable bitcode in every sub-target
