@@ -43,7 +43,7 @@
 }
 
 + (UIColor *)bentoOrderStatusGray {
-    return [UIColor colorWithRed:0.604f green:0.604f blue:0.604f alpha:1.0f];
+    return [UIColor lightGrayColor];
 }
 
 @end

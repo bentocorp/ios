@@ -207,7 +207,6 @@
 //
 #define DELIVERY_LABEL_TEXT                     @"delivery_label"
 
-
 //
 #define DONE_BUTTON_TEXT                        @"oa-done-btn"
 #define ORDER_HISTORY_TITLE                     @"pane-title-orders"
@@ -225,6 +224,12 @@
 
 #define OA_ONLY_TEXT                            @"oa-only-od-btn"
 #define OA_ONLY_TEXT_BANNER                     @"oa-only-od-banner"
+
+#define PREP_STATUS_TITLE                       @"prep_status_title"
+#define PREP_STATUS_DESCRIPTION                 @"prep_status_description"
+
+#define PICKUP_STATUS_TITLE                     @"pickup_status_title"
+#define PICKUP_STATUS_DESCRIPTION                @"pickup_status_description"
 
 // getting from to settings instead of ioscopy
 //#define ABOUT_PRICE                             @"price"

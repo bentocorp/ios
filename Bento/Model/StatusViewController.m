@@ -19,6 +19,7 @@
 #import "OrderHistorySection.h"
 #import "OrderHistoryItem.h"
 #import "UIColor+CustomColors.h"
+#import "AppStrings.h"
 
 #define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
@@ -337,17 +338,20 @@
 
 - (void)prepState {
     // turn on
-    self.prepLabel.backgroundColor = [UIColor bentoBrandGreen];
+    self.prepLabel.textColor = [UIColor bentoBrandGreen];
     self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
     
     self.statusIconImageView.hidden = NO;
     self.descriptionTitleLabel.hidden = NO;
     self.descriptionLabel.hidden = NO;
     
+    self.descriptionTitleLabel.text = [[AppStrings sharedInstance] getString:PREP_STATUS_TITLE];
+    self.descriptionLabel.text = [[AppStrings sharedInstance] getString:PREP_STATUS_DESCRIPTION];
+    
     // turn off
-    self.deliveryLabel.backgroundColor = [UIColor bentoOrderStatusGray];
-    self.assemblyLabel.backgroundColor = [UIColor bentoOrderStatusGray];
-    self.pickupLabel.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.deliveryLabel.textColor = [UIColor bentoOrderStatusGray];
+    self.assemblyLabel.textColor = [UIColor bentoOrderStatusGray];
+    self.pickupLabel.textColor = [UIColor bentoOrderStatusGray];
     
     self.num2Label.backgroundColor = [UIColor bentoOrderStatusGray];
     self.num3Label.backgroundColor = [UIColor bentoOrderStatusGray];
@@ -368,8 +372,8 @@
 
 - (void)deliveryState {
     // turn on
-    self.prepLabel.backgroundColor = [UIColor bentoBrandGreen];
-    self.deliveryLabel.backgroundColor = [UIColor bentoBrandGreen];
+    self.prepLabel.textColor = [UIColor bentoBrandGreen];
+    self.deliveryLabel.textColor = [UIColor bentoBrandGreen];
     self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
     self.num2Label.backgroundColor = [UIColor bentoBrandGreen];
     self.num3Label.backgroundColor = [UIColor bentoBrandGreen];
@@ -377,8 +381,8 @@
     self.mapView.hidden = NO;
     
     // turn off
-    self.assemblyLabel.backgroundColor = [UIColor bentoOrderStatusGray];
-    self.pickupLabel.backgroundColor = [UIColor bentoOrderStatusGray];
+    self.assemblyLabel.textColor = [UIColor bentoOrderStatusGray];
+    self.pickupLabel.textColor = [UIColor bentoOrderStatusGray];
     
     self.num2Label.backgroundColor = [UIColor bentoOrderStatusGray];
     self.num3Label.backgroundColor = [UIColor bentoOrderStatusGray];
@@ -401,10 +405,10 @@
 
 - (void)pickupState {
     // turn on
-    self.prepLabel.backgroundColor = [UIColor bentoBrandGreen];
-    self.deliveryLabel.backgroundColor = [UIColor bentoBrandGreen];
-    self.assemblyLabel.backgroundColor = [UIColor bentoBrandGreen];
-    self.pickupLabel.backgroundColor = [UIColor bentoBrandGreen];
+    self.prepLabel.textColor = [UIColor bentoBrandGreen];
+    self.deliveryLabel.textColor = [UIColor bentoBrandGreen];
+    self.assemblyLabel.textColor = [UIColor bentoBrandGreen];
+    self.pickupLabel.textColor = [UIColor bentoBrandGreen];
     
     self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
     self.num2Label.backgroundColor = [UIColor bentoBrandGreen];
@@ -424,6 +428,9 @@
     self.statusIconImageView.hidden = NO;
     self.descriptionTitleLabel.hidden = NO;
     self.descriptionLabel.hidden = NO;
+    
+    self.descriptionTitleLabel.text = [[AppStrings sharedInstance] getString:PICKUP_STATUS_TITLE];
+    self.descriptionLabel.text = [[AppStrings sharedInstance] getString:PICKUP_STATUS_DESCRIPTION];
     
     // turn off
     self.mapView.hidden = YES;
