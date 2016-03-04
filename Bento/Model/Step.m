@@ -15,7 +15,7 @@
         
         self.startLocation = CLLocationCoordinate2DMake([dictionary[@"start_location"][@"lat"] floatValue], [dictionary[@"start_location"][@"lng"] floatValue]);
         self.endLocation = CLLocationCoordinate2DMake([dictionary[@"end_location"][@"lat"] floatValue], [dictionary[@"end_location"][@"lng"] floatValue]);
-        self.duration = [dictionary[@"duration"][@"value"] intValue];
+        self.duration = [dictionary[@"duration"][@"value"] integerValue];
         
         NSString *polyline = dictionary[@"polyline"][@"points"];
         self.pathCoordinates = [self decodePolyLine:polyline];
