@@ -1745,6 +1745,9 @@
 		FC2AB1671BE9829A00223B8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				FCAB03F81C88F26B004D2ED2 /* Step.h */,
+				FCAB03F91C88F26B004D2ED2 /* Step.m */,
+				FCE036DC1BEAAE6300F7605B /* Annotation */,
 				FC386F0A1BE1F2E700961A17 /* Push.h */,
 				FC386F0B1BE1F2E700961A17 /* Push.m */,
 				FC4327B21BE2EE8E00E91D9B /* DriverLocation.h */,
@@ -1759,9 +1762,8 @@
 				FC46DE8B1BE14AEA00E9A7B1 /* SocketHandler.h */,
 				FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */,
 				FC1809EC1BED3BD0009CE159 /* Order */,
-				FCE036DC1BEAAE6300F7605B /* Annotation */,
-				FCE036DD1BEAAE7C00F7605B /* View Controller */,
 				FC2AB1671BE9829A00223B8A /* Model */,
+				FCE036DD1BEAAE7C00F7605B /* View Controller */,
 			);
 			name = "Driver Tracking";
 			path = ../Model;
@@ -1984,8 +1986,6 @@
 		FCE036DD1BEAAE7C00F7605B /* View Controller */ = {
 			isa = PBXGroup;
 			children = (
-				FCAB03F81C88F26B004D2ED2 /* Step.h */,
-				FCAB03F91C88F26B004D2ED2 /* Step.m */,
 				FCD266531C7D13C200FC1821 /* StatusViewController.h */,
 				FCD266541C7D13C200FC1821 /* StatusViewController.m */,
 				FCD266551C7D13C200FC1821 /* StatusViewController.xib */,

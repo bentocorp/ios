@@ -39,6 +39,7 @@
 
 @property (nonatomic) CLLocationCoordinate2D startLocation;
 @property (nonatomic) CLLocationCoordinate2D endLocation;
+@property (nonatomic) NSString *routeDurationString;
 
 @end
 
@@ -48,6 +49,8 @@
     NSInteger pathCoordinatesCount;
     NSTimer *timer;
     float speedFromPointToPoint;
+    
+    NSString *start;
 }
 
 - (void)viewDidLoad {
@@ -59,9 +62,16 @@
     self.steps = [[NSMutableArray alloc] init];
     
     [self getRouteFromLastLocation];
+    [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
 }
 
 - (void)getRouteFromLastLocation {
+    [timer invalidate];
+    stepCount = 0;
+    pathCoordinatesCount = 0;
+    speedFromPointToPoint = 0;
+    [self.steps removeAllObjects];
+    
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.timeoutIntervalForRequest = 20;
     
@@ -69,7 +79,13 @@
     
     // pass in last location
     NSString *api = @"https://maps.googleapis.com/maps/api/directions/";
-    NSString *start = [NSString stringWithFormat:@"%f,%f", 37.774864, -122.396184];
+    if (start == nil || [start isEqualToString:@""]) {
+        start = [NSString stringWithFormat:@"%f,%f", 37.774864, -122.396184];
+    }
+    else {
+        CLLocation *location = self.currentStep.pathCoordinates[pathCoordinatesCount];
+        start = [NSString stringWithFormat:@"%F,%f", location.coordinate.latitude, location.coordinate.longitude];
+    }
     NSString *end = [NSString stringWithFormat:@"%f,%f", 37.763120, -122.388800];
     NSString *requestString = [NSString stringWithFormat:@"%@json?origin=%@&destination=%@&key=%@", api, start, end, GOOGLE_API_KEY];
     
@@ -80,7 +96,7 @@
         if (error == nil) {
             [self parseResponse:responseObject];
         
-            NSLog(@"steps.count - %ld", self.steps.count);
+            NSLog(@"steps.count - %ld", (unsigned long)self.steps.count);
             
             [self setupViews];
             
@@ -96,13 +112,14 @@
 
 - (void)parseResponse:(NSDictionary *)response {
     NSArray *routes = response[@"routes"];
-    NSDictionary *route = routes[0];
+    NSDictionary *route = [routes firstObject];
     
     NSArray *legs = route[@"legs"];
-    NSDictionary *leg = legs[0];
+    NSDictionary *leg = [legs firstObject];
     
     self.startLocation = CLLocationCoordinate2DMake([leg[@"start_location"][@"lat"] floatValue], [leg[@"start_location"][@"lng"] floatValue]);
     self.endLocation = CLLocationCoordinate2DMake([leg[@"end_location"][@"lat"] floatValue], [leg[@"end_location"][@"lng"] floatValue]);
+    self.routeDurationString = leg[@"duration"][@"text"];
     
     NSArray *steps = leg[@"steps"];
     
@@ -131,7 +148,7 @@
     
     NSLog(@"speedFromPointToPoint - %f second(s)", speedFromPointToPoint);
     
-    NSLog(@"step(%ld of %ld), pathCoordinate(%ld of %ld)", stepCount, self.steps.count, pathCoordinatesCount, self.currentStep.pathCoordinates.count);
+    NSLog(@"step(%ld of %ld), pathCoordinate(%ld of %ld)", (long)stepCount, (unsigned long)self.steps.count, pathCoordinatesCount, (unsigned long)self.currentStep.pathCoordinates.count);
     
     if (pathCoordinatesCount < self.currentStep.pathCoordinates.count) {
         
@@ -139,16 +156,16 @@
         
         // turn fast (1 second)
         [UIView animateWithDuration:1 animations:^{
-            CLLocation *start = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
-            CLLocation *end = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
-            double bearing = [start bearingToLocation:end];
+            CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
+            CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+            double bearing = [stepStart bearingToLocation:stepEnd];
             
             self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
         }];
         
         [UIView animateWithDuration:speedFromPointToPoint animations:^{
             self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
-            [self.mapView showAnnotations:self.allAnnotations animated:YES];
+//            [self.mapView showAnnotations:self.allAnnotations animated:YES];
         }];
     }
     else {
@@ -243,7 +260,7 @@
             [self.allAnnotations addObject:self.customerAnnotation];
             
             self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Server"
-                                                                   subtitle:@""
+                                                                   subtitle:[NSString stringWithFormat:@"ETA - %@", self.routeDurationString]
                                                                  coordinate:self.startLocation
                                                                        type:@"driver"];
             [self.allAnnotations addObject:self.driverAnnotation];
