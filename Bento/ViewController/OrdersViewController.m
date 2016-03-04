@@ -254,18 +254,18 @@
     cell.titleLabel.text = orderHistoryItem.title;
     cell.priceLabel.text = orderHistoryItem.price;
     
-    if ([self isSectionInProgress: self.orderHistoryArray[indexPath.section]]) {
-        cell.titleLabel.textColor = [UIColor bentoBrandGreen];
-        cell.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
-        
-        cell.priceLabel.textColor = [UIColor bentoBrandGreen];
-        cell.priceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
-        cell.priceLabel.frame = CGRectMake(SCREEN_WIDTH - 120, cell.priceLabel.frame.origin.y, cell.priceLabel.frame.size.width, cell.priceLabel.frame.size.height);
-        
-        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-        cell.userInteractionEnabled = YES;
-    }
-    else {
+//    if ([self isSectionInProgress: self.orderHistoryArray[indexPath.section]]) {
+//        cell.titleLabel.textColor = [UIColor bentoBrandGreen];
+//        cell.titleLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
+//        
+//        cell.priceLabel.textColor = [UIColor bentoBrandGreen];
+//        cell.priceLabel.font = [UIFont fontWithName:@"OpenSans-Bold" size:12];
+//        cell.priceLabel.frame = CGRectMake(SCREEN_WIDTH - 120, cell.priceLabel.frame.origin.y, cell.priceLabel.frame.size.width, cell.priceLabel.frame.size.height);
+//        
+//        cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+//        cell.userInteractionEnabled = YES;
+//    }
+//    else {
         cell.titleLabel.textColor = [UIColor bentoTitleGray];
         cell.titleLabel.font = [UIFont fontWithName:@"OpenSans-SemiBold" size:12];
         
@@ -275,28 +275,28 @@
         
         cell.accessoryType = UITableViewCellAccessoryNone;
         cell.userInteractionEnabled = NO;
-    }
+//    }
     
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    [tableView deselectRowAtIndexPath:indexPath animated:YES];
-    
-    // get driverID
-    OrderHistorySection *orderHistorySection = self.orderHistoryArray[indexPath.section];
-    OrderHistoryItem *orderHistoryItem = orderHistorySection.items[indexPath.row];
-    
-    // set driverID to statusVC
-    StatusViewController *statusVC = [[StatusViewController alloc] init];
-    statusVC.orderId = orderHistoryItem.orderId;
-    statusVC.orderStatus = orderHistoryItem.orderStatus;
-    statusVC.driverId = orderHistoryItem.driverId;
-    statusVC.lat = orderHistoryItem.lat;
-    statusVC.lng = orderHistoryItem.lng;
-    
-    [self.navigationController pushViewController:statusVC animated:YES];
-}
+//- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+//    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+//    
+//    // get driverID
+//    OrderHistorySection *orderHistorySection = self.orderHistoryArray[indexPath.section];
+//    OrderHistoryItem *orderHistoryItem = orderHistorySection.items[indexPath.row];
+//    
+//    // set driverID to statusVC
+//    StatusViewController *statusVC = [[StatusViewController alloc] init];
+//    statusVC.orderId = orderHistoryItem.orderId;
+//    statusVC.orderStatus = orderHistoryItem.orderStatus;
+//    statusVC.driverId = orderHistoryItem.driverId;
+//    statusVC.lat = orderHistoryItem.lat;
+//    statusVC.lng = orderHistoryItem.lng;
+//    
+//    [self.navigationController pushViewController:statusVC animated:YES];
+//}
 
 - (BOOL)isSectionInProgress:(OrderHistorySection *)section {
     if ([section.sectionTitle isEqualToString:@"In Progress"]) {
