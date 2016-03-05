@@ -169,7 +169,7 @@ static BentoShop *_shareInstance;
             completion(YES, error);
         }
         else {
-            NSLog(@"getInit2 error: %@", error);
+//            NSLog(@"getInit2 error: %@", error);
             completion(NO, error);
         }
     }];
@@ -221,7 +221,7 @@ static BentoShop *_shareInstance;
             }
             else {
                 completion(NO, error);
-                NSLog(@"init2 gatekeeper error: %@", error);
+//                NSLog(@"init2 gatekeeper error: %@", error);
             }
         }];
     }
@@ -293,7 +293,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     
     NSString *strRequest = [NSString stringWithFormat:@"/init2?date=%@&copy=0&gatekeeper=1&lat=%f&long=%f", strDate, coordinate.latitude, coordinate.longitude];
 
-    NSLog(@"Selected Coordinates - %f, %f", coordinate.latitude, coordinate.longitude);
+//    NSLog(@"Selected Coordinates - %f, %f", coordinate.latitude, coordinate.longitude);
     
     [self sendRequest:strRequest completion:^(id responseDic, NSError *error) {
         
@@ -311,7 +311,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
             }
         }
         else {
-            NSLog(@"init2 gatekeeper error: %@", error);
+//            NSLog(@"init2 gatekeeper error: %@", error);
              completion(NO, nil, error);
 //            completion(NO); // for some reason, some coordinates outofzone are producing an error. return NO for now
         }
@@ -598,7 +598,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
             }
         }
         else {
-            NSLog(@"/menu/date error: %@", error);
+//            NSLog(@"/menu/date error: %@", error);
         }
     }];
 }
@@ -683,7 +683,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
             self.menuNext = (NSDictionary *)responseDic[@"menus"];
         }
         else {
-            NSLog(@"/menu/next/date error: %@", error);
+//            NSLog(@"/menu/next/date error: %@", error);
         }
     }];
     

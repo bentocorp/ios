@@ -45,18 +45,23 @@
 
 @implementation StatusViewController
 {
+    CLLocation *currentLocation;
+    
     NSInteger stepCount;
     NSInteger pathCoordinatesCount;
     NSTimer *timer;
     float speedFromPointToPoint;
     
     NSString *start;
+    
+    BOOL loadedOnce;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
     // uncomment this later
-//    [self connectToNode];
+    [self connectToNode];
 //    [self setupViews];
     
     self.steps = [[NSMutableArray alloc] init];
@@ -67,10 +72,6 @@
 
 - (void)getRouteFromLastLocation {
     [timer invalidate];
-    stepCount = 0;
-    pathCoordinatesCount = 0;
-    speedFromPointToPoint = 0;
-    [self.steps removeAllObjects];
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.timeoutIntervalForRequest = 20;
@@ -80,13 +81,12 @@
     // pass in last location
     NSString *api = @"https://maps.googleapis.com/maps/api/directions/";
     if (start == nil || [start isEqualToString:@""]) {
-        start = [NSString stringWithFormat:@"%f,%f", 37.774864, -122.396184];
+        start = [NSString stringWithFormat:@"%f,%f", 37.737841, -122.436921];
     }
     else {
-        CLLocation *location = self.currentStep.pathCoordinates[pathCoordinatesCount];
-        start = [NSString stringWithFormat:@"%F,%f", location.coordinate.latitude, location.coordinate.longitude];
+        start = [NSString stringWithFormat:@"%F,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
     }
-    NSString *end = [NSString stringWithFormat:@"%f,%f", 37.763120, -122.388800];
+    NSString *end = [NSString stringWithFormat:@"%f,%f", 37.736278, -122.435466];
     NSString *requestString = [NSString stringWithFormat:@"%@json?origin=%@&destination=%@&key=%@", api, start, end, GOOGLE_API_KEY];
     
     NSURL *URL = [NSURL URLWithString: requestString];
@@ -123,6 +123,10 @@
     
     NSArray *steps = leg[@"steps"];
     
+    if (self.steps.count != 0) {
+        [self.steps removeAllObjects];
+    }
+    
     for (NSDictionary *stepDic in steps) {
         if (stepDic) {
             Step *step = [[Step alloc] initWithDictionary:stepDic];
@@ -152,19 +156,19 @@
     
     if (pathCoordinatesCount < self.currentStep.pathCoordinates.count) {
         
-        CLLocation *location = self.currentStep.pathCoordinates[pathCoordinatesCount];
+        currentLocation = self.currentStep.pathCoordinates[pathCoordinatesCount];
         
         // turn fast (1 second)
         [UIView animateWithDuration:1 animations:^{
             CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
-            CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:location.coordinate.latitude longitude:location.coordinate.longitude];
+            CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
             double bearing = [stepStart bearingToLocation:stepEnd];
             
             self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
         }];
         
         [UIView animateWithDuration:speedFromPointToPoint animations:^{
-            self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(location.coordinate.latitude, location.coordinate.longitude);
+            self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
 //            [self.mapView showAnnotations:self.allAnnotations animated:YES];
         }];
     }
@@ -247,26 +251,30 @@
     [SVGeocoder reverseGeocode:CLLocationCoordinate2DMake(self.lat, self.lng) completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil && placemarks.count > 0) {
             self.placeInfo = [placemarks firstObject];
-            NSLog(@"placeinfo - %@", self.placeInfo);
+//            NSLog(@"placeinfo - %@", self.placeInfo);
             
             self.allAnnotations = [[NSMutableArray alloc] init];
             
             
             
-            self.customerAnnotation= [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
+            self.customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
                                                                     subtitle:[NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare]
                                                                   coordinate:self.endLocation
                                                                         type:@"customer"];
             [self.allAnnotations addObject:self.customerAnnotation];
             
             self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Server"
-                                                                   subtitle:[NSString stringWithFormat:@"ETA - %@", self.routeDurationString]
+                                                                   subtitle:[NSString stringWithFormat:@"ETA: %@", self.routeDurationString]
                                                                  coordinate:self.startLocation
                                                                        type:@"driver"];
             [self.allAnnotations addObject:self.driverAnnotation];
             
             [self.mapView addAnnotations:self.allAnnotations];
-            [self.mapView showAnnotations:self.allAnnotations animated:NO];
+            
+            if (loadedOnce == NO) {
+                loadedOnce = YES;
+                [self.mapView showAnnotations:self.allAnnotations animated:NO];
+            }
         }
         else {
             // handler error
