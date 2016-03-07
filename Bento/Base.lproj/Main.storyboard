@@ -1767,7 +1767,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Order Confirmed!" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="R4d-b6-xQx">
-                                        <rect key="frame" x="0.0" y="65" width="320" height="34"/>
+                                        <rect key="frame" x="17" y="65" width="287" height="34"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="18"/>
                                         <color key="textColor" red="0.47843137254901957" green="0.52156862745098043" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
