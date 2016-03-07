@@ -81,12 +81,12 @@
     // pass in last location
     NSString *api = @"https://maps.googleapis.com/maps/api/directions/";
     if (start == nil || [start isEqualToString:@""]) {
-        start = [NSString stringWithFormat:@"%f,%f", 37.737841, -122.436921];
+        start = [NSString stringWithFormat:@"%f,%f", 37.774821, -122.396259];
     }
     else {
         start = [NSString stringWithFormat:@"%F,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
     }
-    NSString *end = [NSString stringWithFormat:@"%f,%f", 37.736278, -122.435466];
+    NSString *end = [NSString stringWithFormat:@"%f,%f", 37.764199, -122.391316];
     NSString *requestString = [NSString stringWithFormat:@"%@json?origin=%@&destination=%@&key=%@", api, start, end, GOOGLE_API_KEY];
     
     NSURL *URL = [NSURL URLWithString: requestString];
@@ -263,13 +263,15 @@
                                                                         type:@"customer"];
             [self.allAnnotations addObject:self.customerAnnotation];
             
-            self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Server"
+            self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Joseph"
                                                                    subtitle:[NSString stringWithFormat:@"ETA: %@", self.routeDurationString]
                                                                  coordinate:self.startLocation
                                                                        type:@"driver"];
             [self.allAnnotations addObject:self.driverAnnotation];
             
             [self.mapView addAnnotations:self.allAnnotations];
+            
+            [self.mapView selectAnnotation:self.driverAnnotation animated:YES];
             
             if (loadedOnce == NO) {
                 loadedOnce = YES;

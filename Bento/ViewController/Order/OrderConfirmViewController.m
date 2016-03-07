@@ -73,7 +73,11 @@
     [self.ivCompleted sd_setImageWithURL:urlCompleted placeholderImage:[UIImage imageNamed:@"orderconfirm_image_car"]];
     
     self.lblCompletedTitle.text = [[AppStrings sharedInstance] getString:COMPLETED_TITLE];
+    self.lblCompletedTitle.adjustsFontSizeToFitWidth = YES;
+    
     self.lblCompletedText.text = [[AppStrings sharedInstance] getString:COMPLETED_TEXT];
+    self.lblCompletedTitle.adjustsFontSizeToFitWidth = YES;
+    
     [self.btnQuestion setTitle:[[AppStrings sharedInstance] getString:COMPLETED_LINK_QUESTION] forState:UIControlStateNormal];
     [self.btnBuild setTitle:[[AppStrings sharedInstance] getString:COMPLETED_BUTTON_COMPLETE] forState:UIControlStateNormal];
     
