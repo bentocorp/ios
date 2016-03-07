@@ -11,6 +11,30 @@
 
 @implementation Order
 
+- (void)setEnumStatus: (NSString *)statusString {
+    
+    NSString *lowerCaseTypeString = [statusString lowercaseString];
+    
+    NSArray *statuses = @[@"pending", @"rejected", @"accepted", @"completed"];
+    
+    NSInteger status = [statuses indexOfObject:lowerCaseTypeString];
+    
+    switch (status) {
+        case 0:
+            self.status = Pending;
+            break;
+        case 1:
+            self.status = Rejected;
+            break;
+        case 2:
+            self.status = Accepted;
+            break;
+        default:
+            self.status = Completed;
+            break;
+    }
+}
+
 - (id)initWithJSON: (NSDictionary *)json {
     self = [super init];
     
@@ -53,30 +77,6 @@
     }
     
     return self;
-}
-
-- (void)setEnumStatus: (NSString *)statusString {
-    
-    NSString *lowerCaseTypeString = [statusString lowercaseString];
-    
-    NSArray *statuses = @[@"pending", @"rejected", @"accepted", @"completed"];
-    
-    NSInteger status = [statuses indexOfObject:lowerCaseTypeString];
-    
-    switch (status) {
-        case 0:
-            self.status = Pending;
-            break;
-        case 1:
-            self.status = Rejected;
-            break;
-        case 2:
-            self.status = Accepted;
-            break;
-        default:
-            self.status = Completed;
-            break;
-    }
 }
 
 @end

@@ -10,18 +10,6 @@
 
 @implementation DishInfo
 
-- (id)initWithJSON: (NSDictionary *)json {
-    self = [super init];
-    
-    if (self) {
-        self.dishId = [json[@"id"] integerValue];
-        self.label = json[@"label"];
-        self.name = json[@"name"];
-        [self setEnumType:json[@"type"]];
-    }
-    return self;
-}
-
 - (void)setEnumType: (NSString *)typeString {
     
     NSString *lowerCaseTypeString = [typeString lowercaseString];
@@ -41,6 +29,18 @@
             self.type = AddOn;
             break;
     }
+}
+
+- (id)initWithJSON: (NSDictionary *)json {
+    self = [super init];
+    
+    if (self) {
+        self.dishId = [json[@"id"] integerValue];
+        self.label = json[@"label"];
+        self.name = json[@"name"];
+        [self setEnumType:json[@"type"]];
+    }
+    return self;
 }
 
 @end

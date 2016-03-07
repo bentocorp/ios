@@ -67,7 +67,7 @@
     self.steps = [[NSMutableArray alloc] init];
     
     [self getRouteFromLastLocation];
-    [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
+    [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
 }
 
 - (void)getRouteFromLastLocation {

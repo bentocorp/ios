@@ -19,21 +19,3 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
-
-// int count = 0
-
-// currentStep = steps[count]
-
-// currentStep.pathCoordinates
-
-// loop through currentStep.pathCoordinates with 1 second delay in between, animating from point to point while keeping count of the duration.
-
-// pathCoordinatesCount = 0
-
-// timer should repeatedly call a countPathCoordinates with 1 second delay
-
-// if pathCoordinatesCount <= currentStep.duration -> update driver with currentStep.pathCoordinates[pathCoordinatesCount]
-
-// 3 seconds to loop through 2 coordinates
-
-// 53 / 44

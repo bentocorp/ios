@@ -74,7 +74,7 @@
 
 #pragma mark Authenticate
 - (void)authenticateUser {
-    NSString *apiString = [NSString stringWithFormat:@"/api/authenticate?username=%@&token=%@&type=customer", self.username, self.token];
+    NSString *apiString = [NSString stringWithFormat:@"/api/authenticate?username=%@&password=%@&type=customer", self.username, self.token];
     [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
         NSLog(@"socket did authenticate");
         

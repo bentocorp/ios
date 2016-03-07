@@ -1705,7 +1705,7 @@
 			name = controller;
 			sourceTree = "<group>";
 		};
-		FC1809EC1BED3BD0009CE159 /* Order */ = {
+		FC1809EC1BED3BD0009CE159 /* Status */ = {
 			isa = PBXGroup;
 			children = (
 				FC2C88361BEC2CBA00C7249A /* Order.h */,
@@ -1715,7 +1715,7 @@
 				FC1809ED1BED3BE3009CE159 /* DishInfo.h */,
 				FC1809EE1BED3BE3009CE159 /* DishInfo.m */,
 			);
-			name = Order;
+			name = Status;
 			sourceTree = "<group>";
 		};
 		FC1D605D1BBA0C0A0012FFB3 /* FacebookSDKs */ = {
@@ -1745,13 +1745,11 @@
 		FC2AB1671BE9829A00223B8A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				FCAB03F81C88F26B004D2ED2 /* Step.h */,
-				FCAB03F91C88F26B004D2ED2 /* Step.m */,
+				FCF330071C8E0ADA00FF8478 /* Google Maps */,
 				FCE036DC1BEAAE6300F7605B /* Annotation */,
-				FC386F0A1BE1F2E700961A17 /* Push.h */,
-				FC386F0B1BE1F2E700961A17 /* Push.m */,
-				FC4327B21BE2EE8E00E91D9B /* DriverLocation.h */,
-				FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */,
+				FCF330061C8E0A0E00FF8478 /* Push */,
+				FCF330081C8E0B0800FF8478 /* Location */,
+				FC1809EC1BED3BD0009CE159 /* Status */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -1761,9 +1759,8 @@
 			children = (
 				FC46DE8B1BE14AEA00E9A7B1 /* SocketHandler.h */,
 				FC46DE8C1BE14AEA00E9A7B1 /* SocketHandler.m */,
-				FC1809EC1BED3BD0009CE159 /* Order */,
 				FC2AB1671BE9829A00223B8A /* Model */,
-				FCE036DD1BEAAE7C00F7605B /* View Controller */,
+				FCE036DD1BEAAE7C00F7605B /* Controller */,
 			);
 			name = "Driver Tracking";
 			path = ../Model;
@@ -1983,14 +1980,14 @@
 			name = Annotation;
 			sourceTree = "<group>";
 		};
-		FCE036DD1BEAAE7C00F7605B /* View Controller */ = {
+		FCE036DD1BEAAE7C00F7605B /* Controller */ = {
 			isa = PBXGroup;
 			children = (
 				FCD266531C7D13C200FC1821 /* StatusViewController.h */,
 				FCD266541C7D13C200FC1821 /* StatusViewController.m */,
 				FCD266551C7D13C200FC1821 /* StatusViewController.xib */,
 			);
-			name = "View Controller";
+			name = Controller;
 			sourceTree = "<group>";
 		};
 		FCE1E5041C47373E00A210DC /* 4-Pod */ = {
@@ -2021,6 +2018,33 @@
 			);
 			name = "View Preview";
 			path = ../MakeBento;
+			sourceTree = "<group>";
+		};
+		FCF330061C8E0A0E00FF8478 /* Push */ = {
+			isa = PBXGroup;
+			children = (
+				FC386F0A1BE1F2E700961A17 /* Push.h */,
+				FC386F0B1BE1F2E700961A17 /* Push.m */,
+			);
+			name = Push;
+			sourceTree = "<group>";
+		};
+		FCF330071C8E0ADA00FF8478 /* Google Maps */ = {
+			isa = PBXGroup;
+			children = (
+				FCAB03F81C88F26B004D2ED2 /* Step.h */,
+				FCAB03F91C88F26B004D2ED2 /* Step.m */,
+			);
+			name = "Google Maps";
+			sourceTree = "<group>";
+		};
+		FCF330081C8E0B0800FF8478 /* Location */ = {
+			isa = PBXGroup;
+			children = (
+				FC4327B21BE2EE8E00E91D9B /* DriverLocation.h */,
+				FC4327B31BE2EE8E00E91D9B /* DriverLocation.m */,
+			);
+			name = Location;
 			sourceTree = "<group>";
 		};
 		FCFD79F01AE8880D002AD322 /* Settings */ = {
