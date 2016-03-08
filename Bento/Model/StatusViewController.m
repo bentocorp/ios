@@ -358,7 +358,7 @@
     [self getOrderHistory];
 }
 
-- (void)socketHandlerDidUpdateLocationWithLatitude:(float)lat andLongitude:(float)lng {
+- (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
     NSLog(@"hehe");
 }
 

@@ -145,7 +145,10 @@
         
         NSLog(@"loc data - %@", json);
         
-        [self.delegate socketHandlerDidUpdateLocationWith:[json[@"lat"] floatValue] and:[json[@"lng"] floatValue]];
+        float lat = [json[@"lat"] floatValue];
+        float lng = [json[@"lng"] floatValue];
+        
+        [self.delegate socketHandlerDidUpdateLocationWith:lat and:lng];
     }];
 }
 
@@ -168,10 +171,13 @@
         NSLog(@"ret - %@", ret);
         
         if (code == 0) {
-            [ret[@"lat"] floatValue];
-            [ret[@"lng"] floatValue];
-            
-            [self requestToTrackDriver];
+            if ([ret isEqual:[NSNull null]] == false) {
+                
+                [ret[@"lat"] floatValue];
+                [ret[@"lng"] floatValue];
+                
+                [self requestToTrackDriver];
+            }
         }
         else {
             // handle error
