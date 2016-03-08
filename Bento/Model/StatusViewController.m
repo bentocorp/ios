@@ -60,6 +60,11 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.mapView.hidden = YES;
+    self.descriptionTitleLabel.hidden = YES;
+    self.descriptionLabel.hidden = YES;
+    self.statusIconImageView.hidden = YES;
+    
     // uncomment this later
     [self connectToNode];
     [self setupViews];
@@ -381,9 +386,30 @@
         if (error == nil) {
 
             // uncomment this later
-            if ([self shouldRemoveOrder:responseDic]) {
-                [self goBack];
+//            if ([self shouldRemoveOrder:responseDic]) {
+//                [self goBack];
+//            }
+            
+            if (self.orderStatus == Assigned) {
+                [self prepState];
             }
+            else if (self.orderStatus == Enroute) {
+                [self deliveryState];
+            }
+            else if (self.orderStatus == Arrived) {
+                [self pickupState];
+            }
+            
+//            switch (self.orderStatus) {
+//                case Assigned:
+//                    [self prepState];
+//                case Enroute:
+//                    [self deliveryState];
+//                case Arrived:
+//                    [self pickupState];
+//                default:
+//                    break;
+//            }
         }
         else {
             // handle error
