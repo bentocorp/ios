@@ -60,8 +60,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self connectToNode];
     [self setupViews];
+    
+    [self connectToNode];
     
     self.steps = [[NSMutableArray alloc] init];
     
@@ -80,12 +81,12 @@
     // pass in last location
     NSString *api = @"https://maps.googleapis.com/maps/api/directions/";
     if (start == nil || [start isEqualToString:@""]) {
-        start = [NSString stringWithFormat:@"%f,%f", 37.774821, -122.396259];
+        start = [NSString stringWithFormat:@"%f,%f", self.startLocation.latitude, self.startLocation];
     }
     else {
         start = [NSString stringWithFormat:@"%F,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
     }
-    NSString *end = [NSString stringWithFormat:@"%f,%f", 37.764199, -122.391316];
+    NSString *end = [NSString stringWithFormat:@"%f,%f", self.lat, self.lng];
     NSString *requestString = [NSString stringWithFormat:@"%@json?origin=%@&destination=%@&key=%@", api, start, end, GOOGLE_API_KEY];
     
     NSURL *URL = [NSURL URLWithString: requestString];
@@ -117,7 +118,7 @@
     NSDictionary *leg = [legs firstObject];
     
     self.startLocation = CLLocationCoordinate2DMake([leg[@"start_location"][@"lat"] floatValue], [leg[@"start_location"][@"lng"] floatValue]);
-    self.endLocation = CLLocationCoordinate2DMake([leg[@"end_location"][@"lat"] floatValue], [leg[@"end_location"][@"lng"] floatValue]);
+//    self.endLocation = CLLocationCoordinate2DMake([leg[@"end_location"][@"lat"] floatValue], [leg[@"end_location"][@"lng"] floatValue]);
     self.routeDurationString = leg[@"duration"][@"text"];
     
     NSArray *steps = leg[@"steps"];
@@ -236,8 +237,6 @@
     
     self.dotView9.layer.cornerRadius = 3;
     self.dotView9.layer.masksToBounds = YES;
-    
-    [self setupMap];
 }
 
 - (void)setupMap {
@@ -248,8 +247,8 @@
     
     [SVGeocoder reverseGeocode:CLLocationCoordinate2DMake(self.lat, self.lng) completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil && placemarks.count > 0) {
+            
             self.placeInfo = [placemarks firstObject];
-//            NSLog(@"placeinfo - %@", self.placeInfo);
             
             self.allAnnotations = [[NSMutableArray alloc] init];
             
@@ -360,7 +359,7 @@
 }
 
 - (void)socketHandlerDidUpdateLocationWithLatitude:(float)lat andLongitude:(float)lng {
-    
+    NSLog(@"hehe");
 }
 
 - (void)closeSocket {
@@ -483,12 +482,20 @@
 }
 
 - (void)deliveryState {
+    
+    self.endLocation = CLLocationCoordinate2DMake(self.lat, self.lng);
+    
+    [self setupMap];
+    
     // turn on
     self.prepLabel.textColor = [UIColor bentoBrandGreen];
     self.deliveryLabel.textColor = [UIColor bentoBrandGreen];
     self.num1Label.backgroundColor = [UIColor bentoBrandGreen];
     self.num2Label.backgroundColor = [UIColor bentoBrandGreen];
-    self.num3Label.backgroundColor = [UIColor bentoBrandGreen];
+    
+    self.dotView1.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView2.backgroundColor = [UIColor bentoBrandGreen];
+    self.dotView3.backgroundColor = [UIColor bentoBrandGreen];
     
     self.mapView.hidden = NO;
     
@@ -496,13 +503,9 @@
     self.assemblyLabel.textColor = [UIColor bentoOrderStatusGray];
     self.pickupLabel.textColor = [UIColor bentoOrderStatusGray];
     
-    self.num2Label.backgroundColor = [UIColor bentoOrderStatusGray];
     self.num3Label.backgroundColor = [UIColor bentoOrderStatusGray];
     self.num4Label.backgroundColor = [UIColor bentoOrderStatusGray];
     
-    self.dotView1.backgroundColor = [UIColor bentoOrderStatusGray];
-    self.dotView2.backgroundColor = [UIColor bentoOrderStatusGray];
-    self.dotView3.backgroundColor = [UIColor bentoOrderStatusGray];
     self.dotView4.backgroundColor = [UIColor bentoOrderStatusGray];
     self.dotView5.backgroundColor = [UIColor bentoOrderStatusGray];
     self.dotView6.backgroundColor = [UIColor bentoOrderStatusGray];

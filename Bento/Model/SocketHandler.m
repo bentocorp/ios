@@ -93,8 +93,12 @@
         
         if (code == 0) {
             if (ret != nil) {
+                // update token
+                self.token = ret[@"token"];
+                
                 [self.delegate socketHandlerDidAuthenticate];
                 [self listenToChannels];
+                [self getLastSavedLocation];
             }
         }
         else {
@@ -134,23 +138,20 @@
 
     // Listen to Location
     [self.socket on:@"loc" callback:^(NSArray *data, SocketAckEmitter *ack) {
-        NSLog(@"loc data - %@", data);
+        NSString *jsonString = data[0];
+        NSError *jsonError;
+        NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&jsonError];
         
-//        NSString *jsonString = [data[0][@"ret"] stringValue];
-//        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:false];
-//        
-//        NSError *error;
-//        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData
-//                                                             options:kNilOptions
-//                                                               error:&error];
-//        
-//        [self.delegate socketHandlerDidUpdateLocationWith:[json[@"lat"] floatValue] and:[json[@"long"] floatValue]];
+        NSLog(@"loc data - %@", json);
+        
+        [self.delegate socketHandlerDidUpdateLocationWith:[json[@"lat"] floatValue] and:[json[@"lng"] floatValue]];
     }];
 }
 
 #pragma mark Request To Track Driver
-- (void)requestToTrackDriver {
-    NSString *apiString = [NSString stringWithFormat:@"/api/track?client_id=d-%ld", (long)self.driverId];
+- (void)getLastSavedLocation {
+    NSString *apiString = [NSString stringWithFormat:@"/api/gloc?token=%@&clientId=d-%@", self.token, self.driverId];
     [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
         
         NSString *jsonString = data[0];
@@ -158,11 +159,53 @@
         NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&jsonError];
         
-        // success
+        int code = [json[@"code"] intValue];
+        NSString *msg = json[@"msg"];
+        NSDictionary *ret = json[@"ret"];
         
-        NSLog(@"json2 - %@", json);
+        NSLog(@"code - %i", code);
+        NSLog(@"msg - %@", msg);
+        NSLog(@"ret - %@", ret);
+        
+        if (code == 0) {
+            [ret[@"lat"] floatValue];
+            [ret[@"lng"] floatValue];
+            
+            [self requestToTrackDriver];
+        }
+        else {
+            // handle error
+        }
     });
 }
+
+- (void)requestToTrackDriver {
+    NSString *apiString = [NSString stringWithFormat:@"/api/track?clientId=d-%@", self.driverId];
+    [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
+        
+        NSString *jsonString = data[0];
+        NSError *jsonError;
+        NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&jsonError];
+        
+        int code = [json[@"code"] intValue];
+        NSString *msg = json[@"msg"];
+        NSDictionary *ret = json[@"ret"];
+        
+        NSLog(@"code - %i", code);
+        NSLog(@"msg - %@", msg);
+        NSLog(@"ret - %@", ret);
+        
+        if (code == 0) {
+            
+        }
+        else {
+            // handle error
+        }
+    });
+}
+
+
 
 #pragma mark Disconnect
 - (void)closeSocket {
