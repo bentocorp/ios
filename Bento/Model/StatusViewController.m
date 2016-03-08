@@ -60,6 +60,8 @@
     NSTimer *timerForLastLocationUpdate;
     BOOL isReceivingLocation;
     NSInteger countSinceLastLocationUpdate;
+    
+    NSTimer *timerForGoogleMapsAPI;
 }
 
 - (void)viewDidLoad {
@@ -75,6 +77,8 @@
     [self connectToNode];
     
     self.steps = [[NSMutableArray alloc] init];
+    
+    isReceivingLocation = YES;
 }
 
 - (void)getRouteFromLastLocation {
@@ -109,8 +113,9 @@
             
             stepCount = 0;
             
-            // uncomment this
-//            [self loopThroughPathCoordinates];
+            if (isReceivingLocation == false) {
+                [self loopThroughPathCoordinates];
+            }
         }
         else {
             // handle error
@@ -159,11 +164,16 @@
     countSinceLastLocationUpdate++;
     NSLog(@"countSinceLastLocationUpdate - %ld", countSinceLastLocationUpdate);
     
-    if (countSinceLastLocationUpdate >= 60) {
+    if (countSinceLastLocationUpdate >= 10) {
+        isReceivingLocation = NO;
         
+        if ([timerForLastLocationUpdate isValid] == false) {
+            [self getRouteFromLastLocation];
+            timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
+        }
     }
     else {
-        
+        isReceivingLocation = YES;
     }
 }
 
@@ -230,6 +240,12 @@
     [super viewWillDisappear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
+    
+    [timerForLastLocationUpdate invalidate];
+    timerForLastLocationUpdate = nil;
+    
+    [timer invalidate];
+    timer = nil;
 }
 
 - (void)setupViews {
@@ -389,19 +405,14 @@
 
 - (void)socketHandlerDidGetLastSavedLocation:(float)lat and:(float)lng {
     self.startLocation = CLLocationCoordinate2DMake(lat, lng);
-    
-    [self getRouteFromLastLocation];
-    [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
-    
+
     [self deliveryState];
 }
 
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
     if (self.orderStatus == Enroute) {
         
-        [timer invalidate];
         countSinceLastLocationUpdate = 0;
-        [timer fire];
         
         currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
         [self updateLocation];
@@ -436,7 +447,9 @@
                 
                 [[SocketHandler sharedSocket] getLastSavedLocation];
                 
-                timerForLastLocationUpdate = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countSinceLastUpdate) userInfo:nil repeats:YES];
+                if (timerForLastLocationUpdate == nil) {
+                    timerForLastLocationUpdate = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countSinceLastUpdate) userInfo:nil repeats:YES];
+                }
             }
             else {
                 [[SocketHandler sharedSocket] untrack];
