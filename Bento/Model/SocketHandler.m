@@ -98,7 +98,6 @@
                 
                 [self.delegate socketHandlerDidAuthenticate];
                 [self listenToChannels];
-                [self getLastSavedLocation];
             }
         }
         else {
@@ -110,20 +109,14 @@
 
 #pragma mark Listen To
 - (void)listenToChannels {
-    
-    // Ex. { rid: rst_7#5y, from: "houston", to: "c-5", subject: "OrderAccepted", body: {orderId: "w/e", driverId: "8"} }
     [self.socket on:@"push" callback:^(NSArray *data, SocketAckEmitter *ack) {
-        NSLog(@"push data - %@", data);
+        NSString *jsonString = data[0];
+        NSError *jsonError;
+        NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&jsonError];
         
-//        NSString *jsonString = [data[0][@"ret"] stringValue];
-//        NSData *jsonData = [jsonString dataUsingEncoding:NSUTF8StringEncoding allowLossyConversion:false];
-//
-//        NSError *error;
-//        NSDictionary* json = [NSJSONSerialization JSONObjectWithData:jsonData
-//                                                             options:kNilOptions
-//                                                               error:&error];
+        NSLog(@"loc data - %@", json);
         
-//        // if driver has accepted my order, node will pass me his clientId, then i take that i call request to track
 //        if (data.subject == "OrderAccepted") { // delivery
 //            [self requestToTrackDriver];
 //        }
@@ -133,7 +126,6 @@
 //        else if (data.subject == "OrderComplete") { // terminate
 //            // pop view controller
 //        }
-        
     }];
 
     // Listen to Location
@@ -152,7 +144,7 @@
     }];
 }
 
-#pragma mark Request To Track Driver
+#pragma mark Tracking
 - (void)getLastSavedLocation {
     NSString *apiString = [NSString stringWithFormat:@"/api/gloc?token=%@&clientId=d-%@", self.token, self.driverId];
     [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
@@ -173,8 +165,10 @@
         if (code == 0) {
             if ([ret isEqual:[NSNull null]] == false) {
                 
-                [ret[@"lat"] floatValue];
-                [ret[@"lng"] floatValue];
+                float lat = [ret[@"lat"] floatValue];
+                float lng = [ret[@"lng"] floatValue];
+                
+                [self.delegate socketHandlerDidGetLastSavedLocation:lat and:lng];
                 
                 [self requestToTrackDriver];
             }
@@ -211,7 +205,31 @@
     });
 }
 
-
+- (void)untrack {
+    NSString *apiString = [NSString stringWithFormat:@"/api/untrack?clientId=d-%@", self.driverId];
+    [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
+        
+        NSString *jsonString = data[0];
+        NSError *jsonError;
+        NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
+        NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&jsonError];
+        
+        int code = [json[@"code"] intValue];
+        NSString *msg = json[@"msg"];
+        NSDictionary *ret = json[@"ret"];
+        
+        NSLog(@"code - %i", code);
+        NSLog(@"msg - %@", msg);
+        NSLog(@"ret - %@", ret);
+        
+        if (code == 0) {
+            
+        }
+        else {
+            // handle error
+        }
+    });
+}
 
 #pragma mark Disconnect
 - (void)closeSocket {

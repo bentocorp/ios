@@ -40,6 +40,8 @@
 @property (weak, nonatomic) IBOutlet UIView *dotView8;
 @property (weak, nonatomic) IBOutlet UIView *dotView9;
 
+@property (weak, nonatomic) IBOutlet UIActivityIndicatorView *loadingHud;
+
 @property (nonatomic) NSString *orderId;
 @property (nonatomic) OrderStatus orderStatus;
 @property (nonatomic) NSString *driverId;

@@ -43,6 +43,7 @@
                 <outlet property="dotView8" destination="L2K-tB-q7D" id="Mgc-IB-ErP"/>
                 <outlet property="dotView9" destination="U3U-5v-QJD" id="9iT-lj-UbA"/>
                 <outlet property="headerLabel" destination="nyv-uk-h1O" id="ft6-ku-Kdu"/>
+                <outlet property="loadingHud" destination="917-d2-eDi" id="oPQ-5O-fiV"/>
                 <outlet property="mapView" destination="7d8-fS-ayY" id="rzj-1B-gEG"/>
                 <outlet property="num1Label" destination="QUY-9U-BG5" id="IcI-eo-X2Q"/>
                 <outlet property="num2Label" destination="NuS-WX-tKx" id="UE2-jq-D0B"/>
@@ -564,6 +565,13 @@
                         <mapView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="7d8-fS-ayY">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="494"/>
                         </mapView>
+                        <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="917-d2-eDi" userLabel="loadingHud">
+                            <rect key="frame" x="177" y="237" width="20" height="20"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="20" id="Cka-we-J1p"/>
+                                <constraint firstAttribute="width" constant="20" id="c5A-Ay-GXt"/>
+                            </constraints>
+                        </activityIndicatorView>
                     </subviews>
                     <color key="backgroundColor" red="0.91372549020000005" green="0.92549019610000005" blue="0.92549019610000005" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -572,6 +580,7 @@
                         <constraint firstItem="T84-iS-vXx" firstAttribute="centerX" secondItem="4Xx-nP-XMp" secondAttribute="centerX" id="9JW-s5-bII"/>
                         <constraint firstItem="T84-iS-vXx" firstAttribute="centerY" secondItem="4Xx-nP-XMp" secondAttribute="centerY" constant="20" id="BIw-ao-EkA"/>
                         <constraint firstAttribute="bottom" secondItem="7d8-fS-ayY" secondAttribute="bottom" id="Cqh-xC-l6x"/>
+                        <constraint firstItem="917-d2-eDi" firstAttribute="centerY" secondItem="4Xx-nP-XMp" secondAttribute="centerY" id="Gan-R2-NlU"/>
                         <constraint firstAttribute="trailing" secondItem="7d8-fS-ayY" secondAttribute="trailing" id="J4H-BG-ATj"/>
                         <constraint firstItem="T84-iS-vXx" firstAttribute="leading" secondItem="4Xx-nP-XMp" secondAttribute="leading" constant="19" id="MtA-Up-xBM"/>
                         <constraint firstItem="Wsx-Vu-pXE" firstAttribute="centerX" secondItem="lCa-Ux-ZXT" secondAttribute="centerX" id="Ouf-G7-hhZ"/>
@@ -581,6 +590,7 @@
                         <constraint firstItem="7d8-fS-ayY" firstAttribute="top" secondItem="4Xx-nP-XMp" secondAttribute="top" id="mXk-R6-3aT"/>
                         <constraint firstItem="Wsx-Vu-pXE" firstAttribute="top" secondItem="T84-iS-vXx" secondAttribute="bottom" constant="8" id="nXI-d3-3NJ"/>
                         <constraint firstItem="Wsx-Vu-pXE" firstAttribute="leading" secondItem="4Xx-nP-XMp" secondAttribute="leading" constant="19" id="qHW-Eo-Kz7"/>
+                        <constraint firstItem="917-d2-eDi" firstAttribute="centerX" secondItem="4Xx-nP-XMp" secondAttribute="centerX" id="x07-rl-8E9"/>
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3em-3M-7g4" userLabel="bottomButton">

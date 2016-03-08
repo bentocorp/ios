@@ -14,6 +14,7 @@
 @optional
 - (void)socketHandlerDidConnect;
 - (void)socketHandlerDidAuthenticate;
+- (void)socketHandlerDidGetLastSavedLocation:(float)lat and:(float)lng;
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng;
 
 @end
@@ -31,5 +32,7 @@
 
 - (void)connectAndAuthenticate:(NSString*)username token:(NSString *)token driverId:(NSString *)driverId;
 - (void)closeSocket;
+- (void)getLastSavedLocation;
+- (void)untrack;
 
 @end

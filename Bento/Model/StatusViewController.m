@@ -55,6 +55,11 @@
     NSString *start;
     
     BOOL loadedOnce;
+    
+    
+    NSTimer *timerForLastLocationUpdate;
+    BOOL isReceivingLocation;
+    NSInteger countSinceLastLocationUpdate;
 }
 
 - (void)viewDidLoad {
@@ -62,12 +67,14 @@
     
     [self setupViews];
     
+    self.loadingHud.hidden = NO;
+    [self.loadingHud startAnimating];
+    
+    [self getOrderHistory];
+    
     [self connectToNode];
     
     self.steps = [[NSMutableArray alloc] init];
-    
-//    [self getRouteFromLastLocation];
-//    [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
 }
 
 - (void)getRouteFromLastLocation {
@@ -81,7 +88,7 @@
     // pass in last location
     NSString *api = @"https://maps.googleapis.com/maps/api/directions/";
     if (start == nil || [start isEqualToString:@""]) {
-        start = [NSString stringWithFormat:@"%f,%f", self.startLocation.latitude, self.startLocation];
+        start = [NSString stringWithFormat:@"%f,%f", self.startLocation.latitude, self.startLocation.longitude];
     }
     else {
         start = [NSString stringWithFormat:@"%F,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
@@ -101,7 +108,9 @@
             [self setupViews];
             
             stepCount = 0;
-            [self loopThroughPathCoordinates];
+            
+            // uncomment this
+//            [self loopThroughPathCoordinates];
         }
         else {
             // handle error
@@ -117,8 +126,6 @@
     NSArray *legs = route[@"legs"];
     NSDictionary *leg = [legs firstObject];
     
-    self.startLocation = CLLocationCoordinate2DMake([leg[@"start_location"][@"lat"] floatValue], [leg[@"start_location"][@"lng"] floatValue]);
-//    self.endLocation = CLLocationCoordinate2DMake([leg[@"end_location"][@"lat"] floatValue], [leg[@"end_location"][@"lng"] floatValue]);
     self.routeDurationString = leg[@"duration"][@"text"];
     
     NSArray *steps = leg[@"steps"];
@@ -145,6 +152,18 @@
         speedFromPointToPoint = (float)self.currentStep.duration / (float)self.currentStep.pathCoordinates.count;
         
         timer = [NSTimer scheduledTimerWithTimeInterval:speedFromPointToPoint target:self selector:@selector(updatePathCoordinatesCount) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)countSinceLastUpdate {
+    countSinceLastLocationUpdate++;
+    NSLog(@"countSinceLastLocationUpdate - %ld", countSinceLastLocationUpdate);
+    
+    if (countSinceLastLocationUpdate >= 60) {
+        
+    }
+    else {
+        
     }
 }
 
@@ -255,12 +274,7 @@
 }
 
 - (void)setupMap {
-    self.mapView.delegate = self;
-    self.mapView.mapType = MKMapTypeStandard;
-    self.mapView.zoomEnabled = YES;
-    self.mapView.scrollEnabled = YES;
-    
-    [SVGeocoder reverseGeocode:CLLocationCoordinate2DMake(self.lat, self.lng) completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+    [SVGeocoder reverseGeocode:self.endLocation completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil && placemarks.count > 0) {
             
             self.placeInfo = [placemarks firstObject];
@@ -370,12 +384,28 @@
 }
 
 - (void)socketHandlerDidAuthenticate {
-    [self getOrderHistory];
+    
+}
+
+- (void)socketHandlerDidGetLastSavedLocation:(float)lat and:(float)lng {
+    self.startLocation = CLLocationCoordinate2DMake(lat, lng);
+    
+    [self getRouteFromLastLocation];
+    [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
+    
+    [self deliveryState];
 }
 
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
-    currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-    [self updateLocation];
+    if (self.orderStatus == Enroute) {
+        
+        [timer invalidate];
+        countSinceLastLocationUpdate = 0;
+        [timer fire];
+        
+        currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+        [self updateLocation];
+    }
 }
 
 - (void)closeSocket {
@@ -398,26 +428,29 @@
 //                [self goBack];
 //            }
             
-            if (self.orderStatus == Assigned) {
-                [self prepState];
+            if (self.orderStatus == Enroute) {
+                self.mapView.delegate = self;
+                self.mapView.mapType = MKMapTypeStandard;
+                self.mapView.zoomEnabled = YES;
+                self.mapView.scrollEnabled = YES;
+                
+                [[SocketHandler sharedSocket] getLastSavedLocation];
+                
+                timerForLastLocationUpdate = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countSinceLastUpdate) userInfo:nil repeats:YES];
             }
-            else if (self.orderStatus == Enroute) {
-                [self deliveryState];
-            }
-            else if (self.orderStatus == Arrived) {
-                [self pickupState];
+            else {
+                [[SocketHandler sharedSocket] untrack];
+                
+                if (self.orderStatus == Assigned) {
+                    [self prepState];
+                }
+                else if (self.orderStatus == Arrived) {
+                    [self pickupState];
+                }
             }
             
-//            switch (self.orderStatus) {
-//                case Assigned:
-//                    [self prepState];
-//                case Enroute:
-//                    [self deliveryState];
-//                case Arrived:
-//                    [self pickupState];
-//                default:
-//                    break;
-//            }
+            [self.loadingHud stopAnimating];
+            self.loadingHud.hidden = YES;
         }
         else {
             // handle error
@@ -442,18 +475,18 @@
     
     for (OrderHistoryItem *item in orderItems) {
         if (item.orderId == self.orderId) {
+            
+            self.orderStatus = item.orderStatus;
+            
             switch (self.orderStatus) {
                 case Assigned:
-//                    [self prepState];
                     return NO;
                 case Enroute:
-//                    [self deliveryState];
                     return NO;
                 case Arrived:
-//                    [self pickupState];
                     return NO;
                 default:
-                    return YES; // order is rejected
+                    return YES;
             }
         }
     }
@@ -535,6 +568,7 @@
 }
 
 - (void)pickupState {
+    
     // turn on
     self.prepLabel.textColor = [UIColor bentoBrandGreen];
     self.deliveryLabel.textColor = [UIColor bentoBrandGreen];
