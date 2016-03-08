@@ -60,12 +60,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.mapView.hidden = YES;
-    self.descriptionTitleLabel.hidden = YES;
-    self.descriptionLabel.hidden = YES;
-    self.statusIconImageView.hidden = YES;
-    
-    // uncomment this later
     [self connectToNode];
     [self setupViews];
     
@@ -244,7 +238,6 @@
     self.dotView9.layer.masksToBounds = YES;
     
     [self setupMap];
-    self.mapView.hidden = NO; // delete later
 }
 
 - (void)setupMap {
@@ -436,13 +429,13 @@
         if (item.orderId == self.orderId) {
             switch (self.orderStatus) {
                 case Assigned:
-                    [self prepState];
+//                    [self prepState];
                     return NO;
                 case Enroute:
-                    [self deliveryState];
+//                    [self deliveryState];
                     return NO;
                 case Arrived:
-                    [self pickupState];
+//                    [self pickupState];
                     return NO;
                 default:
                     return YES; // order is rejected

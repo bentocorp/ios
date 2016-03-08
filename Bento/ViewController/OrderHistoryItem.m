@@ -32,7 +32,7 @@
     
     NSString *lowerCaseTypeString = [statusString lowercaseString];
     
-    NSArray *statuses = @[@"assigned", @"en_route", @"arrived", @"rejected"];
+    NSArray *statuses = @[@"assigned", @"en route", @"arrived", @"rejected"];
     
     NSInteger status = [statuses indexOfObject:lowerCaseTypeString];
     
