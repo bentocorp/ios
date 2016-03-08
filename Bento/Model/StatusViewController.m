@@ -181,6 +181,21 @@
     pathCoordinatesCount++;
 }
 
+- (void)updateLocation {
+    [UIView animateWithDuration:1 animations:^{
+        CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
+        CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+        double bearing = [stepStart bearingToLocation:stepEnd];
+        
+        self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
+    }];
+    
+    [UIView animateWithDuration:speedFromPointToPoint animations:^{
+        self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+        //            [self.mapView showAnnotations:self.allAnnotations animated:YES];
+    }];
+}
+
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
@@ -359,7 +374,8 @@
 }
 
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
-    NSLog(@"hehe");
+    currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+    [self updateLocation];
 }
 
 - (void)closeSocket {
