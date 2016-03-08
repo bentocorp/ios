@@ -14,9 +14,13 @@
     if (self = [super init]) {
         self.title = dictionary[@"title"];
         self.price = dictionary[@"price"];
-        self.orderId = dictionary[@"orderId"];
+        self.orderId = [@([dictionary[@"orderId"] intValue]) stringValue];
         self.orderStatus = [self setEnumStatus:dictionary[@"order_status"]];
-        self.driverId = dictionary[@"driverId"];
+        
+        if (dictionary[@"driverId"] != nil && [dictionary[@"driverId"] isEqual:[NSNull null]] == NO) {
+            self.driverId = [@([dictionary[@"driverId"] intValue]) stringValue];
+        }
+        
         self.lat = [dictionary[@"lat"] floatValue];
         self.lng = [dictionary[@"long"] floatValue];
     }

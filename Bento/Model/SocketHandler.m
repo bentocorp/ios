@@ -74,7 +74,7 @@
 
 #pragma mark Authenticate
 - (void)authenticateUser {
-    NSString *apiString = [NSString stringWithFormat:@"/api/authenticate?username=%@&password=%@&type=customer", self.username, self.token];
+    NSString *apiString = [NSString stringWithFormat:@"/api/authenticate?username=%@&token=%@&type=customer", self.username, self.token];
     [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
         NSLog(@"socket did authenticate");
         
@@ -150,7 +150,7 @@
 
 #pragma mark Request To Track Driver
 - (void)requestToTrackDriver {
-    NSString *apiString = [NSString stringWithFormat:@"/api/track?client_id=d-%@", self.driverId];
+    NSString *apiString = [NSString stringWithFormat:@"/api/track?client_id=d-%ld", (long)self.driverId];
     [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
         
         NSString *jsonString = data[0];

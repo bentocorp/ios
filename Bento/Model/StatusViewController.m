@@ -62,12 +62,12 @@
     
     // uncomment this later
     [self connectToNode];
-//    [self setupViews];
+    [self setupViews];
     
     self.steps = [[NSMutableArray alloc] init];
     
-    [self getRouteFromLastLocation];
-    [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
+//    [self getRouteFromLastLocation];
+//    [NSTimer scheduledTimerWithTimeInterval:3*60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
 }
 
 - (void)getRouteFromLastLocation {
@@ -381,9 +381,9 @@
         if (error == nil) {
 
             // uncomment this later
-//            if ([self shouldRemoveOrder:responseDic]) {
-//                [self goBack];
-//            }
+            if ([self shouldRemoveOrder:responseDic]) {
+                [self goBack];
+            }
         }
         else {
             // handle error
@@ -399,8 +399,10 @@
     
     NSMutableArray *orderItems = [[NSMutableArray alloc] init];
     for (OrderHistorySection *section in orderHistoryArray) {
-        for (OrderHistoryItem *item in section.items) {
-            [orderItems addObject:item];
+        if ([section.sectionTitle isEqualToString:@"In Progress"]) {
+            for (OrderHistoryItem *item in section.items) {
+                [orderItems addObject:item];
+            }
         }
     }
     
