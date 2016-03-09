@@ -50,7 +50,7 @@
     
     NSInteger stepCount;
     NSInteger pathCoordinatesCount;
-    NSTimer *timer;
+    NSTimer *timerForSpeedFromPointToPoint;
     float speedFromPointToPoint;
     
     NSString *start;
@@ -103,8 +103,8 @@
     [timerForLastLocationUpdate invalidate];
     timerForLastLocationUpdate = nil;
     
-    [timer invalidate];
-    timer = nil;
+    [timerForSpeedFromPointToPoint invalidate];
+    timerForSpeedFromPointToPoint = nil;
 }
 
 - (void)setupViews {
@@ -192,8 +192,8 @@
 # pragma mark Google Maps API
 
 - (void)getRouteFromLastLocation {
-    [timer invalidate];
-    timer = nil;
+    [timerForSpeedFromPointToPoint invalidate];
+    timerForSpeedFromPointToPoint = nil;
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.timeoutIntervalForRequest = 20;
@@ -272,8 +272,8 @@
         speedFromPointToPoint = (float)self.currentStep.duration / (float)self.currentStep.pathCoordinates.count;
 
         dispatch_async(dispatch_get_main_queue(), ^{
-            timer = [NSTimer scheduledTimerWithTimeInterval:speedFromPointToPoint target:self selector:@selector(updatePathCoordinatesCount) userInfo:nil repeats:YES];
-            [timer fire];
+            timerForSpeedFromPointToPoint = [NSTimer scheduledTimerWithTimeInterval:speedFromPointToPoint target:self selector:@selector(updatePathCoordinatesCount) userInfo:nil repeats:YES];
+            [timerForSpeedFromPointToPoint fire];
         });
     }
 }
@@ -303,7 +303,9 @@
         }];
     }
     else {
-        [timer invalidate];
+        [timerForSpeedFromPointToPoint invalidate];
+        timerForSpeedFromPointToPoint = nil;
+        
         stepCount++;
         [self loopThroughPathCoordinates];
     }
@@ -456,6 +458,9 @@
             
             [timerForGoogleMapsAPI invalidate];
             timerForGoogleMapsAPI = nil;
+            
+            [timerForSpeedFromPointToPoint invalidate];
+            timerForSpeedFromPointToPoint = nil;
             
             countSinceLastLocationUpdate = 0;
             
