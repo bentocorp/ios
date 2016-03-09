@@ -419,7 +419,7 @@
         
         if (timerForGoogleMapsAPI == nil) {
             [self getRouteFromLastLocation];
-            timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
+            timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
         }
         else {
             [self deliveryState];
@@ -527,7 +527,7 @@
         }
     }
     
-    return YES; // order does not exist
+    return YES;
 }
 
 #pragma mark State Transitions
