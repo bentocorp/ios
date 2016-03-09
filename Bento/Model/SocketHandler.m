@@ -197,7 +197,7 @@
         NSLog(@"ret - %@", ret);
         
         if (code == 0) {
-            
+            NSLog(@"TRACKING!!!");
         }
         else {
             // handle error
@@ -223,7 +223,7 @@
         NSLog(@"ret - %@", ret);
         
         if (code == 0) {
-            
+            NSLog(@"UNTRACKED!!!");
         }
         else {
             // handle error

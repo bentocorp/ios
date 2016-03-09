@@ -37,7 +37,6 @@
 @property (nonatomic) NSMutableArray *steps;
 @property (nonatomic) Step *currentStep;
 
-@property (nonatomic) CLLocationCoordinate2D startLocation;
 @property (nonatomic) CLLocationCoordinate2D endLocation;
 @property (nonatomic) NSString *routeDurationString;
 
@@ -62,6 +61,8 @@
     NSInteger countSinceLastLocationUpdate;
     
     NSTimer *timerForGoogleMapsAPI;
+    
+    BOOL hasSetUpMap;
 }
 
 - (void)viewDidLoad {
@@ -79,150 +80,6 @@
     self.steps = [[NSMutableArray alloc] init];
     
     isReceivingLocation = YES;
-}
-
-- (void)getRouteFromLastLocation {
-    [timer invalidate];
-    
-    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
-    configuration.timeoutIntervalForRequest = 20;
-    
-    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
-    
-    // pass in last location
-    NSString *api = @"https://maps.googleapis.com/maps/api/directions/";
-    if (start == nil || [start isEqualToString:@""]) {
-        start = [NSString stringWithFormat:@"%f,%f", self.startLocation.latitude, self.startLocation.longitude];
-    }
-    else {
-        start = [NSString stringWithFormat:@"%F,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
-    }
-    NSString *end = [NSString stringWithFormat:@"%f,%f", self.lat, self.lng];
-    NSString *requestString = [NSString stringWithFormat:@"%@json?origin=%@&destination=%@&key=%@", api, start, end, GOOGLE_API_KEY];
-    
-    NSURL *URL = [NSURL URLWithString: requestString];
-    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
-    
-    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
-        if (error == nil) {
-            [self parseResponse:responseObject];
-        
-            NSLog(@"steps.count - %ld", (unsigned long)self.steps.count);
-            
-            [self setupViews];
-            
-            stepCount = 0;
-            
-            if (isReceivingLocation == false) {
-                [self loopThroughPathCoordinates];
-            }
-        }
-        else {
-            // handle error
-            NSLog(@"error - %@", error.debugDescription);
-        }
-    }] resume];
-}
-
-- (void)parseResponse:(NSDictionary *)response {
-    NSArray *routes = response[@"routes"];
-    NSDictionary *route = [routes firstObject];
-    
-    NSArray *legs = route[@"legs"];
-    NSDictionary *leg = [legs firstObject];
-    
-    self.routeDurationString = leg[@"duration"][@"text"];
-    
-    NSArray *steps = leg[@"steps"];
-    
-    if (self.steps.count != 0) {
-        [self.steps removeAllObjects];
-    }
-    
-    for (NSDictionary *stepDic in steps) {
-        if (stepDic) {
-            Step *step = [[Step alloc] initWithDictionary:stepDic];
-            [self.steps addObject:step];
-        }
-    }
-}
-
-- (void)loopThroughPathCoordinates {
-    if (stepCount < self.steps.count) {
-        
-        self.currentStep = self.steps[stepCount];
-        
-        pathCoordinatesCount = 0;
-        
-        speedFromPointToPoint = (float)self.currentStep.duration / (float)self.currentStep.pathCoordinates.count;
-        
-        timer = [NSTimer scheduledTimerWithTimeInterval:speedFromPointToPoint target:self selector:@selector(updatePathCoordinatesCount) userInfo:nil repeats:YES];
-    }
-}
-
-- (void)countSinceLastUpdate {
-    countSinceLastLocationUpdate++;
-    NSLog(@"countSinceLastLocationUpdate - %ld", countSinceLastLocationUpdate);
-    
-    if (countSinceLastLocationUpdate >= 10) {
-        isReceivingLocation = NO;
-        
-        if ([timerForLastLocationUpdate isValid] == false) {
-            [self getRouteFromLastLocation];
-            timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
-        }
-    }
-    else {
-        isReceivingLocation = YES;
-    }
-}
-
-- (void)updatePathCoordinatesCount {
-    
-    NSLog(@"speedFromPointToPoint - %f second(s)", speedFromPointToPoint);
-    
-    NSLog(@"step(%ld of %ld), pathCoordinate(%ld of %ld)", (long)stepCount, (unsigned long)self.steps.count, pathCoordinatesCount, (unsigned long)self.currentStep.pathCoordinates.count);
-    
-    if (pathCoordinatesCount < self.currentStep.pathCoordinates.count) {
-        
-        currentLocation = self.currentStep.pathCoordinates[pathCoordinatesCount];
-        
-        // turn fast (1 second)
-        [UIView animateWithDuration:1 animations:^{
-            CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
-            CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
-            double bearing = [stepStart bearingToLocation:stepEnd];
-            
-            self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
-        }];
-        
-        [UIView animateWithDuration:speedFromPointToPoint animations:^{
-            self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-//            [self.mapView showAnnotations:self.allAnnotations animated:YES];
-        }];
-    }
-    else {
-        [timer invalidate];
-        stepCount++;
-        [self loopThroughPathCoordinates];
-    }
-    
-    pathCoordinatesCount++;
-}
-
-- (void)updateLocation {
-    [UIView animateWithDuration:1 animations:^{
-        CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
-        CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
-        double bearing = [stepStart bearingToLocation:stepEnd];
-        
-        self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
-    }];
-    
-    [UIView animateWithDuration:speedFromPointToPoint animations:^{
-        self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-        //            [self.mapView showAnnotations:self.allAnnotations animated:YES];
-    }];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -305,10 +162,12 @@
                                                                         type:@"customer"];
             [self.allAnnotations addObject:self.customerAnnotation];
             
+
             self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Joseph"
                                                                    subtitle:[NSString stringWithFormat:@"ETA: %@", self.routeDurationString]
-                                                                 coordinate:self.startLocation
+                                                                 coordinate:CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude)
                                                                        type:@"driver"];
+            
             [self.allAnnotations addObject:self.driverAnnotation];
             
             [self.mapView addAnnotations:self.allAnnotations];
@@ -324,6 +183,145 @@
             // handler error
         }
     }];
+}
+
+# pragma mark Google Maps API
+
+- (void)getRouteFromLastLocation {
+    [timer invalidate];
+    
+    NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
+    configuration.timeoutIntervalForRequest = 20;
+    
+    AFURLSessionManager *manager = [[AFURLSessionManager alloc] initWithSessionConfiguration:configuration];
+    
+    // pass in last location
+    NSString *api = @"https://maps.googleapis.com/maps/api/directions/";
+    start = [NSString stringWithFormat:@"%f,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
+    
+    NSString *end = [NSString stringWithFormat:@"%f,%f", self.lat, self.lng];
+    NSString *requestString = [NSString stringWithFormat:@"%@json?origin=%@&destination=%@&key=%@", api, start, end, GOOGLE_API_KEY];
+    
+    NSURL *URL = [NSURL URLWithString: requestString];
+    NSURLRequest *request = [NSURLRequest requestWithURL:URL];
+    
+    [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
+        if (error == nil) {
+            [self parseResponse:responseObject];
+            
+            NSLog(@"steps.count - %ld", (unsigned long)self.steps.count);
+            
+            stepCount = 0;
+            
+            if (isReceivingLocation == NO) {
+                [self loopThroughPathCoordinates];
+            }
+        }
+        else {
+            // handle error
+            NSLog(@"error - %@", error.debugDescription);
+        }
+    }] resume];
+}
+
+- (void)parseResponse:(NSDictionary *)response {
+    NSArray *routes = response[@"routes"];
+    NSDictionary *route = [routes firstObject];
+    
+    NSArray *legs = route[@"legs"];
+    NSDictionary *leg = [legs firstObject];
+    
+    self.routeDurationString = leg[@"duration"][@"text"];
+    
+    NSLog(@"route duration string - %@", self.routeDurationString);
+    
+    NSArray *steps = leg[@"steps"];
+    
+    if (self.steps.count != 0) {
+        [self.steps removeAllObjects];
+    }
+    
+    for (NSDictionary *stepDic in steps) {
+        if (stepDic) {
+            Step *step = [[Step alloc] initWithDictionary:stepDic];
+            [self.steps addObject:step];
+        }
+    }
+    
+    [self deliveryState];
+}
+
+- (void)loopThroughPathCoordinates {
+    if (stepCount < self.steps.count) {
+        
+        self.currentStep = self.steps[stepCount];
+        
+        pathCoordinatesCount = 0;
+        
+        speedFromPointToPoint = (float)self.currentStep.duration / (float)self.currentStep.pathCoordinates.count;
+        
+        timer = [NSTimer scheduledTimerWithTimeInterval:speedFromPointToPoint target:self selector:@selector(updatePathCoordinatesCount) userInfo:nil repeats:YES];
+    }
+}
+
+- (void)updatePathCoordinatesCount {
+    
+    NSLog(@"speedFromPointToPoint - %f second(s)", speedFromPointToPoint);
+    
+    NSLog(@"step(%ld of %ld), pathCoordinate(%ld of %ld)", (long)stepCount, (unsigned long)self.steps.count, pathCoordinatesCount, (unsigned long)self.currentStep.pathCoordinates.count);
+    
+    if (pathCoordinatesCount < self.currentStep.pathCoordinates.count) {
+        
+        currentLocation = self.currentStep.pathCoordinates[pathCoordinatesCount];
+        
+        // turn fast (1 second)
+        [UIView animateWithDuration:1 animations:^{
+            CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
+            CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+            double bearing = [stepStart bearingToLocation:stepEnd];
+            
+            self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
+        }];
+        
+        [UIView animateWithDuration:speedFromPointToPoint animations:^{
+            self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+        }];
+    }
+    else {
+        [timer invalidate];
+        stepCount++;
+        [self loopThroughPathCoordinates];
+    }
+    
+    pathCoordinatesCount++;
+}
+
+# pragma mark
+
+- (void)updateLocation {
+    [UIView animateWithDuration:1 animations:^{
+        CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
+        CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+        double bearing = [stepStart bearingToLocation:stepEnd];
+        
+        self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
+    }];
+    
+    [UIView animateWithDuration:speedFromPointToPoint animations:^{
+        self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+    }];
+}
+
+- (void)countSinceLastUpdate {
+    countSinceLastLocationUpdate++;
+//    NSLog(@"countSinceLastLocationUpdate - %ld", countSinceLastLocationUpdate);
+    
+    if (countSinceLastLocationUpdate >= 10) {
+        isReceivingLocation = NO;
+    }
+    else {
+        isReceivingLocation = YES;
+    }
 }
 
 #pragma mark MKMapViewDelegate
@@ -400,13 +398,27 @@
 }
 
 - (void)socketHandlerDidAuthenticate {
-    
+    [[SocketHandler sharedSocket] getLastSavedLocation];
 }
 
 - (void)socketHandlerDidGetLastSavedLocation:(float)lat and:(float)lng {
-    self.startLocation = CLLocationCoordinate2DMake(lat, lng);
-
-    [self deliveryState];
+    
+    if (self.loadingHud != nil) {
+        [self dismissHUD];
+    }
+    
+    if (currentLocation == nil) {
+        currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+    }
+    
+    if (timerForGoogleMapsAPI == nil) {
+        [self getRouteFromLastLocation];
+        timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
+    }
+    else {
+        [self deliveryState];
+    }
+    
 }
 
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
@@ -415,6 +427,7 @@
         countSinceLastLocationUpdate = 0;
         
         currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+        
         [self updateLocation];
     }
 }
@@ -445,8 +458,6 @@
                 self.mapView.zoomEnabled = YES;
                 self.mapView.scrollEnabled = YES;
                 
-                [[SocketHandler sharedSocket] getLastSavedLocation];
-                
                 if (timerForLastLocationUpdate == nil) {
                     timerForLastLocationUpdate = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countSinceLastUpdate) userInfo:nil repeats:YES];
                 }
@@ -460,15 +471,19 @@
                 else if (self.orderStatus == Arrived) {
                     [self pickupState];
                 }
+                
+                [self dismissHUD];
             }
-            
-            [self.loadingHud stopAnimating];
-            self.loadingHud.hidden = YES;
         }
         else {
             // handle error
         }
     }];
+}
+
+- (void)dismissHUD {
+    [self.loadingHud stopAnimating];
+    self.loadingHud.hidden = YES;
 }
 
 - (BOOL)shouldRemoveOrder:(id)responseDic {
@@ -545,9 +560,12 @@
 
 - (void)deliveryState {
     
-    self.endLocation = CLLocationCoordinate2DMake(self.lat, self.lng);
+    if (hasSetUpMap == NO) {
+        hasSetUpMap = YES;
+        self.endLocation = CLLocationCoordinate2DMake(self.lat, self.lng);
     
-    [self setupMap];
+        [self setupMap];
+    }
     
     // turn on
     self.prepLabel.textColor = [UIColor bentoBrandGreen];
