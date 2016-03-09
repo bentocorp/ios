@@ -65,6 +65,8 @@
     NSTimer *timerForGoogleMapsAPI;
     
     BOOL hasSetUpMap;
+    
+    BOOL locationReceptionChanged;
 }
 
 - (void)viewDidLoad {
@@ -102,6 +104,12 @@
     
     [timerForLastLocationUpdate invalidate];
     timerForLastLocationUpdate = nil;
+    
+    [timerForSpeedFromPointToPoint invalidate];
+    timerForSpeedFromPointToPoint = nil;
+    
+    [timerForGoogleMapsAPI invalidate];
+    timerForGoogleMapsAPI = nil;
     
     [timerForSpeedFromPointToPoint invalidate];
     timerForSpeedFromPointToPoint = nil;
@@ -332,13 +340,20 @@
 
 - (void)countSinceLastUpdate {
     countSinceLastLocationUpdate++;
-//    NSLog(@"countSinceLastLocationUpdate - %ld", countSinceLastLocationUpdate);
+    NSLog(@"countSinceLastLocationUpdate - %ld", countSinceLastLocationUpdate);
     
     if (countSinceLastLocationUpdate >= 10) {
         isReceivingLocation = NO;
+        
+        locationReceptionChanged = YES;
     }
     else {
         isReceivingLocation = YES;
+        
+        if (locationReceptionChanged) {
+            locationReceptionChanged = NO;
+            [self getRouteFromLastLocation];
+        }
     }
 }
 
