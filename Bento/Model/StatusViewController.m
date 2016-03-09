@@ -336,11 +336,6 @@
     
     if (countSinceLastLocationUpdate >= 10) {
         isReceivingLocation = NO;
-        
-        if (timerForGoogleMapsAPI == nil) {
-            [self getRouteFromLastLocation];
-            timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
-        }
     }
     else {
         isReceivingLocation = YES;
@@ -455,9 +450,6 @@
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.orderStatus == Enroute) {
-            
-            [timerForGoogleMapsAPI invalidate];
-            timerForGoogleMapsAPI = nil;
             
             [timerForSpeedFromPointToPoint invalidate];
             timerForSpeedFromPointToPoint = nil;
