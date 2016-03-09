@@ -66,7 +66,8 @@
     
     BOOL hasSetUpMap;
     
-    BOOL locationReceptionChanged;
+    BOOL locationReceptionChangedToGoogleMaps;
+    BOOL locationReceiptionChangedToNode;
 }
 
 - (void)viewDidLoad {
@@ -345,13 +346,20 @@
     if (countSinceLastLocationUpdate >= 10) {
         isReceivingLocation = NO;
         
-        locationReceptionChanged = YES;
+        locationReceptionChangedToGoogleMaps = YES;
+        
+        if (locationReceiptionChangedToNode) {
+            locationReceiptionChangedToNode = NO;
+            [self getRouteFromLastLocation];
+        }
     }
     else {
         isReceivingLocation = YES;
         
-        if (locationReceptionChanged) {
-            locationReceptionChanged = NO;
+        locationReceiptionChangedToNode = YES;
+        
+        if (locationReceptionChangedToGoogleMaps) {
+            locationReceptionChangedToGoogleMaps = NO;
             [self getRouteFromLastLocation];
         }
     }
