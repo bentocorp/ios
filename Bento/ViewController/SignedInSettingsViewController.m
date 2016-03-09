@@ -725,7 +725,7 @@
     MFMessageComposeViewController *messageController = [[MFMessageComposeViewController alloc] init];
     messageController.messageComposeDelegate = self;
     
-    [messageController setBody:[NSString stringWithFormat:@"Use my Bento promo code, %@, and get $5 off your first delicious Bento meal. Install the app here: http://apple.co/1FPEbWY", couponCodeString]];
+    [messageController setBody:sharePrecomposedMessageNew];
     
     // Present message view controller on screen
     [self presentViewController:messageController animated:YES completion:nil];
