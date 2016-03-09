@@ -341,7 +341,7 @@
 
 - (void)countSinceLastUpdate {
     countSinceLastLocationUpdate++;
-    NSLog(@"countSinceLastLocationUpdate - %ld", countSinceLastLocationUpdate);
+//    NSLog(@"countSinceLastLocationUpdate - %ld", countSinceLastLocationUpdate);
     
     if (countSinceLastLocationUpdate >= 10) {
         isReceivingLocation = NO;
@@ -514,6 +514,10 @@
                     
                     if (timerForLastLocationUpdate == nil) {
                         timerForLastLocationUpdate = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countSinceLastUpdate) userInfo:nil repeats:YES];
+                    }
+                    
+                    if (currentLocation != nil) {
+                        [self deliveryState];
                     }
                 }
                 else {

@@ -119,6 +119,8 @@
         
         NSLog(@"push data - %@", json);
         
+        // decided not to use push to check for order status because im already polling order history to get status
+        
 //        if (data.subject == "OrderAccepted") { // delivery
 //            [self requestToTrackDriver];
 //        }

@@ -1106,7 +1106,7 @@ static OrderAheadMenu *orderAheadMenu;
     
     // sort prices, lowest first
     NSArray *sortedMainPrices = [mainPrices sortedArrayUsingDescriptors: @[[NSSortDescriptor sortDescriptorWithKey:@"doubleValue"ascending:YES]]];
-    NSLog(@"main prices: %@", sortedMainPrices);
+//    NSLog(@"main prices: %@", sortedMainPrices);
     
     // get and then check if cents are 0
     double integral;
