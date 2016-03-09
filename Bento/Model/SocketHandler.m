@@ -57,6 +57,8 @@
     
     [self.socket on:@"disconnect" callback:^(NSArray *data, SocketAckEmitter *ack) {
         NSLog(@"disconnect triggered - %@", data);
+        
+        [self.delegate socketHandlerDidDisconnect];
     }];
     
     [self.socket on:@"error" callback:^(NSArray *data, SocketAckEmitter *ack) {
@@ -234,6 +236,7 @@
 #pragma mark Disconnect
 - (void)closeSocket {
     NSLog(@"close socket");
+    
     [self.socket removeAllHandlers];
     [self.socket disconnect];
 }

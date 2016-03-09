@@ -40,6 +40,8 @@
 @property (nonatomic) CLLocationCoordinate2D endLocation;
 @property (nonatomic) NSString *routeDurationString;
 
+@property (nonatomic) BOOL purposefullyDisconnected;
+
 @end
 
 @implementation StatusViewController
@@ -150,33 +152,35 @@
     [SVGeocoder reverseGeocode:self.endLocation completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil && placemarks.count > 0) {
             
-            self.placeInfo = [placemarks firstObject];
-            
-            self.allAnnotations = [[NSMutableArray alloc] init];
-            
-            
-            
-            self.customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
-                                                                    subtitle:[NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare]
-                                                                  coordinate:self.endLocation
-                                                                        type:@"customer"];
-            [self.allAnnotations addObject:self.customerAnnotation];
-            
-
-            self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Joseph"
-                                                                   subtitle:[NSString stringWithFormat:@"ETA: %@", self.routeDurationString]
-                                                                 coordinate:CLLocationCoordinate2DMake(driverLat, driverLng)
-                                                                       type:@"driver"];
-            
-            [self.allAnnotations addObject:self.driverAnnotation];
-            
-            [self.mapView addAnnotations:self.allAnnotations];
-            
-            [self.mapView selectAnnotation:self.driverAnnotation animated:YES];
-            
             if (loadedOnce == NO) {
                 loadedOnce = YES;
+            
+                self.placeInfo = [placemarks firstObject];
+                
+                self.allAnnotations = [[NSMutableArray alloc] init];
+                
+                self.customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
+                                                                        subtitle:[NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare]
+                                                                      coordinate:self.endLocation
+                                                                            type:@"customer"];
+                [self.allAnnotations addObject:self.customerAnnotation];
+                
+
+                self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Joseph"
+                                                                       subtitle:[NSString stringWithFormat:@"ETA: %@", self.routeDurationString]
+                                                                     coordinate:CLLocationCoordinate2DMake(driverLat, driverLng)
+                                                                           type:@"driver"];
+                
+                [self.allAnnotations addObject:self.driverAnnotation];
+                
+                [self.mapView addAnnotations:self.allAnnotations];
+            
+            
+                [self.mapView selectAnnotation:self.driverAnnotation animated:YES];
                 [self.mapView showAnnotations:self.allAnnotations animated:NO];
+            }
+            else {
+                self.driverAnnotation.subtitle = [NSString stringWithFormat:@"ETA: %@", self.routeDurationString];
             }
         }
         else {
@@ -295,6 +299,7 @@
         
         [UIView animateWithDuration:speedFromPointToPoint animations:^{
             self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+            [self.mapView showAnnotations:self.allAnnotations animated:YES];
         }];
     }
     else {
@@ -317,8 +322,9 @@
         self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
     }];
     
-    [UIView animateWithDuration:speedFromPointToPoint animations:^{
+    [UIView animateWithDuration:5 animations:^{
         self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+        [self.mapView showAnnotations:self.allAnnotations animated:YES];
     }];
 }
 
@@ -328,6 +334,11 @@
     
     if (countSinceLastLocationUpdate >= 10) {
         isReceivingLocation = NO;
+        
+        if (timerForGoogleMapsAPI == nil) {
+            [self getRouteFromLastLocation];
+            timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
+        }
     }
     else {
         isReceivingLocation = YES;
@@ -374,11 +385,15 @@
 #pragma mark Navigation
 
 - (IBAction)backButtonPressed:(id)sender {
+    self.purposefullyDisconnected = YES;
+    
     [self closeSocket];
     [self goBack];
 }
 
 - (IBAction)buildAnotherBentoButtonPressed:(id)sender {
+    self.purposefullyDisconnected = YES;
+    
     [self closeSocket];
     [self dismissViewControllerAnimated:YES completion:nil];
 }
@@ -390,6 +405,8 @@
 #pragma mark SocketHandlerDelegate
 
 - (void)connectToNode {
+    self.purposefullyDisconnected = NO;
+    
     NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
     NSString *username = userInfo[@"email"];
     NSString *tokenString = [[DataManager shareDataManager] getAPIToken];
@@ -399,6 +416,12 @@
 
 - (void)socketHandlerDidConnect {
     
+}
+
+- (void)socketHandlerDidDisconnect {
+    if (self.purposefullyDisconnected == false) {
+        [self connectToNode];
+    }
 }
 
 - (void)socketHandlerDidAuthenticate {
@@ -431,6 +454,9 @@
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.orderStatus == Enroute) {
             
+            [timerForGoogleMapsAPI invalidate];
+            timerForGoogleMapsAPI = nil;
+            
             countSinceLastLocationUpdate = 0;
             
             currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
@@ -454,34 +480,35 @@
     [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
         
         if (error == nil) {
-
-            // uncomment this later
-            if ([self shouldRemoveOrder:responseDic]) {
-                [self goBack];
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
             
-            if (self.orderStatus == Enroute) {
-                self.mapView.delegate = self;
-                self.mapView.mapType = MKMapTypeStandard;
-                self.mapView.zoomEnabled = YES;
-                self.mapView.scrollEnabled = YES;
-                
-                if (timerForLastLocationUpdate == nil) {
-                    timerForLastLocationUpdate = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countSinceLastUpdate) userInfo:nil repeats:YES];
-                }
-            }
-            else {
-                [[SocketHandler sharedSocket] untrack];
-                
-                if (self.orderStatus == Assigned) {
-                    [self prepState];
-                }
-                else if (self.orderStatus == Arrived) {
-                    [self pickupState];
+                if ([self shouldRemoveOrder:responseDic]) {
+                    [self goBack];
                 }
                 
-                [self dismissHUD];
-            }
+                if (self.orderStatus == Enroute) {
+                    self.mapView.delegate = self;
+                    self.mapView.mapType = MKMapTypeStandard;
+                    self.mapView.zoomEnabled = YES;
+                    self.mapView.scrollEnabled = YES;
+                    
+                    if (timerForLastLocationUpdate == nil) {
+                        timerForLastLocationUpdate = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countSinceLastUpdate) userInfo:nil repeats:YES];
+                    }
+                }
+                else {
+                    [[SocketHandler sharedSocket] untrack];
+                    
+                    if (self.orderStatus == Assigned) {
+                        [self prepState];
+                    }
+                    else if (self.orderStatus == Arrived) {
+                        [self pickupState];
+                    }
+                    
+                    [self dismissHUD];
+                }
+            });
         }
         else {
             // handle error
