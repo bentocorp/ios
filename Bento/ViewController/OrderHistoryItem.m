@@ -12,8 +12,21 @@
 
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if (self = [super init]) {
-        self.title = dictionary[@"title"];
-        self.price = dictionary[@"price"];
+        
+        if ([dictionary[@"title"] isEqual:[NSNull null]] == false) {
+            self.title = dictionary[@"title"];
+        }
+        else {
+            self.title = nil;
+        }
+        
+        if ([dictionary[@"price"] isEqual:[NSNull null]] == false) {
+            self.price = dictionary[@"price"];
+        }
+        else {
+            self.price = nil;
+        }
+        
         self.orderId = [@([dictionary[@"orderId"] intValue]) stringValue];
         self.orderStatus = [self setEnumStatus:dictionary[@"order_status"]];
         

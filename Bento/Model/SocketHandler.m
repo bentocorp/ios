@@ -115,7 +115,7 @@
         NSData *objectData = [jsonString dataUsingEncoding:NSUTF8StringEncoding];
         NSDictionary *json = [NSJSONSerialization JSONObjectWithData:objectData options:NSJSONReadingMutableContainers error:&jsonError];
         
-        NSLog(@"loc data - %@", json);
+        NSLog(@"push data - %@", json);
         
 //        if (data.subject == "OrderAccepted") { // delivery
 //            [self requestToTrackDriver];

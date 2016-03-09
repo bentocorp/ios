@@ -248,7 +248,9 @@
         }
     }
     
-    [self deliveryState];
+    if (isReceivingLocation) {
+        [self deliveryState];
+    }
 }
 
 - (void)loopThroughPathCoordinates {
@@ -398,7 +400,9 @@
 }
 
 - (void)socketHandlerDidAuthenticate {
-    [[SocketHandler sharedSocket] getLastSavedLocation];
+    if (self.orderStatus == Enroute) {
+        [[SocketHandler sharedSocket] getLastSavedLocation];
+    }
 }
 
 - (void)socketHandlerDidGetLastSavedLocation:(float)lat and:(float)lng {
@@ -418,7 +422,6 @@
     else {
         [self deliveryState];
     }
-    
 }
 
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
@@ -448,9 +451,9 @@
         if (error == nil) {
 
             // uncomment this later
-//            if ([self shouldRemoveOrder:responseDic]) {
-//                [self goBack];
-//            }
+            if ([self shouldRemoveOrder:responseDic]) {
+                [self goBack];
+            }
             
             if (self.orderStatus == Enroute) {
                 self.mapView.delegate = self;
