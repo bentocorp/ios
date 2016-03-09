@@ -146,7 +146,7 @@
     self.dotView9.layer.masksToBounds = YES;
 }
 
-- (void)setupMap {
+- (void)setupMapWithDriverLat:(float)driverLat lng:(float)driverLng {
     [SVGeocoder reverseGeocode:self.endLocation completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil && placemarks.count > 0) {
             
@@ -165,7 +165,7 @@
 
             self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Joseph"
                                                                    subtitle:[NSString stringWithFormat:@"ETA: %@", self.routeDurationString]
-                                                                 coordinate:CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude)
+                                                                 coordinate:CLLocationCoordinate2DMake(driverLat, driverLng)
                                                                        type:@"driver"];
             
             [self.allAnnotations addObject:self.driverAnnotation];
@@ -189,6 +189,7 @@
 
 - (void)getRouteFromLastLocation {
     [timer invalidate];
+    timer = nil;
     
     NSURLSessionConfiguration *configuration = [NSURLSessionConfiguration defaultSessionConfiguration];
     configuration.timeoutIntervalForRequest = 20;
@@ -207,15 +208,19 @@
     
     [[manager dataTaskWithRequest:request completionHandler:^(NSURLResponse *response, id responseObject, NSError *error) {
         if (error == nil) {
-            [self parseResponse:responseObject];
-            
-            NSLog(@"steps.count - %ld", (unsigned long)self.steps.count);
-            
-            stepCount = 0;
-            
-            if (isReceivingLocation == NO) {
-                [self loopThroughPathCoordinates];
-            }
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [self parseResponse:responseObject];
+                
+                NSLog(@"steps.count - %ld", (unsigned long)self.steps.count);
+                
+                [self setupMapWithDriverLat:currentLocation.coordinate.latitude lng:currentLocation.coordinate.longitude];
+                
+                stepCount = 0;
+                
+                if (isReceivingLocation == NO) {
+                    [self loopThroughPathCoordinates];
+                }
+            });
         }
         else {
             // handle error
@@ -261,8 +266,11 @@
         pathCoordinatesCount = 0;
         
         speedFromPointToPoint = (float)self.currentStep.duration / (float)self.currentStep.pathCoordinates.count;
-        
-        timer = [NSTimer scheduledTimerWithTimeInterval:speedFromPointToPoint target:self selector:@selector(updatePathCoordinatesCount) userInfo:nil repeats:YES];
+
+        dispatch_async(dispatch_get_main_queue(), ^{
+            timer = [NSTimer scheduledTimerWithTimeInterval:speedFromPointToPoint target:self selector:@selector(updatePathCoordinatesCount) userInfo:nil repeats:YES];
+            [timer fire];
+        });
     }
 }
 
@@ -330,11 +338,7 @@
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
-    // set reuse identifier
     NSString *annotationIdentifier = @"CustomViewAnnotation";
-    
-    // not reusing because 1) there's not going to be many annotations to begin with, 2) it's causing the annotations to switch with each other
-    //    CustomAnnotationView *customAnnotationView = (CustomAnnotationView *)[self.mapView dequeueReusableAnnotationViewWithIdentifier:annotationIdentifier];
     
     CustomAnnotationView *customerAnnotationView;
     
@@ -357,8 +361,6 @@
             self.driverAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
                                                                              reuseIdentifier:annotationIdentifier
                                                                          annotationViewImage:[UIImage imageNamed:@"car"]];
-            
-            
         }
         
         self.driverAnnotationView.canShowCallout = YES;
@@ -406,33 +408,36 @@
 }
 
 - (void)socketHandlerDidGetLastSavedLocation:(float)lat and:(float)lng {
-    
-    if (self.loadingHud != nil) {
-        [self dismissHUD];
-    }
-    
-    if (currentLocation == nil) {
-        currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-    }
-    
-    if (timerForGoogleMapsAPI == nil) {
-        [self getRouteFromLastLocation];
-        timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
-    }
-    else {
-        [self deliveryState];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.loadingHud != nil) {
+            [self dismissHUD];
+        }
+        
+        if (currentLocation == nil) {
+            currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+        }
+        
+        if (timerForGoogleMapsAPI == nil) {
+            [self getRouteFromLastLocation];
+            timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:10 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
+        }
+        else {
+            [self deliveryState];
+        }
+    });
 }
 
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng {
-    if (self.orderStatus == Enroute) {
-        
-        countSinceLastLocationUpdate = 0;
-        
-        currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-        
-        [self updateLocation];
-    }
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.orderStatus == Enroute) {
+            
+            countSinceLastLocationUpdate = 0;
+            
+            currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
+            
+            [self updateLocation];
+        }
+    });
 }
 
 - (void)closeSocket {
@@ -567,7 +572,7 @@
         hasSetUpMap = YES;
         self.endLocation = CLLocationCoordinate2DMake(self.lat, self.lng);
     
-        [self setupMap];
+        [self setupMapWithDriverLat:currentLocation.coordinate.latitude lng:currentLocation.coordinate.longitude];
     }
     
     // turn on

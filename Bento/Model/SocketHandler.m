@@ -40,7 +40,7 @@
     
     [self configureHandlers];
     
-    [self.socket connectWithTimeoutAfter:10 withTimeoutHandler:^{
+    [self.socket connectWithTimeoutAfter:60 withTimeoutHandler:^{
         NSLog(@"connect timed out");
     }];
 }
