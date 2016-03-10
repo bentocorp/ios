@@ -8,6 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
+typedef enum : NSInteger {
+    First,
+    Random,
+    UseDefault
+} DefaultTimeMode;
+
 @interface OrderAheadMenu : NSObject
 
 @property (nonatomic) NSArray *rawTimeRangesArray;
@@ -31,7 +37,7 @@
 @property (nonatomic) NSString *scheduledWindowEndTime;
 @property (nonatomic) NSString *deliveryPrice;
 
-@property (nonatomic) NSString *defaultTimeMode;
+@property (nonatomic) DefaultTimeMode defaultTimeMode;
 
 - (id)initWithDictionary:(NSDictionary *)menu;
 

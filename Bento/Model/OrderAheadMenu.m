@@ -37,7 +37,7 @@
         
         self.rawTimeRangesArray = menu[@"Times"];
         
-        self.defaultTimeMode = menu[@"DefaultTimeMode"];
+        self.defaultTimeMode = [self setEnumStatus:menu[@"DefaultTimeMode"]];
     }
     
     return self;
@@ -257,6 +257,24 @@
     }
     
     return nil;
+}
+
+- (DefaultTimeMode)setEnumStatus: (NSString *)statusString {
+    
+    NSString *lowerCaseTypeString = [statusString lowercaseString];
+    
+    NSArray *statuses = @[@"first", @"random", @"usedefault"];
+    
+    NSInteger status = [statuses indexOfObject:lowerCaseTypeString];
+    
+    switch (status) {
+        case 0:
+            return First;
+        case 1:
+            return Random;
+        default:
+            return UseDefault;
+    }
 }
 
 @end
