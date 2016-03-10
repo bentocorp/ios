@@ -291,6 +291,7 @@
     statusVC.orderId = orderHistoryItem.orderId;
     statusVC.orderStatus = orderHistoryItem.orderStatus;
     statusVC.driverId = orderHistoryItem.driverId;
+    statusVC.driverName = orderHistoryItem.driverName;
     statusVC.lat = orderHistoryItem.lat;
     statusVC.lng = orderHistoryItem.lng;
     

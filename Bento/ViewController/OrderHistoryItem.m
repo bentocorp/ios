@@ -13,14 +13,14 @@
 - (id)initWithDictionary:(NSDictionary *)dictionary {
     if (self = [super init]) {
         
-        if ([dictionary[@"title"] isEqual:[NSNull null]] == false) {
+        if ([dictionary[@"title"] isEqual:[NSNull null]] == NO) {
             self.title = dictionary[@"title"];
         }
         else {
             self.title = nil;
         }
         
-        if ([dictionary[@"price"] isEqual:[NSNull null]] == false) {
+        if ([dictionary[@"price"] isEqual:[NSNull null]] == NO) {
             self.price = dictionary[@"price"];
         }
         else {
@@ -30,8 +30,12 @@
         self.orderId = [@([dictionary[@"orderId"] intValue]) stringValue];
         self.orderStatus = [self setEnumStatus:dictionary[@"order_status"]];
         
-        if (dictionary[@"driverId"] != nil && [dictionary[@"driverId"] isEqual:[NSNull null]] == NO) {
+        if ([dictionary[@"driverId"] isEqual:[NSNull null]] == NO) {
             self.driverId = [@([dictionary[@"driverId"] intValue]) stringValue];
+        }
+        
+        if ([dictionary[@"driverName"] isEqual:[NSNull null]]) {
+            self.driverName = dictionary[@"driverName"];
         }
         
         self.lat = [dictionary[@"lat"] floatValue];

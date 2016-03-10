@@ -22,6 +22,7 @@ typedef enum : NSInteger {
 @property (nonatomic) NSString *orderId;
 @property (nonatomic) OrderStatus orderStatus;
 @property (nonatomic) NSString *driverId;
+@property (nonatomic) NSString *driverName;
 @property (nonatomic) float lat;
 @property (nonatomic) float lng;
 

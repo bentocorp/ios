@@ -402,11 +402,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/Model/StatusViewController.m"
-            timestampString = "479261298.292179"
+            timestampString = "479263246.474017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "296"
-            endingLineNumber = "296"
+            startingLineNumber = "299"
+            endingLineNumber = "299"
             landmarkName = "-updatePathCoordinatesCount"
             landmarkType = "5">
          </BreakpointContent>
@@ -418,11 +418,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bento/Model/StatusViewController.m"
-            timestampString = "479261307.342884"
+            timestampString = "479263246.474017"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "480"
-            endingLineNumber = "480"
+            startingLineNumber = "485"
+            endingLineNumber = "485"
             landmarkName = "-socketHandlerDidUpdateLocationWith:and:"
             landmarkType = "5">
          </BreakpointContent>

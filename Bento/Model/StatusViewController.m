@@ -173,7 +173,7 @@
                 [self.allAnnotations addObject:self.customerAnnotation];
                 
 
-                self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Joseph"
+                self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:self.driverName
                                                                        subtitle:[NSString stringWithFormat:@"ETA: %@", self.routeDurationString]
                                                                      coordinate:CLLocationCoordinate2DMake(driverLat, driverLng)
                                                                            type:@"driver"];
@@ -181,7 +181,6 @@
                 [self.allAnnotations addObject:self.driverAnnotation];
                 
                 [self.mapView addAnnotations:self.allAnnotations];
-            
             
                 [self.mapView selectAnnotation:self.driverAnnotation animated:YES];
                 [self.mapView showAnnotations:self.allAnnotations animated:NO];
@@ -222,14 +221,16 @@
             dispatch_async(dispatch_get_main_queue(), ^{
                 [self parseResponse:responseObject];
                 
-                NSLog(@"steps.count - %ld", (unsigned long)self.steps.count);
-                
-                [self setupMapWithDriverLat:currentLocation.coordinate.latitude lng:currentLocation.coordinate.longitude];
-                
-                stepCount = 0;
-                
-                if (isReceivingLocation == NO) {
-                    [self loopThroughPathCoordinates];
+                if (self.orderStatus == Enroute) {
+                    NSLog(@"steps.count - %ld", (unsigned long)self.steps.count);
+                    
+                    [self setupMapWithDriverLat:currentLocation.coordinate.latitude lng:currentLocation.coordinate.longitude];
+                    
+                    stepCount = 0;
+                    
+                    if (isReceivingLocation == NO) {
+                        [self loopThroughPathCoordinates];
+                    }
                 }
             });
         }
@@ -264,8 +265,10 @@
         }
     }
     
-    if (isReceivingLocation) {
-        [self deliveryState];
+    if (self.orderStatus == Enroute) {
+        if (isReceivingLocation) {
+            [self deliveryState];
+        }
     }
 }
 
