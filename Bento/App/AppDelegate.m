@@ -156,7 +156,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         
         if ([params[@"$marketing_title"] isEqualToString:@"Deep Link to Orders Screen"]) {
             if ([[DataManager shareDataManager] getUserInfo] != nil) {
-                [[NSNotificationCenter defaultCenter] postNotificationName:@"didPopBackFromViewAllOrdersButton" object:nil];
+                [NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(didDeepLink) userInfo:nil repeats:NO];
             }
         }
         
@@ -230,6 +230,10 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     });
     
     return [[FBSDKApplicationDelegate sharedInstance] application:application didFinishLaunchingWithOptions:launchOptions];
+}
+
+- (void)didDeepLink {
+    [[NSNotificationCenter defaultCenter] postNotificationName:@"didPopBackFromViewAllOrdersButton" object:nil];
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application

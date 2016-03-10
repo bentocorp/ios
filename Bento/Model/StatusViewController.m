@@ -29,6 +29,7 @@
 @interface StatusViewController () <MKMapViewDelegate, SocketHandlerDelegate>
 
 @property (nonatomic) SVPlacemark *placeInfo;
+
 @property (nonatomic) CustomAnnotation *customerAnnotation;
 @property (nonatomic) CustomAnnotation *driverAnnotation;
 @property (nonatomic) CustomAnnotationView *driverAnnotationView;
@@ -36,38 +37,31 @@
 
 @property (nonatomic) NSMutableArray *steps;
 @property (nonatomic) Step *currentStep;
-
 @property (nonatomic) CLLocationCoordinate2D endLocation;
 @property (nonatomic) NSString *routeDurationString;
-
-@property (nonatomic) BOOL purposefullyDisconnected;
 
 @end
 
 @implementation StatusViewController
 {
+    NSTimer *timerForLastLocationUpdate;
+    NSTimer *timerForGoogleMapsAPI;
+    NSTimer *timerForSpeedFromPointToPoint;
+    
     CLLocation *currentLocation;
     
     NSInteger stepCount;
     NSInteger pathCoordinatesCount;
-    NSTimer *timerForSpeedFromPointToPoint;
-    float speedFromPointToPoint;
-    
-    NSString *start;
-    
-    BOOL loadedOnce;
-    
-    
-    NSTimer *timerForLastLocationUpdate;
-    BOOL isReceivingLocation;
     NSInteger countSinceLastLocationUpdate;
     
-    NSTimer *timerForGoogleMapsAPI;
+    float speedFromPointToPoint;
     
-    BOOL hasSetUpMap;
-    
-    BOOL locationReceptionChangedToGoogleMaps;
-    BOOL locationReceiptionChangedToNode;
+    BOOL didloadOnce;
+    BOOL didSetupMap;
+    BOOL isReceivingLocation;
+    BOOL didLocationReceptionChangedToGoogleMaps;
+    BOOL didLocationReceptionChangedToNode;
+    BOOL didDisconnectOnPurpose;
 }
 
 - (void)viewDidLoad {
@@ -94,6 +88,7 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToNode) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSocket) name:@"enteringBackground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimers) name:@"enteringBackground" object:nil];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
@@ -101,6 +96,10 @@
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
+    [self stopTimers];
+}
+
+- (void)stopTimers {
     [timerForLastLocationUpdate invalidate];
     timerForLastLocationUpdate = nil;
     
@@ -109,9 +108,6 @@
     
     [timerForGoogleMapsAPI invalidate];
     timerForGoogleMapsAPI = nil;
-    
-    [timerForSpeedFromPointToPoint invalidate];
-    timerForSpeedFromPointToPoint = nil;
 }
 
 - (void)setupViews {
@@ -159,8 +155,8 @@
     [SVGeocoder reverseGeocode:self.endLocation completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
         if (error == nil && placemarks.count > 0) {
             
-            if (loadedOnce == NO) {
-                loadedOnce = YES;
+            if (didloadOnce == NO) {
+                didloadOnce = YES;
             
                 self.placeInfo = [placemarks firstObject];
                 
@@ -208,7 +204,7 @@
     
     // pass in last location
     NSString *api = @"https://maps.googleapis.com/maps/api/directions/";
-    start = [NSString stringWithFormat:@"%f,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
+    NSString * start = [NSString stringWithFormat:@"%f,%f", currentLocation.coordinate.latitude, currentLocation.coordinate.longitude];
     
     NSString *end = [NSString stringWithFormat:@"%f,%f", self.lat, self.lng];
     NSString *requestString = [NSString stringWithFormat:@"%@json?origin=%@&destination=%@&key=%@", api, start, end, GOOGLE_API_KEY];
@@ -347,20 +343,20 @@
     if (countSinceLastLocationUpdate >= 10) {
         isReceivingLocation = NO;
         
-        locationReceptionChangedToGoogleMaps = YES;
+        didLocationReceptionChangedToGoogleMaps = YES;
         
-        if (locationReceiptionChangedToNode) {
-            locationReceiptionChangedToNode = NO;
+        if (didLocationReceptionChangedToNode) {
+            didLocationReceptionChangedToNode = NO;
             [self getRouteFromLastLocation];
         }
     }
     else {
         isReceivingLocation = YES;
         
-        locationReceiptionChangedToNode = YES;
+        didLocationReceptionChangedToNode = YES;
         
-        if (locationReceptionChangedToGoogleMaps) {
-            locationReceptionChangedToGoogleMaps = NO;
+        if (didLocationReceptionChangedToGoogleMaps) {
+            didLocationReceptionChangedToGoogleMaps = NO;
             [self getRouteFromLastLocation];
         }
     }
@@ -406,14 +402,14 @@
 #pragma mark Navigation
 
 - (IBAction)backButtonPressed:(id)sender {
-    self.purposefullyDisconnected = YES;
+    didDisconnectOnPurpose = YES;
     
     [self closeSocket];
     [self goBack];
 }
 
 - (IBAction)buildAnotherBentoButtonPressed:(id)sender {
-    self.purposefullyDisconnected = YES;
+    didDisconnectOnPurpose = YES;
     
     [self closeSocket];
     [self dismissViewControllerAnimated:YES completion:nil];
@@ -426,7 +422,7 @@
 #pragma mark SocketHandlerDelegate
 
 - (void)connectToNode {
-    self.purposefullyDisconnected = NO;
+    didDisconnectOnPurpose = NO;
     
     NSDictionary *userInfo = [[DataManager shareDataManager] getUserInfo];
     NSString *username = userInfo[@"email"];
@@ -440,7 +436,7 @@
 }
 
 - (void)socketHandlerDidDisconnect {
-    if (self.purposefullyDisconnected == false) {
+    if (didDisconnectOnPurpose == false) {
         [self connectToNode];
     }
 }
