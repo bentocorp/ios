@@ -464,9 +464,10 @@
             [self dismissHUD];
         }
         
-        if (currentLocation == nil) {
+        // edit: restart current location to use last saved from gloc
+//        if (currentLocation == nil) {
             currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
-        }
+//        }
         
         // call at least once to get ETA
         [self getRouteFromLastLocation];
@@ -654,6 +655,7 @@
 #pragma mark Timers
 
 - (void)stopTimers {
+    NSLog(@"stop timers");
     [timerForLastLocationUpdate invalidate];
     timerForLastLocationUpdate = nil;
     

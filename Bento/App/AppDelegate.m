@@ -155,9 +155,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
         NSLog(@"deep link data: %@", [params description]);
         
         if ([params[@"$marketing_title"] isEqualToString:@"Deep Link to Orders Screen"]) {
-            if ([[DataManager shareDataManager] getUserInfo] != nil) {
-                [NSTimer scheduledTimerWithTimeInterval:6 target:self selector:@selector(didDeepLink) userInfo:nil repeats:NO];
-            }
+            [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(didDeepLink) userInfo:nil repeats:NO];
         }
         
         [[BentoShop sharedInstance] setBranchParams:params];
@@ -233,7 +231,9 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 }
 
 - (void)didDeepLink {
-    [[NSNotificationCenter defaultCenter] postNotificationName:@"didPopBackFromViewAllOrdersButton" object:nil];
+    if ([[DataManager shareDataManager] getUserInfo] != nil) {
+        [[NSNotificationCenter defaultCenter] postNotificationName:@"didPopBackFromViewAllOrdersButton" object:nil];
+    }
 }
 
 - (void)applicationWillResignActive:(UIApplication *)application
