@@ -34,8 +34,11 @@
             self.driverId = [@([dictionary[@"driverId"] intValue]) stringValue];
         }
         
-        if ([dictionary[@"driverName"] isEqual:[NSNull null]]) {
+        if ([dictionary[@"driverName"] isEqual:[NSNull null]] == NO) {
             self.driverName = dictionary[@"driverName"];
+        }
+        else {
+            self.driverName = @"";
         }
         
         self.lat = [dictionary[@"lat"] floatValue];
