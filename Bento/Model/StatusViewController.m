@@ -292,7 +292,7 @@
     
     NSLog(@"speedFromPointToPoint - %f second(s)", speedFromPointToPoint);
     
-    NSLog(@"step(%ld of %ld), pathCoordinate(%ld of %ld)", (long)stepCount, (unsigned long)self.steps.count, pathCoordinatesCount, (unsigned long)self.currentStep.pathCoordinates.count);
+    NSLog(@"step(%ld of %ld), pathCoordinate(%ld of %ld)", (long)stepCount, (unsigned long)self.steps.count, (long)pathCoordinatesCount, (unsigned long)self.currentStep.pathCoordinates.count);
     
     if (pathCoordinatesCount < self.currentStep.pathCoordinates.count) {
         

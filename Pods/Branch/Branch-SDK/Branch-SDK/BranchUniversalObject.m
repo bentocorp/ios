@@ -68,6 +68,8 @@
     [[Branch getInstance] registerViewWithParams:[self getParamsForServerRequest] andCallback:callback];
 }
 
+#pragma mark - Link Creation Methods
+
 - (NSString *)getShortUrlWithLinkProperties:(BranchLinkProperties *)linkProperties {
     if (!self.canonicalIdentifier && !self.title) {
         NSLog(@"[Branch Warning] a canonicalIdentifier or title are required to uniquely identify content, so could not generate a URL.");
@@ -104,6 +106,24 @@
                                     andCallback:callback];
 }
 
+- (NSString *)getShortUrlWithLinkPropertiesAndIgnoreFirstClick:(BranchLinkProperties *)linkProperties {
+    if (!self.canonicalIdentifier && !self.title) {
+        NSLog(@"[Branch Warning] a canonicalIdentifier or title are required to uniquely identify content, so could not generate a URL.");
+        return nil;
+    }
+    // keep this operation outside of sync operation below.
+    NSString *UAString = [[[UIWebView alloc] init] stringByEvaluatingJavaScriptFromString:@"navigator.userAgent"];
+
+    return [[Branch getInstance] getShortURLWithParams:[self getParamsForServerRequestWithAddedLinkProperties:linkProperties]
+                                        andTags:linkProperties.tags
+                                     andChannel:linkProperties.channel
+                                     andFeature:linkProperties.feature
+                                       andStage:linkProperties.stage
+                                       andAlias:linkProperties.alias
+                                 ignoreUAString:UAString
+                              forceLinkCreation:YES];
+}
+
 - (UIActivityItemProvider *)getBranchActivityItemWithLinkProperties:(BranchLinkProperties *)linkProperties {
     if (!self.canonicalIdentifier && !self.canonicalUrl && !self.title) {
         NSLog(@"[Branch Warning] a canonicalIdentifier, canonicalURL, or title are required to uniquely identify content. In order to not break the end user experience with sharing, Branch SDK will proceed to create a URL, but content analytics may not properly include this URL.");
@@ -120,17 +140,34 @@
                                              alias:linkProperties.alias];
 }
 
-- (void)showShareSheetWithShareText:(NSString *)shareText andCallback:(callback)callback {
-    [self showShareSheetWithLinkProperties:nil andShareText:shareText fromViewController:nil andCallback:callback];
+- (void)showShareSheetWithShareText:(NSString *)shareText completion:(shareCompletion)completion {
+    [self showShareSheetWithLinkProperties:nil andShareText:shareText fromViewController:nil completion:completion];
 }
 
-- (void)showShareSheetWithLinkProperties:(BranchLinkProperties *)linkProperties andShareText:(NSString *)shareText fromViewController:(UIViewController *)viewController andCallback:(callback)callback {
+- (void)showShareSheetWithLinkProperties:(BranchLinkProperties *)linkProperties andShareText:(NSString *)shareText fromViewController:(UIViewController *)viewController completion:(shareCompletion)completion {
+    [self showShareSheetWithLinkProperties:linkProperties andShareText:shareText fromViewController:viewController anchor:nil completion:completion];
+}
+- (void)showShareSheetWithLinkProperties:(BranchLinkProperties *)linkProperties andShareText:(NSString *)shareText fromViewController:(UIViewController *)viewController anchor:(UIBarButtonItem *)anchor completion:(shareCompletion)completion {
     UIActivityItemProvider *itemProvider = [self getBranchActivityItemWithLinkProperties:linkProperties];
     NSMutableArray *items = [NSMutableArray arrayWithObject:itemProvider];
     if (shareText) {
-        [items addObject:shareText];
+        [items insertObject:shareText atIndex:0];
     }
     UIActivityViewController *shareViewController = [[UIActivityViewController alloc] initWithActivityItems:items applicationActivities:nil];
+    
+    if ([shareViewController respondsToSelector:@selector(completionWithItemsHandler)]) {
+        shareViewController.completionWithItemsHandler = ^(NSString *activityType, BOOL completed, NSArray *returnedItems, NSError *activityError) {
+            if (completion) {
+                completion(activityType, completed);
+            }
+        };
+    } else {
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wdeprecated-declarations"
+        // Deprecated in iOS 8.  Safe to hide deprecation warnings as the new completion handler is checked for above
+        shareViewController.completionHandler = completion;
+#pragma clang diagnostic pop
+    }
     
     UIViewController *presentingViewController;
     if (viewController && [viewController respondsToSelector:@selector(presentViewController:animated:completion:)]) {
@@ -153,12 +190,28 @@
         // Required for iPad/Universal apps on iOS 8+
         if ([presentingViewController respondsToSelector:@selector(popoverPresentationController)]) {
             shareViewController.popoverPresentationController.sourceView = presentingViewController.view;
+            if (anchor) {
+                shareViewController.popoverPresentationController.barButtonItem = anchor;
+            }
         }
-        [presentingViewController presentViewController:shareViewController animated:YES completion:callback];
+        [presentingViewController presentViewController:shareViewController animated:YES completion:nil];
     }
     else {
         NSLog(@"[Branch warning, fatal] No view controller is present to show the share sheet. Aborting.");
     }
+}
+
+
+- (void)showShareSheetWithShareText:(NSString *)shareText andCallback:(callback)callback {
+    [self showShareSheetWithLinkProperties:nil andShareText:shareText fromViewController:nil andCallback:callback];
+}
+
+- (void)showShareSheetWithLinkProperties:(BranchLinkProperties *)linkProperties andShareText:(NSString *)shareText fromViewController:(UIViewController *)viewController andCallback:(callback)callback {
+    [self showShareSheetWithLinkProperties:linkProperties andShareText:shareText fromViewController:viewController completion:^(NSString *activityType, BOOL completed) {
+        if (callback) {
+            callback();
+        }
+    }];
 }
 
 - (void)listOnSpotlight {
@@ -174,10 +227,18 @@
         publiclyIndexable = YES;
     }
     
+    NSMutableDictionary *metadataAndProperties = [self.metadata mutableCopy];
+    if (self.canonicalIdentifier) {
+        metadataAndProperties[BRANCH_LINK_DATA_KEY_CANONICAL_IDENTIFIER] = self.canonicalIdentifier;
+    }
+    if (self.canonicalUrl) {
+        metadataAndProperties[BRANCH_LINK_DATA_KEY_CANONICAL_URL] = self.canonicalUrl;
+    }
+
     [[Branch getInstance] createDiscoverableContentWithTitle:self.title
                                                  description:self.contentDescription
                                                 thumbnailUrl:[NSURL URLWithString:self.imageUrl]
-                                                  linkParams:self.metadata.copy
+                                                  linkParams:metadataAndProperties.copy
                                                         type:self.type
                                            publiclyIndexable:publiclyIndexable
                                                     keywords:[NSSet setWithArray:self.keywords]
@@ -196,10 +257,18 @@
         publiclyIndexable = YES;
     }
     
+    NSMutableDictionary *metadataAndProperties = [self.metadata mutableCopy];
+    if (self.canonicalIdentifier) {
+        metadataAndProperties[BRANCH_LINK_DATA_KEY_CANONICAL_IDENTIFIER] = self.canonicalIdentifier;
+    }
+    if (self.canonicalUrl) {
+        metadataAndProperties[BRANCH_LINK_DATA_KEY_CANONICAL_URL] = self.canonicalUrl;
+    }
+    
     [[Branch getInstance] createDiscoverableContentWithTitle:self.title
                                                  description:self.contentDescription
                                                 thumbnailUrl:[NSURL URLWithString:self.imageUrl]
-                                                  linkParams:self.metadata.copy
+                                                  linkParams:metadataAndProperties.copy
                                                         type:self.type
                                            publiclyIndexable:publiclyIndexable
                                                     keywords:[NSSet setWithArray:self.keywords]

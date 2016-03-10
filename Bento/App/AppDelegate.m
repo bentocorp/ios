@@ -37,7 +37,8 @@
 
 // Branch
 #import "Branch.h"
-#import "ChooseMainDishViewController.h"
+#import "SignedInSettingsViewController.h"
+#import "OrdersViewController.h"
 
 // Facebook
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
@@ -145,26 +146,21 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [googleReach startNotifier];
     
 /*--------------------------------------BRANCH-----------------------------------------*/
-    
+
     Branch *branch = [Branch getInstance];
     
     [branch initSessionWithLaunchOptions:launchOptions andRegisterDeepLinkHandler:^(NSDictionary *params, NSError *error)
     {
         // params are the deep linked params associated with the link that the user clicked before showing up.
-        NSLog(@"CHOOSE: %@", params[@"choose"]);
-        
-        if (params[@"choose"] != nil)
-        {
-            // if the app is already open in the background
-            UINavigationController *myNavCon = (UINavigationController*)self.window.rootViewController;
-            [(UINavigationController *)myNavCon.presentingViewController popToRootViewControllerAnimated:NO];
-            [myNavCon dismissViewControllerAnimated:NO completion:nil];
-            [myNavCon popToRootViewControllerAnimated:NO];
-        }
-            
-        [[BentoShop sharedInstance] setBranchParams:params];
-        
         NSLog(@"deep link data: %@", [params description]);
+        
+        if ([params[@"$marketing_title"] isEqualToString:@"Deep Link to Orders Screen"]) {
+            if ([[DataManager shareDataManager] getUserInfo] != nil) {
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"didPopBackFromViewAllOrdersButton" object:nil];
+            }
+        }
+        
+        [[BentoShop sharedInstance] setBranchParams:params];
     }];
 
 /*---------------------------------CRASHLYTICS---------------------------------------*/
@@ -461,6 +457,13 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
 - (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo
 {
     NSLog(@"Received remote notification");
+}
+
+- (BOOL)application:(UIApplication *)application continueUserActivity:(NSUserActivity *)userActivity restorationHandler:(void (^)(NSArray *))restorationHandler
+{
+    [[Branch getInstance] continueUserActivity:userActivity];
+    
+    return YES;
 }
 
 - (BOOL)isPushEnabled {

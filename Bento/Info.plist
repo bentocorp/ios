@@ -24,6 +24,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>fb791688527544905</string>
+				<string>bentoapp</string>
 			</array>
 		</dict>
 		<dict>

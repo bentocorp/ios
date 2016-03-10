@@ -17,7 +17,7 @@ PODS:
   - AFNetworking/Serialization (3.0.4)
   - AFNetworking/UIKit (3.0.4):
     - AFNetworking/NSURLSession
-  - Branch (0.11.14)
+  - Branch (0.11.17)
   - Canvas (0.1.2)
   - Crashlytics (3.7.0):
     - Fabric (~> 1.6.3)
@@ -58,7 +58,7 @@ DEPENDENCIES:
 SPEC CHECKSUMS:
   Adjust: 522f5f9bb29cf02e84197ecb154d3634b97b86f6
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
-  Branch: 8f76ea498816981768f318f74624250a41620f54
+  Branch: 57e2714109c9bb59c0b88dddf94d200bc89f2fa8
   Canvas: eb861e3b555d032648146c8ffda1a5dea40059ca
   Crashlytics: c3a2333dea9e2733d2777f730910321fc9e25c0d
   Fabric: ed41fd62173c6bdea24ab02c9d7707161eabb750

@@ -242,43 +242,12 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
 ///---------------------
 
 /**
- Just initialize the Branch session.
- 
- @warning This is not the recommended method of initializing Branch, as you potentially lose deep linking info, and any ability to do anything with the callback.
- */
-- (void)initSession;
-
-/**
  Just initialize the Branch session with the app launch options.
  
  @param options The launch options provided by the AppDelegate's `didFinishLaunchingWithOptions:` method.
  @warning This is not the recommended method of initializing Branch. While Branch is able to properly attribute deep linking info with the launch options, you lose the ability to do anything with a callback.
  */
 - (void)initSessionWithLaunchOptions:(NSDictionary *)options;
-
-/**
- Just initialize the Branch session, specifying whether to allow it to be treated as a referral.
- 
- @param isReferrable Boolean representing whether to allow the session to be marked as referred, overriding the default behavior.
- @warning This is not the recommended method of initializing Branch, as you potentially lose deep linking info, and any ability to do anything with the callback.
- */
-- (void)initSession:(BOOL)isReferrable;
-
-/**
- Just initialize the Branch session, specifying whether to allow it to automatically display matching deep linked controllers
- 
- @param automaticallyDisplayController Boolean indicating whether we will automatically launch into deep linked controller matched in the init session dictionary.
- @warning This is not the recommended method of initializing Branch, as you potentially lose deep linking info by not passing the launch options.
- */
-- (void)initSessionAndAutomaticallyDisplayDeepLinkController:(BOOL)automaticallyDisplayController;
-
-/**
- Initialize the Branch session and handle the completion with a callback
- 
- @param callback A callback that is called when the session is opened. This will be called multiple times during the apps life, including any time the app goes through a background / foreground cycle.
- @warning This is not the recommended method of initializing Branch, as you potentially lose deep linking info by not passing the launch options.
- */
-- (void)initSessionAndRegisterDeepLinkHandler:(callbackWithParams)callback;
 
 /**
  Just initialize the Branch session with the app launch options, specifying whether to allow it to be treated as a referral.
@@ -288,15 +257,6 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
  @warning This is not the recommended method of initializing Branch. While Branch is able to properly attribute deep linking info with the launch options, you lose the ability to do anything with a callback.
  */
 - (void)initSessionWithLaunchOptions:(NSDictionary *)options isReferrable:(BOOL)isReferrable;
-
-/**
- Initialize the Branch session and handle the completion with a callback
- 
- @param isReferrable Boolean representing whether to allow the session to be marked as referred, overriding the default behavior.
- @param callback A callback that is called when the session is opened. This will be called multiple times during the apps life, including any time the app goes through a background / foreground cycle.
- @warning This is not the recommended method of initializing Branch, as you potentially lose deep linking info by not passing the launch options.
- */
-- (void)initSession:(BOOL)isReferrable andRegisterDeepLinkHandler:(callbackWithParams)callback;
 
 /**
  Initialize the Branch session with the app launch options and handle the completion with a callback
@@ -321,24 +281,6 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
  @param automaticallyDisplayController Boolean indicating whether we will automatically launch into deep linked controller matched in the init session dictionary.
  */
 - (void)initSessionWithLaunchOptions:(NSDictionary *)options automaticallyDisplayDeepLinkController:(BOOL)automaticallyDisplayController;
-
-/**
- Initialize the Branch session and handle the completion with a callback
- 
- @param isReferrable Boolean representing whether to allow the session to be marked as referred, overriding the default behavior.
- @param automaticallyDisplayController Boolean indicating whether we will automatically launch into deep linked controller matched in the init session dictionary.
- @warning This is not the recommended method of initializing Branch, as you potentially lose deep linking info by not passing the launch options.
- */
-- (void)initSession:(BOOL)isReferrable automaticallyDisplayDeepLinkController:(BOOL)automaticallyDisplayController;
-
-/**
- Initialize the Branch session and handle the completion with a callback
- 
- @param automaticallyDisplayController Boolean indicating whether we will automatically launch into deep linked controller matched in the init session dictionary.
- @param callback A callback that is called when the session is opened. This will be called multiple times during the apps life, including any time the app goes through a background / foreground cycle.
- @warning This is not the recommended method of initializing Branch, as you potentially lose deep linking info by not passing the launch options.
- */
-- (void)initSessionAndAutomaticallyDisplayDeepLinkController:(BOOL)automaticallyDisplayController deepLinkHandler:(callbackWithParams)callback;
 
 /**
  Initialize the Branch session with the app launch options and handle the completion with a callback
@@ -370,16 +312,6 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
 /**
  Initialize the Branch session with the app launch options and handle the completion with a callback
  
- @param automaticallyDisplayController Boolean indicating whether we will automatically launch into deep linked controller matched in the init session dictionary.
- @param isReferrable Boolean representing whether to allow the session to be marked as referred, overriding the default behavior.
- @param callback A callback that is called when the session is opened. This will be called multiple times during the apps life, including any time the app goes through a background / foreground cycle.
- @warning This is not the recommended method of initializing Branch, as you potentially lose deep linking info by not passing the launch options.
- */
-- (void)initSessionAndAutomaticallyDisplayDeepLinkController:(BOOL)automaticallyDisplayController isReferrable:(BOOL)isReferrable deepLinkHandler:(callbackWithParams)callback;
-
-/**
- Initialize the Branch session with the app launch options and handle the completion with a callback
- 
  @param options The launch options provided by the AppDelegate's `didFinishLaunchingWithOptions:` method.
  @param automaticallyDisplayController Boolean indicating whether we will automatically launch into deep linked controller matched in the init session dictionary.
  @param isReferrable Boolean representing whether to allow the session to be marked as referred, overriding the default behavior.
@@ -407,8 +339,14 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
 
 #pragma mark - Push Notification support
 
-/* Extract the short URL if there is one */
-- (void)handlePushNotification:(NSDictionary*) userInfo;
+/**
+ Allow Branch to handle a push notification with a Branch link.
+ 
+ To make use of this, when creating a push notification, specify the Branch Link as an NSString, for key @"branch".
+ 
+ NSDictionary userInfo = @{@"branch": @"https://bnc.lt/...", ... };
+ */
+- (void)handlePushNotification:(NSDictionary *)userInfo;
 
 #pragma mark - Deep Link Controller methods
 
@@ -1455,5 +1393,10 @@ typedef NS_ENUM(NSUInteger, BranchPromoCodeUsageType) {
  @warning This is meant for use internally only and should not be used by apps.
  */
 - (void)registerViewWithParams:(NSDictionary *)params andCallback:(callbackWithParams)callback;
+
+/**
+ Method used by external Branch libs to initiate server requests
+ */
+- (void)executeGenericRequest:(BNCServerRequest*)request;
 
 @end
