@@ -456,9 +456,11 @@
             currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
         }
         
+        // call at least once to get ETA
+        [self getRouteFromLastLocation];
+        
         if (self.orderStatus == Enroute) {
             if (timerForGoogleMapsAPI == nil) {
-                [self getRouteFromLastLocation];
                 timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
             }
             else {
