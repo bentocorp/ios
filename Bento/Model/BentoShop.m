@@ -1301,6 +1301,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
                 
                 }];
             }
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"trigger_every_30_secs" object:nil];
         });
     }
     

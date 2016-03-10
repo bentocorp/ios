@@ -401,13 +401,29 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Bento/Model/SocketHandler.m"
-            timestampString = "479247403.772163"
+            filePath = "Bento/Model/StatusViewController.m"
+            timestampString = "479261298.292179"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "120"
-            endingLineNumber = "120"
-            landmarkName = "-listenToChannels"
+            startingLineNumber = "296"
+            endingLineNumber = "296"
+            landmarkName = "-updatePathCoordinatesCount"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bento/Model/StatusViewController.m"
+            timestampString = "479261307.342884"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "480"
+            endingLineNumber = "480"
+            landmarkName = "-socketHandlerDidUpdateLocationWith:and:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

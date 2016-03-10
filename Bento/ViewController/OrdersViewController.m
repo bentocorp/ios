@@ -93,8 +93,7 @@
     [super viewWillAppear:animated];
     
     [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:@"trigger_every_30_secs" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getData) name:@"enteredForeground" object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];

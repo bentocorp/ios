@@ -90,10 +90,8 @@
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:USER_NOTIFICATION_UPDATED_MENU object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:USER_NOTIFICATION_UPDATED_STATUS object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:@"trigger_every_30_secs" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:@"enteredForeground" object:nil];
-    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToNode) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSocket) name:@"enteringBackground" object:nil];
 }
@@ -445,9 +443,7 @@
 }
 
 - (void)socketHandlerDidAuthenticate {
-    if (self.orderStatus == Enroute) {
-        [[SocketHandler sharedSocket] getLastSavedLocation];
-    }
+    [[SocketHandler sharedSocket] getLastSavedLocation];
 }
 
 - (void)socketHandlerDidGetLastSavedLocation:(float)lat and:(float)lng {
@@ -460,12 +456,14 @@
             currentLocation = [[CLLocation alloc] initWithLatitude:lat longitude:lng];
         }
         
-        if (timerForGoogleMapsAPI == nil) {
-            [self getRouteFromLastLocation];
-            timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
-        }
-        else {
-            [self deliveryState];
+        if (self.orderStatus == Enroute) {
+            if (timerForGoogleMapsAPI == nil) {
+                [self getRouteFromLastLocation];
+                timerForGoogleMapsAPI = [NSTimer scheduledTimerWithTimeInterval:60 target:self selector:@selector(getRouteFromLastLocation) userInfo:nil repeats:YES];
+            }
+            else {
+                [self deliveryState];
+            }
         }
     });
 }
@@ -528,6 +526,11 @@
                     }
                     else if (self.orderStatus == Arrived) {
                         [self pickupState];
+                    }
+                    
+                    if (timerForLastLocationUpdate != nil) {
+                        [timerForLastLocationUpdate invalidate];
+                        timerForLastLocationUpdate = nil;
                     }
                     
                     [self dismissHUD];
