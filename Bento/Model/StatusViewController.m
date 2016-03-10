@@ -68,16 +68,11 @@
     [super viewDidLoad];
     
     [self setupViews];
-    
-    self.loadingHud.hidden = NO;
-    [self.loadingHud startAnimating];
-    
+    [self showHUD];
     [self getOrderHistory];
-    
     [self connectToNode];
     
     self.steps = [[NSMutableArray alloc] init];
-    
     isReceivingLocation = YES;
 }
 
@@ -97,98 +92,6 @@
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     
     [self stopTimers];
-}
-
-- (void)stopTimers {
-    [timerForLastLocationUpdate invalidate];
-    timerForLastLocationUpdate = nil;
-    
-    [timerForSpeedFromPointToPoint invalidate];
-    timerForSpeedFromPointToPoint = nil;
-    
-    [timerForGoogleMapsAPI invalidate];
-    timerForGoogleMapsAPI = nil;
-}
-
-- (void)setupViews {
-    self.num1Label.layer.cornerRadius = 10;
-    self.num1Label.layer.masksToBounds = YES;
-    
-    self.num2Label.layer.cornerRadius = 10;
-    self.num2Label.layer.masksToBounds = YES;
-    
-    self.num3Label.layer.cornerRadius = 10;
-    self.num3Label.layer.masksToBounds = YES;
-    
-    self.num4Label.layer.cornerRadius = 10;
-    self.num4Label.layer.masksToBounds = YES;
-    
-    self.dotView1.layer.cornerRadius = 3;
-    self.dotView1.layer.masksToBounds = YES;
-    
-    self.dotView2.layer.cornerRadius = 3;
-    self.dotView2.layer.masksToBounds = YES;
-    
-    self.dotView3.layer.cornerRadius = 3;
-    self.dotView3.layer.masksToBounds = YES;
-    
-    self.dotView4.layer.cornerRadius = 3;
-    self.dotView4.layer.masksToBounds = YES;
-    
-    self.dotView5.layer.cornerRadius = 3;
-    self.dotView5.layer.masksToBounds = YES;
-    
-    self.dotView6.layer.cornerRadius = 3;
-    self.dotView6.layer.masksToBounds = YES;
-    
-    self.dotView7.layer.cornerRadius = 3;
-    self.dotView7.layer.masksToBounds = YES;
-    
-    self.dotView8.layer.cornerRadius = 3;
-    self.dotView8.layer.masksToBounds = YES;
-    
-    self.dotView9.layer.cornerRadius = 3;
-    self.dotView9.layer.masksToBounds = YES;
-}
-
-- (void)setupMapWithDriverLat:(float)driverLat lng:(float)driverLng {
-    [SVGeocoder reverseGeocode:self.endLocation completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
-        if (error == nil && placemarks.count > 0) {
-            
-            if (didloadOnce == NO) {
-                didloadOnce = YES;
-            
-                self.placeInfo = [placemarks firstObject];
-                
-                self.allAnnotations = [[NSMutableArray alloc] init];
-                
-                self.customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
-                                                                        subtitle:[NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare]
-                                                                      coordinate:self.endLocation
-                                                                            type:@"customer"];
-                [self.allAnnotations addObject:self.customerAnnotation];
-                
-
-                self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:self.driverName
-                                                                       subtitle:[NSString stringWithFormat:@"ETA: %@", self.routeDurationString]
-                                                                     coordinate:CLLocationCoordinate2DMake(driverLat, driverLng)
-                                                                           type:@"driver"];
-                
-                [self.allAnnotations addObject:self.driverAnnotation];
-                
-                [self.mapView addAnnotations:self.allAnnotations];
-            
-                [self.mapView selectAnnotation:self.driverAnnotation animated:YES];
-                [self.mapView showAnnotations:self.allAnnotations animated:NO];
-            }
-            else {
-                self.driverAnnotation.subtitle = [NSString stringWithFormat:@"ETA: %@", self.routeDurationString];
-            }
-        }
-        else {
-            // handler error
-        }
-    }];
 }
 
 # pragma mark Google Maps API
@@ -294,19 +197,8 @@
         
         currentLocation = self.currentStep.pathCoordinates[pathCoordinatesCount];
         
-        // turn fast (1 second)
-        [UIView animateWithDuration:1 animations:^{
-            CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
-            CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
-            double bearing = [stepStart bearingToLocation:stepEnd];
-            
-            self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
-        }];
-        
-        [UIView animateWithDuration:speedFromPointToPoint animations:^{
-            self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-            [self.mapView showAnnotations:self.allAnnotations animated:YES];
-        }];
+        [self animateRotation];
+        [self animateFromPointToPoint:speedFromPointToPoint];
     }
     else {
         [timerForSpeedFromPointToPoint invalidate];
@@ -319,9 +211,21 @@
     pathCoordinatesCount++;
 }
 
-# pragma mark
-
 - (void)updateLocation {
+    [self animateRotation];
+    [self animateFromPointToPoint:5];
+}
+
+#pragma mark Animations
+
+- (void)animateFromPointToPoint:(float)speed {
+    [UIView animateWithDuration:speed animations:^{
+        self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
+        [self.mapView showAnnotations:self.allAnnotations animated:YES];
+    }];
+}
+
+- (void)animateRotation {
     [UIView animateWithDuration:1 animations:^{
         CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
         CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
@@ -329,12 +233,9 @@
         
         self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
     }];
-    
-    [UIView animateWithDuration:5 animations:^{
-        self.driverAnnotation.coordinate = CLLocationCoordinate2DMake(currentLocation.coordinate.latitude, currentLocation.coordinate.longitude);
-        [self.mapView showAnnotations:self.allAnnotations animated:YES];
-    }];
 }
+
+#pragma mark Location Reception Change Status Check
 
 - (void)countSinceLastUpdate {
     countSinceLastLocationUpdate++;
@@ -362,7 +263,47 @@
     }
 }
 
-#pragma mark MKMapViewDelegate
+#pragma mark Map
+
+- (void)setupMapWithDriverLat:(float)driverLat lng:(float)driverLng {
+    [SVGeocoder reverseGeocode:self.endLocation completion:^(NSArray *placemarks, NSHTTPURLResponse *urlResponse, NSError *error) {
+        if (error == nil && placemarks.count > 0) {
+            
+            if (didloadOnce == NO) {
+                didloadOnce = YES;
+                
+                self.placeInfo = [placemarks firstObject];
+                
+                self.allAnnotations = [[NSMutableArray alloc] init];
+                
+                self.customerAnnotation = [[CustomAnnotation alloc] initWithTitle:@"Delivery Address"
+                                                                         subtitle:[NSString stringWithFormat:@"%@ %@", self.placeInfo.subThoroughfare, self.placeInfo.thoroughfare]
+                                                                       coordinate:self.endLocation
+                                                                             type:@"customer"];
+                [self.allAnnotations addObject:self.customerAnnotation];
+                
+                
+                self.driverAnnotation = [[CustomAnnotation alloc] initWithTitle:self.driverName
+                                                                       subtitle:[NSString stringWithFormat:@"ETA: %@", self.routeDurationString]
+                                                                     coordinate:CLLocationCoordinate2DMake(driverLat, driverLng)
+                                                                           type:@"driver"];
+                
+                [self.allAnnotations addObject:self.driverAnnotation];
+                
+                [self.mapView addAnnotations:self.allAnnotations];
+                
+                [self.mapView selectAnnotation:self.driverAnnotation animated:YES];
+                [self.mapView showAnnotations:self.allAnnotations animated:NO];
+            }
+            else {
+                self.driverAnnotation.subtitle = [NSString stringWithFormat:@"ETA: %@", self.routeDurationString];
+            }
+        }
+        else {
+            // handler error
+        }
+    }];
+}
 
 - (MKAnnotationView *)mapView:(MKMapView *)mapView viewForAnnotation:(id<MKAnnotation>)annotation {
     
@@ -399,24 +340,95 @@
     return nil;
 }
 
-#pragma mark Navigation
+#pragma mark Order History
 
-- (IBAction)backButtonPressed:(id)sender {
-    didDisconnectOnPurpose = YES;
+- (void)getOrderHistory {
+    NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
     
-    [self closeSocket];
-    [self goBack];
+    NSLog(@"/orderhistory strRequest - %@", strRequest);
+    
+    [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
+        
+        if (error == nil) {
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                if ([self shouldRemoveOrder:responseDic]) {
+                    [self goBack];
+                }
+                
+                if (self.orderStatus == Enroute) {
+                    self.mapView.delegate = self;
+                    self.mapView.mapType = MKMapTypeStandard;
+                    self.mapView.zoomEnabled = YES;
+                    self.mapView.scrollEnabled = YES;
+                    
+                    if (timerForLastLocationUpdate == nil) {
+                        timerForLastLocationUpdate = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countSinceLastUpdate) userInfo:nil repeats:YES];
+                    }
+                    
+                    if (currentLocation != nil) {
+                        [self deliveryState];
+                    }
+                }
+                else {
+                    [[SocketHandler sharedSocket] untrack];
+                    
+                    if (self.orderStatus == Assigned) {
+                        [self prepState];
+                    }
+                    else if (self.orderStatus == Arrived) {
+                        [self pickupState];
+                    }
+                    
+                    if (timerForLastLocationUpdate != nil) {
+                        [timerForLastLocationUpdate invalidate];
+                        timerForLastLocationUpdate = nil;
+                    }
+                    
+                    [self dismissHUD];
+                }
+            });
+        }
+        else {
+            // handle error
+        }
+    }];
 }
 
-- (IBAction)buildAnotherBentoButtonPressed:(id)sender {
-    didDisconnectOnPurpose = YES;
+- (BOOL)shouldRemoveOrder:(id)responseDic {
+    NSMutableArray *orderHistoryArray = [[NSMutableArray alloc] init];
+    for (NSDictionary *json in responseDic) {
+        [orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
+    }
     
-    [self closeSocket];
-    [self dismissViewControllerAnimated:YES completion:nil];
-}
-
-- (void)goBack {
-    [self.navigationController popViewControllerAnimated:YES];
+    NSMutableArray *orderItems = [[NSMutableArray alloc] init];
+    for (OrderHistorySection *section in orderHistoryArray) {
+        if ([section.sectionTitle isEqualToString:@"In Progress"]) {
+            for (OrderHistoryItem *item in section.items) {
+                [orderItems addObject:item];
+            }
+        }
+    }
+    
+    for (OrderHistoryItem *item in orderItems) {
+        if (item.orderId == self.orderId) {
+            
+            self.orderStatus = item.orderStatus;
+            
+            switch (self.orderStatus) {
+                case Assigned:
+                    return NO;
+                case Enroute:
+                    return NO;
+                case Arrived:
+                    return NO;
+                default:
+                    return YES;
+            }
+        }
+    }
+    
+    return YES;
 }
 
 #pragma mark SocketHandlerDelegate
@@ -437,6 +449,7 @@
 
 - (void)socketHandlerDidDisconnect {
     if (didDisconnectOnPurpose == false) {
+        [self closeSocket];
         [self connectToNode];
     }
 }
@@ -489,103 +502,48 @@
     [[SocketHandler sharedSocket] closeSocket];
 }
 
-#pragma mark Order History
+#pragma mark States
 
-- (void)getOrderHistory {
-    NSString *strRequest = [NSString stringWithFormat:@"/user/orderhistory?api_token=%@", [[DataManager shareDataManager] getAPIToken]];
+- (void)setupViews {
+    self.num1Label.layer.cornerRadius = 10;
+    self.num1Label.layer.masksToBounds = YES;
     
-    NSLog(@"/orderhistory strRequest - %@", strRequest);
+    self.num2Label.layer.cornerRadius = 10;
+    self.num2Label.layer.masksToBounds = YES;
     
-    [[BentoShop sharedInstance] sendRequest:strRequest completion:^(id responseDic, NSError *error) {
-        
-        if (error == nil) {
-            dispatch_async(dispatch_get_main_queue(), ^{
-            
-                if ([self shouldRemoveOrder:responseDic]) {
-                    [self goBack];
-                }
-                
-                if (self.orderStatus == Enroute) {
-                    self.mapView.delegate = self;
-                    self.mapView.mapType = MKMapTypeStandard;
-                    self.mapView.zoomEnabled = YES;
-                    self.mapView.scrollEnabled = YES;
-                    
-                    if (timerForLastLocationUpdate == nil) {
-                        timerForLastLocationUpdate = [NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(countSinceLastUpdate) userInfo:nil repeats:YES];
-                    }
-                    
-                    if (currentLocation != nil) {
-                        [self deliveryState];
-                    }
-                }
-                else {
-                    [[SocketHandler sharedSocket] untrack];
-                    
-                    if (self.orderStatus == Assigned) {
-                        [self prepState];
-                    }
-                    else if (self.orderStatus == Arrived) {
-                        [self pickupState];
-                    }
-                    
-                    if (timerForLastLocationUpdate != nil) {
-                        [timerForLastLocationUpdate invalidate];
-                        timerForLastLocationUpdate = nil;
-                    }
-                    
-                    [self dismissHUD];
-                }
-            });
-        }
-        else {
-            // handle error
-        }
-    }];
+    self.num3Label.layer.cornerRadius = 10;
+    self.num3Label.layer.masksToBounds = YES;
+    
+    self.num4Label.layer.cornerRadius = 10;
+    self.num4Label.layer.masksToBounds = YES;
+    
+    self.dotView1.layer.cornerRadius = 3;
+    self.dotView1.layer.masksToBounds = YES;
+    
+    self.dotView2.layer.cornerRadius = 3;
+    self.dotView2.layer.masksToBounds = YES;
+    
+    self.dotView3.layer.cornerRadius = 3;
+    self.dotView3.layer.masksToBounds = YES;
+    
+    self.dotView4.layer.cornerRadius = 3;
+    self.dotView4.layer.masksToBounds = YES;
+    
+    self.dotView5.layer.cornerRadius = 3;
+    self.dotView5.layer.masksToBounds = YES;
+    
+    self.dotView6.layer.cornerRadius = 3;
+    self.dotView6.layer.masksToBounds = YES;
+    
+    self.dotView7.layer.cornerRadius = 3;
+    self.dotView7.layer.masksToBounds = YES;
+    
+    self.dotView8.layer.cornerRadius = 3;
+    self.dotView8.layer.masksToBounds = YES;
+    
+    self.dotView9.layer.cornerRadius = 3;
+    self.dotView9.layer.masksToBounds = YES;
 }
-
-- (void)dismissHUD {
-    [self.loadingHud stopAnimating];
-    self.loadingHud.hidden = YES;
-}
-
-- (BOOL)shouldRemoveOrder:(id)responseDic {
-    NSMutableArray *orderHistoryArray = [[NSMutableArray alloc] init];
-    for (NSDictionary *json in responseDic) {
-        [orderHistoryArray addObject:[[OrderHistorySection alloc] initWithDictionary:json]];
-    }
-    
-    NSMutableArray *orderItems = [[NSMutableArray alloc] init];
-    for (OrderHistorySection *section in orderHistoryArray) {
-        if ([section.sectionTitle isEqualToString:@"In Progress"]) {
-            for (OrderHistoryItem *item in section.items) {
-                [orderItems addObject:item];
-            }
-        }
-    }
-    
-    for (OrderHistoryItem *item in orderItems) {
-        if (item.orderId == self.orderId) {
-            
-            self.orderStatus = item.orderStatus;
-            
-            switch (self.orderStatus) {
-                case Assigned:
-                    return NO;
-                case Enroute:
-                    return NO;
-                case Arrived:
-                    return NO;
-                default:
-                    return YES;
-            }
-        }
-    }
-    
-    return YES;
-}
-
-#pragma mark State Transitions
 
 - (void)prepState {
     // turn on
@@ -622,9 +580,8 @@
 }
 
 - (void)deliveryState {
-    
-    if (hasSetUpMap == NO) {
-        hasSetUpMap = YES;
+    if (didSetupMap == NO) {
+        didSetupMap = YES;
         self.endLocation = CLLocationCoordinate2DMake(self.lat, self.lng);
     
         [self setupMapWithDriverLat:currentLocation.coordinate.latitude lng:currentLocation.coordinate.longitude];
@@ -662,7 +619,6 @@
 }
 
 - (void)pickupState {
-    
     // turn on
     self.prepLabel.textColor = [UIColor bentoBrandGreen];
     self.deliveryLabel.textColor = [UIColor bentoBrandGreen];
@@ -693,6 +649,51 @@
     
     // turn off
     self.mapView.hidden = YES;
+}
+
+#pragma mark Timers
+
+- (void)stopTimers {
+    [timerForLastLocationUpdate invalidate];
+    timerForLastLocationUpdate = nil;
+    
+    [timerForSpeedFromPointToPoint invalidate];
+    timerForSpeedFromPointToPoint = nil;
+    
+    [timerForGoogleMapsAPI invalidate];
+    timerForGoogleMapsAPI = nil;
+}
+
+#pragma mark Navigation
+
+- (IBAction)backButtonPressed:(id)sender {
+    didDisconnectOnPurpose = YES;
+    
+    [self closeSocket];
+    [self goBack];
+}
+
+- (IBAction)buildAnotherBentoButtonPressed:(id)sender {
+    didDisconnectOnPurpose = YES;
+    
+    [self closeSocket];
+    [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (void)goBack {
+    [self.navigationController popViewControllerAnimated:YES];
+}
+
+#pragma mark HUD
+
+- (void)showHUD {
+    self.loadingHud.hidden = NO;
+    [self.loadingHud startAnimating];
+}
+
+- (void)dismissHUD {
+    [self.loadingHud stopAnimating];
+    self.loadingHud.hidden = YES;
 }
 
 @end
