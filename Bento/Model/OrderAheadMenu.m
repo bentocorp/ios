@@ -36,6 +36,8 @@
         self.menuId = menu[@"Menu"][@"menu_id"];
         
         self.rawTimeRangesArray = menu[@"Times"];
+        
+        self.defaultTimeMode = menu[@"DefaultTimeMode"];
     }
     
     return self;

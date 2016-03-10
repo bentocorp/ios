@@ -31,6 +31,8 @@
 @property (nonatomic) NSString *scheduledWindowEndTime;
 @property (nonatomic) NSString *deliveryPrice;
 
+@property (nonatomic) NSString *defaultTimeMode;
+
 - (id)initWithDictionary:(NSDictionary *)menu;
 
 - (BOOL)isDishSoldOut:(NSInteger)menuID;
