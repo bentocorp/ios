@@ -256,6 +256,8 @@ static OrderAheadMenu *orderAheadMenu;
 }
 
 - (void)finishedLoadingData {
+    [self setDefaultTimeMode];
+    
     [loadingHUD dismiss];
     loadingHUD = nil;
 }
@@ -1858,13 +1860,31 @@ static OrderAheadMenu *orderAheadMenu;
                 orderAheadMenu.deliveryPrice = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"delivery_price"];
                 orderAheadMenu.scheduledWindowStartTime = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"start"];
                 orderAheadMenu.scheduledWindowEndTime = orderAheadMenu.rawTimeRangesArray[self.selectedOrderAheadTimeRangeIndex][@"end"];
-                
 //                [[NSUserDefaults standardUserDefaults] rm_setCustomObject:@{
 //                                                                            @"menuId": self.orderAheadMenu.menuId,
 //                                                                            @"name": self.orderAheadMenu.name,
 //                                                                            }
 //                                                                   forKey:@"savedOrderAheadMenu"];
             }
+        }
+    }
+}
+
+- (void)setDefaultTimeMode {
+    if (orderMode == OrderAhead) {
+        
+        NSArray *orderAheadMenus = [[BentoShop sharedInstance] getOrderAheadMenus];
+        OrderAheadMenu *oaMenu = orderAheadMenus[0];
+        
+        if (oaMenu.defaultTimeMode == Random) {
+            int randomTimeWindow = arc4random() % oaMenu.times.count;
+            [self.orderAheadPickerView selectRow:randomTimeWindow inComponent:1 animated:NO];
+        }
+        else if (oaMenu.defaultTimeMode == UseDefault) {
+            
+        }
+        else {
+            // ignore First
         }
     }
 }

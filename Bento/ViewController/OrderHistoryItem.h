@@ -26,7 +26,6 @@ typedef enum : NSInteger {
 @property (nonatomic) float lat;
 @property (nonatomic) float lng;
 
-
 - (id)initWithDictionary:(NSDictionary *)dictionary;
 
 @end
