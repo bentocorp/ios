@@ -34,6 +34,7 @@
 #import "FiveHomeViewController.h"
 
 #import "NotificationsCell.h"
+#import "DailyNotificationsCell.h"
 
 //#import "OrderStatusViewController.h"
 
@@ -425,6 +426,12 @@
         notificationsCell = [[NotificationsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NCell"];
     }
     
+    DailyNotificationsCell *dailyNotifications = (DailyNotificationsCell *)[tableView dequeueReusableCellWithIdentifier:@"DCell"];
+    
+    if (dailyNotifications == nil) {
+        dailyNotifications = [[DailyNotificationsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"DCell"];
+    }
+    
     switch (indexPath.row) {
         case 0:
             settingsTableViewCell.settingsLabel.text = [[AppStrings sharedInstance] getString:ORDER_HISTORY_TITLE];
@@ -445,8 +452,6 @@
         case 4:
             notificationsCell.settingsLabel.text = @"Notifications";
             notificationsCell.iconImageView.image = [UIImage imageNamed:@"notifications-100"];
-//            [notificationsCell.toggle addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
-//            notificationsCell.selectionStyle = UITableViewCellSelectionStyleNone; // disabled cell selection but allows toggle
             notificationsCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
             if ([self isPushEnabled]) {
@@ -457,6 +462,11 @@
             }
             
             return notificationsCell;
+        case 5:
+            dailyNotifications.iconImageView.image = [UIImage imageNamed:@"daily-notifications-100"];
+            [dailyNotifications.toggle addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
+            dailyNotifications.selectionStyle = UITableViewCellSelectionStyleNone; // disables user interaction, but allows toggle
+            return dailyNotifications;
     }
     
     return settingsTableViewCell;
@@ -850,30 +860,7 @@
     btnPencil.frame = CGRectMake(25 + phoneNumberLabel.frame.size.width, 100, 25, 25);
 }
 
-- (void)changeSwitch:(id)sender {
-    if([sender isOn]) {
-        NSLog(@"Switch is ON");
-    }
-    else {
-        NSLog(@"Switch is OFF");
-    }
-}
-
-- (void)gotoDeviceSettings {
-    if (UIApplicationOpenSettingsURLString != NULL) {
-        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
-    }
-}
-
-- (void)requestPush
-{
-    // iOS 8 and up
-    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
-        
-        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
-        [[UIApplication sharedApplication] registerForRemoteNotifications];
-    }
-}
+#pragma Notifications
 
 - (BOOL)isPushEnabled
 {
@@ -892,6 +879,31 @@
     }
     
     return enabled;
+}
+
+- (void)requestPush
+{
+    // iOS 8 and up
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+}
+
+- (void)gotoDeviceSettings {
+    if (UIApplicationOpenSettingsURLString != NULL) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }
+}
+
+- (void)changeSwitch:(id)sender {
+    if([sender isOn]) {
+        NSLog(@"Switch is ON");
+    }
+    else {
+        NSLog(@"Switch is OFF");
+    }
 }
 
 @end

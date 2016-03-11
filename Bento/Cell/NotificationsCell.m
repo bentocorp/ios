@@ -33,7 +33,7 @@
         UIView *notificationsIconView = [[UIView alloc] initWithFrame:CGRectMake(18, 10, 23, 23)];
         notificationsIconView.layer.cornerRadius = 3;
         notificationsIconView.layer.masksToBounds = YES;
-        notificationsIconView.backgroundColor = [UIColor colorWithRed:0.694f green:0.706f blue:0.733f alpha:1.0f];
+        notificationsIconView.backgroundColor = [UIColor colorWithRed:0.694 green:0.706 blue:0.733 alpha:1];
         [self addSubview:notificationsIconView];
         
         self.iconImageView = [[UIImageView alloc] initWithFrame:CGRectMake(notificationsIconView.frame.size.width/2-7.5, notificationsIconView.frame.size.height/2-7.5, 15, 15)];
@@ -42,13 +42,14 @@
         // settings label
         self.settingsLabel = [[UILabel alloc] initWithFrame:CGRectMake(60, 10.5, 200, 24)];
         self.settingsLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-        self.settingsLabel.textColor = [UIColor colorWithRed:0.427f green:0.459f blue:0.514f alpha:1.0f];
+        self.settingsLabel.textColor = [UIColor colorWithRed:0.745f green:0.761f blue:0.800f alpha:1.0f];
         [self addSubview:self.settingsLabel];
         
         // on or off
         self.onOrOffLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 140, 10.5, 100, 24)];
         self.onOrOffLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
-        self.onOrOffLabel.textColor = [UIColor colorWithRed:0.694f green:0.706f blue:0.733f alpha:1.0f];
+        self.onOrOffLabel.textColor = [UIColor colorWithRed:0.694 green:0.706 blue:0.733 alpha:1];
+
         self.onOrOffLabel.textAlignment = NSTextAlignmentRight;
         [self addSubview:self.onOrOffLabel];
     }
