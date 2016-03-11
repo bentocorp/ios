@@ -406,6 +406,7 @@
             notificationsCell.settingsLabel.text = @"Notifications";
             notificationsCell.iconImageView.image = [UIImage imageNamed:@"notifications-100"];
             [notificationsCell.toggle addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
+            notificationsCell.selectionStyle = UITableViewCellSelectionStyleNone; // disabled cell selection but allows toggle
             
             return notificationsCell;
     }

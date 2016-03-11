@@ -25,7 +25,7 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        self.toggle = [[UISwitch alloc] initWithFrame:CGRectMake(self.frame.size.width-55, self.frame.size.height/2-15, 0, 0)];
+        self.toggle = [[UISwitch alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-55, self.frame.size.height/2-15, 0, 0)];
         self.toggle.transform = CGAffineTransformMakeScale(0.75, 0.75);
         [self addSubview:self.toggle];
         
