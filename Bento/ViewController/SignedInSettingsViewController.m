@@ -57,6 +57,9 @@
     UILabel *phoneNumberLabel;
     UIImageView *ivPencil;
     UIButton *btnPencil;
+    
+    UITableView *settingsTableView;
+    UIView *longLineSepartor2;
 }
 
 - (void)viewDidLoad {
@@ -197,16 +200,16 @@
     
     /*-----------------------------------------------------------*/
     
-    // table view
-    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 170, SCREEN_WIDTH, 180+45)];
+    settingsTableView = [[UITableView alloc] init];
+    longLineSepartor2 = [[UIView alloc] init];
+    
     settingsTableView.alwaysBounceVertical = NO;
     [settingsTableView setSeparatorInset:UIEdgeInsetsMake(0, 60, 0, 0)];
     settingsTableView.delegate = self;
     settingsTableView.dataSource = self;
     [scrollView addSubview:settingsTableView];
     
-    // line separator at bottom of table view
-    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 304 + 45 + 45, SCREEN_WIDTH, 2)];
+    
     longLineSepartor2.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [scrollView addSubview:longLineSepartor2];
     
@@ -301,6 +304,8 @@
 
 - (void)viewWillAppear:(BOOL)animated
 {
+    [self setTableHeight];
+    
     // Set promo code string
     if (currentUserInfo[@"coupon_code"] != [NSNull null] || currentUserInfo[@"coupon_code"] != nil) {
         couponCodeString = currentUserInfo[@"coupon_code"];
@@ -321,6 +326,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setTableHeight) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
@@ -334,6 +340,19 @@
     [super viewWillDisappear:animated];
     
     [self endTimerOnViewedScreen];
+}
+
+- (void)setTableHeight {
+    if ([self isPushEnabled]) {
+        settingsTableView.frame = CGRectMake(0, 170, SCREEN_WIDTH, 180+45+45);
+        longLineSepartor2.frame = CGRectMake(0, 304 + 45 + 45 + 45, SCREEN_WIDTH, 2);
+    }
+    else {
+        settingsTableView.frame = CGRectMake(0, 170, SCREEN_WIDTH, 180+45);
+        longLineSepartor2.frame = CGRectMake(0, 304 + 45 + 45, SCREEN_WIDTH, 2);
+    }
+    
+    [settingsTableView reloadData];
 }
 
 #pragma mark Duration on screen
@@ -368,6 +387,10 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if ([self isPushEnabled]) {
+        return 6;
+    }
+    
     return 5;
 }
 
@@ -405,14 +428,24 @@
         case 4:
             notificationsCell.settingsLabel.text = @"Notifications";
             notificationsCell.iconImageView.image = [UIImage imageNamed:@"notifications-100"];
-            [notificationsCell.toggle addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
-            notificationsCell.selectionStyle = UITableViewCellSelectionStyleNone; // disabled cell selection but allows toggle
+//            [notificationsCell.toggle addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
+//            notificationsCell.selectionStyle = UITableViewCellSelectionStyleNone; // disabled cell selection but allows toggle
+            notificationsCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            
+            if ([self isPushEnabled]) {
+                notificationsCell.onOrOffLabel.text = @"Enabled";
+            }
+            else {
+                notificationsCell.onOrOffLabel.text = @"Disabled";
+            }
             
             return notificationsCell;
     }
     
     return settingsTableViewCell;
 }
+
+
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -428,6 +461,9 @@
     
     NSArray *toEmailRecipentsArray;
     MFMailComposeViewController *mailComposeViewController;
+    
+    MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"You will be directed to device Settings to view Notifications settings" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"OK"];
+    alertView1.tag = 890;
     
     switch (indexPath.row) {
         case 0:
@@ -460,7 +496,15 @@
             callAlertView.tag = 2;
             [callAlertView showInView:self.view];
             callAlertView = nil;
-            
+            break;
+        case 4 :
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"hasShownPushAlert"] == NO) {
+                [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasShownPushAlert"];
+                [self requestPush];
+            }
+            else {
+                [alertView1 showInView:self.view];
+            }
             break;
     }
 }
@@ -627,6 +671,11 @@
     else if (alertView.tag == 3) {
         [self forceLogout];
     }
+    else if (alertView.tag == 890) {
+        if (buttonIndex == 1) {
+            [self gotoDeviceSettings];
+        }
+    }
 }
 
 - (void)forceLogout {
@@ -791,6 +840,41 @@
     else {
         NSLog(@"Switch is OFF");
     }
+}
+
+- (void)gotoDeviceSettings {
+    if (UIApplicationOpenSettingsURLString != NULL) {
+        [[UIApplication sharedApplication] openURL:[NSURL URLWithString:UIApplicationOpenSettingsURLString]];
+    }
+}
+
+- (void)requestPush
+{
+    // iOS 8 and up
+    if ([[[UIDevice currentDevice] systemVersion] floatValue] >= 8.0) {
+        
+        [[UIApplication sharedApplication] registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+        [[UIApplication sharedApplication] registerForRemoteNotifications];
+    }
+}
+
+- (BOOL)isPushEnabled
+{
+    BOOL enabled;
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]) {
+        
+        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
+            enabled = NO;
+        }
+        else {
+            enabled = YES;
+        }
+    }
+    
+    return enabled;
 }
 
 @end

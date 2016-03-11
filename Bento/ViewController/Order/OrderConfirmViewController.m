@@ -261,7 +261,7 @@
     if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
         
         if ([self isPushEnabled] == NO) {
-            MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and choosing Allow Notifications." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Turn On"];
+            MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and enabling Allow Notifications." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Turn On"];
             alertView1.tag = 911;
             [alertView1 showInView:self.view];
         }

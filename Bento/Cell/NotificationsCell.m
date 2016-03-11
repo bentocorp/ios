@@ -25,9 +25,9 @@
         
         self.backgroundColor = [UIColor whiteColor];
         
-        self.toggle = [[UISwitch alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-55, self.frame.size.height/2-15, 0, 0)];
-        self.toggle.transform = CGAffineTransformMakeScale(0.75, 0.75);
-        [self addSubview:self.toggle];
+//        self.toggle = [[UISwitch alloc] initWithFrame:CGRectMake(SCREEN_WIDTH-60, self.frame.size.height/2-15, 0, 0)];
+//        self.toggle.transform = CGAffineTransformMakeScale(0.75, 0.75);
+//        [self addSubview:self.toggle];
         
         // icon view
         UIView *notificationsIconView = [[UIView alloc] initWithFrame:CGRectMake(18, 10, 23, 23)];
@@ -44,6 +44,13 @@
         self.settingsLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
         self.settingsLabel.textColor = [UIColor colorWithRed:0.427f green:0.459f blue:0.514f alpha:1.0f];
         [self addSubview:self.settingsLabel];
+        
+        // on or off
+        self.onOrOffLabel = [[UILabel alloc] initWithFrame:CGRectMake(SCREEN_WIDTH - 140, 10.5, 100, 24)];
+        self.onOrOffLabel.font = [UIFont fontWithName:@"OpenSans" size:14];
+        self.onOrOffLabel.textColor = [UIColor colorWithRed:0.694f green:0.706f blue:0.733f alpha:1.0f];
+        self.onOrOffLabel.textAlignment = NSTextAlignmentRight;
+        [self addSubview:self.onOrOffLabel];
     }
     
     return self;

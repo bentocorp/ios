@@ -10,8 +10,9 @@
 
 @interface NotificationsCell : UITableViewCell
 
-@property (nonatomic) UISwitch *toggle;
+//@property (nonatomic) UISwitch *toggle;
 @property (nonatomic) UIImageView *iconImageView;
 @property (nonatomic) UILabel *settingsLabel;
+@property (nonatomic) UILabel *onOrOffLabel;
 
 @end
