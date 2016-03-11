@@ -405,6 +405,7 @@
         case 4:
             notificationsCell.settingsLabel.text = @"Notifications";
             notificationsCell.iconImageView.image = [UIImage imageNamed:@"notifications-100"];
+            [notificationsCell.toggle addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
             
             return notificationsCell;
     }
@@ -780,6 +781,15 @@
     ivPencil.frame = CGRectMake(25 + phoneNumberLabel.frame.size.width + 5, 105, 15, 15);
     
     btnPencil.frame = CGRectMake(25 + phoneNumberLabel.frame.size.width, 100, 25, 25);
+}
+
+- (void)changeSwitch:(id)sender {
+    if([sender isOn]) {
+        NSLog(@"Switch is ON");
+    }
+    else {
+        NSLog(@"Switch is OFF");
+    }
 }
 
 @end
