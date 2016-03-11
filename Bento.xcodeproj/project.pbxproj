@@ -583,6 +583,10 @@
 		FCEACF2B1C9352A8002CE434 /* notifications-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEACF291C9352A7002CE434 /* notifications-100.png */; };
 		FCEACF2E1C9359AE002CE434 /* NotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEACF2D1C9359AE002CE434 /* NotificationsCell.m */; };
 		FCEACF2F1C9359AE002CE434 /* NotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEACF2D1C9359AE002CE434 /* NotificationsCell.m */; };
+		FCEACF321C9378AD002CE434 /* DailyNotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEACF311C9378AD002CE434 /* DailyNotificationsCell.m */; };
+		FCEACF331C9378AD002CE434 /* DailyNotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEACF311C9378AD002CE434 /* DailyNotificationsCell.m */; };
+		FCEACF351C937A62002CE434 /* daily-notifications-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEACF341C937A62002CE434 /* daily-notifications-100.png */; };
+		FCEACF361C937A62002CE434 /* daily-notifications-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEACF341C937A62002CE434 /* daily-notifications-100.png */; };
 		FCEFB7691BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
 		FCEFB76A1BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
 		FCEFB76C1BBCEBF500C3E34D /* MoPub.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */; };
@@ -1022,6 +1026,9 @@
 		FCEACF291C9352A7002CE434 /* notifications-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notifications-100.png"; sourceTree = "<group>"; };
 		FCEACF2C1C9359AE002CE434 /* NotificationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsCell.h; sourceTree = "<group>"; };
 		FCEACF2D1C9359AE002CE434 /* NotificationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsCell.m; sourceTree = "<group>"; };
+		FCEACF301C9378AD002CE434 /* DailyNotificationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DailyNotificationsCell.h; sourceTree = "<group>"; };
+		FCEACF311C9378AD002CE434 /* DailyNotificationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DailyNotificationsCell.m; sourceTree = "<group>"; };
+		FCEACF341C937A62002CE434 /* daily-notifications-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "daily-notifications-100.png"; sourceTree = "<group>"; };
 		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
 		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
 		FCF5E0A11B8BDC28002E823C /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../placeholder.png; sourceTree = "<group>"; };
@@ -1371,6 +1378,7 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FCEACF341C937A62002CE434 /* daily-notifications-100.png */,
 				FC5411111C84F6AC004F99BC /* face.png */,
 				FC5411121C84F6AC004F99BC /* car.png */,
 				FC5411131C84F6AC004F99BC /* pin.png */,
@@ -1636,6 +1644,8 @@
 				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
 				FCEACF2C1C9359AE002CE434 /* NotificationsCell.h */,
 				FCEACF2D1C9359AE002CE434 /* NotificationsCell.m */,
+				FCEACF301C9378AD002CE434 /* DailyNotificationsCell.h */,
+				FCEACF311C9378AD002CE434 /* DailyNotificationsCell.m */,
 			);
 			name = Cell;
 			path = ../Cell;
@@ -2317,6 +2327,7 @@
 				7216B79E1AA64C7C0006FFE9 /* register_icon_phone.png in Resources */,
 				FCB35C521BFE7B0300A590EC /* Expand Arrow-64.png in Resources */,
 				FCA8ABC51C56EC4000B971D3 /* Calendar-50.png in Resources */,
+				FCEACF361C937A62002CE434 /* daily-notifications-100.png in Resources */,
 				FCDF22211ADC3ADF006B2750 /* Icon-76.png in Resources */,
 				FCEFB76D1BBCEBF500C3E34D /* MoPub.bundle in Resources */,
 				7216B79F1AA64C7C0006FFE9 /* nav_background.png in Resources */,
@@ -2477,6 +2488,7 @@
 				90D8F7B31A5D84B800D034CF /* register_icon_phone.png in Resources */,
 				FCB35C511BFE7B0300A590EC /* Expand Arrow-64.png in Resources */,
 				FCA8ABC41C56EC4000B971D3 /* Calendar-50.png in Resources */,
+				FCEACF351C937A62002CE434 /* daily-notifications-100.png in Resources */,
 				FCDF22201ADC3ADF006B2750 /* Icon-76.png in Resources */,
 				90BED0DB1A5C0320003DC872 /* nav_background.png in Resources */,
 				90D8F7D41A5E2C4C00D034CF /* image_checked@2x.png in Resources */,
@@ -2654,6 +2666,7 @@
 				FC4327B91BE2EF4300E91D9B /* CurrentOrdersViewController.m in Sources */,
 				7216B71B1AA64C7C0006FFE9 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
 				FC9E821A1BACE4250099DBF5 /* WebSocket.swift in Sources */,
+				FCEACF331C9378AD002CE434 /* DailyNotificationsCell.m in Sources */,
 				7216B71C1AA64C7C0006FFE9 /* PhoneNumberViewController.m in Sources */,
 				7216B71D1AA64C7C0006FFE9 /* SignInViewController.m in Sources */,
 				FCE036E41BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
@@ -2782,6 +2795,7 @@
 				FC4327B81BE2EF4300E91D9B /* CurrentOrdersViewController.m in Sources */,
 				722333601A6D4058006C2446 /* JGProgressHUDIndeterminateIndicatorView.m in Sources */,
 				FC9E82191BACE4250099DBF5 /* WebSocket.swift in Sources */,
+				FCEACF321C9378AD002CE434 /* DailyNotificationsCell.m in Sources */,
 				90D8F7BD1A5D990800D034CF /* PhoneNumberViewController.m in Sources */,
 				90D8F7BA1A5D963300D034CF /* SignInViewController.m in Sources */,
 				FCE036E31BEABA1B00F7605B /* CustomAnnotationView.m in Sources */,
