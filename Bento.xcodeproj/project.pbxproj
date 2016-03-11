@@ -579,6 +579,8 @@
 		FCE3B9431B14176E00301353 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCE3B9411B14176300301353 /* SystemConfiguration.framework */; };
 		FCE8E5FE1C4F10EC00742AEE /* OrderAheadMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */; };
 		FCE8E5FF1C4F10EC00742AEE /* OrderAheadMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */; };
+		FCEACF2A1C9352A7002CE434 /* notifications-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEACF291C9352A7002CE434 /* notifications-100.png */; };
+		FCEACF2B1C9352A8002CE434 /* notifications-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEACF291C9352A7002CE434 /* notifications-100.png */; };
 		FCEFB7691BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
 		FCEFB76A1BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
 		FCEFB76C1BBCEBF500C3E34D /* MoPub.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */; };
@@ -1015,6 +1017,7 @@
 		FCE3B9411B14176300301353 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		FCE8E5FC1C4F10EC00742AEE /* OrderAheadMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderAheadMenu.h; path = ../../Model/OrderAheadMenu.h; sourceTree = "<group>"; };
 		FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderAheadMenu.m; path = ../../Model/OrderAheadMenu.m; sourceTree = "<group>"; };
+		FCEACF291C9352A7002CE434 /* notifications-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notifications-100.png"; sourceTree = "<group>"; };
 		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
 		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
 		FCF5E0A11B8BDC28002E823C /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../placeholder.png; sourceTree = "<group>"; };
@@ -1798,6 +1801,7 @@
 		FC8DB72D1AF18674003045A3 /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				FCEACF291C9352A7002CE434 /* notifications-100.png */,
 				FCA1C8C11AF1973E004715F1 /* icon-square-user.png */,
 				FC8DB72E1AF18674003045A3 /* icon-circle-facebook.png */,
 				FC8DB72F1AF18674003045A3 /* icon-circle-mail.png */,
@@ -2215,6 +2219,7 @@
 				7216B7771AA64C7C0006FFE9 /* BentoTableViewCell.xib in Resources */,
 				FCE1E51A1C4737C500A210DC /* FiveCustomViewController.xib in Resources */,
 				FC8DB73F1AF18674003045A3 /* icon-circle-twitter.png in Resources */,
+				FCEACF2B1C9352A8002CE434 /* notifications-100.png in Resources */,
 				FC8DB7431AF18674003045A3 /* icon-square-creditcard.png in Resources */,
 				7216B7791AA64C7C0006FFE9 /* OpenSans-Italic.ttf in Resources */,
 				FCDF22251ADC3ADF006B2750 /* Icon-Small-40.png in Resources */,
@@ -2374,6 +2379,7 @@
 				90359C271A5EC49700AAD5D2 /* orderconfirm_image_remove@2x.png in Resources */,
 				FCE1E5191C4737C500A210DC /* FiveCustomViewController.xib in Resources */,
 				FC1D61571BBA0C0B0012FFB3 /* FacebookMessengerShareKitSDK-1_3-for-iOS.docset in Resources */,
+				FCEACF2A1C9352A7002CE434 /* notifications-100.png in Resources */,
 				47C5B0151A8B8038008FA7DA /* BentoTableViewCell.xib in Resources */,
 				FC8DB73E1AF18674003045A3 /* icon-circle-twitter.png in Resources */,
 				FC8DB7421AF18674003045A3 /* icon-square-creditcard.png in Resources */,
