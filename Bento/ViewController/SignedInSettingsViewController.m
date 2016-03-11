@@ -326,7 +326,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(setTableHeight) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(resetTableHeightWithAnimation) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
     
@@ -350,6 +350,23 @@
     else {
         settingsTableView.frame = CGRectMake(0, 170, SCREEN_WIDTH, 180+45);
         longLineSepartor2.frame = CGRectMake(0, 304 + 45 + 45, SCREEN_WIDTH, 2);
+    }
+    
+    [settingsTableView reloadData];
+}
+
+- (void)resetTableHeightWithAnimation {
+    if ([self isPushEnabled]) {
+        [UIView animateWithDuration:1 animations:^{
+            settingsTableView.frame = CGRectMake(0, 170, SCREEN_WIDTH, 180+45+45);
+            longLineSepartor2.frame = CGRectMake(0, 304 + 45 + 45 + 45, SCREEN_WIDTH, 2);
+        }];
+    }
+    else {
+        [UIView animateWithDuration:1 animations:^{
+            settingsTableView.frame = CGRectMake(0, 170, SCREEN_WIDTH, 180+45);
+            longLineSepartor2.frame = CGRectMake(0, 304 + 45 + 45, SCREEN_WIDTH, 2);
+        }];
     }
     
     [settingsTableView reloadData];
