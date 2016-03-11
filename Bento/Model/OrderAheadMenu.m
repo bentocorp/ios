@@ -26,6 +26,9 @@
         [self getMainDishes:menu];
         [self getSideDishes:menu];
         [self getAddons:menu];
+
+        self.rawTimeRangesArray = menu[@"Times"];
+        
         [self setUpTimes:menu[@"Times"]];
         
         self.orderType = @"2";

@@ -1881,7 +1881,19 @@ static OrderAheadMenu *orderAheadMenu;
             [self.orderAheadPickerView selectRow:randomTimeWindow inComponent:1 animated:NO];
         }
         else if (oaMenu.defaultTimeMode == UseDefault) {
+            int defaultTimeWindow = 0;
             
+            for (int i = 0; i < oaMenu.times.count; i++) {
+                NSDictionary *time = oaMenu.rawTimeRangesArray[i];
+                NSNumber *isDefaultNumberValue = (NSNumber *)time[@"isDefault"];
+                BOOL isDefault = [isDefaultNumberValue boolValue];
+                
+                if (isDefault) {
+                    defaultTimeWindow = i;
+                    [self.orderAheadPickerView selectRow:defaultTimeWindow inComponent:1 animated:NO];
+                    return;
+                }
+            }
         }
         else {
             // ignore First

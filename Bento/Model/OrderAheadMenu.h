@@ -19,6 +19,7 @@ typedef enum : NSInteger {
 @property (nonatomic) NSArray *rawTimeRangesArray;
 
 @property (nonatomic) NSString *name;
+@property (nonatomic) NSArray *rawTimesArrayForDefaultTimeMode;
 @property (nonatomic) NSArray *times;
 @property (nonatomic) NSArray *allMenuItems;
 @property (nonatomic) NSArray *mainDishes;
