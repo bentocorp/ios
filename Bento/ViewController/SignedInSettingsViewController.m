@@ -464,6 +464,7 @@
             return notificationsCell;
         case 5:
             dailyNotifications.iconImageView.image = [UIImage imageNamed:@"daily-notifications-100"];
+            dailyNotifications.settingsLabel.text = @"Schedule Daily Notifications";
             [dailyNotifications.toggle addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
             dailyNotifications.selectionStyle = UITableViewCellSelectionStyleNone; // disables user interaction, but allows toggle
             return dailyNotifications;
@@ -471,8 +472,6 @@
     
     return settingsTableViewCell;
 }
-
-
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -900,9 +899,11 @@
 - (void)changeSwitch:(id)sender {
     if([sender isOn]) {
         NSLog(@"Switch is ON");
+        [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"true"}];
     }
     else {
         NSLog(@"Switch is OFF");
+        [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"false"}];
     }
 }
 
