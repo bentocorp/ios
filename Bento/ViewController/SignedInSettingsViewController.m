@@ -357,13 +357,13 @@
 
 - (void)resetTableHeightWithAnimation {
     if ([self isPushEnabled]) {
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             settingsTableView.frame = CGRectMake(0, 170, SCREEN_WIDTH, 180+45+45);
             longLineSepartor2.frame = CGRectMake(0, 304 + 45 + 45 + 45, SCREEN_WIDTH, 2);
         }];
     }
     else {
-        [UIView animateWithDuration:1 animations:^{
+        [UIView animateWithDuration:0.5 animations:^{
             settingsTableView.frame = CGRectMake(0, 170, SCREEN_WIDTH, 180+45);
             longLineSepartor2.frame = CGRectMake(0, 304 + 45 + 45, SCREEN_WIDTH, 2);
         }];
