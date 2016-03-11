@@ -581,6 +581,8 @@
 		FCE8E5FF1C4F10EC00742AEE /* OrderAheadMenu.m in Sources */ = {isa = PBXBuildFile; fileRef = FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */; };
 		FCEACF2A1C9352A7002CE434 /* notifications-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEACF291C9352A7002CE434 /* notifications-100.png */; };
 		FCEACF2B1C9352A8002CE434 /* notifications-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCEACF291C9352A7002CE434 /* notifications-100.png */; };
+		FCEACF2E1C9359AE002CE434 /* NotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEACF2D1C9359AE002CE434 /* NotificationsCell.m */; };
+		FCEACF2F1C9359AE002CE434 /* NotificationsCell.m in Sources */ = {isa = PBXBuildFile; fileRef = FCEACF2D1C9359AE002CE434 /* NotificationsCell.m */; };
 		FCEFB7691BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
 		FCEFB76A1BBCEBF500C3E34D /* MoPub.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FCEFB7671BBCEBF500C3E34D /* MoPub.framework */; };
 		FCEFB76C1BBCEBF500C3E34D /* MoPub.bundle in Resources */ = {isa = PBXBuildFile; fileRef = FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */; };
@@ -1018,6 +1020,8 @@
 		FCE8E5FC1C4F10EC00742AEE /* OrderAheadMenu.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = OrderAheadMenu.h; path = ../../Model/OrderAheadMenu.h; sourceTree = "<group>"; };
 		FCE8E5FD1C4F10EC00742AEE /* OrderAheadMenu.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = OrderAheadMenu.m; path = ../../Model/OrderAheadMenu.m; sourceTree = "<group>"; };
 		FCEACF291C9352A7002CE434 /* notifications-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "notifications-100.png"; sourceTree = "<group>"; };
+		FCEACF2C1C9359AE002CE434 /* NotificationsCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NotificationsCell.h; sourceTree = "<group>"; };
+		FCEACF2D1C9359AE002CE434 /* NotificationsCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NotificationsCell.m; sourceTree = "<group>"; };
 		FCEFB7671BBCEBF500C3E34D /* MoPub.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = MoPub.framework; sourceTree = "<group>"; };
 		FCEFB7681BBCEBF500C3E34D /* MoPub.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = MoPub.bundle; sourceTree = "<group>"; };
 		FCF5E0A11B8BDC28002E823C /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = placeholder.png; path = ../placeholder.png; sourceTree = "<group>"; };
@@ -1630,6 +1634,8 @@
 				FCD51ECF1AFB4B98009D75BB /* PreviewCollectionViewCell.xib */,
 				FCAA47961AE9E03B00CA1743 /* SettingsTableViewCell.h */,
 				FCAA47971AE9E03B00CA1743 /* SettingsTableViewCell.m */,
+				FCEACF2C1C9359AE002CE434 /* NotificationsCell.h */,
+				FCEACF2D1C9359AE002CE434 /* NotificationsCell.m */,
 			);
 			name = Cell;
 			path = ../Cell;
@@ -2694,6 +2700,7 @@
 				7216B7421AA64C7C0006FFE9 /* main.m in Sources */,
 				FC9E81F91BACE4250099DBF5 /* SocketEngineClient.swift in Sources */,
 				7216B7441AA64C7C0006FFE9 /* SVPlacemark.m in Sources */,
+				FCEACF2F1C9359AE002CE434 /* NotificationsCell.m in Sources */,
 				FCAA479F1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				7216B7471AA64C7C0006FFE9 /* MKNetworkOperation.m in Sources */,
 				7216B7481AA64C7C0006FFE9 /* NSAlert+MKNetworkKitAdditions.m in Sources */,
@@ -2821,6 +2828,7 @@
 				90BED0741A5BCC04003DC872 /* main.m in Sources */,
 				FC9E81F81BACE4250099DBF5 /* SocketEngineClient.swift in Sources */,
 				7209E0801A76BD1800D18D7A /* SVPlacemark.m in Sources */,
+				FCEACF2E1C9359AE002CE434 /* NotificationsCell.m in Sources */,
 				FCAA479E1AE9E03B00CA1743 /* SettingsTableViewCell.m in Sources */,
 				722333D61A6F46DF006C2446 /* MKNetworkOperation.m in Sources */,
 				722333CE1A6F46DF006C2446 /* NSAlert+MKNetworkKitAdditions.m in Sources */,

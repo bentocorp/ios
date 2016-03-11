@@ -33,6 +33,8 @@
 
 #import "FiveHomeViewController.h"
 
+#import "NotificationsCell.h"
+
 //#import "OrderStatusViewController.h"
 
 //#import <FBSDKShareKit/FBSDKShareKit.h>
@@ -196,7 +198,7 @@
     /*-----------------------------------------------------------*/
     
     // table view
-    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 170, SCREEN_WIDTH, 180)];
+    UITableView *settingsTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 170, SCREEN_WIDTH, 180+45)];
     settingsTableView.alwaysBounceVertical = NO;
     [settingsTableView setSeparatorInset:UIEdgeInsetsMake(0, 60, 0, 0)];
     settingsTableView.delegate = self;
@@ -204,7 +206,7 @@
     [scrollView addSubview:settingsTableView];
     
     // line separator at bottom of table view
-    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 304 + 45, SCREEN_WIDTH, 2)];
+    UIView *longLineSepartor2 = [[UIView alloc] initWithFrame:CGRectMake(0, 304 + 45 + 45, SCREEN_WIDTH, 2)];
     longLineSepartor2.backgroundColor = [UIColor colorWithRed:0.827f green:0.835f blue:0.835f alpha:1.0f];
     [scrollView addSubview:longLineSepartor2];
     
@@ -366,7 +368,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 4;
+    return 5;
 }
 
 -(UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -377,7 +379,11 @@
         settingsTableViewCell = [[SettingsTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"Cell"];
     }
     
-    //    settingsTableViewCell.iconImageView.backgroundColor = [UIColor colorWithRed:0.694f green:0.702f blue:0.729f alpha:1.0f];
+    NotificationsCell *notificationsCell = (NotificationsCell *)[tableView dequeueReusableCellWithIdentifier:@"NCell"];
+    
+    if (notificationsCell == nil) {
+        notificationsCell = [[NotificationsCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"NCell"];
+    }
     
     switch (indexPath.row) {
         case 0:
@@ -396,6 +402,11 @@
             settingsTableViewCell.settingsLabel.text = @"Phone Support";
             settingsTableViewCell.iconImageView.image = [UIImage imageNamed:@"icon-square-phone"];
             break;
+        case 4:
+            notificationsCell.settingsLabel.text = @"Notifications";
+            notificationsCell.iconImageView.image = [UIImage imageNamed:@"notifications-100"];
+            
+            return notificationsCell;
     }
     
     return settingsTableViewCell;
