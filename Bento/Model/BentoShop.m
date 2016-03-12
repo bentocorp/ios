@@ -1764,6 +1764,7 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
             enabled = NO;
             
             [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"false"}];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"optin_daily_lunch_reminder"];
         }
         else {
             enabled = YES;

@@ -464,9 +464,17 @@
             return notificationsCell;
         case 5:
             dailyNotifications.iconImageView.image = [UIImage imageNamed:@"daily-notifications-100"];
-            dailyNotifications.settingsLabel.text = @"Schedule Daily Notifications";
+            dailyNotifications.settingsLabel.text = @"Daily Reminder";
             [dailyNotifications.toggle addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
             dailyNotifications.selectionStyle = UITableViewCellSelectionStyleNone; // disables user interaction, but allows toggle
+
+            if ([[NSUserDefaults standardUserDefaults] boolForKey:@"optin_daily_lunch_reminder"] == YES) {
+                [dailyNotifications.toggle setOn:YES];
+            }
+            else {
+                [dailyNotifications.toggle setOn:NO];
+            }
+            
             return dailyNotifications;
     }
     
@@ -488,7 +496,7 @@
     NSArray *toEmailRecipentsArray;
     MFMailComposeViewController *mailComposeViewController;
     
-    MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"You will be directed to device Settings to view Notifications settings" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"OK"];
+    MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"You will be directed to Notifications in your device settings" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"OK"];
     alertView1.tag = 890;
     
     switch (indexPath.row) {
@@ -881,10 +889,12 @@
     if([sender isOn]) {
         NSLog(@"Switch is ON");
         [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"true"}];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"optin_daily_lunch_reminder"];
     }
     else {
         NSLog(@"Switch is OFF");
         [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"false"}];
+        [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"optin_daily_lunch_reminder"];
     }
 }
 

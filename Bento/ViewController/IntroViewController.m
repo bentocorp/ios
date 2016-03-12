@@ -342,10 +342,10 @@
     }
     else {
         if ([[BentoShop sharedInstance] isPushEnabled]) {
-            [self exitOnboardingScreen:@"Push"]; // will this ever be called?
+            [self showPushTutorialV2:YES];
         }
         else {
-            [self showPushTutorialV2];
+            [self showPushTutorialV2:NO];
         }
     }
     
@@ -373,10 +373,10 @@
     }
     else {
         if ([[BentoShop sharedInstance] isPushEnabled]) {
-            [self exitOnboardingScreen:@"Push"]; // will this ever be called?
+            [self showPushTutorialV2:YES];
         }
         else {
-            [self showPushTutorialV2];
+            [self showPushTutorialV2:NO];
         }
     }
     
@@ -500,7 +500,7 @@
 }
 
 // call this if user had pressed get started before, but closed the app before finishing the entire onboarding process
-- (void)showPushTutorialV2
+- (void)showPushTutorialV2:(BOOL)isDaily
 {
     [UIView animateWithDuration:2 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         lblPushRequest.alpha = 1;
@@ -509,7 +509,12 @@
     }];
     
     [UIView animateWithDuration:2 delay:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
-        lblPushComment.alpha = 1;
+        if (isDaily == false) {
+            lblPushComment.alpha = 1;
+        }
+        else {
+            lblDailyPush.alpha = 1;
+        }
     } completion:^(BOOL finished) {
         
     }];
@@ -543,46 +548,59 @@
 {
     if ([[NSUserDefaults standardUserDefaults] boolForKey:@"hasPressedOKOnce"] == NO) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPressedOKOnce"];
-    }
-    else {
+        [self requestPush];
         
-    }
-    
-    
-    // register for remote notifications whether system alert has been prompted before or not - required for notifications to show up in settings
-    [self requestPush];
-    
-    // if under ios 9, don't need to route to settings because push is reset everytime user reinstalls
-    if ([[UIDevice currentDevice].systemVersion intValue] < 9) {
-    
-        // try to retrieve flag in keychain - to check if we should redirect to settings or not
-        NSError *error = nil;
-        NSString *has_shown_push_alert = [FDKeychain itemForKey: @"has_shown_push_alert"
-                                         forService: @"Bento"
-                                              error: &error];
-        
-        // if system alert has not been shown before - this should also prompt the system alert when registering for remote notifications above
-        if (has_shown_push_alert == nil) {
-            [self exitOnboardingScreen:@"Push"];
+        // if under ios 9, don't need to route to settings because push is reset everytime user reinstalls
+        if ([[UIDevice currentDevice].systemVersion intValue] < 9) {
+            
+            // try to retrieve flag in keychain - to check if we should redirect to settings or not
+            NSError *error = nil;
+            NSString *has_shown_push_alert = [FDKeychain itemForKey: @"has_shown_push_alert"
+                                                         forService: @"Bento"
+                                                              error: &error];
+            
+            // if system alert has not been shown before - this should also prompt the system alert when registering for remote notifications above
+            if (has_shown_push_alert == nil) {
+                [self exitOnboardingScreen:@"Push"];
+            }
+            // if system alert has been shown before, redirect to settings
+            else {
+                [self showRouteToDeviceSettingsAlert];
+            }
+            
+            // save a flag to keycha
+            [FDKeychain saveItem:@"not_nil"
+                          forKey:@"has_shown_push_alert"
+                      forService:@"Bento"
+                           error:&error];
         }
-        // if system alert has been shown before, redirect to settings
+        // ios 9+
         else {
-            [self showRouteToDeviceSettingsAlert];
+            // this is only used for ios 9 because below 9 uses keychain to check
+            [self setHasShownOushAlert:YES];
         }
         
-        // save a flag to keycha
-        [FDKeychain saveItem:@"not_nil"
-                      forKey:@"has_shown_push_alert"
-                  forService:@"Bento"
-                       error:&error];
+        [self showDailyPush];
     }
-    // if ios 9+
     else {
         [self exitOnboardingScreen:@"Push"];
-        
-        // this is only used for ios 9 because below 9 uses keychain to check
-        [self setHasShownOushAlert:YES];
+        [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"true"}];
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"optin_daily_lunch_reminder"];
     }
+}
+
+- (void)showDailyPush {
+    [UIView animateWithDuration:2 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblPushComment.alpha = 0;
+    } completion:^(BOOL finished) {
+        
+    }];
+    
+    [UIView animateWithDuration:2 delay:0.5 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
+        lblDailyPush.alpha = 1;
+    } completion:^(BOOL finished) {
+        
+    }];
 }
 
 - (void)requestPush {
@@ -681,6 +699,7 @@
         
         [UIView animateWithDuration:1 delay:0.2 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
             lblPushComment.alpha = 0;
+            lblDailyPush.alpha = 0;
         } completion:^(BOOL finished) {
             
         }];
