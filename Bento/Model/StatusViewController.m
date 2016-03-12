@@ -544,6 +544,8 @@
     
     self.dotView9.layer.cornerRadius = 3;
     self.dotView9.layer.masksToBounds = YES;
+    
+    self.descriptionTitleLabel.adjustsFontSizeToFitWidth = YES;
 }
 
 - (void)prepState {
