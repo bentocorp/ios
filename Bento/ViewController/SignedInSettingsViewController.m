@@ -344,7 +344,7 @@
 }
 
 - (void)setTableHeight {
-    if ([self isPushEnabled]) {
+    if ([[BentoShop sharedInstance] isPushEnabled]) {
         settingsTableView.frame = CGRectMake(0, 170, SCREEN_WIDTH, 180+45+45);
         longLineSepartor2.frame = CGRectMake(0, 304 + 45 + 45 + 45, SCREEN_WIDTH, 2);
     }
@@ -357,7 +357,7 @@
 }
 
 - (void)resetTableHeightWithAnimation {
-    if ([self isPushEnabled]) {
+    if ([[BentoShop sharedInstance] isPushEnabled]) {
         [UIView animateWithDuration:0.5 animations:^{
             settingsTableView.frame = CGRectMake(0, 170, SCREEN_WIDTH, 180+45+45);
             longLineSepartor2.frame = CGRectMake(0, 304 + 45 + 45 + 45, SCREEN_WIDTH, 2);
@@ -405,7 +405,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if ([self isPushEnabled]) {
+    if ([[BentoShop sharedInstance] isPushEnabled]) {
         return 6;
     }
     
@@ -454,7 +454,7 @@
             notificationsCell.iconImageView.image = [UIImage imageNamed:@"notifications-100"];
             notificationsCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
             
-            if ([self isPushEnabled]) {
+            if ([[BentoShop sharedInstance] isPushEnabled]) {
                 notificationsCell.onOrOffLabel.text = @"Enabled";
             }
             else {
@@ -861,26 +861,7 @@
 
 #pragma Notifications
 
-- (BOOL)isPushEnabled
-{
-    BOOL enabled;
-    
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]) {
-        
-        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        
-        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
-            enabled = NO;
-            
-            [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"false"}];
-        }
-        else {
-            enabled = YES;
-        }
-    }
-    
-    return enabled;
-}
+
 
 - (void)requestPush
 {

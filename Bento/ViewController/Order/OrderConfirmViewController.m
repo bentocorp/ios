@@ -81,7 +81,7 @@
     [self.btnQuestion setTitle:[[AppStrings sharedInstance] getString:COMPLETED_LINK_QUESTION] forState:UIControlStateNormal];
     [self.btnBuild setTitle:[[AppStrings sharedInstance] getString:COMPLETED_BUTTON_COMPLETE] forState:UIControlStateNormal];
     
-    if ([self isPushEnabled]) {
+    if ([[BentoShop sharedInstance] isPushEnabled]) {
         self.confirmationPlatform.center = self.view.center;
         self.pushPlatform.hidden = YES;
     }
@@ -188,25 +188,6 @@
 
 #pragma mark Push Notifications
 
-- (BOOL)isPushEnabled
-{
-    BOOL enabled;
-    
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]) {
-        
-        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        
-        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
-            enabled = NO;
-        }
-        else {
-            enabled = YES;
-        }
-    }
-    
-    return enabled;
-}
-
 - (void)requestPush
 {
     // iOS 8 and up
@@ -260,7 +241,7 @@
     // go to Bento settings if ios 8+
     if ([[UIDevice currentDevice].systemVersion intValue] >= 8) {
         
-        if ([self isPushEnabled] == NO) {
+        if ([[BentoShop sharedInstance] isPushEnabled] == NO) {
             MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"Turn on notifications by going into Settings, scrolling to Bento Now and enabling Allow Notifications." delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"Turn On"];
             alertView1.tag = 911;
             [alertView1 showInView:self.view];

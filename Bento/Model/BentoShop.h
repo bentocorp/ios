@@ -154,4 +154,6 @@ typedef void (^SendRequestCompletionBlock)(id responseDic, NSError *error);
 - (NSMutableArray *)getOAOnlyItemsSides;
 - (NSMutableArray *)getOAOnlyItemsAddons;
 
+- (BOOL)isPushEnabled;
+
 @end

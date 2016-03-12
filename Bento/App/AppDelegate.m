@@ -95,7 +95,7 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     
     /*------------------------------------REGISTER NOTIFICATIONS-------------------------------------*/
     
-    if ([self isPushEnabled]) {
+    if ([[BentoShop sharedInstance] isPushEnabled]) {
         if ([application respondsToSelector:@selector(registerUserNotificationSettings:)]) {
             UIUserNotificationSettings *settings = [UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeAlert
                                                                                                  | UIUserNotificationTypeBadge
@@ -468,25 +468,6 @@ NSString * const StripePublishableLiveKey = @"pk_live_UBeYAiCH0XezHA8r7Nmu9Jxz";
     [[Branch getInstance] continueUserActivity:userActivity];
     
     return YES;
-}
-
-- (BOOL)isPushEnabled {
-    
-    BOOL enabled;
-    
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]) {
-        
-        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        
-        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
-            enabled = NO;
-        }
-        else {
-            enabled = YES;
-        }
-    }
-    
-    return enabled;
 }
 
 #pragma mark TMReachability Notification Method

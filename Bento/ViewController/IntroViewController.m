@@ -316,7 +316,7 @@
         [self showTutorial];
     }
     else {
-        if ([self isPushEnabled]) {
+        if ([[BentoShop sharedInstance] isPushEnabled]) {
             [self exitOnboardingScreen:@"Push"]; // will this ever be called?
         }
         else {
@@ -347,7 +347,7 @@
         [self showTutorial];
     }
     else {
-        if ([self isPushEnabled]) {
+        if ([[BentoShop sharedInstance] isPushEnabled]) {
             [self exitOnboardingScreen:@"Push"]; // will this ever be called?
         }
         else {
@@ -404,7 +404,7 @@
 
 - (IBAction)onGetStarted:(id)sender
 {
-    if ([self isPushEnabled]) {
+    if ([[BentoShop sharedInstance] isPushEnabled]) {
         [self exitOnboardingScreen:@"Intro"];
     }
     else {
@@ -416,25 +416,6 @@
 }
 
 #pragma mark Push Notifications
-
-- (BOOL)isPushEnabled
-{
-    BOOL enabled;
-    
-    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]) {
-        
-        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
-        
-        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
-            enabled = NO;
-        }
-        else {
-            enabled = YES;
-        }
-    }
-    
-    return enabled;
-}
 
 - (void)showPushTutorial
 {

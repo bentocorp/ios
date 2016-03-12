@@ -1752,4 +1752,25 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     return NO;
 }
 
+- (BOOL)isPushEnabled
+{
+    BOOL enabled;
+    
+    if ([[UIApplication sharedApplication] respondsToSelector:@selector(currentUserNotificationSettings)]) {
+        
+        UIUserNotificationSettings *notificationSettings = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        
+        if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
+            enabled = NO;
+            
+            [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"false"}];
+        }
+        else {
+            enabled = YES;
+        }
+    }
+    
+    return enabled;
+}
+
 @end
