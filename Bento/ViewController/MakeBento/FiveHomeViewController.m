@@ -2396,5 +2396,4 @@ static OrderAheadMenu *orderAheadMenu;
     }
 }
 
-
 @end

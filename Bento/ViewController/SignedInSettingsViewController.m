@@ -871,6 +871,8 @@
         
         if (!notificationSettings || (notificationSettings.types == UIUserNotificationTypeNone)) {
             enabled = NO;
+            
+            [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"false"}];
         }
         else {
             enabled = YES;
