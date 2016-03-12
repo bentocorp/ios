@@ -411,7 +411,7 @@
     }
     
     for (OrderHistoryItem *item in orderItems) {
-        if (item.orderId == self.orderId) {
+        if ([item.orderId isEqualToString: self.orderId]) {
             
             self.orderStatus = item.orderStatus;
             

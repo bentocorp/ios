@@ -93,10 +93,10 @@
     
     // check if iphone 4 screen height
     if (SCREEN_HEIGHT <= 480) {
-        scrollViewContentSizeHeight = SCREEN_HEIGHT + 125;
+        scrollViewContentSizeHeight = SCREEN_HEIGHT + 141;
     }
     else if (SCREEN_HEIGHT <= 568) {
-        scrollViewContentSizeHeight = SCREEN_HEIGHT + 45;
+        scrollViewContentSizeHeight = SCREEN_HEIGHT + 53;
     }
     else {
         scrollViewContentSizeHeight = SCREEN_HEIGHT;
@@ -464,7 +464,7 @@
             return notificationsCell;
         case 5:
             dailyNotifications.iconImageView.image = [UIImage imageNamed:@"daily-notifications-100"];
-            dailyNotifications.settingsLabel.text = @"Daily Reminder";
+            dailyNotifications.settingsLabel.text = @"Receive Daily Notifications";
             [dailyNotifications.toggle addTarget:self action:@selector(changeSwitch:) forControlEvents:UIControlEventValueChanged];
             dailyNotifications.selectionStyle = UITableViewCellSelectionStyleNone; // disables user interaction, but allows toggle
 
@@ -496,7 +496,7 @@
     NSArray *toEmailRecipentsArray;
     MFMailComposeViewController *mailComposeViewController;
     
-    MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"You will be directed to Notifications in your device settings" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"OK"];
+    MyAlertView *alertView1 = [[MyAlertView alloc] initWithTitle:@"" message:@"You'll be directed to Notifications in your device settings" delegate:self cancelButtonTitle:@"Cancel" otherButtonTitle:@"OK"];
     alertView1.tag = 890;
     
     switch (indexPath.row) {
