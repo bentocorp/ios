@@ -60,6 +60,8 @@
     
     CLLocationManager *locationManager;
     CLLocationCoordinate2D coordinate;
+    
+    UILabel *lblDailyPush;
 }
 
 - (void)viewDidLoad {
@@ -121,10 +123,12 @@
     NSString *strPrice = @"";
 
     // Sale price is not 0 and less than unit price
-    if (salePrice != 0 && salePrice < unitPrice)
+    if (salePrice != 0 && salePrice < unitPrice) {
         strPrice = [NSString stringWithFormat:@"$%ld!", (long)salePrice]; // set price string as sale price
-    else
+    }
+    else {
         strPrice = [NSString stringWithFormat:@"$%ld!", (long)unitPrice]; //  set price string as unit price
+    }
     
     // Set up string for about text
     NSString *strItem0 = [[AppStrings sharedInstance] getString:ABOUT_ITEM_0]; // "Build your Bento for only $X" ?
@@ -234,6 +238,27 @@
     [self.lblPlatform addSubview:lblPushComment];
     
     [self requestForLocationServices];
+    
+    
+    // daily push
+    lblDailyPush = [[UILabel alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width - 80, 88)];
+    lblDailyPush.center = CGPointMake(self.lblComment.center.x, self.lblComment.center.y + 100);
+    lblDailyPush.adjustsFontSizeToFitWidth = YES;
+    if (self.view.bounds.size.width == 320) {
+        lblDailyPush.font = [UIFont fontWithName:@"OpenSans-Semibold" size:17];
+    }
+    else if (self.view.bounds.size.width == 375) {
+        lblDailyPush.font = [UIFont fontWithName:@"OpenSans-Semibold" size:20];
+    }
+    else {
+        lblDailyPush.font = [UIFont fontWithName:@"OpenSans-Semibold" size:24];
+    }
+    lblDailyPush.numberOfLines = 0;
+    lblDailyPush.textAlignment = NSTextAlignmentCenter;
+    lblDailyPush.textColor = [UIColor whiteColor];
+    lblDailyPush.text = @"Want a daily push notification reminder of the 10am lunch cutoff?";
+    lblDailyPush.alpha = 0;
+    [self.lblPlatform addSubview:lblDailyPush];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -507,14 +532,23 @@
 
 - (IBAction)onNoThanks:(id)sender
 {
-    [self exitOnboardingScreen:@"Push"];
-    
     // this is only used for ios 9 because below 9 uses keychain to check
     [self setHasShownOushAlert:NO];
+    
+    // if no thanks has ever been pressed, exit
+    [self exitOnboardingScreen:@"Push"];
 }
 
 - (IBAction)onOK:(id)sender
 {
+    if ([[NSUserDefaults standardUserDefaults] boolForKey:@"hasPressedOKOnce"] == NO) {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"hasPressedOKOnce"];
+    }
+    else {
+        
+    }
+    
+    
     // register for remote notifications whether system alert has been prompted before or not - required for notifications to show up in settings
     [self requestPush];
     

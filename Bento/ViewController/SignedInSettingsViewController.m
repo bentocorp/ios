@@ -861,8 +861,6 @@
 
 #pragma Notifications
 
-
-
 - (void)requestPush
 {
     // iOS 8 and up
