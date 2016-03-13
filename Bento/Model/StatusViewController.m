@@ -23,6 +23,8 @@
 #import <AFNetworking/AFNetworking.h>
 #import "AFHTTPSessionManager.h"
 #import "Step.h"
+#import "Mixpanel.h"
+#import "JGProgressHUD.h"
 
 #define DEGREES_TO_RADIANS(degrees)((M_PI * degrees)/180)
 
@@ -62,6 +64,9 @@
     BOOL didLocationReceptionChangedToGoogleMaps;
     BOOL didLocationReceptionChangedToNode;
     BOOL didDisconnectOnPurpose;
+    
+    JGProgressHUD *spinner;
+    BOOL isThereConnection;
 }
 
 - (void)viewDidLoad {
@@ -84,6 +89,44 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToNode) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSocket) name:@"enteringBackground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimers) name:@"enteringBackground" object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(noConnection) name:@"networkError" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(yesConnection) name:@"networkConnected" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerOnViewedScreen) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(endTimerOnViewedScreen) name:@"enteringBackground" object:nil];
+    
+    [self startTimerOnViewedScreen];
+}
+
+- (void)yesConnection {
+    [NSTimer scheduledTimerWithTimeInterval:3 target:self selector:@selector(callUpdate) userInfo:nil repeats:NO];
+}
+
+- (void)noConnection {
+    isThereConnection = NO;
+    
+    if (spinner == nil) {
+        spinner = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
+        spinner.textLabel.text = @"Waiting for internet connectivity...";
+        [spinner showInView:self.view];
+    }
+}
+
+- (void)callUpdate {
+    isThereConnection = YES;
+    
+    [spinner dismiss];
+    spinner = nil;
+    [self viewWillAppear:YES];
+}
+
+#pragma mark Mixpanel - Screen Duration
+- (void)startTimerOnViewedScreen {
+    [[Mixpanel sharedInstance] timeEvent:@"Viewed Custom Home Screen"];
+}
+
+- (void)endTimerOnViewedScreen {
+    [[Mixpanel sharedInstance] track:@"Viewed Custom Home Screen"];
 }
 
 - (void)viewWillDisappear:(BOOL)animated {
