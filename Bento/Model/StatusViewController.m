@@ -372,7 +372,7 @@
         if (self.driverAnnotationView == nil) {
             self.driverAnnotationView = [[CustomAnnotationView alloc] initWithAnnotationWithImage:annotation
                                                                              reuseIdentifier:annotationIdentifier
-                                                                         annotationViewImage:[UIImage imageNamed:@"car"]];
+                                                                         annotationViewImage:[UIImage imageNamed:@"car-green"]];
         }
         
         self.driverAnnotationView.canShowCallout = YES;

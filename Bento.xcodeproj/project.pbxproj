@@ -467,6 +467,8 @@
 		FCA653021C5C42B600B8E11E /* visa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DE1C5C42B600B8E11E /* visa@2x.png */; };
 		FCA72F5E1B806B3D009DD71A /* UpFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */; };
 		FCA72F5F1B806B3D009DD71A /* UpFilled-100.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */; };
+		FCA81FCF1C9731360098DC28 /* car-green.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA81FCE1C9731360098DC28 /* car-green.png */; };
+		FCA81FD01C9731360098DC28 /* car-green.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA81FCE1C9731360098DC28 /* car-green.png */; };
 		FCA8ABC41C56EC4000B971D3 /* Calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */; };
 		FCA8ABC51C56EC4000B971D3 /* Calendar-50.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */; };
 		FCAA479C1AE9E03B00CA1743 /* CreditCardInfoViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */; };
@@ -946,6 +948,7 @@
 		FCA652DD1C5C42B600B8E11E /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visa.png; sourceTree = "<group>"; };
 		FCA652DE1C5C42B600B8E11E /* visa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "visa@2x.png"; sourceTree = "<group>"; };
 		FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UpFilled-100.png"; path = "../UpFilled-100.png"; sourceTree = "<group>"; };
+		FCA81FCE1C9731360098DC28 /* car-green.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "car-green.png"; sourceTree = "<group>"; };
 		FCA8ABC31C56EC4000B971D3 /* Calendar-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Calendar-50.png"; sourceTree = "<group>"; };
 		FCAA47941AE9E03B00CA1743 /* CreditCardInfoViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreditCardInfoViewController.h; sourceTree = "<group>"; };
 		FCAA47951AE9E03B00CA1743 /* CreditCardInfoViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreditCardInfoViewController.m; sourceTree = "<group>"; };
@@ -1378,6 +1381,7 @@
 		90BED09A1A5BCC7B003DC872 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				FCA81FCE1C9731360098DC28 /* car-green.png */,
 				FCEACF341C937A62002CE434 /* daily-notifications-100.png */,
 				FC5411111C84F6AC004F99BC /* face.png */,
 				FC5411121C84F6AC004F99BC /* car.png */,
@@ -2243,6 +2247,7 @@
 				7216B77B1AA64C7C0006FFE9 /* OpenSans-Bold.ttf in Resources */,
 				FC4697801C1FC2FA001FC162 /* ETA-50.png in Resources */,
 				FC8DB73D1AF18674003045A3 /* icon-circle-messages.png in Resources */,
+				FCA81FD01C9731360098DC28 /* car-green.png in Resources */,
 				FC94E3421BB3529500E2104E /* Settings.bundle in Resources */,
 				FC8DB7451AF18674003045A3 /* icon-square-email.png in Resources */,
 				7216B77D1AA64C7C0006FFE9 /* PromoCodeView.xib in Resources */,
@@ -2404,6 +2409,7 @@
 				FCDF22241ADC3ADF006B2750 /* Icon-Small-40.png in Resources */,
 				FC46977F1C1FC2FA001FC162 /* ETA-50.png in Resources */,
 				90D8F7D01A5E2B3B00D034CF /* deliverylocation_icon_navigation@2x.png in Resources */,
+				FCA81FCF1C9731360098DC28 /* car-green.png in Resources */,
 				90BED0C11A5BE72F003DC872 /* OpenSans-Bold.ttf in Resources */,
 				FC8DB73C1AF18674003045A3 /* icon-circle-messages.png in Resources */,
 				FC8DB7441AF18674003045A3 /* icon-square-email.png in Resources */,
