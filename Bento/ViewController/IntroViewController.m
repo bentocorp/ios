@@ -256,7 +256,7 @@
     lblDailyPush.numberOfLines = 0;
     lblDailyPush.textAlignment = NSTextAlignmentCenter;
     lblDailyPush.textColor = [UIColor whiteColor];
-    lblDailyPush.text = @"Want a daily push notification reminder of the 10am lunch cutoff?";
+    lblDailyPush.text = [[AppStrings sharedInstance] getString:DAILY_REMINDER_QUESTION];
     lblDailyPush.alpha = 0;
     [self.lblPlatform addSubview:lblDailyPush];
 }

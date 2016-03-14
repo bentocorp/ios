@@ -229,7 +229,9 @@
 #define PREP_STATUS_DESCRIPTION                 @"prep_status_description"
 
 #define PICKUP_STATUS_TITLE                     @"pickup_status_title"
-#define PICKUP_STATUS_DESCRIPTION                @"pickup_status_description"
+#define PICKUP_STATUS_DESCRIPTION               @"pickup_status_description"
+
+#define DAILY_REMINDER_QUESTION                 @"daily_reminder_question"
 
 // getting from to settings instead of ioscopy
 //#define ABOUT_PRICE                             @"price"
