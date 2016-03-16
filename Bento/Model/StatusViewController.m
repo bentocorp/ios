@@ -414,7 +414,7 @@
                     }
                 }
                 else {
-                    [[SocketHandler sharedSocket] untrack];
+                    [[SocketHandler sharedSocket] untrack:self.driverId];
                     
                     if (self.orderStatus == Assigned) {
                         [self prepState];

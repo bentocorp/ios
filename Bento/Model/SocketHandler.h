@@ -34,6 +34,6 @@
 - (void)connectAndAuthenticate:(NSString*)username token:(NSString *)token driverId:(NSString *)driverId;
 - (void)closeSocket;
 - (void)getLastSavedLocation;
-- (void)untrack;
+- (void)untrack:(NSString *)driverId;
 
 @end

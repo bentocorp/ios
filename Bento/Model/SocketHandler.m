@@ -141,10 +141,18 @@
         
         NSLog(@"loc data - %@", json);
         
+        NSString *clientId = json[@"clientId"];
+        NSString *clientIdSubString = [clientId substringWithRange: NSMakeRange(0, [clientId rangeOfString: @"-"].location)];
+        
         float lat = [json[@"lat"] floatValue];
         float lng = [json[@"lng"] floatValue];
         
-        [self.delegate socketHandlerDidUpdateLocationWith:lat and:lng];
+        if ([clientIdSubString isEqualToString:self.driverId]) {
+            [self.delegate socketHandlerDidUpdateLocationWith:lat and:lng];
+        }
+        else {
+            [self untrack:clientIdSubString];
+        }
     }];
 }
 
@@ -209,8 +217,8 @@
     });
 }
 
-- (void)untrack {
-    NSString *apiString = [NSString stringWithFormat:@"/api/untrack?clientId=d-%@", self.driverId];
+- (void)untrack:(NSString *)driverId {
+    NSString *apiString = [NSString stringWithFormat:@"/api/untrack?clientId=d-%@", driverId];
     [self.socket emitWithAck:@"get" withItems:@[apiString]](0, ^(NSArray *data) {
         
         NSString *jsonString = data[0];
@@ -228,6 +236,8 @@
         
         if (code == 0) {
             NSLog(@"UNTRACKED!!!");
+            [self.socket removeAllHandlers];
+            [self.socket disconnect];
         }
         else {
             // handle error
@@ -238,9 +248,7 @@
 #pragma mark Disconnect
 - (void)closeSocket {
     NSLog(@"close socket");
-    
-    [self.socket removeAllHandlers];
-    [self.socket disconnect];
+    [self untrack: self.driverId];
 }
 
 @end
