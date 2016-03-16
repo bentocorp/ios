@@ -142,7 +142,7 @@
         NSLog(@"loc data - %@", json);
         
         NSString *clientId = json[@"clientId"];
-        NSString *clientIdSubString = [clientId substringWithRange: NSMakeRange(0, [clientId rangeOfString: @"-"].location)];
+        NSString *clientIdSubString = [clientId componentsSeparatedByCharactersInSet:[NSCharacterSet characterSetWithCharactersInString:@"-"]][1]; // removed everything before and including "-"
         
         float lat = [json[@"lat"] floatValue];
         float lng = [json[@"lng"] floatValue];
@@ -151,6 +151,7 @@
             [self.delegate socketHandlerDidUpdateLocationWith:lat and:lng];
         }
         else {
+            // untrack other old driver
             [self untrack:clientIdSubString];
         }
     }];
