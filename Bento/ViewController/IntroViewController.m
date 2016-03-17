@@ -590,6 +590,8 @@
 }
 
 - (void)showDailyPush {
+    [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shownDailyPush"];
+    
     [UIView animateWithDuration:2 delay:0.0 options:UIViewAnimationOptionTransitionCrossDissolve animations:^{
         lblPushComment.alpha = 0;
     } completion:^(BOOL finished) {

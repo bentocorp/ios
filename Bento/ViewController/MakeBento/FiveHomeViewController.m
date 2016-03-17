@@ -260,6 +260,28 @@ static OrderAheadMenu *orderAheadMenu;
     
     [loadingHUD dismiss];
     loadingHUD = nil;
+    
+    [self checkDailyReminder];
+}
+
+- (void)checkDailyReminder {
+    if ([[BentoShop sharedInstance] isPushEnabled]) {
+        // has never seen
+        if ([[NSUserDefaults standardUserDefaults] boolForKey:@"shownDailyPush"] == NO) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shownDailyPush"];
+            MyAlertView *alertView = [[MyAlertView alloc] initWithTitle:@""
+                                                                message:[[AppStrings sharedInstance] getString:DAILY_REMINDER_QUESTION]
+                                                               delegate:self
+                                                      cancelButtonTitle:@"No"
+                                                       otherButtonTitle:@"Yes"];
+            alertView.tag = 616;
+            [alertView showInView:self.view];
+            alertView = nil;
+        }
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"shownDailyPush"];
+    }
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -1333,6 +1355,16 @@ static OrderAheadMenu *orderAheadMenu;
     }
     else if (alertView.tag == 2021) {
         [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"https://itunes.apple.com/us/app/bento-asian-food-delivered/id963634117?mt=8"]];
+    }
+    else if (alertView.tag == 616) {
+        if (buttonIndex == 0) {
+            [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"false"}];
+            [[NSUserDefaults standardUserDefaults] setBool:NO forKey:@"optin_daily_lunch_reminder"];
+        }
+        else {
+            [[Mixpanel sharedInstance].people set:@{@"optin_daily_lunch_reminder": @"true"}];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:@"optin_daily_lunch_reminder"];
+        }
     }
 }
 
