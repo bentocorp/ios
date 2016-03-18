@@ -17,6 +17,7 @@
 - (void)socketHandlerDidGetLastSavedLocation:(float)lat and:(float)lng;
 - (void)socketHandlerDidUpdateLocationWith:(float)lat and:(float)lng;
 - (void)socketHandlerDidDisconnect;
+- (void)socketHandlerDidReceivePushNotification;
 
 @end
 

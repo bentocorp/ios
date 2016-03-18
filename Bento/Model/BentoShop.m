@@ -1288,6 +1288,8 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
     
     if ([self connected]) {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+            
+            [[NSNotificationCenter defaultCenter] postNotificationName:@"trigger_every_30_secs" object:nil];
                 
             if ([[[NSUserDefaults standardUserDefaults] objectForKey:@"IntroProcessed"] isEqualToString:@"YES"] &&
                 [[NSUserDefaults standardUserDefaults] rm_customObjectForKey:@"delivery_location"] != nil) {
@@ -1301,8 +1303,6 @@ typedef void (^SelectedLocationCheckBlock)(BOOL isSelectedLocationInZone, NSStri
                 
                 }];
             }
-            
-            [[NSNotificationCenter defaultCenter] postNotificationName:@"trigger_every_30_secs" object:nil];
         });
     }
     

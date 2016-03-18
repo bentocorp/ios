@@ -50,6 +50,8 @@
     NSTimer *timerForGoogleMapsAPI;
     NSTimer *timerForSpeedFromPointToPoint;
     
+    NSTimer *timerForOrderHistory;
+    
     CLLocation *currentLocation;
     
     NSInteger stepCount;
@@ -81,6 +83,8 @@
     
     self.steps = [[NSMutableArray alloc] init];
     isReceivingLocation = YES;
+    
+    [self startTimerForOrderHistory];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -89,6 +93,8 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:@"trigger_every_30_secs" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(getOrderHistory) name:@"enteredForeground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(connectToNode) name:@"enteredForeground" object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(startTimerForOrderHistory) name:@"enteredForeground" object:nil];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(closeSocket) name:@"enteringBackground" object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(stopTimers) name:@"enteringBackground" object:nil];
     
@@ -558,6 +564,10 @@
     });
 }
 
+- (void)socketHandlerDidReceivePushNotification {
+    [self getOrderHistory];
+}
+
 - (void)closeSocket {
     [[SocketHandler sharedSocket] closeSocket];
 }
@@ -725,6 +735,16 @@
     
     [timerForGoogleMapsAPI invalidate];
     timerForGoogleMapsAPI = nil;
+    
+    [timerForOrderHistory invalidate];
+    timerForOrderHistory = nil;
+}
+
+// already using updateProc to trigger notifications, but set up another timer just in case
+- (void)startTimerForOrderHistory {
+    if (timerForOrderHistory == nil) {
+        timerForOrderHistory = [NSTimer scheduledTimerWithTimeInterval:30 target:self selector:@selector(getOrderHistory) userInfo:nil repeats:YES];
+    }
 }
 
 #pragma mark Navigation

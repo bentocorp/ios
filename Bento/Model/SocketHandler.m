@@ -119,17 +119,12 @@
         
         NSLog(@"push data - %@", json);
         
-        // decided not to use push to check for order status because im already polling order history to get status
+        NSString *subject = json[@"subject"];
         
-//        if (data.subject == "OrderAccepted") { // delivery
-//            [self requestToTrackDriver];
-//        }
-//        else if (data.subject == "OrderArrived") { // assembly pickup
-//            // remove map, show text
-//        }
-//        else if (data.subject == "OrderComplete") { // terminate
-//            // pop view controller
-//        }
+        NSLog(@"push subject line - %@", subject);
+        NSLog(@"status - %@", json[@"body"][@"status"]);
+        
+        [self.delegate socketHandlerDidReceivePushNotification];
     }];
 
     // Listen to Location
