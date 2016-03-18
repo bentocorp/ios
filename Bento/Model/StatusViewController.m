@@ -67,6 +67,8 @@
     
     JGProgressHUD *spinner;
     BOOL isThereConnection;
+    
+    double previousBearing;
 }
 
 - (void)viewDidLoad {
@@ -154,6 +156,8 @@
     
     NSString *end = [NSString stringWithFormat:@"%f,%f", self.lat, self.lng];
     NSString *requestString = [NSString stringWithFormat:@"%@json?origin=%@&destination=%@&key=%@", api, start, end, GOOGLE_API_KEY];
+    
+    NSLog(@"request google maps api - %@", requestString);
     
     NSURL *URL = [NSURL URLWithString: requestString];
     NSURLRequest *request = [NSURLRequest requestWithURL:URL];
@@ -272,9 +276,22 @@
     [UIView animateWithDuration:1 animations:^{
         CLLocation *stepStart = [[CLLocation alloc] initWithLatitude:self.driverAnnotation.coordinate.latitude longitude:self.driverAnnotation.coordinate.longitude];
         CLLocation *stepEnd = [[CLLocation alloc] initWithLatitude:currentLocation.coordinate.latitude longitude:currentLocation.coordinate.longitude];
+        
         double bearing = [stepStart bearingToLocation:stepEnd];
         
-        self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
+        NSLog(@"previous - %f", previousBearing);
+        NSLog(@"degrees - %f", bearing);
+        NSLog(@"radian - %f", DEGREES_TO_RADIANS(bearing));
+        
+        if ((bearing != 0) || (bearing == 0 && (previousBearing <= 5 || previousBearing >= 355)))  {
+            self.driverAnnotationView.imageView.transform = CGAffineTransformMakeRotation(DEGREES_TO_RADIANS(bearing));
+        }
+        else {
+            NSLog(@"skip rotatation!");
+            // my theory is that when google maps api is called, it resets the bearings, causing it to return 0 and making car point north
+        }
+        
+        previousBearing = bearing;
     }];
 }
 
@@ -414,7 +431,7 @@
                     }
                 }
                 else {
-                    [[SocketHandler sharedSocket] untrack:self.driverId];
+//                    [[SocketHandler sharedSocket] untrack:self.driverId];
                     
                     if (self.orderStatus == Assigned) {
                         [self prepState];
@@ -434,6 +451,7 @@
         }
         else {
             // handle error
+            NSLog(@"orderhistory FAILED");
         }
     }];
 }

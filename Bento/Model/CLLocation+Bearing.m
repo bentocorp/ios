@@ -13,7 +13,7 @@ double RadiansToDegrees(double radians) {return radians * 180.0/M_PI;};
 
 @implementation CLLocation (Bearing)
 
--(double) bearingToLocation:(CLLocation *) destinationLocation {
+- (double)bearingToLocation:(CLLocation *)destinationLocation {
     
     double lat1 = DegreesToRadians(self.coordinate.latitude);
     double lon1 = DegreesToRadians(self.coordinate.longitude);
@@ -28,7 +28,7 @@ double RadiansToDegrees(double radians) {return radians * 180.0/M_PI;};
     double radiansBearing = atan2(y, x);
     
     if(radiansBearing < 0.0) {
-        radiansBearing += 2*M_PI;
+        radiansBearing += 2 * M_PI;
     }
     
     return RadiansToDegrees(radiansBearing);
