@@ -61,7 +61,7 @@
     if (strAPIToken == nil || strAPIToken.length == 0)
         return;
     
-#ifndef DEBUG
+//#ifndef DEBUG
     WebManager *webManager = [[WebManager alloc] init];
     
     JGProgressHUD *loadingHUD = [JGProgressHUD progressHUDWithStyle:JGProgressHUDStyleDark];
@@ -79,7 +79,7 @@
         id amountOff = [response objectForKey:@"amountOff"];
         if (response != nil && amountOff != nil && [amountOff isKindOfClass:[NSString class]])
         {
-            NSInteger discount = [[response objectForKey:@"amountOff"] floatValue];
+            float discount = [[response objectForKey:@"amountOff"] floatValue];
             if (self.delegate != nil)
                 [self.delegate setDiscound:discount strCouponCode:strPromoCode];
             
@@ -115,18 +115,18 @@
         return;
         
     } isJSON:NO];
-#else
-    float discount = 5.75; // promo discount - hardcoded for testing
-    if (self.delegate != nil) {
-        [self.delegate setDiscound:discount strCouponCode:@"ridev"];
-    }
-
-    [UIView animateWithDuration:0.3f animations:^{
-        self.alpha = 0.0f;
-    } completion:^(BOOL finished) {
-        [self removeFromSuperview];
-    }];
-#endif
+//#else
+//    float discount = 5.75; // promo discount - hardcoded for testing
+//    if (self.delegate != nil) {
+//        [self.delegate setDiscound:discount strCouponCode:@"ridev"];
+//    }
+//
+//    [UIView animateWithDuration:0.3f animations:^{
+//        self.alpha = 0.0f;
+//    } completion:^(BOOL finished) {
+//        [self removeFromSuperview];
+//    }];
+//#endif
 }
 
 - (IBAction)onUsePromoCode:(id)sender

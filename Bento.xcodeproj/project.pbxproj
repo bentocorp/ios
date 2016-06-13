@@ -457,10 +457,10 @@
 		FCA652F81C5C42B600B8E11E /* mastercard.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652D91C5C42B600B8E11E /* mastercard.png */; };
 		FCA652F91C5C42B600B8E11E /* mastercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DA1C5C42B600B8E11E /* mastercard@2x.png */; };
 		FCA652FA1C5C42B600B8E11E /* mastercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DA1C5C42B600B8E11E /* mastercard@2x.png */; };
-		FCA652FB1C5C42B600B8E11E /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DB1C5C42B600B8E11E /* placeholder.png */; };
-		FCA652FC1C5C42B600B8E11E /* placeholder.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DB1C5C42B600B8E11E /* placeholder.png */; };
-		FCA652FD1C5C42B600B8E11E /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DC1C5C42B600B8E11E /* placeholder@2x.png */; };
-		FCA652FE1C5C42B600B8E11E /* placeholder@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DC1C5C42B600B8E11E /* placeholder@2x.png */; };
+		FCA652FB1C5C42B600B8E11E /* placeholdercard.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DB1C5C42B600B8E11E /* placeholdercard.png */; };
+		FCA652FC1C5C42B600B8E11E /* placeholdercard.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DB1C5C42B600B8E11E /* placeholdercard.png */; };
+		FCA652FD1C5C42B600B8E11E /* placeholdercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DC1C5C42B600B8E11E /* placeholdercard@2x.png */; };
+		FCA652FE1C5C42B600B8E11E /* placeholdercard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DC1C5C42B600B8E11E /* placeholdercard@2x.png */; };
 		FCA652FF1C5C42B600B8E11E /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DD1C5C42B600B8E11E /* visa.png */; };
 		FCA653001C5C42B600B8E11E /* visa.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DD1C5C42B600B8E11E /* visa.png */; };
 		FCA653011C5C42B600B8E11E /* visa@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = FCA652DE1C5C42B600B8E11E /* visa@2x.png */; };
@@ -943,8 +943,8 @@
 		FCA652D81C5C42B600B8E11E /* jcb@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jcb@2x.png"; sourceTree = "<group>"; };
 		FCA652D91C5C42B600B8E11E /* mastercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = mastercard.png; sourceTree = "<group>"; };
 		FCA652DA1C5C42B600B8E11E /* mastercard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "mastercard@2x.png"; sourceTree = "<group>"; };
-		FCA652DB1C5C42B600B8E11E /* placeholder.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholder.png; sourceTree = "<group>"; };
-		FCA652DC1C5C42B600B8E11E /* placeholder@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholder@2x.png"; sourceTree = "<group>"; };
+		FCA652DB1C5C42B600B8E11E /* placeholdercard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = placeholdercard.png; sourceTree = "<group>"; };
+		FCA652DC1C5C42B600B8E11E /* placeholdercard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "placeholdercard@2x.png"; sourceTree = "<group>"; };
 		FCA652DD1C5C42B600B8E11E /* visa.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = visa.png; sourceTree = "<group>"; };
 		FCA652DE1C5C42B600B8E11E /* visa@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "visa@2x.png"; sourceTree = "<group>"; };
 		FCA72F5D1B806B3D009DD71A /* UpFilled-100.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "UpFilled-100.png"; path = "../UpFilled-100.png"; sourceTree = "<group>"; };
@@ -1903,8 +1903,8 @@
 				FCA652D81C5C42B600B8E11E /* jcb@2x.png */,
 				FCA652D91C5C42B600B8E11E /* mastercard.png */,
 				FCA652DA1C5C42B600B8E11E /* mastercard@2x.png */,
-				FCA652DB1C5C42B600B8E11E /* placeholder.png */,
-				FCA652DC1C5C42B600B8E11E /* placeholder@2x.png */,
+				FCA652DB1C5C42B600B8E11E /* placeholdercard.png */,
+				FCA652DC1C5C42B600B8E11E /* placeholdercard@2x.png */,
 				FCA652DD1C5C42B600B8E11E /* visa.png */,
 				FCA652DE1C5C42B600B8E11E /* visa@2x.png */,
 			);
@@ -2159,7 +2159,7 @@
 				ORGANIZATIONNAME = bentonow;
 				TargetAttributes = {
 					7216B7061AA64C7C0006FFE9 = {
-						DevelopmentTeam = WFJ7C63625;
+						DevelopmentTeam = BU7ZBFN522;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2312,7 +2312,7 @@
 				FCDF22371ADC3ADF006B2750 /* Icon@2x.png in Resources */,
 				FCDF222F1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				FCF872231BFFD12B0091A206 /* plus-green-100.png in Resources */,
-				FCA652FC1C5C42B600B8E11E /* placeholder.png in Resources */,
+				FCA652FC1C5C42B600B8E11E /* placeholdercard.png in Resources */,
 				FC9EED171C1F8B680071828D /* plusgray100.png in Resources */,
 				7216B79A1AA64C7C0006FFE9 /* banner_sold_out.png in Resources */,
 				7216B79B1AA64C7C0006FFE9 /* register_icon_username_err.png in Resources */,
@@ -2358,7 +2358,7 @@
 				7216B7A91AA64C7C0006FFE9 /* orderconfirm_image_plus@2x.png in Resources */,
 				FCA652EA1C5C42B600B8E11E /* cvc@2x.png in Resources */,
 				7216B7AA1AA64C7C0006FFE9 /* register_image_or.png in Resources */,
-				FCA652FE1C5C42B600B8E11E /* placeholder@2x.png in Resources */,
+				FCA652FE1C5C42B600B8E11E /* placeholdercard@2x.png in Resources */,
 				FCB35C401BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
 				FCA652FA1C5C42B600B8E11E /* mastercard@2x.png in Resources */,
 				FCA652E01C5C42B600B8E11E /* amex.png in Resources */,
@@ -2474,7 +2474,7 @@
 				FCDF22361ADC3ADF006B2750 /* Icon@2x.png in Resources */,
 				FCDF222E1ADC3ADF006B2750 /* Icon-Small.png in Resources */,
 				FCF872221BFFD12B0091A206 /* plus-green-100.png in Resources */,
-				FCA652FB1C5C42B600B8E11E /* placeholder.png in Resources */,
+				FCA652FB1C5C42B600B8E11E /* placeholdercard.png in Resources */,
 				FC9EED161C1F8B680071828D /* plusgray100.png in Resources */,
 				722333E11A6FF9C5006C2446 /* banner_sold_out.png in Resources */,
 				90D8F7C71A5E126C00D034CF /* register_icon_username_err.png in Resources */,
@@ -2520,7 +2520,7 @@
 				90359C261A5EC49700AAD5D2 /* orderconfirm_image_plus@2x.png in Resources */,
 				FCA652E91C5C42B600B8E11E /* cvc@2x.png in Resources */,
 				90D8F7B51A5D84B800D034CF /* register_image_or.png in Resources */,
-				FCA652FD1C5C42B600B8E11E /* placeholder@2x.png in Resources */,
+				FCA652FD1C5C42B600B8E11E /* placeholdercard@2x.png in Resources */,
 				FCB35C3F1BFE680400A590EC /* Hawaiian sweet maui onion chips DONE.png in Resources */,
 				FCA652F91C5C42B600B8E11E /* mastercard@2x.png in Resources */,
 				FCA652DF1C5C42B600B8E11E /* amex.png in Resources */,
@@ -2945,8 +2945,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3017,7 +3017,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "2c84e253-3d5e-4ffe-90d8-e74f95dc9afb";
+				PROVISIONING_PROFILE = "cd25d1f8-fb52-4d8f-b8aa-f48e14365411";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3029,8 +3029,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = "AppIcon-1";
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = Bento/Bento.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jason Demant (LDVTQCQD7M)";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -3100,7 +3100,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.somethingnew.bentodev;
 				PRODUCT_NAME = "Bento Dev";
-				PROVISIONING_PROFILE = "2c84e253-3d5e-4ffe-90d8-e74f95dc9afb";
+				PROVISIONING_PROFILE = "cd25d1f8-fb52-4d8f-b8aa-f48e14365411";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -3126,6 +3126,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
 				COPY_PHASE_STRIP = NO;
 				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -3171,6 +3172,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Bento Technology, Inc (WFJ7C63625)";
 				COPY_PHASE_STRIP = YES;
 				DEFINES_MODULE = YES;
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;

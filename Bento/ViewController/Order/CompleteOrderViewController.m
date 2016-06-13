@@ -543,7 +543,7 @@
 
 - (void)updatePaymentInfo:(NSString *)strCardType cardNumber:(NSString *)strCardNumber paymentMethod:(PaymentMethod)paymentMethod
 {
-    NSString *strImageName = @"placeholder";
+    NSString *strImageName = @"placeholdercard";
     NSString *strPaymentMethod = @"";
     
     if ([strCardType isEqualToString:@"applepay"])
@@ -1984,6 +1984,8 @@
 
     [webManager AsyncProcess:strRequest method:POST parameters:dicRequest success:^(MKNetworkOperation *networkOperation) {
         
+        [[Mixpanel sharedInstance] track:@"createBackendChargeWithToken == succeeded"];
+        
         [loadingHUD dismiss];
         
         if (completion) {
@@ -2038,6 +2040,8 @@
         [self performSegueWithIdentifier:@"ConfirmOrder" sender:nil];
         
     } failure:^(MKNetworkOperation *errorOp, NSError *error) {
+        
+        [[Mixpanel sharedInstance] track:@"createBackendChargeWithToken == failed" properties:@{@"error": error.description}];
         
         [loadingHUD dismiss];
         
